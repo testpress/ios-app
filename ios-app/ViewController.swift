@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import Alamofire
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
@@ -51,14 +52,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-
+    
     @IBAction func onLoginButtonClick(_ sender: UIButton) {
         print("onLoginButtonClick")
         let username = usernameTextField.text ?? ""
         let password = passwordTextField.text ?? ""
         if (!username.isEmpty && !password.isEmpty) {
-            print("try to login")
-            showAlert(title: "Try to login", message: "This is my message.")
+            TPApiClient.authenticate(username: username, password: password, completion: {
+                testpressAuthToken, error in
+                if let error = error {
+                    print(error.message ?? "No error")
+                    print(error.kind)
+                    switch (error.kind) {
+                    case .network:
+                        print("Internet Unavailable")
+                    case .unauthenticated:
+                        print("Authorization Required")
+                    case .http:
+                        print("HTTP error occured")
+                    default:
+                        print("Unexpected")
+                    }
+                    return
+                }
+                
+                print("Token Generated: \(testpressAuthToken!.token!)")
+            })
         }
     }
     

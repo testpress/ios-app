@@ -13,6 +13,13 @@
 		2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */; };
 		2F26ADF01E8249D70031E6F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEE1E8249D70031E6F4 /* LaunchScreen.storyboard */; };
 		2F26ADFB1E8249D70031E6F4 /* ios_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */; };
+		2FBEDB7C1E82BBD5000CF05C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */; };
+		2FBEDB7E1E82BC02000CF05C /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */; };
+		2FF7520F1E855A1C005E8A0C /* TPAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7520C1E855A1C005E8A0C /* TPAuthToken.swift */; };
+		2FF752101E855A1C005E8A0C /* TPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7520D1E855A1C005E8A0C /* TPError.swift */; };
+		2FF752111E855A1C005E8A0C /* TPModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7520E1E855A1C005E8A0C /* TPModelMapper.swift */; };
+		2FF7521B1E855AB2005E8A0C /* TPEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF752161E855AB2005E8A0C /* TPEndpoint.swift */; };
+		2FF7521C1E855AB2005E8A0C /* TPApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF752171E855AB2005E8A0C /* TPApiClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +43,14 @@
 		2F26ADF61E8249D70031E6F4 /* ios-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_appTests.swift; sourceTree = "<group>"; };
 		2F26ADFC1E8249D70031E6F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2FBEDB791E82BBD0000CF05C /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
+		2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
+		2FF7520C1E855A1C005E8A0C /* TPAuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TPAuthToken.swift; path = Model/TPAuthToken.swift; sourceTree = "<group>"; };
+		2FF7520D1E855A1C005E8A0C /* TPError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TPError.swift; path = Model/TPError.swift; sourceTree = "<group>"; };
+		2FF7520E1E855A1C005E8A0C /* TPModelMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TPModelMapper.swift; path = Model/TPModelMapper.swift; sourceTree = "<group>"; };
+		2FF752161E855AB2005E8A0C /* TPEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPEndpoint.swift; sourceTree = "<group>"; };
+		2FF752171E855AB2005E8A0C /* TPApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPApiClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FBEDB7C1E82BBD5000CF05C /* Alamofire.framework in Frameworks */,
+				2FBEDB7E1E82BC02000CF05C /* ObjectMapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +79,7 @@
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				2F26ADE31E8249D70031E6F4 /* Products */,
+				2FBEDB781E82BBD0000CF05C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +95,8 @@
 		2F26ADE41E8249D70031E6F4 /* ios-app */ = {
 			isa = PBXGroup;
 			children = (
+				2FF7520B1E8559FE005E8A0C /* Model */,
+				2FF752151E855AB2005E8A0C /* Network */,
 				2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */,
 				2F26ADE71E8249D70031E6F4 /* ViewController.swift */,
 				2F26ADE91E8249D70031E6F4 /* Main.storyboard */,
@@ -96,6 +116,35 @@
 			path = "ios-appTests";
 			sourceTree = "<group>";
 		};
+		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */,
+				2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */,
+				2FBEDB791E82BBD0000CF05C /* AlamofireObjectMapper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2FF7520B1E8559FE005E8A0C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2FF7520C1E855A1C005E8A0C /* TPAuthToken.swift */,
+				2FF7520D1E855A1C005E8A0C /* TPError.swift */,
+				2FF7520E1E855A1C005E8A0C /* TPModelMapper.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		2FF752151E855AB2005E8A0C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2FF752161E855AB2005E8A0C /* TPEndpoint.swift */,
+				2FF752171E855AB2005E8A0C /* TPApiClient.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,6 +155,7 @@
 				2F26ADDE1E8249D70031E6F4 /* Sources */,
 				2F26ADDF1E8249D70031E6F4 /* Frameworks */,
 				2F26ADE01E8249D70031E6F4 /* Resources */,
+				2FBEDB7F1E82BC48000CF05C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -194,12 +244,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2FBEDB7F1E82BC48000CF05C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2F26ADDE1E8249D70031E6F4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2F26ADE81E8249D70031E6F4 /* ViewController.swift in Sources */,
+				2FF752111E855A1C005E8A0C /* TPModelMapper.swift in Sources */,
+				2FF7521C1E855AB2005E8A0C /* TPApiClient.swift in Sources */,
+				2FF7520F1E855A1C005E8A0C /* TPAuthToken.swift in Sources */,
+				2FF752101E855A1C005E8A0C /* TPError.swift in Sources */,
+				2FF7521B1E855AB2005E8A0C /* TPEndpoint.swift in Sources */,
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +412,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "in.testpress.ios-app";
@@ -351,6 +428,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "in.testpress.ios-app";
