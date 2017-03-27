@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */; };
-		2F26ADE81E8249D70031E6F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADE71E8249D70031E6F4 /* ViewController.swift */; };
+		2F26ADE81E8249D70031E6F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADE71E8249D70031E6F4 /* LoginViewController.swift */; };
 		2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADE91E8249D70031E6F4 /* Main.storyboard */; };
 		2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */; };
 		2F26ADF01E8249D70031E6F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEE1E8249D70031E6F4 /* LaunchScreen.storyboard */; };
 		2F26ADFB1E8249D70031E6F4 /* ios_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */; };
+		2F61A7CD1E8E6E5D002C746C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CB1E8E6E5D002C746C /* Constants.swift */; };
+		2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */; };
+		2F884D331E8918FE00C371BD /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F884D321E8918FE00C371BD /* TabViewController.swift */; };
 		2FBEDB7C1E82BBD5000CF05C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */; };
 		2FBEDB7E1E82BC02000CF05C /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */; };
 		2FF7520F1E855A1C005E8A0C /* TPAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7520C1E855A1C005E8A0C /* TPAuthToken.swift */; };
@@ -35,7 +38,7 @@
 /* Begin PBXFileReference section */
 		2F26ADE21E8249D70031E6F4 /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2F26ADE71E8249D70031E6F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2F26ADE71E8249D70031E6F4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2F26ADEA1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F26ADEF1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,6 +46,9 @@
 		2F26ADF61E8249D70031E6F4 /* ios-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_appTests.swift; sourceTree = "<group>"; };
 		2F26ADFC1E8249D70031E6F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F61A7CB1E8E6E5D002C746C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Core/Constants.swift; sourceTree = "<group>"; };
+		2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainTokenItem.swift; path = Core/KeychainTokenItem.swift; sourceTree = "<group>"; };
+		2F884D321E8918FE00C371BD /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		2FBEDB791E82BBD0000CF05C /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
 		2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
@@ -95,10 +101,12 @@
 		2F26ADE41E8249D70031E6F4 /* ios-app */ = {
 			isa = PBXGroup;
 			children = (
+				2F884D2F1E88F21E00C371BD /* Core */,
 				2FF7520B1E8559FE005E8A0C /* Model */,
 				2FF752151E855AB2005E8A0C /* Network */,
 				2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */,
-				2F26ADE71E8249D70031E6F4 /* ViewController.swift */,
+				2F26ADE71E8249D70031E6F4 /* LoginViewController.swift */,
+				2F884D321E8918FE00C371BD /* TabViewController.swift */,
 				2F26ADE91E8249D70031E6F4 /* Main.storyboard */,
 				2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */,
 				2F26ADEE1E8249D70031E6F4 /* LaunchScreen.storyboard */,
@@ -114,6 +122,15 @@
 				2F26ADFC1E8249D70031E6F4 /* Info.plist */,
 			);
 			path = "ios-appTests";
+			sourceTree = "<group>";
+		};
+		2F884D2F1E88F21E00C371BD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2F61A7CB1E8E6E5D002C746C /* Constants.swift */,
+				2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
@@ -267,13 +284,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F26ADE81E8249D70031E6F4 /* ViewController.swift in Sources */,
+				2F26ADE81E8249D70031E6F4 /* LoginViewController.swift in Sources */,
 				2FF752111E855A1C005E8A0C /* TPModelMapper.swift in Sources */,
 				2FF7521C1E855AB2005E8A0C /* TPApiClient.swift in Sources */,
 				2FF7520F1E855A1C005E8A0C /* TPAuthToken.swift in Sources */,
 				2FF752101E855A1C005E8A0C /* TPError.swift in Sources */,
 				2FF7521B1E855AB2005E8A0C /* TPEndpoint.swift in Sources */,
+				2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */,
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
+				2F884D331E8918FE00C371BD /* TabViewController.swift in Sources */,
+				2F61A7CD1E8E6E5D002C746C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

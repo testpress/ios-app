@@ -30,9 +30,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var viewController: UIViewController
+        if (KeychainTokenItem.isExist()) {
+            viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TAB_VIEW_CONTROLLER) as! TabViewController
+        } else {
+            viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+        }
+        let navigationController = UINavigationController(rootViewController: viewController)
+        window!.rootViewController = navigationController
         return true
     }
 

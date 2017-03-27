@@ -1,5 +1,5 @@
 //
-//  TPEndpoint.swift
+//  Constants.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,30 +23,12 @@
 //  THE SOFTWARE.
 //
 
-
-import Foundation
-import Alamofire
-
-enum TPEndpoint {
-    case AuthenticateUser
-    case GetExams
+struct Constants {
+    static let APP_NAME = "Testpress iOS App"
+    static let BASE_URL = "http://sandbox.testpress.in";
+    static let KEYCHAIN_SERVICE_NAME_TOKEN = APP_NAME + " Token"
     
-    var method: Alamofire.HTTPMethod {
-        switch self {
-        case .AuthenticateUser:
-            return .post
-        case .GetExams:
-            return .get
-        }
-    }
+    static let LOGIN_VIEW_CONTROLLER = "LoginViewController"
+    static let TAB_VIEW_CONTROLLER = "TabViewController"
     
-    var url: String {
-        let baseUrl = NSURL(string: Constants.BASE_URL)!
-        switch self {
-        case .AuthenticateUser:
-            return baseUrl.appendingPathComponent("/api/v2.2/auth-token/")!.absoluteString
-        case .GetExams:
-            return baseUrl.appendingPathComponent("/api/v2.2/exams/")!.absoluteString
-        }
-    }
 }

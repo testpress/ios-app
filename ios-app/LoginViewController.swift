@@ -26,7 +26,7 @@
 import Alamofire
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: Properties
     @IBOutlet weak var usernameTextField: UITextField!
@@ -76,7 +76,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
-                print("Token Generated: \(testpressAuthToken!.token!)")
+                let token: String = testpressAuthToken!.token!
+                
+                do {
+                    // create a new keychain item with the account name.
+                    let passwordItem = KeychainTokenItem(service: Constants.KEYCHAIN_SERVICE_NAME_TOKEN,
+                                                         account: username)
+                    
+                    // Save the password for the new item.
+                    try passwordItem.savePassword(token)
+                } catch {
+                    fatalError("Error updating keychain - \(error)")
+                }
+                
+                let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
+                    Constants.TAB_VIEW_CONTROLLER) as! TabViewController
+                let navigationController = UINavigationController(rootViewController: tabViewController)
+                self.present(navigationController, animated: true, completion: nil)
             })
         }
     }
