@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  TPApiResponse.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,28 +23,25 @@
 //  THE SOFTWARE.
 //
 
-struct Constants {
-    static let APP_NAME = "Testpress iOS App"
-    static let BASE_URL = "http://sandbox.testpress.in";
-    static let KEYCHAIN_SERVICE_NAME_TOKEN = APP_NAME + " Token"
+import ObjectMapper
+
+public class TPApiResponse<T: Mappable> {
+    var count: Int?;
+    var next: String = "";
+    var previous: String = "";
+    var perPage: Int?;
+    var results: [T] = [];
     
-    static let LOGIN_VIEW_CONTROLLER = "LoginViewController"
-    static let TAB_VIEW_CONTROLLER = "TabViewController"
-    
-    static let PAGE = "page"
-    static let STATE = "state"
-    
-    static let AVAILABLE = "Available"
-    static let UPCOMING = "Upcoming"
-    static let HISTORY = "Histroy"
-    
+    public required init?(map: Map) {
+    }
 }
 
-struct Slug {
-    
-    static let AVAILABLE = "available"
-    static let UPCOMING = "upcoming"
-    static let HISTORY = "history"
-    
+extension TPApiResponse: TestpressModel {
+    public func mapping(map: Map) {
+        count <- map["count"]
+        next <- map["next"]
+        previous <- map["previous"]
+        perPage <- map["perPage"]
+        results <- map["results"]
+    }
 }
-

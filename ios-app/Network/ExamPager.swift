@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  ExamPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,28 +23,27 @@
 //  THE SOFTWARE.
 //
 
-struct Constants {
-    static let APP_NAME = "Testpress iOS App"
-    static let BASE_URL = "http://sandbox.testpress.in";
-    static let KEYCHAIN_SERVICE_NAME_TOKEN = APP_NAME + " Token"
+import Alamofire
+import ObjectMapper
+
+public class ExamPager: TPBasePager<Exam> {
     
-    static let LOGIN_VIEW_CONTROLLER = "LoginViewController"
-    static let TAB_VIEW_CONTROLLER = "TabViewController"
+    var subclass: String
     
-    static let PAGE = "page"
-    static let STATE = "state"
+    init(subclass: String) {
+        self.subclass = subclass
+        super.init()
+    }
     
-    static let AVAILABLE = "Available"
-    static let UPCOMING = "Upcoming"
-    static let HISTORY = "Histroy"
+    override func getItems(page: Int) {
+        queryParams.updateValue(String(page), forKey: Constants.PAGE)
+        queryParams.updateValue(subclass, forKey: Constants.STATE)
+        TPApiClient.getExams(endpointProvider: TPEndpointProvider(.getExams, queryParams: queryParams),
+                             completion: resonseHandler!)
+    }
+    
+    override func getId(resource: Exam) -> Int {
+        return resource.id!
+    }
     
 }
-
-struct Slug {
-    
-    static let AVAILABLE = "available"
-    static let UPCOMING = "upcoming"
-    static let HISTORY = "history"
-    
-}
-

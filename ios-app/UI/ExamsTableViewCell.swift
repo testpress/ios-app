@@ -1,5 +1,5 @@
 //
-//  TabViewController.swift
+//  ExamsTableViewCell.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,36 +25,22 @@
 
 import UIKit
 
-class TabViewController: UIViewController {
+class ExamsTableViewCell: UITableViewCell {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    @IBOutlet weak var examName: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
+    func setExam(_ exam: Exam){
+        examName.text = exam.title
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
     }
-    */
-
-    @IBAction func logout(_ sender: UIButton) {
-        for passwordItem in KeychainTokenItem.passwordItems() {
-            do {
-                try passwordItem.deleteItem()
-            } catch {
-                fatalError("Error deleting keychain item - \(error)")
-            }
-        }
-        
-        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
-            Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
-        let navigationController = UINavigationController(rootViewController: loginViewController)
-        self.present(navigationController, animated: true, completion: nil)
-    }
+    
 }

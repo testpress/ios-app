@@ -8,14 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */; };
-		2F26ADE81E8249D70031E6F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADE71E8249D70031E6F4 /* LoginViewController.swift */; };
 		2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADE91E8249D70031E6F4 /* Main.storyboard */; };
 		2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */; };
 		2F26ADF01E8249D70031E6F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEE1E8249D70031E6F4 /* LaunchScreen.storyboard */; };
 		2F26ADFB1E8249D70031E6F4 /* ios_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */; };
+		2F2CF64F1E8E751D0090A5C4 /* ExamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF64A1E8E751D0090A5C4 /* ExamsTableViewCell.swift */; };
+		2F2CF6501E8E751D0090A5C4 /* ExamsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2CF64B1E8E751D0090A5C4 /* ExamsTableViewCell.xib */; };
+		2F2CF6511E8E751D0090A5C4 /* ExamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */; };
+		2F2CF6521E8E751D0090A5C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF64D1E8E751D0090A5C4 /* LoginViewController.swift */; };
+		2F2CF6531E8E751D0090A5C4 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF64E1E8E751D0090A5C4 /* TabViewController.swift */; };
+		2F2CF6551E8E75780090A5C4 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF6541E8E75780090A5C4 /* UIUtils.swift */; };
+		2F2CF6591E8E76EC0090A5C4 /* TPBasePager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF6581E8E76EC0090A5C4 /* TPBasePager.swift */; };
+		2F2CF65B1E8E77500090A5C4 /* TPApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF65A1E8E77500090A5C4 /* TPApiResponse.swift */; };
+		2F2CF65D1E8E777A0090A5C4 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF65C1E8E777A0090A5C4 /* Exam.swift */; };
+		2F2CF65F1E8E785B0090A5C4 /* ExamPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF65E1E8E785B0090A5C4 /* ExamPager.swift */; };
 		2F61A7CD1E8E6E5D002C746C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CB1E8E6E5D002C746C /* Constants.swift */; };
 		2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */; };
-		2F884D331E8918FE00C371BD /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F884D321E8918FE00C371BD /* TabViewController.swift */; };
 		2FBEDB7C1E82BBD5000CF05C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */; };
 		2FBEDB7E1E82BC02000CF05C /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */; };
 		2FF7520F1E855A1C005E8A0C /* TPAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7520C1E855A1C005E8A0C /* TPAuthToken.swift */; };
@@ -38,7 +46,6 @@
 /* Begin PBXFileReference section */
 		2F26ADE21E8249D70031E6F4 /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2F26ADE71E8249D70031E6F4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2F26ADEA1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F26ADEF1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -46,10 +53,18 @@
 		2F26ADF61E8249D70031E6F4 /* ios-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_appTests.swift; sourceTree = "<group>"; };
 		2F26ADFC1E8249D70031E6F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F2CF64A1E8E751D0090A5C4 /* ExamsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExamsTableViewCell.swift; path = UI/ExamsTableViewCell.swift; sourceTree = "<group>"; };
+		2F2CF64B1E8E751D0090A5C4 /* ExamsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExamsTableViewCell.xib; path = UI/ExamsTableViewCell.xib; sourceTree = "<group>"; };
+		2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExamsTableViewController.swift; path = UI/ExamsTableViewController.swift; sourceTree = "<group>"; };
+		2F2CF64D1E8E751D0090A5C4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = UI/LoginViewController.swift; sourceTree = "<group>"; };
+		2F2CF64E1E8E751D0090A5C4 /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabViewController.swift; path = UI/TabViewController.swift; sourceTree = "<group>"; };
+		2F2CF6541E8E75780090A5C4 /* UIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIUtils.swift; path = "ios-app/Utils/UIUtils.swift"; sourceTree = SOURCE_ROOT; };
+		2F2CF6581E8E76EC0090A5C4 /* TPBasePager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPBasePager.swift; sourceTree = "<group>"; };
+		2F2CF65A1E8E77500090A5C4 /* TPApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TPApiResponse.swift; path = Model/TPApiResponse.swift; sourceTree = "<group>"; };
+		2F2CF65C1E8E777A0090A5C4 /* Exam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Exam.swift; path = Model/Exam.swift; sourceTree = "<group>"; };
+		2F2CF65E1E8E785B0090A5C4 /* ExamPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamPager.swift; sourceTree = "<group>"; };
 		2F61A7CB1E8E6E5D002C746C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Core/Constants.swift; sourceTree = "<group>"; };
 		2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainTokenItem.swift; path = Core/KeychainTokenItem.swift; sourceTree = "<group>"; };
-		2F884D321E8918FE00C371BD /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
-		2FBEDB791E82BBD0000CF05C /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
 		2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		2FF7520C1E855A1C005E8A0C /* TPAuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TPAuthToken.swift; path = Model/TPAuthToken.swift; sourceTree = "<group>"; };
@@ -104,9 +119,9 @@
 				2F884D2F1E88F21E00C371BD /* Core */,
 				2FF7520B1E8559FE005E8A0C /* Model */,
 				2FF752151E855AB2005E8A0C /* Network */,
+				2F53765C1E8E299D00D87DD7 /* UI */,
+				2F61A7C81E8E3BC9002C746C /* Utils */,
 				2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */,
-				2F26ADE71E8249D70031E6F4 /* LoginViewController.swift */,
-				2F884D321E8918FE00C371BD /* TabViewController.swift */,
 				2F26ADE91E8249D70031E6F4 /* Main.storyboard */,
 				2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */,
 				2F26ADEE1E8249D70031E6F4 /* LaunchScreen.storyboard */,
@@ -124,6 +139,27 @@
 			path = "ios-appTests";
 			sourceTree = "<group>";
 		};
+		2F53765C1E8E299D00D87DD7 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2F2CF64A1E8E751D0090A5C4 /* ExamsTableViewCell.swift */,
+				2F2CF64B1E8E751D0090A5C4 /* ExamsTableViewCell.xib */,
+				2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */,
+				2F2CF64D1E8E751D0090A5C4 /* LoginViewController.swift */,
+				2F2CF64E1E8E751D0090A5C4 /* TabViewController.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		2F61A7C81E8E3BC9002C746C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2F2CF6541E8E75780090A5C4 /* UIUtils.swift */,
+			);
+			name = Utils;
+			path = Network/Utils;
+			sourceTree = "<group>";
+		};
 		2F884D2F1E88F21E00C371BD /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,7 +174,6 @@
 			children = (
 				2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */,
 				2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */,
-				2FBEDB791E82BBD0000CF05C /* AlamofireObjectMapper.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -146,6 +181,8 @@
 		2FF7520B1E8559FE005E8A0C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2F2CF65C1E8E777A0090A5C4 /* Exam.swift */,
+				2F2CF65A1E8E77500090A5C4 /* TPApiResponse.swift */,
 				2FF7520C1E855A1C005E8A0C /* TPAuthToken.swift */,
 				2FF7520D1E855A1C005E8A0C /* TPError.swift */,
 				2FF7520E1E855A1C005E8A0C /* TPModelMapper.swift */,
@@ -156,8 +193,10 @@
 		2FF752151E855AB2005E8A0C /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				2FF752161E855AB2005E8A0C /* TPEndpoint.swift */,
+				2F2CF65E1E8E785B0090A5C4 /* ExamPager.swift */,
 				2FF752171E855AB2005E8A0C /* TPApiClient.swift */,
+				2F2CF6581E8E76EC0090A5C4 /* TPBasePager.swift */,
+				2FF752161E855AB2005E8A0C /* TPEndpoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -213,6 +252,7 @@
 				TargetAttributes = {
 					2F26ADE11E8249D70031E6F4 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = BHAB7LC35Y;
 						ProvisioningStyle = Automatic;
 					};
 					2F26ADF51E8249D70031E6F4 = {
@@ -246,6 +286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F2CF6501E8E751D0090A5C4 /* ExamsTableViewCell.xib in Resources */,
 				2F26ADF01E8249D70031E6F4 /* LaunchScreen.storyboard in Resources */,
 				2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */,
 				2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */,
@@ -270,6 +311,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/XLPagerTabStrip.framework",
 			);
 			outputPaths = (
 			);
@@ -284,16 +326,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F26ADE81E8249D70031E6F4 /* LoginViewController.swift in Sources */,
+				2F2CF65F1E8E785B0090A5C4 /* ExamPager.swift in Sources */,
+				2F2CF65D1E8E777A0090A5C4 /* Exam.swift in Sources */,
+				2F2CF6521E8E751D0090A5C4 /* LoginViewController.swift in Sources */,
 				2FF752111E855A1C005E8A0C /* TPModelMapper.swift in Sources */,
 				2FF7521C1E855AB2005E8A0C /* TPApiClient.swift in Sources */,
+				2F2CF6551E8E75780090A5C4 /* UIUtils.swift in Sources */,
+				2F2CF6591E8E76EC0090A5C4 /* TPBasePager.swift in Sources */,
+				2F2CF64F1E8E751D0090A5C4 /* ExamsTableViewCell.swift in Sources */,
+				2F2CF6531E8E751D0090A5C4 /* TabViewController.swift in Sources */,
 				2FF7520F1E855A1C005E8A0C /* TPAuthToken.swift in Sources */,
 				2FF752101E855A1C005E8A0C /* TPError.swift in Sources */,
 				2FF7521B1E855AB2005E8A0C /* TPEndpoint.swift in Sources */,
+				2F2CF65B1E8E77500090A5C4 /* TPApiResponse.swift in Sources */,
 				2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */,
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
-				2F884D331E8918FE00C371BD /* TabViewController.swift in Sources */,
 				2F61A7CD1E8E6E5D002C746C /* Constants.swift in Sources */,
+				2F2CF6511E8E751D0090A5C4 /* ExamsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +481,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -448,6 +498,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

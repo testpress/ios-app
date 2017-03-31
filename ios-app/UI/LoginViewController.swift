@@ -91,8 +91,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 
                 let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
                     Constants.TAB_VIEW_CONTROLLER) as! TabViewController
-                let navigationController = UINavigationController(rootViewController: tabViewController)
-                self.present(navigationController, animated: true, completion: nil)
+                self.present(tabViewController, animated: true, completion: nil)
             })
         }
     }

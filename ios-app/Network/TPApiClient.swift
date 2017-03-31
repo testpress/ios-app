@@ -28,10 +28,19 @@ import Alamofire
 
 class TPApiClient {
 
-    static func apiCall(endpoint: TPEndpoint, parameters: Parameters? = nil, headers: HTTPHeaders? = nil,
+    static func apiCall(endpointProvider: TPEndpointProvider,
+                        parameters: Parameters? = nil, headers: HTTPHeaders? = nil,
                         completion: @escaping (String?, TPError?) -> Void) -> Void {
-        request(endpoint.url, method: endpoint.method, parameters: parameters, headers: headers)
-            .responseString() { response in
+        var commonHeaders = HTTPHeaders()
+        if (KeychainTokenItem.isExist()) {
+            let token: String = KeychainTokenItem.getToken()
+            commonHeaders.update(other: ["Authorization": "JWT " + token])
+        }
+        if headers != nil {
+            commonHeaders.update(other: headers!)
+        }
+        request(endpointProvider.getUrl(), method: endpointProvider.endpoint.method,
+                parameters: parameters, headers: commonHeaders).responseString() { response in
                 #if DEBUG
                     print(response)
                     print(response.response ?? "No HTTP response")
@@ -74,8 +83,8 @@ class TPApiClient {
     static func authenticate(username: String, password: String,
                              completion: @escaping (TPAuthToken?, TPError?) -> Void) {
         let parameters: Parameters = ["username": username, "password": password]
-        apiCall(endpoint: .AuthenticateUser, parameters: parameters, completion: {
-            json, error in
+        apiCall(endpointProvider: TPEndpointProvider(.authenticateUser), parameters: parameters,
+                completion: { json, error in
             var testpressAuthToken: TPAuthToken? = nil
             if let json = json {
                 testpressAuthToken = TPModelMapper<TPAuthToken>().mapFromJSON(json: json)
@@ -88,4 +97,29 @@ class TPApiClient {
         })
     }
     
+    static func getExams(endpointProvider: TPEndpointProvider,
+                         completion: @escaping (TPApiResponse<Exam>?, TPError?) -> Void) {
+        apiCall(endpointProvider: endpointProvider, completion: {
+            json, error in
+            var testpressAuthToken: TPApiResponse<Exam>? = nil
+            if let json = json {
+                testpressAuthToken = TPModelMapper<TPApiResponse<Exam>>().mapFromJSON(json: json)
+                print(testpressAuthToken?.results ?? "Error")
+                guard testpressAuthToken != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(testpressAuthToken, error)
+        })
+    }
+    
+}
+
+extension Dictionary {
+    mutating func update(other:Dictionary) {
+        for (key,value) in other {
+            self.updateValue(value, forKey:key)
+        }
+    }
 }

@@ -28,25 +28,49 @@ import Foundation
 import Alamofire
 
 enum TPEndpoint {
-    case AuthenticateUser
-    case GetExams
+    
+    case authenticateUser
+    case getExams
     
     var method: Alamofire.HTTPMethod {
         switch self {
-        case .AuthenticateUser:
+        case .authenticateUser:
             return .post
-        case .GetExams:
+        case .getExams:
             return .get
         }
     }
+}
+
+struct TPEndpointProvider {
+    var endpoint: TPEndpoint
+    var queryParams: [String: String]
     
-    var url: String {
-        let baseUrl = NSURL(string: Constants.BASE_URL)!
-        switch self {
-        case .AuthenticateUser:
-            return baseUrl.appendingPathComponent("/api/v2.2/auth-token/")!.absoluteString
-        case .GetExams:
-            return baseUrl.appendingPathComponent("/api/v2.2/exams/")!.absoluteString
-        }
+    init(_ endpoint: TPEndpoint, queryParams: [String: String] = [String: String]()) {
+        self.endpoint = endpoint
+        self.queryParams = queryParams
     }
+    
+    func getUrl() -> String {
+        var urlPath: String
+        switch endpoint {
+        case .authenticateUser:
+            urlPath = "/api/v2.2/auth-token/"
+        case .getExams:
+            urlPath = "/api/v2.2/exams/"
+        }
+        var url = Constants.BASE_URL + urlPath
+        if !queryParams.isEmpty {
+            url = url + "?"
+            for (i, queryParam) in queryParams.enumerated() {
+                url = url + queryParam.key + "=" + queryParam.value
+                print("i:\(i)")
+                if queryParams.count != (i + 1) {
+                    url = url + "&"
+                }
+            }
+        }
+        return url
+    }
+    
 }

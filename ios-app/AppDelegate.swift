@@ -40,8 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
         }
-        let navigationController = UINavigationController(rootViewController: viewController)
-        window!.rootViewController = navigationController
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
         return true
     }
 
