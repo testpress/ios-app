@@ -22,6 +22,7 @@
 		2F2CF65B1E8E77500090A5C4 /* TPApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF65A1E8E77500090A5C4 /* TPApiResponse.swift */; };
 		2F2CF65D1E8E777A0090A5C4 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF65C1E8E777A0090A5C4 /* Exam.swift */; };
 		2F2CF65F1E8E785B0090A5C4 /* ExamPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF65E1E8E785B0090A5C4 /* ExamPager.swift */; };
+		2F2CF6611E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF6601E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift */; };
 		2F61A7CD1E8E6E5D002C746C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CB1E8E6E5D002C746C /* Constants.swift */; };
 		2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */; };
 		2FBEDB7C1E82BBD5000CF05C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */; };
@@ -63,6 +64,7 @@
 		2F2CF65A1E8E77500090A5C4 /* TPApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TPApiResponse.swift; path = Model/TPApiResponse.swift; sourceTree = "<group>"; };
 		2F2CF65C1E8E777A0090A5C4 /* Exam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Exam.swift; path = Model/Exam.swift; sourceTree = "<group>"; };
 		2F2CF65E1E8E785B0090A5C4 /* ExamPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamPager.swift; sourceTree = "<group>"; };
+		2F2CF6601E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TPBasePagedTableViewController.swift; path = UI/TPBasePagedTableViewController.swift; sourceTree = "<group>"; };
 		2F61A7CB1E8E6E5D002C746C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Core/Constants.swift; sourceTree = "<group>"; };
 		2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainTokenItem.swift; path = Core/KeychainTokenItem.swift; sourceTree = "<group>"; };
 		2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */,
 				2F2CF64D1E8E751D0090A5C4 /* LoginViewController.swift */,
 				2F2CF64E1E8E751D0090A5C4 /* TabViewController.swift */,
+				2F2CF6601E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				2FF7520F1E855A1C005E8A0C /* TPAuthToken.swift in Sources */,
 				2FF752101E855A1C005E8A0C /* TPError.swift in Sources */,
 				2FF7521B1E855AB2005E8A0C /* TPEndpoint.swift in Sources */,
+				2F2CF6611E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift in Sources */,
 				2F2CF65B1E8E77500090A5C4 /* TPApiResponse.swift in Sources */,
 				2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */,
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
