@@ -28,19 +28,29 @@ import UIKit
 class ExamsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var examName: UILabel!
+    @IBOutlet weak var examViewCell: UIView!
+    
+    var parentViewController: UIViewController? = nil
+    var exam: Exam?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tappedMe))
+        examViewCell.addGestureRecognizer(tap)
     }
     
-    func setExam(_ exam: Exam){
+    func setExam(_ exam: Exam, viewController: UIViewController){
+        parentViewController = viewController
+        self.exam = exam
         examName.text = exam.title
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
+    
+    func tappedMe() {
+        let storyboard = UIStoryboard(name: "TestEngine", bundle: nil)
+        let someViewConroller = storyboard.instantiateViewController(withIdentifier: "StartExamScreenViewController") as! StartExamScreenViewController
+        someViewConroller.exam = self.exam!
+        parentViewController?.showDetailViewController(someViewConroller, sender: self)
     }
     
 }

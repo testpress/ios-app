@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  AttemptQuestion.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,30 +23,25 @@
 //  THE SOFTWARE.
 //
 
-struct Constants {
-    static let APP_NAME = "Testpress iOS App"
-    static let BASE_URL = "http://sandbox.testpress.in";
-    static let KEYCHAIN_SERVICE_NAME_TOKEN = APP_NAME + " Token"
+import ObjectMapper
+
+public class AttemptQuestion {
+    var questionHtml: String?;
+    var subject: String?;
+    var direction: String?;
+    var type: String?;
+    var answers: [AttemptAnswer] = [];
     
-    static let LOGIN_VIEW_CONTROLLER = "LoginViewController"
-    static let TAB_VIEW_CONTROLLER = "TabViewController"
-    static let TEST_ENGINE_VIEW_CONTROLLER = "TestEngineViewController"
-    static let QUESTIONS_VIEW_CONTROLLER = "QuestionsViewController"
-    
-    static let PAGE = "page"
-    static let STATE = "state"
-    
-    static let AVAILABLE = "Available"
-    static let UPCOMING = "Upcoming"
-    static let HISTORY = "Histroy"
-    
+    public required init?(map: Map) {
+    }
 }
 
-struct Slug {
-    
-    static let AVAILABLE = "available"
-    static let UPCOMING = "upcoming"
-    static let HISTORY = "history"
-    
+extension AttemptQuestion: TestpressModel {
+    public func mapping(map: Map) {
+        questionHtml <- map["question_html"]
+        subject <- map["subject"]
+        direction <- map["direction"]
+        type <- map["type"]
+        answers <- map["answers"]
+    }
 }
-

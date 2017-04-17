@@ -38,11 +38,26 @@ public class UIUtils {
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }
+    
+    static func initProgressDialog(message: String) -> UIAlertController {
+        let alertController = UIAlertController(title: nil, message: message,
+                                                preferredStyle: .alert)
+        
+        let spinnerIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        
+        spinnerIndicator.center = CGPoint(x: 135.0, y: 65.5)
+        spinnerIndicator.color = UIColor.black
+        spinnerIndicator.startAnimating()
+        
+        alertController.view.addSubview(spinnerIndicator)
+        return alertController
+    }
 }
 
 public class Colors {
     
     static let PRIMARY = "#2196F3"
+    static let MATERIAL_GREEN = "#00ccaa"
 
     static func getRGB (_ hex:String) -> UIColor {
         var cString:String

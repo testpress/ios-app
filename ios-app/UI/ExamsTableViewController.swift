@@ -73,7 +73,7 @@ class ExamsTableViewController: TPBasePagedTableViewController<Exam>, IndicatorI
         
         tableView.register(UINib(nibName: cellIdentifier, bundle: Bundle.main),
                            forCellReuseIdentifier: cellIdentifier)
-        tableView.rowHeight = 80
+        tableView.rowHeight = 105
         tableView.allowsSelection = false
     }
     
@@ -83,7 +83,7 @@ class ExamsTableViewController: TPBasePagedTableViewController<Exam>, IndicatorI
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as!
             ExamsTableViewCell
         
-        cell.setExam(items[indexPath.row])
+        cell.setExam(items[indexPath.row], viewController: self)
         return cell
     }
 

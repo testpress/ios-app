@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  Attempt.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,30 +23,45 @@
 //  THE SOFTWARE.
 //
 
-struct Constants {
-    static let APP_NAME = "Testpress iOS App"
-    static let BASE_URL = "http://sandbox.testpress.in";
-    static let KEYCHAIN_SERVICE_NAME_TOKEN = APP_NAME + " Token"
+import ObjectMapper
+
+public class Attempt {
+    var url: String?;
+    var id: Int?;
+    var date: String?;
+    var totalQuestions: Int?;
+    var score: String?;
+    var rank: String?;
+    var reviewUrl: String?;
+    var questionsUrl: String?;
+    var correctCount: Int?;
+    var incorrectCount: Int?;
+    var lastStartedTime: String?;
+    var remainingTime: String?;
+    var timeTaken: String?;
+    var state: String?;
+    var percentile: String?;
     
-    static let LOGIN_VIEW_CONTROLLER = "LoginViewController"
-    static let TAB_VIEW_CONTROLLER = "TabViewController"
-    static let TEST_ENGINE_VIEW_CONTROLLER = "TestEngineViewController"
-    static let QUESTIONS_VIEW_CONTROLLER = "QuestionsViewController"
-    
-    static let PAGE = "page"
-    static let STATE = "state"
-    
-    static let AVAILABLE = "Available"
-    static let UPCOMING = "Upcoming"
-    static let HISTORY = "Histroy"
-    
+    public required init?(map: Map) {
+    }
 }
 
-struct Slug {
-    
-    static let AVAILABLE = "available"
-    static let UPCOMING = "upcoming"
-    static let HISTORY = "history"
-    
+extension Attempt: TestpressModel {
+    public func mapping(map: Map) {
+        url <- map["url"]
+        id <- map["id"]
+        date <- map["title"]
+        totalQuestions <- map["total_questions"]
+        score <- map["score"]
+        rank <- map["rank"]
+        reviewUrl <- map["review_url"]
+        questionsUrl <- map["questions_url"]
+        correctCount <- map["correct_count"]
+        incorrectCount <- map["incorrect_count"]
+        lastStartedTime <- map["last_started_time"]
+        remainingTime <- map["remaining_time"]
+        timeTaken <- map["time_taken"]
+        state <- map["state"]
+        percentile <- map["percentile"]
+    }
 }
-

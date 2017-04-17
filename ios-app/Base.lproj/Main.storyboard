@@ -104,7 +104,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Exams" id="HAU-th-mGh">
-                                        <barButtonItem key="rightBarButtonItem" title="Logout" id="GS1-Hd-T3d">
+                                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Logout" id="GS1-Hd-T3d">
                                             <connections>
                                                 <action selector="logout:" destination="QVc-G1-ctc" id="dFA-ZO-UgU"/>
                                             </connections>
@@ -125,6 +125,7 @@
                             <constraint firstItem="SM5-Qb-Y9R" firstAttribute="top" secondItem="oKv-CB-Jjx" secondAttribute="bottom" id="vxM-uO-vxH"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Vz4-LS-yvc"/>
                     <connections>
                         <outlet property="buttonBarView" destination="oKv-CB-Jjx" id="g3c-Xn-BYB"/>
                         <outlet property="tempButtonBarView" destination="oKv-CB-Jjx" id="bvY-sm-d7t"/>
@@ -133,7 +134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jfd-Fa-Udf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-519.20000000000005" y="115.59220389805098"/>
+            <point key="canvasLocation" x="-519" y="174"/>
         </scene>
     </scenes>
 </document>
