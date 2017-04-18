@@ -94,6 +94,7 @@ class TPApiClient {
     
     static func authenticate(username: String, password: String,
                              completion: @escaping (TPAuthToken?, TPError?) -> Void) {
+        
         let parameters: Parameters = ["username": username, "password": password]
         apiCall(endpointProvider: TPEndpointProvider(.authenticateUser), parameters: parameters,
                 completion: { json, error in
@@ -111,18 +112,19 @@ class TPApiClient {
     
     static func getExams(endpointProvider: TPEndpointProvider,
                          completion: @escaping (TPApiResponse<Exam>?, TPError?) -> Void) {
+        
         apiCall(endpointProvider: endpointProvider, completion: {
             json, error in
-            var testpressAuthToken: TPApiResponse<Exam>? = nil
+            var testpressResponse: TPApiResponse<Exam>? = nil
             if let json = json {
-                testpressAuthToken = TPModelMapper<TPApiResponse<Exam>>().mapFromJSON(json: json)
-                print(testpressAuthToken?.results ?? "Error")
-                guard testpressAuthToken != nil else {
+                testpressResponse = TPModelMapper<TPApiResponse<Exam>>().mapFromJSON(json: json)
+                debugPrint(testpressResponse?.results ?? "Error")
+                guard testpressResponse != nil else {
                     completion(nil, TPError(message: json, kind: .unexpected))
                     return
                 }
             }
-            completion(testpressAuthToken, error)
+            completion(testpressResponse, error)
         })
     }
     
@@ -133,7 +135,7 @@ class TPApiClient {
             var attempt: Attempt? = nil
             if let json = json {
                 attempt = TPModelMapper<Attempt>().mapFromJSON(json: json)
-                print(attempt?.questionsUrl ?? "Error")
+                debugPrint(attempt?.questionsUrl ?? "Error")
                 guard attempt != nil else {
                     completion(nil, TPError(message: json, kind: .unexpected))
                     return
@@ -144,14 +146,15 @@ class TPApiClient {
     }
     
     static func getQuestions(endpointProvider: TPEndpointProvider,
-                             completion: @escaping (TPApiResponse<AttemptItem>?, TPError?) -> Void) {
+                             completion: @escaping(TPApiResponse<AttemptItem>?, TPError?) -> Void) {
+        
         apiCall(endpointProvider: endpointProvider, completion: {
             json, error in
             var testpressResponse: TPApiResponse<AttemptItem>? = nil
             if let json = json {
-                testpressResponse = TPModelMapper<TPApiResponse<AttemptItem>>()
-                    .mapFromJSON(json: json)
-                print(testpressResponse?.results.count ?? "Error")
+                testpressResponse =
+                    TPModelMapper<TPApiResponse<AttemptItem>>().mapFromJSON(json: json)
+                debugPrint(testpressResponse?.results.count ?? "Error")
                 guard testpressResponse != nil else {
                     completion(nil, TPError(message: json, kind: .unexpected))
                     return
@@ -168,8 +171,7 @@ class TPApiClient {
             json, error in
             var attempt: Attempt? = nil
             if let json = json {
-                attempt = TPModelMapper<Attempt>()
-                    .mapFromJSON(json: json)
+                attempt = TPModelMapper<Attempt>().mapFromJSON(json: json)
                 debugPrint(attempt?.questionsUrl ?? "Error")
                 guard attempt != nil else {
                     completion(nil, TPError(message: json, kind: .unexpected))
@@ -189,8 +191,7 @@ class TPApiClient {
             json, error in
             var attemptItem: AttemptItem? = nil
             if let json = json {
-                attemptItem = TPModelMapper<AttemptItem>()
-                    .mapFromJSON(json: json)
+                attemptItem = TPModelMapper<AttemptItem>().mapFromJSON(json: json)
                 debugPrint(attemptItem?.url ?? "Error")
                 guard attemptItem != nil else {
                     completion(nil, TPError(message: json, kind: .unexpected))
