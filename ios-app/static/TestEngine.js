@@ -20,7 +20,7 @@ function onRadioOptionClick(clickedOption) {
         if (selectedRadioOption) {
             setRadioButtonState(selectedRadioOption, false);
         }
-        var message = {" clickedOptionId": clickedOption.id, "checked": true, "radioOption": true }
+        var message = {"clickedOptionId": clickedOption.id, "checked": true, "radioOption": true }
         webkit.messageHandlers.callbackHandler.postMessage(message);
         setRadioButtonState(clickedOption, true);
     }

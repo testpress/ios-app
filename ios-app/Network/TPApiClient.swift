@@ -31,17 +31,29 @@ class TPApiClient {
     static func apiCall(endpointProvider: TPEndpointProvider,
                         parameters: Parameters? = nil, headers: HTTPHeaders? = nil,
                         completion: @escaping (String?, TPError?) -> Void) -> Void {
-        var commonHeaders = HTTPHeaders()
+        
+        let url =  URL(string: endpointProvider.getUrl())
+        var request = URLRequest(url: url!)
+        request.httpMethod = endpointProvider.endpoint.method.rawValue
+        // Add given headers
+        if headers != nil {
+            request.allHTTPHeaderFields = headers
+        }
+        // Add common headers
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         if (KeychainTokenItem.isExist()) {
             let token: String = KeychainTokenItem.getToken()
-            commonHeaders.update(other: ["Authorization": "JWT " + token])
+            request.setValue("JWT " + token, forHTTPHeaderField: "Authorization")
         }
-        if headers != nil {
-            commonHeaders.update(other: headers!)
+        // Add post parameters
+        if parameters != nil {
+            request.httpBody = try! JSONSerialization.data(withJSONObject: parameters!, options:
+                JSONSerialization.WritingOptions.prettyPrinted)
         }
-        request(endpointProvider.getUrl(), method: endpointProvider.endpoint.method,
-                parameters: parameters, headers: commonHeaders).responseString() { response in
+        Alamofire.request(request).responseString() { response in
                 #if DEBUG
+                    print(NSString(data: response.request?.httpBody ?? Data(),
+                                   encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
                     print(response)
                     print(response.response ?? "No HTTP response")
                 #endif
@@ -146,6 +158,46 @@ class TPApiClient {
                 }
             }
             completion(testpressResponse, error)
+        })
+    }
+    
+    static func sendHeartBeat(endpointProvider: TPEndpointProvider,
+                              completion: @escaping (Attempt?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, completion: {
+            json, error in
+            var attempt: Attempt? = nil
+            if let json = json {
+                attempt = TPModelMapper<Attempt>()
+                    .mapFromJSON(json: json)
+                debugPrint(attempt?.questionsUrl ?? "Error")
+                guard attempt != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(attempt, error)
+        })
+    }
+    
+    static func saveAnswer(selectedAnswer: [Int], review: Bool,
+                           endpointProvider: TPEndpointProvider,
+                           completion: @escaping (AttemptItem?, TPError?) -> Void) {
+        
+        let parameters: Parameters = ["selected_answers": selectedAnswer, "review": review]
+        apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
+            json, error in
+            var attemptItem: AttemptItem? = nil
+            if let json = json {
+                attemptItem = TPModelMapper<AttemptItem>()
+                    .mapFromJSON(json: json)
+                debugPrint(attemptItem?.url ?? "Error")
+                guard attemptItem != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(attemptItem, error)
         })
     }
     

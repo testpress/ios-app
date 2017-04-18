@@ -67,6 +67,7 @@ class StartExamScreenViewController: UIViewController {
                     default:
                         print("Unexpected")
                     }
+                    self.alertController.dismiss(animated: true, completion: nil)
                     return
                 }
                 

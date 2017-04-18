@@ -28,14 +28,23 @@ import ObjectMapper
 public class AttemptItem {
     var url: String?;
     var question: AttemptQuestion?;
-    var review: Bool?;
+    var review: Bool? {
+       didSet { review = review != nil && review! }
+    }
     var index: Int?;
-    var currentReview: Bool?;
+    var currentReview: Bool? {
+        didSet { currentReview = currentReview != nil && currentReview! }
+    }
     var selectedAnswers: [Int] = [];
     var savedAnswers: [Int] = [];
     
     public required init?(map: Map) {
     }
+    
+    public func hasChanged() -> Bool {
+        return savedAnswers != selectedAnswers || currentReview != review;
+    }
+
 }
 
 extension AttemptItem: TestpressModel {

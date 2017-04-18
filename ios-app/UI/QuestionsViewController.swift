@@ -32,15 +32,19 @@ class QuestionsViewController: UIViewController, WKScriptMessageHandler, WKUIDel
     @IBOutlet weak var topShadowView: UIView!
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var reviewSwitch: UISwitch!
     
     var webView: WKWebView!
     var attemptItem: AttemptItem?
+    private var selectedOptions: [Int] = []
     let topGradient = CAGradientLayer()
     let bottomGradient = CAGradientLayer()
     var activityIndicator: UIActivityIndicatorView?
     
     override func loadView() {
         super.loadView()
+        
+        selectedOptions = attemptItem!.selectedAnswers
        
         activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
@@ -56,6 +60,8 @@ class QuestionsViewController: UIViewController, WKScriptMessageHandler, WKUIDel
         webView.autoresizingMask =  [.flexibleWidth, .flexibleHeight]
         
         self.containerView.addSubview(self.webView)
+        
+        reviewSwitch.isOn = attemptItem!.review!
 
     }
 
@@ -72,10 +78,18 @@ class QuestionsViewController: UIViewController, WKScriptMessageHandler, WKUIDel
         if (message.name == "callbackHandler") {
             let body = message.body
             if let dict = body as? Dictionary<String, AnyObject> {
-                print(dict)
-                print(dict["clickedOptionId"] ?? "clickedOptionId empty")
-                print("checked:\(dict["checked"] as! Bool)")
-                print("radioOption:\(dict["radioOption"] as! Bool)")
+                let checked = dict["checked"] as! Bool
+                let radioOption = dict["radioOption"] as! Bool
+                let id = Int(dict["clickedOptionId"] as! String)!
+                if (checked) {
+                    if (radioOption) {
+                        selectedOptions = []
+                    }
+                    selectedOptions.append(id)
+                } else {
+                    selectedOptions = selectedOptions.filter { $0 != id } ;
+                }
+                attemptItem?.savedAnswers = selectedOptions;
             }
         }
     }
@@ -135,7 +149,6 @@ class QuestionsViewController: UIViewController, WKScriptMessageHandler, WKUIDel
         // Add options
         htmlContent += "<table width='100%' style='margin-top:0px;'>";
         for attemptAnswer in attemptQuestion.answers {
-            print(attemptItem?.question?.type ?? "type is empty")
             if (attemptItem?.question?.type == "R") {
                 htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
                     optionText: attemptAnswer.textHtml!, id: attemptAnswer.id!);
@@ -159,4 +172,7 @@ class QuestionsViewController: UIViewController, WKScriptMessageHandler, WKUIDel
         bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
     }
     
+    @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
+        attemptItem?.currentReview = sender.isOn
+    }
 }

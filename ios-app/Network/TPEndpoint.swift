@@ -33,6 +33,8 @@ enum TPEndpoint {
     case getExams
     case createAttempt
     case getQuestions
+    case sendHeartBeat
+    case saveAnswer
     
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -44,6 +46,23 @@ enum TPEndpoint {
             return .post
         case .getQuestions:
             return .get
+        case .sendHeartBeat:
+            return .put
+        case .saveAnswer:
+            return .put
+        }
+    }
+    
+    var urlPath: String {
+        switch self {
+        case .authenticateUser:
+            return "/api/v2.2/auth-token/"
+        case .getExams:
+            return "/api/v2.2/exams/"
+        case .sendHeartBeat:
+            return "heartbeat/"
+        default:
+            return ""
         }
     }
 }
@@ -62,17 +81,8 @@ struct TPEndpointProvider {
     }
     
     func getUrl() -> String {
-        var urlPath: String
-        switch endpoint {
-        case .authenticateUser:
-            urlPath = "/api/v2.2/auth-token/"
-        case .getExams:
-            urlPath = "/api/v2.2/exams/"
-        default:
-            urlPath = ""
-        }
         // If the given url is empty, use base url with url path
-        var url = self.url.isEmpty ? Constants.BASE_URL + urlPath : self.url
+        var url = self.url.isEmpty ? Constants.BASE_URL + endpoint.urlPath : self.url
         if !queryParams.isEmpty {
             url = url + "?"
             for (i, queryParam) in queryParams.enumerated() {
