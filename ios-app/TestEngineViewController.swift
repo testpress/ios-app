@@ -44,7 +44,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
     var attemptItems = [AttemptItem]()
     var showingProgress: Bool = false
     var previousQuestionIndex: Int = 0
-    let alertController = UIUtils.initProgressDialog(message: "Loading questions\n\n")
+    let loadingDialogController = UIUtils.initProgressDialog(message: "Loading questions\n\n")
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.present(alertController, animated: false, completion: nil)
+        self.present(loadingDialogController, animated: false, completion: nil)
         loadQuestions(url: (attempt?.questionsUrl)!)
     }
     
@@ -97,7 +97,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
                     default:
                         print("Unexpected")
                     }
-                    self.alertController.dismiss(animated: true, completion: nil)
+                    self.loadingDialogController.dismiss(animated: true, completion: nil)
                     return
                 }
                 self.attemptItems.append(contentsOf: testpressResponse!.results)
@@ -119,9 +119,9 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
                     self.setCurrentQuestion(index: self.getCurrentIndex())
                     self.remainingTime = self.getSecondsFromInputString(self.attempt?.remainingTime)
                     self.startTimer()
-                    self.alertController.dismiss(animated: true, completion: nil)
+                    self.loadingDialogController.dismiss(animated: true, completion: nil)
                     // Set loading progress dialog message for further use
-                    self.alertController.message = "Loading…\n\n"
+                    self.loadingDialogController.message = "Loading…\n\n"
                 }
             }
         )
@@ -133,6 +133,8 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
                             didFinishAnimating finished: Bool,
                             previousViewControllers: [UIViewController],
                             transitionCompleted completed: Bool) {
+        
+        // When user swipe the page, set current question
         if completed {
             setCurrentQuestion(index: getCurrentIndex())
         }
@@ -146,6 +148,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
     func setCurrentQuestion(index: Int) {
         saveAnswer(index: previousQuestionIndex)
         previousQuestionIndex = index
+        // Update previous button
         if index == 0 {
             previousButtonLayout.isUserInteractionEnabled = false
             prevButton.isEnabled = false
@@ -155,6 +158,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
             prevButton.isEnabled = true
             prevArrow.tintColor = Colors.getRGB(Colors.PRIMARY)
         }
+        // Update next button
         if index + 1 == self.questionsControllerSource?.attemptItems.count {
             nextButtonLayout.isUserInteractionEnabled = false
             nextButton.isEnabled = false
@@ -218,15 +222,13 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
             completion: {
                 attempt, error in
                 if let error = error {
-                    self.showAlert(error: error, handler: {
-                        self.sendHeartBeat()
-                    })
+                    self.showAlert(error: error, retryHandler: { self.sendHeartBeat() })
                     return
                 }
                 
                 if self.showingProgress {
                     self.startTimer()
-                    self.alertController.dismiss(animated: true)
+                    self.loadingDialogController.dismiss(animated: true)
                     self.showingProgress = false
                 }
             }
@@ -242,7 +244,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
                 completion: {
                     newAttemptItem, error in
                     if let error = error {
-                        self.showAlert(error: error, handler: {
+                        self.showAlert(error: error, retryHandler: {
                             self.saveAnswer(index: index, completionHandler: completionHandler)
                         })
                         return
@@ -260,7 +262,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
                     
                     if self.showingProgress {
                         self.startTimer()
-                        self.alertController.dismiss(animated: false)
+                        self.loadingDialogController.dismiss(animated: false)
                         self.showingProgress = false
                     }
                 }
@@ -286,7 +288,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
             completion: {
                 attempt, error in
                 if let error = error {
-                    self.showAlert(error: error, handler: { self.endExam() })
+                    self.showAlert(error: error, retryHandler: { self.endExam() })
                     return
                 }
                 
@@ -297,33 +299,20 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
         )
     }
     
-    func getSecondsFromInputString(_ inputString: String?) -> Int {
-        if inputString == nil {
-            return 0
-        }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        guard let date = dateFormatter.date(from: inputString!) else {
-            assert(false, "no date from string")
-            return 0
-        }
-        
-        return Int(date.timeIntervalSince1970)
-    }
-    
-    func showAlert(error: TPError, handler: @escaping (() -> Swift.Void)) {
+    func showAlert(error: TPError, retryHandler: @escaping (() -> Swift.Void)) {
         if self.showingProgress {
-            self.alertController.dismiss(animated: true, completion: {
+            // Close progress dialog if currently showing
+            self.loadingDialogController.dismiss(animated: true, completion: {
                 self.showingProgress = false
-                self.showAlert(error: error, handler: handler)
+                self.showAlert(error: error, retryHandler: retryHandler)
             })
             return
         }
+        
         timer.invalidate()
         var alert: UIAlertController
         var cancelButtonTitle: String
+        
         if error.kind == .network {
             alert = UIAlertController(
                 title: "No internet connection",
@@ -335,9 +324,9 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
                 title: "Retry", style: UIAlertActionStyle.default, handler: {
                     (action: UIAlertAction!) in
                     alert.dismiss(animated: false)
-                    self.present(self.alertController, animated: true, completion: nil)
+                    self.present(self.loadingDialogController, animated: true, completion: nil)
                     self.showingProgress = true
-                    handler()
+                    retryHandler()
             }))
             cancelButtonTitle = "Not Now"
         } else {
@@ -348,7 +337,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
             )
             cancelButtonTitle = "OK"
         }
-        
+
         alert.addAction(UIAlertAction(
             title: cancelButtonTitle, style: UIAlertActionStyle.default,
             handler: { (action: UIAlertAction!) in
@@ -393,6 +382,22 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
         presentingViewController?.presentingViewController?.dismiss(animated: false, completion: {})
     }
     
+    func getSecondsFromInputString(_ inputString: String?) -> Int {
+        if inputString == nil {
+            return 0
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        guard let date = dateFormatter.date(from: inputString!) else {
+            assert(false, "no date from string")
+            return 0
+        }
+        
+        return Int(date.timeIntervalSince1970)
+    }
+    
     func startTimer() {
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:
             #selector(self.updateRemainingTime), userInfo: nil, repeats: true)
@@ -400,13 +405,13 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
     
     func showLoadingProgress() {
         timer.invalidate()
-        present(self.alertController, animated: true)
+        present(self.loadingDialogController, animated: true)
         showingProgress = true
     }
     
     func hideLoadingProgress(completionHandler: (() -> Void)? = nil) {
         if self.showingProgress {
-            self.alertController.dismiss(animated: false, completion: {
+            self.loadingDialogController.dismiss(animated: false, completion: {
                 if completionHandler != nil {
                     completionHandler!()
                 }

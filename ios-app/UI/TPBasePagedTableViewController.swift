@@ -29,10 +29,10 @@ import XLPagerTabStrip
 
 class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     
-    var activityIndicator: UIActivityIndicatorView?
+    var activityIndicator: UIActivityIndicatorView? // Progress bar
     var items = [T]()
     let pager: TPBasePager<T>
-    var loading: Bool = false
+    var loadingItems: Bool = false
     
     init(pager: TPBasePager<T>) {
         self.pager = pager
@@ -69,10 +69,10 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     }
     
     func loadItems() {
-        if loading {
+        if loadingItems {
             return
         }
-        loading = true
+        loadingItems = true
         pager.next(completion: {
             items, error in
             if let error = error {
@@ -88,7 +88,7 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
                 self.activityIndicator?.stopAnimating()
             }
             self.tableView.tableFooterView?.isHidden = true
-            self.loading = false
+            self.loadingItems = false
         })
     }
     
@@ -117,12 +117,12 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewCell(cellForRowAt: indexPath)
-        
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         cell.layoutMargins = UIEdgeInsets.zero;
         
-        if indexPath.row >= (items.count - 4) && !loading {
+        // Load more items on scroll to bottom
+        if indexPath.row >= (items.count - 4) && !loadingItems {
             if self.pager.hasMore {
                 tableView.tableFooterView?.isHidden = false
                 self.loadItems()
