@@ -244,9 +244,9 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <items>
                                     <navigationItem id="tf7-Mc-YWp">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="GAQ-Yt-LDJ">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="GAQ-Yt-LDJ">
                                             <connections>
-                                                <action selector="onBackPress:" destination="Lki-87-nF0" id="HPw-45-dPc"/>
+                                                <action selector="onPressStopButton:" destination="Lki-87-nF0" id="6Us-Ku-nsA"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>

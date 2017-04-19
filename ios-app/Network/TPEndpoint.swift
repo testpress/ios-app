@@ -35,6 +35,7 @@ enum TPEndpoint {
     case getQuestions
     case sendHeartBeat
     case saveAnswer
+    case endExam
     
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -50,6 +51,8 @@ enum TPEndpoint {
             return .put
         case .saveAnswer:
             return .put
+        case .endExam:
+            return .put
         }
     }
     
@@ -61,6 +64,8 @@ enum TPEndpoint {
             return "/api/v2.2/exams/"
         case .sendHeartBeat:
             return "heartbeat/"
+        case .endExam:
+            return "end/"
         default:
             return ""
         }

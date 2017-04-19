@@ -120,6 +120,8 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
                     self.remainingTime = self.getSecondsFromInputString(self.attempt?.remainingTime)
                     self.startTimer()
                     self.alertController.dismiss(animated: true, completion: nil)
+                    // Set loading progress dialog message for further use
+                    self.alertController.message = "Loading…\n\n"
                 }
             }
         )
@@ -142,10 +144,8 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
     }
     
     func setCurrentQuestion(index: Int) {
-        
         saveAnswer(index: previousQuestionIndex)
         previousQuestionIndex = index
-        
         if index == 0 {
             previousButtonLayout.isUserInteractionEnabled = false
             prevButton.isEnabled = false
@@ -201,16 +201,18 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
             let minutes = (remainingTime / 60) % 60
             let seconds = remainingTime % 60
             remainingTimeLabel.text = String(format: "%d:%02d:%02d", hours, minutes, seconds)
-            if (remainingTime % 60) == 0 {
-                sendHeartBeat();
+            if hours != 0 || minutes != 0 || seconds != 0 {
+                if (remainingTime % 60) == 0 {
+                    sendHeartBeat();
+                }
+                return
             }
-        } else {
-            // TODO: End Exam
         }
+        onEndExam()
     }
     
     func sendHeartBeat() {
-        TPApiClient.sendHeartBeat(
+        TPApiClient.updateAttemptState(
             endpointProvider: TPEndpointProvider(.sendHeartBeat, url: attempt!.url! +
                 TPEndpoint.sendHeartBeat.urlPath),
             completion: {
@@ -231,7 +233,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
         )
     }
     
-    func saveAnswer(index: Int) {
+    func saveAnswer(index: Int, completionHandler: (() -> Void)? = nil) {
         let attemptItem = attemptItems[index]
         if attemptItem.hasChanged() {
             TPApiClient.saveAnswer(
@@ -241,22 +243,58 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
                     newAttemptItem, error in
                     if let error = error {
                         self.showAlert(error: error, handler: {
-                            self.saveAnswer(index: index)
+                            self.saveAnswer(index: index, completionHandler: completionHandler)
                         })
                         return
                     }
                     
+                    if completionHandler != nil {
+                        // Saved the answer on user paused or end the exam
+                        self.hideLoadingProgress(completionHandler: completionHandler)
+                        return
+                    }
+                    // Saved the answer on user navigate to other question
                     attemptItem.selectedAnswers = newAttemptItem!.selectedAnswers
                     attemptItem.review = newAttemptItem!.review
                     self.attemptItems[index] = attemptItem;
+                    
                     if self.showingProgress {
                         self.startTimer()
-                        self.alertController.dismiss(animated: true)
+                        self.alertController.dismiss(animated: false)
                         self.showingProgress = false
                     }
                 }
             )
+        } else {
+            hideLoadingProgress(completionHandler: completionHandler)
         }
+    }
+    
+    func onEndExam() {
+        showLoadingProgress()
+        self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
+            self.endExam()
+        })
+    }
+    
+    func endExam() {
+        TPApiClient.updateAttemptState(
+            endpointProvider: TPEndpointProvider(
+                .endExam,
+                url: attempt!.url! + TPEndpoint.endExam.urlPath
+            ),
+            completion: {
+                attempt, error in
+                if let error = error {
+                    self.showAlert(error: error, handler: { self.endExam() })
+                    return
+                }
+                
+                self.hideLoadingProgress(completionHandler: {
+                    self.gotoHistory()
+                })
+            }
+        )
     }
     
     func getSecondsFromInputString(_ inputString: String?) -> Int {
@@ -296,7 +334,6 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
             alert.addAction(UIAlertAction(
                 title: "Retry", style: UIAlertActionStyle.default, handler: {
                     (action: UIAlertAction!) in
-                    self.alertController.message = "Loading…"
                     alert.dismiss(animated: false)
                     self.present(self.alertController, animated: true, completion: nil)
                     self.showingProgress = true
@@ -321,13 +358,64 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
         
         self.present(alert, animated: true, completion: nil)
     }
+
+    @IBAction func onPressStopButton(_ sender: UIBarButtonItem) {
+        var alert: UIAlertController
+    
+        alert = UIAlertController(
+            title: "Exit Exam",
+            message: "Are you sure? you can pause the exam & resume again.",
+            preferredStyle: UIAlertControllerStyle.actionSheet
+        )
+        
+        alert.addAction(UIAlertAction(
+            title: "Pause", style: UIAlertActionStyle.default, handler: {
+                (action: UIAlertAction!) in
+                self.showLoadingProgress()
+                self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
+                   self.gotoHistory()
+                })
+        }))
+        
+        alert.addAction(UIAlertAction(
+            title: "End", style: UIAlertActionStyle.default,
+            handler: { (action: UIAlertAction!) in
+                self.onEndExam()
+            }
+        ))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func gotoHistory() {
+        presentingViewController?.presentingViewController?.dismiss(animated: false, completion: {})
+    }
     
     func startTimer() {
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:
             #selector(self.updateRemainingTime), userInfo: nil, repeats: true)
     }
-
-    @IBAction func onBackPress(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+    
+    func showLoadingProgress() {
+        timer.invalidate()
+        present(self.alertController, animated: true)
+        showingProgress = true
+    }
+    
+    func hideLoadingProgress(completionHandler: (() -> Void)? = nil) {
+        if self.showingProgress {
+            self.alertController.dismiss(animated: false, completion: {
+                if completionHandler != nil {
+                    completionHandler!()
+                }
+            })
+            self.showingProgress = false
+        } else {
+            if completionHandler != nil {
+                completionHandler!()
+            }
+        }
     }
 }

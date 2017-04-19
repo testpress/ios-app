@@ -164,8 +164,8 @@ class TPApiClient {
         })
     }
     
-    static func sendHeartBeat(endpointProvider: TPEndpointProvider,
-                              completion: @escaping (Attempt?, TPError?) -> Void) {
+    static func updateAttemptState(endpointProvider: TPEndpointProvider,
+                                   completion: @escaping (Attempt?, TPError?) -> Void) {
         
         apiCall(endpointProvider: endpointProvider, completion: {
             json, error in

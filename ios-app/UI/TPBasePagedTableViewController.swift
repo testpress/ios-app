@@ -69,6 +69,9 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     }
     
     func loadItems() {
+        if loading {
+            return
+        }
         loading = true
         pager.next(completion: {
             items, error in
@@ -121,7 +124,6 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
         
         if indexPath.row >= (items.count - 4) && !loading {
             if self.pager.hasMore {
-                loading = true
                 tableView.tableFooterView?.isHidden = false
                 self.loadItems()
             } else {
