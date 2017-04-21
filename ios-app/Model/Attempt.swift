@@ -31,7 +31,9 @@ public class Attempt {
     var date: String?;
     var totalQuestions: Int?;
     var score: String?;
-    var rank: String?;
+    var rank: Any?;
+    var maxRank: Any?;
+    var rankEnabled: Bool?;
     var reviewUrl: String?;
     var questionsUrl: String?;
     var correctCount: Int?;
@@ -41,6 +43,8 @@ public class Attempt {
     var timeTaken: String?;
     var state: String?;
     var percentile: String?;
+    var speed: Int?
+    var accuracy: Int?
     
     public required init?(map: Map) {
     }
@@ -50,10 +54,12 @@ extension Attempt: TestpressModel {
     public func mapping(map: Map) {
         url <- map["url"]
         id <- map["id"]
-        date <- map["title"]
+        date <- map["date"]
         totalQuestions <- map["total_questions"]
         score <- map["score"]
         rank <- map["rank"]
+        maxRank <- map["max_rank"]
+        rankEnabled <- map["rank_enabled"]
         reviewUrl <- map["review_url"]
         questionsUrl <- map["questions_url"]
         correctCount <- map["correct_count"]
@@ -63,5 +69,7 @@ extension Attempt: TestpressModel {
         timeTaken <- map["time_taken"]
         state <- map["state"]
         percentile <- map["percentile"]
+        speed <- map["speed"]
+        accuracy <- map["accuracy"]
     }
 }

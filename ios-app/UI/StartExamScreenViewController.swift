@@ -44,7 +44,8 @@ class StartExamScreenViewController: UIViewController {
         duration.text = exam?.duration
         markPerQuestion.text = exam?.markPerQuestion
         negativeMarks.text = exam?.negativeMarks
-        startEndDate.text = formatDate(exam?.startDate) + " - " + formatDate(exam?.endDate)
+        startEndDate.text = FormatDate.format(dateString: exam?.startDate) + " -\n" +
+            FormatDate.format(dateString: exam?.endDate)
     }
 
     @IBAction func startExam(_ sender: UIButton) {
@@ -89,24 +90,4 @@ class StartExamScreenViewController: UIViewController {
         self.present(viewController, animated: true, completion: nil)
     }
     
-    func formatDate(_ date: String?) -> String {
-        
-        if date == nil {
-            return "forever"
-        }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        
-        guard let date = dateFormatter.date(from: date!) else {
-            assert(false, "no date from string")
-            return ""
-        }
-        
-        dateFormatter.dateFormat = "dd MMM yy"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        return dateFormatter.string(from: date)
-    }
-
 }

@@ -292,8 +292,9 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
                     return
                 }
                 
+                self.attempt = attempt
                 self.hideLoadingProgress(completionHandler: {
-                    self.gotoHistory()
+                    self.gotoTestReport()
                 })
             }
         )
@@ -380,6 +381,14 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
     
     func gotoHistory() {
         presentingViewController?.presentingViewController?.dismiss(animated: false, completion: {})
+    }
+    
+    func gotoTestReport() {
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier:
+            Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
+        viewController.exam = exam
+        viewController.attempt = attempt
+        self.present(viewController, animated: true, completion: nil)
     }
     
     func getSecondsFromInputString(_ inputString: String?) -> Int {

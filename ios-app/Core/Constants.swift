@@ -32,6 +32,7 @@ struct Constants {
     static let TAB_VIEW_CONTROLLER = "TabViewController"
     static let TEST_ENGINE_VIEW_CONTROLLER = "TestEngineViewController"
     static let QUESTIONS_VIEW_CONTROLLER = "QuestionsViewController"
+    static let TEST_REPORT_VIEW_CONTROLLER = "TestReportViewController"
     
     static let PAGE = "page"
     static let STATE = "state"
