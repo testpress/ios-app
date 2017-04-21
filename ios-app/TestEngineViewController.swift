@@ -68,8 +68,10 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
         nextButtonLayout.addGestureRecognizer(nextButtonGesture)
         prevButton.setTitleColor(UIColor.lightGray, for: .disabled)
         prevButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
-        nextButton.setTitleColor(UIColor.lightGray, for: .disabled)
+        nextButton.setTitleColor(UIColor.red, for: .disabled)
         nextButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
+        nextButton.setTitle("END", for: .disabled)
+        nextButton.setTitle("NEXT", for: .normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -160,11 +162,9 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
         }
         // Update next button
         if index + 1 == self.questionsControllerSource?.attemptItems.count {
-            nextButtonLayout.isUserInteractionEnabled = false
             nextButton.isEnabled = false
             nextArrow.tintColor = UIColor.lightGray
         } else {
-            nextButtonLayout.isUserInteractionEnabled = true
             nextButton.isEnabled = true
             nextArrow.tintColor = Colors.getRGB(Colors.PRIMARY)
         }
@@ -188,6 +188,7 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
         var  index = getCurrentIndex()
         index += 1
         if index == self.questionsControllerSource?.attemptItems.count {
+            onEndExam()
             return
         }
         
