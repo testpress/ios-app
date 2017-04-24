@@ -202,6 +202,25 @@ class TPApiClient {
         })
     }
     
+    static func loadAttempts(endpointProvider: TPEndpointProvider,
+                             completion: @escaping(TPApiResponse<Attempt>?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, completion: {
+            json, error in
+            var testpressResponse: TPApiResponse<Attempt>? = nil
+            if let json = json {
+                testpressResponse =
+                    TPModelMapper<TPApiResponse<Attempt>>().mapFromJSON(json: json)
+                debugPrint(testpressResponse?.results.count ?? "Error")
+                guard testpressResponse != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(testpressResponse, error)
+        })
+    }
+    
 }
 
 extension Dictionary {

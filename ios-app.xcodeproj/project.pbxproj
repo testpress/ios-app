@@ -36,6 +36,9 @@
 		2F5C20D31E9B9E0B00A2BE2A /* WebViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5C20D21E9B9E0B00A2BE2A /* WebViewUtils.swift */; };
 		2F61A7CD1E8E6E5D002C746C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CB1E8E6E5D002C746C /* Constants.swift */; };
 		2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */; };
+		2FA27D451EAB2907006A9F15 /* AttemptsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA27D441EAB2907006A9F15 /* AttemptsListViewController.swift */; };
+		2FA27D491EAB3527006A9F15 /* AttemptsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA27D481EAB3527006A9F15 /* AttemptsTableViewCell.swift */; };
+		2FA27D4B1EAB3E82006A9F15 /* AttemptPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA27D4A1EAB3E82006A9F15 /* AttemptPager.swift */; };
 		2FBEDB7C1E82BBD5000CF05C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */; };
 		2FBEDB7E1E82BC02000CF05C /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */; };
 		2FCD55011EA7A7130004EC0D /* TestReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD55001EA7A7130004EC0D /* TestReportViewController.swift */; };
@@ -91,6 +94,9 @@
 		2F5C20D21E9B9E0B00A2BE2A /* WebViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewUtils.swift; path = "ios-app/Utils/WebViewUtils.swift"; sourceTree = SOURCE_ROOT; };
 		2F61A7CB1E8E6E5D002C746C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Core/Constants.swift; sourceTree = "<group>"; };
 		2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainTokenItem.swift; path = Core/KeychainTokenItem.swift; sourceTree = "<group>"; };
+		2FA27D441EAB2907006A9F15 /* AttemptsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttemptsListViewController.swift; path = UI/AttemptsListViewController.swift; sourceTree = "<group>"; };
+		2FA27D481EAB3527006A9F15 /* AttemptsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttemptsTableViewCell.swift; path = UI/AttemptsTableViewCell.swift; sourceTree = "<group>"; };
+		2FA27D4A1EAB3E82006A9F15 /* AttemptPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptPager.swift; sourceTree = "<group>"; };
 		2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		2FCD55001EA7A7130004EC0D /* TestReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestReportViewController.swift; path = UI/TestReportViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +178,8 @@
 		2F53765C1E8E299D00D87DD7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2FA27D441EAB2907006A9F15 /* AttemptsListViewController.swift */,
+				2FA27D481EAB3527006A9F15 /* AttemptsTableViewCell.swift */,
 				2F2CF64A1E8E751D0090A5C4 /* ExamsTableViewCell.swift */,
 				2F2CF64B1E8E751D0090A5C4 /* ExamsTableViewCell.xib */,
 				2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */,
@@ -236,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				2F2CF65E1E8E785B0090A5C4 /* ExamPager.swift */,
+				2FA27D4A1EAB3E82006A9F15 /* AttemptPager.swift */,
 				2FF752171E855AB2005E8A0C /* TPApiClient.swift */,
 				2F2CF6581E8E76EC0090A5C4 /* TPBasePager.swift */,
 				2FF752161E855AB2005E8A0C /* TPEndpoint.swift */,
@@ -381,7 +390,9 @@
 				2F2CF6551E8E75780090A5C4 /* UIUtils.swift in Sources */,
 				2F2CF6591E8E76EC0090A5C4 /* TPBasePager.swift in Sources */,
 				2F2CF64F1E8E751D0090A5C4 /* ExamsTableViewCell.swift in Sources */,
+				2FA27D491EAB3527006A9F15 /* AttemptsTableViewCell.swift in Sources */,
 				2F3EB3B01E964FBA00D754A4 /* QuestionsViewController.swift in Sources */,
+				2FA27D451EAB2907006A9F15 /* AttemptsListViewController.swift in Sources */,
 				2F2CF6531E8E751D0090A5C4 /* TabViewController.swift in Sources */,
 				2F3EB3B41E96957F00D754A4 /* AttemptQuestion.swift in Sources */,
 				2F2CD6F11E8FEDB40054148F /* StartExamScreenViewController.swift in Sources */,
@@ -395,6 +406,7 @@
 				2F2CF6611E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift in Sources */,
 				2F2CF65B1E8E77500090A5C4 /* TPApiResponse.swift in Sources */,
 				2F3EB3B81E9698D400D754A4 /* AttemptItem.swift in Sources */,
+				2FA27D4B1EAB3E82006A9F15 /* AttemptPager.swift in Sources */,
 				2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */,
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
 				2F61A7CD1E8E6E5D002C746C /* Constants.swift in Sources */,

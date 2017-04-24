@@ -32,25 +32,41 @@ class ExamsTableViewCell: UITableViewCell {
     
     var parentViewController: UIViewController? = nil
     var exam: Exam?
+    var examState: ExamState?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tappedMe))
-        examViewCell.addGestureRecognizer(tap)
-    }
-    
-    func setExam(_ exam: Exam, viewController: UIViewController){
+    func setExam(_ exam: Exam, examState: ExamState, viewController: UIViewController){
         parentViewController = viewController
         self.exam = exam
+        self.examState = examState
         examName.text = exam.title
+        
+        if examState == ExamState.available {
+            let tapRecognizer = UITapGestureRecognizer(target: self,
+                                                       action: #selector(self.showStartExamScreen))
+            
+            examViewCell.addGestureRecognizer(tapRecognizer)
+        } else if examState == ExamState.history {
+            let tapRecognizer = UITapGestureRecognizer(target: self,
+                                                       action: #selector(self.showAttemptsList))
+            
+            examViewCell.addGestureRecognizer(tapRecognizer)
+        }
     }
     
-    func tappedMe() {
-        let storyboard = UIStoryboard(name: "TestEngine", bundle: nil)
-        let someViewConroller = storyboard.instantiateViewController(withIdentifier: "StartExamScreenViewController") as! StartExamScreenViewController
-        someViewConroller.exam = self.exam!
-        parentViewController?.showDetailViewController(someViewConroller, sender: self)
+    func showStartExamScreen() {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.START_EXAM_SCREEN_VIEW_CONTROLLER) as! StartExamScreenViewController
+        viewController.exam = self.exam!
+        parentViewController?.showDetailViewController(viewController, sender: self)
+    }
+    
+    func showAttemptsList() {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.ATTEMPTS_VIEW_CONTROLLER) as! AttemptsListViewController
+        viewController.exam = exam!
+        parentViewController?.showDetailViewController(viewController, sender: self)
     }
     
 }

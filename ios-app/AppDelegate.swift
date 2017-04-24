@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        setStatusBarBackgroundColor(color: UIColor.white)
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var viewController: UIViewController
         if (KeychainTokenItem.isExist()) {
@@ -44,6 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
         return true
+    }
+    
+    func setStatusBarBackgroundColor(color: UIColor) {
+        guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
+            as? UIView else { return }
+        
+        statusBar.backgroundColor = color
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

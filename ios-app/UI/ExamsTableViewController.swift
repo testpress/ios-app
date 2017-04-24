@@ -83,7 +83,7 @@ class ExamsTableViewController: TPBasePagedTableViewController<Exam>, IndicatorI
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as!
             ExamsTableViewCell
         
-        cell.setExam(items[indexPath.row], viewController: self)
+        cell.setExam(items[indexPath.row], examState: state, viewController: self)
         return cell
     }
 

@@ -28,14 +28,20 @@ struct Constants {
     static let BASE_URL = "http://sandbox.testpress.in";
     static let KEYCHAIN_SERVICE_NAME_TOKEN = APP_NAME + " Token"
     
+    static let TEST_ENGINE = "TestEngine"
     static let LOGIN_VIEW_CONTROLLER = "LoginViewController"
     static let TAB_VIEW_CONTROLLER = "TabViewController"
     static let TEST_ENGINE_VIEW_CONTROLLER = "TestEngineViewController"
     static let QUESTIONS_VIEW_CONTROLLER = "QuestionsViewController"
     static let TEST_REPORT_VIEW_CONTROLLER = "TestReportViewController"
+    static let START_EXAM_SCREEN_VIEW_CONTROLLER = "StartExamScreenViewController"
+    static let ATTEMPTS_VIEW_CONTROLLER = "AttemptsListViewController"
+    static let PAUSED_ATTEMPT_TABLE_VIEW_CELL = "PausedAttemptTableViewCell"
+    static let COMPLETED_ATTEMPT_TABLE_VIEW_CELL = "CompletedAttemptTableViewCell"
     
     static let PAGE = "page"
     static let STATE = "state"
+    static let STATE_RUNNING = "Running"
     
     static let AVAILABLE = "Available"
     static let UPCOMING = "Upcoming"
