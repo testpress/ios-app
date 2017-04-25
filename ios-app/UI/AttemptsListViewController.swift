@@ -44,7 +44,7 @@ class AttemptsListViewController: UITableViewController {
         
         if (attempts.isEmpty) {
             activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
-            activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y)
+            activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
             activityIndicator?.startAnimating()
             loadAttempts(url: exam.attemptsUrl!)
         }
@@ -116,6 +116,15 @@ class AttemptsListViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let attempt = attempts[indexPath.row]
+        if attempt.state == Constants.STATE_RUNNING {
+            showStartExamScreen(attempt: attempt)
+        } else {
+            showTestReport(attempt: attempt)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return tableView.dequeueReusableCell(withIdentifier: "AttemptsListHeader")!
     }
@@ -126,6 +135,31 @@ class AttemptsListViewController: UITableViewController {
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func showStartExamScreen(attempt: Attempt) {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.START_EXAM_SCREEN_VIEW_CONTROLLER) as! StartExamScreenViewController
+        viewController.exam = self.exam!
+        viewController.attempt = attempt
+        showDetailViewController(viewController, sender: self)
+    }
+    
+    func showTestReport(attempt: Attempt) {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
+        viewController.exam = self.exam!
+        viewController.attempt = attempt
+        showDetailViewController(viewController, sender: self)
+    }
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)?) {
+        super.dismiss(animated: flag, completion:completion)
+        // Clear the attempts when user return from the test engine
+        // This will cause the attempts to be load again on viewWillAppear
+        attempts.removeAll()
     }
 
 }

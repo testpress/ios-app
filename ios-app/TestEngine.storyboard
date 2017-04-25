@@ -217,10 +217,12 @@
                     </view>
                     <connections>
                         <outlet property="duration" destination="e1z-yG-gfY" id="oML-wy-g6q"/>
+                        <outlet property="durationLabel" destination="5ze-PE-9XW" id="nQ8-ki-YQ6"/>
                         <outlet property="examTitle" destination="VR3-e3-nBf" id="diV-pX-oJO"/>
                         <outlet property="markPerQuestion" destination="NPg-R7-FKo" id="fZF-jU-fub"/>
                         <outlet property="negativeMarks" destination="ql5-jr-Vtq" id="R2l-EV-Yft"/>
                         <outlet property="questionsCount" destination="rMx-AR-0OQ" id="wO6-zd-d8N"/>
+                        <outlet property="startButton" destination="DsT-Gx-mG6" id="NmW-On-Tn6"/>
                         <outlet property="startEndDate" destination="cQc-Bl-eLv" id="yaw-9k-1ML"/>
                     </connections>
                 </viewController>
@@ -1113,8 +1115,9 @@
                                                     <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_navigate_next" translatesAutoresizingMaskIntoConstraints="NO" id="M8R-XQ-DgR">
+                                                <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_navigate_next" translatesAutoresizingMaskIntoConstraints="NO" id="M8R-XQ-DgR">
                                                     <rect key="frame" x="266" y="0.0" width="24" height="24"/>
+                                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="GvV-Mr-yP6"/>
@@ -1197,8 +1200,9 @@
                                                     <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" image="ic_navigate_next" translatesAutoresizingMaskIntoConstraints="NO" id="2iZ-AV-3tl">
+                                                <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" image="ic_navigate_next" translatesAutoresizingMaskIntoConstraints="NO" id="2iZ-AV-3tl">
                                                     <rect key="frame" x="266" y="0.0" width="24" height="24"/>
+                                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="ULg-hj-rUE"/>
                                                     </constraints>

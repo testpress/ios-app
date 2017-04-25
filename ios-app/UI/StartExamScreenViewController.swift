@@ -29,27 +29,50 @@ class StartExamScreenViewController: UIViewController {
     @IBOutlet weak var examTitle: UILabel!
     @IBOutlet weak var questionsCount: UILabel!
     @IBOutlet weak var duration: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var markPerQuestion: UILabel!
     @IBOutlet weak var negativeMarks: UILabel!
     @IBOutlet weak var startEndDate: UILabel!
+    @IBOutlet weak var startButton: UIButton!
     
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
     var exam: Exam?
+    var attempt: Attempt?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         examTitle.text = exam?.title!
         questionsCount.text = String(describing: (exam?.numberOfQuestions)!)
-        duration.text = exam?.duration
+        if attempt?.remainingTime! != nil {
+            duration.text = attempt?.remainingTime!
+            durationLabel.text = "Time Remaining"
+        } else {
+            duration.text = exam?.duration
+        }
         markPerQuestion.text = exam?.markPerQuestion
         negativeMarks.text = exam?.negativeMarks
         startEndDate.text = FormatDate.format(dateString: exam?.startDate) + " -\n" +
             FormatDate.format(dateString: exam?.endDate)
+        if attempt?.state! == Constants.STATE_RUNNING {
+            startButton.setTitle("RESUME", for: .normal)
+        }
     }
 
     @IBAction func startExam(_ sender: UIButton) {
         self.present(alertController, animated: false, completion: nil)
+        if attempt != nil {
+            resumeAttempt()
+        } else {
+            createAttempt()
+        }
+    }
+    
+    @IBAction func back(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func createAttempt() {
         TPApiClient.createAttempt(
             endpointProvider: TPEndpointProvider(.createAttempt, url: (exam?.attemptsUrl)!),
             completion: {
@@ -78,8 +101,36 @@ class StartExamScreenViewController: UIViewController {
         )
     }
     
-    @IBAction func back(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+    func resumeAttempt() {
+        TPApiClient.updateAttemptState(
+            endpointProvider: TPEndpointProvider(
+                .resumeAttempt,
+                url: attempt!.url! + TPEndpoint.resumeAttempt.urlPath
+            ),
+            completion: {
+                attempt, error in
+                
+                if let error = error {
+                    print(error.message ?? "No error")
+                    print(error.kind)
+                    switch (error.kind) {
+                    case .network:
+                        print("Internet Unavailable")
+                    case .unauthenticated:
+                        print("Authorization Required")
+                    case .http:
+                        print("HTTP error occured")
+                    default:
+                        print("Unexpected")
+                    }
+                    self.alertController.dismiss(animated: true, completion: nil)
+                    return
+                }
+                
+                self.alertController.dismiss(animated: true, completion: nil)
+                self.gotoTestEngine(attempt: attempt!)
+            }
+        )
     }
     
     func gotoTestEngine(attempt: Attempt) {

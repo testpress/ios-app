@@ -67,7 +67,10 @@ class QuestionsViewController: UIViewController, WKScriptMessageHandler, WKUIDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // Set initial values of current selected answer & review
+        attemptItem?.savedAnswers = attemptItem!.selectedAnswers
+        attemptItem?.currentReview = attemptItem!.review
+        
         indexView!.text = String("\((attemptItem?.index)! + 1)")
         webView.loadHTMLString(WebViewUtils.getHeader() + WebViewUtils.getTestEngineHeader() +
             getQuestionHtml(), baseURL: Bundle.main.bundleURL)
