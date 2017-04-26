@@ -57,6 +57,19 @@ public class Exam {
     
     public required init?(map: Map) {
     }
+    
+    func hasStarted() -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        
+        guard let date = dateFormatter.date(from: startDate!) else {
+            assert(false, "no date from string")
+            return true
+        }
+        
+        return date < Date()
+    }
 }
 
 extension Exam: TestpressModel {

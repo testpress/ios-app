@@ -25,30 +25,39 @@
 
 import UIKit
 
-class AttemptsListViewController: UITableViewController {
+class AttemptsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var navigationBarItem: UINavigationItem!
+    @IBOutlet weak var startButtonLayout: UIView!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bottomShadowView: UIView!
+    @IBOutlet weak var contentView: UIView!
     
-    static let HEADER_VIEW_HEIGHT: CGFloat = 65
+    static let HEADER_VIEW_HEIGHT: CGFloat = 45
     
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var exam: Exam!
     var attempts: [Attempt] = []
+    var pausedAttempts: [Attempt] = []
+    
+    override func viewDidLoad() {
+        navigationBarItem.title = exam.title
+        startButtonLayout.isHidden = true
+        tableView.tableFooterView = UIView(frame: .zero)
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarItem.title = exam.title
-        // Set navigation bar below the status bar.
-        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
-        tableView.contentInset = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
         
         if (attempts.isEmpty) {
-            activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
-            activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
+            activityIndicator = UIUtils.initActivityIndicator(parentView: contentView)
+            activityIndicator?.center = CGPoint(x: contentView.center.x, y: contentView.center.y)
             activityIndicator?.startAnimating()
             loadAttempts(url: exam.attemptsUrl!)
         }
-        tableView.tableFooterView = UIView(frame: .zero)
         tableView.reloadData()
     }
     
@@ -77,10 +86,7 @@ class AttemptsListViewController: UITableViewController {
                 if !(testpressResponse!.next.isEmpty) {
                     self.loadAttempts(url: testpressResponse!.next)
                 } else {
-                    self.tableView.reloadData()
-                    if (self.activityIndicator?.isAnimating)! {
-                        self.activityIndicator?.stopAnimating()
-                    }
+                    self.displayAttemptsList()
                 }
             }
         )
@@ -88,15 +94,20 @@ class AttemptsListViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return attempts.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if attempts.count <= indexPath.row {
+            // Needed to prevent index out of bound execption when dismiss view controller while
+            // table view is scrolling
+            return UITableViewCell()
+        }
         let attempt = attempts[indexPath.row]
         var cellIdentifier: String
         if attempt.state == Constants.STATE_RUNNING {
@@ -116,7 +127,7 @@ class AttemptsListViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let attempt = attempts[indexPath.row]
         if attempt.state == Constants.STATE_RUNNING {
             showStartExamScreen(attempt: attempt)
@@ -125,24 +136,75 @@ class AttemptsListViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return tableView.dequeueReusableCell(withIdentifier: "AttemptsListHeader")!
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return AttemptsListViewController.HEADER_VIEW_HEIGHT
+    }
+    
+    @IBAction func onClickStartButton(_ sender: UIButton) {
+        if pausedAttempts.isEmpty {
+            showStartExamScreen()
+        } else {
+            showStartExamScreen(attempt: pausedAttempts.popLast()!)
+        }
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
-    func showStartExamScreen(attempt: Attempt) {
+    private func displayAttemptsList() {
+        tableView.reloadData()
+        if canAttemptExam() {
+            if exam.pausedAttemptsCount! > 0 {
+                for attempt: Attempt in attempts {
+                    if attempt.state == Constants.STATE_RUNNING {
+                        pausedAttempts.append(attempt);
+                    }
+                }
+            }
+            if (pausedAttempts.isEmpty) {
+                startButton.setTitle("RETAKE", for: .normal)
+            } else {
+               startButton.setTitle("RESUME", for: .normal)
+            }
+            startButtonLayout.isHidden = false
+        } else {
+            startButtonLayout.isHidden = true
+        }
+        if (activityIndicator?.isAnimating)! {
+            activityIndicator?.stopAnimating()
+        }
+    }
+    
+    private func canAttemptExam() -> Bool {
+        // User can't retake an exam if retake disabled or max retake attemted or web only exam or
+        // exam start date is future. If paused attempt exist, can resume it.
+        if (exam.attemptsCount! == 0 || exam.pausedAttemptsCount! != 0 ||
+            ((exam.allowRetake!) &&
+                (exam.attemptsCount! <= exam.maxRetakes! ||
+                    exam.maxRetakes! < 0))) {
+            
+            if (exam.deviceAccessControl != nil && exam.deviceAccessControl == "web") {
+                return false;
+            } else {
+                return exam.hasStarted()
+            }
+        }
+        return false;
+    }
+    
+    func showStartExamScreen(attempt: Attempt? = nil) {
         let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.START_EXAM_SCREEN_VIEW_CONTROLLER) as! StartExamScreenViewController
         viewController.exam = self.exam!
-        viewController.attempt = attempt
+        if attempt != nil {
+            viewController.attempt = attempt
+        }
         showDetailViewController(viewController, sender: self)
     }
     
@@ -153,6 +215,17 @@ class AttemptsListViewController: UITableViewController {
         viewController.exam = self.exam!
         viewController.attempt = attempt
         showDetailViewController(viewController, sender: self)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        // Set frames of the view here to support both portrait & landscape view
+        // Add gradient shadow layer to the shadow container view
+        let bottomGradient = CAGradientLayer()
+        bottomGradient.frame = bottomShadowView.bounds
+        bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+        bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
+
+        activityIndicator?.frame = contentView.frame
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)?) {
