@@ -77,8 +77,10 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.present(loadingDialogController, animated: false, completion: nil)
-        loadQuestions(url: (attempt?.questionsUrl)!)
+        if attemptItems.isEmpty {
+            self.present(loadingDialogController, animated: false, completion: nil)
+            loadQuestions(url: (attempt?.questionsUrl)!)
+        }
     }
     
     func loadQuestions(url: String) {
