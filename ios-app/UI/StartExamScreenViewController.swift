@@ -34,6 +34,12 @@ class StartExamScreenViewController: UIViewController {
     @IBOutlet weak var negativeMarks: UILabel!
     @IBOutlet weak var startEndDate: UILabel!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var webOnlyExamLabel: UILabel!
+    @IBOutlet weak var bottomShadowView: UIView!
+    @IBOutlet weak var startButtonLayout: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIStackView!
     
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
     var exam: Exam?
@@ -54,8 +60,22 @@ class StartExamScreenViewController: UIViewController {
         negativeMarks.text = exam?.negativeMarks
         startEndDate.text = FormatDate.format(dateString: exam?.startDate) + " -\n" +
             FormatDate.format(dateString: exam?.endDate)
-        if attempt?.state! == Constants.STATE_RUNNING {
-            startButton.setTitle("RESUME", for: .normal)
+        
+        if exam?.description != nil {
+            descriptionLabel.text = exam?.description
+        } else {
+            descriptionLabel.isHidden = true
+        }
+        if exam?.deviceAccessControl == "web" {
+            // Hide start button for web only exams
+            startButtonLayout.isHidden = true
+        } else {
+            webOnlyExamLabel.isHidden = true
+            if !exam!.hasStarted() {
+                startButtonLayout.isHidden = true
+            } else if attempt?.state! == Constants.STATE_RUNNING {
+                startButton.setTitle("RESUME", for: .normal)
+            }
         }
     }
 
@@ -139,6 +159,18 @@ class StartExamScreenViewController: UIViewController {
         viewController.exam = exam
         viewController.attempt = attempt
         self.present(viewController, animated: true, completion: nil)
+    }
+    
+    // Set frames of the views in this method to support both portrait & landscape view
+    override func viewDidLayoutSubviews() {
+        // Add gradient shadow layer to the shadow container view
+        let bottomGradient = CAGradientLayer()
+        bottomGradient.frame = bottomShadowView.bounds
+        bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+        bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
+        
+        // Set scroll view content height to support the scroll
+        scrollView.contentSize.height = contentView.frame.size.height
     }
     
 }
