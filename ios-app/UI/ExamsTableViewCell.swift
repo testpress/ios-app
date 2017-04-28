@@ -34,23 +34,20 @@ class ExamsTableViewCell: UITableViewCell {
     var exam: Exam?
     var examState: ExamState?
     
-    func setExam(_ exam: Exam, examState: ExamState, viewController: UIViewController){
+    func initExamCell(_ exam: Exam, examState: ExamState, viewController: UIViewController){
         parentViewController = viewController
         self.exam = exam
         self.examState = examState
         examName.text = exam.title
         
-        if examState == ExamState.available {
-            let tapRecognizer = UITapGestureRecognizer(target: self,
-                                                       action: #selector(self.showStartExamScreen))
-            
-            examViewCell.addGestureRecognizer(tapRecognizer)
-        } else if examState == ExamState.history {
-            let tapRecognizer = UITapGestureRecognizer(target: self,
-                                                       action: #selector(self.showAttemptsList))
-            
-            examViewCell.addGestureRecognizer(tapRecognizer)
+        var actionHandler: Selector
+        if examState == ExamState.history {
+            actionHandler = #selector(self.showAttemptsList)
+        } else {
+            actionHandler = #selector(self.showStartExamScreen)
         }
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: actionHandler)
+        examViewCell.addGestureRecognizer(tapRecognizer)
     }
     
     func showStartExamScreen() {
