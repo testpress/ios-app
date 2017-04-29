@@ -322,6 +322,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="ocn-vu-yqn" id="rIC-Ow-zTA"/>
                         <outlet property="bottomShadowView" destination="9PU-Kp-cS0" id="iiX-om-yrX"/>
                         <outlet property="contentView" destination="KIO-Xh-Nhw" id="IeJ-fp-QRS"/>
                         <outlet property="descriptionLabel" destination="skS-rS-hUV" id="Sz9-0h-bp8"/>

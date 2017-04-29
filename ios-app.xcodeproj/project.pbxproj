@@ -27,6 +27,10 @@
 		2F2CF65D1E8E777A0090A5C4 /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF65C1E8E777A0090A5C4 /* Exam.swift */; };
 		2F2CF65F1E8E785B0090A5C4 /* ExamPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF65E1E8E785B0090A5C4 /* ExamPager.swift */; };
 		2F2CF6611E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF6601E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift */; };
+		2F2D32541EB345FF00DD0C5D /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2D32531EB345FF00DD0C5D /* EmptyView.swift */; };
+		2F2D32561EB3466200DD0C5D /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2D32551EB3466200DD0C5D /* EmptyView.xib */; };
+		2F2D32581EB4BBC800DD0C5D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2D32571EB4BBC800DD0C5D /* Strings.swift */; };
+		2F2D325B1EB4C3E800DD0C5D /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2D325A1EB4C3E800DD0C5D /* Images.swift */; };
 		2F3EB3B01E964FBA00D754A4 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3EB3AF1E964FBA00D754A4 /* QuestionsViewController.swift */; };
 		2F3EB3B21E96513700D754A4 /* QuestionsControllerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3EB3B11E96513700D754A4 /* QuestionsControllerSource.swift */; };
 		2F3EB3B41E96957F00D754A4 /* AttemptQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3EB3B31E96957F00D754A4 /* AttemptQuestion.swift */; };
@@ -85,6 +89,10 @@
 		2F2CF65C1E8E777A0090A5C4 /* Exam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Exam.swift; path = Model/Exam.swift; sourceTree = "<group>"; };
 		2F2CF65E1E8E785B0090A5C4 /* ExamPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamPager.swift; sourceTree = "<group>"; };
 		2F2CF6601E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TPBasePagedTableViewController.swift; path = UI/TPBasePagedTableViewController.swift; sourceTree = "<group>"; };
+		2F2D32531EB345FF00DD0C5D /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyView.swift; path = UI/EmptyView.swift; sourceTree = "<group>"; };
+		2F2D32551EB3466200DD0C5D /* EmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyView.xib; path = UI/EmptyView.xib; sourceTree = "<group>"; };
+		2F2D32571EB4BBC800DD0C5D /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Strings.swift; path = Core/Strings.swift; sourceTree = "<group>"; };
+		2F2D325A1EB4C3E800DD0C5D /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Images.swift; path = Resources/Images.swift; sourceTree = "<group>"; };
 		2F3EB3AF1E964FBA00D754A4 /* QuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuestionsViewController.swift; path = UI/QuestionsViewController.swift; sourceTree = "<group>"; };
 		2F3EB3B11E96513700D754A4 /* QuestionsControllerSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuestionsControllerSource.swift; path = UI/QuestionsControllerSource.swift; sourceTree = "<group>"; };
 		2F3EB3B31E96957F00D754A4 /* AttemptQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttemptQuestion.swift; path = Model/AttemptQuestion.swift; sourceTree = "<group>"; };
@@ -154,6 +162,7 @@
 				2F884D2F1E88F21E00C371BD /* Core */,
 				2FF7520B1E8559FE005E8A0C /* Model */,
 				2FF752151E855AB2005E8A0C /* Network */,
+				2F2D32591EB4C00700DD0C5D /* Resources */,
 				2F53765C1E8E299D00D87DD7 /* UI */,
 				2F61A7C81E8E3BC9002C746C /* Utils */,
 				2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */,
@@ -175,11 +184,22 @@
 			path = "ios-appTests";
 			sourceTree = "<group>";
 		};
+		2F2D32591EB4C00700DD0C5D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2F2D32571EB4BBC800DD0C5D /* Strings.swift */,
+				2F2D325A1EB4C3E800DD0C5D /* Images.swift */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		2F53765C1E8E299D00D87DD7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				2FA27D441EAB2907006A9F15 /* AttemptsListViewController.swift */,
 				2FA27D481EAB3527006A9F15 /* AttemptsTableViewCell.swift */,
+				2F2D32531EB345FF00DD0C5D /* EmptyView.swift */,
+				2F2D32551EB3466200DD0C5D /* EmptyView.xib */,
 				2F2CF64A1E8E751D0090A5C4 /* ExamsTableViewCell.swift */,
 				2F2CF64B1E8E751D0090A5C4 /* ExamsTableViewCell.xib */,
 				2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */,
@@ -340,6 +360,7 @@
 				2F2CD6EF1E8FECAD0054148F /* TestEngine.storyboard in Resources */,
 				2F2CF6501E8E751D0090A5C4 /* ExamsTableViewCell.xib in Resources */,
 				2F26ADF01E8249D70031E6F4 /* LaunchScreen.storyboard in Resources */,
+				2F2D32561EB3466200DD0C5D /* EmptyView.xib in Resources */,
 				2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */,
 				2F0CF0021E9BAAD900F69A88 /* static in Resources */,
 				2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */,
@@ -386,11 +407,13 @@
 				2FF752111E855A1C005E8A0C /* TPModelMapper.swift in Sources */,
 				2FF7521C1E855AB2005E8A0C /* TPApiClient.swift in Sources */,
 				2FDA54251EAA288A00FAE92B /* FormatDate.swift in Sources */,
+				2F2D325B1EB4C3E800DD0C5D /* Images.swift in Sources */,
 				2FCD55011EA7A7130004EC0D /* TestReportViewController.swift in Sources */,
 				2F2CF6551E8E75780090A5C4 /* UIUtils.swift in Sources */,
 				2F2CF6591E8E76EC0090A5C4 /* TPBasePager.swift in Sources */,
 				2F2CF64F1E8E751D0090A5C4 /* ExamsTableViewCell.swift in Sources */,
 				2FA27D491EAB3527006A9F15 /* AttemptsTableViewCell.swift in Sources */,
+				2F2D32581EB4BBC800DD0C5D /* Strings.swift in Sources */,
 				2F3EB3B01E964FBA00D754A4 /* QuestionsViewController.swift in Sources */,
 				2FA27D451EAB2907006A9F15 /* AttemptsListViewController.swift in Sources */,
 				2F2CF6531E8E751D0090A5C4 /* TabViewController.swift in Sources */,
@@ -402,6 +425,7 @@
 				2FF752101E855A1C005E8A0C /* TPError.swift in Sources */,
 				2F3EB3B61E9696B000D754A4 /* Attempt.swift in Sources */,
 				2F3EB3B21E96513700D754A4 /* QuestionsControllerSource.swift in Sources */,
+				2F2D32541EB345FF00DD0C5D /* EmptyView.swift in Sources */,
 				2FF7521B1E855AB2005E8A0C /* TPEndpoint.swift in Sources */,
 				2F2CF6611E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift in Sources */,
 				2F2CF65B1E8E77500090A5C4 /* TPApiResponse.swift in Sources */,

@@ -128,23 +128,6 @@ class TPApiClient {
         })
     }
     
-    static func createAttempt(endpointProvider: TPEndpointProvider,
-                              completion: @escaping (Attempt?, TPError?) -> Void) {
-        apiCall(endpointProvider: endpointProvider, completion: {
-            json, error in
-            var attempt: Attempt? = nil
-            if let json = json {
-                attempt = TPModelMapper<Attempt>().mapFromJSON(json: json)
-                debugPrint(attempt?.questionsUrl ?? "Error")
-                guard attempt != nil else {
-                    completion(nil, TPError(message: json, kind: .unexpected))
-                    return
-                }
-            }
-            completion(attempt, error)
-        })
-    }
-    
     static func getQuestions(endpointProvider: TPEndpointProvider,
                              completion: @escaping(TPApiResponse<AttemptItem>?, TPError?) -> Void) {
         

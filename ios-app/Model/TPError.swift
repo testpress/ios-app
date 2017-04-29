@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 import Alamofire
 
 public class TPError: Error {
@@ -69,6 +69,25 @@ public class TPError: Error {
     
     public func isServerError() -> Bool {
         return statusCode >= 500 && statusCode < 600;
+    }
+    
+    public func getDisplayInfo() -> (image: UIImage, title: String, description: String) {
+        switch (kind) {
+        case .network:
+            return (Images.TestpressNoWifi.image,
+                    Strings.NETWORK_ERROR,
+                    Strings.PLEASE_CHECK_INTERNET_CONNECTION)
+            
+        case .unauthenticated:
+            return (Images.TestpressAlertWarning.image,
+                    Strings.AUTHENTICATION_FAILED,
+                    Strings.PLEASE_LOGIN)
+            
+        default:
+            return (Images.TestpressAlertWarning.image,
+                    Strings.LOADING_FAILED,
+                    Strings.SOMETHIGN_WENT_WRONG)
+        }
     }
     
 }

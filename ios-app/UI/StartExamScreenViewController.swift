@@ -40,14 +40,18 @@ class StartExamScreenViewController: UIViewController {
     @IBOutlet weak var startButtonLayout: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIStackView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
+    var emptyView: EmptyView!
     var exam: Exam?
     var attempt: Attempt?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        emptyView = EmptyView.getInstance(parentView: scrollView)
+        view.addSubview(emptyView)
         examTitle.text = exam?.title!
         questionsCount.text = String(describing: (exam?.numberOfQuestions)!)
         if attempt?.remainingTime! != nil {
@@ -81,68 +85,53 @@ class StartExamScreenViewController: UIViewController {
 
     @IBAction func startExam(_ sender: UIButton) {
         self.present(alertController, animated: false, completion: nil)
-        if attempt != nil {
-            resumeAttempt()
-        } else {
-            createAttempt()
-        }
+        startButton.isHidden = true
+        startAttempt()
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
-    func createAttempt() {
-        TPApiClient.createAttempt(
-            endpointProvider: TPEndpointProvider(.createAttempt, url: (exam?.attemptsUrl)!),
-            completion: {
-                attempt, error in
-                
-                if let error = error {
-                    print(error.message ?? "No error")
-                    print(error.kind)
-                    switch (error.kind) {
-                    case .network:
-                        print("Internet Unavailable")
-                    case .unauthenticated:
-                        print("Authorization Required")
-                    case .http:
-                        print("HTTP error occured")
-                    default:
-                        print("Unexpected")
-                    }
-                    self.alertController.dismiss(animated: true, completion: nil)
-                    return
-                }
-                
-                self.alertController.dismiss(animated: true, completion: nil)
-                self.gotoTestEngine(attempt: attempt!)
-            }
-        )
-    }
-    
-    func resumeAttempt() {
-        TPApiClient.updateAttemptState(
-            endpointProvider: TPEndpointProvider(
+    func startAttempt() {
+        var endpointProvider: TPEndpointProvider
+        if attempt == nil {
+            endpointProvider = TPEndpointProvider(
+                .createAttempt,
+                url: (exam?.attemptsUrl)!
+            )
+        } else {
+            endpointProvider = TPEndpointProvider(
                 .resumeAttempt,
                 url: attempt!.url! + TPEndpoint.resumeAttempt.urlPath
-            ),
+            )
+        }
+        TPApiClient.updateAttemptState(
+            endpointProvider: endpointProvider,
             completion: {
                 attempt, error in
                 
                 if let error = error {
-                    print(error.message ?? "No error")
-                    print(error.kind)
-                    switch (error.kind) {
-                    case .network:
-                        print("Internet Unavailable")
-                    case .unauthenticated:
-                        print("Authorization Required")
-                    case .http:
-                        print("HTTP error occured")
-                    default:
-                        print("Unexpected")
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                    var retryButtonText: String
+                    var retryHandler: () -> Void
+                    if error.kind == .network {
+                        retryButtonText = Strings.TRY_AGAIN
+                        retryHandler = {
+                            self.present(self.alertController, animated: false, completion: nil)
+                            self.startAttempt()
+                        }
+                    } else {
+                        retryButtonText = Strings.OK
+                        retryHandler = {
+                            self.back(self.backButton)
+                        }
                     }
+                    let (image, title, description) = error.getDisplayInfo()
+                    self.emptyView.show(image: image, title: title, description: description,
+                                        retryButtonText: retryButtonText, retryHandler: retryHandler)
+                    
                     self.alertController.dismiss(animated: true, completion: nil)
                     return
                 }
