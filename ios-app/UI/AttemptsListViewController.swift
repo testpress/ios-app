@@ -148,7 +148,7 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
         if pausedAttempts.isEmpty {
             showStartExamScreen()
         } else {
-            showStartExamScreen(attempt: pausedAttempts.popLast()!)
+            showStartExamScreen(attempt: pausedAttempts.last)
         }
     }
     
