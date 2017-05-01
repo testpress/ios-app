@@ -33,15 +33,18 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     static let HEADER_VIEW_HEIGHT: CGFloat = 45
     
     var activityIndicator: UIActivityIndicatorView? // Progress bar
+    var emptyView: EmptyView!
     var exam: Exam!
     var attempts: [Attempt] = []
     var pausedAttempts: [Attempt] = []
     
     override func viewDidLoad() {
+        emptyView = EmptyView.getInstance(parentView: contentView)
         navigationBarItem.title = exam.title
         startButtonLayout.isHidden = true
         tableView.tableFooterView = UIView(frame: .zero)
@@ -53,17 +56,16 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
         super.viewWillAppear(animated)
         
         if (attempts.isEmpty) {
-            loadAttemptsWithProgress()
+            loadAttemptsWithProgress(url: exam.attemptsUrl!)
         }
         tableView.reloadData()
     }
     
-    func loadAttemptsWithProgress() {
+    func loadAttemptsWithProgress(url: String) {
         activityIndicator = UIUtils.initActivityIndicator(parentView: contentView)
         activityIndicator?.center = CGPoint(x: contentView.center.x, y: contentView.center.y - 25)
         activityIndicator?.startAnimating()
-        attempts.removeAll()
-        loadAttempts(url: exam.attemptsUrl!)
+        loadAttempts(url: url)
     }
     
     func loadAttempts(url: String) {
@@ -72,18 +74,29 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
             completion: {
                 testpressResponse, error in
                 if let error = error {
-                    print(error.message ?? "No error")
-                    print(error.kind)
-                    switch (error.kind) {
-                    case .network:
-                        print("Internet Unavailable")
-                    case .unauthenticated:
-                        print("Authorization Required")
-                    case .http:
-                        print("HTTP error occured")
-                    default:
-                        print("Unexpected")
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                    var retryButtonText: String
+                    var retryHandler: () -> Void
+                    if error.kind == .network {
+                        retryButtonText = Strings.TRY_AGAIN
+                        retryHandler = {
+                            self.emptyView.hide()
+                            self.loadAttemptsWithProgress(url: url)
+                        }
+                    } else {
+                        retryButtonText = Strings.OK
+                        retryHandler = {
+                            self.back(self.backButton)
+                        }
                     }
+                    if (self.activityIndicator?.isAnimating)! {
+                        self.activityIndicator?.stopAnimating()
+                    }
+                    let (image, title, description) = error.getDisplayInfo()
+                    self.emptyView.show(image: image, title: title, description: description,
+                                        retryButtonText: retryButtonText, retryHandler: retryHandler)
+                    
                     return
                 }
                 

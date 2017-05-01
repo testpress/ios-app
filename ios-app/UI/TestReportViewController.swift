@@ -88,7 +88,10 @@ class TestReportViewController: UIViewController {
         } else if presentingViewController is AttemptsListViewController {
             let attemptsListViewController = presentingViewController as! AttemptsListViewController
             attemptsListViewController.dismiss(animated: false, completion: {
-                attemptsListViewController.loadAttemptsWithProgress()
+                // Remove exsiting items
+                attemptsListViewController.attempts.removeAll()
+                // Load new attempts list with progress
+                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
             })
         } else {
             dismiss(animated: true, completion: nil)

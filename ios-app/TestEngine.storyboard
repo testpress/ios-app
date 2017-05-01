@@ -1410,6 +1410,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="iE0-sO-6xi" id="8mg-Ma-xub"/>
                         <outlet property="bottomShadowView" destination="TQQ-nc-Cdc" id="XhD-m5-1Kr"/>
                         <outlet property="contentView" destination="Slp-RO-UNE" id="SJj-3X-11h"/>
                         <outlet property="navigationBarItem" destination="hOV-pf-6Jf" id="1dr-Yn-JSH"/>
