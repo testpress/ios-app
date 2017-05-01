@@ -41,6 +41,7 @@ class StartExamScreenViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIStackView!
     @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var navigationBarItem: UINavigationItem!
     
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
     var emptyView: EmptyView!
@@ -79,6 +80,7 @@ class StartExamScreenViewController: UIViewController {
                 startButtonLayout.isHidden = true
             } else if attempt?.state! == Constants.STATE_RUNNING {
                 startButton.setTitle("RESUME", for: .normal)
+                navigationBarItem.title = Strings.RESUME_EXAM
             }
         }
     }

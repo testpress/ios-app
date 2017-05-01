@@ -25,7 +25,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQa-Vp-huf">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="uUV-4M-Cdp">
+                                    <navigationItem title="Start Exam" id="uUV-4M-Cdp">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="ocn-vu-yqn">
                                             <connections>
                                                 <action selector="back:" destination="yph-KO-fST" id="pzn-Iq-f60"/>
@@ -330,6 +330,7 @@
                         <outlet property="durationLabel" destination="5ze-PE-9XW" id="nQ8-ki-YQ6"/>
                         <outlet property="examTitle" destination="VR3-e3-nBf" id="diV-pX-oJO"/>
                         <outlet property="markPerQuestion" destination="NPg-R7-FKo" id="fZF-jU-fub"/>
+                        <outlet property="navigationBarItem" destination="uUV-4M-Cdp" id="4yE-sk-nKU"/>
                         <outlet property="negativeMarks" destination="ql5-jr-Vtq" id="R2l-EV-Yft"/>
                         <outlet property="questionsCount" destination="rMx-AR-0OQ" id="wO6-zd-d8N"/>
                         <outlet property="scrollView" destination="HMh-DY-atE" id="hTF-Bx-TSF"/>

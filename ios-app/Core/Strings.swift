@@ -42,4 +42,6 @@ struct Strings {
     static let BUY_EXAMS_FROM_STORE = "Looks like you don't have any active exams. Checkout the store to find courses you may like."
     static let NO_UPCOMING_EXAM = "Looks like you don't have any upcoming exams."
     static let NO_ATTEMPTED_EXAM = "Looks like you don't attempted any exams till now."
+    
+    static let RESUME_EXAM = "Resume Exam"
 }
