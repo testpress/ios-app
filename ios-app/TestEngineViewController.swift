@@ -89,19 +89,13 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
             completion: {
                 testpressResponse, error in
                 if let error = error {
-                    print(error.message ?? "No error")
-                    print(error.kind)
-                    switch (error.kind) {
-                    case .network:
-                        print("Internet Unavailable")
-                    case .unauthenticated:
-                        print("Authorization Required")
-                    case .http:
-                        print("HTTP error occured")
-                    default:
-                        print("Unexpected")
-                    }
-                    self.loadingDialogController.dismiss(animated: true, completion: nil)
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                    self.loadingDialogController.dismiss(animated: true, completion: {
+                        self.showAlert(error: error, retryHandler: {
+                            self.loadQuestions(url: url)
+                        })
+                    })
                     return
                 }
                 self.attemptItems.append(contentsOf: testpressResponse!.results)
