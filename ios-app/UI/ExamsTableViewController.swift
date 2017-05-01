@@ -86,6 +86,20 @@ class ExamsTableViewController: TPBasePagedTableViewController<Exam>, IndicatorI
         cell.initExamCell(items[indexPath.row], examState: state, viewController: self)
         return cell
     }
+    
+    override func setEmptyText() {
+        var message: String
+        switch state {
+        case .available:
+            message = Strings.BUY_EXAMS_FROM_STORE
+        case .upcoming:
+            message = Strings.NO_UPCOMING_EXAM
+        case .history:
+            message = Strings.NO_ATTEMPTED_EXAM
+        }
+        emptyView.setValues(image: Images.ExamsFlatIcon.image, title: Strings.NO_EXAMS,
+                            description: message)
+    }
 
     // MARK: - IndicatorInfoProvider
     

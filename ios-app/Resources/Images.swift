@@ -28,6 +28,7 @@ import UIKit
 enum Images: String {
     case TestpressNoWifi = "testpress_no_wifi"
     case TestpressAlertWarning = "testpress_alert_warning"
+    case ExamsFlatIcon = "exams_flat_icon"
     
     var image: UIImage {
         return UIImage(asset: self)

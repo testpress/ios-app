@@ -45,6 +45,13 @@ class EmptyView: UIView {
         return emptyView
     }
     
+    class func getInstance() -> EmptyView {
+        let emptyView = UINib(nibName: "EmptyView", bundle: nil)
+            .instantiate(withOwner: nil, options: nil)[0] as! EmptyView
+        
+        return emptyView
+    }
+    
     func setValues(image: UIImage? = nil, title: String? = nil, description: String? = nil,
                    retryButtonText: String? = nil, retryHandler: (() -> Void)? = nil) {
         
@@ -98,7 +105,9 @@ class EmptyView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         // Set frame here to support rotation
-        frame = parentView.frame
+        if parentView != nil {
+            frame = parentView.frame
+        }
     }
     
 }

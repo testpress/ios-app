@@ -18,7 +18,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vhn-EV-UeO">
                     <rect key="frame" x="30" y="212.5" width="315" height="243"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testpress_no_wifi" translatesAutoresizingMaskIntoConstraints="NO" id="t9U-wV-nnt">
+                        <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testpress_no_wifi" translatesAutoresizingMaskIntoConstraints="NO" id="t9U-wV-nnt">
                             <rect key="frame" x="93.5" y="0.0" width="128" height="128"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="128" id="C4o-zm-lib"/>

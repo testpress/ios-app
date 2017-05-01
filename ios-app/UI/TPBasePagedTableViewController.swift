@@ -30,6 +30,7 @@ import XLPagerTabStrip
 class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     
     var activityIndicator: UIActivityIndicatorView? // Progress bar
+    var emptyView: EmptyView!
     var items = [T]()
     let pager: TPBasePager<T>
     var loadingItems: Bool = false
@@ -48,12 +49,18 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set table view footer as progress spinner
         let pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         pagingSpinner.startAnimating()
         pagingSpinner.color = Colors.getRGB(Colors.PRIMARY)
         pagingSpinner.hidesWhenStopped = true
         tableView.tableFooterView = pagingSpinner
-        tableView.tableFooterView?.isHidden = true
+        
+        // Set table view backgroud
+        emptyView = EmptyView.getInstance()
+        tableView.backgroundView = emptyView
+        emptyView.frame = tableView.frame
+        setEmptyText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +70,7 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if (items.isEmpty) {
+            tableView.tableFooterView?.isHidden = true
             activityIndicator?.startAnimating()
             loadItems()
         }
@@ -76,13 +84,16 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
         pager.next(completion: {
             items, error in
             if let error = error {
-                print(error.message ?? "No error")
-                print(error.kind)
+                debugPrint(error.message ?? "No error")
+                debugPrint(error.kind)
                 self.handleError(error)
                 return
             }
             
             self.items = Array(items!.values)
+            if self.items.count == 0 {
+                self.setEmptyText()
+            }
             self.tableView.reloadData()
             if (self.activityIndicator?.isAnimating)! {
                 self.activityIndicator?.stopAnimating()
@@ -93,16 +104,25 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     }
     
     func handleError(_ error: TPError) {
-        switch (error.kind) {
-        case .network:
-            print("Internet Unavailable")
-        case .unauthenticated:
-            print("Authorization Required")
-        case .http:
-            print("HTTP error occured")
-        default:
-            print("Unexpected")
+        var retryHandler: (() -> Void)?
+        if error.kind == .network {
+            retryHandler = {
+                self.activityIndicator?.startAnimating()
+                self.loadItems()
+            }
         }
+        let (image, title, description) = error.getDisplayInfo()
+        if (activityIndicator?.isAnimating)! {
+            activityIndicator?.stopAnimating()
+        }
+        loadingItems = false
+        if items.count == 0 {
+            emptyView.setValues(image: image, title: title, description: description,
+                                retryHandler: retryHandler)
+        } else {
+            UIUtils.showSimpleAlert(message: description, viewController: self)
+        }
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -112,6 +132,11 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if items.count == 0 {
+            tableView.backgroundView?.isHidden = false
+        } else {
+            tableView.backgroundView?.isHidden = true
+        }
         return items.count
     }
     
@@ -130,12 +155,15 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
                 tableView.tableFooterView?.isHidden = true
             }
         }
-        
         return cell
     }
     
     func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
+    }
+    
+    func setEmptyText() {
+        emptyView.setValues(image: Images.ExamsFlatIcon.image, description: Strings.NO_ITEMS_EXIST)
     }
     
     /*

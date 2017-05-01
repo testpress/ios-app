@@ -37,4 +37,9 @@ struct Strings {
     static let LOADING_FAILED = "Loading Failed"
     static let SOMETHIGN_WENT_WRONG = "Some thing went wrong, please try again later."
     
+    static let NO_ITEMS_EXIST = "No items exist"
+    static let NO_EXAMS = "Learing can't wait"
+    static let BUY_EXAMS_FROM_STORE = "Looks like you don't have any active exams. Checkout the store to find courses you may like."
+    static let NO_UPCOMING_EXAM = "Looks like you don't have any upcoming exams."
+    static let NO_ATTEMPTED_EXAM = "Looks like you don't attempted any exams till now."
 }

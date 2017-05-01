@@ -34,7 +34,7 @@ public class UIUtils {
         activityIndicator.backgroundColor = UIColor.white
         activityIndicator.center = parentView.center
         parentView.addSubview(activityIndicator)
-        activityIndicator.bringSubview(toFront: parentView)
+        parentView.bringSubview(toFront: activityIndicator)
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }
@@ -51,6 +51,14 @@ public class UIUtils {
         
         alertController.view.addSubview(spinnerIndicator)
         return alertController
+    }
+    
+    static func showSimpleAlert(title: String? = nil, message: String? = nil,
+                                viewController: UIViewController) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Strings.OK, style: UIAlertActionStyle.cancel))
+        viewController.present(alert, animated: true, completion: nil)
     }
 }
 
