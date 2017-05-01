@@ -53,12 +53,17 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
         super.viewWillAppear(animated)
         
         if (attempts.isEmpty) {
-            activityIndicator = UIUtils.initActivityIndicator(parentView: contentView)
-            activityIndicator?.center = CGPoint(x: contentView.center.x, y: contentView.center.y)
-            activityIndicator?.startAnimating()
-            loadAttempts(url: exam.attemptsUrl!)
+            loadAttemptsWithProgress()
         }
         tableView.reloadData()
+    }
+    
+    func loadAttemptsWithProgress() {
+        activityIndicator = UIUtils.initActivityIndicator(parentView: contentView)
+        activityIndicator?.center = CGPoint(x: contentView.center.x, y: contentView.center.y - 25)
+        activityIndicator?.startAnimating()
+        attempts.removeAll()
+        loadAttempts(url: exam.attemptsUrl!)
     }
     
     func loadAttempts(url: String) {
@@ -226,13 +231,6 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
         bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
 
         activityIndicator?.frame = contentView.frame
-    }
-    
-    override func dismiss(animated flag: Bool, completion: (() -> Void)?) {
-        super.dismiss(animated: flag, completion:completion)
-        // Clear the attempts when user return from the test engine
-        // This will cause the attempts to be load again on viewWillAppear
-        attempts.removeAll()
     }
 
 }

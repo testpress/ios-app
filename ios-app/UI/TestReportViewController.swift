@@ -70,15 +70,26 @@ class TestReportViewController: UIViewController {
         timeTaken.text = attempt!.timeTaken!
         accuracy.text = String(attempt!.accuracy!) + "%"
     }
-    
-    func gotoHistory() {
-        presentingViewController?.presentingViewController?.presentingViewController?
-            .dismiss(animated: false, completion: {})
-    }
 
     @IBAction func back(_ sender: UIBarButtonItem) {
-        if presentingViewController is TestEngineViewController {
-            gotoHistory()
+        let presentingViewController =
+            self.presentingViewController?.presentingViewController?.presentingViewController
+        
+        if presentingViewController is TabViewController {
+            let tabViewController = presentingViewController as! TabViewController
+            tabViewController.dismiss(animated: false, completion: {
+                if tabViewController.currentIndex != 2 {
+                    // Move to histroy tab
+                    tabViewController.moveToViewController(at: 2, animated: true)
+                }
+                // Refresh the items
+                tabViewController.reloadPagerTabStripView()
+            })
+        } else if presentingViewController is AttemptsListViewController {
+            let attemptsListViewController = presentingViewController as! AttemptsListViewController
+            attemptsListViewController.dismiss(animated: false, completion: {
+                attemptsListViewController.loadAttemptsWithProgress()
+            })
         } else {
             dismiss(animated: true, completion: nil)
         }

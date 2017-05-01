@@ -71,16 +71,6 @@ class TabViewController: ButtonBarPagerTabStripViewController {
     }
     */
     
-    override func dismiss(animated flag: Bool, completion: (() -> Void)?) {
-        super.dismiss(animated: flag, completion:completion)
-        // When user returns after attempted(paused or end) an exam, move to history tab &
-        // refresh the list items
-        if currentIndex != 2 {
-            moveToViewController(at: 2, animated: true)
-        }
-        reloadPagerTabStripView()
-    }
-    
     // MARK: - PagerTabStripDataSource
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {

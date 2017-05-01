@@ -383,7 +383,23 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
     }
     
     func gotoHistory() {
-        presentingViewController?.presentingViewController?.dismiss(animated: false, completion: {})
+        let presentingViewController = self.presentingViewController?.presentingViewController
+        if presentingViewController is TabViewController {
+            let tabViewController = presentingViewController as! TabViewController
+            tabViewController.dismiss(animated: false, completion: {
+                if tabViewController.currentIndex != 2 {
+                    // Move to histroy tab
+                    tabViewController.moveToViewController(at: 2, animated: true)
+                }
+                // Refresh the list items
+                tabViewController.reloadPagerTabStripView()
+            })
+        } else if presentingViewController is AttemptsListViewController {
+            let attemptsListViewController = presentingViewController as! AttemptsListViewController
+            attemptsListViewController.dismiss(animated: false, completion: {
+                attemptsListViewController.loadAttemptsWithProgress()
+            })
+        }
     }
     
     func gotoTestReport() {
