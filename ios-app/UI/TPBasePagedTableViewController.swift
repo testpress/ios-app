@@ -72,6 +72,7 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
         if (items.isEmpty) {
             tableView.tableFooterView?.isHidden = true
             activityIndicator?.startAnimating()
+            pager.reset()
             loadItems()
         }
     }

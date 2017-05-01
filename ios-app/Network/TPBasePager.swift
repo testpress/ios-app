@@ -66,6 +66,13 @@ public class TPBasePager<T: Mappable> {
         }
     }
     
+    func reset() {
+        page = 1
+        resources.removeAll()
+        response = nil
+        hasMore = true
+    }
+    
     func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
     }
