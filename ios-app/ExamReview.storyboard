@@ -582,7 +582,7 @@
                                     <navigationItem title="Solutions" id="TMh-BK-mdy">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="UDM-ER-pse">
                                             <connections>
-                                                <action selector="back:" destination="r0V-bB-YTq" id="8Qm-OP-uF6"/>
+                                                <action selector="goBack" destination="r0V-bB-YTq" id="QdN-Jv-i0W"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>

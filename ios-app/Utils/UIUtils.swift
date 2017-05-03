@@ -53,12 +53,16 @@ public class UIUtils {
         return alertController
     }
     
-    static func showSimpleAlert(title: String? = nil, message: String? = nil,
-                                viewController: UIViewController) {
+    static func showSimpleAlert(title: String? = nil,
+                                message: String? = nil,
+                                viewController: UIViewController,
+                                completion: ((UIAlertAction) -> Void)? = nil) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: Strings.OK, style: UIAlertActionStyle.cancel))
-        viewController.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: Strings.OK, style: UIAlertActionStyle.cancel,
+                                      handler: completion))
+        
+        viewController.present(alert, animated: true)
     }
 }
 

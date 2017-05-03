@@ -185,7 +185,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 (action: UIAlertAction!) in
                 self.showLoadingProgress()
                 self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
-                   self.gotoHistory()
+                    self.goBack()
                 })
         }))
         alert.addAction(UIAlertAction(
@@ -198,7 +198,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func gotoHistory() {
+    override func goBack() {
         let presentingViewController = self.presentingViewController?.presentingViewController
         if presentingViewController is TabViewController {
             let tabViewController = presentingViewController as! TabViewController

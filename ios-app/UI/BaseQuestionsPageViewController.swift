@@ -111,6 +111,20 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                 if !(testpressResponse!.next.isEmpty) {
                     self.loadQuestions(url: testpressResponse!.next)
                 } else {
+                    if self.attemptItems.isEmpty {
+                        // Handled empty questions
+                        self.loadingDialogController.dismiss(animated: true, completion: {
+                            UIUtils.showSimpleAlert(
+                                title: Strings.NO_QUESTIONS,
+                                message: Strings.NO_QUESTIONS_DESCRIPTION,
+                                viewController: self,
+                                completion: { action in
+                                    self.goBack()
+                                }
+                            )
+                        })
+                        return
+                    }
                     self.attemptItems = self.attemptItems.sorted(by: { $0.order! < $1.order! })
                     self.baseQuestionsDataSource = self.getQuestionsDataSource()
                     // TODO: Handle empty questions
@@ -133,6 +147,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         )
     }
     
+    // Provided event delegate to override in subclass optionally
     func onFinishLoadingQuestions() {
     }
     
@@ -275,6 +290,10 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                 completionHandler!()
             }
         }
+    }
+    
+    // Handle the back navigation based on the subclass requirement
+    func goBack() {
     }
     
 }

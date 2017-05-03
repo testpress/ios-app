@@ -35,7 +35,7 @@ class ReviewSolutionsViewController: BaseQuestionsPageViewController {
         return ReviewQuestionsDataSource(attemptItems)
     }
     
-    @IBAction func back(_ sender: UIBarButtonItem) {
+    @IBAction override func goBack() {
         dismiss(animated: true, completion: nil)
     }
 
