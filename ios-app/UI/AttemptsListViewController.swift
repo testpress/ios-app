@@ -177,6 +177,8 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
     private func displayAttemptsList() {
         tableView.reloadData()
         if canAttemptExam() {
+            // Clear existing paused attempts if exist
+            pausedAttempts.removeAll()
             if exam.pausedAttemptsCount! > 0 {
                 for attempt: Attempt in attempts {
                     if attempt.state == Constants.STATE_RUNNING {
