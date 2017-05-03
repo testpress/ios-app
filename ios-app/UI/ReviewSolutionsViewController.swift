@@ -1,5 +1,5 @@
 //
-//  Strings.swift
+//  ReviewSolutionsViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,31 +23,20 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
-struct Strings {
+class ReviewSolutionsViewController: BaseQuestionsPageViewController {
     
-    static let OK = "OK"
-    static let TRY_AGAIN = "Try Again"
+    override func getQuestionsUrl() -> String {
+        return (attempt?.reviewUrl)!
+    }
     
-    static let NETWORK_ERROR = "Network Error"
-    static let PLEASE_CHECK_INTERNET_CONNECTION = "Please check your internet connection & try again."
-    static let AUTHENTICATION_FAILED = "Authentication failed"
-    static let PLEASE_LOGIN = "Please login to see this"
-    static let LOADING_FAILED = "Loading Failed"
-    static let SOMETHIGN_WENT_WRONG = "Some thing went wrong, please try again later."
+    override func getQuestionsDataSource() -> BaseQuestionsDataSource {
+        return ReviewQuestionsDataSource(attemptItems)
+    }
     
-    static let NO_ITEMS_EXIST = "No items exist"
-    static let NO_EXAMS = "Learing can't wait"
-    static let BUY_EXAMS_FROM_STORE = "Looks like you don't have any active exams. Checkout the store to find courses you may like."
-    static let NO_UPCOMING_EXAM = "Looks like you don't have any upcoming exams."
-    static let NO_ATTEMPTED_EXAM = "Looks like you don't attempted any exams till now."
-    
-    static let RESUME_EXAM = "Resume Exam"
-    
-    static let CORRECT_ANSWER = "Correct Answer:"
-    static let EXPLANATION = "Explanation:"
-    
-    static let LOADING_QUESTIONS = "Loading questions"
-    static let LOADING = "Loading…"
+    @IBAction func back(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+
 }

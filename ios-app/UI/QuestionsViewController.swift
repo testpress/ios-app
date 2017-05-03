@@ -25,30 +25,14 @@
 import UIKit
 import WebKit
 
-class QuestionsViewController: UIViewController, WKScriptMessageHandler, WKUIDelegate,
-    WKNavigationDelegate {
+class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
     
     @IBOutlet weak var indexView: UILabel!
-    @IBOutlet weak var topShadowView: UIView!
-    @IBOutlet weak var bottomShadowView: UIView!
-    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var reviewSwitch: UISwitch!
     
-    var webView: WKWebView!
-    var attemptItem: AttemptItem?
     private var selectedOptions: [Int] = []
-    let topGradient = CAGradientLayer()
-    let bottomGradient = CAGradientLayer()
-    var activityIndicator: UIActivityIndicatorView?
     
-    override func loadView() {
-        super.loadView()
-        
-        selectedOptions = attemptItem!.selectedAnswers
-       
-        activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
-        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
-        
+    override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
         let config = WKWebViewConfiguration()
@@ -56,18 +40,14 @@ class QuestionsViewController: UIViewController, WKScriptMessageHandler, WKUIDel
         config.preferences.javaScriptEnabled = true
         
         webView = WKWebView( frame: self.containerView!.bounds, configuration: config)
-        webView.navigationDelegate = self
-        webView.autoresizingMask =  [.flexibleWidth, .flexibleHeight]
-        
-        self.containerView.addSubview(self.webView)
-        
-        reviewSwitch.isOn = attemptItem!.review!
-
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Set initial values of current selected answer & review
+        selectedOptions = attemptItem!.selectedAnswers
+        reviewSwitch.isOn = attemptItem!.review!
         attemptItem?.savedAnswers = attemptItem!.selectedAnswers
         attemptItem?.currentReview = attemptItem!.review
         
@@ -97,38 +77,19 @@ class QuestionsViewController: UIViewController, WKScriptMessageHandler, WKUIDel
         }
     }
     
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        activityIndicator?.startAnimating()
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        activityIndicator?.stopAnimating()
-        let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "MathJaxRender",
-                                                            ofType:"js", inDirectory:"static")!)
-        do {
-            var javascript = try String(contentsOf: fileURL, encoding: String.Encoding.utf8)
-            var selectedAnswers: [Int] = (attemptItem?.selectedAnswers)!;
-            if !selectedAnswers.isEmpty {
-                let optionType: String = (attemptItem?.question?.type)!;
-                if optionType == "R" {
-                    javascript += WebViewUtils.getRadioButtonInitializer(
-                        selectedOption: selectedAnswers[0]);
-                } else {
-                    javascript += WebViewUtils.getCheckBoxInitializer(
-                        selectedOptions: selectedAnswers);
-                }
+    override func getJavascript() -> String {
+        var javascript = super.getJavascript()
+        var selectedAnswers: [Int] = (attemptItem?.selectedAnswers)!
+        if !selectedAnswers.isEmpty {
+            let optionType: String = (attemptItem?.question?.type)!
+            if optionType == "R" {
+                javascript +=
+                    WebViewUtils.getRadioButtonInitializer(selectedOption: selectedAnswers[0])
+            } else {
+                javascript += WebViewUtils.getCheckBoxInitializer(selectedOptions: selectedAnswers)
             }
-            webView.evaluateJavaScript(javascript) { (result, error) in
-                if error != nil {
-                    debugPrint(error ?? "no error")
-                }
-            }
-            // Bring top & bottom shadow to front
-            view.bringSubview(toFront: bottomShadowView)
-            view.bringSubview(toFront: topShadowView)
-        } catch let error as NSError {
-            debugPrint(error.localizedDescription)
         }
+        return javascript
     }
     
     func getQuestionHtml() -> String {
@@ -162,17 +123,6 @@ class QuestionsViewController: UIViewController, WKScriptMessageHandler, WKUIDel
         }
         htmlContent = htmlContent + "</table></div>";
         return htmlContent
-    }
-    
-    override func viewDidLayoutSubviews() {
-        // Add gradient shadow layer to the shadow container view
-        topGradient.frame = topShadowView.bounds
-        topGradient.colors = [UIColor.black.cgColor, UIColor.white.cgColor]
-        topShadowView.layer.insertSublayer(topGradient, at: 0)
-        
-        bottomGradient.frame = bottomShadowView.bounds
-        bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
-        bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {

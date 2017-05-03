@@ -227,7 +227,7 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func showTestReport(attempt: Attempt) {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
         viewController.exam = self.exam!

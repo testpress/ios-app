@@ -66,6 +66,7 @@ public class Colors {
     
     static let PRIMARY = "#2196F3"
     static let MATERIAL_GREEN = "#00ccaa"
+    static let MATERIAL_RED = "#e65c6c"
     static let GRAY_LIGHT = "#e6e6e6"
     static let GRAY_MEDIUM = "#999999"
 

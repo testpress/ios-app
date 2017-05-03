@@ -22,60 +22,12 @@
 
 import UIKit
 
-class QuestionsControllerSource: NSObject, UIPageViewControllerDataSource {
+class QuestionsControllerSource: BaseQuestionsDataSource {
     
-    var attemptItems = [AttemptItem]()
-    
-    init(_ attemptItems: [AttemptItem] = [AttemptItem]()) {
-        super.init()
-        self.attemptItems = attemptItems
-    }
-    
-    func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) ->
-        QuestionsViewController? {
-        
-        if (self.attemptItems.count == 0) || (index >= self.attemptItems.count) {
-            return nil
-        }
-        
-        // Create a new view controller and pass suitable data.
-        let dataViewController = storyboard.instantiateViewController(
+    override func getQuestionsViewController() -> BaseQuestionsViewController {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        return storyboard.instantiateViewController(
             withIdentifier: Constants.QUESTIONS_VIEW_CONTROLLER) as! QuestionsViewController
-        let attemptItem = self.attemptItems[index]
-        attemptItem.index = index
-        dataViewController.attemptItem = attemptItem
-        return dataViewController
-    }
-    
-    func indexOfViewController(_ viewController: QuestionsViewController) -> Int {
-        return viewController.attemptItem!.index!
-    }
-    
-    // MARK: - Page View Controller Data Source
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore
-        viewController: UIViewController) -> UIViewController? {
-        var index = self.indexOfViewController(viewController as! QuestionsViewController)
-        if (index == 0) || (index == NSNotFound) {
-            return nil
-        }
-
-        index -= 1
-        return self.viewControllerAtIndex(index, storyboard: viewController.storyboard!)
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter
-        viewController: UIViewController) -> UIViewController? {
-        var index = self.indexOfViewController(viewController as! QuestionsViewController)
-        if index == NSNotFound {
-            return nil
-        }
-
-        index += 1
-        if index == self.attemptItems.count {
-            return nil
-        }
-        return self.viewControllerAtIndex(index, storyboard: viewController.storyboard!)
     }
     
 }

@@ -29,6 +29,7 @@ struct Constants {
     static let KEYCHAIN_SERVICE_NAME_TOKEN = APP_NAME + " Token"
     
     static let TEST_ENGINE = "TestEngine"
+    static let EXAM_REVIEW_STORYBOARD = "ExamReview"
     static let LOGIN_VIEW_CONTROLLER = "LoginViewController"
     static let TAB_VIEW_CONTROLLER = "TabViewController"
     static let TEST_ENGINE_VIEW_CONTROLLER = "TestEngineViewController"
@@ -38,6 +39,8 @@ struct Constants {
     static let ATTEMPTS_VIEW_CONTROLLER = "AttemptsListViewController"
     static let PAUSED_ATTEMPT_TABLE_VIEW_CELL = "PausedAttemptTableViewCell"
     static let COMPLETED_ATTEMPT_TABLE_VIEW_CELL = "CompletedAttemptTableViewCell"
+    static let REVIEW_SOLUTIONS_VIEW_CONTROLLER = "ReviewSolutionsViewController"
+    static let REVIEW_QUESTIONS_VIEW_CONTROLLER = "ReviewQuestionsViewController"
     
     static let PAGE = "page"
     static let STATE = "state"

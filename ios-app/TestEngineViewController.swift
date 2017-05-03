@@ -24,175 +24,46 @@
 
 import UIKit
 
-class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
+class TestEngineViewController: BaseQuestionsPageViewController {
     
-    @IBOutlet weak var questionsContainerView: UIView!
-    @IBOutlet weak var prevArrow: UIImageView!
-    @IBOutlet weak var prevButton: UIButton!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var nextArrow: UIImageView!
-    @IBOutlet weak var nextButtonLayout: UIStackView!
-    @IBOutlet weak var previousButtonLayout: UIStackView!
     @IBOutlet weak var remainingTimeLabel: UILabel!
-    var pageViewController: UIPageViewController?
-    var questionsControllerSource: QuestionsControllerSource?
-    var currentIndex: Int?
+    
     var remainingTime: Int = 0
     var timer: Timer = Timer()
-    var exam: Exam?
-    var attempt: Attempt?
-    var attemptItems = [AttemptItem]()
-    var showingProgress: Bool = false
     var previousQuestionIndex: Int = 0
-    let loadingDialogController = UIUtils.initProgressDialog(message: "Loading questions\n\n")
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        pageViewController!.delegate = self
-        addChildViewController(self.pageViewController!)
-        questionsContainerView.addSubview(self.pageViewController!.view)
-        var pageViewRect = questionsContainerView.bounds
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            pageViewRect = pageViewRect.insetBy(dx: 40.0, dy: 40.0)
-        }
-        pageViewController!.view.frame = pageViewRect
-        pageViewController!.didMove(toParentViewController: self)
-        // Set navigation button click listener
-        let previousButtonGesture = UITapGestureRecognizer(target: self, action:
-            #selector(self.onClickPreviousButton(sender:)))
-        previousButtonLayout.addGestureRecognizer(previousButtonGesture)
-        let nextButtonGesture = UITapGestureRecognizer(target: self, action:
-            #selector(self.onClickNextButton(sender:)))
-        nextButtonLayout.addGestureRecognizer(nextButtonGesture)
-        prevButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        prevButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
-        nextButton.setTitleColor(UIColor.red, for: .disabled)
-        nextButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
+        
+        nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
         nextButton.setTitle("END", for: .disabled)
         nextButton.setTitle("NEXT", for: .normal)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if attemptItems.isEmpty {
-            self.present(loadingDialogController, animated: false, completion: nil)
-            loadQuestions(url: (attempt?.questionsUrl)!)
-        }
+    override func getQuestionsDataSource() -> BaseQuestionsDataSource {
+        return QuestionsControllerSource(attemptItems)
     }
     
-    func loadQuestions(url: String) {
-        TPApiClient.getQuestions(
-            endpointProvider: TPEndpointProvider(.getQuestions, url: url),
-            completion: {
-                testpressResponse, error in
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    self.loadingDialogController.dismiss(animated: true, completion: {
-                        self.showAlert(error: error, retryHandler: {
-                            self.loadQuestions(url: url)
-                        })
-                    })
-                    return
-                }
-                self.attemptItems.append(contentsOf: testpressResponse!.results)
-                if !(testpressResponse!.next.isEmpty) {
-                    self.loadQuestions(url: testpressResponse!.next)
-                } else {
-                    self.questionsControllerSource = QuestionsControllerSource(self.attemptItems)
-                    // TODO: Handle empty questions
-                    let startingViewController: QuestionsViewController =
-                        self.questionsControllerSource!
-                            .viewControllerAtIndex(0, storyboard: self.storyboard!)!
-                    
-                    let viewControllers = [startingViewController]
-                    self.pageViewController!.setViewControllers(
-                        viewControllers, direction: .forward, animated: false,
-                        completion: {done in })
-                    
-                    self.pageViewController!.dataSource = self.questionsControllerSource
-                    self.setCurrentQuestion(index: self.getCurrentIndex())
-                    self.remainingTime = self.getSecondsFromInputString(self.attempt?.remainingTime)
-                    self.startTimer()
-                    self.loadingDialogController.dismiss(animated: true, completion: nil)
-                    // Set loading progress dialog message for further use
-                    self.loadingDialogController.message = "Loading…\n\n"
-                }
-            }
-        )
+    override func onFinishLoadingQuestions() {
+        remainingTime = getSecondsFromInputString(attempt.remainingTime)
+        startTimer()
     }
     
-    // MARK: - UIPageViewController delegate methods
-    
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            didFinishAnimating finished: Bool,
-                            previousViewControllers: [UIViewController],
-                            transitionCompleted completed: Bool) {
-        
-        // When user swipe the page, set current question
-        if completed {
-            setCurrentQuestion(index: getCurrentIndex())
-        }
-    }
-    
-    func getCurrentIndex() -> Int {
-        let currentViewController = self.pageViewController!.viewControllers![0] as! QuestionsViewController
-        return (currentViewController.attemptItem?.index)!
-    }
-    
-    func setCurrentQuestion(index: Int) {
+    override func setCurrentQuestion(index: Int) {
         saveAnswer(index: previousQuestionIndex)
         previousQuestionIndex = index
-        // Update previous button
-        if index == 0 {
-            previousButtonLayout.isUserInteractionEnabled = false
-            prevButton.isEnabled = false
-            prevArrow.tintColor = UIColor.lightGray
-        } else {
-            previousButtonLayout.isUserInteractionEnabled = true
-            prevButton.isEnabled = true
-            prevArrow.tintColor = Colors.getRGB(Colors.PRIMARY)
-        }
-        // Update next button
-        if index + 1 == self.questionsControllerSource?.attemptItems.count {
-            nextButton.isEnabled = false
-            nextArrow.tintColor = UIColor.lightGray
-        } else {
-            nextButton.isEnabled = true
-            nextArrow.tintColor = Colors.getRGB(Colors.PRIMARY)
-        }
+        super.setCurrentQuestion(index: index)
     }
     
-    func onClickPreviousButton(sender : UITapGestureRecognizer) {
-        var index = getCurrentIndex()
-        if index == 0 {
-            return
-        }
-        index -= 1
-        
-        let viewControllers = [self.questionsControllerSource?
-            .viewControllerAtIndex(index, storyboard: self.storyboard!)] as! [UIViewController]
-        self.pageViewController!.setViewControllers(viewControllers , direction: .reverse,
-                                                    animated: true, completion: {done in })
-        setCurrentQuestion(index: getCurrentIndex())
-    }
-    
-    func onClickNextButton(sender : UITapGestureRecognizer) {
+    override func onClickNextButton(sender: UITapGestureRecognizer) {
         var  index = getCurrentIndex()
         index += 1
-        if index == self.questionsControllerSource?.attemptItems.count {
-            onEndExam()
+        if index == self.baseQuestionsDataSource.attemptItems.count {
+            onPressStopButton()
             return
         }
         
-        let viewControllers = [self.questionsControllerSource?
-            .viewControllerAtIndex(index, storyboard: self.storyboard!)] as! [UIViewController]
-        self.pageViewController!.setViewControllers(viewControllers , direction: .forward,
-                                                    animated: true, completion: {done in })
-        setCurrentQuestion(index: getCurrentIndex())
+        super.onClickNextButton(sender: sender)
     }
     
     func updateRemainingTime() {
@@ -297,64 +168,18 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
         )
     }
     
-    func showAlert(error: TPError, retryHandler: @escaping (() -> Swift.Void)) {
-        if self.showingProgress {
-            // Close progress dialog if currently showing
-            self.loadingDialogController.dismiss(animated: true, completion: {
-                self.showingProgress = false
-                self.showAlert(error: error, retryHandler: retryHandler)
-            })
-            return
-        }
-        
+    override func showAlert(error: TPError, retryHandler: @escaping (() -> Swift.Void)) {
         timer.invalidate()
-        var alert: UIAlertController
-        var cancelButtonTitle: String
-        
-        if error.kind == .network {
-            alert = UIAlertController(
-                title: "No internet connection",
-                message: "Exam is paused, Please check your internet connection & resume again.",
-                preferredStyle: UIAlertControllerStyle.alert
-            )
-            
-            alert.addAction(UIAlertAction(
-                title: "Retry", style: UIAlertActionStyle.default, handler: {
-                    (action: UIAlertAction!) in
-                    alert.dismiss(animated: false)
-                    self.present(self.loadingDialogController, animated: true, completion: nil)
-                    self.showingProgress = true
-                    retryHandler()
-            }))
-            cancelButtonTitle = "Not Now"
-        } else {
-            alert = UIAlertController(
-                title: "Loading Failed",
-                message: "Some thing went wrong, please try again later.",
-                preferredStyle: UIAlertControllerStyle.alert
-            )
-            cancelButtonTitle = "OK"
-        }
-
-        alert.addAction(UIAlertAction(
-            title: cancelButtonTitle, style: UIAlertActionStyle.default,
-            handler: { (action: UIAlertAction!) in
-                self.dismiss(animated: true, completion: nil)
-            }
-        ))
-        
-        self.present(alert, animated: true, completion: nil)
+        super.showAlert(error: error, retryHandler: retryHandler)
     }
-
-    @IBAction func onPressStopButton(_ sender: UIBarButtonItem) {
-        var alert: UIAlertController
     
+    @IBAction func onPressStopButton() {
+        var alert: UIAlertController
         alert = UIAlertController(
             title: "Exit Exam",
             message: "Are you sure? you can pause the exam & resume again.",
             preferredStyle: UIAlertControllerStyle.actionSheet
         )
-        
         alert.addAction(UIAlertAction(
             title: "Pause", style: UIAlertActionStyle.default, handler: {
                 (action: UIAlertAction!) in
@@ -363,16 +188,13 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
                    self.gotoHistory()
                 })
         }))
-        
         alert.addAction(UIAlertAction(
             title: "End", style: UIAlertActionStyle.default,
             handler: { (action: UIAlertAction!) in
                 self.onEndExam()
             }
         ))
-        
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel))
-        
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -400,8 +222,10 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
     }
     
     func gotoTestReport() {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier:
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
+        
         viewController.exam = exam
         viewController.attempt = attempt
         self.present(viewController, animated: true, completion: nil)
@@ -428,24 +252,9 @@ class TestEngineViewController: UIViewController, UIPageViewControllerDelegate {
             #selector(self.updateRemainingTime), userInfo: nil, repeats: true)
     }
     
-    func showLoadingProgress() {
+    override func showLoadingProgress() {
         timer.invalidate()
-        present(self.loadingDialogController, animated: true)
-        showingProgress = true
+        super.showLoadingProgress()
     }
     
-    func hideLoadingProgress(completionHandler: (() -> Void)? = nil) {
-        if self.showingProgress {
-            self.loadingDialogController.dismiss(animated: false, completion: {
-                if completionHandler != nil {
-                    completionHandler!()
-                }
-            })
-            self.showingProgress = false
-        } else {
-            if completionHandler != nil {
-                completionHandler!()
-            }
-        }
-    }
 }

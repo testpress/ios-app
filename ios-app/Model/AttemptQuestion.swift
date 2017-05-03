@@ -26,9 +26,11 @@
 import ObjectMapper
 
 public class AttemptQuestion {
+    var id: Int?
     var questionHtml: String?;
     var subject: String?;
     var direction: String?;
+    var explanationHtml: String?
     var type: String?;
     var answers: [AttemptAnswer] = [];
     
@@ -38,9 +40,11 @@ public class AttemptQuestion {
 
 extension AttemptQuestion: TestpressModel {
     public func mapping(map: Map) {
+        id <- map["id"]
         questionHtml <- map["question_html"]
         subject <- map["subject"]
         direction <- map["direction"]
+        explanationHtml <- map["explanation_html"]
         type <- map["type"]
         answers <- map["answers"]
     }

@@ -37,6 +37,7 @@ public class AttemptItem {
     }
     var selectedAnswers: [Int] = [];
     var savedAnswers: [Int] = [];
+    var order: Int?
     
     public required init?(map: Map) {
     }
@@ -56,5 +57,6 @@ extension AttemptItem: TestpressModel {
         currentReview <- map["current_review"]
         selectedAnswers <- map["selected_answers"]
         savedAnswers <- map["saved_answers"]
+        order <- map["order"]
     }
 }

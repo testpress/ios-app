@@ -41,6 +41,9 @@ class TestReportViewController: UIViewController {
     @IBOutlet weak var incorrect: UILabel!
     @IBOutlet weak var timeTaken: UILabel!
     @IBOutlet weak var accuracy: UILabel!
+    @IBOutlet weak var contentView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var bottomShadowView: UIView!
     
     var attempt: Attempt?
     var exam: Exam?
@@ -71,6 +74,15 @@ class TestReportViewController: UIViewController {
         accuracy.text = String(attempt!.accuracy!) + "%"
     }
 
+    @IBAction func showSolutions(_ sender: UIButton) {
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier:
+            Constants.REVIEW_SOLUTIONS_VIEW_CONTROLLER) as! ReviewSolutionsViewController
+        
+        viewController.exam = exam
+        viewController.attempt = attempt
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
     @IBAction func back(_ sender: UIBarButtonItem) {
         let presentingViewController =
             self.presentingViewController?.presentingViewController?.presentingViewController
@@ -96,6 +108,18 @@ class TestReportViewController: UIViewController {
         } else {
             dismiss(animated: true, completion: nil)
         }
+    }
+    
+    // Set frames of the views in this method to support both portrait & landscape view
+    override func viewDidLayoutSubviews() {
+        // Add gradient shadow layer to the shadow container view
+        let bottomGradient = CAGradientLayer()
+        bottomGradient.frame = bottomShadowView.bounds
+        bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+        bottomShadowView.layer.addSublayer(bottomGradient)
+        
+        // Set scroll view content height to support the scroll
+        scrollView.contentSize.height = contentView.frame.size.height
     }
 
 }

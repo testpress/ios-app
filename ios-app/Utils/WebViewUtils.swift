@@ -73,5 +73,28 @@ class WebViewUtils {
         return html
         
     }
+    
+    public static func getOptionWithTags(optionText: String, index: Int, color: String?) -> String {
+        var html = "\n<div class='review-option-item'>"
+        if color == nil {
+            html += "<div class='alphabetical-option-ring-general'>"
+        } else {
+            html += "<div class='alphabetical-option-ring-attempted' style='background-color:" +
+                color! + "'>"
+        }
+        html += "\(Character(UnicodeScalar(65 + index)!))</div>"
+        html += "<div>" + optionText + "</div>"
+        html += "</div>"
+        return html
+    }
+    
+    public static func getCorrectAnswerIndexWithTags(index: Int) -> String {
+        return "\n<div class='alphabetical-option-ring-general'>" +
+                "\(Character(UnicodeScalar(65 + index)!))</div>"
+    }
+    
+    public static func getHeadingTags(headingText: String) -> String {
+        return "<div class='review-heading'>" + headingText + "</div>"
+    }
 
 }
