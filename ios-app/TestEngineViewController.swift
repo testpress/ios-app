@@ -27,6 +27,7 @@ import UIKit
 class TestEngineViewController: BaseQuestionsPageViewController {
     
     @IBOutlet weak var remainingTimeLabel: UILabel!
+    @IBOutlet weak var pauseButtonLayout: UIStackView!
     
     var remainingTime: Int = 0
     var timer: Timer = Timer()
@@ -38,6 +39,10 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
         nextButton.setTitle("END", for: .disabled)
         nextButton.setTitle("NEXT", for: .normal)
+        
+        let pauseButtonGesture = UITapGestureRecognizer(target: self, action:
+            #selector(self.onPressPauseButton(sender:)))
+        pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
     }
     
     override func getQuestionsDataSource() -> BaseQuestionsDataSource {
@@ -173,15 +178,42 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         super.showAlert(error: error, retryHandler: retryHandler)
     }
     
+    func onPressPauseButton(sender: UITapGestureRecognizer) {
+        let alert = UIAlertController(title: Strings.EXIT_EXAM,
+                                      message: Strings.PAUSE_MESSAGE,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(
+            title: Strings.YES,
+            style: UIAlertActionStyle.default,
+            handler: { action in
+                self.showLoadingProgress()
+                self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
+                    self.goBack()
+                })
+            }
+        ))
+        alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
+        present(alert, animated: true, completion: {
+            alert.view.superview?.isUserInteractionEnabled = true
+            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action:
+                #selector(self.closeAlert(gesture:))))
+        })
+    }
+    
+    func closeAlert(gesture: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func onPressStopButton() {
         var alert: UIAlertController
         alert = UIAlertController(
-            title: "Exit Exam",
-            message: "Are you sure? you can pause the exam & resume again.",
+            title: Strings.EXIT_EXAM,
+            message: Strings.END_MESSAGE,
             preferredStyle: UIAlertControllerStyle.actionSheet
         )
         alert.addAction(UIAlertAction(
-            title: "Pause", style: UIAlertActionStyle.default, handler: {
+            title: Strings.PAUSE, style: UIAlertActionStyle.default, handler: {
                 (action: UIAlertAction!) in
                 self.showLoadingProgress()
                 self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
@@ -189,12 +221,12 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 })
         }))
         alert.addAction(UIAlertAction(
-            title: "End", style: UIAlertActionStyle.default,
+            title: Strings.END, style: UIAlertActionStyle.destructive,
             handler: { (action: UIAlertAction!) in
                 self.onEndExam()
             }
         ))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel))
+        alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
         self.present(alert, animated: true, completion: nil)
     }
     

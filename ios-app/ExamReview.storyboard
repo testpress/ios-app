@@ -22,12 +22,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Pg-wp-aPm">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="lqf-5e-oVb"/>
+                                </constraints>
                                 <items>
                                     <navigationItem title="Test Report" id="TJH-dY-TYs">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="UPx-kO-cvV">
+                                        <barButtonItem key="leftBarButtonItem" image="ic_navigate_before_36pt" style="done" id="wtm-xs-kqF">
+                                            <inset key="imageInsets" minX="-10" minY="0.0" maxX="-20" maxY="0.0"/>
                                             <connections>
-                                                <action selector="back:" destination="3z8-h4-idf" id="srm-IC-KI5"/>
+                                                <action selector="back:" destination="3z8-h4-idf" id="ShK-vu-1A6"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -528,15 +532,14 @@
                             <constraint firstItem="NDB-Vf-fVH" firstAttribute="width" secondItem="JQM-uy-KcH" secondAttribute="width" id="MT9-Cy-eD7"/>
                             <constraint firstAttribute="trailing" secondItem="Vxf-PL-fVq" secondAttribute="trailing" id="QzP-6R-re1"/>
                             <constraint firstItem="WL5-Qw-Ilc" firstAttribute="top" secondItem="D74-Wv-07Z" secondAttribute="bottom" id="WIf-Ys-EiL"/>
-                            <constraint firstItem="0Pg-wp-aPm" firstAttribute="top" secondItem="let-4k-RVz" secondAttribute="bottom" id="Y44-h7-ZkJ"/>
                             <constraint firstAttribute="trailing" secondItem="0Pg-wp-aPm" secondAttribute="trailing" id="ZiS-Z8-jgq"/>
+                            <constraint firstItem="0Pg-wp-aPm" firstAttribute="top" secondItem="JQM-uy-KcH" secondAttribute="top" id="cDc-Zb-mMq"/>
                             <constraint firstItem="Vxf-PL-fVq" firstAttribute="leading" secondItem="JQM-uy-KcH" secondAttribute="leading" id="nIQ-X9-jeE"/>
                             <constraint firstItem="0Pg-wp-aPm" firstAttribute="leading" secondItem="JQM-uy-KcH" secondAttribute="leading" id="oHS-i9-bhV"/>
                             <constraint firstItem="D74-Wv-07Z" firstAttribute="leading" secondItem="JQM-uy-KcH" secondAttribute="leading" id="ty6-jT-1eM"/>
                             <constraint firstAttribute="trailing" secondItem="D74-Wv-07Z" secondAttribute="trailing" id="vYj-0g-f3Q"/>
                         </constraints>
                     </view>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="700"/>
                     <connections>
@@ -577,35 +580,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGb-Tc-We2">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="299-2X-uQo"/>
+                                </constraints>
                                 <items>
                                     <navigationItem title="Solutions" id="TMh-BK-mdy">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="UDM-ER-pse">
+                                        <barButtonItem key="leftBarButtonItem" image="ic_navigate_before_36pt" style="done" id="nyJ-qG-nlK">
+                                            <inset key="imageInsets" minX="-10" minY="0.0" maxX="-20" maxY="0.0"/>
                                             <connections>
-                                                <action selector="goBack" destination="r0V-bB-YTq" id="QdN-Jv-i0W"/>
+                                                <action selector="goBack" destination="r0V-bB-YTq" id="gSa-YF-0l7"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRi-gR-yd2">
-                                <rect key="frame" x="0.0" y="72" width="320" height="436"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="454"/>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qv7-B6-GTS">
-                                <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qRc-eC-3g8">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5UL-8h-Iev">
-                                                <rect key="frame" x="0.0" y="0.0" width="64" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="64" height="50"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_navigate_before" translatesAutoresizingMaskIntoConstraints="NO" id="HDQ-q3-1UH">
-                                                        <rect key="frame" x="0.0" y="18" width="24" height="24"/>
+                                                        <rect key="frame" x="0.0" y="13" width="24" height="24"/>
                                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     </imageView>
                                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYP-dB-Ug5">
-                                                        <rect key="frame" x="24" y="15" width="40" height="30"/>
+                                                        <rect key="frame" x="24" y="10" width="40" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="oQv-vK-N1t"/>
                                                         </constraints>
@@ -615,10 +622,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-VB-QV3">
-                                                <rect key="frame" x="255" y="0.0" width="65" height="60"/>
+                                                <rect key="frame" x="255" y="0.0" width="65" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4M-k5-4EG">
-                                                        <rect key="frame" x="0.0" y="15" width="41" height="30"/>
+                                                        <rect key="frame" x="0.0" y="10" width="41" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="41" id="rbo-wJ-Dod"/>
                                                         </constraints>
@@ -626,7 +633,7 @@
                                                         <state key="normal" title="NEXT"/>
                                                     </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_navigate_next" translatesAutoresizingMaskIntoConstraints="NO" id="gLV-q5-g7j">
-                                                        <rect key="frame" x="41" y="18" width="24" height="24"/>
+                                                        <rect key="frame" x="41" y="13" width="24" height="24"/>
                                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     </imageView>
                                                 </subviews>
@@ -635,6 +642,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="KPx-VB-QV3" secondAttribute="trailing" id="7Gt-Aq-mQf"/>
+                                            <constraint firstAttribute="height" constant="50" id="YNM-bR-h0c"/>
                                             <constraint firstAttribute="bottom" secondItem="KPx-VB-QV3" secondAttribute="bottom" id="a96-cN-GUV"/>
                                             <constraint firstItem="5UL-8h-Iev" firstAttribute="top" secondItem="qRc-eC-3g8" secondAttribute="top" id="qZf-wx-ecJ"/>
                                             <constraint firstItem="KPx-VB-QV3" firstAttribute="top" secondItem="qRc-eC-3g8" secondAttribute="top" id="y06-zz-e7f"/>
@@ -653,9 +661,8 @@
                             <constraint firstItem="Qv7-B6-GTS" firstAttribute="leading" secondItem="B0A-gc-1ef" secondAttribute="leading" id="8PF-0h-zm5"/>
                             <constraint firstItem="fRi-gR-yd2" firstAttribute="leading" secondItem="SGb-Tc-We2" secondAttribute="leading" id="ARD-4P-gvB"/>
                             <constraint firstAttribute="trailing" secondItem="SGb-Tc-We2" secondAttribute="trailing" id="BkN-XA-oul"/>
+                            <constraint firstItem="SGb-Tc-We2" firstAttribute="top" secondItem="B0A-gc-1ef" secondAttribute="top" id="GJf-tM-hMU"/>
                             <constraint firstItem="cXq-uV-Zcs" firstAttribute="top" secondItem="Qv7-B6-GTS" secondAttribute="bottom" id="VPe-9r-4wd"/>
-                            <constraint firstItem="cXq-uV-Zcs" firstAttribute="top" secondItem="fRi-gR-yd2" secondAttribute="bottom" constant="60" id="cNm-NI-jha"/>
-                            <constraint firstItem="SGb-Tc-We2" firstAttribute="top" secondItem="OLF-wJ-IXt" secondAttribute="bottom" constant="8" id="kC6-iT-xMt"/>
                             <constraint firstAttribute="trailing" secondItem="Qv7-B6-GTS" secondAttribute="trailing" id="knZ-bH-jRD"/>
                             <constraint firstItem="fRi-gR-yd2" firstAttribute="trailing" secondItem="SGb-Tc-We2" secondAttribute="trailing" id="yzU-Wx-53s"/>
                         </constraints>
@@ -740,6 +747,7 @@
         <image name="clock_flat_icon" width="33" height="36"/>
         <image name="correct_flat_icon" width="28" height="36"/>
         <image name="ic_navigate_before" width="24" height="24"/>
+        <image name="ic_navigate_before_36pt" width="36" height="36"/>
         <image name="ic_navigate_next" width="24" height="24"/>
         <image name="incorrect_flat_icon" width="28" height="36"/>
         <image name="schollership_flat_icon" width="60" height="54"/>

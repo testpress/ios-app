@@ -121,9 +121,18 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
             emptyView.setValues(image: image, title: title, description: description,
                                 retryHandler: retryHandler)
         } else {
-            UIUtils.showSimpleAlert(message: description, viewController: self)
+            UIUtils.showSimpleAlert(
+                title: title,
+                message: description,
+                viewController: self,
+                cancelable: true,
+                cancelHandler: #selector(self.closeAlert(gesture:)))
         }
         tableView.reloadData()
+    }
+    
+    func closeAlert(gesture: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Table view data source

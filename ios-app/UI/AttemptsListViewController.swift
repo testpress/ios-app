@@ -33,9 +33,8 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var backButton: UIBarButtonItem!
     
-    static let HEADER_VIEW_HEIGHT: CGFloat = 45
+    static let HEADER_VIEW_HEIGHT: CGFloat = 55
     
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var emptyView: EmptyView!
@@ -87,7 +86,7 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
                     } else {
                         retryButtonText = Strings.OK
                         retryHandler = {
-                            self.back(self.backButton)
+                            self.back()
                         }
                     }
                     if (self.activityIndicator?.isAnimating)! {
@@ -170,7 +169,7 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    @IBAction func back(_ sender: UIBarButtonItem) {
+    @IBAction func back() {
         dismiss(animated: true, completion: nil)
     }
     

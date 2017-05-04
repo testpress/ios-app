@@ -31,8 +31,6 @@ class TabViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var tempButtonBarView: ButtonBarView!
     @IBOutlet weak var tempContainerView: UIScrollView!
     
-    let blueInstagramColor = UIColor(red: 37/255.0, green: 111/255.0, blue: 206/255.0, alpha: 1.0)
-
     override func viewDidLoad() {
         
         self.buttonBarView = self.tempButtonBarView
@@ -40,22 +38,21 @@ class TabViewController: ButtonBarPagerTabStripViewController {
         
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
-        settings.style.selectedBarBackgroundColor = blueInstagramColor
-        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
-        settings.style.selectedBarHeight = 2.0
+        settings.style.selectedBarBackgroundColor = Colors.getRGB(Colors.PRIMARY)
+        settings.style.buttonBarItemFont = UIFont(name: "Helvetica-Bold", size: 12)!
+        settings.style.selectedBarHeight = 4.0
         settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarItemTitleColor = .black
+        settings.style.buttonBarItemTitleColor = Colors.getRGB(Colors.TAB_TEXT_COLOR)
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         
-        changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?,
-            newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool,
-            animated: Bool) -> Void in
+        changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?,
+            progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             
             guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = .black
-            newCell?.label.textColor = self?.blueInstagramColor
+            oldCell?.label.textColor = Colors.getRGB(Colors.TAB_TEXT_COLOR)
+            newCell?.label.textColor = Colors.getRGB(Colors.PRIMARY)
         }
         
         super.viewDidLoad()

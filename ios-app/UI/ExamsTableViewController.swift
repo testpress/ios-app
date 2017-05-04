@@ -34,11 +34,11 @@ enum ExamState {
     var title: String {
         switch self {
         case .available:
-            return Constants.AVAILABLE
+            return Strings.AVAILABLE
         case .upcoming:
-            return Constants.UPCOMING
+            return Strings.UPCOMING
         case .history:
-            return Constants.HISTORY
+            return Strings.HISTORY
         }
     }
     

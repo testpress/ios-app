@@ -56,23 +56,33 @@ public class UIUtils {
     static func showSimpleAlert(title: String? = nil,
                                 message: String? = nil,
                                 viewController: UIViewController,
+                                cancelable: Bool = false,
+                                cancelHandler: Selector? = nil,
                                 completion: ((UIAlertAction) -> Void)? = nil) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Strings.OK, style: UIAlertActionStyle.cancel,
                                       handler: completion))
         
-        viewController.present(alert, animated: true)
+        viewController.present(alert, animated: true, completion: {
+            alert.view.superview?.isUserInteractionEnabled = true
+            alert.view.superview?.addGestureRecognizer(
+                UITapGestureRecognizer(target: viewController, action: cancelHandler))
+        })
+        
     }
+    
 }
 
 public class Colors {
     
     static let PRIMARY = "#2196F3"
+    static let PRIMARY_TEXT = "#ffffff"
     static let MATERIAL_GREEN = "#00ccaa"
     static let MATERIAL_RED = "#e65c6c"
     static let GRAY_LIGHT = "#e6e6e6"
     static let GRAY_MEDIUM = "#999999"
+    static let TAB_TEXT_COLOR = "#888888"
 
     static func getRGB (_ hex:String) -> UIColor {
         var cString:String

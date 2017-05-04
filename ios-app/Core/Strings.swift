@@ -27,6 +27,7 @@ import Foundation
 
 struct Strings {
     
+    static let YES = "Yes"
     static let OK = "OK"
     static let TRY_AGAIN = "Try Again"
     
@@ -52,4 +53,16 @@ struct Strings {
     
     static let LOADING_QUESTIONS = "Loading questions"
     static let LOADING = "Loading…"
+    
+    static let AVAILABLE = "AVAILABLE"
+    static let UPCOMING = "UPCOMING"
+    static let HISTORY = "HISTORY"
+    
+    static let EXIT_EXAM = "Exit Exam"
+    static let END_MESSAGE = "Are you sure? you can pause the exam & resume later before the end date."
+    static let PAUSE_MESSAGE = "Are you sure? Want to Pause the exam & resume later before the end date."
+    
+    static let PAUSE = "Pause"
+    static let END = "End"
+    static let CANCEL = "Cancel"
 }

@@ -46,10 +46,6 @@ struct Constants {
     static let STATE = "state"
     static let STATE_RUNNING = "Running"
     
-    static let AVAILABLE = "Available"
-    static let UPCOMING = "Upcoming"
-    static let HISTORY = "Histroy"
-    
 }
 
 struct Slug {

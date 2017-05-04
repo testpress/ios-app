@@ -40,7 +40,6 @@ class StartExamScreenViewController: UIViewController {
     @IBOutlet weak var startButtonLayout: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIStackView!
-    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
@@ -91,7 +90,7 @@ class StartExamScreenViewController: UIViewController {
         startAttempt()
     }
     
-    @IBAction func back(_ sender: UIBarButtonItem) {
+    @IBAction func back() {
         dismiss(animated: true, completion: nil)
     }
     
@@ -127,7 +126,7 @@ class StartExamScreenViewController: UIViewController {
                     } else {
                         retryButtonText = Strings.OK
                         retryHandler = {
-                            self.back(self.backButton)
+                            self.back()
                         }
                     }
                     let (image, title, description) = error.getDisplayInfo()
