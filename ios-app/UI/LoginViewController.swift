@@ -26,84 +26,107 @@
 import Alamofire
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController {
 
     // MARK: Properties
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var navigationbarItem: UINavigationItem!
     @IBOutlet weak var loginButton: UIButton!
     
+    let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        usernameTextField.delegate = self
-        passwordTextField.delegate = self
+        // Set login button shadow
+        loginButton.layer.shadowColor = UIColor.lightGray.cgColor
+        loginButton.layer.shadowOffset = CGSize(width:0, height: 2)
+        loginButton.layer.shadowOpacity = 0.9;
     }
     
-    //MARK: UITextFieldDelegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Hide the keyboard.
-        print("textFieldShouldReturn")
-        textField.resignFirstResponder()
-        if (textField == usernameTextField) {
-            passwordTextField.becomeFirstResponder()
-        } else if (textField == passwordTextField) {
-            onLoginButtonClick(loginButton)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationbarItem.title = Constants.APP_NAME
+        
+        // Add tap gesture to hide keyboard on outside click
+        let tapGesture = UITapGestureRecognizer(target: self, action:
+            #selector(hideKeyboard(gesture:)))
+        
+        view.addGestureRecognizer(tapGesture)
+        
+        // Display keyboard initialy with cursor on username field
+        usernameField.becomeFirstResponder()
+    }
+    
+    @IBAction func moveToPasswordField(_ sender: UITextField) {
+        // Move focus(cursor) to password field on click next in keyboard from username field
+        passwordField.becomeFirstResponder()
+    }
+    
+    func hideKeyboard(gesture: UITapGestureRecognizer? = nil) {
+        usernameField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+    }
+    
+    @IBAction func onLoginButtonClick(_ sender: UIView) {
+        guard let username = usernameField.text, !username.isEmpty else {
+            usernameField.becomeFirstResponder()
+            return
         }
-        return true
-    }
-    
-    @IBAction func onLoginButtonClick(_ sender: UIButton) {
-        print("onLoginButtonClick")
-        let username = usernameTextField.text ?? ""
-        let password = passwordTextField.text ?? ""
-        if (!username.isEmpty && !password.isEmpty) {
-            TPApiClient.authenticate(username: username, password: password, completion: {
-                testpressAuthToken, error in
-                if let error = error {
-                    print(error.message ?? "No error")
-                    print(error.kind)
-                    switch (error.kind) {
-                    case .network:
-                        print("Internet Unavailable")
-                    case .unauthenticated:
-                        print("Authorization Required")
-                    case .http:
-                        print("HTTP error occured")
-                    default:
-                        print("Unexpected")
-                    }
-                    return
-                }
-                
-                let token: String = testpressAuthToken!.token!
-                
-                do {
-                    // create a new keychain item with the account name.
-                    let passwordItem = KeychainTokenItem(service: Constants.KEYCHAIN_SERVICE_NAME_TOKEN,
-                                                         account: username)
-                    
-                    // Save the password for the new item.
-                    try passwordItem.savePassword(token)
-                } catch {
-                    fatalError("Error updating keychain - \(error)")
-                }
-                
-                let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
-                    Constants.TAB_VIEW_CONTROLLER) as! TabViewController
-                self.present(tabViewController, animated: true, completion: nil)
-            })
+        guard let password = passwordField.text, !password.isEmpty else {
+            passwordField.becomeFirstResponder()
+            return
         }
+        
+        hideKeyboard()
+        present(alertController, animated: false, completion: nil)
+        
+        TPApiClient.authenticate(username: username, password: password, completion: {
+            testpressAuthToken, error in
+            if let error = error {
+                debugPrint(error.message ?? "No error message found")
+                debugPrint(error.kind)
+                var title, description: String
+                if error.isClientError() {
+                    title = Strings.WRONG_CREDENTIALS
+                    description = Strings.USERNAME_PASSWORD_NOT_MATCHED
+                } else {
+                    (_, title, description) = error.getDisplayInfo()
+                }
+                self.alertController.dismiss(animated: true, completion: nil)
+                UIUtils.showSimpleAlert(
+                    title: title,
+                    message: description,
+                    viewController: self,
+                    cancelable: true,
+                    cancelHandler: #selector(self.closeAlert(gesture:))
+                )
+                return
+            }
+            
+            let token: String = testpressAuthToken!.token!
+            do {
+                // Create a new keychain item
+                let passwordItem = KeychainTokenItem(service: Constants.KEYCHAIN_SERVICE_NAME_TOKEN,
+                                                     account: username)
+                
+                // Save the password for the new item
+                try passwordItem.savePassword(token)
+            } catch {
+                fatalError("Error updating keychain - \(error)")
+            }
+            
+            let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
+                Constants.TAB_VIEW_CONTROLLER) as! TabViewController
+            
+            self.alertController.dismiss(animated: true, completion: nil)
+            self.present(tabViewController, animated: true, completion: nil)
+            self.dismiss(animated: true)
+        })
     }
     
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        
-        // add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        
-        // show the alert
-        self.present(alert, animated: true, completion: nil)
+    func closeAlert(gesture: UITapGestureRecognizer) {
+        dismiss(animated: true)
     }
 
 }

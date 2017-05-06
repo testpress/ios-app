@@ -38,6 +38,9 @@ struct Strings {
     static let LOADING_FAILED = "Loading Failed"
     static let SOMETHIGN_WENT_WRONG = "Some thing went wrong, please try again later."
     
+    static let WRONG_CREDENTIALS = "Wrong Credentials"
+    static let USERNAME_PASSWORD_NOT_MATCHED = "Username & Password didn't match. Please try again."
+    
     static let NO_ITEMS_EXIST = "No items exist"
     static let NO_EXAMS = "Learing can't wait"
     static let BUY_EXAMS_FROM_STORE = "Looks like you don't have any active exams. Checkout the store to find courses you may like."
@@ -53,6 +56,7 @@ struct Strings {
     
     static let LOADING_QUESTIONS = "Loading questions"
     static let LOADING = "Loading…"
+    static let PLEASE_WAIT = "Please wait..."
     
     static let AVAILABLE = "AVAILABLE"
     static let UPCOMING = "UPCOMING"

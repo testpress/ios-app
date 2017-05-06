@@ -23,6 +23,8 @@
 //  THE SOFTWARE.
 //
 
+import Foundation
+
 struct Constants {
     static let APP_NAME = "Testpress iOS App"
     static let BASE_URL = "http://sandbox.testpress.in";
