@@ -80,13 +80,7 @@ class TabViewController: ButtonBarPagerTabStripViewController {
     // MARK: - Custom Action
 
     @IBAction func logout(_ sender: UIBarButtonItem) {
-        for passwordItem in KeychainTokenItem.passwordItems() {
-            do {
-                try passwordItem.deleteItem()
-            } catch {
-                fatalError("Error deleting keychain item - \(error)")
-            }
-        }
+        KeychainTokenItem.clearKeychainItems()
         
         let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
             Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController

@@ -31,7 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                
+        
+        // Customise navigation bar
         UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().backgroundColor = Colors.getRGB(Colors.PRIMARY)
@@ -40,6 +41,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes =
             [NSForegroundColorAttributeName: Colors.getRGB(Colors.PRIMARY_TEXT)]
         
+        // Clear keychain items if app is launching the first time after installation
+        let userDefaults = UserDefaults.standard
+        if userDefaults.bool(forKey: Constants.LAUNCHED_APP_BEFORE) == false {
+            KeychainTokenItem.clearKeychainItems()
+            
+            userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
+            userDefaults.synchronize() // Forces the app to update UserDefaults
+        }
+        
+        // Launch the view controller based on user login state
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var viewController: UIViewController
         if (KeychainTokenItem.isExist()) {

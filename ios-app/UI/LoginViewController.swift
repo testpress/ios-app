@@ -107,7 +107,7 @@ class LoginViewController: UIViewController {
             let token: String = testpressAuthToken!.token!
             do {
                 // Create a new keychain item
-                let passwordItem = KeychainTokenItem(service: Constants.KEYCHAIN_SERVICE_NAME_TOKEN,
+                let passwordItem = KeychainTokenItem(service: Constants.KEYCHAIN_SERVICE_NAME,
                                                      account: username)
                 
                 // Save the password for the new item

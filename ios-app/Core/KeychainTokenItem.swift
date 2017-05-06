@@ -180,7 +180,7 @@ struct KeychainTokenItem {
         var passwordItems = [KeychainTokenItem]()
         do {
             passwordItems =
-                try KeychainTokenItem.passwordItems(forService: Constants.KEYCHAIN_SERVICE_NAME_TOKEN)
+                try KeychainTokenItem.passwordItems(forService: Constants.KEYCHAIN_SERVICE_NAME)
         } catch {
             fatalError("Error fetching password items - \(error)")
         }
@@ -196,6 +196,16 @@ struct KeychainTokenItem {
             return try passwordItems()[0].readPassword()
         } catch {
             fatalError("Error reading password from keychain - \(error)")
+        }
+    }
+    
+    static func clearKeychainItems() {
+        for passwordItem in passwordItems() {
+            do {
+                try passwordItem.deleteItem()
+            } catch {
+                fatalError("Error deleting keychain item - \(error)")
+            }
         }
     }
 }
