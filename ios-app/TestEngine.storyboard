@@ -650,7 +650,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="13g-gF-S0c">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="454"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="bottom" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttemptsListHeader" rowHeight="55" id="cW3-Wc-0Vt">
@@ -933,7 +933,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="1uE-R4-0pX" secondAttribute="trailing" id="H0f-eg-1YM"/>
-                                    <constraint firstAttribute="bottom" secondItem="13g-gF-S0c" secondAttribute="bottom" id="Xdy-Hm-l3b"/>
+                                    <constraint firstItem="1uE-R4-0pX" firstAttribute="top" secondItem="13g-gF-S0c" secondAttribute="bottom" constant="-8" id="RoN-pY-VZK"/>
                                     <constraint firstAttribute="bottom" secondItem="1uE-R4-0pX" secondAttribute="bottom" id="iDO-cZ-NkV"/>
                                     <constraint firstAttribute="trailing" secondItem="13g-gF-S0c" secondAttribute="trailing" id="iLd-O9-G3J"/>
                                     <constraint firstItem="13g-gF-S0c" firstAttribute="top" secondItem="Slp-RO-UNE" secondAttribute="top" id="lzR-gH-V32"/>
@@ -964,7 +964,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgA-Vt-1NL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2456" y="166"/>
+            <point key="canvasLocation" x="2454.375" y="165.8450704225352"/>
         </scene>
     </scenes>
     <resources>
