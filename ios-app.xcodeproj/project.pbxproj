@@ -14,6 +14,7 @@
 		2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */; };
 		2F26ADF01E8249D70031E6F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEE1E8249D70031E6F4 /* LaunchScreen.storyboard */; };
 		2F26ADFB1E8249D70031E6F4 /* ios_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */; };
+		2F2CA1DB1EBDC59300ED1C99 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F2CA1DA1EBDC59300ED1C99 /* XLPagerTabStrip.framework */; };
 		2F2CD6EF1E8FECAD0054148F /* TestEngine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F2CD6EE1E8FECAD0054148F /* TestEngine.storyboard */; };
 		2F2CD6F11E8FEDB40054148F /* StartExamScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CD6F01E8FEDB40054148F /* StartExamScreenViewController.swift */; };
 		2F2CF64F1E8E751D0090A5C4 /* ExamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF64A1E8E751D0090A5C4 /* ExamsTableViewCell.swift */; };
@@ -83,6 +84,7 @@
 		2F26ADF61E8249D70031E6F4 /* ios-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_appTests.swift; sourceTree = "<group>"; };
 		2F26ADFC1E8249D70031E6F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F2CA1DA1EBDC59300ED1C99 /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XLPagerTabStrip.framework; path = Carthage/Build/iOS/XLPagerTabStrip.framework; sourceTree = "<group>"; };
 		2F2CD6EE1E8FECAD0054148F /* TestEngine.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestEngine.storyboard; sourceTree = "<group>"; };
 		2F2CD6F01E8FEDB40054148F /* StartExamScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartExamScreenViewController.swift; path = UI/StartExamScreenViewController.swift; sourceTree = "<group>"; };
 		2F2CF64A1E8E751D0090A5C4 /* ExamsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExamsTableViewCell.swift; path = UI/ExamsTableViewCell.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			files = (
 				2FBEDB7C1E82BBD5000CF05C /* Alamofire.framework in Frameworks */,
 				2FBEDB7E1E82BC02000CF05C /* ObjectMapper.framework in Frameworks */,
+				2F2CA1DB1EBDC59300ED1C99 /* XLPagerTabStrip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +262,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F2CA1DA1EBDC59300ED1C99 /* XLPagerTabStrip.framework */,
 				2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */,
 				2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */,
 			);
