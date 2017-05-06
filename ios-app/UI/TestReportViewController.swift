@@ -70,7 +70,7 @@ class TestReportViewController: UIViewController {
         score.text = attempt!.score!
         correct.text = String(attempt!.correctCount!)
         incorrect.text = String(attempt!.incorrectCount!)
-        timeTaken.text = attempt!.timeTaken!
+        timeTaken.text = attempt!.timeTaken ?? "NA"
         accuracy.text = String(attempt!.accuracy!) + "%"
     }
 

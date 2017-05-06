@@ -54,7 +54,7 @@ class StartExamScreenViewController: UIViewController {
         view.addSubview(emptyView)
         examTitle.text = exam?.title!
         questionsCount.text = String(describing: (exam?.numberOfQuestions)!)
-        if attempt?.remainingTime! != nil {
+        if attempt?.remainingTime != nil {
             duration.text = attempt?.remainingTime!
             durationLabel.text = "Time Remaining"
         } else {
