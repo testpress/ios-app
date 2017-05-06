@@ -23,8 +23,8 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import Alamofire
+import UIKit
 
 class TPApiClient {
 
@@ -40,11 +40,13 @@ class TPApiClient {
             request.allHTTPHeaderFields = headers
         }
         // Add common headers
+        request.setValue(getUserAgent(), forHTTPHeaderField: "User-Agent")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         if (KeychainTokenItem.isExist()) {
             let token: String = KeychainTokenItem.getToken()
             request.setValue("JWT " + token, forHTTPHeaderField: "Authorization")
         }
+        
         // Add post parameters
         if parameters != nil {
             request.httpBody = try! JSONSerialization.data(withJSONObject: parameters!, options:
@@ -90,6 +92,13 @@ class TPApiClient {
                     }
                 }
         }
+    }
+    
+    static func getUserAgent() -> String {
+        let device = UIDevice.current
+        // Testpress iOS App/1.0.1 (iPhone; iPhoneSE OS 10_3_1)
+        return "\(Constants.APP_NAME)/\(Constants.getAppVersion()) (iPhone; \(device.deviceType) OS"
+        + " \(device.systemVersion.replacingOccurrences(of: ".", with: "_")))"
     }
     
     static func authenticate(username: String, password: String,

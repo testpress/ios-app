@@ -50,6 +50,13 @@ struct Constants {
     static let STATE = "state"
     static let STATE_RUNNING = "Running"
     
+    static func getAppVersion() -> String {
+        let dictionary = Bundle.main.infoDictionary!
+        let version = dictionary["CFBundleShortVersionString"] as! String
+        let build = dictionary["CFBundleVersion"] as! String
+        return "\(version).\(build)"
+    }
+    
 }
 
 struct Slug {
