@@ -29,6 +29,8 @@ class ExamsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var examName: UILabel!
     @IBOutlet weak var examViewCell: UIView!
+    @IBOutlet weak var duration: UILabel!
+    @IBOutlet weak var noOfQuestions: UILabel!
     
     var parentViewController: UIViewController? = nil
     var exam: Exam?
@@ -39,6 +41,8 @@ class ExamsTableViewCell: UITableViewCell {
         self.exam = exam
         self.examState = examState
         examName.text = exam.title
+        duration.text = exam.duration
+        noOfQuestions.text = String(exam.numberOfQuestions!)
         
         var actionHandler: Selector
         if examState == ExamState.history {
