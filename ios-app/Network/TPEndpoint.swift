@@ -30,6 +30,7 @@ import Alamofire
 enum TPEndpoint {
     
     case authenticateUser
+    case registerNewUser
     case getExams
     case createAttempt
     case getQuestions
@@ -42,6 +43,8 @@ enum TPEndpoint {
     var method: Alamofire.HTTPMethod {
         switch self {
         case .authenticateUser:
+            return .post
+        case .registerNewUser:
             return .post
         case .getExams:
             return .get
@@ -66,6 +69,8 @@ enum TPEndpoint {
         switch self {
         case .authenticateUser:
             return "/api/v2.2/auth-token/"
+        case .registerNewUser:
+            return "/api/v2.2/register/"
         case .getExams:
             return "/api/v2.2/exams/"
         case .sendHeartBeat:

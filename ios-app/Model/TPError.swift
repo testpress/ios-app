@@ -90,6 +90,10 @@ public class TPError: Error {
         }
     }
     
+    public func getErrorBodyAs<T: TestpressModel>(type: T.Type) -> T? {
+        return TPModelMapper<T>().mapFromJSON(json: message!)
+    }
+    
 }
 
 

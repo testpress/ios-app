@@ -26,7 +26,7 @@
 import Alamofire
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseTextFieldViewController {
 
     // MARK: Properties
     @IBOutlet weak var usernameField: UITextField!
@@ -37,35 +37,17 @@ class LoginViewController: UIViewController {
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
     override func viewDidLoad() {
-        // Set login button shadow
-        loginButton.layer.shadowColor = UIColor.lightGray.cgColor
-        loginButton.layer.shadowOffset = CGSize(width:0, height: 2)
-        loginButton.layer.shadowOpacity = 0.9;
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewDidLoad()
         
-        navigationbarItem.title = Constants.APP_NAME
+        UIUtils.setButtonDropShadow(loginButton)
         
-        // Add tap gesture to hide keyboard on outside click
-        let tapGesture = UITapGestureRecognizer(target: self, action:
-            #selector(hideKeyboard(gesture:)))
-        
-        view.addGestureRecognizer(tapGesture)
-        
-        // Display keyboard initialy with cursor on username field
-        usernameField.becomeFirstResponder()
+        // Set firstTextField in super class to set the cursor
+        firstTextField = usernameField
     }
     
     @IBAction func moveToPasswordField(_ sender: UITextField) {
         // Move focus(cursor) to password field on click next in keyboard from username field
         passwordField.becomeFirstResponder()
-    }
-    
-    func hideKeyboard(gesture: UITapGestureRecognizer? = nil) {
-        usernameField.resignFirstResponder()
-        passwordField.resignFirstResponder()
     }
     
     @IBAction func onLoginButtonClick(_ sender: UIView) {
@@ -121,8 +103,14 @@ class LoginViewController: UIViewController {
             
             self.alertController.dismiss(animated: true, completion: nil)
             self.present(tabViewController, animated: true, completion: nil)
-            self.dismiss(animated: true)
         })
+    }
+    
+    @IBAction func showSignUpView() {
+        let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
+            Constants.SIGNUP_VIEW_CONTROLLER) as! SignUpViewController
+        
+        present(tabViewController, animated: true, completion: nil)
     }
     
     func closeAlert(gesture: UITapGestureRecognizer) {

@@ -72,6 +72,12 @@ public class UIUtils {
         
     }
     
+    static func setButtonDropShadow(_ button: UIButton) {
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOffset = CGSize(width:0, height: 2)
+        button.layer.shadowOpacity = 0.9
+    }
+    
 }
 
 public class Colors {

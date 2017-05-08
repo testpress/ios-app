@@ -62,6 +62,8 @@ struct Strings {
     static let UPCOMING = "UPCOMING"
     static let HISTORY = "HISTORY"
     
+    static let LOGIN = "Login"
+    
     static let EXIT_EXAM = "Exit Exam"
     static let END_MESSAGE = "Are you sure? you can pause the exam & resume later before the end date."
     static let PAUSE_MESSAGE = "Are you sure? Want to Pause the exam & resume later before the end date."
@@ -69,4 +71,11 @@ struct Strings {
     static let PAUSE = "Pause"
     static let END = "End"
     static let CANCEL = "Cancel"
+    
+    static let ENTER_VALID_EMAIL = "Please enter a valid email address"
+    static let ENTER_VALID_USERNAME = "Use only alphabets or numbers"
+    static let PASSWORD_MUST_HAVE_SIX_CHARACTERS = "Require at least 6 digits"
+    static let PASSWORD_NOT_MATCH = "Passwords not matching"
+    
+    static let ACTIVATION_MAIL_SENT = "An activation email has been sent. Please check your email and click on the link to activate your account."
 }

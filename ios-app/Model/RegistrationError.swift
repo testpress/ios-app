@@ -1,5 +1,5 @@
 //
-//  TPModelMapper.swift
+//  RegistrationError.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,23 +25,21 @@
 
 import ObjectMapper
 
-public protocol TestpressModel: Mappable {
-    init?(map: Map)
-    mutating func mapping(map: Map)
+public class RegistrationError {
+    var username: [String] = []
+    var email: [String] = []
+    var password: [String] = []
+    var phone: [String] = []
+    
+    public required init?(map: Map) {
+    }
 }
 
-/**
- *  Layer between models and external callers mapping JSON to and from models.
- */
-struct TPModelMapper<U> where U:TestpressModel {
-    /**
-     Map a JSON string representation to a model that conforms to the Mappable protocol.
-     
-     - parameter json: string representing the JSON information.
-     - returns: an object that conforms to the Mappable protocol.
-     */
-    func mapFromJSON(json: String) -> U? {
-        return Mapper<U>().map(JSONString: json)
+extension RegistrationError: TestpressModel {
+    public func mapping(map: Map) {
+        username <- map["username"]
+        email <- map["email"]
+        password <- map["password"]
+        phone <- map["phone"]
     }
-    
 }

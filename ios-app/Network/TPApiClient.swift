@@ -119,6 +119,24 @@ class TPApiClient {
         })
     }
     
+    static func registerNewUser(username: String, email: String, password: String,
+                                completion: @escaping (TestpressModel?, TPError?) -> Void) {
+        
+        let parameters: Parameters = ["username": username, "email": email, "password": password]
+        apiCall(endpointProvider: TPEndpointProvider(.registerNewUser), parameters: parameters,
+                completion: { json, error in
+                    var response: TestpressModel? = nil
+                    if let json = json {
+                        response = TPModelMapper<User>().mapFromJSON(json: json)
+                        guard response != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(response, error)
+        })
+    }
+    
     static func getExams(endpointProvider: TPEndpointProvider,
                          completion: @escaping (TPApiResponse<Exam>?, TPError?) -> Void) {
         
