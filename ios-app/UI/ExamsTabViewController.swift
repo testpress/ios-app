@@ -1,5 +1,5 @@
 //
-//  TabViewController.swift
+//  ExamsTabViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -26,7 +26,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class TabViewController: ButtonBarPagerTabStripViewController {
+class ExamsTabViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var tempButtonBarView: ButtonBarView!
     @IBOutlet weak var tempContainerView: UIScrollView!

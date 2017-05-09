@@ -100,7 +100,7 @@ class LoginViewController: BaseTextFieldViewController {
             }
             
             let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
-                Constants.TAB_VIEW_CONTROLLER) as! TabViewController
+                Constants.EXAMS_TAB_VIEW_CONTROLLER) as! ExamsTabViewController
             
             self.alertController.dismiss(animated: true, completion: nil)
             self.present(tabViewController, animated: true, completion: nil)

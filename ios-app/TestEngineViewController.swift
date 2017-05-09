@@ -232,8 +232,8 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     
     override func goBack() {
         let presentingViewController = self.presentingViewController?.presentingViewController
-        if presentingViewController is TabViewController {
-            let tabViewController = presentingViewController as! TabViewController
+        if presentingViewController is ExamsTabViewController {
+            let tabViewController = presentingViewController as! ExamsTabViewController
             tabViewController.dismiss(animated: false, completion: {
                 if tabViewController.currentIndex != 2 {
                     // Move to histroy tab

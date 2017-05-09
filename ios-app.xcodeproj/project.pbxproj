@@ -27,7 +27,7 @@
 		2F2CF6501E8E751D0090A5C4 /* ExamsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2CF64B1E8E751D0090A5C4 /* ExamsTableViewCell.xib */; };
 		2F2CF6511E8E751D0090A5C4 /* ExamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */; };
 		2F2CF6521E8E751D0090A5C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF64D1E8E751D0090A5C4 /* LoginViewController.swift */; };
-		2F2CF6531E8E751D0090A5C4 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF64E1E8E751D0090A5C4 /* TabViewController.swift */; };
+		2F2CF6531E8E751D0090A5C4 /* ExamsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF64E1E8E751D0090A5C4 /* ExamsTabViewController.swift */; };
 		2F2CF6551E8E75780090A5C4 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF6541E8E75780090A5C4 /* UIUtils.swift */; };
 		2F2CF6591E8E76EC0090A5C4 /* TPBasePager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF6581E8E76EC0090A5C4 /* TPBasePager.swift */; };
 		2F2CF65B1E8E77500090A5C4 /* TPApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CF65A1E8E77500090A5C4 /* TPApiResponse.swift */; };
@@ -103,7 +103,7 @@
 		2F2CF64B1E8E751D0090A5C4 /* ExamsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExamsTableViewCell.xib; path = UI/ExamsTableViewCell.xib; sourceTree = "<group>"; };
 		2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExamsTableViewController.swift; path = UI/ExamsTableViewController.swift; sourceTree = "<group>"; };
 		2F2CF64D1E8E751D0090A5C4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = UI/LoginViewController.swift; sourceTree = "<group>"; };
-		2F2CF64E1E8E751D0090A5C4 /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabViewController.swift; path = UI/TabViewController.swift; sourceTree = "<group>"; };
+		2F2CF64E1E8E751D0090A5C4 /* ExamsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExamsTabViewController.swift; path = UI/ExamsTabViewController.swift; sourceTree = "<group>"; };
 		2F2CF6541E8E75780090A5C4 /* UIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIUtils.swift; path = "ios-app/Utils/UIUtils.swift"; sourceTree = SOURCE_ROOT; };
 		2F2CF6581E8E76EC0090A5C4 /* TPBasePager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPBasePager.swift; sourceTree = "<group>"; };
 		2F2CF65A1E8E77500090A5C4 /* TPApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TPApiResponse.swift; path = Model/TPApiResponse.swift; sourceTree = "<group>"; };
@@ -237,11 +237,11 @@
 				2F2CF64A1E8E751D0090A5C4 /* ExamsTableViewCell.swift */,
 				2F2CF64B1E8E751D0090A5C4 /* ExamsTableViewCell.xib */,
 				2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */,
+				2F2CF64E1E8E751D0090A5C4 /* ExamsTabViewController.swift */,
 				2F2CF64D1E8E751D0090A5C4 /* LoginViewController.swift */,
 				2FA265891EB864BF009E8540 /* ReviewSolutionsViewController.swift */,
 				2FA265951EB879E5009E8540 /* ReviewQuestionsDataSource.swift */,
 				2FA2658B1EB86548009E8540 /* ReviewQuestionsViewController.swift */,
-				2F2CF64E1E8E751D0090A5C4 /* TabViewController.swift */,
 				2F2CF6601E8EA6BF0090A5C4 /* TPBasePagedTableViewController.swift */,
 				2F21E90E1E951F3A001BBF6E /* TestEngineViewController.swift */,
 				2F2CD6F01E8FEDB40054148F /* StartExamScreenViewController.swift */,
@@ -468,7 +468,7 @@
 				2F2D32581EB4BBC800DD0C5D /* Strings.swift in Sources */,
 				2F3EB3B01E964FBA00D754A4 /* QuestionsViewController.swift in Sources */,
 				2FA27D451EAB2907006A9F15 /* AttemptsListViewController.swift in Sources */,
-				2F2CF6531E8E751D0090A5C4 /* TabViewController.swift in Sources */,
+				2F2CF6531E8E751D0090A5C4 /* ExamsTabViewController.swift in Sources */,
 				2F3EB3B41E96957F00D754A4 /* AttemptQuestion.swift in Sources */,
 				2F2CD6F11E8FEDB40054148F /* StartExamScreenViewController.swift in Sources */,
 				2F21E90F1E951F3A001BBF6E /* TestEngineViewController.swift in Sources */,
