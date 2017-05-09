@@ -560,6 +560,7 @@
                         <outlet property="schollershipImageContainer" destination="AV2-HG-una" id="iqs-Vf-glC"/>
                         <outlet property="score" destination="Zr3-Qo-czN" id="vVx-5t-F3F"/>
                         <outlet property="scrollView" destination="Vxf-PL-fVq" id="uUV-3y-Thy"/>
+                        <outlet property="solutionsButton" destination="Y79-Ub-iWU" id="kGM-oR-M8t"/>
                         <outlet property="timeTaken" destination="qpT-WA-WvI" id="3SG-tR-mOo"/>
                     </connections>
                 </viewController>

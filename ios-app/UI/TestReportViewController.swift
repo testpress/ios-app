@@ -44,6 +44,7 @@ class TestReportViewController: UIViewController {
     @IBOutlet weak var contentView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomShadowView: UIView!
+    @IBOutlet weak var solutionsButton: UIButton!
     
     var attempt: Attempt?
     var exam: Exam?
@@ -72,6 +73,7 @@ class TestReportViewController: UIViewController {
         incorrect.text = String(attempt!.incorrectCount!)
         timeTaken.text = attempt!.timeTaken ?? "NA"
         accuracy.text = String(attempt!.accuracy!) + "%"
+        UIUtils.setButtonDropShadow(solutionsButton)
     }
 
     @IBAction func showSolutions(_ sender: UIButton) {

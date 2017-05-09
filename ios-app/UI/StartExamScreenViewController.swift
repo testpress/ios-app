@@ -75,6 +75,7 @@ class StartExamScreenViewController: UIViewController {
             startButtonLayout.isHidden = true
         } else {
             webOnlyExamLabel.isHidden = true
+            UIUtils.setButtonDropShadow(startButton)
             if !exam!.hasStarted() {
                 startButtonLayout.isHidden = true
             } else if attempt?.state! == Constants.STATE_RUNNING {

@@ -49,6 +49,7 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.delegate = self
         tableView.dataSource = self
+        UIUtils.setButtonDropShadow(startButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
