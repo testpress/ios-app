@@ -97,8 +97,8 @@ class TPApiClient {
     static func getUserAgent() -> String {
         let device = UIDevice.current
         // Testpress iOS App/1.0.1 (iPhone; iPhoneSE OS 10_3_1)
-        return "\(Constants.APP_NAME)/\(Constants.getAppVersion()) (iPhone; \(device.deviceType) OS"
-        + " \(device.systemVersion.replacingOccurrences(of: ".", with: "_")))"
+        return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) (iPhone; \(device.deviceType) "
+            + "OS \(device.systemVersion.replacingOccurrences(of: ".", with: "_")))"
     }
     
     static func authenticate(username: String, password: String,

@@ -78,6 +78,10 @@ public class UIUtils {
         button.layer.shadowOpacity = 0.9
     }
     
+    static func getAppName() -> String {
+        return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? ""
+    }
+    
 }
 
 public class Colors {

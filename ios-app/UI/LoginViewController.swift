@@ -39,6 +39,7 @@ class LoginViewController: BaseTextFieldViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationbarItem.title = UIUtils.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
         
         // Set firstTextField in super class to set the cursor

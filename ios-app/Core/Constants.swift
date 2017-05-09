@@ -26,7 +26,6 @@
 import Foundation
 
 struct Constants {
-    static let APP_NAME = "Testpress iOS App"
     static let BASE_URL = "http://sandbox.testpress.in";
     static let KEYCHAIN_SERVICE_NAME = Bundle.main.bundleIdentifier!
     
