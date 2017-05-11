@@ -91,7 +91,7 @@ class ExamsTableViewController: TPBasePagedTableViewController<Exam>, IndicatorI
         var message: String
         switch state {
         case .available:
-            message = Strings.BUY_EXAMS_FROM_STORE
+            message = Strings.NO_AVAILABLE_EXAM
         case .upcoming:
             message = Strings.NO_UPCOMING_EXAM
         case .history:

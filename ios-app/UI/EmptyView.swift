@@ -74,7 +74,8 @@ class EmptyView: UIView {
             retryButton.setTitle(retryButtonText, for: .normal)
         }
         if retryHandler != nil {
-             self.retryHandler = retryHandler
+            self.retryHandler = retryHandler
+            retryButton.isHidden = false
         } else {
             retryButton.isHidden = true
         }
