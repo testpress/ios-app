@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var viewController: UIViewController
         if (KeychainTokenItem.isExist()) {
             viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.EXAMS_TAB_VIEW_CONTROLLER) as! ExamsTabViewController
+                Constants.TAB_VIEW_CONTROLLER)
         } else {
             viewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController

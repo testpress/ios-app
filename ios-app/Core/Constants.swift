@@ -36,6 +36,7 @@ struct Constants {
     static let LOGIN_VIEW_CONTROLLER = "LoginViewController"
     static let SIGNUP_VIEW_CONTROLLER = "SignUpViewController"
     static let SUCCESS_VIEW_CONTROLLER = "SuccessViewController"
+    static let TAB_VIEW_CONTROLLER = "TabViewController"
     static let EXAMS_TAB_VIEW_CONTROLLER = "ExamsTabViewController"
     static let TEST_ENGINE_VIEW_CONTROLLER = "TestEngineViewController"
     static let QUESTIONS_VIEW_CONTROLLER = "QuestionsViewController"

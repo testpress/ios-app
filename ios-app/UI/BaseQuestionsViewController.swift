@@ -56,7 +56,7 @@ class BaseQuestionsViewController: UIViewController, WKNavigationDelegate {
     
     func getJavascript() -> String {
         let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "MathJaxRender",
-                                                            ofType:"js", inDirectory:"static")!)
+                                                            ofType:"js")!)
         do {
             return try String(contentsOf: fileURL, encoding: String.Encoding.utf8)
         } catch let error as NSError {

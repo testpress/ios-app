@@ -78,4 +78,7 @@ struct Strings {
     static let PASSWORD_NOT_MATCH = "Passwords not matching"
     
     static let ACTIVATION_MAIL_SENT = "An activation email has been sent. Please check your email and click on the link to activate your account."
+    
+    static let LOGOUT = "Log Out"
+    static let LOGOUT_CONFIRM_MESSAGE = "Are you sure want to log out?"
 }

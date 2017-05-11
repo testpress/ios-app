@@ -77,14 +77,4 @@ class ExamsTabViewController: ButtonBarPagerTabStripViewController {
         return [available, upcoming, history]
     }
     
-    // MARK: - Custom Action
-
-    @IBAction func logout(_ sender: UIBarButtonItem) {
-        KeychainTokenItem.clearKeychainItems()
-        
-        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
-            Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
-        self.present(loginViewController, animated: true, completion: nil)
-    }
-    
 }

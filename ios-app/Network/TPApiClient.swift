@@ -231,6 +231,24 @@ class TPApiClient {
         })
     }
     
+    static func getProfile(endpointProvider: TPEndpointProvider,
+                           completion: @escaping(User?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, completion: {
+            json, error in
+            var user: User? = nil
+            if let json = json {
+                user = TPModelMapper<User>().mapFromJSON(json: json)
+                debugPrint(user?.url ?? "Error")
+                guard user != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(user, error)
+        })
+    }
+    
 }
 
 extension Dictionary {

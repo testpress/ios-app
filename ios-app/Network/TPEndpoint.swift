@@ -39,6 +39,7 @@ enum TPEndpoint {
     case endExam
     case loadAttempts
     case resumeAttempt
+    case getProfile
     
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -62,6 +63,8 @@ enum TPEndpoint {
             return .get
         case .resumeAttempt:
             return .put
+        case .getProfile:
+            return .get
         }
     }
     
@@ -79,6 +82,8 @@ enum TPEndpoint {
             return "start/"
         case .endExam:
             return "end/"
+        case .getProfile:
+            return "/api/v2.2/me/stats/"
         default:
             return ""
         }

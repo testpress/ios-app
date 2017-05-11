@@ -7,7 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F0CF0021E9BAAD900F69A88 /* static in Resources */ = {isa = PBXBuildFile; fileRef = 2F0CF0011E9BAAD900F69A88 /* static */; };
+		2F0D9AC21EC3682800057858 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */; };
+		2F0D9AC61EC4407D00057858 /* CALayerBorderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D9AC51EC4407D00057858 /* CALayerBorderColor.swift */; };
+		2F0D9B0D1EC475F200057858 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0D9AF01EC475F200057858 /* Rubik-Medium.ttf */; };
+		2F0D9B0E1EC475F200057858 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0D9AF11EC475F200057858 /* Rubik-Regular.ttf */; };
+		2F0D9B111EC4762600057858 /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2F0D9B101EC4762600057858 /* katex */; };
+		2F0D9B131EC47AC500057858 /* MathJaxRender.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F0D9AED1EC475F200057858 /* MathJaxRender.js */; };
+		2F0D9B141EC47AC800057858 /* PT_Serif-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0D9AEE1EC475F200057858 /* PT_Serif-Web-Regular.ttf */; };
+		2F0D9B151EC47ACF00057858 /* questions_typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F0D9AEF1EC475F200057858 /* questions_typebase.css */; };
+		2F0D9B161EC47B6D00057858 /* TestEngine.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F0D9AF21EC475F200057858 /* TestEngine.js */; };
 		2F21E90F1E951F3A001BBF6E /* TestEngineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F21E90E1E951F3A001BBF6E /* TestEngineViewController.swift */; };
 		2F23F1191EC0536000B0D0A1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F23F1181EC0536000B0D0A1 /* SignUpViewController.swift */; };
 		2F23F11B1EC06D8300B0D0A1 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F23F11A1EC06D8300B0D0A1 /* BaseTextFieldViewController.swift */; };
@@ -47,6 +55,7 @@
 		2F5C20D31E9B9E0B00A2BE2A /* WebViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5C20D21E9B9E0B00A2BE2A /* WebViewUtils.swift */; };
 		2F61A7CD1E8E6E5D002C746C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CB1E8E6E5D002C746C /* Constants.swift */; };
 		2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */; };
+		2F6B52451EC1E5C9006C92D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B52441EC1E5C9006C92D6 /* ProfileViewController.swift */; };
 		2FA2658A1EB864BF009E8540 /* ReviewSolutionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA265891EB864BF009E8540 /* ReviewSolutionsViewController.swift */; };
 		2FA2658C1EB86548009E8540 /* ReviewQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2658B1EB86548009E8540 /* ReviewQuestionsViewController.swift */; };
 		2FA2658E1EB865FD009E8540 /* ExamReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FA2658D1EB865FD009E8540 /* ExamReview.storyboard */; };
@@ -79,7 +88,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F0CF0011E9BAAD900F69A88 /* static */ = {isa = PBXFileReference; lastKnownFileType = folder; path = static; sourceTree = "<group>"; };
+		2F0D9AC51EC4407D00057858 /* CALayerBorderColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CALayerBorderColor.swift; path = "ios-app/Utils/CALayerBorderColor.swift"; sourceTree = SOURCE_ROOT; };
+		2F0D9AED1EC475F200057858 /* MathJaxRender.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MathJaxRender.js; sourceTree = "<group>"; };
+		2F0D9AEE1EC475F200057858 /* PT_Serif-Web-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Serif-Web-Regular.ttf"; sourceTree = "<group>"; };
+		2F0D9AEF1EC475F200057858 /* questions_typebase.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = questions_typebase.css; sourceTree = "<group>"; };
+		2F0D9AF01EC475F200057858 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		2F0D9AF11EC475F200057858 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		2F0D9AF21EC475F200057858 /* TestEngine.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TestEngine.js; sourceTree = "<group>"; };
+		2F0D9B101EC4762600057858 /* katex */ = {isa = PBXFileReference; lastKnownFileType = folder; path = katex; sourceTree = "<group>"; };
 		2F21E90E1E951F3A001BBF6E /* TestEngineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestEngineViewController.swift; sourceTree = "<group>"; };
 		2F23F1181EC0536000B0D0A1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = UI/SignUpViewController.swift; sourceTree = "<group>"; };
 		2F23F11A1EC06D8300B0D0A1 /* BaseTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseTextFieldViewController.swift; path = UI/BaseTextFieldViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +130,7 @@
 		2F2D32551EB3466200DD0C5D /* EmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyView.xib; path = UI/EmptyView.xib; sourceTree = "<group>"; };
 		2F2D32571EB4BBC800DD0C5D /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Strings.swift; path = Core/Strings.swift; sourceTree = "<group>"; };
 		2F2D325A1EB4C3E800DD0C5D /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Images.swift; path = Resources/Images.swift; sourceTree = "<group>"; };
+		2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		2F3EB3AF1E964FBA00D754A4 /* QuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuestionsViewController.swift; path = UI/QuestionsViewController.swift; sourceTree = "<group>"; };
 		2F3EB3B11E96513700D754A4 /* QuestionsControllerSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuestionsControllerSource.swift; path = UI/QuestionsControllerSource.swift; sourceTree = "<group>"; };
 		2F3EB3B31E96957F00D754A4 /* AttemptQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttemptQuestion.swift; path = Model/AttemptQuestion.swift; sourceTree = "<group>"; };
@@ -123,6 +140,7 @@
 		2F5C20D21E9B9E0B00A2BE2A /* WebViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewUtils.swift; path = "ios-app/Utils/WebViewUtils.swift"; sourceTree = SOURCE_ROOT; };
 		2F61A7CB1E8E6E5D002C746C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Core/Constants.swift; sourceTree = "<group>"; };
 		2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainTokenItem.swift; path = Core/KeychainTokenItem.swift; sourceTree = "<group>"; };
+		2F6B52441EC1E5C9006C92D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = UI/ProfileViewController.swift; sourceTree = "<group>"; };
 		2FA265891EB864BF009E8540 /* ReviewSolutionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReviewSolutionsViewController.swift; path = UI/ReviewSolutionsViewController.swift; sourceTree = "<group>"; };
 		2FA2658B1EB86548009E8540 /* ReviewQuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReviewQuestionsViewController.swift; path = UI/ReviewQuestionsViewController.swift; sourceTree = "<group>"; };
 		2FA2658D1EB865FD009E8540 /* ExamReview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ExamReview.storyboard; sourceTree = "<group>"; };
@@ -150,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FBEDB7C1E82BBD5000CF05C /* Alamofire.framework in Frameworks */,
+				2F0D9AC21EC3682800057858 /* Kingfisher.framework in Frameworks */,
 				2FBEDB7E1E82BC02000CF05C /* ObjectMapper.framework in Frameworks */,
 				2F2CA1DB1EBDC59300ED1C99 /* XLPagerTabStrip.framework in Frameworks */,
 			);
@@ -165,6 +184,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F0D9AD21EC475F200057858 /* static */ = {
+			isa = PBXGroup;
+			children = (
+				2F0D9B101EC4762600057858 /* katex */,
+				2F0D9AED1EC475F200057858 /* MathJaxRender.js */,
+				2F0D9AEE1EC475F200057858 /* PT_Serif-Web-Regular.ttf */,
+				2F0D9AEF1EC475F200057858 /* questions_typebase.css */,
+				2F0D9AF01EC475F200057858 /* Rubik-Medium.ttf */,
+				2F0D9AF11EC475F200057858 /* Rubik-Regular.ttf */,
+				2F0D9AF21EC475F200057858 /* TestEngine.js */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
@@ -187,7 +220,7 @@
 		2F26ADE41E8249D70031E6F4 /* ios-app */ = {
 			isa = PBXGroup;
 			children = (
-				2F0CF0011E9BAAD900F69A88 /* static */,
+				2F0D9AD21EC475F200057858 /* static */,
 				2F884D2F1E88F21E00C371BD /* Core */,
 				2FF7520B1E8559FE005E8A0C /* Model */,
 				2FF752151E855AB2005E8A0C /* Network */,
@@ -239,6 +272,7 @@
 				2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */,
 				2F2CF64E1E8E751D0090A5C4 /* ExamsTabViewController.swift */,
 				2F2CF64D1E8E751D0090A5C4 /* LoginViewController.swift */,
+				2F6B52441EC1E5C9006C92D6 /* ProfileViewController.swift */,
 				2FA265891EB864BF009E8540 /* ReviewSolutionsViewController.swift */,
 				2FA265951EB879E5009E8540 /* ReviewQuestionsDataSource.swift */,
 				2FA2658B1EB86548009E8540 /* ReviewQuestionsViewController.swift */,
@@ -259,6 +293,7 @@
 			children = (
 				2F2CA1E01EBDE5CF00ED1C99 /* UIDeviceExtension.swift */,
 				2F2CF6541E8E75780090A5C4 /* UIUtils.swift */,
+				2F0D9AC51EC4407D00057858 /* CALayerBorderColor.swift */,
 				2F5C20D21E9B9E0B00A2BE2A /* WebViewUtils.swift */,
 				2FDA54241EAA288A00FAE92B /* FormatDate.swift */,
 			);
@@ -278,6 +313,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */,
 				2F2CA1DA1EBDC59300ED1C99 /* XLPagerTabStrip.framework */,
 				2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */,
 				2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */,
@@ -401,12 +437,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F2CD6EF1E8FECAD0054148F /* TestEngine.storyboard in Resources */,
+				2F0D9B0D1EC475F200057858 /* Rubik-Medium.ttf in Resources */,
+				2F0D9B0E1EC475F200057858 /* Rubik-Regular.ttf in Resources */,
 				2FA2658E1EB865FD009E8540 /* ExamReview.storyboard in Resources */,
 				2F2CF6501E8E751D0090A5C4 /* ExamsTableViewCell.xib in Resources */,
+				2F0D9B151EC47ACF00057858 /* questions_typebase.css in Resources */,
+				2F0D9B161EC47B6D00057858 /* TestEngine.js in Resources */,
 				2F26ADF01E8249D70031E6F4 /* LaunchScreen.storyboard in Resources */,
 				2F2D32561EB3466200DD0C5D /* EmptyView.xib in Resources */,
 				2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */,
-				2F0CF0021E9BAAD900F69A88 /* static in Resources */,
+				2F0D9B111EC4762600057858 /* katex in Resources */,
+				2F0D9B131EC47AC500057858 /* MathJaxRender.js in Resources */,
+				2F0D9B141EC47AC800057858 /* PT_Serif-Web-Regular.ttf in Resources */,
 				2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +472,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XLPagerTabStrip.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 			);
 			outputPaths = (
 			);
@@ -450,6 +493,7 @@
 				2F2CF6521E8E751D0090A5C4 /* LoginViewController.swift in Sources */,
 				2F23F1191EC0536000B0D0A1 /* SignUpViewController.swift in Sources */,
 				2F23F11D1EC0868100B0D0A1 /* User.swift in Sources */,
+				2F6B52451EC1E5C9006C92D6 /* ProfileViewController.swift in Sources */,
 				2FF752111E855A1C005E8A0C /* TPModelMapper.swift in Sources */,
 				2FF7521C1E855AB2005E8A0C /* TPApiClient.swift in Sources */,
 				2F23F11F1EC0874700B0D0A1 /* RegistrationError.swift in Sources */,
@@ -485,6 +529,7 @@
 				2F2CF65B1E8E77500090A5C4 /* TPApiResponse.swift in Sources */,
 				2F3EB3B81E9698D400D754A4 /* AttemptItem.swift in Sources */,
 				2FA27D4B1EAB3E82006A9F15 /* AttemptPager.swift in Sources */,
+				2F0D9AC61EC4407D00057858 /* CALayerBorderColor.swift in Sources */,
 				2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */,
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
 				2FF8871F1EB9A432006ED74D /* BaseQuestionsPageViewController.swift in Sources */,

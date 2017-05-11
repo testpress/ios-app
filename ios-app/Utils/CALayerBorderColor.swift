@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  CALayerBorderColor.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,19 +25,14 @@
 
 import UIKit
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    
-    var image: UIImage {
-        return UIImage(asset: self)
-    }
-}
-
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+extension CALayer {
+    var borderUIColor: UIColor {
+        set {
+            self.borderColor = newValue.cgColor
+        }
+        
+        get {
+            return UIColor(cgColor: self.borderColor!)
+        }
     }
 }

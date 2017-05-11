@@ -99,8 +99,8 @@ class LoginViewController: BaseTextFieldViewController {
                 fatalError("Error updating keychain - \(error)")
             }
             
-            let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
-                Constants.EXAMS_TAB_VIEW_CONTROLLER) as! ExamsTabViewController
+            let tabViewController = self.storyboard!.instantiateViewController(
+                withIdentifier: Constants.TAB_VIEW_CONTROLLER)
             
             self.alertController.dismiss(animated: true, completion: nil)
             self.present(tabViewController, animated: true, completion: nil)

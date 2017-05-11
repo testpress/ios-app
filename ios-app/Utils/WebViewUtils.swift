@@ -28,7 +28,7 @@ import Foundation
 class WebViewUtils {
     
     static func getTestEngineHeader() -> String {
-        return "<script src='static/TestEngine.js'></script>"
+        return "<script src='TestEngine.js'></script>"
     }
     
     static func getRadioButtonInitializer(selectedOption: Int) -> String {
@@ -42,12 +42,12 @@ class WebViewUtils {
     public static func getHeader() -> String {
         var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, " +
         "initial-scale=1, maximum-scale=1, user-scalable=no' />"
-        header += "<link rel='stylesheet' type='text/css' href='static/questions_typebase.css' />"
+        header += "<link rel='stylesheet' type='text/css' href='questions_typebase.css' />"
         header += "<style> img { display: inline; height: auto !important; width: auto !important; "
             + "max-width: 100%; } </style>"
-        header += "<link rel='stylesheet' href='static/katex/katex.min.css' />"
-        header += "<script src='static/katex/katex.min.js'></script>"
-        header += "<script src='static/katex/contrib/auto-render.min.js'></script>"
+        header += "<link rel='stylesheet' href='katex/katex.min.css' />"
+        header += "<script src='katex/katex.min.js'></script>"
+        header += "<script src='katex/contrib/auto-render.min.js'></script>"
         return header
     }
     

@@ -30,6 +30,16 @@ public class User {
     var email: String?
     var password: String?
     var phone: String?
+    var id: Int?
+    var url: String?
+    var displayName: String?
+    var photo: String?
+    var largeImage: String?
+    var averageSpeed: Int?
+    var averageAccuracy: Int?
+    var averagePercentage: Int?
+    var testsCount: Int?
+    var score: String?
     
     public required init?(map: Map) {
     }
@@ -41,5 +51,15 @@ extension User: TestpressModel {
         email <- map["email"]
         password <- map["password"]
         phone <- map["phone"]
+        id <- map["id"]
+        url <- map["url"]
+        displayName <- map["display_name"]
+        photo <- map["photo"]
+        largeImage <- map["large_image"]
+        averageSpeed <- map["average_speed"]
+        averageAccuracy <- map["average_accuracy"]
+        averagePercentage <- map["average_percentage"]
+        testsCount <- map["tests_count"]
+        score <- map["score"]
     }
 }
