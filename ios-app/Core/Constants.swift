@@ -26,7 +26,8 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "http://sandbox.testpress.in";
+    static let BASE_URL = "http://prime.pgtestseries.com";
+    
     static let KEYCHAIN_SERVICE_NAME = Bundle.main.bundleIdentifier!
     
     static let LAUNCHED_APP_BEFORE = "launchedAppBefore"
