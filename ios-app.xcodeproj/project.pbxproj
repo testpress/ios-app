@@ -25,7 +25,6 @@
 		2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */; };
 		2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADE91E8249D70031E6F4 /* Main.storyboard */; };
 		2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */; };
-		2F26ADF01E8249D70031E6F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEE1E8249D70031E6F4 /* LaunchScreen.storyboard */; };
 		2F26ADFB1E8249D70031E6F4 /* ios_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */; };
 		2F2CA1DB1EBDC59300ED1C99 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F2CA1DA1EBDC59300ED1C99 /* XLPagerTabStrip.framework */; };
 		2F2CA1E11EBDE5CF00ED1C99 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CA1E01EBDE5CF00ED1C99 /* UIDeviceExtension.swift */; };
@@ -106,7 +105,6 @@
 		2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F26ADEA1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2F26ADEF1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F26ADF11E8249D70031E6F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F26ADF61E8249D70031E6F4 /* ios-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_appTests.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 				2FA2658D1EB865FD009E8540 /* ExamReview.storyboard */,
 				2F2CD6EE1E8FECAD0054148F /* TestEngine.storyboard */,
 				2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */,
-				2F26ADEE1E8249D70031E6F4 /* LaunchScreen.storyboard */,
 				2F26ADF11E8249D70031E6F4 /* Info.plist */,
 			);
 			path = "ios-app";
@@ -443,7 +440,6 @@
 				2F2CF6501E8E751D0090A5C4 /* ExamsTableViewCell.xib in Resources */,
 				2F0D9B151EC47ACF00057858 /* questions_typebase.css in Resources */,
 				2F0D9B161EC47B6D00057858 /* TestEngine.js in Resources */,
-				2F26ADF01E8249D70031E6F4 /* LaunchScreen.storyboard in Resources */,
 				2F2D32561EB3466200DD0C5D /* EmptyView.xib in Resources */,
 				2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */,
 				2F0D9B111EC4762600057858 /* katex in Resources */,
@@ -566,14 +562,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		2F26ADEE1E8249D70031E6F4 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2F26ADEF1E8249D70031E6F4 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -674,6 +662,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -691,6 +680,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
