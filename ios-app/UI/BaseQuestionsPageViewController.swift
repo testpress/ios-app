@@ -251,7 +251,8 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                     self.present(self.loadingDialogController, animated: true, completion: nil)
                     self.showingProgress = true
                     retryHandler()
-            }))
+                }
+            ))
             cancelButtonTitle = "Not Now"
         } else {
             alert = UIAlertController(
@@ -266,7 +267,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
             title: cancelButtonTitle, style: UIAlertActionStyle.default,
             handler: { (action: UIAlertAction!) in
                 self.dismiss(animated: true, completion: nil)
-        }
+            }
         ))
         
         present(alert, animated: true, completion: nil)

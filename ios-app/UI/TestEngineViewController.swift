@@ -4,23 +4,24 @@
 //
 //  Copyright © 2017 Testpress. All rights reserved.
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
 
 import UIKit
 
@@ -63,7 +64,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     override func onClickNextButton(sender: UITapGestureRecognizer) {
         var  index = getCurrentIndex()
         index += 1
-        if index == self.baseQuestionsDataSource.attemptItems.count {
+        if index == baseQuestionsDataSource.attemptItems.count {
             onPressStopButton()
             return
         }
@@ -90,8 +91,10 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     
     func sendHeartBeat() {
         TPApiClient.updateAttemptState(
-            endpointProvider: TPEndpointProvider(.sendHeartBeat, url: attempt!.url! +
-                TPEndpoint.sendHeartBeat.urlPath),
+            endpointProvider: TPEndpointProvider(
+                .sendHeartBeat,
+                url: attempt!.url! + TPEndpoint.sendHeartBeat.urlPath
+            ),
             completion: {
                 attempt, error in
                 if let error = error {
@@ -147,7 +150,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     
     func onEndExam() {
         showLoadingProgress()
-        self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
+        saveAnswer(index: getCurrentIndex(), completionHandler: {
             self.endExam()
         })
     }
@@ -202,7 +205,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func closeAlert(gesture: UITapGestureRecognizer) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func onPressStopButton() {
@@ -219,7 +222,8 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
                     self.goBack()
                 })
-        }))
+            }
+        ))
         alert.addAction(UIAlertAction(
             title: Strings.END, style: UIAlertActionStyle.destructive,
             handler: { (action: UIAlertAction!) in
@@ -227,7 +231,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             }
         ))
         alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     override func goBack() {
@@ -262,7 +266,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         
         viewController.exam = exam
         viewController.attempt = attempt
-        self.present(viewController, animated: true, completion: nil)
+        present(viewController, animated: true, completion: nil)
     }
     
     func getSecondsFromInputString(_ inputString: String?) -> Int {
@@ -282,7 +286,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func startTimer() {
-        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:
             #selector(self.updateRemainingTime), userInfo: nil, repeats: true)
     }
     

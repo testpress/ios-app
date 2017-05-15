@@ -28,11 +28,11 @@ import UIKit
 extension CALayer {
     var borderUIColor: UIColor {
         set {
-            self.borderColor = newValue.cgColor
+            borderColor = newValue.cgColor
         }
         
         get {
-            return UIColor(cgColor: self.borderColor!)
+            return UIColor(cgColor: borderColor!)
         }
     }
 }
