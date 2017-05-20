@@ -82,4 +82,8 @@ public class UIUtils {
         return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? ""
     }
     
+    static func getActionSheetStyle() -> UIAlertControllerStyle {
+        return (UIDevice.current.userInterfaceIdiom == .phone) ? .actionSheet : .alert
+    }
+    
 }

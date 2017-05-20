@@ -155,6 +155,9 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         cell.layoutMargins = UIEdgeInsets.zero;
+        if #available(iOS 9.0, *) {
+            tableView.cellLayoutMarginsFollowReadableWidth = false
+        }
         
         // Load more items on scroll to bottom
         if indexPath.row >= (items.count - 4) && !loadingItems {

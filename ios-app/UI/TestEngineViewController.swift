@@ -213,7 +213,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         alert = UIAlertController(
             title: Strings.EXIT_EXAM,
             message: Strings.END_MESSAGE,
-            preferredStyle: UIAlertControllerStyle.actionSheet
+            preferredStyle: UIUtils.getActionSheetStyle()
         )
         alert.addAction(UIAlertAction(
             title: Strings.PAUSE, style: UIAlertActionStyle.default, handler: {
