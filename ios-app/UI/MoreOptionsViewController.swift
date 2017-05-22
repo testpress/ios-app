@@ -1,5 +1,5 @@
 //
-//  CALayerBorderColor.swift
+//  MoreOptionsViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,14 +25,27 @@
 
 import UIKit
 
-extension CALayer {
-    var borderUIColor: UIColor {
-        set {
-            borderColor = newValue.cgColor
-        }
-        
-        get {
-            return UIColor(cgColor: borderColor!)
+class MoreOptionsViewController: UIViewController {
+    
+    @IBAction func rateUs() {
+        if let url = URL(string: Constants.APP_STORE_LINK),
+            UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:])
+            } else {
+                UIApplication.shared.openURL(url)
+            }
         }
     }
+    
+    @IBAction func shareApp() {
+        let textToShare = [ Constants.APP_SHARE_MESSAGE ]
+        let activityViewController =
+            UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        
+        activityViewController.popoverPresentationController?.sourceView = view
+        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop ]
+        present(activityViewController, animated: true, completion: nil)
+    }
+
 }

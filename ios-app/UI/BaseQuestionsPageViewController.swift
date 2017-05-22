@@ -55,11 +55,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         pageViewController.delegate = self
         addChildViewController(pageViewController)
         questionsContainerView.addSubview(pageViewController.view)
-        var pageViewRect = questionsContainerView.bounds
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            pageViewRect = pageViewRect.insetBy(dx: 40.0, dy: 40.0)
-        }
-        pageViewController.view.frame = pageViewRect
+        pageViewController.view.frame = questionsContainerView.bounds
         pageViewController.didMove(toParentViewController: self)
         // Set navigation buttons click listener
         let previousButtonGesture = UITapGestureRecognizer(target: self, action:
@@ -251,7 +247,8 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                     self.present(self.loadingDialogController, animated: true, completion: nil)
                     self.showingProgress = true
                     retryHandler()
-            }))
+                }
+            ))
             cancelButtonTitle = "Not Now"
         } else {
             alert = UIAlertController(
@@ -266,7 +263,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
             title: cancelButtonTitle, style: UIAlertActionStyle.default,
             handler: { (action: UIAlertAction!) in
                 self.dismiss(animated: true, completion: nil)
-        }
+            }
         ))
         
         present(alert, animated: true, completion: nil)

@@ -38,8 +38,10 @@ public class ExamPager: TPBasePager<Exam> {
     override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         queryParams.updateValue(subclass, forKey: Constants.STATE)
-        TPApiClient.getExams(endpointProvider: TPEndpointProvider(.getExams, queryParams: queryParams),
-                             completion: resonseHandler!)
+        TPApiClient.getExams(
+            endpointProvider: TPEndpointProvider(.getExams, queryParams: queryParams),
+            completion: resonseHandler!
+        )
     }
     
     override func getId(resource: Exam) -> Int {

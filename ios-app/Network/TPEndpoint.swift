@@ -95,7 +95,8 @@ struct TPEndpointProvider {
     var url: String
     var queryParams: [String: String]
     
-    init(_ endpoint: TPEndpoint, url: String = "",
+    init(_ endpoint: TPEndpoint,
+         url: String = "",
          queryParams: [String: String] = [String: String]()) {
         
         self.endpoint = endpoint
@@ -110,7 +111,6 @@ struct TPEndpointProvider {
             url = url + "?"
             for (i, queryParam) in queryParams.enumerated() {
                 url = url + queryParam.key + "=" + queryParam.value
-                print("i:\(i)")
                 if queryParams.count != (i + 1) {
                     url = url + "&"
                 }

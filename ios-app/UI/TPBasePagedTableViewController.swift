@@ -132,7 +132,7 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     }
     
     func closeAlert(gesture: UITapGestureRecognizer) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Table view data source
@@ -155,12 +155,15 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         cell.layoutMargins = UIEdgeInsets.zero;
+        if #available(iOS 9.0, *) {
+            tableView.cellLayoutMarginsFollowReadableWidth = false
+        }
         
         // Load more items on scroll to bottom
         if indexPath.row >= (items.count - 4) && !loadingItems {
-            if self.pager.hasMore {
+            if pager.hasMore {
                 tableView.tableFooterView?.isHidden = false
-                self.loadItems()
+                loadItems()
             } else {
                 tableView.tableFooterView?.isHidden = true
             }
@@ -175,50 +178,5 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     func setEmptyText() {
         emptyView.setValues(image: Images.ExamsFlatIcon.image, description: Strings.NO_ITEMS_EXIST)
     }
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

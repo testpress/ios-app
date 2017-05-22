@@ -176,16 +176,16 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
     
     private func displayAttemptsList() {
         tableView.reloadData()
-        if canAttemptExam() {
-            // Clear existing paused attempts if exist
-            pausedAttempts.removeAll()
-            if exam.pausedAttemptsCount! > 0 {
-                for attempt: Attempt in attempts {
-                    if attempt.state == Constants.STATE_RUNNING {
-                        pausedAttempts.append(attempt);
-                    }
+        // Clear existing paused attempts if exist
+        pausedAttempts.removeAll()
+        if exam.pausedAttemptsCount! > 0 {
+            for attempt: Attempt in attempts {
+                if attempt.state == Constants.STATE_RUNNING {
+                    pausedAttempts.append(attempt);
                 }
             }
+        }
+        if canAttemptExam() {
             if (pausedAttempts.isEmpty) {
                 startButton.setTitle("RETAKE", for: .normal)
             } else {
@@ -203,9 +203,9 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
     private func canAttemptExam() -> Bool {
         // User can't retake an exam if retake disabled or max retake attemted or web only exam or
         // exam start date is future. If paused attempt exist, can resume it.
-        if (exam.attemptsCount! == 0 || exam.pausedAttemptsCount! != 0 ||
+        if (exam.attemptsCount! == 0 || pausedAttempts.count != 0 ||
             ((exam.allowRetake!) &&
-                (exam.attemptsCount! <= exam.maxRetakes! ||
+                (attempts.count <= exam.maxRetakes! ||
                     exam.maxRetakes! < 0))) {
             
             if (exam.deviceAccessControl != nil && exam.deviceAccessControl == "web") {

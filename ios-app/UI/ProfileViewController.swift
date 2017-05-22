@@ -114,7 +114,7 @@ class ProfileViewController: UIViewController {
     @IBAction func logout(_ sender: UIButton) {
         let alert = UIAlertController(title: nil,
                                       message: Strings.LOGOUT_CONFIRM_MESSAGE,
-                                      preferredStyle: .actionSheet)
+                                      preferredStyle: UIUtils.getActionSheetStyle())
         
         alert.addAction(UIAlertAction(
             title: Strings.YES,

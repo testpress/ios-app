@@ -55,7 +55,7 @@ public class TPBasePager<T: Mappable> {
     var resonseHandler: ((TPApiResponse<T>?, TPError?) -> Void)? = nil
     
     init() {
-        self.resonseHandler = { response, error in
+        resonseHandler = { response, error in
             if let error = error {
                 self.hasMore = false;
                 self.completion!(self.resources, error)
@@ -84,9 +84,11 @@ public class TPBasePager<T: Mappable> {
     
     func onSuccess() {
         let resourcePage: [T] = (response?.results)!;
-        print("response?.next:" + (response!.next))
-        print("response?.previous:" + (response!.previous))
-        print("response?.count:"+String(response!.count!))
+        #if DEBUG
+            print("response?.next:" + (response!.next))
+            print("response?.previous:" + (response!.previous))
+            print("response?.count:"+String(response!.count!))
+        #endif
         let emptyPage = resourcePage.isEmpty;
         for resource in resourcePage {
             let resource: T? = register(resource: resource);
@@ -97,8 +99,10 @@ public class TPBasePager<T: Mappable> {
         }
         page += 1;
         hasMore = hasNext() && !emptyPage;
-        print("self.hasMore:\(hasMore)")
-        print("hasNext():\(hasNext())")
+        #if DEBUG
+            print("self.hasMore:\(hasMore)")
+            print("hasNext():\(hasNext())")
+        #endif
         completion!(resources, nil)
     }
     

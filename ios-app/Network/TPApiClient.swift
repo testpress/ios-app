@@ -29,16 +29,19 @@ import UIKit
 class TPApiClient {
 
     static func apiCall(endpointProvider: TPEndpointProvider,
-                        parameters: Parameters? = nil, headers: HTTPHeaders? = nil,
+                        parameters: Parameters? = nil,
+                        headers: HTTPHeaders? = nil,
                         completion: @escaping (String?, TPError?) -> Void) -> Void {
         
         let url =  URL(string: endpointProvider.getUrl())
         var request = URLRequest(url: url!)
         request.httpMethod = endpointProvider.endpoint.method.rawValue
+        
         // Add given headers
         if headers != nil {
             request.allHTTPHeaderFields = headers
         }
+        
         // Add common headers
         request.setValue(getUserAgent(), forHTTPHeaderField: "User-Agent")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -52,45 +55,51 @@ class TPApiClient {
             request.httpBody = try! JSONSerialization.data(withJSONObject: parameters!, options:
                 JSONSerialization.WritingOptions.prettyPrinted)
         }
+        
         Alamofire.request(request).responseString() { response in
-                #if DEBUG
-                    print(NSString(data: response.request?.httpBody ?? Data(),
-                                   encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
-                    print(response)
-                    print(response.response ?? "No HTTP response")
-                #endif
-                let httpResponse: HTTPURLResponse? = response.response
-                switch(response.result){
-                case .success(let json):
-                    let statusCode = httpResponse!.statusCode
-                    if (statusCode >= 200 && statusCode < 300) {
-                        completion(json, nil)
+            #if DEBUG
+                print(NSString(data: response.request?.httpBody ?? Data(),
+                               encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
+                print(response)
+                print(response.response ?? "No HTTP response")
+            #endif
+        
+            let httpResponse: HTTPURLResponse? = response.response
+            switch(response.result){
+                
+            case .success(let json):
+                let statusCode = httpResponse!.statusCode
+                if (statusCode >= 200 && statusCode < 300) {
+                    completion(json, nil)
+                } else {
+                    var error: TPError
+                    if (statusCode == 403) {
+                        error = TPError(message: json, response: httpResponse,
+                                        kind: .unauthenticated)
                     } else {
-                        var error: TPError
-                        if (statusCode == 403) {
-                            error = TPError(message: json, response: httpResponse,
-                                            kind: .unauthenticated)
-                        } else {
-                            error = TPError(message: json, response: httpResponse, kind: .http)
-                        }
-                        completion(nil, error)
+                        error = TPError(message: json, response: httpResponse, kind: .http)
                     }
-                case .failure(let error):
-                    let description = error.localizedDescription
-                    if let err = error as? URLError,
-                        (err.code  == URLError.Code.notConnectedToInternet ||
-                            err.code  == URLError.Code.cannotConnectToHost ||
-                            err.code  == URLError.Code.timedOut) {
-                        
-                        let error = TPError(message: description, response: httpResponse,
-                                            kind: .network)
-                        completion(nil, error)
-                    } else {
-                        let error = TPError(message: description, response: httpResponse,
-                                            kind: .unexpected)
-                        completion(nil, error)
-                    }
+                    completion(nil, error)
                 }
+                
+            case .failure(let error):
+                let description = error.localizedDescription
+                if let error = error as? URLError,
+                    (error.code  == URLError.Code.notConnectedToInternet ||
+                        error.code  == URLError.Code.cannotConnectToHost ||
+                        error.code  == URLError.Code.timedOut) {
+                    
+                    let error = TPError(message: description, response: httpResponse,
+                                        kind: .network)
+                    
+                    completion(nil, error)
+                } else {
+                    let error = TPError(message: description, response: httpResponse,
+                                        kind: .unexpected)
+                    
+                    completion(nil, error)
+                }
+            }
         }
     }
     
@@ -107,6 +116,7 @@ class TPApiClient {
         let parameters: Parameters = ["username": username, "password": password]
         apiCall(endpointProvider: TPEndpointProvider(.authenticateUser), parameters: parameters,
                 completion: { json, error in
+                    
             var testpressAuthToken: TPAuthToken? = nil
             if let json = json {
                 testpressAuthToken = TPModelMapper<TPAuthToken>().mapFromJSON(json: json)
@@ -125,15 +135,16 @@ class TPApiClient {
         let parameters: Parameters = ["username": username, "email": email, "password": password]
         apiCall(endpointProvider: TPEndpointProvider(.registerNewUser), parameters: parameters,
                 completion: { json, error in
-                    var response: TestpressModel? = nil
+                    
+                    var user: TestpressModel? = nil
                     if let json = json {
-                        response = TPModelMapper<User>().mapFromJSON(json: json)
-                        guard response != nil else {
+                        user = TPModelMapper<User>().mapFromJSON(json: json)
+                        guard user != nil else {
                             completion(nil, TPError(message: json, kind: .unexpected))
                             return
                         }
                     }
-                    completion(response, error)
+                    completion(user, error)
         })
     }
     
@@ -142,6 +153,7 @@ class TPApiClient {
         
         apiCall(endpointProvider: endpointProvider, completion: {
             json, error in
+
             var testpressResponse: TPApiResponse<Exam>? = nil
             if let json = json {
                 testpressResponse = TPModelMapper<TPApiResponse<Exam>>().mapFromJSON(json: json)
@@ -160,17 +172,17 @@ class TPApiClient {
         
         apiCall(endpointProvider: endpointProvider, completion: {
             json, error in
-            var testpressResponse: TPApiResponse<AttemptItem>? = nil
+            
+            var response: TPApiResponse<AttemptItem>? = nil
             if let json = json {
-                testpressResponse =
-                    TPModelMapper<TPApiResponse<AttemptItem>>().mapFromJSON(json: json)
-                debugPrint(testpressResponse?.results.count ?? "Error")
-                guard testpressResponse != nil else {
+                response = TPModelMapper<TPApiResponse<AttemptItem>>().mapFromJSON(json: json)
+                debugPrint(response?.results.count ?? "Error")
+                guard response != nil else {
                     completion(nil, TPError(message: json, kind: .unexpected))
                     return
                 }
             }
-            completion(testpressResponse, error)
+            completion(response, error)
         })
     }
     
@@ -221,6 +233,7 @@ class TPApiClient {
             if let json = json {
                 testpressResponse =
                     TPModelMapper<TPApiResponse<Attempt>>().mapFromJSON(json: json)
+                
                 debugPrint(testpressResponse?.results.count ?? "Error")
                 guard testpressResponse != nil else {
                     completion(nil, TPError(message: json, kind: .unexpected))
