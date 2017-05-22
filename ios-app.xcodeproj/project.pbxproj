@@ -53,7 +53,6 @@
 		2F61A7CD1E8E6E5D002C746C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CB1E8E6E5D002C746C /* Constants.swift */; };
 		2F61A7CE1E8E6E5D002C746C /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */; };
 		2F6B52451EC1E5C9006C92D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6B52441EC1E5C9006C92D6 /* ProfileViewController.swift */; };
-		2F6E2D261EC4BE3900D3BCBA /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6E2D251EC4BE3900D3BCBA /* MoreOptionsViewController.swift */; };
 		2F7179511EC73ED5009114C4 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7179501EC73ED5009114C4 /* Colors.swift */; };
 		2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7179521EC740C6009114C4 /* ExamReview.storyboard */; };
 		2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7179541EC740C6009114C4 /* TestEngine.storyboard */; };
@@ -139,7 +138,6 @@
 		2F61A7CB1E8E6E5D002C746C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Core/Constants.swift; sourceTree = "<group>"; };
 		2F61A7CC1E8E6E5D002C746C /* KeychainTokenItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainTokenItem.swift; path = Core/KeychainTokenItem.swift; sourceTree = "<group>"; };
 		2F6B52441EC1E5C9006C92D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = UI/ProfileViewController.swift; sourceTree = "<group>"; };
-		2F6E2D251EC4BE3900D3BCBA /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreOptionsViewController.swift; path = UI/MoreOptionsViewController.swift; sourceTree = "<group>"; };
 		2F7179501EC73ED5009114C4 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Resources/Colors.swift; sourceTree = "<group>"; };
 		2F7179531EC740C6009114C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ExamReview.storyboard; sourceTree = "<group>"; };
 		2F7179551EC740C6009114C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TestEngine.storyboard; sourceTree = "<group>"; };
@@ -275,7 +273,6 @@
 				2F2CF64C1E8E751D0090A5C4 /* ExamsTableViewController.swift */,
 				2F2CF64E1E8E751D0090A5C4 /* ExamsTabViewController.swift */,
 				2F2CF64D1E8E751D0090A5C4 /* LoginViewController.swift */,
-				2F6E2D251EC4BE3900D3BCBA /* MoreOptionsViewController.swift */,
 				2F6B52441EC1E5C9006C92D6 /* ProfileViewController.swift */,
 				2F3EB3B11E96513700D754A4 /* QuestionsControllerSource.swift */,
 				2F3EB3AF1E964FBA00D754A4 /* QuestionsViewController.swift */,
@@ -498,7 +495,6 @@
 				2F23F11D1EC0868100B0D0A1 /* User.swift in Sources */,
 				2F6B52451EC1E5C9006C92D6 /* ProfileViewController.swift in Sources */,
 				2FF752111E855A1C005E8A0C /* TPModelMapper.swift in Sources */,
-				2F6E2D261EC4BE3900D3BCBA /* MoreOptionsViewController.swift in Sources */,
 				2FF7521C1E855AB2005E8A0C /* TPApiClient.swift in Sources */,
 				2F23F11F1EC0874700B0D0A1 /* RegistrationError.swift in Sources */,
 				2FA265961EB879E5009E8540 /* ReviewQuestionsDataSource.swift in Sources */,
