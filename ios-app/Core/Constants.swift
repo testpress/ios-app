@@ -32,7 +32,7 @@ struct Constants {
     
     static let APP_SHARE_MESSAGE = "Good app to prepare for online exams. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID
     
-    static let APP_STORE_LINK = "itms://itunes.apple.com/app/id" + APP_APPLE_ID
+    static let APP_STORE_LINK = "itms-apps://itunes.apple.com/app/id" + APP_APPLE_ID
     
     static let KEYCHAIN_SERVICE_NAME = Bundle.main.bundleIdentifier!
     
