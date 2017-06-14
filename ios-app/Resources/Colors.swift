@@ -27,7 +27,7 @@ import UIKit
 
 public class Colors {
     
-    static let PRIMARY = "#2196F3"
+    static let PRIMARY = "#004D96"
     static let PRIMARY_TEXT = "#ffffff"
     static let MATERIAL_GREEN = "#00ccaa"
     static let MATERIAL_RED = "#e65c6c"
