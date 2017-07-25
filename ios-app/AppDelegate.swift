@@ -40,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes =
             [NSForegroundColorAttributeName: Colors.getRGB(Colors.PRIMARY_TEXT)]
         
+        UIApplication.shared.isStatusBarHidden = false
+        
         // Clear keychain items if app is launching the first time after installation
         let userDefaults = UserDefaults.standard
         if userDefaults.bool(forKey: Constants.LAUNCHED_APP_BEFORE) == false {
