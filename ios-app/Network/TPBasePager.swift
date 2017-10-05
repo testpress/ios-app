@@ -26,7 +26,7 @@
 import Alamofire
 import ObjectMapper
 
-public class TPBasePager<T: Mappable> {
+class TPBasePager<T: Mappable> {
     
     var response: TPApiResponse<T>?
     

@@ -155,12 +155,12 @@ class SignUpViewController: BaseTextFieldViewController {
     func setFieldError(textField: UITextField, errorMessage: String) {
         textField.text = ""
         textField.attributedPlaceholder = NSAttributedString(string: errorMessage,
-            attributes: [NSForegroundColorAttributeName: UIColor.red])
+            attributes: [NSAttributedStringKey.foregroundColor: UIColor.red])
         
         textField.becomeFirstResponder()
     }
     
-    func closeAlert(gesture: UITapGestureRecognizer) {
+    @objc func closeAlert(gesture: UITapGestureRecognizer) {
         dismiss(animated: true)
     }
     

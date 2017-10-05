@@ -25,7 +25,7 @@
 
 import UIKit
 
-class BaseTextFieldViewController: UIViewController {
+class BaseTextFieldViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -50,18 +50,18 @@ class BaseTextFieldViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action:
             #selector(hideKeyboard(gesture:)))
         
-        view.addGestureRecognizer(tapGesture)
+        scrollView.addGestureRecognizer(tapGesture)
         
         // Display keyboard initialy with cursor on first text field
         firstTextField?.becomeFirstResponder()
     }
     
-    func hideKeyboard(gesture: UITapGestureRecognizer? = nil) {
+    @objc func hideKeyboard(gesture: UITapGestureRecognizer? = nil) {
         firstTextField?.becomeFirstResponder()
         firstTextField?.resignFirstResponder()
     }
     
-    func keyboardWillShow(notification:NSNotification){
+    @objc func keyboardWillShow(notification:NSNotification){
         // Give room at the bottom of the scroll view, so keyboard doesn't cover up anything
         // the user needs to tap
         var userInfo = notification.userInfo!
@@ -74,7 +74,7 @@ class BaseTextFieldViewController: UIViewController {
         scrollView.contentInset = contentInset
     }
     
-    func keyboardWillHide(notification:NSNotification){
+    @objc func keyboardWillHide(notification:NSNotification){
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
     }

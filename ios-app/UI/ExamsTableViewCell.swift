@@ -54,7 +54,7 @@ class ExamsTableViewCell: UITableViewCell {
         examViewCell.addGestureRecognizer(tapRecognizer)
     }
     
-    func showStartExamScreen() {
+    @objc func showStartExamScreen() {
         let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.START_EXAM_SCREEN_VIEW_CONTROLLER) as! StartExamScreenViewController
@@ -62,7 +62,7 @@ class ExamsTableViewCell: UITableViewCell {
         parentViewController?.showDetailViewController(viewController, sender: self)
     }
     
-    func showAttemptsList() {
+    @objc func showAttemptsList() {
         let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.ATTEMPTS_VIEW_CONTROLLER) as! AttemptsListViewController

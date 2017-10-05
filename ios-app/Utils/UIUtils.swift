@@ -86,4 +86,8 @@ public class UIUtils {
         return (UIDevice.current.userInterfaceIdiom == .phone) ? .actionSheet : .alert
     }
     
+    static func isiPad() -> Bool {
+        return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
+    }
+    
 }

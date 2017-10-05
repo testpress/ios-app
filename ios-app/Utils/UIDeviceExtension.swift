@@ -200,7 +200,7 @@ internal protocol EnumProtocol: Hashable {
 
 // MARK: - Extensions
 
-internal extension EnumProtocol where Self:Hashable {
+internal extension EnumProtocol {
 	
 	static var all: [Self] {
 		typealias Type = Self

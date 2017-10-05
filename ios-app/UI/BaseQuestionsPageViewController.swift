@@ -188,7 +188,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         }
     }
     
-    func onClickPreviousButton(sender: UITapGestureRecognizer) {
+    @objc func onClickPreviousButton(sender: UITapGestureRecognizer) {
         var index = getCurrentIndex()
         if index == 0 {
             return
@@ -204,7 +204,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         setCurrentQuestion(index: getCurrentIndex())
     }
     
-    func onClickNextButton(sender: UITapGestureRecognizer) {
+    @objc func onClickNextButton(sender: UITapGestureRecognizer) {
         var  index = getCurrentIndex()
         index += 1
         if index == baseQuestionsDataSource?.attemptItems.count {

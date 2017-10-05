@@ -72,7 +72,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         super.onClickNextButton(sender: sender)
     }
     
-    func updateRemainingTime() {
+    @objc func updateRemainingTime() {
         if(remainingTime > 0) {
             remainingTime -= 1
             let hours = (remainingTime / (60 * 60)) % 12
@@ -181,7 +181,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         super.showAlert(error: error, retryHandler: retryHandler)
     }
     
-    func onPressPauseButton(sender: UITapGestureRecognizer) {
+    @objc func onPressPauseButton(sender: UITapGestureRecognizer) {
         let alert = UIAlertController(title: Strings.EXIT_EXAM,
                                       message: Strings.PAUSE_MESSAGE,
                                       preferredStyle: .alert)
@@ -204,7 +204,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         })
     }
     
-    func closeAlert(gesture: UITapGestureRecognizer) {
+    @objc func closeAlert(gesture: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
     
