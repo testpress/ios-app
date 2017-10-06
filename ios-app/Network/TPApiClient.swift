@@ -24,6 +24,7 @@
 //
 
 import Alamofire
+import Device
 import UIKit
 
 class TPApiClient {

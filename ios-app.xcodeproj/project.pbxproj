@@ -67,7 +67,6 @@
 		2FC0F3111F863BA90092BFDC /* TPBasePagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */; };
 		2FC0F3121F863BBD0092BFDC /* CALayerBorderColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2531F8617690092BFDC /* CALayerBorderColor.swift */; };
 		2FC0F3131F863BBD0092BFDC /* FormatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2541F8617690092BFDC /* FormatDate.swift */; };
-		2FC0F3141F863BBD0092BFDC /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2551F8617690092BFDC /* UIDeviceExtension.swift */; };
 		2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2571F8617690092BFDC /* WebViewUtils.swift */; };
 		2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2731F8619220092BFDC /* MathJaxRender.js */; };
 		2FC0F3171F863BCE0092BFDC /* PT_Serif-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2741F8619220092BFDC /* PT_Serif-Web-Regular.ttf */; };
@@ -76,6 +75,7 @@
 		2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2771F8619220092BFDC /* Rubik-Regular.ttf */; };
 		2FC0F31B1F863BCE0092BFDC /* TestEngine.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2781F8619220092BFDC /* TestEngine.js */; };
 		2FC0F31D1F863D780092BFDC /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F31C1F863D730092BFDC /* katex */; };
+		2FC0F31F1F866BC30092BFDC /* Device.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC0F31E1F866BC30092BFDC /* Device.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,7 +105,6 @@
 		2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		2FC0F2531F8617690092BFDC /* CALayerBorderColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerBorderColor.swift; sourceTree = "<group>"; };
 		2FC0F2541F8617690092BFDC /* FormatDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatDate.swift; sourceTree = "<group>"; };
-		2FC0F2551F8617690092BFDC /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		2FC0F2561F8617690092BFDC /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
 		2FC0F2571F8617690092BFDC /* WebViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewUtils.swift; sourceTree = "<group>"; };
 		2FC0F2731F8619220092BFDC /* MathJaxRender.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MathJaxRender.js; sourceTree = "<group>"; };
@@ -162,6 +161,7 @@
 		2FC0F2ED1F863B080092BFDC /* TPBasePager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPBasePager.swift; sourceTree = "<group>"; };
 		2FC0F2EE1F863B080092BFDC /* TPEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPEndpoint.swift; sourceTree = "<group>"; };
 		2FC0F31C1F863D730092BFDC /* katex */ = {isa = PBXFileReference; lastKnownFileType = folder; path = katex; sourceTree = "<group>"; };
+		2FC0F31E1F866BC30092BFDC /* Device.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Device.framework; path = Carthage/Build/iOS/Device.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FBEDB7C1E82BBD5000CF05C /* Alamofire.framework in Frameworks */,
+				2FC0F31F1F866BC30092BFDC /* Device.framework in Frameworks */,
 				2F0D9AC21EC3682800057858 /* Kingfisher.framework in Frameworks */,
 				2FBEDB7E1E82BC02000CF05C /* ObjectMapper.framework in Frameworks */,
 				2F2CA1DB1EBDC59300ED1C99 /* XLPagerTabStrip.framework in Frameworks */,
@@ -237,6 +238,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2FC0F31E1F866BC30092BFDC /* Device.framework */,
 				2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */,
 				2F2CA1DA1EBDC59300ED1C99 /* XLPagerTabStrip.framework */,
 				2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */,
@@ -250,7 +252,6 @@
 			children = (
 				2FC0F2531F8617690092BFDC /* CALayerBorderColor.swift */,
 				2FC0F2541F8617690092BFDC /* FormatDate.swift */,
-				2FC0F2551F8617690092BFDC /* UIDeviceExtension.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 			);
@@ -476,6 +477,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XLPagerTabStrip.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Device.framework",
 			);
 			outputPaths = (
 			);
@@ -515,7 +517,6 @@
 				2FC0F2E81F863AE80092BFDC /* User.swift in Sources */,
 				2FC0F3101F863BA90092BFDC /* TestReportViewController.swift in Sources */,
 				2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */,
-				2FC0F3141F863BBD0092BFDC /* UIDeviceExtension.swift in Sources */,
 				2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */,
 				2FC0F30D1F863BA90092BFDC /* StartExamScreenViewController.swift in Sources */,
 				2FC0F3051F863BA90092BFDC /* MoreOptionsViewController.swift in Sources */,
