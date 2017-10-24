@@ -1,5 +1,5 @@
 //
-//  AttemptPager.swift
+//  ReviewQuestionListViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,28 +23,21 @@
 //  THE SOFTWARE.
 //
 
-import Alamofire
-import ObjectMapper
-
-class AttemptPager: TPBasePager<Attempt> {
+class ReviewQuestionListViewController: BaseQuestionsListViewController {
     
-    var url: String
-    
-    init(url: String) {
-        self.url = url
-        super.init()
-    }
-    
-    override func getItems(page: Int) {
-        queryParams.updateValue(String(page), forKey: Constants.PAGE)
-        TPApiClient.loadAttempts(
-            endpointProvider: TPEndpointProvider(.loadAttempts, url: url, queryParams: queryParams),
-            completion: resonseHandler!
-        )
-    }
-    
-    override func getId(resource: Attempt) -> Int {
-        return resource.id!
+    override func getIndexBorderColor(attemptItem: AttemptItem) -> String {
+        var color: String = Colors.GRAY_LIGHT_DARK
+        if !(attemptItem.selectedAnswers.isEmpty) {
+            color = Colors.MATERIAL_GREEN;
+            // If question is attempted & any of the selected option is incorrect then set red color
+            for attemptAnswer in (attemptItem.question?.answers)! {
+                if attemptItem.selectedAnswers.contains(attemptAnswer.id!) &&
+                    !(attemptAnswer.isCorrect!) {
+                        color = Colors.MATERIAL_RED
+                }
+            }
+        }
+        return color
     }
     
 }

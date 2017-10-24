@@ -23,9 +23,12 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
-
 class ReviewSolutionsViewController: BaseQuestionsPageViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        questionsPageViewDelegate = self
+    }
     
     override func getQuestionsUrl() -> String {
         return (attempt?.reviewUrl)!
@@ -35,8 +38,18 @@ class ReviewSolutionsViewController: BaseQuestionsPageViewController {
         return ReviewQuestionsDataSource(attemptItems)
     }
     
-    @IBAction override func goBack() {
+}
+
+extension ReviewSolutionsViewController: QuestionsPageViewDelegate {
+    
+    func goBack() {
         dismiss(animated: true, completion: nil)
     }
+}
 
+extension ReviewSolutionsViewController: SlidingMenuDelegate {
+    
+    func dismissViewController() {
+        goBack()
+    }
 }

@@ -27,38 +27,25 @@ import UIKit
 
 class TestEngineViewController: BaseQuestionsPageViewController {
     
-    @IBOutlet weak var remainingTimeLabel: UILabel!
-    @IBOutlet weak var pauseButtonLayout: UIStackView!
-    
     var remainingTime: Int = 0
     var timer: Timer = Timer()
-    var previousQuestionIndex: Int = 0
+    var parentSlidingViewController: TestEngineSlidingViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        questionsPageViewDelegate = self
         nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
         nextButton.setTitle("END", for: .disabled)
         nextButton.setTitle("NEXT", for: .normal)
         
         let pauseButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onPressPauseButton(sender:)))
-        pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
+        parentSlidingViewController.pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
     }
     
     override func getQuestionsDataSource() -> BaseQuestionsDataSource {
         return QuestionsControllerSource(attemptItems)
-    }
-    
-    override func onFinishLoadingQuestions() {
-        remainingTime = getSecondsFromInputString(attempt.remainingTime)
-        startTimer()
-    }
-    
-    override func setCurrentQuestion(index: Int) {
-        saveAnswer(index: previousQuestionIndex)
-        previousQuestionIndex = index
-        super.setCurrentQuestion(index: index)
     }
     
     override func onClickNextButton(sender: UITapGestureRecognizer) {
@@ -72,13 +59,15 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         super.onClickNextButton(sender: sender)
     }
     
-    func updateRemainingTime() {
+    @objc func updateRemainingTime() {
         if(remainingTime > 0) {
             remainingTime -= 1
             let hours = (remainingTime / (60 * 60)) % 12
             let minutes = (remainingTime / 60) % 60
             let seconds = remainingTime % 60
-            remainingTimeLabel.text = String(format: "%d:%02d:%02d", hours, minutes, seconds)
+            parentSlidingViewController.remainingTimeLabel.text =
+                String(format: "%d:%02d:%02d", hours, minutes, seconds)
+            
             if hours != 0 || minutes != 0 || seconds != 0 {
                 if (remainingTime % 60) == 0 {
                     sendHeartBeat();
@@ -181,7 +170,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         super.showAlert(error: error, retryHandler: retryHandler)
     }
     
-    func onPressPauseButton(sender: UITapGestureRecognizer) {
+    @objc func onPressPauseButton(sender: UITapGestureRecognizer) {
         let alert = UIAlertController(title: Strings.EXIT_EXAM,
                                       message: Strings.PAUSE_MESSAGE,
                                       preferredStyle: .alert)
@@ -204,11 +193,11 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         })
     }
     
-    func closeAlert(gesture: UITapGestureRecognizer) {
+    @objc func closeAlert(gesture: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func onPressStopButton() {
+    func onPressStopButton() {
         var alert: UIAlertController
         alert = UIAlertController(
             title: Strings.EXIT_EXAM,
@@ -232,31 +221,6 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         ))
         alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
         present(alert, animated: true, completion: nil)
-    }
-    
-    override func goBack() {
-        let presentingViewController = self.presentingViewController?.presentingViewController
-        if presentingViewController is UITabBarController {
-            let tabViewController =
-                presentingViewController?.childViewControllers[0] as! ExamsTabViewController
-            
-            tabViewController.dismiss(animated: false, completion: {
-                if tabViewController.currentIndex != 2 {
-                    // Move to histroy tab
-                    tabViewController.moveToViewController(at: 2, animated: true)
-                }
-                // Refresh the list items
-                tabViewController.reloadPagerTabStripView()
-            })
-        } else if presentingViewController is AttemptsListViewController {
-            let attemptsListViewController = presentingViewController as! AttemptsListViewController
-            attemptsListViewController.dismiss(animated: false, completion: {
-                // Remove exsiting items
-                attemptsListViewController.attempts.removeAll()
-                // Load new attempts list with progress
-                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
-            })
-        }
     }
     
     func gotoTestReport() {
@@ -288,11 +252,58 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:
             #selector(self.updateRemainingTime), userInfo: nil, repeats: true)
+        
+        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
     }
     
     override func showLoadingProgress() {
         timer.invalidate()
         super.showLoadingProgress()
     }
-    
+
 }
+
+extension TestEngineViewController: QuestionsPageViewDelegate {
+    
+    func questionsDidLoad() {
+        remainingTime = getSecondsFromInputString(attempt.remainingTime)
+        startTimer()
+    }
+    
+    func currentQuestionDidChange(previousIndex: Int, currentIndex: Int) {
+         saveAnswer(index: previousIndex)
+    }
+    
+    func goBack() {
+        let presentingViewController = self.presentingViewController?.presentingViewController
+        if presentingViewController is UITabBarController {
+            let tabViewController =
+                presentingViewController?.childViewControllers[0] as! ExamsTabViewController
+            
+            tabViewController.dismiss(animated: false, completion: {
+                if tabViewController.currentIndex != 2 {
+                    // Move to histroy tab
+                    tabViewController.moveToViewController(at: 2, animated: true)
+                }
+                // Refresh the list items
+                tabViewController.reloadPagerTabStripView()
+            })
+        } else if presentingViewController is AttemptsListViewController {
+            let attemptsListViewController = presentingViewController as! AttemptsListViewController
+            attemptsListViewController.dismiss(animated: false, completion: {
+                // Remove exsiting items
+                attemptsListViewController.attempts.removeAll()
+                // Load new attempts list with progress
+                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
+            })
+        }
+    }
+}
+
+extension TestEngineViewController: SlidingMenuDelegate {
+    
+    func dismissViewController() {
+        onPressStopButton()
+    }
+}
+

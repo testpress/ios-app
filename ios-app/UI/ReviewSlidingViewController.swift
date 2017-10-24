@@ -1,5 +1,5 @@
 //
-//  AttemptPager.swift
+//  ReviewSlidingViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,28 +23,18 @@
 //  THE SOFTWARE.
 //
 
-import Alamofire
-import ObjectMapper
-
-class AttemptPager: TPBasePager<Attempt> {
+class ReviewSlidingViewController: BaseQuestionsSlidingViewController {
     
-    var url: String
-    
-    init(url: String) {
-        self.url = url
-        super.init()
+    override func awakeFromNib() {
+        let mainViewController = storyboard?.instantiateViewController(withIdentifier:
+            Constants.REVIEW_SOLUTIONS_VIEW_CONTROLLER) as! ReviewSolutionsViewController
+        
+        self.mainViewController = mainViewController
+        slidingMenuDelegate = mainViewController
+        let leftViewController = storyboard?.instantiateViewController(withIdentifier:
+            Constants.REVIEW_QUESTION_LIST_VIEW_CONTROLLER) as! ReviewQuestionListViewController
+        
+        self.leftViewController = leftViewController
+        super.awakeFromNib()
     }
-    
-    override func getItems(page: Int) {
-        queryParams.updateValue(String(page), forKey: Constants.PAGE)
-        TPApiClient.loadAttempts(
-            endpointProvider: TPEndpointProvider(.loadAttempts, url: url, queryParams: queryParams),
-            completion: resonseHandler!
-        )
-    }
-    
-    override func getId(resource: Attempt) -> Int {
-        return resource.id!
-    }
-    
 }

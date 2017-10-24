@@ -78,12 +78,15 @@ class TestReportViewController: UIViewController {
     }
 
     @IBAction func showSolutions(_ sender: UIButton) {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier:
-            Constants.REVIEW_SOLUTIONS_VIEW_CONTROLLER) as! ReviewSolutionsViewController
+        let slideMenuController = self.storyboard?.instantiateViewController(withIdentifier:
+            Constants.REVIEW_NAVIGATION_VIEW_CONTROLLER) as! UINavigationController
+        
+        let viewController =
+            slideMenuController.viewControllers.first as! ReviewSlidingViewController
         
         viewController.exam = exam
         viewController.attempt = attempt
-        self.present(viewController, animated: true, completion: nil)
+        self.present(slideMenuController, animated: true, completion: nil)
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {

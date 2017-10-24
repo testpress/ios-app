@@ -93,13 +93,13 @@ function getWidget(layout) {
 }
 
 function isCheckedOption(option) {
-    return option.className.match(/(?:^|\s)option-item-selected(?!\S)/);
+    return option.className.match(/(?:^|\s)selected-item(?!\S)/);
 }
 
 function setSelectedOptionBackground(layout) {
-    layout.className += " option-item-selected";
+    layout.className += " selected-item";
 }
 
 function removeBackground(layout) {
-    layout.className = layout.className.replace( /(?:^|\s)option-item-selected(?!\S)/g , '' );
+    layout.className = layout.className.replace( /(?:^|\s)selected-item(?!\S)/g , '' );
 }

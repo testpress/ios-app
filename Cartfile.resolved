@@ -1,4 +1,6 @@
 github "Alamofire/Alamofire" "4.4.0"
 github "Hearst-DD/ObjectMapper" "2.2.5"
-github "onevcat/Kingfisher" "3.8.0"
+github "dekatotoro/SlideMenuControllerSwift" "3.0.2"
+github "onevcat/Kingfisher" "3.13.1"
+github "schickling/Device.swift" "1.0"
 github "xmartlabs/XLPagerTabStrip" "7.0.0"

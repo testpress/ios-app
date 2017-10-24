@@ -131,7 +131,7 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
         tableView.reloadData()
     }
     
-    func closeAlert(gesture: UITapGestureRecognizer) {
+    @objc func closeAlert(gesture: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
     

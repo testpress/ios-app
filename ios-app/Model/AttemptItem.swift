@@ -28,21 +28,25 @@ import ObjectMapper
 public class AttemptItem {
     var url: String?;
     var question: AttemptQuestion?;
-    var review: Bool? {
-       didSet { review = review != nil && review! }
+    var review: Bool! {
+       didSet { review = review != nil && review }
     }
     var index: Int?;
-    var currentReview: Bool? {
-        didSet { currentReview = currentReview != nil && currentReview! }
-    }
+    var currentReview: Bool!
     var selectedAnswers: [Int] = [];
-    var savedAnswers: [Int] = [];
+    var savedAnswers: [Int]!;
     var order: Int?
     
     public required init?(map: Map) {
     }
     
     public func hasChanged() -> Bool {
+        if savedAnswers == nil {
+            savedAnswers = []
+        }
+        if currentReview == nil {
+            currentReview = false
+        }
         return savedAnswers != selectedAnswers || currentReview != review;
     }
 

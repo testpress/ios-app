@@ -25,15 +25,17 @@
 
 import UIKit
 
-public class Colors {
+class Colors {
     
     static let PRIMARY = "#2196F3"
     static let PRIMARY_TEXT = "#ffffff"
     static let MATERIAL_GREEN = "#00ccaa"
     static let MATERIAL_RED = "#e65c6c"
     static let GRAY_LIGHT = "#e6e6e6"
+    static let GRAY_LIGHT_DARK = "#cccccc"
     static let GRAY_MEDIUM = "#999999"
     static let TAB_TEXT_COLOR = "#888888"
+    static let ORANGE = "#ffa319"
     
     static func getRGB (_ hex:String) -> UIColor {
         

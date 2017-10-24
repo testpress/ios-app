@@ -1,5 +1,5 @@
 //
-//  AttemptPager.swift
+//  QuestionListViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,28 +23,17 @@
 //  THE SOFTWARE.
 //
 
-import Alamofire
-import ObjectMapper
+class QuestionListViewController: BaseQuestionsListViewController {
+    
+    override func getIndexBorderColor(attemptItem: AttemptItem) -> String {
+        let marked: Bool = attemptItem.currentReview == nil ?
+            attemptItem.review : attemptItem.currentReview
+        
+        let unanswered = attemptItem.savedAnswers == nil ?
+            attemptItem.selectedAnswers.isEmpty : attemptItem.savedAnswers.isEmpty
+        
+        return marked ?
+            Colors.ORANGE : (unanswered ? Colors.GRAY_LIGHT_DARK : Colors.MATERIAL_GREEN)
+    }
 
-class AttemptPager: TPBasePager<Attempt> {
-    
-    var url: String
-    
-    init(url: String) {
-        self.url = url
-        super.init()
-    }
-    
-    override func getItems(page: Int) {
-        queryParams.updateValue(String(page), forKey: Constants.PAGE)
-        TPApiClient.loadAttempts(
-            endpointProvider: TPEndpointProvider(.loadAttempts, url: url, queryParams: queryParams),
-            completion: resonseHandler!
-        )
-    }
-    
-    override func getId(resource: Attempt) -> Int {
-        return resource.id!
-    }
-    
 }
