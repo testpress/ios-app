@@ -25,6 +25,12 @@
 
 import UIKit
 
+@objc protocol QuestionsPageViewDelegate {
+    @objc optional func questionsDidLoad()
+    @objc optional func currentQuestionDidChange(previousIndex: Int, currentIndex: Int)
+    func goBack()
+}
+
 class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDelegate {
     
     @IBOutlet weak var questionsContainerView: UIView!
@@ -37,6 +43,8 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     
     var pageViewController: UIPageViewController!
     var baseQuestionsDataSource: BaseQuestionsDataSource!
+    var questionsPageViewDelegate: QuestionsPageViewDelegate?
+    var parentviewController: BaseQuestionsSlidingViewController!
     var currentIndex: Int!
     var exam: Exam!
     var attempt: Attempt!
@@ -115,7 +123,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                                 message: Strings.NO_QUESTIONS_DESCRIPTION,
                                 viewController: self,
                                 completion: { action in
-                                    self.goBack()
+                                    self.questionsPageViewDelegate?.goBack()
                                 }
                             )
                         })
@@ -132,8 +140,13 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                         completion: {done in })
                     
                     self.pageViewController.dataSource = self.baseQuestionsDataSource
-                    self.setCurrentQuestion(index: self.getCurrentIndex())
-                    self.onFinishLoadingQuestions()
+                    self.updateNavigationButtons(index: self.getCurrentIndex())
+                    self.parentviewController
+                        .questionsSlidingMenuDelegate.updateQuestions(self.attemptItems)
+                    
+                    if self.questionsPageViewDelegate?.questionsDidLoad != nil {
+                        self.questionsPageViewDelegate?.questionsDidLoad!()
+                    }
                     self.loadingDialogController.dismiss(animated: true, completion: {
                         // Set loading progress dialog message for further use
                         self.loadingDialogController.message = Strings.LOADING + "\n\n"
@@ -141,10 +154,6 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                 }
             }
         )
-    }
-    
-    // Provided event delegate to override in subclass optionally
-    func onFinishLoadingQuestions() {
     }
     
     // MARK: - UIPageViewController delegate methods
@@ -156,7 +165,18 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         
         // When user swipe the page, set current question
         if completed {
-            setCurrentQuestion(index: getCurrentIndex())
+            let currentIndex = getCurrentIndex()
+            if questionsPageViewDelegate != nil {
+                let previousViewController = previousViewControllers[0] as!
+                    BaseQuestionsViewController
+                
+                let previousIndex = (previousViewController.attemptItem?.index)!
+                if questionsPageViewDelegate?.currentQuestionDidChange != nil {
+                    questionsPageViewDelegate?.currentQuestionDidChange!(
+                        previousIndex: previousIndex, currentIndex: currentIndex)
+                }
+            }
+            updateNavigationButtons(index: currentIndex)
         }
     }
     
@@ -168,6 +188,30 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func setCurrentQuestion(index: Int) {
+        let currentIndex: Int = getCurrentIndex()
+        if  index < 0 || index >= (baseQuestionsDataSource?.attemptItems.count)! ||
+                index == currentIndex {
+            
+            return
+        }
+        let viewController =
+            [baseQuestionsDataSource?.viewControllerAtIndex(index)] as! [UIViewController]
+        
+        let direction: UIPageViewControllerNavigationDirection =
+            index > currentIndex ? .forward : .reverse
+        
+        pageViewController.setViewControllers(viewController , direction: direction,
+                                              animated: true, completion: {done in })
+        
+        
+        if questionsPageViewDelegate?.currentQuestionDidChange != nil {
+            questionsPageViewDelegate?
+                .currentQuestionDidChange!(previousIndex: currentIndex, currentIndex: index)
+        }
+        updateNavigationButtons(index: index)
+    }
+    
+    func updateNavigationButtons(index: Int) {
         // Update previous button
         if index == 0 {
             previousButtonLayout.isUserInteractionEnabled = false
@@ -189,35 +233,15 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     @objc func onClickPreviousButton(sender: UITapGestureRecognizer) {
-        var index = getCurrentIndex()
-        if index == 0 {
-            return
-        }
-        index -= 1
-        
-        let viewControllers =
-            [baseQuestionsDataSource?.viewControllerAtIndex(index)] as! [UIViewController]
-        
-        pageViewController.setViewControllers(viewControllers , direction: .reverse,
-                                               animated: true, completion: {done in })
-        
-        setCurrentQuestion(index: getCurrentIndex())
+        setCurrentQuestion(index: getCurrentIndex() - 1)
     }
     
     @objc func onClickNextButton(sender: UITapGestureRecognizer) {
-        var  index = getCurrentIndex()
-        index += 1
-        if index == baseQuestionsDataSource?.attemptItems.count {
-            return
-        }
-        
-        let viewControllers =
-            [baseQuestionsDataSource?.viewControllerAtIndex(index)] as! [UIViewController]
-        
-        pageViewController.setViewControllers(viewControllers , direction: .forward,
-                                              animated: true, completion: {done in })
-        
-        setCurrentQuestion(index: getCurrentIndex())
+        setCurrentQuestion(index: getCurrentIndex() + 1)
+    }
+    
+    @IBAction func showQuestionListPanel(_ sender: UIButton) {
+        parentviewController.slideMenuController()?.openLeft()
     }
     
     func showAlert(error: TPError, retryHandler: @escaping (() -> Swift.Void)) {
@@ -289,9 +313,13 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         }
     }
     
-    // Handle the back navigation based on the subclass requirement
-    func goBack() {
-    }
+}
+
+extension BaseQuestionsPageViewController: QuestionListDelegate {
     
+    func gotoQuestion(index: Int) {
+        parentviewController.slideMenuController()?.closeLeft()
+        setCurrentQuestion(index: index)
+    }
 }
 

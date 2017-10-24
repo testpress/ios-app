@@ -26,59 +26,23 @@
 import UIKit
 import WebKit
 
-class BaseQuestionsViewController: UIViewController, WKNavigationDelegate {
+class BaseQuestionsViewController: BaseWebViewController {
 
     @IBOutlet weak var topShadowView: UIView!
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var containerView: UIView!
     
-    var webView: WKWebView!
     var attemptItem: AttemptItem!
     let topGradient = CAGradientLayer()
     let bottomGradient = CAGradientLayer()
-    var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        activityIndicator = UIUtils.initActivityIndicator(parentView: view)
-        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
-        
-        initWebView()
-        webView.navigationDelegate = self
-        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        containerView.addSubview(webView)
+        webViewDelegate = self
     }
     
-    func initWebView() {
-        webView = WKWebView(frame: containerView.bounds)
-    }
-    
-    func getJavascript() -> String {
-        let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "MathJaxRender",
-                                                            ofType:"js")!)
-        do {
-            return try String(contentsOf: fileURL, encoding: String.Encoding.utf8)
-        } catch let error as NSError {
-            debugPrint(error.localizedDescription)
-        }
-        return ""
-    }
-    
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        activityIndicator.startAnimating()
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        activityIndicator.stopAnimating()
-        webView.evaluateJavaScript(getJavascript()) { (result, error) in
-            if error != nil {
-                debugPrint(error ?? "no error")
-            }
-        }
-        // Bring top & bottom shadow to front
-        view.bringSubview(toFront: bottomShadowView)
-        view.bringSubview(toFront: topShadowView)
+    override func getParentView() -> UIView {
+        return containerView
     }
     
     override func viewDidLayoutSubviews() {
@@ -92,4 +56,12 @@ class BaseQuestionsViewController: UIViewController, WKNavigationDelegate {
         bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
     }
 
+}
+
+extension BaseQuestionsViewController: WKWebViewDelegate {
+    func onFinishLoadingWebView() {
+        // Bring top & bottom shadow to front
+        view.bringSubview(toFront: bottomShadowView)
+        view.bringSubview(toFront: topShadowView)
+    }
 }

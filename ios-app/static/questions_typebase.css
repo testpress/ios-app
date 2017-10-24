@@ -96,11 +96,21 @@ table th {
   vertical-align: top;
   line-height: 27.2px;
 }
+body {
+    margin-left: 0px;
+    margin-right: 0px;
+}
 
 .table-without-border {
     border: initial;
     padding-top: 5px;
     padding-right: 0px;
+    line-height: initial;
+}
+
+.table-without-padding {
+    border-top: 1px solid #e6e6e6;
+    padding: 0px;
     line-height: initial;
 }
 
@@ -197,6 +207,37 @@ table th {
     padding: 10px;
 }
 
+.question-list-item {
+    display: flex;
+    flex-flow: row;
+}
+
+.question-list-index {
+    min-width: 10px;
+    margin-top: 15px;
+    margin-left: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 13px;
+    padding-left: 13px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    color: #484848;
+    text-align: center;
+    font-family: 'Rubik-Medium', sans-serif;
+}
+
+.question-list-content {
+    font-family: 'Rubik-Regular', sans-serif;
+    font-size: 1rem;
+    color: #666;
+    margin-top: 12px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
 .review-explanation {
     color: #666;
     font-family: 'PT-Serif-Regular', serif;
@@ -274,6 +315,6 @@ table th {
     margin-top: 4px;
 }
 
-.option-item-selected {
+.selected-item {
     background-color: rgba(23, 147, 230, 0.1);
 }

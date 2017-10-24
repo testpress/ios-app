@@ -1,5 +1,5 @@
 //
-//  AttemptItem.swift
+//  ReviewQuestionListViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,44 +23,21 @@
 //  THE SOFTWARE.
 //
 
-import ObjectMapper
-
-public class AttemptItem {
-    var url: String?;
-    var question: AttemptQuestion?;
-    var review: Bool! {
-       didSet { review = review != nil && review }
-    }
-    var index: Int?;
-    var currentReview: Bool!
-    var selectedAnswers: [Int] = [];
-    var savedAnswers: [Int]!;
-    var order: Int?
+class ReviewQuestionListViewController: BaseQuestionsListViewController {
     
-    public required init?(map: Map) {
+    override func getIndexBorderColor(attemptItem: AttemptItem) -> String {
+        var color: String = Colors.GRAY_LIGHT_DARK
+        if !(attemptItem.selectedAnswers.isEmpty) {
+            color = Colors.MATERIAL_GREEN;
+            // If question is attempted & any of the selected option is incorrect then set red color
+            for attemptAnswer in (attemptItem.question?.answers)! {
+                if attemptItem.selectedAnswers.contains(attemptAnswer.id!) &&
+                    !(attemptAnswer.isCorrect!) {
+                        color = Colors.MATERIAL_RED
+                }
+            }
+        }
+        return color
     }
     
-    public func hasChanged() -> Bool {
-        if savedAnswers == nil {
-            savedAnswers = []
-        }
-        if currentReview == nil {
-            currentReview = false
-        }
-        return savedAnswers != selectedAnswers || currentReview != review;
-    }
-
-}
-
-extension AttemptItem: TestpressModel {
-    public func mapping(map: Map) {
-        url <- map["url"]
-        question <- map["question"]
-        review <- map["review"]
-        index <- map["index"]
-        currentReview <- map["current_review"]
-        selectedAnswers <- map["selected_answers"]
-        savedAnswers <- map["saved_answers"]
-        order <- map["order"]
-    }
 }

@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import SlideMenuControllerSwift
 import UIKit
 
 class StartExamScreenViewController: UIViewController {
@@ -146,11 +147,15 @@ class StartExamScreenViewController: UIViewController {
     }
     
     func gotoTestEngine(attempt: Attempt) {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier:
-            Constants.TEST_ENGINE_VIEW_CONTROLLER) as! TestEngineViewController
+       let slideMenuController = self.storyboard?.instantiateViewController(withIdentifier:
+            Constants.TEST_ENGINE_NAVIGATION_CONTROLLER) as! UINavigationController
+
+        let viewController =
+            slideMenuController.viewControllers.first as! TestEngineSlidingViewController
+        
         viewController.exam = exam
         viewController.attempt = attempt
-        present(viewController, animated: true, completion: nil)
+        present(slideMenuController, animated: true, completion: nil)
     }
     
     // Set frames of the views in this method to support both portrait & landscape view

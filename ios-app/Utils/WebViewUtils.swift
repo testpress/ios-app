@@ -31,6 +31,10 @@ class WebViewUtils {
         return "<script src='TestEngine.js'></script>"
     }
     
+    static func getQuestionListHeader() -> String {
+        return "<script src='QuestionListHandler.js'></script>"
+    }
+    
     static func getRadioButtonInitializer(selectedOption: Int) -> String {
         return "initRadioGroup(\(selectedOption));"
     }

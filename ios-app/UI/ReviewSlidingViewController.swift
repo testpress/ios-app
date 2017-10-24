@@ -1,5 +1,5 @@
 //
-//  AttemptItem.swift
+//  ReviewSlidingViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,44 +23,18 @@
 //  THE SOFTWARE.
 //
 
-import ObjectMapper
-
-public class AttemptItem {
-    var url: String?;
-    var question: AttemptQuestion?;
-    var review: Bool! {
-       didSet { review = review != nil && review }
-    }
-    var index: Int?;
-    var currentReview: Bool!
-    var selectedAnswers: [Int] = [];
-    var savedAnswers: [Int]!;
-    var order: Int?
+class ReviewSlidingViewController: BaseQuestionsSlidingViewController {
     
-    public required init?(map: Map) {
-    }
-    
-    public func hasChanged() -> Bool {
-        if savedAnswers == nil {
-            savedAnswers = []
-        }
-        if currentReview == nil {
-            currentReview = false
-        }
-        return savedAnswers != selectedAnswers || currentReview != review;
-    }
-
-}
-
-extension AttemptItem: TestpressModel {
-    public func mapping(map: Map) {
-        url <- map["url"]
-        question <- map["question"]
-        review <- map["review"]
-        index <- map["index"]
-        currentReview <- map["current_review"]
-        selectedAnswers <- map["selected_answers"]
-        savedAnswers <- map["saved_answers"]
-        order <- map["order"]
+    override func awakeFromNib() {
+        let mainViewController = storyboard?.instantiateViewController(withIdentifier:
+            Constants.REVIEW_SOLUTIONS_VIEW_CONTROLLER) as! ReviewSolutionsViewController
+        
+        self.mainViewController = mainViewController
+        slidingMenuDelegate = mainViewController
+        let leftViewController = storyboard?.instantiateViewController(withIdentifier:
+            Constants.REVIEW_QUESTION_LIST_VIEW_CONTROLLER) as! ReviewQuestionListViewController
+        
+        self.leftViewController = leftViewController
+        super.awakeFromNib()
     }
 }

@@ -30,6 +30,8 @@ enum Images: String {
     case TestpressAlertWarning = "testpress_alert_warning"
     case ExamsFlatIcon = "exams_flat_icon"
     case ProfileImagePlaceHolder = "profile_image_place_holder"
+    case BackButton = "ic_navigate_before_36pt"
+    case CloseButton = "ic_close"
     
     var image: UIImage {
         return UIImage(asset: self)
