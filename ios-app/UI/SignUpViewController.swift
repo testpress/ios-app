@@ -138,7 +138,8 @@ class SignUpViewController: BaseTextFieldViewController {
             setFieldError(textField: emailField, errorMessage: Strings.ENTER_VALID_EMAIL)
             return false
         }
-        if passwordField.text == nil || passwordField.text!.characters.count < 6 {
+        let passwordText = passwordField.text
+        if passwordText == nil || passwordText!.count < 6 {
             confirmPasswordField.text = ""
             setFieldError(textField: passwordField,
                           errorMessage: Strings.PASSWORD_MUST_HAVE_SIX_CHARACTERS)
