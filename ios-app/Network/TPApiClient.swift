@@ -111,6 +111,26 @@ class TPApiClient {
             + "OS \(device.systemVersion.replacingOccurrences(of: ".", with: "_")))"
     }
     
+    static func getListItems<T> (endpointProvider: TPEndpointProvider,
+                                 completion: @escaping (TPApiResponse<T>?, TPError?) -> Void,
+                                 type: T.Type) {
+        
+        apiCall(endpointProvider: endpointProvider, completion: {
+            json, error in
+            
+            var testpressResponse: TPApiResponse<T>? = nil
+            if let json = json {
+                testpressResponse = TPModelMapper<TPApiResponse<T>>().mapFromJSON(json: json)
+                debugPrint(testpressResponse?.results ?? "Error")
+                guard testpressResponse != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(testpressResponse, error)
+        })
+    }
+    
     static func authenticate(username: String, password: String,
                              completion: @escaping (TPAuthToken?, TPError?) -> Void) {
         

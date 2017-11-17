@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  CoursesTableViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,23 +25,30 @@
 
 import UIKit
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
+class CoursesTableViewController: TPBasePagedTableViewController<Course>,
+    BasePagedTableViewDelegate {
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(pager: CoursePager(), coder: aDecoder)
+        delegate = self
     }
-}
+    
+    // MARK: - Table view data source
+    override func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.COURSE_LIST_VIEW_CELL, for: indexPath) as! CourseTableViewCell
 
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+        cell.initCell(items[indexPath.row], viewController: self)
+        return cell
     }
+    
+    func onItemsLoaded() {
+        items = items.sorted(by: { $0.order! < $1.order! })
+    }
+    
+    override func setEmptyText() {
+        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_COURSES,
+                            description: Strings.NO_COURSE_DESCRIPTION)
+    }
+    
 }

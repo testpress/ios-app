@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  Course.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,25 +23,41 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import ObjectMapper
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
+public class Course {
+    var url: String!
+    var id: Int!
+    var title: String!
+    var description: String?
+    var image: String?
+    var modified: String!
+    var contentsUrl: String!
+    var chaptersUrl: String!
+    var slug: String!
+    var trophiesCount: Int!
+    var chaptersCount: Int!
+    var contentsCount: Int!
+    var order: Int!
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    public required init?(map: Map) {
     }
 }
 
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+extension Course: TestpressModel {
+    public func mapping(map: Map) {
+        url <- map["url"]
+        id <- map["id"]
+        title <- map["title"]
+        description <- map["description"]
+        image <- map["image"]
+        modified <- map["modified"]
+        contentsUrl <- map["contents_url"]
+        chaptersUrl <- map["chapters_url"]
+        slug <- map["slug"]
+        trophiesCount <- map["trophies_count"]
+        chaptersCount <- map["chapters_count"]
+        contentsCount <- map["contents_count"]
+        order <- map["order"]
     }
 }

@@ -27,19 +27,27 @@ import UIKit
 import ObjectMapper
 import XLPagerTabStrip
 
+protocol BasePagedTableViewDelegate {
+    func onItemsLoaded()
+}
+
 class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var emptyView: EmptyView!
     var items = [T]()
-    let pager: TPBasePager<T>
+    var pager: TPBasePager<T>
     var loadingItems: Bool = false
+    var delegate: BasePagedTableViewDelegate?
     
-    init(pager: TPBasePager<T>) {
+    init(pager: TPBasePager<T>, coder aDecoder: NSCoder? = nil) {
         self.pager = pager
-        super.init(style: .plain)
-        activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
-        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 150)
+        // Support table cell view from both xib & storyboard
+        if aDecoder != nil {
+            super.init(coder: aDecoder!)!
+        } else {
+            super.init(style: .plain)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,6 +57,8 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
+        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 150)
         // Set table view footer as progress spinner
         let pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         pagingSpinner.startAnimating()
@@ -95,6 +105,7 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
             if self.items.count == 0 {
                 self.setEmptyText()
             }
+            self.delegate?.onItemsLoaded()
             self.tableView.reloadData()
             if (self.activityIndicator?.isAnimating)! {
                 self.activityIndicator?.stopAnimating()
