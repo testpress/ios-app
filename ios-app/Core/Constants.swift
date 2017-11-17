@@ -59,8 +59,12 @@ struct Constants {
     static let TEST_ENGINE_NAVIGATION_CONTROLLER = "TestEngineNavigationController"
     static let REVIEW_NAVIGATION_VIEW_CONTROLLER = "ReviewNavigationViewController"
     static let COURSE_LIST_VIEW_CELL = "CourseTableViewCell"
+    static let CHAPTER_CONTENT_STORYBOARD = "ChapterContent"
+    static let CHAPTERS_VIEW_CONTROLLER = "ChaptersViewController"
+    static let CHAPTER_COLLECTION_VIEW_CELL = "ChapterCollectionViewCell"
     
     static let PAGE = "page"
+    static let PARENT = "parent"
     static let STATE = "state"
     static let STATE_RUNNING = "Running"
     

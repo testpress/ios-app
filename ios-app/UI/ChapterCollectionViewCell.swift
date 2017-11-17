@@ -1,5 +1,5 @@
 //
-//  CourseTableViewCell.swift
+//  ChapterCollectionViewCell.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,48 +25,48 @@
 
 import UIKit
 
-class CourseTableViewCell: UITableViewCell {
+class ChapterCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var courseName: UILabel!
-    @IBOutlet weak var courseViewCell: UIView!
+    @IBOutlet weak var chapterName: UILabel!
+    @IBOutlet weak var chapterViewCell: UIView!
     @IBOutlet weak var thumbnailImage: UIImageView!
     
     var parentViewController: UIViewController! = nil
-    var course: Course!
+    var chapter: Chapter!
     
-    func initCell(_ course: Course, viewController: UIViewController) {
+    func initCell(_ chapter: Chapter, viewController: UIViewController) {
         parentViewController = viewController
-        self.course = course
-        courseName.text = course.title
-        thumbnailImage.kf.setImage(with: URL(string: course.image!),
+        self.chapter = chapter
+        chapterName.text = chapter.name
+        thumbnailImage.kf.setImage(with: URL(string: chapter.image!),
                                    placeholder: Images.PlaceHolder.image)
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
         
-        courseViewCell.addGestureRecognizer(tapRecognizer)
+        chapterViewCell.addGestureRecognizer(tapRecognizer)
     }
     
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
-        let viewController: UIViewController
-        if course.chaptersCount > 0 {
-            let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
+        var viewController: UIViewController
+        if chapter.childrenCount != 0 {
+            let chapterViewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
             
-            chaptersViewController.coursesUrl = course.url
-            chaptersViewController.title = course.title
-            viewController = chaptersViewController
+            chapterViewController.coursesUrl = chapter.courseUrl!
+            chapterViewController.parentId = chapter.id
+            chapterViewController.title = chapter.name
+            viewController = chapterViewController
         } else {
-            // ToDo display contents list instead of chapter
-            let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
+            // ToDo Display contents list instead of chapter
+            let chapterViewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
             
-            chaptersViewController.coursesUrl = course.url
-            chaptersViewController.title = course.title
-            viewController = chaptersViewController
+            chapterViewController.coursesUrl = chapter.courseUrl!
+            chapterViewController.parentId = chapter.id
+            viewController = chapterViewController
         }
         parentViewController.present(viewController, animated: true, completion: nil)
     }
-    
 }

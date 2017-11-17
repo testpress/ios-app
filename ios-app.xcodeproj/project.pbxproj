@@ -29,6 +29,11 @@
 		2F763D041FBD83340033D495 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F2CA1DA1EBDC59300ED1C99 /* XLPagerTabStrip.framework */; };
 		2F763D061FBDA89C0033D495 /* CoursePager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D051FBDA89C0033D495 /* CoursePager.swift */; };
 		2F763D081FBDB4D30033D495 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */; };
+		2F763D0B1FBEC7260033D495 /* ChapterContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F763D091FBEC7260033D495 /* ChapterContent.storyboard */; };
+		2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D0C1FBEC91D0033D495 /* ChaptersViewController.swift */; };
+		2F763D0F1FBECBBC0033D495 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D0E1FBECBBC0033D495 /* Chapter.swift */; };
+		2F763D111FBECFD30033D495 /* ChapterPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D101FBECFD30033D495 /* ChapterPager.swift */; };
+		2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */; };
 		2FC0F2DC1F863AB70092BFDC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DA1F863AAF0092BFDC /* Colors.swift */; };
 		2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DB1F863AAF0092BFDC /* Images.swift */; };
 		2FC0F2DE1F863ACA0092BFDC /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2C31F86385B0092BFDC /* Attempt.swift */; };
@@ -124,6 +129,11 @@
 		2F763CFD1FBD7AE40033D495 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		2F763D051FBDA89C0033D495 /* CoursePager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePager.swift; sourceTree = "<group>"; };
 		2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
+		2F763D0A1FBEC7260033D495 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ChapterContent.storyboard; sourceTree = "<group>"; };
+		2F763D0C1FBEC91D0033D495 /* ChaptersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaptersViewController.swift; sourceTree = "<group>"; };
+		2F763D0E1FBECBBC0033D495 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
+		2F763D101FBECFD30033D495 /* ChapterPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterPager.swift; sourceTree = "<group>"; };
+		2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCollectionViewCell.swift; sourceTree = "<group>"; };
 		2F9E39911F851A76001D51B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TestEngine.storyboard; sourceTree = "<group>"; };
 		2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
@@ -244,6 +254,7 @@
 				2FC0F2801F861A860092BFDC /* UI */,
 				2FC0F2521F8617690092BFDC /* Utils */,
 				2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */,
+				2F763D091FBEC7260033D495 /* ChapterContent.storyboard */,
 				2F7179521EC740C6009114C4 /* ExamReview.storyboard */,
 				2F26ADE91E8249D70031E6F4 /* Main.storyboard */,
 				2F7179541EC740C6009114C4 /* TestEngine.storyboard */,
@@ -323,6 +334,8 @@
 				2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */,
 				2FC0F2861F861A860092BFDC /* BaseTextFieldViewController.swift */,
 				2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */,
+				2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */,
+				2F763D0C1FBEC91D0033D495 /* ChaptersViewController.swift */,
 				2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */,
 				2F763CFB1FBD79F60033D495 /* CoursesTableViewController.swift */,
 				2FC0F2871F861A860092BFDC /* EmptyView.swift */,
@@ -360,6 +373,7 @@
 				2FC0F2C41F86385B0092BFDC /* AttemptAnswer.swift */,
 				2FC0F2C51F86385B0092BFDC /* AttemptItem.swift */,
 				2FC0F2C61F86385B0092BFDC /* AttemptQuestion.swift */,
+				2F763D0E1FBECBBC0033D495 /* Chapter.swift */,
 				2F763CFD1FBD7AE40033D495 /* Course.swift */,
 				2FC0F2C71F86385B0092BFDC /* Exam.swift */,
 				2FC0F2C81F86385B0092BFDC /* RegistrationError.swift */,
@@ -385,6 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				2FC0F2EA1F863B080092BFDC /* AttemptPager.swift */,
+				2F763D101FBECFD30033D495 /* ChapterPager.swift */,
 				2F763D051FBDA89C0033D495 /* CoursePager.swift */,
 				2FC0F2EB1F863B080092BFDC /* ExamPager.swift */,
 				2FC0F2EC1F863B080092BFDC /* TPApiClient.swift */,
@@ -495,6 +510,7 @@
 				2FC0F3021F863B980092BFDC /* ExamsTableViewCell.xib in Resources */,
 				2FC0F3011F863B950092BFDC /* EmptyView.xib in Resources */,
 				2FC0F3191F863BCE0092BFDC /* Rubik-Medium.ttf in Resources */,
+				2F763D0B1FBEC7260033D495 /* ChapterContent.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +571,7 @@
 				2FC0F30E1F863BA90092BFDC /* SuccessViewController.swift in Sources */,
 				2FC0F3041F863B9E0092BFDC /* ExamsTabViewController.swift in Sources */,
 				2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */,
+				2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */,
 				2FC0F2EF1F863B110092BFDC /* ExamPager.swift in Sources */,
 				2FC0F2E71F863AE50092BFDC /* TPModelMapper.swift in Sources */,
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
@@ -569,6 +586,7 @@
 				2FC0F3051F863BA90092BFDC /* MoreOptionsViewController.swift in Sources */,
 				2F763D061FBDA89C0033D495 /* CoursePager.swift in Sources */,
 				2F763CFE1FBD7AE40033D495 /* Course.swift in Sources */,
+				2F763D111FBECFD30033D495 /* ChapterPager.swift in Sources */,
 				2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */,
 				2FC0F2F61F863B2F0092BFDC /* Strings.swift in Sources */,
 				2FC0F3111F863BA90092BFDC /* TPBasePagedTableViewController.swift in Sources */,
@@ -582,10 +600,12 @@
 				2FC0F2F01F863B130092BFDC /* AttemptPager.swift in Sources */,
 				2FC0F3071F863BA90092BFDC /* QuestionsControllerSource.swift in Sources */,
 				2FC0F2F41F863B280092BFDC /* Constants.swift in Sources */,
+				2F763D0F1FBECBBC0033D495 /* Chapter.swift in Sources */,
 				2FC0F2E41F863ADC0092BFDC /* TPApiResponse.swift in Sources */,
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
 				2FC0F2DE1F863ACA0092BFDC /* Attempt.swift in Sources */,
 				2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */,
+				2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */,
 				2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */,
 				2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */,
 				2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */,
@@ -639,6 +659,14 @@
 				2F9E39911F851A76001D51B2 /* Base */,
 			);
 			name = TestEngine.storyboard;
+			sourceTree = "<group>";
+		};
+		2F763D091FBEC7260033D495 /* ChapterContent.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F763D0A1FBEC7260033D495 /* Base */,
+			);
+			name = ChapterContent.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
