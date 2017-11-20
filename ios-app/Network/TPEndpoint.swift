@@ -41,6 +41,7 @@ enum TPEndpoint {
     case resumeAttempt
     case getCourses
     case getChapters
+    case getContents
     case getProfile
     
     var method: Alamofire.HTTPMethod {
@@ -68,6 +69,8 @@ enum TPEndpoint {
         case .getCourses:
             return .get
         case .getChapters:
+            return .get
+        case .getContents:
             return .get
         case .getProfile:
             return .get

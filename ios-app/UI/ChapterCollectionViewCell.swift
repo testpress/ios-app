@@ -59,13 +59,15 @@ class ChapterCollectionViewCell: UICollectionViewCell {
             chapterViewController.title = chapter.name
             viewController = chapterViewController
         } else {
-            // ToDo Display contents list instead of chapter
-            let chapterViewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
+            let contentsNavigationController = storyboard.instantiateViewController(withIdentifier:
+                Constants.CONTENTS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
             
-            chapterViewController.coursesUrl = chapter.courseUrl!
-            chapterViewController.parentId = chapter.id
-            viewController = chapterViewController
+            let contentViewController = contentsNavigationController.viewControllers.first
+                as! ContentsTableViewController
+            
+            contentViewController.contentsUrl = chapter.contentUrl
+            contentViewController.title = chapter.name
+            viewController = contentsNavigationController
         }
         parentViewController.present(viewController, animated: true, completion: nil)
     }

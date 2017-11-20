@@ -52,6 +52,7 @@ struct Strings {
     static let NO_COURSES = "Learning can't wait"
     static let NO_COURSE_DESCRIPTION = "Looks like you don’t have any active courses. Kindly contact admin."
     static let NO_CHAPTER_DESCRIPTION = "Looks like chapters not available. Check back later."
+    static let NO_CONTENT_DESCRIPTION = "Looks like contents not available. Check back later."
     
     static let RESUME_EXAM = "Resume Exam"
     

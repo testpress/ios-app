@@ -62,6 +62,8 @@ struct Constants {
     static let CHAPTER_CONTENT_STORYBOARD = "ChapterContent"
     static let CHAPTERS_VIEW_CONTROLLER = "ChaptersViewController"
     static let CHAPTER_COLLECTION_VIEW_CELL = "ChapterCollectionViewCell"
+    static let CONTENTS_LIST_NAVIGATION_CONTROLLER = "ContentsListNavigationController"
+    static let CONTENT_TABLE_VIEW_CELL = "ContentsTableViewCell"
     
     static let PAGE = "page"
     static let PARENT = "parent"

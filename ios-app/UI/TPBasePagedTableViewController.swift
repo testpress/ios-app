@@ -70,18 +70,19 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
         emptyView = EmptyView.getInstance()
         tableView.backgroundView = emptyView
         emptyView.frame = tableView.frame
-        setEmptyText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        if (items.isEmpty) {
+            activityIndicator?.startAnimating()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         if (items.isEmpty) {
             tableView.tableFooterView?.isHidden = true
-            activityIndicator?.startAnimating()
             pager.reset()
             loadItems()
         }
