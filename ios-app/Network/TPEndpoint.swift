@@ -43,6 +43,7 @@ enum TPEndpoint {
     case getChapters
     case getContents
     case getProfile
+    case get
     
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -73,6 +74,8 @@ enum TPEndpoint {
         case .getContents:
             return .get
         case .getProfile:
+            return .get
+        case .get:
             return .get
         }
     }

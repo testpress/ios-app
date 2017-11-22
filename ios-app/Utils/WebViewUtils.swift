@@ -43,10 +43,15 @@ class WebViewUtils {
         return "initCheckBoxGroup(\(selectedOptions));"
     }
     
+    public static func getQuestionHeader() -> String {
+        return getHeader()
+            + "<link rel='stylesheet' type='text/css' href='questions_typebase.css' />"
+    }
+    
     public static func getHeader() -> String {
-        var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, " +
-        "initial-scale=1, maximum-scale=1, user-scalable=no' />"
-        header += "<link rel='stylesheet' type='text/css' href='questions_typebase.css' />"
+        var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, "
+            + "initial-scale=1, maximum-scale=1, user-scalable=no' />"
+        header += "<link rel='stylesheet' type='text/css' href='typebase.css' />"
         header += "<style> img { display: inline; height: auto !important; width: auto !important; "
             + "max-width: 100%; } </style>"
         header += "<link rel='stylesheet' href='katex/katex.min.css' />"
@@ -99,6 +104,14 @@ class WebViewUtils {
     
     public static func getHeadingTags(headingText: String) -> String {
         return "<div class='review-heading'>" + headingText + "</div>"
+    }
+    
+    public static func getFormattedTitle(title: String) -> String {
+        return "<div class='title'>" + title + "</div><hr class='title_separator'>"
+    }
+    
+    public static func getHtmlContentWithMargin(_ content: String) -> String {
+        return "<div class='html_content'>" + content + "</div>"
     }
 
 }

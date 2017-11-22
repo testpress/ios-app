@@ -131,6 +131,23 @@ class TPApiClient {
         })
     }
     
+    static func request<T: TestpressModel>(type: T.Type, endpointProvider: TPEndpointProvider,
+                                           completion: @escaping(T?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, completion: {
+            json, error in
+            var dataModel: T? = nil
+            if let json = json {
+                dataModel = TPModelMapper<T>().mapFromJSON(json: json)
+                guard dataModel != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(dataModel, error)
+        })
+    }
+    
     static func authenticate(username: String, password: String,
                              completion: @escaping (TPAuthToken?, TPError?) -> Void) {
         

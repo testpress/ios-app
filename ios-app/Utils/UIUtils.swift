@@ -78,6 +78,13 @@ public class UIUtils {
         button.layer.shadowOpacity = 0.9
     }
     
+    // Add gradient shadow layer to the shadow container view
+    static func updateBottomShadow(bottomShadowView: UIView, bottomGradient: CAGradientLayer) {
+        bottomGradient.frame = bottomShadowView.bounds
+        bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+        bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
+    }
+    
     static func getAppName() -> String {
         return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? ""
     }

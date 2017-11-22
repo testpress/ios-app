@@ -48,7 +48,7 @@ class ContentsTableViewController: TPBasePagedTableViewController<Content>,
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CONTENT_TABLE_VIEW_CELL,
                                                  for: indexPath) as! ContentsTableViewCell
         
-        cell.initCell(items[indexPath.row], viewController: self)
+        cell.initCell(position: indexPath.row, viewController: self)
         return cell
     }
     

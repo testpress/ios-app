@@ -139,7 +139,9 @@ extension BaseQuestionsListViewController: QuestionsSlidingMenuDelegate {
     
     func displayQuestions(currentQuestionIndex: Int) {
         currentPosition = currentQuestionIndex
-        webView.loadHTMLString(WebViewUtils.getHeader() + WebViewUtils.getQuestionListHeader() +
-            getHtml(), baseURL: Bundle.main.bundleURL)
+        webView.loadHTMLString(
+            WebViewUtils.getQuestionHeader() + WebViewUtils.getQuestionListHeader() + getHtml(),
+            baseURL: Bundle.main.bundleURL
+        )
     }
 }

@@ -31,7 +31,10 @@ class ReviewQuestionsViewController: BaseQuestionsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView.loadHTMLString(WebViewUtils.getHeader() + getHtml(), baseURL: Bundle.main.bundleURL)
+        webView.loadHTMLString(
+            WebViewUtils.getQuestionHeader() + getHtml(),
+            baseURL: Bundle.main.bundleURL
+        )
     }
     
     func getHtml() -> String {

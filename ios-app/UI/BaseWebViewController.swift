@@ -36,14 +36,13 @@ class BaseWebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activityIndicator = UIUtils.initActivityIndicator(parentView: view)
-        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
-        
         parentView = getParentView()
         initWebView()
         webView.navigationDelegate = self
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         parentView.addSubview(webView)
+        activityIndicator = UIUtils.initActivityIndicator(parentView: parentView)
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
     }
     
     func getParentView() -> UIView {

@@ -34,12 +34,13 @@ class ContentsTableViewCell: UITableViewCell {
     @IBOutlet weak var questionsCount: UILabel!
     @IBOutlet weak var examDetailsLayout: UIStackView!
     
-    var parentViewController: UIViewController! = nil
-    var content: Content!
+    var parentViewController: ContentsTableViewController! = nil
+    var position: Int!
     
-    func initCell(_ content: Content, viewController: UIViewController) {
+    func initCell(position: Int, viewController: ContentsTableViewController) {
         parentViewController = viewController
-        self.content = content
+        self.position = position
+        let content = parentViewController.items[position]
         contentName.text = content.name
         thumbnailImage.kf.setImage(with: URL(string: content.image!),
                                    placeholder: Images.PlaceHolder.image)
@@ -51,7 +52,6 @@ class ContentsTableViewCell: UITableViewCell {
         } else {
             examDetailsLayout.isHidden = true
         }
-        
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
         
@@ -59,7 +59,14 @@ class ContentsTableViewCell: UITableViewCell {
     }
     
     @objc func onItemClick() {
-        // Display content detail
+        let viewController = parentViewController.storyboard?.instantiateViewController(
+            withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
+            as! ContentDetailPageViewController
+        
+        viewController.contents = parentViewController.items
+        viewController.title = parentViewController.title
+        viewController.position = position
+        parentViewController.present(viewController, animated: true, completion: nil)
     }
     
 }

@@ -15,6 +15,9 @@
 		2F26ADFB1E8249D70031E6F4 /* ios_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */; };
 		2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
 		2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
+		2F6F167B1FC3F08900FB768C /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
+		2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */; };
+		2F6F167F1FC4164100FB768C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167E1FC4164100FB768C /* Reachability.swift */; };
 		2F70F4D71F9F1C3300D30755 /* BaseQuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F4D61F9F1C3300D30755 /* BaseQuestionsListViewController.swift */; };
 		2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F4D81F9F1F8200D30755 /* ReviewQuestionListViewController.swift */; };
 		2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7179521EC740C6009114C4 /* ExamReview.storyboard */; };
@@ -40,6 +43,7 @@
 		2F96997E1FC2A761001B2B18 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96997D1FC2A761001B2B18 /* Attachment.swift */; };
 		2F9699801FC2A8E0001B2B18 /* ContentPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96997F1FC2A8E0001B2B18 /* ContentPager.swift */; };
 		2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */; };
+		2F9B5E171FC54AFC00D67100 /* AttachmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */; };
 		2FC0F2DC1F863AB70092BFDC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DA1F863AAF0092BFDC /* Colors.swift */; };
 		2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DB1F863AAF0092BFDC /* Images.swift */; };
 		2FC0F2DE1F863ACA0092BFDC /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2C31F86385B0092BFDC /* Attempt.swift */; };
@@ -98,6 +102,9 @@
 		2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2771F8619220092BFDC /* Rubik-Regular.ttf */; };
 		2FC0F31B1F863BCE0092BFDC /* TestEngine.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2781F8619220092BFDC /* TestEngine.js */; };
 		2FC0F31D1F863D780092BFDC /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F31C1F863D730092BFDC /* katex */; };
+		2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */; };
+		2FD846601FC30D1900D6F016 /* ContentDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */; };
+		2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */; };
 		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
 /* End PBXBuildFile section */
@@ -128,6 +135,9 @@
 		2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQuestionsSlidingViewController.swift; sourceTree = "<group>"; };
 		2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSlidingViewController.swift; sourceTree = "<group>"; };
 		2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		2F6F167A1FC3F08900FB768C /* typebase.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = typebase.css; sourceTree = "<group>"; };
+		2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContent.swift; sourceTree = "<group>"; };
+		2F6F167E1FC4164100FB768C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		2F70F4D61F9F1C3300D30755 /* BaseQuestionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQuestionsListViewController.swift; sourceTree = "<group>"; };
 		2F70F4D81F9F1F8200D30755 /* ReviewQuestionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewQuestionListViewController.swift; sourceTree = "<group>"; };
 		2F7179531EC740C6009114C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ExamReview.storyboard; sourceTree = "<group>"; };
@@ -146,6 +156,7 @@
 		2F96997D1FC2A761001B2B18 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		2F96997F1FC2A8E0001B2B18 /* ContentPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentPager.swift; sourceTree = "<group>"; };
 		2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTableViewCell.swift; sourceTree = "<group>"; };
+		2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentDetailViewController.swift; sourceTree = "<group>"; };
 		2F9E39911F851A76001D51B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TestEngine.storyboard; sourceTree = "<group>"; };
 		2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
@@ -208,6 +219,9 @@
 		2FC0F2EE1F863B080092BFDC /* TPEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPEndpoint.swift; sourceTree = "<group>"; };
 		2FC0F31C1F863D730092BFDC /* katex */ = {isa = PBXFileReference; lastKnownFileType = folder; path = katex; sourceTree = "<group>"; };
 		2FC0F31E1F866BC30092BFDC /* Device.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Device.framework; path = Carthage/Build/iOS/Device.framework; sourceTree = "<group>"; };
+		2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailPageViewController.swift; sourceTree = "<group>"; };
+		2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailDataSource.swift; sourceTree = "<group>"; };
+		2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContentViewController.swift; sourceTree = "<group>"; };
 		2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		2FE290711F8D07D0004D7574 /* QuestionListHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuestionListHandler.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -303,6 +317,7 @@
 			children = (
 				2FC0F2531F8617690092BFDC /* CALayerBorderColor.swift */,
 				2FC0F2541F8617690092BFDC /* FormatDate.swift */,
+				2F6F167E1FC4164100FB768C /* Reachability.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 			);
@@ -319,6 +334,7 @@
 				2FC0F2761F8619220092BFDC /* Rubik-Medium.ttf */,
 				2FC0F2771F8619220092BFDC /* Rubik-Regular.ttf */,
 				2FC0F2781F8619220092BFDC /* TestEngine.js */,
+				2F6F167A1FC3F08900FB768C /* typebase.css */,
 				2FE290711F8D07D0004D7574 /* QuestionListHandler.js */,
 			);
 			path = static;
@@ -337,6 +353,7 @@
 		2FC0F2801F861A860092BFDC /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */,
 				2FC0F2811F861A860092BFDC /* AttemptsListViewController.swift */,
 				2FC0F2821F861A860092BFDC /* AttemptsTableViewCell.swift */,
 				2FC0F2831F861A860092BFDC /* BaseQuestionsDataSource.swift */,
@@ -348,6 +365,8 @@
 				2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */,
 				2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */,
 				2F763D0C1FBEC91D0033D495 /* ChaptersViewController.swift */,
+				2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */,
+				2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */,
 				2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */,
 				2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */,
 				2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */,
@@ -358,6 +377,7 @@
 				2FC0F28A1F861A860092BFDC /* ExamsTableViewCell.xib */,
 				2FC0F28B1F861A860092BFDC /* ExamsTableViewController.swift */,
 				2FC0F28C1F861A860092BFDC /* ExamsTabViewController.swift */,
+				2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */,
 				2FC0F28D1F861A860092BFDC /* LoginViewController.swift */,
 				2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */,
 				2FC0F28F1F861A860092BFDC /* ProfileViewController.swift */,
@@ -383,6 +403,7 @@
 		2FC0F2C21F86385B0092BFDC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2F96997D1FC2A761001B2B18 /* Attachment.swift */,
 				2FC0F2C31F86385B0092BFDC /* Attempt.swift */,
 				2FC0F2C41F86385B0092BFDC /* AttemptAnswer.swift */,
 				2FC0F2C51F86385B0092BFDC /* AttemptItem.swift */,
@@ -391,6 +412,7 @@
 				2F763CFD1FBD7AE40033D495 /* Course.swift */,
 				2F9699791FC2A22A001B2B18 /* Content.swift */,
 				2FC0F2C71F86385B0092BFDC /* Exam.swift */,
+				2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */,
 				2FC0F2C81F86385B0092BFDC /* RegistrationError.swift */,
 				2FC0F2C91F86385B0092BFDC /* TPApiResponse.swift */,
 				2FC0F2CA1F86385B0092BFDC /* TPAuthToken.swift */,
@@ -398,7 +420,6 @@
 				2FC0F2CC1F86385B0092BFDC /* TPModelMapper.swift */,
 				2FC0F2CD1F86385B0092BFDC /* User.swift */,
 				2F96997B1FC2A625001B2B18 /* Video.swift */,
-				2F96997D1FC2A761001B2B18 /* Attachment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -520,6 +541,7 @@
 				2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */,
 				2FC0F3181F863BCE0092BFDC /* questions_typebase.css in Resources */,
 				2FC0F3171F863BCE0092BFDC /* PT_Serif-Web-Regular.ttf in Resources */,
+				2F6F167B1FC3F08900FB768C /* typebase.css in Resources */,
 				2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */,
 				2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */,
 				2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */,
@@ -569,8 +591,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FC0F2F11F863B160092BFDC /* TPApiClient.swift in Sources */,
+				2FD846601FC30D1900D6F016 /* ContentDetailDataSource.swift in Sources */,
+				2F6F167F1FC4164100FB768C /* Reachability.swift in Sources */,
 				2FC0F3121F863BBD0092BFDC /* CALayerBorderColor.swift in Sources */,
 				2FC0F2FB1F863B7E0092BFDC /* BaseQuestionsDataSource.swift in Sources */,
+				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
 				2FC0F2E51F863AE00092BFDC /* TPAuthToken.swift in Sources */,
 				2FC0F3091F863BA90092BFDC /* ReviewQuestionsDataSource.swift in Sources */,
 				2FC0F2F31F863B1B0092BFDC /* TPEndpoint.swift in Sources */,
@@ -607,6 +632,7 @@
 				2F763D061FBDA89C0033D495 /* CoursePager.swift in Sources */,
 				2F763CFE1FBD7AE40033D495 /* Course.swift in Sources */,
 				2F763D111FBECFD30033D495 /* ChapterPager.swift in Sources */,
+				2F9B5E171FC54AFC00D67100 /* AttachmentDetailViewController.swift in Sources */,
 				2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */,
 				2FC0F2F61F863B2F0092BFDC /* Strings.swift in Sources */,
 				2F96997E1FC2A761001B2B18 /* Attachment.swift in Sources */,
@@ -627,12 +653,14 @@
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
 				2FC0F2DE1F863ACA0092BFDC /* Attempt.swift in Sources */,
 				2F96997A1FC2A22A001B2B18 /* Content.swift in Sources */,
+				2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */,
 				2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */,
 				2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */,
 				2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */,
 				2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */,
 				2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */,
 				2F9699801FC2A8E0001B2B18 /* ContentPager.swift in Sources */,
+				2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */,
 				2FC0F2FA1F863B7C0092BFDC /* AttemptsTableViewCell.swift in Sources */,
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
