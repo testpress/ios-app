@@ -28,10 +28,7 @@ import WebKit
 
 class HtmlContentViewController: BaseWebViewController {
     
-    @IBOutlet weak var bottomShadowView: UIView!
-    
     var content: Content!
-    let bottomGradient = CAGradientLayer()
     var emptyView: EmptyView!
     var loading: Bool = false
     
@@ -112,14 +109,6 @@ class HtmlContentViewController: BaseWebViewController {
     func getFormattedContent(_ contentHtml: String) -> String {
         return WebViewUtils.getHeader() + WebViewUtils.getFormattedTitle(title: content.name) +
             WebViewUtils.getHtmlContentWithMargin(contentHtml)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        // Add gradient shadow layer to the shadow container view
-        UIUtils.updateBottomShadow(bottomShadowView: bottomShadowView,
-                                   bottomGradient: bottomGradient)
-        
-        view.bringSubview(toFront: bottomShadowView)
     }
     
 }

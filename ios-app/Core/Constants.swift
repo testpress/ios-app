@@ -67,6 +67,8 @@ struct Constants {
     static let CONTENT_DETAIL_PAGE_VIEW_CONTROLLER = "ContentDetailPageViewController"
     static let HTML_CONTENT_VIEW_CONTROLLER = "HtmlContentViewController"
     static let ATTACHMENT_DETAIL_VIEW_CONTROLLER = "AttachmentDetailViewController"
+    static let CONTENT_START_EXAM_VIEW_CONTROLLER = "ContentStartExamViewController"
+    static let CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER = "ContentExamAttemptsTableViewController"
     
     static let PAGE = "page"
     static let PARENT = "parent"

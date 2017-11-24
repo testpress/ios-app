@@ -31,10 +31,8 @@ class AttachmentDetailViewController: UIViewController {
     @IBOutlet weak var contentView: UIStackView!
     @IBOutlet weak var contentTitle: UILabel!
     @IBOutlet weak var contentDescription: UILabel!
-    @IBOutlet weak var bottomShadowView: UIView!
     
     var content: Content!
-    let bottomGradient = CAGradientLayer()
     var loading: Bool = false
     
     override func viewDidLoad() {
@@ -57,10 +55,6 @@ class AttachmentDetailViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        // Add gradient shadow layer to the shadow container view
-        UIUtils.updateBottomShadow(bottomShadowView: bottomShadowView,
-                                   bottomGradient: bottomGradient)
-    
         // Set scroll view content height to support the scroll
         scrollView.contentSize.height = contentView.frame.size.height
     }

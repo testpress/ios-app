@@ -35,16 +35,16 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     @IBOutlet weak var nextButtonLayout: UIStackView!
     @IBOutlet weak var previousButtonLayout: UIStackView!
     @IBOutlet weak var navigationBarItem: UINavigationItem!
+    @IBOutlet weak var bottomShadowView: UIView!
     
+    let bottomGradient = CAGradientLayer()
     var pageViewController: UIPageViewController!
     var contentDetailDataSource: ContentDetailDataSource!
     var currentIndex: Int!
-    var exam: Exam!
     var contents = [Content]()
     var position: Int!
-    var showingProgress: Bool = false
-    let loadingDialogController = UIUtils.initProgressDialog(message:
-        Strings.LOADING_QUESTIONS + "\n\n")
+    var emptyView: EmptyView!
+    var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,12 +71,12 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         prevButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
         nextButton.setTitleColor(UIColor.lightGray, for: .disabled)
         nextButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
+        
+        emptyView = EmptyView.getInstance(parentView: pageViewController.view)
+        activityIndicator = UIUtils.initActivityIndicator(parentView: pageViewController.view)
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
         contentDetailDataSource = ContentDetailDataSource(contents)
         navigationBarItem.title = title
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         let startingViewController = contentDetailDataSource.viewControllerAtIndex(position)!
         pageViewController.setViewControllers(
@@ -102,8 +102,12 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         }
     }
     
+    func getCurretViewController() -> UIViewController {
+        return pageViewController.viewControllers![0]
+    }
+    
     func getCurrentIndex() -> Int {
-        return contentDetailDataSource.indexOfViewController(pageViewController.viewControllers![0])
+        return contentDetailDataSource.indexOfViewController(getCurretViewController())
     }
     
     func setCurrentContent(index: Int) {
@@ -151,8 +155,66 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         setCurrentContent(index: getCurrentIndex() + 1)
     }
     
+    func updateCurrentExamContent() {
+        let content = contents[getCurrentIndex()]
+        if content.exam!.attemptsCount > 0 || content.exam!.pausedAttemptsCount > 0 {
+            let viewController =
+                getCurretViewController() as! ContentExamAttemptsTableViewController
+
+            viewController.attempts.removeAll()
+            viewController.loadAttemptsWithProgress(url: content.exam!.attemptsUrl!)
+        } else {
+            updateContent()
+        }
+    }
+    
+    func updateContent() {
+        activityIndicator.startAnimating()
+        let content = contents[getCurrentIndex()]
+        TPApiClient.request(
+            type: Content.self,
+            endpointProvider: TPEndpointProvider(.get, url: content.url),
+            completion: {
+                content, error in
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                    var retryHandler: (() -> Void)?
+                    if error.kind == .network {
+                        retryHandler = {
+                            self.emptyView.hide()
+                            self.updateContent()
+                        }
+                    }
+                    self.activityIndicator.stopAnimating()
+                    let (image, title, description) = error.getDisplayInfo()
+                    self.emptyView.show(image: image, title: title, description: description,
+                                        retryHandler: retryHandler)
+                    
+                    return
+                }
+                
+                self.contents[self.getCurrentIndex()] = content!
+                self.contentDetailDataSource.contents = self.contents
+                let viewController =
+                    self.contentDetailDataSource.viewControllerAtIndex(self.getCurrentIndex())
+                
+                self.pageViewController.setViewControllers([viewController!] , direction: .forward,
+                                                           animated: true, completion: {done in })
+                
+                self.activityIndicator.stopAnimating()
+        })
+    }
+    
     @IBAction func back() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        // Add gradient shadow layer to the shadow container view
+        UIUtils.updateBottomShadow(bottomShadowView: bottomShadowView,
+                                   bottomGradient: bottomGradient)
+        
     }
     
 }

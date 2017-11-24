@@ -27,7 +27,7 @@ import UIKit
 
 class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     
-    var contents = [Content]()
+    var contents: [Content]!
     var initialPosition: Int!
     
     init(_ contents: [Content]) {
@@ -43,7 +43,22 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
         let content = contents[index]
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         
-        if content.attachment != nil {
+        if content.exam != nil {
+            if content.exam!.attemptsCount > 0 || content.exam!.pausedAttemptsCount > 0 {
+                let viewController = storyboard.instantiateViewController(
+                    withIdentifier: Constants.CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER
+                    ) as! ContentExamAttemptsTableViewController
+                
+                viewController.content = content
+                return viewController
+            } else {
+                let viewController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.CONTENT_START_EXAM_VIEW_CONTROLLER) as! ContentStartExamViewController
+                
+                viewController.content = content
+                return viewController
+            }
+        } else if content.attachment != nil {
             let viewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.ATTACHMENT_DETAIL_VIEW_CONTROLLER) as! AttachmentDetailViewController
             
@@ -59,7 +74,11 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     }
     
     func indexOfViewController(_ viewController: UIViewController) -> Int {
-        if viewController is AttachmentDetailViewController {
+        if viewController is ContentExamAttemptsTableViewController {
+            return (viewController as! ContentExamAttemptsTableViewController).content.order
+        } else if viewController is ContentStartExamViewController {
+            return (viewController as! ContentStartExamViewController).content.order
+        } else if viewController is AttachmentDetailViewController {
             return (viewController as! AttachmentDetailViewController).content.order
         } else {
             return (viewController as! HtmlContentViewController).content.order

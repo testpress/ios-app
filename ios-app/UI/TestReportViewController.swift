@@ -113,6 +113,24 @@ class TestReportViewController: UIViewController {
                 // Load new attempts list with progress
                 attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
             })
+        } else if presentingViewController is ContentDetailPageViewController {
+            
+            let contentDetailPageViewController =
+                presentingViewController as! ContentDetailPageViewController
+            
+            contentDetailPageViewController.dismiss(animated: false, completion: {
+                contentDetailPageViewController.updateCurrentExamContent()
+            })
+        } else if self.presentingViewController?.presentingViewController! is
+            ContentDetailPageViewController {
+            
+            let contentDetailPageViewController  =
+                self.presentingViewController?.presentingViewController!
+                    as! ContentDetailPageViewController
+            
+            contentDetailPageViewController.dismiss(animated: false, completion: {
+                contentDetailPageViewController.updateCurrentExamContent()
+            })
         } else {
             dismiss(animated: true, completion: nil)
         }

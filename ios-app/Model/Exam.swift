@@ -42,8 +42,8 @@ public class Exam {
     var enableRanks: Bool?;
     var rankPublishingDate: String?;
     var attemptsUrl: String?;
-    var attemptsCount: Int?;
-    var pausedAttemptsCount: Int?;
+    var attemptsCount: Int!;
+    var pausedAttemptsCount: Int!;
     var allowPdf: Bool?;
     var allowQuestionPdf: Bool?;
     var created: String?;
