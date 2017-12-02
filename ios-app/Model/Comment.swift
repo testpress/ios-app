@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Comment.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,43 +25,34 @@
 
 import ObjectMapper
 
-public class User {
-    var username: String?
-    var email: String?
-    var password: String?
-    var phone: String?
-    var id: Int?
-    var url: String?
-    var displayName: String!
-    var photo: String?
-    var mediumImage: String!
-    var largeImage: String?
-    var averageSpeed: Int?
-    var averageAccuracy: Int?
-    var averagePercentage: Int?
-    var testsCount: Int?
-    var score: String?
+public class Comment {
+    
+    var url: String!
+    var id: Int!
+    var comment: String!
+    var created: String!
+    var upvotes: Int!
+    var downvotes: Int!
+    var voteId: Int?
+    var typeOfVote: Int!
+    var user: User!
+    var contentObject: ContentObject!
     
     public required init?(map: Map) {
     }
 }
 
-extension User: TestpressModel {
+extension Comment: TestpressModel {
     public func mapping(map: Map) {
-        username <- map["username"]
-        email <- map["email"]
-        password <- map["password"]
-        phone <- map["phone"]
-        id <- map["id"]
         url <- map["url"]
-        displayName <- map["display_name"]
-        photo <- map["photo"]
-        mediumImage <- map["medium_image"]
-        largeImage <- map["large_image"]
-        averageSpeed <- map["average_speed"]
-        averageAccuracy <- map["average_accuracy"]
-        averagePercentage <- map["average_percentage"]
-        testsCount <- map["tests_count"]
-        score <- map["score"]
+        id <- map["id"]
+        comment <- map["comment"]
+        created <- map["created"]
+        upvotes <- map["upvotes"]
+        downvotes <- map["downvotes"]
+        voteId <- map["vote_id"]
+        typeOfVote <- map["type_of_vote"]
+        user <- map["user"]
+        contentObject <- map["content_object"]
     }
 }

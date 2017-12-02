@@ -58,6 +58,7 @@ struct Strings {
     
     static let CORRECT_ANSWER = "Correct Answer:"
     static let EXPLANATION = "Explanation:"
+    static let COMMENTS = "Comments"
     
     static let LOADING_QUESTIONS = "Loading questions"
     static let LOADING = "Loading…"
@@ -86,4 +87,8 @@ struct Strings {
     
     static let LOGOUT = "Log Out"
     static let LOGOUT_CONFIRM_MESSAGE = "Are you sure want to log out?"
+    
+    static let LOAD_MORE_COMMENTS = "Load previous comments"
+    static let LOAD_COMMENTS = "Load comments"
+    static let LOAD_NEW_COMMENTS = "Load new comments"
 }

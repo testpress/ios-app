@@ -1,20 +1,10 @@
 
-@font-face {
-    font-family: "Rubik-Regular";
-    src: url('Rubik-Regular.ttf');
-}
-
 p {
   text-align: justify;
   line-height: 1.7rem;
   vertical-align: top;
   margin-top: 0rem;
   margin-bottom: 0;
-}
-
-body {
-    margin-left: 0px;
-    margin-right: 0px;
 }
 
 .table-without-border {

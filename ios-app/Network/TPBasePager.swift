@@ -69,6 +69,7 @@ class TPBasePager<T: Mappable> {
     func reset() {
         page = 1
         resources.removeAll()
+        queryParams.removeAll()
         response = nil
         hasMore = true
     }

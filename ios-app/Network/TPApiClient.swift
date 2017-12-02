@@ -63,6 +63,8 @@ class TPApiClient {
                                encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
                 print(response)
                 print(response.response ?? "No HTTP response")
+                print("requestDuration-", response.timeline.requestDuration)
+                print("totalDuration-", response.timeline.totalDuration)
             #endif
         
             let httpResponse: HTTPURLResponse? = response.response
@@ -297,6 +299,27 @@ class TPApiClient {
                 }
             }
             completion(user, error)
+        })
+    }
+    
+    static func postComment(comment: String,
+                            commentsUrl: String,
+                            completion: @escaping (Comment?, TPError?) -> Void) {
+        
+        let parameters: Parameters = ["comment": comment]
+        let endpoint = TPEndpointProvider(.post, url: commentsUrl)
+        apiCall(endpointProvider: endpoint, parameters: parameters,
+                completion: { json, error in
+                    
+                    var comment: Comment? = nil
+                    if let json = json {
+                        comment = TPModelMapper<Comment>().mapFromJSON(json: json)
+                        guard comment != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(comment, error)
         })
     }
     

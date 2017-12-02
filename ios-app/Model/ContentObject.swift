@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  ContentObject.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,43 +25,23 @@
 
 import ObjectMapper
 
-public class User {
-    var username: String?
-    var email: String?
-    var password: String?
-    var phone: String?
-    var id: Int?
-    var url: String?
-    var displayName: String!
-    var photo: String?
-    var mediumImage: String!
-    var largeImage: String?
-    var averageSpeed: Int?
-    var averageAccuracy: Int?
-    var averagePercentage: Int?
-    var testsCount: Int?
-    var score: String?
+public class ContentObject {
+    
+    var url: String!
+    var id: Int!
+    var type: String!
+    var slug: String!
     
     public required init?(map: Map) {
     }
 }
 
-extension User: TestpressModel {
+extension ContentObject: TestpressModel {
+    
     public func mapping(map: Map) {
-        username <- map["username"]
-        email <- map["email"]
-        password <- map["password"]
-        phone <- map["phone"]
-        id <- map["id"]
         url <- map["url"]
-        displayName <- map["display_name"]
-        photo <- map["photo"]
-        mediumImage <- map["medium_image"]
-        largeImage <- map["large_image"]
-        averageSpeed <- map["average_speed"]
-        averageAccuracy <- map["average_accuracy"]
-        averagePercentage <- map["average_percentage"]
-        testsCount <- map["tests_count"]
-        score <- map["score"]
+        id <- map["id"]
+        type <- map["type"]
+        slug <- map["slug"]
     }
 }

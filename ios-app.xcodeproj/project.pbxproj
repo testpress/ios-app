@@ -16,6 +16,14 @@
 		2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
 		2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
 		2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */; };
+		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
+		2F48C7FB1FCDA957009C686C /* comments.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FA1FCDA957009C686C /* comments.js */; };
+		2F48C7FD1FCDABDE009C686C /* comments.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FC1FCDABDE009C686C /* comments.css */; };
+		2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C7FE1FCE9750009C686C /* Comment.swift */; };
+		2F48C8011FCE9963009C686C /* ContentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8001FCE9963009C686C /* ContentObject.swift */; };
+		2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8021FCE9A37009C686C /* CommentPager.swift */; };
+		2F48C8051FD030A7009C686C /* icomoon in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8041FD030A7009C686C /* icomoon */; };
+		2F48C8071FD13ABD009C686C /* TTGSnackbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F48C8061FD13ABC009C686C /* TTGSnackbar.framework */; };
 		2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */; };
 		2F6F167B1FC3F08900FB768C /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
 		2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */; };
@@ -138,6 +146,14 @@
 		2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSlidingViewController.swift; sourceTree = "<group>"; };
 		2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentExamAttemptsTableViewController.swift; sourceTree = "<group>"; };
+		2F48C7F81FCD9F18009C686C /* progress_loader.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = progress_loader.css; sourceTree = "<group>"; };
+		2F48C7FA1FCDA957009C686C /* comments.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = comments.js; sourceTree = "<group>"; };
+		2F48C7FC1FCDABDE009C686C /* comments.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = comments.css; sourceTree = "<group>"; };
+		2F48C7FE1FCE9750009C686C /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		2F48C8001FCE9963009C686C /* ContentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentObject.swift; sourceTree = "<group>"; };
+		2F48C8021FCE9A37009C686C /* CommentPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentPager.swift; sourceTree = "<group>"; };
+		2F48C8041FD030A7009C686C /* icomoon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icomoon; sourceTree = "<group>"; };
+		2F48C8061FD13ABC009C686C /* TTGSnackbar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTGSnackbar.framework; path = Carthage/Build/iOS/TTGSnackbar.framework; sourceTree = "<group>"; };
 		2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStartExamViewController.swift; sourceTree = "<group>"; };
 		2F6F167A1FC3F08900FB768C /* typebase.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = typebase.css; sourceTree = "<group>"; };
 		2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContent.swift; sourceTree = "<group>"; };
@@ -240,6 +256,7 @@
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
 				2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */,
+				2F48C8071FD13ABD009C686C /* TTGSnackbar.framework in Frameworks */,
 				2F763D041FBD83340033D495 /* XLPagerTabStrip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,6 +323,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F48C8061FD13ABC009C686C /* TTGSnackbar.framework */,
 				2F1474701F8B73FF0017151B /* SlideMenuControllerSwift.framework */,
 				2FC0F31E1F866BC30092BFDC /* Device.framework */,
 				2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */,
@@ -331,7 +349,11 @@
 		2FC0F2581F8619220092BFDC /* static */ = {
 			isa = PBXGroup;
 			children = (
+				2F48C8041FD030A7009C686C /* icomoon */,
 				2FC0F31C1F863D730092BFDC /* katex */,
+				2F48C7FC1FCDABDE009C686C /* comments.css */,
+				2F48C7FA1FCDA957009C686C /* comments.js */,
+				2F48C7F81FCD9F18009C686C /* progress_loader.css */,
 				2FC0F2731F8619220092BFDC /* MathJaxRender.js */,
 				2FC0F2741F8619220092BFDC /* PT_Serif-Web-Regular.ttf */,
 				2FC0F2751F8619220092BFDC /* questions_typebase.css */,
@@ -416,7 +438,9 @@
 				2FC0F2C61F86385B0092BFDC /* AttemptQuestion.swift */,
 				2F763D0E1FBECBBC0033D495 /* Chapter.swift */,
 				2F763CFD1FBD7AE40033D495 /* Course.swift */,
+				2F48C7FE1FCE9750009C686C /* Comment.swift */,
 				2F9699791FC2A22A001B2B18 /* Content.swift */,
+				2F48C8001FCE9963009C686C /* ContentObject.swift */,
 				2FC0F2C71F86385B0092BFDC /* Exam.swift */,
 				2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */,
 				2FC0F2C81F86385B0092BFDC /* RegistrationError.swift */,
@@ -444,6 +468,7 @@
 			children = (
 				2FC0F2EA1F863B080092BFDC /* AttemptPager.swift */,
 				2F763D101FBECFD30033D495 /* ChapterPager.swift */,
+				2F48C8021FCE9A37009C686C /* CommentPager.swift */,
 				2F96997F1FC2A8E0001B2B18 /* ContentPager.swift */,
 				2F763D051FBDA89C0033D495 /* CoursePager.swift */,
 				2FC0F2EB1F863B080092BFDC /* ExamPager.swift */,
@@ -544,6 +569,7 @@
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
 				2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */,
 				2FC0F31B1F863BCE0092BFDC /* TestEngine.js in Resources */,
+				2F48C8051FD030A7009C686C /* icomoon in Resources */,
 				2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */,
 				2FC0F3181F863BCE0092BFDC /* questions_typebase.css in Resources */,
 				2FC0F3171F863BCE0092BFDC /* PT_Serif-Web-Regular.ttf in Resources */,
@@ -551,9 +577,12 @@
 				2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */,
 				2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */,
 				2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */,
+				2F48C7FB1FCDA957009C686C /* comments.js in Resources */,
 				2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */,
+				2F48C7FD1FCDABDE009C686C /* comments.css in Resources */,
 				2FC0F31D1F863D780092BFDC /* katex in Resources */,
 				2FC0F3021F863B980092BFDC /* ExamsTableViewCell.xib in Resources */,
+				2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */,
 				2FC0F3011F863B950092BFDC /* EmptyView.xib in Resources */,
 				2FC0F3191F863BCE0092BFDC /* Rubik-Medium.ttf in Resources */,
 				2F763D0B1FBEC7260033D495 /* ChapterContent.storyboard in Resources */,
@@ -582,6 +611,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Device.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SlideMenuControllerSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/TTGSnackbar.framework",
 			);
 			outputPaths = (
 			);
@@ -607,6 +637,7 @@
 				2FC0F2F31F863B1B0092BFDC /* TPEndpoint.swift in Sources */,
 				2FC0F2FD1F863B850092BFDC /* BaseQuestionsViewController.swift in Sources */,
 				2FC0F2FE1F863B890092BFDC /* BaseTextFieldViewController.swift in Sources */,
+				2F48C8011FCE9963009C686C /* ContentObject.swift in Sources */,
 				2FC0F3061F863BA90092BFDC /* ProfileViewController.swift in Sources */,
 				2FC0F2F21F863B190092BFDC /* TPBasePager.swift in Sources */,
 				2FC0F3081F863BA90092BFDC /* QuestionsViewController.swift in Sources */,
@@ -630,6 +661,7 @@
 				2F70F4D71F9F1C3300D30755 /* BaseQuestionsListViewController.swift in Sources */,
 				2FC0F3101F863BA90092BFDC /* TestReportViewController.swift in Sources */,
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
+				2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */,
 				2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */,
 				2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */,
 				2FC0F30D1F863BA90092BFDC /* StartExamScreenViewController.swift in Sources */,
@@ -671,6 +703,7 @@
 				2FC0F2FA1F863B7C0092BFDC /* AttemptsTableViewCell.swift in Sources */,
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
+				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,
 				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
 				2FC0F2E61F863AE30092BFDC /* TPError.swift in Sources */,
 				2FC0F2E31F863ADA0092BFDC /* RegistrationError.swift in Sources */,

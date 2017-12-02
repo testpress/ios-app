@@ -7,6 +7,11 @@
 }
 
 @font-face {
+    font-family: "Rubik-Regular";
+    src: url('Rubik-Regular.ttf');
+}
+
+@font-face {
     font-family: "PT-Serif-Regular";
     src: url('PT_Serif-Web-Regular.ttf');
 }
@@ -18,6 +23,11 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -webkit-user-select: none;
+}
+body {
+    margin-left: 0px;
+    margin-right: 0px;
+    cursor: pointer;
 }
 /* Copy & Lists */
 p {
@@ -92,7 +102,12 @@ table th {
   vertical-align: top;
   line-height: 27.2px;
 }
-
+img {
+    display: inline;
+    height: auto !important;
+    width: auto !important;
+    max-width: 100%;
+}
 hr {
     display: block;
     height: 1px;

@@ -26,7 +26,7 @@
 import UIKit
 import WebKit
 
-class BaseQuestionsViewController: BaseWebViewController {
+class BaseQuestionsViewController: BaseWebViewController, WKWebViewDelegate {
 
     @IBOutlet weak var topShadowView: UIView!
     @IBOutlet weak var bottomShadowView: UIView!
@@ -55,13 +55,11 @@ class BaseQuestionsViewController: BaseWebViewController {
         bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
         bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
     }
-
-}
-
-extension BaseQuestionsViewController: WKWebViewDelegate {
+    
     func onFinishLoadingWebView() {
         // Bring top & bottom shadow to front
         view.bringSubview(toFront: bottomShadowView)
         view.bringSubview(toFront: topShadowView)
     }
+
 }

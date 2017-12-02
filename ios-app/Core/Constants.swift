@@ -74,6 +74,9 @@ struct Constants {
     static let PARENT = "parent"
     static let STATE = "state"
     static let STATE_RUNNING = "Running"
+    static let ORDER = "order"
+    static let SINCE = "since"
+    static let UNTIL = "until"
     
     static func getAppVersion() -> String {
         let dictionary = Bundle.main.infoDictionary!

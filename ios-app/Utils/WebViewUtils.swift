@@ -52,8 +52,10 @@ class WebViewUtils {
         var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, "
             + "initial-scale=1, maximum-scale=1, user-scalable=no' />"
         header += "<link rel='stylesheet' type='text/css' href='typebase.css' />"
-        header += "<style> img { display: inline; height: auto !important; width: auto !important; "
-            + "max-width: 100%; } </style>"
+        header += "<link rel='stylesheet' type='text/css' href='progress_loader.css' />"
+        header += "<link rel='stylesheet' type='text/css' href='comments.css' />"
+        header += "<link rel='stylesheet' type='text/css' href='icomoon/style.css' />"
+        header += "<script src='comments.js'></script>"
         header += "<link rel='stylesheet' href='katex/katex.min.css' />"
         header += "<script src='katex/katex.min.js'></script>"
         header += "<script src='katex/contrib/auto-render.min.js'></script>"
@@ -102,7 +104,7 @@ class WebViewUtils {
                 "\(Character(UnicodeScalar(65 + index)!))</div>"
     }
     
-    public static func getHeadingTags(headingText: String) -> String {
+    public static func getReviewHeadingTags(headingText: String) -> String {
         return "<div class='review-heading'>" + headingText + "</div>"
     }
     
@@ -113,5 +115,46 @@ class WebViewUtils {
     public static func getHtmlContentWithMargin(_ content: String) -> String {
         return "<div class='html_content'>" + content + "</div>"
     }
+    
+    public static func getLoadingProgressBar(className: String, visible: Bool = true) -> String {
+        let visibility = visible ? "block" : "none"
+        var html = "<div class='loading_layout' id='" + className + "'" +
+            "style='display:" + visibility + ";'>"
+        
+        html += "<div id='floatingBarsG'>"
+        html += "<div class='blockG' id='rotateG_01'></div>"
+        html += "<div class='blockG' id='rotateG_02'></div>"
+        html += "<div class='blockG' id='rotateG_03'></div>"
+        html += "<div class='blockG' id='rotateG_04'></div>"
+        html += "<div class='blockG' id='rotateG_05'></div>"
+        html += "<div class='blockG' id='rotateG_06'></div>"
+        html += "<div class='blockG' id='rotateG_07'></div>"
+        html += "<div class='blockG' id='rotateG_08'></div></div>"
+        html += "<div class='loading_text'>Loading...</div>"
+        return html + "</div>"
+    }
 
+    public static func getCommentHeadingTags(headingText: String) -> String {
+        return "<div class='comment_heading'>" + headingText + "</div>"
+    }
+    
+    public static func getCommentItemTags(_ comment: Comment) -> String {
+        var html = "<hr><div class='comment_item'><img src='" + comment.user.mediumImage! + "' class='avatar'>"
+        html += "<div class='comment_detail_layout'><div style='display:inline-block;'>"
+        html += "<div class='username'>" + comment.user.displayName + "</div>·"
+        html += "<div class='commentted_time'>" +
+                    FormatDate.getElapsedTime(dateString: comment.created) +
+                "</div></div>"
+        html += "<div class='comment_content'>" + comment.comment + "</div></div></div>"
+        return html
+    }
+    
+    public static func formatHtmlToAppendInJavascript(_ html: String) -> String {
+        var html = html
+        html = html.replacingOccurrences(of: "\\", with: "\\\\")
+        html = html.replacingOccurrences(of: "\"", with: "\\\"")
+        html = html.replacingOccurrences(of: "\n", with: "\\n")
+        return html.replacingOccurrences(of: "\r", with: "")
+    }
+    
 }

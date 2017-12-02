@@ -4,3 +4,4 @@ github "Hearst-DD/ObjectMapper" "2.2.5"
 github "onevcat/Kingfisher" ~> 3.8.0
 github "schickling/Device.swift"
 github "xmartlabs/XLPagerTabStrip" ~> 7.0
+github "zekunyan/TTGSnackbar" ~> 1.7.1

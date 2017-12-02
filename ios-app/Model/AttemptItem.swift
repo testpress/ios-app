@@ -27,7 +27,7 @@ import ObjectMapper
 
 public class AttemptItem {
     var url: String?;
-    var question: AttemptQuestion?;
+    var question: AttemptQuestion!;
     var review: Bool! {
        didSet { review = review != nil && review }
     }
@@ -36,6 +36,7 @@ public class AttemptItem {
     var selectedAnswers: [Int] = [];
     var savedAnswers: [Int]!;
     var order: Int?
+    var commentsCount: Int!
     
     public required init?(map: Map) {
     }
@@ -62,5 +63,6 @@ extension AttemptItem: TestpressModel {
         selectedAnswers <- map["selected_answers"]
         savedAnswers <- map["saved_answers"]
         order <- map["order"]
+        commentsCount <- map["comments_count"]
     }
 }
