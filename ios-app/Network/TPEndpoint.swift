@@ -43,6 +43,7 @@ enum TPEndpoint {
     case getChapters
     case getContents
     case getProfile
+    case getPosts
     case get
     case post
     
@@ -76,6 +77,8 @@ enum TPEndpoint {
             return .get
         case .getProfile:
             return .get
+        case .getPosts:
+            return .get
         case .get:
             return .get
         case .post:
@@ -103,6 +106,8 @@ enum TPEndpoint {
             return "chapters/"
         case .getProfile:
             return "/api/v2.2/me/stats/"
+        case .getPosts:
+            return "/api/v2.2/posts/"
         default:
             return ""
         }

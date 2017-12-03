@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  Post.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,26 +23,38 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import ObjectMapper
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
-    case NewsFlatIcon = "news_flat_icon"
+public class Post {
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    var url: String!
+    var id: Int!
+    var title: String!
+    var summary: String!
+    var shortWebUrl: String!
+    var publishedDate: String!
+    var modified: String!
+    var commentsUrl: String!
+    var commentsCount: Int!
+    var isActive: Bool!
+    var category: Category!
+    
+    public required init?(map: Map) {
     }
 }
 
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+extension Post: TestpressModel {
+    public func mapping(map: Map) {
+        url <- map["url"]
+        id <- map["id"]
+        title <- map["title"]
+        summary <- map["summary"]
+        shortWebUrl <- map["short_web_url"]
+        publishedDate <- map["published_date"]
+        modified <- map["modified"]
+        commentsUrl <- map["comments_url"]
+        commentsCount <- map["comments_count"]
+        isActive <- map["is_active"]
+        category <- map["category"]
     }
 }

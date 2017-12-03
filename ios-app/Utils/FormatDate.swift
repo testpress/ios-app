@@ -33,7 +33,11 @@ public class FormatDate {
         let dateFormatter = DateFormatter()
         var givenFormat = givenFormat
         if givenFormat == nil {
-            givenFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            if dateString.contains(".") {
+                givenFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+            } else {
+                givenFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            }
         }
         dateFormatter.dateFormat = givenFormat
         dateFormatter.timeZone = TimeZone(identifier: "UTC")
@@ -74,26 +78,16 @@ public class FormatDate {
         return format(date: date, requiredFormat: requiredFormat)
     }
     
-   
-    
     static func compareDate(dateString1: String,
                             dateString2: String,
                             givenFormat: String? = nil) -> Bool {
         
-        var givenFormat = givenFormat
-        if givenFormat == nil {
-            givenFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
-        }
         let date1 = getDate(from: dateString1, givenFormat: givenFormat)!
         let date2 = getDate(from: dateString2, givenFormat: givenFormat)!
         return date1 > date2
     }
     
     static func getElapsedTime(dateString: String, givenFormat: String? = nil) -> String {
-        var givenFormat = givenFormat
-        if givenFormat == nil {
-            givenFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
-        }
         guard let date = getDate(from: dateString, givenFormat: givenFormat) else {
             return ""
         }

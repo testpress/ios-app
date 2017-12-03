@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  Category.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,26 +23,28 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import ObjectMapper
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
-    case NewsFlatIcon = "news_flat_icon"
+public class Category {
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    var id: Int!
+    var name: String!
+    var color: String!
+    var slug: String!
+    var order: Int!
+    var is_starred: Bool!
+    
+    public required init?(map: Map) {
     }
 }
 
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+extension Category: TestpressModel {
+    public func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+        color <- map["color"]
+        slug <- map["slug"]
+        order <- map["order"]
+        is_starred <- map["is_starred"]
     }
 }

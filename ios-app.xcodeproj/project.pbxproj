@@ -24,6 +24,11 @@
 		2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8021FCE9A37009C686C /* CommentPager.swift */; };
 		2F48C8051FD030A7009C686C /* icomoon in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8041FD030A7009C686C /* icomoon */; };
 		2F48C8071FD13ABD009C686C /* TTGSnackbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F48C8061FD13ABC009C686C /* TTGSnackbar.framework */; };
+		2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80A1FD288C6009C686C /* PostTableViewController.swift */; };
+		2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80C1FD28902009C686C /* PostTableViewCell.swift */; };
+		2F48C80F1FD2899E009C686C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80E1FD2899E009C686C /* Post.swift */; };
+		2F48C8111FD28E7A009C686C /* PostPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8101FD28E7A009C686C /* PostPager.swift */; };
+		2F48C8131FD3E417009C686C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8121FD3E417009C686C /* Category.swift */; };
 		2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */; };
 		2F6F167B1FC3F08900FB768C /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
 		2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */; };
@@ -154,6 +159,11 @@
 		2F48C8021FCE9A37009C686C /* CommentPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentPager.swift; sourceTree = "<group>"; };
 		2F48C8041FD030A7009C686C /* icomoon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icomoon; sourceTree = "<group>"; };
 		2F48C8061FD13ABC009C686C /* TTGSnackbar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTGSnackbar.framework; path = Carthage/Build/iOS/TTGSnackbar.framework; sourceTree = "<group>"; };
+		2F48C80A1FD288C6009C686C /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
+		2F48C80C1FD28902009C686C /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		2F48C80E1FD2899E009C686C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		2F48C8101FD28E7A009C686C /* PostPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPager.swift; sourceTree = "<group>"; };
+		2F48C8121FD3E417009C686C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStartExamViewController.swift; sourceTree = "<group>"; };
 		2F6F167A1FC3F08900FB768C /* typebase.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = typebase.css; sourceTree = "<group>"; };
 		2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContent.swift; sourceTree = "<group>"; };
@@ -408,6 +418,8 @@
 				2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */,
 				2FC0F28D1F861A860092BFDC /* LoginViewController.swift */,
 				2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */,
+				2F48C80C1FD28902009C686C /* PostTableViewCell.swift */,
+				2F48C80A1FD288C6009C686C /* PostTableViewController.swift */,
 				2FC0F28F1F861A860092BFDC /* ProfileViewController.swift */,
 				2FC0F2901F861A860092BFDC /* QuestionsControllerSource.swift */,
 				2F1474781F8B898F0017151B /* QuestionListViewController.swift */,
@@ -436,6 +448,7 @@
 				2FC0F2C41F86385B0092BFDC /* AttemptAnswer.swift */,
 				2FC0F2C51F86385B0092BFDC /* AttemptItem.swift */,
 				2FC0F2C61F86385B0092BFDC /* AttemptQuestion.swift */,
+				2F48C8121FD3E417009C686C /* Category.swift */,
 				2F763D0E1FBECBBC0033D495 /* Chapter.swift */,
 				2F763CFD1FBD7AE40033D495 /* Course.swift */,
 				2F48C7FE1FCE9750009C686C /* Comment.swift */,
@@ -443,6 +456,7 @@
 				2F48C8001FCE9963009C686C /* ContentObject.swift */,
 				2FC0F2C71F86385B0092BFDC /* Exam.swift */,
 				2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */,
+				2F48C80E1FD2899E009C686C /* Post.swift */,
 				2FC0F2C81F86385B0092BFDC /* RegistrationError.swift */,
 				2FC0F2C91F86385B0092BFDC /* TPApiResponse.swift */,
 				2FC0F2CA1F86385B0092BFDC /* TPAuthToken.swift */,
@@ -472,6 +486,7 @@
 				2F96997F1FC2A8E0001B2B18 /* ContentPager.swift */,
 				2F763D051FBDA89C0033D495 /* CoursePager.swift */,
 				2FC0F2EB1F863B080092BFDC /* ExamPager.swift */,
+				2F48C8101FD28E7A009C686C /* PostPager.swift */,
 				2FC0F2EC1F863B080092BFDC /* TPApiClient.swift */,
 				2FC0F2ED1F863B080092BFDC /* TPBasePager.swift */,
 				2FC0F2EE1F863B080092BFDC /* TPEndpoint.swift */,
@@ -628,7 +643,9 @@
 			files = (
 				2FC0F2F11F863B160092BFDC /* TPApiClient.swift in Sources */,
 				2FD846601FC30D1900D6F016 /* ContentDetailDataSource.swift in Sources */,
+				2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */,
 				2F6F167F1FC4164100FB768C /* Reachability.swift in Sources */,
+				2F48C80F1FD2899E009C686C /* Post.swift in Sources */,
 				2FC0F3121F863BBD0092BFDC /* CALayerBorderColor.swift in Sources */,
 				2FC0F2FB1F863B7E0092BFDC /* BaseQuestionsDataSource.swift in Sources */,
 				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
@@ -660,6 +677,7 @@
 				2FC0F2E81F863AE80092BFDC /* User.swift in Sources */,
 				2F70F4D71F9F1C3300D30755 /* BaseQuestionsListViewController.swift in Sources */,
 				2FC0F3101F863BA90092BFDC /* TestReportViewController.swift in Sources */,
+				2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */,
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
 				2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */,
 				2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */,
@@ -688,6 +706,7 @@
 				2FC0F2F41F863B280092BFDC /* Constants.swift in Sources */,
 				2F763D0F1FBECBBC0033D495 /* Chapter.swift in Sources */,
 				2FC0F2E41F863ADC0092BFDC /* TPApiResponse.swift in Sources */,
+				2F48C8111FD28E7A009C686C /* PostPager.swift in Sources */,
 				2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */,
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
 				2FC0F2DE1F863ACA0092BFDC /* Attempt.swift in Sources */,
@@ -705,6 +724,7 @@
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
 				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,
 				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
+				2F48C8131FD3E417009C686C /* Category.swift in Sources */,
 				2FC0F2E61F863AE30092BFDC /* TPError.swift in Sources */,
 				2FC0F2E31F863ADA0092BFDC /* RegistrationError.swift in Sources */,
 				2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */,

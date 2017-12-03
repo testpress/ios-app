@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  PostPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,26 +23,20 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
-
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
-    case NewsFlatIcon = "news_flat_icon"
+class PostPager: TPBasePager<Post> {
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    override func getItems(page: Int) {
+        queryParams.updateValue("-published_date", forKey: Constants.ORDER)
+        queryParams.updateValue(String(page), forKey: Constants.PAGE)
+        TPApiClient.getListItems(
+            endpointProvider: TPEndpointProvider(.getPosts, queryParams: queryParams),
+            completion: resonseHandler!,
+            type: Post.self
+        )
     }
-}
-
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+    
+    override func getId(resource: Post) -> Int {
+        return resource.id!
     }
+    
 }
