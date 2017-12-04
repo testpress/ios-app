@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Post Detail View Controller-->
+        <scene sceneID="Rms-9V-5XV">
+            <objects>
+                <viewController storyboardIdentifier="PostDetailViewController" id="zXR-ST-QOC" customClass="PostDetailViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="I5h-OF-XWw"/>
+                        <viewControllerLayoutGuide type="bottom" id="zKB-yC-iXp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hZI-DX-8ev">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RRh-aS-IhR">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Article" id="Pgl-Pw-xJ8">
+                                        <barButtonItem key="leftBarButtonItem" image="ic_navigate_before_36pt" style="done" id="Iyh-Mg-suZ">
+                                            <inset key="imageInsets" minX="-10" minY="0.0" maxX="-20" maxY="0.0"/>
+                                            <connections>
+                                                <action selector="back" destination="zXR-ST-QOC" id="Nxa-Rw-tLp"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xME-oG-yUH">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RRh-aS-IhR" firstAttribute="top" secondItem="aC0-f8-OEW" secondAttribute="top" id="Bfe-t3-wcq"/>
+                            <constraint firstItem="aC0-f8-OEW" firstAttribute="bottom" secondItem="xME-oG-yUH" secondAttribute="bottom" id="GzX-dL-wuv"/>
+                            <constraint firstItem="RRh-aS-IhR" firstAttribute="leading" secondItem="aC0-f8-OEW" secondAttribute="leading" id="KS2-oM-shu"/>
+                            <constraint firstItem="aC0-f8-OEW" firstAttribute="trailing" secondItem="xME-oG-yUH" secondAttribute="trailing" id="P9c-7D-CFs"/>
+                            <constraint firstItem="xME-oG-yUH" firstAttribute="leading" secondItem="aC0-f8-OEW" secondAttribute="leading" id="Y9I-9l-Crm"/>
+                            <constraint firstItem="xME-oG-yUH" firstAttribute="top" secondItem="RRh-aS-IhR" secondAttribute="bottom" id="c6N-4H-tYn"/>
+                            <constraint firstItem="RRh-aS-IhR" firstAttribute="trailing" secondItem="aC0-f8-OEW" secondAttribute="trailing" id="rYN-mv-FYI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aC0-f8-OEW"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="xME-oG-yUH" id="kbM-C9-bZ8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QKn-nu-HLw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1545" y="152"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_navigate_before_36pt" width="36" height="36"/>
+    </resources>
+</document>

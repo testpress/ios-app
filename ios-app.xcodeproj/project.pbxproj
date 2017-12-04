@@ -29,6 +29,8 @@
 		2F48C80F1FD2899E009C686C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80E1FD2899E009C686C /* Post.swift */; };
 		2F48C8111FD28E7A009C686C /* PostPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8101FD28E7A009C686C /* PostPager.swift */; };
 		2F48C8131FD3E417009C686C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8121FD3E417009C686C /* Category.swift */; };
+		2F48C8161FD3F6BD009C686C /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8141FD3F6BD009C686C /* Post.storyboard */; };
+		2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */; };
 		2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */; };
 		2F6F167B1FC3F08900FB768C /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
 		2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */; };
@@ -164,6 +166,8 @@
 		2F48C80E1FD2899E009C686C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		2F48C8101FD28E7A009C686C /* PostPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPager.swift; sourceTree = "<group>"; };
 		2F48C8121FD3E417009C686C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		2F48C8151FD3F6BD009C686C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Post.storyboard; sourceTree = "<group>"; };
+		2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStartExamViewController.swift; sourceTree = "<group>"; };
 		2F6F167A1FC3F08900FB768C /* typebase.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = typebase.css; sourceTree = "<group>"; };
 		2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContent.swift; sourceTree = "<group>"; };
@@ -314,6 +318,7 @@
 				2F763D091FBEC7260033D495 /* ChapterContent.storyboard */,
 				2F7179521EC740C6009114C4 /* ExamReview.storyboard */,
 				2F26ADE91E8249D70031E6F4 /* Main.storyboard */,
+				2F48C8141FD3F6BD009C686C /* Post.storyboard */,
 				2F7179541EC740C6009114C4 /* TestEngine.storyboard */,
 				2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */,
 				2F26ADF11E8249D70031E6F4 /* Info.plist */,
@@ -418,6 +423,7 @@
 				2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */,
 				2FC0F28D1F861A860092BFDC /* LoginViewController.swift */,
 				2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */,
+				2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */,
 				2F48C80C1FD28902009C686C /* PostTableViewCell.swift */,
 				2F48C80A1FD288C6009C686C /* PostTableViewController.swift */,
 				2FC0F28F1F861A860092BFDC /* ProfileViewController.swift */,
@@ -600,6 +606,7 @@
 				2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */,
 				2FC0F3011F863B950092BFDC /* EmptyView.xib in Resources */,
 				2FC0F3191F863BCE0092BFDC /* Rubik-Medium.ttf in Resources */,
+				2F48C8161FD3F6BD009C686C /* Post.storyboard in Resources */,
 				2F763D0B1FBEC7260033D495 /* ChapterContent.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -666,6 +673,7 @@
 				2FC0F2DF1F863ACD0092BFDC /* AttemptAnswer.swift in Sources */,
 				2FC0F2E01F863AD00092BFDC /* AttemptQuestion.swift in Sources */,
 				2FC0F3031F863B9B0092BFDC /* ExamsTableViewController.swift in Sources */,
+				2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */,
 				2FC0F30E1F863BA90092BFDC /* SuccessViewController.swift in Sources */,
 				2FC0F3041F863B9E0092BFDC /* ExamsTabViewController.swift in Sources */,
 				2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */,
@@ -756,6 +764,14 @@
 				2F26ADEA1E8249D70031E6F4 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2F48C8141FD3F6BD009C686C /* Post.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F48C8151FD3F6BD009C686C /* Base */,
+			);
+			name = Post.storyboard;
 			sourceTree = "<group>";
 		};
 		2F7179521EC740C6009114C4 /* ExamReview.storyboard */ = {

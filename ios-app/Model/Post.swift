@@ -38,6 +38,7 @@ public class Post {
     var commentsCount: Int!
     var isActive: Bool!
     var category: Category!
+    var contentHtml: String!
     
     public required init?(map: Map) {
     }
@@ -56,5 +57,6 @@ extension Post: TestpressModel {
         commentsCount <- map["comments_count"]
         isActive <- map["is_active"]
         category <- map["category"]
+        contentHtml <- map["content_html"]
     }
 }

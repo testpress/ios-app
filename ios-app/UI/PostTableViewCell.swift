@@ -55,6 +55,12 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @objc func onItemClick() {
+        let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.POST_DETAIL_VIEW_CONTROLLER) as! PostDetailViewController
+        
+        viewController.post = post
+        parentViewController.present(viewController, animated: true, completion: nil)
     }
     
 }

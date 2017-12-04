@@ -83,6 +83,25 @@ extension BaseWebViewController: WKNavigationDelegate {
             webViewDelegate.onFinishLoadingWebView()
         }
     }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        if navigationAction.navigationType == .linkActivated,
+            let url = navigationAction.request.url, UIApplication.shared.canOpenURL(url) {
+            
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    // openURL(_:) is deprecated in iOS 10+.
+                    UIApplication.shared.openURL(url)
+                }
+                decisionHandler(.cancel)
+                return
+        }
+        decisionHandler(.allow)
+    }
+
 }
 
 protocol WKWebViewDelegate {
