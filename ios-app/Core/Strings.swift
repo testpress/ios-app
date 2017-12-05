@@ -32,6 +32,7 @@ struct Strings {
     static let TRY_AGAIN = "Try Again"
     
     static let NETWORK_ERROR = "Network Error"
+    static let NO_INTERNET_CONNECTION = "No Internet Connection"
     static let PLEASE_CHECK_INTERNET_CONNECTION = "Please check your internet connection & try again."
     static let AUTHENTICATION_FAILED = "Authentication failed"
     static let PLEASE_LOGIN = "Please login to see this"

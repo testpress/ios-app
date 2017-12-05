@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-Regular.ttf">
+            <string>Rubik-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Post Detail View Controller-->
         <scene sceneID="Rms-9V-5XV">
@@ -36,18 +41,65 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xME-oG-yUH">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKm-MU-x0M">
+                                <rect key="frame" x="0.0" y="604" width="375" height="8"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="8" id="PeX-4K-qWo"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QyO-JZ-m3F">
+                                <rect key="frame" x="10" y="612" width="365" height="50"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LxW-0M-2BC">
+                                        <rect key="frame" x="0.0" y="10" width="310" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="_placeholderLabel.text" value="Write a Comment.."/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                <color key="value" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sok-IE-VHh">
+                                        <rect key="frame" x="320" y="5" width="45" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="JpC-Mr-Ag9"/>
+                                            <constraint firstAttribute="width" constant="45" id="jBE-HE-Fvc"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="imageEdgeInsets" minX="5" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="paper_plane"/>
+                                        <connections>
+                                            <action selector="postComment:" destination="zXR-ST-QOC" eventType="touchUpInside" id="c1T-fF-ZBM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="LxW-0M-2BC" firstAttribute="top" secondItem="QyO-JZ-m3F" secondAttribute="top" constant="10" id="QnG-TM-cEq"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="iHV-OV-sAp"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RRh-aS-IhR" firstAttribute="top" secondItem="aC0-f8-OEW" secondAttribute="top" id="Bfe-t3-wcq"/>
-                            <constraint firstItem="aC0-f8-OEW" firstAttribute="bottom" secondItem="xME-oG-yUH" secondAttribute="bottom" id="GzX-dL-wuv"/>
+                            <constraint firstItem="QyO-JZ-m3F" firstAttribute="leading" secondItem="aC0-f8-OEW" secondAttribute="leading" constant="10" id="DqZ-di-YxK"/>
+                            <constraint firstItem="QKm-MU-x0M" firstAttribute="trailing" secondItem="aC0-f8-OEW" secondAttribute="trailing" id="EQ7-9F-fip"/>
+                            <constraint firstItem="QyO-JZ-m3F" firstAttribute="top" secondItem="xME-oG-yUH" secondAttribute="bottom" id="GzX-dL-wuv"/>
                             <constraint firstItem="RRh-aS-IhR" firstAttribute="leading" secondItem="aC0-f8-OEW" secondAttribute="leading" id="KS2-oM-shu"/>
                             <constraint firstItem="aC0-f8-OEW" firstAttribute="trailing" secondItem="xME-oG-yUH" secondAttribute="trailing" id="P9c-7D-CFs"/>
                             <constraint firstItem="xME-oG-yUH" firstAttribute="leading" secondItem="aC0-f8-OEW" secondAttribute="leading" id="Y9I-9l-Crm"/>
+                            <constraint firstItem="aC0-f8-OEW" firstAttribute="bottom" secondItem="QyO-JZ-m3F" secondAttribute="bottom" constant="5" id="bbf-5t-APK"/>
                             <constraint firstItem="xME-oG-yUH" firstAttribute="top" secondItem="RRh-aS-IhR" secondAttribute="bottom" id="c6N-4H-tYn"/>
+                            <constraint firstItem="QKm-MU-x0M" firstAttribute="leading" secondItem="aC0-f8-OEW" secondAttribute="leading" id="cNv-Zj-6iW"/>
+                            <constraint firstItem="QyO-JZ-m3F" firstAttribute="trailing" secondItem="aC0-f8-OEW" secondAttribute="trailing" id="gMh-XY-pLu"/>
+                            <constraint firstItem="QyO-JZ-m3F" firstAttribute="top" secondItem="QKm-MU-x0M" secondAttribute="bottom" id="lku-xV-guP"/>
                             <constraint firstItem="RRh-aS-IhR" firstAttribute="trailing" secondItem="aC0-f8-OEW" secondAttribute="trailing" id="rYN-mv-FYI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aC0-f8-OEW"/>
@@ -58,15 +110,18 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="bottomShadowView" destination="QKm-MU-x0M" id="rhc-CE-5gM"/>
+                        <outlet property="commentBox" destination="LxW-0M-2BC" id="KjL-RL-1FY"/>
                         <outlet property="contentView" destination="xME-oG-yUH" id="kbM-C9-bZ8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QKn-nu-HLw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1545" y="152"/>
+            <point key="canvasLocation" x="1544.8" y="151.57421289355324"/>
         </scene>
     </scenes>
     <resources>
         <image name="ic_navigate_before_36pt" width="36" height="36"/>
+        <image name="paper_plane" width="32" height="32"/>
     </resources>
 </document>

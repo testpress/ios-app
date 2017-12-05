@@ -20,17 +20,12 @@ function hideNewCommentsLoading() {
     loader.style.display = "none";
 }
 
-function displayCommentHeader() {
-    var commentHeading = document.getElementsByClassName("comment_heading")[0];
-    commentHeading.style.display = "block";
-}
-
-function appendPreviousCommentItems(text) {
+function appendCommentItemsAtBottom(text) {
     var div = document.getElementById('comments_layout');
     div.innerHTML += text;
 }
 
-function appendNewCommentItems(text) {
+function appendCommentItemsAtTop(text) {
     var div = document.getElementById('comments_layout');
     text += div.innerHTML;
     div.innerHTML = text
@@ -74,4 +69,14 @@ function sendComment() {
 function clearCommentBox() {
     var commentBox = document.getElementsByClassName("comment_box")[0];
     commentBox.innerHTML = ""
+}
+
+function displayEmptyCommentsDescription() {
+    var label = document.getElementById("empty_comments_description");
+    label.style.display = "block";
+}
+
+function hideEmptyCommentsDescription() {
+    var label = document.getElementById("empty_comments_description");
+    label.style.display = "none";
 }

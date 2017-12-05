@@ -110,10 +110,10 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             self.comments.append(contentsOf: comments)
             var html = ""
             for comment in comments {
-                html += WebViewUtils.getCommentItemTags(comment)
+                html += WebViewUtils.getCommentItemTags(comment, seperatorAtTop: true)
             }
             html = WebViewUtils.formatHtmlToAppendInJavascript(html)
-            var js = "hidePreviousCommentsLoading(); \n appendPreviousCommentItems(\"\(html)\");"
+            var js = "hidePreviousCommentsLoading(); \n appendCommentItemsAtBottom(\"\(html)\");"
             if self.getPreviousCommentsPager().hasMore {
                 js += "\ndisplayLoadMoreCommentsButton('" + Strings.LOAD_MORE_COMMENTS + "');"
             }
@@ -153,7 +153,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 html += WebViewUtils.getCommentItemTags(comment)
             }
             html = WebViewUtils.formatHtmlToAppendInJavascript(html)
-            let js = "hideNewCommentsLoading(); \n appendNewCommentItems(\"\(html)\");"
+            let js = "hideNewCommentsLoading(); \n appendCommentItemsAtTop(\"\(html)\");"
             self.evaluateJavaScript(js)
         })
     }
@@ -277,12 +277,11 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                             "onclick='sendComment()'></span></div>" +
                 "</div>"
         
-        
         html += WebViewUtils.getLoadingProgressBar(className: "new_comments_loading_layout",
                                                    visible: false)
         
         html += "<div class='load_new_comments_layout' style='display:none;'>" +
-                    "<hr style='margin-top: 10px;'>" +
+                    "<hr>" +
                     "<div class='load_new_comments' onclick='loadNewComments()'></div>" +
                 "</div>"
         
@@ -290,7 +289,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         
         html += WebViewUtils.getLoadingProgressBar(className: "preview_comments_loading_layout")
         html += "<div class='load_more_comments_layout' style='display:none;'>" +
-                    "<hr style='margin-top: 10px;'>" +
+                    "<hr>" +
                     "<div class='load_more_comments' onclick='loadMoreComments()'></div>" +
                 "</div>"
         

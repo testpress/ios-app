@@ -31,6 +31,7 @@
 		2F48C8131FD3E417009C686C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8121FD3E417009C686C /* Category.swift */; };
 		2F48C8161FD3F6BD009C686C /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8141FD3F6BD009C686C /* Post.storyboard */; };
 		2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */; };
+		2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F48C8191FD566B2009C686C /* IQKeyboardManagerSwift.framework */; };
 		2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */; };
 		2F6F167B1FC3F08900FB768C /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
 		2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */; };
@@ -168,6 +169,7 @@
 		2F48C8121FD3E417009C686C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		2F48C8151FD3F6BD009C686C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Post.storyboard; sourceTree = "<group>"; };
 		2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		2F48C8191FD566B2009C686C /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStartExamViewController.swift; sourceTree = "<group>"; };
 		2F6F167A1FC3F08900FB768C /* typebase.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = typebase.css; sourceTree = "<group>"; };
 		2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContent.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			files = (
 				2F763CFF1FBD83340033D495 /* Alamofire.framework in Frameworks */,
 				2F763D001FBD83340033D495 /* Device.framework in Frameworks */,
+				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
 				2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */,
@@ -338,6 +341,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F48C8191FD566B2009C686C /* IQKeyboardManagerSwift.framework */,
 				2F48C8061FD13ABC009C686C /* TTGSnackbar.framework */,
 				2F1474701F8B73FF0017151B /* SlideMenuControllerSwift.framework */,
 				2FC0F31E1F866BC30092BFDC /* Device.framework */,
@@ -634,6 +638,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Device.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SlideMenuControllerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TTGSnackbar.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
 			);
 			outputPaths = (
 			);

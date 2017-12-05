@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import IQKeyboardManagerSwift
 import UIKit
 
 @UIApplicationMain
@@ -51,6 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UITabBarItem.appearance().titlePositionAdjustment =
                 UIOffset(horizontal: 0, vertical: -5)
         }
+        
+        IQKeyboardManager.sharedManager().enable = true
         
         // Clear keychain items if app is launching the first time after installation
         let userDefaults = UserDefaults.standard

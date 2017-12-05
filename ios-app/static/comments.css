@@ -6,9 +6,16 @@
     margin-top: 15px;
     margin-left: 10px;
     margin-right: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 1rem;
     font-family: 'Rubik-Medium', sans-serif;
+}
+
+#empty_comments_description {
+    margin:20px;
+    color: #888888;
+    text-align: center;
+    font-family: 'Rubik-Regular', serif;
 }
 
 .avatar {
@@ -42,6 +49,7 @@
 }
 
 .comment_content {
+    word-break: break-all;
     margin-top:6px;
 }
 

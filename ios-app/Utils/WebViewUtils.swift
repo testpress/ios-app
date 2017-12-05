@@ -138,14 +138,21 @@ class WebViewUtils {
         return "<div class='comment_heading'>" + headingText + "</div>"
     }
     
-    public static func getCommentItemTags(_ comment: Comment) -> String {
-        var html = "<hr><div class='comment_item'><img src='" + comment.user.mediumImage! + "' class='avatar'>"
+    public static func getCommentItemTags(_ comment: Comment,
+                                          seperatorAtTop: Bool = false) -> String {
+        
+        var html = "<div class='comment_item'><img src='" + comment.user.mediumImage! + "' class='avatar'>"
         html += "<div class='comment_detail_layout'><div style='display:inline-block;'>"
         html += "<div class='username'>" + comment.user.displayName + "</div>·"
         html += "<div class='commentted_time'>" +
                     FormatDate.getElapsedTime(dateString: comment.created) +
                 "</div></div>"
         html += "<div class='comment_content'>" + comment.comment + "</div></div></div>"
+        if seperatorAtTop {
+            html = "<hr>" + html
+        } else {
+            html += "<hr>"
+        }
         return html
     }
     
