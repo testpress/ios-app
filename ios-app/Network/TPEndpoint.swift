@@ -45,6 +45,7 @@ enum TPEndpoint {
     case getProfile
     case getPosts
     case getForum
+    case createForumPost
     case get
     case post
     
@@ -82,6 +83,8 @@ enum TPEndpoint {
             return .get
         case .getForum:
             return .get
+        case .createForumPost:
+            return .post
         case .get:
             return .get
         case .post:
@@ -111,7 +114,7 @@ enum TPEndpoint {
             return "/api/v2.2/me/stats/"
         case .getPosts:
             return "/api/v2.2/posts/"
-        case .getForum:
+        case .getForum, .createForumPost:
             return "/api/v2.3/forum/"
         default:
             return ""

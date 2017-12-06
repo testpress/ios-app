@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  PostsViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,26 +25,25 @@
 
 import UIKit
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
-    case NewsFlatIcon = "news_flat_icon"
-    case DiscussionFlatIcon = "discussion_flat_icon"
-    case SuccessTick = "success_tick"
+class PostsViewController: UIViewController {
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    @IBOutlet weak var postCreateButton: UIButton!
+    @IBOutlet weak var containerView: UIView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        UIUtils.setButtonDropShadow(postCreateButton)
     }
-}
-
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+    
+    @IBAction func composePost(_ sender: Any) {
+        let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.POST_CREATION_VIEW_CONTROLLER) as! PostCreationViewController
+        
+        viewController.parentTableViewController =
+            containerView.subviews[0].viewController() as! TPBasePagedTableViewController<Post>
+        
+        present(viewController, animated: true, completion: nil)
     }
+    
 }

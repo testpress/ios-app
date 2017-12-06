@@ -133,10 +133,12 @@ class TPApiClient {
         })
     }
     
-    static func request<T: TestpressModel>(type: T.Type, endpointProvider: TPEndpointProvider,
+    static func request<T: TestpressModel>(type: T.Type,
+                                           endpointProvider: TPEndpointProvider,
+                                           parameters: Parameters? = nil,
                                            completion: @escaping(T?, TPError?) -> Void) {
         
-        apiCall(endpointProvider: endpointProvider, completion: {
+        apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
             json, error in
             var dataModel: T? = nil
             if let json = json {

@@ -92,6 +92,9 @@ struct Strings {
     
     static let ACTIVATION_MAIL_SENT = "An activation email has been sent. Please check your email and click on the link to activate your account."
     
+    static let YOU_MADE_IT = "You Made It!"
+    static let POST_CREATED_DESCRIPTION = "You have successfully created a new discussion, wait for your folks responds"
+    
     static let LOGOUT = "Log Out"
     static let LOGOUT_CONFIRM_MESSAGE = "Are you sure want to log out?"
     
