@@ -58,6 +58,9 @@ struct Strings {
     static let NO_POSTS = "Breaking news!"
     static let NO_POSTS_DESCRIPTION = "Looks like the admin didn’t update this news page yet. Check back in a bit?"
     
+    static let NO_FORUM_POSTS = "Discuss with folks!"
+    static let NO_FORUM_POSTS_DESCRIPTION = "Looks like no one created a discussion yet. Create a discussion about your doubt or share your knowledge?"
+    
     static let RESUME_EXAM = "Resume Exam"
     
     static let CORRECT_ANSWER = "Correct Answer:"

@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  ForumTableViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,25 +25,32 @@
 
 import UIKit
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
-    case NewsFlatIcon = "news_flat_icon"
-    case DiscussionFlatIcon = "discussion_flat_icon"
+class ForumTableViewController: TPBasePagedTableViewController<Post>,
+    BasePagedTableViewDelegate {
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(pager: PostPager(endpoint: .getForum), coder: aDecoder)
+        delegate = self
     }
-}
-
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+    
+    // MARK: - Table view data source
+    override func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.POST_TABLE_VIEW_CELL, for: indexPath) as! PostTableViewCell
+        
+        cell.initCell(items[indexPath.row], viewController: self)
+        return cell
     }
+    
+    func onItemsLoaded() {
+        items = items.sorted(by: {
+            FormatDate.compareDate(dateString1:  $0.publishedDate!, dateString2: $1.publishedDate!)
+        })
+    }
+    
+    override func setEmptyText() {
+        emptyView.setValues(image: Images.DiscussionFlatIcon.image, title: Strings.NO_FORUM_POSTS,
+                            description: Strings.NO_FORUM_POSTS_DESCRIPTION)
+    }
+    
 }

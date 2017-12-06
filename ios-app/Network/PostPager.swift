@@ -25,11 +25,18 @@
 
 class PostPager: TPBasePager<Post> {
     
+    let endpoint: TPEndpoint
+    
+    init(endpoint: TPEndpoint = .getPosts) {
+        self.endpoint = endpoint
+        super.init()
+    }
+    
     override func getItems(page: Int) {
         queryParams.updateValue("-published_date", forKey: Constants.ORDER)
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(.getPosts, queryParams: queryParams),
+            endpointProvider: TPEndpointProvider(endpoint, queryParams: queryParams),
             completion: resonseHandler!,
             type: Post.self
         )

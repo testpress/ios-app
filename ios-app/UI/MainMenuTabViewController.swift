@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  MainMenuTabViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,25 +25,12 @@
 
 import UIKit
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
-    case NewsFlatIcon = "news_flat_icon"
-    case DiscussionFlatIcon = "discussion_flat_icon"
+class MainMenuTabViewController: UITabBarController {
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        viewControllers?.remove(at: 1)
     }
-}
-
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
-    }
+    
 }
