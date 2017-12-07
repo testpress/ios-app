@@ -39,11 +39,12 @@ class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPick
     @IBOutlet weak var categoryPickerView: UIPickerView!
     @IBOutlet weak var pickTopicLayout: UIStackView!
     
+    var categories = [Category]()
     var postCreated: Bool = false
     var parentTableViewController: TPBasePagedTableViewController<Post>!
+    var activityIndicator: UIActivityIndicatorView!
     var emptyView: EmptyView!
     let loadingDialogController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
-    let pickerViewItems = ["Doubt", "Knowledge sharing", "Other"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +53,49 @@ class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPick
         postContent.delegate = self
         categoryPickerView.selectRow(1, inComponent: 0, animated: false)
         emptyView = EmptyView.getInstance(parentView: contentView)
-        pickTopicLayout.isHidden = true
+        activityIndicator = UIUtils.initActivityIndicator(parentView: contentView)
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
+        fetchCategory()
+    }
+    
+    func fetchCategory() {
+        activityIndicator.startAnimating()
+        let endpoint = TPEndpointProvider(.getForumCategories)
+        TPApiClient.getListItems(endpointProvider: endpoint, completion: { response, error in
+            if let error = error {
+                debugPrint(error.message ?? "No error")
+                debugPrint(error.kind)
+                var retryHandler: (() -> Void)?
+                if error.kind == .network {
+                    retryHandler = {
+                        self.emptyView.hide()
+                        self.fetchCategory()
+                    }
+                }
+                if (self.activityIndicator?.isAnimating)! {
+                    self.activityIndicator?.stopAnimating()
+                }
+                let (image, title, description) = error.getDisplayInfo()
+                self.emptyView.show(image: image, title: title, description: description,
+                                    retryHandler: retryHandler)
+                return
+            }
+            
+            self.categories = response!.results
+            self.activityIndicator.stopAnimating()
+            self.categoryPickerView.reloadAllComponents()
+            if !self.categories.isEmpty {
+                let selectedComponent = (self.categoryPickerView.numberOfComponents / 2) + 1
+                self.categoryPickerView.selectRow(
+                    selectedComponent,
+                    inComponent: 0,
+                    animated: false
+                )
+            } else {
+                self.categoryPickerView.isHidden = true
+            }
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        }, type: Category.self)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -60,7 +103,7 @@ class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPick
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerViewItems.count
+        return categories.count
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int,
@@ -71,7 +114,11 @@ class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPick
             label = v as! UILabel
         }
         label.font = UIFont (name: "Rubik", size: 14)
-        label.text =  pickerViewItems[row]
+        if categories.count > row {
+            label.text =  categories[row].name
+        } else {
+            label.text = ""
+        }
         label.textAlignment = .center
         return label
     }
@@ -81,12 +128,17 @@ class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPick
         postContent.resignFirstResponder()
         let title: String! = postTitle.text
         let content: String! = postContent.text
+        let selectedCategoryPostion = categoryPickerView.selectedRow(inComponent: 0)
+        var category: String = "null"
+        if selectedCategoryPostion != -1 {
+            category = categories[selectedCategoryPostion].slug
+        }
         if title == nil || title.elementsEqual("") || content == nil || content.elementsEqual("") {
             return
         }
         present(loadingDialogController, animated: true)
         let endpoint = TPEndpointProvider(.createForumPost)
-        let parameters: Parameters = ["title": title, "content_html": content]
+        let parameters: Parameters = ["title": title, "content_html": content, "category": category]
         TPApiClient.request(type: Post.self, endpointProvider: endpoint, parameters: parameters,
             completion: { post, error in
                 
@@ -124,11 +176,10 @@ class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPick
     }
     
     @IBAction func back() {
-        parentTableViewController.dismiss(animated: false, completion: {
-            if self.postCreated {
-                self.parentTableViewController.items.removeAll()
-            }
-        })
+        if postCreated {
+            parentTableViewController.items.removeAll()
+        }
+        parentTableViewController.dismiss(animated: false, completion: nil)
     }
     
 }
