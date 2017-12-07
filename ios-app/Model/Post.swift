@@ -39,6 +39,8 @@ public class Post {
     var isActive: Bool!
     var category: Category!
     var contentHtml: String!
+    var createdBy: User!
+    var viewsCount: Int!
     
     public required init?(map: Map) {
     }
@@ -58,5 +60,7 @@ extension Post: TestpressModel {
         isActive <- map["is_active"]
         category <- map["category"]
         contentHtml <- map["content_html"]
+        createdBy <- map["created_by"]
+        viewsCount <- map["views_count"]
     }
 }

@@ -37,6 +37,8 @@ enum Images: String {
     case NewsFlatIcon = "news_flat_icon"
     case DiscussionFlatIcon = "discussion_flat_icon"
     case SuccessTick = "success_tick"
+    case TimeIcon = "time_icon"
+    case ViewsIcon = "views_icon"
     
     var image: UIImage {
         return UIImage(asset: self)

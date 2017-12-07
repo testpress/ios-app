@@ -67,6 +67,8 @@
 		2F9B5E171FC54AFC00D67100 /* AttachmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */; };
 		2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */; };
 		2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */; };
+		2FB049BB1FD838860049D5B0 /* post.css in Resources */ = {isa = PBXBuildFile; fileRef = 2FB049BA1FD838860049D5B0 /* post.css */; };
+		2FB049BD1FD839EB0049D5B0 /* ForumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */; };
 		2FC0F2DC1F863AB70092BFDC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DA1F863AAF0092BFDC /* Colors.swift */; };
 		2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DB1F863AAF0092BFDC /* Images.swift */; };
 		2FC0F2DE1F863ACA0092BFDC /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2C31F86385B0092BFDC /* Attempt.swift */; };
@@ -204,6 +206,8 @@
 		2F9E39911F851A76001D51B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TestEngine.storyboard; sourceTree = "<group>"; };
 		2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTabViewController.swift; sourceTree = "<group>"; };
 		2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumTableViewController.swift; sourceTree = "<group>"; };
+		2FB049BA1FD838860049D5B0 /* post.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = post.css; sourceTree = "<group>"; };
+		2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumTableViewCell.swift; sourceTree = "<group>"; };
 		2FBEDB7B1E82BBD5000CF05C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		2FC0F2531F8617690092BFDC /* CALayerBorderColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerBorderColor.swift; sourceTree = "<group>"; };
@@ -383,8 +387,9 @@
 				2FC0F31C1F863D730092BFDC /* katex */,
 				2F48C7FC1FCDABDE009C686C /* comments.css */,
 				2F48C7FA1FCDA957009C686C /* comments.js */,
-				2F48C7F81FCD9F18009C686C /* progress_loader.css */,
 				2FC0F2731F8619220092BFDC /* MathJaxRender.js */,
+				2F48C7F81FCD9F18009C686C /* progress_loader.css */,
+				2FB049BA1FD838860049D5B0 /* post.css */,
 				2FC0F2741F8619220092BFDC /* PT_Serif-Web-Regular.ttf */,
 				2FC0F2751F8619220092BFDC /* questions_typebase.css */,
 				2FC0F2761F8619220092BFDC /* Rubik-Medium.ttf */,
@@ -435,6 +440,7 @@
 				2FC0F28A1F861A860092BFDC /* ExamsTableViewCell.xib */,
 				2FC0F28B1F861A860092BFDC /* ExamsTableViewController.swift */,
 				2FC0F28C1F861A860092BFDC /* ExamsTabViewController.swift */,
+				2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */,
 				2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */,
 				2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */,
 				2FC0F28D1F861A860092BFDC /* LoginViewController.swift */,
@@ -615,6 +621,7 @@
 				2FC0F3171F863BCE0092BFDC /* PT_Serif-Web-Regular.ttf in Resources */,
 				2F6F167B1FC3F08900FB768C /* typebase.css in Resources */,
 				2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */,
+				2FB049BB1FD838860049D5B0 /* post.css in Resources */,
 				2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */,
 				2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */,
 				2F48C7FB1FCDA957009C686C /* comments.js in Resources */,
@@ -701,6 +708,7 @@
 				2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */,
 				2FC0F2EF1F863B110092BFDC /* ExamPager.swift in Sources */,
 				2FC0F2E71F863AE50092BFDC /* TPModelMapper.swift in Sources */,
+				2FB049BD1FD839EB0049D5B0 /* ForumTableViewCell.swift in Sources */,
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
 				2FC0F30A1F863BA90092BFDC /* ReviewQuestionsViewController.swift in Sources */,
 				2FC0F2E81F863AE80092BFDC /* User.swift in Sources */,

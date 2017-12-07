@@ -42,6 +42,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     private let placeholder = "Write a comment..."
     
     var post: Post!
+    var forum: Bool = false
     var emptyView: EmptyView!
     var loading: Bool = false
     var previousCommentsPager: CommentPager!
@@ -299,8 +300,15 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         })
     }
     
+    func getTitle() -> String {
+        if forum {
+            return WebViewUtils.getFormattedDiscussionTitle(post: post)
+        }
+        return WebViewUtils.getFormattedTitle(title: post.title)
+    }
+    
     func getFormattedContent(_ contentHtml: String) -> String {
-        var html = WebViewUtils.getHeader() + WebViewUtils.getFormattedTitle(title: post.title) +
+        var html = WebViewUtils.getHeader() + getTitle() +
             WebViewUtils.getHtmlContentWithMargin(contentHtml)
         
         html += "<hr style='margin-top:20px;'>"

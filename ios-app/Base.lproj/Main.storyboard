@@ -1336,7 +1336,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostTableViewCell" rowHeight="105" id="q5o-xK-Hod" customClass="PostTableViewCell" customModule="ios_app" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ForumTableViewCell" rowHeight="105" id="q5o-xK-Hod" customClass="ForumTableViewCell" customModule="ios_app" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="105"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q5o-xK-Hod" id="8vp-cn-iIK">
@@ -1373,21 +1373,18 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7gh-VI-wXu">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7gh-VI-wXu">
                                                             <rect key="frame" x="70.5" y="0.0" width="50.5" height="16"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="category_icon" translatesAutoresizingMaskIntoConstraints="NO" id="tnS-7r-7le">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="views_icon" translatesAutoresizingMaskIntoConstraints="NO" id="tnS-7r-7le">
+                                                                    <rect key="frame" x="0.0" y="2.5" width="16" height="11"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="16" id="7Ff-Sg-HuS"/>
-                                                                        <constraint firstAttribute="height" constant="16" id="qyg-bB-SMU"/>
+                                                                        <constraint firstAttribute="height" constant="11" id="qyg-bB-SMU"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwk-cp-oHY">
-                                                                    <rect key="frame" x="21" y="0.0" width="29.5" height="16"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="gkK-6t-dpF"/>
-                                                                    </constraints>
+                                                                    <rect key="frame" x="21" y="1" width="29.5" height="14"/>
                                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                                     <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1407,11 +1404,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="category" destination="lwk-cp-oHY" id="5hA-3I-jcu"/>
-                                    <outlet property="categoryLayout" destination="7gh-VI-wXu" id="eTM-sP-ihw"/>
                                     <outlet property="date" destination="c9I-3u-ye4" id="c8M-md-BQb"/>
                                     <outlet property="postTitle" destination="Y6V-gX-ZHX" id="yrH-JQ-Tex"/>
                                     <outlet property="postViewCell" destination="8vp-cn-iIK" id="A2h-Ij-0p4"/>
+                                    <outlet property="viewsLabel" destination="lwk-cp-oHY" id="olR-zC-NkY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1565,5 +1561,6 @@
         <image name="tests_taken_flat_icon" width="64" height="64"/>
         <image name="time_icon" width="16" height="16"/>
         <image name="tp_exam_icon" width="64" height="64"/>
+        <image name="views_icon" width="16" height="11"/>
     </resources>
 </document>

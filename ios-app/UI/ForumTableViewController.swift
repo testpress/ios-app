@@ -36,7 +36,7 @@ class ForumTableViewController: TPBasePagedTableViewController<Post>,
     // MARK: - Table view data source
     override func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.POST_TABLE_VIEW_CELL, for: indexPath) as! PostTableViewCell
+            withIdentifier: Constants.FORUM_TABLE_VIEW_CELL, for: indexPath) as! ForumTableViewCell
         
         cell.initCell(items[indexPath.row], viewController: self)
         return cell

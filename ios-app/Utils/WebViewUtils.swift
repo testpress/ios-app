@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
 class WebViewUtils {
     
@@ -54,6 +54,7 @@ class WebViewUtils {
         header += "<link rel='stylesheet' type='text/css' href='typebase.css' />"
         header += "<link rel='stylesheet' type='text/css' href='progress_loader.css' />"
         header += "<link rel='stylesheet' type='text/css' href='comments.css' />"
+        header += "<link rel='stylesheet' type='text/css' href='post.css' />"
         header += "<link rel='stylesheet' type='text/css' href='icomoon/style.css' />"
         header += "<script src='comments.js'></script>"
         header += "<link rel='stylesheet' href='katex/katex.min.css' />"
@@ -110,6 +111,38 @@ class WebViewUtils {
     
     public static func getFormattedTitle(title: String) -> String {
         return "<div class='title'>" + title + "</div><hr class='title_separator'>"
+    }
+    
+    public static func getFormattedDiscussionTitle(post: Post) -> String {
+        let timeIconData = UIImagePNGRepresentation(Images.TimeIcon.image)
+        let encodedTimeIcon = timeIconData?.base64EncodedString()
+        let viewsIconData = UIImagePNGRepresentation(Images.ViewsIcon.image)
+        let encodedViewsIcon = viewsIconData?.base64EncodedString()
+        var html = "<div class='discussion_title'>" + post.title + "</div>"
+        
+        html += "<div class='author_layout'>"
+        html += "   <img src='\(post.createdBy.mediumImage!)' class='avatar'/>"
+        html += "   <div class='author_name_layout'>"
+        html += "       <div class='author_name'>" +
+                            post.createdBy.displayName +
+                        "</div>"
+        
+        html += "       <div class='post_details'>" +
+                            "<img class='time_icon' " +
+                                "src='data:image/png;base64,\(encodedTimeIcon!)'/> " +
+                            "<div class='post_details_text' >" +
+                                FormatDate.getElapsedTime(dateString: post.publishedDate) +
+                            "</div>" +
+                            "<img class='views_icon' " +
+                                "src='data:image/png;base64,\(encodedViewsIcon!)'/> " +
+                            "<div class='post_details_text' >\(post.viewsCount!) views</div>" +
+                        "</div>"
+        
+        html += "   </div>" +
+                "</div>"
+        
+        html += "<hr>"
+        return html
     }
     
     public static func getHtmlContentWithMargin(_ content: String) -> String {

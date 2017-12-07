@@ -133,6 +133,7 @@ hr {
 
 .html_content {
     margin: 20px;
+    text-align: justify;
 }
 
 .videoWrapper {

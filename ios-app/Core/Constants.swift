@@ -73,6 +73,7 @@ struct Constants {
     static let POST_STORYBOARD = "Post"
     static let POST_DETAIL_VIEW_CONTROLLER = "PostDetailViewController"
     static let POST_CREATION_VIEW_CONTROLLER = "PostCreationViewController"
+    static let FORUM_TABLE_VIEW_CELL = "ForumTableViewCell"
     
     static let PAGE = "page"
     static let PARENT = "parent"
