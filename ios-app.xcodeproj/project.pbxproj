@@ -18,6 +18,10 @@
 		2F2A41C01FD6ACE900B92C6D /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */; };
 		2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
 		2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
+		2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */; };
+		2F3A53011FDA652A00C64123 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53001FDA652A00C64123 /* Subject.swift */; };
+		2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53021FDA6AE400C64123 /* SubjectPager.swift */; };
+		2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsTableViewCell.swift */; };
 		2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */; };
 		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
 		2F48C7FB1FCDA957009C686C /* comments.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FA1FCDA957009C686C /* comments.js */; };
@@ -35,6 +39,8 @@
 		2F48C8161FD3F6BD009C686C /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8141FD3F6BD009C686C /* Post.storyboard */; };
 		2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */; };
 		2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F48C8191FD566B2009C686C /* IQKeyboardManagerSwift.framework */; };
+		2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */; };
+		2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */; };
 		2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */; };
 		2F6F167B1FC3F08900FB768C /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
 		2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */; };
@@ -58,6 +64,9 @@
 		2F763D0F1FBECBBC0033D495 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D0E1FBECBBC0033D495 /* Chapter.swift */; };
 		2F763D111FBECFD30033D495 /* ChapterPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D101FBECFD30033D495 /* ChapterPager.swift */; };
 		2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */; };
+		2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */; };
+		2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */; };
+		2F936E821FDAD376008C353A /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F936E811FDAD376008C353A /* Charts.framework */; };
 		2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */; };
 		2F96997A1FC2A22A001B2B18 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699791FC2A22A001B2B18 /* Content.swift */; };
 		2F96997C1FC2A625001B2B18 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96997B1FC2A625001B2B18 /* Video.swift */; };
@@ -163,6 +172,10 @@
 		2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQuestionsSlidingViewController.swift; sourceTree = "<group>"; };
 		2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSlidingViewController.swift; sourceTree = "<group>"; };
 		2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsViewController.swift; sourceTree = "<group>"; };
+		2F3A53001FDA652A00C64123 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		2F3A53021FDA6AE400C64123 /* SubjectPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPager.swift; sourceTree = "<group>"; };
+		2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsTableViewCell.swift; sourceTree = "<group>"; };
 		2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentExamAttemptsTableViewController.swift; sourceTree = "<group>"; };
 		2F48C7F81FCD9F18009C686C /* progress_loader.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = progress_loader.css; sourceTree = "<group>"; };
 		2F48C7FA1FCDA957009C686C /* comments.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = comments.js; sourceTree = "<group>"; };
@@ -180,6 +193,8 @@
 		2F48C8151FD3F6BD009C686C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Post.storyboard; sourceTree = "<group>"; };
 		2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		2F48C8191FD566B2009C686C /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
+		2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisLabelFormatter.swift; sourceTree = "<group>"; };
+		2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisPercentValueFormatter.swift; sourceTree = "<group>"; };
 		2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStartExamViewController.swift; sourceTree = "<group>"; };
 		2F6F167A1FC3F08900FB768C /* typebase.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = typebase.css; sourceTree = "<group>"; };
 		2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContent.swift; sourceTree = "<group>"; };
@@ -196,6 +211,9 @@
 		2F763D0E1FBECBBC0033D495 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		2F763D101FBECFD30033D495 /* ChapterPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterPager.swift; sourceTree = "<group>"; };
 		2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCollectionViewCell.swift; sourceTree = "<group>"; };
+		2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectAnalyticsTabViewController.swift; sourceTree = "<group>"; };
+		2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallSubjectAnalyticsViewController.swift; sourceTree = "<group>"; };
+		2F936E811FDAD376008C353A /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTableViewController.swift; sourceTree = "<group>"; };
 		2F9699791FC2A22A001B2B18 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		2F96997B1FC2A625001B2B18 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
@@ -282,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F763CFF1FBD83340033D495 /* Alamofire.framework in Frameworks */,
+				2F936E821FDAD376008C353A /* Charts.framework in Frameworks */,
 				2F763D001FBD83340033D495 /* Device.framework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
@@ -355,6 +374,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F936E811FDAD376008C353A /* Charts.framework */,
 				2F48C8191FD566B2009C686C /* IQKeyboardManagerSwift.framework */,
 				2F48C8061FD13ABC009C686C /* TTGSnackbar.framework */,
 				2F1474701F8B73FF0017151B /* SlideMenuControllerSwift.framework */,
@@ -372,6 +392,8 @@
 			children = (
 				2FC0F2531F8617690092BFDC /* CALayerBorderColor.swift */,
 				2FC0F2541F8617690092BFDC /* FormatDate.swift */,
+				2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */,
+				2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */,
 				2F6F167E1FC4164100FB768C /* Reachability.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
 				2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */,
@@ -443,9 +465,12 @@
 				2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */,
 				2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */,
 				2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */,
+				2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsTableViewCell.swift */,
+				2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */,
 				2FC0F28D1F861A860092BFDC /* LoginViewController.swift */,
 				2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */,
 				2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */,
+				2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */,
 				2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */,
 				2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */,
 				2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */,
@@ -462,6 +487,7 @@
 				2FC0F2941F861A860092BFDC /* ReviewSolutionsViewController.swift */,
 				2FC0F2951F861A860092BFDC /* SignUpViewController.swift */,
 				2FC0F2961F861A860092BFDC /* StartExamScreenViewController.swift */,
+				2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */,
 				2FC0F2971F861A860092BFDC /* SuccessViewController.swift */,
 				2F1474741F8B7BF30017151B /* TestEngineSlidingViewController.swift */,
 				2FC0F2981F861A860092BFDC /* TestEngineViewController.swift */,
@@ -489,6 +515,7 @@
 				2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */,
 				2F48C80E1FD2899E009C686C /* Post.swift */,
 				2FC0F2C81F86385B0092BFDC /* RegistrationError.swift */,
+				2F3A53001FDA652A00C64123 /* Subject.swift */,
 				2FC0F2C91F86385B0092BFDC /* TPApiResponse.swift */,
 				2FC0F2CA1F86385B0092BFDC /* TPAuthToken.swift */,
 				2FC0F2CB1F86385B0092BFDC /* TPError.swift */,
@@ -518,6 +545,7 @@
 				2F763D051FBDA89C0033D495 /* CoursePager.swift */,
 				2FC0F2EB1F863B080092BFDC /* ExamPager.swift */,
 				2F48C8101FD28E7A009C686C /* PostPager.swift */,
+				2F3A53021FDA6AE400C64123 /* SubjectPager.swift */,
 				2FC0F2EC1F863B080092BFDC /* TPApiClient.swift */,
 				2FC0F2ED1F863B080092BFDC /* TPBasePager.swift */,
 				2FC0F2EE1F863B080092BFDC /* TPEndpoint.swift */,
@@ -661,6 +689,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SlideMenuControllerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TTGSnackbar.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 			);
 			outputPaths = (
 			);
@@ -717,6 +746,7 @@
 				2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */,
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
 				2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */,
+				2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */,
 				2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */,
 				2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */,
 				2FC0F30D1F863BA90092BFDC /* StartExamScreenViewController.swift in Sources */,
@@ -736,6 +766,7 @@
 				2FC0F2E11F863AD30092BFDC /* AttemptItem.swift in Sources */,
 				2FC0F3001F863B8F0092BFDC /* ExamsTableViewCell.swift in Sources */,
 				2F96997C1FC2A625001B2B18 /* Video.swift in Sources */,
+				2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */,
 				2FC0F2FC1F863B810092BFDC /* BaseQuestionsPageViewController.swift in Sources */,
 				2FC0F2F91F863B780092BFDC /* AttemptsListViewController.swift in Sources */,
 				2FC0F3131F863BBD0092BFDC /* FormatDate.swift in Sources */,
@@ -745,6 +776,8 @@
 				2F763D0F1FBECBBC0033D495 /* Chapter.swift in Sources */,
 				2FC0F2E41F863ADC0092BFDC /* TPApiResponse.swift in Sources */,
 				2F48C8111FD28E7A009C686C /* PostPager.swift in Sources */,
+				2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */,
+				2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */,
 				2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */,
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
 				2FC0F2DE1F863ACA0092BFDC /* Attempt.swift in Sources */,
@@ -755,16 +788,20 @@
 				2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */,
 				2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */,
 				2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */,
+				2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsTableViewCell.swift in Sources */,
 				2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */,
 				2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */,
 				2F9699801FC2A8E0001B2B18 /* ContentPager.swift in Sources */,
 				2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */,
 				2FC0F2FA1F863B7C0092BFDC /* AttemptsTableViewCell.swift in Sources */,
+				2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */,
 				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
+				2F3A53011FDA652A00C64123 /* Subject.swift in Sources */,
 				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,
 				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
+				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
 				2F48C8131FD3E417009C686C /* Category.swift in Sources */,
 				2FC0F2E61F863AE30092BFDC /* TPError.swift in Sources */,
 				2FC0F2E31F863ADA0092BFDC /* RegistrationError.swift in Sources */,

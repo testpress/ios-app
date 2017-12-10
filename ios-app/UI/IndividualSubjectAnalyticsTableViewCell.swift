@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  IndividualSubjectAnalyticsTableViewCell.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,30 +25,29 @@
 
 import UIKit
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
-    case NewsFlatIcon = "news_flat_icon"
-    case DiscussionFlatIcon = "discussion_flat_icon"
-    case SuccessTick = "success_tick"
-    case TimeIcon = "time_icon"
-    case ViewsIcon = "views_icon"
-    case NavigateNext = "ic_navigate_next"
-    case AnalyticsFlatIcon = "analytics_flat_icon"
+class IndividualSubjectAnalyticsTableViewCell: UITableViewCell {
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    @IBOutlet weak var subjectLabel: UILabel!
+    @IBOutlet weak var correct: UILabel!
+    @IBOutlet weak var incorrect: UILabel!
+    @IBOutlet weak var skipped: UILabel!
+    @IBOutlet weak var navigationArrow: UIImageView!
+    
+    var subject: Subject!
+    var parentViewController: UIViewController!
+    
+    func initCell(subject: Subject, parentViewController: UIViewController) {
+        self.subject = subject
+        self.parentViewController = parentViewController
+        subjectLabel.text = subject.name
+        correct.text = String(subject.correct)
+        incorrect.text = String(subject.incorrect)
+        skipped.text = String(subject.unanswered)
+        if subject.leaf {
+            navigationArrow.image = nil
+        } else {
+            navigationArrow.image = Images.NavigateNext.image
+        }
     }
-}
-
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
-    }
+    
 }

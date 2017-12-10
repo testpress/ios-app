@@ -26,7 +26,7 @@
 import ObjectMapper
 
 public class Attempt {
-    var url: String?;
+    var url: String!;
     var id: Int?;
     var date: String?;
     var totalQuestions: Int?;

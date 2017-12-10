@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  Subject.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,32 +23,36 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import ObjectMapper
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
-    case NewsFlatIcon = "news_flat_icon"
-    case DiscussionFlatIcon = "discussion_flat_icon"
-    case SuccessTick = "success_tick"
-    case TimeIcon = "time_icon"
-    case ViewsIcon = "views_icon"
-    case NavigateNext = "ic_navigate_next"
-    case AnalyticsFlatIcon = "analytics_flat_icon"
+public class Subject {
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    var id: Int!
+    var name: String!
+    var parent: Int!
+    var total: Int!
+    var correct: Int!
+    var incorrect: Int!
+    var unanswered: Int!
+    var percentage: Double!
+    var incorrectPercentage: Double!
+    var unansweredPercentage: Double!
+    var leaf: Bool!
+    
+    public required init?(map: Map) {
     }
 }
 
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+extension Subject: TestpressModel {
+    public func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+        parent <- map["parent"]
+        total <- map["total"]
+        correct <- map["correct"]
+        incorrect <- map["incorrect"]
+        unanswered <- map["unanswered"]
+        percentage <- map["percentage"]
+        leaf <- map["leaf"]
     }
 }

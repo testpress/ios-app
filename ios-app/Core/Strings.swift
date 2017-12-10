@@ -95,6 +95,12 @@ struct Strings {
     static let YOU_MADE_IT = "You Made It!"
     static let POST_CREATED_DESCRIPTION = "You have successfully created a new discussion, wait for your folks responds"
     
+    static let NO_ANALYTICS = "No Analytics Data!"
+    static let NO_SUBJECT_ANALYTICS_DESCRIPTION = "No subjects available to analyse"
+    
+    static let OVERALL_SUBJECTS_ANALYTICS = "OVERALL"
+    static let INDIVIDUAL_SUBJECTS_ANALYTICS = "INDIVIDUAL SUBJECTS"
+    
     static let LOGOUT = "Log Out"
     static let LOGOUT_CONFIRM_MESSAGE = "Are you sure want to log out?"
     

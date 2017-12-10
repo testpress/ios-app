@@ -31,6 +31,7 @@ class Colors {
     static let PRIMARY_TEXT = "#ffffff"
     static let MATERIAL_GREEN = "#00ccaa"
     static let MATERIAL_RED = "#e65c6c"
+    static let BLACK_TEXT = "#333333"
     static let GRAY_LIGHT = "#e6e6e6"
     static let GRAY_LIGHT_DARK = "#cccccc"
     static let GRAY_MEDIUM = "#999999"

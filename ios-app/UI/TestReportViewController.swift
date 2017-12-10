@@ -46,6 +46,7 @@ class TestReportViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var solutionsButton: UIButton!
+    @IBOutlet weak var analyticsButton: UIButton!
     
     var attempt: Attempt?
     var exam: Exam?
@@ -75,6 +76,7 @@ class TestReportViewController: UIViewController {
         timeTaken.text = attempt!.timeTaken ?? "NA"
         accuracy.text = String(attempt!.accuracy!) + "%"
         UIUtils.setButtonDropShadow(solutionsButton)
+        UIUtils.setButtonDropShadow(analyticsButton)
     }
 
     @IBAction func showSolutions(_ sender: UIButton) {
@@ -87,6 +89,14 @@ class TestReportViewController: UIViewController {
         viewController.exam = exam
         viewController.attempt = attempt
         self.present(slideMenuController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showSubjectAnalytics(_ sender: UIButton) {
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier:
+            Constants.SUBJECT_ANALYTICS_TAB_VIEW_CONTROLLER) as! SubjectAnalyticsTabViewController
+        
+        viewController.analyticsUrl = attempt!.url + TPEndpoint.getAttemptSubjectAnalytics.urlPath
+        present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {

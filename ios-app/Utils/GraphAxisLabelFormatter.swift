@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  GraphAxisLabelFormatter.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,32 +23,24 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Charts
 
-enum Images: String {
-    case TestpressNoWifi = "testpress_no_wifi"
-    case TestpressAlertWarning = "testpress_alert_warning"
-    case ExamsFlatIcon = "exams_flat_icon"
-    case ProfileImagePlaceHolder = "profile_image_place_holder"
-    case BackButton = "ic_navigate_before_36pt"
-    case CloseButton = "ic_close"
-    case PlaceHolder = "placeholder_icon"
-    case LearnFlatIcon = "learn_flat_icon"
-    case NewsFlatIcon = "news_flat_icon"
-    case DiscussionFlatIcon = "discussion_flat_icon"
-    case SuccessTick = "success_tick"
-    case TimeIcon = "time_icon"
-    case ViewsIcon = "views_icon"
-    case NavigateNext = "ic_navigate_next"
-    case AnalyticsFlatIcon = "analytics_flat_icon"
+public class GraphAxisLabelFormatter: IndexAxisValueFormatter {
     
-    var image: UIImage {
-        return UIImage(asset: self)
+    var interval: Int!
+    
+    init(values: [String], interval: Int) {
+        super.init()
+        self.values = values;
+        self.interval = interval;
     }
-}
-
-extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+    
+    override public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        if (interval > 1) {
+            return UIUtils.ellipsize(text: values[(Int(value) + interval) / interval], size: 16)
+        } else {
+            return UIUtils.ellipsize(text: values[Int(value)], size: 16)
+        }
     }
+    
 }

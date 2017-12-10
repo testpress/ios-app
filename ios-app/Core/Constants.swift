@@ -26,7 +26,7 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "http://192.168.0.11:8000";
+    static let BASE_URL = "https://sandbox.testpress.in/";
     
     static let APP_APPLE_ID = "1235683818"
     
@@ -74,6 +74,10 @@ struct Constants {
     static let POST_DETAIL_VIEW_CONTROLLER = "PostDetailViewController"
     static let POST_CREATION_VIEW_CONTROLLER = "PostCreationViewController"
     static let FORUM_TABLE_VIEW_CELL = "ForumTableViewCell"
+    static let SUBJECT_ANALYTICS_TAB_VIEW_CONTROLLER = "SubjectAnalyticsTabViewController"
+    static let INDIVIDUAL_SUBJECT_ANALYTICS_VIEW_CONTROLLER = "IndividualSubjectAnalyticsViewController"
+    static let OVERALL_SUBJECT_ANALYTICS_VIEW_CONTROLLER = "OverallSubjectAnalyticsViewController"
+    static let INDIVIDUAL_SUBJECT_ANALYTICS_TABLE_VIEW_CELL = "IndividualSubjectAnalyticsTableViewCell"
     
     static let PAGE = "page"
     static let PARENT = "parent"

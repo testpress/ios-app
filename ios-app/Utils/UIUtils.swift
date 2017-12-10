@@ -85,6 +85,12 @@ public class UIUtils {
         bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
     }
     
+    static func setTableCellSeperatorInset(_ cell: UITableViewCell, size: CGFloat) {
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsetsMake(0, size, 0, size);
+        cell.layoutMargins = UIEdgeInsets.zero;
+    }
+    
     static func getAppName() -> String {
         return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? ""
     }
@@ -95,6 +101,15 @@ public class UIUtils {
     
     static func isiPad() -> Bool {
         return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
+    }
+    
+    static func ellipsize(text: String, size: Int) -> String {
+        if (text.count < size) {
+            return text
+        } else {
+            let endIndex = text.index(text.startIndex, offsetBy: (size - 3))
+            return String(text[text.startIndex...endIndex]) + "..."
+        }
     }
     
 }
