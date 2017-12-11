@@ -77,7 +77,8 @@ struct Constants {
     static let SUBJECT_ANALYTICS_TAB_VIEW_CONTROLLER = "SubjectAnalyticsTabViewController"
     static let INDIVIDUAL_SUBJECT_ANALYTICS_VIEW_CONTROLLER = "IndividualSubjectAnalyticsViewController"
     static let OVERALL_SUBJECT_ANALYTICS_VIEW_CONTROLLER = "OverallSubjectAnalyticsViewController"
-    static let INDIVIDUAL_SUBJECT_ANALYTICS_TABLE_VIEW_CELL = "IndividualSubjectAnalyticsTableViewCell"
+    static let INDIVIDUAL_SUBJECT_ANALYTICS_COUNT_CELL = "IndividualSubjectAnalyticsCountCell"
+    static let INDIVIDUAL_SUBJECT_ANALYTICS_GRAPH_CELL = "IndividualSubjectAnalyticsGraphCell"
     
     static let PAGE = "page"
     static let PARENT = "parent"

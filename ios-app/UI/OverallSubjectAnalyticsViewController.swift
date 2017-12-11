@@ -119,7 +119,7 @@ class OverallSubjectAnalyticsViewController: UIViewController {
         }
         
         chart.data = data
-        chart.chartDescription?.text = ""
+        chartView.chartDescription?.enabled = false
         chart.fitBars = true
         chart.legend.enabled = false
         chart.setScaleEnabled(false)

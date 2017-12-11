@@ -85,10 +85,10 @@ public class UIUtils {
         bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
     }
     
-    static func setTableCellSeperatorInset(_ cell: UITableViewCell, size: CGFloat) {
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsetsMake(0, size, 0, size);
-        cell.layoutMargins = UIEdgeInsets.zero;
+    static func setTableViewSeperatorInset(_ tableView: UITableView, size: CGFloat) {
+        tableView.preservesSuperviewLayoutMargins = false
+        tableView.separatorInset = UIEdgeInsetsMake(0, size, 0, size);
+        tableView.layoutMargins = UIEdgeInsets.zero;
     }
     
     static func getAppName() -> String {

@@ -21,7 +21,7 @@
 		2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */; };
 		2F3A53011FDA652A00C64123 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53001FDA652A00C64123 /* Subject.swift */; };
 		2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53021FDA6AE400C64123 /* SubjectPager.swift */; };
-		2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsTableViewCell.swift */; };
+		2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */; };
 		2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */; };
 		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
 		2F48C7FB1FCDA957009C686C /* comments.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FA1FCDA957009C686C /* comments.js */; };
@@ -41,6 +41,7 @@
 		2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F48C8191FD566B2009C686C /* IQKeyboardManagerSwift.framework */; };
 		2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */; };
 		2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */; };
+		2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */; };
 		2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */; };
 		2F6F167B1FC3F08900FB768C /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
 		2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */; };
@@ -175,7 +176,7 @@
 		2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsViewController.swift; sourceTree = "<group>"; };
 		2F3A53001FDA652A00C64123 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		2F3A53021FDA6AE400C64123 /* SubjectPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPager.swift; sourceTree = "<group>"; };
-		2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsTableViewCell.swift; sourceTree = "<group>"; };
+		2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsCountCell.swift; sourceTree = "<group>"; };
 		2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentExamAttemptsTableViewController.swift; sourceTree = "<group>"; };
 		2F48C7F81FCD9F18009C686C /* progress_loader.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = progress_loader.css; sourceTree = "<group>"; };
 		2F48C7FA1FCDA957009C686C /* comments.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = comments.js; sourceTree = "<group>"; };
@@ -195,6 +196,7 @@
 		2F48C8191FD566B2009C686C /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisLabelFormatter.swift; sourceTree = "<group>"; };
 		2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisPercentValueFormatter.swift; sourceTree = "<group>"; };
+		2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsGraphCell.swift; sourceTree = "<group>"; };
 		2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStartExamViewController.swift; sourceTree = "<group>"; };
 		2F6F167A1FC3F08900FB768C /* typebase.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = typebase.css; sourceTree = "<group>"; };
 		2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContent.swift; sourceTree = "<group>"; };
@@ -465,7 +467,8 @@
 				2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */,
 				2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */,
 				2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */,
-				2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsTableViewCell.swift */,
+				2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */,
+				2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */,
 				2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */,
 				2FC0F28D1F861A860092BFDC /* LoginViewController.swift */,
 				2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */,
@@ -722,6 +725,7 @@
 				2FC0F2F21F863B190092BFDC /* TPBasePager.swift in Sources */,
 				2FC0F3081F863BA90092BFDC /* QuestionsViewController.swift in Sources */,
 				2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */,
+				2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */,
 				2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */,
 				2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */,
 				2F1474791F8B898F0017151B /* QuestionListViewController.swift in Sources */,
@@ -788,7 +792,7 @@
 				2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */,
 				2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */,
 				2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */,
-				2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsTableViewCell.swift in Sources */,
+				2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */,
 				2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */,
 				2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */,
 				2F9699801FC2A8E0001B2B18 /* ContentPager.swift in Sources */,

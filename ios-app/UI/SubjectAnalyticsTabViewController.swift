@@ -115,6 +115,7 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
                 self.loadSubjects()
             } else {
                 self.subjects = Array(items!.values)
+                self.subjects = self.subjects.sorted(by: { $0.name! < $1.name! })
                 self.activityIndicator.stopAnimating()
                 if self.subjects.isEmpty {
                     self.emptyView.show(

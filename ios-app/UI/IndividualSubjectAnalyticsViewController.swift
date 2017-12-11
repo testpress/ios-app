@@ -28,46 +28,57 @@ import XLPagerTabStrip
 
 class IndividualSubjectAnalyticsViewController: UITableViewController {
     
+    let HEADER_VIEW_HEIGHT: CGFloat = 55
+    let GRAPH_CELL_HEIGHT: CGFloat = 316
+    
     var analyticsUrl: String!
     var subjects = [Subject]()
     
     override func viewDidLoad() {
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.reloadData()
+        UIUtils.setTableViewSeperatorInset(tableView, size: 0)
     }
     
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return subjects.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->
-        UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
         if subjects.count <= indexPath.row {
             // Needed to prevent index out of bound execption when dismiss view controller while
             // table view is scrolling
             return UITableViewCell()
         }
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.INDIVIDUAL_SUBJECT_ANALYTICS_TABLE_VIEW_CELL, for: indexPath)
-            as! IndividualSubjectAnalyticsTableViewCell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier:
+                Constants.INDIVIDUAL_SUBJECT_ANALYTICS_COUNT_CELL, for: indexPath)
+                as! IndividualSubjectAnalyticsCountCell
+            
+            cell.initCell(subject: subjects[indexPath.row], parentViewController: self)
+            return cell
+        }
+        let graphCell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.INDIVIDUAL_SUBJECT_ANALYTICS_GRAPH_CELL, for: indexPath)
+            as! IndividualSubjectAnalyticsGraphCell
         
-        cell.initCell(subject: subjects[indexPath.row], parentViewController: self)
-        UIUtils.setTableCellSeperatorInset(cell, size: 0)
-        return cell
+        graphCell.initCell(subject: subjects[indexPath.row])
+        return graphCell
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) ->
         IndexPath? {
             
         let subject = subjects[indexPath.row]
-        return subject.leaf ? nil : indexPath
+        return subject.leaf || indexPath.section == 1 ? nil : indexPath
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -83,15 +94,22 @@ class IndividualSubjectAnalyticsViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) ->
-        UIView? {
-            
-        if subjects.isEmpty {
+    override func tableView(_ tableView: UITableView,
+                            viewForHeaderInSection section: Int) -> UIView? {
+        
+        if subjects.isEmpty || section == 1 {
             return nil
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubjectAnalyticsHeader")!
-        UIUtils.setTableCellSeperatorInset(cell, size: 0)
-        return cell
+        return cell.contentView
+    }
+    
+    override func tableView(_ tableView: UITableView,
+                            heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return HEADER_VIEW_HEIGHT
+        }
+        return 0
     }
     
 }
