@@ -31,12 +31,15 @@ public class AttemptItem {
     var review: Bool! {
        didSet { review = review != nil && review }
     }
-    var index: Int?;
+    var index: Int!
     var currentReview: Bool!
     var selectedAnswers: [Int] = [];
     var savedAnswers: [Int]!;
     var order: Int?
     var commentsCount: Int!
+    var duration: Float!
+    var bestDuration: Float!
+    var averageDuration: Float!
     
     public required init?(map: Map) {
     }
@@ -64,5 +67,8 @@ extension AttemptItem: TestpressModel {
         savedAnswers <- map["saved_answers"]
         order <- map["order"]
         commentsCount <- map["comments_count"]
+        duration <- map["duration"]
+        bestDuration <- map["best_duration"]
+        averageDuration <- map["average_duration"]
     }
 }

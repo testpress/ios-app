@@ -1,5 +1,6 @@
 github "Alamofire/Alamofire" "4.4.0"
 github "Hearst-DD/ObjectMapper" "2.2.5"
+github "LaurentiuUngur/LUExpandableTableView" "3.0.0"
 github "danielgindi/Charts" "v3.0.4"
 github "dekatotoro/SlideMenuControllerSwift" "3.0.2"
 github "hackiftekhar/IQKeyboardManager" "v5.0.6"
