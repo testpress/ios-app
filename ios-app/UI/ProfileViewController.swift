@@ -49,6 +49,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         emptyView = EmptyView.getInstance(parentView: contentStackView)
+        emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
     }
     
@@ -63,7 +64,8 @@ class ProfileViewController: UIViewController {
     func getProfile() {
         loading = true
         activityIndicator = UIUtils.initActivityIndicator(parentView: contentStackView)
-        activityIndicator?.center = CGPoint(x: contentStackView.center.x, y: contentStackView.center.y)
+        activityIndicator?.frame = view.frame
+        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
         activityIndicator?.startAnimating()
         TPApiClient.getProfile(
             endpointProvider: TPEndpointProvider(.getProfile),
@@ -82,6 +84,7 @@ class ProfileViewController: UIViewController {
                     if (self.activityIndicator?.isAnimating)! {
                         self.activityIndicator?.stopAnimating()
                     }
+                    self.scrollView.contentSize.height = self.view.frame.size.height - 150
                     let (image, title, description) = error.getDisplayInfo()
                     self.emptyView.show(image: image, title: title, description: description,
                                         retryHandler: retryHandler)
@@ -111,6 +114,7 @@ class ProfileViewController: UIViewController {
         accuracy.text = "\(user.averageAccuracy!)%"
         activityIndicator?.stopAnimating()
         loading = false
+        viewDidLayoutSubviews()
     }
     
     @IBAction func logout(_ sender: UIButton) {
