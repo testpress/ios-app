@@ -46,6 +46,10 @@ class TimeAnalyticsHeaderViewCell: LUExpandableTableViewSectionHeader {
         yourTime.text = getFormattedValue(attemptItem.duration)
         bestTime.text = getFormattedValue(attemptItem.bestDuration)
         averageTime.text = getFormattedValue(attemptItem.averageDuration)
+        let color = getColor(attemptItem)
+        yourTime.textColor = color
+        bestTime.textColor = color
+        averageTime.textColor = color
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapCell(_:))))
     }
     
@@ -56,6 +60,21 @@ class TimeAnalyticsHeaderViewCell: LUExpandableTableViewSectionHeader {
             parentViewController.tableView
                 .scrollToRow(at: IndexPath(item: 0, section: section), at: .top, animated: false)
         }
+    }
+    
+    func getColor(_ attemptItem: AttemptItem) -> UIColor {
+        var color: String = Colors.GRAY_LIGHT_DARK
+        if !(attemptItem.selectedAnswers.isEmpty) {
+            color = Colors.MATERIAL_GREEN;
+            // If question is attempted & any of the selected option is incorrect then set red color
+            for attemptAnswer in (attemptItem.question?.answers)! {
+                if attemptItem.selectedAnswers.contains(attemptAnswer.id!) &&
+                    !(attemptAnswer.isCorrect!) {
+                    color = Colors.MATERIAL_RED
+                }
+            }
+        }
+        return Colors.getRGB(color)
     }
     
     func getFormattedValue(_ duration: Float?) -> String {
