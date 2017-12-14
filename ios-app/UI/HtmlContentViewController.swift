@@ -47,6 +47,7 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func loadHTMLContent() {
+        title = content.htmlContentTitle
         if loading {
             return
         }
@@ -87,6 +88,7 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func displayVideoContent() {
+        title = content.video!.title
         if !Reachability.isConnectedToNetwork() {
             let retryHandler = {
                 self.emptyView.hide()
@@ -107,7 +109,7 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func getFormattedContent(_ contentHtml: String) -> String {
-        return WebViewUtils.getHeader() + WebViewUtils.getFormattedTitle(title: content.name) +
+        return WebViewUtils.getHeader() + WebViewUtils.getFormattedTitle(title: title!) +
             WebViewUtils.getHtmlContentWithMargin(contentHtml)
     }
     

@@ -1,5 +1,5 @@
 //
-//  MainMenuTabViewController.swift
+//  ActivityFeedPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,14 +23,23 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Alamofire
+import ObjectMapper
 
-class MainMenuTabViewController: UITabBarController {
+class ActivityFeedPager: TPBasePager<ActivityFeed> {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        viewControllers?.remove(at: 2)
+    override func getItems(page: Int) {
+        queryParams.updateValue(Constants.ADMIN, forKey: Constants.FILTER)
+        queryParams.updateValue(String(page), forKey: Constants.PAGE)
+        TPApiClient.getListItems(
+            endpointProvider: TPEndpointProvider(.getActivityFeed, queryParams: queryParams),
+            completion: resonseHandler!,
+            type: ActivityFeed.self
+        )
+    }
+    
+    override func getId(resource: ActivityFeed) -> Int {
+        return resource.id!
     }
     
 }

@@ -49,6 +49,7 @@ enum TPEndpoint {
     case getForumCategories
     case getSubjectAnalytics
     case getAttemptSubjectAnalytics
+    case getActivityFeed
     case get
     case post
     
@@ -90,7 +91,8 @@ enum TPEndpoint {
             return .post
         case .getForumCategories,
              .getSubjectAnalytics,
-             .getAttemptSubjectAnalytics:
+             .getAttemptSubjectAnalytics,
+             .getActivityFeed:
             return .get
         case .get:
             return .get
@@ -129,6 +131,8 @@ enum TPEndpoint {
             return "/api/v2.2/analytics/"
         case .getAttemptSubjectAnalytics:
             return "review/subjects/"
+        case .getActivityFeed:
+            return "/api/v2.3/activities/"
         default:
             return ""
         }

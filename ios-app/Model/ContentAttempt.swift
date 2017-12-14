@@ -1,5 +1,5 @@
 //
-//  MainMenuTabViewController.swift
+//  ContentAttempt.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,14 +23,32 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import ObjectMapper
 
-class MainMenuTabViewController: UITabBarController {
+public class ContentAttempt {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        viewControllers?.remove(at: 2)
+    var id: Int!
+    var type: String!
+    var trophies: String!
+    var objectUrl: String!
+    var assessment: Attempt!
+    var video: Video!
+    var content: HtmlContent!
+    var attachment: Attachment!
+    
+    public required init?(map: Map) {
     }
-    
+}
+
+extension ContentAttempt: TestpressModel {
+    public func mapping(map: Map) {
+        type <- map["type"]
+        id <- map["id"]
+        trophies <- map["trophies"]
+        objectUrl <- map["objectUrl"]
+        video <- map["video"]
+        assessment <- map["assessment"]
+        content <- map["content"]
+        attachment <- map["attachment"]
+    }
 }

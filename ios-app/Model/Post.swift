@@ -29,6 +29,7 @@ public class Post {
     
     var url: String!
     var id: Int!
+    var slug: String!
     var title: String!
     var summary: String!
     var shortWebUrl: String!
@@ -50,6 +51,7 @@ extension Post: TestpressModel {
     public func mapping(map: Map) {
         url <- map["url"]
         id <- map["id"]
+        slug <- map["slug"]
         title <- map["title"]
         summary <- map["summary"]
         shortWebUrl <- map["short_web_url"]

@@ -276,7 +276,15 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
     
     func goBack() {
         let presentingViewController = self.presentingViewController?.presentingViewController
-        if presentingViewController is UITabBarController {
+        if self.presentingViewController! is ContentDetailPageViewController {
+            
+            let contentDetailPageViewController  =
+                self.presentingViewController! as! ContentDetailPageViewController
+            
+            contentDetailPageViewController.dismiss(animated: false, completion: {
+                contentDetailPageViewController.updateCurrentExamContent()
+            })
+        } else if presentingViewController is UITabBarController {
             let tabViewController =
                 presentingViewController?.childViewControllers[0] as! ExamsTabViewController
             
@@ -300,14 +308,6 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
             
             let contentDetailPageViewController =
                 presentingViewController as! ContentDetailPageViewController
-            
-            contentDetailPageViewController.dismiss(animated: false, completion: {
-                contentDetailPageViewController.updateCurrentExamContent()
-            })
-        } else if self.presentingViewController! is ContentDetailPageViewController {
-            
-            let contentDetailPageViewController  =
-                self.presentingViewController! as! ContentDetailPageViewController
             
             contentDetailPageViewController.dismiss(animated: false, completion: {
                 contentDetailPageViewController.updateCurrentExamContent()

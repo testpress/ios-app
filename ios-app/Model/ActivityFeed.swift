@@ -1,5 +1,5 @@
 //
-//  MainMenuTabViewController.swift
+//  ActivityFeed.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,14 +23,28 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import ObjectMapper
 
-class MainMenuTabViewController: UITabBarController {
+public class ActivityFeed {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        viewControllers?.remove(at: 2)
+    var id: Int!
+    var timestamp: String!
+    var verb: String!
+    var actor: User!
+    var target: Any!
+    var actionObject: Any!
+    
+    public required init?(map: Map) {
     }
-    
+}
+
+extension ActivityFeed: TestpressModel {
+    public func mapping(map: Map) {
+        id <- map["id"]
+        timestamp <- map["timestamp"]
+        verb <- map["verb"]
+        actor <- map["actor"]
+        target <- map["target"]
+        actionObject <- map["action_object"]
+    }
 }

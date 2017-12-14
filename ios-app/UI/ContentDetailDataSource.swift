@@ -44,7 +44,8 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         
         if content.exam != nil {
-            if content.exam!.attemptsCount > 0 || content.exam!.pausedAttemptsCount > 0 {
+            if content.exam!.attemptsCount != nil && content.exam!.pausedAttemptsCount != nil &&
+                (content.exam!.attemptsCount > 0 || content.exam!.pausedAttemptsCount > 0) {
                 let viewController = storyboard.instantiateViewController(
                     withIdentifier: Constants.CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER
                     ) as! ContentExamAttemptsTableViewController

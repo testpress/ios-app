@@ -41,6 +41,11 @@ enum Images: String {
     case ViewsIcon = "views_icon"
     case NavigateNext = "ic_navigate_next"
     case AnalyticsFlatIcon = "analytics_flat_icon"
+    case ExamAddedIcon = "exam_added_icon"
+    case FileDownloadIcon = "file_download_icon"
+    case PostAdded = "post_added"
+    case VideoAddedIcon = "video_added_icon"
+    case ExamAttemptedIcon = "exam_attempted_icon"
     
     var image: UIImage {
         return UIImage(asset: self)

@@ -1,5 +1,5 @@
 //
-//  MainMenuTabViewController.swift
+//  ActivityFeedTableViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,12 +25,36 @@
 
 import UIKit
 
-class MainMenuTabViewController: UITabBarController {
+class ActivityFeedTableViewController: TPBasePagedTableViewController<ActivityFeed>,
+    BasePagedTableViewDelegate {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(pager: ActivityFeedPager(), coder: aDecoder)
+        delegate = self
+    }
+    
+    // MARK: - Table view data source
+    override func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:
+            Constants.ACTIVITY_FEED_TABLE_VIEW_CELL, for: indexPath) as! ActivityFeedTableViewCell
         
-        viewControllers?.remove(at: 2)
+        cell.initCell(activityFeed: items[indexPath.row], viewController: self)
+        return cell
+    }
+    
+    func onItemsLoaded() {
+        items = items.sorted(by: {
+            FormatDate.compareDate(dateString1:  $0.timestamp, dateString2: $1.timestamp)
+        })
+    }
+    
+    override func setEmptyText() {
+        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_ITEMS_EXIST,
+                            description: Strings.NO_CONTENT_DESCRIPTION)
+    }
+    
+    @IBAction func back() {
+        dismiss(animated: true, completion: nil)
     }
     
 }

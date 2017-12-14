@@ -113,7 +113,17 @@ class TestReportViewController: UIViewController {
         let presentingViewController =
             self.presentingViewController?.presentingViewController?.presentingViewController
         
-        if presentingViewController is UITabBarController {
+        if self.presentingViewController?.presentingViewController! is
+            ContentDetailPageViewController {
+            
+            let contentDetailPageViewController  =
+                self.presentingViewController?.presentingViewController!
+                    as! ContentDetailPageViewController
+            
+            contentDetailPageViewController.dismiss(animated: false, completion: {
+                contentDetailPageViewController.updateCurrentExamContent()
+            })
+        } else if presentingViewController is UITabBarController {
             let tabViewController =
                 presentingViewController?.childViewControllers[0] as! ExamsTabViewController
             
@@ -137,16 +147,6 @@ class TestReportViewController: UIViewController {
             
             let contentDetailPageViewController =
                 presentingViewController as! ContentDetailPageViewController
-            
-            contentDetailPageViewController.dismiss(animated: false, completion: {
-                contentDetailPageViewController.updateCurrentExamContent()
-            })
-        } else if self.presentingViewController?.presentingViewController! is
-            ContentDetailPageViewController {
-            
-            let contentDetailPageViewController  =
-                self.presentingViewController?.presentingViewController!
-                    as! ContentDetailPageViewController
             
             contentDetailPageViewController.dismiss(animated: false, completion: {
                 contentDetailPageViewController.updateCurrentExamContent()

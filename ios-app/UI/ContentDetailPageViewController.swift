@@ -36,6 +36,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     @IBOutlet weak var previousButtonLayout: UIStackView!
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     @IBOutlet weak var bottomShadowView: UIView!
+    @IBOutlet weak var bottomNavigationBar: UIStackView!
     
     let bottomGradient = CAGradientLayer()
     var pageViewController: UIPageViewController!
@@ -77,7 +78,10 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
         contentDetailDataSource = ContentDetailDataSource(contents)
         navigationBarItem.title = title
-        
+        if contents.count < 2 {
+            bottomShadowView.isHidden = true
+            bottomNavigationBar.isHidden = true
+        }
         let startingViewController = contentDetailDataSource.viewControllerAtIndex(position)!
         pageViewController.setViewControllers(
             [startingViewController],
@@ -157,7 +161,8 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     func updateCurrentExamContent() {
         let content = contents[getCurrentIndex()]
-        if content.exam!.attemptsCount > 0 || content.exam!.pausedAttemptsCount > 0 {
+        if content.exam!.attemptsCount != nil && content.exam!.pausedAttemptsCount != nil &&
+            (content.exam!.attemptsCount > 0 || content.exam!.pausedAttemptsCount > 0) {
             let viewController =
                 getCurretViewController() as! ContentExamAttemptsTableViewController
 

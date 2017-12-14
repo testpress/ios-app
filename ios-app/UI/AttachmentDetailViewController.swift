@@ -41,7 +41,7 @@ class AttachmentDetailViewController: UIViewController {
     }
     
     func displayAttachment() {
-        contentTitle.text = content.name
+        contentTitle.text = content.attachment!.title
         let attachment = content.attachment!
         if attachment.description != nil && attachment.description != "" {
             contentDescription.text = attachment.description

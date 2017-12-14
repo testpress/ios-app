@@ -26,7 +26,7 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://sandbox.testpress.in/";
+    static let BASE_URL = "http://192.168.0.9:8000";
     
     static let APP_APPLE_ID = "1235683818"
     
@@ -82,6 +82,7 @@ struct Constants {
     static let TIME_ANALYTICS_HEADER_VIEW_CELL = "TimeAnalyticsHeaderViewCell"
     static let TIME_ANALYTICS_QUESTION_CELL = "TimeAnalyticsQuestionCell"
     static let TIME_ANALYTICS_TABLE_VIEW_CONTROLLER = "TimeAnalyticsTableViewController"
+    static let ACTIVITY_FEED_TABLE_VIEW_CELL = "ActivityFeedTableViewCell"
     
     static let PAGE = "page"
     static let PARENT = "parent"
@@ -90,6 +91,8 @@ struct Constants {
     static let ORDER = "order"
     static let SINCE = "since"
     static let UNTIL = "until"
+    static let FILTER = "filter"
+    static let ADMIN = "admin"
     
     static func getAppVersion() -> String {
         let dictionary = Bundle.main.infoDictionary!
