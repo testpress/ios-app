@@ -504,10 +504,21 @@
                                                         <rect key="frame" x="0.0" y="126.5" width="325" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dwp-a5-1om">
-                                                                <rect key="frame" x="71" y="0.0" width="183" height="38"/>
+                                                                <rect key="frame" x="52.5" y="0.0" width="220" height="38"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="i3Q-b8-w8U"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
                                                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                                                <state key="normal" title="Download Attachment"/>
+                                                                <state key="normal" title="Download Attachment">
+                                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="19"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="openPdf:" destination="5sd-P7-T9l" eventType="touchUpInside" id="ccn-zx-zH9"/>
                                                                 </connections>
