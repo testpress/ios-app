@@ -42,6 +42,10 @@ class PostPager: TPBasePager<Post> {
         )
     }
     
+    override func register(resource post: Post) -> Post? {
+        return post.isActive ? post : nil
+    }
+    
     override func getId(resource: Post) -> Int {
         return resource.id!
     }
