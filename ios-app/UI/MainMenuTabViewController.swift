@@ -31,6 +31,7 @@ class MainMenuTabViewController: UITabBarController {
         super.viewDidLoad()
         
         viewControllers?.remove(at: 2)
+        viewControllers?.remove(at: 5)
     }
     
 }

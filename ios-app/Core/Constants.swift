@@ -28,7 +28,7 @@ import Foundation
 struct Constants {
     static let BASE_URL = "http://192.168.0.9:8000";
     
-    static let APP_APPLE_ID = "1235683818"
+    static let APP_APPLE_ID = "dummyid"
     
     static let APP_SHARE_MESSAGE = "Good app to prepare for online exams. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID
     
