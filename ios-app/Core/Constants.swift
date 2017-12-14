@@ -26,7 +26,7 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "http://192.168.0.9:8000";
+    static let BASE_URL = "https://sandbox.testpress.in";
     
     static let APP_APPLE_ID = "dummyid"
     

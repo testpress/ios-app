@@ -108,7 +108,7 @@ class ActivityFeedTableViewCell: UITableViewCell {
                     content.order = 0
                     post = nil
                     let id = actionObject["id"] as! Int
-                    content.url = Constants.BASE_URL + "/api/v2.3/contents/\(id)/"
+                    content.url = Constants.BASE_URL + "api/v2.3/contents/\(id)/"
                     if let exam = actionObject["exam"] as? [String: Any] {
                         action += "an exam "
                         actionObjectName = exam["title"] as! String
@@ -140,8 +140,8 @@ class ActivityFeedTableViewCell: UITableViewCell {
             let map = Map(mappingType: .fromJSON, JSON: actionObject, toObject: true)
             post = Post(map: map)
             post.mapping(map: map)
-            post.url = Constants.BASE_URL + "/api/v2.2/posts/" + post.slug
-            post.commentsUrl = Constants.BASE_URL + "/api/v2.2/posts/\(post.id!)/comments/"
+            post.url = Constants.BASE_URL + "api/v2.2/posts/" + post.slug
+            post.commentsUrl = Constants.BASE_URL + "api/v2.2/posts/\(post.id!)/comments/"
             break
         default:
             break
