@@ -253,6 +253,10 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             }
         }
         
+        if attemptQuestion.percentageGotCorrect != nil {
+            html += "<div>\(attemptQuestion.percentageGotCorrect) of users got correct</div>"
+        }
+        
         // Add correct answer
         html += "<div style='display:block;'>" +
             WebViewUtils.getReviewHeadingTags(headingText: Strings.CORRECT_ANSWER) +

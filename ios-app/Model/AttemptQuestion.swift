@@ -34,6 +34,7 @@ public class AttemptQuestion {
     var type: String?;
     var commentsUrl: String!
     var answers: [AttemptAnswer] = [];
+    var percentageGotCorrect: Float!
     
     public required init?(map: Map) {
     }
@@ -49,5 +50,6 @@ extension AttemptQuestion: TestpressModel {
         type <- map["type"]
         commentsUrl <- map["comments_url"]
         answers <- map["answers"]
+        percentageGotCorrect <- map["percentage_got_correct"]
     }
 }
