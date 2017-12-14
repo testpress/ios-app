@@ -42,6 +42,9 @@ public class Post {
     var contentHtml: String!
     var createdBy: User!
     var viewsCount: Int!
+    var lastCommentedBy: User!
+    var lastCommentedTime: String!
+    var participantsCount: Int!
     
     public required init?(map: Map) {
     }
@@ -64,5 +67,8 @@ extension Post: TestpressModel {
         contentHtml <- map["content_html"]
         createdBy <- map["created_by"]
         viewsCount <- map["views_count"]
+        lastCommentedBy <- map["last_commented_by"]
+        lastCommentedTime <- map["last_commented_time"]
+        participantsCount <- map["participants_count"]
     }
 }

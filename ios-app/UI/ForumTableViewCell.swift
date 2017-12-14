@@ -27,10 +27,13 @@ import UIKit
 
 class ForumTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var postTitle: UILabel!
-    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var commentsCount: UILabel!
     @IBOutlet weak var viewsLabel: UILabel!
     @IBOutlet weak var postViewCell: UIView!
+    @IBOutlet weak var authorName: UILabel!
+    @IBOutlet weak var categoryName: UILabel!
     
     var parentViewController: UIViewController! = nil
     var post: Post!
@@ -38,8 +41,18 @@ class ForumTableViewCell: UITableViewCell {
     func initCell(_ post: Post, viewController: UIViewController) {
         parentViewController = viewController
         self.post = post
+        userImage.kf.setImage(with: URL(string: post.createdBy.mediumImage!),
+                              placeholder: Images.PlaceHolder.image)
+        
         postTitle.text = post.title
-        date.text = FormatDate.getElapsedTime(dateString: post.publishedDate)
+        authorName.text = post.createdBy.displayName
+        categoryName.text = post.category.name
+        commentsCount.text = String(post.participantsCount)
+        if post.lastCommentedBy == nil {
+            authorName.text = post.createdBy.displayName + " started " + FormatDate.getElapsedTime(dateString: post.publishedDate)
+        } else {
+            authorName.text = post.lastCommentedBy.displayName + " replied " + FormatDate.getElapsedTime(dateString: post.lastCommentedTime)
+        }
         viewsLabel.text = "\(post.viewsCount!) views"
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
