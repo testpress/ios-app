@@ -25,8 +25,12 @@
 
 import UIKit
 
+protocol ContentAttemptCreationDelegate {
+    func newAttemptCreated()
+}
+
 class ContentsTableViewController: TPBasePagedTableViewController<Content>,
-    BasePagedTableViewDelegate {
+    BasePagedTableViewDelegate, ContentAttemptCreationDelegate {
     
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     
@@ -86,6 +90,10 @@ class ContentsTableViewController: TPBasePagedTableViewController<Content>,
                 self.loadingItems = false
             }
         })
+    }
+    
+    func newAttemptCreated() {
+        items.removeAll()
     }
     
     override func setEmptyText() {

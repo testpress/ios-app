@@ -41,6 +41,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     let bottomGradient = CAGradientLayer()
     var pageViewController: UIPageViewController!
     var contentDetailDataSource: ContentDetailDataSource!
+    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate!
     var currentIndex: Int!
     var contents = [Content]()
     var position: Int!
@@ -76,7 +77,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         emptyView = EmptyView.getInstance(parentView: pageViewController.view)
         activityIndicator = UIUtils.initActivityIndicator(parentView: pageViewController.view)
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
-        contentDetailDataSource = ContentDetailDataSource(contents)
+        contentDetailDataSource = ContentDetailDataSource(contents, contentAttemptCreationDelegate)
         navigationBarItem.title = title
         if contents.count < 2 {
             bottomShadowView.isHidden = true

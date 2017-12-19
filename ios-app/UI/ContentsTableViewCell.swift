@@ -33,6 +33,7 @@ class ContentsTableViewCell: UITableViewCell {
     @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var questionsCount: UILabel!
     @IBOutlet weak var examDetailsLayout: UIStackView!
+    @IBOutlet weak var attemptedTick: UIImageView!
     
     var parentViewController: ContentsTableViewController! = nil
     var position: Int!
@@ -52,6 +53,7 @@ class ContentsTableViewCell: UITableViewCell {
         } else {
             examDetailsLayout.isHidden = true
         }
+        attemptedTick.isHidden = content.attemptsCount == 0
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
         
@@ -65,6 +67,7 @@ class ContentsTableViewCell: UITableViewCell {
         
         viewController.contents = parentViewController.items
         viewController.title = parentViewController.title
+        viewController.contentAttemptCreationDelegate = parentViewController
         viewController.position = position
         parentViewController.present(viewController, animated: true, completion: nil)
     }

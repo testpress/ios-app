@@ -34,6 +34,7 @@ class AttachmentDetailViewController: UIViewController {
     
     var content: Content!
     var loading: Bool = false
+    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,25 @@ class AttachmentDetailViewController: UIViewController {
     
     @IBAction func openPdf(_ sender: UIButton) {
         UIApplication.shared.openURL(URL(string: content.attachment!.attachmentUrl)!)
+        createContentAttempt()
+    }
+    
+    func createContentAttempt() {
+        TPApiClient.request(
+            type: ContentAttempt.self,
+            endpointProvider: TPEndpointProvider(.post, url: content.attemptsUrl),
+            completion: {
+                contentAttempt, error in
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                    return
+                }
+                
+                if self.content.attemptsCount == 0 {
+                    self.contentAttemptCreationDelegate?.newAttemptCreated()
+                }
+        })
     }
     
     override func viewDidLayoutSubviews() {

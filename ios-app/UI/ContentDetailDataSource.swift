@@ -29,10 +29,12 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     
     var contents: [Content]!
     var initialPosition: Int!
+    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate!
     
-    init(_ contents: [Content]) {
+    init(_ contents: [Content], _ contentAttemptCreationDelegate: ContentAttemptCreationDelegate) {
         super.init()
         self.contents = contents
+        self.contentAttemptCreationDelegate = contentAttemptCreationDelegate
     }
     
     func viewControllerAtIndex(_ index: Int) -> UIViewController? {
@@ -64,12 +66,14 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
                 Constants.ATTACHMENT_DETAIL_VIEW_CONTROLLER) as! AttachmentDetailViewController
             
             viewController.content = content
+            viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
             return viewController
         } else {
             let viewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.HTML_CONTENT_VIEW_CONTROLLER) as! HtmlContentViewController
         
             viewController.content = content
+            viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
             return viewController
         }
     }

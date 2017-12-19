@@ -26,6 +26,7 @@
 		2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53021FDA6AE400C64123 /* SubjectPager.swift */; };
 		2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */; };
 		2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */; };
+		2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */; };
 		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
 		2F48C7FB1FCDA957009C686C /* comments.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FA1FCDA957009C686C /* comments.js */; };
 		2F48C7FD1FCDABDE009C686C /* comments.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FC1FCDABDE009C686C /* comments.css */; };
@@ -53,7 +54,6 @@
 		2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BB61FE2444E00236AFE /* ActivityFeedTableViewController.swift */; };
 		2F5E0BB91FE2452D00236AFE /* ActivityFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BB81FE2452D00236AFE /* ActivityFeedTableViewCell.swift */; };
 		2F5E0BBB1FE2871900236AFE /* ContentAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BBA1FE2871900236AFE /* ContentAttempt.swift */; };
-		2F5E0BBD1FE2B01E00236AFE /* ContentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BBC1FE2B01E00236AFE /* ContentDetailViewController.swift */; };
 		2F6F167B1FC3F08900FB768C /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
 		2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */; };
 		2F6F167F1FC4164100FB768C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167E1FC4164100FB768C /* Reachability.swift */; };
@@ -194,6 +194,7 @@
 		2F3A53021FDA6AE400C64123 /* SubjectPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPager.swift; sourceTree = "<group>"; };
 		2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsCountCell.swift; sourceTree = "<group>"; };
 		2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentExamAttemptsTableViewController.swift; sourceTree = "<group>"; };
+		2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		2F48C7F81FCD9F18009C686C /* progress_loader.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = progress_loader.css; sourceTree = "<group>"; };
 		2F48C7FA1FCDA957009C686C /* comments.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = comments.js; sourceTree = "<group>"; };
 		2F48C7FC1FCDABDE009C686C /* comments.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = comments.css; sourceTree = "<group>"; };
@@ -221,7 +222,6 @@
 		2F5E0BB61FE2444E00236AFE /* ActivityFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedTableViewController.swift; sourceTree = "<group>"; };
 		2F5E0BB81FE2452D00236AFE /* ActivityFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedTableViewCell.swift; sourceTree = "<group>"; };
 		2F5E0BBA1FE2871900236AFE /* ContentAttempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAttempt.swift; sourceTree = "<group>"; };
-		2F5E0BBC1FE2B01E00236AFE /* ContentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailViewController.swift; sourceTree = "<group>"; };
 		2F6F167A1FC3F08900FB768C /* typebase.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = typebase.css; sourceTree = "<group>"; };
 		2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContent.swift; sourceTree = "<group>"; };
 		2F6F167E1FC4164100FB768C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -425,6 +425,7 @@
 				2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */,
 				2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */,
 				2F6F167E1FC4164100FB768C /* Reachability.swift */,
+				2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
 				2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
@@ -483,7 +484,6 @@
 				2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */,
 				2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */,
 				2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */,
-				2F5E0BBC1FE2B01E00236AFE /* ContentDetailViewController.swift */,
 				2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */,
 				2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */,
 				2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */,
@@ -790,7 +790,6 @@
 				2FC0F2E81F863AE80092BFDC /* User.swift in Sources */,
 				2F70F4D71F9F1C3300D30755 /* BaseQuestionsListViewController.swift in Sources */,
 				2FC0F3101F863BA90092BFDC /* TestReportViewController.swift in Sources */,
-				2F5E0BBD1FE2B01E00236AFE /* ContentDetailViewController.swift in Sources */,
 				2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */,
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
 				2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */,
@@ -826,6 +825,7 @@
 				2F56B73D1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift in Sources */,
 				2FC0F2E41F863ADC0092BFDC /* TPApiResponse.swift in Sources */,
 				2F48C8111FD28E7A009C686C /* PostPager.swift in Sources */,
+				2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */,
 				2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */,
 				2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */,
 				2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */,
