@@ -31,8 +31,8 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     var emptyView: EmptyView!
     var content: Content!
     var exam: Exam!
-    var attempts: [Attempt] = []
-    var pausedAttempts: [Attempt] = []
+    var attempts: [ContentAttempt] = []
+    var pausedAttempts: [ContentAttempt] = []
     
     override func viewDidLoad() {
         emptyView = EmptyView.getInstance(parentView: view)
@@ -40,13 +40,14 @@ class ContentExamAttemptsTableViewController: UITableViewController {
         if content != nil && exam == nil {
             exam = content.exam
         }
+        UIUtils.setTableViewSeperatorInset(tableView, size: 15)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if (attempts.isEmpty) {
-            loadAttemptsWithProgress(url: exam.attemptsUrl!)
+            loadAttemptsWithProgress(url: content.attemptsUrl!)
         }
         tableView.reloadData()
     }
@@ -59,7 +60,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     }
     
     func loadAttempts(url: String) {
-        TPApiClient.loadAttempts(
+        TPApiClient.getListItems(
             endpointProvider: TPEndpointProvider(.loadAttempts, url: url),
             completion: {
                 testpressResponse, error in
@@ -92,7 +93,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                 } else {
                     self.displayAttemptsList()
                 }
-        })
+        }, type: ContentAttempt.self)
     }
     
     // MARK: - Table view data source
@@ -113,7 +114,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                 // table view is scrolling
                 return UITableViewCell()
             }
-            let attempt = attempts[indexPath.row]
+            let attempt = attempts[indexPath.row].assessment!
             var cellIdentifier: String
             if attempt.state == Constants.STATE_RUNNING {
                 cellIdentifier = Constants.PAUSED_ATTEMPT_TABLE_VIEW_CELL
@@ -123,21 +124,16 @@ class ContentExamAttemptsTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
                 as! AttemptsTableViewCell
             
-            cell.initCell(exam: exam, attempt: attempts[indexPath.row], parentViewController: self)
-            
-            // Customise items seperator
-            cell.preservesSuperviewLayoutMargins = false
-            cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
-            cell.layoutMargins = UIEdgeInsets.zero;
+            cell.initCell(attempt: attempt, parentViewController: self)
             return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let attempt = attempts[indexPath.row]
-        if attempt.state == Constants.STATE_RUNNING {
-            showStartExamScreen(attempt: attempt)
+        let contentAttempt = attempts[indexPath.row]
+        if contentAttempt.assessment.state == Constants.STATE_RUNNING {
+            showStartExamScreen(contentAttempt: contentAttempt)
         } else {
-            showTestReport(attempt: attempt)
+            showTestReport(contentAttempt: contentAttempt)
         }
     }
     
@@ -150,8 +146,8 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     func getFooter() -> UIView? {
         // Clear existing paused attempts if exist
         pausedAttempts.removeAll()
-        for attempt: Attempt in attempts {
-            if attempt.state == Constants.STATE_RUNNING {
+        for attempt: ContentAttempt in attempts {
+            if attempt.assessment.state == Constants.STATE_RUNNING {
                 pausedAttempts.append(attempt);
             }
         }
@@ -188,25 +184,25 @@ class ContentExamAttemptsTableViewController: UITableViewController {
         return false;
     }
     
-    func showStartExamScreen(attempt: Attempt? = nil) {
+    func showStartExamScreen(contentAttempt: ContentAttempt? = nil) {
         let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.START_EXAM_SCREEN_VIEW_CONTROLLER) as! StartExamScreenViewController
         
-        viewController.exam = self.exam!
-        if attempt != nil {
-            viewController.attempt = attempt
+        viewController.content = content
+        if contentAttempt != nil {
+            viewController.contentAttempt = contentAttempt
         }
         showDetailViewController(viewController, sender: self)
     }
     
-    func showTestReport(attempt: Attempt) {
+    func showTestReport(contentAttempt: ContentAttempt) {
         let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
         
         viewController.exam = self.exam!
-        viewController.attempt = attempt
+        viewController.attempt = contentAttempt.assessment
         showDetailViewController(viewController, sender: self)
     }
     
@@ -233,11 +229,7 @@ class ContentAttemptFooterCell: UITableViewCell {
     }
     
     @IBAction func onClickStartButton(_ sender: UIButton) {
-        if parentViewController.pausedAttempts.isEmpty {
-            parentViewController.showStartExamScreen()
-        } else {
-            parentViewController
-                .showStartExamScreen(attempt: parentViewController.pausedAttempts.last)
-        }
+        parentViewController
+            .showStartExamScreen(contentAttempt: parentViewController.pausedAttempts.last)
     }
 }

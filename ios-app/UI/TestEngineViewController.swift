@@ -145,11 +145,23 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func endExam() {
-        TPApiClient.updateAttemptState(
-            endpointProvider: TPEndpointProvider(
-                .endExam,
+        var endpointProvider: TPEndpointProvider
+        if contentAttempt != nil {
+            endpointProvider = TPEndpointProvider(.put, url: contentAttempt.getEndAttemptUrl())
+            endExam(type: ContentAttempt.self, endpointProvider: endpointProvider)
+        } else {
+            endpointProvider = TPEndpointProvider(
+                .put,
                 url: attempt!.url! + TPEndpoint.endExam.urlPath
-            ),
+            )
+            endExam(type: Attempt.self, endpointProvider: endpointProvider)
+        }
+    }
+    
+    func endExam<T: TestpressModel>(type: T.Type, endpointProvider: TPEndpointProvider) {
+        TPApiClient.request(
+            type: type,
+            endpointProvider: endpointProvider,
             completion: {
                 attempt, error in
                 if let error = error {
@@ -157,11 +169,16 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                     return
                 }
                 
-                self.attempt = attempt
+                if attempt is ContentAttempt {
+                    self.contentAttempt = attempt as! ContentAttempt
+                    self.attempt = self.contentAttempt.assessment
+                } else {
+                    self.attempt = attempt as? Attempt
+                }
                 self.hideLoadingProgress(completionHandler: {
                     self.gotoTestReport()
                 })
-            }
+        }
         )
     }
     

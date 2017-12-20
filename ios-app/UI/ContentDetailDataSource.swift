@@ -29,9 +29,9 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     
     var contents: [Content]!
     var initialPosition: Int!
-    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate!
+    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
     
-    init(_ contents: [Content], _ contentAttemptCreationDelegate: ContentAttemptCreationDelegate) {
+    init(_ contents: [Content], _ contentAttemptCreationDelegate: ContentAttemptCreationDelegate?) {
         super.init()
         self.contents = contents
         self.contentAttemptCreationDelegate = contentAttemptCreationDelegate
@@ -46,8 +46,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         
         if content.exam != nil {
-            if content.exam!.attemptsCount != nil && content.exam!.pausedAttemptsCount != nil &&
-                (content.exam!.attemptsCount > 0 || content.exam!.pausedAttemptsCount > 0) {
+            if content.attemptsCount != nil && content.attemptsCount > 0 {
                 let viewController = storyboard.instantiateViewController(
                     withIdentifier: Constants.CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER
                     ) as! ContentExamAttemptsTableViewController
@@ -56,7 +55,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
                 return viewController
             } else {
                 let viewController = storyboard.instantiateViewController(withIdentifier:
-                    Constants.CONTENT_START_EXAM_VIEW_CONTROLLER) as! ContentStartExamViewController
+                    Constants.CONTENT_START_EXAM_VIEW_CONTROLLER) as! StartExamScreenViewController
                 
                 viewController.content = content
                 return viewController
@@ -81,8 +80,8 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     func indexOfViewController(_ viewController: UIViewController) -> Int {
         if viewController is ContentExamAttemptsTableViewController {
             return (viewController as! ContentExamAttemptsTableViewController).content.order
-        } else if viewController is ContentStartExamViewController {
-            return (viewController as! ContentStartExamViewController).content.order
+        } else if viewController is StartExamScreenViewController {
+            return (viewController as! StartExamScreenViewController).content.order
         } else if viewController is AttachmentDetailViewController {
             return (viewController as! AttachmentDetailViewController).content.order
         } else {

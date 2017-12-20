@@ -33,13 +33,9 @@ class AttemptsTableViewCell: UITableViewCell {
     @IBOutlet weak var pausedDate: UILabel!
     @IBOutlet weak var pausedLabel: UIView!
     
-    var attempt: Attempt?
-    var exam: Exam?
     var parentViewController: UIViewController? = nil
     
-    func initCell(exam: Exam, attempt: Attempt, parentViewController: UIViewController) {
-        self.exam = exam
-        self.attempt = attempt
+    func initCell(attempt: Attempt, parentViewController: UIViewController) {
         self.parentViewController = parentViewController
         if reuseIdentifier == Constants.PAUSED_ATTEMPT_TABLE_VIEW_CELL {
             pausedDate.text = FormatDate.format(dateString: attempt.date!,

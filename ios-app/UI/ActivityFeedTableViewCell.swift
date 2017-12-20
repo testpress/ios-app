@@ -108,12 +108,12 @@ class ActivityFeedTableViewCell: UITableViewCell {
                     content.order = 0
                     post = nil
                     let id = actionObject["id"] as! Int
-                    content.url = Constants.BASE_URL + "api/v2.3/contents/\(id)/"
+                    content.url = Constants.BASE_URL + "/api/v2.3/contents/\(id)/"
+                    content.attemptsUrl = content.url + "attempts/"
                     if let exam = actionObject["exam"] as? [String: Any] {
                         action += "an exam "
                         actionObjectName = exam["title"] as! String
                         thumbnailImage.image = Images.ExamAddedIcon.image
-                        content.exam?.attemptsUrl = content.exam!.url! + "attempts/"
                     } else if let htmlTitle = actionObject["html_content_title"] as? String {
                         action += "an ariticle "
                         actionObjectName = htmlTitle

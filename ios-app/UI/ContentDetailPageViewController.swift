@@ -41,7 +41,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     let bottomGradient = CAGradientLayer()
     var pageViewController: UIPageViewController!
     var contentDetailDataSource: ContentDetailDataSource!
-    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate!
+    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate? = nil
     var currentIndex: Int!
     var contents = [Content]()
     var position: Int!
@@ -162,14 +162,13 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     func updateCurrentExamContent() {
         let content = contents[getCurrentIndex()]
-        if content.exam!.attemptsCount != nil && content.exam!.pausedAttemptsCount != nil &&
-            (content.exam!.attemptsCount > 0 || content.exam!.pausedAttemptsCount > 0) {
-            let viewController =
-                getCurretViewController() as! ContentExamAttemptsTableViewController
+        if let viewController =
+            getCurretViewController() as? ContentExamAttemptsTableViewController {
 
             viewController.attempts.removeAll()
-            viewController.loadAttemptsWithProgress(url: content.exam!.attemptsUrl!)
+            viewController.loadAttemptsWithProgress(url: content.attemptsUrl)
         } else {
+            contentAttemptCreationDelegate?.newAttemptCreated()
             updateContent()
         }
     }

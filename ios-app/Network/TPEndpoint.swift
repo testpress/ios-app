@@ -32,7 +32,6 @@ enum TPEndpoint {
     case authenticateUser
     case registerNewUser
     case getExams
-    case createAttempt
     case getQuestions
     case sendHeartBeat
     case saveAnswer
@@ -50,8 +49,10 @@ enum TPEndpoint {
     case getSubjectAnalytics
     case getAttemptSubjectAnalytics
     case getActivityFeed
+    case contentAttempts
     case get
     case post
+    case put
     
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -61,8 +62,6 @@ enum TPEndpoint {
             return .post
         case .getExams:
             return .get
-        case .createAttempt:
-            return .post
         case .getQuestions:
             return .get
         case .sendHeartBeat:
@@ -98,6 +97,10 @@ enum TPEndpoint {
             return .get
         case .post:
             return .post
+        case .put:
+            return .put
+        default:
+            return .get
         }
     }
     
@@ -133,6 +136,8 @@ enum TPEndpoint {
             return "review/subjects/"
         case .getActivityFeed:
             return "/api/v2.3/activities/"
+        case .contentAttempts:
+            return "/api/v2.2/content_attempts/"
         default:
             return ""
         }

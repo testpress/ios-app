@@ -49,7 +49,6 @@
 		2F56B73B1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */; };
 		2F56B73D1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73C1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift */; };
 		2F56B73F1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73E1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift */; };
-		2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */; };
 		2F5E0BB51FE2415800236AFE /* ActivityFeedPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BB41FE2415800236AFE /* ActivityFeedPager.swift */; };
 		2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BB61FE2444E00236AFE /* ActivityFeedTableViewController.swift */; };
 		2F5E0BB91FE2452D00236AFE /* ActivityFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BB81FE2452D00236AFE /* ActivityFeedTableViewCell.swift */; };
@@ -217,7 +216,6 @@
 		2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAnalyticsTableViewController.swift; sourceTree = "<group>"; };
 		2F56B73C1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAnalyticsHeaderViewCell.swift; sourceTree = "<group>"; };
 		2F56B73E1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAnalyticsQuestionCell.swift; sourceTree = "<group>"; };
-		2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStartExamViewController.swift; sourceTree = "<group>"; };
 		2F5E0BB41FE2415800236AFE /* ActivityFeedPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedPager.swift; sourceTree = "<group>"; };
 		2F5E0BB61FE2444E00236AFE /* ActivityFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedTableViewController.swift; sourceTree = "<group>"; };
 		2F5E0BB81FE2452D00236AFE /* ActivityFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -486,7 +484,6 @@
 				2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */,
 				2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */,
 				2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */,
-				2F5C03221FC598110064C30F /* ContentStartExamViewController.swift */,
 				2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */,
 				2F763CFB1FBD79F60033D495 /* CoursesTableViewController.swift */,
 				2FC0F2871F861A860092BFDC /* EmptyView.swift */,
@@ -828,7 +825,6 @@
 				2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */,
 				2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */,
 				2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */,
-				2F5C03231FC598110064C30F /* ContentStartExamViewController.swift in Sources */,
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
 				2FC0F2DE1F863ACA0092BFDC /* Attempt.swift in Sources */,
 				2F96997A1FC2A22A001B2B18 /* Content.swift in Sources */,

@@ -603,10 +603,10 @@
             </objects>
             <point key="canvasLocation" x="2142" y="-579"/>
         </scene>
-        <!--Content Start Exam View Controller-->
+        <!--Start Exam Screen View Controller-->
         <scene sceneID="R2F-EW-Fct">
             <objects>
-                <viewController storyboardIdentifier="ContentStartExamViewController" id="hZW-Ne-SuA" customClass="ContentStartExamViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContentStartExamViewController" id="hZW-Ne-SuA" customClass="StartExamScreenViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CQk-wv-T0R"/>
                         <viewControllerLayoutGuide type="bottom" id="nZc-F1-Ok9"/>
@@ -888,6 +888,7 @@
                         <outlet property="questionsCount" destination="ocj-CE-eIB" id="8X8-U0-8QP"/>
                         <outlet property="scrollView" destination="K6H-CK-msH" id="vVV-tj-Lwb"/>
                         <outlet property="startButton" destination="FPc-W3-byD" id="6ro-yj-hUC"/>
+                        <outlet property="startButtonLayout" destination="FPc-W3-byD" id="nfd-wB-dvt"/>
                         <outlet property="startEndDate" destination="O66-OT-NiS" id="aXJ-bJ-vgC"/>
                         <outlet property="webOnlyExamLabel" destination="lsI-Qn-jXx" id="ovH-Yl-Vhl"/>
                     </connections>
