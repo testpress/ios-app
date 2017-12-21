@@ -32,23 +32,56 @@ class AttemptsTableViewCell: UITableViewCell {
     @IBOutlet weak var correct: UILabel!
     @IBOutlet weak var pausedDate: UILabel!
     @IBOutlet weak var pausedLabel: UIView!
+    @IBOutlet weak var trophiesCount: UILabel!
+    @IBOutlet weak var resumeLabel: UILabel!
+    @IBOutlet weak var reviewLabel: UILabel!
     
     var parentViewController: UIViewController? = nil
     
-    func initCell(attempt: Attempt, parentViewController: UIViewController) {
+    func initCell(contentAttempt: ContentAttempt? = nil, attempt: Attempt? = nil,
+                  parentViewController: UIViewController) {
+        
+        let attempt = attempt != nil ? attempt! : contentAttempt!.assessment!
+        let trophiesEnabled = contentAttempt != nil && Constants.TROPHIES_ENABLED
         self.parentViewController = parentViewController
         if reuseIdentifier == Constants.PAUSED_ATTEMPT_TABLE_VIEW_CELL {
             pausedDate.text = FormatDate.format(dateString: attempt.date!,
                                                 givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
             
             pausedLabel.layer.borderColor = Colors.getRGB(Colors.GRAY_MEDIUM).cgColor
+            if trophiesEnabled {
+                resumeLabel.isHidden = true
+            }
         } else {
             completedDate.text = FormatDate.format(dateString: attempt.date!,
                                                    givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
             
             score.text = attempt.score!
             correct.text = String(attempt.correctCount!) + "/" + String(attempt.totalQuestions!)
+            if trophiesEnabled {
+                reviewLabel.isHidden = true
+                let trophies = String(describing: contentAttempt!.trophies!)
+                trophiesCount.text = trophies.elementsEqual("NA") ? "0" : trophies
+                trophiesCount.textColor = trophies.contains("+") ?
+                    Colors.getRGB(Colors.MATERIAL_GREEN) : Colors.getRGB(Colors.MATERIAL_RED)
+            } else {
+                trophiesCount?.isHidden = true
+            }
         }
     }
 
+}
+
+class AttemptsListHeader: UITableViewCell {
+    
+    @IBOutlet weak var trophiesLabel: UILabel!
+    @IBOutlet weak var actionLabel: UILabel!
+    
+    func initCell() {
+        if Constants.TROPHIES_ENABLED {
+            actionLabel.isHidden = true
+        } else {
+            trophiesLabel.isHidden = true
+        }
+    }
 }

@@ -114,9 +114,9 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                 // table view is scrolling
                 return UITableViewCell()
             }
-            let attempt = attempts[indexPath.row].assessment!
+            let contentAttempt = attempts[indexPath.row]
             var cellIdentifier: String
-            if attempt.state == Constants.STATE_RUNNING {
+            if contentAttempt.assessment.state == Constants.STATE_RUNNING {
                 cellIdentifier = Constants.PAUSED_ATTEMPT_TABLE_VIEW_CELL
             } else {
                 cellIdentifier = Constants.COMPLETED_ATTEMPT_TABLE_VIEW_CELL
@@ -124,7 +124,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
                 as! AttemptsTableViewCell
             
-            cell.initCell(attempt: attempt, parentViewController: self)
+            cell.initCell(contentAttempt: contentAttempt, parentViewController: self)
             return cell
     }
     
@@ -137,10 +137,14 @@ class ContentExamAttemptsTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) ->
-        UIView? {
-                
-            return tableView.dequeueReusableCell(withIdentifier: "AttemptsListHeader")!
+    override func tableView(_ tableView: UITableView,
+                            viewForHeaderInSection section: Int) -> UIView? {
+        
+        let header = tableView.dequeueReusableCell(withIdentifier: "AttemptsListHeader")
+            as! AttemptsListHeader
+        
+        header.initCell()
+        return header
     }
     
     func getFooter() -> UIView? {

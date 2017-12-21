@@ -38,6 +38,8 @@ struct Constants {
     
     static let LAUNCHED_APP_BEFORE = "launchedAppBefore"
     
+    static let TROPHIES_ENABLED = true
+    
     static let TEST_ENGINE = "TestEngine"
     static let EXAM_REVIEW_STORYBOARD = "ExamReview"
     static let LOGIN_VIEW_CONTROLLER = "LoginViewController"
