@@ -84,6 +84,7 @@
 		2F96997E1FC2A761001B2B18 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96997D1FC2A761001B2B18 /* Attachment.swift */; };
 		2F9699801FC2A8E0001B2B18 /* ContentPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96997F1FC2A8E0001B2B18 /* ContentPager.swift */; };
 		2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */; };
+		2F9778A81FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */; };
 		2F9B5E171FC54AFC00D67100 /* AttachmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */; };
 		2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */; };
 		2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */; };
@@ -244,6 +245,7 @@
 		2F96997D1FC2A761001B2B18 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		2F96997F1FC2A8E0001B2B18 /* ContentPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentPager.swift; sourceTree = "<group>"; };
 		2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTableViewCell.swift; sourceTree = "<group>"; };
+		2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrophiesAchievedViewController.swift; sourceTree = "<group>"; };
 		2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentDetailViewController.swift; sourceTree = "<group>"; };
 		2F9E39911F851A76001D51B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TestEngine.storyboard; sourceTree = "<group>"; };
 		2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTabViewController.swift; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 				2F3A14301FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib */,
 				2F56B73E1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift */,
 				2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */,
+				2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */,
 				2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */,
 			);
 			path = UI;
@@ -845,6 +848,7 @@
 				2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */,
 				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
+				2F9778A81FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
 				2F3A53011FDA652A00C64123 /* Subject.swift in Sources */,
 				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,

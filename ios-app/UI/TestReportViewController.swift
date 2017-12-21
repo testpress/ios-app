@@ -113,16 +113,10 @@ class TestReportViewController: UIViewController {
         let presentingViewController =
             self.presentingViewController?.presentingViewController?.presentingViewController
         
-        if self.presentingViewController?.presentingViewController! is
-            ContentDetailPageViewController {
+        if let contentDetailPageViewController =
+            presentingViewController as? ContentDetailPageViewController {
             
-            let contentDetailPageViewController  =
-                self.presentingViewController?.presentingViewController!
-                    as! ContentDetailPageViewController
-            
-            contentDetailPageViewController.dismiss(animated: false, completion: {
-                contentDetailPageViewController.updateCurrentExamContent()
-            })
+            goToContentDetailPageViewController(contentDetailPageViewController)
         } else if presentingViewController is UITabBarController {
             let tabViewController =
                 presentingViewController?.childViewControllers[0] as! ExamsTabViewController
@@ -143,17 +137,22 @@ class TestReportViewController: UIViewController {
                 // Load new attempts list with progress
                 attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
             })
-        } else if presentingViewController is ContentDetailPageViewController {
+        } else if let contentDetailPageViewController =
+            presentingViewController?.presentingViewController as? ContentDetailPageViewController {
             
-            let contentDetailPageViewController =
-                presentingViewController as! ContentDetailPageViewController
-            
-            contentDetailPageViewController.dismiss(animated: false, completion: {
-                contentDetailPageViewController.updateCurrentExamContent()
-            })
+            goToContentDetailPageViewController(contentDetailPageViewController)
         } else {
             dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func goToContentDetailPageViewController(_ contentDetailPageViewController: UIViewController) {
+        let contentDetailPageViewController =
+            contentDetailPageViewController as! ContentDetailPageViewController
+        
+        contentDetailPageViewController.dismiss(animated: false, completion: {
+            contentDetailPageViewController.updateCurrentExamContent()
+        })
     }
     
     // Set frames of the views in this method to support both portrait & landscape view

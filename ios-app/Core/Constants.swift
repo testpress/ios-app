@@ -83,6 +83,7 @@ struct Constants {
     static let TIME_ANALYTICS_QUESTION_CELL = "TimeAnalyticsQuestionCell"
     static let TIME_ANALYTICS_TABLE_VIEW_CONTROLLER = "TimeAnalyticsTableViewController"
     static let ACTIVITY_FEED_TABLE_VIEW_CELL = "ActivityFeedTableViewCell"
+    static let TROPHIES_ACHIEVED_VIEW_CONTROLLER = "TrophiesAchievedViewController"
     
     static let PAGE = "page"
     static let PARENT = "parent"

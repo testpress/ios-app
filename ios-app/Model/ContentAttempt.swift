@@ -29,7 +29,7 @@ public class ContentAttempt {
     
     var id: Int!
     var type: String!
-    var trophies: String!
+    var trophies: Any!
     var objectUrl: String!
     var assessment: Attempt!
     var video: Video!
