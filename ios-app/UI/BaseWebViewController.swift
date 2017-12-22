@@ -101,6 +101,15 @@ extension BaseWebViewController: WKNavigationDelegate {
         }
         decisionHandler(.allow)
     }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!,
+                 withError error: Error) {
+        
+        debugPrint(error.localizedDescription)
+        if activityIndicator.isAnimating {
+            activityIndicator.stopAnimating()
+        }
+    }
 
 }
 

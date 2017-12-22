@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  WebViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,45 +23,28 @@
 //  THE SOFTWARE.
 //
 
-import ObjectMapper
+import UIKit
 
-public class User {
-    var username: String?
-    var email: String?
-    var password: String?
-    var phone: String?
-    var id: Int!
-    var url: String?
-    var displayName: String!
-    var photo: String?
-    var mediumImage: String!
-    var largeImage: String?
-    var averageSpeed: Int?
-    var averageAccuracy: Int?
-    var averagePercentage: Int?
-    var testsCount: Int?
-    var score: String?
+class WebViewController: BaseWebViewController {
     
-    public required init?(map: Map) {
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var navigationBarItem: UINavigationItem!
+    
+    var url: String!
+    
+    override func getParentView() -> UIView {
+        return contentView
     }
-}
-
-extension User: TestpressModel {
-    public func mapping(map: Map) {
-        username <- map["username"]
-        email <- map["email"]
-        password <- map["password"]
-        phone <- map["phone"]
-        id <- map["id"]
-        url <- map["url"]
-        displayName <- map["display_name"]
-        photo <- map["photo"]
-        mediumImage <- map["medium_image"]
-        largeImage <- map["large_image"]
-        averageSpeed <- map["average_speed"]
-        averageAccuracy <- map["average_accuracy"]
-        averagePercentage <- map["average_percentage"]
-        testsCount <- map["tests_count"]
-        score <- map["score"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityIndicator.frame = view.frame
+        navigationBarItem.title = title
+        activityIndicator.startAnimating()
+        webView.load(URLRequest(url: URL(string: url)!))
+    }
+    
+    @IBAction func back() {
+        dismiss(animated: true, completion: nil)
     }
 }

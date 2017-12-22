@@ -37,6 +37,7 @@ struct Constants {
     static let KEYCHAIN_SERVICE_NAME = Bundle.main.bundleIdentifier!
     
     static let LAUNCHED_APP_BEFORE = "launchedAppBefore"
+    static let TESTPRESS_USER_ID = "testpressUserId"
     
     static let TROPHIES_ENABLED = true
     
@@ -86,6 +87,7 @@ struct Constants {
     static let TIME_ANALYTICS_TABLE_VIEW_CONTROLLER = "TimeAnalyticsTableViewController"
     static let ACTIVITY_FEED_TABLE_VIEW_CELL = "ActivityFeedTableViewCell"
     static let TROPHIES_ACHIEVED_VIEW_CONTROLLER = "TrophiesAchievedViewController"
+    static let WEB_VIEW_CONTROLLER = "WebViewController"
     
     static let PAGE = "page"
     static let PARENT = "parent"

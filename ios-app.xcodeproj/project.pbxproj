@@ -43,6 +43,8 @@
 		2F48C8161FD3F6BD009C686C /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8141FD3F6BD009C686C /* Post.storyboard */; };
 		2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */; };
 		2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F48C8191FD566B2009C686C /* IQKeyboardManagerSwift.framework */; };
+		2F50A8A81FECE77F00F1F2B3 /* ProgressCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F50A8A71FECE77F00F1F2B3 /* ProgressCardViewController.swift */; };
+		2F50A8AA1FECE8B600F1F2B3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F50A8A91FECE8B600F1F2B3 /* WebViewController.swift */; };
 		2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */; };
 		2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */; };
 		2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */; };
@@ -211,6 +213,8 @@
 		2F48C8151FD3F6BD009C686C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Post.storyboard; sourceTree = "<group>"; };
 		2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		2F48C8191FD566B2009C686C /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
+		2F50A8A71FECE77F00F1F2B3 /* ProgressCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCardViewController.swift; sourceTree = "<group>"; };
+		2F50A8A91FECE8B600F1F2B3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisLabelFormatter.swift; sourceTree = "<group>"; };
 		2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisPercentValueFormatter.swift; sourceTree = "<group>"; };
 		2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsGraphCell.swift; sourceTree = "<group>"; };
@@ -510,6 +514,7 @@
 				2F48C80C1FD28902009C686C /* PostTableViewCell.swift */,
 				2F48C80A1FD288C6009C686C /* PostTableViewController.swift */,
 				2FC0F28F1F861A860092BFDC /* ProfileViewController.swift */,
+				2F50A8A71FECE77F00F1F2B3 /* ProgressCardViewController.swift */,
 				2FC0F2901F861A860092BFDC /* QuestionsControllerSource.swift */,
 				2F1474781F8B898F0017151B /* QuestionListViewController.swift */,
 				2FC0F2911F861A860092BFDC /* QuestionsViewController.swift */,
@@ -531,6 +536,7 @@
 				2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */,
 				2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */,
 				2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */,
+				2F50A8A91FECE8B600F1F2B3 /* WebViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -766,11 +772,13 @@
 				2FC0F3081F863BA90092BFDC /* QuestionsViewController.swift in Sources */,
 				2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */,
 				2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */,
+				2F50A8AA1FECE8B600F1F2B3 /* WebViewController.swift in Sources */,
 				2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */,
 				2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */,
 				2F1474791F8B898F0017151B /* QuestionListViewController.swift in Sources */,
 				2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */,
 				2FC0F2E21F863AD70092BFDC /* Exam.swift in Sources */,
+				2F50A8A81FECE77F00F1F2B3 /* ProgressCardViewController.swift in Sources */,
 				2FC0F2DF1F863ACD0092BFDC /* AttemptAnswer.swift in Sources */,
 				2F56B73F1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift in Sources */,
 				2FC0F2E01F863AD00092BFDC /* AttemptQuestion.swift in Sources */,
