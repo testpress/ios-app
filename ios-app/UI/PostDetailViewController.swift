@@ -29,15 +29,10 @@ import WebKit
 
 class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessageHandler {
     
+    @IBOutlet weak var editorHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var bottomShadowView: UIView!
-    @IBOutlet weak var commentBox: UITextView! {
-        didSet {
-            commentBox.textColor = UIColor.lightGray
-            commentBox.text = placeholder
-            commentBox.selectedRange = NSRange(location: 0, length: 0)
-        }
-    }
+    @IBOutlet weak var commentBox: RichTextEditor!
     
     private let placeholder = "Write a comment..."
     
@@ -55,6 +50,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         super.viewDidLoad()
         webViewDelegate = self
         commentBox.delegate = self
+        commentBox.placeholder = placeholder
         activityIndicator.center = CGPoint(x: view.center.x, y: webView.center.y)
         emptyView = EmptyView.getInstance(parentView: webView)
         loadHTMLContent()
@@ -271,8 +267,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     }
     
     @IBAction func postComment(_ sender: Any) {
-        
-        commentBox.resignFirstResponder()
+        commentBox.endEditing(true)
         let comment: String! = commentBox.text
         if comment == nil || comment.elementsEqual("") || comment.elementsEqual(placeholder) {
             return
@@ -292,8 +287,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
                     return
                 }
                 
-                self.commentBox.text = nil
-                self.textViewDidChange(self.commentBox)
+                self.commentBox.text = ""
                 self.loadingDialogController.dismiss(animated: false)
                 self.getNewCommentsPager().reset()
                 self.loadNewComments()
@@ -347,30 +341,9 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     
 }
 
-extension PostDetailViewController: UITextViewDelegate {
+extension PostDetailViewController: RichTextEditorDelegate {
     
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        // Move cursor to beginning on first tap
-        if textView.text == placeholder {
-            textView.selectedRange = NSRange(location: 0, length: 0)
-        }
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange,
-                  replacementText text: String) -> Bool {
-        
-        if textView.text == placeholder && !text.isEmpty {
-            textView.text = nil
-            textView.textColor = UIColor.black
-            textView.selectedRange = NSRange(location: 0, length: 0)
-        }
-        return true
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.textColor = UIColor.lightGray
-            textView.text = placeholder
-        }
+    func heightDidChange(_ editor: RichTextEditor, heightDidChange height: CGFloat) {
+        editorHeightConstraint.constant = height + 5
     }
 }
