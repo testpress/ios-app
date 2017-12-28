@@ -43,6 +43,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     var previousCommentsPager: CommentPager!
     var newCommentsPager: CommentPager!
     var comments = [Comment]()
+    let imagePicker = ImagePicker()
     let bottomGradient = CAGradientLayer()
     let loadingDialogController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
@@ -51,6 +52,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         webViewDelegate = self
         commentBox.delegate = self
         commentBox.placeholder = placeholder
+        imagePicker.delegate = self
         activityIndicator.center = CGPoint(x: view.center.x, y: webView.center.y)
         emptyView = EmptyView.getInstance(parentView: webView)
         loadHTMLContent()
@@ -273,6 +275,10 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
             return
         }
         present(loadingDialogController, animated: true)
+        postComment(comment)
+    }
+    
+    func postComment(_ comment: String) {
         TPApiClient.postComment(
             comment: comment,
             commentsUrl: post.commentsUrl,
@@ -292,6 +298,10 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
                 self.getNewCommentsPager().reset()
                 self.loadNewComments()
         })
+    }
+    
+    @IBAction func uploadImage(_ sender: UIButton) {
+        imagePicker.showActionSheet(viewController: self)
     }
     
     func getTitle() -> String {
@@ -345,5 +355,29 @@ extension PostDetailViewController: RichTextEditorDelegate {
     
     func heightDidChange(_ editor: RichTextEditor, heightDidChange height: CGFloat) {
         editorHeightConstraint.constant = height + 5
+    }
+}
+
+extension PostDetailViewController: ImagePickerDelegate {
+    
+    func imagePicker(_ picker: ImagePicker, didFinishPickingImage imageData: Data,
+                     imagePath: String) {
+        
+        present(loadingDialogController, animated: false, completion: {
+            TPApiClient.uploadImage(imageData: imageData, fileName: imagePath, completion: {
+                fileDetails, error in
+                
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                    self.loadingDialogController.dismiss(animated: false)
+                    let (_, title, _) = error.getDisplayInfo()
+                    TTGSnackbar(message: title, duration: .middle).show()
+                    return
+                }
+                
+                self.postComment(WebViewUtils.appendImageTag(imageUrl: fileDetails!.url))
+            })
+        })
     }
 }

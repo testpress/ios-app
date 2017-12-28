@@ -50,6 +50,7 @@ enum TPEndpoint {
     case getAttemptSubjectAnalytics
     case getActivityFeed
     case contentAttempts
+    case uploadImage
     case get
     case post
     case put
@@ -95,7 +96,8 @@ enum TPEndpoint {
             return .get
         case .get:
             return .get
-        case .post:
+        case .post,
+             .uploadImage:
             return .post
         case .put:
             return .put
@@ -138,6 +140,8 @@ enum TPEndpoint {
             return "/api/v2.3/activities/"
         case .contentAttempts:
             return "/api/v2.2/content_attempts/"
+        case .uploadImage:
+            return "/api/v2.2/image_upload/"
         default:
             return ""
         }

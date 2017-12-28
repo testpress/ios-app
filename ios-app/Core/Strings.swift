@@ -107,4 +107,12 @@ struct Strings {
     static let LOAD_MORE_COMMENTS = "Load previous comments"
     static let LOAD_COMMENTS = "Load comments"
     static let LOAD_NEW_COMMENTS = "Load new comments"
+    
+    static let PHOTO_LIBRARY = "Photo Library"
+    static let CAMERA = "Camera"
+    static let INVALID_IMAGE = "Invalid Image"
+    static let NEEDS_PERMISSION_TO_ACCESS = "Needs permission to access "
+    static let GO_TO_SETTINGS = "Go to Settings to enable the permission"
+    static let SETTINGS = "Settings"
+    
 }

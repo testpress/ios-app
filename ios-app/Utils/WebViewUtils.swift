@@ -197,4 +197,8 @@ class WebViewUtils {
         return html.replacingOccurrences(of: "\r", with: "")
     }
     
+    public static func appendImageTag(imageUrl: String) -> String {
+        return "<img src='" + imageUrl + "'/>"
+    }
+    
 }
