@@ -43,7 +43,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     var previousCommentsPager: CommentPager!
     var newCommentsPager: CommentPager!
     var comments = [Comment]()
-    let imagePicker = ImagePicker()
+    let imageUploadHelper = ImageUploadHelper()
     let bottomGradient = CAGradientLayer()
     let loadingDialogController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
@@ -52,7 +52,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         webViewDelegate = self
         commentBox.delegate = self
         commentBox.placeholder = placeholder
-        imagePicker.delegate = self
+        imageUploadHelper.delegate = self
         activityIndicator.center = CGPoint(x: view.center.x, y: webView.center.y)
         emptyView = EmptyView.getInstance(parentView: webView)
         loadHTMLContent()
@@ -301,7 +301,8 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     }
     
     @IBAction func uploadImage(_ sender: UIButton) {
-        imagePicker.showActionSheet(viewController: self)
+        imageUploadHelper.showImagePicker(viewController: self,
+                                          loadingDialogController: loadingDialogController)
     }
     
     func getTitle() -> String {
@@ -358,26 +359,9 @@ extension PostDetailViewController: RichTextEditorDelegate {
     }
 }
 
-extension PostDetailViewController: ImagePickerDelegate {
+extension PostDetailViewController: ImageUploadHelperDelegate {
     
-    func imagePicker(_ picker: ImagePicker, didFinishPickingImage imageData: Data,
-                     imagePath: String) {
-        
-        present(loadingDialogController, animated: false, completion: {
-            TPApiClient.uploadImage(imageData: imageData, fileName: imagePath, completion: {
-                fileDetails, error in
-                
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    self.loadingDialogController.dismiss(animated: false)
-                    let (_, title, _) = error.getDisplayInfo()
-                    TTGSnackbar(message: title, duration: .middle).show()
-                    return
-                }
-                
-                self.postComment(WebViewUtils.appendImageTag(imageUrl: fileDetails!.url))
-            })
-        })
+    func imageUploadHelper(_ helper: ImageUploadHelper, didFinishUploadImage imageUrl: String) {
+        postComment(WebViewUtils.appendImageTag(imageUrl: imageUrl))
     }
 }

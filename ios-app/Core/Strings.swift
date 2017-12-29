@@ -111,6 +111,7 @@ struct Strings {
     static let PHOTO_LIBRARY = "Photo Library"
     static let CAMERA = "Camera"
     static let INVALID_IMAGE = "Invalid Image"
+    static let YOUR_DEVAICE_NOT_SUPPORTED = "Your device is not supported"
     static let NEEDS_PERMISSION_TO_ACCESS = "Needs permission to access "
     static let GO_TO_SETTINGS = "Go to Settings to enable the permission"
     static let SETTINGS = "Settings"

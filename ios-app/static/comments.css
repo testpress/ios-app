@@ -79,7 +79,6 @@ div:empty::before {
 
 .comment_box {
     font-family: 'Rubik-Regular', serif;
-    margin-left: 10px;
     width: 100%;
     font-size: 14px;
     line-height: 20px;
@@ -93,7 +92,7 @@ div:empty::before {
     user-select: text;
 }
 
-.icon-paper-plane {
+.icon-paper-plane, .icon-add-a-photo {
     display: inline-block;
     background-color: #00ccaa;
     color: #ffffff;
@@ -103,6 +102,7 @@ div:empty::before {
     height: auto;
     width: 40px;
     padding: 10px 0 10px 0;
+    margin-left: 10px;
     margin-right: 10px;
 }
 

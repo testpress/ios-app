@@ -48,10 +48,12 @@ class ImagePicker: NSObject {
             pickerController.delegate = self
             pickerController.sourceType = sourceType
             viewController.present(pickerController, animated: true, completion: nil)
+        } else {
+            TTGSnackbar(message: Strings.YOUR_DEVAICE_NOT_SUPPORTED, duration: .middle).show()
         }
     }
     
-    func showActionSheet(viewController: UIViewController) {
+    func showImagePicker(viewController: UIViewController) {
         self.viewController = viewController
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(

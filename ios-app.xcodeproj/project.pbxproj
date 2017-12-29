@@ -51,6 +51,7 @@
 		2F515DFC1FF4EF9C0005D8A5 /* FileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFB1FF4EF9C0005D8A5 /* FileDetails.swift */; };
 		2F515DFE1FF517160005D8A5 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFD1FF517160005D8A5 /* Permissions.swift */; };
 		2F515E001FF572690005D8A5 /* PhotoCropEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F515DFF1FF572690005D8A5 /* PhotoCropEditor.framework */; };
+		2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */; };
 		2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */; };
 		2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */; };
 		2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */; };
@@ -227,6 +228,7 @@
 		2F515DFB1FF4EF9C0005D8A5 /* FileDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDetails.swift; sourceTree = "<group>"; };
 		2F515DFD1FF517160005D8A5 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		2F515DFF1FF572690005D8A5 /* PhotoCropEditor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotoCropEditor.framework; path = Carthage/Build/iOS/PhotoCropEditor.framework; sourceTree = "<group>"; };
+		2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadHelper.swift; sourceTree = "<group>"; };
 		2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisLabelFormatter.swift; sourceTree = "<group>"; };
 		2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisPercentValueFormatter.swift; sourceTree = "<group>"; };
 		2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsGraphCell.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 				2FC0F2541F8617690092BFDC /* FormatDate.swift */,
 				2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */,
 				2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */,
+				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
 				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
 				2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */,
 				2F515DFD1FF517160005D8A5 /* Permissions.swift */,
@@ -875,6 +878,7 @@
 				2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */,
 				2F56B73B1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift in Sources */,
 				2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */,
+				2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */,
 				2F9699801FC2A8E0001B2B18 /* ContentPager.swift in Sources */,
 				2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */,
 				2FC0F2FA1F863B7C0092BFDC /* AttemptsTableViewCell.swift in Sources */,
