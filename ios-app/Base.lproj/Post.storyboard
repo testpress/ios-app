@@ -67,7 +67,6 @@
                                         <inset key="imageEdgeInsets" minX="10" minY="5" maxX="5" maxY="10"/>
                                         <state key="normal" image="ic_add_a_photo"/>
                                         <connections>
-                                            <action selector="postComment:" destination="zXR-ST-QOC" eventType="touchUpInside" id="fiW-Nc-efn"/>
                                             <action selector="uploadImage:" destination="zXR-ST-QOC" eventType="touchUpInside" id="aZL-oo-qb9"/>
                                         </connections>
                                     </button>
