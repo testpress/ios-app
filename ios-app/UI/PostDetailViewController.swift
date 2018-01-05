@@ -234,6 +234,11 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
                 js += "displayEmptyCommentsDescription();\n"
             }
             self.evaluateJavaScript(js)
+            // Scroll to bottom
+            let scrollPoint = CGPoint(x: 0, y: self.webView.scrollView.contentSize.height -
+                self.webView.frame.size.height)
+            
+            self.webView.scrollView.setContentOffset(scrollPoint, animated: false)
         })
     }
     
@@ -270,12 +275,14 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     
     @IBAction func postComment(_ sender: Any) {
         commentBox.endEditing(true)
-        let comment: String! = commentBox.text
-        if comment == nil || comment.elementsEqual("") || comment.elementsEqual(placeholder) {
+        let comment: String? = commentBox.text
+        if (comment == nil) ||
+            (comment!.elementsEqual("") || comment!.elementsEqual(placeholder)) {
+            
             return
         }
         present(loadingDialogController, animated: true)
-        postComment(comment)
+        postComment(comment!)
     }
     
     func postComment(_ comment: String) {

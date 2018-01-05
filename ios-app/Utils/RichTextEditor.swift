@@ -73,14 +73,11 @@ public class RichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDelegat
         }
         set {
             guard let text = newValue else { return }
-            if editorView.isLoading {
-                textToLoad = text
-            } else {
-                editorView.evaluateJavaScript(
-                    "richeditor.insertText(\"\(text.htmlEscapeQuotes)\");", completionHandler: nil)
-                
-                placeholderLabel.isHidden = !text.htmlToPlainText.isEmpty
-            }
+            textToLoad = text
+            editorView.evaluateJavaScript(
+                "richeditor.insertText(\"\(text.htmlEscapeQuotes)\");", completionHandler: nil)
+            
+            placeholderLabel.isHidden = !text.htmlToPlainText.isEmpty
         }
     }
 
