@@ -24,6 +24,10 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>To take image &amp; upload in comments/forum</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To upload image in comments/forum</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -52,9 +56,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>To take image &amp; upload in comments/forum</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To upload image in comments/forum</string>
 </dict>
 </plist>
