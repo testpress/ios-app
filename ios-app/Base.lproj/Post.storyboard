@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="PT_Serif-Web-Regular.ttf">
+            <string>PTSerif-Regular</string>
+        </array>
         <array key="Rubik-Medium.ttf">
             <string>Rubik-Medium</string>
         </array>
@@ -155,10 +158,10 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Deb-Se-TmZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="603"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lJr-NC-AHF">
-                                                <rect key="frame" x="25" y="0.0" width="270" height="453.5"/>
+                                                <rect key="frame" x="25" y="0.0" width="270" height="463.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNH-4s-faq">
                                                         <rect key="frame" x="0.0" y="0.0" width="270" height="1"/>
@@ -168,36 +171,42 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Brr-5K-xTj">
-                                                        <rect key="frame" x="0.0" y="21" width="270" height="60.5"/>
+                                                        <rect key="frame" x="0.0" y="21" width="270" height="70.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="POST TITLE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pn-BI-Hqt">
-                                                                <rect key="frame" x="0.0" y="0.0" width="270" height="15.5"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Nk-zG-nWy">
+                                                                <rect key="frame" x="0.0" y="0.0" width="270" height="0.0"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" id="IMa-bR-40b"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POST TITLE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pn-BI-Hqt">
+                                                                <rect key="frame" x="0.0" y="10" width="270" height="15.5"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="13"/>
                                                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y4R-14-kOF" customClass="RichTextEditor" customModule="ios_app" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="25.5" width="270" height="35"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RPw-XS-x4c">
+                                                                <rect key="frame" x="0.0" y="35.5" width="270" height="35"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <real key="value" value="5"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                         <real key="value" value="1"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
-                                                            </view>
+                                                            </textView>
                                                         </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="60.5" id="xaV-Kh-nwz"/>
-                                                        </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="x5F-f6-L7T">
-                                                        <rect key="frame" x="0.0" y="101.5" width="270" height="125.5"/>
+                                                        <rect key="frame" x="0.0" y="111.5" width="270" height="125.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICK A TOPIC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxr-6u-tRg">
                                                                 <rect key="frame" x="0.0" y="0.0" width="270" height="15.5"/>
@@ -214,7 +223,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0uQ-O4-pEx">
-                                                        <rect key="frame" x="0.0" y="247" width="270" height="125.5"/>
+                                                        <rect key="frame" x="0.0" y="257" width="270" height="125.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POST CONTENT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I4D-8X-6Rh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="270" height="15.5"/>
@@ -222,28 +231,31 @@
                                                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V4F-du-iOd" customClass="RichTextEditor" customModule="ios_app" customModuleProvider="target">
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dFK-Ux-uxB">
                                                                 <rect key="frame" x="0.0" y="25.5" width="270" height="100"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="HBc-b3-V5f"/>
+                                                                </constraints>
+                                                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" name="PTSerif-Regular" family="PT Serif" pointSize="16"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <real key="value" value="5"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                         <real key="value" value="1"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
-                                                            </view>
+                                                            </textView>
                                                         </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="125.5" id="uTj-40-bRw"/>
-                                                        </constraints>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nli-PZ-9wT">
-                                                        <rect key="frame" x="0.0" y="392.5" width="270" height="40"/>
+                                                        <rect key="frame" x="0.0" y="402.5" width="270" height="40"/>
                                                         <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="oh4-yM-C7w"/>
@@ -262,7 +274,7 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mJT-7d-SCq">
-                                                        <rect key="frame" x="0.0" y="452.5" width="270" height="1"/>
+                                                        <rect key="frame" x="0.0" y="462.5" width="270" height="1"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="GDw-AI-sfj"/>
@@ -275,7 +287,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="lJr-NC-AHF" secondAttribute="trailing" constant="25" id="Ahe-Lb-5xD"/>
                                             <constraint firstItem="lJr-NC-AHF" firstAttribute="leading" secondItem="Deb-Se-TmZ" secondAttribute="leading" constant="25" id="KPH-SG-pyi"/>
-                                            <constraint firstAttribute="height" constant="504" id="hGD-i2-lLl" customClass="KeyboardLayoutConstraint" customModule="ios_app" customModuleProvider="target"/>
+                                            <constraint firstAttribute="height" constant="603" id="hGD-i2-lLl"/>
                                             <constraint firstItem="lJr-NC-AHF" firstAttribute="top" secondItem="Deb-Se-TmZ" secondAttribute="top" id="yxm-0G-HpO"/>
                                         </constraints>
                                     </view>
@@ -312,17 +324,14 @@
                         <outlet property="contentView" destination="Deb-Se-TmZ" id="H2c-Dy-BVE"/>
                         <outlet property="contentViewHeightConstraint" destination="hGD-i2-lLl" id="f78-4X-skJ"/>
                         <outlet property="pickTopicLayout" destination="x5F-f6-L7T" id="vNX-vX-bnI"/>
-                        <outlet property="postContent" destination="V4F-du-iOd" id="fj1-do-cLW"/>
-                        <outlet property="postContentHeightConstraint" destination="uTj-40-bRw" id="SdO-lG-2BJ"/>
-                        <outlet property="postTitle" destination="y4R-14-kOF" id="jDt-CG-8Sf"/>
-                        <outlet property="postTitleHeightConstraint" destination="xaV-Kh-nwz" id="aV7-dd-SmH"/>
-                        <outlet property="publishButton" destination="nli-PZ-9wT" id="fZC-0b-1c4"/>
+                        <outlet property="postContent" destination="dFK-Ux-uxB" id="Bdi-32-xUA"/>
+                        <outlet property="postTitle" destination="RPw-XS-x4c" id="lL2-Al-uEj"/>
                         <outlet property="scrollView" destination="C4s-jm-LYH" id="4mu-2h-ufF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Hh-Ni-ggD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1837.5" y="-163.73239436619718"/>
+            <point key="canvasLocation" x="1837.5999999999999" y="-163.26836581709148"/>
         </scene>
     </scenes>
     <resources>

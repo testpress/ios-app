@@ -27,18 +27,17 @@ import Alamofire
 import TTGSnackbar
 import UIKit
 
-class PostCreationViewController: BaseTextFieldViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,
+    UITextViewDelegate {
     
-    @IBOutlet weak var contentViewHeightConstraint: KeyboardLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentStackView: UIStackView!
-    @IBOutlet weak var postTitleHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var postTitle: RichTextEditor!
-    @IBOutlet weak var postContentHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var postContent: RichTextEditor!
+    @IBOutlet weak var postTitle: UITextView!
+    @IBOutlet weak var postContent: UITextView!
     @IBOutlet weak var categoryPickerView: UIPickerView!
     @IBOutlet weak var pickTopicLayout: UIStackView!
-    @IBOutlet weak var publishButton: UIButton!
     
     var categories = [Category]()
     var postCreated: Bool = false
@@ -51,16 +50,11 @@ class PostCreationViewController: BaseTextFieldViewController, UIPickerViewDeleg
         super.viewDidLoad()
         categoryPickerView.delegate = self
         categoryPickerView.dataSource = self
-        postTitle.delegate = self
-        postTitle.defaultHeight = 35
         postContent.delegate = self
-        postContent.defaultHeight = 100
         categoryPickerView.selectRow(1, inComponent: 0, animated: false)
         emptyView = EmptyView.getInstance(parentView: contentView)
-        activityIndicator = UIUtils.initActivityIndicator(parentView: scrollView)
-        activityIndicator.frame = view.frame
-        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
-        UIUtils.setButtonDropShadow(publishButton)
+        activityIndicator = UIUtils.initActivityIndicator(parentView: contentView)
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
         fetchCategory()
     }
     
@@ -130,7 +124,8 @@ class PostCreationViewController: BaseTextFieldViewController, UIPickerViewDeleg
     }
     
     @IBAction func publishPost(_ sender: Any) {
-        view.endEditing(true)
+        postTitle.resignFirstResponder()
+        postContent.resignFirstResponder()
         let title: String! = postTitle.text
         let content: String! = postContent.text
         let selectedCategoryPostion = categoryPickerView.selectedRow(inComponent: 0)
@@ -156,8 +151,8 @@ class PostCreationViewController: BaseTextFieldViewController, UIPickerViewDeleg
                     return
                 }
                 
-                self.postTitle.text = ""
-                self.postContent.text = ""
+                self.postTitle.text = nil
+                self.postContent.text = nil
                 self.loadingDialogController.dismiss(animated: false)
                 self.postCreated = true
                 self.emptyView.show(
@@ -172,12 +167,12 @@ class PostCreationViewController: BaseTextFieldViewController, UIPickerViewDeleg
     
     override func viewDidLayoutSubviews() {
         // Set scroll view content height to support the scroll
-        let height =
-            contentStackView.frame.size.height + contentViewHeightConstraint.keyboardVisibleHeight
-        
-        contentViewHeightConstraint.constant = height
-        scrollView.contentSize.height = height
-        contentView.layoutIfNeeded()
+        let height = contentStackView.frame.size.height
+        if contentViewHeightConstraint.constant < height {
+            contentViewHeightConstraint.constant = height
+            scrollView.contentSize.height = height
+            contentView.layoutIfNeeded()
+        }
     }
     
     @IBAction func back() {
@@ -187,16 +182,4 @@ class PostCreationViewController: BaseTextFieldViewController, UIPickerViewDeleg
         parentTableViewController.dismiss(animated: false, completion: nil)
     }
     
-}
-
-extension PostCreationViewController: RichTextEditorDelegate {
-    
-    func heightDidChange(_ editor: RichTextEditor, heightDidChange height: CGFloat) {
-        if editor == postTitle {
-            postTitleHeightConstraint.constant = height + 25.5
-        } else {
-            postContentHeightConstraint.constant = height + 25.5
-        }
-        viewDidLayoutSubviews()
-    }
 }

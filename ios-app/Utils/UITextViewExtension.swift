@@ -1,5 +1,5 @@
 //
-//  UIViewExtension.swift
+//  UITextViewExtension.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,7 +25,7 @@
 
 import UIKit
 
-extension UIView {
+extension UITextView {
     
     @IBInspectable var cornerRadius: CGFloat {
         get {

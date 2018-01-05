@@ -57,7 +57,8 @@ class BaseTextFieldViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     @objc func hideKeyboard(gesture: UITapGestureRecognizer? = nil) {
-        view.endEditing(true)
+        firstTextField?.becomeFirstResponder()
+        firstTextField?.resignFirstResponder()
     }
     
     @objc func keyboardWillShow(notification:NSNotification){

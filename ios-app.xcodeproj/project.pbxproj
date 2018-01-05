@@ -14,7 +14,7 @@
 		2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */; };
 		2F26ADFB1E8249D70031E6F4 /* ios_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */; };
 		2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */; };
-		2F2866FA1FD6C1D600FC6BAA /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */; };
+		2F2866FA1FD6C1D600FC6BAA /* UITextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */; };
 		2F2A41C01FD6ACE900B92C6D /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */; };
 		2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
 		2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
@@ -187,7 +187,7 @@
 		2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_appTests.swift; sourceTree = "<group>"; };
 		2F26ADFC1E8249D70031E6F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreationViewController.swift; sourceTree = "<group>"; };
-		2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewExtension.swift; sourceTree = "<group>"; };
 		2F29437B1FDFE50600E45F07 /* ExpandableCell.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ExpandableCell.framework.dSYM; path = Carthage/Build/iOS/ExpandableCell.framework.dSYM; sourceTree = "<group>"; };
 		2F29437D1FDFE51600E45F07 /* ExpandableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExpandableCell.framework; path = Carthage/Build/iOS/ExpandableCell.framework; sourceTree = "<group>"; };
 		2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
@@ -452,7 +452,7 @@
 				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
 				2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
-				2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */,
+				2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 			);
 			path = Utils;
@@ -870,7 +870,7 @@
 				2F2A41C01FD6ACE900B92C6D /* PostsViewController.swift in Sources */,
 				2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */,
 				2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */,
-				2F2866FA1FD6C1D600FC6BAA /* UIViewExtension.swift in Sources */,
+				2F2866FA1FD6C1D600FC6BAA /* UITextViewExtension.swift in Sources */,
 				2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */,
 				2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */,
 				2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */,
