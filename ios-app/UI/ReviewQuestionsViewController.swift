@@ -148,12 +148,12 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             comments = comments.sorted(by: {
                 FormatDate.compareDate(dateString1:  $0.created!, dateString2: $1.created!)
             })
-            comments.append(contentsOf: self.comments)
-            self.comments = comments
             var html = ""
             for comment in comments {
-                html += WebViewUtils.getCommentItemTags(comment)
+                html += WebViewUtils.getCommentItemTags(comment, seperatorAtTop: true)
             }
+            comments.append(contentsOf: self.comments)
+            self.comments = comments
             html = WebViewUtils.formatHtmlToAppendInJavascript(html)
             let js = "hideNewCommentsLoading(); \n appendCommentItemsAtTop(\"\(html)\");"
             self.evaluateJavaScript(js)
