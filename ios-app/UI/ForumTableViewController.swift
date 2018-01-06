@@ -44,7 +44,7 @@ class ForumTableViewController: TPBasePagedTableViewController<Post>,
     
     func onItemsLoaded() {
         items = items.sorted(by: {
-            FormatDate.compareDate(dateString1:  $0.publishedDate!, dateString2: $1.publishedDate!)
+            FormatDate.compareDate(dateString1:  $0.lastCommentedTime!, dateString2: $1.lastCommentedTime!)
         })
     }
     
