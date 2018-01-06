@@ -122,7 +122,7 @@ extension ImagePicker: CropViewControllerDelegate {
         // thus rewrite the last "temp" image. Don't worry it won't be shown in Photos app.
         let imageName = "temp"
         let imageURL = URL(string: documentDirectory.appendingPathComponent(imageName))!
-        let data = UIImageJPEGRepresentation(image, 1)!
+        let data = UIImageJPEGRepresentation(image, 0)!
         do {
             try data.write(to: imageURL)
         } catch {
