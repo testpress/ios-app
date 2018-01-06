@@ -47,11 +47,13 @@ class ForumTableViewCell: UITableViewCell {
         postTitle.text = post.title
         authorName.text = post.createdBy.displayName
         categoryName.text = post.category.name
-        commentsCount.text = String(post.participantsCount)
+        commentsCount.text = String(post.commentsCount)
         if post.lastCommentedBy == nil {
-            authorName.text = post.createdBy.displayName + " started " + FormatDate.getElapsedTime(dateString: post.publishedDate)
+            displayLastResponder(userName: post.createdBy.displayName, action: " started ",
+                                 date: post.publishedDate)
         } else {
-            authorName.text = post.lastCommentedBy.displayName + " replied " + FormatDate.getElapsedTime(dateString: post.lastCommentedTime)
+            displayLastResponder(userName: post.lastCommentedBy.displayName, action: " replied ",
+                                 date: post.lastCommentedTime)
         }
         viewsLabel.text = "\(post.viewsCount!) views"
         
@@ -59,6 +61,19 @@ class ForumTableViewCell: UITableViewCell {
                                                    action: #selector(self.onItemClick))
         
         postViewCell.addGestureRecognizer(tapRecognizer)
+    }
+    
+    func displayLastResponder(userName: String, action: String, date: String) {
+        let text = userName + action +  FormatDate.getElapsedTime(dateString: date)
+        authorName.text = text
+        let attributedString = NSMutableAttributedString(string: text)
+        let range = (text as NSString).range(of: action)
+        attributedString.addAttribute(
+            NSAttributedStringKey.font,
+            value: UIFont(name: "Rubik-Regular", size: 12.0)!,
+            range: range
+        )
+        authorName.attributedText = attributedString
     }
     
     @objc func onItemClick() {

@@ -93,7 +93,7 @@ struct Strings {
     static let ACTIVATION_MAIL_SENT = "An activation email has been sent. Please check your email and click on the link to activate your account."
     
     static let YOU_MADE_IT = "You Made It!"
-    static let POST_CREATED_DESCRIPTION = "You have successfully created a new discussion, wait for your folks responds"
+    static let POST_CREATED_DESCRIPTION = "You have successfully created a new discussion, wait for your folks response"
     
     static let NO_ANALYTICS = "No Analytics Data!"
     static let NO_SUBJECT_ANALYTICS_DESCRIPTION = "No subjects available to analyse"
