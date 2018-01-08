@@ -1,18 +1,46 @@
 {
   "images" : [
     {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
       "extent" : "full-screen",
-      "minimum-system-version" : "8.0",
+      "idiom" : "iphone",
+      "subtype" : "2436h",
+      "filename" : "iphone X potrait.png",
+      "minimum-system-version" : "11.0",
+      "orientation" : "portrait",
+      "scale" : "3x"
+    },
+    {
+      "extent" : "full-screen",
+      "idiom" : "iphone",
+      "subtype" : "2436h",
+      "filename" : "iphone x landscape.png",
+      "minimum-system-version" : "11.0",
+      "orientation" : "landscape",
+      "scale" : "3x"
+    },
+    {
+      "extent" : "full-screen",
+      "idiom" : "iphone",
       "subtype" : "736h",
+      "filename" : "iPhone 8 Plus, iPhone 7 Plus, potrait.png",
+      "minimum-system-version" : "8.0",
+      "orientation" : "portrait",
+      "scale" : "3x"
+    },
+    {
+      "extent" : "full-screen",
+      "idiom" : "iphone",
+      "subtype" : "736h",
+      "filename" : "2208x1242.png",
+      "minimum-system-version" : "8.0",
+      "orientation" : "landscape",
       "scale" : "3x"
     },
     {
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "667h",
-      "filename" : "750px-1334px.png",
+      "filename" : "iPhone 8, iPhone 7,.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -28,7 +56,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "640px-1136px.png",
+      "filename" : "iPhone SE potrait.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -50,7 +78,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "1536px-2048px.png",
+      "filename" : "9.7 iPad 7.9 iPad mini 4 potrait.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -58,7 +86,7 @@
     {
       "orientation" : "landscape",
       "idiom" : "ipad",
-      "filename" : "2048px-1536px.png",
+      "filename" : "9.7 iPad, 7.9 iPad mini landscape.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
