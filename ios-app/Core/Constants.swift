@@ -28,7 +28,7 @@ import Foundation
 struct Constants {
     static let BASE_URL = "https://dbmci.testpress.in";
     
-    static let APP_APPLE_ID = "1331849713"
+    static let APP_APPLE_ID = "1333450438"
     
     static let APP_SHARE_MESSAGE = "Best app to prepare for NEET, AIIMS, DNB, AIPG. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID
     
