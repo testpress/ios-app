@@ -127,6 +127,7 @@ class ProfileViewController: UIViewController {
             style: UIAlertActionStyle.destructive,
             handler: { action in
                 
+                DBInstance.clearAllTables()
                 KeychainTokenItem.clearKeychainItems()
                 let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
                     Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController

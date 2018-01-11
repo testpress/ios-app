@@ -1,5 +1,5 @@
 //
-//  CoursePager.swift
+//  BaseDBItemPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -26,20 +26,14 @@
 import Alamofire
 import ObjectMapper
 
-class CoursePager: BaseDBItemPager<Course> {
+class BaseDBItemPager<T: DBModel>: TPBasePager<T> {
     
-    override func getItems(page: Int) {
-        queryParams.updateValue(String(page), forKey: Constants.PAGE)
-        TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(.getCourses, queryParams: queryParams),
-            headers: headers,
-            completion: resonseHandler!,
-            type: Course.self
-        )
-    }
+    var latestModifiedDate: String? = nil
+    var headers = HTTPHeaders()
     
-    override func getId(resource: Course) -> Int {
-        return resource.id
+    func setLatestModifiedDate(_ latestModifiedDate: String) {
+        self.latestModifiedDate = latestModifiedDate
+        headers = ["If-Modified-Since": latestModifiedDate]
     }
     
 }

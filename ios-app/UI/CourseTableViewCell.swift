@@ -38,7 +38,7 @@ class CourseTableViewCell: UITableViewCell {
         parentViewController = viewController
         self.course = course
         courseName.text = course.title
-        thumbnailImage.kf.setImage(with: URL(string: course.image!),
+        thumbnailImage.kf.setImage(with: URL(string: course.image),
                                    placeholder: Images.PlaceHolder.image)
         
         let tapRecognizer = UITapGestureRecognizer(target: self,

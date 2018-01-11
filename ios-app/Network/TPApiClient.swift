@@ -167,10 +167,11 @@ class TPApiClient {
     }
     
     static func getListItems<T> (endpointProvider: TPEndpointProvider,
+                                 headers: HTTPHeaders? = nil,
                                  completion: @escaping (TPApiResponse<T>?, TPError?) -> Void,
                                  type: T.Type) {
         
-        apiCall(endpointProvider: endpointProvider, completion: {
+        apiCall(endpointProvider: endpointProvider, headers: headers, completion: {
             json, error in
             
             var testpressResponse: TPApiResponse<T>? = nil
