@@ -54,6 +54,10 @@ public class Exam {
     var allowPreemptiveSectionEnding: Bool?;
     var immediateFeedback: Bool?;
     var deviceAccessControl: String?;
+    var totalMarks: String = ""
+    var passPercentage: Int = 0
+    var showScore: Bool = true
+    var showPercentile: Bool = true
     
     public required init?(map: Map) {
     }
@@ -102,5 +106,9 @@ extension Exam: TestpressModel {
         allowPreemptiveSectionEnding <- map["allow_preemptive_section_ending"]
         immediateFeedback <- map["immediate_feedback"]
         deviceAccessControl <- map["device_access_control"]
+        totalMarks <- map["total_marks"]
+        passPercentage <- map["pass_percentage"]
+        showScore <- map["show_score"]
+        showPercentile <- map["show_percentile"]
     }
 }

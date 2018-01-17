@@ -42,7 +42,8 @@ public class Attempt {
     var remainingTime: String?;
     var timeTaken: String?;
     var state: String?;
-    var percentile: String?;
+    var percentile: Double = 0
+    var percentage: String = ""
     var speed: Int?
     var accuracy: Int?
     
@@ -69,6 +70,7 @@ extension Attempt: TestpressModel {
         timeTaken <- map["time_taken"]
         state <- map["state"]
         percentile <- map["percentile"]
+        percentage <- map["percentage"]
         speed <- map["speed"]
         accuracy <- map["accuracy"]
     }
