@@ -121,7 +121,7 @@ enum TPEndpoint {
         case .endExam:
             return "end/"
         case .getCourses:
-            return "/api/v2.2/courses/"
+            return "/api/v2.2.1/courses/"
         case .getChapters:
             return "chapters/"
         case .getProfile:

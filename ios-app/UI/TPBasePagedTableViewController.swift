@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import TTGSnackbar
 import UIKit
 import ObjectMapper
 import XLPagerTabStrip
@@ -33,12 +34,13 @@ protocol BasePagedTableViewDelegate {
 
 class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     
-    var activityIndicator: UIActivityIndicatorView? // Progress bar
+    var activityIndicator: UIActivityIndicatorView! // Progress bar
     var emptyView: EmptyView!
     var items = [T]()
     var pager: TPBasePager<T>
     var loadingItems: Bool = false
     var delegate: BasePagedTableViewDelegate?
+    var firstCallBack: Bool = true
     
     init(pager: TPBasePager<T>, coder aDecoder: NSCoder? = nil) {
         self.pager = pager
@@ -81,7 +83,8 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (items.isEmpty) {
+        if (items.isEmpty || firstCallBack) {
+            firstCallBack = false
             tableView.tableFooterView?.isHidden = true
             pager.reset()
             loadItems()
@@ -133,12 +136,7 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
             emptyView.setValues(image: image, title: title, description: description,
                                 retryHandler: retryHandler)
         } else {
-            UIUtils.showSimpleAlert(
-                title: title,
-                message: description,
-                viewController: self,
-                cancelable: true,
-                cancelHandler: #selector(self.closeAlert(gesture:)))
+            TTGSnackbar(message: description, duration: .middle).show()
         }
         tableView.reloadData()
     }

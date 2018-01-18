@@ -14,7 +14,7 @@
 		2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */; };
 		2F26ADFB1E8249D70031E6F4 /* ios_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */; };
 		2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */; };
-		2F2866FA1FD6C1D600FC6BAA /* UITextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */; };
+		2F2866FA1FD6C1D600FC6BAA /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */; };
 		2F2A41C01FD6ACE900B92C6D /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */; };
 		2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
 		2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
@@ -26,6 +26,10 @@
 		2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53021FDA6AE400C64123 /* SubjectPager.swift */; };
 		2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */; };
 		2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */; };
+		2F3D78B62007782500F57783 /* BaseDBItemPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3D78B52007782500F57783 /* BaseDBItemPager.swift */; };
+		2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F634F2004A2D000976053 /* RealmSwift.framework */; };
+		2F3F63522004A75F00976053 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F63512004A75F00976053 /* DBManager.swift */; };
+		2F3F63542004C54900976053 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F63532004C54900976053 /* Realm.framework */; };
 		2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */; };
 		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
 		2F48C7FB1FCDA957009C686C /* comments.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FA1FCDA957009C686C /* comments.js */; };
@@ -162,6 +166,7 @@
 		2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */; };
 		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
+		2FF024212004CECA00E0047D /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF024202004CECA00E0047D /* BaseDBViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,7 +192,7 @@
 		2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_appTests.swift; sourceTree = "<group>"; };
 		2F26ADFC1E8249D70031E6F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreationViewController.swift; sourceTree = "<group>"; };
-		2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewExtension.swift; sourceTree = "<group>"; };
+		2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		2F29437B1FDFE50600E45F07 /* ExpandableCell.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ExpandableCell.framework.dSYM; path = Carthage/Build/iOS/ExpandableCell.framework.dSYM; sourceTree = "<group>"; };
 		2F29437D1FDFE51600E45F07 /* ExpandableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExpandableCell.framework; path = Carthage/Build/iOS/ExpandableCell.framework; sourceTree = "<group>"; };
 		2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +208,10 @@
 		2F3A53021FDA6AE400C64123 /* SubjectPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPager.swift; sourceTree = "<group>"; };
 		2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsCountCell.swift; sourceTree = "<group>"; };
 		2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentExamAttemptsTableViewController.swift; sourceTree = "<group>"; };
+		2F3D78B52007782500F57783 /* BaseDBItemPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBItemPager.swift; sourceTree = "<group>"; };
+		2F3F634F2004A2D000976053 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		2F3F63512004A75F00976053 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		2F3F63532004C54900976053 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		2F48C7F81FCD9F18009C686C /* progress_loader.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = progress_loader.css; sourceTree = "<group>"; };
 		2F48C7FA1FCDA957009C686C /* comments.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = comments.js; sourceTree = "<group>"; };
@@ -336,6 +345,7 @@
 		2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContentViewController.swift; sourceTree = "<group>"; };
 		2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		2FE290711F8D07D0004D7574 /* QuestionListHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuestionListHandler.js; sourceTree = "<group>"; };
+		2FF024202004CECA00E0047D /* BaseDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +361,8 @@
 				2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
 				2F515E001FF572690005D8A5 /* PhotoCropEditor.framework in Frameworks */,
+				2F3F63542004C54900976053 /* Realm.framework in Frameworks */,
+				2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */,
 				2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */,
 				2F48C8071FD13ABD009C686C /* TTGSnackbar.framework in Frameworks */,
 				2F763D041FBD83340033D495 /* XLPagerTabStrip.framework in Frameworks */,
@@ -420,6 +432,8 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F3F63532004C54900976053 /* Realm.framework */,
+				2F3F634F2004A2D000976053 /* RealmSwift.framework */,
 				2F515DFF1FF572690005D8A5 /* PhotoCropEditor.framework */,
 				2F3A142E1FE0EEED007CEE84 /* LUExpandableTableView.framework */,
 				2F29437D1FDFE51600E45F07 /* ExpandableCell.framework */,
@@ -452,7 +466,7 @@
 				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
 				2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
-				2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */,
+				2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 			);
 			path = Utils;
@@ -499,6 +513,7 @@
 				2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */,
 				2FC0F2811F861A860092BFDC /* AttemptsListViewController.swift */,
 				2FC0F2821F861A860092BFDC /* AttemptsTableViewCell.swift */,
+				2FF024202004CECA00E0047D /* BaseDBViewController.swift */,
 				2FC0F2831F861A860092BFDC /* BaseQuestionsDataSource.swift */,
 				2F70F4D61F9F1C3300D30755 /* BaseQuestionsListViewController.swift */,
 				2FC0F2841F861A860092BFDC /* BaseQuestionsPageViewController.swift */,
@@ -578,6 +593,7 @@
 				2F9699791FC2A22A001B2B18 /* Content.swift */,
 				2F5E0BBA1FE2871900236AFE /* ContentAttempt.swift */,
 				2F48C8001FCE9963009C686C /* ContentObject.swift */,
+				2F3F63512004A75F00976053 /* DBManager.swift */,
 				2FC0F2C71F86385B0092BFDC /* Exam.swift */,
 				2F515DFB1FF4EF9C0005D8A5 /* FileDetails.swift */,
 				2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */,
@@ -612,6 +628,7 @@
 				2F48C8021FCE9A37009C686C /* CommentPager.swift */,
 				2F96997F1FC2A8E0001B2B18 /* ContentPager.swift */,
 				2F763D051FBDA89C0033D495 /* CoursePager.swift */,
+				2F3D78B52007782500F57783 /* BaseDBItemPager.swift */,
 				2FC0F2EB1F863B080092BFDC /* ExamPager.swift */,
 				2F48C8101FD28E7A009C686C /* PostPager.swift */,
 				2F3A53021FDA6AE400C64123 /* SubjectPager.swift */,
@@ -764,6 +781,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/LUExpandableTableView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PhotoCropEditor.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 			);
 			outputPaths = (
 			);
@@ -800,6 +819,7 @@
 				2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */,
 				2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */,
 				2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */,
+				2F3D78B62007782500F57783 /* BaseDBItemPager.swift in Sources */,
 				2F1474791F8B898F0017151B /* QuestionListViewController.swift in Sources */,
 				2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */,
 				2FC0F2E21F863AD70092BFDC /* Exam.swift in Sources */,
@@ -840,6 +860,7 @@
 				2F9B5E171FC54AFC00D67100 /* AttachmentDetailViewController.swift in Sources */,
 				2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */,
 				2FC0F2F61F863B2F0092BFDC /* Strings.swift in Sources */,
+				2F3F63522004A75F00976053 /* DBManager.swift in Sources */,
 				2F96997E1FC2A761001B2B18 /* Attachment.swift in Sources */,
 				2FC0F3111F863BA90092BFDC /* TPBasePagedTableViewController.swift in Sources */,
 				2FC0F2F51F863B2B0092BFDC /* KeychainTokenItem.swift in Sources */,
@@ -862,6 +883,7 @@
 				2F48C8111FD28E7A009C686C /* PostPager.swift in Sources */,
 				2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */,
 				2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */,
+				2FF024212004CECA00E0047D /* BaseDBViewController.swift in Sources */,
 				2F515DFA1FF4D12A0005D8A5 /* ImagePicker.swift in Sources */,
 				2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */,
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
@@ -870,7 +892,7 @@
 				2F2A41C01FD6ACE900B92C6D /* PostsViewController.swift in Sources */,
 				2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */,
 				2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */,
-				2F2866FA1FD6C1D600FC6BAA /* UITextViewExtension.swift in Sources */,
+				2F2866FA1FD6C1D600FC6BAA /* UIViewExtension.swift in Sources */,
 				2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */,
 				2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */,
 				2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */,

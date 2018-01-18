@@ -1,5 +1,5 @@
 //
-//  ContentPager.swift
+//  UIView.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,31 +23,35 @@
 //  THE SOFTWARE.
 //
 
-import Alamofire
-import ObjectMapper
+import UIKit
 
-class ContentPager: TPBasePager<Content> {
+extension UIView {
     
-    var url: String!
-    
-    override func getItems(page: Int) {
-        queryParams.updateValue(String(page), forKey: Constants.PAGE)
-        TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(.getContents, url: url, queryParams: queryParams),
-            completion: resonseHandler!,
-            type: Content.self
-        )
-    }
-    
-    override func getId(resource: Content) -> Int {
-        return resource.id!
-    }
-    
-    override func register(resource content: Content) -> Content? {
-        if content.active {
-            return content
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
         }
-        return nil
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
     }
     
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor? {
+        get {
+            return UIColor(cgColor: layer.borderColor!)
+        }
+        set {
+            layer.borderColor = newValue?.cgColor
+        }
+    }
 }

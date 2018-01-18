@@ -45,6 +45,7 @@ public class Content {
     var isLocked: Bool!
     var video: Video?
     var attachment: Attachment?
+    var active: Bool = true
     
     public required init?(map: Map) {
     }
@@ -71,5 +72,6 @@ extension Content: TestpressModel {
         isLocked <- map["is_locked"]
         video <- map["video"]
         attachment <- map["attachment"]
+        active <- map["active"]
     }
 }

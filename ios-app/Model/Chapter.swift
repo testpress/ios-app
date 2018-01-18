@@ -44,6 +44,7 @@ public class Chapter {
     var order: Int!
     var leaf: Bool!
     var isLocked: Bool!
+    var active: Bool = true
     
     public required init?(map: Map) {
     }
@@ -69,5 +70,6 @@ extension Chapter: TestpressModel {
         order <- map["order"]
         leaf <- map["leaf"]
         isLocked <- map["is_locked"]
+        active <- map["active"]
     }
 }

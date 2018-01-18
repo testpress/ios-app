@@ -1,5 +1,5 @@
 //
-//  UITextViewExtension.swift
+//  BaseDBItemPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,35 +23,17 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Alamofire
+import ObjectMapper
 
-extension UITextView {
+class BaseDBItemPager<T: DBModel>: TPBasePager<T> {
     
-    @IBInspectable var cornerRadius: CGFloat {
-        get {
-            return layer.cornerRadius
-        }
-        set {
-            layer.cornerRadius = newValue
-            layer.masksToBounds = newValue > 0
-        }
+    var latestModifiedDate: String? = nil
+    var headers = HTTPHeaders()
+    
+    func setLatestModifiedDate(_ latestModifiedDate: String) {
+        self.latestModifiedDate = latestModifiedDate
+        headers = ["If-Modified-Since": latestModifiedDate]
     }
     
-    @IBInspectable var borderWidth: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
-        }
-    }
-    
-    @IBInspectable var borderColor: UIColor? {
-        get {
-            return UIColor(cgColor: layer.borderColor!)
-        }
-        set {
-            layer.borderColor = newValue?.cgColor
-        }
-    }
 }
