@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import PDFReader
 import UIKit
 
 class AttachmentDetailViewController: UIViewController {
@@ -31,13 +32,18 @@ class AttachmentDetailViewController: UIViewController {
     @IBOutlet weak var contentView: UIStackView!
     @IBOutlet weak var contentTitle: UILabel!
     @IBOutlet weak var contentDescription: UILabel!
+    @IBOutlet weak var downloadAttachmentButton: UIButton!
+    @IBOutlet weak var viewAttachmentButton: UIButton!
     
     var content: Content!
+    var attachmentUrl: URL!
     var loading: Bool = false
     var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
+    let alertController = UIUtils.initProgressDialog(message: Strings.LOADING + "\n\n")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIUtils.setButtonDropShadow(downloadAttachmentButton)
         displayAttachment()
     }
     
@@ -49,10 +55,52 @@ class AttachmentDetailViewController: UIViewController {
         } else {
             contentDescription.isHidden = true
         }
+        attachmentUrl = URL(string: content.attachment!.attachmentUrl!)!
+        if attachmentUrl.pathExtension != "pdf" {
+            viewAttachmentButton.isHidden = true
+        } else {
+            UIUtils.setButtonDropShadow(viewAttachmentButton)
+            viewAttachmentButton.isHidden = false
+        }
     }
     
-    @IBAction func openPdf(_ sender: UIButton) {
-        UIApplication.shared.openURL(URL(string: content.attachment!.attachmentUrl)!)
+    @IBAction func viewAttachment(_ sender: UIButton) {
+        if attachmentUrl.scheme == "http" {
+            attachmentUrl = URL(string: "https://" + attachmentUrl.host! + attachmentUrl.path
+                + "?" + attachmentUrl.query!)
+        }
+        present(alertController, animated: false, completion: {
+            self.loadPdf()
+        })
+    }
+    
+    func loadPdf() {
+        let pdfDocument = PDFDocument(url: attachmentUrl!)
+        alertController.dismiss(animated: false, completion: {
+            self.displayPdf(pdfDocument)
+        })
+    }
+    
+    func displayPdf(_ pdfDocument: PDFDocument?) {
+        if pdfDocument != nil {
+            let backButton = UIBarButtonItem(title: "Back", style: .done, target: self,
+                                             action:  #selector(back))
+            
+            let pdfController = PDFViewController.createNew(with: pdfDocument!,
+                                                            title: content.attachment!.title,
+                                                            backButton: backButton)
+            
+            pdfController.navigationItem.rightBarButtonItem = nil
+            let navigationController =
+                UINavigationController(rootViewController: pdfController)
+            
+            present(navigationController, animated: true)
+            createContentAttempt()
+        }
+    }
+    
+    @IBAction func downloadAttachment(_ sender: UIButton) {
+        UIApplication.shared.openURL(attachmentUrl)
         createContentAttempt()
     }
     
@@ -77,6 +125,10 @@ class AttachmentDetailViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         // Set scroll view content height to support the scroll
         scrollView.contentSize.height = contentView.frame.size.height
+    }
+    
+    @objc func back() {
+        dismiss(animated: true, completion: nil)
     }
     
 }
