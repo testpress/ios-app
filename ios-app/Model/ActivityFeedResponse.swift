@@ -1,5 +1,5 @@
 //
-//  HtmlContent.swift
+//  ActivityFeedResponse.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,20 +25,41 @@
 
 import ObjectMapper
 
-public class HtmlContent {
+public class ActivityFeedResponse {
     
-    var id: Int = 0
-    var title: String!
-    var textHtml: String!
+    var activities: [ActivityFeed] = []
+    var users: [User] = []
+    var contentTypes: [ContentType] = []
+    var chapters: [Chapter] = []
+    var chapterContents: [Content] = []
+    var chapterContentAttempts: [ContentAttempt] = []
+    var htmlContents: [HtmlContent] = []
+    var videoContents: [Video] = []
+    var exams: [Exam] = []
+    var attachmentContents: [Attachment] = []
+    var posts: [Post] = []
+    var postCategories: [Category] = []
     
     public required init?(map: Map) {
+        mapping(map: map)
     }
 }
 
-extension HtmlContent: TestpressModel {
+extension ActivityFeedResponse: TestpressModel {
+    
     public func mapping(map: Map) {
-        id <- map["id"]
-        title <- map["title"]
-        textHtml <- map["text_html"]
+        
+        activities <- map["activities"]
+        users <- map["users"]
+        contentTypes <- map["content_types"]
+        chapters <- map["chapters"]
+        chapterContents <- map["chaptercontents"]
+        chapterContentAttempts <- map["chaptercontentattempts"]
+        htmlContents <- map["html_contents"]
+        videoContents <- map["video_contents"]
+        exams <- map["exams"]
+        attachmentContents <- map["attachment_contents"]
+        posts <- map["posts"]
+        postCategories <- map["postcategories"]
     }
 }

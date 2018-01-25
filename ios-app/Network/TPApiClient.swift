@@ -206,6 +206,27 @@ class TPApiClient {
         })
     }
     
+    static func getListItems<T> (type: T.Type,
+                                 endpointProvider: TPEndpointProvider,
+                                 headers: HTTPHeaders? = nil,
+                                 completion: @escaping (ApiResponse<T>?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, headers: headers, completion: {
+            json, error in
+            
+            var testpressResponse: ApiResponse<T>? = nil
+            if let json = json {
+                testpressResponse = TPModelMapper<ApiResponse<T>>().mapFromJSON(json: json)
+                debugPrint(testpressResponse?.results ?? "Error")
+                guard testpressResponse != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(testpressResponse, error)
+        })
+    }
+    
     static func authenticate(username: String, password: String,
                              completion: @escaping (TPAuthToken?, TPError?) -> Void) {
         

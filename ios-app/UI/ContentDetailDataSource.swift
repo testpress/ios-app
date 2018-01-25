@@ -43,6 +43,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
         }
         
         let content = contents[index]
+        content.index = index
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         
         if content.exam != nil {
@@ -79,13 +80,13 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     
     func indexOfViewController(_ viewController: UIViewController) -> Int {
         if viewController is ContentExamAttemptsTableViewController {
-            return (viewController as! ContentExamAttemptsTableViewController).content.order
+            return (viewController as! ContentExamAttemptsTableViewController).content.index
         } else if viewController is StartExamScreenViewController {
-            return (viewController as! StartExamScreenViewController).content.order
+            return (viewController as! StartExamScreenViewController).content.index
         } else if viewController is AttachmentDetailViewController {
-            return (viewController as! AttachmentDetailViewController).content.order
+            return (viewController as! AttachmentDetailViewController).content.index
         } else {
-            return (viewController as! HtmlContentViewController).content.order
+            return (viewController as! HtmlContentViewController).content.index
         }
     }
     

@@ -1,5 +1,5 @@
 //
-//  HtmlContent.swift
+//  ContentType.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,20 +25,22 @@
 
 import ObjectMapper
 
-public class HtmlContent {
+public class ContentType {
     
-    var id: Int = 0
-    var title: String!
-    var textHtml: String!
-    
+    var id: Int!
+    var appLabel: String!
+    var model: String!
+
     public required init?(map: Map) {
     }
 }
 
-extension HtmlContent: TestpressModel {
+extension ContentType: TestpressModel {
+    
     public func mapping(map: Map) {
+        
         id <- map["id"]
-        title <- map["title"]
-        textHtml <- map["text_html"]
+        appLabel <- map["app_label"]
+        model <- map["model"]
     }
 }

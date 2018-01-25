@@ -35,6 +35,7 @@ public class ContentAttempt {
     var video: Video!
     var content: HtmlContent!
     var attachment: Attachment!
+    var chapterContentId: Int!
     
     public required init?(map: Map) {
     }
@@ -55,5 +56,6 @@ extension ContentAttempt: TestpressModel {
         assessment <- map["assessment"]
         content <- map["content"]
         attachment <- map["attachment"]
+        chapterContentId <- map["chapter_content"]
     }
 }

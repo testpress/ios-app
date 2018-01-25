@@ -137,7 +137,7 @@ enum TPEndpoint {
         case .getAttemptSubjectAnalytics:
             return "review/subjects/"
         case .getActivityFeed:
-            return "/api/v2.3/activities/"
+            return "/api/v2.4/activities/"
         case .contentAttempts:
             return "/api/v2.2/content_attempts/"
         case .uploadImage:

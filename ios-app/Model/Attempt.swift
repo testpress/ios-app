@@ -46,6 +46,7 @@ public class Attempt {
     var percentage: String = ""
     var speed: Int?
     var accuracy: Int?
+    var exam: Int!
     
     public required init?(map: Map) {
     }
@@ -73,5 +74,6 @@ extension Attempt: TestpressModel {
         percentage <- map["percentage"]
         speed <- map["speed"]
         accuracy <- map["accuracy"]
+        exam <- map["exam"]
     }
 }
