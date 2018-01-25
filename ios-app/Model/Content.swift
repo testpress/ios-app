@@ -26,6 +26,8 @@
 import ObjectMapper
 
 public class Content {
+    
+    var index: Int!
     var url: String!
     var id: Int!
     var name: String!
@@ -38,13 +40,17 @@ public class Content {
     var chapterId: Int!
     var attemptsCount: Int!
     var exam: Exam?
+    var examId: Int!
+    var htmlContentId: Int!
     var htmlContentTitle: String?
     var htmlContentUrl: String!
     var order: Int!
     var hasStarted: Bool!
     var isLocked: Bool!
     var video: Video?
+    var videoId: Int!
     var attachment: Attachment?
+    var attachmentId: Int!
     var active: Bool = true
     
     public required init?(map: Map) {
@@ -52,7 +58,9 @@ public class Content {
 }
 
 extension Content: TestpressModel {
+    
     public func mapping(map: Map) {
+        
         url <- map["url"]
         id <- map["id"]
         name <- map["name"]
@@ -65,13 +73,17 @@ extension Content: TestpressModel {
         chapterId <- map["chapter_id"]
         attemptsCount <- map["attempts_count"]
         exam <- map["exam"]
+        examId <- map["exam"]
+        htmlContentId <- map["html_content"]
         htmlContentTitle <- map["html_content_title"]
         htmlContentUrl <- map["html_content_url"]
         order <- map["order"]
         hasStarted <- map["has_started"]
         isLocked <- map["is_locked"]
         video <- map["video"]
+        videoId <- map["video_content"]
         attachment <- map["attachment"]
+        attachmentId <- map["attachment_content"]
         active <- map["active"]
     }
 }

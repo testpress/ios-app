@@ -27,6 +27,9 @@
 		2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */; };
 		2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */; };
 		2F3D78B62007782500F57783 /* BaseDBItemPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3D78B52007782500F57783 /* BaseDBItemPager.swift */; };
+		2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21920186417004EDAF2 /* ActivityFeedResponse.swift */; };
+		2F3DD21C20186B93004EDAF2 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21B20186B93004EDAF2 /* ContentType.swift */; };
+		2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21F20187B5D004EDAF2 /* ApiResponse.swift */; };
 		2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F634F2004A2D000976053 /* RealmSwift.framework */; };
 		2F3F63522004A75F00976053 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F63512004A75F00976053 /* DBManager.swift */; };
 		2F3F63542004C54900976053 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F63532004C54900976053 /* Realm.framework */; };
@@ -167,6 +170,8 @@
 		2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */; };
 		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
+		2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
+		2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */; };
 		2FF024212004CECA00E0047D /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF024202004CECA00E0047D /* BaseDBViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -210,6 +215,9 @@
 		2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsCountCell.swift; sourceTree = "<group>"; };
 		2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentExamAttemptsTableViewController.swift; sourceTree = "<group>"; };
 		2F3D78B52007782500F57783 /* BaseDBItemPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBItemPager.swift; sourceTree = "<group>"; };
+		2F3DD21920186417004EDAF2 /* ActivityFeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedResponse.swift; sourceTree = "<group>"; };
+		2F3DD21B20186B93004EDAF2 /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
+		2F3DD21F20187B5D004EDAF2 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		2F3F634F2004A2D000976053 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		2F3F63512004A75F00976053 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		2F3F63532004C54900976053 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
@@ -347,6 +355,8 @@
 		2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContentViewController.swift; sourceTree = "<group>"; };
 		2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		2FE290711F8D07D0004D7574 /* QuestionListHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuestionListHandler.js; sourceTree = "<group>"; };
+		2FE81096201A0AF70031E134 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		2FF024202004CECA00E0047D /* BaseDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -483,6 +493,8 @@
 				2FC0F31C1F863D730092BFDC /* katex */,
 				2F48C7FC1FCDABDE009C686C /* comments.css */,
 				2F48C7FA1FCDA957009C686C /* comments.js */,
+				2FE81096201A0AF70031E134 /* Lato-Bold.ttf */,
+				2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */,
 				2FC0F2731F8619220092BFDC /* MathJaxRender.js */,
 				2F48C7F81FCD9F18009C686C /* progress_loader.css */,
 				2FB049BA1FD838860049D5B0 /* post.css */,
@@ -585,6 +597,8 @@
 			isa = PBXGroup;
 			children = (
 				2F3A14321FE15E97007CEE84 /* ActivityFeed.swift */,
+				2F3DD21920186417004EDAF2 /* ActivityFeedResponse.swift */,
+				2F3DD21F20187B5D004EDAF2 /* ApiResponse.swift */,
 				2F96997D1FC2A761001B2B18 /* Attachment.swift */,
 				2FC0F2C31F86385B0092BFDC /* Attempt.swift */,
 				2FC0F2C41F86385B0092BFDC /* AttemptAnswer.swift */,
@@ -597,6 +611,7 @@
 				2F9699791FC2A22A001B2B18 /* Content.swift */,
 				2F5E0BBA1FE2871900236AFE /* ContentAttempt.swift */,
 				2F48C8001FCE9963009C686C /* ContentObject.swift */,
+				2F3DD21B20186B93004EDAF2 /* ContentType.swift */,
 				2F3F63512004A75F00976053 /* DBManager.swift */,
 				2FC0F2C71F86385B0092BFDC /* Exam.swift */,
 				2F515DFB1FF4EF9C0005D8A5 /* FileDetails.swift */,
@@ -734,7 +749,9 @@
 				2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */,
 				2FC0F31B1F863BCE0092BFDC /* TestEngine.js in Resources */,
 				2F48C8051FD030A7009C686C /* icomoon in Resources */,
+				2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */,
 				2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */,
+				2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */,
 				2FC0F3181F863BCE0092BFDC /* questions_typebase.css in Resources */,
 				2FC0F3171F863BCE0092BFDC /* PT_Serif-Web-Regular.ttf in Resources */,
 				2F6F167B1FC3F08900FB768C /* typebase.css in Resources */,
@@ -867,6 +884,7 @@
 				2FC0F2F61F863B2F0092BFDC /* Strings.swift in Sources */,
 				2F3F63522004A75F00976053 /* DBManager.swift in Sources */,
 				2F96997E1FC2A761001B2B18 /* Attachment.swift in Sources */,
+				2F3DD21C20186B93004EDAF2 /* ContentType.swift in Sources */,
 				2FC0F3111F863BA90092BFDC /* TPBasePagedTableViewController.swift in Sources */,
 				2FC0F2F51F863B2B0092BFDC /* KeychainTokenItem.swift in Sources */,
 				2FC0F2DC1F863AB70092BFDC /* Colors.swift in Sources */,
@@ -913,12 +931,14 @@
 				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
 				2F9778A81FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift in Sources */,
+				2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
 				2F3A53011FDA652A00C64123 /* Subject.swift in Sources */,
 				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,
 				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
 				2F5E0BB51FE2415800236AFE /* ActivityFeedPager.swift in Sources */,
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
+				2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */,
 				2F48C8131FD3E417009C686C /* Category.swift in Sources */,
 				2FC0F2E61F863AE30092BFDC /* TPError.swift in Sources */,
 				2FC0F2E31F863ADA0092BFDC /* RegistrationError.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  HtmlContent.swift
+//  ApiResponse.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,20 +25,26 @@
 
 import ObjectMapper
 
-public class HtmlContent {
+public class ApiResponse<T: TestpressModel> {
     
-    var id: Int = 0
-    var title: String!
-    var textHtml: String!
+    var count: Int = 0
+    var next: String = ""
+    var previous: String = ""
+    var perPage: Int?
+    var results: T!
     
     public required init?(map: Map) {
     }
 }
 
-extension HtmlContent: TestpressModel {
+extension ApiResponse: TestpressModel {
+    
     public func mapping(map: Map) {
-        id <- map["id"]
-        title <- map["title"]
-        textHtml <- map["text_html"]
+        
+        count <- map["count"]
+        next <- map["next"]
+        previous <- map["previous"]
+        perPage <- map["perPage"]
+        results <- map["results"]
     }
 }

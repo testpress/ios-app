@@ -410,6 +410,9 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Osw-Bx-U7f"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -425,13 +428,14 @@
                             <constraint firstItem="KxI-vt-y9F" firstAttribute="trailing" secondItem="wB2-X5-4Ue" secondAttribute="trailing" id="Od5-aN-jxO"/>
                             <constraint firstItem="KxI-vt-y9F" firstAttribute="top" secondItem="wB2-X5-4Ue" secondAttribute="top" id="Yqu-aY-xmt"/>
                             <constraint firstItem="kwE-bD-BlI" firstAttribute="leading" secondItem="c8y-iO-6FK" secondAttribute="leading" id="dOm-T4-rk0"/>
-                            <constraint firstItem="2C1-W5-ggm" firstAttribute="top" secondItem="kwE-bD-BlI" secondAttribute="bottom" id="dZZ-px-YrY"/>
+                            <constraint firstItem="2C1-W5-ggm" firstAttribute="top" secondItem="kwE-bD-BlI" secondAttribute="bottom" id="omC-b9-lbg"/>
                             <constraint firstItem="kwE-bD-BlI" firstAttribute="trailing" secondItem="c8y-iO-6FK" secondAttribute="trailing" id="owf-oA-nxb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wB2-X5-4Ue"/>
                     </view>
                     <connections>
                         <outlet property="bottomNavigationBar" destination="2C1-W5-ggm" id="TxQ-Lt-VUE"/>
+                        <outlet property="bottomNavigationBarConstraint" destination="Osw-Bx-U7f" id="3CD-0v-0sd"/>
                         <outlet property="bottomShadowView" destination="2Sb-r1-Jcp" id="NA9-1e-fF7"/>
                         <outlet property="contentsContainerView" destination="kwE-bD-BlI" id="HIu-Ud-w9q"/>
                         <outlet property="navigationBarItem" destination="5S5-Ob-TFH" id="Riw-OT-iwq"/>

@@ -13,6 +13,9 @@
         <array key="HelveticaNeue.ttc">
             <string>HelveticaNeue</string>
         </array>
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
         <array key="Rubik-Medium.ttf">
             <string>Rubik-Medium</string>
         </array>
@@ -365,30 +368,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gRx-zO-Lg8">
-                                <rect key="frame" x="20" y="154" width="280" height="260"/>
+                                <rect key="frame" x="0.0" y="162.5" width="0.0" height="243"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yGV-8e-nmk">
-                                        <rect key="frame" x="20" y="0.0" width="240" height="1"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="BGQ-Jp-wv6"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="success_tick" translatesAutoresizingMaskIntoConstraints="NO" id="SfJ-yv-JYF">
-                                        <rect key="frame" x="76" y="21" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="21" width="128" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="PL6-92-A1K"/>
                                             <constraint firstAttribute="height" constant="128" id="bPH-Xh-AUl"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An activation email has been sent. Please check your email and click on the link to activate your account." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSc-Gt-ZK8">
-                                        <rect key="frame" x="-20" y="169" width="0.0" height="17"/>
+                                        <rect key="frame" x="0.0" y="169" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSm-tL-gGh">
-                                        <rect key="frame" x="117" y="206" width="46" height="33"/>
+                                        <rect key="frame" x="0.0" y="189" width="46" height="33"/>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
                                         <state key="normal" title="Login"/>
                                         <connections>
@@ -396,7 +399,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-6D-RFU">
-                                        <rect key="frame" x="115" y="259" width="50" height="1"/>
+                                        <rect key="frame" x="0.0" y="242" width="0.0" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="eKC-k0-udQ"/>
@@ -405,7 +408,7 @@
                                 </subviews>
                             </stackView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXs-0F-oHi">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="0.0" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="3ad-iI-eg1"/>
                                 </constraints>
@@ -1774,7 +1777,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2t-y7-cbd">
                                                     <rect key="frame" x="0.0" y="24.5" width="244" height="17"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1813,7 +1816,7 @@
         <scene sceneID="jB8-Vu-jjh">
             <objects>
                 <navigationController id="J6Z-bq-2k4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activities" image="learn" id="vhn-dx-IGA"/>
+                    <tabBarItem key="tabBarItem" title="Activities" image="feed_tab_icon" id="vhn-dx-IGA"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XVL-V4-Cdp">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -1835,6 +1838,7 @@
         <image name="discussion_icon" width="24" height="24"/>
         <image name="exam_added_icon" width="16" height="16"/>
         <image name="exam_outline" width="24" height="24"/>
+        <image name="feed_tab_icon" width="32" height="32"/>
         <image name="happy" width="22" height="22"/>
         <image name="ic_chat_bubble_outline" width="24" height="24"/>
         <image name="ic_edit_white" width="24" height="24"/>
