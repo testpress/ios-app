@@ -61,10 +61,6 @@ class ContentsTableViewController: TPBasePagedTableViewController<Content>,
     }
     
     override func loadItems() {
-        if loadingItems {
-            return
-        }
-        loadingItems = true
         pager.next(completion: {
             items, error in
             if let error = error {
@@ -87,7 +83,6 @@ class ContentsTableViewController: TPBasePagedTableViewController<Content>,
                     self.activityIndicator?.stopAnimating()
                 }
                 self.tableView.tableFooterView?.isHidden = true
-                self.loadingItems = false
             }
         })
     }
