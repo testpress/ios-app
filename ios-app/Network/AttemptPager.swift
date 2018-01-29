@@ -26,7 +26,7 @@
 import Alamofire
 import ObjectMapper
 
-public class AttemptPager: TPBasePager<Attempt> {
+class AttemptPager: TPBasePager<Attempt> {
     
     var url: String
     

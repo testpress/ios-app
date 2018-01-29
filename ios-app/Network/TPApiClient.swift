@@ -24,6 +24,7 @@
 //
 
 import Alamofire
+import Device
 import UIKit
 
 class TPApiClient {
@@ -56,17 +57,26 @@ class TPApiClient {
                 JSONSerialization.WritingOptions.prettyPrinted)
         }
         
-        Alamofire.request(request).responseString() { response in
+        let dataRequest = Alamofire.request(request)
+        self.request(dataRequest: dataRequest, completion: completion)
+    }
+    
+    static func request(dataRequest: DataRequest,
+                        completion: @escaping (String?, TPError?) -> Void) {
+        
+        dataRequest.responseString() { response in
             #if DEBUG
                 print(NSString(data: response.request?.httpBody ?? Data(),
                                encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
                 print(response)
                 print(response.response ?? "No HTTP response")
+                print("requestDuration-", response.timeline.requestDuration)
+                print("totalDuration-", response.timeline.totalDuration)
             #endif
-        
+            
             let httpResponse: HTTPURLResponse? = response.response
             switch(response.result){
-                
+            
             case .success(let json):
                 let statusCode = httpResponse!.statusCode
                 if (statusCode >= 200 && statusCode < 300) {
@@ -81,24 +91,70 @@ class TPApiClient {
                     }
                     completion(nil, error)
                 }
-                
+            
             case .failure(let error):
-                let description = error.localizedDescription
-                if let error = error as? URLError,
-                    (error.code  == URLError.Code.notConnectedToInternet ||
-                        error.code  == URLError.Code.cannotConnectToHost ||
-                        error.code  == URLError.Code.timedOut) {
-                    
-                    let error = TPError(message: description, response: httpResponse,
-                                        kind: .network)
-                    
+                handleError(error: error, completion: completion)
+            }
+        }
+    }
+    
+    static func handleError(error: Error, httpResponse: HTTPURLResponse? = nil,
+                            completion: @escaping (String?, TPError?) -> Void) {
+        
+        let description = error.localizedDescription
+        if let error = error as? URLError,
+            (error.code  == URLError.Code.notConnectedToInternet ||
+                error.code  == URLError.Code.cannotConnectToHost ||
+                error.code  == URLError.Code.timedOut) {
+            
+            let error = TPError(message: description, response: httpResponse,
+                                kind: .network)
+            
+            completion(nil, error)
+        } else {
+            let error = TPError(message: description, response: httpResponse,
+                                kind: .unexpected)
+            
+            completion(nil, error)
+        }
+    }
+    
+    static func uploadImage(imageData: Data, fileName: String,
+                            completion: @escaping (FileDetails?, TPError?) -> Void) {
+        
+        let url =  URL(string: TPEndpointProvider(.uploadImage).getUrl())!
+        var headers: HTTPHeaders = ["User-Agent": getUserAgent()]
+        if (KeychainTokenItem.isExist()) {
+            let token: String = KeychainTokenItem.getToken()
+            headers["Authorization"] = "JWT " + token
+        }
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData, withName: "file", fileName: fileName,
+                                         mimeType: "image/jpg")
+        },
+            to: url,
+            headers: headers
+        ) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                request(dataRequest: upload, completion: {
+                    json, error in
+                    var fileDetails: FileDetails? = nil
+                    if let json = json {
+                        fileDetails = TPModelMapper<FileDetails>().mapFromJSON(json: json)
+                        guard fileDetails != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(fileDetails, error)
+                })
+            case .failure(let error):
+                handleError(error: error, completion: {
+                    json, error in
                     completion(nil, error)
-                } else {
-                    let error = TPError(message: description, response: httpResponse,
-                                        kind: .unexpected)
-                    
-                    completion(nil, error)
-                }
+                })
             }
         }
     }
@@ -108,6 +164,67 @@ class TPApiClient {
         // Testpress iOS App/1.0.1 (iPhone; iPhoneSE OS 10_3_1)
         return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) (iPhone; \(device.deviceType) "
             + "OS \(device.systemVersion.replacingOccurrences(of: ".", with: "_")))"
+    }
+    
+    static func getListItems<T> (endpointProvider: TPEndpointProvider,
+                                 headers: HTTPHeaders? = nil,
+                                 completion: @escaping (TPApiResponse<T>?, TPError?) -> Void,
+                                 type: T.Type) {
+        
+        apiCall(endpointProvider: endpointProvider, headers: headers, completion: {
+            json, error in
+            
+            var testpressResponse: TPApiResponse<T>? = nil
+            if let json = json {
+                testpressResponse = TPModelMapper<TPApiResponse<T>>().mapFromJSON(json: json)
+                debugPrint(testpressResponse?.results ?? "Error")
+                guard testpressResponse != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(testpressResponse, error)
+        })
+    }
+    
+    static func request<T: TestpressModel>(type: T.Type,
+                                           endpointProvider: TPEndpointProvider,
+                                           parameters: Parameters? = nil,
+                                           completion: @escaping(T?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
+            json, error in
+            var dataModel: T? = nil
+            if let json = json {
+                dataModel = TPModelMapper<T>().mapFromJSON(json: json)
+                guard dataModel != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(dataModel, error)
+        })
+    }
+    
+    static func getListItems<T> (type: T.Type,
+                                 endpointProvider: TPEndpointProvider,
+                                 headers: HTTPHeaders? = nil,
+                                 completion: @escaping (ApiResponse<T>?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, headers: headers, completion: {
+            json, error in
+            
+            var testpressResponse: ApiResponse<T>? = nil
+            if let json = json {
+                testpressResponse = TPModelMapper<ApiResponse<T>>().mapFromJSON(json: json)
+                debugPrint(testpressResponse?.results ?? "Error")
+                guard testpressResponse != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(testpressResponse, error)
+        })
     }
     
     static func authenticate(username: String, password: String,
@@ -259,6 +376,27 @@ class TPApiClient {
                 }
             }
             completion(user, error)
+        })
+    }
+    
+    static func postComment(comment: String,
+                            commentsUrl: String,
+                            completion: @escaping (Comment?, TPError?) -> Void) {
+        
+        let parameters: Parameters = ["comment": comment]
+        let endpoint = TPEndpointProvider(.post, url: commentsUrl)
+        apiCall(endpointProvider: endpoint, parameters: parameters,
+                completion: { json, error in
+                    
+                    var comment: Comment? = nil
+                    if let json = json {
+                        comment = TPModelMapper<Comment>().mapFromJSON(json: json)
+                        guard comment != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(comment, error)
         })
     }
     

@@ -24,10 +24,34 @@
 //
 
 import ObjectMapper
+import Realm
+import RealmSwift
 
 public protocol TestpressModel: Mappable {
     init?(map: Map)
     mutating func mapping(map: Map)
+}
+
+class DBModel: Object, TestpressModel {
+    
+    public required init?(map: Map) {
+        super.init()
+        mapping(map: map)
+    }
+    
+    public func mapping(map: Map) {}
+    
+    required public init(realm: RLMRealm, schema: RLMObjectSchema) {
+        super.init(realm: realm, schema: schema)
+    }
+    
+    required public init() {
+        super.init()
+    }
+    
+    required public init(value: Any, schema: RLMSchema) {
+        super.init(value: value, schema: schema)
+    }
 }
 
 /**

@@ -32,6 +32,7 @@ public class AttemptQuestion {
     var direction: String?;
     var explanationHtml: String?
     var type: String?;
+    var commentsUrl: String!
     var answers: [AttemptAnswer] = [];
     
     public required init?(map: Map) {
@@ -46,6 +47,7 @@ extension AttemptQuestion: TestpressModel {
         direction <- map["direction"]
         explanationHtml <- map["explanation_html"]
         type <- map["type"]
+        commentsUrl <- map["comments_url"]
         answers <- map["answers"]
     }
 }

@@ -32,6 +32,7 @@ struct Strings {
     static let TRY_AGAIN = "Try Again"
     
     static let NETWORK_ERROR = "Network Error"
+    static let NO_INTERNET_CONNECTION = "No Internet Connection"
     static let PLEASE_CHECK_INTERNET_CONNECTION = "Please check your internet connection & try again."
     static let AUTHENTICATION_FAILED = "Authentication failed"
     static let PLEASE_LOGIN = "Please login to see this"
@@ -49,10 +50,22 @@ struct Strings {
     static let NO_QUESTIONS = "No Questions Found"
     static let NO_QUESTIONS_DESCRIPTION = "No questions added to this exam, try after some time."
     
+    static let NO_COURSES = "Learning can't wait"
+    static let NO_COURSE_DESCRIPTION = "Looks like you don’t have any active courses. Kindly contact admin."
+    static let NO_CHAPTER_DESCRIPTION = "Looks like chapters not available. Check back later."
+    static let NO_CONTENT_DESCRIPTION = "Looks like contents not available. Check back later."
+    
+    static let NO_POSTS = "Breaking news!"
+    static let NO_POSTS_DESCRIPTION = "Looks like the admin didn’t update this news page yet. Check back in a bit?"
+    
+    static let NO_FORUM_POSTS = "Discuss with folks!"
+    static let NO_FORUM_POSTS_DESCRIPTION = "Looks like no one created a discussion yet. Create a discussion about your doubt or share your knowledge?"
+    
     static let RESUME_EXAM = "Resume Exam"
     
     static let CORRECT_ANSWER = "Correct Answer:"
     static let EXPLANATION = "Explanation:"
+    static let COMMENTS = "Comments"
     
     static let LOADING_QUESTIONS = "Loading questions"
     static let LOADING = "Loading…"
@@ -79,6 +92,28 @@ struct Strings {
     
     static let ACTIVATION_MAIL_SENT = "An activation email has been sent. Please check your email and click on the link to activate your account."
     
+    static let YOU_MADE_IT = "You Made It!"
+    static let POST_CREATED_DESCRIPTION = "You have successfully created a new discussion, wait for your folks response"
+    
+    static let NO_ANALYTICS = "No Analytics Data!"
+    static let NO_SUBJECT_ANALYTICS_DESCRIPTION = "No subjects available to analyse"
+    
+    static let OVERALL_SUBJECTS_ANALYTICS = "OVERALL"
+    static let INDIVIDUAL_SUBJECTS_ANALYTICS = "INDIVIDUAL SUBJECTS"
+    
     static let LOGOUT = "Log Out"
     static let LOGOUT_CONFIRM_MESSAGE = "Are you sure want to log out?"
+    
+    static let LOAD_MORE_COMMENTS = "Load previous comments"
+    static let LOAD_COMMENTS = "Load comments"
+    static let LOAD_NEW_COMMENTS = "Load new comments"
+    
+    static let PHOTO_LIBRARY = "Photo Library"
+    static let CAMERA = "Camera"
+    static let INVALID_IMAGE = "Invalid Image"
+    static let YOUR_DEVAICE_NOT_SUPPORTED = "Your device is not supported"
+    static let NEEDS_PERMISSION_TO_ACCESS = "Needs permission to access "
+    static let GO_TO_SETTINGS = "Go to Settings to enable the permission"
+    static let SETTINGS = "Settings"
+    
 }

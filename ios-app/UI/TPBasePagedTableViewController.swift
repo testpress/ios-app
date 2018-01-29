@@ -23,23 +23,33 @@
 //  THE SOFTWARE.
 //
 
+import TTGSnackbar
 import UIKit
 import ObjectMapper
 import XLPagerTabStrip
 
+protocol BasePagedTableViewDelegate {
+    func onItemsLoaded()
+}
+
 class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     
-    var activityIndicator: UIActivityIndicatorView? // Progress bar
+    var activityIndicator: UIActivityIndicatorView! // Progress bar
     var emptyView: EmptyView!
     var items = [T]()
-    let pager: TPBasePager<T>
+    var pager: TPBasePager<T>
     var loadingItems: Bool = false
+    var delegate: BasePagedTableViewDelegate?
+    var firstCallBack: Bool = true
     
-    init(pager: TPBasePager<T>) {
+    init(pager: TPBasePager<T>, coder aDecoder: NSCoder? = nil) {
         self.pager = pager
-        super.init(style: .plain)
-        activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
-        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 150)
+        // Support table cell view from both xib & storyboard
+        if aDecoder != nil {
+            super.init(coder: aDecoder!)!
+        } else {
+            super.init(style: .plain)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,6 +59,8 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
+        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 150)
         // Set table view footer as progress spinner
         let pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         pagingSpinner.startAnimating()
@@ -60,18 +72,20 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
         emptyView = EmptyView.getInstance()
         tableView.backgroundView = emptyView
         emptyView.frame = tableView.frame
-        setEmptyText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        if (items.isEmpty) {
+            activityIndicator?.startAnimating()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (items.isEmpty) {
+        if (items.isEmpty || firstCallBack) {
+            firstCallBack = false
             tableView.tableFooterView?.isHidden = true
-            activityIndicator?.startAnimating()
             pager.reset()
             loadItems()
         }
@@ -95,6 +109,7 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
             if self.items.count == 0 {
                 self.setEmptyText()
             }
+            self.delegate?.onItemsLoaded()
             self.tableView.reloadData()
             if (self.activityIndicator?.isAnimating)! {
                 self.activityIndicator?.stopAnimating()
@@ -121,17 +136,12 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
             emptyView.setValues(image: image, title: title, description: description,
                                 retryHandler: retryHandler)
         } else {
-            UIUtils.showSimpleAlert(
-                title: title,
-                message: description,
-                viewController: self,
-                cancelable: true,
-                cancelHandler: #selector(self.closeAlert(gesture:)))
+            TTGSnackbar(message: description, duration: .middle).show()
         }
         tableView.reloadData()
     }
     
-    func closeAlert(gesture: UITapGestureRecognizer) {
+    @objc func closeAlert(gesture: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
     

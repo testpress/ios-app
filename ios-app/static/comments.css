@@ -1,0 +1,108 @@
+
+.comment_heading {
+    text-transform: uppercase;
+    display: inline-block;
+    color: #333;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    font-family: 'Rubik-Medium', sans-serif;
+}
+
+#empty_comments_description {
+    margin:20px;
+    color: #888888;
+    text-align: center;
+    font-family: 'Rubik-Regular', serif;
+}
+
+.avatar {
+    width: 36px !important;
+    height: 36px !important;
+    flex: 0 0 36px;
+    border-radius: 50%;
+}
+
+.comment_item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    display: flex;
+    flex-flow: row;
+    color: #666666;
+    font-size: 0.813em;
+    font-family: 'Rubik-Regular', serif;
+}
+
+.username {
+    font-family: 'Rubik-Medium', sans-serif;
+    color: #333;
+    margin-right: 5px;
+    display: inline;
+}
+
+.comment_detail_layout {
+    margin-left:10px;
+}
+
+.comment_content {
+    word-break: break-all;
+    margin-top:6px;
+}
+
+.commentted_time {
+    margin-left:5px;
+    display: inline;
+    font-size: 0.750em;
+}
+
+.load_more_comments, .load_new_comments {
+    font-family: 'Rubik-Medium', serif;
+    color: #666666;
+    text-align: center;
+    padding: 20px;
+}
+
+.comment_box_layout {
+    display:flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+div:empty::before {
+    color: #cccccc;
+    content: attr(data-placeholder);
+}
+
+.comment_box {
+    font-family: 'Rubik-Regular', serif;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    border: solid 1px #cccccc;
+    padding: 10px;
+    min-height: 20px;
+    border-radius: 5px;
+    vertical-align: middle;
+    word-wrap: break-word;
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+.icon-paper-plane, .icon-add-a-photo {
+    display: inline-block;
+    background-color: #00ccaa;
+    color: #ffffff;
+    border-radius: 5px;
+    text-align:center;
+    font-size: 20px;
+    height: auto;
+    width: 40px;
+    padding: 10px 0 10px 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+

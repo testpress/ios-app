@@ -30,6 +30,22 @@ enum Images: String {
     case TestpressAlertWarning = "testpress_alert_warning"
     case ExamsFlatIcon = "exams_flat_icon"
     case ProfileImagePlaceHolder = "profile_image_place_holder"
+    case BackButton = "ic_navigate_before_36pt"
+    case CloseButton = "ic_close"
+    case PlaceHolder = "placeholder_icon"
+    case LearnFlatIcon = "learn_flat_icon"
+    case NewsFlatIcon = "news_flat_icon"
+    case DiscussionFlatIcon = "discussion_flat_icon"
+    case SuccessTick = "success_tick"
+    case TimeIcon = "time_icon"
+    case ViewsIcon = "views_icon"
+    case NavigateNext = "ic_navigate_next"
+    case AnalyticsFlatIcon = "analytics_flat_icon"
+    case ExamAddedIcon = "exam_added_icon"
+    case FileDownloadIcon = "file_download_icon"
+    case PostAdded = "post_added"
+    case VideoAddedIcon = "video_added_icon"
+    case ExamAttemptedIcon = "exam_attempted_icon"
     
     var image: UIImage {
         return UIImage(asset: self)

@@ -32,14 +32,28 @@ enum TPEndpoint {
     case authenticateUser
     case registerNewUser
     case getExams
-    case createAttempt
     case getQuestions
     case sendHeartBeat
     case saveAnswer
     case endExam
     case loadAttempts
     case resumeAttempt
+    case getCourses
+    case getChapters
+    case getContents
     case getProfile
+    case getPosts
+    case getForum
+    case createForumPost
+    case getForumCategories
+    case getSubjectAnalytics
+    case getAttemptSubjectAnalytics
+    case getActivityFeed
+    case contentAttempts
+    case uploadImage
+    case get
+    case post
+    case put
     
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -49,8 +63,6 @@ enum TPEndpoint {
             return .post
         case .getExams:
             return .get
-        case .createAttempt:
-            return .post
         case .getQuestions:
             return .get
         case .sendHeartBeat:
@@ -63,7 +75,33 @@ enum TPEndpoint {
             return .get
         case .resumeAttempt:
             return .put
+        case .getCourses:
+            return .get
+        case .getChapters:
+            return .get
+        case .getContents:
+            return .get
         case .getProfile:
+            return .get
+        case .getPosts:
+            return .get
+        case .getForum:
+            return .get
+        case .createForumPost:
+            return .post
+        case .getForumCategories,
+             .getSubjectAnalytics,
+             .getAttemptSubjectAnalytics,
+             .getActivityFeed:
+            return .get
+        case .get:
+            return .get
+        case .post,
+             .uploadImage:
+            return .post
+        case .put:
+            return .put
+        default:
             return .get
         }
     }
@@ -82,8 +120,28 @@ enum TPEndpoint {
             return "start/"
         case .endExam:
             return "end/"
+        case .getCourses:
+            return "/api/v2.2.1/courses/"
+        case .getChapters:
+            return "chapters/"
         case .getProfile:
             return "/api/v2.2/me/stats/"
+        case .getPosts:
+            return "/api/v2.2/posts/"
+        case .getForum, .createForumPost:
+            return "/api/v2.3/forum/"
+        case .getForumCategories:
+            return "/api/v2.3/forum/categories/"
+        case .getSubjectAnalytics:
+            return "/api/v2.2/analytics/"
+        case .getAttemptSubjectAnalytics:
+            return "review/subjects/"
+        case .getActivityFeed:
+            return "/api/v2.4/activities/"
+        case .contentAttempts:
+            return "/api/v2.2/content_attempts/"
+        case .uploadImage:
+            return "/api/v2.2/image_upload/"
         default:
             return ""
         }

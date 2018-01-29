@@ -1,0 +1,70 @@
+
+.time_icon {
+    width: 15px !important;
+    height: 15px !important;
+    margin-right: 5px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.views_icon {
+    width: 16px !important;
+    height: 11px !important;
+    margin-right: 5px;
+    margin-left: 15px;
+    display: table-cell !important;
+    vertical-align: middle;
+    margin-bottom: 3px;
+}
+
+.discussion_title {
+    font-size: 1.375rem;
+    font-family: 'Rubik-Medium', sans-serif;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
+
+.avatar {
+    width: 45px !important;
+    height: 45px !important;
+    flex: 0 0 45px;
+    border-radius: 50%;
+}
+
+.author_layout {
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    display: flex;
+    flex-flow: row;
+    color: #999999;
+    font-size: 0.813em;
+    font-family: 'Rubik-Regular', serif;
+}
+
+.author_name {
+    font-size: 1.063em;
+    font-family: 'Rubik-Medium', sans-serif;
+    color: #666666;
+    margin-right: 5px;
+    display: inline;
+}
+
+.author_name_layout {
+    margin-left:10px;
+}
+
+.post_details {
+    display: table;
+    margin-top:9px;
+    line-height: 15px;
+}
+
+.post_details_text {
+    display: table-cell;
+    font-size: 0.813em;
+    vertical-align: middle;
+    margin-left: 5px;
+}

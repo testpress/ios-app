@@ -78,12 +78,38 @@ public class UIUtils {
         button.layer.shadowOpacity = 0.9
     }
     
+    // Add gradient shadow layer to the shadow container view
+    static func updateBottomShadow(bottomShadowView: UIView, bottomGradient: CAGradientLayer) {
+        bottomGradient.frame = bottomShadowView.bounds
+        bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+        bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
+    }
+    
+    static func setTableViewSeperatorInset(_ tableView: UITableView, size: CGFloat) {
+        tableView.preservesSuperviewLayoutMargins = false
+        tableView.separatorInset = UIEdgeInsetsMake(0, size, 0, size);
+        tableView.layoutMargins = UIEdgeInsets.zero;
+    }
+    
     static func getAppName() -> String {
         return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? ""
     }
     
     static func getActionSheetStyle() -> UIAlertControllerStyle {
         return (UIDevice.current.userInterfaceIdiom == .phone) ? .actionSheet : .alert
+    }
+    
+    static func isiPad() -> Bool {
+        return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
+    }
+    
+    static func ellipsize(text: String, size: Int) -> String {
+        if (text.count < size) {
+            return text
+        } else {
+            let endIndex = text.index(text.startIndex, offsetBy: (size - 3))
+            return String(text[text.startIndex...endIndex]) + "..."
+        }
     }
     
 }
