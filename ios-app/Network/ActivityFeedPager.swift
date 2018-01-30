@@ -208,6 +208,14 @@ class ActivityFeedPager {
                 break
             }
         }
+        if activity.actor == nil {
+            debugPrint("activity.actor not Exists", activity.id)
+            return nil
+        }
+        if activity.actionObject == nil {
+            debugPrint("activity.actionObject not Exists", activity.id)
+            return nil
+        }
         return activity
     }
     

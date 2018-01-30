@@ -56,6 +56,8 @@ class ActivityFeedTableViewController: UITableViewController {
         emptyView = EmptyView.getInstance()
         tableView.backgroundView = emptyView
         emptyView.frame = tableView.frame
+        
+        UIUtils.setTableViewSeperatorInset(tableView, size: 10)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,13 +148,6 @@ class ActivityFeedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewCell(cellForRowAt: indexPath)
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
-        cell.layoutMargins = UIEdgeInsets.zero;
-        if #available(iOS 9.0, *) {
-            tableView.cellLayoutMarginsFollowReadableWidth = false
-        }
-        
         // Load more items on scroll to bottom
         if indexPath.row >= (items.count - 4) && !loadingItems {
             if pager.hasMore {
