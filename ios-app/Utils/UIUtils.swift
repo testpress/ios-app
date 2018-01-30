@@ -112,4 +112,12 @@ public class UIUtils {
         }
     }
     
+    static func showProfileDetails(_ viewController: UIViewController) {
+        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+        let profileViewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.PROFILE_VIEW_CONTROLLER) as! ProfileViewController
+        
+        viewController.present(profileViewController, animated: true)
+    }
+    
 }

@@ -63,4 +63,8 @@ class CoursesTableViewController: BaseDBViewController<Course> {
                             description: Strings.NO_COURSE_DESCRIPTION)
     }
     
+    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
+        UIUtils.showProfileDetails(self)
+    }
+    
 }

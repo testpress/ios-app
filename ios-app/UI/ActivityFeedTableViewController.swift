@@ -184,8 +184,8 @@ class ActivityFeedTableViewController: UITableViewController {
                             description: Strings.NO_CONTENT_DESCRIPTION)
     }
     
-    @IBAction func back() {
-        dismiss(animated: true, completion: nil)
+    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
+        UIUtils.showProfileDetails(self)
     }
     
 }

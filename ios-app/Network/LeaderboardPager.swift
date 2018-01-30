@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  LeaderboardPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,45 +23,23 @@
 //  THE SOFTWARE.
 //
 
+import Alamofire
 import ObjectMapper
 
-public class User {
-    var username: String?
-    var email: String?
-    var password: String?
-    var phone: String?
-    var id: Int!
-    var url: String?
-    var displayName: String!
-    var photo: String?
-    var mediumImage: String!
-    var largeImage: String?
-    var averageSpeed: Int?
-    var averageAccuracy: Int?
-    var averagePercentage: Int?
-    var testsCount: Int?
-    var score: String?
+class LeaderboardPager: TPBasePager<Reputation> {
     
-    public required init?(map: Map) {
+    override func getItems(page: Int) {
+        queryParams.updateValue(String(page), forKey: Constants.PAGE)
+        queryParams.updateValue(String(20), forKey: Constants.PAGE_SIZE)
+        TPApiClient.getListItems(
+            endpointProvider: TPEndpointProvider(.getLeaderboard, queryParams: queryParams),
+            completion: resonseHandler!,
+            type: Reputation.self
+        )
     }
-}
-
-extension User: TestpressModel {
-    public func mapping(map: Map) {
-        username <- map["username"]
-        email <- map["email"]
-        password <- map["password"]
-        phone <- map["phone"]
-        id <- map["id"]
-        url <- map["url"]
-        displayName <- map["display_name"]
-        photo <- map["photo"]
-        mediumImage <- map["medium_image"]
-        largeImage <- map["large_image"]
-        averageSpeed <- map["average_speed"]
-        averageAccuracy <- map["average_accuracy"]
-        averagePercentage <- map["average_percentage"]
-        testsCount <- map["tests_count"]
-        score <- map["score"]
+    
+    override func getId(resource: Reputation) -> Int {
+        return resource.id
     }
+    
 }

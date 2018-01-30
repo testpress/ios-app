@@ -1,5 +1,5 @@
 //
-//  PostTableViewController.swift
+//  LeaderboardTableViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -24,37 +24,59 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 
-class PostTableViewController: TPBasePagedTableViewController<Post>,
-    BasePagedTableViewDelegate {
+class LeaderboardTableViewController: TPBasePagedTableViewController<Reputation>,
+    BasePagedTableViewDelegate, IndicatorInfoProvider {
+    
+    var userReputation: Reputation?
+    
+    required init() {
+        super.init(pager: LeaderboardPager())
+        delegate = self
+    }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(pager: PostPager(), coder: aDecoder)
-        delegate = self
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.register(
+            UINib(nibName: Constants.LEADERBOARD_TABLE_VIEW_CELL, bundle: Bundle.main),
+            forCellReuseIdentifier: Constants.LEADERBOARD_TABLE_VIEW_CELL
+        )
+        tableView.rowHeight = 80
+        tableView.allowsSelection = false
+                
+        tableView.separatorStyle = .none
     }
     
     // MARK: - Table view data source
     override func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.POST_TABLE_VIEW_CELL, for: indexPath) as! PostTableViewCell
+            withIdentifier: Constants.LEADERBOARD_TABLE_VIEW_CELL,
+            for: indexPath
+        ) as! LeaderboardTableViewCell
         
-        cell.initCell(items[indexPath.row], viewController: self)
+        cell.initCell(reputation: items[indexPath.row],
+                      rank: indexPath.row + 1,
+                      userId: userReputation?.user.id)
         return cell
     }
     
     func onItemsLoaded() {
-        items = items.sorted(by: {
-            FormatDate.compareDate(dateString1:  $0.publishedDate!, dateString2: $1.publishedDate!)
-        })
+        items = items.sorted(by: { $0.trophiesCount > $1.trophiesCount })
     }
     
     override func setEmptyText() {
-        emptyView.setValues(image: Images.NewsFlatIcon.image, title: Strings.NO_POSTS,
-                            description: Strings.NO_POSTS_DESCRIPTION)
+        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_ITEMS_EXIST,
+                            description: Strings.NO_CONTENT_DESCRIPTION)
     }
     
-    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: Strings.LEADERBOARD)
     }
     
 }
