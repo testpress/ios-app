@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  LeaderboardTableViewCell.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,45 +23,30 @@
 //  THE SOFTWARE.
 //
 
-import ObjectMapper
+import UIKit
 
-public class User {
-    var username: String?
-    var email: String?
-    var password: String?
-    var phone: String?
-    var id: Int!
-    var url: String?
-    var displayName: String!
-    var photo: String?
-    var mediumImage: String!
-    var largeImage: String?
-    var averageSpeed: Int?
-    var averageAccuracy: Int?
-    var averagePercentage: Int?
-    var testsCount: Int?
-    var score: String?
+class LeaderboardTableViewCell: UITableViewCell {
     
-    public required init?(map: Map) {
-    }
-}
-
-extension User: TestpressModel {
-    public func mapping(map: Map) {
-        username <- map["username"]
-        email <- map["email"]
-        password <- map["password"]
-        phone <- map["phone"]
-        id <- map["id"]
-        url <- map["url"]
-        displayName <- map["display_name"]
-        photo <- map["photo"]
-        mediumImage <- map["medium_image"]
-        largeImage <- map["large_image"]
-        averageSpeed <- map["average_speed"]
-        averageAccuracy <- map["average_accuracy"]
-        averagePercentage <- map["average_percentage"]
-        testsCount <- map["tests_count"]
-        score <- map["score"]
+    @IBOutlet weak var rank: UILabel!
+    @IBOutlet weak var contentViewCell: UIView!
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var trophiesCount: UILabel!
+    @IBOutlet weak var differenceCount: UILabel!
+    @IBOutlet weak var differenceImage: UIImageView!
+    
+    func initCell(reputation: Reputation, rank: Int, userId: Int?) {
+        
+        self.rank.text = String(rank)
+        userImage.kf.setImage(with: URL(string: reputation.user.mediumImage!),
+                              placeholder: Images.PlaceHolder.image)
+        
+        userName.text = String(reputation.user.displayName)
+        trophiesCount.text = String(reputation.trophiesCount)
+        if userId == reputation.user.id {
+            contentViewCell.backgroundColor = Colors.getRGB(Colors.BLUE, alpha: 0.1)
+        } else {
+            contentViewCell.backgroundColor = UIColor.white
+        }
     }
 }

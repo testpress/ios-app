@@ -160,6 +160,10 @@ class ProfileViewController: UIViewController {
         present(activityViewController, animated: true, completion: nil)
     }
     
+    @IBAction func back() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // Set frames of the views in this method to support both portrait & landscape view
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

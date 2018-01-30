@@ -1,5 +1,5 @@
 //
-//  ActivityFeedTableViewController.swift
+//  BaseTableViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,39 +25,33 @@
 
 import TTGSnackbar
 import UIKit
+import ObjectMapper
+import XLPagerTabStrip
 
-class ActivityFeedTableViewController: UITableViewController {
+protocol BaseTableViewDelegate {
+    func loadItems()
+}
+
+class BaseTableViewController<T: Mappable>: UITableViewController {
     
     var activityIndicator: UIActivityIndicatorView! // Progress bar
     var emptyView: EmptyView!
-    var items = [ActivityFeed]()
-    var pager: ActivityFeedPager
-    var loadingItems: Bool = false
-    var firstCallBack: Bool = true
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.pager = ActivityFeedPager()
-        super.init(coder: aDecoder)
-    }
+    var items = [T]()
+    var tableViewDelegate: BaseTableViewDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 150)
-        // Set table view footer as progress spinner
-        let pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        pagingSpinner.startAnimating()
-        pagingSpinner.color = Colors.getRGB(Colors.PRIMARY)
-        pagingSpinner.hidesWhenStopped = true
-        tableView.tableFooterView = pagingSpinner
         
         // Set table view backgroud
         emptyView = EmptyView.getInstance()
         tableView.backgroundView = emptyView
         emptyView.frame = tableView.frame
         
-        UIUtils.setTableViewSeperatorInset(tableView, size: 10)
+        UIUtils.setTableViewSeperatorInset(tableView, size: 15)
+        tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,40 +63,17 @@ class ActivityFeedTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (items.isEmpty || firstCallBack) {
-            firstCallBack = false
-            tableView.tableFooterView?.isHidden = true
-            pager.reset()
-            loadItems()
+        super.viewDidAppear(animated)
+        if (items.isEmpty) {
+            tableViewDelegate.loadItems()
         }
     }
     
-    func loadItems() {
-        if loadingItems {
-            return
+    func onLoadFinished() {
+        self.tableView.reloadData()
+        if (self.activityIndicator?.isAnimating)! {
+            self.activityIndicator?.stopAnimating()
         }
-        loadingItems = true
-        pager.next(completion: {
-            items, error in
-            if let error = error {
-                debugPrint(error.message ?? "No error")
-                debugPrint(error.kind)
-                self.handleError(error)
-                return
-            }
-            
-            self.items = Array(items!.values)
-            if self.items.count == 0 {
-                self.setEmptyText()
-            }
-            self.onItemsLoaded()
-            self.tableView.reloadData()
-            if (self.activityIndicator?.isAnimating)! {
-                self.activityIndicator?.stopAnimating()
-            }
-            self.tableView.tableFooterView?.isHidden = true
-            self.loadingItems = false
-        })
     }
     
     func handleError(_ error: TPError) {
@@ -110,14 +81,13 @@ class ActivityFeedTableViewController: UITableViewController {
         if error.kind == .network {
             retryHandler = {
                 self.activityIndicator?.startAnimating()
-                self.loadItems()
+                self.tableViewDelegate.loadItems()
             }
         }
         let (image, title, description) = error.getDisplayInfo()
         if (activityIndicator?.isAnimating)! {
             activityIndicator?.stopAnimating()
         }
-        loadingItems = false
         if items.count == 0 {
             emptyView.setValues(image: image, title: title, description: description,
                                 retryHandler: retryHandler)
@@ -125,10 +95,6 @@ class ActivityFeedTableViewController: UITableViewController {
             TTGSnackbar(message: description, duration: .middle).show()
         }
         tableView.reloadData()
-    }
-    
-    @objc func closeAlert(gesture: UITapGestureRecognizer) {
-        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Table view data source
@@ -146,41 +112,18 @@ class ActivityFeedTableViewController: UITableViewController {
         return items.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewCell(cellForRowAt: indexPath)
-        // Load more items on scroll to bottom
-        if indexPath.row >= (items.count - 4) && !loadingItems {
-            if pager.hasMore {
-                tableView.tableFooterView?.isHidden = false
-                loadItems()
-            } else {
-                tableView.tableFooterView?.isHidden = true
-            }
-        }
-        return cell
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        return tableViewCell(cellForRowAt: indexPath)
     }
     
     func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:
-            Constants.ACTIVITY_FEED_TABLE_VIEW_CELL, for: indexPath) as! ActivityFeedTableViewCell
-        
-        cell.initCell(activityFeed: items[indexPath.row], viewController: self)
-        return cell
-    }
-    
-    func onItemsLoaded() {
-        items = items.sorted(by: {
-            FormatDate.compareDate(dateString1:  $0.timestamp, dateString2: $1.timestamp)
-        })
+        return UITableViewCell()
     }
     
     func setEmptyText() {
-        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_ITEMS_EXIST,
-                            description: Strings.NO_CONTENT_DESCRIPTION)
-    }
-    
-    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+        emptyView.setValues(image: Images.LearnFlatIcon.image, description: Strings.NO_ITEMS_EXIST)
     }
     
 }

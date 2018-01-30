@@ -56,4 +56,8 @@ class PostsViewController: UIViewController {
         present(viewController, animated: true, completion: nil)
     }
     
+    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
+        UIUtils.showProfileDetails(self)
+    }
+    
 }

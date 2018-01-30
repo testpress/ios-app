@@ -116,4 +116,7 @@ struct Strings {
     static let GO_TO_SETTINGS = "Go to Settings to enable the permission"
     static let SETTINGS = "Settings"
     
+    static let LEADERBOARD = "LEADERBOARD"
+    static let TARGETS_AND_THREADS = "TARGETS / THREADS"
+    
 }
