@@ -60,8 +60,8 @@ class TargetThreadViewController: BaseTableViewController<Reputation>, BaseTable
                     return
                 }
                 
-                let items = response!.results
-                self.addItems(items)
+                let items = response!.results.reversed()
+                self.items.append(contentsOf: items)
                 if self.userReputation != nil {
                     self.items.append(self.userReputation!)
                     self.startingRank = self.userReputation!.rank - items.count
@@ -83,16 +83,12 @@ class TargetThreadViewController: BaseTableViewController<Reputation>, BaseTable
                     return
                 }
                 
-                self.addItems(response!.results)
+                let items = response!.results.reversed()
+                self.items.append(contentsOf: items)
                 self.onLoadFinished()
             },
             type: Reputation.self
         )
-    }
-    
-    func addItems(_ items: [Reputation]) {
-        let items = items.sorted(by: { $0.trophiesCount > $1.trophiesCount })
-        self.items.append(contentsOf: items)
     }
     
     // MARK: - Table view data source

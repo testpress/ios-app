@@ -41,6 +41,7 @@
 		2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F634F2004A2D000976053 /* RealmSwift.framework */; };
 		2F3F63522004A75F00976053 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F63512004A75F00976053 /* DBManager.swift */; };
 		2F3F63542004C54900976053 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F63532004C54900976053 /* Realm.framework */; };
+		2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F412CC120219BC300B7F70C /* OrderedDictionary.swift */; };
 		2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */; };
 		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
 		2F48C7FB1FCDA957009C686C /* comments.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FA1FCDA957009C686C /* comments.js */; };
@@ -237,6 +238,7 @@
 		2F3F634F2004A2D000976053 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		2F3F63512004A75F00976053 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		2F3F63532004C54900976053 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		2F412CC120219BC300B7F70C /* OrderedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		2F48C7F81FCD9F18009C686C /* progress_loader.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = progress_loader.css; sourceTree = "<group>"; };
 		2F48C7FA1FCDA957009C686C /* comments.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = comments.js; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
 				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
 				2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */,
+				2F412CC120219BC300B7F70C /* OrderedDictionary.swift */,
 				2F515DFD1FF517160005D8A5 /* Permissions.swift */,
 				2F6F167E1FC4164100FB768C /* Reachability.swift */,
 				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
@@ -853,6 +856,7 @@
 				2FC0F3121F863BBD0092BFDC /* CALayerBorderColor.swift in Sources */,
 				2FC0F2FB1F863B7E0092BFDC /* BaseQuestionsDataSource.swift in Sources */,
 				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
+				2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */,
 				2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */,
 				2FC0F2E51F863AE00092BFDC /* TPAuthToken.swift in Sources */,
 				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,

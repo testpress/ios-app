@@ -27,13 +27,12 @@ import UIKit
 import XLPagerTabStrip
 
 class LeaderboardTableViewController: TPBasePagedTableViewController<Reputation>,
-    BasePagedTableViewDelegate, IndicatorInfoProvider {
+    IndicatorInfoProvider {
     
     var userReputation: Reputation?
     
     required init() {
         super.init(pager: LeaderboardPager())
-        delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,10 +63,6 @@ class LeaderboardTableViewController: TPBasePagedTableViewController<Reputation>
                       rank: indexPath.row + 1,
                       userId: userReputation?.user.id)
         return cell
-    }
-    
-    func onItemsLoaded() {
-        items = items.sorted(by: { $0.trophiesCount > $1.trophiesCount })
     }
     
     override func setEmptyText() {
