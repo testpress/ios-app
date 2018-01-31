@@ -66,8 +66,9 @@ class LeaderboardTableViewController: TPBasePagedTableViewController<Reputation>
     }
     
     override func setEmptyText() {
-        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_ITEMS_EXIST,
-                            description: Strings.NO_CONTENT_DESCRIPTION)
+        emptyView.setValues(image: Images.LeaderboardFlatIcon.image,
+                            title: Strings.NO_LEADERBOARD_ITEMS,
+                            description: Strings.NO_LEADERBOARD_ITEMS_DESCRIPTION)
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
