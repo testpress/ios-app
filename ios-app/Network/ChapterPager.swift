@@ -52,4 +52,11 @@ class ChapterPager: TPBasePager<Chapter> {
         return resource.id!
     }
     
+    override func register(resource chapter: Chapter) -> Chapter? {
+        if chapter.active {
+            return chapter
+        }
+        return nil
+    }
+    
 }

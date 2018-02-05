@@ -29,14 +29,20 @@ public class ContentAttempt {
     
     var id: Int!
     var type: String!
-    var trophies: String!
+    var trophies: Any!
     var objectUrl: String!
     var assessment: Attempt!
     var video: Video!
     var content: HtmlContent!
     var attachment: Attachment!
+    var chapterContentId: Int!
     
     public required init?(map: Map) {
+    }
+    
+    public func getEndAttemptUrl() -> String {
+        return Constants.BASE_URL + TPEndpoint.contentAttempts.urlPath + "\(id!)/" +
+            TPEndpoint.endExam.urlPath;
     }
 }
 
@@ -50,5 +56,6 @@ extension ContentAttempt: TestpressModel {
         assessment <- map["assessment"]
         content <- map["content"]
         attachment <- map["attachment"]
+        chapterContentId <- map["chapter_content"]
     }
 }

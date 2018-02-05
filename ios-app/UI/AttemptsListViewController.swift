@@ -136,7 +136,7 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             as! AttemptsTableViewCell
         
-        cell.initCell(exam: exam, attempt: attempts[indexPath.row], parentViewController: self)
+        cell.initCell(attempt: attempts[indexPath.row], parentViewController: self)
         
         // Customise items seperator
         cell.preservesSuperviewLayoutMargins = false

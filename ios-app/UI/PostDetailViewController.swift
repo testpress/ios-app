@@ -29,15 +29,10 @@ import WebKit
 
 class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessageHandler {
     
+    @IBOutlet weak var editorHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var bottomShadowView: UIView!
-    @IBOutlet weak var commentBox: UITextView! {
-        didSet {
-            commentBox.textColor = UIColor.lightGray
-            commentBox.text = placeholder
-            commentBox.selectedRange = NSRange(location: 0, length: 0)
-        }
-    }
+    @IBOutlet weak var commentBox: RichTextEditor!
     
     private let placeholder = "Write a comment..."
     
@@ -48,6 +43,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     var previousCommentsPager: CommentPager!
     var newCommentsPager: CommentPager!
     var comments = [Comment]()
+    let imageUploadHelper = ImageUploadHelper()
     let bottomGradient = CAGradientLayer()
     let loadingDialogController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
@@ -55,6 +51,8 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         super.viewDidLoad()
         webViewDelegate = self
         commentBox.delegate = self
+        commentBox.placeholder = placeholder
+        imageUploadHelper.delegate = self
         activityIndicator.center = CGPoint(x: view.center.x, y: webView.center.y)
         emptyView = EmptyView.getInstance(parentView: webView)
         loadHTMLContent()
@@ -223,7 +221,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
             
             var comments = Array(items!.values)
             comments = comments.sorted(by: {
-                FormatDate.compareDate(dateString1:  $0.created!, dateString2: $1.created!)
+                FormatDate.compareDate(dateString1:  $1.created!, dateString2: $0.created!)
             })
             self.comments.append(contentsOf: comments)
             var html = ""
@@ -236,6 +234,11 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
                 js += "displayEmptyCommentsDescription();\n"
             }
             self.evaluateJavaScript(js)
+            // Scroll to bottom
+            let scrollPoint = CGPoint(x: 0, y: self.webView.scrollView.contentSize.height -
+                self.webView.frame.size.height)
+            
+            self.webView.scrollView.setContentOffset(scrollPoint, animated: false)
         })
     }
     
@@ -271,13 +274,18 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     }
     
     @IBAction func postComment(_ sender: Any) {
-        
-        commentBox.resignFirstResponder()
-        let comment: String! = commentBox.text
-        if comment == nil || comment.elementsEqual("") || comment.elementsEqual(placeholder) {
+        commentBox.endEditing(true)
+        let comment: String? = commentBox.text
+        if (comment == nil) ||
+            (comment!.elementsEqual("") || comment!.elementsEqual(placeholder)) {
+            
             return
         }
         present(loadingDialogController, animated: true)
+        postComment(comment!)
+    }
+    
+    func postComment(_ comment: String) {
         TPApiClient.postComment(
             comment: comment,
             commentsUrl: post.commentsUrl,
@@ -292,12 +300,16 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
                     return
                 }
                 
-                self.commentBox.text = nil
-                self.textViewDidChange(self.commentBox)
+                self.commentBox.text = ""
                 self.loadingDialogController.dismiss(animated: false)
                 self.getNewCommentsPager().reset()
                 self.loadNewComments()
         })
+    }
+    
+    @IBAction func uploadImage(_ sender: UIButton) {
+        imageUploadHelper.showImagePicker(viewController: self,
+                                          loadingDialogController: loadingDialogController)
     }
     
     func getTitle() -> String {
@@ -347,30 +359,16 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     
 }
 
-extension PostDetailViewController: UITextViewDelegate {
+extension PostDetailViewController: RichTextEditorDelegate {
     
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        // Move cursor to beginning on first tap
-        if textView.text == placeholder {
-            textView.selectedRange = NSRange(location: 0, length: 0)
-        }
+    func heightDidChange(_ editor: RichTextEditor, heightDidChange height: CGFloat) {
+        editorHeightConstraint.constant = height + 5
     }
+}
+
+extension PostDetailViewController: ImageUploadHelperDelegate {
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange,
-                  replacementText text: String) -> Bool {
-        
-        if textView.text == placeholder && !text.isEmpty {
-            textView.text = nil
-            textView.textColor = UIColor.black
-            textView.selectedRange = NSRange(location: 0, length: 0)
-        }
-        return true
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.textColor = UIColor.lightGray
-            textView.text = placeholder
-        }
+    func imageUploadHelper(_ helper: ImageUploadHelper, didFinishUploadImage imageUrl: String) {
+        postComment(WebViewUtils.appendImageTag(imageUrl: imageUrl))
     }
 }

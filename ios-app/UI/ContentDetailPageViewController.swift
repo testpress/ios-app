@@ -37,10 +37,12 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var bottomNavigationBar: UIStackView!
+    @IBOutlet weak var bottomNavigationBarConstraint: NSLayoutConstraint!
     
     let bottomGradient = CAGradientLayer()
     var pageViewController: UIPageViewController!
     var contentDetailDataSource: ContentDetailDataSource!
+    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate? = nil
     var currentIndex: Int!
     var contents = [Content]()
     var position: Int!
@@ -76,12 +78,27 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         emptyView = EmptyView.getInstance(parentView: pageViewController.view)
         activityIndicator = UIUtils.initActivityIndicator(parentView: pageViewController.view)
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
-        contentDetailDataSource = ContentDetailDataSource(contents)
+        contentDetailDataSource = ContentDetailDataSource(contents, contentAttemptCreationDelegate)
         navigationBarItem.title = title
         if contents.count < 2 {
             bottomShadowView.isHidden = true
             bottomNavigationBar.isHidden = true
+            bottomNavigationBarConstraint.constant = 0
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if pageViewController.viewControllers?.count == 0 {
+            if self.presentingViewController is MainMenuTabViewController {
+                loadContent()
+            } else {
+                setFirstViewController()
+            }
+        }
+    }
+    
+    func setFirstViewController() {
         let startingViewController = contentDetailDataSource.viewControllerAtIndex(position)!
         pageViewController.setViewControllers(
             [startingViewController],
@@ -161,14 +178,13 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     func updateCurrentExamContent() {
         let content = contents[getCurrentIndex()]
-        if content.exam!.attemptsCount != nil && content.exam!.pausedAttemptsCount != nil &&
-            (content.exam!.attemptsCount > 0 || content.exam!.pausedAttemptsCount > 0) {
-            let viewController =
-                getCurretViewController() as! ContentExamAttemptsTableViewController
+        if let viewController =
+            getCurretViewController() as? ContentExamAttemptsTableViewController {
 
             viewController.attempts.removeAll()
-            viewController.loadAttemptsWithProgress(url: content.exam!.attemptsUrl!)
+            viewController.loadAttemptsWithProgress(url: content.attemptsUrl)
         } else {
+            contentAttemptCreationDelegate?.newAttemptCreated()
             updateContent()
         }
     }
@@ -207,6 +223,39 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
                 self.pageViewController.setViewControllers([viewController!] , direction: .forward,
                                                            animated: true, completion: {done in })
                 
+                self.activityIndicator.stopAnimating()
+        })
+    }
+    
+    func loadContent() {
+        activityIndicator.startAnimating()
+        let content = contents[position]
+        TPApiClient.request(
+            type: Content.self,
+            endpointProvider: TPEndpointProvider(.get, url: content.url),
+            completion: {
+                content, error in
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                    var retryHandler: (() -> Void)?
+                    if error.kind == .network {
+                        retryHandler = {
+                            self.emptyView.hide()
+                            self.updateContent()
+                        }
+                    }
+                    self.activityIndicator.stopAnimating()
+                    let (image, title, description) = error.getDisplayInfo()
+                    self.emptyView.show(image: image, title: title, description: description,
+                                        retryHandler: retryHandler)
+                    
+                    return
+                }
+                
+                self.contents[self.position] = content!
+                self.contentDetailDataSource.contents = self.contents
+                self.setFirstViewController()
                 self.activityIndicator.stopAnimating()
         })
     }

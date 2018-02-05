@@ -32,11 +32,13 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     var previousCommentsPager: CommentPager!
     var newCommentsPager: CommentPager!
     var comments = [Comment]()
+    let imageUploadHelper = ImageUploadHelper()
     let loadingDialogController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageUploadHelper.delegate = self
         webView.loadHTMLString(
             WebViewUtils.getQuestionHeader() + getHtml(),
             baseURL: Bundle.main.bundleURL
@@ -146,12 +148,12 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             comments = comments.sorted(by: {
                 FormatDate.compareDate(dateString1:  $0.created!, dateString2: $1.created!)
             })
-            comments.append(contentsOf: self.comments)
-            self.comments = comments
             var html = ""
             for comment in comments {
-                html += WebViewUtils.getCommentItemTags(comment)
+                html += WebViewUtils.getCommentItemTags(comment, seperatorAtTop: true)
             }
+            comments.append(contentsOf: self.comments)
+            self.comments = comments
             html = WebViewUtils.formatHtmlToAppendInJavascript(html)
             let js = "hideNewCommentsLoading(); \n appendCommentItemsAtTop(\"\(html)\");"
             self.evaluateJavaScript(js)
@@ -181,18 +183,21 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 case "LoadNewComments":
                     loadNewComments()
                     break
+                case "InsertImage":
+                    uploadImage()
+                    break
                 default:
                     break
                 }
             } else if let dict = body as? Dictionary<String, AnyObject> {
                 let comment = dict["comment"] as! String
+                present(loadingDialogController, animated: true)
                 postComment(comment)
             }
         }
     }
     
     func postComment(_ comment: String) {
-        present(loadingDialogController, animated: true)
         TPApiClient.postComment(
             comment: comment,
             commentsUrl: attemptItem.question.commentsUrl,
@@ -213,6 +218,11 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             self.getNewCommentsPager().reset()
             self.loadNewComments()
         })
+    }
+    
+    func uploadImage() {
+        imageUploadHelper.showImagePicker(viewController: self,
+                                          loadingDialogController: loadingDialogController)
     }
 
     func getHtml() -> String {
@@ -275,10 +285,10 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         html += "<hr style='margin-top:20px;'>"
         html += WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS);
         html += "<div class='comment_box_layout'>" +
+                    "<div><span class='icon-add-a-photo' onclick='insertImage()'></span></div>" +
                     "<div contentEditable='true' class='comment_box' " +
                             "data-placeholder='Write a comment...'></div>" +
-                    "<div style='margin-left: 10px;'><span class='icon-paper-plane' " +
-                            "onclick='sendComment()'></span></div>" +
+                    "<div><span class='icon-paper-plane' onclick='sendComment()'></span></div>" +
                 "</div>"
         
         html += WebViewUtils.getLoadingProgressBar(className: "new_comments_loading_layout",
@@ -300,4 +310,11 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         return html + "</div>"
     }
     
+}
+
+extension ReviewQuestionsViewController: ImageUploadHelperDelegate {
+    
+    func imageUploadHelper(_ helper: ImageUploadHelper, didFinishUploadImage imageUrl: String) {
+        postComment(WebViewUtils.appendImageTag(imageUrl: imageUrl))
+    }
 }

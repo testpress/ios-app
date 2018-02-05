@@ -127,6 +127,7 @@ class ProfileViewController: UIViewController {
             style: UIAlertActionStyle.destructive,
             handler: { action in
                 
+                DBInstance.clearAllTables()
                 KeychainTokenItem.clearKeychainItems()
                 let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
                     Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
@@ -157,6 +158,10 @@ class ProfileViewController: UIViewController {
         activityViewController.popoverPresentationController?.sourceView = view
         activityViewController.excludedActivityTypes = [ UIActivityType.airDrop ]
         present(activityViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func back() {
+        dismiss(animated: true, completion: nil)
     }
     
     // Set frames of the views in this method to support both portrait & landscape view

@@ -28,23 +28,35 @@ import ObjectMapper
 public class ActivityFeed {
     
     var id: Int!
+    var actorContentType: Int!
+    var actorObjectId: String!
+    var targetContentType: Int!
+    var targetObjectId: String!
+    var actionObjectContentType: Int!
+    var actionObjectObjectId: String!
     var timestamp: String!
     var verb: String!
     var actor: User!
     var target: Any!
     var actionObject: Any!
+    var actionObjectType: String!
     
     public required init?(map: Map) {
     }
 }
 
 extension ActivityFeed: TestpressModel {
+    
     public func mapping(map: Map) {
+        
         id <- map["id"]
+        actorContentType <- map["actor_content_type"]
+        actorObjectId <- map["actor_object_id"]
+        targetContentType <- map["target_content_type"]
+        targetObjectId <- map["target_object_id"]
+        actionObjectContentType <- map["action_object_content_type"]
+        actionObjectObjectId <- map["action_object_object_id"]
         timestamp <- map["timestamp"]
         verb <- map["verb"]
-        actor <- map["actor"]
-        target <- map["target"]
-        actionObject <- map["action_object"]
     }
 }

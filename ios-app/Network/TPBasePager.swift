@@ -38,7 +38,7 @@ class TPBasePager<T: Mappable> {
     /**
      * All resources retrieved
      */
-    var resources = [Int: T]()
+    var resources = OrderedDictionary<Int, T>()
     
     /**
      * Query Params to be passed
@@ -50,7 +50,7 @@ class TPBasePager<T: Mappable> {
      */
     var hasMore: Bool = false
     
-    var completion: (([Int: T]?, TPError?) -> Void)? = nil
+    var completion: ((OrderedDictionary<Int, T>?, TPError?) -> Void)? = nil
     
     var resonseHandler: ((TPApiResponse<T>?, TPError?) -> Void)? = nil
     
@@ -78,7 +78,7 @@ class TPBasePager<T: Mappable> {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
     }
     
-    public func next(completion: @escaping ([Int: T]?, TPError?) -> Void) {
+    public func next(completion: @escaping (OrderedDictionary<Int, T>?, TPError?) -> Void) {
         self.completion = completion
         getItems(page: page);
     }
@@ -96,7 +96,7 @@ class TPBasePager<T: Mappable> {
             if resource == nil {
                 continue;
             }
-            resources.updateValue(resource!, forKey: getId(resource: resource!));
+            resources[getId(resource: resource!)] = resource!
         }
         page += 1;
         hasMore = hasNext() && !emptyPage;

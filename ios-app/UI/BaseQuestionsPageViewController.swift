@@ -49,6 +49,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     var exam: Exam!
     var attempt: Attempt!
     var attemptItems = [AttemptItem]()
+    var contentAttempt: ContentAttempt!
     var showingProgress: Bool = false
     let loadingDialogController = UIUtils.initProgressDialog(message:
         Strings.LOADING_QUESTIONS + "\n\n")

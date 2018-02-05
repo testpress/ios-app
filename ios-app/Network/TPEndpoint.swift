@@ -32,7 +32,6 @@ enum TPEndpoint {
     case authenticateUser
     case registerNewUser
     case getExams
-    case createAttempt
     case getQuestions
     case sendHeartBeat
     case saveAnswer
@@ -50,8 +49,15 @@ enum TPEndpoint {
     case getSubjectAnalytics
     case getAttemptSubjectAnalytics
     case getActivityFeed
+    case contentAttempts
+    case uploadImage
+    case getRank
+    case getLeaderboard
+    case getTargets
+    case getThreads
     case get
     case post
+    case put
     
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -61,8 +67,6 @@ enum TPEndpoint {
             return .post
         case .getExams:
             return .get
-        case .createAttempt:
-            return .post
         case .getQuestions:
             return .get
         case .sendHeartBeat:
@@ -92,12 +96,21 @@ enum TPEndpoint {
         case .getForumCategories,
              .getSubjectAnalytics,
              .getAttemptSubjectAnalytics,
+             .getRank,
+             .getLeaderboard,
+             .getTargets,
+             .getThreads,
              .getActivityFeed:
             return .get
         case .get:
             return .get
-        case .post:
+        case .post,
+             .uploadImage:
             return .post
+        case .put:
+            return .put
+        default:
+            return .get
         }
     }
     
@@ -116,7 +129,7 @@ enum TPEndpoint {
         case .endExam:
             return "end/"
         case .getCourses:
-            return "/api/v2.2/courses/"
+            return "/api/v2.2.1/courses/"
         case .getChapters:
             return "chapters/"
         case .getProfile:
@@ -132,7 +145,19 @@ enum TPEndpoint {
         case .getAttemptSubjectAnalytics:
             return "review/subjects/"
         case .getActivityFeed:
-            return "/api/v2.3/activities/"
+            return "/api/v2.4/activities/"
+        case .contentAttempts:
+            return "/api/v2.2/content_attempts/"
+        case .uploadImage:
+            return "/api/v2.2/image_upload/"
+        case .getRank:
+            return "/api/v2.2/me/rank/"
+        case .getLeaderboard:
+            return "/api/v2.2/leaderboard/"
+        case .getTargets:
+            return "/api/v2.2/me/targets/"
+        case .getThreads:
+            return "/api/v2.2/me/threats/"
         default:
             return ""
         }

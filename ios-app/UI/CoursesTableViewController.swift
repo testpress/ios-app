@@ -23,14 +23,30 @@
 //  THE SOFTWARE.
 //
 
+import RealmSwift
 import UIKit
 
-class CoursesTableViewController: TPBasePagedTableViewController<Course>,
-    BasePagedTableViewDelegate {
+class CoursesTableViewController: BaseDBViewController<Course> {
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(pager: CoursePager(), coder: aDecoder)
-        delegate = self
+        super.init(pager: getPager(), coder: aDecoder)
+    }
+    
+    func getPager() -> CoursePager {
+        debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
+        let pager = CoursePager()
+        if DBManager<Course>().getResultsFromDB().count > 0 {
+            let latestModifiedDate = DBManager<Course>()
+                .getSortedItemsFromDB(byKeyPath: "modifiedDate", ascending: false)[0].modified
+            
+            pager.setLatestModifiedDate(latestModifiedDate)
+        }
+        return pager
+    }
+    
+    override func getItemsFromDb() -> [Course] {
+        return DBManager<Course>()
+            .getItemsFromDB(filteredBy: "active = true", byKeyPath: "order")
     }
     
     // MARK: - Table view data source
@@ -42,13 +58,13 @@ class CoursesTableViewController: TPBasePagedTableViewController<Course>,
         return cell
     }
     
-    func onItemsLoaded() {
-        items = items.sorted(by: { $0.order! < $1.order! })
-    }
-    
     override func setEmptyText() {
         emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_COURSES,
                             description: Strings.NO_COURSE_DESCRIPTION)
+    }
+    
+    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
+        UIUtils.showProfileDetails(self)
     }
     
 }

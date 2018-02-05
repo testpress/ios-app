@@ -31,11 +31,13 @@ class HtmlContentViewController: BaseWebViewController {
     var content: Content!
     var emptyView: EmptyView!
     var loading: Bool = false
+    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         emptyView = EmptyView.getInstance(parentView: webView)
         checkContentType()
+        webViewDelegate = self
     }
     
     func checkContentType() {
@@ -108,9 +110,34 @@ class HtmlContentViewController: BaseWebViewController {
         )
     }
     
+    func createContentAttempt() {
+        TPApiClient.request(
+            type: ContentAttempt.self,
+            endpointProvider: TPEndpointProvider(.post, url: content.attemptsUrl),
+            completion: {
+                contentAttempt, error in
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                    return
+                }
+                
+                if self.content.attemptsCount == 0 {
+                    self.contentAttemptCreationDelegate?.newAttemptCreated()
+                }
+        })
+    }
+    
     func getFormattedContent(_ contentHtml: String) -> String {
         return WebViewUtils.getHeader() + WebViewUtils.getFormattedTitle(title: title!) +
             WebViewUtils.getHtmlContentWithMargin(contentHtml)
     }
     
+}
+
+extension HtmlContentViewController: WKWebViewDelegate {
+    
+    func onFinishLoadingWebView() {
+        createContentAttempt()
+    }
 }

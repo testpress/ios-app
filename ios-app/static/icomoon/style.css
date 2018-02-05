@@ -20,6 +20,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-add-a-photo:before {
+    content: "\e901";
+}
+
 .icon-paper-plane:before {
   content: "\e900";
 }

@@ -66,6 +66,12 @@ function sendComment() {
     webkit.messageHandlers.callbackHandler.postMessage(message);
 }
 
+function insertImage() {
+    var commentBox = document.getElementsByClassName("comment_box")[0];
+    commentBox.blur();
+    webkit.messageHandlers.callbackHandler.postMessage("InsertImage");
+}
+
 function clearCommentBox() {
     var commentBox = document.getElementsByClassName("comment_box")[0];
     commentBox.innerHTML = ""

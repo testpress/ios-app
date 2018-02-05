@@ -103,7 +103,6 @@ class TimeAnalyticsTableViewController: UIViewController {
                         })
                         return
                     }
-                    self.attemptItems = self.attemptItems.sorted(by: { $0.order! < $1.order! })
                     self.webViewHeight = [CGFloat](repeating: 0, count: self.attemptItems.count)
                     self.loadingDialogController.dismiss(animated: false, completion: nil)
                     self.tableView.reloadData()

@@ -26,19 +26,20 @@
 import Alamofire
 import ObjectMapper
 
-class CoursePager: TPBasePager<Course> {
+class CoursePager: BaseDBItemPager<Course> {
     
     override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
             endpointProvider: TPEndpointProvider(.getCourses, queryParams: queryParams),
+            headers: headers,
             completion: resonseHandler!,
             type: Course.self
         )
     }
     
     override func getId(resource: Course) -> Int {
-        return resource.id!
+        return resource.id
     }
     
 }

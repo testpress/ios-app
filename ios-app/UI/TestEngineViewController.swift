@@ -145,11 +145,23 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func endExam() {
-        TPApiClient.updateAttemptState(
-            endpointProvider: TPEndpointProvider(
-                .endExam,
+        var endpointProvider: TPEndpointProvider
+        if contentAttempt != nil {
+            endpointProvider = TPEndpointProvider(.put, url: contentAttempt.getEndAttemptUrl())
+            endExam(type: ContentAttempt.self, endpointProvider: endpointProvider)
+        } else {
+            endpointProvider = TPEndpointProvider(
+                .put,
                 url: attempt!.url! + TPEndpoint.endExam.urlPath
-            ),
+            )
+            endExam(type: Attempt.self, endpointProvider: endpointProvider)
+        }
+    }
+    
+    func endExam<T: TestpressModel>(type: T.Type, endpointProvider: TPEndpointProvider) {
+        TPApiClient.request(
+            type: type,
+            endpointProvider: endpointProvider,
             completion: {
                 attempt, error in
                 if let error = error {
@@ -157,11 +169,16 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                     return
                 }
                 
-                self.attempt = attempt
+                if attempt is ContentAttempt {
+                    self.contentAttempt = attempt as! ContentAttempt
+                    self.attempt = self.contentAttempt.assessment
+                } else {
+                    self.attempt = attempt as? Attempt
+                }
                 self.hideLoadingProgress(completionHandler: {
                     self.gotoTestReport()
                 })
-            }
+        }
         )
     }
     
@@ -225,12 +242,21 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     
     func gotoTestReport() {
         let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier:
-            Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
-        
-        viewController.exam = exam
-        viewController.attempt = attempt
-        present(viewController, animated: true, completion: nil)
+        if contentAttempt != nil {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TROPHIES_ACHIEVED_VIEW_CONTROLLER) as! TrophiesAchievedViewController
+            
+            viewController.exam = exam
+            viewController.contentAttempt = contentAttempt
+            present(viewController, animated: true, completion: nil)
+        } else {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
+            
+            viewController.exam = exam
+            viewController.attempt = attempt
+            present(viewController, animated: true, completion: nil)
+        }
     }
     
     func getSecondsFromInputString(_ inputString: String?) -> Int {

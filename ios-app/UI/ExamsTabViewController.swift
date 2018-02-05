@@ -67,4 +67,8 @@ class ExamsTabViewController: ButtonBarPagerTabStripViewController {
         return [available, upcoming, history]
     }
     
+    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
+        UIUtils.showProfileDetails(self)
+    }
+    
 }

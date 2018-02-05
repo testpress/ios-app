@@ -27,17 +27,20 @@ import UIKit
 
 class TestReportViewController: UIViewController {
 
-    @IBOutlet weak var schollershipImageContainer: UIView!
-    @IBOutlet weak var correctImageContainer: UIView!
-    @IBOutlet weak var incorrectImageContainer: UIView!
-    @IBOutlet weak var clockImageContainer: UIView!
-    @IBOutlet weak var accurateImageContainer: UIView!
-    @IBOutlet weak var rankLayout: UIStackView!
+    @IBOutlet weak var rankLayout: UIView!
     @IBOutlet weak var examTitle: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var rank: UILabel!
     @IBOutlet weak var maxRank: UILabel!
     @IBOutlet weak var score: UILabel!
+    @IBOutlet weak var scoreLayout: UIView!
+    @IBOutlet weak var totalQuestions: UILabel!
+    @IBOutlet weak var totalMarks: UILabel!
+    @IBOutlet weak var totalTime: UILabel!
+    @IBOutlet weak var cutoff: UILabel!
+    @IBOutlet weak var percentile: UILabel!
+    @IBOutlet weak var percentileLayout: UIView!
+    @IBOutlet weak var percentage: UILabel!
     @IBOutlet weak var correct: UILabel!
     @IBOutlet weak var incorrect: UILabel!
     @IBOutlet weak var timeTaken: UILabel!
@@ -49,17 +52,11 @@ class TestReportViewController: UIViewController {
     @IBOutlet weak var analyticsButton: UIButton!
     @IBOutlet weak var timeAnalyticsButton: UIButton!
     
-    var attempt: Attempt?
-    var exam: Exam?
+    var attempt: Attempt!
+    var exam: Exam!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        schollershipImageContainer.layer.borderColor = Colors.getRGB(Colors.GRAY_LIGHT).cgColor
-        correctImageContainer.layer.borderColor = Colors.getRGB(Colors.GRAY_LIGHT).cgColor
-        incorrectImageContainer.layer.borderColor = Colors.getRGB(Colors.GRAY_LIGHT).cgColor
-        clockImageContainer.layer.borderColor = Colors.getRGB(Colors.GRAY_LIGHT).cgColor
-        accurateImageContainer.layer.borderColor = Colors.getRGB(Colors.GRAY_LIGHT).cgColor
         
         examTitle.text = exam!.title!
         date.text = FormatDate.format(dateString: attempt!.date!,
@@ -71,7 +68,21 @@ class TestReportViewController: UIViewController {
             rank.text = String(describing: attempt!.rank!)
             maxRank.text = String(describing: attempt!.maxRank!)
         }
-        score.text = attempt!.score!
+        totalQuestions.text = String(exam.numberOfQuestions!)
+        totalMarks.text = exam.totalMarks
+        totalTime.text = String(exam.duration!)
+        if !exam.showScore || attempt.score == "NA" {
+            scoreLayout.isHidden = true
+        } else {
+            score.text = attempt.score!
+        }
+        if !exam.showPercentile || attempt.percentile == 0 {
+            percentileLayout.isHidden = true
+        } else {
+            percentile.text = String(attempt.percentile)
+        }
+        percentage.text = attempt.percentage
+        cutoff.text = String(exam.passPercentage)
         correct.text = String(attempt!.correctCount!)
         incorrect.text = String(attempt!.incorrectCount!)
         timeTaken.text = attempt!.timeTaken ?? "NA"
@@ -113,16 +124,10 @@ class TestReportViewController: UIViewController {
         let presentingViewController =
             self.presentingViewController?.presentingViewController?.presentingViewController
         
-        if self.presentingViewController?.presentingViewController! is
-            ContentDetailPageViewController {
+        if let contentDetailPageViewController =
+            presentingViewController as? ContentDetailPageViewController {
             
-            let contentDetailPageViewController  =
-                self.presentingViewController?.presentingViewController!
-                    as! ContentDetailPageViewController
-            
-            contentDetailPageViewController.dismiss(animated: false, completion: {
-                contentDetailPageViewController.updateCurrentExamContent()
-            })
+            goToContentDetailPageViewController(contentDetailPageViewController)
         } else if presentingViewController is UITabBarController {
             let tabViewController =
                 presentingViewController?.childViewControllers[0] as! ExamsTabViewController
@@ -143,17 +148,22 @@ class TestReportViewController: UIViewController {
                 // Load new attempts list with progress
                 attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
             })
-        } else if presentingViewController is ContentDetailPageViewController {
+        } else if let contentDetailPageViewController =
+            presentingViewController?.presentingViewController as? ContentDetailPageViewController {
             
-            let contentDetailPageViewController =
-                presentingViewController as! ContentDetailPageViewController
-            
-            contentDetailPageViewController.dismiss(animated: false, completion: {
-                contentDetailPageViewController.updateCurrentExamContent()
-            })
+            goToContentDetailPageViewController(contentDetailPageViewController)
         } else {
             dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func goToContentDetailPageViewController(_ contentDetailPageViewController: UIViewController) {
+        let contentDetailPageViewController =
+            contentDetailPageViewController as! ContentDetailPageViewController
+        
+        contentDetailPageViewController.dismiss(animated: false, completion: {
+            contentDetailPageViewController.updateCurrentExamContent()
+        })
     }
     
     // Set frames of the views in this method to support both portrait & landscape view

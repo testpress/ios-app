@@ -29,10 +29,12 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     
     var contents: [Content]!
     var initialPosition: Int!
+    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
     
-    init(_ contents: [Content]) {
+    init(_ contents: [Content], _ contentAttemptCreationDelegate: ContentAttemptCreationDelegate?) {
         super.init()
         self.contents = contents
+        self.contentAttemptCreationDelegate = contentAttemptCreationDelegate
     }
     
     func viewControllerAtIndex(_ index: Int) -> UIViewController? {
@@ -41,11 +43,11 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
         }
         
         let content = contents[index]
+        content.index = index
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         
         if content.exam != nil {
-            if content.exam!.attemptsCount != nil && content.exam!.pausedAttemptsCount != nil &&
-                (content.exam!.attemptsCount > 0 || content.exam!.pausedAttemptsCount > 0) {
+            if content.attemptsCount != nil && content.attemptsCount > 0 {
                 let viewController = storyboard.instantiateViewController(
                     withIdentifier: Constants.CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER
                     ) as! ContentExamAttemptsTableViewController
@@ -54,7 +56,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
                 return viewController
             } else {
                 let viewController = storyboard.instantiateViewController(withIdentifier:
-                    Constants.CONTENT_START_EXAM_VIEW_CONTROLLER) as! ContentStartExamViewController
+                    Constants.CONTENT_START_EXAM_VIEW_CONTROLLER) as! StartExamScreenViewController
                 
                 viewController.content = content
                 return viewController
@@ -64,25 +66,27 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
                 Constants.ATTACHMENT_DETAIL_VIEW_CONTROLLER) as! AttachmentDetailViewController
             
             viewController.content = content
+            viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
             return viewController
         } else {
             let viewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.HTML_CONTENT_VIEW_CONTROLLER) as! HtmlContentViewController
         
             viewController.content = content
+            viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
             return viewController
         }
     }
     
     func indexOfViewController(_ viewController: UIViewController) -> Int {
         if viewController is ContentExamAttemptsTableViewController {
-            return (viewController as! ContentExamAttemptsTableViewController).content.order
-        } else if viewController is ContentStartExamViewController {
-            return (viewController as! ContentStartExamViewController).content.order
+            return (viewController as! ContentExamAttemptsTableViewController).content.index
+        } else if viewController is StartExamScreenViewController {
+            return (viewController as! StartExamScreenViewController).content.index
         } else if viewController is AttachmentDetailViewController {
-            return (viewController as! AttachmentDetailViewController).content.order
+            return (viewController as! AttachmentDetailViewController).content.index
         } else {
-            return (viewController as! HtmlContentViewController).content.order
+            return (viewController as! HtmlContentViewController).content.index
         }
     }
     

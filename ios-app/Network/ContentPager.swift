@@ -43,4 +43,11 @@ class ContentPager: TPBasePager<Content> {
         return resource.id!
     }
     
+    override func register(resource content: Content) -> Content? {
+        if content.active {
+            return content
+        }
+        return nil
+    }
+    
 }

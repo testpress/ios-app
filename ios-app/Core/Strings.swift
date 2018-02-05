@@ -61,6 +61,12 @@ struct Strings {
     static let NO_FORUM_POSTS = "Discuss with folks!"
     static let NO_FORUM_POSTS_DESCRIPTION = "Looks like no one created a discussion yet. Create a discussion about your doubt or share your knowledge?"
     
+    static let NO_ACTIVITIES = "No Recent Activities!"
+    static let NO_ADMIN_ACTIVITIES_DESCRIPTION = "Looks like the admin didn’t update this page yet. Check back in a bit?"
+    
+    static let NO_LEADERBOARD_ITEMS = "Toppers under progress"
+    static let NO_LEADERBOARD_ITEMS_DESCRIPTION = "We are yet to update the leaderboard list. Check back later?"
+    
     static let RESUME_EXAM = "Resume Exam"
     
     static let CORRECT_ANSWER = "Correct Answer:"
@@ -93,7 +99,7 @@ struct Strings {
     static let ACTIVATION_MAIL_SENT = "An activation email has been sent. Please check your email and click on the link to activate your account."
     
     static let YOU_MADE_IT = "You Made It!"
-    static let POST_CREATED_DESCRIPTION = "You have successfully created a new discussion, wait for your folks responds"
+    static let POST_CREATED_DESCRIPTION = "You have successfully created a new discussion, wait for your folks response"
     
     static let NO_ANALYTICS = "No Analytics Data!"
     static let NO_SUBJECT_ANALYTICS_DESCRIPTION = "No subjects available to analyse"
@@ -107,4 +113,16 @@ struct Strings {
     static let LOAD_MORE_COMMENTS = "Load previous comments"
     static let LOAD_COMMENTS = "Load comments"
     static let LOAD_NEW_COMMENTS = "Load new comments"
+    
+    static let PHOTO_LIBRARY = "Photo Library"
+    static let CAMERA = "Camera"
+    static let INVALID_IMAGE = "Invalid Image"
+    static let YOUR_DEVAICE_NOT_SUPPORTED = "Your device is not supported"
+    static let NEEDS_PERMISSION_TO_ACCESS = "Needs permission to access "
+    static let GO_TO_SETTINGS = "Go to Settings to enable the permission"
+    static let SETTINGS = "Settings"
+    
+    static let LEADERBOARD = "LEADERBOARD"
+    static let TARGETS_AND_THREADS = "TARGETS / THREADS"
+    
 }
