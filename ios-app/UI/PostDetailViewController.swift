@@ -221,7 +221,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
             
             var comments = Array(items!.values)
             comments = comments.sorted(by: {
-                FormatDate.compareDate(dateString1:  $0.created!, dateString2: $1.created!)
+                FormatDate.compareDate(dateString1:  $1.created!, dateString2: $0.created!)
             })
             self.comments.append(contentsOf: comments)
             var html = ""

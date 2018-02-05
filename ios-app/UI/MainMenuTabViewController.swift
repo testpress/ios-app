@@ -30,9 +30,8 @@ class MainMenuTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewControllers?.remove(at: 2)
-        viewControllers?.remove(at: 5)
-        viewControllers?.remove(at: 3) // Forum
+        viewControllers?.remove(at: 2) // Exams list
+        viewControllers?.remove(at: 4) // Discussion Forum
         viewControllers?.remove(at: 0) // Activity Feed
     }
     

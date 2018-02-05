@@ -29,9 +29,20 @@ import RealmSwift
 
 class BaseDBViewController<T: Mappable>: TPBasePagedTableViewController<T> where T:Object {
     
+    var firstCallBack: Bool = true // On firstCallBack load modified items if items already exists
+    
     override func viewWillAppear(_ animated: Bool) {
         items = getItemsFromDb()
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (items.isEmpty || firstCallBack) {
+            firstCallBack = false
+            tableView.tableFooterView?.isHidden = true
+            pager.reset()
+            loadItems()
+        }
     }
     
     func getItemsFromDb() -> [T] {

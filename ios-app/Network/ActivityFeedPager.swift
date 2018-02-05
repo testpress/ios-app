@@ -38,7 +38,7 @@ class ActivityFeedPager {
     /**
      * All resources retrieved
      */
-    var activities = [Int: ActivityFeed]()
+    var activities = OrderedDictionary<Int, ActivityFeed>()
     var contentTypes = [Int: ContentType]()
     var users = [Int: User]()
     var chapters = [Int: Chapter]()
@@ -61,7 +61,7 @@ class ActivityFeedPager {
      */
     var hasMore: Bool = false
     
-    var completion: (([Int: ActivityFeed]?, TPError?) -> Void)? = nil
+    var completion: ((OrderedDictionary<Int, ActivityFeed>?, TPError?) -> Void)? = nil
     
     var resonseHandler: ((ApiResponse<ActivityFeedResponse>?, TPError?) -> Void)? = nil
     
@@ -84,7 +84,9 @@ class ActivityFeedPager {
         hasMore = true
     }
     
-    public func next(completion: @escaping([Int: ActivityFeed]?, TPError?) -> Void) {
+    public func next(
+            completion: @escaping(OrderedDictionary<Int, ActivityFeed>?, TPError?) -> Void) {
+        
         self.completion = completion
         getItems(page: page);
     }
@@ -137,7 +139,7 @@ class ActivityFeedPager {
                 if activity == nil {
                     continue;
                 }
-                self.activities.updateValue(activity!, forKey: activity!.id)
+                self.activities[activity!.id] = activity!
             }
         }
         page += 1;
@@ -207,6 +209,14 @@ class ActivityFeedPager {
             default:
                 break
             }
+        }
+        if activity.actor == nil {
+            debugPrint("activity.actor not Exists", activity.id)
+            return nil
+        }
+        if activity.actionObject == nil {
+            debugPrint("activity.actionObject not Exists", activity.id)
+            return nil
         }
         return activity
     }

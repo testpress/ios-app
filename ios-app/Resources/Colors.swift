@@ -37,8 +37,9 @@ class Colors {
     static let GRAY_MEDIUM = "#999999"
     static let TAB_TEXT_COLOR = "#888888"
     static let ORANGE = "#ffa319"
+    static let BLUE = "#1793e6"
     
-    static func getRGB (_ hex:String) -> UIColor {
+    static func getRGB (_ hex:String, alpha: CGFloat = 1) -> UIColor {
         
         var cString:String = hex.trimmingCharacters(
             in: CharacterSet.whitespacesAndNewlines).uppercased()
@@ -62,7 +63,7 @@ class Colors {
         return UIColor(red: CGFloat(r) / 255.0,
                        green: CGFloat(g) / 255.0,
                        blue: CGFloat(b) / 255.0,
-                       alpha: CGFloat(1))
+                       alpha: alpha)
     }
     
 }

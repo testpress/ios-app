@@ -31,6 +31,10 @@ class ActivityFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var timestamp: UILabel!
     @IBOutlet weak var activity: UILabel!
+    @IBOutlet weak var examDetails: UIView!
+    @IBOutlet weak var duration: UILabel!
+    @IBOutlet weak var studentsAttemptedCount: UILabel!
+    @IBOutlet weak var questionsCount: UILabel!
     
     var parentViewController: ActivityFeedTableViewController! = nil
     var activityFeed: ActivityFeed!
@@ -45,8 +49,9 @@ class ActivityFeedTableViewCell: UITableViewCell {
         let pager = viewController.pager
         let exams = pager.exams
         timestamp.text = FormatDate.getElapsedTime(dateString: activityFeed.timestamp)
-        var actorName: String = activityFeed.actor.displayName
+        var actorName: String = activityFeed.actor.displayName.capitalized
         var action: String = ""
+        examDetails.isHidden = true
         if activityFeed.verb == "attempted" {
             actorName = "You "
             if let contentAttempt = activityFeed.actionObject as? ContentAttempt {
@@ -88,6 +93,10 @@ class ActivityFeedTableViewCell: UITableViewCell {
                     content.exam = exam
                     actionObjectName = exam.title!
                     thumbnailImage.image = Images.ExamAddedIcon.image
+                    duration.text = exam.duration
+                    studentsAttemptedCount.text = "\(exam.studentsAttemptedCount!) students"
+                    questionsCount.text = String(exam.numberOfQuestions!)
+                    examDetails.isHidden = false
                 } else if content.htmlContentId != nil {
                     action += "an ariticle "
                     let htmlContent = pager.htmlContents[content.htmlContentId]!
@@ -160,7 +169,7 @@ class ActivityFeedTableViewCell: UITableViewCell {
     func setRubikMedium(in attributedString: NSMutableAttributedString, forRange: NSRange) {
         attributedString.addAttribute(
             NSAttributedStringKey.font,
-            value: UIFont(name: "Rubik-Medium", size: 14.0)!,
+            value: UIFont(name: "lato-bold", size: 14.0)!,
             range: forRange
         )
     }

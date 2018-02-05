@@ -23,24 +23,19 @@
 //  THE SOFTWARE.
 //
 
-import TTGSnackbar
 import UIKit
 import ObjectMapper
-import XLPagerTabStrip
 
 protocol BasePagedTableViewDelegate {
     func onItemsLoaded()
 }
 
-class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
+class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
+    BaseTableViewDelegate {
     
-    var activityIndicator: UIActivityIndicatorView! // Progress bar
-    var emptyView: EmptyView!
-    var items = [T]()
     var pager: TPBasePager<T>
     var loadingItems: Bool = false
     var delegate: BasePagedTableViewDelegate?
-    var firstCallBack: Bool = true
     
     init(pager: TPBasePager<T>, coder aDecoder: NSCoder? = nil) {
         self.pager = pager
@@ -59,8 +54,6 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
-        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 150)
         // Set table view footer as progress spinner
         let pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         pagingSpinner.startAnimating()
@@ -68,23 +61,11 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
         pagingSpinner.hidesWhenStopped = true
         tableView.tableFooterView = pagingSpinner
         
-        // Set table view backgroud
-        emptyView = EmptyView.getInstance()
-        tableView.backgroundView = emptyView
-        emptyView.frame = tableView.frame
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-        if (items.isEmpty) {
-            activityIndicator?.startAnimating()
-        }
+        tableViewDelegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (items.isEmpty || firstCallBack) {
-            firstCallBack = false
+        if (items.isEmpty) {
             tableView.tableFooterView?.isHidden = true
             pager.reset()
             loadItems()
@@ -110,64 +91,21 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
                 self.setEmptyText()
             }
             self.delegate?.onItemsLoaded()
-            self.tableView.reloadData()
-            if (self.activityIndicator?.isAnimating)! {
-                self.activityIndicator?.stopAnimating()
-            }
+            self.onLoadFinished()
             self.tableView.tableFooterView?.isHidden = true
             self.loadingItems = false
         })
     }
     
-    func handleError(_ error: TPError) {
-        var retryHandler: (() -> Void)?
-        if error.kind == .network {
-            retryHandler = {
-                self.activityIndicator?.startAnimating()
-                self.loadItems()
-            }
-        }
-        let (image, title, description) = error.getDisplayInfo()
-        if (activityIndicator?.isAnimating)! {
-            activityIndicator?.stopAnimating()
-        }
+    override func handleError(_ error: TPError) {
+        super.handleError(error)
         loadingItems = false
-        if items.count == 0 {
-            emptyView.setValues(image: image, title: title, description: description,
-                                retryHandler: retryHandler)
-        } else {
-            TTGSnackbar(message: description, duration: .middle).show()
-        }
-        tableView.reloadData()
     }
     
-    @objc func closeAlert(gesture: UITapGestureRecognizer) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if items.count == 0 {
-            tableView.backgroundView?.isHidden = false
-        } else {
-            tableView.backgroundView?.isHidden = true
-        }
-        return items.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableViewCell(cellForRowAt: indexPath)
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
-        cell.layoutMargins = UIEdgeInsets.zero;
-        if #available(iOS 9.0, *) {
-            tableView.cellLayoutMarginsFollowReadableWidth = false
-        }
         
         // Load more items on scroll to bottom
         if indexPath.row >= (items.count - 4) && !loadingItems {
@@ -179,14 +117,6 @@ class TPBasePagedTableViewController<T: Mappable>: UITableViewController {
             }
         }
         return cell
-    }
-    
-    func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-    
-    func setEmptyText() {
-        emptyView.setValues(image: Images.ExamsFlatIcon.image, description: Strings.NO_ITEMS_EXIST)
     }
     
 }

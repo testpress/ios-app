@@ -58,6 +58,7 @@ public class Exam {
     var passPercentage: Int = 0
     var showScore: Bool = true
     var showPercentile: Bool = true
+    var studentsAttemptedCount: Int!
     
     public required init?(map: Map) {
     }
@@ -105,5 +106,6 @@ extension Exam: TestpressModel {
         passPercentage <- map["pass_percentage"]
         showScore <- map["show_score"]
         showPercentile <- map["show_percentile"]
+        studentsAttemptedCount <- map["students_attempted_count"]
     }
 }

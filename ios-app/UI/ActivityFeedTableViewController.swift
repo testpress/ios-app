@@ -56,6 +56,8 @@ class ActivityFeedTableViewController: UITableViewController {
         emptyView = EmptyView.getInstance()
         tableView.backgroundView = emptyView
         emptyView.frame = tableView.frame
+        
+        UIUtils.setTableViewSeperatorInset(tableView, size: 10)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,7 +95,6 @@ class ActivityFeedTableViewController: UITableViewController {
             if self.items.count == 0 {
                 self.setEmptyText()
             }
-            self.onItemsLoaded()
             self.tableView.reloadData()
             if (self.activityIndicator?.isAnimating)! {
                 self.activityIndicator?.stopAnimating()
@@ -146,13 +147,6 @@ class ActivityFeedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewCell(cellForRowAt: indexPath)
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
-        cell.layoutMargins = UIEdgeInsets.zero;
-        if #available(iOS 9.0, *) {
-            tableView.cellLayoutMarginsFollowReadableWidth = false
-        }
-        
         // Load more items on scroll to bottom
         if indexPath.row >= (items.count - 4) && !loadingItems {
             if pager.hasMore {
@@ -173,19 +167,13 @@ class ActivityFeedTableViewController: UITableViewController {
         return cell
     }
     
-    func onItemsLoaded() {
-        items = items.sorted(by: {
-            FormatDate.compareDate(dateString1:  $0.timestamp, dateString2: $1.timestamp)
-        })
-    }
-    
     func setEmptyText() {
-        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_ITEMS_EXIST,
-                            description: Strings.NO_CONTENT_DESCRIPTION)
+        emptyView.setValues(image: Images.ActivitiesFlatIcon.image, title: Strings.NO_ACTIVITIES,
+                            description: Strings.NO_ADMIN_ACTIVITIES_DESCRIPTION)
     }
     
-    @IBAction func back() {
-        dismiss(animated: true, completion: nil)
+    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
+        UIUtils.showProfileDetails(self)
     }
     
 }

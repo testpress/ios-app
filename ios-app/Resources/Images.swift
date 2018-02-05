@@ -46,6 +46,8 @@ enum Images: String {
     case PostAdded = "post_added"
     case VideoAddedIcon = "video_added_icon"
     case ExamAttemptedIcon = "exam_attempted_icon"
+    case ActivitiesFlatIcon = "activities_flat_icon"
+    case LeaderboardFlatIcon = "leaderboard_flat_icon"
     
     var image: UIImage {
         return UIImage(asset: self)
