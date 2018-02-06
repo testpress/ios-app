@@ -50,7 +50,7 @@ class Course: DBModel {
         title <- map["title"]
         image <- map["image"]
         modified <- map["modified"]
-        modifiedDate = FormatDate.getDate(from: modified)!.timeIntervalSince1970
+        modifiedDate = FormatDate.getDate(from: modified)?.timeIntervalSince1970 ?? 0
         contentsUrl <- map["contents_url"]
         chaptersUrl <- map["chapters_url"]
         slug <- map["slug"]

@@ -42,7 +42,7 @@ public class FormatDate {
         dateFormatter.dateFormat = givenFormat
         dateFormatter.timeZone = TimeZone(identifier: "UTC")
         guard let date = dateFormatter.date(from: dateString) else {
-            assert(false, "no date from string")
+            debugPrint("no date from string")
             return nil
         }
         return date

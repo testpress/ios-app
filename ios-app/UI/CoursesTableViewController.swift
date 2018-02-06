@@ -34,19 +34,43 @@ class CoursesTableViewController: BaseDBViewController<Course> {
     
     func getPager() -> CoursePager {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
-        let pager = CoursePager()
-        if DBManager<Course>().getResultsFromDB().count > 0 {
-            let latestModifiedDate = DBManager<Course>()
-                .getSortedItemsFromDB(byKeyPath: "modifiedDate", ascending: false)[0].modified
-            
-            pager.setLatestModifiedDate(latestModifiedDate)
-        }
-        return pager
+        return CoursePager()
     }
     
     override func getItemsFromDb() -> [Course] {
         return DBManager<Course>()
             .getItemsFromDB(filteredBy: "active = true", byKeyPath: "order")
+    }
+    
+    override func loadItems() {
+        if loadingItems {
+            return
+        }
+        loadingItems = true
+        pager.next(completion: {
+            items, error in
+            if let error = error {
+                debugPrint(error.message ?? "No error")
+                debugPrint(error.kind)
+                self.handleError(error)
+                return
+            }
+            
+            let items = Array(items!.values)
+            DBManager<Course>().deleteAllFromDatabase() // Delete previous items
+            DBManager<Course>().addData(objects: items)
+            self.items = self.getItemsFromDb()
+            if self.items.count == 0 {
+                self.setEmptyText()
+            }
+            self.delegate?.onItemsLoaded()
+            self.tableView.reloadData()
+            if self.activityIndicator.isAnimating {
+                self.activityIndicator.stopAnimating()
+            }
+            self.tableView.tableFooterView?.isHidden = true
+            self.loadingItems = false
+        })
     }
     
     // MARK: - Table view data source
