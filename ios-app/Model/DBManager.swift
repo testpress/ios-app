@@ -41,7 +41,7 @@ class DBInstance {
     }
     
     static func clearAllTables() {
-        DBManager<Course>().deleteAllFromDatabase()
+        sharedInstance.database.deleteAll()
     }
     
 }
@@ -86,7 +86,7 @@ class DBManager<T: Object> {
     
     func deleteAllFromDatabase() {
         try! database.write {
-            database.deleteAll()
+            database.delete(getResultsFromDB())
         }
     }
     
