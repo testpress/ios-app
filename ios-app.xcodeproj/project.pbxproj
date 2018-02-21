@@ -9,12 +9,20 @@
 /* Begin PBXBuildFile section */
 		2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1474741F8B7BF30017151B /* TestEngineSlidingViewController.swift */; };
 		2F1474791F8B898F0017151B /* QuestionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1474781F8B898F0017151B /* QuestionListViewController.swift */; };
+		2F25D558201EFB9F00C01CCE /* LeaderboardTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D557201EFB9F00C01CCE /* LeaderboardTabViewController.swift */; };
+		2F25D55A201EFD5C00C01CCE /* Reputation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D559201EFD5C00C01CCE /* Reputation.swift */; };
+		2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D55B201EFE7B00C01CCE /* LeaderboardPager.swift */; };
+		2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */; };
+		2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D55F201F085A00C01CCE /* LeaderboardTableViewCell.swift */; };
+		2F25D562201F5C8800C01CCE /* TargetThreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D561201F5C8800C01CCE /* TargetThreadViewController.swift */; };
+		2F25D564201F5DBB00C01CCE /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */; };
+		2F25D566201F6D7500C01CCE /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */; };
 		2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */; };
 		2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADE91E8249D70031E6F4 /* Main.storyboard */; };
 		2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */; };
 		2F26ADFB1E8249D70031E6F4 /* ios_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */; };
 		2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */; };
-		2F2866FA1FD6C1D600FC6BAA /* UITextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */; };
+		2F2866FA1FD6C1D600FC6BAA /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */; };
 		2F2A41C01FD6ACE900B92C6D /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */; };
 		2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
 		2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
@@ -26,6 +34,14 @@
 		2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53021FDA6AE400C64123 /* SubjectPager.swift */; };
 		2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */; };
 		2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */; };
+		2F3D78B62007782500F57783 /* BaseDBItemPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3D78B52007782500F57783 /* BaseDBItemPager.swift */; };
+		2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21920186417004EDAF2 /* ActivityFeedResponse.swift */; };
+		2F3DD21C20186B93004EDAF2 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21B20186B93004EDAF2 /* ContentType.swift */; };
+		2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21F20187B5D004EDAF2 /* ApiResponse.swift */; };
+		2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F634F2004A2D000976053 /* RealmSwift.framework */; };
+		2F3F63522004A75F00976053 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F63512004A75F00976053 /* DBManager.swift */; };
+		2F3F63542004C54900976053 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F63532004C54900976053 /* Realm.framework */; };
+		2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F412CC120219BC300B7F70C /* OrderedDictionary.swift */; };
 		2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */; };
 		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
 		2F48C7FB1FCDA957009C686C /* comments.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FA1FCDA957009C686C /* comments.js */; };
@@ -52,6 +68,7 @@
 		2F515DFE1FF517160005D8A5 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFD1FF517160005D8A5 /* Permissions.swift */; };
 		2F515E001FF572690005D8A5 /* PhotoCropEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F515DFF1FF572690005D8A5 /* PhotoCropEditor.framework */; };
 		2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */; };
+		2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F52CB7A20173BA300592CD8 /* PDFReader.framework */; };
 		2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */; };
 		2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */; };
 		2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */; };
@@ -162,6 +179,9 @@
 		2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */; };
 		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
+		2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
+		2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */; };
+		2FF024212004CECA00E0047D /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF024202004CECA00E0047D /* BaseDBViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +198,14 @@
 		2F1474701F8B73FF0017151B /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
 		2F1474741F8B7BF30017151B /* TestEngineSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEngineSlidingViewController.swift; sourceTree = "<group>"; };
 		2F1474781F8B898F0017151B /* QuestionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListViewController.swift; sourceTree = "<group>"; };
+		2F25D557201EFB9F00C01CCE /* LeaderboardTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardTabViewController.swift; sourceTree = "<group>"; };
+		2F25D559201EFD5C00C01CCE /* Reputation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reputation.swift; sourceTree = "<group>"; };
+		2F25D55B201EFE7B00C01CCE /* LeaderboardPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPager.swift; sourceTree = "<group>"; };
+		2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
+		2F25D55F201F085A00C01CCE /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
+		2F25D561201F5C8800C01CCE /* TargetThreadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetThreadViewController.swift; sourceTree = "<group>"; };
+		2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
 		2F26ADE21E8249D70031E6F4 /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F26ADEA1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -187,7 +215,7 @@
 		2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_appTests.swift; sourceTree = "<group>"; };
 		2F26ADFC1E8249D70031E6F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreationViewController.swift; sourceTree = "<group>"; };
-		2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewExtension.swift; sourceTree = "<group>"; };
+		2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		2F29437B1FDFE50600E45F07 /* ExpandableCell.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ExpandableCell.framework.dSYM; path = Carthage/Build/iOS/ExpandableCell.framework.dSYM; sourceTree = "<group>"; };
 		2F29437D1FDFE51600E45F07 /* ExpandableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExpandableCell.framework; path = Carthage/Build/iOS/ExpandableCell.framework; sourceTree = "<group>"; };
 		2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +231,14 @@
 		2F3A53021FDA6AE400C64123 /* SubjectPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPager.swift; sourceTree = "<group>"; };
 		2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsCountCell.swift; sourceTree = "<group>"; };
 		2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentExamAttemptsTableViewController.swift; sourceTree = "<group>"; };
+		2F3D78B52007782500F57783 /* BaseDBItemPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBItemPager.swift; sourceTree = "<group>"; };
+		2F3DD21920186417004EDAF2 /* ActivityFeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedResponse.swift; sourceTree = "<group>"; };
+		2F3DD21B20186B93004EDAF2 /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
+		2F3DD21F20187B5D004EDAF2 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
+		2F3F634F2004A2D000976053 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		2F3F63512004A75F00976053 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		2F3F63532004C54900976053 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		2F412CC120219BC300B7F70C /* OrderedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		2F48C7F81FCD9F18009C686C /* progress_loader.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = progress_loader.css; sourceTree = "<group>"; };
 		2F48C7FA1FCDA957009C686C /* comments.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = comments.js; sourceTree = "<group>"; };
@@ -229,6 +265,7 @@
 		2F515DFD1FF517160005D8A5 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		2F515DFF1FF572690005D8A5 /* PhotoCropEditor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotoCropEditor.framework; path = Carthage/Build/iOS/PhotoCropEditor.framework; sourceTree = "<group>"; };
 		2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadHelper.swift; sourceTree = "<group>"; };
+		2F52CB7A20173BA300592CD8 /* PDFReader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFReader.framework; path = Carthage/Build/iOS/PDFReader.framework; sourceTree = "<group>"; };
 		2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisLabelFormatter.swift; sourceTree = "<group>"; };
 		2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphAxisPercentValueFormatter.swift; sourceTree = "<group>"; };
 		2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualSubjectAnalyticsGraphCell.swift; sourceTree = "<group>"; };
@@ -336,6 +373,9 @@
 		2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContentViewController.swift; sourceTree = "<group>"; };
 		2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		2FE290711F8D07D0004D7574 /* QuestionListHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuestionListHandler.js; sourceTree = "<group>"; };
+		2FE81096201A0AF70031E134 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		2FF024202004CECA00E0047D /* BaseDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,7 +390,10 @@
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
 				2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
+				2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */,
 				2F515E001FF572690005D8A5 /* PhotoCropEditor.framework in Frameworks */,
+				2F3F63542004C54900976053 /* Realm.framework in Frameworks */,
+				2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */,
 				2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */,
 				2F48C8071FD13ABD009C686C /* TTGSnackbar.framework in Frameworks */,
 				2F763D041FBD83340033D495 /* XLPagerTabStrip.framework in Frameworks */,
@@ -420,6 +463,9 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F52CB7A20173BA300592CD8 /* PDFReader.framework */,
+				2F3F63532004C54900976053 /* Realm.framework */,
+				2F3F634F2004A2D000976053 /* RealmSwift.framework */,
 				2F515DFF1FF572690005D8A5 /* PhotoCropEditor.framework */,
 				2F3A142E1FE0EEED007CEE84 /* LUExpandableTableView.framework */,
 				2F29437D1FDFE51600E45F07 /* ExpandableCell.framework */,
@@ -447,12 +493,13 @@
 				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
 				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
 				2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */,
+				2F412CC120219BC300B7F70C /* OrderedDictionary.swift */,
 				2F515DFD1FF517160005D8A5 /* Permissions.swift */,
 				2F6F167E1FC4164100FB768C /* Reachability.swift */,
 				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
 				2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
-				2F2866F91FD6C1D600FC6BAA /* UITextViewExtension.swift */,
+				2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 			);
 			path = Utils;
@@ -465,6 +512,8 @@
 				2FC0F31C1F863D730092BFDC /* katex */,
 				2F48C7FC1FCDABDE009C686C /* comments.css */,
 				2F48C7FA1FCDA957009C686C /* comments.js */,
+				2FE81096201A0AF70031E134 /* Lato-Bold.ttf */,
+				2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */,
 				2FC0F2731F8619220092BFDC /* MathJaxRender.js */,
 				2F48C7F81FCD9F18009C686C /* progress_loader.css */,
 				2FB049BA1FD838860049D5B0 /* post.css */,
@@ -499,11 +548,13 @@
 				2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */,
 				2FC0F2811F861A860092BFDC /* AttemptsListViewController.swift */,
 				2FC0F2821F861A860092BFDC /* AttemptsTableViewCell.swift */,
+				2FF024202004CECA00E0047D /* BaseDBViewController.swift */,
 				2FC0F2831F861A860092BFDC /* BaseQuestionsDataSource.swift */,
 				2F70F4D61F9F1C3300D30755 /* BaseQuestionsListViewController.swift */,
 				2FC0F2841F861A860092BFDC /* BaseQuestionsPageViewController.swift */,
 				2FC0F2851F861A860092BFDC /* BaseQuestionsViewController.swift */,
 				2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */,
+				2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */,
 				2FC0F2861F861A860092BFDC /* BaseTextFieldViewController.swift */,
 				2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */,
 				2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */,
@@ -527,6 +578,10 @@
 				2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */,
 				2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */,
 				2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */,
+				2F25D55F201F085A00C01CCE /* LeaderboardTableViewCell.swift */,
+				2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */,
+				2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */,
+				2F25D557201EFB9F00C01CCE /* LeaderboardTabViewController.swift */,
 				2FC0F28D1F861A860092BFDC /* LoginViewController.swift */,
 				2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */,
 				2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */,
@@ -549,6 +604,7 @@
 				2FC0F2961F861A860092BFDC /* StartExamScreenViewController.swift */,
 				2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */,
 				2FC0F2971F861A860092BFDC /* SuccessViewController.swift */,
+				2F25D561201F5C8800C01CCE /* TargetThreadViewController.swift */,
 				2F1474741F8B7BF30017151B /* TestEngineSlidingViewController.swift */,
 				2FC0F2981F861A860092BFDC /* TestEngineViewController.swift */,
 				2FC0F2991F861A860092BFDC /* TestReportViewController.swift */,
@@ -566,6 +622,8 @@
 			isa = PBXGroup;
 			children = (
 				2F3A14321FE15E97007CEE84 /* ActivityFeed.swift */,
+				2F3DD21920186417004EDAF2 /* ActivityFeedResponse.swift */,
+				2F3DD21F20187B5D004EDAF2 /* ApiResponse.swift */,
 				2F96997D1FC2A761001B2B18 /* Attachment.swift */,
 				2FC0F2C31F86385B0092BFDC /* Attempt.swift */,
 				2FC0F2C41F86385B0092BFDC /* AttemptAnswer.swift */,
@@ -578,11 +636,14 @@
 				2F9699791FC2A22A001B2B18 /* Content.swift */,
 				2F5E0BBA1FE2871900236AFE /* ContentAttempt.swift */,
 				2F48C8001FCE9963009C686C /* ContentObject.swift */,
+				2F3DD21B20186B93004EDAF2 /* ContentType.swift */,
+				2F3F63512004A75F00976053 /* DBManager.swift */,
 				2FC0F2C71F86385B0092BFDC /* Exam.swift */,
 				2F515DFB1FF4EF9C0005D8A5 /* FileDetails.swift */,
 				2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */,
 				2F48C80E1FD2899E009C686C /* Post.swift */,
 				2FC0F2C81F86385B0092BFDC /* RegistrationError.swift */,
+				2F25D559201EFD5C00C01CCE /* Reputation.swift */,
 				2F3A53001FDA652A00C64123 /* Subject.swift */,
 				2FC0F2C91F86385B0092BFDC /* TPApiResponse.swift */,
 				2FC0F2CA1F86385B0092BFDC /* TPAuthToken.swift */,
@@ -612,7 +673,9 @@
 				2F48C8021FCE9A37009C686C /* CommentPager.swift */,
 				2F96997F1FC2A8E0001B2B18 /* ContentPager.swift */,
 				2F763D051FBDA89C0033D495 /* CoursePager.swift */,
+				2F3D78B52007782500F57783 /* BaseDBItemPager.swift */,
 				2FC0F2EB1F863B080092BFDC /* ExamPager.swift */,
+				2F25D55B201EFE7B00C01CCE /* LeaderboardPager.swift */,
 				2F48C8101FD28E7A009C686C /* PostPager.swift */,
 				2F3A53021FDA6AE400C64123 /* SubjectPager.swift */,
 				2FC0F2EC1F863B080092BFDC /* TPApiClient.swift */,
@@ -713,7 +776,9 @@
 				2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */,
 				2FC0F31B1F863BCE0092BFDC /* TestEngine.js in Resources */,
 				2F48C8051FD030A7009C686C /* icomoon in Resources */,
+				2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */,
 				2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */,
+				2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */,
 				2FC0F3181F863BCE0092BFDC /* questions_typebase.css in Resources */,
 				2FC0F3171F863BCE0092BFDC /* PT_Serif-Web-Regular.ttf in Resources */,
 				2F6F167B1FC3F08900FB768C /* typebase.css in Resources */,
@@ -728,6 +793,7 @@
 				2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */,
 				2F48C7FD1FCDABDE009C686C /* comments.css in Resources */,
 				2FC0F31D1F863D780092BFDC /* katex in Resources */,
+				2F25D566201F6D7500C01CCE /* LeaderboardTableViewCell.xib in Resources */,
 				2FC0F3021F863B980092BFDC /* ExamsTableViewCell.xib in Resources */,
 				2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */,
 				2FC0F3011F863B950092BFDC /* EmptyView.xib in Resources */,
@@ -764,6 +830,9 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/LUExpandableTableView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PhotoCropEditor.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
 			);
 			outputPaths = (
 			);
@@ -787,7 +856,10 @@
 				2FC0F3121F863BBD0092BFDC /* CALayerBorderColor.swift in Sources */,
 				2FC0F2FB1F863B7E0092BFDC /* BaseQuestionsDataSource.swift in Sources */,
 				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
+				2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */,
+				2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */,
 				2FC0F2E51F863AE00092BFDC /* TPAuthToken.swift in Sources */,
+				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,
 				2FC0F3091F863BA90092BFDC /* ReviewQuestionsDataSource.swift in Sources */,
 				2FC0F2F31F863B1B0092BFDC /* TPEndpoint.swift in Sources */,
 				2FC0F2FD1F863B850092BFDC /* BaseQuestionsViewController.swift in Sources */,
@@ -800,6 +872,7 @@
 				2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */,
 				2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */,
 				2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */,
+				2F3D78B62007782500F57783 /* BaseDBItemPager.swift in Sources */,
 				2F1474791F8B898F0017151B /* QuestionListViewController.swift in Sources */,
 				2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */,
 				2FC0F2E21F863AD70092BFDC /* Exam.swift in Sources */,
@@ -825,6 +898,7 @@
 				2FC0F3101F863BA90092BFDC /* TestReportViewController.swift in Sources */,
 				2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */,
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
+				2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */,
 				2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */,
 				2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */,
 				2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */,
@@ -840,11 +914,15 @@
 				2F9B5E171FC54AFC00D67100 /* AttachmentDetailViewController.swift in Sources */,
 				2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */,
 				2FC0F2F61F863B2F0092BFDC /* Strings.swift in Sources */,
+				2F3F63522004A75F00976053 /* DBManager.swift in Sources */,
 				2F96997E1FC2A761001B2B18 /* Attachment.swift in Sources */,
+				2F3DD21C20186B93004EDAF2 /* ContentType.swift in Sources */,
+				2F25D55A201EFD5C00C01CCE /* Reputation.swift in Sources */,
 				2FC0F3111F863BA90092BFDC /* TPBasePagedTableViewController.swift in Sources */,
 				2FC0F2F51F863B2B0092BFDC /* KeychainTokenItem.swift in Sources */,
 				2FC0F2DC1F863AB70092BFDC /* Colors.swift in Sources */,
 				2FC0F2E11F863AD30092BFDC /* AttemptItem.swift in Sources */,
+				2F25D558201EFB9F00C01CCE /* LeaderboardTabViewController.swift in Sources */,
 				2F3A14331FE15E98007CEE84 /* ActivityFeed.swift in Sources */,
 				2FC0F3001F863B8F0092BFDC /* ExamsTableViewCell.swift in Sources */,
 				2F96997C1FC2A625001B2B18 /* Video.swift in Sources */,
@@ -862,6 +940,7 @@
 				2F48C8111FD28E7A009C686C /* PostPager.swift in Sources */,
 				2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */,
 				2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */,
+				2FF024212004CECA00E0047D /* BaseDBViewController.swift in Sources */,
 				2F515DFA1FF4D12A0005D8A5 /* ImagePicker.swift in Sources */,
 				2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */,
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
@@ -870,7 +949,7 @@
 				2F2A41C01FD6ACE900B92C6D /* PostsViewController.swift in Sources */,
 				2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */,
 				2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */,
-				2F2866FA1FD6C1D600FC6BAA /* UITextViewExtension.swift in Sources */,
+				2F2866FA1FD6C1D600FC6BAA /* UIViewExtension.swift in Sources */,
 				2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */,
 				2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */,
 				2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */,
@@ -878,6 +957,7 @@
 				2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */,
 				2F56B73B1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift in Sources */,
 				2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */,
+				2F25D564201F5DBB00C01CCE /* BaseTableViewController.swift in Sources */,
 				2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */,
 				2F9699801FC2A8E0001B2B18 /* ContentPager.swift in Sources */,
 				2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */,
@@ -885,13 +965,16 @@
 				2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */,
 				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
+				2F25D562201F5C8800C01CCE /* TargetThreadViewController.swift in Sources */,
 				2F9778A81FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift in Sources */,
+				2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
 				2F3A53011FDA652A00C64123 /* Subject.swift in Sources */,
 				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,
 				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
 				2F5E0BB51FE2415800236AFE /* ActivityFeedPager.swift in Sources */,
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
+				2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */,
 				2F48C8131FD3E417009C686C /* Category.swift in Sources */,
 				2FC0F2E61F863AE30092BFDC /* TPError.swift in Sources */,
 				2FC0F2E31F863ADA0092BFDC /* RegistrationError.swift in Sources */,

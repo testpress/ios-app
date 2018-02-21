@@ -25,12 +25,10 @@
 
 import UIKit
 
-class ForumTableViewController: TPBasePagedTableViewController<Post>,
-    BasePagedTableViewDelegate {
+class ForumTableViewController: TPBasePagedTableViewController<Post> {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(pager: PostPager(endpoint: .getForum), coder: aDecoder)
-        delegate = self
     }
     
     // MARK: - Table view data source
@@ -40,12 +38,6 @@ class ForumTableViewController: TPBasePagedTableViewController<Post>,
         
         cell.initCell(items[indexPath.row], viewController: self)
         return cell
-    }
-    
-    func onItemsLoaded() {
-        items = items.sorted(by: {
-            FormatDate.compareDate(dateString1:  $0.lastCommentedTime!, dateString2: $1.lastCommentedTime!)
-        })
     }
     
     override func setEmptyText() {

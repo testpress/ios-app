@@ -27,6 +27,7 @@ import ObjectMapper
 
 public class HtmlContent {
     
+    var id: Int = 0
     var title: String!
     var textHtml: String!
     
@@ -36,6 +37,7 @@ public class HtmlContent {
 
 extension HtmlContent: TestpressModel {
     public func mapping(map: Map) {
+        id <- map["id"]
         title <- map["title"]
         textHtml <- map["text_html"]
     }

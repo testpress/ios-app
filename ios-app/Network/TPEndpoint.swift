@@ -51,6 +51,10 @@ enum TPEndpoint {
     case getActivityFeed
     case contentAttempts
     case uploadImage
+    case getRank
+    case getLeaderboard
+    case getTargets
+    case getThreads
     case get
     case post
     case put
@@ -92,6 +96,10 @@ enum TPEndpoint {
         case .getForumCategories,
              .getSubjectAnalytics,
              .getAttemptSubjectAnalytics,
+             .getRank,
+             .getLeaderboard,
+             .getTargets,
+             .getThreads,
              .getActivityFeed:
             return .get
         case .get:
@@ -137,11 +145,19 @@ enum TPEndpoint {
         case .getAttemptSubjectAnalytics:
             return "review/subjects/"
         case .getActivityFeed:
-            return "/api/v2.3/activities/"
+            return "/api/v2.4/activities/"
         case .contentAttempts:
             return "/api/v2.2/content_attempts/"
         case .uploadImage:
             return "/api/v2.2/image_upload/"
+        case .getRank:
+            return "/api/v2.2/me/rank/"
+        case .getLeaderboard:
+            return "/api/v2.2/leaderboard/"
+        case .getTargets:
+            return "/api/v2.2/me/targets/"
+        case .getThreads:
+            return "/api/v2.2/me/threats/"
         default:
             return ""
         }

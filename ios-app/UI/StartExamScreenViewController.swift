@@ -83,12 +83,18 @@ class StartExamScreenViewController: UIViewController {
         if exam?.deviceAccessControl == "web" {
             // Hide start button for web only exams
             startButtonLayout.isHidden = true
+        } else if content != nil && content.isLocked {
+            webOnlyExamLabel.text = Strings.SCORE_GOOD_IN_PREVIOUS
+            startButtonLayout.isHidden = true
+        } else if !exam!.hasStarted() {
+            webOnlyExamLabel.text =
+                Strings.CAN_START_EXAM_ONLY_AFTER + FormatDate.format(dateString: exam?.startDate)
+            
+            startButtonLayout.isHidden = true
         } else {
             webOnlyExamLabel.isHidden = true
             UIUtils.setButtonDropShadow(startButton)
-            if !exam!.hasStarted() {
-                startButtonLayout.isHidden = true
-            } else if attempt?.state! == Constants.STATE_RUNNING {
+            if attempt?.state! == Constants.STATE_RUNNING {
                 startButton.setTitle("RESUME", for: .normal)
                 navigationBarItem?.title = Strings.RESUME_EXAM
             }

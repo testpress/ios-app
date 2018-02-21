@@ -30,7 +30,7 @@ public class User {
     var email: String?
     var password: String?
     var phone: String?
-    var id: Int?
+    var id: Int!
     var url: String?
     var displayName: String!
     var photo: String?

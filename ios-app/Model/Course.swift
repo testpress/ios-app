@@ -24,34 +24,33 @@
 //
 
 import ObjectMapper
+import Realm
+import RealmSwift
 
-public class Course {
-    var url: String!
-    var id: Int!
-    var title: String!
-    var description: String?
-    var image: String?
-    var modified: String!
-    var contentsUrl: String!
-    var chaptersUrl: String!
-    var slug: String!
-    var trophiesCount: Int!
-    var chaptersCount: Int!
-    var contentsCount: Int!
-    var order: Int!
+class Course: DBModel {
     
-    public required init?(map: Map) {
-    }
-}
-
-extension Course: TestpressModel {
-    public func mapping(map: Map) {
+    @objc dynamic var url: String = ""
+    @objc dynamic var id = 0
+    @objc dynamic var title: String = ""
+    @objc dynamic var image: String = ""
+    @objc dynamic var modified: String = ""
+    @objc dynamic var modifiedDate: Double = 0
+    @objc dynamic var contentsUrl: String = ""
+    @objc dynamic var chaptersUrl: String = ""
+    @objc dynamic var slug: String = ""
+    @objc dynamic var trophiesCount = 0
+    @objc dynamic var chaptersCount = 0
+    @objc dynamic var contentsCount = 0
+    @objc dynamic var order = 0
+    @objc dynamic var active = true
+    
+    public override func mapping(map: Map) {
         url <- map["url"]
         id <- map["id"]
         title <- map["title"]
-        description <- map["description"]
         image <- map["image"]
         modified <- map["modified"]
+        modifiedDate = FormatDate.getDate(from: modified)?.timeIntervalSince1970 ?? 0
         contentsUrl <- map["contents_url"]
         chaptersUrl <- map["chapters_url"]
         slug <- map["slug"]
@@ -59,5 +58,10 @@ extension Course: TestpressModel {
         chaptersCount <- map["chapters_count"]
         contentsCount <- map["contents_count"]
         order <- map["order"]
+        active <- map["active"]
+    }
+    
+    override public static func primaryKey() -> String? {
+        return "id"
     }
 }

@@ -31,145 +31,166 @@ class ActivityFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var timestamp: UILabel!
     @IBOutlet weak var activity: UILabel!
+    @IBOutlet weak var examDetails: UIView!
+    @IBOutlet weak var duration: UILabel!
+    @IBOutlet weak var studentsAttemptedCount: UILabel!
+    @IBOutlet weak var questionsCount: UILabel!
     
     var parentViewController: ActivityFeedTableViewController! = nil
     var activityFeed: ActivityFeed!
     var content: Content!
     var post: Post!
     var targetName: String = ""
+    var actionObjectName: String = ""
     
     func initCell(activityFeed: ActivityFeed, viewController: ActivityFeedTableViewController) {
         parentViewController = viewController
         self.activityFeed = activityFeed
+        let pager = viewController.pager
+        let exams = pager.exams
         timestamp.text = FormatDate.getElapsedTime(dateString: activityFeed.timestamp)
-        var actorName: String = activityFeed.actor.displayName
+        var actorName: String = activityFeed.actor.displayName.capitalized
         var action: String = ""
-        var actionObjectName: String = ""
-        let target = activityFeed.target as! [String: Any]
-        let actionObject = activityFeed.actionObject as! [String: Any]
-        targetName = target["name"] as! String
-        switch target["model_name"] as! String {
-        case "Chapter":
-            if activityFeed.verb == "attempted" {
-                actorName = "You "
-                switch actionObject["model_name"] as! String {
-                case "ChapterContentAttempt":
-                    switch actionObject["type"] as! String {
-                    case "assessment":
-                        action = "attempted exam "
-                        if let attempt = actionObject["assessment"] as? [String: Any] {
-                            if let exam = attempt["exam"] as? [String: Any] {
-                                actionObjectName = exam["title"] as! String
-                            }
-                        }
-                        thumbnailImage.image = Images.ExamAttemptedIcon.image
-                        break
-                    case "article":
-                        action = "read the article "
-                        if let content = actionObject["content"] as? [String: Any] {
-                            if let textContent = content["text_content"] as? [String: Any] {
-                                actionObjectName = textContent["title"] as! String
-                            }
-                        }
-                        thumbnailImage.image = Images.PostAdded.image
-                        break
-                    case "video":
-                        action = "watched the video "
-                        if let video = actionObject["video"] as? [String: Any] {
-                            if let videoContent = video["video_content"] as? [String: Any] {
-                                actionObjectName = videoContent["title"] as! String
-                            }
-                        }
-                        thumbnailImage.image = Images.VideoAddedIcon.image
-                        break
-                    case "attachment":
-                        action = "viewed the file "
-                        if let attachment = actionObject["attachment"] as? [String: Any] {
-                            if let fileContent = attachment["file_content"] as? [String: Any] {
-                                actionObjectName = fileContent["title"] as! String
-                            }
-                        }
-                        thumbnailImage.image = Images.FileDownloadIcon.image
-                        break
-                    default:
-                        break
-                    }
-                    break
-                default:
-                    break
-                }
-            } else {
-                action = " added "
-                switch actionObject["model_name"] as! String {
-                case "ChapterContent":
-                    let map = Map(mappingType: .fromJSON, JSON: actionObject, toObject: true)
-                    content = Content(map: map)
-                    content.mapping(map: map)
+        examDetails.isHidden = true
+        if activityFeed.verb == "attempted" {
+            actorName = "You "
+            if let contentAttempt = activityFeed.actionObject as? ContentAttempt {
+                if let content = pager.contents[contentAttempt.chapterContentId] {
                     content.order = 0
-                    post = nil
-                    let id = actionObject["id"] as! Int
-                    content.url = Constants.BASE_URL + "/api/v2.3/contents/\(id)/"
+                    content.url = Constants.BASE_URL + "/api/v2.2/contents/\(content.id!)/"
                     content.attemptsUrl = content.url + "attempts/"
-                    if let exam = actionObject["exam"] as? [String: Any] {
-                        action += "an exam "
-                        actionObjectName = exam["title"] as! String
-                        thumbnailImage.image = Images.ExamAddedIcon.image
-                    } else if let htmlTitle = actionObject["html_content_title"] as? String {
-                        action += "an ariticle "
-                        actionObjectName = htmlTitle
+                    self.content = content
+                    if contentAttempt.assessment != nil {
+                        action = "attempted exam "
+                        actionObjectName = exams[contentAttempt.assessment.exam]!.title!
+                        thumbnailImage.image = Images.ExamAttemptedIcon.image
+                    } else if contentAttempt.content != nil {
+                        action = "read the article "
+                        actionObjectName = contentAttempt.content.title
                         thumbnailImage.image = Images.PostAdded.image
-                        content.htmlContentUrl = content.url + "html/"
-                    } else if let video = actionObject["video"] as? [String: Any] {
-                        action += "a video "
-                        actionObjectName = video["title"] as! String
+                    } else if contentAttempt.video != nil {
+                        action = "watched the video "
+                        actionObjectName = contentAttempt.video.title
                         thumbnailImage.image = Images.VideoAddedIcon.image
-                    } else if let attachment = actionObject["attachment"] as? [String: Any] {
-                        action += "a file "
-                        actionObjectName = attachment["title"] as! String
+                    } else if contentAttempt.attachment != nil {
+                        action = "viewed the file "
+                        actionObjectName = contentAttempt.attachment.title
                         thumbnailImage.image = Images.FileDownloadIcon.image
                     }
-                default:
-                    break
+                }
+                let chapter = activityFeed.target as! Chapter
+                targetName = chapter.name
+            }
+        } else {
+            if let content = activityFeed.actionObject as? Content {
+                action = " added "
+                content.order = 0
+                content.url = Constants.BASE_URL + "/api/v2.2/contents/\(content.id!)/"
+                content.attemptsUrl = content.url + "attempts/"
+                if content.examId != nil {
+                    action += "an exam "
+                    let exam = exams[content.examId]!
+                    content.exam = exam
+                    actionObjectName = exam.title!
+                    thumbnailImage.image = Images.ExamAddedIcon.image
+                    duration.text = exam.duration
+                    studentsAttemptedCount.text = "\(exam.studentsAttemptedCount!) students"
+                    questionsCount.text = String(exam.numberOfQuestions!)
+                    examDetails.isHidden = false
+                } else if content.htmlContentId != nil {
+                    action += "an ariticle "
+                    let htmlContent = pager.htmlContents[content.htmlContentId]!
+                    content.htmlContentTitle = htmlContent.title
+                    content.htmlContentUrl = content.url + "html/"
+                    actionObjectName = htmlContent.title!
+                    thumbnailImage.image = Images.PostAdded.image
+                    content.htmlContentUrl = content.url + "html/"
+                } else if content.videoId != nil {
+                    action += "a video "
+                    let video = pager.videos[content.videoId]!
+                    content.video = video
+                    actionObjectName = video.title!
+                    thumbnailImage.image = Images.VideoAddedIcon.image
+                } else if content.attachmentId != nil {
+                    action += "a file "
+                    let attachment = pager.attachments[content.attachmentId]!
+                    content.attachment = attachment
+                    actionObjectName = attachment.title!
+                    thumbnailImage.image = Images.FileDownloadIcon.image
+                }
+                self.content = content
+                let chapter = activityFeed.target as! Chapter
+                targetName = chapter.name
+            } else if let post = activityFeed.actionObject as? Post {
+                content = nil
+                action = " added an article "
+                actionObjectName = post.title
+                thumbnailImage.image = Images.PostAdded.image
+                post.url = Constants.BASE_URL + "/api/v2.2/posts/" + post.slug
+                post.commentsUrl = Constants.BASE_URL + "/api/v2.2/posts/\(post.id!)/comments/"
+                self.post = post
+                if let category = activityFeed.target as? Category {
+                    targetName = category.name
+                } else {
+                    targetName = ""
                 }
             }
-            break
-        case "PostCategory":
-            action = " added an article "
-            actionObjectName = actionObject["title"] as! String
-            thumbnailImage.image = Images.PostAdded.image
-            let map = Map(mappingType: .fromJSON, JSON: actionObject, toObject: true)
-            post = Post(map: map)
-            post.mapping(map: map)
-            post.url = Constants.BASE_URL + "api/v2.2/posts/" + post.slug
-            post.commentsUrl = Constants.BASE_URL + "api/v2.2/posts/\(post.id!)/comments/"
-            break
-        default:
-            break
         }
-        activity.text = actorName + action + actionObjectName + " in " + targetName
+        var text = actorName + action
+        let actionObjectNameStartIndex = text.count
+        text += actionObjectName
+        var targetNameStartIndex: Int!
+        if !targetName.isEmpty {
+            text += " in "
+            targetNameStartIndex = text.count
+            text += targetName
+        }
+        activity.text = text
+        let attributedString = NSMutableAttributedString(string: text)
+        var range = NSRange(location: 0, length: actorName.count)
+        setRubikMedium(in: attributedString, forRange: range)
+        
+        range = NSRange(location: actionObjectNameStartIndex, length: actionObjectName.count)
+        setRubikMedium(in: attributedString, forRange: range)
+        
+        if !targetName.isEmpty {
+            range = NSRange(location: targetNameStartIndex, length: targetName.count)
+            setRubikMedium(in: attributedString, forRange: range)
+        }
+        
+        activity.attributedText = attributedString
+        
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
         
         addGestureRecognizer(tapRecognizer)
     }
     
+    func setRubikMedium(in attributedString: NSMutableAttributedString, forRange: NSRange) {
+        attributedString.addAttribute(
+            NSAttributedStringKey.font,
+            value: UIFont(name: "lato-bold", size: 14.0)!,
+            range: forRange
+        )
+    }
+    
     @objc func onItemClick() {
-        if post != nil {
-            let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.POST_DETAIL_VIEW_CONTROLLER) as! PostDetailViewController
-            
-            viewController.post = post
-            parentViewController.present(viewController, animated: true, completion: nil)
-        } else {
+        if content != nil {
             let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
             let viewController = storyboard.instantiateViewController(
                 withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
                 as! ContentDetailPageViewController
             
             viewController.contents = [content]
-            viewController.title = targetName
+            viewController.title = targetName.isEmpty ? actionObjectName : targetName
             viewController.position = 0
+            parentViewController.present(viewController, animated: true, completion: nil)
+        } else {
+            let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.POST_DETAIL_VIEW_CONTROLLER) as! PostDetailViewController
+            
+            viewController.post = post
             parentViewController.present(viewController, animated: true, completion: nil)
         }
     }

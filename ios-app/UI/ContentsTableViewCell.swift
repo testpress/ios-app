@@ -34,6 +34,8 @@ class ContentsTableViewCell: UITableViewCell {
     @IBOutlet weak var questionsCount: UILabel!
     @IBOutlet weak var examDetailsLayout: UIStackView!
     @IBOutlet weak var attemptedTick: UIImageView!
+    @IBOutlet weak var lock: UIView!
+    @IBOutlet weak var contentLayout: UIStackView!
     
     var parentViewController: ContentsTableViewController! = nil
     var position: Int!
@@ -53,7 +55,17 @@ class ContentsTableViewCell: UITableViewCell {
         } else {
             examDetailsLayout.isHidden = true
         }
-        attemptedTick.isHidden = content.attemptsCount == 0
+        if content.isLocked || !content.hasStarted {
+            lock.isHidden = false
+            contentLayout.alpha = 0.5
+            thumbnailImage.alpha = 0.5
+            attemptedTick.isHidden = true
+        } else {
+            lock.isHidden = true
+            contentLayout.alpha = 1
+            thumbnailImage.alpha = 1
+            attemptedTick.isHidden = content.attemptsCount == 0
+        }
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
         

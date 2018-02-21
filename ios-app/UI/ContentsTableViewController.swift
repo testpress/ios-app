@@ -60,38 +60,6 @@ class ContentsTableViewController: TPBasePagedTableViewController<Content>,
         items = items.sorted(by: { $0.order! < $1.order! })
     }
     
-    override func loadItems() {
-        if loadingItems {
-            return
-        }
-        loadingItems = true
-        pager.next(completion: {
-            items, error in
-            if let error = error {
-                debugPrint(error.message ?? "No error")
-                debugPrint(error.kind)
-                self.handleError(error)
-                return
-            }
-            
-            if self.pager.hasMore {
-                self.loadItems()
-            } else {
-                self.items = Array(items!.values)
-                if self.items.count == 0 {
-                    self.setEmptyText()
-                }
-                self.delegate?.onItemsLoaded()
-                self.tableView.reloadData()
-                if (self.activityIndicator?.isAnimating)! {
-                    self.activityIndicator?.stopAnimating()
-                }
-                self.tableView.tableFooterView?.isHidden = true
-                self.loadingItems = false
-            }
-        })
-    }
-    
     func newAttemptCreated() {
         items.removeAll()
     }

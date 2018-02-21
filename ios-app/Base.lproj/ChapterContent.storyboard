@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -127,7 +128,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="104.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="trw-ho-H6t">
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="trw-ho-H6t">
                                             <rect key="frame" x="20" y="20" width="285" height="64.5"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQh-i7-0N3">
@@ -140,6 +141,28 @@
                                                                 <constraint firstAttribute="height" constant="64" id="Y1D-gf-hFe"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="srE-j9-fbm">
+                                                            <rect key="frame" x="38" y="-8.5" width="36" height="36"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock_outline" translatesAutoresizingMaskIntoConstraints="NO" id="rEO-TY-SSM">
+                                                                    <rect key="frame" x="13" y="10" width="10" height="16"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="36" id="BrM-OL-yVG"/>
+                                                                <constraint firstAttribute="trailing" secondItem="rEO-TY-SSM" secondAttribute="trailing" constant="13" id="E1i-3s-jHo"/>
+                                                                <constraint firstAttribute="bottom" secondItem="rEO-TY-SSM" secondAttribute="bottom" constant="10" id="jea-zh-eww"/>
+                                                                <constraint firstItem="rEO-TY-SSM" firstAttribute="leading" secondItem="srE-j9-fbm" secondAttribute="leading" constant="13" id="lP4-eb-v8x"/>
+                                                                <constraint firstItem="rEO-TY-SSM" firstAttribute="top" secondItem="srE-j9-fbm" secondAttribute="top" constant="10" id="me0-fA-5Ie"/>
+                                                                <constraint firstAttribute="width" constant="36" id="veO-BL-ZoB"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="18"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
                                                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rounded_tick" translatesAutoresizingMaskIntoConstraints="NO" id="cff-9b-gur">
                                                             <rect key="frame" x="51" y="-5" width="18" height="18"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -163,10 +186,12 @@
                                                         <constraint firstItem="cff-9b-gur" firstAttribute="top" secondItem="sQh-i7-0N3" secondAttribute="top" constant="-5" id="Tih-eW-klL"/>
                                                         <constraint firstItem="MOo-KI-ucC" firstAttribute="leading" secondItem="sQh-i7-0N3" secondAttribute="leading" id="b5z-Z9-HSr"/>
                                                         <constraint firstItem="MOo-KI-ucC" firstAttribute="top" secondItem="sQh-i7-0N3" secondAttribute="top" id="h48-88-iIX"/>
+                                                        <constraint firstItem="srE-j9-fbm" firstAttribute="top" secondItem="sQh-i7-0N3" secondAttribute="top" constant="-8" id="rVl-1C-8OC"/>
+                                                        <constraint firstAttribute="trailing" secondItem="srE-j9-fbm" secondAttribute="trailing" constant="-10" id="ruK-tB-Pxv"/>
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hy3-UO-F5T">
-                                                    <rect key="frame" x="74" y="10" width="211" height="45"/>
+                                                    <rect key="frame" x="84" y="10" width="201" height="45"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAO-CF-Zhc">
                                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="19"/>
@@ -227,10 +252,12 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="attemptedTick" destination="cff-9b-gur" id="jqB-6X-lGW"/>
+                                    <outlet property="contentLayout" destination="hy3-UO-F5T" id="Lsi-rM-7af"/>
                                     <outlet property="contentName" destination="iAO-CF-Zhc" id="KeB-Yp-6M3"/>
                                     <outlet property="contentViewCell" destination="05z-Q8-pY2" id="ooE-68-Inp"/>
                                     <outlet property="duration" destination="GsZ-Nf-XPr" id="3bY-9k-glY"/>
                                     <outlet property="examDetailsLayout" destination="UNo-CL-zLz" id="PAi-K1-qHk"/>
+                                    <outlet property="lock" destination="srE-j9-fbm" id="8zD-TI-Fbk"/>
                                     <outlet property="questionsCount" destination="G1F-p0-OYl" id="7Hu-Nb-hOU"/>
                                     <outlet property="thumbnailImage" destination="MOo-KI-ucC" id="0hw-Hp-j3e"/>
                                 </connections>
@@ -409,6 +436,9 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Osw-Bx-U7f"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -424,13 +454,14 @@
                             <constraint firstItem="KxI-vt-y9F" firstAttribute="trailing" secondItem="wB2-X5-4Ue" secondAttribute="trailing" id="Od5-aN-jxO"/>
                             <constraint firstItem="KxI-vt-y9F" firstAttribute="top" secondItem="wB2-X5-4Ue" secondAttribute="top" id="Yqu-aY-xmt"/>
                             <constraint firstItem="kwE-bD-BlI" firstAttribute="leading" secondItem="c8y-iO-6FK" secondAttribute="leading" id="dOm-T4-rk0"/>
-                            <constraint firstItem="2C1-W5-ggm" firstAttribute="top" secondItem="kwE-bD-BlI" secondAttribute="bottom" id="dZZ-px-YrY"/>
+                            <constraint firstItem="2C1-W5-ggm" firstAttribute="top" secondItem="kwE-bD-BlI" secondAttribute="bottom" id="omC-b9-lbg"/>
                             <constraint firstItem="kwE-bD-BlI" firstAttribute="trailing" secondItem="c8y-iO-6FK" secondAttribute="trailing" id="owf-oA-nxb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wB2-X5-4Ue"/>
                     </view>
                     <connections>
                         <outlet property="bottomNavigationBar" destination="2C1-W5-ggm" id="TxQ-Lt-VUE"/>
+                        <outlet property="bottomNavigationBarConstraint" destination="Osw-Bx-U7f" id="3CD-0v-0sd"/>
                         <outlet property="bottomShadowView" destination="2Sb-r1-Jcp" id="NA9-1e-fF7"/>
                         <outlet property="contentsContainerView" destination="kwE-bD-BlI" id="HIu-Ud-w9q"/>
                         <outlet property="navigationBarItem" destination="5S5-Ob-TFH" id="Riw-OT-iwq"/>
@@ -523,18 +554,18 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ac8-yT-A6n">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ac8-yT-A6n">
                                                         <rect key="frame" x="0.0" y="126.5" width="270" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dwp-a5-1om">
-                                                                <rect key="frame" x="25" y="0.0" width="220" height="38"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="125" height="38"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="i3Q-b8-w8U"/>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="i3Q-b8-w8U"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
                                                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                                                <state key="normal" title="Download Attachment">
+                                                                <state key="normal" title="Download">
                                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
@@ -543,7 +574,27 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="openPdf:" destination="5sd-P7-T9l" eventType="touchUpInside" id="ccn-zx-zH9"/>
+                                                                    <action selector="downloadAttachment:" destination="5sd-P7-T9l" eventType="touchUpInside" id="ptC-BP-QGq"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I76-VM-96z">
+                                                                <rect key="frame" x="145" y="0.0" width="125" height="38"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="4TK-fv-8Ec"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
+                                                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                                <state key="normal" title="View">
+                                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="19"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="viewAttachment:" destination="5sd-P7-T9l" eventType="touchUpInside" id="YQr-8u-kjv"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -594,7 +645,9 @@
                         <outlet property="contentDescription" destination="6tC-R2-iyY" id="iPn-9x-obK"/>
                         <outlet property="contentTitle" destination="WWf-Id-eOT" id="kma-yx-lXn"/>
                         <outlet property="contentView" destination="Jdu-yi-uQ2" id="THc-ld-Nqe"/>
+                        <outlet property="downloadAttachmentButton" destination="Dwp-a5-1om" id="NPC-3S-FVr"/>
                         <outlet property="scrollView" destination="Pgt-pF-4oH" id="Ikk-pd-61I"/>
+                        <outlet property="viewAttachmentButton" destination="I76-VM-96z" id="lLy-g4-ksb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mBv-6b-pHv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -771,8 +824,11 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O66-OT-NiS">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O66-OT-NiS">
                                                                         <rect key="frame" x="178" y="0.0" width="92" height="17"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="92" id="l7p-gr-rIa"/>
+                                                                        </constraints>
                                                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
                                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -1211,6 +1267,7 @@
         <image name="ic_navigate_before_36pt" width="36" height="36"/>
         <image name="ic_navigate_next" width="24" height="24"/>
         <image name="ic_thumb_up_18pt" width="18" height="18"/>
+        <image name="lock_outline" width="10" height="16"/>
         <image name="questions_outline_16pt" width="16" height="16"/>
         <image name="rounded_tick" width="42" height="42"/>
         <image name="testpress_calendar_icon" width="24" height="24"/>

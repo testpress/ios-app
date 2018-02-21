@@ -86,8 +86,13 @@ struct Constants {
     static let TIME_ANALYTICS_TABLE_VIEW_CONTROLLER = "TimeAnalyticsTableViewController"
     static let ACTIVITY_FEED_TABLE_VIEW_CELL = "ActivityFeedTableViewCell"
     static let TROPHIES_ACHIEVED_VIEW_CONTROLLER = "TrophiesAchievedViewController"
+    static let LEADERBOARD_TABLE_VIEW_CONTROLLER = "LeaderboardTableViewController"
+    static let LEADERBOARD_TABLE_VIEW_CELL = "LeaderboardTableViewCell"
+    static let PROFILE_VIEW_CONTROLLER = "ProfileViewController"
+    static let MAIN_STORYBOARD = "Main"
     
     static let PAGE = "page"
+    static let PAGE_SIZE = "page_size"
     static let PARENT = "parent"
     static let STATE = "state"
     static let STATE_RUNNING = "Running"

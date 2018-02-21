@@ -26,20 +26,199 @@
 import Alamofire
 import ObjectMapper
 
-class ActivityFeedPager: TPBasePager<ActivityFeed> {
+class ActivityFeedPager {
     
-    override func getItems(page: Int) {
+    var response: ApiResponse<ActivityFeedResponse>?
+    
+    /**
+     * Next page to request
+     */
+    var page: Int = 1
+    
+    /**
+     * All resources retrieved
+     */
+    var activities = OrderedDictionary<Int, ActivityFeed>()
+    var contentTypes = [Int: ContentType]()
+    var users = [Int: User]()
+    var chapters = [Int: Chapter]()
+    var contents = [Int: Content]()
+    var contentAttempts = [Int: ContentAttempt]()
+    var htmlContents = [Int: HtmlContent]()
+    var videos = [Int: Video]()
+    var attachments = [Int: Attachment]()
+    var exams = [Int: Exam]()
+    var posts = [Int: Post]()
+    var postCategories = [Int: Category]()
+    
+    /**
+     * Query Params to be passed
+     */
+    public var queryParams = [String: String]()
+    
+    /**
+     * Are more pages available?
+     */
+    var hasMore: Bool = false
+    
+    var completion: ((OrderedDictionary<Int, ActivityFeed>?, TPError?) -> Void)? = nil
+    
+    var resonseHandler: ((ApiResponse<ActivityFeedResponse>?, TPError?) -> Void)? = nil
+    
+    init() {
+        resonseHandler = { response, error in
+            if let error = error {
+                self.hasMore = false;
+                self.completion!(self.activities, error)
+            } else {
+                self.response = response
+                self.onSuccess()
+            }
+        }
+    }
+    
+    func reset() {
+        page = 1
+        queryParams.removeAll()
+        response = nil
+        hasMore = true
+    }
+    
+    public func next(
+            completion: @escaping(OrderedDictionary<Int, ActivityFeed>?, TPError?) -> Void) {
+        
+        self.completion = completion
+        getItems(page: page);
+    }
+    
+    func onSuccess() {
+        let activities: [ActivityFeed] = response!.results.activities
+        #if DEBUG
+            print("response?.next:" + (response!.next))
+            print("response?.previous:" + (response!.previous))
+            print("response?.count:"+String(response!.count))
+        #endif
+        let emptyPage = activities.isEmpty
+        if !emptyPage {
+            // DON'T CHANGE THE BELOW ORDER
+            response!.results.contentTypes.forEach { contentType in
+                contentTypes.updateValue(contentType, forKey: contentType.id)
+            }
+            response!.results.users.forEach { user in
+                users.updateValue(user, forKey: user.id!)
+            }
+            response!.results.chapters.forEach { chapter in
+                chapters.updateValue(chapter, forKey: chapter.id)
+            }
+            response!.results.chapterContentAttempts.forEach { contentAttempt in
+                contentAttempts.updateValue(contentAttempt, forKey: contentAttempt.id)
+            }
+            response!.results.htmlContents.forEach { htmlContent in
+                htmlContents.updateValue(htmlContent, forKey: htmlContent.id)
+            }
+            response!.results.videoContents.forEach { video in
+                videos.updateValue(video, forKey: video.id)
+            }
+            response!.results.attachmentContents.forEach { attachment in
+                attachments.updateValue(attachment, forKey: attachment.id)
+            }
+            response!.results.exams.forEach { exam in
+                exams.updateValue(exam, forKey: exam.id!)
+            }
+            response!.results.chapterContents.forEach { content in
+                contents.updateValue(content, forKey: content.id)
+            }
+            response!.results.posts.forEach { post in
+                posts.updateValue(post, forKey: post.id)
+            }
+            response!.results.postCategories.forEach { postCategory in
+                postCategories.updateValue(postCategory, forKey: postCategory.id)
+            }
+            for activity in activities {
+                let activity: ActivityFeed? = register(activity: activity)
+                if activity == nil {
+                    continue;
+                }
+                self.activities[activity!.id] = activity!
+            }
+        }
+        page += 1;
+        hasMore = hasNext() && !emptyPage
+        #if DEBUG
+            print("self.hasMore:\(hasMore)")
+            print("hasNext():\(hasNext())")
+        #endif
+        completion!(self.activities, nil)
+    }
+    
+    func hasNext() -> Bool {
+        return response == nil || (response != nil && !(response!.next.isEmpty));
+    }
+    
+    func getItems(page: Int) {
         queryParams.updateValue(Constants.ADMIN, forKey: Constants.FILTER)
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
+            type: ActivityFeedResponse.self,
             endpointProvider: TPEndpointProvider(.getActivityFeed, queryParams: queryParams),
-            completion: resonseHandler!,
-            type: ActivityFeed.self
+            completion: resonseHandler!
         )
     }
     
-    override func getId(resource: ActivityFeed) -> Int {
-        return resource.id!
+    func register(activity: ActivityFeed) -> ActivityFeed? {
+        
+        activity.actor = users[Int(activity.actorObjectId)!]
+        
+        let actionObjectId = Int(activity.actionObjectObjectId)!
+        switch contentTypes[activity.actionObjectContentType]!.model {
+        case "chapter":
+            activity.actionObject = chapters[actionObjectId]
+            activity.actionObjectType = String(describing: Chapter.self)
+            break
+        case "chaptercontent":
+            activity.actionObject = contents[actionObjectId]
+            activity.actionObjectType = String(describing: Content.self)
+            break
+        case "chaptercontentattempt":
+            activity.actionObject = contentAttempts[actionObjectId]
+            activity.actionObjectType = String(describing: ContentAttempt.self)
+            break
+        case "post":
+            activity.actionObject = posts[actionObjectId]
+            activity.actionObjectType = String(describing: Post.self)
+            break
+        default:
+            break
+        }
+        
+        if activity.targetObjectId != nil {
+            let targetObjectId = Int(activity.targetObjectId)!
+            switch contentTypes[activity.targetContentType]!.model {
+            case "chapter":
+                activity.target = chapters[targetObjectId]
+                break
+            case "chaptercontent":
+                activity.target = contents[targetObjectId]
+                break
+            case "post":
+                activity.target = posts[targetObjectId]
+                break
+            case "postcategory":
+                activity.target = postCategories[targetObjectId]
+                break
+            default:
+                break
+            }
+        }
+        if activity.actor == nil {
+            debugPrint("activity.actor not Exists", activity.id)
+            return nil
+        }
+        if activity.actionObject == nil {
+            debugPrint("activity.actionObject not Exists", activity.id)
+            return nil
+        }
+        return activity
     }
     
 }

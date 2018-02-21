@@ -25,12 +25,10 @@
 
 import UIKit
 
-class PostTableViewController: TPBasePagedTableViewController<Post>,
-    BasePagedTableViewDelegate {
+class PostTableViewController: TPBasePagedTableViewController<Post> {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(pager: PostPager(), coder: aDecoder)
-        delegate = self
     }
     
     // MARK: - Table view data source
@@ -42,15 +40,13 @@ class PostTableViewController: TPBasePagedTableViewController<Post>,
         return cell
     }
     
-    func onItemsLoaded() {
-        items = items.sorted(by: {
-            FormatDate.compareDate(dateString1:  $0.publishedDate!, dateString2: $1.publishedDate!)
-        })
-    }
-    
     override func setEmptyText() {
         emptyView.setValues(image: Images.NewsFlatIcon.image, title: Strings.NO_POSTS,
                             description: Strings.NO_POSTS_DESCRIPTION)
+    }
+    
+    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
+        UIUtils.showProfileDetails(self)
     }
     
 }
