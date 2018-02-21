@@ -41,7 +41,9 @@ class DBInstance {
     }
     
     static func clearAllTables() {
-        sharedInstance.database.deleteAll()
+        try! sharedInstance.database.write {
+            sharedInstance.database.deleteAll()
+        }
     }
     
 }
