@@ -55,7 +55,7 @@ public class Exam {
     var immediateFeedback: Bool?;
     var deviceAccessControl: String?;
     var totalMarks: String = ""
-    var passPercentage: Int = 0
+    var passPercentage: Double = 0
     var showScore: Bool = true
     var showPercentile: Bool = true
     var studentsAttemptedCount: Int!

@@ -162,6 +162,13 @@ class TestReportViewController: UIViewController {
             contentDetailPageViewController as! ContentDetailPageViewController
         
         contentDetailPageViewController.dismiss(animated: false, completion: {
+            if Double(self.attempt.percentage)! >= self.exam.passPercentage {
+                let currentIndex = contentDetailPageViewController.getCurrentIndex()
+                let nextContent =
+                    contentDetailPageViewController.contents[currentIndex]
+                
+                nextContent.isLocked = false
+            }
             contentDetailPageViewController.updateCurrentExamContent()
         })
     }
