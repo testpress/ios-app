@@ -23,6 +23,8 @@
 //  THE SOFTWARE.
 //
 
+import IQKeyboardManagerSwift
+import RealmSwift
 import UIKit
 
 @UIApplicationMain
@@ -38,7 +40,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = Colors.getRGB(Colors.PRIMARY)
         UIBarButtonItem.appearance().tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
         UINavigationBar.appearance().titleTextAttributes =
-            [NSForegroundColorAttributeName: Colors.getRGB(Colors.PRIMARY_TEXT)]
+            [NSAttributedStringKey.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
+        
+        UIApplication.shared.isStatusBarHidden = false
+        let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
+            as? UIView
+
+        statusBar?.backgroundColor = Colors.getRGB(Colors.PRIMARY)
+        
+        // Set tab bar item custom offset only on iPhone
+        if !UIUtils.isiPad() {
+            UITabBarItem.appearance().titlePositionAdjustment =
+                UIOffset(horizontal: 0, vertical: -5)
+        }
+        
+        IQKeyboardManager.sharedManager().enable = true
         
         // Clear keychain items if app is launching the first time after installation
         let userDefaults = UserDefaults.standard
@@ -48,6 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
             userDefaults.synchronize() // Forces the app to update UserDefaults
         }
+        
+        let config = Realm.Configuration(schemaVersion: 0)
+        Realm.Configuration.defaultConfiguration = config
         
         // Launch the view controller based on user login state
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

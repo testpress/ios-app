@@ -53,8 +53,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         attemptItem?.currentReview = attemptItem!.review
         
         indexView!.text = String("\((attemptItem?.index)! + 1)")
-        webView.loadHTMLString(WebViewUtils.getHeader() + WebViewUtils.getTestEngineHeader() +
-            getQuestionHtml(), baseURL: Bundle.main.bundleURL)
+        webView.loadHTMLString(WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader()
+            + getQuestionHtml(), baseURL: Bundle.main.bundleURL)
     }
 
     func userContentController(_ userContentController: WKUserContentController,

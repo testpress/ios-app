@@ -42,8 +42,8 @@ public class Exam {
     var enableRanks: Bool?;
     var rankPublishingDate: String?;
     var attemptsUrl: String?;
-    var attemptsCount: Int?;
-    var pausedAttemptsCount: Int?;
+    var attemptsCount: Int!;
+    var pausedAttemptsCount: Int!;
     var allowPdf: Bool?;
     var allowQuestionPdf: Bool?;
     var created: String?;
@@ -54,20 +54,20 @@ public class Exam {
     var allowPreemptiveSectionEnding: Bool?;
     var immediateFeedback: Bool?;
     var deviceAccessControl: String?;
+    var totalMarks: String = ""
+    var passPercentage: Double = 0
+    var showScore: Bool = true
+    var showPercentile: Bool = true
+    var studentsAttemptedCount: Int!
     
     public required init?(map: Map) {
     }
     
     func hasStarted() -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        
-        guard let date = dateFormatter.date(from: startDate!) else {
+        guard let date = FormatDate.getDate(from: startDate!) else {
             assert(false, "no date from string")
             return true
         }
-        
         return date < Date()
     }
 }
@@ -102,5 +102,10 @@ extension Exam: TestpressModel {
         allowPreemptiveSectionEnding <- map["allow_preemptive_section_ending"]
         immediateFeedback <- map["immediate_feedback"]
         deviceAccessControl <- map["device_access_control"]
+        totalMarks <- map["total_marks"]
+        passPercentage <- map["pass_percentage"]
+        showScore <- map["show_score"]
+        showPercentile <- map["show_percentile"]
+        studentsAttemptedCount <- map["students_attempted_count"]
     }
 }

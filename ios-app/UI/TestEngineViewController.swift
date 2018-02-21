@@ -27,38 +27,25 @@ import UIKit
 
 class TestEngineViewController: BaseQuestionsPageViewController {
     
-    @IBOutlet weak var remainingTimeLabel: UILabel!
-    @IBOutlet weak var pauseButtonLayout: UIStackView!
-    
     var remainingTime: Int = 0
     var timer: Timer = Timer()
-    var previousQuestionIndex: Int = 0
+    var parentSlidingViewController: TestEngineSlidingViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        questionsPageViewDelegate = self
         nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
         nextButton.setTitle("END", for: .disabled)
         nextButton.setTitle("NEXT", for: .normal)
         
         let pauseButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onPressPauseButton(sender:)))
-        pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
+        parentSlidingViewController.pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
     }
     
     override func getQuestionsDataSource() -> BaseQuestionsDataSource {
         return QuestionsControllerSource(attemptItems)
-    }
-    
-    override func onFinishLoadingQuestions() {
-        remainingTime = getSecondsFromInputString(attempt.remainingTime)
-        startTimer()
-    }
-    
-    override func setCurrentQuestion(index: Int) {
-        saveAnswer(index: previousQuestionIndex)
-        previousQuestionIndex = index
-        super.setCurrentQuestion(index: index)
     }
     
     override func onClickNextButton(sender: UITapGestureRecognizer) {
@@ -72,13 +59,15 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         super.onClickNextButton(sender: sender)
     }
     
-    func updateRemainingTime() {
+    @objc func updateRemainingTime() {
         if(remainingTime > 0) {
             remainingTime -= 1
             let hours = (remainingTime / (60 * 60)) % 12
             let minutes = (remainingTime / 60) % 60
             let seconds = remainingTime % 60
-            remainingTimeLabel.text = String(format: "%d:%02d:%02d", hours, minutes, seconds)
+            parentSlidingViewController.remainingTimeLabel.text =
+                String(format: "%d:%02d:%02d", hours, minutes, seconds)
+            
             if hours != 0 || minutes != 0 || seconds != 0 {
                 if (remainingTime % 60) == 0 {
                     sendHeartBeat();
@@ -156,11 +145,23 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func endExam() {
-        TPApiClient.updateAttemptState(
-            endpointProvider: TPEndpointProvider(
-                .endExam,
+        var endpointProvider: TPEndpointProvider
+        if contentAttempt != nil {
+            endpointProvider = TPEndpointProvider(.put, url: contentAttempt.getEndAttemptUrl())
+            endExam(type: ContentAttempt.self, endpointProvider: endpointProvider)
+        } else {
+            endpointProvider = TPEndpointProvider(
+                .put,
                 url: attempt!.url! + TPEndpoint.endExam.urlPath
-            ),
+            )
+            endExam(type: Attempt.self, endpointProvider: endpointProvider)
+        }
+    }
+    
+    func endExam<T: TestpressModel>(type: T.Type, endpointProvider: TPEndpointProvider) {
+        TPApiClient.request(
+            type: type,
+            endpointProvider: endpointProvider,
             completion: {
                 attempt, error in
                 if let error = error {
@@ -168,11 +169,16 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                     return
                 }
                 
-                self.attempt = attempt
+                if attempt is ContentAttempt {
+                    self.contentAttempt = attempt as! ContentAttempt
+                    self.attempt = self.contentAttempt.assessment
+                } else {
+                    self.attempt = attempt as? Attempt
+                }
                 self.hideLoadingProgress(completionHandler: {
                     self.gotoTestReport()
                 })
-            }
+        }
         )
     }
     
@@ -181,7 +187,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         super.showAlert(error: error, retryHandler: retryHandler)
     }
     
-    func onPressPauseButton(sender: UITapGestureRecognizer) {
+    @objc func onPressPauseButton(sender: UITapGestureRecognizer) {
         let alert = UIAlertController(title: Strings.EXIT_EXAM,
                                       message: Strings.PAUSE_MESSAGE,
                                       preferredStyle: .alert)
@@ -204,11 +210,11 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         })
     }
     
-    func closeAlert(gesture: UITapGestureRecognizer) {
+    @objc func closeAlert(gesture: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func onPressStopButton() {
+    func onPressStopButton() {
         var alert: UIAlertController
         alert = UIAlertController(
             title: Strings.EXIT_EXAM,
@@ -234,39 +240,23 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    override func goBack() {
-        let presentingViewController = self.presentingViewController?.presentingViewController
-        if presentingViewController is UITabBarController {
-            let tabViewController =
-                presentingViewController?.childViewControllers[0] as! ExamsTabViewController
-            
-            tabViewController.dismiss(animated: false, completion: {
-                if tabViewController.currentIndex != 2 {
-                    // Move to histroy tab
-                    tabViewController.moveToViewController(at: 2, animated: true)
-                }
-                // Refresh the list items
-                tabViewController.reloadPagerTabStripView()
-            })
-        } else if presentingViewController is AttemptsListViewController {
-            let attemptsListViewController = presentingViewController as! AttemptsListViewController
-            attemptsListViewController.dismiss(animated: false, completion: {
-                // Remove exsiting items
-                attemptsListViewController.attempts.removeAll()
-                // Load new attempts list with progress
-                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
-            })
-        }
-    }
-    
     func gotoTestReport() {
         let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier:
-            Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
-        
-        viewController.exam = exam
-        viewController.attempt = attempt
-        present(viewController, animated: true, completion: nil)
+        if contentAttempt != nil {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TROPHIES_ACHIEVED_VIEW_CONTROLLER) as! TrophiesAchievedViewController
+            
+            viewController.exam = exam
+            viewController.contentAttempt = contentAttempt
+            present(viewController, animated: true, completion: nil)
+        } else {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
+            
+            viewController.exam = exam
+            viewController.attempt = attempt
+            present(viewController, animated: true, completion: nil)
+        }
     }
     
     func getSecondsFromInputString(_ inputString: String?) -> Int {
@@ -288,11 +278,77 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:
             #selector(self.updateRemainingTime), userInfo: nil, repeats: true)
+        
+        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
     }
     
     override func showLoadingProgress() {
         timer.invalidate()
         super.showLoadingProgress()
     }
-    
+
 }
+
+extension TestEngineViewController: QuestionsPageViewDelegate {
+    
+    func questionsDidLoad() {
+        remainingTime = getSecondsFromInputString(attempt.remainingTime)
+        startTimer()
+    }
+    
+    func currentQuestionDidChange(previousIndex: Int, currentIndex: Int) {
+         saveAnswer(index: previousIndex)
+    }
+    
+    func goBack() {
+        let presentingViewController = self.presentingViewController?.presentingViewController
+        if self.presentingViewController! is ContentDetailPageViewController {
+            
+            let contentDetailPageViewController  =
+                self.presentingViewController! as! ContentDetailPageViewController
+            
+            contentDetailPageViewController.dismiss(animated: false, completion: {
+                contentDetailPageViewController.updateCurrentExamContent()
+            })
+        } else if presentingViewController is UITabBarController {
+            let tabViewController =
+                presentingViewController?.childViewControllers[0] as! ExamsTabViewController
+            
+            tabViewController.dismiss(animated: false, completion: {
+                if tabViewController.currentIndex != 2 {
+                    // Move to histroy tab
+                    tabViewController.moveToViewController(at: 2, animated: true)
+                }
+                // Refresh the list items
+                tabViewController.reloadPagerTabStripView()
+            })
+        } else if presentingViewController is AttemptsListViewController {
+            let attemptsListViewController = presentingViewController as! AttemptsListViewController
+            attemptsListViewController.dismiss(animated: false, completion: {
+                // Remove exsiting items
+                attemptsListViewController.attempts.removeAll()
+                // Load new attempts list with progress
+                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
+            })
+        } else if presentingViewController is ContentDetailPageViewController {
+            
+            let contentDetailPageViewController =
+                presentingViewController as! ContentDetailPageViewController
+            
+            contentDetailPageViewController.dismiss(animated: false, completion: {
+                contentDetailPageViewController.updateCurrentExamContent()
+            })
+        } else {
+            debugPrint(type(of: presentingViewController!))
+            dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+extension TestEngineViewController: SlidingMenuDelegate {
+    
+    func dismissViewController() {
+        onPressStopButton()
+    }
+}
+

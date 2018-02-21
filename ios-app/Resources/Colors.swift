@@ -25,17 +25,21 @@
 
 import UIKit
 
-public class Colors {
+class Colors {
     
     static let PRIMARY = "#004D96"
     static let PRIMARY_TEXT = "#ffffff"
     static let MATERIAL_GREEN = "#00ccaa"
     static let MATERIAL_RED = "#e65c6c"
+    static let BLACK_TEXT = "#333333"
     static let GRAY_LIGHT = "#e6e6e6"
+    static let GRAY_LIGHT_DARK = "#cccccc"
     static let GRAY_MEDIUM = "#999999"
     static let TAB_TEXT_COLOR = "#888888"
+    static let ORANGE = "#ffa319"
+    static let BLUE = "#1793e6"
     
-    static func getRGB (_ hex:String) -> UIColor {
+    static func getRGB (_ hex:String, alpha: CGFloat = 1) -> UIColor {
         
         var cString:String = hex.trimmingCharacters(
             in: CharacterSet.whitespacesAndNewlines).uppercased()
@@ -59,7 +63,7 @@ public class Colors {
         return UIColor(red: CGFloat(r) / 255.0,
                        green: CGFloat(g) / 255.0,
                        blue: CGFloat(b) / 255.0,
-                       alpha: CGFloat(1))
+                       alpha: alpha)
     }
     
 }

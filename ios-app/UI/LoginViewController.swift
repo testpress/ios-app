@@ -114,7 +114,7 @@ class LoginViewController: BaseTextFieldViewController {
         present(tabViewController, animated: true, completion: nil)
     }
     
-    func closeAlert(gesture: UITapGestureRecognizer) {
+    @objc func closeAlert(gesture: UITapGestureRecognizer) {
         dismiss(animated: true)
     }
 

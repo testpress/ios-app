@@ -138,7 +138,8 @@ class SignUpViewController: BaseTextFieldViewController {
             setFieldError(textField: emailField, errorMessage: Strings.ENTER_VALID_EMAIL)
             return false
         }
-        if passwordField.text == nil || passwordField.text!.characters.count < 6 {
+        let passwordText = passwordField.text
+        if passwordText == nil || passwordText!.count < 6 {
             confirmPasswordField.text = ""
             setFieldError(textField: passwordField,
                           errorMessage: Strings.PASSWORD_MUST_HAVE_SIX_CHARACTERS)
@@ -155,12 +156,12 @@ class SignUpViewController: BaseTextFieldViewController {
     func setFieldError(textField: UITextField, errorMessage: String) {
         textField.text = ""
         textField.attributedPlaceholder = NSAttributedString(string: errorMessage,
-            attributes: [NSForegroundColorAttributeName: UIColor.red])
+            attributes: [NSAttributedStringKey.foregroundColor: UIColor.red])
         
         textField.becomeFirstResponder()
     }
     
-    func closeAlert(gesture: UITapGestureRecognizer) {
+    @objc func closeAlert(gesture: UITapGestureRecognizer) {
         dismiss(animated: true)
     }
     

@@ -26,7 +26,7 @@
 import ObjectMapper
 
 public class Attempt {
-    var url: String?;
+    var url: String!;
     var id: Int?;
     var date: String?;
     var totalQuestions: Int?;
@@ -42,9 +42,11 @@ public class Attempt {
     var remainingTime: String?;
     var timeTaken: String?;
     var state: String?;
-    var percentile: String?;
+    var percentile: Double = 0
+    var percentage: String = ""
     var speed: Int?
     var accuracy: Int?
+    var exam: Int!
     
     public required init?(map: Map) {
     }
@@ -69,7 +71,9 @@ extension Attempt: TestpressModel {
         timeTaken <- map["time_taken"]
         state <- map["state"]
         percentile <- map["percentile"]
+        percentage <- map["percentage"]
         speed <- map["speed"]
         accuracy <- map["accuracy"]
+        exam <- map["exam"]
     }
 }

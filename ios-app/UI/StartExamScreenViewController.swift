@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import SlideMenuControllerSwift
 import UIKit
 
 class StartExamScreenViewController: UIViewController {
@@ -45,7 +46,9 @@ class StartExamScreenViewController: UIViewController {
     
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
     var emptyView: EmptyView!
-    var exam: Exam?
+    var content: Content!
+    var contentAttempt: ContentAttempt!
+    var exam: Exam!
     var attempt: Attempt?
     
     override func viewDidLoad() {
@@ -53,8 +56,14 @@ class StartExamScreenViewController: UIViewController {
         
         emptyView = EmptyView.getInstance(parentView: scrollView)
         view.addSubview(emptyView)
-        examTitle.text = exam?.title!
-        questionsCount.text = String(describing: (exam?.numberOfQuestions)!)
+        if content != nil && exam == nil {
+            exam = content.exam
+            if contentAttempt != nil && attempt == nil {
+                attempt = contentAttempt.assessment
+            }
+        }
+        examTitle.text = exam.title
+        questionsCount.text = String(exam.numberOfQuestions!)
         if attempt?.remainingTime != nil {
             duration.text = attempt?.remainingTime!
             durationLabel.text = "Time Remaining"
@@ -74,18 +83,24 @@ class StartExamScreenViewController: UIViewController {
         if exam?.deviceAccessControl == "web" {
             // Hide start button for web only exams
             startButtonLayout.isHidden = true
+        } else if content != nil && content.isLocked {
+            webOnlyExamLabel.text = Strings.SCORE_GOOD_IN_PREVIOUS
+            startButtonLayout.isHidden = true
+        } else if !exam!.hasStarted() {
+            webOnlyExamLabel.text =
+                Strings.CAN_START_EXAM_ONLY_AFTER + FormatDate.format(dateString: exam?.startDate)
+            
+            startButtonLayout.isHidden = true
         } else {
             webOnlyExamLabel.isHidden = true
             UIUtils.setButtonDropShadow(startButton)
-            if !exam!.hasStarted() {
-                startButtonLayout.isHidden = true
-            } else if attempt?.state! == Constants.STATE_RUNNING {
+            if attempt?.state! == Constants.STATE_RUNNING {
                 startButton.setTitle("RESUME", for: .normal)
-                navigationBarItem.title = Strings.RESUME_EXAM
+                navigationBarItem?.title = Strings.RESUME_EXAM
             }
         }
     }
-
+    
     @IBAction func startExam(_ sender: UIButton) {
         present(alertController, animated: false, completion: nil)
         startButton.isHidden = true
@@ -98,18 +113,30 @@ class StartExamScreenViewController: UIViewController {
     
     func startAttempt() {
         var endpointProvider: TPEndpointProvider
-        if attempt == nil {
+        if content != nil && contentAttempt == nil {
             endpointProvider = TPEndpointProvider(
-                .createAttempt,
+                .post,
+                url: (content?.attemptsUrl)!
+            )
+            startAttempt(type: ContentAttempt.self, endpointProvider: endpointProvider)
+            return
+        } else if attempt == nil {
+            endpointProvider = TPEndpointProvider(
+                .post,
                 url: (exam?.attemptsUrl)!
             )
         } else {
             endpointProvider = TPEndpointProvider(
-                .resumeAttempt,
+                .put,
                 url: attempt!.url! + TPEndpoint.resumeAttempt.urlPath
             )
         }
-        TPApiClient.updateAttemptState(
+        startAttempt(type: Attempt.self, endpointProvider: endpointProvider)
+    }
+    
+    func startAttempt<T: TestpressModel>(type: T.Type, endpointProvider: TPEndpointProvider) {
+        TPApiClient.request(
+            type: type,
             endpointProvider: endpointProvider,
             completion: {
                 attempt, error in
@@ -117,49 +144,58 @@ class StartExamScreenViewController: UIViewController {
                 if let error = error {
                     debugPrint(error.message ?? "No error")
                     debugPrint(error.kind)
-                    var retryButtonText: String
-                    var retryHandler: () -> Void
+                    var retryButtonText: String?
+                    var retryHandler: (() -> Void)?
                     if error.kind == .network {
                         retryButtonText = Strings.TRY_AGAIN
                         retryHandler = {
                             self.present(self.alertController, animated: false, completion: nil)
                             self.startAttempt()
                         }
-                    } else {
-                        retryButtonText = Strings.OK
-                        retryHandler = {
-                            self.back()
-                        }
                     }
                     let (image, title, description) = error.getDisplayInfo()
                     self.emptyView.show(image: image, title: title, description: description,
-                                        retryButtonText: retryButtonText, retryHandler: retryHandler)
+                                        retryButtonText: retryButtonText,
+                                        retryHandler: retryHandler)
                     
                     self.alertController.dismiss(animated: true, completion: nil)
                     return
                 }
                 
                 self.alertController.dismiss(animated: true, completion: nil)
-                self.gotoTestEngine(attempt: attempt!)
-            }
-        )
+                if attempt is ContentAttempt {
+                    self.contentAttempt = attempt as! ContentAttempt
+                    self.attempt = self.contentAttempt.assessment
+                } else {
+                    self.attempt = attempt as? Attempt
+                }
+                self.gotoTestEngine()
+        })
     }
     
-    func gotoTestEngine(attempt: Attempt) {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier:
-            Constants.TEST_ENGINE_VIEW_CONTROLLER) as! TestEngineViewController
+    func gotoTestEngine() {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let slideMenuController = storyboard.instantiateViewController(withIdentifier:
+            Constants.TEST_ENGINE_NAVIGATION_CONTROLLER) as! UINavigationController
+        
+        let viewController =
+            slideMenuController.viewControllers.first as! TestEngineSlidingViewController
+        
         viewController.exam = exam
         viewController.attempt = attempt
-        present(viewController, animated: true, completion: nil)
+        viewController.contentAttempt = contentAttempt
+        present(slideMenuController, animated: true, completion: nil)
     }
     
     // Set frames of the views in this method to support both portrait & landscape view
     override func viewDidLayoutSubviews() {
         // Add gradient shadow layer to the shadow container view
-        let bottomGradient = CAGradientLayer()
-        bottomGradient.frame = bottomShadowView.bounds
-        bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
-        bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
+        if bottomShadowView != nil {
+            let bottomGradient = CAGradientLayer()
+            bottomGradient.frame = bottomShadowView.bounds
+            bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+            bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
+        }
         
         // Set scroll view content height to support the scroll
         scrollView.contentSize.height = contentView.frame.size.height

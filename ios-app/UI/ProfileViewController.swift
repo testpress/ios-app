@@ -32,7 +32,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIStackView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contentStackView: UIStackView!
     @IBOutlet weak var tabBar: UITabBarItem!
     @IBOutlet weak var score: UILabel!
     @IBOutlet weak var testsTaken: UILabel!
@@ -46,7 +48,8 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emptyView = EmptyView.getInstance(parentView: contentView)
+        emptyView = EmptyView.getInstance(parentView: contentStackView)
+        emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
     }
     
@@ -60,8 +63,9 @@ class ProfileViewController: UIViewController {
     
     func getProfile() {
         loading = true
-        activityIndicator = UIUtils.initActivityIndicator(parentView: contentView)
-        activityIndicator?.center = CGPoint(x: contentView.center.x, y: contentView.center.y)
+        activityIndicator = UIUtils.initActivityIndicator(parentView: contentStackView)
+        activityIndicator?.frame = view.frame
+        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
         activityIndicator?.startAnimating()
         TPApiClient.getProfile(
             endpointProvider: TPEndpointProvider(.getProfile),
@@ -80,6 +84,7 @@ class ProfileViewController: UIViewController {
                     if (self.activityIndicator?.isAnimating)! {
                         self.activityIndicator?.stopAnimating()
                     }
+                    self.scrollView.contentSize.height = self.view.frame.size.height - 150
                     let (image, title, description) = error.getDisplayInfo()
                     self.emptyView.show(image: image, title: title, description: description,
                                         retryHandler: retryHandler)
@@ -109,6 +114,7 @@ class ProfileViewController: UIViewController {
         accuracy.text = "\(user.averageAccuracy!)%"
         activityIndicator?.stopAnimating()
         loading = false
+        viewDidLayoutSubviews()
     }
     
     @IBAction func logout(_ sender: UIButton) {
@@ -121,6 +127,7 @@ class ProfileViewController: UIViewController {
             style: UIAlertActionStyle.destructive,
             handler: { action in
                 
+                DBInstance.clearAllTables()
                 KeychainTokenItem.clearKeychainItems()
                 let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
                     Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
@@ -132,12 +139,39 @@ class ProfileViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    @IBAction func rateUs() {
+        if let url = URL(string: Constants.APP_STORE_LINK),
+            UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:])
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
+    @IBAction func shareApp() {
+        let textToShare = [ Constants.APP_SHARE_MESSAGE ]
+        let activityViewController =
+            UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        
+        activityViewController.popoverPresentationController?.sourceView = view
+        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop ]
+        present(activityViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func back() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // Set frames of the views in this method to support both portrait & landscape view
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         // Set scroll view content height to support the scroll
-        scrollView.contentSize.height = contentView.frame.size.height
+        let height = contentStackView.frame.size.height
+        contentViewHeightConstraint.constant = height
+        scrollView.contentSize.height = height
+        contentView.layoutIfNeeded()
     }
     
 }

@@ -26,7 +26,7 @@
 import Alamofire
 import ObjectMapper
 
-public class ExamPager: TPBasePager<Exam> {
+class ExamPager: TPBasePager<Exam> {
     
     var subclass: String
     

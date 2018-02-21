@@ -30,10 +30,11 @@ public class User {
     var email: String?
     var password: String?
     var phone: String?
-    var id: Int?
+    var id: Int!
     var url: String?
-    var displayName: String?
+    var displayName: String!
     var photo: String?
+    var mediumImage: String!
     var largeImage: String?
     var averageSpeed: Int?
     var averageAccuracy: Int?
@@ -55,6 +56,7 @@ extension User: TestpressModel {
         url <- map["url"]
         displayName <- map["display_name"]
         photo <- map["photo"]
+        mediumImage <- map["medium_image"]
         largeImage <- map["large_image"]
         averageSpeed <- map["average_speed"]
         averageAccuracy <- map["average_accuracy"]
