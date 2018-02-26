@@ -101,6 +101,7 @@
 		2F763D0F1FBECBBC0033D495 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D0E1FBECBBC0033D495 /* Chapter.swift */; };
 		2F763D111FBECFD30033D495 /* ChapterPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D101FBECFD30033D495 /* ChapterPager.swift */; };
 		2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */; };
+		2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8411BB2043D5C500193A66 /* ResetPasswordViewController.swift */; };
 		2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */; };
 		2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */; };
 		2F936E821FDAD376008C353A /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F936E811FDAD376008C353A /* Charts.framework */; };
@@ -291,6 +292,7 @@
 		2F763D0E1FBECBBC0033D495 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		2F763D101FBECFD30033D495 /* ChapterPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterPager.swift; sourceTree = "<group>"; };
 		2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCollectionViewCell.swift; sourceTree = "<group>"; };
+		2F8411BB2043D5C500193A66 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectAnalyticsTabViewController.swift; sourceTree = "<group>"; };
 		2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallSubjectAnalyticsViewController.swift; sourceTree = "<group>"; };
 		2F936E811FDAD376008C353A /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
@@ -595,6 +597,7 @@
 				2FC0F2901F861A860092BFDC /* QuestionsControllerSource.swift */,
 				2F1474781F8B898F0017151B /* QuestionListViewController.swift */,
 				2FC0F2911F861A860092BFDC /* QuestionsViewController.swift */,
+				2F8411BB2043D5C500193A66 /* ResetPasswordViewController.swift */,
 				2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */,
 				2FC0F2921F861A860092BFDC /* ReviewQuestionsDataSource.swift */,
 				2F70F4D81F9F1F8200D30755 /* ReviewQuestionListViewController.swift */,
@@ -860,6 +863,7 @@
 				2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */,
 				2FC0F2E51F863AE00092BFDC /* TPAuthToken.swift in Sources */,
 				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,
+				2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */,
 				2FC0F3091F863BA90092BFDC /* ReviewQuestionsDataSource.swift in Sources */,
 				2FC0F2F31F863B1B0092BFDC /* TPEndpoint.swift in Sources */,
 				2FC0F2FD1F863B850092BFDC /* BaseQuestionsViewController.swift in Sources */,
