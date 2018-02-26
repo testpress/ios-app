@@ -125,6 +125,7 @@ struct Strings {
     static let LEADERBOARD = "LEADERBOARD"
     static let TARGETS_AND_THREADS = "TARGETS / THREADS"
     
+    static let EXAM_ENDED = "This exam has ended"
     static let CAN_START_EXAM_ONLY_AFTER = "You can attempt this exam only after \n"
     static let SCORE_GOOD_IN_PREVIOUS = "You need to get good score in your previous test to attempt this."
     

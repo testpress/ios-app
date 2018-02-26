@@ -91,6 +91,9 @@ class StartExamScreenViewController: UIViewController {
                 Strings.CAN_START_EXAM_ONLY_AFTER + FormatDate.format(dateString: exam?.startDate)
             
             startButtonLayout.isHidden = true
+        } else if exam.hasEnded() {
+            webOnlyExamLabel.text = Strings.EXAM_ENDED
+            startButtonLayout.isHidden = true
         } else {
             webOnlyExamLabel.isHidden = true
             UIUtils.setButtonDropShadow(startButton)
