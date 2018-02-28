@@ -33,6 +33,7 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var navigationbarItem: UINavigationItem!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signUpLayout: UIStackView!
     
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
@@ -41,6 +42,9 @@ class LoginViewController: BaseTextFieldViewController {
         
         navigationbarItem.title = UIUtils.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
+        
+        // TODO: Set using institute settings
+        signUpLayout.isHidden = false
         
         // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
