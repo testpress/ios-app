@@ -77,6 +77,7 @@ public class Exam {
         }
         guard let date = FormatDate.getDate(from: endDate!) else {
             assert(false, "no date from string")
+            return false
         }
         return date < Date()
     }
