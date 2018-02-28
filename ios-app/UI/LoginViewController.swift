@@ -44,7 +44,7 @@ class LoginViewController: BaseTextFieldViewController {
         UIUtils.setButtonDropShadow(loginButton)
         
         // TODO: Set using institute settings
-        signUpLayout.isHidden = false
+        signUpLayout.isHidden = true
         
         // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField

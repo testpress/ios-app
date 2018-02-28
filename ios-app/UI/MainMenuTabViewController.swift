@@ -31,6 +31,7 @@ class MainMenuTabViewController: UITabBarController {
         super.viewDidLoad()
         
         viewControllers?.remove(at: 2) // Exams list
+        viewControllers?.remove(at: 0) // Activity Feed
     }
     
 }
