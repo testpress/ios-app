@@ -2280,6 +2280,52 @@
             </objects>
             <point key="canvasLocation" x="-482" y="-631"/>
         </scene>
+        <!--In App Browser View Controller-->
+        <scene sceneID="RIl-Xs-FCy">
+            <objects>
+                <viewController storyboardIdentifier="InAppBrowserViewController" id="JPt-BF-aqz" customClass="InAppBrowserViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zmK-LH-lZ8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hF-FS-bop">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem id="EyC-hq-4ae">
+                                        <barButtonItem key="leftBarButtonItem" image="ic_navigate_before_36pt" style="done" id="Vpc-ew-deD">
+                                            <inset key="imageInsets" minX="-10" minY="0.0" maxX="-20" maxY="0.0"/>
+                                            <connections>
+                                                <action selector="back" destination="JPt-BF-aqz" id="Lkn-iv-JMI"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kR-a2-Nf4">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4hF-FS-bop" firstAttribute="top" secondItem="omg-Ha-4Ag" secondAttribute="top" id="6B2-pL-TwH"/>
+                            <constraint firstItem="4hF-FS-bop" firstAttribute="trailing" secondItem="omg-Ha-4Ag" secondAttribute="trailing" id="AR1-57-vcL"/>
+                            <constraint firstItem="8kR-a2-Nf4" firstAttribute="top" secondItem="4hF-FS-bop" secondAttribute="bottom" id="SZj-dD-M92"/>
+                            <constraint firstItem="omg-Ha-4Ag" firstAttribute="bottom" secondItem="8kR-a2-Nf4" secondAttribute="bottom" id="fEg-y0-MA1"/>
+                            <constraint firstItem="8kR-a2-Nf4" firstAttribute="trailing" secondItem="omg-Ha-4Ag" secondAttribute="trailing" id="fEq-sg-bZL"/>
+                            <constraint firstItem="8kR-a2-Nf4" firstAttribute="leading" secondItem="omg-Ha-4Ag" secondAttribute="leading" id="gGD-mX-CuM"/>
+                            <constraint firstItem="4hF-FS-bop" firstAttribute="leading" secondItem="omg-Ha-4Ag" secondAttribute="leading" id="hdG-Nv-m6f"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="omg-Ha-4Ag"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="8kR-a2-Nf4" id="ss9-x2-a8r"/>
+                        <outlet property="navigationBarItem" destination="EyC-hq-4ae" id="XCL-b4-bFd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lUe-Jh-QjD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2738" y="-631"/>
+        </scene>
     </scenes>
     <resources>
         <image name="accurate_flat_icon" width="33" height="36"/>

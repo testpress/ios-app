@@ -127,6 +127,16 @@ class ProfileViewController: UIViewController {
             style: UIAlertActionStyle.destructive,
             handler: { action in
                 
+                // Clear cookies for babapedia & value notes
+                let storage = HTTPCookieStorage.shared
+                if let cookies = storage.cookies {
+                    for cookie in cookies {
+                        storage.deleteCookie(cookie)
+                    }
+                }
+                let userDefaults = UserDefaults.standard
+                userDefaults.removeObject(forKey: "cookies")
+                userDefaults.synchronize()
                 DBInstance.clearAllTables()
                 KeychainTokenItem.clearKeychainItems()
                 let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:

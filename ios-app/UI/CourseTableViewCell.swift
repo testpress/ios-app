@@ -33,13 +33,22 @@ class CourseTableViewCell: UITableViewCell {
     
     var parentViewController: UIViewController! = nil
     var course: Course!
+    var customCourse: CustomCourse!
     
-    func initCell(_ course: Course, viewController: UIViewController) {
+    func initCell(_ position: Int, viewController: CoursesTableViewController) {
         parentViewController = viewController
-        self.course = course
-        courseName.text = course.title
-        thumbnailImage.kf.setImage(with: URL(string: course.image),
-                                   placeholder: Images.PlaceHolder.image)
+        let coursesCount = viewController.items.count
+        if coursesCount > position {
+            course = viewController.items[position]
+            courseName.text = course.title
+            thumbnailImage.kf.setImage(with: URL(string: course.image),
+                                       placeholder: Images.PlaceHolder.image)
+        } else {
+            course = nil
+            customCourse = viewController.customItems[position - coursesCount]
+            courseName.text = customCourse.title
+            thumbnailImage.image = customCourse.image
+        }
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
@@ -50,23 +59,34 @@ class CourseTableViewCell: UITableViewCell {
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         let viewController: UIViewController
-        if course.chaptersCount > 0 {
-            let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
-            
-            chaptersViewController.coursesUrl = course.url
-            chaptersViewController.title = course.title
-            viewController = chaptersViewController
+        if course != nil {
+            if course.chaptersCount > 0 {
+                let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
+                
+                chaptersViewController.coursesUrl = course.url
+                chaptersViewController.title = course.title
+                viewController = chaptersViewController
+            } else {
+                let contentsNavigationController =
+                    storyboard.instantiateViewController(withIdentifier:
+                    Constants.CONTENTS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
+                
+                let contentViewController = contentsNavigationController.viewControllers.first
+                    as! ContentsTableViewController
+                
+                contentViewController.contentsUrl = course.contentsUrl
+                contentViewController.title = course.title
+                viewController = contentsNavigationController
+            }
         } else {
-            let contentsNavigationController = storyboard.instantiateViewController(withIdentifier:
-                Constants.CONTENTS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
+            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+            let browserViewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.IN_APP_BROWSER_VIEW_CONTROLLER) as! InAppBrowserViewController
             
-            let contentViewController = contentsNavigationController.viewControllers.first
-                as! ContentsTableViewController
-            
-            contentViewController.contentsUrl = course.contentsUrl
-            contentViewController.title = course.title
-            viewController = contentsNavigationController
+            browserViewController.url = customCourse.url
+            browserViewController.title = customCourse.title
+            viewController = browserViewController
         }
         parentViewController.present(viewController, animated: true, completion: nil)
     }

@@ -38,6 +38,8 @@
 		2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21920186417004EDAF2 /* ActivityFeedResponse.swift */; };
 		2F3DD21C20186B93004EDAF2 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21B20186B93004EDAF2 /* ContentType.swift */; };
 		2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21F20187B5D004EDAF2 /* ApiResponse.swift */; };
+		2F3F4DA1204D2863008997D1 /* CustomCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F4DA0204D2863008997D1 /* CustomCourse.swift */; };
+		2F3F4DA6204D5378008997D1 /* InAppBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F4DA4204D5378008997D1 /* InAppBrowserViewController.swift */; };
 		2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F634F2004A2D000976053 /* RealmSwift.framework */; };
 		2F3F63522004A75F00976053 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F63512004A75F00976053 /* DBManager.swift */; };
 		2F3F63542004C54900976053 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F63532004C54900976053 /* Realm.framework */; };
@@ -236,6 +238,8 @@
 		2F3DD21920186417004EDAF2 /* ActivityFeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedResponse.swift; sourceTree = "<group>"; };
 		2F3DD21B20186B93004EDAF2 /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		2F3DD21F20187B5D004EDAF2 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
+		2F3F4DA0204D2863008997D1 /* CustomCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCourse.swift; sourceTree = "<group>"; };
+		2F3F4DA4204D5378008997D1 /* InAppBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppBrowserViewController.swift; sourceTree = "<group>"; };
 		2F3F634F2004A2D000976053 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		2F3F63512004A75F00976053 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		2F3F63532004C54900976053 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
@@ -577,6 +581,7 @@
 				2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */,
 				2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */,
 				2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */,
+				2F3F4DA4204D5378008997D1 /* InAppBrowserViewController.swift */,
 				2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */,
 				2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */,
 				2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */,
@@ -635,6 +640,7 @@
 				2F48C8121FD3E417009C686C /* Category.swift */,
 				2F763D0E1FBECBBC0033D495 /* Chapter.swift */,
 				2F763CFD1FBD7AE40033D495 /* Course.swift */,
+				2F3F4DA0204D2863008997D1 /* CustomCourse.swift */,
 				2F48C7FE1FCE9750009C686C /* Comment.swift */,
 				2F9699791FC2A22A001B2B18 /* Content.swift */,
 				2F5E0BBA1FE2871900236AFE /* ContentAttempt.swift */,
@@ -967,6 +973,7 @@
 				2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */,
 				2FC0F2FA1F863B7C0092BFDC /* AttemptsTableViewCell.swift in Sources */,
 				2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */,
+				2F3F4DA1204D2863008997D1 /* CustomCourse.swift in Sources */,
 				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
 				2F25D562201F5C8800C01CCE /* TargetThreadViewController.swift in Sources */,
@@ -980,6 +987,7 @@
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
 				2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */,
 				2F48C8131FD3E417009C686C /* Category.swift in Sources */,
+				2F3F4DA6204D5378008997D1 /* InAppBrowserViewController.swift in Sources */,
 				2FC0F2E61F863AE30092BFDC /* TPError.swift in Sources */,
 				2FC0F2E31F863ADA0092BFDC /* RegistrationError.swift in Sources */,
 				2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */,
