@@ -26,7 +26,7 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://www.dma-testhub.eu";
+    static let BASE_URL = "https://www.dma-testhub.com";
     
     static let APP_APPLE_ID = "1353825708"
     
