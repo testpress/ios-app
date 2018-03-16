@@ -55,6 +55,7 @@ enum TPEndpoint {
     case getLeaderboard
     case getTargets
     case getThreads
+    case resetPassword
     case get
     case post
     case put
@@ -105,6 +106,7 @@ enum TPEndpoint {
         case .get:
             return .get
         case .post,
+             .resetPassword,
              .uploadImage:
             return .post
         case .put:
@@ -158,6 +160,8 @@ enum TPEndpoint {
             return "/api/v2.2/me/targets/"
         case .getThreads:
             return "/api/v2.2/me/threats/"
+        case .resetPassword:
+            return "/api/v2.2/password/reset/"
         default:
             return ""
         }

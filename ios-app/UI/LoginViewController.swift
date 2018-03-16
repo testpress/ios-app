@@ -33,6 +33,7 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var navigationbarItem: UINavigationItem!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signUpLayout: UIStackView!
     
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
@@ -42,8 +43,12 @@ class LoginViewController: BaseTextFieldViewController {
         navigationbarItem.title = UIUtils.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
         
-        // Set firstTextField in super class to set the cursor
+        // TODO: Set using institute settings
+        signUpLayout.isHidden = false
+        
+        // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
+        showKeyboardOnStart = false
     }
     
     @IBAction func moveToPasswordField(_ sender: UITextField) {
@@ -110,6 +115,13 @@ class LoginViewController: BaseTextFieldViewController {
     @IBAction func showSignUpView() {
         let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
             Constants.SIGNUP_VIEW_CONTROLLER) as! SignUpViewController
+        
+        present(tabViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showResetPasswordView() {
+        let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
+            Constants.RESET_PASSWORD_VIEW_CONTROLLER) as! ResetPasswordViewController
         
         present(tabViewController, animated: true, completion: nil)
     }

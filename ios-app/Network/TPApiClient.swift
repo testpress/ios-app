@@ -265,6 +265,18 @@ class TPApiClient {
         })
     }
     
+    static func resetPassword(email: String,
+                              completion: @escaping (TPError?) -> Void) {
+        
+        let parameters: Parameters = ["email": email]
+        apiCall(endpointProvider: TPEndpointProvider(.resetPassword),
+                parameters: parameters,
+                completion: { json, error in
+                    completion(error)
+                }
+        )
+    }
+    
     static func getExams(endpointProvider: TPEndpointProvider,
                          completion: @escaping (TPApiResponse<Exam>?, TPError?) -> Void) {
         

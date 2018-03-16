@@ -70,6 +70,17 @@ public class Exam {
         }
         return date < Date()
     }
+    
+    func hasEnded() -> Bool {
+        if endDate == nil || endDate == "" {
+            return false
+        }
+        guard let date = FormatDate.getDate(from: endDate!) else {
+            assert(false, "no date from string")
+            return false
+        }
+        return date < Date()
+    }
 }
 
 extension Exam: TestpressModel {

@@ -90,6 +90,7 @@ struct Constants {
     static let LEADERBOARD_TABLE_VIEW_CELL = "LeaderboardTableViewCell"
     static let PROFILE_VIEW_CONTROLLER = "ProfileViewController"
     static let MAIN_STORYBOARD = "Main"
+    static let RESET_PASSWORD_VIEW_CONTROLLER = "ResetPasswordViewController"
     
     static let PAGE = "page"
     static let PAGE_SIZE = "page_size"
