@@ -739,7 +739,7 @@
 				TargetAttributes = {
 					2F26ADE11E8249D70031E6F4 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = BHAB7LC35Y;
+						DevelopmentTeam = 4ZCXA7W722;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -1158,7 +1158,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = BHAB7LC35Y;
+				DEVELOPMENT_TEAM = 4ZCXA7W722;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1178,7 +1178,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = BHAB7LC35Y;
+				DEVELOPMENT_TEAM = 4ZCXA7W722;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
