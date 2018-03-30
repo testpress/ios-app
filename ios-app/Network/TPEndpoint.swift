@@ -56,6 +56,7 @@ enum TPEndpoint {
     case getTargets
     case getThreads
     case resetPassword
+    case getPostCategories
     case get
     case post
     case put
@@ -101,6 +102,7 @@ enum TPEndpoint {
              .getLeaderboard,
              .getTargets,
              .getThreads,
+             .getPostCategories,
              .getActivityFeed:
             return .get
         case .get:
@@ -162,6 +164,8 @@ enum TPEndpoint {
             return "/api/v2.2/me/threats/"
         case .resetPassword:
             return "/api/v2.2/password/reset/"
+        case .getPostCategories:
+            return "/api/v2.2/posts/categories/"
         default:
             return ""
         }

@@ -182,6 +182,10 @@
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
 		2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
 		2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */; };
+		2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */; };
+		2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */; };
+		2FEDFF5A206CE7560002CF04 /* CategoryPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF59206CE7560002CF04 /* CategoryPager.swift */; };
+		2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */; };
 		2FF024212004CECA00E0047D /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF024202004CECA00E0047D /* BaseDBViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -377,6 +381,10 @@
 		2FE290711F8D07D0004D7574 /* QuestionListHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuestionListHandler.js; sourceTree = "<group>"; };
 		2FE81096201A0AF70031E134 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoriesTableViewController.swift; sourceTree = "<group>"; };
+		2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoriesTableViewCell.swift; sourceTree = "<group>"; };
+		2FEDFF59206CE7560002CF04 /* CategoryPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPager.swift; sourceTree = "<group>"; };
+		2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostTableViewController.swift; sourceTree = "<group>"; };
 		2FF024202004CECA00E0047D /* BaseDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -589,6 +597,8 @@
 				2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */,
 				2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */,
 				2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */,
+				2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */,
+				2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */,
 				2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */,
 				2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */,
 				2F48C80C1FD28902009C686C /* PostTableViewCell.swift */,
@@ -597,6 +607,7 @@
 				2FC0F2901F861A860092BFDC /* QuestionsControllerSource.swift */,
 				2F1474781F8B898F0017151B /* QuestionListViewController.swift */,
 				2FC0F2911F861A860092BFDC /* QuestionsViewController.swift */,
+				2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */,
 				2F8411BB2043D5C500193A66 /* ResetPasswordViewController.swift */,
 				2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */,
 				2FC0F2921F861A860092BFDC /* ReviewQuestionsDataSource.swift */,
@@ -672,6 +683,7 @@
 			children = (
 				2FC0F2EA1F863B080092BFDC /* AttemptPager.swift */,
 				2F5E0BB41FE2415800236AFE /* ActivityFeedPager.swift */,
+				2FEDFF59206CE7560002CF04 /* CategoryPager.swift */,
 				2F763D101FBECFD30033D495 /* ChapterPager.swift */,
 				2F48C8021FCE9A37009C686C /* CommentPager.swift */,
 				2F96997F1FC2A8E0001B2B18 /* ContentPager.swift */,
@@ -861,6 +873,7 @@
 				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
 				2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */,
 				2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */,
+				2FEDFF5A206CE7560002CF04 /* CategoryPager.swift in Sources */,
 				2FC0F2E51F863AE00092BFDC /* TPAuthToken.swift in Sources */,
 				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,
 				2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */,
@@ -873,6 +886,7 @@
 				2FC0F2F21F863B190092BFDC /* TPBasePager.swift in Sources */,
 				2FC0F3081F863BA90092BFDC /* QuestionsViewController.swift in Sources */,
 				2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */,
+				2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */,
 				2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */,
 				2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */,
 				2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */,
@@ -885,6 +899,7 @@
 				2FC0F2E01F863AD00092BFDC /* AttemptQuestion.swift in Sources */,
 				2FC0F3031F863B9B0092BFDC /* ExamsTableViewController.swift in Sources */,
 				2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */,
+				2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */,
 				2FC0F30E1F863BA90092BFDC /* SuccessViewController.swift in Sources */,
 				2FC0F3041F863B9E0092BFDC /* ExamsTabViewController.swift in Sources */,
 				2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */,
@@ -904,6 +919,7 @@
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
 				2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */,
 				2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */,
+				2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */,
 				2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */,
 				2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */,
 				2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */,
