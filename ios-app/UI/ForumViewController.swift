@@ -1,5 +1,5 @@
 //
-//  PostsViewController.swift
+//  ForumViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,7 +25,7 @@
 
 import UIKit
 
-class PostsViewController: UIViewController {
+class ForumViewController: UIViewController {
     
     @IBOutlet weak var postCreateButton: UIButton!
     @IBOutlet weak var containerView: UIView!

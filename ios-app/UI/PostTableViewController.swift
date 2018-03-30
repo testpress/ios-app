@@ -27,8 +27,18 @@ import UIKit
 
 class PostTableViewController: TPBasePagedTableViewController<Post> {
     
+    @IBOutlet weak var navigationBarItem: UINavigationItem!
+    
+    var category: Category!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(pager: PostPager(), coder: aDecoder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationBarItem.title = category.name
+        (pager as! PostPager).category = category
     }
     
     // MARK: - Table view data source
@@ -45,8 +55,8 @@ class PostTableViewController: TPBasePagedTableViewController<Post> {
                             description: Strings.NO_POSTS_DESCRIPTION)
     }
     
-    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+    @IBAction func back() {
+        dismiss(animated: true, completion: nil)
     }
     
 }
