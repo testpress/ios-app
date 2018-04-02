@@ -23,13 +23,14 @@
 //  THE SOFTWARE.
 //
 
+import DropDown
 import UIKit
 
 class PostTableViewController: TPBasePagedTableViewController<Post> {
     
-    @IBOutlet weak var navigationBarItem: UINavigationItem!
-    
     var category: Category!
+    var categories: [Category]!
+    var categoriesDropDown: PostCategoriesDropDown!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(pager: PostPager(), coder: aDecoder)
@@ -37,8 +38,37 @@ class PostTableViewController: TPBasePagedTableViewController<Post> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBarItem.title = category.name
+        
         (pager as! PostPager).category = category
+        categoriesDropDown = PostCategoriesDropDown(category: category, categories: categories,
+                                                    navigationItem: navigationItem)
+        
+        categoriesDropDown.dropDown.selectionAction = { (index: Int, item: String) in
+            DispatchQueue.main.async {
+                self.categoriesDropDown.dropDown.selectRow(index)
+            }
+            if item == self.category.slug {
+                return
+            }
+            
+            self.category =
+                self.categoriesDropDown.getCategory(withSlug: item, from: self.categories)
+            
+            self.categoriesDropDown.titleButton.setTitle(self.category.name, for: .normal)
+            (self.pager as! PostPager).category = self.category
+            self.pager.reset()
+            self.items = []
+            self.tableView.reloadData()
+            self.activityIndicator?.startAnimating()
+            self.loadItems()
+        }
+        
+        for (index, category) in categories.enumerated() {
+            if category.slug == self.category.slug {
+                categoriesDropDown.dropDown.selectRow(index)
+                break
+            }
+        }
     }
     
     // MARK: - Table view data source

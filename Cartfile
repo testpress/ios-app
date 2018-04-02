@@ -1,5 +1,6 @@
 github "Alamofire/Alamofire" "4.4.0"
 github "Alua-Kinzhebayeva/iOS-PDF-Reader"
+github "AssistoLab/DropDown"
 github "danielgindi/Charts" ~> 3.0.4
 github "dekatotoro/SlideMenuControllerSwift" "3.0.2" 
 github "hackiftekhar/IQKeyboardManager"

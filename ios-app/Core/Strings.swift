@@ -131,4 +131,6 @@ struct Strings {
     
     static let RESET_PASSWORD_MAIL_SENT = "We have sent you an email with a link to reset your password.  Please check your email and click the link to continue."
     
+    static let ARTICLES = "Articles"
+    
 }

@@ -27,6 +27,7 @@ import ObjectMapper
 import UIKit
 
 protocol PostCategoryDelegate {
+    func onLoadedCategories(_ categories: [Category])
     func onError(_ error: TPError)
     func onEmptyCategories()
     func showCategories()
@@ -36,11 +37,12 @@ class PostCategoriesTableViewController: BaseTableViewController<Category>, Base
     
     var pager: CategoryPager!
     var postCategoryDelegate: PostCategoryDelegate?
+    var categories = [Category]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pager = CategoryPager(starred: true)
+        pager = CategoryPager()
         tableViewDelegate = self
         tableView.frame.size.height = 156
         activityIndicator?.center = CGPoint(x: view.center.x, y: tableView.center.y)
@@ -71,7 +73,15 @@ class PostCategoriesTableViewController: BaseTableViewController<Category>, Base
             if self.pager.hasMore {
                 self.loadItems()
             } else {
-                self.items = Array(items!.values)
+                self.categories = Array(items!.values)
+                self.postCategoryDelegate?.onLoadedCategories(self.categories)
+                var starred = [Category]()
+                for category in self.categories {
+                    if category.is_starred {
+                        starred.append(category)
+                    }
+                }
+                self.items = starred
                 if self.items.count == 0 {
                     self.setEmptyText()
                     self.postCategoryDelegate?.onEmptyCategories()
