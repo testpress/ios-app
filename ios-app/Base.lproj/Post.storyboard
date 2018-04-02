@@ -452,9 +452,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="navigationBarItem" destination="lOb-42-gay" id="2Lv-RR-rxa"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MaR-R0-q2r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -31,10 +31,10 @@ class PostCategoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var categoryColor: UIView!
     
-    var parentViewController: UIViewController! = nil
+    var parentViewController: PostCategoriesTableViewController! = nil
     var category: Category!
     
-    func initCell(_ category: Category, viewController: UIViewController) {
+    func initCell(_ category: Category, viewController: PostCategoriesTableViewController) {
         self.category = category
         parentViewController = viewController
         categoryName.text = category.name
@@ -55,6 +55,7 @@ class PostCategoriesTableViewCell: UITableViewCell {
         let viewController = navigationController.viewControllers.first as! PostTableViewController
         
         viewController.category = category
+        viewController.categories = parentViewController.categories
         parentViewController.present(navigationController, animated: true, completion: nil)
     }
     

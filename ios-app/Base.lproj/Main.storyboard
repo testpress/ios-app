@@ -1547,7 +1547,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qao-6a-rwJ">
-                                                                    <rect key="frame" x="-76" y="0.0" width="0.0" height="16"/>
+                                                                    <rect key="frame" x="-76" y="0.0" width="51.5" height="16"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="category_icon" translatesAutoresizingMaskIntoConstraints="NO" id="aGT-7T-EAf">
                                                                             <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -1557,7 +1557,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9I-3u-ye4">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="16"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="30.5" height="16"/>
                                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -1804,6 +1804,7 @@
                     <connections>
                         <outlet property="categoryLayout" destination="JEZ-cL-GBb" id="6dp-te-Vti"/>
                         <outlet property="categoryLayoutHeightConstraint" destination="dQ3-zx-gfX" id="Ytn-0X-yxG"/>
+                        <outlet property="navigationBar" destination="hWF-gG-LY4" id="fff-FH-DOl"/>
                         <outlet property="scrollView" destination="10M-1R-m2U" id="mpQ-0F-0Bj"/>
                         <outlet property="shadowView" destination="FVV-Qf-Zog" id="5gH-Pa-HPq"/>
                         <outlet property="tableHeight" destination="5T9-dh-OgZ" id="4aw-MH-Geb"/>

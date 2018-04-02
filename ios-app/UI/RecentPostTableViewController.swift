@@ -23,12 +23,14 @@
 //  THE SOFTWARE.
 //
 
+import DropDown
 import TTGSnackbar
 import UIKit
 
 class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,
     UIScrollViewDelegate {
     
+    @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
@@ -44,6 +46,7 @@ class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITa
     let bottomGradient = CAGradientLayer()
     var categoryTableViewController: PostCategoriesTableViewController!
     let categoryLayoutHeight: CGFloat = 275
+    var categoriesDropDown: PostCategoriesDropDown!
     
     required init(coder aDecoder: NSCoder? = nil) {
         self.pager = PostPager()
@@ -226,6 +229,35 @@ class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITa
 }
 
 extension RecentPostTableViewController: PostCategoryDelegate {
+    
+    func onLoadedCategories(_ categories: [Category]) {
+        if !categories.isEmpty {
+            categoriesDropDown = PostCategoriesDropDown(categories: categories,
+                                                        navigationItem: navigationItem)
+            
+            categoriesDropDown.dropDown.selectionAction = { (index: Int, item: String) in
+                
+                DispatchQueue.main.async {
+                    self.categoriesDropDown.dropDown.clearSelection()
+                }
+                let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
+                let navigationController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.POSTS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
+                
+                let viewController =
+                    navigationController.viewControllers.first as! PostTableViewController
+                
+                viewController.category =
+                    self.categoriesDropDown.getCategory(withSlug: item, from: categories)
+                
+                viewController.categories = categories
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        } else {
+            navigationItem.titleView = nil
+            navigationItem.title = Strings.ARTICLES
+        }
+    }
     
     func onError(_ error: TPError) {
         handleError(error)
