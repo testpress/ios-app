@@ -42,6 +42,9 @@
 		2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F634F2004A2D000976053 /* RealmSwift.framework */; };
 		2F3F63522004A75F00976053 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F63512004A75F00976053 /* DBManager.swift */; };
 		2F3F63542004C54900976053 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F63532004C54900976053 /* Realm.framework */; };
+		2F40CC592045446600A729CE /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC582045446600A729CE /* FacebookCore.framework */; };
+		2F40CC5D20456FEC00A729CE /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5C20456FEC00A729CE /* FBSDKCoreKit.framework */; };
+		2F40CC5F2045702100A729CE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5E2045702100A729CE /* Bolts.framework */; };
 		2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F412CC120219BC300B7F70C /* OrderedDictionary.swift */; };
 		2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */; };
 		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
@@ -182,6 +185,9 @@
 		2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */; };
 		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
+		2FE6B94F2051136F0091C7CA /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5A2045446B00A729CE /* FacebookLogin.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2FE6B958205144CD0091C7CA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */; };
+		2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
 		2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */; };
 		2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */; };
@@ -200,6 +206,20 @@
 			remoteInfo = "ios-app";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2FE6B95A205144CD0091C7CA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2F1474701F8B73FF0017151B /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
@@ -246,6 +266,10 @@
 		2F3F634F2004A2D000976053 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		2F3F63512004A75F00976053 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		2F3F63532004C54900976053 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		2F40CC582045446600A729CE /* FacebookCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookCore.framework; path = Carthage/Build/iOS/FacebookCore.framework; sourceTree = "<group>"; };
+		2F40CC5A2045446B00A729CE /* FacebookLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookLogin.framework; path = Carthage/Build/iOS/FacebookLogin.framework; sourceTree = "<group>"; };
+		2F40CC5C20456FEC00A729CE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Carthage/Build/iOS/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		2F40CC5E2045702100A729CE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
 		2F412CC120219BC300B7F70C /* OrderedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		2F48C7F81FCD9F18009C686C /* progress_loader.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = progress_loader.css; sourceTree = "<group>"; };
@@ -383,6 +407,7 @@
 		2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContentViewController.swift; sourceTree = "<group>"; };
 		2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		2FE290711F8D07D0004D7574 /* QuestionListHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuestionListHandler.js; sourceTree = "<group>"; };
+		2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Carthage/Build/iOS/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		2FE81096201A0AF70031E134 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoriesTableViewController.swift; sourceTree = "<group>"; };
@@ -398,9 +423,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F763CFF1FBD83340033D495 /* Alamofire.framework in Frameworks */,
+				2F40CC5F2045702100A729CE /* Bolts.framework in Frameworks */,
+				2FE6B958205144CD0091C7CA /* FBSDKLoginKit.framework in Frameworks */,
 				2F936E821FDAD376008C353A /* Charts.framework in Frameworks */,
 				2F763D001FBD83340033D495 /* Device.framework in Frameworks */,
 				2F33BFFB206E7E7100D4CE6D /* DropDown.framework in Frameworks */,
+				2F40CC592045446600A729CE /* FacebookCore.framework in Frameworks */,
+				2FE6B94F2051136F0091C7CA /* FacebookLogin.framework in Frameworks */,
+				2F40CC5D20456FEC00A729CE /* FBSDKCoreKit.framework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
 				2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */,
@@ -479,6 +509,11 @@
 			isa = PBXGroup;
 			children = (
 				2F33BFFA206E7E7100D4CE6D /* DropDown.framework */,
+				2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */,
+				2F40CC5E2045702100A729CE /* Bolts.framework */,
+				2F40CC5C20456FEC00A729CE /* FBSDKCoreKit.framework */,
+				2F40CC5A2045446B00A729CE /* FacebookLogin.framework */,
+				2F40CC582045446600A729CE /* FacebookCore.framework */,
 				2F52CB7A20173BA300592CD8 /* PDFReader.framework */,
 				2F3F63532004C54900976053 /* Realm.framework */,
 				2F3F634F2004A2D000976053 /* RealmSwift.framework */,
@@ -718,6 +753,7 @@
 				2F26ADDF1E8249D70031E6F4 /* Frameworks */,
 				2F26ADE01E8249D70031E6F4 /* Resources */,
 				2FBEDB7F1E82BC48000CF05C /* ShellScript */,
+				2FE6B95A205144CD0091C7CA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -856,6 +892,10 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookLogin.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKCoreKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Bolts.framework",
 			);
 			outputPaths = (
 			);
@@ -1181,6 +1221,7 @@
 		2F26AE001E8249D70031E6F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
@@ -1201,6 +1242,7 @@
 		2F26AE011E8249D70031E6F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;

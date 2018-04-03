@@ -57,6 +57,7 @@ enum TPEndpoint {
     case getThreads
     case resetPassword
     case getPostCategories
+    case authenticateSocialUser
     case get
     case post
     case put
@@ -109,6 +110,7 @@ enum TPEndpoint {
             return .get
         case .post,
              .resetPassword,
+             .authenticateSocialUser,
              .uploadImage:
             return .post
         case .put:
@@ -166,6 +168,8 @@ enum TPEndpoint {
             return "/api/v2.2/password/reset/"
         case .getPostCategories:
             return "/api/v2.2/posts/categories/"
+        case .authenticateSocialUser:
+            return "/api/v2.2/social-auth/"
         default:
             return ""
         }
