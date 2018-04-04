@@ -26,7 +26,7 @@
 import RealmSwift
 import UIKit
 
-class CoursesTableViewController: BaseTableViewController<Course> {
+class CoursesTableViewController: BaseTableViewController<Course>, BaseTableViewDelegate {
     
     var pager: TPBasePager<Course>
     var customItems = [CustomCourse]()
@@ -46,6 +46,11 @@ class CoursesTableViewController: BaseTableViewController<Course> {
         customItems.append(babapedia)
         customItems.append(valueAddedNotes)
         customItems.append(forum)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableViewDelegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
