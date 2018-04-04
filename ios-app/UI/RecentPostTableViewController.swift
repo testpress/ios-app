@@ -37,6 +37,7 @@ class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var categoryLayout: UIView!
     @IBOutlet weak var categoryLayoutHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     
     var activityIndicator: UIActivityIndicatorView! // Progress bar
     var emptyView: EmptyView!
@@ -74,7 +75,9 @@ class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITa
         pagingSpinner.hidesWhenStopped = true
         tableView.tableFooterView = pagingSpinner
         
-        tableHeight.constant = scrollView.frame.height
+        //Set scrollView height as view height minus height of bottom bar & navigation bar
+        scrollViewHeight.constant = view.frame.height - 113
+        tableHeight.constant = scrollViewHeight.constant
         tableView.isScrollEnabled = false
         scrollView.bounces = false
         tableView.bounces = true

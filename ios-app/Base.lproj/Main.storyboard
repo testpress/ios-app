@@ -51,7 +51,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iWs-E9-hPK">
-                                                <rect key="frame" x="20" y="20" width="280" height="350"/>
+                                                <rect key="frame" x="20" y="20" width="280" height="447"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="s1n-cK-AMs">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="110"/>
@@ -66,7 +66,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="2Or-Cx-6aR">
-                                                        <rect key="frame" x="0.0" y="130" width="280" height="220"/>
+                                                        <rect key="frame" x="0.0" y="130" width="280" height="317"/>
                                                         <subviews>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="qaT-yY-Sc7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
@@ -147,6 +147,23 @@
                                                                     </stackView>
                                                                 </subviews>
                                                             </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="htc-yl-NIs">
+                                                                <rect key="frame" x="0.0" y="245" width="280" height="72"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSj-uM-Kwg">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="17"/>
+                                                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
+                                                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozZ-X7-GX9">
+                                                                        <rect key="frame" x="0.0" y="42" width="280" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="30" id="qVn-SG-3yx"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -183,11 +200,13 @@
                         <viewLayoutGuide key="safeArea" id="1zr-At-qze"/>
                     </view>
                     <connections>
+                        <outlet property="facebookButtonLayout" destination="ozZ-X7-GX9" id="EBw-bO-voE"/>
                         <outlet property="loginButton" destination="SKF-zT-5yA" id="Owh-dc-0FD"/>
                         <outlet property="navigationbarItem" destination="y21-8k-c3o" id="23P-l9-DYy"/>
                         <outlet property="passwordField" destination="omV-An-VdO" id="YK7-XR-RQV"/>
                         <outlet property="scrollView" destination="IC7-mf-Rhd" id="rh9-gq-s8e"/>
                         <outlet property="signUpLayout" destination="YcW-vj-b3g" id="aXQ-4G-UCA"/>
+                        <outlet property="socialLoginLayout" destination="htc-yl-NIs" id="4z2-Wv-n0X"/>
                         <outlet property="usernameField" destination="qaT-yY-Sc7" id="kSr-nI-LNK"/>
                     </connections>
                 </viewController>
@@ -335,30 +354,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gRx-zO-Lg8">
-                                <rect key="frame" x="0.0" y="162.5" width="0.0" height="243"/>
+                                <rect key="frame" x="20" y="154" width="280" height="260"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yGV-8e-nmk">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
+                                        <rect key="frame" x="20" y="0.0" width="240" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="BGQ-Jp-wv6"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="success_tick" translatesAutoresizingMaskIntoConstraints="NO" id="SfJ-yv-JYF">
-                                        <rect key="frame" x="0.0" y="21" width="128" height="128"/>
+                                        <rect key="frame" x="76" y="21" width="128" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="PL6-92-A1K"/>
                                             <constraint firstAttribute="height" constant="128" id="bPH-Xh-AUl"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An activation email has been sent. Please check your email and click on the link to activate your account." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSc-Gt-ZK8">
-                                        <rect key="frame" x="0.0" y="169" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="-20" y="169" width="0.0" height="17"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSm-tL-gGh">
-                                        <rect key="frame" x="0.0" y="189" width="46" height="33"/>
+                                        <rect key="frame" x="117" y="206" width="46" height="33"/>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
                                         <state key="normal" title="Login"/>
                                         <connections>
@@ -366,7 +385,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-6D-RFU">
-                                        <rect key="frame" x="0.0" y="242" width="0.0" height="1"/>
+                                        <rect key="frame" x="115" y="259" width="50" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="eKC-k0-udQ"/>
@@ -375,7 +394,7 @@
                                 </subviews>
                             </stackView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXs-0F-oHi">
-                                <rect key="frame" x="0.0" y="20" width="0.0" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="3ad-iI-eg1"/>
                                 </constraints>
@@ -1779,6 +1798,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Awr-CX-5nU" secondAttribute="trailing" id="b4U-iu-X5F"/>
                                     <constraint firstAttribute="bottom" secondItem="Awr-CX-5nU" secondAttribute="bottom" id="r6a-tW-krF"/>
                                     <constraint firstItem="JEZ-cL-GBb" firstAttribute="leading" secondItem="10M-1R-m2U" secondAttribute="leading" id="vUn-4a-9oU"/>
+                                    <constraint firstAttribute="height" constant="455" id="w5G-NO-H9C"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="iks-hl-Go7" id="fFp-Vk-XGD"/>
@@ -1806,6 +1826,7 @@
                         <outlet property="categoryLayoutHeightConstraint" destination="dQ3-zx-gfX" id="Ytn-0X-yxG"/>
                         <outlet property="navigationBar" destination="hWF-gG-LY4" id="fff-FH-DOl"/>
                         <outlet property="scrollView" destination="10M-1R-m2U" id="mpQ-0F-0Bj"/>
+                        <outlet property="scrollViewHeight" destination="w5G-NO-H9C" id="SGd-MF-wEe"/>
                         <outlet property="shadowView" destination="FVV-Qf-Zog" id="5gH-Pa-HPq"/>
                         <outlet property="tableHeight" destination="5T9-dh-OgZ" id="4aw-MH-Geb"/>
                         <outlet property="tableView" destination="Awr-CX-5nU" id="MU5-qK-NfW"/>
