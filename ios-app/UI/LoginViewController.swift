@@ -36,6 +36,7 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var navigationbarItem: UINavigationItem!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpLayout: UIStackView!
+    @IBOutlet weak var socialLoginLayout: UIStackView!
     @IBOutlet weak var facebookButtonLayout: UIView!
         
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
@@ -63,6 +64,9 @@ class LoginViewController: BaseTextFieldViewController {
             .constraint(equalTo: facebookButtonLayout.leadingAnchor).isActive = true
         fbLoginButton.trailingAnchor
             .constraint(equalTo: facebookButtonLayout.trailingAnchor).isActive = true
+        
+        // TODO: Use institute settings
+        socialLoginLayout.isHidden = false
         
         // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
