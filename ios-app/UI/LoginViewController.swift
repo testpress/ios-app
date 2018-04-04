@@ -54,7 +54,15 @@ class LoginViewController: BaseTextFieldViewController {
         
         fbLoginButton.center.x = facebookButtonLayout.center.x
         fbLoginButton.delegate = self
+        fbLoginButton.translatesAutoresizingMaskIntoConstraints = false
         facebookButtonLayout.addSubview(fbLoginButton)
+        fbLoginButton.topAnchor.constraint(equalTo: facebookButtonLayout.topAnchor).isActive = true
+        fbLoginButton.bottomAnchor
+            .constraint(equalTo: facebookButtonLayout.bottomAnchor).isActive = true
+        fbLoginButton.leadingAnchor
+            .constraint(equalTo: facebookButtonLayout.leadingAnchor).isActive = true
+        fbLoginButton.trailingAnchor
+            .constraint(equalTo: facebookButtonLayout.trailingAnchor).isActive = true
         
         // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
