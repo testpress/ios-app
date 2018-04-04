@@ -1797,6 +1797,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Awr-CX-5nU" secondAttribute="trailing" id="b4U-iu-X5F"/>
                                     <constraint firstAttribute="bottom" secondItem="Awr-CX-5nU" secondAttribute="bottom" id="r6a-tW-krF"/>
                                     <constraint firstItem="JEZ-cL-GBb" firstAttribute="leading" secondItem="10M-1R-m2U" secondAttribute="leading" id="vUn-4a-9oU"/>
+                                    <constraint firstAttribute="height" constant="455" id="w5G-NO-H9C"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="iks-hl-Go7" id="fFp-Vk-XGD"/>
@@ -1824,6 +1825,7 @@
                         <outlet property="categoryLayoutHeightConstraint" destination="dQ3-zx-gfX" id="Ytn-0X-yxG"/>
                         <outlet property="navigationBar" destination="hWF-gG-LY4" id="fff-FH-DOl"/>
                         <outlet property="scrollView" destination="10M-1R-m2U" id="mpQ-0F-0Bj"/>
+                        <outlet property="scrollViewHeight" destination="w5G-NO-H9C" id="SGd-MF-wEe"/>
                         <outlet property="shadowView" destination="FVV-Qf-Zog" id="5gH-Pa-HPq"/>
                         <outlet property="tableHeight" destination="5T9-dh-OgZ" id="4aw-MH-Geb"/>
                         <outlet property="tableView" destination="Awr-CX-5nU" id="MU5-qK-NfW"/>
