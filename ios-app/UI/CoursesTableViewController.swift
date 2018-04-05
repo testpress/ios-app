@@ -29,12 +29,8 @@ import UIKit
 class CoursesTableViewController: BaseDBViewController<Course> {
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(pager: getPager(), coder: aDecoder)
-    }
-    
-    func getPager() -> CoursePager {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
-        return CoursePager()
+        super.init(pager: CoursePager(), coder: aDecoder)
     }
     
     override func getItemsFromDb() -> [Course] {
