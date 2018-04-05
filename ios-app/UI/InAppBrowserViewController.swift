@@ -88,7 +88,7 @@ extension InAppBrowserViewController: UIWebViewDelegate {
         guard let cookies = HTTPCookieStorage.shared.cookies else {
             return
         }
-        let array = cookies.flatMap { (cookie) -> [HTTPCookiePropertyKey: Any]? in
+        let array = cookies.compactMap { (cookie) -> [HTTPCookiePropertyKey: Any]? in
             cookie.properties
         }
         UserDefaults.standard.set(array, forKey: "cookies")
