@@ -72,10 +72,10 @@ public class UIUtils {
         
     }
     
-    static func setButtonDropShadow(_ button: UIButton) {
-        button.layer.shadowColor = UIColor.lightGray.cgColor
-        button.layer.shadowOffset = CGSize(width:0, height: 2)
-        button.layer.shadowOpacity = 0.9
+    static func setButtonDropShadow(_ view: UIView) {
+        view.layer.shadowColor = UIColor.lightGray.cgColor
+        view.layer.shadowOffset = CGSize(width:0, height: 2)
+        view.layer.shadowOpacity = 0.9
     }
     
     // Add gradient shadow layer to the shadow container view

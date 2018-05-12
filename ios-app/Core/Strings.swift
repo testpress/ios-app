@@ -133,4 +133,6 @@ struct Strings {
     
     static let ARTICLES = "Articles"
     
+    static let INVALID_ACCESS_CODE = "Invalid Access Code"
+    
 }

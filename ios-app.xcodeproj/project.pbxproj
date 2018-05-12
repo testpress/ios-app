@@ -183,6 +183,8 @@
 		2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */; };
 		2FD846601FC30D1900D6F016 /* ContentDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */; };
 		2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */; };
+		2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD2E4020A59D2500A111EC /* AccessCodeViewController.swift */; };
+		2FDD2E4320A5C3FE00A111EC /* AccessCodeExamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD2E4220A5C3FE00A111EC /* AccessCodeExamsViewController.swift */; };
 		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
 		2FE6B94F2051136F0091C7CA /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5A2045446B00A729CE /* FacebookLogin.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -405,6 +407,8 @@
 		2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailPageViewController.swift; sourceTree = "<group>"; };
 		2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailDataSource.swift; sourceTree = "<group>"; };
 		2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContentViewController.swift; sourceTree = "<group>"; };
+		2FDD2E4020A59D2500A111EC /* AccessCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessCodeViewController.swift; sourceTree = "<group>"; };
+		2FDD2E4220A5C3FE00A111EC /* AccessCodeExamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessCodeExamsViewController.swift; sourceTree = "<group>"; };
 		2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		2FE290711F8D07D0004D7574 /* QuestionListHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuestionListHandler.js; sourceTree = "<group>"; };
 		2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Carthage/Build/iOS/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -594,6 +598,8 @@
 		2FC0F2801F861A860092BFDC /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2FDD2E4020A59D2500A111EC /* AccessCodeViewController.swift */,
+				2FDD2E4220A5C3FE00A111EC /* AccessCodeExamsViewController.swift */,
 				2F5E0BB81FE2452D00236AFE /* ActivityFeedTableViewCell.swift */,
 				2F5E0BB61FE2444E00236AFE /* ActivityFeedTableViewController.swift */,
 				2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */,
@@ -947,6 +953,7 @@
 				2F56B73F1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift in Sources */,
 				2FC0F2E01F863AD00092BFDC /* AttemptQuestion.swift in Sources */,
 				2FC0F3031F863B9B0092BFDC /* ExamsTableViewController.swift in Sources */,
+				2FDD2E4320A5C3FE00A111EC /* AccessCodeExamsViewController.swift in Sources */,
 				2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */,
 				2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */,
 				2FC0F30E1F863BA90092BFDC /* SuccessViewController.swift in Sources */,
@@ -1045,6 +1052,7 @@
 				2F5E0BB51FE2415800236AFE /* ActivityFeedPager.swift in Sources */,
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
 				2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */,
+				2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */,
 				2F48C8131FD3E417009C686C /* Category.swift in Sources */,
 				2FC0F2E61F863AE30092BFDC /* TPError.swift in Sources */,
 				2FC0F2E31F863ADA0092BFDC /* RegistrationError.swift in Sources */,

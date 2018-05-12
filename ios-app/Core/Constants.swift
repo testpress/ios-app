@@ -93,6 +93,7 @@ struct Constants {
     static let RESET_PASSWORD_VIEW_CONTROLLER = "ResetPasswordViewController"
     static let POST_CATEGORIES_TABLE_VIEW_CELL = "PostCategoriesTableViewCell"
     static let POSTS_LIST_NAVIGATION_CONTROLLER = "PostsListNavigationController"
+    static let ACCESS_CODE_EXAMS_NAVIGATION_CONTROLLER = "AccessCodeExamsNavigationController"
     
     static let PAGE = "page"
     static let PAGE_SIZE = "page_size"
@@ -106,6 +107,7 @@ struct Constants {
     static let ADMIN = "admin"
     static let CATEGORY = "category"
     static let STARRED = "starred"
+    static let ACCESS_CODE = "access_code"
     
     static func getAppVersion() -> String {
         let dictionary = Bundle.main.infoDictionary!
