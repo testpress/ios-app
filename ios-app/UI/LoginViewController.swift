@@ -24,6 +24,8 @@
 //
 
 import Alamofire
+import FacebookCore
+import FacebookLogin
 import UIKit
 
 class LoginViewController: BaseTextFieldViewController {
@@ -33,7 +35,10 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var navigationbarItem: UINavigationItem!
     @IBOutlet weak var loginButton: UIButton!
-    
+    @IBOutlet weak var signUpLayout: UIStackView!
+    @IBOutlet weak var socialLoginLayout: UIStackView!
+    @IBOutlet weak var facebookButtonLayout: UIView!
+        
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
     override func viewDidLoad() {
@@ -42,8 +47,30 @@ class LoginViewController: BaseTextFieldViewController {
         navigationbarItem.title = UIUtils.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
         
-        // Set firstTextField in super class to set the cursor
+        // TODO: Set using institute settings
+        signUpLayout.isHidden = false
+
+        let fbLoginButton = LoginButton(readPermissions:
+            [ .publicProfile, .email, .userBirthday, .userLocation ])
+        
+        fbLoginButton.center.x = facebookButtonLayout.center.x
+        fbLoginButton.delegate = self
+        fbLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        facebookButtonLayout.addSubview(fbLoginButton)
+        fbLoginButton.topAnchor.constraint(equalTo: facebookButtonLayout.topAnchor).isActive = true
+        fbLoginButton.bottomAnchor
+            .constraint(equalTo: facebookButtonLayout.bottomAnchor).isActive = true
+        fbLoginButton.leadingAnchor
+            .constraint(equalTo: facebookButtonLayout.leadingAnchor).isActive = true
+        fbLoginButton.trailingAnchor
+            .constraint(equalTo: facebookButtonLayout.trailingAnchor).isActive = true
+        
+        // TODO: Use institute settings
+        socialLoginLayout.isHidden = false
+        
+        // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
+        showKeyboardOnStart = false
     }
     
     @IBAction func moveToPasswordField(_ sender: UITextField) {
@@ -62,49 +89,57 @@ class LoginViewController: BaseTextFieldViewController {
         }
         
         hideKeyboard()
+        authenticate(username: username, password: password, provider: .TESTPRESS)
+    }
+    
+    func authenticate(username: String, password: String, provider: AuthProvider) {
         present(alertController, animated: false, completion: nil)
-        
-        TPApiClient.authenticate(username: username, password: password, completion: {
-            testpressAuthToken, error in
-            if let error = error {
-                debugPrint(error.message ?? "No error message found")
-                debugPrint(error.kind)
-                var title, description: String
-                if error.isClientError() {
-                    title = Strings.WRONG_CREDENTIALS
-                    description = Strings.USERNAME_PASSWORD_NOT_MATCHED
-                } else {
-                    (_, title, description) = error.getDisplayInfo()
+        TPApiClient.authenticate(
+            username: username,
+            password: password,
+            provider: provider,
+            completion: {
+                testpressAuthToken, error in
+                if let error = error {
+                    debugPrint(error.message ?? "No error message found")
+                    debugPrint(error.kind)
+                    var title, description: String
+                    if error.isClientError() {
+                        title = Strings.WRONG_CREDENTIALS
+                        description = Strings.USERNAME_PASSWORD_NOT_MATCHED
+                    } else {
+                        (_, title, description) = error.getDisplayInfo()
+                    }
+                    self.alertController.dismiss(animated: true, completion: nil)
+                    UIUtils.showSimpleAlert(
+                        title: title,
+                        message: description,
+                        viewController: self,
+                        cancelable: true,
+                        cancelHandler: #selector(self.closeAlert(gesture:))
+                    )
+                    return
                 }
-                self.alertController.dismiss(animated: true, completion: nil)
-                UIUtils.showSimpleAlert(
-                    title: title,
-                    message: description,
-                    viewController: self,
-                    cancelable: true,
-                    cancelHandler: #selector(self.closeAlert(gesture:))
-                )
-                return
-            }
-            
-            let token: String = testpressAuthToken!.token!
-            do {
-                // Create a new keychain item
-                let passwordItem = KeychainTokenItem(service: Constants.KEYCHAIN_SERVICE_NAME,
-                                                     account: username)
                 
-                // Save the password for the new item
-                try passwordItem.savePassword(token)
-            } catch {
-                fatalError("Error updating keychain - \(error)")
+                let token: String = testpressAuthToken!.token!
+                do {
+                    // Create a new keychain item
+                    let passwordItem = KeychainTokenItem(service: Constants.KEYCHAIN_SERVICE_NAME,
+                                                         account: username)
+                    
+                    // Save the password for the new item
+                    try passwordItem.savePassword(token)
+                } catch {
+                    fatalError("Error updating keychain - \(error)")
+                }
+                
+                let tabViewController = self.storyboard!.instantiateViewController(
+                    withIdentifier: Constants.TAB_VIEW_CONTROLLER)
+                
+                self.alertController.dismiss(animated: true, completion: nil)
+                self.present(tabViewController, animated: true, completion: nil)
             }
-            
-            let tabViewController = self.storyboard!.instantiateViewController(
-                withIdentifier: Constants.TAB_VIEW_CONTROLLER)
-            
-            self.alertController.dismiss(animated: true, completion: nil)
-            self.present(tabViewController, animated: true, completion: nil)
-        })
+        )
     }
     
     @IBAction func showSignUpView() {
@@ -114,9 +149,37 @@ class LoginViewController: BaseTextFieldViewController {
         present(tabViewController, animated: true, completion: nil)
     }
     
+    @IBAction func showResetPasswordView() {
+        let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
+            Constants.RESET_PASSWORD_VIEW_CONTROLLER) as! ResetPasswordViewController
+        
+        present(tabViewController, animated: true, completion: nil)
+    }
+    
     @objc func closeAlert(gesture: UITapGestureRecognizer) {
         dismiss(animated: true)
     }
 
+}
+
+extension LoginViewController: LoginButtonDelegate {
+    
+    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+        switch result {
+        case .success(_, _, let token):
+            authenticate(username: token.userId!, password: token.authenticationToken,
+                         provider: .FACEBOOK)
+            break
+        case .cancelled:
+            
+            break
+        case .failed(let error):
+            print(error)
+            break
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: LoginButton) {
+    }
 }
 
