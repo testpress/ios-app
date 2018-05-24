@@ -26,7 +26,7 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://onlinetest.raceinstitute.in";
+    static let BASE_URL = "https://race.testpress.in";
     
     static let APP_APPLE_ID = "1344697199"
     
