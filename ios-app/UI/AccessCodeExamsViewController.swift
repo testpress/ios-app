@@ -1,5 +1,5 @@
 //
-//  PostsViewController.swift
+//  AccessCodeExamsViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,39 +25,43 @@
 
 import UIKit
 
-class PostsViewController: UIViewController {
+class AccessCodeExamsViewController: TPBasePagedTableViewController<Exam> {
     
-    @IBOutlet weak var postCreateButton: UIButton!
-    @IBOutlet weak var containerView: UIView!
+    let cellIdentifier = "ExamsTableViewCell"
+    var accessCode: String!
     
-    var forumTableViewController: ForumTableViewController!
+    required init?(coder aDecoder: NSCoder) {
+        super.init(pager: ExamPager(), coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIUtils.setButtonDropShadow(postCreateButton)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ForumListSegue" {
-            if let viewController =
-                segue.destination as? ForumTableViewController {
-                
-                self.forumTableViewController = viewController
-            }
-        }
-    }
-    
-    @IBAction func composePost(_ sender: Any) {
-        let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier:
-            Constants.POST_CREATION_VIEW_CONTROLLER) as! PostCreationViewController
         
-        viewController.parentTableViewController = forumTableViewController
-        present(viewController, animated: true, completion: nil)
+        (pager as! ExamPager).accessCode = accessCode
+        tableView.register(UINib(nibName: cellIdentifier, bundle: Bundle.main),
+                           forCellReuseIdentifier: cellIdentifier)
+        
+        tableView.rowHeight = 105
+        tableView.allowsSelection = false
     }
     
-    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+    // MARK: - Table view data source
+    
+    override func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as!
+        ExamsTableViewCell
+        
+        cell.initExamCell(items[indexPath.row], accessCode: accessCode!, viewController: self)
+        return cell
+    }
+    
+    override func setEmptyText() {
+        emptyView.setValues(image: Images.ExamsFlatIcon.image, title: Strings.NO_EXAMS,
+                            description: Strings.NO_AVAILABLE_EXAM)
+    }
+    
+    @IBAction func back() {
+        dismiss(animated: true, completion: nil)
     }
     
 }

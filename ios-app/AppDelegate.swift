@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import FacebookCore
 import IQKeyboardManagerSwift
 import RealmSwift
 import UIKit
@@ -54,6 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UIOffset(horizontal: 0, vertical: -5)
         }
         
+        SDKApplicationDelegate.shared.application(application,
+                                                  didFinishLaunchingWithOptions: launchOptions)
+        
         IQKeyboardManager.sharedManager().enable = true
         
         // Clear keychain items if app is launching the first time after installation
@@ -82,6 +86,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
         return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL,
+                     options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        
+        return SDKApplicationDelegate.shared.application(application, open: url, options: options)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -1,5 +1,5 @@
 //
-//  ExamPager.swift
+//  CategoryPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -26,41 +26,28 @@
 import Alamofire
 import ObjectMapper
 
-class ExamPager: TPBasePager<Exam> {
+class CategoryPager: TPBasePager<Category> {
     
-    var subclass: String!
-    var accessCode: String!
+    var starred: Bool?
     
-    init(subclass: String) {
-        self.subclass = subclass
-        super.init()
-    }
-    
-    override init() {
-        super.init()
+    init(starred: Bool? = nil) {
+        self.starred = starred
     }
     
     override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
-        if accessCode != nil {
-            let url = Constants.BASE_URL + TPEndpoint.getAccessCodeExams.urlPath + accessCode
-                + TPEndpoint.examsPath.urlPath
-            
-            let endpointProvider = TPEndpointProvider(.getAccessCodeExams, url: url,
-                                                      queryParams: queryParams)
-            
-            TPApiClient.getExams(endpointProvider: endpointProvider, completion: resonseHandler!)
-            return
+        if starred != nil {
+            queryParams.updateValue(String(starred!), forKey: Constants.STARRED)
         }
-        queryParams.updateValue(subclass, forKey: Constants.STATE)
-        TPApiClient.getExams(
-            endpointProvider: TPEndpointProvider(.getExams, queryParams: queryParams),
-            completion: resonseHandler!
+        TPApiClient.getListItems(
+            endpointProvider: TPEndpointProvider(.getPostCategories, queryParams: queryParams),
+            completion: resonseHandler!,
+            type: Category.self
         )
     }
     
-    override func getId(resource: Exam) -> Int {
-        return resource.id!
+    override func getId(resource: Category) -> Int {
+        return resource.id
     }
     
 }

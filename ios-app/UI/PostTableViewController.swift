@@ -23,12 +23,52 @@
 //  THE SOFTWARE.
 //
 
+import DropDown
 import UIKit
 
 class PostTableViewController: TPBasePagedTableViewController<Post> {
     
+    var category: Category!
+    var categories: [Category]!
+    var categoriesDropDown: PostCategoriesDropDown!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(pager: PostPager(), coder: aDecoder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        (pager as! PostPager).category = category
+        categoriesDropDown = PostCategoriesDropDown(category: category, categories: categories,
+                                                    navigationItem: navigationItem)
+        
+        categoriesDropDown.dropDown.selectionAction = { (index: Int, item: String) in
+            DispatchQueue.main.async {
+                self.categoriesDropDown.dropDown.selectRow(index)
+            }
+            if item == self.category.slug {
+                return
+            }
+            
+            self.category =
+                self.categoriesDropDown.getCategory(withSlug: item, from: self.categories)
+            
+            self.categoriesDropDown.titleButton.setTitle(self.category.name, for: .normal)
+            (self.pager as! PostPager).category = self.category
+            self.pager.reset()
+            self.items = []
+            self.tableView.reloadData()
+            self.activityIndicator?.startAnimating()
+            self.loadItems()
+        }
+        
+        for (index, category) in categories.enumerated() {
+            if category.slug == self.category.slug {
+                categoriesDropDown.dropDown.selectRow(index)
+                break
+            }
+        }
     }
     
     // MARK: - Table view data source
@@ -45,8 +85,8 @@ class PostTableViewController: TPBasePagedTableViewController<Post> {
                             description: Strings.NO_POSTS_DESCRIPTION)
     }
     
-    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+    @IBAction func back() {
+        dismiss(animated: true, completion: nil)
     }
     
 }

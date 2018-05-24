@@ -50,6 +50,7 @@ class StartExamScreenViewController: UIViewController {
     var contentAttempt: ContentAttempt!
     var exam: Exam!
     var attempt: Attempt?
+    var accessCode: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +92,9 @@ class StartExamScreenViewController: UIViewController {
                 Strings.CAN_START_EXAM_ONLY_AFTER + FormatDate.format(dateString: exam?.startDate)
             
             startButtonLayout.isHidden = true
+        } else if exam.hasEnded() {
+            webOnlyExamLabel.text = Strings.EXAM_ENDED
+            startButtonLayout.isHidden = true
         } else {
             webOnlyExamLabel.isHidden = true
             UIUtils.setButtonDropShadow(startButton)
@@ -121,9 +125,14 @@ class StartExamScreenViewController: UIViewController {
             startAttempt(type: ContentAttempt.self, endpointProvider: endpointProvider)
             return
         } else if attempt == nil {
+            var queryParams = [String: String]()
+            if accessCode != nil {
+                queryParams.updateValue(accessCode, forKey: Constants.ACCESS_CODE)
+            }
             endpointProvider = TPEndpointProvider(
                 .post,
-                url: (exam?.attemptsUrl)!
+                url: (exam?.attemptsUrl)!,
+                queryParams: queryParams
             )
         } else {
             endpointProvider = TPEndpointProvider(

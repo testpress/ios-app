@@ -310,6 +310,12 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
             contentDetailPageViewController.dismiss(animated: false, completion: {
                 contentDetailPageViewController.updateCurrentExamContent()
             })
+        } else if let nvc =  presentingViewController as? UINavigationController,
+                let accessCodeExamsViewController =
+                    nvc.viewControllers.first as? AccessCodeExamsViewController {
+            
+            accessCodeExamsViewController.items.removeAll()
+            accessCodeExamsViewController.dismiss(animated: false, completion: nil)
         } else if presentingViewController is UITabBarController {
             let tabViewController =
                 presentingViewController?.childViewControllers[0] as! ExamsTabViewController

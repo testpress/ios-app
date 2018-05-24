@@ -1,5 +1,5 @@
 //
-//  CoursesTableViewController.swift
+//  PostCategoriesTableViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,53 +23,72 @@
 //  THE SOFTWARE.
 //
 
-import RealmSwift
+import ObjectMapper
 import UIKit
 
-class CoursesTableViewController: BaseDBViewController<Course> {
+protocol PostCategoryDelegate {
+    func onLoadedCategories(_ categories: [Category])
+    func onError(_ error: TPError)
+    func onEmptyCategories()
+    func showCategories()
+}
+
+class PostCategoriesTableViewController: BaseTableViewController<Category>, BaseTableViewDelegate {
     
-    required init?(coder aDecoder: NSCoder) {
-        debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
-        super.init(pager: CoursePager(), coder: aDecoder)
-    }
+    var pager: CategoryPager!
+    var postCategoryDelegate: PostCategoryDelegate?
+    var categories = [Category]()
     
-    override func getItemsFromDb() -> [Course] {
-        return DBManager<Course>()
-            .getItemsFromDB(filteredBy: "active = true", byKeyPath: "order")
-    }
-    
-    override func loadItems() {
-        if loadingItems {
-            return
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        pager = CategoryPager()
+        tableViewDelegate = self
+        tableView.frame.size.height = 156
+        activityIndicator?.center = CGPoint(x: view.center.x, y: tableView.center.y)
+        tableView.reloadData()
+        if (items.isEmpty) {
+            activityIndicator?.startAnimating()
+            tableViewDelegate.loadItems()
         }
-        loadingItems = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+    }
+    
+    func loadItems() {
         pager.next(completion: {
             items, error in
             if let error = error {
                 debugPrint(error.message ?? "No error")
                 debugPrint(error.kind)
                 self.handleError(error)
+                self.postCategoryDelegate?.onError(error)
                 return
             }
             
             if self.pager.hasMore {
-                self.loadingItems = false
                 self.loadItems()
             } else {
-                let items = Array(items!.values)
-                DBManager<Course>().deleteAllFromDatabase() // Delete previous items
-                DBManager<Course>().addData(objects: items)
-                self.items = self.getItemsFromDb()
+                self.categories = Array(items!.values)
+                self.postCategoryDelegate?.onLoadedCategories(self.categories)
+                var starred = [Category]()
+                for category in self.categories {
+                    if category.is_starred {
+                        starred.append(category)
+                    }
+                }
+                self.items = starred
                 if self.items.count == 0 {
                     self.setEmptyText()
+                    self.postCategoryDelegate?.onEmptyCategories()
+                } else {
+                    self.postCategoryDelegate?.showCategories()
                 }
-                self.delegate?.onItemsLoaded()
-                self.tableView.reloadData()
-                if self.activityIndicator.isAnimating {
-                    self.activityIndicator.stopAnimating()
-                }
-                self.tableView.tableFooterView?.isHidden = true
-                self.loadingItems = false
+                self.onLoadFinished()
             }
         })
     }
@@ -77,19 +96,12 @@ class CoursesTableViewController: BaseDBViewController<Course> {
     // MARK: - Table view data source
     override func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.COURSE_LIST_VIEW_CELL, for: indexPath) as! CourseTableViewCell
-
+            withIdentifier: Constants.POST_CATEGORIES_TABLE_VIEW_CELL,
+            for: indexPath
+            ) as! PostCategoriesTableViewCell
+        
         cell.initCell(items[indexPath.row], viewController: self)
         return cell
-    }
-    
-    override func setEmptyText() {
-        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_COURSES,
-                            description: Strings.NO_COURSE_DESCRIPTION)
-    }
-    
-    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
     }
     
 }

@@ -30,6 +30,7 @@ class BaseTextFieldViewController: UIViewController, UIGestureRecognizerDelegate
     @IBOutlet weak var scrollView: UIScrollView!
     
     var firstTextField: UITextField?
+    var showKeyboardOnStart: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,8 +53,10 @@ class BaseTextFieldViewController: UIViewController, UIGestureRecognizerDelegate
         
         scrollView.addGestureRecognizer(tapGesture)
         
-        // Display keyboard initialy with cursor on first text field
-        firstTextField?.becomeFirstResponder()
+        if showKeyboardOnStart {
+            // Display keyboard initialy with cursor on first text field
+            firstTextField?.becomeFirstResponder()
+        }
     }
     
     @objc func hideKeyboard(gesture: UITapGestureRecognizer? = nil) {
