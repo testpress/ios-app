@@ -53,6 +53,7 @@ class SuccessViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        successDescriptionLabel.text = successDescription
         actionButton.isHidden = (actionButtonClickHandler == nil)
     }
     
