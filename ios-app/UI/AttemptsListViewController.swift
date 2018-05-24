@@ -41,6 +41,7 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
     var exam: Exam!
     var attempts: [Attempt] = []
     var pausedAttempts: [Attempt] = []
+    var accessCode: String!
     
     override func viewDidLoad() {
         emptyView = EmptyView.getInstance(parentView: contentView)
@@ -224,6 +225,9 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
         viewController.exam = self.exam!
         if attempt != nil {
             viewController.attempt = attempt
+        }
+        if accessCode != nil {
+            viewController.accessCode = accessCode
         }
         showDetailViewController(viewController, sender: self)
     }

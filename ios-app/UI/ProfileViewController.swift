@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import FacebookLogin
 import Kingfisher
 import UIKit
 
@@ -128,6 +129,8 @@ class ProfileViewController: UIViewController {
             handler: { action in
                 
                 DBInstance.clearAllTables()
+                // Logout on Facebook
+                LoginManager().logOut()
                 KeychainTokenItem.clearKeychainItems()
                 let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
                     Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController

@@ -55,7 +55,11 @@ class ImagePicker: NSObject {
     
     func showImagePicker(viewController: UIViewController) {
         self.viewController = viewController
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: UIUtils.getActionSheetStyle()
+        )
         actionSheet.addAction(UIAlertAction(
             title: Strings.CAMERA,
             style: .default,
