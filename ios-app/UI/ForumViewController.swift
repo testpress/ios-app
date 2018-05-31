@@ -1,5 +1,5 @@
 //
-//  MainMenuTabViewController.swift
+//  ForumViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,16 +25,39 @@
 
 import UIKit
 
-class MainMenuTabViewController: UITabBarController {
+class ForumViewController: UIViewController {
+    
+    @IBOutlet weak var postCreateButton: UIButton!
+    @IBOutlet weak var containerView: UIView!
+    
+    var forumTableViewController: ForumTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIUtils.setButtonDropShadow(postCreateButton)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ForumListSegue" {
+            if let viewController =
+                segue.destination as? ForumTableViewController {
+                
+                self.forumTableViewController = viewController
+            }
+        }
+    }
+    
+    @IBAction func composePost(_ sender: Any) {
+        let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.POST_CREATION_VIEW_CONTROLLER) as! PostCreationViewController
         
-        viewControllers?.remove(at: 2) // Exams list
-        viewControllers?.remove(at: 5) // Access Code
-        viewControllers?.remove(at: 4) // Discussion Forum
-        viewControllers?.remove(at: 0) // Activity Feed
-
+        viewController.parentTableViewController = forumTableViewController
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
+        UIUtils.showProfileDetails(self)
     }
     
 }

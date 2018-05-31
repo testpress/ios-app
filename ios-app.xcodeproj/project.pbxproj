@@ -23,7 +23,8 @@
 		2F26ADFB1E8249D70031E6F4 /* ios_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* ios_appTests.swift */; };
 		2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */; };
 		2F2866FA1FD6C1D600FC6BAA /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */; };
-		2F2A41C01FD6ACE900B92C6D /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */; };
+		2F2A41C01FD6ACE900B92C6D /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A41BF1FD6ACE900B92C6D /* ForumViewController.swift */; };
+		2F33BFFB206E7E7100D4CE6D /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F33BFFA206E7E7100D4CE6D /* DropDown.framework */; };
 		2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
 		2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
 		2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3A142E1FE0EEED007CEE84 /* LUExpandableTableView.framework */; };
@@ -41,6 +42,9 @@
 		2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F634F2004A2D000976053 /* RealmSwift.framework */; };
 		2F3F63522004A75F00976053 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F63512004A75F00976053 /* DBManager.swift */; };
 		2F3F63542004C54900976053 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F63532004C54900976053 /* Realm.framework */; };
+		2F40CC592045446600A729CE /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC582045446600A729CE /* FacebookCore.framework */; };
+		2F40CC5D20456FEC00A729CE /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5C20456FEC00A729CE /* FBSDKCoreKit.framework */; };
+		2F40CC5F2045702100A729CE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5E2045702100A729CE /* Bolts.framework */; };
 		2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F412CC120219BC300B7F70C /* OrderedDictionary.swift */; };
 		2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */; };
 		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
@@ -113,6 +117,7 @@
 		2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */; };
 		2F9778A81FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */; };
 		2F9B5E171FC54AFC00D67100 /* AttachmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */; };
+		2F9F169520724F76009886AB /* PostCategoriesDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9F169420724F76009886AB /* PostCategoriesDropDown.swift */; };
 		2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */; };
 		2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */; };
 		2FB049BB1FD838860049D5B0 /* post.css in Resources */ = {isa = PBXBuildFile; fileRef = 2FB049BA1FD838860049D5B0 /* post.css */; };
@@ -178,10 +183,19 @@
 		2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */; };
 		2FD846601FC30D1900D6F016 /* ContentDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */; };
 		2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */; };
+		2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD2E4020A59D2500A111EC /* AccessCodeViewController.swift */; };
+		2FDD2E4320A5C3FE00A111EC /* AccessCodeExamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD2E4220A5C3FE00A111EC /* AccessCodeExamsViewController.swift */; };
 		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
+		2FE6B94F2051136F0091C7CA /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5A2045446B00A729CE /* FacebookLogin.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2FE6B958205144CD0091C7CA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */; };
+		2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
 		2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */; };
+		2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */; };
+		2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */; };
+		2FEDFF5A206CE7560002CF04 /* CategoryPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF59206CE7560002CF04 /* CategoryPager.swift */; };
+		2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */; };
 		2FF024212004CECA00E0047D /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF024202004CECA00E0047D /* BaseDBViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -194,6 +208,20 @@
 			remoteInfo = "ios-app";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2FE6B95A205144CD0091C7CA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2F1474701F8B73FF0017151B /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
@@ -219,8 +247,9 @@
 		2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		2F29437B1FDFE50600E45F07 /* ExpandableCell.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ExpandableCell.framework.dSYM; path = Carthage/Build/iOS/ExpandableCell.framework.dSYM; sourceTree = "<group>"; };
 		2F29437D1FDFE51600E45F07 /* ExpandableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExpandableCell.framework; path = Carthage/Build/iOS/ExpandableCell.framework; sourceTree = "<group>"; };
-		2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
+		2F2A41BF1FD6ACE900B92C6D /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
 		2F2CA1DA1EBDC59300ED1C99 /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XLPagerTabStrip.framework; path = Carthage/Build/iOS/XLPagerTabStrip.framework; sourceTree = "<group>"; };
+		2F33BFFA206E7E7100D4CE6D /* DropDown.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropDown.framework; path = Carthage/Build/iOS/DropDown.framework; sourceTree = "<group>"; };
 		2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQuestionsSlidingViewController.swift; sourceTree = "<group>"; };
 		2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSlidingViewController.swift; sourceTree = "<group>"; };
 		2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
@@ -239,6 +268,10 @@
 		2F3F634F2004A2D000976053 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		2F3F63512004A75F00976053 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		2F3F63532004C54900976053 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		2F40CC582045446600A729CE /* FacebookCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookCore.framework; path = Carthage/Build/iOS/FacebookCore.framework; sourceTree = "<group>"; };
+		2F40CC5A2045446B00A729CE /* FacebookLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookLogin.framework; path = Carthage/Build/iOS/FacebookLogin.framework; sourceTree = "<group>"; };
+		2F40CC5C20456FEC00A729CE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Carthage/Build/iOS/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		2F40CC5E2045702100A729CE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
 		2F412CC120219BC300B7F70C /* OrderedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		2F48C7F81FCD9F18009C686C /* progress_loader.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = progress_loader.css; sourceTree = "<group>"; };
@@ -305,6 +338,7 @@
 		2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrophiesAchievedViewController.swift; sourceTree = "<group>"; };
 		2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentDetailViewController.swift; sourceTree = "<group>"; };
 		2F9E39911F851A76001D51B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TestEngine.storyboard; sourceTree = "<group>"; };
+		2F9F169420724F76009886AB /* PostCategoriesDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoriesDropDown.swift; sourceTree = "<group>"; };
 		2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTabViewController.swift; sourceTree = "<group>"; };
 		2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumTableViewController.swift; sourceTree = "<group>"; };
 		2FB049BA1FD838860049D5B0 /* post.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = post.css; sourceTree = "<group>"; };
@@ -373,10 +407,17 @@
 		2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailPageViewController.swift; sourceTree = "<group>"; };
 		2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailDataSource.swift; sourceTree = "<group>"; };
 		2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlContentViewController.swift; sourceTree = "<group>"; };
+		2FDD2E4020A59D2500A111EC /* AccessCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessCodeViewController.swift; sourceTree = "<group>"; };
+		2FDD2E4220A5C3FE00A111EC /* AccessCodeExamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessCodeExamsViewController.swift; sourceTree = "<group>"; };
 		2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		2FE290711F8D07D0004D7574 /* QuestionListHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuestionListHandler.js; sourceTree = "<group>"; };
+		2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Carthage/Build/iOS/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		2FE81096201A0AF70031E134 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoriesTableViewController.swift; sourceTree = "<group>"; };
+		2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoriesTableViewCell.swift; sourceTree = "<group>"; };
+		2FEDFF59206CE7560002CF04 /* CategoryPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPager.swift; sourceTree = "<group>"; };
+		2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostTableViewController.swift; sourceTree = "<group>"; };
 		2FF024202004CECA00E0047D /* BaseDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -386,8 +427,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F763CFF1FBD83340033D495 /* Alamofire.framework in Frameworks */,
+				2F40CC5F2045702100A729CE /* Bolts.framework in Frameworks */,
+				2FE6B958205144CD0091C7CA /* FBSDKLoginKit.framework in Frameworks */,
 				2F936E821FDAD376008C353A /* Charts.framework in Frameworks */,
 				2F763D001FBD83340033D495 /* Device.framework in Frameworks */,
+				2F33BFFB206E7E7100D4CE6D /* DropDown.framework in Frameworks */,
+				2F40CC592045446600A729CE /* FacebookCore.framework in Frameworks */,
+				2FE6B94F2051136F0091C7CA /* FacebookLogin.framework in Frameworks */,
+				2F40CC5D20456FEC00A729CE /* FBSDKCoreKit.framework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
 				2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */,
@@ -465,6 +512,12 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F33BFFA206E7E7100D4CE6D /* DropDown.framework */,
+				2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */,
+				2F40CC5E2045702100A729CE /* Bolts.framework */,
+				2F40CC5C20456FEC00A729CE /* FBSDKCoreKit.framework */,
+				2F40CC5A2045446B00A729CE /* FacebookLogin.framework */,
+				2F40CC582045446600A729CE /* FacebookCore.framework */,
 				2F52CB7A20173BA300592CD8 /* PDFReader.framework */,
 				2F3F63532004C54900976053 /* Realm.framework */,
 				2F3F634F2004A2D000976053 /* RealmSwift.framework */,
@@ -545,6 +598,8 @@
 		2FC0F2801F861A860092BFDC /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2FDD2E4020A59D2500A111EC /* AccessCodeViewController.swift */,
+				2FDD2E4220A5C3FE00A111EC /* AccessCodeExamsViewController.swift */,
 				2F5E0BB81FE2452D00236AFE /* ActivityFeedTableViewCell.swift */,
 				2F5E0BB61FE2444E00236AFE /* ActivityFeedTableViewController.swift */,
 				2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */,
@@ -576,6 +631,7 @@
 				2FC0F28C1F861A860092BFDC /* ExamsTabViewController.swift */,
 				2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */,
 				2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */,
+				2F2A41BF1FD6ACE900B92C6D /* ForumViewController.swift */,
 				2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */,
 				2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */,
 				2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */,
@@ -588,15 +644,18 @@
 				2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */,
 				2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */,
 				2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */,
+				2F9F169420724F76009886AB /* PostCategoriesDropDown.swift */,
+				2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */,
+				2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */,
 				2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */,
 				2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */,
-				2F2A41BF1FD6ACE900B92C6D /* PostsViewController.swift */,
 				2F48C80C1FD28902009C686C /* PostTableViewCell.swift */,
 				2F48C80A1FD288C6009C686C /* PostTableViewController.swift */,
 				2FC0F28F1F861A860092BFDC /* ProfileViewController.swift */,
 				2FC0F2901F861A860092BFDC /* QuestionsControllerSource.swift */,
 				2F1474781F8B898F0017151B /* QuestionListViewController.swift */,
 				2FC0F2911F861A860092BFDC /* QuestionsViewController.swift */,
+				2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */,
 				2F8411BB2043D5C500193A66 /* ResetPasswordViewController.swift */,
 				2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */,
 				2FC0F2921F861A860092BFDC /* ReviewQuestionsDataSource.swift */,
@@ -672,6 +731,7 @@
 			children = (
 				2FC0F2EA1F863B080092BFDC /* AttemptPager.swift */,
 				2F5E0BB41FE2415800236AFE /* ActivityFeedPager.swift */,
+				2FEDFF59206CE7560002CF04 /* CategoryPager.swift */,
 				2F763D101FBECFD30033D495 /* ChapterPager.swift */,
 				2F48C8021FCE9A37009C686C /* CommentPager.swift */,
 				2F96997F1FC2A8E0001B2B18 /* ContentPager.swift */,
@@ -698,6 +758,7 @@
 				2F26ADDE1E8249D70031E6F4 /* Sources */,
 				2F26ADDF1E8249D70031E6F4 /* Frameworks */,
 				2F26ADE01E8249D70031E6F4 /* Resources */,
+				2FE6B95A205144CD0091C7CA /* Embed Frameworks */,
 				2FBEDB7F1E82BC48000CF05C /* ShellScript */,
 			);
 			buildRules = (
@@ -734,7 +795,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Testpress;
 				TargetAttributes = {
 					2F26ADE11E8249D70031E6F4 = {
@@ -836,6 +897,12 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookLogin.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKCoreKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Bolts.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
 			);
 			outputPaths = (
 			);
@@ -861,6 +928,7 @@
 				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
 				2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */,
 				2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */,
+				2FEDFF5A206CE7560002CF04 /* CategoryPager.swift in Sources */,
 				2FC0F2E51F863AE00092BFDC /* TPAuthToken.swift in Sources */,
 				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,
 				2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */,
@@ -873,6 +941,7 @@
 				2FC0F2F21F863B190092BFDC /* TPBasePager.swift in Sources */,
 				2FC0F3081F863BA90092BFDC /* QuestionsViewController.swift in Sources */,
 				2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */,
+				2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */,
 				2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */,
 				2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */,
 				2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */,
@@ -884,7 +953,9 @@
 				2F56B73F1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift in Sources */,
 				2FC0F2E01F863AD00092BFDC /* AttemptQuestion.swift in Sources */,
 				2FC0F3031F863B9B0092BFDC /* ExamsTableViewController.swift in Sources */,
+				2FDD2E4320A5C3FE00A111EC /* AccessCodeExamsViewController.swift in Sources */,
 				2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */,
+				2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */,
 				2FC0F30E1F863BA90092BFDC /* SuccessViewController.swift in Sources */,
 				2FC0F3041F863B9E0092BFDC /* ExamsTabViewController.swift in Sources */,
 				2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */,
@@ -904,6 +975,7 @@
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
 				2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */,
 				2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */,
+				2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */,
 				2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */,
 				2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */,
 				2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */,
@@ -926,6 +998,7 @@
 				2FC0F2F51F863B2B0092BFDC /* KeychainTokenItem.swift in Sources */,
 				2FC0F2DC1F863AB70092BFDC /* Colors.swift in Sources */,
 				2FC0F2E11F863AD30092BFDC /* AttemptItem.swift in Sources */,
+				2F9F169520724F76009886AB /* PostCategoriesDropDown.swift in Sources */,
 				2F25D558201EFB9F00C01CCE /* LeaderboardTabViewController.swift in Sources */,
 				2F3A14331FE15E98007CEE84 /* ActivityFeed.swift in Sources */,
 				2FC0F3001F863B8F0092BFDC /* ExamsTableViewCell.swift in Sources */,
@@ -950,7 +1023,7 @@
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
 				2FC0F2DE1F863ACA0092BFDC /* Attempt.swift in Sources */,
 				2F96997A1FC2A22A001B2B18 /* Content.swift in Sources */,
-				2F2A41C01FD6ACE900B92C6D /* PostsViewController.swift in Sources */,
+				2F2A41C01FD6ACE900B92C6D /* ForumViewController.swift in Sources */,
 				2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */,
 				2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */,
 				2F2866FA1FD6C1D600FC6BAA /* UIViewExtension.swift in Sources */,
@@ -979,6 +1052,7 @@
 				2F5E0BB51FE2415800236AFE /* ActivityFeedPager.swift in Sources */,
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
 				2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */,
+				2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */,
 				2F48C8131FD3E417009C686C /* Category.swift in Sources */,
 				2FC0F2E61F863AE30092BFDC /* TPError.swift in Sources */,
 				2FC0F2E31F863ADA0092BFDC /* RegistrationError.swift in Sources */,
@@ -1061,6 +1135,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1068,6 +1143,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1117,6 +1193,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1124,6 +1201,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1156,9 +1234,11 @@
 		2F26AE001E8249D70031E6F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1176,9 +1256,11 @@
 		2F26AE011E8249D70031E6F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

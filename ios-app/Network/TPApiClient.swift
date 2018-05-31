@@ -27,6 +27,11 @@ import Alamofire
 import Device
 import UIKit
 
+enum AuthProvider: String {
+    case TESTPRESS
+    case FACEBOOK
+}
+
 class TPApiClient {
 
     static func apiCall(endpointProvider: TPEndpointProvider,
@@ -228,10 +233,20 @@ class TPApiClient {
     }
     
     static func authenticate(username: String, password: String,
+                             provider: AuthProvider = .TESTPRESS,
                              completion: @escaping (TPAuthToken?, TPError?) -> Void) {
         
-        let parameters: Parameters = ["username": username, "password": password]
-        apiCall(endpointProvider: TPEndpointProvider(.authenticateUser), parameters: parameters,
+        var parameters: Parameters
+        var endpoint: TPEndpoint
+        if provider == .TESTPRESS {
+            parameters = ["username": username, "password": password]
+            endpoint = .authenticateUser
+        } else {
+            endpoint = .authenticateSocialUser
+            parameters = ["user_id": username, "access_token": password,
+                          "provider": provider.rawValue]
+        }
+        apiCall(endpointProvider: TPEndpointProvider(endpoint), parameters: parameters,
                 completion: { json, error in
                     
             var testpressAuthToken: TPAuthToken? = nil

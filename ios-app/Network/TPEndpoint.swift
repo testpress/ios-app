@@ -56,6 +56,10 @@ enum TPEndpoint {
     case getTargets
     case getThreads
     case resetPassword
+    case getPostCategories
+    case authenticateSocialUser
+    case getAccessCodeExams
+    case examsPath
     case get
     case post
     case put
@@ -101,12 +105,15 @@ enum TPEndpoint {
              .getLeaderboard,
              .getTargets,
              .getThreads,
+             .getPostCategories,
+             .getAccessCodeExams,
              .getActivityFeed:
             return .get
         case .get:
             return .get
         case .post,
              .resetPassword,
+             .authenticateSocialUser,
              .uploadImage:
             return .post
         case .put:
@@ -162,6 +169,14 @@ enum TPEndpoint {
             return "/api/v2.2/me/threats/"
         case .resetPassword:
             return "/api/v2.2/password/reset/"
+        case .getPostCategories:
+            return "/api/v2.2/posts/categories/"
+        case .authenticateSocialUser:
+            return "/api/v2.2/social-auth/"
+        case .getAccessCodeExams:
+            return "/api/v2.2/access_codes/"
+        case .examsPath:
+            return "/exams/"
         default:
             return ""
         }
