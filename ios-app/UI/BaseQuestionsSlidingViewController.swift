@@ -67,7 +67,6 @@ class BaseQuestionsSlidingViewController: SlideMenuController {
         questionsPageViewController.exam = exam
         questionsPageViewController.contentAttempt = contentAttempt
         questionsPageViewController.parentviewController = self
-        mainViewController = questionsPageViewController
     }
     
     @IBAction func onPressBackButton() {

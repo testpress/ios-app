@@ -26,16 +26,11 @@
 import UIKit
 import ObjectMapper
 
-protocol BasePagedTableViewDelegate {
-    func onItemsLoaded()
-}
-
 class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
     BaseTableViewDelegate {
     
     var pager: TPBasePager<T>
     var loadingItems: Bool = false
-    var delegate: BasePagedTableViewDelegate?
     
     init(pager: TPBasePager<T>, coder aDecoder: NSCoder? = nil) {
         self.pager = pager
@@ -87,14 +82,17 @@ class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
             }
             
             self.items = Array(items!.values)
-            if self.items.count == 0 {
-                self.setEmptyText()
-            }
-            self.delegate?.onItemsLoaded()
-            self.onLoadFinished()
-            self.tableView.tableFooterView?.isHidden = true
-            self.loadingItems = false
+            self.onLoadFinished(items: self.items)
         })
+    }
+    
+    override func onLoadFinished(items: [T]) {
+        if items.count == 0 {
+            setEmptyText()
+        }
+        super.onLoadFinished(items: items)
+        self.tableView.tableFooterView?.isHidden = true
+        self.loadingItems = false
     }
     
     override func handleError(_ error: TPError) {

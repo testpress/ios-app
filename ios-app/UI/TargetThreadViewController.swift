@@ -85,7 +85,7 @@ class TargetThreadViewController: BaseTableViewController<Reputation>, BaseTable
                 
                 let items = response!.results.reversed()
                 self.items.append(contentsOf: items)
-                self.onLoadFinished()
+                self.onLoadFinished(items: self.items)
             },
             type: Reputation.self
         )

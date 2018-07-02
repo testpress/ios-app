@@ -39,6 +39,7 @@ struct Constants {
     static let LAUNCHED_APP_BEFORE = "launchedAppBefore"
     
     static let TROPHIES_ENABLED = true
+    static let BOOKMARKS_ENABLED = true
     
     static let TEST_ENGINE = "TestEngine"
     static let EXAM_REVIEW_STORYBOARD = "ExamReview"
@@ -94,6 +95,15 @@ struct Constants {
     static let POST_CATEGORIES_TABLE_VIEW_CELL = "PostCategoriesTableViewCell"
     static let POSTS_LIST_NAVIGATION_CONTROLLER = "PostsListNavigationController"
     static let ACCESS_CODE_EXAMS_NAVIGATION_CONTROLLER = "AccessCodeExamsNavigationController"
+    static let BOOKMARKS_TABLE_VIEW_CELL = "BookmarksTableViewCell"
+    static let BOOKMARKS_LIST_NAVIGATION_CONTROLLER = "BookmarksListNavigationController"
+    static let BOOKMARKS_STORYBOARD = "Bookmarks"
+    static let BOOKMARKS_DETAIL_PAGE_VIEW_CONTROLLER = "BookmarksDetailPageViewController"
+    static let BOOKMARKS_LIST_VIEW_CONTROLLER = "BookmarksListViewController"
+    static let BOOKMARKS_TABLE_VIEW_CONTROLLER = "BookmarksTableViewController"
+    static let BOOKMARKED_QUESTION_VIEW_CONTROLLER = "BookmarkedQuestionViewController"
+    static let BOOKMARK_FOLDER_NAVIGATION_CONTROLLER = "BookmarkFolderNavigationController"
+    static let BOOKMARK_FOLDER_TABLE_VIEW_CELL = "BookmarkFolderTableViewCell"
     
     static let PAGE = "page"
     static let PAGE_SIZE = "page_size"

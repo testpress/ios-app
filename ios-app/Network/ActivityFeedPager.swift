@@ -26,19 +26,8 @@
 import Alamofire
 import ObjectMapper
 
-class ActivityFeedPager {
+class ActivityFeedPager: BasePager<ActivityFeedResponse, ActivityFeed> {
     
-    var response: ApiResponse<ActivityFeedResponse>?
-    
-    /**
-     * Next page to request
-     */
-    var page: Int = 1
-    
-    /**
-     * All resources retrieved
-     */
-    var activities = OrderedDictionary<Int, ActivityFeed>()
     var contentTypes = [Int: ContentType]()
     var users = [Int: User]()
     var chapters = [Int: Chapter]()
@@ -51,55 +40,9 @@ class ActivityFeedPager {
     var posts = [Int: Post]()
     var postCategories = [Int: Category]()
     
-    /**
-     * Query Params to be passed
-     */
-    public var queryParams = [String: String]()
-    
-    /**
-     * Are more pages available?
-     */
-    var hasMore: Bool = false
-    
-    var completion: ((OrderedDictionary<Int, ActivityFeed>?, TPError?) -> Void)? = nil
-    
-    var resonseHandler: ((ApiResponse<ActivityFeedResponse>?, TPError?) -> Void)? = nil
-    
-    init() {
-        resonseHandler = { response, error in
-            if let error = error {
-                self.hasMore = false;
-                self.completion!(self.activities, error)
-            } else {
-                self.response = response
-                self.onSuccess()
-            }
-        }
-    }
-    
-    func reset() {
-        page = 1
-        queryParams.removeAll()
-        response = nil
-        hasMore = true
-    }
-    
-    public func next(
-            completion: @escaping(OrderedDictionary<Int, ActivityFeed>?, TPError?) -> Void) {
-        
-        self.completion = completion
-        getItems(page: page);
-    }
-    
-    func onSuccess() {
-        let activities: [ActivityFeed] = response!.results.activities
-        #if DEBUG
-            print("response?.next:" + (response!.next))
-            print("response?.previous:" + (response!.previous))
-            print("response?.count:"+String(response!.count))
-        #endif
-        let emptyPage = activities.isEmpty
-        if !emptyPage {
+    override func getItems(_ resultResponse: ActivityFeedResponse) -> [ActivityFeed] {
+        let activities: [ActivityFeed] = resultResponse.activities
+        if !activities.isEmpty {
             // DON'T CHANGE THE BELOW ORDER
             response!.results.contentTypes.forEach { contentType in
                 contentTypes.updateValue(contentType, forKey: contentType.id)
@@ -134,41 +77,23 @@ class ActivityFeedPager {
             response!.results.postCategories.forEach { postCategory in
                 postCategories.updateValue(postCategory, forKey: postCategory.id)
             }
-            for activity in activities {
-                let activity: ActivityFeed? = register(activity: activity)
-                if activity == nil {
-                    continue;
-                }
-                self.activities[activity!.id] = activity!
-            }
         }
-        page += 1;
-        hasMore = hasNext() && !emptyPage
-        #if DEBUG
-            print("self.hasMore:\(hasMore)")
-            print("hasNext():\(hasNext())")
-        #endif
-        completion!(self.activities, nil)
+        return activities
     }
     
-    func hasNext() -> Bool {
-        return response == nil || (response != nil && !(response!.next.isEmpty));
-    }
-    
-    func getItems(page: Int) {
+    override func getResponse(page: Int) {
         queryParams.updateValue(Constants.ADMIN, forKey: Constants.FILTER)
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
             type: ActivityFeedResponse.self,
             endpointProvider: TPEndpointProvider(.getActivityFeed, queryParams: queryParams),
-            completion: resonseHandler!
+            completion: responseHandler!
         )
     }
     
-    func register(activity: ActivityFeed) -> ActivityFeed? {
+    override func register(resource activity: ActivityFeed) -> ActivityFeed? {
         
         activity.actor = users[Int(activity.actorObjectId)!]
-        
         let actionObjectId = Int(activity.actionObjectObjectId)!
         switch contentTypes[activity.actionObjectContentType]!.model {
         case "chapter":
@@ -219,6 +144,10 @@ class ActivityFeedPager {
             return nil
         }
         return activity
+    }
+    
+    override func getId(resource: ActivityFeed) -> Int {
+        return resource.id
     }
     
 }
