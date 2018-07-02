@@ -1,0 +1,40 @@
+
+.bookmark_options_layout {
+    display: block;
+    height: 56px;
+    border-radius: 5px;
+    border: solid 1px #e6e6e6;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 15px;
+}
+
+.bookmark-button {
+    margin-top: 18px;
+    display: inline-block;
+    height: 20px;
+    margin-right: 20px;
+}
+
+.bookmark-text, .move-bookmark-text {
+    font-size: 14px;
+    line-height: 14px;
+    color: #bfbfbf;
+    display: inline-block;
+    margin-top: 3px;
+    float:right;
+    font-family: 'Rubik-Regular', sans-serif;
+}
+
+.move-bookmark-text {
+    color: #3b99d8;
+}
+
+.bookmark-image {
+    width: 12px;
+    height: 14px;
+    margin-right: 7px;
+    margin-top: 3px;
+    display: inline-block;
+}

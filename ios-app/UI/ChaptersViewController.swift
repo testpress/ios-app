@@ -35,7 +35,6 @@ class ChaptersViewController: UIViewController {
     var items = [Chapter]()
     var pager: ChapterPager!
     var loadingItems: Bool = false
-    var delegate: BasePagedTableViewDelegate?
     var coursesUrl: String!
     var parentId: Int? = nil
     

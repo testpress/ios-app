@@ -38,6 +38,7 @@ class Colors {
     static let TAB_TEXT_COLOR = "#888888"
     static let ORANGE = "#ffa319"
     static let BLUE = "#1793e6"
+    static let BLUE_TEXT = "#3598db"
     
     static func getRGB (_ hex:String, alpha: CGFloat = 1) -> UIColor {
         

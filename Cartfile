@@ -1,3 +1,4 @@
+github "airbnb/lottie-ios" "2.5.0"
 github "Alamofire/Alamofire" "4.4.0"
 github "Alua-Kinzhebayeva/iOS-PDF-Reader" "2.5.1"
 github "AssistoLab/DropDown" "v2.3.1"

@@ -63,6 +63,15 @@ class BaseWebViewController: UIViewController {
         }
         return ""
     }
+    
+    func evaluateJavaScript(_ javascript: String) {
+        webView.evaluateJavaScript(javascript) {
+            (result, error) in
+            if error != nil {
+                debugPrint(error ?? "No Error Message")
+            }
+        }
+    }
 
 }
 
@@ -74,11 +83,7 @@ extension BaseWebViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         activityIndicator.stopAnimating()
-        webView.evaluateJavaScript(getJavascript()) { (result, error) in
-            if error != nil {
-                debugPrint(error ?? "no error")
-            }
-        }
+        evaluateJavaScript(getJavascript())
         if webViewDelegate != nil {
             webViewDelegate.onFinishLoadingWebView()
         }

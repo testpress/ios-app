@@ -26,8 +26,11 @@
 import ObjectMapper
 
 public class AttemptItem {
+    
+    var id: Int!
     var url: String?;
     var question: AttemptQuestion!;
+    var questionId: Int!
     var review: Bool! {
        didSet { review = review != nil && review }
     }
@@ -40,6 +43,7 @@ public class AttemptItem {
     var duration: Float!
     var bestDuration: Float!
     var averageDuration: Float!
+    var bookmarkId: Int!
     
     public required init?(map: Map) {
     }
@@ -58,17 +62,21 @@ public class AttemptItem {
 
 extension AttemptItem: TestpressModel {
     public func mapping(map: Map) {
+        id <- map["id"]
         url <- map["url"]
         question <- map["question"]
+        questionId <- map["question_id"]
         review <- map["review"]
         index <- map["index"]
         currentReview <- map["current_review"]
         selectedAnswers <- map["selected_answers"]
+        selectedAnswers <- map["selected_answer_ids"]
         savedAnswers <- map["saved_answers"]
         order <- map["order"]
         commentsCount <- map["comments_count"]
         duration <- map["duration"]
         bestDuration <- map["best_duration"]
         averageDuration <- map["average_duration"]
+        bookmarkId <- map["bookmark_id"]
     }
 }

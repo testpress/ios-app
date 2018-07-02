@@ -23,27 +23,71 @@
 //  THE SOFTWARE.
 //
 
+import Lottie
 import PDFReader
 import UIKit
 
 class AttachmentDetailViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIStackView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contentStackView: UIStackView!
     @IBOutlet weak var contentTitle: UILabel!
     @IBOutlet weak var contentDescription: UILabel!
     @IBOutlet weak var downloadAttachmentButton: UIButton!
     @IBOutlet weak var viewAttachmentButton: UIButton!
+    @IBOutlet weak var bookmarkOptionsLayout: UIView!
+    @IBOutlet weak var moveBookmarkLayout: UIStackView!
+    @IBOutlet weak var moveButton: UIButton!
+    @IBOutlet weak var removeBookmarkLayout: UIStackView!
+    @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var bookmarkButton: UIButton!
+    @IBOutlet weak var bookmarkAnimationContainer: UIView!
     
     var content: Content!
     var attachmentUrl: URL!
+    var bookmark: Bookmark!
+    var position: Int!
     var loading: Bool = false
+    var bookmarkHelper: BookmarkHelper!
     var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
+    var animationView: LOTAnimationView!
+    var moveAnimationView: LOTAnimationView!
+    var removeAnimationView: LOTAnimationView!
     let alertController = UIUtils.initProgressDialog(message: Strings.LOADING + "\n\n")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         UIUtils.setButtonDropShadow(downloadAttachmentButton)
+        bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkAnimationContainer.isHidden = true
+        if Constants.BOOKMARKS_ENABLED {
+            if bookmark == nil {
+                animationView = initAnimationView()
+                bookmarkAnimationContainer.addSubview(animationView)
+                animationView.center.y = animationView.center.y - 5
+                animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+                bookmarkOptionsLayout.isHidden = true
+                if content.bookmarkId != nil {
+                    bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
+                    bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")
+                }
+            } else {
+                moveAnimationView = initAnimationView()
+                removeAnimationView = initAnimationView()
+                moveAnimationView.isHidden = true
+                removeAnimationView.isHidden = true
+                moveBookmarkLayout.addSubview(moveAnimationView)
+                removeBookmarkLayout.addSubview(removeAnimationView)
+                moveAnimationView.center.y = moveAnimationView.center.y + 5
+                removeAnimationView.center.y = removeAnimationView.center.y + 5
+                bookmarkButton.isHidden = true
+            }
+        } else {
+            bookmarkOptionsLayout.isHidden = true
+            bookmarkButton.isHidden = true
+        }
         displayAttachment()
     }
     
@@ -62,6 +106,7 @@ class AttachmentDetailViewController: UIViewController {
             UIUtils.setButtonDropShadow(viewAttachmentButton)
             viewAttachmentButton.isHidden = false
         }
+        viewDidLayoutSubviews()
     }
     
     @IBAction func viewAttachment(_ sender: UIButton) {
@@ -91,9 +136,7 @@ class AttachmentDetailViewController: UIViewController {
                                                             backButton: backButton)
             
             pdfController.navigationItem.rightBarButtonItem = nil
-            let navigationController =
-                UINavigationController(rootViewController: pdfController)
-            
+            let navigationController = UINavigationController(rootViewController: pdfController)
             present(navigationController, animated: true)
             createContentAttempt()
         }
@@ -122,9 +165,51 @@ class AttachmentDetailViewController: UIViewController {
         })
     }
     
+    @IBAction func moveBookmark() {
+        bookmarkHelper.onClickMoveButton(bookmark: bookmark)
+    }
+    
+    @IBAction func removeBookmark() {
+        bookmarkHelper.onClickRemoveButton(bookmark: bookmark)
+    }
+    
+    @IBAction func bookmark(_ sender: UIButton) {
+        bookmarkHelper.onClickBookmarkButton(bookmarkId: content.bookmarkId)
+    }
+    
+    func udpateBookmarkButtonState(bookmarkId: Int?) {
+        content.bookmarkId = bookmarkId
+        if bookmarkId != nil {
+            bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
+            bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")
+        } else {
+            bookmarkButton.setTitle(Strings.BOOKMARK_THIS, for: .normal)
+            bookmarkButton.imageView?.image = #imageLiteral(resourceName: "ic_bookmark")
+        }
+        bookmarkAnimationContainer.isHidden = true
+        bookmarkButton.isHidden = false
+    }
+    
+    func initAnimationView() -> LOTAnimationView {
+        let animationView = LOTAnimationView(name: "material_wave_loading")
+        animationView.contentMode = .scaleAspectFill
+        animationView.frame.size.width = 50
+        animationView.frame.size.height = 25
+        let primaryColor = Colors.getRGB(Colors.PRIMARY).cgColor
+        animationView.setValueDelegate(LOTColorValueCallback(color: primaryColor),
+                                       for: LOTKeypath(string: "**.Fill 1.Color"))
+        
+        animationView.loopAnimation = true
+        animationView.play()
+        return animationView
+    }
+    
     override func viewDidLayoutSubviews() {
         // Set scroll view content height to support the scroll
-        scrollView.contentSize.height = contentView.frame.size.height
+        let height = contentStackView.frame.size.height
+        contentViewHeightConstraint.constant = height
+        scrollView.contentSize.height = height
+        contentView.layoutIfNeeded()
     }
     
     @objc func back() {
