@@ -42,6 +42,7 @@ public class Content {
     var exam: Exam?
     var examId: Int!
     var htmlContentId: Int!
+    var htmlObject: HtmlContent!
     var htmlContentTitle: String?
     var htmlContentUrl: String!
     var order: Int!
@@ -52,6 +53,7 @@ public class Content {
     var attachment: Attachment?
     var attachmentId: Int!
     var active: Bool = true
+    var bookmarkId: Int!
     
     public required init?(map: Map) {
     }
@@ -75,6 +77,7 @@ extension Content: TestpressModel {
         exam <- map["exam"]
         examId <- map["exam"]
         htmlContentId <- map["html_content"]
+        htmlContentId <- map["html_id"]
         htmlContentTitle <- map["html_content_title"]
         htmlContentUrl <- map["html_content_url"]
         order <- map["order"]
@@ -82,8 +85,11 @@ extension Content: TestpressModel {
         isLocked <- map["is_locked"]
         video <- map["video"]
         videoId <- map["video_content"]
+        videoId <- map["video_id"]
         attachment <- map["attachment"]
         attachmentId <- map["attachment_content"]
+        attachmentId <- map["attachment_id"]
         active <- map["active"]
+        bookmarkId <- map["bookmark_id"]
     }
 }

@@ -56,12 +56,19 @@ public class UIUtils {
     static func showSimpleAlert(title: String? = nil,
                                 message: String? = nil,
                                 viewController: UIViewController,
+                                positiveButtonText: String = Strings.OK,
+                                positiveButtonStyle: UIAlertActionStyle = .default,
+                                negativeButtonText: String? = nil,
                                 cancelable: Bool = false,
                                 cancelHandler: Selector? = nil,
                                 completion: ((UIAlertAction) -> Void)? = nil) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: Strings.OK, style: UIAlertActionStyle.cancel,
+        if negativeButtonText != nil {
+            alert.addAction(UIAlertAction(title: negativeButtonText!,
+                                          style: UIAlertActionStyle.default))
+        }
+        alert.addAction(UIAlertAction(title: positiveButtonText, style: positiveButtonStyle,
                                       handler: completion))
         
         viewController.present(alert, animated: true, completion: {

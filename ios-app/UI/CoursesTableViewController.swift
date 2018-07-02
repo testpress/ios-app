@@ -59,17 +59,7 @@ class CoursesTableViewController: BaseDBViewController<Course> {
                 let items = Array(items!.values)
                 DBManager<Course>().deleteAllFromDatabase() // Delete previous items
                 DBManager<Course>().addData(objects: items)
-                self.items = self.getItemsFromDb()
-                if self.items.count == 0 {
-                    self.setEmptyText()
-                }
-                self.delegate?.onItemsLoaded()
-                self.tableView.reloadData()
-                if self.activityIndicator.isAnimating {
-                    self.activityIndicator.stopAnimating()
-                }
-                self.tableView.tableFooterView?.isHidden = true
-                self.loadingItems = false
+                self.onLoadFinished(items: self.getItemsFromDb())
             }
         })
     }

@@ -224,3 +224,9 @@ p {
 .selected-item {
     background-color: rgba(23, 147, 230, 0.1);
 }
+
+.subject {
+    color: #666;
+    font-family: 'PT-Serif-Regular', serif;
+    display: inline-block;
+}
