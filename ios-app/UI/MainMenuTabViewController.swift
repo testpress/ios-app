@@ -32,6 +32,8 @@ class MainMenuTabViewController: UITabBarController {
         
         viewControllers?.remove(at: 2) // Exams list
         viewControllers?.remove(at: 5) // Access Code
+        viewControllers?.remove(at: 4) // Discussion Forum
+        viewControllers?.remove(at: 0) // Activity Feed
     }
     
 }

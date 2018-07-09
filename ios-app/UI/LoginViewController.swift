@@ -66,7 +66,7 @@ class LoginViewController: BaseTextFieldViewController {
             .constraint(equalTo: facebookButtonLayout.trailingAnchor).isActive = true
         
         // TODO: Use institute settings
-        socialLoginLayout.isHidden = false
+        socialLoginLayout.isHidden = true
         
         // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
