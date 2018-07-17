@@ -28,6 +28,7 @@ import Foundation
 struct Strings {
     
     static let YES = "Yes"
+    static let NO = "No"
     static let OK = "OK"
     static let TRY_AGAIN = "Try Again"
     
@@ -71,6 +72,7 @@ struct Strings {
     
     static let CORRECT_ANSWER = "Correct Answer:"
     static let EXPLANATION = "Explanation:"
+    static let SUBJECT_HEADING = "Subject:"
     static let COMMENTS = "Comments"
     
     static let LOADING_QUESTIONS = "Loading questions"
@@ -132,5 +134,29 @@ struct Strings {
     static let RESET_PASSWORD_MAIL_SENT = "We have sent you an email with a link to reset your password.  Please check your email and click the link to continue."
     
     static let ARTICLES = "Articles"
+    
+    static let INVALID_ACCESS_CODE = "Invalid Access Code"
+    
+    static let INVALID_FOLDER_NAME = "Folder name not allowed"
+    static let BOOKMARK_MOVED_SUCCESSFULLY = "Bookmark moved successfully"
+    static let BOOKMARK_DELETED_SUCCESSFULLY = "Bookmark deleted successfully"
+    static let ENTER_FOLDER_NAME = "Enter Folder Name"
+    static let RENAME_FOLDER = "Rename Folder"
+    static let FOLDER_UPDATED_SUCCESSFULLY = "Folder updated successfully"
+    static let ARE_YOU_SURE = "Are you sure?"
+    static let WANT_TO_DELETE_FOLDER = "Do you want to delete this folder?"
+    static let FOLDER_DELETED_SUCCESSFULLY = "Folder deleted successfully"
+    static let WANT_TO_DELETE_BOOKMARK = "Do you want to delete this bookmark?"
+    static let CREATE = "Create"
+    static let UDPATE = "Update"
+    static let DELETE = "Delete"
+    
+    static let ALL_BOOKMARKS = "All Bookmarks"
+    static let BOOKMARKS = "Bookmarks"
+    static let NO_BOOKMARKS = "No bookmarks added yet"
+    static let NO_BOOKMARKS_DESCRIPTION = "You can bookmark stuff like Questions, Articles, Videos and Files you see in the courses you’ve opted for."
+    
+    static let BOOKMARK_THIS = "Bookmark this"
+    static let REMOVE_BOOKMARK = "Remove Bookmark"
     
 }

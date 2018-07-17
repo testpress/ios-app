@@ -242,16 +242,6 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         })
     }
     
-    func evaluateJavaScript(_ javascript: String) {
-        self.webView.evaluateJavaScript(javascript) {
-            (result, error) in
-            if error != nil {
-                debugPrint(error ?? "No Error Message")
-                self.evaluateJavaScript("hidePreviousCommentsLoading();")
-            }
-        }
-    }
-    
     func userContentController(_ userContentController: WKUserContentController,
                                didReceive message: WKScriptMessage) {
         

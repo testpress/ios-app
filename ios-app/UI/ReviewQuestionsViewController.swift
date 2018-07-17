@@ -32,6 +32,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     var previousCommentsPager: CommentPager!
     var newCommentsPager: CommentPager!
     var comments = [Comment]()
+    var bookmarkHelper: BookmarkHelper!
     let imageUploadHelper = ImageUploadHelper()
     let loadingDialogController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
@@ -39,10 +40,18 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         super.viewDidLoad()
         
         imageUploadHelper.delegate = self
+        bookmarkHelper = BookmarkHelper(viewController: self)
         webView.loadHTMLString(
-            WebViewUtils.getQuestionHeader() + getHtml(),
+            WebViewUtils.getQuestionHeader() + getAdditionalHeaders() + getHtml(),
             baseURL: Bundle.main.bundleURL
         )
+    }
+    
+    func getAdditionalHeaders() -> String {
+        if Constants.BOOKMARKS_ENABLED {
+            return WebViewUtils.getBookmarkHeader()
+        }
+        return ""
     }
     
     override func initWebView() {
@@ -62,6 +71,9 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     
     func getPreviousCommentsPager() -> CommentPager {
         if previousCommentsPager == nil {
+            attemptItem.question.commentsUrl =
+                TPEndpointProvider.getCommentsUrl(questionId: attemptItem.question.id!)
+            
             previousCommentsPager = CommentPager(attemptItem.question.commentsUrl)
             previousCommentsPager.queryParams.updateValue("-created", forKey: Constants.ORDER)
             let now = FormatDate.format(date: Date(),
@@ -160,16 +172,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         })
     }
     
-    func evaluateJavaScript(_ javascript: String) {
-        self.webView.evaluateJavaScript(javascript) {
-            (result, error) in
-            if error != nil {
-                debugPrint(error ?? "No Error Message")
-                self.evaluateJavaScript("hidePreviousCommentsLoading();")
-            }
-        }
-    }
-    
     func userContentController(_ userContentController: WKUserContentController,
                                didReceive message: WKScriptMessage) {
         
@@ -187,6 +189,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                     uploadImage()
                     break
                 default:
+                    bookmarkJavascriptListener(message: message)
                     break
                 }
             } else if let dict = body as? Dictionary<String, AnyObject> {
@@ -195,6 +198,10 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 postComment(comment)
             }
         }
+    }
+    
+    func bookmarkJavascriptListener(message: String) {
+        bookmarkHelper.javascriptListener(message: message, bookmarkId: attemptItem.bookmarkId)
     }
     
     func postComment(_ comment: String) {
@@ -231,8 +238,8 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         var html: String = "<div style='padding-left: 5px; padding-right: 5px;'>"
         html += "<div style='overflow:scroll'>"
         
-        // Add index
-        html += "<div class='review-question-index'>\((attemptItem.index)! + 1)</div>"
+        html += getHtmlAboveQuestion()
+        
         // Add direction/passage if present
         if (attemptQuestion.direction != nil && !(attemptQuestion.direction!.isEmpty)) {
             html += "<div class='question' style='padding-bottom: 0px;'>" +
@@ -277,6 +284,14 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 explanationHtml! +
             "</div>";
         }
+        // Add Subject
+        if attemptQuestion.subject != nil && !attemptQuestion.subject!.isEmpty &&
+            !attemptQuestion.subject!.elementsEqual("Uncategorized") {
+                html += WebViewUtils.getReviewHeadingTags(headingText: Strings.SUBJECT_HEADING)
+                html += "<div class='subject'>" +
+                    attemptQuestion.subject! +
+                "</div>";
+        }
         html += "</div>"
         html += "<hr style='margin-top:20px;'>"
         html += WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS);
@@ -304,6 +319,16 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 "</div>"
         
         return html + "</div>"
+    }
+    
+    func getHtmlAboveQuestion() -> String {
+        // Add index
+        var html = "<div class='review-question-index'>\((attemptItem!.index)! + 1)</div>"
+        if (Constants.BOOKMARKS_ENABLED) {
+            let attemptItemBookmarked = attemptItem!.bookmarkId != nil
+            html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: attemptItemBookmarked)
+        }
+        return html
     }
     
 }

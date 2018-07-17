@@ -69,9 +69,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
             return viewController
         } else {
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.HTML_CONTENT_VIEW_CONTROLLER) as! HtmlContentViewController
-        
+            let viewController = HtmlContentViewController()
             viewController.content = content
             viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
             return viewController

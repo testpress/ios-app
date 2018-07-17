@@ -28,15 +28,30 @@ import ObjectMapper
 
 class ExamPager: TPBasePager<Exam> {
     
-    var subclass: String
+    var subclass: String!
+    var accessCode: String!
     
     init(subclass: String) {
         self.subclass = subclass
         super.init()
     }
     
+    override init() {
+        super.init()
+    }
+    
     override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
+        if accessCode != nil {
+            let url = Constants.BASE_URL + TPEndpoint.getAccessCodeExams.urlPath + accessCode
+                + TPEndpoint.examsPath.urlPath
+            
+            let endpointProvider = TPEndpointProvider(.getAccessCodeExams, url: url,
+                                                      queryParams: queryParams)
+            
+            TPApiClient.getExams(endpointProvider: endpointProvider, completion: resonseHandler!)
+            return
+        }
         queryParams.updateValue(subclass, forKey: Constants.STATE)
         TPApiClient.getExams(
             endpointProvider: TPEndpointProvider(.getExams, queryParams: queryParams),

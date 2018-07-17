@@ -78,7 +78,7 @@ class CoursesTableViewController: BaseTableViewController<Course>, BaseTableView
                 if self.items.count == 0 {
                     self.setEmptyText()
                 }
-                self.onLoadFinished()
+                self.onLoadFinished(items: self.items)
                 self.tableView.tableFooterView?.isHidden = true
             }
         })
