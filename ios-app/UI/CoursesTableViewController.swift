@@ -30,22 +30,18 @@ class CoursesTableViewController: BaseTableViewController<Course>, BaseTableView
     
     var pager: TPBasePager<Course>
     var customItems = [CustomCourse]()
-    let babapedia = CustomCourse(title: "Babapedia", url: "https://babapedia2018.iasbaba.com",
+    let babapedia = CustomCourse(title: "Babapedia", url: "https://babapedia2019.iasbaba.com",
                                  image: Images.GlobalLearning.image)
     
-    let valueAddedNotes = CustomCourse(title: "Value Add Notes",
-                                       url: "https://ilp2018.iasbaba.com/value-add-notes",
+    let valueAddedNotes = CustomCourse(title: "ILP 2019",
+                                       url: "https://ilp2019.iasbaba.com/",
                                        image: Images.NotesMenuIcon.image)
-    
-    let forum = CustomCourse(title: "Forum", url: "https://ilp2018.iasbaba.com/forum",
-                             image: Images.ForumMenuIcon.image)
     
     required init?(coder aDecoder: NSCoder) {
         pager = CoursePager()
         super.init(coder: aDecoder)
         customItems.append(babapedia)
         customItems.append(valueAddedNotes)
-        customItems.append(forum)
     }
     
     override func viewDidLoad() {

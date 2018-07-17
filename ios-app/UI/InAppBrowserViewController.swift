@@ -44,8 +44,9 @@ class InAppBrowserViewController: UIViewController {
         webView.scalesPageToFit = true
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         containerView.addSubview(webView)
-        activityIndicator = UIUtils.initActivityIndicator(parentView: webView)
-        emptyView = EmptyView.getInstance(parentView: webView)
+        activityIndicator = UIUtils.initActivityIndicator(parentView: containerView)
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
+        emptyView = EmptyView.getInstance(parentView: containerView)
         
         let request = URLRequest(url: URL(string: url)!)
         webView.loadRequest(request)
@@ -110,7 +111,8 @@ extension InAppBrowserViewController: UIWebViewDelegate {
         if error._code != NSURLErrorCancelled {
             let retryHandler = {
                 self.emptyView.hide()
-                webView.reload()
+                let request = URLRequest(url: URL(string: self.url)!)
+                webView.loadRequest(request)
             }
             emptyView.show(image: Images.TestpressNoWifi.image, title: Strings.NETWORK_ERROR,
                            description: error.localizedDescription, retryHandler: retryHandler)
