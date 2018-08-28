@@ -38,7 +38,7 @@ public class Content {
     var attemptsUrl: String!
     var chapterSlug: String!
     var chapterId: Int!
-    var attemptsCount: Int!
+    var attemptsCount: Int = 0
     var exam: Exam?
     var examId: Int!
     var htmlContentId: Int!
