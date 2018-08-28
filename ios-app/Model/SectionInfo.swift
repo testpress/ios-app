@@ -1,8 +1,8 @@
 //
-//  AttemptQuestion.swift
+//  SectionInfo.swift
 //  ios-app
 //
-//  Copyright © 2017 Testpress. All rights reserved.
+//  Copyright © 2018 Testpress. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,37 +25,21 @@
 
 import ObjectMapper
 
-public class AttemptQuestion {
-    var id: Int?
-    var questionHtml: String?;
-    var subject: String!
-    var subjectId: Int!
-    var direction: String?;
-    var directionId: Int!
-    var explanationHtml: String?
-    var type: String?;
-    var commentsUrl: String!
-    var answers: [AttemptAnswer] = [];
-    var answerIds: [Int] = []
-    var translationIds: [Int] = []
+public class SectionInfo {
+    
+    var name: String!
+    var duration: String!
+    var order: Int!
     
     public required init?(map: Map) {
     }
+    
 }
 
-extension AttemptQuestion: TestpressModel {
+extension SectionInfo: TestpressModel {
     public func mapping(map: Map) {
-        id <- map["id"]
-        questionHtml <- map["question_html"]
-        subject <- map["subject"]
-        subjectId <- map["subject_id"]
-        direction <- map["direction"]
-        directionId <- map["direction_id"]
-        explanationHtml <- map["explanation_html"]
-        type <- map["type"]
-        commentsUrl <- map["comments_url"]
-        answers <- map["answers"]
-        answerIds <- map["answer_ids"]
-        translationIds <- map["translation_ids"]
+        name <- map["name"]
+        duration <- map["duration"]
+        order <- map["order"]
     }
 }

@@ -53,6 +53,7 @@ public class UIUtils {
         return alertController
     }
     
+    @discardableResult
     static func showSimpleAlert(title: String? = nil,
                                 message: String? = nil,
                                 viewController: UIViewController,
@@ -61,7 +62,7 @@ public class UIUtils {
                                 negativeButtonText: String? = nil,
                                 cancelable: Bool = false,
                                 cancelHandler: Selector? = nil,
-                                completion: ((UIAlertAction) -> Void)? = nil) {
+                                completion: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if negativeButtonText != nil {
@@ -76,7 +77,7 @@ public class UIUtils {
             alert.view.superview?.addGestureRecognizer(
                 UITapGestureRecognizer(target: viewController, action: cancelHandler))
         })
-        
+        return alert
     }
     
     static func setButtonDropShadow(_ view: UIView) {

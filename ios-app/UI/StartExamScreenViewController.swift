@@ -174,6 +174,7 @@ class StartExamScreenViewController: UIViewController {
                 self.alertController.dismiss(animated: true, completion: nil)
                 if attempt is ContentAttempt {
                     self.contentAttempt = attempt as! ContentAttempt
+                    self.content.attemptsCount += 1
                     self.attempt = self.contentAttempt.assessment
                 } else {
                     self.attempt = attempt as? Attempt
@@ -192,6 +193,7 @@ class StartExamScreenViewController: UIViewController {
         
         viewController.exam = exam
         viewController.attempt = attempt
+        viewController.courseContent = content
         viewController.contentAttempt = contentAttempt
         present(slideMenuController, animated: true, completion: nil)
     }

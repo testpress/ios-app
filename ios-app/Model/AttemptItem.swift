@@ -44,6 +44,7 @@ public class AttemptItem {
     var bestDuration: Float!
     var averageDuration: Float!
     var bookmarkId: Int!
+    var attemptSection: AttemptSection!
     
     public required init?(map: Map) {
     }
@@ -78,5 +79,6 @@ extension AttemptItem: TestpressModel {
         bestDuration <- map["best_duration"]
         averageDuration <- map["average_duration"]
         bookmarkId <- map["bookmark_id"]
+        attemptSection <- map["attempt_section"]
     }
 }
