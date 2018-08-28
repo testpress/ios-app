@@ -91,6 +91,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                 if !(testpressResponse!.next.isEmpty) {
                     self.loadAttempts(url: testpressResponse!.next)
                 } else {
+                    self.content.attemptsCount = self.attempts.count
                     self.displayAttemptsList()
                 }
         }, type: ContentAttempt.self)

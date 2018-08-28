@@ -76,8 +76,10 @@ struct Strings {
     static let COMMENTS = "Comments"
     
     static let LOADING_QUESTIONS = "Loading questions"
+    static let LOADING_SECTION_QUESTIONS = "Loading section questions\n\n"
+    
     static let LOADING = "Loading…"
-    static let PLEASE_WAIT = "Please wait..."
+    static let PLEASE_WAIT = "Please wait"
     
     static let AVAILABLE = "AVAILABLE"
     static let UPCOMING = "UPCOMING"
@@ -158,5 +160,20 @@ struct Strings {
     
     static let BOOKMARK_THIS = "Bookmark this"
     static let REMOVE_BOOKMARK = "Remove Bookmark"
+    
+    static let EXAM_PAUSED_CHECK_INTERNET = "Exam is paused, Please check your internet connection & resume again."
+    static let EXAM_PAUSED_CHECK_INTERNET_TO_END = "Exam is paused, Please check your internet connection & try again."
+    
+    static let CANNOT_SWITCH_SECTION = "Can\'t Switch Section!"
+    static let CANNOT_SWITCH_IN_FIRST_ATTEMPT = "You can\'t switch sections in the first attempt."
+    static let ALREADY_SUBMITTED = "You have already submitted this section."
+    static let SWITCH_SECTION = "Switch Section?"
+    static let SWITCH_SECTION_MESSAGE = "Are you sure want to move to the next section? You won\'t be able to switch back to this section."
+    static let ATTEMPT_SECTION_IN_ORDER = "You need to attempt sections in order."
+    static let END_SECTION = "End current section"
+    static let ENDING_SECTION = "Ending current section\n\n"
+    static let ENDING_EXAM = "Ending exam\n\n"
+    static let STARTING_SECTION = "Starting next section\n\n"
+    static let SAVING_LAST_CHANGE = "Saving your last change\n\n"
     
 }

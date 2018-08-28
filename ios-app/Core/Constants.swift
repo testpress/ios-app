@@ -118,6 +118,7 @@ struct Constants {
     static let CATEGORY = "category"
     static let STARRED = "starred"
     static let ACCESS_CODE = "access_code"
+    static let UNCATEGORIZED = "Uncategorized"
     
     static func getAppVersion() -> String {
         let dictionary = Bundle.main.infoDictionary!

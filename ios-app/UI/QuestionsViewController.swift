@@ -46,6 +46,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
+        
         // Set initial values of current selected answer & review
         selectedOptions = attemptItem!.selectedAnswers
         reviewSwitch.isOn = attemptItem!.review!

@@ -1,8 +1,8 @@
 //
-//  AttemptQuestion.swift
+//  LockableSectionDropDownCell.swift
 //  ios-app
 //
-//  Copyright © 2017 Testpress. All rights reserved.
+//  Copyright © 2018 Testpress. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,39 +23,29 @@
 //  THE SOFTWARE.
 //
 
-import ObjectMapper
+import DropDown
+import UIKit
 
-public class AttemptQuestion {
-    var id: Int?
-    var questionHtml: String?;
-    var subject: String!
-    var subjectId: Int!
-    var direction: String?;
-    var directionId: Int!
-    var explanationHtml: String?
-    var type: String?;
-    var commentsUrl: String!
-    var answers: [AttemptAnswer] = [];
-    var answerIds: [Int] = []
-    var translationIds: [Int] = []
+class LockableSectionDropDownCell: DropDownCell {
     
-    public required init?(map: Map) {
+    @IBOutlet weak var currentStateImage: UIImageView!
+    
+    func initCell(index: Int, sectionName: String, selectedItem: Int) {
+        optionLabel.text = sectionName
+        if selectedItem == index {
+            optionLabel.textColor = Colors.getRGB(Colors.BLACK_TEXT)
+            currentStateImage.tintColor = Colors.getRGB(Colors.MATERIAL_GREEN2)
+            currentStateImage.image = #imageLiteral(resourceName: "check_mark")
+        } else {
+            optionLabel.textColor = Colors.getRGB(Colors.GRAY_MEDIUM_DARK)
+            currentStateImage.tintColor = Colors.getRGB(Colors.GRAY_MEDIUM_DARK)
+            if selectedItem > index {
+                currentStateImage.image = #imageLiteral(resourceName: "ic_lock_with_tick_18pt")
+            } else {
+                currentStateImage.image = #imageLiteral(resourceName: "ic_lock_outline_18pt")
+            }
+        }
+        separatorInset = UIEdgeInsets.zero
     }
-}
-
-extension AttemptQuestion: TestpressModel {
-    public func mapping(map: Map) {
-        id <- map["id"]
-        questionHtml <- map["question_html"]
-        subject <- map["subject"]
-        subjectId <- map["subject_id"]
-        direction <- map["direction"]
-        directionId <- map["direction_id"]
-        explanationHtml <- map["explanation_html"]
-        type <- map["type"]
-        commentsUrl <- map["comments_url"]
-        answers <- map["answers"]
-        answerIds <- map["answer_ids"]
-        translationIds <- map["translation_ids"]
-    }
+    
 }

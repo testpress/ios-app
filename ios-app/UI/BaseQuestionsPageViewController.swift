@@ -49,10 +49,10 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     var exam: Exam!
     var attempt: Attempt!
     var attemptItems = [AttemptItem]()
+    var courseContent: Content!
     var contentAttempt: ContentAttempt!
     var showingProgress: Bool = false
-    let loadingDialogController = UIUtils.initProgressDialog(message:
-        Strings.LOADING_QUESTIONS + "\n\n")
+    let loadingDialogController = UIUtils.initProgressDialog(message: Strings.LOADING_QUESTIONS)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,8 +84,9 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         super.viewDidAppear(animated)
         
         if attemptItems.isEmpty {
-            present(loadingDialogController, animated: false, completion: nil)
-            loadQuestions(url: getQuestionsUrl())
+            showLoadingProgress(completionHandler: {
+                self.loadQuestions(url: self.getQuestionsUrl())
+            })
         }
     }
     
@@ -98,6 +99,9 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func loadQuestions(url: String) {
+        if loadingDialogController.message!.contains(Strings.PLEASE_WAIT) {
+            loadingDialogController.message = Strings.LOADING_QUESTIONS + "\n\n"
+        }
         TPApiClient.getQuestions(
             endpointProvider: TPEndpointProvider(.getQuestions, url: url),
             completion: {
@@ -105,10 +109,8 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                 if let error = error {
                     debugPrint(error.message ?? "No error message found")
                     debugPrint(error.kind)
-                    self.loadingDialogController.dismiss(animated: true, completion: {
-                        self.showAlert(error: error, retryHandler: {
-                            self.loadQuestions(url: url)
-                        })
+                    self.showAlert(error: error, retryHandler: {
+                        self.loadQuestions(url: url)
                     })
                     return
                 }
@@ -145,12 +147,10 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                     self.parentviewController
                         .questionsSlidingMenuDelegate.updateQuestions(self.attemptItems)
                     
-                    if self.questionsPageViewDelegate?.questionsDidLoad != nil {
-                        self.questionsPageViewDelegate?.questionsDidLoad!()
-                    }
-                    self.loadingDialogController.dismiss(animated: true, completion: {
-                        // Set loading progress dialog message for further use
-                        self.loadingDialogController.message = Strings.LOADING + "\n\n"
+                    self.hideLoadingProgress(completionHandler: {
+                        if self.questionsPageViewDelegate?.questionsDidLoad != nil {
+                            self.questionsPageViewDelegate?.questionsDidLoad!()
+                        }
                     })
                 }
             }
@@ -245,11 +245,13 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         parentviewController.slideMenuController()?.openLeft()
     }
     
-    func showAlert(error: TPError, retryHandler: @escaping (() -> Swift.Void)) {
+    func showAlert(error: TPError,
+                   message: String = Strings.PLEASE_CHECK_INTERNET_CONNECTION,
+                   retryHandler: @escaping (() -> Swift.Void)) {
+        
         if showingProgress {
             // Close progress dialog if currently showing
-            loadingDialogController.dismiss(animated: true, completion: {
-                self.showingProgress = false
+            hideLoadingProgress(completionHandler: {
                 self.showAlert(error: error, retryHandler: retryHandler)
             })
             return
@@ -261,7 +263,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         if error.kind == .network {
             alert = UIAlertController(
                 title: "No internet connection",
-                message: "Exam is paused, Please check your internet connection & resume again.",
+                message: message,
                 preferredStyle: UIAlertControllerStyle.alert
             )
             
@@ -269,9 +271,9 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                 title: "Retry", style: UIAlertActionStyle.default, handler: {
                     (action: UIAlertAction!) in
                     alert.dismiss(animated: false)
-                    self.present(self.loadingDialogController, animated: true, completion: nil)
-                    self.showingProgress = true
-                    retryHandler()
+                    self.showLoadingProgress(completionHandler: {
+                        retryHandler()
+                    })
                 }
             ))
             cancelButtonTitle = "Not Now"
@@ -287,26 +289,31 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         alert.addAction(UIAlertAction(
             title: cancelButtonTitle, style: UIAlertActionStyle.default,
             handler: { (action: UIAlertAction!) in
-                self.dismiss(animated: true, completion: nil)
+                self.questionsPageViewDelegate?.goBack()
             }
         ))
         
         present(alert, animated: true, completion: nil)
     }
     
-    func showLoadingProgress() {
-        present(loadingDialogController, animated: true)
-        showingProgress = true
+    func showLoadingProgress(completionHandler: (() -> Void)?) {
+        loadingDialogController.message = Strings.PLEASE_WAIT + "\n\n"
+        present(loadingDialogController, animated: false, completion: {
+            self.showingProgress = true
+            if completionHandler != nil {
+                completionHandler!()
+            }
+        })
     }
     
     func hideLoadingProgress(completionHandler: (() -> Void)? = nil) {
         if showingProgress {
             loadingDialogController.dismiss(animated: false, completion: {
+                self.showingProgress = false
                 if completionHandler != nil {
                     completionHandler!()
                 }
             })
-            showingProgress = false
         } else {
             if completionHandler != nil {
                 completionHandler!()
