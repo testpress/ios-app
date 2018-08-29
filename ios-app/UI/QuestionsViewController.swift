@@ -53,6 +53,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         reviewSwitch.isOn = attemptItem!.review!
         attemptItem?.savedAnswers = attemptItem!.selectedAnswers
         attemptItem?.currentReview = attemptItem!.review
+        attemptItem?.currentShortText = attemptItem!.shortText
         
         indexView!.text = String("\((attemptItem?.index)! + 1)")
         webView.loadHTMLString(WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader()
@@ -65,18 +66,21 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         if (message.name == "callbackHandler") {
             let body = message.body
             if let dict = body as? Dictionary<String, AnyObject> {
-                let checked = dict["checked"] as! Bool
-                let radioOption = dict["radioOption"] as! Bool
-                let id = Int(dict["clickedOptionId"] as! String)!
-                if (checked) {
-                    if (radioOption) {
-                        selectedOptions = []
+                if let checked = dict["checked"] as? Bool {
+                    let radioOption = dict["radioOption"] as! Bool
+                    let id = Int(dict["clickedOptionId"] as! String)!
+                    if checked {
+                        if radioOption {
+                            selectedOptions = []
+                        }
+                        selectedOptions.append(id)
+                    } else {
+                        selectedOptions = selectedOptions.filter { $0 != id }
                     }
-                    selectedOptions.append(id)
-                } else {
-                    selectedOptions = selectedOptions.filter { $0 != id } ;
+                    attemptItem.savedAnswers = selectedOptions
+                } else if let shortText = dict["shortText"] as? String {
+                    attemptItem.currentShortText = shortText.trim()
                 }
-                attemptItem?.savedAnswers = selectedOptions;
             }
         }
     }
@@ -117,19 +121,29 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             attemptQuestion.questionHtml! +
         "</div>";
         
-        // Add options
-        htmlContent += "<table width='100%' style='margin-top:0px;'>";
-        for attemptAnswer in attemptQuestion.answers {
-            if (attemptItem?.question?.type == "R") {
-                htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
-                    optionText: attemptAnswer.textHtml!, id: attemptAnswer.id!);
-            } else {
-                htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
-                    optionText: attemptAnswer.textHtml!, id: attemptAnswer.id!);
+        if attemptQuestion.type == "R" || attemptQuestion.type == "C" {
+            // Add options
+            htmlContent += "<table width='100%' style='margin-top:0px;'>"
+            for attemptAnswer in attemptQuestion.answers {
+                if (attemptItem?.question?.type == "R") {
+                    htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
+                        optionText: attemptAnswer.textHtml!, id: attemptAnswer.id!)
+                } else {
+                    htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
+                        optionText: attemptAnswer.textHtml!, id: attemptAnswer.id!)
+                }
             }
+            htmlContent += "</table>"
+        } else {
+            let inputType = attemptQuestion.type == "N" ? "number" : "text"
+            let value =
+                attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
+            
+            htmlContent += "<input class='edit_box' type='\(inputType)' value='\(value)' " +
+                "onpaste='return false' oninput='onValueChange(this)' " +
+                "placeholder='YOUR ANSWER'>"
         }
-        
-        return htmlContent + "</table></div>";
+        return htmlContent + "</div>";
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {

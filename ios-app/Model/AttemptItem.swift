@@ -36,8 +36,8 @@ public class AttemptItem {
     }
     var index: Int!
     var currentReview: Bool!
-    var selectedAnswers: [Int] = [];
-    var savedAnswers: [Int]!;
+    var selectedAnswers: [Int] = []
+    var savedAnswers: [Int] = []
     var order: Int?
     var commentsCount: Int!
     var duration: Float!
@@ -45,18 +45,19 @@ public class AttemptItem {
     var averageDuration: Float!
     var bookmarkId: Int!
     var attemptSection: AttemptSection!
+    var shortText: String!
+    var currentShortText: String!
     
     public required init?(map: Map) {
     }
     
     public func hasChanged() -> Bool {
-        if savedAnswers == nil {
-            savedAnswers = []
-        }
         if currentReview == nil {
             currentReview = false
         }
-        return savedAnswers != selectedAnswers || currentReview != review;
+        return savedAnswers != selectedAnswers || currentReview != review ||
+            (shortText != nil && shortText != currentShortText) ||
+            (shortText == nil && currentShortText != nil && !currentShortText.isEmpty)
     }
 
 }
@@ -80,5 +81,6 @@ extension AttemptItem: TestpressModel {
         averageDuration <- map["average_duration"]
         bookmarkId <- map["bookmark_id"]
         attemptSection <- map["attempt_section"]
+        shortText <- map["short_text"]
     }
 }
