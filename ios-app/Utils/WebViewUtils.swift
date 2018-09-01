@@ -120,6 +120,25 @@ class WebViewUtils {
         return "<div class='review-heading'>" + headingText + "</div>"
     }
     
+    public static func getShortAnswerHeadersWithTags() -> String {
+        return "" +
+            "<tr>" +
+            "   <th class='short_answer_option_item table-without-border'>Answers</th>" +
+            "   <th class='short_answer_option_item table-without-border'>Marks</th>" +
+            "</tr>"
+    }
+    
+    public static func getShortAnswersWithTags(shortAnswerText: String,
+                                               marksAllocated: String) -> String {
+        return "" +
+            "<tr>" +
+            "   <td class='short_answer_option_item table-without-border'>" +
+                shortAnswerText + "</td>" +
+            "   <td class='short_answer_option_item table-without-border'>" +
+                marksAllocated + "%</td>" +
+            "</tr>";
+    }
+    
     public static func getFormattedTitle(title: String,
                                          withBookmarkButton: Bool = false,
                                          withBookmarkedState: Bool = false) -> String {

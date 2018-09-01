@@ -27,6 +27,10 @@ import ObjectMapper
 
 public class AttemptItem {
     
+    public static let ANSWERED_CORRECT = "Correct"
+    public static let ANSWERED_INCORRECT = "Incorrect"
+    public static let UNANSWERED = "Unanswered"
+    
     var id: Int!
     var url: String?;
     var question: AttemptQuestion!;
@@ -45,8 +49,10 @@ public class AttemptItem {
     var averageDuration: Float!
     var bookmarkId: Int!
     var attemptSection: AttemptSection!
-    var shortText: String!
+    var shortText: String?
     var currentShortText: String!
+    var marks: String?
+    var result: String!
     
     public required init?(map: Map) {
     }
@@ -82,5 +88,7 @@ extension AttemptItem: TestpressModel {
         bookmarkId <- map["bookmark_id"]
         attemptSection <- map["attempt_section"]
         shortText <- map["short_text"]
+        marks <- map["marks"]
+        result <- map["result"]
     }
 }

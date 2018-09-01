@@ -30,7 +30,7 @@ class QuestionListViewController: BaseQuestionsListViewController {
             attemptItem.review : attemptItem.currentReview
         
         let unanswered = attemptItem.selectedAnswers.isEmpty && attemptItem.savedAnswers.isEmpty
-            && (attemptItem.shortText == nil || attemptItem.shortText.isEmpty)
+            && (attemptItem.shortText == nil || attemptItem.shortText!.isEmpty)
             && (attemptItem.currentShortText == nil || attemptItem.currentShortText.isEmpty)
         
         return marked ?

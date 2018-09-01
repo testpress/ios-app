@@ -38,6 +38,7 @@ public class AttemptQuestion {
     var answers: [AttemptAnswer] = [];
     var answerIds: [Int] = []
     var translationIds: [Int] = []
+    var isCaseSensitive: Bool!
     
     public required init?(map: Map) {
     }
@@ -57,5 +58,6 @@ extension AttemptQuestion: TestpressModel {
         answers <- map["answers"]
         answerIds <- map["answer_ids"]
         translationIds <- map["translation_ids"]
+        isCaseSensitive <- map["is_case_sensitive"]
     }
 }

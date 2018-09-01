@@ -176,4 +176,10 @@ struct Strings {
     static let STARTING_SECTION = "Starting next section\n\n"
     static let SAVING_LAST_CHANGE = "Saving your last change\n\n"
     
+    static let YOUR_ANSWER = "Your Answer:"
+    static let MARKS_AWARDED = "Marks Awarded:"
+    static let NOTE = "Note:"
+    static let CASE_INSENSITIVE = "Answers are case insensitive"
+    static let CASE_SENSITIVE = "Answers are case sensitive"
+    
 }
