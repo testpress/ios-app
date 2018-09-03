@@ -348,11 +348,16 @@ class TPApiClient {
         })
     }
     
-    static func saveAnswer(selectedAnswer: [Int], review: Bool,
+    static func saveAnswer(selectedAnswer: [Int],
+                           review: Bool,
+                           shortAnswer: String?,
                            endpointProvider: TPEndpointProvider,
                            completion: @escaping (AttemptItem?, TPError?) -> Void) {
         
-        let parameters: Parameters = ["selected_answers": selectedAnswer, "review": review]
+        var parameters: Parameters = [ "selected_answers": selectedAnswer, "review": review ]
+        if let shortAnswer = shortAnswer {
+            parameters["short_text"] = shortAnswer
+        }
         apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
             json, error in
             var attemptItem: AttemptItem? = nil

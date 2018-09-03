@@ -283,7 +283,9 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         if attemptItem.hasChanged() {
             loadingDialogController.message = Strings.SAVING_LAST_CHANGE
             TPApiClient.saveAnswer(
-                selectedAnswer: attemptItem.savedAnswers, review: attemptItem.currentReview!,
+                selectedAnswer: attemptItem.savedAnswers,
+                review: attemptItem.currentReview!,
+                shortAnswer: attemptItem.currentShortText,
                 endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.url!),
                 completion: {
                     newAttemptItem, error in
@@ -302,6 +304,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                     // Saved the answer on user navigate to other question
                     attemptItem.selectedAnswers = newAttemptItem!.selectedAnswers
                     attemptItem.review = newAttemptItem!.review
+                    attemptItem.shortText = newAttemptItem!.shortText
                     self.attemptItems[index] = attemptItem;
                     
                     if self.showingProgress {

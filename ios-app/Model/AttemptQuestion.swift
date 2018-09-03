@@ -38,8 +38,30 @@ public class AttemptQuestion {
     var answers: [AttemptAnswer] = [];
     var answerIds: [Int] = []
     var translationIds: [Int] = []
+    var isCaseSensitive: Bool!
     
     public required init?(map: Map) {
+    }
+    
+    public init() {
+    }
+    
+    public  func clone() -> AttemptQuestion {
+        let newAttemptItem = AttemptQuestion()
+        newAttemptItem.id = id
+        newAttemptItem.questionHtml = questionHtml
+        newAttemptItem.subject = subject
+        newAttemptItem.subjectId = subjectId
+        newAttemptItem.direction = direction
+        newAttemptItem.directionId = directionId
+        newAttemptItem.explanationHtml = explanationHtml
+        newAttemptItem.type = type
+        newAttemptItem.commentsUrl = commentsUrl
+        newAttemptItem.answers = answers
+        newAttemptItem.answerIds = answerIds
+        newAttemptItem.translationIds = translationIds
+        newAttemptItem.isCaseSensitive = isCaseSensitive
+        return newAttemptItem
     }
 }
 
@@ -57,5 +79,6 @@ extension AttemptQuestion: TestpressModel {
         answers <- map["answers"]
         answerIds <- map["answer_ids"]
         translationIds <- map["translation_ids"]
+        isCaseSensitive <- map["is_case_sensitive"]
     }
 }
