@@ -43,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes =
             [NSAttributedStringKey.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
         
-        UIApplication.shared.isStatusBarHidden = false
         let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
             as? UIView
 

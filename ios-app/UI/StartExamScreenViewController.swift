@@ -172,10 +172,10 @@ class StartExamScreenViewController: UIViewController {
                 }
                 
                 self.alertController.dismiss(animated: true, completion: nil)
-                if attempt is ContentAttempt {
-                    self.contentAttempt = attempt as! ContentAttempt
+                if let contentAttempt = attempt as? ContentAttempt {
+                    self.contentAttempt = contentAttempt
                     self.content.attemptsCount += 1
-                    self.attempt = self.contentAttempt.assessment
+                    self.attempt = contentAttempt.assessment
                 } else {
                     self.attempt = attempt as? Attempt
                 }

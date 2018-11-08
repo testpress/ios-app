@@ -408,9 +408,9 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                     return
                 }
                 
-                if attempt is ContentAttempt {
-                    self.contentAttempt = attempt as! ContentAttempt
-                    self.attempt = self.contentAttempt.assessment
+                if let contentAttempt = attempt as? ContentAttempt {
+                    self.contentAttempt = contentAttempt
+                    self.attempt = contentAttempt.assessment
                 } else {
                     self.attempt = attempt as? Attempt
                 }

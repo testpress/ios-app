@@ -28,7 +28,7 @@ import TTGSnackbar
 import UIKit
 
 class BookmarkFolderTableViewController:
-    BasePagedTableViewController<BookmarksListResponse, BookmarkFolder> {
+    BasePagedTableViewController<BookmarksListResponse, BookmarkFolder>, UITextFieldDelegate {
     
     var bookmark: Bookmark!
     var sourceViewController: UIViewController!
@@ -144,12 +144,9 @@ class BookmarkFolderTableViewController:
         }
     }
     
-}
-
-extension BookmarkFolderTableViewController: UITextFieldDelegate {
-    
     @nonobjc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         createNewFolder(textField: textField)
         return true
     }
+    
 }
