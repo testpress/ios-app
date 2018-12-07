@@ -47,10 +47,9 @@ class LoginViewController: BaseTextFieldViewController {
         navigationbarItem.title = UIUtils.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
         
-        print("I caused the error man \((InstituteSettings.isAvailable()))")
-        
         if (InstituteSettings.isAvailable()) {
-            // TODO: Set using institute settings
+            // TODO : When user logs out DBInstance gets cleared , so after
+            // logout this condition won't be executed.Need to handle that.
             instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
             
             if(instituteSettings.allowSignup) {

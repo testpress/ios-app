@@ -31,7 +31,6 @@ class MainMenuTabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("isAvailable : \(InstituteSettings.isAvailable())")
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         if (!instituteSettings.forumEnabled) {
             viewControllers?.remove(at: 5)
