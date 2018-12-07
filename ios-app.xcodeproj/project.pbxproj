@@ -12,6 +12,8 @@
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
 		18F25D29212FDC5300097425 /* LockableSectionDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */; };
 		18F25D2B213000D700097425 /* SectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D2A213000D700097425 /* SectionInfo.swift */; };
+		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
+		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
 		2F04053020D902530074D80E /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04052F20D902530074D80E /* Direction.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
 		2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */; };
@@ -265,6 +267,8 @@
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
 		18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockableSectionDropDownCell.swift; sourceTree = "<group>"; };
 		18F25D2A213000D700097425 /* SectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfo.swift; sourceTree = "<group>"; };
+		250E68F521BA4AA600DA81F1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		2519C12D21B0083600D26551 /* InstituteSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstituteSettings.swift; sourceTree = "<group>"; };
 		2F04052F20D902530074D80E /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkFoldersDropDownCell.xib; sourceTree = "<group>"; };
 		2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFoldersDropDownCell.swift; sourceTree = "<group>"; };
@@ -776,6 +780,7 @@
 				2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */,
 				2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */,
 				2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */,
+				250E68F521BA4AA600DA81F1 /* MainViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -819,6 +824,7 @@
 				2FC0F2CC1F86385B0092BFDC /* TPModelMapper.swift */,
 				2FC0F2CD1F86385B0092BFDC /* User.swift */,
 				2F96997B1FC2A625001B2B18 /* Video.swift */,
+				2519C12D21B0083600D26551 /* InstituteSettings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1046,6 +1052,7 @@
 				2F515DF21FF3B0990005D8A5 /* RichTextEditor.swift in Sources */,
 				2FC0F3121F863BBD0092BFDC /* CALayerBorderColor.swift in Sources */,
 				2F452C3220BC123D007833A0 /* BookmarkedQuestionViewController.swift in Sources */,
+				2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */,
 				2FC0F2FB1F863B7E0092BFDC /* BaseQuestionsDataSource.swift in Sources */,
 				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
 				2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */,
@@ -1087,6 +1094,7 @@
 				2FC0F3041F863B9E0092BFDC /* ExamsTabViewController.swift in Sources */,
 				2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */,
 				2F5E0BB91FE2452D00236AFE /* ActivityFeedTableViewCell.swift in Sources */,
+				250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */,
 				2FDF9C5320B6D7FC0086245F /* BasePager.swift in Sources */,
 				2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */,
 				2FC0F2EF1F863B110092BFDC /* ExamPager.swift in Sources */,

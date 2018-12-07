@@ -60,6 +60,10 @@ class DBManager<T: Object> {
         return database.objects(T.self)
     }
     
+    func isEmpty() -> Bool {
+        return database.objects(T.self).isEmpty
+    }
+    
     func getItemsFromDB() -> [T] {
         return Array(getResultsFromDB())
     }
