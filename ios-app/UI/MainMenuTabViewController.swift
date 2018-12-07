@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import FirebaseInstanceID
 import UIKit
 
 class MainMenuTabViewController: UITabBarController {
@@ -30,8 +31,29 @@ class MainMenuTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.displayFCMToken(notification:)),
+            name: Notification.Name("FCMToken"),
+            object: nil
+        )
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instange ID: \(error)")
+            } else if let result = result {
+                print("Remote instance ID token: \(result.token)")
+            }
+        }
+        
         viewControllers?.remove(at: 2) // Exams list
         viewControllers?.remove(at: 5) // Access Code
+    }
+    
+    @objc func displayFCMToken(notification: NSNotification){
+        guard let userInfo = notification.userInfo else {return}
+        if let fcmToken = userInfo["token"] as? String {
+            print("Received FCM token: \(fcmToken)")
+        }
     }
     
 }

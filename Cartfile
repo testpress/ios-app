@@ -14,3 +14,7 @@ github "schickling/Device.swift" "1.1.2"
 github "sprint84/CropViewController" "1.2.4"
 github "xmartlabs/XLPagerTabStrip" "7.0.0"
 github "zekunyan/TTGSnackbar" "1.7.1"
+
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json"
+
