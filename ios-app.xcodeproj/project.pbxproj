@@ -23,7 +23,7 @@
 		2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D55B201EFE7B00C01CCE /* LeaderboardPager.swift */; };
 		2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */; };
 		2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D55F201F085A00C01CCE /* LeaderboardTableViewCell.swift */; };
-		2F25D562201F5C8800C01CCE /* TargetThreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D561201F5C8800C01CCE /* TargetThreadViewController.swift */; };
+		2F25D562201F5C8800C01CCE /* TargetThreatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D561201F5C8800C01CCE /* TargetThreatViewController.swift */; };
 		2F25D564201F5DBB00C01CCE /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */; };
 		2F25D566201F6D7500C01CCE /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */; };
 		2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */; };
@@ -277,7 +277,7 @@
 		2F25D55B201EFE7B00C01CCE /* LeaderboardPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPager.swift; sourceTree = "<group>"; };
 		2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
 		2F25D55F201F085A00C01CCE /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
-		2F25D561201F5C8800C01CCE /* TargetThreadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetThreadViewController.swift; sourceTree = "<group>"; };
+		2F25D561201F5C8800C01CCE /* TargetThreatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetThreatViewController.swift; sourceTree = "<group>"; };
 		2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
 		2F26ADE21E8249D70031E6F4 /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -766,7 +766,7 @@
 				2FC0F2961F861A860092BFDC /* StartExamScreenViewController.swift */,
 				2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */,
 				2FC0F2971F861A860092BFDC /* SuccessViewController.swift */,
-				2F25D561201F5C8800C01CCE /* TargetThreadViewController.swift */,
+				2F25D561201F5C8800C01CCE /* TargetThreatViewController.swift */,
 				2F1474741F8B7BF30017151B /* TestEngineSlidingViewController.swift */,
 				2FC0F2981F861A860092BFDC /* TestEngineViewController.swift */,
 				2FC0F2991F861A860092BFDC /* TestReportViewController.swift */,
@@ -1182,7 +1182,7 @@
 				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
 				2F4186A020BD3A33003D2D8A /* BookmarkFolderPager.swift in Sources */,
-				2F25D562201F5C8800C01CCE /* TargetThreadViewController.swift in Sources */,
+				2F25D562201F5C8800C01CCE /* TargetThreatViewController.swift in Sources */,
 				2FA9285220B811F400CD3076 /* BookmarksDetailPageViewController.swift in Sources */,
 				2F9778A81FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift in Sources */,
 				2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */,
