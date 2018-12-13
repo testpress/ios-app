@@ -143,10 +143,9 @@ class LoginViewController: BaseTextFieldViewController {
     }
     
     @IBAction func showSignUpView() {
-        let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
-            Constants.SIGNUP_VIEW_CONTROLLER) as! SignUpViewController
-        
-        present(tabViewController, animated: true, completion: nil)
+        if let link = URL(string: "https://forms.zohopublic.com/koncpt/form/AriseMedicalStudents/formperma/Hrv77kpSszRRjBhDw1QTatjOZyp7f5wo45OYw6lfMjk") {
+            UIApplication.shared.openURL(link)
+        }
     }
     
     @IBAction func showResetPasswordView() {
