@@ -26,7 +26,8 @@
 import Foundation
 
 struct Strings {
-    
+    static let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+
     static let YES = "Yes"
     static let NO = "No"
     static let OK = "OK"
@@ -135,7 +136,7 @@ struct Strings {
     
     static let RESET_PASSWORD_MAIL_SENT = "We have sent you an email with a link to reset your password.  Please check your email and click the link to continue."
     
-    static let ARTICLES = "Articles"
+    static let ARTICLES = instituteSettings.postsLabel
     
     static let INVALID_ACCESS_CODE = "Invalid Access Code"
     
