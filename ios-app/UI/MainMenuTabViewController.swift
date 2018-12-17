@@ -33,7 +33,6 @@ class MainMenuTabViewController: UITabBarController {
         super.viewDidLoad()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
-        
         if (!instituteSettings.forumEnabled) {
             viewControllers?.remove(at: 5)
         }
