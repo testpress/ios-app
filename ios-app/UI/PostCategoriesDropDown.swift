@@ -38,11 +38,18 @@ class PostCategoriesDropDown {
         let image = UIImage(named: "ic_arrow_drop_down")
         titleButton.setImage(image, for: .normal)
         titleButton.tintColor = .white
+        
         if category != nil {
             titleButton.setTitle(category!.name, for: .normal)
         } else {
             titleButton.setTitle(Strings.ARTICLES, for: .normal)
         }
+        
+        if (InstituteSettings.isAvailable()) {
+            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+            titleButton.setTitle(instituteSettings.postsLabel, for: .normal)
+        }
+
         titleButton.setTitleColor(.white, for: .normal)
         titleButton.addTarget(self, action: #selector(self.onClickDropDown), for: .touchUpInside)
         titleButton.sizeToFit()

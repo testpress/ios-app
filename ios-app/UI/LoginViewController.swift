@@ -48,8 +48,6 @@ class LoginViewController: BaseTextFieldViewController {
         UIUtils.setButtonDropShadow(loginButton)
         
         if (InstituteSettings.isAvailable()) {
-            // TODO : When user logs out DBInstance gets cleared , so after
-            // logout this condition won't be executed.Need to handle that.
             instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
             
             if(instituteSettings.allowSignup) {
