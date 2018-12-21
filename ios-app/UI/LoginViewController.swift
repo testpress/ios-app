@@ -136,6 +136,20 @@ class LoginViewController: BaseTextFieldViewController {
                     fatalError("Error updating keychain - \(error)")
                 }
                 
+
+                if ((UserDefaults.standard.string(forKey: Constants.REGISTER_FCM_TOKEN) == "true") && (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true")) {
+                    let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
+                    let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
+                    let parameters: Parameters = [
+                        "device_id": deviceToken!,
+                        "registration_id": fcmToken!,
+                        "platform": "ios"
+                    ]
+                    TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters,
+                                        completion: { _, _ in})
+                    UserDefaults.standard.set("false", forKey: Constants.REGISTER_FCM_TOKEN)
+                }
+                
                 let tabViewController = self.storyboard!.instantiateViewController(
                     withIdentifier: Constants.TAB_VIEW_CONTROLLER)
                 

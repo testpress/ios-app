@@ -38,6 +38,7 @@ import FirebaseMessaging
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     var window: UIWindow?
+    let gcmMessageIDKey = "gcm.message_id"
     
     var activityIndicator: UIActivityIndicatorView!
     var emptyView: EmptyView!
@@ -46,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         
-        // Register for remote notifications. This shows a permission dialog on first run.
+        // Register for remote notifications. This shows a permission dialog on first run, to
         // [START register_for_notifications]
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
