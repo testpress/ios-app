@@ -26,7 +26,8 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://sandbox.testpress.in";
+    static let BASE_URL = "https://3cdc67ab.ngrok.io";
+//    static let BASE_URL = "https://sandbox.testpress.in";
     
     static let APP_APPLE_ID = "dummyid"
     
@@ -119,6 +120,12 @@ struct Constants {
     static let STARRED = "starred"
     static let ACCESS_CODE = "access_code"
     static let UNCATEGORIZED = "Uncategorized"
+    static let DEVICE_TOKEN = "device_token"
+    static let FCM_TOKEN = "fcm_token"
+    static let REGISTER_FCM_TOKEN = "register_fcm_token"
+    static let REGISTER_DEVICE_TOKEN = "register_device_token"
+
+
     
     static func getAppVersion() -> String {
         let dictionary = Bundle.main.infoDictionary!
