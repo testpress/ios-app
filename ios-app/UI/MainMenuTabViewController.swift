@@ -48,5 +48,6 @@ class MainMenuTabViewController: UITabBarController {
         if (!instituteSettings.coursesEnableGamification) {
             viewControllers?.remove(at: 3)
         }
+        
     }
 }
