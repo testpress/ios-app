@@ -38,7 +38,6 @@ import FirebaseMessaging
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     var window: UIWindow?
-    let gcmMessageIDKey = "gcm.message_id"
     
     var activityIndicator: UIActivityIndicatorView!
     var emptyView: EmptyView!
@@ -47,8 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         
-        // Register for remote notifications. This shows a permission dialog on first run, to
-        // show the dialog at a more appropriate time move this registration accordingly.
+        // Register for remote notifications. This shows a permission dialog on first run.
         // [START register_for_notifications]
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -72,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
         // [END set_messaging_delegate]
-        UserDefaults.standard.set("false", forKey: Constants.REGISTER_FCM_TOKEN)
         
         
         // Customise navigation bar
@@ -177,7 +174,6 @@ extension AppDelegate {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugPrint("Unable to register for remote notifications: \(error.localizedDescription)")
         UserDefaults.standard.set("false", forKey: Constants.REGISTER_DEVICE_TOKEN)
-        
     }
     
     

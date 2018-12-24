@@ -53,7 +53,6 @@ class TPApiClient {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         if (KeychainTokenItem.isExist()) {
             let token: String = KeychainTokenItem.getToken()
-            print("token \(token)")
             request.setValue("JWT " + token, forHTTPHeaderField: "Authorization")
         }
         
