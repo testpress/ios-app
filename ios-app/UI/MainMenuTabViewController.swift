@@ -32,30 +32,24 @@ class MainMenuTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (InstituteSettings.isAvailable()) {
-            
-            instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-            viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
-            
-            if (!instituteSettings.forumEnabled) {
-                viewControllers?.remove(at: 5)
-            }
-            
-            if (!instituteSettings.showGameFrontend) {
-                viewControllers?.remove(at: 1)
-            }
-            
-            if (!instituteSettings.postsEnabled) {
-                viewControllers?.remove(at: 4)
-            }
-            
-            if (!instituteSettings.coursesEnableGamification) {
-                viewControllers?.remove(at: 3)
-            }
-        } else {
-            UIUtils.fetchInstituteSettings(completion: {_,_ in})
+        
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
+        
+        if (!instituteSettings.forumEnabled) {
+            viewControllers?.remove(at: 5)
         }
         
+        if (!instituteSettings.showGameFrontend) {
+            viewControllers?.remove(at: 1)
+        }
+        
+        if (!instituteSettings.postsEnabled) {
+            viewControllers?.remove(at: 4)
+        }
+        
+        if (!instituteSettings.coursesEnableGamification) {
+            viewControllers?.remove(at: 3)
+        }
     }
-    
 }

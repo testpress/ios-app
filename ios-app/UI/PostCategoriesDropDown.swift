@@ -45,10 +45,8 @@ class PostCategoriesDropDown {
             titleButton.setTitle(Strings.ARTICLES, for: .normal)
         }
         
-        if (InstituteSettings.isAvailable()) {
-            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-            titleButton.setTitle(instituteSettings.postsLabel, for: .normal)
-        }
+        let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        titleButton.setTitle(instituteSettings.postsLabel, for: .normal)
 
         titleButton.setTitleColor(.white, for: .normal)
         titleButton.addTarget(self, action: #selector(self.onClickDropDown), for: .touchUpInside)

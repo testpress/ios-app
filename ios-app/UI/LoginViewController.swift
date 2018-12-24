@@ -47,12 +47,10 @@ class LoginViewController: BaseTextFieldViewController {
         navigationbarItem.title = UIUtils.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
         
-        if (InstituteSettings.isAvailable()) {
-            instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-            
-            if(instituteSettings.allowSignup) {
-                signUpLayout.isHidden = false
-            }
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        
+        if(instituteSettings.allowSignup) {
+            signUpLayout.isHidden = false
         }
 
         let fbLoginButton = LoginButton(readPermissions:
