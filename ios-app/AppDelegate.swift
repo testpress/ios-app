@@ -38,7 +38,6 @@ import FirebaseMessaging
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     var window: UIWindow?
-    let gcmMessageIDKey = "gcm.message_id"
     
     var activityIndicator: UIActivityIndicatorView!
     var emptyView: EmptyView!
