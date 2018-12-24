@@ -64,6 +64,7 @@ enum TPEndpoint {
     case bookmarkFolders
     case attemptsPath
     case commentsPath
+    case instituteSettings
     case get
     case post
     case put
@@ -198,6 +199,8 @@ enum TPEndpoint {
             return "/api/v2.2/questions/"
         case .commentsPath:
             return "/comments/"
+        case .instituteSettings:
+            return "/api/v2.2/settings/"
         default:
             return ""
         }

@@ -27,11 +27,29 @@ import UIKit
 
 class MainMenuTabViewController: UITabBarController {
     
+    var instituteSettings: InstituteSettings!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewControllers?.remove(at: 2) // Exams list
-        viewControllers?.remove(at: 5) // Access Code
+        
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
+        
+        if (!instituteSettings.forumEnabled) {
+            viewControllers?.remove(at: 5)
+        }
+        
+        if (!instituteSettings.showGameFrontend) {
+            viewControllers?.remove(at: 1)
+        }
+        
+        if (!instituteSettings.postsEnabled) {
+            viewControllers?.remove(at: 4)
+        }
+        
+        if (!instituteSettings.coursesEnableGamification) {
+            viewControllers?.remove(at: 3)
+        }
     }
-    
 }

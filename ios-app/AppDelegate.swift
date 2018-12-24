@@ -70,16 +70,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let config = Realm.Configuration(schemaVersion: 0)
         Realm.Configuration.defaultConfiguration = config
+        let viewController:UIViewController
         
-        // Launch the view controller based on user login state
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var viewController: UIViewController
-        if (KeychainTokenItem.isExist()) {
-            viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.TAB_VIEW_CONTROLLER)
+        if (!InstituteSettings.isAvailable()) {
+            viewController = MainViewController()
         } else {
-            viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+            UIUtils.fetchInstituteSettings(completion:{ _,_  in })
+            viewController = UIUtils.getLoginOrTabViewController()
         }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController

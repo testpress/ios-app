@@ -40,15 +40,18 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var facebookButtonLayout: UIView!
         
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
-    
+    var instituteSettings: InstituteSettings!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationbarItem.title = UIUtils.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
         
-        // TODO: Set using institute settings
-        signUpLayout.isHidden = false
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        
+        if(instituteSettings.allowSignup) {
+            signUpLayout.isHidden = false
+        }
 
         let fbLoginButton = LoginButton(readPermissions:
             [ .publicProfile, .email, .userBirthday, .userLocation ])

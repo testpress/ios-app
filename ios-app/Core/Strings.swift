@@ -26,7 +26,7 @@
 import Foundation
 
 struct Strings {
-    
+
     static let YES = "Yes"
     static let NO = "No"
     static let OK = "OK"

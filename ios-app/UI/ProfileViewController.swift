@@ -129,8 +129,8 @@ class ProfileViewController: UIViewController {
             title: Strings.YES,
             style: UIAlertActionStyle.destructive,
             handler: { action in
-                
-                DBInstance.clearAllTables()
+                // Clear only user related tables
+                DBInstance.clearTables()
                 // Logout on Facebook
                 LoginManager().logOut()
                 KeychainTokenItem.clearKeychainItems()
