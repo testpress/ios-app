@@ -26,8 +26,9 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://sandbox.testpress.in";
-    
+//    static let BASE_URL = "https://sandbox.testpress.in";
+    static let BASE_URL = "https://3cdc67ab.ngrok.io";
+
     static let APP_APPLE_ID = "dummyid"
     
     static let APP_SHARE_MESSAGE = "Good app to prepare for online exams. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID
@@ -121,7 +122,6 @@ struct Constants {
     static let UNCATEGORIZED = "Uncategorized"
     static let DEVICE_TOKEN = "device_token"
     static let FCM_TOKEN = "fcm_token"
-    static let REGISTER_FCM_TOKEN = "register_fcm_token"
     static let REGISTER_DEVICE_TOKEN = "register_device_token"
 
 

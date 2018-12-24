@@ -49,8 +49,7 @@ class MainMenuTabViewController: UITabBarController {
         if (!instituteSettings.coursesEnableGamification) {
             viewControllers?.remove(at: 3)
         }
-        
-        if ((UserDefaults.standard.string(forKey: Constants.REGISTER_FCM_TOKEN) == "true") && (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true")) {
+        if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
             let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
             let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
             let parameters: Parameters = [
@@ -59,7 +58,6 @@ class MainMenuTabViewController: UITabBarController {
                 "platform": "ios"
             ]
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters,completion: { _, _ in})
-            UserDefaults.standard.set("false", forKey: Constants.REGISTER_FCM_TOKEN)
         }
     }
 }

@@ -155,10 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate {
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        if (UserDefaults.standard.string(forKey: Constants.FCM_TOKEN) != fcmToken) {
-            UserDefaults.standard.set(fcmToken, forKey: Constants.FCM_TOKEN)
-            UserDefaults.standard.set("true", forKey: Constants.REGISTER_FCM_TOKEN)
-        }
+        UserDefaults.standard.set(fcmToken, forKey: Constants.FCM_TOKEN)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
