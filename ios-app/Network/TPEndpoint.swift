@@ -69,7 +69,9 @@ enum TPEndpoint {
     case post
     case put
     case delete
-    
+    case registerDevice
+    case unRegisterDevice
+
     var method: Alamofire.HTTPMethod {
         switch self {
         case .authenticateUser:
@@ -122,7 +124,9 @@ enum TPEndpoint {
         case .post,
              .resetPassword,
              .authenticateSocialUser,
-             .uploadImage:
+             .uploadImage,
+             .registerDevice,
+             .unRegisterDevice:
             return .post
         case .put:
             return .put
@@ -201,6 +205,10 @@ enum TPEndpoint {
             return "/comments/"
         case .instituteSettings:
             return "/api/v2.2/settings/"
+        case .registerDevice:
+            return "/api/v2.2/devices/register/"
+        case .unRegisterDevice:
+            return "/api/v2.2/devices/unregister/"
         default:
             return ""
         }

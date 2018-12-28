@@ -28,12 +28,49 @@ import IQKeyboardManagerSwift
 import RealmSwift
 import UIKit
 
+import Alamofire
+import UserNotifications
+import Firebase
+import FirebaseInstanceID
+import FirebaseMessaging
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+    
     var window: UIWindow?
-
+    
+    var activityIndicator: UIActivityIndicatorView!
+    var emptyView: EmptyView!
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        
+        // Register for remote notifications. This shows a permission dialog on first run.
+        // [START register_for_notifications]
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        
+        // [END register_for_notifications]
+        FirebaseApp.configure()
+        
+        // [START set_messaging_delegate]
+        Messaging.messaging().delegate = self
+        // [END set_messaging_delegate]
+        
         
         // Customise navigation bar
         UINavigationBar.appearance().isTranslucent = false
@@ -45,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
             as? UIView
-
+        
         statusBar?.backgroundColor = Colors.getRGB(Colors.PRIMARY)
         
         // Set tab bar item custom offset only on iPhone
@@ -67,7 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
             userDefaults.synchronize() // Forces the app to update UserDefaults
         }
-        
         let config = Realm.Configuration(schemaVersion: 0)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
@@ -84,34 +120,162 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         
         return SDKApplicationDelegate.shared.application(application, open: url, options: options)
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
+    
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    
 }
 
+extension AppDelegate {
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        UserDefaults.standard.set(fcmToken, forKey: Constants.FCM_TOKEN)
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // Convert token to string
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        if ((UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN) != deviceTokenString)) {
+            UserDefaults.standard.set(deviceTokenString, forKey: Constants.DEVICE_TOKEN)
+            UserDefaults.standard.set("true", forKey: Constants.REGISTER_DEVICE_TOKEN)
+            
+        }
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        debugPrint("Unable to register for remote notifications: \(error.localizedDescription)")
+        UserDefaults.standard.set("false", forKey: Constants.REGISTER_DEVICE_TOKEN)
+    }
+    
+    
+    // Receive displayed notifications for iOS 10 devices.
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.badge,.alert,.sound])
+    }
+    
+    // [END ios_10_message_handling]
+    
+    
+    //Called when a notification is interacted with for a background app.
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        
+        if let url: String = userInfo["gcm.notification.short_url"] as? String  {
+            let urlPath = URL(fileURLWithPath: url)
+            let contentType = urlPath.pathComponents[1]
+            if let topController = UIApplication.topViewController() {
+                if (KeychainTokenItem.isExist()) {
+                    switch(contentType) {
+                    case "p":
+                        let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
+                        let viewController = storyboard.instantiateViewController(withIdentifier:
+                            Constants.POST_DETAIL_VIEW_CONTROLLER) as! PostDetailViewController
+                        
+                        let url = Constants.BASE_URL + "/api/v2.2/posts/\(urlPath.pathComponents[2])/?short_link=true"
+                        viewController.url = url
+                        
+                        topController.present(viewController, animated: true, completion: nil)
+                        break;
+                    case "chapters":
+                        emptyView = EmptyView.getInstance(parentView: topController.view)
+                        emptyView.backgroundColor = .white
+                        activityIndicator = UIUtils.initActivityIndicator(parentView: topController.view)
+                        activityIndicator?.center = CGPoint(x: topController.view.center.x, y: topController.view.center.y - 50)
+                        activityIndicator.startAnimating()
+                        
+                        let url = Constants.BASE_URL + "/api/v2.2/contents/\(urlPath.pathComponents[3])/"
+                        Content.fetchContent(url: url, completion: { content, error in
+                            if let error = error {
+                                debugPrint(error.message ?? "No error")
+                                debugPrint(error.kind)
+                                var retryButtonText: String?
+                                var retryHandler: (() -> Void)?
+                                if error.kind == .network {
+                                    retryButtonText = Strings.TRY_AGAIN
+                                    retryHandler = {
+                                        self.emptyView.hide()
+                                    }
+                                }
+                                self.activityIndicator.stopAnimating()
+                                let (image, title, description) = error.getDisplayInfo()
+                                
+                                self.emptyView.show(image: image, title: title, description: description,
+                                                    retryButtonText: retryButtonText, retryHandler: retryHandler)
+                            } else {
+                                self.activityIndicator.stopAnimating()
+                                let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
+                                let viewController = storyboard.instantiateViewController(withIdentifier:
+                                    Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) as! ContentDetailPageViewController
+                                
+                                viewController.position = 0
+                                viewController.contents = [content] as! [Content]
+                                
+                                topController.present(viewController, animated: true, completion: nil)
+                            }
+                        })
+                        break;
+                    default:
+                        break;
+                    }
+                } else {
+                    let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier:
+                        Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+                    topController.present(viewController, animated: true, completion: nil)
+                    
+                }
+            }
+        }
+        completionHandler()
+    }
+    
+    
+}
+
+extension UIApplication {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return topViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
+    }
+}

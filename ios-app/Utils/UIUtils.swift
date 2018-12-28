@@ -27,6 +27,7 @@ import UIKit
 
 public class UIUtils {
 
+
     static func initActivityIndicator(parentView: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(frame: parentView.frame)
         activityIndicator.activityIndicatorViewStyle = .whiteLarge
