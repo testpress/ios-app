@@ -47,9 +47,7 @@ class SignUpViewController: BaseTextFieldViewController {
         firstTextField = usernameField
         phoneNumberField.isHidden = true
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-        print("Insitute settings \(instituteSettings.verificationMethod)")
         if (instituteSettings.verificationMethod == "M") {
-            print("Hello")
             phoneNumberField.isHidden = false
         }
     }

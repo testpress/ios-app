@@ -85,21 +85,12 @@ class VerifyPhoneViewController: UIViewController {
                 if let error = error {
                     debugPrint(error.message ?? "No error message found")
                     debugPrint(error.kind)
-                    var title, description: String
-                    if error.isClientError() {
-                        title = Strings.WRONG_CREDENTIALS
-                        description = Strings.USERNAME_PASSWORD_NOT_MATCHED
-                    } else {
-                        (_, title, description) = error.getDisplayInfo()
-                    }
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier:
+                        Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+                    
                     self.alertController.dismiss(animated: true, completion: nil)
-                    UIUtils.showSimpleAlert(
-                        title: title,
-                        message: description,
-                        viewController: self,
-                        cancelable: true,
-                        cancelHandler: #selector(self.closeAlert(gesture:))
-                    )
+                    self.present(viewController, animated: true, completion: nil)
                     return
                 }
                 
@@ -114,8 +105,9 @@ class VerifyPhoneViewController: UIViewController {
                 } catch {
                     fatalError("Error updating keychain - \(error)")
                 }
-                
-                let tabViewController = self.storyboard!.instantiateViewController(
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+                let tabViewController = storyboard.instantiateViewController(
                     withIdentifier: Constants.TAB_VIEW_CONTROLLER)
                 
                 self.alertController.dismiss(animated: true, completion: nil)
