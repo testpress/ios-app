@@ -57,6 +57,23 @@ public class Content {
     
     public required init?(map: Map) {
     }
+    
+    public static func fetchContent(url:String, completion: @escaping(Content?, TPError?) -> Void) {
+        TPApiClient.request(
+            type: Content.self,
+            endpointProvider: TPEndpointProvider(.get, url: url),
+            completion: {
+                content, error in
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                } else {
+                    let content: Content = content!
+                    print("Content : \(content)")
+                }
+                completion(content, error)
+        })
+    }
 }
 
 extension Content: TestpressModel {

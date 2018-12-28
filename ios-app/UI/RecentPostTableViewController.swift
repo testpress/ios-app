@@ -56,7 +56,10 @@ class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        self.navigationItem.title = instituteSettings.postsLabel
+
         activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
         
@@ -258,7 +261,9 @@ extension RecentPostTableViewController: PostCategoryDelegate {
             }
         } else {
             navigationItem.titleView = nil
-            navigationItem.title = Strings.ARTICLES
+    
+            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+            navigationItem.title = instituteSettings.postsLabel
         }
     }
     

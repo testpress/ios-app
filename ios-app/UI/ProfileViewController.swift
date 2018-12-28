@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import Alamofire
 import FacebookLogin
 import Kingfisher
 import UIKit
@@ -130,7 +131,23 @@ class ProfileViewController: UIViewController {
             style: UIAlertActionStyle.destructive,
             handler: { action in
                 
-                DBInstance.clearAllTables()
+                let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
+                let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
+                
+                if (fcmToken != nil && deviceToken != nil ) {
+                    let parameters: Parameters = [
+                        "device_id": deviceToken!,
+                        "registration_id": fcmToken!,
+                        "platform": "ios"
+                    ]
+                    
+                    TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.unRegisterDevice), parameters: parameters,
+                                        completion: { _, _ in})
+                }
+                UIApplication.shared.unregisterForRemoteNotifications()
+
+                // Clear only user related tables
+                DBInstance.clearTables()
                 // Logout on Facebook
                 LoginManager().logOut()
                 KeychainTokenItem.clearKeychainItems()
