@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         
-        // Register for remote notifications. This shows a permission dialog on first run, to
+        // Register for remote notifications. This shows a permission dialog on first run.
         // [START register_for_notifications]
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
