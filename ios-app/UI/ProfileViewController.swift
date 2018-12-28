@@ -144,6 +144,7 @@ class ProfileViewController: UIViewController {
                     TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.unRegisterDevice), parameters: parameters,
                                         completion: { _, _ in})
                 }
+                UIApplication.shared.unregisterForRemoteNotifications()
 
                 // Clear only user related tables
                 DBInstance.clearTables()
