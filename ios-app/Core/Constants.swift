@@ -103,6 +103,8 @@ struct Constants {
     static let BOOKMARKED_QUESTION_VIEW_CONTROLLER = "BookmarkedQuestionViewController"
     static let BOOKMARK_FOLDER_NAVIGATION_CONTROLLER = "BookmarkFolderNavigationController"
     static let BOOKMARK_FOLDER_TABLE_VIEW_CELL = "BookmarkFolderTableViewCell"
+    static let VERIFY_PHONE_VIEW_CONTROLLER = "VerifyPhoneViewController"
+
     
     static let PAGE = "page"
     static let PAGE_SIZE = "page_size"

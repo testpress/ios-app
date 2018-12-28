@@ -30,6 +30,7 @@ public class RegistrationError {
     var email: [String] = []
     var password: [String] = []
     var phone: [String] = []
+    var non_field_errors: [String] = []
     
     public required init?(map: Map) {
     }
@@ -41,5 +42,6 @@ extension RegistrationError: TestpressModel {
         email <- map["email"]
         password <- map["password"]
         phone <- map["phone"]
+        non_field_errors <- map["non_field_errors"]
     }
 }
