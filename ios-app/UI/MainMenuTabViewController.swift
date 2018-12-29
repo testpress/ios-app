@@ -34,15 +34,18 @@ class MainMenuTabViewController: UITabBarController {
         super.viewDidLoad()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
+        viewControllers?.remove(at: 6) // Access code
+
         if (!instituteSettings.forumEnabled) {
             viewControllers?.remove(at: 5)
         }
         
         if (!instituteSettings.showGameFrontend) {
             viewControllers?.remove(at: 1)
+        } else {
+            viewControllers?.remove(at: 2) // Exams list
         }
         
-        viewControllers?.remove(at: 2) // Exams list
 
         if (!instituteSettings.postsEnabled) {
             viewControllers?.remove(at: 4)
