@@ -261,10 +261,9 @@ class TPApiClient {
         })
     }
     
-    static func registerNewUser(username: String, email: String, password: String, phone: String,
-                                completion: @escaping (TestpressModel?, TPError?) -> Void) {
+    static func registerNewUser(username: String, email: String, password: String, phone: String, country_code:String, completion: @escaping (TestpressModel?, TPError?) -> Void) {
         
-        let parameters: Parameters = ["username": username, "email": email, "password": password, "phone": phone]
+        let parameters: Parameters = ["username": username, "email": email, "password": password, "phone": phone, "country_code":country_code]
         apiCall(endpointProvider: TPEndpointProvider(.registerNewUser), parameters: parameters,
                 completion: { json, error in
                     
