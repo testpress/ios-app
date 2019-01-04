@@ -26,7 +26,7 @@
 import Foundation
 
 struct Strings {
-    
+
     static let YES = "Yes"
     static let NO = "No"
     static let OK = "OK"
@@ -97,6 +97,7 @@ struct Strings {
     
     static let ENTER_VALID_EMAIL = "Please enter a valid email address"
     static let ENTER_VALID_USERNAME = "Use only alphabets or numbers"
+    static let ENTER_VALID_PHONE_NUMBER = "Please enter valid phone number"
     static let PASSWORD_MUST_HAVE_SIX_CHARACTERS = "Require at least 6 digits"
     static let PASSWORD_NOT_MATCH = "Passwords not matching"
     
