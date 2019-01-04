@@ -24,17 +24,46 @@
 //
 
 import UIKit
+import Alamofire
 
 class MainMenuTabViewController: UITabBarController {
     
+    var instituteSettings: InstituteSettings!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewControllers?.remove(at: 2) // Exams list
-        viewControllers?.remove(at: 5) // Access Code
-        viewControllers?.remove(at: 4) // Discussion Forum
-        viewControllers?.remove(at: 0) // Activity Feed
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
+        viewControllers?.remove(at: 6) // Access Code
 
+        if (!instituteSettings.forumEnabled) {
+            viewControllers?.remove(at: 5)
+        }
+
+        if (!instituteSettings.postsEnabled) {
+            viewControllers?.remove(at: 4)
+        }
+        
+        if (!instituteSettings.coursesEnableGamification) {
+            viewControllers?.remove(at: 3)
+        }
+
+        if (instituteSettings.showGameFrontend) {
+            viewControllers?.remove(at: 2) // Exams list
+            
+        } else {
+            viewControllers?.remove(at: 1)
+        }
+        
+        if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
+            let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
+            let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
+            let parameters: Parameters = [
+                "device_id": deviceToken!,
+                "registration_id": fcmToken!,
+                "platform": "ios"
+            ]
+            TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters,completion: { _, _ in})
+        }
     }
-    
 }

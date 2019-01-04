@@ -27,6 +27,7 @@ import UIKit
 
 public class UIUtils {
 
+
     static func initActivityIndicator(parentView: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(frame: parentView.frame)
         activityIndicator.activityIndicatorViewStyle = .whiteLarge
@@ -53,15 +54,23 @@ public class UIUtils {
         return alertController
     }
     
+    @discardableResult
     static func showSimpleAlert(title: String? = nil,
                                 message: String? = nil,
                                 viewController: UIViewController,
+                                positiveButtonText: String = Strings.OK,
+                                positiveButtonStyle: UIAlertActionStyle = .default,
+                                negativeButtonText: String? = nil,
                                 cancelable: Bool = false,
                                 cancelHandler: Selector? = nil,
-                                completion: ((UIAlertAction) -> Void)? = nil) {
+                                completion: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: Strings.OK, style: UIAlertActionStyle.cancel,
+        if negativeButtonText != nil {
+            alert.addAction(UIAlertAction(title: negativeButtonText!,
+                                          style: UIAlertActionStyle.default))
+        }
+        alert.addAction(UIAlertAction(title: positiveButtonText, style: positiveButtonStyle,
                                       handler: completion))
         
         viewController.present(alert, animated: true, completion: {
@@ -69,7 +78,7 @@ public class UIUtils {
             alert.view.superview?.addGestureRecognizer(
                 UITapGestureRecognizer(target: viewController, action: cancelHandler))
         })
-        
+        return alert
     }
     
     static func setButtonDropShadow(_ view: UIView) {
@@ -120,4 +129,34 @@ public class UIUtils {
         viewController.present(profileViewController, animated: true)
     }
     
+    static func fetchInstituteSettings(
+        completion: @escaping(InstituteSettings?, TPError?) -> Void) {
+        TPApiClient.request(
+            type: InstituteSettings.self,
+            endpointProvider: TPEndpointProvider(.instituteSettings),
+            completion: {
+                instituteSettings, error in
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                } else {
+                    instituteSettings!.baseUrl = Constants.BASE_URL
+                    DBManager<InstituteSettings>().addData(objects: [instituteSettings!])
+                }
+                completion(instituteSettings,error)
+        })
+    }
+
+    static func getLoginOrTabViewController() -> UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var viewController: UIViewController
+        if (KeychainTokenItem.isExist()) {
+            viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TAB_VIEW_CONTROLLER)
+        } else {
+            viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+        }
+        return viewController
+    }
 }

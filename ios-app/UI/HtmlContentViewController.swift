@@ -32,12 +32,24 @@ class HtmlContentViewController: BaseWebViewController {
     var emptyView: EmptyView!
     var loading: Bool = false
     var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
+    var bookmarkHelper: BookmarkHelper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         emptyView = EmptyView.getInstance(parentView: webView)
-        checkContentType()
         webViewDelegate = self
+        bookmarkHelper = BookmarkHelper(viewController: self)
+        checkContentType()
+    }
+    
+    override func initWebView() {
+        let contentController = WKUserContentController()
+        contentController.add(self, name: "callbackHandler")
+        let config = WKWebViewConfiguration()
+        config.userContentController = contentController
+        config.preferences.javaScriptEnabled = true
+        
+        webView = WKWebView( frame: parentView.bounds, configuration: config)
     }
     
     func checkContentType() {
@@ -129,8 +141,21 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func getFormattedContent(_ contentHtml: String) -> String {
-        return WebViewUtils.getHeader() + WebViewUtils.getFormattedTitle(title: title!) +
-            WebViewUtils.getHtmlContentWithMargin(contentHtml)
+        var html = WebViewUtils.getHeader()
+        if Constants.BOOKMARKS_ENABLED {
+            html += WebViewUtils.getBookmarkHeader()
+        }
+        let bookmarked = content.bookmarkId != nil
+        html += WebViewUtils.getFormattedTitle(
+            title: title!,
+            withBookmarkButton: Constants.BOOKMARKS_ENABLED,
+            withBookmarkedState: bookmarked
+        )
+        return html + WebViewUtils.getHtmlContentWithMargin(contentHtml)
+    }
+    
+    func bookmarkJavascriptListener(message: String) {
+        bookmarkHelper.javascriptListener(message: message, bookmarkId: content.bookmarkId)
     }
     
 }
@@ -139,5 +164,18 @@ extension HtmlContentViewController: WKWebViewDelegate {
     
     func onFinishLoadingWebView() {
         createContentAttempt()
+    }
+}
+
+extension HtmlContentViewController: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController,
+                               didReceive message: WKScriptMessage) {
+        
+        if (message.name == "callbackHandler") {
+            let body = message.body
+            if let message = body as? String {
+                bookmarkJavascriptListener(message: message)
+            }
+        }
     }
 }

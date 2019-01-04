@@ -48,11 +48,22 @@ class WebViewUtils {
             + "<link rel='stylesheet' type='text/css' href='questions_typebase.css' />"
     }
     
+    public static func getBookmarkHeader() -> String {
+        return "<link rel='stylesheet' type='text/css' href='bookmark/bookmark.css' />"
+            + "<script src='bookmark/Bookmark.js'></script>"
+    }
+    
+    public static func getBookmarkOptionsHeader() -> String {
+        return "<link rel='stylesheet' type='text/css' href='bookmark/bookmark_detail.css' />"
+            + "<script src='bookmark/BookmarkDetail.js'></script>"
+    }
+    
     public static func getHeader() -> String {
         var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, "
             + "initial-scale=1, maximum-scale=1, user-scalable=no' />"
         header += "<link rel='stylesheet' type='text/css' href='typebase.css' />"
         header += "<link rel='stylesheet' type='text/css' href='progress_loader.css' />"
+        header += "<link rel='stylesheet' type='text/css' href='dotted_loader.css' />"
         header += "<link rel='stylesheet' type='text/css' href='comments.css' />"
         header += "<link rel='stylesheet' type='text/css' href='post.css' />"
         header += "<link rel='stylesheet' type='text/css' href='icomoon/style.css' />"
@@ -109,8 +120,37 @@ class WebViewUtils {
         return "<div class='review-heading'>" + headingText + "</div>"
     }
     
-    public static func getFormattedTitle(title: String) -> String {
-        return "<div class='title'>" + title + "</div><hr class='title_separator'>"
+    public static func getShortAnswerHeadersWithTags() -> String {
+        return "" +
+            "<tr>" +
+            "   <th class='short_answer_option_item table-without-border'>Answers</th>" +
+            "   <th class='short_answer_option_item table-without-border'>Marks</th>" +
+            "</tr>"
+    }
+    
+    public static func getShortAnswersWithTags(shortAnswerText: String,
+                                               marksAllocated: String) -> String {
+        return "" +
+            "<tr>" +
+            "   <td class='short_answer_option_item table-without-border'>" +
+                shortAnswerText + "</td>" +
+            "   <td class='short_answer_option_item table-without-border'>" +
+                marksAllocated + "%</td>" +
+            "</tr>";
+    }
+    
+    public static func getFormattedTitle(title: String,
+                                         withBookmarkButton: Bool = false,
+                                         withBookmarkedState: Bool = false) -> String {
+        
+        var html = "<div class='title'>" + title + "</div>"
+        if withBookmarkButton {
+            html += "<div class='bookmark-button-container'>"
+            html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: withBookmarkedState,
+                                                           alignCenter: true)
+            html += "</div>"
+        }
+        return html + "<hr class='title_separator'>"
     }
     
     public static func getFormattedDiscussionTitle(post: Post) -> String {
@@ -187,6 +227,45 @@ class WebViewUtils {
             html += "<hr>"
         }
         return html
+    }
+    
+    public static func getMoveBookmarkTags() -> String {
+        var html = "<div class='bookmark_options_layout' >"
+        html += "<div class='bookmark-button' onclick='onClickMoveBookmarkButton()'" +
+            "       style='width:121px;'>" +
+            "   <img class='bookmark-image' src='images/move_bookmark.svg' />" +
+            "   <div class='move-bookmark-text'>Move bookmark</div>" +
+            getDottedLoader(marginBottom: 3) +
+        "</div>"
+        html += "<div class='bookmark-button' onclick='onClickRemoveBookmarkButton()'>" +
+            "   <img class='bookmark-image' src='images/remove_bookmark.svg' />" +
+            "   <div class='bookmark-text'>Remove</div>" +
+            getDottedLoader(marginBottom: 3) +
+        "</div>"
+        html += "</div>"
+        return html
+    }
+    
+    public static func getMoveBookmarkTagsWithPadding() -> String {
+        return "<div style='padding: 5px 5px 0px 5px;'>" + getMoveBookmarkTags() + "</div>"
+    }
+    
+    public static func getBookmarkButtonWithTags(bookmarked: Bool,
+                                                 alignCenter: Bool = false) -> String {
+        let image = bookmarked ? "images/remove_bookmark.svg" : "images/bookmark.svg";
+        let text = bookmarked ? "Remove Bookmark" : "Bookmark this";
+        let buttonClass = alignCenter ? "bookmark-centered-button" : "bookmark-button"
+        return "<div class='" + buttonClass + "' onclick='onClickBookmarkButton()'>" +
+            "   <img class='bookmark-image' src='" + image + "' />" +
+            "   <span class='bookmark-text'>" + text + "</span>" +
+            getDottedLoader() +
+        "</div>";
+    }
+    
+    public static func getDottedLoader(marginBottom: Int = 5) -> String {
+        return "<div class='lds-ellipsis' style='display:none; margin-bottom:\(marginBottom)px;'>" +
+            "   <div></div><div></div><div></div><div></div>" +
+            "</div>"
     }
     
     public static func formatHtmlToAppendInJavascript(_ html: String) -> String {

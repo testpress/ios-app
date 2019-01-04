@@ -114,10 +114,10 @@ class LeaderboardTabViewController: ButtonBarPagerTabStripViewController {
         let leaderboardTableViewController = LeaderboardTableViewController()
         leaderboardTableViewController.userReputation = userReputation
         
-        let targerThreadViewController = TargetThreadViewController()
-        targerThreadViewController.userReputation = userReputation
+        let targetThreatViewController = TargetThreatViewController()
+        targetThreatViewController.userReputation = userReputation
         
-        return [leaderboardTableViewController, targerThreadViewController]
+        return [leaderboardTableViewController, targetThreatViewController]
     }
     
     @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {

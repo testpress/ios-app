@@ -38,6 +38,7 @@ class BaseTableViewController<T: Mappable>: UITableViewController {
     var emptyView: EmptyView!
     var items = [T]()
     var tableViewDelegate: BaseTableViewDelegate!
+    var useInterfaceBuilderSeperatorInset = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,9 @@ class BaseTableViewController<T: Mappable>: UITableViewController {
         tableView.backgroundView = emptyView
         emptyView.frame = tableView.frame
         
-        UIUtils.setTableViewSeperatorInset(tableView, size: 15)
+        if !useInterfaceBuilderSeperatorInset {
+            UIUtils.setTableViewSeperatorInset(tableView, size: 15)
+        }
         tableView.tableFooterView = UIView()
     }
     
@@ -69,7 +72,8 @@ class BaseTableViewController<T: Mappable>: UITableViewController {
         }
     }
     
-    func onLoadFinished() {
+    func onLoadFinished(items: [T]) {
+        self.items = items
         self.tableView.reloadData()
         if (self.activityIndicator?.isAnimating)! {
             self.activityIndicator?.stopAnimating()
@@ -120,6 +124,11 @@ class BaseTableViewController<T: Mappable>: UITableViewController {
     
     func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
+    }
+    
+    func refreshWithProgress() {
+        activityIndicator?.startAnimating()
+        tableViewDelegate.loadItems()
     }
     
     func setEmptyText() {

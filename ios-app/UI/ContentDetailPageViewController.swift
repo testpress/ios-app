@@ -48,6 +48,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     var position: Int!
     var emptyView: EmptyView!
     var activityIndicator: UIActivityIndicatorView!
+    var url: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -252,7 +253,6 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
                     
                     return
                 }
-                
                 self.contents[self.position] = content!
                 self.contentDetailDataSource.contents = self.contents
                 self.setFirstViewController()
