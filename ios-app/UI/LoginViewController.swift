@@ -40,15 +40,20 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var facebookButtonLayout: UIView!
         
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
-    
+    var instituteSettings: InstituteSettings!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationbarItem.title = UIUtils.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
         
-        // TODO: Set using institute settings
-        signUpLayout.isHidden = false
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        signUpLayout.isHidden = true
+        socialLoginLayout.isHidden = true
+
+        if(instituteSettings.allowSignup) {
+            signUpLayout.isHidden = false
+        }
 
         let fbLoginButton = LoginButton(readPermissions:
             [ .publicProfile, .email, .userBirthday, .userLocation ])
@@ -65,9 +70,9 @@ class LoginViewController: BaseTextFieldViewController {
         fbLoginButton.trailingAnchor
             .constraint(equalTo: facebookButtonLayout.trailingAnchor).isActive = true
         
-        // TODO: Use institute settings
-        socialLoginLayout.isHidden = false
-        
+        if(instituteSettings.facebookLoginEnabled) {
+            socialLoginLayout.isHidden = false
+        }
         // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
         showKeyboardOnStart = false

@@ -88,7 +88,7 @@ class PostCategoriesTableViewController: BaseTableViewController<Category>, Base
                 } else {
                     self.postCategoryDelegate?.showCategories()
                 }
-                self.onLoadFinished()
+                self.onLoadFinished(items: self.items)
             }
         })
     }

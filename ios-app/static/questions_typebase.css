@@ -224,3 +224,40 @@ p {
 .selected-item {
     background-color: rgba(23, 147, 230, 0.1);
 }
+
+.subject {
+    color: #666;
+    font-family: 'PT-Serif-Regular', serif;
+    display: inline-block;
+}
+
+::placeholder {
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.edit_box {
+    font-family: 'Rubik-Regular', serif;
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    border: solid 1px #cccccc;
+    padding: 10px;
+    min-height: 20px;
+    margin: 20px 20px 20px 10px;
+    border-radius: 5px;
+    vertical-align: middle;
+    word-wrap: break-word;
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+.short_answer_option_item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #666666;
+    text-align: left;
+    font-family: 'PT-Serif-Regular', serif;
+}

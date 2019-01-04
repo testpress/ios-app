@@ -26,6 +26,9 @@
 import ObjectMapper
 
 public class Attempt {
+    
+    public static let RUNNING = "Running";
+    
     var url: String!;
     var id: Int?;
     var date: String?;
@@ -47,6 +50,7 @@ public class Attempt {
     var speed: Int?
     var accuracy: Int?
     var exam: Int!
+    var sections: [AttemptSection] = [];
     
     public required init?(map: Map) {
     }
@@ -75,5 +79,6 @@ extension Attempt: TestpressModel {
         speed <- map["speed"]
         accuracy <- map["accuracy"]
         exam <- map["exam"]
+        sections <- map["sections"]
     }
 }

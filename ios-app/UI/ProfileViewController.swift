@@ -23,6 +23,7 @@
 //  THE SOFTWARE.
 //
 
+import Alamofire
 import FacebookLogin
 import Kingfisher
 import UIKit
@@ -41,6 +42,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var testsTaken: UILabel!
     @IBOutlet weak var speed: UILabel!
     @IBOutlet weak var accuracy: UILabel!
+    @IBOutlet weak var bookmarkButtonLayout: UIStackView!
     
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var emptyView: EmptyView!
@@ -52,6 +54,7 @@ class ProfileViewController: UIViewController {
         emptyView = EmptyView.getInstance(parentView: contentStackView)
         emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
+        bookmarkButtonLayout.isHidden = !Constants.BOOKMARKS_ENABLED
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,7 +131,23 @@ class ProfileViewController: UIViewController {
             style: UIAlertActionStyle.destructive,
             handler: { action in
                 
-                DBInstance.clearAllTables()
+                let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
+                let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
+                
+                if (fcmToken != nil && deviceToken != nil ) {
+                    let parameters: Parameters = [
+                        "device_id": deviceToken!,
+                        "registration_id": fcmToken!,
+                        "platform": "ios"
+                    ]
+                    
+                    TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.unRegisterDevice), parameters: parameters,
+                                        completion: { _, _ in})
+                }
+                UIApplication.shared.unregisterForRemoteNotifications()
+
+                // Clear only user related tables
+                DBInstance.clearTables()
                 // Logout on Facebook
                 LoginManager().logOut()
                 KeychainTokenItem.clearKeychainItems()
@@ -140,6 +159,14 @@ class ProfileViewController: UIViewController {
         ))
         alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
         present(alert, animated: true)
+    }
+    
+    @IBAction func showBookmarks() {
+        let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: nil)
+        let navigationController = storyboard.instantiateViewController(withIdentifier:
+            Constants.BOOKMARKS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
+        
+        present(navigationController, animated: true, completion: nil)
     }
     
     @IBAction func rateUs() {

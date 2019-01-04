@@ -149,7 +149,9 @@ struct KeychainTokenItem {
         // Create a `KeychainPasswordItem` for each dictionary in the query result.
         var passwordItems = [KeychainTokenItem]()
         for result in resultData {
-            guard let account  = result[kSecAttrAccount as String] as? String else { throw KeychainError.unexpectedItemData }
+            guard let account  = result[kSecAttrAccount as String] as? String else {
+                continue
+            }
             
             let passwordItem = KeychainTokenItem(service: service, account: account, accessGroup: accessGroup)
             passwordItems.append(passwordItem)

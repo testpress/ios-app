@@ -30,7 +30,7 @@ protocol ContentAttemptCreationDelegate {
 }
 
 class ContentsTableViewController: TPBasePagedTableViewController<Content>,
-    BasePagedTableViewDelegate, ContentAttemptCreationDelegate {
+    ContentAttemptCreationDelegate {
     
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     
@@ -38,7 +38,6 @@ class ContentsTableViewController: TPBasePagedTableViewController<Content>,
     
     required init?(coder aDecoder: NSCoder) {
         super.init(pager: ContentPager(), coder: aDecoder)
-        delegate = self
     }
     
     override func viewDidLoad() {
@@ -56,8 +55,8 @@ class ContentsTableViewController: TPBasePagedTableViewController<Content>,
         return cell
     }
     
-    func onItemsLoaded() {
-        items = items.sorted(by: { $0.order! < $1.order! })
+    override func onLoadFinished(items: [Content]) {
+        super.onLoadFinished(items: items.sorted(by: { $0.order! < $1.order! }))
     }
     
     func newAttemptCreated() {
