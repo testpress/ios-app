@@ -144,7 +144,7 @@ enum TPEndpoint {
         case .authenticateUser:
             return "/api/v2.2/auth-token/"
         case .registerNewUser:
-            return "/api/v2.2/register/"
+            return "/api/v2.3/register/"
         case .getExams:
             return "/api/v2.2/exams/"
         case .sendHeartBeat:
