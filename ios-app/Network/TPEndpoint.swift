@@ -206,7 +206,7 @@ enum TPEndpoint {
         case .commentsPath:
             return "/comments/"
         case .instituteSettings:
-            return "/api/v2.2/settings/"
+            return "/api/v2.3/settings/"
         case .registerDevice:
             return "/api/v2.2/devices/register/"
         case .unRegisterDevice:
