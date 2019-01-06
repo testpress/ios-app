@@ -2362,18 +2362,33 @@
                                                                     <action selector="onTextChangeListener" destination="coG-x9-smr" eventType="editingChanged" id="se4-ce-0Vm"/>
                                                                 </connections>
                                                             </textField>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uom-1v-HBQ">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bLP-4L-8j6">
                                                                 <rect key="frame" x="0.0" y="130" width="280" height="40"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="40" id="F8V-Yt-zh7"/>
-                                                                </constraints>
-                                                                <nil key="textColor"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
-                                                                <connections>
-                                                                    <action selector="moveToPasswordField:" destination="coG-x9-smr" eventType="primaryActionTriggered" id="Uvb-tB-dWt"/>
-                                                                </connections>
-                                                            </textField>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QDj-Ya-YkI">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="50" id="DnC-ks-Lrz"/>
+                                                                            <constraint firstAttribute="height" constant="40" id="NC2-Ti-7Np"/>
+                                                                        </constraints>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uom-1v-HBQ">
+                                                                        <rect key="frame" x="50" y="0.0" width="230" height="40"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="40" id="F8V-Yt-zh7"/>
+                                                                        </constraints>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
+                                                                        <connections>
+                                                                            <action selector="moveToPasswordField:" destination="coG-x9-smr" eventType="primaryActionTriggered" id="Uvb-tB-dWt"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="jJx-Qa-uF5">
                                                                 <rect key="frame" x="0.0" y="195" width="280" height="40"/>
                                                                 <constraints>
@@ -2483,9 +2498,11 @@
                     </view>
                     <connections>
                         <outlet property="confirmPasswordField" destination="CQf-ag-vv6" id="1BM-pi-MUe"/>
+                        <outlet property="countryCodeField" destination="QDj-Ya-YkI" id="v3V-LI-d4M"/>
                         <outlet property="emailField" destination="Ot9-aE-Pja" id="qZf-kv-Hqu"/>
                         <outlet property="passwordField" destination="jJx-Qa-uF5" id="Ipg-F0-bBY"/>
                         <outlet property="phoneNumberField" destination="uom-1v-HBQ" id="e8V-gV-KEv"/>
+                        <outlet property="phoneStackView" destination="bLP-4L-8j6" id="b5v-xa-gph"/>
                         <outlet property="pleaseFillLabel" destination="ldf-bg-f9s" id="Mdc-kg-z7L"/>
                         <outlet property="scrollView" destination="bVP-5s-xzC" id="gUu-eW-nle"/>
                         <outlet property="signUpButton" destination="Otf-iG-yaD" id="nNM-ly-6es"/>
