@@ -14,6 +14,7 @@
 		18F25D2B213000D700097425 /* SectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D2A213000D700097425 /* SectionInfo.swift */; };
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
+		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		2570A23F21CA0D260097C6FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2570A23E21CA0D260097C6FE /* GoogleService-Info.plist */; };
 		2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24021CA0D760097C6FE /* FirebaseInstanceID.framework */; };
 		2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24121CA0D760097C6FE /* FirebaseCore.framework */; };
@@ -248,6 +249,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		254E69C621DCF199009A4E61 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F26ADDA1E8249D70031E6F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F26ADE11E8249D70031E6F4;
+			remoteInfo = "ios-app";
+		};
 		2F26ADF71E8249D70031E6F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2F26ADDA1E8249D70031E6F4 /* Project object */;
@@ -289,6 +297,9 @@
 		18F25D2A213000D700097425 /* SectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfo.swift; sourceTree = "<group>"; };
 		250E68F521BA4AA600DA81F1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2519C12D21B0083600D26551 /* InstituteSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstituteSettings.swift; sourceTree = "<group>"; };
+		254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Testpress iOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testpress_iOS_AppUITests.swift; sourceTree = "<group>"; };
+		254E69C521DCF199009A4E61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		256EF50721CA15A200C743F0 /* ios-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-app.entitlements"; sourceTree = "<group>"; };
 		2570A23E21CA0D260097C6FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2570A24021CA0D760097C6FE /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Carthage/Build/iOS/FirebaseInstanceID.framework; sourceTree = "<group>"; };
@@ -533,6 +544,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		254E69BE21DCF199009A4E61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2F26ADDF1E8249D70031E6F4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -578,11 +596,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */,
+				254E69C521DCF199009A4E61 /* Info.plist */,
+			);
+			path = "Testpress iOS AppUITests";
+			sourceTree = "<group>";
+		};
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
+				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
 				2F26ADE31E8249D70031E6F4 /* Products */,
 				2FBEDB781E82BBD0000CF05C /* Frameworks */,
 			);
@@ -593,6 +621,7 @@
 			children = (
 				2F26ADE21E8249D70031E6F4 /* ios-app.app */,
 				2F26ADF61E8249D70031E6F4 /* ios-appTests.xctest */,
+				254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -923,6 +952,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		254E69C021DCF199009A4E61 /* Testpress iOS AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 254E69C821DCF199009A4E61 /* Build configuration list for PBXNativeTarget "Testpress iOS AppUITests" */;
+			buildPhases = (
+				254E69BD21DCF199009A4E61 /* Sources */,
+				254E69BE21DCF199009A4E61 /* Frameworks */,
+				254E69BF21DCF199009A4E61 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				254E69C721DCF199009A4E61 /* PBXTargetDependency */,
+			);
+			name = "Testpress iOS AppUITests";
+			productName = "Testpress iOS AppUITests";
+			productReference = 254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		2F26ADE11E8249D70031E6F4 /* ios-app */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F26ADFF1E8249D70031E6F4 /* Build configuration list for PBXNativeTarget "ios-app" */;
@@ -968,10 +1015,15 @@
 		2F26ADDA1E8249D70031E6F4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Testpress;
 				TargetAttributes = {
+					254E69C021DCF199009A4E61 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2F26ADE11E8249D70031E6F4;
+					};
 					2F26ADE11E8249D70031E6F4 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = BHAB7LC35Y;
@@ -1006,11 +1058,19 @@
 			targets = (
 				2F26ADE11E8249D70031E6F4 /* ios-app */,
 				2F26ADF51E8249D70031E6F4 /* ios-appTests */,
+				254E69C021DCF199009A4E61 /* Testpress iOS AppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		254E69BF21DCF199009A4E61 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2F26ADE01E8249D70031E6F4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1121,6 +1181,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		254E69BD21DCF199009A4E61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2F26ADDE1E8249D70031E6F4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1310,6 +1378,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		254E69C721DCF199009A4E61 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F26ADE11E8249D70031E6F4 /* ios-app */;
+			targetProxy = 254E69C621DCF199009A4E61 /* PBXContainerItemProxy */;
+		};
 		2F26ADF81E8249D70031E6F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2F26ADE11E8249D70031E6F4 /* ios-app */;
@@ -1361,6 +1434,51 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		254E69C921DCF199009A4E61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Testpress iOS AppUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Testpress-iOS-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ios-app";
+			};
+			name = Debug;
+		};
+		254E69CA21DCF199009A4E61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Testpress iOS AppUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Testpress-iOS-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ios-app";
+			};
+			name = Release;
+		};
 		2F26ADFD1E8249D70031E6F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1565,6 +1683,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		254E69C821DCF199009A4E61 /* Build configuration list for PBXNativeTarget "Testpress iOS AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				254E69C921DCF199009A4E61 /* Debug */,
+				254E69CA21DCF199009A4E61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2F26ADDD1E8249D70031E6F4 /* Build configuration list for PBXProject "ios-app" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -104,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
             userDefaults.synchronize() // Forces the app to update UserDefaults
         }
-        let config = Realm.Configuration(schemaVersion: 0)
+        let config = Realm.Configuration(schemaVersion: 1)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         
