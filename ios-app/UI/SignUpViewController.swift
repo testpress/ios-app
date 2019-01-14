@@ -42,6 +42,7 @@ class SignUpViewController: BaseTextFieldViewController, UIPickerViewDataSource,
     var instituteSettings: InstituteSettings!
     let countryList = UIUtils.getCountryList()
     var countryCodes: [String]?
+    var countryCode: String = "IN"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +86,7 @@ class SignUpViewController: BaseTextFieldViewController, UIPickerViewDataSource,
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        countryCode = countryCodes![row]
         countryCodeField.text = countryList[countryCodes![row]]![1]
     }
     
@@ -120,7 +122,7 @@ class SignUpViewController: BaseTextFieldViewController, UIPickerViewDataSource,
                 email: emailField.text!,
                 password: passwordField.text!,
                 phone: phoneNumberField.text!,
-                country_code: countryCodeField.text!,
+                country_code: countryCode,
                 completion: { response, error in
                     if let error = error {
                         debugPrint(error.message ?? "No error message found")
