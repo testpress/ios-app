@@ -27,6 +27,11 @@ import Alamofire
 import Device
 import UIKit
 
+enum AuthProvider: String {
+    case TESTPRESS
+    case FACEBOOK
+}
+
 class TPApiClient {
 
     static func apiCall(endpointProvider: TPEndpointProvider,
@@ -228,10 +233,20 @@ class TPApiClient {
     }
     
     static func authenticate(username: String, password: String,
+                             provider: AuthProvider = .TESTPRESS,
                              completion: @escaping (TPAuthToken?, TPError?) -> Void) {
         
-        let parameters: Parameters = ["username": username, "password": password]
-        apiCall(endpointProvider: TPEndpointProvider(.authenticateUser), parameters: parameters,
+        var parameters: Parameters
+        var endpoint: TPEndpoint
+        if provider == .TESTPRESS {
+            parameters = ["username": username, "password": password]
+            endpoint = .authenticateUser
+        } else {
+            endpoint = .authenticateSocialUser
+            parameters = ["user_id": username, "access_token": password,
+                          "provider": provider.rawValue]
+        }
+        apiCall(endpointProvider: TPEndpointProvider(endpoint), parameters: parameters,
                 completion: { json, error in
                     
             var testpressAuthToken: TPAuthToken? = nil
@@ -246,10 +261,9 @@ class TPApiClient {
         })
     }
     
-    static func registerNewUser(username: String, email: String, password: String,
-                                completion: @escaping (TestpressModel?, TPError?) -> Void) {
+    static func registerNewUser(username: String, email: String, password: String, phone: String, country_code:String, completion: @escaping (TestpressModel?, TPError?) -> Void) {
         
-        let parameters: Parameters = ["username": username, "email": email, "password": password]
+        let parameters: Parameters = ["username": username, "email": email, "password": password, "phone": phone, "country_code":country_code]
         apiCall(endpointProvider: TPEndpointProvider(.registerNewUser), parameters: parameters,
                 completion: { json, error in
                     
@@ -274,6 +288,16 @@ class TPApiClient {
                 completion: { json, error in
                     completion(error)
                 }
+        )
+    }
+    
+    static func verifyPhoneNumber(username: String, code: String, completion: @escaping (TPError?) -> Void) {
+        let parameters: Parameters = ["code": code, "username": username]
+        apiCall(endpointProvider: TPEndpointProvider(.verifyPhoneNumber),
+                parameters: parameters,
+                completion: { json, error in
+                    completion(error)
+        }
         )
     }
     
@@ -333,11 +357,16 @@ class TPApiClient {
         })
     }
     
-    static func saveAnswer(selectedAnswer: [Int], review: Bool,
+    static func saveAnswer(selectedAnswer: [Int],
+                           review: Bool,
+                           shortAnswer: String?,
                            endpointProvider: TPEndpointProvider,
                            completion: @escaping (AttemptItem?, TPError?) -> Void) {
         
-        let parameters: Parameters = ["selected_answers": selectedAnswer, "review": review]
+        var parameters: Parameters = [ "selected_answers": selectedAnswer, "review": review ]
+        if let shortAnswer = shortAnswer {
+            parameters["short_text"] = shortAnswer
+        }
         apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
             json, error in
             var attemptItem: AttemptItem? = nil

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-Regular.ttf">
+            <string>Rubik-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookmarkFoldersDropDownCell" customModule="ios_app" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="40" id="xg8-m6-aOv" customClass="BookmarkFoldersDropDownCell" customModule="ios_app" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xg8-m6-aOv" id="RU3-wr-twl">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="39.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="k1c-dx-WRy">
+                        <rect key="frame" x="17" y="-0.5" width="358" height="40.5"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="fga-2O-aEr">
+                                <rect key="frame" x="0.0" y="11" width="281" height="19"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_mark" translatesAutoresizingMaskIntoConstraints="NO" id="CtW-gy-kF7">
+                                        <rect key="frame" x="0.0" y="3.5" width="12" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="11J-Nf-d7F"/>
+                                            <constraint firstAttribute="width" constant="12" id="heP-fW-VRA"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                                <color key="value" red="0.0" green="0.73333333333333328" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQ6-70-2bf">
+                                        <rect key="frame" x="24" y="0.0" width="257" height="19"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yWp-oM-nhw">
+                                <rect key="frame" x="291" y="0.0" width="67" height="40.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="33" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdh-mS-gKd">
+                                        <rect key="frame" x="0.0" y="0.0" width="17" height="40.5"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                        <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OK2-CF-HUG">
+                                        <rect key="frame" x="27" y="0.0" width="40" height="40.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="qdA-rH-jra"/>
+                                            <constraint firstAttribute="width" constant="40" id="u1F-rW-U6h"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                                        <state key="normal" image="ic_edit_white"/>
+                                        <connections>
+                                            <action selector="onClickEditFolder" destination="xg8-m6-aOv" eventType="touchUpInside" id="imj-ny-FMH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="67" id="Nrl-BN-akm"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="k1c-dx-WRy" firstAttribute="centerY" secondItem="RU3-wr-twl" secondAttribute="centerY" id="BwB-iq-Hzw"/>
+                    <constraint firstItem="k1c-dx-WRy" firstAttribute="leading" secondItem="RU3-wr-twl" secondAttribute="leading" constant="17" id="lZc-fW-Kxy"/>
+                    <constraint firstAttribute="trailing" secondItem="k1c-dx-WRy" secondAttribute="trailing" id="vaO-Lw-yoe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="checkMark" destination="CtW-gy-kF7" id="eKv-SJ-xgf"/>
+                <outlet property="countLabel" destination="Hdh-mS-gKd" id="kKu-CT-1Nm"/>
+                <outlet property="editButton" destination="OK2-CF-HUG" id="OOJ-80-bUn"/>
+                <outlet property="folderNameLabel" destination="FQ6-70-2bf" id="boc-yt-2gf"/>
+                <outlet property="optionLabel" destination="FQ6-70-2bf" id="JdN-Qc-XwE"/>
+            </connections>
+            <point key="canvasLocation" x="41" y="21"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="check_mark" width="32" height="32"/>
+        <image name="ic_edit_white" width="24" height="24"/>
+    </resources>
+</document>

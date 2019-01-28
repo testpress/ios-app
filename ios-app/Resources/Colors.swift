@@ -30,14 +30,17 @@ class Colors {
     static let PRIMARY = "#8D070A"
     static let PRIMARY_TEXT = "#ffffff"
     static let MATERIAL_GREEN = "#00ccaa"
+    static let MATERIAL_GREEN2 = "#00bb9c"
     static let MATERIAL_RED = "#e65c6c"
     static let BLACK_TEXT = "#333333"
     static let GRAY_LIGHT = "#e6e6e6"
     static let GRAY_LIGHT_DARK = "#cccccc"
     static let GRAY_MEDIUM = "#999999"
+    static let GRAY_MEDIUM_DARK = "#bfbfbf"
     static let TAB_TEXT_COLOR = "#888888"
     static let ORANGE = "#ffa319"
     static let BLUE = "#1793e6"
+    static let BLUE_TEXT = "#3598db"
     
     static func getRGB (_ hex:String, alpha: CGFloat = 1) -> UIColor {
         

@@ -29,8 +29,9 @@ class QuestionListViewController: BaseQuestionsListViewController {
         let marked: Bool = attemptItem.currentReview == nil ?
             attemptItem.review : attemptItem.currentReview
         
-        let unanswered = attemptItem.savedAnswers == nil ?
-            attemptItem.selectedAnswers.isEmpty : attemptItem.savedAnswers.isEmpty
+        let unanswered = attemptItem.selectedAnswers.isEmpty && attemptItem.savedAnswers.isEmpty
+            && (attemptItem.shortText == nil || attemptItem.shortText!.isEmpty)
+            && (attemptItem.currentShortText == nil || attemptItem.currentShortText.isEmpty)
         
         return marked ?
             Colors.ORANGE : (unanswered ? Colors.GRAY_LIGHT_DARK : Colors.MATERIAL_GREEN)

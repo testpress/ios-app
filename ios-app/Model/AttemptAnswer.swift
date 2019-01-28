@@ -26,11 +26,12 @@
 import ObjectMapper
 
 public class AttemptAnswer {
-    var textHtml: String?;
+    var textHtml: String!
     var id: Int?;
     var isCorrect: Bool? {
         didSet { isCorrect = isCorrect != nil && isCorrect! }
     }
+    var marks: String!
     
     public required init?(map: Map) {
     }
@@ -41,5 +42,6 @@ extension AttemptAnswer: TestpressModel {
         textHtml <- map["text_html"]
         id <- map["id"]
         isCorrect <- map["is_correct"]
+        marks <- map["marks"]
     }
 }

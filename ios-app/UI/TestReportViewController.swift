@@ -62,11 +62,11 @@ class TestReportViewController: UIViewController {
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
         
-        if !(attempt!.rankEnabled!) || String(describing: attempt!.rank!) == "NA" {
+        if !(attempt!.rankEnabled!) || String.getValue(attempt!.rank!) == "NA" {
             rankLayout.isHidden = true
         } else {
-            rank.text = String(describing: attempt!.rank!)
-            maxRank.text = String(describing: attempt!.maxRank!)
+            rank.text = String.getValue(attempt!.rank!)
+            maxRank.text = String.getValue(attempt!.maxRank!)
         }
         totalQuestions.text = String(exam.numberOfQuestions!)
         totalMarks.text = exam.totalMarks
@@ -128,9 +128,14 @@ class TestReportViewController: UIViewController {
             presentingViewController as? ContentDetailPageViewController {
             
             goToContentDetailPageViewController(contentDetailPageViewController)
-        } else if presentingViewController is UITabBarController {
-            let tabViewController =
-                presentingViewController?.childViewControllers[0] as! ExamsTabViewController
+        } else if let nvc =  presentingViewController as? UINavigationController,
+                let accessCodeExamsViewController =
+                    nvc.viewControllers.first as? AccessCodeExamsViewController {
+            
+            goToAccessCodeExamsViewController(accessCodeExamsViewController)
+        } else if presentingViewController is UITabBarController,
+                let tabViewController =
+                    presentingViewController?.childViewControllers[0] as? ExamsTabViewController {
             
             tabViewController.dismiss(animated: false, completion: {
                 if tabViewController.currentIndex != 2 {
@@ -171,6 +176,11 @@ class TestReportViewController: UIViewController {
             }
             contentDetailPageViewController.updateCurrentExamContent()
         })
+    }
+    
+    func goToAccessCodeExamsViewController(_ viewController: AccessCodeExamsViewController) {
+        viewController.items.removeAll()
+        viewController.dismiss(animated: false, completion: nil)
     }
     
     // Set frames of the views in this method to support both portrait & landscape view

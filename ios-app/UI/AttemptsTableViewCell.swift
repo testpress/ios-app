@@ -60,7 +60,7 @@ class AttemptsTableViewCell: UITableViewCell {
             correct.text = String(attempt.correctCount!) + "/" + String(attempt.totalQuestions!)
             if trophiesEnabled {
                 reviewLabel.isHidden = true
-                let trophies = String(describing: contentAttempt!.trophies!)
+                let trophies = String.getValue(contentAttempt!.trophies!)
                 trophiesCount.text = trophies.elementsEqual("NA") ? "0" : trophies
                 trophiesCount.textColor = trophies.contains("+") ?
                     Colors.getRGB(Colors.MATERIAL_GREEN) : Colors.getRGB(Colors.MATERIAL_RED)
