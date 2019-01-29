@@ -24,6 +24,7 @@
 		25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */; };
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
 		25B0ADD521D615A200C702B9 /* Hippolyte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */; };
+		25D343B22200320E000082AB /* SignUpWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D343B12200320E000082AB /* SignUpWebViewController.swift */; };
 		2F04053020D902530074D80E /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04052F20D902530074D80E /* Direction.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
 		2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */; };
@@ -314,6 +315,7 @@
 		25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewController.swift; sourceTree = "<group>"; };
 		25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerification.swift; sourceTree = "<group>"; };
 		25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hippolyte.framework; path = Carthage/Build/iOS/Hippolyte.framework; sourceTree = "<group>"; };
+		25D343B12200320E000082AB /* SignUpWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWebViewController.swift; sourceTree = "<group>"; };
 		2F04052F20D902530074D80E /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkFoldersDropDownCell.xib; sourceTree = "<group>"; };
 		2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFoldersDropDownCell.swift; sourceTree = "<group>"; };
@@ -865,6 +867,7 @@
 				2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */,
 				250E68F521BA4AA600DA81F1 /* MainViewController.swift */,
 				25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */,
+				25D343B12200320E000082AB /* SignUpWebViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1222,6 +1225,7 @@
 				2FC0F3081F863BA90092BFDC /* QuestionsViewController.swift in Sources */,
 				1825F5FD212E8BF900AC25E5 /* AttemptSection.swift in Sources */,
 				2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */,
+				25D343B22200320E000082AB /* SignUpWebViewController.swift in Sources */,
 				2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */,
 				2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */,
 				2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */,
