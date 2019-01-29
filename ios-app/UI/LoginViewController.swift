@@ -149,10 +149,8 @@ class LoginViewController: BaseTextFieldViewController {
     }
     
     @IBAction func showSignUpView() {
-        let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
-            Constants.SIGNUP_VIEW_CONTROLLER) as! SignUpViewController
-        
-        present(tabViewController, animated: true, completion: nil)
+        let tabViewController = SignUpWebViewController()
+        self.present(tabViewController, animated: true, completion: nil)
     }
     
     @IBAction func showResetPasswordView() {
