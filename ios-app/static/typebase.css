@@ -16,6 +16,11 @@
     src: url('PT_Serif-Web-Regular.ttf');
 }
 
+@font-face {
+    font-family: "symbol";
+    src: url('symbol.ttf');
+}
+
 html {
   /* Change default typefaces here */
   font-family: 'PT-Serif-Regular', serif;
@@ -128,7 +133,7 @@ hr {
 }
 
 .title_separator {
-    width: 200px;
+    width: 220px;
 }
 
 .html_content {

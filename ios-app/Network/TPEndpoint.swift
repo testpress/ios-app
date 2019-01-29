@@ -54,12 +54,25 @@ enum TPEndpoint {
     case getRank
     case getLeaderboard
     case getTargets
-    case getThreads
+    case getThreats
     case resetPassword
+    case getPostCategories
+    case authenticateSocialUser
+    case getAccessCodeExams
+    case examsPath
+    case bookmarks
+    case bookmarkFolders
+    case attemptsPath
+    case commentsPath
+    case instituteSettings
     case get
     case post
     case put
-    
+    case delete
+    case registerDevice
+    case unRegisterDevice
+    case verifyPhoneNumber
+
     var method: Alamofire.HTTPMethod {
         switch self {
         case .authenticateUser:
@@ -100,17 +113,27 @@ enum TPEndpoint {
              .getRank,
              .getLeaderboard,
              .getTargets,
-             .getThreads,
+             .getThreats,
+             .getPostCategories,
+             .getAccessCodeExams,
+             .bookmarks,
+             .bookmarkFolders,
              .getActivityFeed:
             return .get
         case .get:
             return .get
         case .post,
              .resetPassword,
-             .uploadImage:
+             .authenticateSocialUser,
+             .uploadImage,
+             .registerDevice,
+             .unRegisterDevice,
+             .verifyPhoneNumber:
             return .post
         case .put:
             return .put
+        case .delete:
+            return .delete
         default:
             return .get
         }
@@ -121,7 +144,7 @@ enum TPEndpoint {
         case .authenticateUser:
             return "/api/v2.2/auth-token/"
         case .registerNewUser:
-            return "/api/v2.2/register/"
+            return "/api/v2.3/register/"
         case .getExams:
             return "/api/v2.2/exams/"
         case .sendHeartBeat:
@@ -158,10 +181,38 @@ enum TPEndpoint {
             return "/api/v2.2/leaderboard/"
         case .getTargets:
             return "/api/v2.2/me/targets/"
-        case .getThreads:
+        case .getThreats:
             return "/api/v2.2/me/threats/"
         case .resetPassword:
             return "/api/v2.2/password/reset/"
+        case .getPostCategories:
+            return "/api/v2.2/posts/categories/"
+        case .authenticateSocialUser:
+            return "/api/v2.2/social-auth/"
+        case .getAccessCodeExams:
+            return "/api/v2.2/access_codes/"
+        case .examsPath:
+            return "/exams/"
+        case .bookmarks:
+            return "/api/v2.4/bookmarks/"
+        case .bookmarkFolders:
+            return "/api/v2.4/folders/"
+        case .getContents:
+            return "/api/v2.2/contents/"
+        case .attemptsPath:
+            return "/attempts/"
+        case .getQuestions:
+            return "/api/v2.2/questions/"
+        case .commentsPath:
+            return "/comments/"
+        case .instituteSettings:
+            return "/api/v2.3/settings/"
+        case .registerDevice:
+            return "/api/v2.2/devices/register/"
+        case .unRegisterDevice:
+            return "/api/v2.2/devices/unregister/"
+        case .verifyPhoneNumber:
+            return "/api/v2.2/verify/"
         default:
             return ""
         }
@@ -182,19 +233,46 @@ struct TPEndpointProvider {
         self.queryParams = queryParams
     }
     
+    init(_ endpoint: TPEndpoint,
+         urlPath: String,
+         queryParams: [String: String] = [String: String]()) {
+        
+        let url = urlPath.isEmpty ? "" : Constants.BASE_URL + urlPath
+        self.init(endpoint, url: url, queryParams: queryParams)
+    }
+    
     func getUrl() -> String {
         // If the given url is empty, use base url with url path
         var url = self.url.isEmpty ? Constants.BASE_URL + endpoint.urlPath : self.url
         if !queryParams.isEmpty {
             url = url + "?"
             for (i, queryParam) in queryParams.enumerated() {
-                url = url + queryParam.key + "=" + queryParam.value
+                let allowedCharacterSet =
+                    (CharacterSet(charactersIn: "!*'();@&=+$,/?%#[] ").inverted)
+                
+                let value = queryParam.value
+                    .addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)!
+                
+                url = url + queryParam.key + "=" + value
                 if queryParams.count != (i + 1) {
                     url = url + "&"
                 }
             }
         }
         return url
+    }
+    
+    static func getBookmarkPath(bookmarkId: Int) -> String {
+        return TPEndpoint.bookmarks.urlPath + "\(bookmarkId)/"
+    }
+    
+    static func getBookmarkFolderPath(folderId: Int) -> String {
+        return TPEndpoint.bookmarkFolders.urlPath + "\(folderId)/"
+    }
+    
+    static func getCommentsUrl(questionId: Int) -> String {
+        return Constants.BASE_URL + TPEndpoint.getQuestions.urlPath + "\(questionId)"
+            + TPEndpoint.commentsPath.urlPath
     }
     
 }

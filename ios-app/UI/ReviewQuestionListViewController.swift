@@ -26,18 +26,12 @@
 class ReviewQuestionListViewController: BaseQuestionsListViewController {
     
     override func getIndexBorderColor(attemptItem: AttemptItem) -> String {
-        var color: String = Colors.GRAY_LIGHT_DARK
-        if !(attemptItem.selectedAnswers.isEmpty) {
-            color = Colors.MATERIAL_GREEN;
-            // If question is attempted & any of the selected option is incorrect then set red color
-            for attemptAnswer in (attemptItem.question?.answers)! {
-                if attemptItem.selectedAnswers.contains(attemptAnswer.id!) &&
-                    !(attemptAnswer.isCorrect!) {
-                        color = Colors.MATERIAL_RED
-                }
-            }
+        if attemptItem.result == nil || attemptItem.result == AttemptItem.UNANSWERED {
+            return Colors.GRAY_LIGHT_DARK
+        } else if attemptItem.result == AttemptItem.ANSWERED_INCORRECT {
+            return Colors.MATERIAL_RED
         }
-        return color
+        return Colors.MATERIAL_GREEN
     }
     
 }

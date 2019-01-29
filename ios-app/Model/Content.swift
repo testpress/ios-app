@@ -38,10 +38,11 @@ public class Content {
     var attemptsUrl: String!
     var chapterSlug: String!
     var chapterId: Int!
-    var attemptsCount: Int!
+    var attemptsCount: Int = 0
     var exam: Exam?
     var examId: Int!
     var htmlContentId: Int!
+    var htmlObject: HtmlContent!
     var htmlContentTitle: String?
     var htmlContentUrl: String!
     var order: Int!
@@ -52,8 +53,26 @@ public class Content {
     var attachment: Attachment?
     var attachmentId: Int!
     var active: Bool = true
+    var bookmarkId: Int!
     
     public required init?(map: Map) {
+    }
+    
+    public static func fetchContent(url:String, completion: @escaping(Content?, TPError?) -> Void) {
+        TPApiClient.request(
+            type: Content.self,
+            endpointProvider: TPEndpointProvider(.get, url: url),
+            completion: {
+                content, error in
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                } else {
+                    let content: Content = content!
+                    print("Content : \(content)")
+                }
+                completion(content, error)
+        })
     }
 }
 
@@ -75,6 +94,7 @@ extension Content: TestpressModel {
         exam <- map["exam"]
         examId <- map["exam"]
         htmlContentId <- map["html_content"]
+        htmlContentId <- map["html_id"]
         htmlContentTitle <- map["html_content_title"]
         htmlContentUrl <- map["html_content_url"]
         order <- map["order"]
@@ -82,8 +102,11 @@ extension Content: TestpressModel {
         isLocked <- map["is_locked"]
         video <- map["video"]
         videoId <- map["video_content"]
+        videoId <- map["video_id"]
         attachment <- map["attachment"]
         attachmentId <- map["attachment_content"]
+        attachmentId <- map["attachment_id"]
         active <- map["active"]
+        bookmarkId <- map["bookmark_id"]
     }
 }

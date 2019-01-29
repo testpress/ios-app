@@ -26,8 +26,9 @@
 import Foundation
 
 struct Strings {
-    
+
     static let YES = "Yes"
+    static let NO = "No"
     static let OK = "OK"
     static let TRY_AGAIN = "Try Again"
     
@@ -71,11 +72,14 @@ struct Strings {
     
     static let CORRECT_ANSWER = "Correct Answer:"
     static let EXPLANATION = "Explanation:"
+    static let SUBJECT_HEADING = "Subject:"
     static let COMMENTS = "Comments"
     
     static let LOADING_QUESTIONS = "Loading questions"
+    static let LOADING_SECTION_QUESTIONS = "Loading section questions\n\n"
+    
     static let LOADING = "Loading…"
-    static let PLEASE_WAIT = "Please wait..."
+    static let PLEASE_WAIT = "Please wait"
     
     static let AVAILABLE = "AVAILABLE"
     static let UPCOMING = "UPCOMING"
@@ -93,6 +97,7 @@ struct Strings {
     
     static let ENTER_VALID_EMAIL = "Please enter a valid email address"
     static let ENTER_VALID_USERNAME = "Use only alphabets or numbers"
+    static let ENTER_VALID_PHONE_NUMBER = "Please enter valid phone number"
     static let PASSWORD_MUST_HAVE_SIX_CHARACTERS = "Require at least 6 digits"
     static let PASSWORD_NOT_MATCH = "Passwords not matching"
     
@@ -123,12 +128,59 @@ struct Strings {
     static let SETTINGS = "Settings"
     
     static let LEADERBOARD = "LEADERBOARD"
-    static let TARGETS_AND_THREADS = "TARGETS / THREADS"
+    static let TARGETS_AND_THREATS = "TARGETS / THREATS"
     
     static let EXAM_ENDED = "This exam has ended"
     static let CAN_START_EXAM_ONLY_AFTER = "You can attempt this exam only after \n"
     static let SCORE_GOOD_IN_PREVIOUS = "You need to get good score in your previous test to attempt this."
     
     static let RESET_PASSWORD_MAIL_SENT = "We have sent you an email with a link to reset your password.  Please check your email and click the link to continue."
+    
+    static let ARTICLES = "Articles"
+    
+    static let INVALID_ACCESS_CODE = "Invalid Access Code"
+    
+    static let INVALID_FOLDER_NAME = "Folder name not allowed"
+    static let BOOKMARK_MOVED_SUCCESSFULLY = "Bookmark moved successfully"
+    static let BOOKMARK_DELETED_SUCCESSFULLY = "Bookmark deleted successfully"
+    static let ENTER_FOLDER_NAME = "Enter Folder Name"
+    static let RENAME_FOLDER = "Rename Folder"
+    static let FOLDER_UPDATED_SUCCESSFULLY = "Folder updated successfully"
+    static let ARE_YOU_SURE = "Are you sure?"
+    static let WANT_TO_DELETE_FOLDER = "Do you want to delete this folder?"
+    static let FOLDER_DELETED_SUCCESSFULLY = "Folder deleted successfully"
+    static let WANT_TO_DELETE_BOOKMARK = "Do you want to delete this bookmark?"
+    static let CREATE = "Create"
+    static let UDPATE = "Update"
+    static let DELETE = "Delete"
+    
+    static let ALL_BOOKMARKS = "All Bookmarks"
+    static let BOOKMARKS = "Bookmarks"
+    static let NO_BOOKMARKS = "No bookmarks added yet"
+    static let NO_BOOKMARKS_DESCRIPTION = "You can bookmark stuff like Questions, Articles, Videos and Files you see in the courses you’ve opted for."
+    
+    static let BOOKMARK_THIS = "Bookmark this"
+    static let REMOVE_BOOKMARK = "Remove Bookmark"
+    
+    static let EXAM_PAUSED_CHECK_INTERNET = "Exam is paused, Please check your internet connection & resume again."
+    static let EXAM_PAUSED_CHECK_INTERNET_TO_END = "Exam is paused, Please check your internet connection & try again."
+    
+    static let CANNOT_SWITCH_SECTION = "Can\'t Switch Section!"
+    static let CANNOT_SWITCH_IN_FIRST_ATTEMPT = "You can\'t switch sections in the first attempt."
+    static let ALREADY_SUBMITTED = "You have already submitted this section."
+    static let SWITCH_SECTION = "Switch Section?"
+    static let SWITCH_SECTION_MESSAGE = "Are you sure want to move to the next section? You won\'t be able to switch back to this section."
+    static let ATTEMPT_SECTION_IN_ORDER = "You need to attempt sections in order."
+    static let END_SECTION = "End current section"
+    static let ENDING_SECTION = "Ending current section\n\n"
+    static let ENDING_EXAM = "Ending exam\n\n"
+    static let STARTING_SECTION = "Starting next section\n\n"
+    static let SAVING_LAST_CHANGE = "Saving your last change\n\n"
+    
+    static let YOUR_ANSWER = "Your Answer:"
+    static let MARKS_AWARDED = "Marks Awarded:"
+    static let NOTE = "Note:"
+    static let CASE_INSENSITIVE = "Answers are case insensitive"
+    static let CASE_SENSITIVE = "Answers are case sensitive"
     
 }

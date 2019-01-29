@@ -86,6 +86,11 @@ function setCheckboxState(option, check) {
     }
 }
 
+function onValueChange(element) {
+    var message = { "shortText": element.value };
+    webkit.messageHandlers.callbackHandler.postMessage(message);
+}
+
 // Common functions
 
 function getWidget(layout) {

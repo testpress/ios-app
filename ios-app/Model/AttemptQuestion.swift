@@ -28,14 +28,40 @@ import ObjectMapper
 public class AttemptQuestion {
     var id: Int?
     var questionHtml: String?;
-    var subject: String?;
+    var subject: String!
+    var subjectId: Int!
     var direction: String?;
+    var directionId: Int!
     var explanationHtml: String?
     var type: String?;
     var commentsUrl: String!
     var answers: [AttemptAnswer] = [];
+    var answerIds: [Int] = []
+    var translationIds: [Int] = []
+    var isCaseSensitive: Bool!
     
     public required init?(map: Map) {
+    }
+    
+    public init() {
+    }
+    
+    public  func clone() -> AttemptQuestion {
+        let newAttemptItem = AttemptQuestion()
+        newAttemptItem.id = id
+        newAttemptItem.questionHtml = questionHtml
+        newAttemptItem.subject = subject
+        newAttemptItem.subjectId = subjectId
+        newAttemptItem.direction = direction
+        newAttemptItem.directionId = directionId
+        newAttemptItem.explanationHtml = explanationHtml
+        newAttemptItem.type = type
+        newAttemptItem.commentsUrl = commentsUrl
+        newAttemptItem.answers = answers
+        newAttemptItem.answerIds = answerIds
+        newAttemptItem.translationIds = translationIds
+        newAttemptItem.isCaseSensitive = isCaseSensitive
+        return newAttemptItem
     }
 }
 
@@ -44,10 +70,15 @@ extension AttemptQuestion: TestpressModel {
         id <- map["id"]
         questionHtml <- map["question_html"]
         subject <- map["subject"]
+        subjectId <- map["subject_id"]
         direction <- map["direction"]
+        directionId <- map["direction_id"]
         explanationHtml <- map["explanation_html"]
         type <- map["type"]
         commentsUrl <- map["comments_url"]
         answers <- map["answers"]
+        answerIds <- map["answer_ids"]
+        translationIds <- map["translation_ids"]
+        isCaseSensitive <- map["is_case_sensitive"]
     }
 }

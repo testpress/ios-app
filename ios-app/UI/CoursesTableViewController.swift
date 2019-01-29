@@ -29,12 +29,8 @@ import UIKit
 class CoursesTableViewController: BaseDBViewController<Course> {
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(pager: getPager(), coder: aDecoder)
-    }
-    
-    func getPager() -> CoursePager {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
-        return CoursePager()
+        super.init(pager: CoursePager(), coder: aDecoder)
     }
     
     override func getItemsFromDb() -> [Course] {
@@ -63,17 +59,7 @@ class CoursesTableViewController: BaseDBViewController<Course> {
                 let items = Array(items!.values)
                 DBManager<Course>().deleteAllFromDatabase() // Delete previous items
                 DBManager<Course>().addData(objects: items)
-                self.items = self.getItemsFromDb()
-                if self.items.count == 0 {
-                    self.setEmptyText()
-                }
-                self.delegate?.onItemsLoaded()
-                self.tableView.reloadData()
-                if self.activityIndicator.isAnimating {
-                    self.activityIndicator.stopAnimating()
-                }
-                self.tableView.tableFooterView?.isHidden = true
-                self.loadingItems = false
+                self.onLoadFinished(items: self.getItemsFromDb())
             }
         })
     }

@@ -35,14 +35,11 @@ class ExamsTableViewCell: UITableViewCell {
     var parentViewController: UIViewController? = nil
     var exam: Exam?
     var examState: ExamState?
+    var accessCode: String!
     
     func initExamCell(_ exam: Exam, examState: ExamState, viewController: UIViewController){
-        parentViewController = viewController
-        self.exam = exam
+        initCell(exam, viewController: viewController)
         self.examState = examState
-        examName.text = exam.title
-        duration.text = exam.duration
-        noOfQuestions.text = String(exam.numberOfQuestions!)
         
         var actionHandler: Selector
         if examState == ExamState.history {
@@ -54,11 +51,34 @@ class ExamsTableViewCell: UITableViewCell {
         examViewCell.addGestureRecognizer(tapRecognizer)
     }
     
+    func initExamCell(_ exam: Exam, accessCode: String, viewController: UIViewController) {
+        self.accessCode = accessCode
+        initCell(exam, viewController: viewController)
+        
+        var actionHandler: Selector
+        if exam.attemptsCount != 0 {
+            actionHandler = #selector(self.showAttemptsList)
+        } else {
+            actionHandler = #selector(self.showStartExamScreen)
+        }
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: actionHandler)
+        examViewCell.addGestureRecognizer(tapRecognizer)
+    }
+    
+    func initCell(_ exam: Exam, viewController: UIViewController) {
+        parentViewController = viewController
+        self.exam = exam
+        examName.text = exam.title
+        duration.text = exam.duration
+        noOfQuestions.text = String(exam.numberOfQuestions!)
+    }
+    
     @objc func showStartExamScreen() {
         let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.START_EXAM_SCREEN_VIEW_CONTROLLER) as! StartExamScreenViewController
         viewController.exam = self.exam!
+        viewController.accessCode = accessCode
         parentViewController?.showDetailViewController(viewController, sender: self)
     }
     
@@ -67,6 +87,7 @@ class ExamsTableViewCell: UITableViewCell {
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.ATTEMPTS_VIEW_CONTROLLER) as! AttemptsListViewController
         viewController.exam = exam!
+        viewController.accessCode = accessCode
         parentViewController?.showDetailViewController(viewController, sender: self)
     }
     
