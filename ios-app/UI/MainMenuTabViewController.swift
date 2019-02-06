@@ -56,13 +56,14 @@ class MainMenuTabViewController: UITabBarController {
 
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
             let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
-            let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
+            if let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN) {
             let parameters: Parameters = [
                 "device_id": deviceToken!,
-                "registration_id": fcmToken!,
+                "registration_id": fcmToken,
                 "platform": "ios"
             ]
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters,completion: { _, _ in})
         }
+      }
     }
 }
