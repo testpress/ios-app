@@ -26,10 +26,10 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://sandbox.testpress.in";
-    static let APP_APPLE_ID = "dummyid"
+    static let BASE_URL = "https://prime.testpress.in";
+    static let APP_APPLE_ID = "1453324551"
     
-    static let APP_SHARE_MESSAGE = "Good app to prepare for online exams. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID
+    static let APP_SHARE_MESSAGE = "Good app to prepare for AIIMS, AIPGMEE, DNB, JIPMER, PGI and Nepal-PG MCQs. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID
     
     static let APP_STORE_LINK = "itms-apps://itunes.apple.com/app/id" + APP_APPLE_ID
     
