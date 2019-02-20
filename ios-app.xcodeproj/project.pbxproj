@@ -12,6 +12,7 @@
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
 		18F25D29212FDC5300097425 /* LockableSectionDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */; };
 		18F25D2B213000D700097425 /* SectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D2A213000D700097425 /* SectionInfo.swift */; };
+		2507587422198A1E00021F27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2507587322198A1E00021F27 /* LaunchScreen.storyboard */; };
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
@@ -295,6 +296,7 @@
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
 		18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockableSectionDropDownCell.swift; sourceTree = "<group>"; };
 		18F25D2A213000D700097425 /* SectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfo.swift; sourceTree = "<group>"; };
+		2507587322198A1E00021F27 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		250E68F521BA4AA600DA81F1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2519C12D21B0083600D26551 /* InstituteSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstituteSettings.swift; sourceTree = "<group>"; };
 		254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Testpress iOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -642,6 +644,7 @@
 				2F763D091FBEC7260033D495 /* ChapterContent.storyboard */,
 				2F7179521EC740C6009114C4 /* ExamReview.storyboard */,
 				2F26ADE91E8249D70031E6F4 /* Main.storyboard */,
+				2507587322198A1E00021F27 /* LaunchScreen.storyboard */,
 				2F48C8141FD3F6BD009C686C /* Post.storyboard */,
 				2F7179541EC740C6009114C4 /* TestEngine.storyboard */,
 				2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */,
@@ -1101,6 +1104,7 @@
 				2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */,
 				18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */,
 				2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */,
+				2507587422198A1E00021F27 /* LaunchScreen.storyboard in Resources */,
 				2F48C7FB1FCDA957009C686C /* comments.js in Resources */,
 				2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */,
 				2F48C7FD1FCDABDE009C686C /* comments.css in Resources */,

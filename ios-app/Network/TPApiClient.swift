@@ -26,6 +26,7 @@
 import Alamofire
 import Device
 import UIKit
+import FacebookLogin
 
 enum AuthProvider: String {
     case TESTPRESS
@@ -91,6 +92,15 @@ class TPApiClient {
                     if (statusCode == 403) {
                         error = TPError(message: json, response: httpResponse,
                                         kind: .unauthenticated)
+                        if let error_message = UIUtils.jsonToDictionary(text: error.message!) {
+                            if (error_message["detail"] as? String == "Invalid signature") {
+                                // Clear user related tables
+                                DBInstance.clearTables()
+                                // Logout on Facebook
+                                LoginManager().logOut()
+                                KeychainTokenItem.clearKeychainItems()
+                            }
+                        }
                     } else {
                         error = TPError(message: json, response: httpResponse, kind: .http)
                     }
