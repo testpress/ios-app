@@ -24,13 +24,15 @@
 //
 
 import UIKit
+import WebKit
 
 class CourseTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var courseName: UILabel!
     @IBOutlet weak var courseViewCell: UIView!
     @IBOutlet weak var thumbnailImage: UIImageView!
+    @IBOutlet weak var externalLinkButton: UIButton!
     
+    var webView: WKWebView!
     var parentViewController: UIViewController! = nil
     var course: Course!
     
@@ -43,10 +45,23 @@ class CourseTableViewCell: UITableViewCell {
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
+        externalLinkButton.isHidden = true
+        if !course.external_content_link.isEmpty {
+            externalLinkButton.setTitle(course.external_link_label, for: UIControlState.normal)
+            externalLinkButton.isHidden = false
+        }
         
         courseViewCell.addGestureRecognizer(tapRecognizer)
     }
     
+
+    @IBAction func externalLinkButtonClick(_ sender: UIButton) {
+        // This is custom code
+        let tabViewController = SignUpWebViewController()
+        tabViewController.url = course.external_content_link
+        parentViewController.present(tabViewController, animated: true, completion: nil)
+    }
+
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         let viewController: UIViewController
@@ -69,6 +84,16 @@ class CourseTableViewCell: UITableViewCell {
             viewController = contentsNavigationController
         }
         parentViewController.present(viewController, animated: true, completion: nil)
+    }
+    
+    
+    
+    func onFinishLoadingWebView() {
+        
+    }
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        
     }
     
 }

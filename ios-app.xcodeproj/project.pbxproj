@@ -15,6 +15,7 @@
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
+		25597C992232607500A7BD01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25597C982232607500A7BD01 /* LaunchScreen.storyboard */; };
 		2570A23F21CA0D260097C6FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2570A23E21CA0D260097C6FE /* GoogleService-Info.plist */; };
 		2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24021CA0D760097C6FE /* FirebaseInstanceID.framework */; };
 		2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24121CA0D760097C6FE /* FirebaseCore.framework */; };
@@ -25,6 +26,7 @@
 		25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */; };
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
 		25B0ADD521D615A200C702B9 /* Hippolyte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */; };
+		25C9821322323621005A6760 /* SignUpWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C9821222323621005A6760 /* SignUpWebViewController.swift */; };
 		2F04053020D902530074D80E /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04052F20D902530074D80E /* Direction.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
 		2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */; };
@@ -300,6 +302,7 @@
 		254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Testpress iOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testpress_iOS_AppUITests.swift; sourceTree = "<group>"; };
 		254E69C521DCF199009A4E61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25597C982232607500A7BD01 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		256EF50721CA15A200C743F0 /* ios-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-app.entitlements"; sourceTree = "<group>"; };
 		2570A23E21CA0D260097C6FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2570A24021CA0D760097C6FE /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Carthage/Build/iOS/FirebaseInstanceID.framework; sourceTree = "<group>"; };
@@ -315,6 +318,7 @@
 		25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewController.swift; sourceTree = "<group>"; };
 		25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerification.swift; sourceTree = "<group>"; };
 		25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hippolyte.framework; path = Carthage/Build/iOS/Hippolyte.framework; sourceTree = "<group>"; };
+		25C9821222323621005A6760 /* SignUpWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWebViewController.swift; sourceTree = "<group>"; };
 		2F04052F20D902530074D80E /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkFoldersDropDownCell.xib; sourceTree = "<group>"; };
 		2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFoldersDropDownCell.swift; sourceTree = "<group>"; };
@@ -641,6 +645,7 @@
 				2FDF9C5A20B6F6C50086245F /* Bookmarks.storyboard */,
 				2F763D091FBEC7260033D495 /* ChapterContent.storyboard */,
 				2F7179521EC740C6009114C4 /* ExamReview.storyboard */,
+				25597C982232607500A7BD01 /* LaunchScreen.storyboard */,
 				2F26ADE91E8249D70031E6F4 /* Main.storyboard */,
 				2F48C8141FD3F6BD009C686C /* Post.storyboard */,
 				2F7179541EC740C6009114C4 /* TestEngine.storyboard */,
@@ -867,6 +872,7 @@
 				2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */,
 				250E68F521BA4AA600DA81F1 /* MainViewController.swift */,
 				25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */,
+				25C9821222323621005A6760 /* SignUpWebViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1100,6 +1106,7 @@
 				2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */,
 				18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */,
 				2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */,
+				25597C992232607500A7BD01 /* LaunchScreen.storyboard in Resources */,
 				2F48C7FB1FCDA957009C686C /* comments.js in Resources */,
 				2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */,
 				2F48C7FD1FCDABDE009C686C /* comments.css in Resources */,
@@ -1224,6 +1231,7 @@
 				2FC0F3081F863BA90092BFDC /* QuestionsViewController.swift in Sources */,
 				1825F5FD212E8BF900AC25E5 /* AttemptSection.swift in Sources */,
 				2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */,
+				25C9821322323621005A6760 /* SignUpWebViewController.swift in Sources */,
 				2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */,
 				2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */,
 				2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */,
@@ -1608,7 +1616,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "in.testpress.ios-app";
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.ssgrbcc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -1635,7 +1643,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "in.testpress.ios-app";
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.ssgrbcc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
