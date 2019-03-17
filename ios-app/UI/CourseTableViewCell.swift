@@ -30,7 +30,7 @@ class CourseTableViewCell: UITableViewCell {
     @IBOutlet weak var courseName: UILabel!
     @IBOutlet weak var courseViewCell: UIView!
     @IBOutlet weak var thumbnailImage: UIImageView!
-    @IBOutlet weak var externalLinkButton: UIButton!
+    @IBOutlet weak var external_link_label: UILabel!
     
     var webView: WKWebView!
     var parentViewController: UIViewController! = nil
@@ -45,10 +45,11 @@ class CourseTableViewCell: UITableViewCell {
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
-        externalLinkButton.isHidden = true
+        external_link_label.isHidden = true
         if !course.external_content_link.isEmpty {
-            externalLinkButton.setTitle(course.external_link_label, for: UIControlState.normal)
-            externalLinkButton.isHidden = false
+            external_link_label.text = course.external_link_label
+            external_link_label.isHidden = false
+            external_link_label.textColor = Colors.getRGB(Colors.PRIMARY)
         }
         
         courseViewCell.addGestureRecognizer(tapRecognizer)
@@ -65,6 +66,11 @@ class CourseTableViewCell: UITableViewCell {
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         let viewController: UIViewController
+        if !course.external_content_link.isEmpty {
+            let tabViewController = SignUpWebViewController()
+            tabViewController.url = course.external_content_link
+            parentViewController.present(tabViewController, animated: true, completion: nil)
+        } else {
         if course.chaptersCount > 0 {
             let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
@@ -84,6 +90,7 @@ class CourseTableViewCell: UITableViewCell {
             viewController = contentsNavigationController
         }
         parentViewController.present(viewController, animated: true, completion: nil)
+        }
     }
     
     

@@ -1288,7 +1288,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qu2-u5-K7k">
-                                                    <rect key="frame" x="74" y="27.5" width="226" height="49"/>
+                                                    <rect key="frame" x="74" y="42.5" width="226" height="19"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6c-dG-tJf">
                                                             <rect key="frame" x="0.0" y="0.0" width="226" height="19"/>
@@ -1296,33 +1296,17 @@
                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="huZ-30-eeJ">
-                                                            <rect key="frame" x="0.0" y="19" width="226" height="30"/>
-                                                            <subviews>
-                                                                <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SrE-Q8-8XN">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="186" height="30"/>
-                                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="12"/>
-                                                                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                            <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                            <real key="value" value="1"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="0.0"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                    <connections>
-                                                                        <action selector="externalLinkButtonClick:" destination="TsT-u2-wcV" eventType="touchUpInside" id="v58-rY-bFs"/>
-                                                                    </connections>
-                                                                </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3I-FZ-sTC">
-                                                                    <rect key="frame" x="196" y="0.0" width="30" height="30"/>
-                                                                </button>
-                                                            </subviews>
-                                                        </stackView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdg-0c-6LY">
+                                                            <rect key="frame" x="0.0" y="19" width="226" height="0.0"/>
+                                                            <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
+                                                            <color key="textColor" red="0.45882352939999999" green="0.70196078429999997" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                    <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -1341,7 +1325,7 @@
                                 <connections>
                                     <outlet property="courseName" destination="P6c-dG-tJf" id="5yR-ds-mK3"/>
                                     <outlet property="courseViewCell" destination="rUM-am-RGd" id="Gmv-t3-ag4"/>
-                                    <outlet property="externalLinkButton" destination="SrE-Q8-8XN" id="Zkl-0Z-l6j"/>
+                                    <outlet property="external_link_label" destination="Zdg-0c-6LY" id="4dX-jq-Kx3"/>
                                     <outlet property="thumbnailImage" destination="gsk-oW-mDZ" id="HEo-eh-jTj"/>
                                 </connections>
                             </tableViewCell>

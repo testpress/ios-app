@@ -52,9 +52,10 @@ class LoginViewController: BaseTextFieldViewController {
         signUpLayout.isHidden = true
         socialLoginLayout.isHidden = true
 
-        if(instituteSettings.allowSignup) {
-            signUpLayout.isHidden = false
-        }
+//        Disabled SignUp for SSGRBCC, since SSGRBCC collects more information about student(e.g Aadhar details etc., ) apple review team rejected app as those details weren't used inside the app.
+//        if(instituteSettings.allowSignup) {
+//            signUpLayout.isHidden = false
+//        }
 
         let fbLoginButton = LoginButton(readPermissions:
             [ .publicProfile, .email, .userBirthday, .userLocation ])
