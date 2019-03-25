@@ -72,6 +72,8 @@ enum TPEndpoint {
     case registerDevice
     case unRegisterDevice
     case verifyPhoneNumber
+    case getSSOUrl
+    case checkPermission
 
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -118,7 +120,8 @@ enum TPEndpoint {
              .getAccessCodeExams,
              .bookmarks,
              .bookmarkFolders,
-             .getActivityFeed:
+             .getActivityFeed,
+             .checkPermission:
             return .get
         case .get:
             return .get
@@ -128,7 +131,8 @@ enum TPEndpoint {
              .uploadImage,
              .registerDevice,
              .unRegisterDevice,
-             .verifyPhoneNumber:
+             .verifyPhoneNumber,
+             .getSSOUrl:
             return .post
         case .put:
             return .put
@@ -213,6 +217,10 @@ enum TPEndpoint {
             return "/api/v2.2/devices/unregister/"
         case .verifyPhoneNumber:
             return "/api/v2.2/verify/"
+        case .getSSOUrl:
+            return "/api/v2.3/presigned_sso_url/"
+        case .checkPermission:
+            return "/api/v2.3/me/check_permission/"
         default:
             return ""
         }
