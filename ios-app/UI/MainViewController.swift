@@ -30,6 +30,43 @@ class MainViewController: UIViewController {
         self.fetchInstitueSettings()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if !InstituteSettings.isAvailable() {
+            self.fetchInstitueSettings()
+        } else {
+            UIUtils.fetchInstituteSettings(completion:{ _,_  in })
+            self.showView()
+            self.checkPermissions()
+        }
+    }
+    
+    func showView() {
+        self.activityIndicator.stopAnimating()
+        let viewController = UIUtils.getLoginOrTabViewController()
+        present(viewController, animated: false, completion: nil)
+    }
+    
+    func checkPermissions() {
+        let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        if instituteSettings.forceStudentData {
+            TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.checkPermission),completion: {
+                json, error in
+                var checkPermission: CheckPermission? = nil
+                if let json = json {
+                    checkPermission = TPModelMapper<CheckPermission>().mapFromJSON(json: json)
+                    if (checkPermission != nil) {
+                        if !((checkPermission?.is_data_collected)!) {
+                            let viewController = WebViewController()
+                            viewController.url = "&next=/settings/force/mobile"
+                            viewController.use_sso_login = true
+                            UIApplication.topViewController()?.present(viewController, animated: true, completion: nil)
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
     func fetchInstitueSettings() {
         activityIndicator.startAnimating()
 
@@ -54,8 +91,7 @@ class MainViewController: UIViewController {
                                         retryButtonText: retryButtonText, retryHandler: retryHandler)
                 } else {
                     self.activityIndicator.stopAnimating()
-                    let viewController = UIUtils.getLoginOrTabViewController()
-                    self.present(viewController, animated: false, completion: nil)
+                    self.showView()
                 }
                 
         })

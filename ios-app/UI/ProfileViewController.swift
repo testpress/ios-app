@@ -43,6 +43,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var speed: UILabel!
     @IBOutlet weak var accuracy: UILabel!
     @IBOutlet weak var bookmarkButtonLayout: UIStackView!
+    @IBOutlet weak var editProfileButton: UIButton!
     
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var emptyView: EmptyView!
@@ -54,7 +55,14 @@ class ProfileViewController: UIViewController {
         emptyView = EmptyView.getInstance(parentView: contentStackView)
         emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
+        UIUtils.setButtonDropShadow(editProfileButton)
         bookmarkButtonLayout.isHidden = !Constants.BOOKMARKS_ENABLED
+        let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        
+        if(!instituteSettings.allowProfileEdit) {
+            editProfileButton.isHidden = false
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -161,6 +169,13 @@ class ProfileViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    @IBAction func editProfile(_ sender: Any) {
+        let viewController = WebViewController()
+        viewController.url = "&next=/settings/profile/mobile"
+        viewController.use_sso_login = true
+        self.present(viewController, animated: true, completion: nil)
+    }
+
     @IBAction func showBookmarks() {
         let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: nil)
         let navigationController = storyboard.instantiateViewController(withIdentifier:

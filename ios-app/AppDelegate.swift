@@ -104,16 +104,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
             userDefaults.synchronize() // Forces the app to update UserDefaults
         }
-        let config = Realm.Configuration(schemaVersion: 1)
+        let config = Realm.Configuration(schemaVersion: 2)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
-        
-        if (!InstituteSettings.isAvailable()) {
-            viewController = MainViewController()
-        } else {
-            UIUtils.fetchInstituteSettings(completion:{ _,_  in })
-            viewController = UIUtils.getLoginOrTabViewController()
-        }
+        viewController = MainViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
