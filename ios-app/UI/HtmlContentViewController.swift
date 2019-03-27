@@ -25,6 +25,9 @@
 
 import UIKit
 import WebKit
+import AVFoundation
+import AVKit
+
 
 class HtmlContentViewController: BaseWebViewController {
     
@@ -42,6 +45,10 @@ class HtmlContentViewController: BaseWebViewController {
         checkContentType()
     }
     
+    @objc func buttonAction(sender: UIButton!) {
+        self.playVideo(url: content.video!.url)
+    }
+    
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
@@ -50,6 +57,15 @@ class HtmlContentViewController: BaseWebViewController {
         config.preferences.javaScriptEnabled = true
         
         webView = WKWebView( frame: parentView.bounds, configuration: config)
+        let button = UIButton(frame: CGRect(x: webView.scrollView.center.x-50, y: webView.scrollView.center.y, width: 110, height: 50))
+        button.backgroundColor = Colors.getRGB(Colors.PRIMARY)
+        button.setTitle("Play Video", for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        webView.scrollView.addSubview(button)
+        
+        if content.video!.url == nil {
+            button.isHidden = true
+        }
     }
     
     func checkContentType() {
@@ -120,6 +136,17 @@ class HtmlContentViewController: BaseWebViewController {
             getFormattedContent(videoContentHtml),
             baseURL: Bundle.main.bundleURL
         )
+    }
+    
+    private func playVideo(url: String) {
+        let video_url = URL(string: url)
+        let player = AVPlayer(url: video_url!)
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+        self.present(playerController, animated: true) {
+            player.play()
+        }
     }
     
     func createContentAttempt() {
