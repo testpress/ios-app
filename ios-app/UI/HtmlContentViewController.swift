@@ -57,21 +57,19 @@ class HtmlContentViewController: BaseWebViewController {
         config.preferences.javaScriptEnabled = true
         
         webView = WKWebView( frame: parentView.bounds, configuration: config)
-        let button = UIButton(frame: CGRect(x: webView.scrollView.center.x-50, y: webView.scrollView.center.y, width: 110, height: 50))
-        button.backgroundColor = Colors.getRGB(Colors.PRIMARY)
-        button.setTitle("Play Video", for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        webView.scrollView.addSubview(button)
-        
-        if content.video!.url == nil {
-            button.isHidden = true
-        }
     }
     
     func checkContentType() {
         if content.htmlContentTitle != nil {
             loadHTMLContent()
         } else if content.video != nil {
+            if content.video!.url != nil {
+                let button = UIButton(frame: CGRect(x: webView.scrollView.center.x-50, y: webView.scrollView.center.y, width: 110, height: 50))
+                button.backgroundColor = Colors.getRGB(Colors.PRIMARY)
+                button.setTitle("Play Video", for: .normal)
+                button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+                webView.scrollView.addSubview(button)
+            }
             displayVideoContent()
         }
     }
