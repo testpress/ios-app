@@ -30,6 +30,7 @@ class CourseTableViewCell: UITableViewCell {
     @IBOutlet weak var courseName: UILabel!
     @IBOutlet weak var courseViewCell: UIView!
     @IBOutlet weak var thumbnailImage: UIImageView!
+    @IBOutlet weak var externalLinkLabel: UILabel!
     
     var parentViewController: UIViewController! = nil
     var course: Course!
@@ -45,30 +46,44 @@ class CourseTableViewCell: UITableViewCell {
                                                    action: #selector(self.onItemClick))
         
         courseViewCell.addGestureRecognizer(tapRecognizer)
+
+        externalLinkLabel.isHidden = true
+        if !course.external_content_link.isEmpty {
+            externalLinkLabel.text = course.external_link_label
+            externalLinkLabel.isHidden = false
+            externalLinkLabel.textColor = Colors.getRGB(Colors.PRIMARY)
+        }
     }
     
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         let viewController: UIViewController
-        if course.chaptersCount > 0 {
-            let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
-            
-            chaptersViewController.coursesUrl = course.url
-            chaptersViewController.title = course.title
-            viewController = chaptersViewController
+        if !course.external_content_link.isEmpty {
+            let webViewController = WebViewController()
+            webViewController.url = course.external_content_link
+            webViewController.title = course.title
+            parentViewController.present(webViewController, animated: true, completion: nil)
         } else {
-            let contentsNavigationController = storyboard.instantiateViewController(withIdentifier:
-                Constants.CONTENTS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
-            
-            let contentViewController = contentsNavigationController.viewControllers.first
-                as! ContentsTableViewController
-            
-            contentViewController.contentsUrl = course.contentsUrl
-            contentViewController.title = course.title
-            viewController = contentsNavigationController
+            if course.chaptersCount > 0 {
+                let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
+                
+                chaptersViewController.coursesUrl = course.url
+                chaptersViewController.title = course.title
+                viewController = chaptersViewController
+            } else {
+                let contentsNavigationController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.CONTENTS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
+                
+                let contentViewController = contentsNavigationController.viewControllers.first
+                    as! ContentsTableViewController
+                
+                contentViewController.contentsUrl = course.contentsUrl
+                contentViewController.title = course.title
+                viewController = contentsNavigationController
+            }
+            parentViewController.present(viewController, animated: true, completion: nil)
         }
-        parentViewController.present(viewController, animated: true, completion: nil)
     }
     
 }

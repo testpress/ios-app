@@ -1287,12 +1287,23 @@
                                                         <constraint firstAttribute="width" constant="64" id="lgd-q4-xhQ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6c-dG-tJf">
-                                                    <rect key="frame" x="74" y="42.5" width="226" height="19"/>
-                                                    <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
-                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="srX-Sy-VLl">
+                                                    <rect key="frame" x="74" y="35.5" width="226" height="33.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6c-dG-tJf">
+                                                            <rect key="frame" x="0.0" y="0.0" width="226" height="19"/>
+                                                            <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
+                                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gM-gw-FQa">
+                                                            <rect key="frame" x="0.0" y="19" width="226" height="14.5"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="gsk-oW-mDZ" firstAttribute="top" secondItem="l3v-G2-DBl" secondAttribute="top" constant="20" id="tcs-EP-W4t"/>
@@ -1309,6 +1320,7 @@
                                 <connections>
                                     <outlet property="courseName" destination="P6c-dG-tJf" id="5yR-ds-mK3"/>
                                     <outlet property="courseViewCell" destination="rUM-am-RGd" id="Gmv-t3-ag4"/>
+                                    <outlet property="externalLinkLabel" destination="4gM-gw-FQa" id="I3l-Yz-RcC"/>
                                     <outlet property="thumbnailImage" destination="gsk-oW-mDZ" id="HEo-eh-jTj"/>
                                 </connections>
                             </tableViewCell>
