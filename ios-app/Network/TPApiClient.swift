@@ -165,10 +165,9 @@ class TPApiClient {
     }
     
     static func getUserAgent() -> String {
+        // Testpress iOS App/1.17.0.1 iPhone8,4, iOS/12_1_4 CFNetwork
         let device = UIDevice.current
-        // Testpress iOS App/1.0.1 (iPhone; iPhoneSE OS 10_3_1)
-        return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) (iPhone; \(device.deviceType) "
-            + "OS \(device.systemVersion.replacingOccurrences(of: ".", with: "_")))"
+        return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) \(device.modelName), iOS/\(device.systemVersion.replacingOccurrences(of: ".", with: "_")) CFNetwork"
     }
     
     static func getListItems<T> (endpointProvider: TPEndpointProvider,
@@ -249,15 +248,15 @@ class TPApiClient {
         apiCall(endpointProvider: TPEndpointProvider(endpoint), parameters: parameters,
                 completion: { json, error in
                     
-            var testpressAuthToken: TPAuthToken? = nil
-            if let json = json {
-                testpressAuthToken = TPModelMapper<TPAuthToken>().mapFromJSON(json: json)
-                guard testpressAuthToken != nil else {
-                    completion(nil, TPError(message: json, kind: .unexpected))
-                    return
-                }
-            }
-            completion(testpressAuthToken, error)
+                    var testpressAuthToken: TPAuthToken? = nil
+                    if let json = json {
+                        testpressAuthToken = TPModelMapper<TPAuthToken>().mapFromJSON(json: json)
+                        guard testpressAuthToken != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(testpressAuthToken, error)
         })
     }
     
@@ -448,5 +447,18 @@ extension Dictionary {
         for (key,value) in other {
             self.updateValue(value, forKey:key)
         }
+    }
+}
+
+extension UIDevice {
+    var modelName: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        return identifier
     }
 }

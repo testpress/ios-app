@@ -37,6 +37,7 @@ public class TPError: Error {
         unauthenticated,
         /// A non-200 HTTP status code was received from the server.
         http,
+        custom,
         /// All other errors
         unexpected
     }
@@ -49,6 +50,9 @@ public class TPError: Error {
     
     public var response: HTTPURLResponse?
     
+    public var error_detail: String?
+    public var error_code: String?
+    
     /// Identifies the event kind which triggered this error
     public var kind: Kind
     
@@ -57,6 +61,13 @@ public class TPError: Error {
         self.message = message
         self.response = response
         self.kind = kind
+
+        if let error_detail = self.getErrorBodyAs(type: ApiError.self) {
+            self.kind = Kind.custom
+            self.error_detail = error_detail.detail
+            self.error_code = error_detail.error_code
+        }
+        
     }
     
     public func isNetworkError() -> Bool {
@@ -79,10 +90,36 @@ public class TPError: Error {
                     Strings.PLEASE_CHECK_INTERNET_CONNECTION)
             
         case .unauthenticated:
-            return (Images.TestpressAlertWarning.image,
+            return (Images.TestpressAlertWarning.image, 
                     Strings.AUTHENTICATION_FAILED,
                     Strings.PLEASE_LOGIN)
-            
+        case .custom:
+            if self.error_code == Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE || self.error_code == Constants.MAX_LOGIN_LIMIT_EXCEEDED{
+                var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+                if let navigationController = rootViewController as? UINavigationController {
+                    rootViewController = navigationController.viewControllers.first
+                }
+                if let tabBarController = rootViewController as? UITabBarController {
+                    rootViewController = tabBarController.selectedViewController
+                }
+                let alert = UIAlertController(title: Strings.LOADING_FAILED,
+                                              message: self.error_detail,
+                                              preferredStyle: UIUtils.getActionSheetStyle())
+                alert.addAction(UIAlertAction(
+                    title: Strings.OK,
+                    style: UIAlertActionStyle.destructive,
+                    handler: { action in
+                        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+                        let tabViewController = storyboard.instantiateViewController(
+                            withIdentifier: Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER)
+                        rootViewController!.present(tabViewController, animated: true, completion: nil)
+                }))
+                alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
+                rootViewController!.present(alert, animated: true)
+            }
+            return (Images.TestpressAlertWarning.image,
+                    Strings.LOADING_FAILED,
+                    self.error_detail ?? Strings.SOMETHIGN_WENT_WRONG)
         default:
             return (Images.TestpressAlertWarning.image,
                     Strings.LOADING_FAILED,
