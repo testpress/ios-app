@@ -33,8 +33,10 @@ public class AttemptSection {
     var startUrl: String!
     var endUrl: String!
     var remainingTime: String!
-    var info: SectionInfo!
     var attemptId: Int!
+    var name: String!
+    var duration: String!
+    var order: Int!
     
     public required init?(map: Map) {
     }
@@ -49,7 +51,9 @@ extension AttemptSection: TestpressModel {
         startUrl <- map["start_url"]
         endUrl <- map["end_url"]
         remainingTime <- map["remaining_time"]
-        info <- map["info"]
         attemptId <- map["attempt_id"]
+        name <- map["name"]
+        duration <- map["duration"]
+        order <- map["order"]
     }
 }

@@ -69,7 +69,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 if sections[i].state == Attempt.RUNNING {
                     currentSection = i
                 }
-                if sections[i].info.duration == nil || sections[i].info.duration == "0:00:00" {
+                if sections[i].duration == nil || sections[i].duration == "0:00:00" {
                     unlockedSectionExam = true;
                 }
             }
@@ -90,7 +90,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 cell.initCell(index: index, sectionName: item, selectedItem: selectedItemIndex!)
             }
             for section in sections {
-                plainDropDown.items.append(section.info.name)
+                plainDropDown.items.append(section.name)
             }
             plainDropDown.addItems(items: plainDropDown.items)
             plainDropDown.setCurrentItem(index: currentSection)
@@ -212,7 +212,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             var currentSpinnerItem: String
             let currentAttemptItem = attemptItems[getCurrentIndex()]
             if unlockedSectionExam {
-                currentSpinnerItem = currentAttemptItem.attemptSection.info.name
+                currentSpinnerItem = currentAttemptItem.attemptSection.name
             } else {
                 currentSpinnerItem = currentAttemptItem.question.subject
             }
@@ -565,7 +565,7 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
             var groupedAttemptItems = OrderedDictionary<String, [AttemptItem]>()
             for attemptItem in attemptItems {
                 if unlockedSectionExam {
-                    let section = attemptItem.attemptSection.info.name!
+                    let section = attemptItem.attemptSection.name!
                     groupAttemptItems(
                         spinnerItem: section,
                         attemptItem: attemptItem,
