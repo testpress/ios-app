@@ -246,6 +246,8 @@
 		2FEDFF5A206CE7560002CF04 /* CategoryPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF59206CE7560002CF04 /* CategoryPager.swift */; };
 		2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */; };
 		2FF024212004CECA00E0047D /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF024202004CECA00E0047D /* BaseDBViewController.swift */; };
+		8C04228F22AA3FD40015269B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04228E22AA3FD40015269B /* WebViewController.swift */; };
+		8C04229122AA77C90015269B /* TestCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04229022AA77C90015269B /* TestCourseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -541,6 +543,8 @@
 		2FEDFF59206CE7560002CF04 /* CategoryPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPager.swift; sourceTree = "<group>"; };
 		2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostTableViewController.swift; sourceTree = "<group>"; };
 		2FF024202004CECA00E0047D /* BaseDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBViewController.swift; sourceTree = "<group>"; };
+		8C04228E22AA3FD40015269B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		8C04229022AA77C90015269B /* TestCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCourseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -657,6 +661,7 @@
 				25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */,
 				2F26ADFA1E8249D70031E6F4 /* PushNotificationsTest.swift */,
 				2F26ADFC1E8249D70031E6F4 /* Info.plist */,
+				8C04229022AA77C90015269B /* TestCourseViewController.swift */,
 			);
 			path = "ios-appTests";
 			sourceTree = "<group>";
@@ -867,6 +872,7 @@
 				2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */,
 				250E68F521BA4AA600DA81F1 /* MainViewController.swift */,
 				25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */,
+				8C04228E22AA3FD40015269B /* WebViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1212,6 +1218,7 @@
 				2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */,
 				2FEDFF5A206CE7560002CF04 /* CategoryPager.swift in Sources */,
 				2FC0F2E51F863AE00092BFDC /* TPAuthToken.swift in Sources */,
+				8C04228F22AA3FD40015269B /* WebViewController.swift in Sources */,
 				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,
 				2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */,
 				2FC0F3091F863BA90092BFDC /* ReviewQuestionsDataSource.swift in Sources */,
@@ -1370,6 +1377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C04229122AA77C90015269B /* TestCourseViewController.swift in Sources */,
 				2F26ADFB1E8249D70031E6F4 /* PushNotificationsTest.swift in Sources */,
 				25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */,
 			);
