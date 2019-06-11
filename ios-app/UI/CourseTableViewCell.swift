@@ -49,9 +49,30 @@ class CourseTableViewCell: UITableViewCell {
 
         externalLinkLabel.isHidden = true
         if !course.external_content_link.isEmpty {
-            externalLinkLabel.text = course.external_link_label
-            externalLinkLabel.isHidden = false
-            externalLinkLabel.textColor = Colors.getRGB(Colors.PRIMARY)
+            displayExternalLabel()
+        }
+    }
+    
+    func displayExternalLabel() {
+        externalLinkLabel.text = course.external_link_label
+        externalLinkLabel.sizeToFit()
+        externalLinkLabel.frame.size.width = externalLinkLabel.intrinsicContentSize.width + 10
+        externalLinkLabel.frame.size.height = externalLinkLabel.intrinsicContentSize.height + 10
+        externalLinkLabel.textAlignment = .center
+        externalLinkLabel.isHidden = false
+        externalLinkLabel.layer.borderWidth = 1.0
+        externalLinkLabel.layer.cornerRadius = 2
+        externalLinkLabel.layer.borderColor = Colors.getRGB(Colors.PRIMARY).cgColor
+        externalLinkLabel.textColor = Colors.getRGB(Colors.PRIMARY)
+    }
+    
+    override func layoutSubviews() {
+        /*
+         In case of device rotation, external link label should be redrawn.
+         */
+        super.layoutSubviews()
+        if !course.external_content_link.isEmpty {
+            displayExternalLabel()
         }
     }
     
