@@ -43,7 +43,9 @@ class Course: DBModel {
     @objc dynamic var contentsCount = 0
     @objc dynamic var order = 0
     @objc dynamic var active = true
-    
+    @objc dynamic var external_content_link: String = ""
+    @objc dynamic var external_link_label: String = ""
+
     public override func mapping(map: Map) {
         url <- map["url"]
         id <- map["id"]
@@ -59,6 +61,8 @@ class Course: DBModel {
         contentsCount <- map["contents_count"]
         order <- map["order"]
         active <- map["active"]
+        external_content_link <- map["external_content_link"]
+        external_link_label <- map["external_link_label"]
     }
     
     override public static func primaryKey() -> String? {
