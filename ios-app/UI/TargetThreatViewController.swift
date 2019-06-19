@@ -1,5 +1,5 @@
 //
-//  TargetThreadViewController.swift
+//  TargetThreatViewController.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -27,7 +27,7 @@ import ObjectMapper
 import UIKit
 import XLPagerTabStrip
 
-class TargetThreadViewController: BaseTableViewController<Reputation>, BaseTableViewDelegate,
+class TargetThreatViewController: BaseTableViewController<Reputation>, BaseTableViewDelegate,
     IndicatorInfoProvider {
     
     var userReputation: Reputation?
@@ -66,15 +66,15 @@ class TargetThreadViewController: BaseTableViewController<Reputation>, BaseTable
                     self.items.append(self.userReputation!)
                     self.startingRank = self.userReputation!.rank - items.count
                 }
-                self.loadThreads()
+                self.loadThreats()
             },
             type: Reputation.self
         )
     }
     
-    func loadThreads() {
+    func loadThreats() {
         TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(.getThreads),
+            endpointProvider: TPEndpointProvider(.getThreats),
             completion: { response, error in
                 if let error = error {
                     debugPrint(error.message ?? "No error")
@@ -105,7 +105,7 @@ class TargetThreadViewController: BaseTableViewController<Reputation>, BaseTable
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: Strings.TARGETS_AND_THREADS)
+        return IndicatorInfo(title: Strings.TARGETS_AND_THREATS)
     }
 
 }

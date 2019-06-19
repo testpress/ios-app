@@ -123,7 +123,7 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
         switch contentTypes[bookmark.contentTypeId]!.model {
         case "userselectedanswer":
             let reviewItem = reviewItems[bookmark.objectId]!
-            reviewItem.question = questions[reviewItem.questionId]
+            reviewItem.question = questions[reviewItem.questionId]!.clone()
             for answerId in reviewItem.question.answerIds {
                 reviewItem.question.answers.append(answers[answerId]!)
             }

@@ -27,6 +27,10 @@ import ObjectMapper
 
 public class AttemptItem {
     
+    public static let ANSWERED_CORRECT = "Correct"
+    public static let ANSWERED_INCORRECT = "Incorrect"
+    public static let UNANSWERED = "Unanswered"
+    
     var id: Int!
     var url: String?;
     var question: AttemptQuestion!;
@@ -36,26 +40,30 @@ public class AttemptItem {
     }
     var index: Int!
     var currentReview: Bool!
-    var selectedAnswers: [Int] = [];
-    var savedAnswers: [Int]!;
+    var selectedAnswers: [Int] = []
+    var savedAnswers: [Int] = []
     var order: Int?
     var commentsCount: Int!
     var duration: Float!
     var bestDuration: Float!
     var averageDuration: Float!
     var bookmarkId: Int!
+    var attemptSection: AttemptSection!
+    var shortText: String?
+    var currentShortText: String!
+    var marks: String?
+    var result: String!
     
     public required init?(map: Map) {
     }
     
     public func hasChanged() -> Bool {
-        if savedAnswers == nil {
-            savedAnswers = []
-        }
         if currentReview == nil {
             currentReview = false
         }
-        return savedAnswers != selectedAnswers || currentReview != review;
+        return savedAnswers != selectedAnswers || currentReview != review ||
+            (shortText != nil && shortText != currentShortText) ||
+            (shortText == nil && currentShortText != nil && !currentShortText.isEmpty)
     }
 
 }
@@ -78,5 +86,9 @@ extension AttemptItem: TestpressModel {
         bestDuration <- map["best_duration"]
         averageDuration <- map["average_duration"]
         bookmarkId <- map["bookmark_id"]
+        attemptSection <- map["attempt_section"]
+        shortText <- map["short_text"]
+        marks <- map["marks"]
+        result <- map["result"]
     }
 }

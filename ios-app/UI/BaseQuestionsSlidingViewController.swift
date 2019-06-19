@@ -41,6 +41,7 @@ class BaseQuestionsSlidingViewController: SlideMenuController {
     
     var exam: Exam!
     var attempt: Attempt!
+    var courseContent: Content!
     var contentAttempt: ContentAttempt!
     var slidingMenuDelegate: SlidingMenuDelegate!
     var questionsSlidingMenuDelegate: QuestionsSlidingMenuDelegate!
@@ -65,6 +66,7 @@ class BaseQuestionsSlidingViewController: SlideMenuController {
         let questionsPageViewController = mainViewController as! BaseQuestionsPageViewController
         questionsPageViewController.attempt = attempt
         questionsPageViewController.exam = exam
+        questionsPageViewController.courseContent = courseContent
         questionsPageViewController.contentAttempt = contentAttempt
         questionsPageViewController.parentviewController = self
     }

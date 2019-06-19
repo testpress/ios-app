@@ -38,7 +38,7 @@ public class Content {
     var attemptsUrl: String!
     var chapterSlug: String!
     var chapterId: Int!
-    var attemptsCount: Int!
+    var attemptsCount: Int = 0
     var exam: Exam?
     var examId: Int!
     var htmlContentId: Int!
@@ -56,6 +56,23 @@ public class Content {
     var bookmarkId: Int!
     
     public required init?(map: Map) {
+    }
+    
+    public static func fetchContent(url:String, completion: @escaping(Content?, TPError?) -> Void) {
+        TPApiClient.request(
+            type: Content.self,
+            endpointProvider: TPEndpointProvider(.get, url: url),
+            completion: {
+                content, error in
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                } else {
+                    let content: Content = content!
+                    print("Content : \(content)")
+                }
+                completion(content, error)
+        })
     }
 }
 

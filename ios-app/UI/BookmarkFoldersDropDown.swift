@@ -49,7 +49,6 @@ class BookmarkFoldersDropDown {
         dropDown = DropDown()
         dropDown.anchorView = viewController.navigationItem.titleView
         dropDown.width = viewController.view.frame.width
-        dropDown.cornerRadius = 1
         dropDown.bottomOffset = CGPoint(x: 0, y: dropDown.anchorView!.plainView.bounds.height + 5)
         dropDown.backgroundColor = UIColor.white
         dropDown.selectionBackgroundColor = Colors.getRGB(Colors.GRAY_LIGHT, alpha: 0.4)

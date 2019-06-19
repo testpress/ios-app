@@ -62,11 +62,11 @@ class TestReportViewController: UIViewController {
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
         
-        if !(attempt!.rankEnabled!) || String(describing: attempt!.rank!) == "NA" {
+        if !(attempt!.rankEnabled!) || String.getValue(attempt!.rank!) == "NA" {
             rankLayout.isHidden = true
         } else {
-            rank.text = String(describing: attempt!.rank!)
-            maxRank.text = String(describing: attempt!.maxRank!)
+            rank.text = String.getValue(attempt!.rank!)
+            maxRank.text = String.getValue(attempt!.maxRank!)
         }
         totalQuestions.text = String(exam.numberOfQuestions!)
         totalMarks.text = exam.totalMarks

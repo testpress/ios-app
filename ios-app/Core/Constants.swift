@@ -105,6 +105,8 @@ struct Constants {
     static let BOOKMARKED_QUESTION_VIEW_CONTROLLER = "BookmarkedQuestionViewController"
     static let BOOKMARK_FOLDER_NAVIGATION_CONTROLLER = "BookmarkFolderNavigationController"
     static let BOOKMARK_FOLDER_TABLE_VIEW_CELL = "BookmarkFolderTableViewCell"
+    static let VERIFY_PHONE_VIEW_CONTROLLER = "VerifyPhoneViewController"
+
     
     static let PAGE = "page"
     static let PAGE_SIZE = "page_size"
@@ -119,6 +121,12 @@ struct Constants {
     static let CATEGORY = "category"
     static let STARRED = "starred"
     static let ACCESS_CODE = "access_code"
+    static let UNCATEGORIZED = "Uncategorized"
+    static let DEVICE_TOKEN = "device_token"
+    static let FCM_TOKEN = "fcm_token"
+    static let REGISTER_DEVICE_TOKEN = "register_device_token"
+
+
     
     static func getAppVersion() -> String {
         let dictionary = Bundle.main.infoDictionary!

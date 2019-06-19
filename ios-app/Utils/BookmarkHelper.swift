@@ -70,8 +70,8 @@ class BookmarkHelper {
             let navigationViewController = viewController.presentingViewController?
                 .presentedViewController as! UINavigationController
             
-            slidingViewController = navigationViewController.viewControllers.first
-                as! BookmarksSlidingViewController
+            slidingViewController = (navigationViewController.viewControllers.first
+                as! BookmarksSlidingViewController)
         }
         UIUtils.showSimpleAlert(
             title: Strings.ARE_YOU_SURE,

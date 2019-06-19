@@ -43,14 +43,14 @@ class BookmarksSlidingViewController: SlideMenuController {
     var foldersDropDown: BookmarkFoldersDropDown!
     
     override func awakeFromNib() {
-        pageViewController = storyboard?.instantiateViewController(withIdentifier:
-            Constants.BOOKMARKS_DETAIL_PAGE_VIEW_CONTROLLER) as! BookmarksDetailPageViewController
+        pageViewController = (storyboard?.instantiateViewController(withIdentifier:
+            Constants.BOOKMARKS_DETAIL_PAGE_VIEW_CONTROLLER) as! BookmarksDetailPageViewController)
         
         pageViewController.parentviewController = self
         self.rightViewController = pageViewController
         
-        tableViewController = storyboard?.instantiateViewController(withIdentifier:
-            Constants.BOOKMARKS_TABLE_VIEW_CONTROLLER) as! BookmarksTableViewController
+        tableViewController = (storyboard?.instantiateViewController(withIdentifier:
+            Constants.BOOKMARKS_TABLE_VIEW_CONTROLLER) as! BookmarksTableViewController)
         
         tableViewController.parentviewController = self
         self.mainViewController = tableViewController

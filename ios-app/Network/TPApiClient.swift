@@ -261,10 +261,9 @@ class TPApiClient {
         })
     }
     
-    static func registerNewUser(username: String, email: String, password: String,
-                                completion: @escaping (TestpressModel?, TPError?) -> Void) {
+    static func registerNewUser(username: String, email: String, password: String, phone: String, country_code:String, completion: @escaping (TestpressModel?, TPError?) -> Void) {
         
-        let parameters: Parameters = ["username": username, "email": email, "password": password]
+        let parameters: Parameters = ["username": username, "email": email, "password": password, "phone": phone, "country_code":country_code]
         apiCall(endpointProvider: TPEndpointProvider(.registerNewUser), parameters: parameters,
                 completion: { json, error in
                     
@@ -289,6 +288,16 @@ class TPApiClient {
                 completion: { json, error in
                     completion(error)
                 }
+        )
+    }
+    
+    static func verifyPhoneNumber(username: String, code: String, completion: @escaping (TPError?) -> Void) {
+        let parameters: Parameters = ["code": code, "username": username]
+        apiCall(endpointProvider: TPEndpointProvider(.verifyPhoneNumber),
+                parameters: parameters,
+                completion: { json, error in
+                    completion(error)
+        }
         )
     }
     
@@ -348,11 +357,16 @@ class TPApiClient {
         })
     }
     
-    static func saveAnswer(selectedAnswer: [Int], review: Bool,
+    static func saveAnswer(selectedAnswer: [Int],
+                           review: Bool,
+                           shortAnswer: String?,
                            endpointProvider: TPEndpointProvider,
                            completion: @escaping (AttemptItem?, TPError?) -> Void) {
         
-        let parameters: Parameters = ["selected_answers": selectedAnswer, "review": review]
+        var parameters: Parameters = [ "selected_answers": selectedAnswer, "review": review ]
+        if let shortAnswer = shortAnswer {
+            parameters["short_text"] = shortAnswer
+        }
         apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
             json, error in
             var attemptItem: AttemptItem? = nil

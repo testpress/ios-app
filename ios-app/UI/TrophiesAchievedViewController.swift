@@ -42,7 +42,7 @@ class TrophiesAchievedViewController: UIViewController {
     override func viewDidLoad() {
         UIUtils.setButtonDropShadow(okayButton)
         trophyImageLayout.layer.borderColor = Colors.getRGB(Colors.GRAY_LIGHT).cgColor
-        let trophies = String(describing: contentAttempt.trophies!)
+        let trophies = String.getValue(contentAttempt.trophies!)
         let startIndex = trophies.index(trophies.startIndex, offsetBy: 1)
         if trophies.elementsEqual("NA") {
             trophiesCount.text = "0"

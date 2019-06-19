@@ -22,13 +22,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-
 import RealmSwift
 import UIKit
 
-class CoursesTableViewController: BaseTableViewController<Course>, BaseTableViewDelegate {
+class CoursesTableViewController: BaseDBViewController<Course> {
     
-    var pager: TPBasePager<Course>
+    var customPager: TPBasePager<Course>
     var customItems = [CustomCourse]()
     let babapedia = CustomCourse(title: "Babapedia", url: "https://babapedia2019.iasbaba.com",
                                  image: Images.GlobalLearning.image)
@@ -38,28 +37,30 @@ class CoursesTableViewController: BaseTableViewController<Course>, BaseTableView
                                        image: Images.NotesMenuIcon.image)
     
     required init?(coder aDecoder: NSCoder) {
-        pager = CoursePager()
-        super.init(coder: aDecoder)
+        debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
+        customPager = CoursePager()
         customItems.append(babapedia)
         customItems.append(valueAddedNotes)
+        super.init(pager: customPager, coder: aDecoder)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableViewDelegate = self
+    override func getItemsFromDb() -> [Course] {
+        return DBManager<Course>()
+            .getItemsFromDB(filteredBy: "active = true", byKeyPath: "order")
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (items.isEmpty) {
-            pager.reset()
-            loadItems()
-        }
+        tableView.reloadData()
+        super.viewDidAppear(animated)
     }
     
-    func loadItems() {
+    override func loadItems() {
+        if loadingItems {
+            return
+        }
+        loadingItems = true
         pager.next(completion: {
             items, error in
-            
             if let error = error {
                 debugPrint(error.message ?? "No error")
                 debugPrint(error.kind)
@@ -68,14 +69,14 @@ class CoursesTableViewController: BaseTableViewController<Course>, BaseTableView
             }
             
             if self.pager.hasMore {
+                self.loadingItems = false
                 self.loadItems()
             } else {
-                self.items = Array(items!.values)
-                if self.items.count == 0 {
-                    self.setEmptyText()
-                }
-                self.onLoadFinished(items: self.items)
-                self.tableView.tableFooterView?.isHidden = true
+                let items = Array(items!.values)
+                DBManager<Course>().deleteAllFromDatabase() // Delete previous items
+                DBManager<Course>().addData(objects: items)
+                self.onLoadFinished(items: self.getItemsFromDb())
+
             }
         })
     }
@@ -84,7 +85,7 @@ class CoursesTableViewController: BaseTableViewController<Course>, BaseTableView
     override func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.COURSE_LIST_VIEW_CELL, for: indexPath) as! CourseTableViewCell
-
+        
         cell.initCell(indexPath.row, viewController: self)
         return cell
     }

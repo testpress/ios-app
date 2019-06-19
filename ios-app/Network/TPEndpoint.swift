@@ -54,7 +54,7 @@ enum TPEndpoint {
     case getRank
     case getLeaderboard
     case getTargets
-    case getThreads
+    case getThreats
     case resetPassword
     case getPostCategories
     case authenticateSocialUser
@@ -64,11 +64,15 @@ enum TPEndpoint {
     case bookmarkFolders
     case attemptsPath
     case commentsPath
+    case instituteSettings
     case get
     case post
     case put
     case delete
-    
+    case registerDevice
+    case unRegisterDevice
+    case verifyPhoneNumber
+
     var method: Alamofire.HTTPMethod {
         switch self {
         case .authenticateUser:
@@ -109,7 +113,7 @@ enum TPEndpoint {
              .getRank,
              .getLeaderboard,
              .getTargets,
-             .getThreads,
+             .getThreats,
              .getPostCategories,
              .getAccessCodeExams,
              .bookmarks,
@@ -121,7 +125,10 @@ enum TPEndpoint {
         case .post,
              .resetPassword,
              .authenticateSocialUser,
-             .uploadImage:
+             .uploadImage,
+             .registerDevice,
+             .unRegisterDevice,
+             .verifyPhoneNumber:
             return .post
         case .put:
             return .put
@@ -137,7 +144,7 @@ enum TPEndpoint {
         case .authenticateUser:
             return "/api/v2.2/auth-token/"
         case .registerNewUser:
-            return "/api/v2.2/register/"
+            return "/api/v2.3/register/"
         case .getExams:
             return "/api/v2.2/exams/"
         case .sendHeartBeat:
@@ -147,7 +154,7 @@ enum TPEndpoint {
         case .endExam:
             return "end/"
         case .getCourses:
-            return "/api/v2.2/courses/"
+            return "/api/v2.2.1/courses/"
         case .getChapters:
             return "chapters/"
         case .getProfile:
@@ -174,7 +181,7 @@ enum TPEndpoint {
             return "/api/v2.2/leaderboard/"
         case .getTargets:
             return "/api/v2.2/me/targets/"
-        case .getThreads:
+        case .getThreats:
             return "/api/v2.2/me/threats/"
         case .resetPassword:
             return "/api/v2.2/password/reset/"
@@ -198,6 +205,14 @@ enum TPEndpoint {
             return "/api/v2.2/questions/"
         case .commentsPath:
             return "/comments/"
+        case .instituteSettings:
+            return "/api/v2.3/settings/"
+        case .registerDevice:
+            return "/api/v2.2/devices/register/"
+        case .unRegisterDevice:
+            return "/api/v2.2/devices/unregister/"
+        case .verifyPhoneNumber:
+            return "/api/v2.2/verify/"
         default:
             return ""
         }
