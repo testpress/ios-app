@@ -36,7 +36,7 @@ class TestLoginViewController: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
         
-        TestUtils.saveInstituteSettings(TestUtils.getInstituteSettings())
+        saveInstituteSettings(getInstituteSettings())
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyboard.instantiateViewController(
@@ -48,13 +48,27 @@ class TestLoginViewController: XCTestCase {
         controller.loadViewIfNeeded()
     }
     
+    func saveInstituteSettings(_ instituteSettings: InstituteSettings) {
+        DBManager<InstituteSettings>().deleteAllFromDatabase()
+        DBManager<InstituteSettings>().addData(objects: [instituteSettings])
+    }
+    
+    
+    func getInstituteSettings(allowSignup: Bool? = false, facebookLoginEnabled: Bool? = false) -> InstituteSettings {
+        let instituteSettings = InstituteSettings()
+        instituteSettings.baseUrl = Constants.BASE_URL
+        instituteSettings.allowSignup = allowSignup!
+        instituteSettings.facebookLoginEnabled = facebookLoginEnabled!
+        return instituteSettings
+    }
+
     func testVisibiltyOfSignupLayout() {
         /*
          Signup layout's visibility should depend on institute settings
          */
         XCTAssertTrue(controller.signUpLayout.isHidden)
         
-        TestUtils.saveInstituteSettings(TestUtils.getInstituteSettings(allowSignup: true))
+        saveInstituteSettings(getInstituteSettings(allowSignup: true))
         controller.loadView()
         
         XCTAssertFalse(controller.signUpLayout.isHidden)
@@ -66,7 +80,7 @@ class TestLoginViewController: XCTestCase {
          */
         XCTAssertTrue(controller.socialLoginLayout.isHidden)
         
-        TestUtils.saveInstituteSettings(TestUtils.getInstituteSettings(facebookLoginEnabled: true))
+        saveInstituteSettings(getInstituteSettings(facebookLoginEnabled: true))
         controller.loadView()
         
         XCTAssertFalse(controller.socialLoginLayout.isHidden)

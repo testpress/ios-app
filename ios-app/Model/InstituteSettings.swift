@@ -53,8 +53,7 @@ class InstituteSettings: DBModel {
     @objc dynamic var bookmarksEnabled: Bool = false
     @objc dynamic var forumEnabled: Bool = false
     @objc dynamic var twilioEnabled: Bool = false
-    @objc dynamic var activityFeedEnabled: Bool = false
-
+    
     public override func mapping(map: Map) {
         verificationMethod <- map["verification_method"]
         allowSignup <- map["allow_signup"]
@@ -79,7 +78,6 @@ class InstituteSettings: DBModel {
         bookmarksEnabled <- map["bookmarks_enabled"]
         forumEnabled <- map["forum_enabled"]
         twilioEnabled <- map["twilio_enabled"]
-        activityFeedEnabled <- map["activity_feed_enabled"]
     }
     
     override public static func primaryKey() -> String? {
