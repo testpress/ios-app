@@ -13,7 +13,8 @@
   ],
   "install": true,
   "script": [
-    "script/intelligent-bootstrap"
+    "script/intelligent-bootstrap",
+    "fastlane scan -s Testpress.in\(demo\)"
   ],
   "os": "osx"
 }
