@@ -1,5 +1,5 @@
 //
-//  TestLoginViewController.swift
+//  TestMainMenuTabViewController.swift
 //  ios-appTests
 //
 //  Copyright © 2019 Testpress. All rights reserved.
@@ -22,54 +22,38 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-
 import XCTest
 @testable import ios_app
 
-
-class TestLoginViewController: XCTestCase {
-
-    var controller: LoginViewController!
-
+class TestMainMenuTabViewController: XCTestCase {
+    
+    var controller: MainMenuTabViewController!
     
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        
         TestUtils.saveInstituteSettings(TestUtils.getInstituteSettings())
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let vc = storyboard.instantiateViewController(
-            withIdentifier: Constants.LOGIN_VIEW_CONTROLLER) as? LoginViewController else {
-                return XCTFail("Could not instantiate ViewController from main storyboard")
-        }
-        
-        controller = vc
+        controller = viewController()
         controller.loadViewIfNeeded()
     }
     
-    func testVisibiltyOfSignupLayout() {
-        /*
-         Signup layout's visibility should depend on institute settings
-         */
-        XCTAssertTrue(controller.signUpLayout.isHidden)
-        
-        TestUtils.saveInstituteSettings(TestUtils.getInstituteSettings(allowSignup: true))
-        controller.loadView()
-        
-        XCTAssertFalse(controller.signUpLayout.isHidden)
+    func viewController() -> MainMenuTabViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(
+            withIdentifier: Constants.TAB_VIEW_CONTROLLER) as! MainMenuTabViewController
     }
     
-    func testVisibiltyOfFacebookLogin() {
+    func testVisibilityOfActivityFeed() {
         /*
-         Facebook login's visibility should depend on institute settings
+         Activity Feed's visibility should be determined using institute settings
          */
-        XCTAssertTrue(controller.socialLoginLayout.isHidden)
+        var vc = controller.viewControllers?[0] as? UINavigationController
+        XCTAssertNil(vc?.viewControllers[0].isKind(of:ActivityFeedTableViewController.self))
         
-        TestUtils.saveInstituteSettings(TestUtils.getInstituteSettings(facebookLoginEnabled: true))
-        controller.loadView()
-        
-        XCTAssertFalse(controller.socialLoginLayout.isHidden)
-    }
+        TestUtils.saveInstituteSettings(TestUtils.getInstituteSettings(activityFeedEnabled: true))
+        controller = viewController()
+        vc = controller.viewControllers?[0] as? UINavigationController
 
+        XCTAssertTrue(vc?.viewControllers[0].isKind(of:ActivityFeedTableViewController.self) ?? false)
+    }
+    
 }
