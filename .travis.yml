@@ -11,6 +11,11 @@
     "sudo installer -pkg CartfileDiff.pkg -target /",
     "gem install fastlane --no-ri --no-rdoc --no-document"
   ],
+  "cache":[
+    "directories": [
+      "Carthage"
+    ]
+  ],
   "install": true,
   "script": [
     "script/intelligent-bootstrap",
