@@ -14,7 +14,7 @@
   "install": true,
   "script": [
     "script/intelligent-bootstrap",
-    "fastlane scan -s Carthage-CI"
+    "fastlane scan -s Testpress.in(demo)"
   ],
   "os": "osx"
 }
