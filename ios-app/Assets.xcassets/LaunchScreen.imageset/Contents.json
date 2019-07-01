@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "filename" : "LaunchScreen2.png",
+      "filename" : "LaunchImage-1242@3x~iphone6s-portrait_1242x2208.png",
       "scale" : "1x"
     },
     {
@@ -15,7 +15,7 @@
     },
     {
       "idiom" : "ipad",
-      "filename" : "LaunchScreen1.png",
+      "filename" : "LaunchImage-Landscape~ipad_1024x768.png",
       "scale" : "1x"
     },
     {
