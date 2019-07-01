@@ -14,6 +14,6 @@ cache:
     - Carthage
 install: true
 script:
-  - script/cache-carthage
+  - script/bootstrap
   - fastlane scan -s Testpress.in
 os: osx
