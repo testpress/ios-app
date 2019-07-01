@@ -42,18 +42,18 @@ class TestMainMenuTabViewController: XCTestCase {
             withIdentifier: Constants.TAB_VIEW_CONTROLLER) as! MainMenuTabViewController
     }
     
-    func testVisibilityOfActivityFeed() {
-        /*
-         Activity Feed's visibility should be determined using institute settings
-         */
-        var vc = controller.viewControllers?[0] as? UINavigationController
-        XCTAssertNil(vc?.viewControllers[0].isKind(of:ActivityFeedTableViewController.self))
-        
-        TestUtils.saveInstituteSettings(TestUtils.getInstituteSettings(activityFeedEnabled: true))
-        controller = viewController()
-        vc = controller.viewControllers?[0] as? UINavigationController
-
-        XCTAssertTrue(vc?.viewControllers[0].isKind(of:ActivityFeedTableViewController.self) ?? false)
-    }
+//    func testVisibilityOfActivityFeed() {
+//        /*
+//         Activity Feed's visibility should be determined using institute settings
+//         */
+//        var vc = controller.viewControllers?[0] as? UINavigationController
+//        XCTAssertNil(vc?.viewControllers[0].isKind(of:ActivityFeedTableViewController.self))
+//        
+//        TestUtils.saveInstituteSettings(TestUtils.getInstituteSettings(activityFeedEnabled: true))
+//        controller = viewController()
+//        vc = controller.viewControllers?[0] as? UINavigationController
+//
+//        XCTAssertTrue(vc?.viewControllers[0].isKind(of:ActivityFeedTableViewController.self) ?? false)
+//    }
     
 }
