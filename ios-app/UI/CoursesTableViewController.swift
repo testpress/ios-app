@@ -36,11 +36,16 @@ class CoursesTableViewController: BaseDBViewController<Course> {
                                        url: "https://ilp2019.iasbaba.com/",
                                        image: Images.NotesMenuIcon.image)
     
+    let ILP2020 = CustomCourse(title: "ILP 2020",
+                                       url: "https://ilp2020.iasbaba.com/",
+                                       image: Images.PaperAirplaneIcon.image)
+    
     required init?(coder aDecoder: NSCoder) {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
         customPager = CoursePager()
         customItems.append(babapedia)
         customItems.append(valueAddedNotes)
+        customItems.append(ILP2020)
         super.init(pager: customPager, coder: aDecoder)
     }
     
