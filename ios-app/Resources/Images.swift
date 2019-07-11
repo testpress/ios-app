@@ -52,6 +52,7 @@ enum Images: String {
     case ForumMenuIcon = "forum_menu_icon"
     case NotesMenuIcon = "notes_menu_icon"
     case PaperAirplaneIcon = "paper_airplane_icon"
+    case BookIcon = "ic_book"
     
     var image: UIImage {
         return UIImage(asset: self)
