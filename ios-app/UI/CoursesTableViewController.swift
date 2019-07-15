@@ -29,14 +29,9 @@ class CoursesTableViewController: BaseDBViewController<Course> {
     
     var customPager: TPBasePager<Course>
     var customItems = [CustomCourse]()
-    let babapedia = CustomCourse(title: "Babapedia 2019", url: "https://babapedia2019.iasbaba.com",
-                                 image: Images.GlobalLearning.image)
+ 
     let babapedia2020 = CustomCourse(title: "Babapedia 2020", url: "https://babapedia2020.iasbaba.com",
                                  image: Images.BookIcon.image)
-    
-    let valueAddedNotes = CustomCourse(title: "ILP 2019",
-                                       url: "https://ilp2019.iasbaba.com/",
-                                       image: Images.NotesMenuIcon.image)
     
     let ILP2020 = CustomCourse(title: "ILP 2020",
                                        url: "https://ilp2020.iasbaba.com/",
@@ -45,9 +40,7 @@ class CoursesTableViewController: BaseDBViewController<Course> {
     required init?(coder aDecoder: NSCoder) {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
         customPager = CoursePager()
-        customItems.append(babapedia)
         customItems.append(babapedia2020)
-        customItems.append(valueAddedNotes)
         customItems.append(ILP2020)
         super.init(pager: customPager, coder: aDecoder)
     }
