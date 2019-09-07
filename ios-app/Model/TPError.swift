@@ -94,7 +94,7 @@ public class TPError: Error {
                     Strings.AUTHENTICATION_FAILED,
                     Strings.PLEASE_LOGIN)
         case .custom:
-            if self.error_code == Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE || self.error_code == Constants.MAX_LOGIN_LIMIT_EXCEEDED{
+            if self.error_code == Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE {
                 var rootViewController = UIApplication.shared.keyWindow?.rootViewController
                 if let navigationController = rootViewController as? UINavigationController {
                     rootViewController = navigationController.viewControllers.first
