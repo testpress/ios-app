@@ -153,11 +153,12 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LoginActivityTableCell", for: indexPath)
-        cell.textLabel?.text = items[indexPath.row].userAgent
-        cell.detailTextLabel?.text = "Last Used : \(FormatDate.getElapsedTime(dateString: items[indexPath.row].lastUsed))"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LoginActivityTableCell", for: indexPath) as! LoginActivityCell
+        cell.ipAddress?.text = items[indexPath.row].ipAddress
+        cell.deviceName?.text = items[indexPath.row].userAgent
+        cell.lastUsedTime?.text = "Last Used : \(FormatDate.getElapsedTime(dateString: items[indexPath.row].lastUsed))"
         if items[indexPath.row].currentDevice {
-            cell.detailTextLabel?.text = "Currently using"
+            cell.lastUsedTime?.text = "Currently using"
         }
         return cell
     }
