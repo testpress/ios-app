@@ -248,15 +248,15 @@ class TPApiClient {
         apiCall(endpointProvider: TPEndpointProvider(endpoint), parameters: parameters,
                 completion: { json, error in
                     
-                    var testpressAuthToken: TPAuthToken? = nil
-                    if let json = json {
-                        testpressAuthToken = TPModelMapper<TPAuthToken>().mapFromJSON(json: json)
-                        guard testpressAuthToken != nil else {
-                            completion(nil, TPError(message: json, kind: .unexpected))
-                            return
-                        }
-                    }
-                    completion(testpressAuthToken, error)
+            var testpressAuthToken: TPAuthToken? = nil
+            if let json = json {
+                testpressAuthToken = TPModelMapper<TPAuthToken>().mapFromJSON(json: json)
+                guard testpressAuthToken != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(testpressAuthToken, error)
         })
     }
     
