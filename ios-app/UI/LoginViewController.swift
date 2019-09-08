@@ -110,49 +110,23 @@ class LoginViewController: BaseTextFieldViewController {
                     debugPrint(error.message ?? "No error message found")
                     debugPrint(error.kind)
                     var title, description: String
-                    if (error.kind == TPError.Kind.custom){
-                        title = "Maximum Logins Exceeded"
-                        description = "Maximum number of device logins exceeded.Please logout from one or more devices to continue"
-                        self.alertController.dismiss(animated: true, completion: nil)
-                        UIUtils.showSimpleAlert(
-                            title: title,
-                            message: description,
-                            viewController: self,
-                            cancelable: true,
-                            cancelHandler: #selector(self.closeAlert(gesture:)),
-                            completion: {_ in
-                                
-                                let tabViewController = self.storyboard!.instantiateViewController(
-                                    withIdentifier: Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER)
-                                
-                                self.alertController.dismiss(animated: true, completion: nil)
-                                self.present(tabViewController, animated: true, completion: nil)
-                        }
-                        )
-                    } else if error.isClientError() {
+                    if error.isClientError() {
                         title = Strings.WRONG_CREDENTIALS
                         description = Strings.USERNAME_PASSWORD_NOT_MATCHED
-                        self.alertController.dismiss(animated: true, completion: nil)
-                        UIUtils.showSimpleAlert(
-                            title: title,
-                            message: description,
-                            viewController: self,
-                            cancelable: true,
-                            cancelHandler: #selector(self.closeAlert(gesture:))
-                        )
                     } else {
                         (_, title, description) = error.getDisplayInfo()
-                        self.alertController.dismiss(animated: true, completion: nil)
-                        UIUtils.showSimpleAlert(
-                            title: title,
-                            message: description,
-                            viewController: self,
-                            cancelable: true,
-                            cancelHandler: #selector(self.closeAlert(gesture:))
-                        )
                     }
+                    self.alertController.dismiss(animated: true, completion: nil)
+                    UIUtils.showSimpleAlert(
+                        title: title,
+                        message: description,
+                        viewController: self,
+                        cancelable: true,
+                        cancelHandler: #selector(self.closeAlert(gesture:))
+                    )
                     return
                 }
+
                 let token: String = testpressAuthToken!.token!
                 do {
                     // Create a new keychain item
@@ -164,6 +138,7 @@ class LoginViewController: BaseTextFieldViewController {
                 } catch {
                     fatalError("Error updating keychain - \(error)")
                 }
+
                 let tabViewController = self.storyboard!.instantiateViewController(
                     withIdentifier: Constants.TAB_VIEW_CONTROLLER)
                 

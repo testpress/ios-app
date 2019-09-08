@@ -90,36 +90,13 @@ public class TPError: Error {
                     Strings.PLEASE_CHECK_INTERNET_CONNECTION)
             
         case .unauthenticated:
-            return (Images.TestpressAlertWarning.image, 
+            return (Images.TestpressAlertWarning.image,
                     Strings.AUTHENTICATION_FAILED,
                     Strings.PLEASE_LOGIN)
         case .custom:
-            if self.error_code == Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE {
-                var rootViewController = UIApplication.shared.keyWindow?.rootViewController
-                if let navigationController = rootViewController as? UINavigationController {
-                    rootViewController = navigationController.viewControllers.first
-                }
-                if let tabBarController = rootViewController as? UITabBarController {
-                    rootViewController = tabBarController.selectedViewController
-                }
-                let alert = UIAlertController(title: Strings.LOADING_FAILED,
-                                              message: self.error_detail,
-                                              preferredStyle: UIUtils.getActionSheetStyle())
-                alert.addAction(UIAlertAction(
-                    title: Strings.OK,
-                    style: UIAlertActionStyle.destructive,
-                    handler: { action in
-                        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
-                        let tabViewController = storyboard.instantiateViewController(
-                            withIdentifier: Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER)
-                        rootViewController!.present(tabViewController, animated: true, completion: nil)
-                }))
-                alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
-                rootViewController!.present(alert, animated: true)
-            }
             return (Images.TestpressAlertWarning.image,
                     Strings.LOADING_FAILED,
-                    self.error_detail ?? Strings.SOMETHIGN_WENT_WRONG)
+                    self.error_detail!)
         default:
             return (Images.TestpressAlertWarning.image,
                     Strings.LOADING_FAILED,

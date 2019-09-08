@@ -26,13 +26,13 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
         super.init(coder: aDecoder)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         activityIndicator = UIUtils.initActivityIndicator(parentView: self.tableView)
         activityIndicator?.center = CGPoint(x: tableView.center.x, y: tableView.center.y)
+
         // Set table view footer as progress spinner
         let pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         pagingSpinner.startAnimating()
@@ -49,7 +49,6 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
-    
     func getNavBarHeight() -> CGFloat {
         return UINavigationController().navigationBar.frame.size.height
     }
@@ -57,6 +56,7 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+
         if (items.isEmpty) {
             activityIndicator?.startAnimating()
         }
@@ -75,6 +75,7 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
         if loadingItems {
             return
         }
+
         loadingItems = true
         pager.next(completion: {
             items, error in
@@ -86,13 +87,17 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
             }
             
             self.items = Array(items!.values)
+
             if self.items.count == 0 {
                 self.setEmptyText()
             }
+
             self.tableView.reloadData()
+
             if (self.activityIndicator?.isAnimating)! {
                 self.activityIndicator?.stopAnimating()
             }
+
             self.tableView.tableFooterView?.isHidden = true
             self.loadingItems = false
         })
@@ -105,23 +110,27 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
     
     func handleError(_ error: TPError) {
         var retryHandler: (() -> Void)?
+
         if error.kind == .network {
             retryHandler = {
                 self.activityIndicator?.startAnimating()
                 self.loadItems()
             }
         }
+
         let (image, title, description) = error.getDisplayInfo()
+
         if (activityIndicator?.isAnimating)! {
             activityIndicator?.stopAnimating()
         }
         loadingItems = false
+
         if items.count == 0 {
-            emptyView.setValues(image: image, title: title, description: description,
-                                retryHandler: retryHandler)
+            emptyView.setValues(image: image, title: title, description: description, retryHandler: retryHandler)
         } else {
             TTGSnackbar(message: description, duration: .middle).show()
         }
+
         tableView.reloadData()
     }
     
@@ -135,13 +144,16 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
         } else {
             tableView.backgroundView?.isHidden = true
         }
+
         return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViewCell(cellForRowAt: indexPath)
+
         // Load more items on scroll to bottom
         if indexPath.row >= (items.count - 4) && !loadingItems {
+
             if pager.hasMore {
                 tableView.tableFooterView?.isHidden = false
                 loadItems()
@@ -157,9 +169,11 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
         cell.ipAddress?.text = items[indexPath.row].ipAddress
         cell.deviceName?.text = items[indexPath.row].userAgent
         cell.lastUsedTime?.text = "Last Used : \(FormatDate.getElapsedTime(dateString: items[indexPath.row].lastUsed))"
+
         if items[indexPath.row].currentDevice {
             cell.lastUsedTime?.text = "Currently using"
         }
+
         return cell
     }
 
@@ -167,6 +181,7 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
         activityIndicator?.startAnimating()
         TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logoutDevices), completion: {
             _,error in
+
             if let error = error {
                 self.activityIndicator?.stopAnimating()
                 debugPrint(error.message ?? "No error")
@@ -175,10 +190,10 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
                 TTGSnackbar(message: description, duration: .middle).show()
                 return
             }
+
             self.items.removeAll()
             self.pager.reset()
             self.loadItems()
-            self.tableView.reloadData()
         })
     }
     
