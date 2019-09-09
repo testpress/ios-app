@@ -184,5 +184,8 @@ struct Strings {
     static let CASE_SENSITIVE = "Answers are case sensitive"
     
     static let PARALLEL_LOGIN_RESTRICTION_INFO = "Note : Admin has restricted parallel logged in devices to "
+    static let ACCOUNT_LOCKED = "Account Locked"
+    static let MAX_LOGIN_EXCEEDED_ERROR_MESSAGE = "Your account has been locked as it has exceeded maximum devices it can be used."
+    static let ACCOUNT_UNLOCK_INFO = "Your account will automatically get unlocked within "
     
 }

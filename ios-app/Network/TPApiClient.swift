@@ -133,17 +133,17 @@ class TPApiClient {
     }
     
     static func handleCustomError(error: TPError) {
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        
+        if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController
+        }
+
         if error.error_code == Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE {
-            var rootViewController = UIApplication.shared.keyWindow?.rootViewController
-
-            if let navigationController = rootViewController as? UINavigationController {
-                rootViewController = navigationController.viewControllers.first
-            }
-
-            if let tabBarController = rootViewController as? UITabBarController {
-                rootViewController = tabBarController.selectedViewController
-            }
-
             let alert = UIAlertController(title: Strings.LOADING_FAILED,
                                           message: error.error_detail,
                                           preferredStyle: UIUtils.getActionSheetStyle())
@@ -158,6 +158,21 @@ class TPApiClient {
             }))
             alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
             rootViewController!.present(alert, animated: true)
+
+        } else if error.error_code == Constants.MAX_LOGIN_LIMIT_EXCEEDED {
+            var message = Strings.MAX_LOGIN_EXCEEDED_ERROR_MESSAGE
+            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+            
+            if !instituteSettings.cooloffTime.isEmpty {
+                message += Strings.ACCOUNT_UNLOCK_INFO + "\(instituteSettings.cooloffTime) hours"
+            }
+
+            UIUtils.showSimpleAlert(
+                title: Strings.ACCOUNT_LOCKED,
+                message: message,
+                viewController: rootViewController!,
+                cancelable: true
+            )
         }
     }
     

@@ -57,6 +57,7 @@ class InstituteSettings: DBModel {
     @objc dynamic var enableParallelLoginRestriction: Bool = false
     @objc dynamic var maxParallelLogins: Int = 0
     @objc dynamic var lockoutLimit: String = ""
+    @objc dynamic var cooloffTime: String = ""
 
     public override func mapping(map: Map) {
         verificationMethod <- map["verification_method"]
@@ -86,6 +87,7 @@ class InstituteSettings: DBModel {
         enableParallelLoginRestriction <- map["enable_parallel_login_restriction"]
         maxParallelLogins <- map["max_parallel_logins"]
         lockoutLimit <- map["lockout_limit"]
+        cooloffTime <- map["cooloff_time"]
     }
     
     override public static func primaryKey() -> String? {
