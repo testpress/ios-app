@@ -13,6 +13,8 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logoutDevicesButton: UIButton!
+    @IBOutlet weak var infoView: UIStackView!
+    @IBOutlet weak var infoLabel: UILabel!
     
     var activityIndicator: UIActivityIndicatorView! // Progress bar
     var emptyView: EmptyView!
@@ -46,6 +48,17 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
         emptyView.frame = view.frame
         
         UIUtils.setTableViewSeperatorInset(tableView, size: 10)
+        
+        let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        infoView.isHidden = true
+        infoLabel.isHidden = true
+
+        if (instituteSettings.enableParallelLoginRestriction) {
+            infoView.isHidden = false
+            infoLabel.isHidden = false
+            infoLabel.text = Strings.PARALLEL_LOGIN_RESTRICTION_INFO + "\(instituteSettings.maxParallelLogins) \n"
+            infoView.addBackground(color: Colors.getRGB(Colors.BLACK_TEXT))
+        }
         
     }
     

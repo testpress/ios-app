@@ -54,6 +54,9 @@ class InstituteSettings: DBModel {
     @objc dynamic var forumEnabled: Bool = false
     @objc dynamic var twilioEnabled: Bool = false
     @objc dynamic var activityFeedEnabled: Bool = false
+    @objc dynamic var enableParallelLoginRestriction: Bool = false
+    @objc dynamic var maxParallelLogins: Int = 0
+    @objc dynamic var lockoutLimit: String = ""
 
     public override func mapping(map: Map) {
         verificationMethod <- map["verification_method"]
@@ -80,6 +83,9 @@ class InstituteSettings: DBModel {
         forumEnabled <- map["forum_enabled"]
         twilioEnabled <- map["twilio_enabled"]
         activityFeedEnabled <- map["activity_feed_enabled"]
+        enableParallelLoginRestriction <- map["enable_parallel_login_restriction"]
+        maxParallelLogins <- map["max_parallel_logins"]
+        lockoutLimit <- map["lockout_limit"]
     }
     
     override public static func primaryKey() -> String? {
