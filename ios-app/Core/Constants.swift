@@ -104,6 +104,7 @@ struct Constants {
     static let BOOKMARK_FOLDER_NAVIGATION_CONTROLLER = "BookmarkFolderNavigationController"
     static let BOOKMARK_FOLDER_TABLE_VIEW_CELL = "BookmarkFolderTableViewCell"
     static let VERIFY_PHONE_VIEW_CONTROLLER = "VerifyPhoneViewController"
+    static let LOGIN_ACTIVITY_VIEW_CONTROLLER = "LoginActivityViewController"
 
     
     static let PAGE = "page"
@@ -123,7 +124,10 @@ struct Constants {
     static let DEVICE_TOKEN = "device_token"
     static let FCM_TOKEN = "fcm_token"
     static let REGISTER_DEVICE_TOKEN = "register_device_token"
-
+    
+    //    ERROR_CODES
+    static let MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE = "parallel_login_restriction"
+    static let MAX_LOGIN_LIMIT_EXCEEDED = "max_login_exceeded"
 
     
     static func getAppVersion() -> String {

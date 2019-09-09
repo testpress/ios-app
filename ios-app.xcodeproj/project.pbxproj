@@ -12,6 +12,12 @@
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
 		18F25D29212FDC5300097425 /* LockableSectionDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */; };
 		18F25D2B213000D700097425 /* SectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D2A213000D700097425 /* SectionInfo.swift */; };
+		2506298E2264856E00539FB2 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506298D2264856E00539FB2 /* ApiError.swift */; };
+		250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506298F2265B7D600539FB2 /* LoginActivityViewController.swift */; };
+		250629922265E74D00539FB2 /* LoginActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629912265E74D00539FB2 /* LoginActivity.swift */; };
+		250629942265E8E900539FB2 /* LoginActivityPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629932265E8E900539FB2 /* LoginActivityPager.swift */; };
+		250629962266F9C000539FB2 /* LoginActivityViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629952266F9C000539FB2 /* LoginActivityViewControllerTest.swift */; };
+		2506299A2266FEC800539FB2 /* LoginActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629992266FEC800539FB2 /* LoginActivity.swift */; };
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
@@ -248,6 +254,8 @@
 		2FF024212004CECA00E0047D /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF024202004CECA00E0047D /* BaseDBViewController.swift */; };
 		8C04228F22AA3FD40015269B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04228E22AA3FD40015269B /* WebViewController.swift */; };
 		8C04229122AA77C90015269B /* TestCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04229022AA77C90015269B /* TestCourseViewController.swift */; };
+		8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205A072323918700596E66 /* LoginActivityCell.swift */; };
+		8C5DF60223264D9400B9F8A0 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */; };
 		8CD78EA322BC917D00DD034D /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */; };
 		8CD78EA522BC9B8F00DD034D /* TestMainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */; };
 		8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA622BC9DA100DD034D /* TestUtils.swift */; };
@@ -300,6 +308,12 @@
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
 		18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockableSectionDropDownCell.swift; sourceTree = "<group>"; };
 		18F25D2A213000D700097425 /* SectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfo.swift; sourceTree = "<group>"; };
+		2506298D2264856E00539FB2 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		2506298F2265B7D600539FB2 /* LoginActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityViewController.swift; sourceTree = "<group>"; };
+		250629912265E74D00539FB2 /* LoginActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivity.swift; sourceTree = "<group>"; };
+		250629932265E8E900539FB2 /* LoginActivityPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityPager.swift; sourceTree = "<group>"; };
+		250629952266F9C000539FB2 /* LoginActivityViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityViewControllerTest.swift; sourceTree = "<group>"; };
+		250629992266FEC800539FB2 /* LoginActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivity.swift; sourceTree = "<group>"; };
 		250E68F521BA4AA600DA81F1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2519C12D21B0083600D26551 /* InstituteSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstituteSettings.swift; sourceTree = "<group>"; };
 		254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Testpress iOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -548,6 +562,8 @@
 		2FF024202004CECA00E0047D /* BaseDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBViewController.swift; sourceTree = "<group>"; };
 		8C04228E22AA3FD40015269B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8C04229022AA77C90015269B /* TestCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCourseViewController.swift; sourceTree = "<group>"; };
+		8C205A072323918700596E66 /* LoginActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityCell.swift; sourceTree = "<group>"; };
+		8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
 		8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginViewController.swift; sourceTree = "<group>"; };
 		8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainMenuTabViewController.swift; sourceTree = "<group>"; };
 		8CD78EA622BC9DA100DD034D /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
@@ -606,6 +622,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		250629972266FE9700539FB2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				250629992266FEC800539FB2 /* LoginActivity.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		250629982266FEA500539FB2 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2F26ADFA1E8249D70031E6F4 /* PushNotificationsTest.swift */,
+				250629952266F9C000539FB2 /* LoginActivityViewControllerTest.swift */,
+				25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -639,6 +673,7 @@
 		2F26ADE41E8249D70031E6F4 /* ios-app */ = {
 			isa = PBXGroup;
 			children = (
+				8C5DF60023264D2B00B9F8A0 /* Extensions */,
 				256EF50721CA15A200C743F0 /* ios-app.entitlements */,
 				2FC0F27C1F861A3E0092BFDC /* Core */,
 				2FC0F2C21F86385B0092BFDC /* Model */,
@@ -664,8 +699,8 @@
 		2F26ADF91E8249D70031E6F4 /* ios-appTests */ = {
 			isa = PBXGroup;
 			children = (
-				25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */,
-				2F26ADFA1E8249D70031E6F4 /* PushNotificationsTest.swift */,
+				250629982266FEA500539FB2 /* ViewController */,
+				250629972266FE9700539FB2 /* Models */,
 				2F26ADFC1E8249D70031E6F4 /* Info.plist */,
 				8C04229022AA77C90015269B /* TestCourseViewController.swift */,
 				8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */,
@@ -882,6 +917,8 @@
 				250E68F521BA4AA600DA81F1 /* MainViewController.swift */,
 				25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */,
 				8C04228E22AA3FD40015269B /* WebViewController.swift */,
+				2506298F2265B7D600539FB2 /* LoginActivityViewController.swift */,
+				8C205A072323918700596E66 /* LoginActivityCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -926,6 +963,8 @@
 				2FC0F2CD1F86385B0092BFDC /* User.swift */,
 				2F96997B1FC2A625001B2B18 /* Video.swift */,
 				2519C12D21B0083600D26551 /* InstituteSettings.swift */,
+				2506298D2264856E00539FB2 /* ApiError.swift */,
+				250629912265E74D00539FB2 /* LoginActivity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -960,8 +999,17 @@
 				2FC0F2EC1F863B080092BFDC /* TPApiClient.swift */,
 				2FC0F2ED1F863B080092BFDC /* TPBasePager.swift */,
 				2FC0F2EE1F863B080092BFDC /* TPEndpoint.swift */,
+				250629932265E8E900539FB2 /* LoginActivityPager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		8C5DF60023264D2B00B9F8A0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1221,6 +1269,7 @@
 				2FC0F3121F863BBD0092BFDC /* CALayerBorderColor.swift in Sources */,
 				2F452C3220BC123D007833A0 /* BookmarkedQuestionViewController.swift in Sources */,
 				2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */,
+				250629922265E74D00539FB2 /* LoginActivity.swift in Sources */,
 				2FC0F2FB1F863B7E0092BFDC /* BaseQuestionsDataSource.swift in Sources */,
 				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
 				2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */,
@@ -1318,6 +1367,7 @@
 				2FC0F2FC1F863B810092BFDC /* BaseQuestionsPageViewController.swift in Sources */,
 				2FC0F2F91F863B780092BFDC /* AttemptsListViewController.swift in Sources */,
 				2FC0F3131F863BBD0092BFDC /* FormatDate.swift in Sources */,
+				250629942265E8E900539FB2 /* LoginActivityPager.swift in Sources */,
 				2FC0F2F01F863B130092BFDC /* AttemptPager.swift in Sources */,
 				2F515DFC1FF4EF9C0005D8A5 /* FileDetails.swift in Sources */,
 				2FC0F3071F863BA90092BFDC /* QuestionsControllerSource.swift in Sources */,
@@ -1326,6 +1376,7 @@
 				2F56B73D1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift in Sources */,
 				2F17C1FE20C965B300606D5C /* BookmarkFoldersDropDown.swift in Sources */,
 				2FC0F2E41F863ADC0092BFDC /* TPApiResponse.swift in Sources */,
+				8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */,
 				2F48C8111FD28E7A009C686C /* PostPager.swift in Sources */,
 				2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */,
 				2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */,
@@ -1341,6 +1392,7 @@
 				2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */,
 				2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */,
 				2F2866FA1FD6C1D600FC6BAA /* UIViewExtension.swift in Sources */,
+				8C5DF60223264D9400B9F8A0 /* UIDevice+ModelName.swift in Sources */,
 				2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */,
 				2FDF9C5520B6E4B90086245F /* BookmarksListResponse.swift in Sources */,
 				2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */,
@@ -1348,6 +1400,7 @@
 				2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */,
 				2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */,
 				2F56B73B1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift in Sources */,
+				250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */,
 				2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */,
 				2F25D564201F5DBB00C01CCE /* BaseTableViewController.swift in Sources */,
 				2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */,
@@ -1360,6 +1413,7 @@
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
 				2F4186A020BD3A33003D2D8A /* BookmarkFolderPager.swift in Sources */,
 				2F25D562201F5C8800C01CCE /* TargetThreatViewController.swift in Sources */,
+				2506298E2264856E00539FB2 /* ApiError.swift in Sources */,
 				2FA9285220B811F400CD3076 /* BookmarksDetailPageViewController.swift in Sources */,
 				2F9778A81FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift in Sources */,
 				2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */,
@@ -1390,6 +1444,8 @@
 				8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */,
 				8CD78EA322BC917D00DD034D /* TestLoginViewController.swift in Sources */,
 				8C04229122AA77C90015269B /* TestCourseViewController.swift in Sources */,
+				2506299A2266FEC800539FB2 /* LoginActivity.swift in Sources */,
+				250629962266F9C000539FB2 /* LoginActivityViewControllerTest.swift in Sources */,
 				2F26ADFB1E8249D70031E6F4 /* PushNotificationsTest.swift in Sources */,
 				25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */,
 			);
