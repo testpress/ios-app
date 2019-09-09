@@ -160,9 +160,16 @@ class TPApiClient {
             rootViewController!.present(alert, animated: true)
 
         } else if error.error_code == Constants.MAX_LOGIN_LIMIT_EXCEEDED {
+            var message = Strings.MAX_LOGIN_EXCEEDED_ERROR_MESSAGE
+            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+            
+            if !instituteSettings.cooloffTime.isEmpty {
+                message += Strings.ACCOUNT_UNLOCK_INFO + "\(instituteSettings.cooloffTime) hours"
+            }
+
             UIUtils.showSimpleAlert(
                 title: Strings.ACCOUNT_LOCKED,
-                message: Strings.MAX_LOGIN_EXCEEDED_ERROR_MESSAGE,
+                message: message,
                 viewController: rootViewController!,
                 cancelable: true
             )

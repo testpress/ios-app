@@ -185,6 +185,7 @@ struct Strings {
     
     static let PARALLEL_LOGIN_RESTRICTION_INFO = "Note : Admin has restricted parallel logged in devices to "
     static let ACCOUNT_LOCKED = "Account Locked"
-    static let MAX_LOGIN_EXCEEDED_ERROR_MESSAGE = "Your account is locked due to exceed of maximum login limits. Your account will automatically get unlocked within 24 hours."
+    static let MAX_LOGIN_EXCEEDED_ERROR_MESSAGE = "Your account is locked due to exceed of maximum login limits."
+    static let ACCOUNT_UNLOCK_INFO = "Your account will automatically get unlocked within "
     
 }
