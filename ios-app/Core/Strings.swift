@@ -183,4 +183,6 @@ struct Strings {
     static let CASE_INSENSITIVE = "Answers are case insensitive"
     static let CASE_SENSITIVE = "Answers are case sensitive"
     
+    static let PARALLEL_LOGIN_RESTRICTION_INFO = "Note : Admin has restricted parallel logged in devices to "
+    
 }
