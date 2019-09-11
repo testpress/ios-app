@@ -27,6 +27,8 @@ import FacebookCore
 import IQKeyboardManagerSwift
 import RealmSwift
 import UIKit
+import Sentry
+
 
 import Alamofire
 import UserNotifications
@@ -104,7 +106,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
             userDefaults.synchronize() // Forces the app to update UserDefaults
         }
-        let config = Realm.Configuration(schemaVersion: 1)
+        
+        do {
+            Client.shared = try Client(dsn: "https://15420a637fb7479a832b721fb7cc0ceb@sentry.testpress.in/4")
+            try Client.shared?.startCrashHandler()
+        } catch let error {
+            print("\(error)")
+        }
+        
+        if (KeychainTokenItem.isExist()) {
+            Client.shared?.extra = [
+                "username": KeychainTokenItem.getAccount()
+            ]
+        }
+        
+        let config = Realm.Configuration(schemaVersion: 4)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         

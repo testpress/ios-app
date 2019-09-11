@@ -148,6 +148,7 @@ class ProfileViewController: UIViewController {
 
                 // Clear only user related tables
                 DBInstance.clearTables()
+                TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), completion: {_,_ in})
                 // Logout on Facebook
                 LoginManager().logOut()
                 KeychainTokenItem.clearKeychainItems()
@@ -167,6 +168,13 @@ class ProfileViewController: UIViewController {
             Constants.BOOKMARKS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
         
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showLoginActivity() {
+        let loginActivityViewController = self.storyboard!.instantiateViewController(
+            withIdentifier: Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER)
+        
+        self.present(loginActivityViewController, animated: true, completion: nil)
     }
     
     @IBAction func rateUs() {

@@ -1,8 +1,9 @@
 //
-//  AttemptSection.swift
-//  ios-app
+//  TestUtils.swift
+//  ios-appTests
 //
-//  Copyright © 2018 Testpress. All rights reserved.
+
+//  Copyright © 2019 Testpress. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,39 +22,24 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-//
 
-import ObjectMapper
+import Foundation
+@testable import ios_app
 
-public class AttemptSection {
-    
-    var id: Int!
-    var state: String!
-    var questionsUrl: String!
-    var startUrl: String!
-    var endUrl: String!
-    var remainingTime: String!
-    var attemptId: Int!
-    var name: String!
-    var duration: String!
-    var order: Int!
-    
-    public required init?(map: Map) {
+public class TestUtils {
+    static func saveInstituteSettings(_ instituteSettings: InstituteSettings) {
+        DBManager<InstituteSettings>().deleteAllFromDatabase()
+        DBManager<InstituteSettings>().addData(objects: [instituteSettings])
     }
     
-}
-
-extension AttemptSection: TestpressModel {
-    public func mapping(map: Map) {
-        id <- map["id"]
-        state <- map["state"]
-        questionsUrl <- map["questions_url"]
-        startUrl <- map["start_url"]
-        endUrl <- map["end_url"]
-        remainingTime <- map["remaining_time"]
-        attemptId <- map["attempt_id"]
-        name <- map["name"]
-        duration <- map["duration"]
-        order <- map["order"]
+    
+    static func getInstituteSettings(allowSignup: Bool? = false, facebookLoginEnabled: Bool? = false, activityFeedEnabled: Bool? = false) -> InstituteSettings {
+        let instituteSettings = InstituteSettings()
+        instituteSettings.baseUrl = Constants.BASE_URL
+        instituteSettings.allowSignup = allowSignup!
+        instituteSettings.facebookLoginEnabled = facebookLoginEnabled!
+        instituteSettings.activityFeedEnabled = activityFeedEnabled!
+        return instituteSettings
     }
+    
 }

@@ -1,8 +1,8 @@
 //
-//  AttemptSection.swift
+//  LoginActivityPager.swift
 //  ios-app
 //
-//  Copyright © 2018 Testpress. All rights reserved.
+//  Copyright © 2019 Testpress. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,37 +23,26 @@
 //  THE SOFTWARE.
 //
 
+
+
+import Alamofire
 import ObjectMapper
 
-public class AttemptSection {
+class LoginActivityPager: BaseDBItemPager<LoginActivity> {
     
-    var id: Int!
-    var state: String!
-    var questionsUrl: String!
-    var startUrl: String!
-    var endUrl: String!
-    var remainingTime: String!
-    var attemptId: Int!
-    var name: String!
-    var duration: String!
-    var order: Int!
-    
-    public required init?(map: Map) {
+    override func getItems(page: Int) {
+        queryParams.updateValue("app", forKey: Constants.FILTER)
+        queryParams.updateValue(String(page), forKey: Constants.PAGE)
+        TPApiClient.getListItems(
+            endpointProvider: TPEndpointProvider(.loginActivity, queryParams: queryParams),
+            headers: headers,
+            completion: resonseHandler!,
+            type: LoginActivity.self
+        )
     }
     
-}
-
-extension AttemptSection: TestpressModel {
-    public func mapping(map: Map) {
-        id <- map["id"]
-        state <- map["state"]
-        questionsUrl <- map["questions_url"]
-        startUrl <- map["start_url"]
-        endUrl <- map["end_url"]
-        remainingTime <- map["remaining_time"]
-        attemptId <- map["attempt_id"]
-        name <- map["name"]
-        duration <- map["duration"]
-        order <- map["order"]
+    override func getId(resource: LoginActivity) -> Int {
+        return resource.id
     }
+    
 }

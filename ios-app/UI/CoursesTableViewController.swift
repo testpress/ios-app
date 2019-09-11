@@ -38,6 +38,11 @@ class CoursesTableViewController: BaseDBViewController<Course> {
             .getItemsFromDB(filteredBy: "active = true", byKeyPath: "order")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+        super.viewDidAppear(animated)
+    }
+    
     override func loadItems() {
         if loadingItems {
             return
