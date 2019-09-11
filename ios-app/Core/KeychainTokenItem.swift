@@ -201,6 +201,10 @@ struct KeychainTokenItem {
         }
     }
     
+    static func getAccount() -> String {
+        return passwordItems()[0].account
+    }
+    
     static func clearKeychainItems() {
         for passwordItem in passwordItems() {
             do {

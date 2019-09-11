@@ -260,6 +260,7 @@
 		8CD78EA522BC9B8F00DD034D /* TestMainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */; };
 		8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA622BC9DA100DD034D /* TestUtils.swift */; };
 		8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */; };
+		8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF6972E2327180F0040A986 /* Sentry.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -569,6 +570,7 @@
 		8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainMenuTabViewController.swift; sourceTree = "<group>"; };
 		8CD78EA622BC9DA100DD034D /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stackview+BackgroundColor.swift"; sourceTree = "<group>"; };
+		8CF6972E2327180F0040A986 /* Sentry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sentry.framework; path = Carthage/Build/iOS/Sentry.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -583,6 +585,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */,
 				2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */,
 				2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */,
 				2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */,
@@ -715,6 +718,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8CF6972E2327180F0040A986 /* Sentry.framework */,
 				25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */,
 				2570A25221CA0DBE0097C6FE /* Protobuf.framework */,
 				2570A24321CA0D770097C6FE /* FIRAnalyticsConnector.framework */,
@@ -1236,6 +1240,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Bolts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
