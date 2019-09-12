@@ -91,6 +91,22 @@ class TPApiClient {
                     if (statusCode == 403) {
                         error = TPError(message: json, response: httpResponse,
                                         kind: .unauthenticated)
+                    } else if (statusCode == 401){
+                        error = TPError(message: json, response: httpResponse, kind: .unauthenticated)
+                        UIUtils.logout()
+
+                        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                            while let presentedViewController = topController.presentedViewController {
+                                topController = presentedViewController
+                            }
+                            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+                            let loginViewController = storyboard.instantiateViewController(withIdentifier:
+                                                        Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+                            
+                            topController.present(loginViewController, animated: true, completion: nil)
+                            
+                        }
+                        
                     } else {
                         error = TPError(message: json, response: httpResponse, kind: .http)
                     }
