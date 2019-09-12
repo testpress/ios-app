@@ -24,6 +24,8 @@
 //
 
 import UIKit
+import Alamofire
+import FacebookLogin
 
 public class UIUtils {
 
@@ -420,4 +422,28 @@ public class UIUtils {
             let countryDialingCode = prefix[countryRegionCode]
             return countryDialingCode!
         }
+    
+    static func logout() {
+        let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
+        let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
+        
+        if (fcmToken != nil && deviceToken != nil ) {
+            let parameters: Parameters = [
+                "device_id": deviceToken!,
+                "registration_id": fcmToken!,
+                "platform": "ios"
+            ]
+            
+            TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.unRegisterDevice), parameters: parameters,
+                                completion: { _, _ in})
+        }
+        UIApplication.shared.unregisterForRemoteNotifications()
+        
+        // Clear only user related tables
+        DBInstance.clearTables()
+        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), completion: {_,_ in})
+        // Logout on Facebook
+        LoginManager().logOut()
+        KeychainTokenItem.clearKeychainItems()
+    }
 }
