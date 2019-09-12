@@ -34,12 +34,11 @@ class MainMenuTabViewController: UITabBarController {
         super.viewDidLoad()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
-        viewControllers?.remove(at: 6) // Access Code
-
+        viewControllers?.remove(at: 6) // Access code
         if (!instituteSettings.forumEnabled) {
             viewControllers?.remove(at: 5)
         }
-
+        
         if (!instituteSettings.postsEnabled) {
             viewControllers?.remove(at: 4)
         }
@@ -47,7 +46,7 @@ class MainMenuTabViewController: UITabBarController {
         if (!instituteSettings.coursesEnableGamification) {
             viewControllers?.remove(at: 3)
         }
-
+        
         if (instituteSettings.showGameFrontend) {
             viewControllers?.remove(at: 2) // Exams list
             
@@ -55,6 +54,10 @@ class MainMenuTabViewController: UITabBarController {
             viewControllers?.remove(at: 1)
         }
         
+        if (!instituteSettings.activityFeedEnabled) {
+            viewControllers?.remove(at: 0)
+        }
+
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
             let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
             let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)

@@ -48,9 +48,8 @@ class LoginViewController: BaseTextFieldViewController {
         UIUtils.setButtonDropShadow(loginButton)
         
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        
         signUpLayout.isHidden = true
-        socialLoginLayout.isHidden = true
-
         if(instituteSettings.allowSignup) {
             signUpLayout.isHidden = false
         }
@@ -70,9 +69,11 @@ class LoginViewController: BaseTextFieldViewController {
         fbLoginButton.trailingAnchor
             .constraint(equalTo: facebookButtonLayout.trailingAnchor).isActive = true
         
+        socialLoginLayout.isHidden = true
         if(instituteSettings.facebookLoginEnabled) {
             socialLoginLayout.isHidden = false
         }
+
         // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
         showKeyboardOnStart = false
@@ -125,7 +126,7 @@ class LoginViewController: BaseTextFieldViewController {
                     )
                     return
                 }
-                
+
                 let token: String = testpressAuthToken!.token!
                 do {
                     // Create a new keychain item
@@ -137,7 +138,7 @@ class LoginViewController: BaseTextFieldViewController {
                 } catch {
                     fatalError("Error updating keychain - \(error)")
                 }
-                
+
                 let tabViewController = self.storyboard!.instantiateViewController(
                     withIdentifier: Constants.TAB_VIEW_CONTROLLER)
                 

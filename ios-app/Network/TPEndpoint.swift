@@ -72,6 +72,9 @@ enum TPEndpoint {
     case registerDevice
     case unRegisterDevice
     case verifyPhoneNumber
+    case logout
+    case loginActivity
+    case logoutDevices
 
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -128,7 +131,8 @@ enum TPEndpoint {
              .uploadImage,
              .registerDevice,
              .unRegisterDevice,
-             .verifyPhoneNumber:
+             .verifyPhoneNumber,
+             .logoutDevices:
             return .post
         case .put:
             return .put
@@ -142,9 +146,9 @@ enum TPEndpoint {
     var urlPath: String {
         switch self {
         case .authenticateUser:
-            return "/api/v2.2/auth-token/"
+            return "/api/v2.3/auth-token/"
         case .registerNewUser:
-            return "/api/v2.2/register/"
+            return "/api/v2.3/register/"
         case .getExams:
             return "/api/v2.2/exams/"
         case .sendHeartBeat:
@@ -154,7 +158,7 @@ enum TPEndpoint {
         case .endExam:
             return "end/"
         case .getCourses:
-            return "/api/v2.2/courses/"
+            return "/api/v2.2.1/courses/"
         case .getChapters:
             return "chapters/"
         case .getProfile:
@@ -206,13 +210,19 @@ enum TPEndpoint {
         case .commentsPath:
             return "/comments/"
         case .instituteSettings:
-            return "/api/v2.2/settings/"
+            return "/api/v2.3/settings/"
         case .registerDevice:
             return "/api/v2.2/devices/register/"
         case .unRegisterDevice:
             return "/api/v2.2/devices/unregister/"
         case .verifyPhoneNumber:
             return "/api/v2.2/verify/"
+        case .logout:
+            return "/api/v2.4/auth/logout/"
+        case .loginActivity:
+            return "/api/v2.3/me/login_activity/"
+        case .logoutDevices:
+            return "/api/v2.4/auth/logout_devices/"
         default:
             return ""
         }
