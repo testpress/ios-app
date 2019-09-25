@@ -132,7 +132,8 @@ enum TPEndpoint {
              .registerDevice,
              .unRegisterDevice,
              .verifyPhoneNumber,
-             .logoutDevices:
+             .logoutDevices,
+             .logout:
             return .post
         case .put:
             return .put
