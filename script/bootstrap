@@ -1,2 +1,2 @@
 #!/bin/bash
-carthage bootstrap $@ --platform iphoneos --no-use-binaries --cache-builds|| exit $?
+carthage bootstrap $@ --platform iphoneos --cache-builds|| exit $?
