@@ -24,15 +24,7 @@ class LoginActivityTest:XCTestCase {
         Hippolyte.shared.stop()
     }
     
-    func testModelAttributes() {
-        XCTAssertTrue(model.id is Int)
-        XCTAssertTrue(model.location is String)
-        XCTAssertTrue(model.userAgent is String)
-        XCTAssertTrue(model.lastUsed is String)
-        XCTAssertTrue(model.ipAddress is String)
-        XCTAssertTrue(model.currentDevice is Bool)
-    }
-    
+
     func testValueMapping() {
         /*
          Json data should be mapped to model's attributes appropriately.
@@ -53,6 +45,7 @@ class LoginActivityTest:XCTestCase {
             }
         }
         wait(for: [expectation], timeout: 5)
+        print("Useragent : ", self.model.userAgent)
         
         XCTAssertEqual(self.model.id, dictionary["id"] as! Int)
         XCTAssertEqual(self.model.userAgent, dictionary["user_agent"] as! String)
