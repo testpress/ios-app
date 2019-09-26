@@ -71,7 +71,7 @@ class VerifyPhoneViewController: UIViewController {
     func setFieldError(textField: UITextField, errorMessage: String) {
         textField.text = ""
         textField.attributedPlaceholder = NSAttributedString(string: errorMessage,
-                                                             attributes: [NSAttributedStringKey.foregroundColor: UIColor.red])
+                                                             attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
         textField.becomeFirstResponder()
     }
     

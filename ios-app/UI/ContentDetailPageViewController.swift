@@ -59,10 +59,10 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
             options: nil
         )
         pageViewController.delegate = self
-        addChildViewController(pageViewController)
+        addChild(pageViewController)
         contentsContainerView.addSubview(pageViewController.view)
         pageViewController.view.frame = contentsContainerView.bounds
-        pageViewController.didMove(toParentViewController: self)
+        pageViewController.didMove(toParent: self)
         // Set navigation buttons click listener
         let previousButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onClickPreviousButton(sender:)))
@@ -139,7 +139,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         }
         
         let viewController = contentDetailDataSource.viewControllerAtIndex(index)!
-        let direction: UIPageViewControllerNavigationDirection =
+        let direction: UIPageViewController.NavigationDirection =
             index > currentIndex ? .forward : .reverse
         
         pageViewController.setViewControllers([viewController] , direction: direction,
