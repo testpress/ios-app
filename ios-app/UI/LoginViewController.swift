@@ -126,7 +126,7 @@ class LoginViewController: BaseTextFieldViewController {
                     )
                     return
                 }
-                
+
                 let token: String = testpressAuthToken!.token!
                 do {
                     // Create a new keychain item
@@ -138,7 +138,7 @@ class LoginViewController: BaseTextFieldViewController {
                 } catch {
                     fatalError("Error updating keychain - \(error)")
                 }
-                
+
                 let tabViewController = self.storyboard!.instantiateViewController(
                     withIdentifier: Constants.TAB_VIEW_CONTROLLER)
                 

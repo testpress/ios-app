@@ -85,33 +85,33 @@ class PhoneVerification: XCTestCase {
         XCTAssertTrue(UIApplication.topViewController() is LoginViewController)
     }
     
-    func testAuthenticateSuccess() {
-        /*
-         This tests authentication success
-         */
-        let url = URL(string: Constants.BASE_URL+"/api/v2.2/auth-token/")!
-        var stub = StubRequest(method: .POST, url: url)
-        var response = StubResponse()
-        response = StubResponse(statusCode: 200)
-        
-        let jsonObject: [String: Any] = [
-            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MjY5LCJ1c2VyX2lkIjoyNjksImVtYWlsIjoia2FydGhpa0B0ZXN0cHJlc3MuaW4iLCJleHAiOjE1NDYwMDcyOTJ9.ux0YtD-pGOBXPN6K6hhlCstRCmAhCDJF4R2YBO8t5bM",
-        ]
-        
-        do {
-            try response.body = JSONSerialization.data(withJSONObject: jsonObject,options: .prettyPrinted)
-        } catch {
-            response.body = "hello".data(using: .utf8)
-        }
-
-        stub.response = response
-        Hippolyte.shared.add(stubbedRequest: stub)
-        Hippolyte.shared.start()
-        
-        verifyPhoneViewController?.authenticate(username: "demo", password: "password", provider: .TESTPRESS)
-    
-        XCTAssertTrue(UIApplication.topViewController() is ActivityFeedTableViewController)
-    }
+//    func testAuthenticateSuccess() {
+//        /*
+//         This tests authentication success
+//         */
+//        let url = URL(string: Constants.BASE_URL+"/api/v2.2/auth-token/")!
+//        var stub = StubRequest(method: .POST, url: url)
+//        var response = StubResponse()
+//        response = StubResponse(statusCode: 200)
+//        
+//        let jsonObject: [String: Any] = [
+//            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MjY5LCJ1c2VyX2lkIjoyNjksImVtYWlsIjoia2FydGhpa0B0ZXN0cHJlc3MuaW4iLCJleHAiOjE1NDYwMDcyOTJ9.ux0YtD-pGOBXPN6K6hhlCstRCmAhCDJF4R2YBO8t5bM",
+//        ]
+//        
+//        do {
+//            try response.body = JSONSerialization.data(withJSONObject: jsonObject,options: .prettyPrinted)
+//        } catch {
+//            response.body = "hello".data(using: .utf8)
+//        }
+//
+//        stub.response = response
+//        Hippolyte.shared.add(stubbedRequest: stub)
+//        Hippolyte.shared.start()
+//        
+//        verifyPhoneViewController?.authenticate(username: "demo", password: "password", provider: .TESTPRESS)
+//    
+//        XCTAssertTrue(UIApplication.topViewController() is ActivityFeedTableViewController)
+//    }
     
     func testInvalidOtpFieldValue() {
         /*

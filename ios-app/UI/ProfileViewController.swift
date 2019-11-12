@@ -131,26 +131,7 @@ class ProfileViewController: UIViewController {
             style: UIAlertActionStyle.destructive,
             handler: { action in
                 
-                let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
-                let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
-                
-                if (fcmToken != nil && deviceToken != nil ) {
-                    let parameters: Parameters = [
-                        "device_id": deviceToken!,
-                        "registration_id": fcmToken!,
-                        "platform": "ios"
-                    ]
-                    
-                    TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.unRegisterDevice), parameters: parameters,
-                                        completion: { _, _ in})
-                }
-                UIApplication.shared.unregisterForRemoteNotifications()
-
-                // Clear only user related tables
-                DBInstance.clearTables()
-                // Logout on Facebook
-                LoginManager().logOut()
-                KeychainTokenItem.clearKeychainItems()
+                UIUtils.logout()
                 let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
                     Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
                 
@@ -167,6 +148,13 @@ class ProfileViewController: UIViewController {
             Constants.BOOKMARKS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
         
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showLoginActivity() {
+        let loginActivityViewController = self.storyboard!.instantiateViewController(
+            withIdentifier: Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER)
+        
+        self.present(loginActivityViewController, animated: true, completion: nil)
     }
     
     @IBAction func rateUs() {
