@@ -27,10 +27,6 @@
 
 import UIKit
 import AVKit
-
-
-import UIKit
-import AVKit
 import AVFoundation
 
 
@@ -59,7 +55,6 @@ class VideoContentViewController: UIViewController {
         let player = AVPlayer(url: videoURL)
         player.rate = 1
         playerViewController.player = player
-        playerViewController.videoGravity = AVLayerVideoGravity.resizeAspect.rawValue
         addChildViewController(playerViewController)
         playerViewController.view.sizeToFit()
         view.addSubview(playerViewController.view)
