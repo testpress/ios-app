@@ -1,8 +1,8 @@
 //
-//  ContentAttempt.swift
+//  VideoAttempt.swift
 //  ios-app
 //
-//  Copyright © 2017 Testpress. All rights reserved.
+//  Copyright © 2019 Testpress. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,39 +25,27 @@
 
 import ObjectMapper
 
-public class ContentAttempt {
+public class VideoAttempt {
     
     var id: Int!
-    var type: String!
-    var trophies: Any!
-    var objectUrl: String!
-    var assessment: Attempt!
-    var video: VideoAttempt!
-    var content: HtmlContent!
-    var attachment: Attachment!
-    var chapterContentId: Int!
-    var objectID: Int!
+    var lastPosition: String!
+    var watchDuration: String!
+    var state: Int!
+    var videoContent: Video!
+    var user: User!
     
     public required init?(map: Map) {
     }
     
-    public func getEndAttemptUrl() -> String {
-        return Constants.BASE_URL + TPEndpoint.contentAttempts.urlPath + "\(id!)/" +
-            TPEndpoint.endExam.urlPath;
-    }
 }
 
-extension ContentAttempt: TestpressModel {
+extension VideoAttempt: TestpressModel {
     public func mapping(map: Map) {
-        type <- map["type"]
         id <- map["id"]
-        trophies <- map["trophies"]
-        objectUrl <- map["objectUrl"]
-        video <- map["video"]
-        assessment <- map["assessment"]
-        content <- map["content"]
-        attachment <- map["attachment"]
-        chapterContentId <- map["chapter_content"]
-        objectID <- map["object_id"]
+        videoContent <- map["video_content"]
+        lastPosition <- map["last_position"]
+        watchDuration <- map["watched_duration"]
+        state <- map["state"]
+        user <- map["user"]
     }
 }
