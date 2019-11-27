@@ -258,6 +258,8 @@
 		8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205A072323918700596E66 /* LoginActivityCell.swift */; };
 		8C2D130B238507C4005A7F39 /* VideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D130A238507C4005A7F39 /* VideoContentViewController.swift */; };
 		8C5DF60223264D9400B9F8A0 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */; };
+		8C9E5BDC238E5ACA00D8790F /* AVPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */; };
+		8C9E5BDF238E5D6200D8790F /* VideoContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9E5BDE238E5D6200D8790F /* VideoContentViewModel.swift */; };
 		8CD78EA322BC917D00DD034D /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */; };
 		8CD78EA522BC9B8F00DD034D /* TestMainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */; };
 		8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA622BC9DA100DD034D /* TestUtils.swift */; };
@@ -570,6 +572,8 @@
 		8C205A072323918700596E66 /* LoginActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityCell.swift; sourceTree = "<group>"; };
 		8C2D130A238507C4005A7F39 /* VideoContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentViewController.swift; sourceTree = "<group>"; };
 		8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
+		8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerExtensions.swift; sourceTree = "<group>"; };
+		8C9E5BDE238E5D6200D8790F /* VideoContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentViewModel.swift; sourceTree = "<group>"; };
 		8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginViewController.swift; sourceTree = "<group>"; };
 		8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainMenuTabViewController.swift; sourceTree = "<group>"; };
 		8CD78EA622BC9DA100DD034D /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
@@ -683,6 +687,7 @@
 		2F26ADE41E8249D70031E6F4 /* ios-app */ = {
 			isa = PBXGroup;
 			children = (
+				8C9E5BDD238E5D3300D8790F /* ViewModel */,
 				8C5DF60023264D2B00B9F8A0 /* Extensions */,
 				256EF50721CA15A200C743F0 /* ios-app.entitlements */,
 				2FC0F27C1F861A3E0092BFDC /* Core */,
@@ -1021,8 +1026,17 @@
 			children = (
 				8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */,
 				8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */,
+				8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8C9E5BDD238E5D3300D8790F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8C9E5BDE238E5D6200D8790F /* VideoContentViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1292,6 +1306,7 @@
 				2FC0F2E51F863AE00092BFDC /* TPAuthToken.swift in Sources */,
 				8C04228F22AA3FD40015269B /* WebViewController.swift in Sources */,
 				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,
+				8C9E5BDF238E5D6200D8790F /* VideoContentViewModel.swift in Sources */,
 				2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */,
 				2FC0F3091F863BA90092BFDC /* ReviewQuestionsDataSource.swift in Sources */,
 				2FC0F2F31F863B1B0092BFDC /* TPEndpoint.swift in Sources */,
@@ -1377,6 +1392,7 @@
 				2F25D558201EFB9F00C01CCE /* LeaderboardTabViewController.swift in Sources */,
 				2F3A14331FE15E98007CEE84 /* ActivityFeed.swift in Sources */,
 				2FC0F3001F863B8F0092BFDC /* ExamsTableViewCell.swift in Sources */,
+				8C9E5BDC238E5ACA00D8790F /* AVPlayerExtensions.swift in Sources */,
 				2F96997C1FC2A625001B2B18 /* Video.swift in Sources */,
 				2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */,
 				2FC0F2FC1F863B810092BFDC /* BaseQuestionsPageViewController.swift in Sources */,

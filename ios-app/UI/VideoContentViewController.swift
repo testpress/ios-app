@@ -32,6 +32,9 @@ import AVFoundation
 
 class VideoContentViewController: UIViewController {
     var content: Content!
+    var playerViewController:AVPlayerViewController!
+    var viewModel: VideoContentViewModel!
+
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var desc: UILabel!
@@ -39,27 +42,20 @@ class VideoContentViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
 
     
-    let playerViewController = AVPlayerViewController()
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let videoURL = URL(string: content.video!.url!)
-        initializePlayer(videoURL: videoURL!)
-        titleLabel.text = content.video?.title
-        desc.text = content.description
+        viewModel = VideoContentViewModel(content)
+        initAndSubviewPlayerViewController()
+        titleLabel.text = viewModel.getTitle()
+        desc.text = viewModel.getDescription()
     }
     
-    func initializePlayer(videoURL: URL) {
-        let player = AVPlayer(url: videoURL)
-        player.rate = 1
-        playerViewController.player = player
+    func initAndSubviewPlayerViewController() {
+        playerViewController = viewModel.initializePlayer()
         addChildViewController(playerViewController)
-        playerViewController.view.sizeToFit()
         view.addSubview(playerViewController.view)
         playerViewController.didMove(toParentViewController: self)
-        handleOrientation()
+        viewModel.handleOrientation()
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,47 +64,9 @@ class VideoContentViewController: UIViewController {
         playerViewController.view.frame = playerFrame
         scrollView.contentSize.height = stackView.frame.size.height
     }
-
-    
-    func handleOrientation() {
-        if UIDevice.current.orientation.isLandscape {
-            playerViewController.enterFullScreen()
-        } else {
-            playerViewController.exitFullScreen()
-        }
-    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        handleOrientation()
+        viewModel.handleOrientation()
     }
     
-}
-
-extension AVPlayerViewController {
-    
-    func enterFullScreen() {
-        let selectorName: String = {
-            if #available(iOS 11.3, *) {
-                return "_transitionToFullScreenAnimated:interactive:completionHandler:"
-            } else if #available(iOS 11, *) {
-                return "_transitionToFullScreenAnimated:completionHandler:"
-            } else {
-                return "_transitionToFullScreenViewControllerAnimated:completionHandler:"
-            }
-        }()
-        let selector = NSSelectorFromString(selectorName)
-        
-        if self.responds(to: selector) {
-            self.perform(selector, with: true, with: nil)
-        }
-    }
-    
-    func exitFullScreen() {
-        let selectorName = "exitFullScreenAnimated:completionHandler:"
-        let selector = NSSelectorFromString(selectorName)
-        
-        if self.responds(to: selector) {
-            self.perform(selector, with: true, with: nil)
-        }
-    }
 }

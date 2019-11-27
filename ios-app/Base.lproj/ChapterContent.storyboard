@@ -388,9 +388,8 @@
                                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="mzz-Rs-bza">
                                                         <rect key="frame" x="0.0" y="200" width="834" height="66"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WmO-u9-dHR">
-                                                                <rect key="frame" x="10" y="10" width="48" height="15"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WmO-u9-dHR">
+                                                                <rect key="frame" x="10" y="10" width="48" height="0.0"/>
                                                                 <color key="backgroundColor" red="0.90196442604064941" green="0.90194994211196899" blue="0.90196913480758667" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
@@ -425,11 +424,6 @@
                                                             </label>
                                                         </subviews>
                                                         <edgeInsets key="layoutMargins" top="10" left="10" bottom="10" right="0.0"/>
-                                                        <variation key="default">
-                                                            <mask key="subviews">
-                                                                <exclude reference="WmO-u9-dHR"/>
-                                                            </mask>
-                                                        </variation>
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
@@ -1177,7 +1171,7 @@
                                             <rect key="frame" x="20" y="15" width="809" height="24"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEe-g1-FVi">
-                                                    <rect key="frame" x="0.0" y="3.5" width="61" height="17.5"/>
+                                                    <rect key="frame" x="0.0" y="3" width="61" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="61" id="AFt-Vh-j28"/>
                                                     </constraints>
@@ -1186,13 +1180,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaV-ag-HOM">
-                                                    <rect key="frame" x="165" y="3.5" width="39.5" height="17.5"/>
+                                                    <rect key="frame" x="162.5" y="3" width="42.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Correct" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlG-b7-y1t">
-                                                    <rect key="frame" x="308.5" y="3.5" width="57" height="17.5"/>
+                                                    <rect key="frame" x="306.5" y="3" width="57" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57" id="3LV-6U-99c"/>
                                                     </constraints>
@@ -1201,13 +1195,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trophies " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUC-Nq-VfF">
-                                                    <rect key="frame" x="469" y="3.5" width="61" height="17.5"/>
+                                                    <rect key="frame" x="465" y="3" width="65.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Action " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RW5-OR-mNx">
-                                                    <rect key="frame" x="634" y="3.5" width="47" height="17.5"/>
+                                                    <rect key="frame" x="632" y="3" width="51.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1256,13 +1250,13 @@
                                             <rect key="frame" x="20" y="20" width="804" height="24.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 Oct '15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJZ-x2-yRw">
-                                                    <rect key="frame" x="0.0" y="4" width="65.5" height="16.5"/>
+                                                    <rect key="frame" x="0.0" y="4" width="61" height="17"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qz-IZ-kNQ">
-                                                    <rect key="frame" x="166" y="4" width="42" height="16.5"/>
+                                                    <rect key="frame" x="162.5" y="4" width="42" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="Z8w-wN-xAO"/>
                                                     </constraints>
@@ -1271,7 +1265,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200/299" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6o-Ec-FMV">
-                                                    <rect key="frame" x="309" y="4" width="57" height="16.5"/>
+                                                    <rect key="frame" x="306" y="4" width="57" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57" id="GlF-h6-5OD"/>
                                                     </constraints>
@@ -1280,7 +1274,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+90" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trT-Is-f7v">
-                                                    <rect key="frame" x="466.5" y="4" width="65" height="16.5"/>
+                                                    <rect key="frame" x="465" y="4" width="65" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="oiz-9X-FnA"/>
                                                     </constraints>
@@ -1289,7 +1283,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWc-aJ-e9a">
-                                                    <rect key="frame" x="632.5" y="4" width="47" height="16.5"/>
+                                                    <rect key="frame" x="631.5" y="4" width="47" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="47" id="5RW-zM-hvk"/>
                                                     </constraints>
@@ -1334,7 +1328,7 @@
                                             <rect key="frame" x="20" y="20" width="804" height="24.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 Oct '15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoM-sS-UgS">
-                                                    <rect key="frame" x="0.0" y="4" width="80" height="16.5"/>
+                                                    <rect key="frame" x="0.0" y="4" width="80" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="cFz-Mp-RNT"/>
                                                     </constraints>
@@ -1343,10 +1337,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="center" verticalHuggingPriority="1000" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="KFu-e1-72W">
-                                                    <rect key="frame" x="210" y="0.5" width="75" height="24"/>
+                                                    <rect key="frame" x="210" y="0.5" width="74.5" height="24"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="PAUSED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNy-Ou-esN">
-                                                            <rect key="frame" x="10" y="5" width="55" height="14"/>
+                                                            <rect key="frame" x="10" y="5" width="54.5" height="14"/>
                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                             <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1376,7 +1370,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resume" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acm-nc-T3V">
-                                                    <rect key="frame" x="590" y="4" width="60" height="16.5"/>
+                                                    <rect key="frame" x="590" y="4" width="60" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Z6H-z8-dD7"/>
                                                     </constraints>
