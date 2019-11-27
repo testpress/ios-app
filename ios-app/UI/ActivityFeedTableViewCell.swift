@@ -70,7 +70,7 @@ class ActivityFeedTableViewCell: UITableViewCell {
                         thumbnailImage.image = Images.PostAdded.image
                     } else if contentAttempt.video != nil {
                         action = "watched the video "
-                        actionObjectName = contentAttempt.video.title
+                        actionObjectName = contentAttempt.video.videoContent.title
                         thumbnailImage.image = Images.VideoAddedIcon.image
                     } else if contentAttempt.attachment != nil {
                         action = "viewed the file "

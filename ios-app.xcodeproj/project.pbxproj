@@ -260,6 +260,7 @@
 		8C5DF60223264D9400B9F8A0 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */; };
 		8C9E5BDC238E5ACA00D8790F /* AVPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */; };
 		8C9E5BDF238E5D6200D8790F /* VideoContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9E5BDE238E5D6200D8790F /* VideoContentViewModel.swift */; };
+		8CA17128238CED7F00BD42E9 /* VideoAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA17127238CED7F00BD42E9 /* VideoAttempt.swift */; };
 		8CD78EA322BC917D00DD034D /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */; };
 		8CD78EA522BC9B8F00DD034D /* TestMainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */; };
 		8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA622BC9DA100DD034D /* TestUtils.swift */; };
@@ -574,6 +575,7 @@
 		8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
 		8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerExtensions.swift; sourceTree = "<group>"; };
 		8C9E5BDE238E5D6200D8790F /* VideoContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentViewModel.swift; sourceTree = "<group>"; };
+		8CA17127238CED7F00BD42E9 /* VideoAttempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAttempt.swift; sourceTree = "<group>"; };
 		8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginViewController.swift; sourceTree = "<group>"; };
 		8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainMenuTabViewController.swift; sourceTree = "<group>"; };
 		8CD78EA622BC9DA100DD034D /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
@@ -982,6 +984,7 @@
 				2519C12D21B0083600D26551 /* InstituteSettings.swift */,
 				2506298D2264856E00539FB2 /* ApiError.swift */,
 				250629912265E74D00539FB2 /* LoginActivity.swift */,
+				8CA17127238CED7F00BD42E9 /* VideoAttempt.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1461,6 +1464,7 @@
 				2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */,
 				2FDF9C4D20B6D01B0086245F /* Bookmark.swift in Sources */,
 				2FDF9C4F20B6D40D0086245F /* BookmarksPager.swift in Sources */,
+				8CA17128238CED7F00BD42E9 /* VideoAttempt.swift in Sources */,
 				2F48C8131FD3E417009C686C /* Category.swift in Sources */,
 				2FC0F2E61F863AE30092BFDC /* TPError.swift in Sources */,
 				2FC0F2E31F863ADA0092BFDC /* RegistrationError.swift in Sources */,
