@@ -37,29 +37,21 @@ class VideoContentViewController: UIViewController {
     var playerViewController:AVPlayerViewController!
     var viewModel: VideoContentViewModel!
     var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
-    var contentAttemptId: Int?
-    var startTime: String?
-    weak var timer: Timer?
-    var myView: UIView?
-
+    
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = VideoContentViewModel(content)
+        viewModel = VideoContentViewModel(content, contentAttemptCreationDelegate)
         initAndSubviewPlayerViewController()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()
-        createContentAttempt()
-        if #available(iOS 11.0, *) {
-            NotificationCenter.default.addObserver(self, selector: #selector(screenCaptureChanged), name: NSNotification.Name.UIScreenCapturedDidChange, object: nil)
-        }
-         playerViewController.player?.addObserver(self, forKeyPath: "rate", options: [.new, .initial], context: nil)
+        viewModel.createContentAttempt()
     }
     
     override func observeValue(forKeyPath keyPath: String?,
@@ -67,19 +59,9 @@ class VideoContentViewController: UIViewController {
                                change: [NSKeyValueChangeKey : Any]?,
                                context: UnsafeMutableRawPointer?) {
         if keyPath  == "rate" {
-            self.startTime = String(format: "%.4f", playerViewController.player!.currentTimeInSeconds)
+            viewModel.startTime = String(format: "%.4f", playerViewController.player!.currentTimeInSeconds)
         }
         
-    }
-    
-    @objc func screenCaptureChanged() {
-        if #available(iOS 11.0, *) {
-            if (UIScreen.main.isCaptured) {
-                print("Screen is being recorded")
-            } else {
-                print("Screen recording is done")
-            }
-        }
     }
     
     func initAndSubviewPlayerViewController() {
@@ -90,18 +72,16 @@ class VideoContentViewController: UIViewController {
         viewModel.handleOrientation()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.updateVideoAttempt), userInfo: nil, repeats: true)
-
+        viewModel.startPeriodicAttemptUpdater()
+        playerViewController.player?.addObserver(self, forKeyPath: "rate", options: [.new, .initial], context: nil)
     }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        timer?.invalidate()
+        viewModel.stopPeriodicAttemptUpdater()
+        playerViewController.player?.removeObserver(self, forKeyPath: "rate")
     }
     
     override func viewDidLayoutSubviews() {
@@ -109,54 +89,6 @@ class VideoContentViewController: UIViewController {
         let playerFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: videoPlayer.frame.height)
         playerViewController.view.frame = playerFrame
         scrollView.contentSize.height = stackView.frame.size.height
-    }
-    
-    
-    func createContentAttempt() {
-        let url = TPEndpointProvider.getContentAttemptUrl(contentID: content.id)
-        TPApiClient.request(
-            type: ContentAttempt.self,
-            endpointProvider: TPEndpointProvider(.post, url: url),
-            completion: {
-                contentAttempt, error in
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    return
-                }
-                self.startTime = contentAttempt?.video.lastPosition
-                self.contentAttemptId = contentAttempt!.objectID
-                let seconds = CMTimeMakeWithSeconds((contentAttempt?.video.lastPosition as! NSString).doubleValue, CMTimeScale(NSEC_PER_MSEC))
-                print("Seconds \(seconds)")
-                self.playerViewController.player?.seek(to: seconds)
-                
-                if self.content.attemptsCount == 0 {
-                    self.contentAttemptCreationDelegate?.newAttemptCreated()
-                }
-        })
-    }
-    
-    @objc func updateVideoAttempt() {
-        if (playerViewController.player!.isPlaying) {
-            let currentTime = String(format: "%.4f", playerViewController.player!.currentTimeInSeconds)
-            let parameters: Parameters = [
-                "last_position": currentTime,
-                "time_ranges": [[self.startTime, currentTime]]
-            ]
-            let url = TPEndpointProvider.getVideoAttemptPath(attemptID: contentAttemptId!)
-
-            TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.put, url: url), parameters: parameters,completion: {
-                videoAttempt, error in
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    let event = Event(level: .error)
-                    event.message = error.message ?? "No error"
-                    Client.shared?.send(event: event)
-                    return
-                }
-            })
-        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

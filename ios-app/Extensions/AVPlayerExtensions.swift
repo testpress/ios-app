@@ -58,3 +58,18 @@ extension AVPlayerViewController {
         videoGravity = AVLayerVideoGravity.resizeAspect.rawValue
     }
 }
+
+
+extension AVPlayer {
+    var currentTimeInSeconds:Float64 {
+        return CMTimeGetSeconds(currentTime())
+    }
+    
+    var isPlaying: Bool {
+        if #available(iOS 10.0, *) {
+            return timeControlStatus == AVPlayerTimeControlStatus.playing
+        } else {
+            return rate != 0 && error == nil
+        }
+    }
+}
