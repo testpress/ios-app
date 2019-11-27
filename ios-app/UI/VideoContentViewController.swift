@@ -37,29 +37,21 @@ class VideoContentViewController: UIViewController {
     var playerViewController:AVPlayerViewController!
     var viewModel: VideoContentViewModel!
     var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
-    var contentAttemptId: Int?
-    var startTime: String?
-    weak var timer: Timer?
-    var myView: UIView?
-
+    
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = VideoContentViewModel(content)
+        viewModel = VideoContentViewModel(content, contentAttemptCreationDelegate)
         initAndSubviewPlayerViewController()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()
-        createContentAttempt()
-        if #available(iOS 11.0, *) {
-            NotificationCenter.default.addObserver(self, selector: #selector(screenCaptureChanged), name: NSNotification.Name.UIScreenCapturedDidChange, object: nil)
-        }
-         playerViewController.player?.addObserver(self, forKeyPath: "rate", options: [.new, .initial], context: nil)
+        viewModel.createContentAttempt()
     }
     
     override func observeValue(forKeyPath keyPath: String?,
@@ -67,19 +59,9 @@ class VideoContentViewController: UIViewController {
                                change: [NSKeyValueChangeKey : Any]?,
                                context: UnsafeMutableRawPointer?) {
         if keyPath  == "rate" {
-            self.startTime = String(format: "%.4f", playerViewController.player!.currentTimeInSeconds)
+            viewModel.startTime = String(format: "%.4f", playerViewController.player!.currentTimeInSeconds)
         }
         
-    }
-    
-    @objc func screenCaptureChanged() {
-        if #available(iOS 11.0, *) {
-            if (UIScreen.main.isCaptured) {
-                print("Screen is being recorded")
-            } else {
-                print("Screen recording is done")
-            }
-        }
     }
     
     func initAndSubviewPlayerViewController() {
@@ -89,18 +71,16 @@ class VideoContentViewController: UIViewController {
         playerViewController.didMove(toParentViewController: self)
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.updateVideoAttempt), userInfo: nil, repeats: true)
-
+        viewModel.startPeriodicAttemptUpdater()
+        playerViewController.player?.addObserver(self, forKeyPath: "rate", options: [.new, .initial], context: nil)
     }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        timer?.invalidate()
+        viewModel.stopPeriodicAttemptUpdater()
+        playerViewController.player?.removeObserver(self, forKeyPath: "rate")
     }
     
     override func viewDidLayoutSubviews() {
