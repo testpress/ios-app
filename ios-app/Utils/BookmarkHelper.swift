@@ -138,6 +138,9 @@ class BookmarkHelper {
         } else if viewController is AttachmentDetailViewController {
             let attachmentViewController = viewController as! AttachmentDetailViewController
             attachmentViewController.udpateBookmarkButtonState(bookmarkId: bookmarkId)
+        } else if viewController is VideoContentViewController {
+             let videoContentViewController = viewController as! VideoContentViewController
+            videoContentViewController.udpateBookmarkButtonState(bookmarkId: bookmarkId)
         } else {
             let htmlViewController = viewController as! HtmlContentViewController
             htmlViewController.content.bookmarkId = bookmarkId
@@ -157,7 +160,7 @@ class BookmarkHelper {
             let attachmentViewController = viewController as! AttachmentDetailViewController
             attachmentViewController.bookmarkAnimationContainer.isHidden = true
             attachmentViewController.bookmarkButton.isHidden = false
-        } else {
+        } else if viewController is HtmlContentViewController {
             let htmlViewController = viewController as! HtmlContentViewController
             htmlViewController.evaluateJavaScript("displayBookmarkButton();")
         }
@@ -246,6 +249,8 @@ class BookmarkHelper {
             var content: Content
             if let htmlViewController = viewController as? HtmlContentViewController {
                 content = htmlViewController.content
+            } else if let videoContentViewController = viewController as? VideoContentViewController {
+                content = videoContentViewController.content
             } else {
                 let attachmentViewController = viewController as! AttachmentDetailViewController
                 content = attachmentViewController.content

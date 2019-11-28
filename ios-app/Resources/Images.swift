@@ -49,7 +49,9 @@ enum Images: String {
     case ActivitiesFlatIcon = "activities_flat_icon"
     case LeaderboardFlatIcon = "leaderboard_flat_icon"
     case LoginActivityIcon = "lock"
-    
+    case RemoveBookmark = "remove_bookmark"
+    case AddBookmark = "ic_bookmark"
+
     var image: UIImage {
         return UIImage(asset: self)
     }
