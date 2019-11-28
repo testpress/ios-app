@@ -30,6 +30,7 @@ import AVKit
 import AVFoundation
 import Alamofire
 import Sentry
+import TTGSnackbar
 
 
 class VideoContentViewController: UIViewController {
@@ -38,6 +39,7 @@ class VideoContentViewController: UIViewController {
     var viewModel: VideoContentViewModel!
     var customView: UIView!
     var warningLabel: UILabel!
+    var bookmarkHelper: BookmarkHelper!
     
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -54,6 +56,7 @@ class VideoContentViewController: UIViewController {
         desc.text = viewModel.getDescription()
         viewModel.createContentAttempt()
         addCustomView()
+        udpateBookmarkButtonState(bookmarkId: content.bookmarkId)
         
         handleExternalDisplay()
         if #available(iOS 11.0, *) {
@@ -83,6 +86,40 @@ class VideoContentViewController: UIViewController {
         customView.isHidden = false
     }
     
+    func addOrRemoveBookmark() {
+        if (content.bookmarkId != nil) {
+            viewModel.removeBookmark(completion: {self.udpateBookmarkButtonState(bookmarkId: nil)})
+        } else {
+            bookmark()
+        }
+    }
+    
+    
+    func udpateBookmarkButtonState(bookmarkId: Int?) {
+        content.bookmarkId = bookmarkId
+        if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
+            if bookmarkId != nil {
+                contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.RemoveBookmark.image
+            } else {
+                 contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
+            }
+        }
+    }
+    
+    
+    func bookmark() {
+        let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: nil)
+        let navigationController = storyboard.instantiateViewController(withIdentifier:
+            Constants.BOOKMARK_FOLDER_NAVIGATION_CONTROLLER) as! UINavigationController
+        
+        let foldersTableViewController = navigationController.viewControllers.first
+            as! BookmarkFolderTableViewController
+        
+        foldersTableViewController.sourceViewController = self
+        present(navigationController, animated: true)
+        
+    }
+ 
     func hideWarning() {
         playerViewController.player?.play()
         customView.isHidden = true
