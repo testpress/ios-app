@@ -21,6 +21,7 @@ class VideoContentViewModel {
     func initializePlayer() -> AVPlayerViewController {
         let videoURL = URL(string: content.video!.url!)
         let player = AVPlayer(url: videoURL!)
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
         player.rate = 1
         playerViewController.player = player
         return playerViewController
