@@ -268,6 +268,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         // Add gradient shadow layer to the shadow container view
         UIUtils.updateBottomShadow(bottomShadowView: bottomShadowView,
                                    bottomGradient: bottomGradient)
+        emptyView.frame = contentsContainerView.bounds
         
     }
     
