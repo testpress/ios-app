@@ -376,17 +376,34 @@
                                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TdS-OU-Y5d">
-                                                <rect key="frame" x="0.0" y="0.0" width="834" height="266"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="834" height="465.5"/>
                                                 <subviews>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNq-HH-xlC" userLabel="VideoPlayer View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="834" height="200"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="834" height="400"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="200" id="3yN-6e-3tp"/>
+                                                            <constraint firstAttribute="height" constant="200" id="KfW-Su-cN1"/>
+                                                            <constraint firstAttribute="height" constant="400" id="TkF-0F-BDH"/>
                                                         </constraints>
                                                         <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="KfW-Su-cN1"/>
+                                                                <exclude reference="TkF-0F-BDH"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                            <mask key="constraints">
+                                                                <include reference="KfW-Su-cN1"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="TkF-0F-BDH"/>
+                                                            </mask>
+                                                        </variation>
                                                     </view>
                                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="mzz-Rs-bza">
-                                                        <rect key="frame" x="0.0" y="200" width="834" height="66"/>
+                                                        <rect key="frame" x="0.0" y="400" width="834" height="65.5"/>
                                                         <subviews>
                                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WmO-u9-dHR">
                                                                 <rect key="frame" x="10" y="10" width="48" height="0.0"/>
@@ -409,14 +426,14 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxX-yA-srq">
-                                                                <rect key="frame" x="10" y="10" width="58" height="26.5"/>
+                                                                <rect key="frame" x="10" y="10" width="54" height="26"/>
                                                                 <edgeInsets key="layoutMargins" top="15" left="0.0" bottom="0.0" right="0.0"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="22"/>
                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="058-hb-RRr">
-                                                                <rect key="frame" x="10" y="36.5" width="83" height="19.5"/>
+                                                                <rect key="frame" x="10" y="36" width="83" height="19.5"/>
                                                                 <edgeInsets key="layoutMargins" top="20" left="8" bottom="8" right="8"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -517,11 +534,11 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="64" height="50"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_navigate_before" translatesAutoresizingMaskIntoConstraints="NO" id="uF0-Et-ek3">
-                                                        <rect key="frame" x="0.0" y="1" width="24" height="48"/>
+                                                        <rect key="frame" x="0.0" y="1" width="48" height="48"/>
                                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     </imageView>
                                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ZB-0Z-4QR">
-                                                        <rect key="frame" x="24" y="10" width="40" height="30"/>
+                                                        <rect key="frame" x="48" y="10" width="16" height="30"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
                                                         <state key="normal" title="PREV"/>
                                                     </button>
@@ -534,12 +551,12 @@
                                                 <rect key="frame" x="771" y="0.0" width="63" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nnK-b7-hfQ">
-                                                        <rect key="frame" x="0.0" y="10" width="39" height="30"/>
+                                                        <rect key="frame" x="0.0" y="10" width="15" height="30"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
                                                         <state key="normal" title="NEXT"/>
                                                     </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_navigate_next" translatesAutoresizingMaskIntoConstraints="NO" id="ARs-nd-XZj">
-                                                        <rect key="frame" x="39" y="1" width="24" height="48"/>
+                                                        <rect key="frame" x="15" y="1" width="48" height="48"/>
                                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     </imageView>
                                                 </subviews>
