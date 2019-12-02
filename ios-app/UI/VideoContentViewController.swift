@@ -33,19 +33,26 @@ import Sentry
 import TTGSnackbar
 
 
-class VideoContentViewController: UIViewController {
+class VideoContentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    
     var content: Content!
+    var contents: [Content]!
     var playerViewController:AVPlayerViewController!
     var viewModel: VideoContentViewModel!
     var customView: UIView!
     var warningLabel: UILabel!
     var bookmarkHelper: BookmarkHelper!
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleStackView: UIStackView!
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var caretImage: UIImageView!
+    @IBOutlet weak var contentView: UIView!
     
     
     override func viewDidLoad() {
@@ -62,6 +69,37 @@ class VideoContentViewController: UIViewController {
         if #available(iOS 11.0, *) {
             handleScreenCapture()
         }
+
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.isScrollEnabled = false
+        
+        
+        titleStackView.addTapGestureRecognizer {
+            self.desc.isHidden = !self.desc.isHidden
+            
+            if (self.desc.isHidden) {
+                self.caretImage.image = Images.CaretDown.image
+            } else {
+                self.caretImage.image = Images.CaretUp.image
+            }
+        }
+        
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contents.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RelatedContentsCell", for: indexPath) as! RelatedContentsCell
+        cell.initCell(index: indexPath.row, contents: contents, viewController: self, is_current: content.id == contents[indexPath.row].id)
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     func addCustomView() {
@@ -193,7 +231,83 @@ class VideoContentViewController: UIViewController {
         }
         
         playerViewController.view.frame = playerFrame
-        scrollView.contentSize.height = stackView.frame.size.height
+        stackView.layoutIfNeeded()
+        
+        scrollView.contentSize.height = stackView.frame.height + tableView.contentSize.height + desc.frame.height + 300
+        
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Touch : \(touches)")
+        if let touch = touches.first {
+            let position = touch.location(in: view)
+            print("Tableview Bounds \(touch.view)")
+            if tableView.frame.contains(position) {
+                print("I am in tableview")
+            }
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        viewModel.handleOrientation()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+        playerViewController.player?.pause()
+    }
+    
+}
+
+
+
+extension UIView {
+    
+    fileprivate struct AssociatedObjectKeys {
+        static var tapGestureRecognizer = "MediaViewerAssociatedObjectKey_mediaViewer"
+    }
+    
+    fileprivate typealias Action = (() -> Void)?
+    
+    fileprivate var tapGestureRecognizerAction: Action? {
+        set {
+            if let newValue = newValue {
+                // Computed properties get stored as associated objects
+                objc_setAssociatedObject(self, &AssociatedObjectKeys.tapGestureRecognizer, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            }
+        }
+        get {
+            let tapGestureRecognizerActionInstance = objc_getAssociatedObject(self, &AssociatedObjectKeys.tapGestureRecognizer) as? Action
+            return tapGestureRecognizerActionInstance
+        }
+    }
+    
+    // This is the meat of the sauce, here we create the tap gesture recognizer and
+    // store the closure the user passed to us in the associated object we declared above
+    public func addTapGestureRecognizer(action: (() -> Void)?) {
+        self.isUserInteractionEnabled = true
+        self.tapGestureRecognizerAction = action
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    // Every time the user taps on the UIImageView, this function gets called,
+    // which triggers the closure we stored
+    @objc fileprivate func handleTapGesture(sender: UITapGestureRecognizer) {
+        if let action = self.tapGestureRecognizerAction {
+            action?()
+        } else {
+            print("no action")
+        }
+    }
+    
+}
+
+extension UIScrollView {
+    func fitSizeOfContent() -> CGSize {
+        let sumHeight = self.subviews.map({$0.frame.size.height}).reduce(0, {x, y in x + y})
+                self.contentSize = CGSize(width: self.frame.width, height: sumHeight)
+             return CGSize(width: self.frame.width, height: sumHeight)
+    }
 }

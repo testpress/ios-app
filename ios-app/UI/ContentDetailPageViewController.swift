@@ -83,10 +83,14 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         contentDetailDataSource = ContentDetailDataSource(contents, contentAttemptCreationDelegate)
         navigationBarItem.title = title
         if contents.count < 2 {
-            bottomShadowView.isHidden = true
-            bottomNavigationBar.isHidden = true
-            bottomNavigationBarConstraint.constant = 0
+            hideBottomNavBar()
         }
+    }
+    
+    func hideBottomNavBar() {
+        bottomShadowView.isHidden = true
+        bottomNavigationBar.isHidden = true
+        bottomNavigationBarConstraint.constant = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +109,8 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
             if contents[position].bookmarkId != nil {
                 bookmarkButton.image = Images.RemoveBookmark.image
             }
+            hideBottomNavBar()
+            
         } else {
             navigationBarItem.rightBarButtonItems = []
         }
@@ -272,7 +278,11 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     @IBAction func back() {
-        dismiss(animated: true, completion: nil)
+        if let navigationViewController = self.view.window?.rootViewController?.presentedViewController?.presentedViewController as? UINavigationController {
+            navigationViewController.dismiss(animated: true)
+        } else {
+            dismiss(animated: true)
+        }
     }
     
     @IBAction func bookMark(_ sender: UIBarButtonItem) {
