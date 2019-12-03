@@ -124,7 +124,6 @@ class VideoContentViewModel {
                     ).show()
                 
                 completion?()
-//                self.udpateBookmarkButtonState(bookmarkId: nil)
         })
     }
     
