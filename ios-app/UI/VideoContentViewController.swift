@@ -49,10 +49,11 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var desc: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var caretImage: UIImageView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var headerStackView: UIStackView!
+    @IBOutlet weak var headerView: UIView!
     
     
     override func viewDidLoad() {
@@ -60,9 +61,11 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         viewModel = VideoContentViewModel(content)
         initAndSubviewPlayerViewController()
         titleLabel.text = viewModel.getTitle()
+
         desc.text = viewModel.getDescription()
         viewModel.createContentAttempt()
         addCustomView()
+        desc.isHidden = true
         udpateBookmarkButtonState(bookmarkId: content.bookmarkId)
         
         handleExternalDisplay()
@@ -73,27 +76,32 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.isScrollEnabled = false
         
         
         titleStackView.addTapGestureRecognizer {
             self.desc.isHidden = !self.desc.isHidden
-            
+        
             if (self.desc.isHidden) {
                 self.caretImage.image = Images.CaretDown.image
             } else {
                 self.caretImage.image = Images.CaretUp.image
             }
+            
         }
         
     }
-
+    
+    var oldContentOffset = CGPoint.zero
+    let topConstraintRange = (CGFloat(120)..<CGFloat(300))
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contents.count
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RelatedContentsCell", for: indexPath) as! RelatedContentsCell
+        
         cell.initCell(index: indexPath.row, contents: contents, viewController: self, is_current: content.id == contents[indexPath.row].id)
         return cell
     }
@@ -135,6 +143,7 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
         content.bookmarkId = bookmarkId
+        tableView.reloadData()
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             if bookmarkId != nil {
                 contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.RemoveBookmark.image
@@ -224,25 +233,26 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func viewDidLayoutSubviews() {
+        let headerHeight = headerView.fitSizeOfContent().height - desc.frame.size.height
+
         super.viewDidLayoutSubviews()
         let playerFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: videoPlayer.frame.height)
         playerViewController.view.frame = playerFrame
-        stackView.layoutIfNeeded()
+         desc.sizeToFit()
         
-        scrollView.contentSize.height = stackView.frame.height + tableView.contentSize.height + desc.frame.height + 300
-        
+        if let tableHeaderView = tableView.tableHeaderView  {
+            if !desc.isHidden && desc.text != nil {
+                tableHeaderView.frame.size.height = titleStackView.frame.size.height + desc.frame.size.height + 20
+            } else {
+                tableHeaderView.frame.size.height = headerHeight
+            }
+            
+            tableView.tableHeaderView = tableHeaderView
+            tableView.layoutIfNeeded()
+        }
+
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touch : \(touches)")
-        if let touch = touches.first {
-            let position = touch.location(in: view)
-            print("Tableview Bounds \(touch.view)")
-            if tableView.frame.contains(position) {
-                print("I am in tableview")
-            }
-        }
-    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         viewModel.handleOrientation()
@@ -300,10 +310,9 @@ extension UIView {
     
 }
 
-extension UIScrollView {
+extension UIView {
     func fitSizeOfContent() -> CGSize {
         let sumHeight = self.subviews.map({$0.frame.size.height}).reduce(0, {x, y in x + y})
-                self.contentSize = CGSize(width: self.frame.width, height: sumHeight)
-             return CGSize(width: self.frame.width, height: sumHeight)
+        return CGSize(width: self.frame.width, height: sumHeight)
     }
 }
