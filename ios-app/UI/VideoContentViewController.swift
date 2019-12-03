@@ -55,18 +55,18 @@ class VideoContentViewController: UIViewController {
         addChildViewController(playerViewController)
         view.addSubview(playerViewController.view)
         playerViewController.didMove(toParentViewController: self)
-        viewModel.handleOrientation()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let playerFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: videoPlayer.frame.height)
+        var playerFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: videoPlayer.frame.height)
+        
+        if (UIDevice.current.orientation.isLandscape) {
+            playerFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: view.frame.height)
+        }
+        
         playerViewController.view.frame = playerFrame
         scrollView.contentSize.height = stackView.frame.size.height
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        viewModel.handleOrientation()
     }
     
 }

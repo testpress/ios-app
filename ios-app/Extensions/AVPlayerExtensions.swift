@@ -29,32 +29,5 @@
 import AVKit
 
 extension AVPlayerViewController {
-    
-    func enterFullScreen() {
-        let selectorName: String = {
-            if #available(iOS 11.3, *) {
-                return "_transitionToFullScreenAnimated:interactive:completionHandler:"
-            } else if #available(iOS 11, *) {
-                return "_transitionToFullScreenAnimated:completionHandler:"
-            } else {
-                return "_transitionToFullScreenViewControllerAnimated:completionHandler:"
-            }
-        }()
-        let selector = NSSelectorFromString(selectorName)
-        
-        if self.responds(to: selector) {
-            self.perform(selector, with: true, with: nil)
-        }
-        videoGravity = AVLayerVideoGravity.resizeAspectFill.rawValue
-    }
-    
-    func exitFullScreen() {
-        let selectorName = "exitFullScreenAnimated:completionHandler:"
-        let selector = NSSelectorFromString(selectorName)
-        
-        if self.responds(to: selector) {
-            self.perform(selector, with: true, with: nil)
-        }
-        videoGravity = AVLayerVideoGravity.resizeAspect.rawValue
-    }
+   
 }
