@@ -69,6 +69,12 @@ class RelatedContentsCell: UITableViewCell {
         
         addGestureRecognizer(tapRecognizer)
         
+        bookmarkIcon.addTapGestureRecognizer{
+            if let viewController = self.parentViewController as? VideoContentViewController {
+                viewController.addOrRemoveBookmark(content: self.content)
+            }
+        }
+        
     }
     
     @objc func onItemClick() {
