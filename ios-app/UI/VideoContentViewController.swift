@@ -43,6 +43,7 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
     var customView: UIView!
     var warningLabel: UILabel!
     var bookmarkHelper: BookmarkHelper!
+    var bookmarkDelegate: BookmarkDelegate?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleStackView: UIStackView!
@@ -161,6 +162,7 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         let foldersTableViewController = navigationController.viewControllers.first
             as! BookmarkFolderTableViewController
         
+        foldersTableViewController.bookmarkDelegate = self
         foldersTableViewController.sourceViewController = self
         present(navigationController, animated: true)
         
@@ -263,4 +265,41 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         playerViewController.player?.pause()
     }
     
+}
+
+
+extension VideoContentViewController: BookmarkDelegate {
+    func displayMoveButton() {
+
+    }
+    
+    func displayBookmarkButton() {
+    }
+    
+    func onClickMoveButton() {
+    
+    }
+    
+    func removeBookmark() {
+    
+    }
+    
+    func displayRemoveButton() {
+        
+    }
+    
+    func onClickBookmarkButton() {
+    
+    }
+    
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = content.id
+        parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
+        return parameters
+    }
+    
+    func updateBookmark(bookmarkId: Int?) {
+        self.udpateBookmarkButtonState(bookmarkId: bookmarkId)
+    }
 }

@@ -26,6 +26,7 @@
 import TTGSnackbar
 import UIKit
 import WebKit
+import Alamofire
 
 class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler, BookmarkDelegate {
     
@@ -409,6 +410,26 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     
     func onClickBookmarkButton() {
         self.evaluateJavaScript("hideBookmarkButton();")
+    }
+    
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = self.attemptItem.id
+        parameters["content_type"] = ["model": "userselectedanswer", "app_label": "exams"]
+        return parameters
+    }
+    
+    func updateBookmark(bookmarkId: Int?) {
+        self.attemptItem.bookmarkId = bookmarkId
+        self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
+    }
+    
+    func displayBookmarkButton() {
+        self.evaluateJavaScript("displayBookmarkButton();")
+    }
+    
+    func displayMoveButton() {
+        self.evaluateJavaScript("displayMoveButton();")
     }
     
 }

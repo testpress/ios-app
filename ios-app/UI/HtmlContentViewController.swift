@@ -25,6 +25,7 @@
 
 import UIKit
 import WebKit
+import  Alamofire
 
 class HtmlContentViewController: BaseWebViewController {
     
@@ -40,7 +41,7 @@ class HtmlContentViewController: BaseWebViewController {
         emptyView = EmptyView.getInstance(parentView: webView)
         webViewDelegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
-        bookmarkHelper.delegate = bookmarkDelegate
+        bookmarkHelper.delegate = self
         checkContentType()
     }
     
@@ -184,6 +185,14 @@ extension HtmlContentViewController: WKScriptMessageHandler {
 
 
 extension HtmlContentViewController: BookmarkDelegate {
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = content.id
+        parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
+        print("Parameters : \(parameters)")
+        return parameters
+    }
+    
     func onClickMoveButton() {
         self.evaluateJavaScript("hideMoveButton();")
     }
@@ -200,5 +209,16 @@ extension HtmlContentViewController: BookmarkDelegate {
         self.evaluateJavaScript("hideBookmarkButton();")
     }
     
+    func updateBookmark(bookmarkId: Int?) {
+        self.content.bookmarkId = bookmarkId
+        self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
+    }
     
+    func displayBookmarkButton() {
+        self.evaluateJavaScript("displayBookmarkButton();")
+    }
+    
+    func displayMoveButton() {
+        self.evaluateJavaScript("displayMoveButton();")
+    }
 }

@@ -26,6 +26,7 @@
 import Lottie
 import PDFReader
 import UIKit
+import Alamofire
 
 class AttachmentDetailViewController: UIViewController {
     
@@ -221,6 +222,17 @@ class AttachmentDetailViewController: UIViewController {
 }
 
 extension AttachmentDetailViewController: BookmarkDelegate {
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = content.id
+        parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
+        return parameters
+    }
+    
+    func updateBookmark(bookmarkId: Int?) {
+        self.udpateBookmarkButtonState(bookmarkId: bookmarkId)
+    }
+    
     func onClickMoveButton() {
         self.moveButton.isHidden = true
         self.moveAnimationView.isHidden = false
@@ -241,5 +253,14 @@ extension AttachmentDetailViewController: BookmarkDelegate {
         self.removeAnimationView.isHidden = false
     }
     
+    func displayBookmarkButton() {
+        self.bookmarkAnimationContainer.isHidden = true
+        self.bookmarkButton.isHidden = false
+    }
+    
+    func displayMoveButton() {
+        self.moveAnimationView.isHidden = true
+        self.moveButton.isHidden = false
+    }
     
 }
