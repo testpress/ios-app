@@ -302,7 +302,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     @IBAction func bookMark(_ sender: UIBarButtonItem) {
         if let viewController = self.getCurretViewController() as? VideoContentViewController {
-            viewController.addOrRemoveBookmark()
+            viewController.addOrRemoveBookmark(content: nil)
         }
     }
     
