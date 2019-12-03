@@ -54,9 +54,9 @@ class MainMenuTabViewController: UITabBarController {
             viewControllers?.remove(at: 1)
         }
         
-//        if (!instituteSettings.activityFeedEnabled) {
-//            viewControllers?.remove(at: 0)
-//        }
+        if (!instituteSettings.activityFeedEnabled) {
+            viewControllers?.remove(at: 0)
+        }
 
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
             let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
