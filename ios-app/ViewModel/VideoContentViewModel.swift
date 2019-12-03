@@ -34,14 +34,4 @@ class VideoContentViewModel {
     func getDescription() -> String {
         return content.description!
     }
-    
-    
-    func handleOrientation() {
-        if UIDevice.current.orientation.isLandscape {
-            playerViewController.enterFullScreen()
-        } else {
-            playerViewController.exitFullScreen()
-        }
-    }
-    
 }
