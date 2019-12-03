@@ -61,26 +61,29 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         viewModel = VideoContentViewModel(content)
         initAndSubviewPlayerViewController()
         titleLabel.text = viewModel.getTitle()
-
         desc.text = viewModel.getDescription()
         viewModel.createContentAttempt()
         addCustomView()
         desc.isHidden = true
         udpateBookmarkButtonState(bookmarkId: content.bookmarkId)
+
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        addGestures()
         
         handleExternalDisplay()
         if #available(iOS 11.0, *) {
             handleScreenCapture()
         }
+        
+    }
+    
 
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        
+    func addGestures() {
         titleStackView.addTapGestureRecognizer {
             self.desc.isHidden = !self.desc.isHidden
-        
+            
             if (self.desc.isHidden) {
                 self.caretImage.image = Images.CaretDown.image
             } else {
@@ -88,16 +91,12 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
             }
             
         }
-        
     }
-    
-    var oldContentOffset = CGPoint.zero
-    let topConstraintRange = (CGFloat(120)..<CGFloat(300))
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contents.count
     }
-
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RelatedContentsCell", for: indexPath) as! RelatedContentsCell
@@ -148,7 +147,7 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
             if bookmarkId != nil {
                 contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.RemoveBookmark.image
             } else {
-                 contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
+                contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
             }
         }
     }
@@ -166,7 +165,7 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         present(navigationController, animated: true)
         
     }
- 
+    
     func hideWarning() {
         playerViewController.player?.play()
         customView.isHidden = true
@@ -183,7 +182,7 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
     @available(iOS 11.0, *)
     @objc func handleScreenCapture() {
         if (UIScreen.main.isCaptured) {
-           showWarning(text: "Please stop screen recording to continue watching video")
+            showWarning(text: "Please stop screen recording to continue watching video")
         } else {
             hideWarning()
         }
@@ -213,7 +212,7 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         playerViewController.player?.addObserver(self, forKeyPath: "rate", options: [.new, .initial], context: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidConnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidDisconnect, object: nil)
-
+        
         if #available(iOS 11.0, *) {
             NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: .UIScreenCapturedDidChange, object: nil)
         }
@@ -229,16 +228,16 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         if #available(iOS 11.0, *) {
             NotificationCenter.default.removeObserver(self, name: .UIScreenCapturedDidChange, object: nil)
         }
-
+        
     }
     
     override func viewDidLayoutSubviews() {
         let headerHeight = headerView.fitSizeOfContent().height - desc.frame.size.height
-
+        
         super.viewDidLayoutSubviews()
         let playerFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: videoPlayer.frame.height)
         playerViewController.view.frame = playerFrame
-         desc.sizeToFit()
+        desc.sizeToFit()
         
         if let tableHeaderView = tableView.tableHeaderView  {
             if !desc.isHidden && desc.text != nil {
@@ -250,7 +249,7 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
             tableView.tableHeaderView = tableHeaderView
             tableView.layoutIfNeeded()
         }
-
+        
     }
     
     
@@ -264,55 +263,4 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         playerViewController.player?.pause()
     }
     
-}
-
-
-
-extension UIView {
-    
-    fileprivate struct AssociatedObjectKeys {
-        static var tapGestureRecognizer = "MediaViewerAssociatedObjectKey_mediaViewer"
-    }
-    
-    fileprivate typealias Action = (() -> Void)?
-    
-    fileprivate var tapGestureRecognizerAction: Action? {
-        set {
-            if let newValue = newValue {
-                // Computed properties get stored as associated objects
-                objc_setAssociatedObject(self, &AssociatedObjectKeys.tapGestureRecognizer, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-            }
-        }
-        get {
-            let tapGestureRecognizerActionInstance = objc_getAssociatedObject(self, &AssociatedObjectKeys.tapGestureRecognizer) as? Action
-            return tapGestureRecognizerActionInstance
-        }
-    }
-    
-    // This is the meat of the sauce, here we create the tap gesture recognizer and
-    // store the closure the user passed to us in the associated object we declared above
-    public func addTapGestureRecognizer(action: (() -> Void)?) {
-        self.isUserInteractionEnabled = true
-        self.tapGestureRecognizerAction = action
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
-        self.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    // Every time the user taps on the UIImageView, this function gets called,
-    // which triggers the closure we stored
-    @objc fileprivate func handleTapGesture(sender: UITapGestureRecognizer) {
-        if let action = self.tapGestureRecognizerAction {
-            action?()
-        } else {
-            print("no action")
-        }
-    }
-    
-}
-
-extension UIView {
-    func fitSizeOfContent() -> CGSize {
-        let sumHeight = self.subviews.map({$0.frame.size.height}).reduce(0, {x, y in x + y})
-        return CGSize(width: self.frame.width, height: sumHeight)
-    }
 }
