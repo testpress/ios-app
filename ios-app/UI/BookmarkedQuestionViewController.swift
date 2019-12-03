@@ -49,4 +49,21 @@ class BookmarkedQuestionViewController: ReviewQuestionsViewController {
         bookmarkHelper.javascriptListener(message: message, bookmark: bookmark)
     }
     
+    override func onClickMoveButton() {
+        self.evaluateJavaScript("hideMoveButton();")
+    }
+    
+    override func removeBookmark() {
+        self.evaluateJavaScript("hideRemoveButton();")
+    }
+    
+    override func onClickBookmarkButton() {
+        self.evaluateJavaScript("hideBookmarkButton();")
+    }
+    
+    override func displayRemoveButton () {
+        self.evaluateJavaScript("displayRemoveButton();")
+    }
+    
 }
+

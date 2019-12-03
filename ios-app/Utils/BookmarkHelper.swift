@@ -31,6 +31,7 @@ class BookmarkHelper {
     
     var viewController: UIViewController!
     var slidingViewController: BookmarksSlidingViewController!
+    weak var delegate: BookmarkDelegate?
     
     init(viewController: UIViewController) {
         self.viewController = viewController
@@ -52,16 +53,7 @@ class BookmarkHelper {
     }
     
     func onClickMoveButton(bookmark: Bookmark) {
-        if let questionViewController = viewController as? BookmarkedQuestionViewController {
-            questionViewController.evaluateJavaScript("hideMoveButton();")
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.moveButton.isHidden = true
-            attachmentViewController.moveAnimationView.isHidden = false
-        } else {
-            let htmlViewController = viewController as! BookmarkedHtmlContentViewController
-            htmlViewController.evaluateJavaScript("hideMoveButton();")
-        }
+        delegate?.onClickMoveButton()
         showFoldersList(bookmark: bookmark)
     }
     
@@ -88,16 +80,7 @@ class BookmarkHelper {
     }
     
     func removeBookmark(bookmark: Bookmark) {
-        if let questionViewController = viewController as? BookmarkedQuestionViewController {
-            questionViewController.evaluateJavaScript("hideRemoveButton();")
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.removeButton.isHidden = true
-            attachmentViewController.removeAnimationView.isHidden = false
-        } else {
-            let htmlViewController = viewController as! BookmarkedHtmlContentViewController
-            htmlViewController.evaluateJavaScript("hideRemoveButton();")
-        }
+        delegate?.removeBookmark()
         deleteBookmark(bookmarkId: bookmark.id)
     }
     
@@ -114,16 +97,7 @@ class BookmarkHelper {
     }
     
     func onClickBookmarkButton(bookmarkId: Int?) {
-        if let questionViewController = viewController as? ReviewQuestionsViewController {
-            questionViewController.evaluateJavaScript("hideBookmarkButton();")
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.bookmarkButton.isHidden = true
-            attachmentViewController.bookmarkAnimationContainer.isHidden = false
-        } else {
-            let htmlViewController = viewController as! HtmlContentViewController
-            htmlViewController.evaluateJavaScript("hideBookmarkButton();")
-        }
+        delegate?.onClickBookmarkButton()
         if bookmarkId != nil {
             deleteBookmark(bookmarkId: bookmarkId!)
         } else {
@@ -180,16 +154,7 @@ class BookmarkHelper {
     }
     
     func displayRemoveButton() {
-        if let questionViewController = viewController as? BookmarkedQuestionViewController {
-            questionViewController.evaluateJavaScript("displayRemoveButton();")
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.removeAnimationView.isHidden = true
-            attachmentViewController.removeButton.isHidden = false
-        } else {
-            let htmlViewController = viewController as! BookmarkedHtmlContentViewController
-            htmlViewController.evaluateJavaScript("displayRemoveButton();")
-        }
+        delegate?.displayRemoveButton()
     }
     
     func showFoldersList(bookmark: Bookmark? = nil) {
@@ -335,4 +300,16 @@ class BookmarkHelper {
                 }
         })
     }
+}
+
+
+protocol BookmarkDelegate: AnyObject {
+    func onClickMoveButton()
+    
+    func removeBookmark()
+        
+    func displayRemoveButton()
+    
+    func onClickBookmarkButton()
+    
 }

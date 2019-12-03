@@ -27,12 +27,13 @@ import TTGSnackbar
 import UIKit
 import WebKit
 
-class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
+class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler, BookmarkDelegate {
     
     var previousCommentsPager: CommentPager!
     var newCommentsPager: CommentPager!
     var comments = [Comment]()
     var bookmarkHelper: BookmarkHelper!
+    var bookmarkDelegate: BookmarkDelegate?
     let imageUploadHelper = ImageUploadHelper()
     let loadingDialogController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
@@ -40,7 +41,9 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         super.viewDidLoad()
         
         imageUploadHelper.delegate = self
+        bookmarkDelegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = bookmarkDelegate
         webView.loadHTMLString(
             WebViewUtils.getQuestionHeader() + getAdditionalHeaders() + getHtml(),
             baseURL: Bundle.main.bundleURL
@@ -393,6 +396,19 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: attemptItemBookmarked)
         }
         return html
+    }
+    
+    func onClickMoveButton() {
+    }
+    
+    func removeBookmark() {
+    }
+    
+    func displayRemoveButton() {
+    }
+    
+    func onClickBookmarkButton() {
+        self.evaluateJavaScript("hideBookmarkButton();")
     }
     
 }

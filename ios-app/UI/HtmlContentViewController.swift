@@ -31,6 +31,7 @@ class HtmlContentViewController: BaseWebViewController {
     var content: Content!
     var emptyView: EmptyView!
     var loading: Bool = false
+    var bookmarkDelegate: BookmarkDelegate?
     var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
     var bookmarkHelper: BookmarkHelper!
     
@@ -39,6 +40,7 @@ class HtmlContentViewController: BaseWebViewController {
         emptyView = EmptyView.getInstance(parentView: webView)
         webViewDelegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = bookmarkDelegate
         checkContentType()
     }
     
@@ -178,4 +180,25 @@ extension HtmlContentViewController: WKScriptMessageHandler {
             }
         }
     }
+}
+
+
+extension HtmlContentViewController: BookmarkDelegate {
+    func onClickMoveButton() {
+        self.evaluateJavaScript("hideMoveButton();")
+    }
+    
+    func removeBookmark() {
+        self.evaluateJavaScript("hideRemoveButton();")
+    }
+    
+    func displayRemoveButton() {
+        self.evaluateJavaScript("displayRemoveButton();")
+    }
+    
+    func onClickBookmarkButton() {
+        self.evaluateJavaScript("hideBookmarkButton();")
+    }
+    
+    
 }

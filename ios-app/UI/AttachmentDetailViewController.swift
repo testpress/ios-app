@@ -56,11 +56,13 @@ class AttachmentDetailViewController: UIViewController {
     var moveAnimationView: LOTAnimationView!
     var removeAnimationView: LOTAnimationView!
     let alertController = UIUtils.initProgressDialog(message: Strings.LOADING + "\n\n")
+    var bookmarkDelegate: BookmarkDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         UIUtils.setButtonDropShadow(downloadAttachmentButton)
         bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = bookmarkDelegate
         bookmarkAnimationContainer.isHidden = true
         if Constants.BOOKMARKS_ENABLED {
             if bookmark == nil {
@@ -169,7 +171,7 @@ class AttachmentDetailViewController: UIViewController {
         bookmarkHelper.onClickMoveButton(bookmark: bookmark)
     }
     
-    @IBAction func removeBookmark() {
+    @IBAction func onRemoveBookmark() {
         bookmarkHelper.onClickRemoveButton(bookmark: bookmark)
     }
     
@@ -215,5 +217,29 @@ class AttachmentDetailViewController: UIViewController {
     @objc func back() {
         dismiss(animated: true, completion: nil)
     }
+    
+}
+
+extension AttachmentDetailViewController: BookmarkDelegate {
+    func onClickMoveButton() {
+        self.moveButton.isHidden = true
+        self.moveAnimationView.isHidden = false
+    }
+    
+    func displayRemoveButton() {
+        self.removeAnimationView.isHidden = true
+        self.removeButton.isHidden = false
+    }
+    
+    func onClickBookmarkButton() {
+        self.bookmarkButton.isHidden = true
+        self.bookmarkAnimationContainer.isHidden = false
+    }
+    
+    func removeBookmark() {
+        self.removeButton.isHidden = true
+        self.removeAnimationView.isHidden = false
+    }
+    
     
 }
