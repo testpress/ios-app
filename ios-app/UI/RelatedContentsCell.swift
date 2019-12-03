@@ -27,18 +27,18 @@ class RelatedContentsCell: UITableViewCell {
         title.text = content?.name
         
         if content?.exam != nil {
-            contentIcon.image = Images.ExamAddedIcon.image
+            contentIcon.image = Images.Quill.image
         } else if content?.htmlContentTitle != nil {
             contentIcon.image = Images.Article.image
         } else if content?.video != nil {
             contentIcon.image = Images.VideoIcon.image
         } else if content?.attachment != nil {
-            contentIcon.image = Images.FileDownloadIcon.image
+            contentIcon.image = Images.Attachment.image
         }
         
         
         if content?.bookmarkId != nil {
-            bookmarkIcon.image = Images.RemoveBookmark.image
+            bookmarkIcon.image = Images.RemoveBookmarkLarge.image
         } else {
             bookmarkIcon.image = Images.AddBookmark.image
         }
@@ -46,6 +46,9 @@ class RelatedContentsCell: UITableViewCell {
         
         contentIcon.setImageColor(color: Colors.getRGB(Colors.DIM_GRAY))
         bookmarkIcon.setImageColor(color: Colors.getRGB(Colors.DIM_GRAY))
+        self.backgroundColor = Colors.getRGB(Colors.WHITE)
+        title.textColor = Colors.getRGB(Colors.DIM_GRAY)
+        desc.textColor = Colors.getRGB(Colors.DIM_GRAY)
         desc.isHidden = true
 
         if (is_current) {
@@ -66,9 +69,6 @@ class RelatedContentsCell: UITableViewCell {
         
         addGestureRecognizer(tapRecognizer)
         
-        self.addTapGestureRecognizer{
-            print("Hello Hello")
-        }
     }
     
     @objc func onItemClick() {

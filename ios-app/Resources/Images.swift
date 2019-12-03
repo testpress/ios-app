@@ -55,6 +55,9 @@ enum Images: String {
     case CaretDown = "ic_caret_down"
     case VideoIcon = "video"
     case Article = "article"
+    case Quill = "quill"
+    case Attachment = "attachment"
+    case RemoveBookmarkLarge = "remove_bookmark_24pt"
 
     var image: UIImage {
         return UIImage(asset: self)
