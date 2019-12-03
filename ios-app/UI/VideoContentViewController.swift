@@ -44,6 +44,7 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
     var warningLabel: UILabel!
     var bookmarkHelper: BookmarkHelper!
     var bookmarkDelegate: BookmarkDelegate?
+    var bookmarkContent: Content?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleStackView: UIStackView!
@@ -67,8 +68,8 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         addCustomView()
         desc.isHidden = true
         udpateBookmarkButtonState(bookmarkId: content.bookmarkId)
-
-        
+        bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
         addGestures()
@@ -133,11 +134,7 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func addOrRemoveBookmark() {
-        if (content.bookmarkId != nil) {
-            viewModel.removeBookmark(completion: {self.udpateBookmarkButtonState(bookmarkId: nil)})
-        } else {
-            bookmark()
-        }
+        bookmarkHelper?.onClickBookmarkButton(bookmarkId: content.bookmarkId)
     }
     
     
@@ -153,20 +150,6 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    
-    func bookmark() {
-        let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: nil)
-        let navigationController = storyboard.instantiateViewController(withIdentifier:
-            Constants.BOOKMARK_FOLDER_NAVIGATION_CONTROLLER) as! UINavigationController
-        
-        let foldersTableViewController = navigationController.viewControllers.first
-            as! BookmarkFolderTableViewController
-        
-        foldersTableViewController.bookmarkDelegate = self
-        foldersTableViewController.sourceViewController = self
-        present(navigationController, animated: true)
-        
-    }
     
     func hideWarning() {
         playerViewController.player?.play()

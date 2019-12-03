@@ -44,7 +44,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         imageUploadHelper.delegate = self
         bookmarkDelegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
-        bookmarkHelper.delegate = bookmarkDelegate
+        bookmarkHelper.delegate = self
         webView.loadHTMLString(
             WebViewUtils.getQuestionHeader() + getAdditionalHeaders() + getHtml(),
             baseURL: Bundle.main.bundleURL

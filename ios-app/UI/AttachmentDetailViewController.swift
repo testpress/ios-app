@@ -63,7 +63,7 @@ class AttachmentDetailViewController: UIViewController {
         super.viewDidLoad()
         UIUtils.setButtonDropShadow(downloadAttachmentButton)
         bookmarkHelper = BookmarkHelper(viewController: self)
-        bookmarkHelper.delegate = bookmarkDelegate
+        bookmarkHelper.delegate = self
         bookmarkAnimationContainer.isHidden = true
         if Constants.BOOKMARKS_ENABLED {
             if bookmark == nil {
