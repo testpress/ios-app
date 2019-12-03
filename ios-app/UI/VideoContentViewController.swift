@@ -36,7 +36,6 @@ class VideoContentViewController: UIViewController {
     var content: Content!
     var playerViewController:AVPlayerViewController!
     var viewModel: VideoContentViewModel!
-    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
     
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -47,7 +46,7 @@ class VideoContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = VideoContentViewModel(content, contentAttemptCreationDelegate)
+        viewModel = VideoContentViewModel(content)
         initAndSubviewPlayerViewController()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()

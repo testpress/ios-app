@@ -19,12 +19,10 @@ class VideoContentViewModel {
     var startTime: String?
     weak var timer: Timer?
     var myView: UIView?
-    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
     
     
-    public init(_ content: Content, _ contentAttemptDelegate: ContentAttemptCreationDelegate?){
+    public init(_ content: Content){
         self.content = content
-        self.contentAttemptCreationDelegate = contentAttemptDelegate
     }
     
     func initializePlayer() -> AVPlayerViewController {
@@ -70,10 +68,6 @@ class VideoContentViewModel {
                 self.contentAttemptId = contentAttempt!.objectID
                 let seconds = CMTimeMakeWithSeconds((contentAttempt?.video.lastPosition as! NSString).doubleValue, CMTimeScale(NSEC_PER_MSEC))
                 self.playerViewController.player?.seek(to: seconds)
-                
-                if self.content.attemptsCount == 0 {
-                    self.contentAttemptCreationDelegate?.newAttemptCreated()
-                }
         })
     }
     
