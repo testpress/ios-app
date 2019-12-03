@@ -256,11 +256,6 @@ class VideoContentViewController: UIViewController, UITableViewDelegate, UITable
         
     }
     
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        viewModel.handleOrientation()
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
