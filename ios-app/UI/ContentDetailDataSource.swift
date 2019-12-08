@@ -68,6 +68,12 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             viewController.content = content
             viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
             return viewController
+        } else if (content.video != nil && content.video!.embedCode.isEmpty) {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.VIDEO_CONTENT_VIEW_CONTROLLER) as! VideoContentViewController
+             viewController.content = content
+            return viewController
+
         } else {
             let viewController = HtmlContentViewController()
             viewController.content = content
@@ -83,6 +89,8 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             return (viewController as! StartExamScreenViewController).content.index
         } else if viewController is AttachmentDetailViewController {
             return (viewController as! AttachmentDetailViewController).content.index
+        } else if viewController is VideoContentViewController {
+            return (viewController as! VideoContentViewController).content.index
         } else {
             return (viewController as! HtmlContentViewController).content.index
         }

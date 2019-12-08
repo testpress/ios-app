@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-Medium.ttf">
+            <string>Rubik-Medium</string>
+        </array>
+        <array key="Rubik-Regular.ttf">
+            <string>Rubik-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="VideoPlayerControlsView" customModule="ios_app" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="642" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="kXs-IP-jHb">
+                    <rect key="frame" x="302.5" y="81.5" width="37" height="37"/>
+                </activityIndicatorView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EOa-fV-i3a">
+                    <rect key="frame" x="287" y="66" width="68" height="68"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                    <state key="normal" image="play_icon"/>
+                    <connections>
+                        <action selector="playPauseClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="K4f-EM-ggc"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwU-LP-1zx">
+                    <rect key="frame" x="187" y="66" width="68" height="68"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                    <state key="normal" image="rewind_icon"/>
+                    <connections>
+                        <action selector="rewind:" destination="iN0-l3-epB" eventType="touchUpInside" id="fyb-Uw-CkX"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Md2-Me-Kr4">
+                    <rect key="frame" x="387" y="66" width="68" height="68"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                    <inset key="imageEdgeInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" image="forward_icon"/>
+                    <connections>
+                        <action selector="forward:" destination="iN0-l3-epB" eventType="touchUpInside" id="8RN-Hu-iQC"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJu-pi-pZ0">
+                    <rect key="frame" x="10" y="155" width="26" height="15"/>
+                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="translatesAutoresizingMaskIntoConstraints" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgk-gf-KAi">
+                    <rect key="frame" x="558" y="155" width="26" height="15"/>
+                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="translatesAutoresizingMaskIntoConstraints" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zMr-Qd-Qx9" customClass="CustomSlider" customModule="ios_app" customModuleProvider="target">
+                    <rect key="frame" x="-2" y="180" width="646" height="31"/>
+                    <color key="tintColor" red="0.0" green="0.80000000000000004" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <color key="thumbTintColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="translatesAutoresizingMaskIntoConstraints" value="NO"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </slider>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJH-op-Ia2">
+                    <rect key="frame" x="608" y="139" width="35" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="Ik6-Z5-l3g"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="15" minY="12" maxX="0.0" maxY="10"/>
+                    <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" image="fullscreen"/>
+                    <connections>
+                        <action selector="onFullscreen:" destination="iN0-l3-epB" eventType="touchUpInside" id="bZ3-Mo-HVF"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tp-LR-i2b">
+                    <rect key="frame" x="583" y="10" width="49" height="25"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
+                    <inset key="contentEdgeInsets" minX="18" minY="5" maxX="18" maxY="5"/>
+                    <inset key="titleEdgeInsets" minX="-5" minY="-10" maxX="-5" maxY="-10"/>
+                    <state key="normal" title="1x">
+                        <color key="titleColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="hJH-op-Ia2" secondAttribute="trailing" constant="10" id="1xu-Wh-qEX"/>
+                <constraint firstItem="5tp-LR-i2b" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="4Y7-E4-Xjd"/>
+                <constraint firstItem="zMr-Qd-Qx9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6zm-yD-wDU"/>
+                <constraint firstAttribute="bottom" secondItem="zMr-Qd-Qx9" secondAttribute="bottom" constant="-10" id="C5e-Q3-gwu"/>
+                <constraint firstItem="Md2-Me-Kr4" firstAttribute="trailing" secondItem="EOa-fV-i3a" secondAttribute="trailing" constant="300" id="Dcg-OY-M3a"/>
+                <constraint firstItem="EOa-fV-i3a" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Egj-39-eU6"/>
+                <constraint firstItem="Md2-Me-Kr4" firstAttribute="trailing" secondItem="EOa-fV-i3a" secondAttribute="trailing" constant="100" id="Flb-lN-sSq"/>
+                <constraint firstItem="Md2-Me-Kr4" firstAttribute="trailing" secondItem="EOa-fV-i3a" secondAttribute="trailing" constant="100" id="HwT-1W-9ya"/>
+                <constraint firstItem="EOa-fV-i3a" firstAttribute="leading" secondItem="JwU-LP-1zx" secondAttribute="leading" constant="100" id="MVx-vv-9Gx"/>
+                <constraint firstAttribute="trailing" secondItem="5tp-LR-i2b" secondAttribute="trailing" constant="10" id="Maf-SX-WJJ"/>
+                <constraint firstItem="Md2-Me-Kr4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="O5a-Vg-GL8"/>
+                <constraint firstAttribute="trailing" secondItem="zMr-Qd-Qx9" secondAttribute="trailing" id="Sz9-h2-QUY"/>
+                <constraint firstItem="EOa-fV-i3a" firstAttribute="leading" secondItem="JwU-LP-1zx" secondAttribute="leading" constant="100" id="V55-aF-7k9"/>
+                <constraint firstItem="hJH-op-Ia2" firstAttribute="leading" secondItem="Zgk-gf-KAi" secondAttribute="trailing" id="g1x-0e-Nnj"/>
+                <constraint firstItem="EOa-fV-i3a" firstAttribute="leading" secondItem="JwU-LP-1zx" secondAttribute="leading" constant="300" id="hGy-Bq-iZ2"/>
+                <constraint firstItem="kXs-IP-jHb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jeA-Rz-ppe"/>
+                <constraint firstItem="kXs-IP-jHb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="mxt-WS-9jF"/>
+                <constraint firstItem="JwU-LP-1zx" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="qge-Bb-4VF"/>
+                <constraint firstItem="Zgk-gf-KAi" firstAttribute="bottom" secondItem="zMr-Qd-Qx9" secondAttribute="top" constant="-10" id="r7E-G4-YwA"/>
+                <constraint firstItem="hJH-op-Ia2" firstAttribute="bottom" secondItem="zMr-Qd-Qx9" secondAttribute="top" constant="5" id="tb1-uP-ofm"/>
+                <constraint firstItem="EOa-fV-i3a" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="vHj-gi-c3F"/>
+                <constraint firstItem="gJu-pi-pZ0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="wCM-xS-cgV"/>
+                <constraint firstItem="gJu-pi-pZ0" firstAttribute="bottom" secondItem="zMr-Qd-Qx9" secondAttribute="top" constant="-10" id="x3F-Ty-L8M"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="MVx-vv-9Gx"/>
+                    <exclude reference="V55-aF-7k9"/>
+                    <exclude reference="hGy-Bq-iZ2"/>
+                    <exclude reference="Dcg-OY-M3a"/>
+                    <exclude reference="Flb-lN-sSq"/>
+                    <exclude reference="HwT-1W-9ya"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="V55-aF-7k9"/>
+                    <include reference="Flb-lN-sSq"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="MVx-vv-9Gx"/>
+                    <include reference="HwT-1W-9ya"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="hGy-Bq-iZ2"/>
+                    <include reference="Dcg-OY-M3a"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="currentDurationLabel" destination="gJu-pi-pZ0" id="bwn-uR-dgw"/>
+                <outlet property="forwardButton" destination="Md2-Me-Kr4" id="nRP-y4-xln"/>
+                <outlet property="fullScreen" destination="hJH-op-Ia2" id="HT4-aN-vnA"/>
+                <outlet property="loadingIndicator" destination="kXs-IP-jHb" id="Ls9-mi-DFI"/>
+                <outlet property="playPauseButton" destination="EOa-fV-i3a" id="Wpy-UT-8WH"/>
+                <outlet property="playbackSpeed" destination="5tp-LR-i2b" id="AKA-xe-EUE"/>
+                <outlet property="rewindButton" destination="JwU-LP-1zx" id="bnc-Pz-OUc"/>
+                <outlet property="slider" destination="zMr-Qd-Qx9" id="4PL-3y-vgg"/>
+                <outlet property="totalDurationLabel" destination="Zgk-gf-KAi" id="Swk-LR-bwK"/>
+            </connections>
+            <point key="canvasLocation" x="165.51724137931035" y="48"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="forward_icon" width="48" height="48"/>
+        <image name="fullscreen" width="24" height="24"/>
+        <image name="play_icon" width="48" height="48"/>
+        <image name="rewind_icon" width="48" height="48"/>
+    </resources>
+</document>

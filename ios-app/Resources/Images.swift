@@ -49,7 +49,11 @@ enum Images: String {
     case ActivitiesFlatIcon = "activities_flat_icon"
     case LeaderboardFlatIcon = "leaderboard_flat_icon"
     case LoginActivityIcon = "lock"
-    
+    case PlayIcon = "play_icon"
+    case PauseIcon = "pause_icon"
+    case ReloadIcon = "reload"
+    case Round = "round"
+
     var image: UIImage {
         return UIImage(asset: self)
     }
