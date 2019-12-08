@@ -32,10 +32,11 @@ public class ContentAttempt {
     var trophies: Any!
     var objectUrl: String!
     var assessment: Attempt!
-    var video: Video!
+    var video: VideoAttempt!
     var content: HtmlContent!
     var attachment: Attachment!
     var chapterContentId: Int!
+    var objectID: Int!
     
     public required init?(map: Map) {
     }
@@ -57,5 +58,6 @@ extension ContentAttempt: TestpressModel {
         content <- map["content"]
         attachment <- map["attachment"]
         chapterContentId <- map["chapter_content"]
+        objectID <- map["object_id"]
     }
 }

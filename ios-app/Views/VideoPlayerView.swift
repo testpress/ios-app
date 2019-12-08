@@ -17,6 +17,7 @@ class VideoPlayerView: UIView {
     var controlsContainerView: VideoPlayerControlsView! = .fromNib("VideoPlayerControls")
     var timeObserver: Any?
     var videoEndObserver: Any?
+    var startTime: Float = 0.0
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -162,6 +163,7 @@ extension VideoPlayerView: PlayerControlDelegate {
         if newTime < (CMTimeGetSeconds(duration)) {
             let seekTime: CMTime = CMTimeMake(Int64(newTime * 1000 as Float64), 1000)
             player.seek(to: seekTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+            startTime = Float(newTime)
             
         }
         
@@ -176,7 +178,8 @@ extension VideoPlayerView: PlayerControlDelegate {
         }
         let seekTime: CMTime = CMTimeMake(Int64(newTime * 1000 as Float64), 1000)
         player.seek(to: seekTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
-
+        startTime = Float(newTime)
+        
         if (controlsContainerView.playerStatus == .finished) {
             player.play()
             controlsContainerView.playerStatus = .playing

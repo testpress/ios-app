@@ -75,6 +75,7 @@ enum TPEndpoint {
     case logout
     case loginActivity
     case logoutDevices
+    case userVideos
 
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -203,7 +204,7 @@ enum TPEndpoint {
         case .bookmarkFolders:
             return "/api/v2.4/folders/"
         case .getContents:
-            return "/api/v2.2/contents/"
+            return "/api/v2.3/contents/"
         case .attemptsPath:
             return "/attempts/"
         case .getQuestions:
@@ -224,6 +225,8 @@ enum TPEndpoint {
             return "/api/v2.3/me/login_activity/"
         case .logoutDevices:
             return "/api/v2.4/auth/logout_devices/"
+        case .userVideos:
+            return "/api/v2.3/user_videos/"
         default:
             return ""
         }
@@ -284,6 +287,14 @@ struct TPEndpointProvider {
     static func getCommentsUrl(questionId: Int) -> String {
         return Constants.BASE_URL + TPEndpoint.getQuestions.urlPath + "\(questionId)"
             + TPEndpoint.commentsPath.urlPath
+    }
+    
+    static func getContentAttemptUrl(contentID: Int) -> String {
+        return Constants.BASE_URL + TPEndpoint.getContents.urlPath + "\(contentID)" + TPEndpoint.attemptsPath.urlPath
+    }
+    
+    static func getVideoAttemptPath(attemptID: Int) -> String {
+        return Constants.BASE_URL + TPEndpoint.userVideos.urlPath + "\(attemptID)/"
     }
     
 }

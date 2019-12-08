@@ -28,20 +28,26 @@
 import UIKit
 import AVKit
 import AVFoundation
+import Alamofire
+import Sentry
 
 
 class VideoContentViewController: UIViewController {
     var content: Content!
     var videoPlayerView: VideoPlayerView!
+    var viewModel: VideoContentViewModel!
 
     @IBOutlet weak var videoPlayer: UIView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = VideoContentViewModel(content)
         initVideoPlayerView()
         view.addSubview(videoPlayerView)
+        viewModel.videoPlayerView = videoPlayerView
         showOrHideBottomBar()
+        viewModel.createContentAttempt()
     }
     
     func initVideoPlayerView() {
@@ -88,6 +94,7 @@ class VideoContentViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.startPeriodicAttemptUpdater()
         videoPlayerView.addObservers()
 
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
@@ -97,6 +104,7 @@ class VideoContentViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        viewModel.stopPeriodicAttemptUpdater()
         videoPlayerView.dealloc()
     }
     
