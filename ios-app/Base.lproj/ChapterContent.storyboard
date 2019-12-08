@@ -433,6 +433,11 @@
                                                 <action selector="back" destination="nmb-5t-Gcl" id="p12-NP-axc"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="ic_bookmark" id="DHV-ig-Ml0">
+                                            <connections>
+                                                <action selector="bookMark:" destination="nmb-5t-Gcl" id="Xow-Cr-6Or"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -523,6 +528,7 @@
                         <viewLayoutGuide key="safeArea" id="wB2-X5-4Ue"/>
                     </view>
                     <connections>
+                        <outlet property="bookmarkButton" destination="DHV-ig-Ml0" id="nkh-xg-vMq"/>
                         <outlet property="bottomNavigationBar" destination="2C1-W5-ggm" id="TxQ-Lt-VUE"/>
                         <outlet property="bottomNavigationBarConstraint" destination="Osw-Bx-U7f" id="3CD-0v-0sd"/>
                         <outlet property="bottomShadowView" destination="2Sb-r1-Jcp" id="NA9-1e-fF7"/>
