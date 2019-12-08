@@ -49,6 +49,10 @@ class VideoPlayerView: UIView {
         self.layer.addSublayer(playerLayer!)
         playerLayer?.frame = self.frame
         player.play()
+        
+        if #available(iOS 10.0, *) {
+            player.currentItem?.preferredForwardBufferDuration = 1
+        }
     }
     
     
@@ -94,6 +98,9 @@ class VideoPlayerView: UIView {
                 case "playbackLikelyToKeepUp":
                     controlsContainerView.stopLoading()
                 case "playbackBufferFull":
+                    if #available(iOS 10.0, *) {
+                        player.currentItem?.preferredForwardBufferDuration = 0
+                    }
                     controlsContainerView.stopLoading()
                 case .none:
                     break;
@@ -120,14 +127,9 @@ extension VideoPlayerView: PlayerControlDelegate {
     func goTo(seconds: Float) {
         if let duration = player?.currentItem?.duration {
             let totalSeconds = CMTimeGetSeconds(duration)
-            
             let value = Double(seconds) * totalSeconds
-            
             let seekTime = CMTime(value: Int64(value), timescale: 1)
-            
-            player?.seek(to: seekTime, completionHandler: { (completedSeek) in
-                
-            })
+            player?.seek(to: seekTime)
         }
     }
     
@@ -181,6 +183,7 @@ extension VideoPlayerView: PlayerControlDelegate {
     
     func fullScreen() {
         var value = UIInterfaceOrientation.landscapeRight.rawValue
+
         if UIDevice.current.orientation.isLandscape {
             value = UIInterfaceOrientation.portrait.rawValue
         }

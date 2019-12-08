@@ -63,11 +63,11 @@ enum VideoDurationType {
         if seconds.isNaN || seconds.isInfinite {
             return "00:00"
         }
-        
-        let intSeconds = Int(seconds)
-        let minute = intSeconds / 60 % 60
-        let second = intSeconds % 60
-        return String(format: "%02i:%02i", minute, second)
+        let hour = Int(seconds) / 3600
+        let minute = Int(seconds) / 60 % 60
+        let second = Int(seconds) % 60
+        let time = hour > 0 ? String(format: "%02i:%02i:%02i", hour, minute, second) :String(format: "%02i:%02i", minute, second)
+        return time
     }
     
     func value(seconds:Double, total:Double) -> String {
