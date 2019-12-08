@@ -36,7 +36,9 @@ class VideoContentViewController: UIViewController {
     var content: Content!
     var videoPlayerView: VideoPlayerView!
     var viewModel: VideoContentViewModel!
-
+    var customView: UIView!
+    var warningLabel: UILabel!
+    
     @IBOutlet weak var videoPlayer: UIView!
     
     
@@ -48,6 +50,57 @@ class VideoContentViewController: UIViewController {
         viewModel.videoPlayerView = videoPlayerView
         showOrHideBottomBar()
         viewModel.createContentAttempt()
+        addCustomView()
+        handleExternalDisplay()
+        
+        if #available(iOS 11.0, *) {
+            handleScreenCapture()
+        }
+    }
+    
+    func addCustomView() {
+        warningLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
+        warningLabel.textColor = UIColor.white
+        warningLabel.textAlignment = .center
+        warningLabel.numberOfLines = 3
+        
+        customView = UIView(frame: videoPlayerView.frame)
+        customView.backgroundColor = UIColor.black
+        customView.center = CGPoint(x: view.center.x, y: videoPlayerView.center.y)
+        warningLabel.center = customView.center
+        customView.addSubview(warningLabel)
+        customView.isHidden = true
+        view.addSubview(customView)
+    }
+    
+    func showWarning(text: String) {
+        videoPlayerView.pause()
+        videoPlayerView.isHidden = true
+        warningLabel.text = text
+        warningLabel.sizeToFit()
+        customView.isHidden = false
+    }
+    
+    func hideWarning() {
+        videoPlayerView.isHidden = false
+        customView.isHidden = false
+    }
+    
+    @objc func handleExternalDisplay() {
+        if (UIScreen.screens.count > 1) {
+            showWarning(text: "Please stop casting to external devices")
+        } else {
+            hideWarning()
+        }
+    }
+    
+    @available(iOS 11.0, *)
+    @objc func handleScreenCapture() {
+        if (UIScreen.main.isCaptured) {
+           showWarning(text: "Please stop screen recording to continue watching video")
+        } else {
+            hideWarning()
+        }
     }
     
     func initVideoPlayerView() {
@@ -82,6 +135,7 @@ class VideoContentViewController: UIViewController {
             UIApplication.shared.keyWindow!.addSubview(videoPlayerView)
         }
         videoPlayerView.frame = playerFrame
+        customView.frame = videoPlayerView.frame
         videoPlayerView.layoutIfNeeded()
         videoPlayerView.playerLayer?.frame = playerFrame
     }
@@ -100,12 +154,26 @@ class VideoContentViewController: UIViewController {
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidConnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidDisconnect, object: nil)
+
+        if #available(iOS 11.0, *) {
+            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: .UIScreenCapturedDidChange, object: nil)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.stopPeriodicAttemptUpdater()
         videoPlayerView.dealloc()
+        NotificationCenter.default.removeObserver(self, name: .UIScreenDidConnect, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIScreenDidDisconnect, object: nil)
+        
+        if #available(iOS 11.0, *) {
+            NotificationCenter.default.removeObserver(self, name: .UIScreenCapturedDidChange, object: nil)
+        }
+
     }
     
     func showPlaybackSpeedMenu() {
