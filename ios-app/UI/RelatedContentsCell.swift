@@ -27,6 +27,7 @@ class RelatedContentsCell: UITableViewCell {
         self.index = index
         title.text = content?.name
         bookmarkIcon.isHidden = false
+        isCurrent = false
         
         if content?.exam != nil {
             contentIcon.image = Images.Quill.image
