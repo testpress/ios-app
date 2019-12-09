@@ -45,11 +45,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var desc: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var titleToggleButton: UIButton!
-    @IBOutlet weak var caretImage: UIImageView!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var headerStackView: UIStackView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleStackView: UIStackView!
@@ -82,16 +79,23 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     
+    func showOrHideDescription() {
+        self.desc.isHidden = !self.desc.isHidden
+        
+        if (self.desc.isHidden) {
+            self.titleToggleButton.setImage(Images.CaretDown.image, for: .normal)
+        } else {
+            self.titleToggleButton.setImage(Images.CaretUp.image, for: .normal)
+        }
+    }
+    
     func addGestures() {
         titleStackView.addTapGestureRecognizer {
-            self.desc.isHidden = !self.desc.isHidden
-            
-            if (self.desc.isHidden) {
-                self.titleToggleButton.setImage(Images.CaretDown.image, for: .normal)
-            } else {
-                self.titleToggleButton.setImage(Images.CaretUp.image, for: .normal)
-            }
-            
+            self.showOrHideDescription()
+        }
+        
+        titleToggleButton.addTapGestureRecognizer{
+            self.showOrHideDescription()
         }
     }
     
