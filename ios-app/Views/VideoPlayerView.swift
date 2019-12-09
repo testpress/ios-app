@@ -57,6 +57,7 @@ class VideoPlayerView: UIView {
     
     
     func addObservers() {
+        player?.play()
         player?.currentItem?.addObserver(self, forKeyPath: "playbackBufferEmpty", options: .new, context: nil)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: .new, context: nil)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackBufferFull", options: .new, context: nil)
@@ -125,12 +126,8 @@ extension VideoPlayerView: PlayerControlDelegate {
     }
     
     func goTo(seconds: Float) {
-        if let duration = player?.currentItem?.duration {
-            let totalSeconds = CMTimeGetSeconds(duration)
-            let value = Double(seconds) * totalSeconds
-            let seekTime = CMTime(value: Int64(value), timescale: 1)
-            player?.seek(to: seekTime)
-        }
+        let seekTime = CMTime(value: Int64(seconds), timescale: 1)
+        player?.seek(to: seekTime)
     }
     
     func playOrPause() {

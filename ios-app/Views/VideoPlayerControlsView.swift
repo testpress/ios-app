@@ -91,7 +91,8 @@ class VideoPlayerControlsView: UIView {
         let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(slider.maximumValue) / widthOfSlider)
         
         slider.setValue(Float(newValue), animated: true)
-        delegate?.goTo(seconds: (slider?.value)!)
+        let seconds = Float64(slider!.value) * totalDuration
+        delegate?.goTo(seconds: Float(seconds))
     }
     
     @objc func handleSliderChange() {
@@ -100,7 +101,8 @@ class VideoPlayerControlsView: UIView {
         if (loadingIndicator.isAnimating) {
             return
         }
-        delegate?.goTo(seconds: (slider?.value)!)
+        let seconds = Float64(slider!.value) * totalDuration
+        delegate?.goTo(seconds: Float(seconds))
     }
     
     func showControls() {
@@ -133,6 +135,7 @@ class VideoPlayerControlsView: UIView {
     }
     
     func updateDuration(seconds: Double, videoDuration: Double) {
+        stopLoading()
         if (slider.state != .highlighted) {
             slider.value = Float(seconds/videoDuration)
         }
