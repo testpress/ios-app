@@ -78,7 +78,7 @@ class RelatedContentsCell: UITableViewCell {
         viewController.contents = contents!
         viewController.title = content?.name
         viewController.position = index
-        parentViewController?.present(viewController, animated: true, completion: nil)
+        parentViewController?.present(viewController, animated: false, completion: nil)
         
     }
 }

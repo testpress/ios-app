@@ -236,6 +236,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
+            contentDetailPageViewController.hideNavbarTitle()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidConnect, object: nil)

@@ -88,6 +88,10 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         }
     }
     
+    func hideNavbarTitle() {
+        navigationBarItem.title = ""
+    }
+    
     func hideBottomNavBar() {
         bottomShadowView.isHidden = true
         bottomNavigationBar.isHidden = true
@@ -289,7 +293,11 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     @IBAction func back() {
-        dismiss(animated: true, completion: nil)
+        if let navigationViewController = self.view.window?.rootViewController?.presentedViewController?.presentedViewController as? UINavigationController {
+            navigationViewController.dismiss(animated: true)
+        } else {
+            dismiss(animated: true)
+        }
     }
     
     @IBAction func bookMark(_ sender: UIBarButtonItem) {
