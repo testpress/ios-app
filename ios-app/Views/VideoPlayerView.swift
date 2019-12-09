@@ -128,6 +128,11 @@ extension VideoPlayerView: PlayerControlDelegate {
     func goTo(seconds: Float) {
         let seekTime = CMTime(value: Int64(seconds), timescale: 1)
         player?.seek(to: seekTime)
+        
+        if (controlsContainerView.playerStatus == .finished) {
+            player?.play()
+            controlsContainerView.playerStatus = .playing
+        }
     }
     
     func playOrPause() {

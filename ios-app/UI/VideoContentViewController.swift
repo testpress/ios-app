@@ -110,6 +110,7 @@ class VideoContentViewController: UIViewController {
                 self.videoPlayerView.changePlaybackSpeed(speed: playbackSpeed)
             }))
         }
+        alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated: true)
     }
 }
