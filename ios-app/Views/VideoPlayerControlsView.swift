@@ -67,6 +67,10 @@ class VideoPlayerControlsView: UIView {
     func startTimerTohideControls() {
         self.timer?.invalidate()
 
+        if (loadingIndicator.isAnimating) {
+            return
+        }
+        
         if #available(iOS 10.0, *) {
             self.timer = Timer.scheduledTimer(withTimeInterval: TIMER_DELAY, repeats: false) { timer in
                 self.isHidden = true
@@ -135,7 +139,6 @@ class VideoPlayerControlsView: UIView {
     }
     
     func updateDuration(seconds: Double, videoDuration: Double) {
-        stopLoading()
         if (slider.state != .highlighted) {
             slider.value = Float(seconds/videoDuration)
         }
