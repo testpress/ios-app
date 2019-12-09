@@ -43,6 +43,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     var bookmarkHelper: BookmarkHelper!
     var bookmarkDelegate: BookmarkDelegate?
     var bookmarkContent: Content?
+    var position: Int! = 0
     
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -63,6 +64,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         showOrHideBottomBar()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()
+        bookmarkContent = content
         viewModel.createContentAttempt()
         addCustomView()
         desc.isHidden = true
