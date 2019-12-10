@@ -83,7 +83,7 @@ class VideoContentViewController: UIViewController {
     
     func hideWarning() {
         videoPlayerView.isHidden = false
-        customView.isHidden = false
+        customView.isHidden = true
     }
     
     @objc func handleExternalDisplay() {
