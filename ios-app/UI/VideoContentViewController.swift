@@ -32,8 +32,6 @@ import AVFoundation
 
 class VideoContentViewController: UIViewController {
     var content: Content!
-    var playerViewController:AVPlayerViewController!
-    var playerLayer: AVPlayerLayer?
     var videoPlayerView: VideoPlayerView!
 
     @IBOutlet weak var videoPlayer: UIView!
