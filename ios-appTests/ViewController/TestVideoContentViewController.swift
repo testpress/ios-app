@@ -32,6 +32,7 @@ class TestVideoContentViewController: XCTestCase {
         controller = storyboard.instantiateViewController(withIdentifier:
             Constants.VIDEO_CONTENT_VIEW_CONTROLLER) as? VideoContentViewController
         controller?.content = content
+        controller?.contents = [content!]
         let window = UIWindow()
         window.rootViewController = controller
         window.makeKeyAndVisible()
@@ -61,5 +62,34 @@ class TestVideoContentViewController: XCTestCase {
     func testAddOrRemoveBookmark() {
         controller!.addOrRemoveBookmark()
         XCTAssertTrue(UIApplication.topViewController()!.isKind(of: BookmarkFolderTableViewController.self))
+    }
+    
+    func testNumberOfRows() {
+        let tableView = UITableView()
+        let numberOfRows = controller?.tableView(tableView, numberOfRowsInSection: 0)
+        
+        XCTAssertEqual(numberOfRows, controller?.contents.count)
+    }
+    
+    func testRelatedContent() {
+        let cell = controller!.tableView.dequeueReusableCell(withIdentifier: "RelatedContentsCell") as! RelatedContentsCell
+        cell.initCell(index: 0, contents: (controller!.contents)!, viewController: controller!)
+        
+        XCTAssertEqual(cell.title.text, content?.name)
+        XCTAssertEqual(cell.title.textColor, Colors.getRGB(Colors.DIM_GRAY))
+        XCTAssertEqual(cell.desc.textColor, Colors.getRGB(Colors.DIM_GRAY))
+        XCTAssertEqual(cell.contentIcon.imageColor, Colors.getRGB(Colors.DIM_GRAY))
+        XCTAssertEqual(cell.bookmarkIcon.imageColor, Colors.getRGB(Colors.DIM_GRAY))
+    }
+    
+    func testCurrentRelatedContent() {
+        let cell = controller!.tableView.dequeueReusableCell(withIdentifier: "RelatedContentsCell") as! RelatedContentsCell
+        cell.initCell(index: 0, contents: (controller!.contents)!, viewController: controller!, is_current: true)
+        
+        XCTAssertEqual(cell.title.textColor, Colors.getRGB(Colors.PRIMARY))
+        XCTAssertEqual(cell.desc.textColor, Colors.getRGB(Colors.PRIMARY))
+        XCTAssertEqual(cell.contentIcon.imageColor, Colors.getRGB(Colors.PRIMARY))
+        XCTAssertEqual(cell.bookmarkIcon.imageColor, Colors.getRGB(Colors.PRIMARY))
+        XCTAssertEqual(cell.desc.text, "Now Playing...")
     }
 }
