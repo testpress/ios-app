@@ -85,6 +85,13 @@ class RelatedContentsCell: UITableViewCell {
             return
         }
         
+        if (content?.video != nil && content!.video!.embedCode.isEmpty) {
+            if let viewController = self.parentViewController as? VideoContentViewController {
+                viewController.changeVideo(content: content)
+                return
+            }
+        }
+        
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(
             withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
