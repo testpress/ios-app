@@ -106,7 +106,10 @@ class VideoPlayerControlsView: UIView {
             return
         }
         let seconds = Float64(slider!.currentPosition) * totalDuration
+        delegate?.pause()
         delegate?.goTo(seconds: Float(seconds))
+        slider.currentPosition = Float(seconds/totalDuration)
+        delegate?.play()
     }
     
     func showControls() {
@@ -124,6 +127,10 @@ class VideoPlayerControlsView: UIView {
         forwardButton.isHidden = true
         playPauseButton.isHidden = true
         loadingIndicator.isHidden = false
+        fullScreen.isHidden = true
+        currentDurationLabel.isHidden = true
+        totalDurationLabel.isHidden = true
+        slider.isHidden = true
         loadingIndicator.startAnimating()
     }
     
@@ -133,6 +140,10 @@ class VideoPlayerControlsView: UIView {
             rewindButton.isHidden = false
             forwardButton.isHidden = false
             playPauseButton.isHidden = false
+            currentDurationLabel.isHidden = false
+            fullScreen.isHidden = false
+            totalDurationLabel.isHidden = false
+            slider.isHidden = false
             loadingIndicator.stopAnimating()
             loadingIndicator.isHidden = true
         }
@@ -144,7 +155,17 @@ class VideoPlayerControlsView: UIView {
     
     func updateDuration(seconds: Double, videoDuration: Double) {
         stopLoading()
-        slider.currentPosition = Float(seconds/videoDuration)
+        
+        if(!(delegate?.isPlaying())!) {
+            return
+        }
+        
+        if (slider.isHighlighted) {
+            timer?.invalidate()
+        } else {
+            slider.currentPosition = Float(seconds/videoDuration)
+        }
+ 
         totalDuration = videoDuration
         currentDuration = seconds
         totalDurationLabel.text = durationType.value(seconds: seconds, total: videoDuration)
@@ -187,6 +208,9 @@ class VideoPlayerControlsView: UIView {
 
 
 protocol PlayerControlDelegate: class {
+    func isPlaying() -> Bool
+    func pause()
+    func play()
     func playOrPause()
     func forward()
     func rewind()

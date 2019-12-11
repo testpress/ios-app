@@ -136,6 +136,12 @@ class VideoSlider: UIControl {
         return true
     }
     
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let bounds = self.bounds.insetBy(dx: -20, dy: -20)
+        return bounds.contains(point);
+    }
+    
     override public func endTracking(_ touch: UITouch?, with event: UIEvent?){
         super.endTracking(touch, with: event)
         sendActions(for: .valueChanged)

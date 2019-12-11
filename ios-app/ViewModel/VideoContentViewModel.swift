@@ -14,7 +14,7 @@ import TTGSnackbar
 
 
 class VideoContentViewModel {
-    let content: Content!
+    var content: Content!
     var contentAttemptId: Int?
     var startTime: String?
     var videoPlayerView: VideoPlayerView?
@@ -39,7 +39,11 @@ class VideoContentViewModel {
     }
     
     func getDescription()  -> String{
-        return content?.description ?? ""
+        var description = ""
+        if (!content.description!.isEmpty) {
+            description = "\(content.description!) \n"
+        }
+        return description
     }
     
     func createContentAttempt() {
@@ -63,8 +67,8 @@ class VideoContentViewModel {
     }
     
     @objc func updateVideoAttempt() {
-        if (videoPlayerView?.player.isPlaying ?? true) {
-            let currentTime = String(format: "%.4f", (videoPlayerView?.player.currentTimeInSeconds)!)
+        if (videoPlayerView?.player?.isPlaying ?? true) {
+            let currentTime = String(format: "%.4f", (videoPlayerView?.player?.currentTimeInSeconds)!)
             let parameters: Parameters = [
                 "last_position": currentTime,
                 "time_ranges": [[videoPlayerView!.startTime, currentTime]]
