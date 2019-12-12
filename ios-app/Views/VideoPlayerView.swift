@@ -118,6 +118,16 @@ class VideoPlayerView: UIView {
         controlsContainerView.playerStatus = .playing
     }
     
+    func pause() {
+        player.pause()
+        controlsContainerView.playerStatus = .paused
+    }
+    
+    func play() {
+        player.play()
+        controlsContainerView.playerStatus = .playing
+    }
+    
 }
 
 
@@ -139,16 +149,13 @@ extension VideoPlayerView: PlayerControlDelegate {
     func playOrPause() {
         if (controlsContainerView.playerStatus == .finished) {
             player?.seek(to: kCMTimeZero, completionHandler: { _ in
-                self.player.play()
-                self.controlsContainerView.playerStatus = .playing
+                self.play()
             })
         } else {
             if player.isPlaying {
-                player.pause()
-                controlsContainerView.playerStatus = .paused
+                self.pause()
             } else {
-                player.play()
-                controlsContainerView.playerStatus = .playing
+                self.play()
             }
         }
     }
