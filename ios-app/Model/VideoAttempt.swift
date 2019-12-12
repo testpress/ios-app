@@ -1,8 +1,6 @@
 //
-//  AVPlayerExtensions.swift
+//  VideoAttempt.swift
 //  ios-app
-//
-//
 //
 //  Copyright © 2019 Testpress. All rights reserved.
 //
@@ -25,18 +23,29 @@
 //  THE SOFTWARE.
 //
 
+import ObjectMapper
 
-import AVKit
-
-extension AVPlayer {
-    var isPlaying: Bool {
-        if #available(iOS 10.0, *) {
-            return timeControlStatus == .playing
-        }
-        return rate != 0 && error == nil
+public class VideoAttempt {
+    
+    var id: Int!
+    var lastPosition: String!
+    var watchDuration: String!
+    var state: Int!
+    var videoContent: Video!
+    var user: User!
+    
+    public required init?(map: Map) {
     }
     
-    var currentTimeInSeconds:Float64 {
-        return CMTimeGetSeconds(currentTime())
+}
+
+extension VideoAttempt: TestpressModel {
+    public func mapping(map: Map) {
+        id <- map["id"]
+        videoContent <- map["video_content"]
+        lastPosition <- map["last_position"]
+        watchDuration <- map["watched_duration"]
+        state <- map["state"]
+        user <- map["user"]
     }
 }
