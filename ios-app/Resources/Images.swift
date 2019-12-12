@@ -53,6 +53,8 @@ enum Images: String {
     case PauseIcon = "pause_icon"
     case ReloadIcon = "reload"
     case Round = "round"
+    case RemoveBookmark = "bookmark_filled"
+    case AddBookmark = "bookmark_outline"
 
     var image: UIImage {
         return UIImage(asset: self)

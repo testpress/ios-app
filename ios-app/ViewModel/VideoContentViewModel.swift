@@ -10,6 +10,7 @@ import Foundation
 import AVKit
 import Alamofire
 import Sentry
+import TTGSnackbar
 
 
 class VideoContentViewModel {
@@ -74,6 +75,29 @@ class VideoContentViewModel {
                 }
             })
         }
+    }
+    
+    
+    func removeBookmark(completion: (() -> Void)?) {
+        let urlPath = TPEndpointProvider.getBookmarkPath(bookmarkId: content.bookmarkId)
+        TPApiClient.apiCall(
+            endpointProvider: TPEndpointProvider(.delete, urlPath: urlPath),
+            completion: {
+                void, error in
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                    let (_, _, description) = error.getDisplayInfo()
+                    TTGSnackbar(message: description, duration: .middle).show()
+                    return
+                }
+                TTGSnackbar(
+                    message: Strings.BOOKMARK_DELETED_SUCCESSFULLY,
+                    duration: .middle
+                    ).show()
+                
+                completion?()
+        })
     }
     
 }

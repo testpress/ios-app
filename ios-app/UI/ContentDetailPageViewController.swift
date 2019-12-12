@@ -39,6 +39,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var bottomNavigationBar: UIStackView!
     @IBOutlet weak var bottomNavigationBarConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bookmarkButton: UIBarButtonItem!
     
     let bottomGradient = CAGradientLayer()
     var pageViewController: UIPageViewController!
@@ -105,6 +106,16 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
             } else {
                 setFirstViewController()
             }
+        }
+
+        if contentDetailDataSource.viewControllerAtIndex(position)! is VideoContentViewController {
+            navigationBarItem.rightBarButtonItems = [bookmarkButton]
+            
+            if contents[position].bookmarkId != nil {
+                bookmarkButton.image = Images.RemoveBookmark.image
+            }
+        } else {
+            navigationBarItem.rightBarButtonItems = []
         }
     }
     
@@ -279,6 +290,12 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     @IBAction func back() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func bookMark(_ sender: UIBarButtonItem) {
+        if let viewController = self.getCurretViewController() as? VideoContentViewController {
+            viewController.addOrRemoveBookmark()
+        }
     }
     
     override func viewDidLayoutSubviews() {

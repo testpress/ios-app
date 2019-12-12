@@ -35,10 +35,10 @@ class TestVideoContentViewController: XCTestCase {
         let window = UIWindow()
         window.rootViewController = controller
         window.makeKeyAndVisible()
+        controller?.viewDidLoad()
     }
     
     func testCustomView() {
-        controller?.viewDidLoad()
         XCTAssertTrue(controller!.customView.isHidden)
         
         controller?.showWarning(text: "Stop casting")
@@ -52,11 +52,14 @@ class TestVideoContentViewController: XCTestCase {
     }
     
     func testVideoPlayerView() {
-        controller?.viewDidLoad()
         XCTAssertEqual(controller?.videoPlayerView.frame, CGRect(x:0, y:0, width:controller!.view.frame.width, height: controller!.videoPlayer.frame.height))
         
         controller?.videoPlayerView.fullScreen()
         XCTAssertEqual(controller?.videoPlayerView.frame, UIScreen.main.bounds)
     }
     
+    func testAddOrRemoveBookmark() {
+        controller!.addOrRemoveBookmark()
+        XCTAssertTrue(UIApplication.topViewController()!.isKind(of: BookmarkFolderTableViewController.self))
+    }
 }
