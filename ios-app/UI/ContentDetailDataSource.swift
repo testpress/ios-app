@@ -72,6 +72,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             let viewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.VIDEO_CONTENT_VIEW_CONTROLLER) as! VideoContentViewController
              viewController.content = content
+             viewController.contents = contents
             return viewController
 
         } else {

@@ -34,6 +34,14 @@ class VideoContentViewModel {
         timer?.invalidate()
     }
     
+    func getTitle() -> String{
+        return content!.name
+    }
+    
+    func getDescription()  -> String{
+        return content?.description ?? ""
+    }
+    
     func createContentAttempt() {
         let url = TPEndpointProvider.getContentAttemptUrl(contentID: content.id)
         TPApiClient.request(

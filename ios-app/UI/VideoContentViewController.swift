@@ -33,8 +33,9 @@ import Sentry
 import TTGSnackbar
 
 
-class VideoContentViewController: UIViewController {
+class VideoContentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     var content: Content!
+    var contents: [Content]!
     var videoPlayerView: VideoPlayerView!
     var viewModel: VideoContentViewModel!
     var customView: UIView!
@@ -42,6 +43,13 @@ class VideoContentViewController: UIViewController {
     var bookmarkHelper: BookmarkHelper!
     
     @IBOutlet weak var videoPlayer: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var titleToggleButton: UIButton!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleStackView: UIStackView!
     
     
     override func viewDidLoad() {
@@ -51,15 +59,60 @@ class VideoContentViewController: UIViewController {
         view.addSubview(videoPlayerView)
         viewModel.videoPlayerView = videoPlayerView
         showOrHideBottomBar()
+        titleLabel.text = viewModel.getTitle()
+        desc.text = viewModel.getDescription()
         viewModel.createContentAttempt()
         addCustomView()
+        desc.isHidden = true
         udpateBookmarkButtonState(bookmarkId: content.bookmarkId)
         
-        handleExternalDisplay()
         
+        tableView.dataSource = self
+        tableView.delegate = self
+        addGestures()
+        
+        handleExternalDisplay()
         if #available(iOS 11.0, *) {
             handleScreenCapture()
         }
+        
+    }
+    
+    
+    func showOrHideDescription() {
+        self.desc.isHidden = !self.desc.isHidden
+        
+        if (self.desc.isHidden) {
+            self.titleToggleButton.setImage(Images.CaretDown.image, for: .normal)
+        } else {
+            self.titleToggleButton.setImage(Images.CaretUp.image, for: .normal)
+        }
+    }
+    
+    func addGestures() {
+        titleStackView.addTapGestureRecognizer {
+            self.showOrHideDescription()
+        }
+        
+        titleToggleButton.addTapGestureRecognizer{
+            self.showOrHideDescription()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contents.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RelatedContentsCell", for: indexPath) as! RelatedContentsCell
+        
+        cell.initCell(index: indexPath.row, contents: contents!, viewController: self, is_current: content.id == contents[indexPath.row].id)
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     func addCustomView() {
@@ -96,11 +149,12 @@ class VideoContentViewController: UIViewController {
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
         content.bookmarkId = bookmarkId
+        tableView.reloadData()
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             if bookmarkId != nil {
                 contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.RemoveBookmark.image
             } else {
-                 contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
+                contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
             }
         }
     }
@@ -118,7 +172,7 @@ class VideoContentViewController: UIViewController {
         present(navigationController, animated: true)
         
     }
- 
+    
     func hideWarning() {
         videoPlayerView.isHidden = false
         customView.isHidden = true
@@ -135,7 +189,7 @@ class VideoContentViewController: UIViewController {
     @available(iOS 11.0, *)
     @objc func handleScreenCapture() {
         if (UIScreen.main.isCaptured) {
-           showWarning(text: "Please stop screen recording to continue watching video")
+            showWarning(text: "Please stop screen recording to continue watching video")
         } else {
             hideWarning()
         }
@@ -154,7 +208,7 @@ class VideoContentViewController: UIViewController {
     func showOrHideBottomBar() {
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
-
+            
             if (UIDevice.current.orientation.isLandscape) {
                 contentDetailPageViewController.hideBottomNavBar()
             } else {
@@ -179,23 +233,19 @@ class VideoContentViewController: UIViewController {
     }
     
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        handleFullScreen()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.startPeriodicAttemptUpdater()
         videoPlayerView.addObservers()
-
+        
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
+            contentDetailPageViewController.hideNavbarTitle()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidConnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidDisconnect, object: nil)
-
+        
         if #available(iOS 11.0, *) {
             NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: .UIScreenCapturedDidChange, object: nil)
         }
@@ -211,7 +261,7 @@ class VideoContentViewController: UIViewController {
         if #available(iOS 11.0, *) {
             NotificationCenter.default.removeObserver(self, name: .UIScreenCapturedDidChange, object: nil)
         }
-
+        
     }
     
     func showPlaybackSpeedMenu() {
@@ -224,6 +274,22 @@ class VideoContentViewController: UIViewController {
         }
         alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated: true)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        desc.sizeToFit()
+        handleFullScreen()
+        
+        if let tableHeaderView = tableView.tableHeaderView  {
+            if !desc.isHidden && desc.text != nil {
+                tableHeaderView.frame.size.height = titleStackView.frame.size.height + desc.frame.size.height + 20
+            } else {
+                tableHeaderView.frame.size.height = titleStackView.frame.size.height + 20
+            }
+            tableView.tableHeaderView = tableHeaderView
+        }
+        
     }
 }
 
@@ -238,7 +304,7 @@ extension UIWindow {
     func removeVideoPlayerView() {
         for subview in self.subviews {
             if subview is VideoPlayerView  {
-               subview.removeFromSuperview()
+                subview.removeFromSuperview()
             }
         }
     }
