@@ -62,7 +62,10 @@ class VideoContentViewModel {
                 self.contentAttemptId = contentAttempt!.objectID
                 let seconds = NSString(string: (contentAttempt?.video.lastPosition)!)
                 self.videoPlayerView?.startTime = Float(seconds.doubleValue)
-                self.videoPlayerView?.goTo(seconds: Float(seconds.doubleValue))
+                
+                if (seconds.doubleValue > Double(1.0)) {
+                    self.videoPlayerView?.goTo(seconds: Float(seconds.doubleValue))
+                }
         })
     }
     
