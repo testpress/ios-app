@@ -68,6 +68,11 @@ class VideoContentViewModel {
     
     @objc func updateVideoAttempt() {
         if (videoPlayerView?.player?.isPlaying ?? true) {
+
+            if ((videoPlayerView?.player?.currentTimeInSeconds)! <= Double(1.0)) {
+                return
+            }
+
             let currentTime = String(format: "%.4f", (videoPlayerView?.player?.currentTimeInSeconds)!)
             let parameters: Parameters = [
                 "last_position": currentTime,
