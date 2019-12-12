@@ -41,6 +41,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     var customView: UIView!
     var warningLabel: UILabel!
     var bookmarkHelper: BookmarkHelper!
+    var bookmarkDelegate: BookmarkDelegate?
+    var bookmarkContent: Content?
     
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -65,8 +67,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         addCustomView()
         desc.isHidden = true
         udpateBookmarkButtonState(bookmarkId: content.bookmarkId)
-        
-        
+        bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
         addGestures()
@@ -139,11 +141,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     func addOrRemoveBookmark() {
-        if (content.bookmarkId != nil) {
-            viewModel.removeBookmark(completion: {self.udpateBookmarkButtonState(bookmarkId: nil)})
-        } else {
-            bookmark()
-        }
+        bookmarkHelper?.onClickBookmarkButton(bookmarkId: content.bookmarkId)
     }
     
     
@@ -159,19 +157,6 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         }
     }
     
-    
-    func bookmark() {
-        let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: nil)
-        let navigationController = storyboard.instantiateViewController(withIdentifier:
-            Constants.BOOKMARK_FOLDER_NAVIGATION_CONTROLLER) as! UINavigationController
-        
-        let foldersTableViewController = navigationController.viewControllers.first
-            as! BookmarkFolderTableViewController
-        
-        foldersTableViewController.sourceViewController = self
-        present(navigationController, animated: true)
-        
-    }
     
     func hideWarning() {
         videoPlayerView.isHidden = false
@@ -310,3 +295,39 @@ extension UIWindow {
     }
 }
 
+
+extension VideoContentViewController: BookmarkDelegate {
+    func displayMoveButton() {
+
+    }
+    
+    func displayBookmarkButton() {
+    }
+    
+    func onClickMoveButton() {
+    
+    }
+    
+    func removeBookmark() {
+    
+    }
+    
+    func displayRemoveButton() {
+        
+    }
+    
+    func onClickBookmarkButton() {
+    
+    }
+    
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = content.id
+        parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
+        return parameters
+    }
+    
+    func updateBookmark(bookmarkId: Int?) {
+        self.udpateBookmarkButtonState(bookmarkId: bookmarkId)
+    }
+}

@@ -783,7 +783,7 @@
                                                                             <color key="titleColor" red="0.74901960784313726" green="0.74901960784313726" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <action selector="removeBookmark" destination="5sd-P7-T9l" eventType="touchUpInside" id="MI1-XP-e1L"/>
+                                                                            <action selector="onRemoveBookmark" destination="5sd-P7-T9l" eventType="touchUpInside" id="BJz-Cr-Cvy"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
