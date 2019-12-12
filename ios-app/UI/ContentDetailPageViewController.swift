@@ -27,6 +27,7 @@ import UIKit
 
 class ContentDetailPageViewController: UIViewController, UIPageViewControllerDelegate {
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var contentsContainerView: UIView!
     @IBOutlet weak var prevArrow: UIImageView!
     @IBOutlet weak var prevButton: UIButton!
@@ -82,10 +83,18 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         contentDetailDataSource = ContentDetailDataSource(contents, contentAttemptCreationDelegate)
         navigationBarItem.title = title
         if contents.count < 2 {
-            bottomShadowView.isHidden = true
-            bottomNavigationBar.isHidden = true
-            bottomNavigationBarConstraint.constant = 0
+            hideBottomNavBar()
         }
+    }
+    
+    func hideBottomNavBar() {
+        bottomShadowView.isHidden = true
+        bottomNavigationBar.isHidden = true
+    }
+    
+    func showBottomNavbar() {
+        bottomShadowView.isHidden = false
+        bottomNavigationBar.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -190,6 +199,14 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         }
     }
     
+    func enableSwipeGesture() {
+        pageViewController.dataSource = contentDetailDataSource
+    }
+    
+    func disableSwipeGesture() {
+        pageViewController.dataSource = nil
+    }
+    
     func updateContent() {
         activityIndicator.startAnimating()
         let content = contents[getCurrentIndex()]
@@ -268,6 +285,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         // Add gradient shadow layer to the shadow container view
         UIUtils.updateBottomShadow(bottomShadowView: bottomShadowView,
                                    bottomGradient: bottomGradient)
+        emptyView.frame = contentsContainerView.bounds
         
     }
     
