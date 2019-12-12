@@ -117,16 +117,18 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func enableBookmarkOption() {
-        if contentDetailDataSource.viewControllerAtIndex(getCurrentIndex())! is VideoContentViewController {
-            navigationBarItem.rightBarButtonItems = [bookmarkButton]
-            bookmarkButton.isEnabled = true
-            bookmarkButton.image = Images.AddBookmark.image
-            if contents[getCurrentIndex()].bookmarkId != nil {
-                bookmarkButton.image = Images.RemoveBookmark.image
+        if !(pageViewController.viewControllers?.isEmpty)! {
+            if contentDetailDataSource.viewControllerAtIndex(getCurrentIndex())! is VideoContentViewController {
+                navigationBarItem.rightBarButtonItems = [bookmarkButton]
+                bookmarkButton.isEnabled = true
+                bookmarkButton.image = Images.AddBookmark.image
+                if contents[getCurrentIndex()].bookmarkId != nil {
+                    bookmarkButton.image = Images.RemoveBookmark.image
+                }
+            } else {
+                bookmarkButton.isEnabled = false
+                bookmarkButton.image = nil
             }
-        } else {
-            bookmarkButton.isEnabled = false
-            bookmarkButton.image = nil
         }
     }
     
@@ -160,6 +162,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func getCurrentIndex() -> Int {
+        print("Content detail data source : \(contentDetailDataSource.contents)")
         return contentDetailDataSource.indexOfViewController(getCurretViewController())
     }
     
