@@ -70,7 +70,7 @@ class VideoContentViewModel {
     }
     
     @objc func updateVideoAttempt() {
-        if (videoPlayerView?.player?.isPlaying ?? true) {
+        if ((videoPlayerView?.player?.isPlaying ?? true) && ((contentAttemptId != nil))) {
 
             if ((videoPlayerView?.player?.currentTimeInSeconds)! <= Double(1.0)) {
                 return
