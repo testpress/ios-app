@@ -44,10 +44,6 @@ class HtmlContentViewController: BaseWebViewController {
         checkContentType()
     }
     
-    @objc func buttonAction(sender: UIButton!) {
-        self.playVideo(url: content.video!.url)
-    }
-    
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
