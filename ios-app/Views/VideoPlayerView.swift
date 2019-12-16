@@ -12,7 +12,7 @@ import AVKit
 class VideoPlayerView: UIView {
     var url: URL!
     var playerLayer: AVPlayerLayer?
-    var player: AVPlayer!
+    var player: AVPlayer? = AVPlayer()
     var playerDelegate: VideoPlayerDelegate!
     var controlsContainerView: VideoPlayerControlsView! = .fromNib("VideoPlayerControls")
     var timeObserver: Any?
@@ -43,37 +43,56 @@ class VideoPlayerView: UIView {
     
     private func setupPlayer() {
         backgroundColor = .black
-        player = AVPlayer(url: url!)
-        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
-        player.rate = 1
+        playVideo(url: url)
         playerLayer = AVPlayerLayer(player: player)
         self.layer.addSublayer(playerLayer!)
         playerLayer?.frame = self.frame
-        player.play()
+    }
+    
+    func playVideo(url: URL) {
+        controlsContainerView.startLoading()
+        self.url = url
+        let playerItem = AVPlayerItem(url: url)
+        player?.replaceCurrentItem(with: playerItem)
+        player?.seek(to: kCMTimeZero)
+        player?.rate = 1
+        play()
         
         if #available(iOS 10.0, *) {
-            player.currentItem?.preferredForwardBufferDuration = 1
+            player?.currentItem?.preferredForwardBufferDuration = 1
         }
+        addObservers()
     }
     
     
     func addObservers() {
-        player?.play()
+        initPlayer()
         player?.currentItem?.addObserver(self, forKeyPath: "playbackBufferEmpty", options: .new, context: nil)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: .new, context: nil)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackBufferFull", options: .new, context: nil)
         player?.currentItem?.addObserver(self, forKeyPath: "loadedTimeRanges", options: .new, context: nil)
-        videoEndObserver = NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        videoEndObserver = NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
 
         
-        let interval = CMTime(value: 1, timescale: 2)
+        let interval = CMTime(value: 1, timescale: CMTimeScale(NSEC_PER_SEC))
         timeObserver = player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
             let seconds = CMTimeGetSeconds(progressTime)
-            self.controlsContainerView.updateDuration(seconds:seconds, videoDuration: CMTimeGetSeconds((self.player?.currentItem?.duration)!))
+            if (self.player?.currentItem != nil) {
+                let loadedDuration = CMTimeGetSeconds((self.player?.availableDuration())!)
+                self.controlsContainerView.updateDuration(seconds:seconds, videoDuration: CMTimeGetSeconds((self.player?.currentItem?.duration)!))
+                self.controlsContainerView.updateLoadedDuration(seconds:loadedDuration)
+            }
         })
 
     }
     
+    func initPlayer()  {
+        if player != nil {
+            player?.play()
+        } else {
+            playVideo(url: self.url)
+        }
+    }
     
     @objc func playerDidFinishPlaying() {
         controlsContainerView.timer?.invalidate()
@@ -82,14 +101,15 @@ class VideoPlayerView: UIView {
     }
     
     func dealloc() {
-        player.pause()
+        player?.pause()
         controlsContainerView.playerStatus = .paused
+        player?.removeTimeObserver(timeObserver!)
+        NotificationCenter.default.removeObserver(videoEndObserver!)
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackBufferEmpty")
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackBufferFull")
         player?.currentItem?.removeObserver(self, forKeyPath: "loadedTimeRanges")
-        player.removeTimeObserver(timeObserver!)
-        NotificationCenter.default.removeObserver(videoEndObserver!)
+        player?.replaceCurrentItem(with: nil)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -101,7 +121,7 @@ class VideoPlayerView: UIView {
                     controlsContainerView.stopLoading()
                 case "playbackBufferFull":
                     if #available(iOS 10.0, *) {
-                        player.currentItem?.preferredForwardBufferDuration = 0
+                        player?.currentItem?.preferredForwardBufferDuration = 0
                     }
                     controlsContainerView.stopLoading()
                 case .none:
@@ -113,18 +133,18 @@ class VideoPlayerView: UIView {
     }
     
     func changePlaybackSpeed(speed: PlaybackSpeed) {
-        player.rate = speed.value
+        player?.rate = speed.value
         controlsContainerView.playbackSpeed.setTitle(speed.label, for: .normal)
         controlsContainerView.playerStatus = .playing
     }
     
     func pause() {
-        player.pause()
+        player?.pause()
         controlsContainerView.playerStatus = .paused
     }
     
     func play() {
-        player.play()
+        player?.play()
         controlsContainerView.playerStatus = .playing
     }
     
@@ -144,15 +164,16 @@ extension VideoPlayerView: PlayerControlDelegate {
             player?.play()
             controlsContainerView.playerStatus = .playing
         }
+        startTime = seconds
     }
     
     func playOrPause() {
         if (controlsContainerView.playerStatus == .finished) {
-            player?.seek(to: kCMTimeZero, completionHandler: { _ in
+            player?.currentItem?.seek(to: kCMTimeZero, completionHandler: { _ in
                 self.play()
             })
         } else {
-            if player.isPlaying {
+            if (player?.isPlaying)! {
                 self.pause()
             } else {
                 self.play()
@@ -161,15 +182,15 @@ extension VideoPlayerView: PlayerControlDelegate {
     }
     
     func forward() {
-        guard let duration  = player.currentItem?.asset.duration else{
+        guard let duration  = player?.currentItem?.asset.duration else{
             return
         }
-        let playerCurrentTime = CMTimeGetSeconds(player.currentItem!.currentTime())
+        let playerCurrentTime = CMTimeGetSeconds((player?.currentItem!.currentTime())!)
         let newTime = playerCurrentTime + 10
         
         if newTime < (CMTimeGetSeconds(duration)) {
             let seekTime: CMTime = CMTimeMake(Int64(newTime * 1000 as Float64), 1000)
-            player.seek(to: seekTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+            player?.seek(to: seekTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
             startTime = Float(newTime)
             
         }
@@ -177,18 +198,18 @@ extension VideoPlayerView: PlayerControlDelegate {
     }
     
     func rewind() {
-        let playerCurrentTime = CMTimeGetSeconds(player.currentTime())
+        let playerCurrentTime = CMTimeGetSeconds((player?.currentTime())!)
         var newTime = playerCurrentTime - 10
         
         if newTime < 0 {
             newTime = 0
         }
         let seekTime: CMTime = CMTimeMake(Int64(newTime * 1000 as Float64), 1000)
-        player.seek(to: seekTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+        player?.seek(to: seekTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
         startTime = Float(newTime)
         
         if (controlsContainerView.playerStatus == .finished) {
-            player.play()
+            player?.play()
             controlsContainerView.playerStatus = .playing
         }
     }
@@ -202,6 +223,9 @@ extension VideoPlayerView: PlayerControlDelegate {
         UIDevice.current.setValue(value, forKey: "orientation")
     }
     
+    func isPlaying() -> Bool {
+        return player?.isPlaying ?? false
+    }
 }
 
 protocol VideoPlayerDelegate: class {

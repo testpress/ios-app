@@ -18,6 +18,7 @@ class RelatedContentsCell: UITableViewCell {
     var index: Int?
     var contents: [Content]?
     var parentViewController: UIViewController? = nil
+    var isCurrent: Bool = false
     
     func initCell(index: Int, contents: [Content], viewController: UIViewController, is_current: Bool=false) {
         parentViewController = viewController
@@ -25,9 +26,12 @@ class RelatedContentsCell: UITableViewCell {
         self.contents = contents
         self.index = index
         title.text = content?.name
+        bookmarkIcon.isHidden = false
+        isCurrent = false
         
         if content?.exam != nil {
             contentIcon.image = Images.Quill.image
+            bookmarkIcon.isHidden = true
         } else if content?.htmlContentTitle != nil {
             contentIcon.image = Images.Article.image
         } else if content?.video != nil {
@@ -50,6 +54,7 @@ class RelatedContentsCell: UITableViewCell {
         desc.isHidden = true
         
         if (is_current) {
+            isCurrent = true
             contentIcon.setImageColor(color: Colors.getRGB(Colors.PRIMARY))
             bookmarkIcon.setImageColor(color: Colors.getRGB(Colors.PRIMARY))
             self.backgroundColor = Colors.getRGB(Colors.PRIMARY, alpha: 0.1)
@@ -67,9 +72,26 @@ class RelatedContentsCell: UITableViewCell {
         
         addGestureRecognizer(tapRecognizer)
         
+        bookmarkIcon.addTapGestureRecognizer{
+            if let viewController = self.parentViewController as? VideoContentViewController {
+                viewController.addOrRemoveBookmark(content: self.content)
+            }
+        }
+        
     }
     
     @objc func onItemClick() {
+        if isCurrent {
+            return
+        }
+        
+        if (content?.video != nil && content!.video!.embedCode.isEmpty) {
+            if let viewController = self.parentViewController as? VideoContentViewController {
+                viewController.changeVideo(content: content)
+                return
+            }
+        }
+        
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(
             withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)

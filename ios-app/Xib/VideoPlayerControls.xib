@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="landscape">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -53,7 +53,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJu-pi-pZ0">
-                    <rect key="frame" x="10" y="155" width="26" height="15"/>
+                    <rect key="frame" x="10" y="157" width="26" height="15"/>
                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgk-gf-KAi">
-                    <rect key="frame" x="558" y="155" width="26" height="15"/>
+                    <rect key="frame" x="558" y="157" width="26" height="15"/>
                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -70,22 +70,8 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="translatesAutoresizingMaskIntoConstraints" value="NO"/>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zMr-Qd-Qx9" customClass="CustomSlider" customModule="ios_app" customModuleProvider="target">
-                    <rect key="frame" x="-2" y="180" width="646" height="31"/>
-                    <color key="tintColor" red="0.0" green="0.80000000000000004" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <color key="thumbTintColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="0.0"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="translatesAutoresizingMaskIntoConstraints" value="NO"/>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </slider>
-                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJH-op-Ia2">
-                    <rect key="frame" x="608" y="139" width="35" height="46"/>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJH-op-Ia2">
+                    <rect key="frame" x="584" y="139" width="48" height="46"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="48" id="Ik6-Z5-l3g"/>
                     </constraints>
@@ -114,32 +100,40 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mey-yi-8hf" customClass="VideoSlider" customModule="ios_app" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="192" width="642" height="10"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="2Nh-XF-PiB"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hJH-op-Ia2" secondAttribute="trailing" constant="10" id="1xu-Wh-qEX"/>
                 <constraint firstItem="5tp-LR-i2b" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="4Y7-E4-Xjd"/>
-                <constraint firstItem="zMr-Qd-Qx9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6zm-yD-wDU"/>
-                <constraint firstAttribute="bottom" secondItem="zMr-Qd-Qx9" secondAttribute="bottom" constant="-10" id="C5e-Q3-gwu"/>
                 <constraint firstItem="Md2-Me-Kr4" firstAttribute="trailing" secondItem="EOa-fV-i3a" secondAttribute="trailing" constant="300" id="Dcg-OY-M3a"/>
                 <constraint firstItem="EOa-fV-i3a" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Egj-39-eU6"/>
                 <constraint firstItem="Md2-Me-Kr4" firstAttribute="trailing" secondItem="EOa-fV-i3a" secondAttribute="trailing" constant="100" id="Flb-lN-sSq"/>
                 <constraint firstItem="Md2-Me-Kr4" firstAttribute="trailing" secondItem="EOa-fV-i3a" secondAttribute="trailing" constant="100" id="HwT-1W-9ya"/>
+                <constraint firstAttribute="bottom" secondItem="mey-yi-8hf" secondAttribute="bottom" constant="25" id="JW0-lz-5SS"/>
                 <constraint firstItem="EOa-fV-i3a" firstAttribute="leading" secondItem="JwU-LP-1zx" secondAttribute="leading" constant="100" id="MVx-vv-9Gx"/>
                 <constraint firstAttribute="trailing" secondItem="5tp-LR-i2b" secondAttribute="trailing" constant="10" id="Maf-SX-WJJ"/>
                 <constraint firstItem="Md2-Me-Kr4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="O5a-Vg-GL8"/>
-                <constraint firstAttribute="trailing" secondItem="zMr-Qd-Qx9" secondAttribute="trailing" id="Sz9-h2-QUY"/>
+                <constraint firstAttribute="bottom" secondItem="mey-yi-8hf" secondAttribute="bottom" constant="-2" id="Pcn-t1-0RI"/>
+                <constraint firstItem="mey-yi-8hf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UX1-Hf-XLS"/>
                 <constraint firstItem="EOa-fV-i3a" firstAttribute="leading" secondItem="JwU-LP-1zx" secondAttribute="leading" constant="100" id="V55-aF-7k9"/>
+                <constraint firstItem="mey-yi-8hf" firstAttribute="top" secondItem="Zgk-gf-KAi" secondAttribute="bottom" constant="20" id="XQ8-Ub-XHS"/>
+                <constraint firstItem="mey-yi-8hf" firstAttribute="top" secondItem="hJH-op-Ia2" secondAttribute="bottom" constant="7" id="Xjy-Ef-axj"/>
                 <constraint firstItem="hJH-op-Ia2" firstAttribute="leading" secondItem="Zgk-gf-KAi" secondAttribute="trailing" id="g1x-0e-Nnj"/>
                 <constraint firstItem="EOa-fV-i3a" firstAttribute="leading" secondItem="JwU-LP-1zx" secondAttribute="leading" constant="300" id="hGy-Bq-iZ2"/>
+                <constraint firstItem="mey-yi-8hf" firstAttribute="top" secondItem="gJu-pi-pZ0" secondAttribute="bottom" constant="20" id="jNc-dW-Fmm"/>
                 <constraint firstItem="kXs-IP-jHb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jeA-Rz-ppe"/>
                 <constraint firstItem="kXs-IP-jHb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="mxt-WS-9jF"/>
                 <constraint firstItem="JwU-LP-1zx" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="qge-Bb-4VF"/>
-                <constraint firstItem="Zgk-gf-KAi" firstAttribute="bottom" secondItem="zMr-Qd-Qx9" secondAttribute="top" constant="-10" id="r7E-G4-YwA"/>
-                <constraint firstItem="hJH-op-Ia2" firstAttribute="bottom" secondItem="zMr-Qd-Qx9" secondAttribute="top" constant="5" id="tb1-uP-ofm"/>
                 <constraint firstItem="EOa-fV-i3a" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="vHj-gi-c3F"/>
                 <constraint firstItem="gJu-pi-pZ0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="wCM-xS-cgV"/>
-                <constraint firstItem="gJu-pi-pZ0" firstAttribute="bottom" secondItem="zMr-Qd-Qx9" secondAttribute="top" constant="-10" id="x3F-Ty-L8M"/>
+                <constraint firstAttribute="trailing" secondItem="mey-yi-8hf" secondAttribute="trailing" id="yiX-6B-YRg"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -147,6 +141,8 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="JW0-lz-5SS"/>
+                    <exclude reference="Pcn-t1-0RI"/>
                     <exclude reference="MVx-vv-9Gx"/>
                     <exclude reference="V55-aF-7k9"/>
                     <exclude reference="hGy-Bq-iZ2"/>
@@ -157,12 +153,14 @@
             </variation>
             <variation key="heightClass=compact-widthClass=compact">
                 <mask key="constraints">
+                    <include reference="JW0-lz-5SS"/>
                     <include reference="V55-aF-7k9"/>
                     <include reference="Flb-lN-sSq"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="constraints">
+                    <include reference="Pcn-t1-0RI"/>
                     <include reference="MVx-vv-9Gx"/>
                     <include reference="HwT-1W-9ya"/>
                 </mask>
@@ -181,7 +179,7 @@
                 <outlet property="playPauseButton" destination="EOa-fV-i3a" id="Wpy-UT-8WH"/>
                 <outlet property="playbackSpeed" destination="5tp-LR-i2b" id="AKA-xe-EUE"/>
                 <outlet property="rewindButton" destination="JwU-LP-1zx" id="bnc-Pz-OUc"/>
-                <outlet property="slider" destination="zMr-Qd-Qx9" id="4PL-3y-vgg"/>
+                <outlet property="slider" destination="mey-yi-8hf" id="A6k-0Q-u1a"/>
                 <outlet property="totalDurationLabel" destination="Zgk-gf-KAi" id="Swk-LR-bwK"/>
             </connections>
             <point key="canvasLocation" x="165.51724137931035" y="48"/>
