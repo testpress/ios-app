@@ -31,6 +31,7 @@ class BookmarkHelper {
     
     var viewController: UIViewController!
     var slidingViewController: BookmarksSlidingViewController!
+    weak var delegate: BookmarkDelegate?
     
     init(viewController: UIViewController) {
         self.viewController = viewController
@@ -40,28 +41,19 @@ class BookmarkHelper {
     @discardableResult
     func javascriptListener(message: String, bookmark: Bookmark) -> Bool {
         switch(message) {
-            case "MoveBookmark":
-                onClickMoveButton(bookmark: bookmark)
-                return true
-            case "RemoveBookmark":
-                onClickRemoveButton(bookmark: bookmark)
-                return true
-            default:
-                return false
+        case "MoveBookmark":
+            onClickMoveButton(bookmark: bookmark)
+            return true
+        case "RemoveBookmark":
+            onClickRemoveButton(bookmark: bookmark)
+            return true
+        default:
+            return false
         }
     }
     
     func onClickMoveButton(bookmark: Bookmark) {
-        if let questionViewController = viewController as? BookmarkedQuestionViewController {
-            questionViewController.evaluateJavaScript("hideMoveButton();")
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.moveButton.isHidden = true
-            attachmentViewController.moveAnimationView.isHidden = false
-        } else {
-            let htmlViewController = viewController as! BookmarkedHtmlContentViewController
-            htmlViewController.evaluateJavaScript("hideMoveButton();")
-        }
+        delegate?.onClickMoveButton()
         showFoldersList(bookmark: bookmark)
     }
     
@@ -88,16 +80,7 @@ class BookmarkHelper {
     }
     
     func removeBookmark(bookmark: Bookmark) {
-        if let questionViewController = viewController as? BookmarkedQuestionViewController {
-            questionViewController.evaluateJavaScript("hideRemoveButton();")
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.removeButton.isHidden = true
-            attachmentViewController.removeAnimationView.isHidden = false
-        } else {
-            let htmlViewController = viewController as! BookmarkedHtmlContentViewController
-            htmlViewController.evaluateJavaScript("hideRemoveButton();")
-        }
+        delegate?.removeBookmark()
         deleteBookmark(bookmarkId: bookmark.id)
     }
     
@@ -114,16 +97,7 @@ class BookmarkHelper {
     }
     
     func onClickBookmarkButton(bookmarkId: Int?) {
-        if let questionViewController = viewController as? ReviewQuestionsViewController {
-            questionViewController.evaluateJavaScript("hideBookmarkButton();")
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.bookmarkButton.isHidden = true
-            attachmentViewController.bookmarkAnimationContainer.isHidden = false
-        } else {
-            let htmlViewController = viewController as! HtmlContentViewController
-            htmlViewController.evaluateJavaScript("hideBookmarkButton();")
-        }
+        delegate?.onClickBookmarkButton()
         if bookmarkId != nil {
             deleteBookmark(bookmarkId: bookmarkId!)
         } else {
@@ -131,62 +105,20 @@ class BookmarkHelper {
         }
     }
     
-    static func updateBookmark(with bookmarkId: Int?, in viewController: UIViewController) {
-        if let questionViewController = viewController as? ReviewQuestionsViewController {
-            questionViewController.attemptItem.bookmarkId = bookmarkId
-            setBookmarkButtonState(bookmarkId: bookmarkId, webViewController: questionViewController)
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.udpateBookmarkButtonState(bookmarkId: bookmarkId)
-        } else {
-            let htmlViewController = viewController as! HtmlContentViewController
-            htmlViewController.content.bookmarkId = bookmarkId
-            setBookmarkButtonState(bookmarkId: bookmarkId, webViewController: htmlViewController)
-        }
+    func updateBookmark(with bookmarkId: Int?) {
+        delegate?.updateBookmark(bookmarkId: bookmarkId)
     }
     
-    static func setBookmarkButtonState(bookmarkId: Int?, webViewController: BaseWebViewController) {
-        let bookmarked = bookmarkId != nil
-        webViewController.evaluateJavaScript("updateBookmarkButtonState(\(bookmarked));")
+    func displayBookmarkButton() {
+        delegate?.displayBookmarkButton()
     }
     
-    static func displayBookmarkButton(in viewController: UIViewController) {
-        if let questionViewController = viewController as? ReviewQuestionsViewController {
-            questionViewController.evaluateJavaScript("displayBookmarkButton();")
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.bookmarkAnimationContainer.isHidden = true
-            attachmentViewController.bookmarkButton.isHidden = false
-        } else {
-            let htmlViewController = viewController as! HtmlContentViewController
-            htmlViewController.evaluateJavaScript("displayBookmarkButton();")
-        }
-    }
-    
-    public static func displayMoveButton(in viewController: UIViewController) {
-        if let questionViewController = viewController as? BookmarkedQuestionViewController {
-            questionViewController.evaluateJavaScript("displayMoveButton();")
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.moveAnimationView.isHidden = true
-            attachmentViewController.moveButton.isHidden = false
-        } else {
-            let htmlViewController = viewController as! BookmarkedHtmlContentViewController
-            htmlViewController.evaluateJavaScript("displayMoveButton();")
-        }
+    func displayMoveButton() {
+        delegate?.displayMoveButton()
     }
     
     func displayRemoveButton() {
-        if let questionViewController = viewController as? BookmarkedQuestionViewController {
-            questionViewController.evaluateJavaScript("displayRemoveButton();")
-        } else if viewController is AttachmentDetailViewController {
-            let attachmentViewController = viewController as! AttachmentDetailViewController
-            attachmentViewController.removeAnimationView.isHidden = true
-            attachmentViewController.removeButton.isHidden = false
-        } else {
-            let htmlViewController = viewController as! BookmarkedHtmlContentViewController
-            htmlViewController.evaluateJavaScript("displayRemoveButton();")
-        }
+        delegate?.displayRemoveButton()
     }
     
     func showFoldersList(bookmark: Bookmark? = nil) {
@@ -198,6 +130,7 @@ class BookmarkHelper {
             as! BookmarkFolderTableViewController
         
         foldersTableViewController.bookmark = bookmark
+        foldersTableViewController.bookmarkDelegate = delegate
         foldersTableViewController.sourceViewController = viewController
         viewController.present(navigationController, animated: true, completion: nil)
     }
@@ -212,7 +145,7 @@ class BookmarkHelper {
                     debugPrint(error.message ?? "No error")
                     debugPrint(error.kind)
                     if self.slidingViewController == nil {
-                        BookmarkHelper.displayBookmarkButton(in: self.viewController)
+                        self.displayBookmarkButton()
                     } else {
                         self.displayRemoveButton()
                     }
@@ -222,37 +155,25 @@ class BookmarkHelper {
                 }
                 
                 if self.slidingViewController == nil {
-                    BookmarkHelper.updateBookmark(with: nil, in: self.viewController)
+                    self.updateBookmark(with: nil)
                 } else {
                     TTGSnackbar(
                         message: Strings.BOOKMARK_DELETED_SUCCESSFULLY,
                         duration: .middle
-                    ).show()
+                        ).show()
                     self.slidingViewController.onBookmarkDeleted()
                 }
         })
     }
     
-    public static func bookmark(folderName: String, viewController: UIViewController) {
+    func bookmark(folderName: String) {
         var folderName = folderName
         if folderName == BookmarkFolder.UNCATEGORIZED {
             folderName = ""
         }
-        var parameters: Parameters = ["folder": folderName]
-        if let questionViewController = viewController as? ReviewQuestionsViewController {
-            parameters["object_id"] = questionViewController.attemptItem.id
-            parameters["content_type"] = ["model": "userselectedanswer", "app_label": "exams"]
-        } else {
-            var content: Content
-            if let htmlViewController = viewController as? HtmlContentViewController {
-                content = htmlViewController.content
-            } else {
-                let attachmentViewController = viewController as! AttachmentDetailViewController
-                content = attachmentViewController.content
-            }
-            parameters["object_id"] = content.id
-            parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
-        }
+        var parameters: Parameters = delegate?.getBookMarkParams() ?? Parameters()
+        parameters["folder"] = folderName
+        
         TPApiClient.request(
             type: Bookmark.self,
             endpointProvider: TPEndpointProvider(.post, urlPath: TPEndpoint.bookmarks.urlPath),
@@ -262,7 +183,7 @@ class BookmarkHelper {
                 if let error = error {
                     debugPrint(error.message ?? "No error")
                     debugPrint(error.kind)
-                    BookmarkHelper.displayBookmarkButton(in: viewController)
+                    self.displayBookmarkButton()
                     var (_, _, description) = error.getDisplayInfo()
                     if error.isClientError() {
                         description = Strings.INVALID_FOLDER_NAME
@@ -271,12 +192,12 @@ class BookmarkHelper {
                     return
                 }
                 
-                BookmarkHelper.updateBookmark(with: bookmark!.id, in: viewController)
+                self.updateBookmark(with: bookmark!.id)
         })
     }
     
-    public static func update(folderName: String, in bookmarkId: Int,
-                              on viewController: UIViewController, newFolder: Bool = false) {
+    func update(folderName: String, in bookmarkId: Int,
+                on viewController: UIViewController, newFolder: Bool = false) {
         
         var folderName = folderName
         if folderName == BookmarkFolder.UNCATEGORIZED {
@@ -293,7 +214,7 @@ class BookmarkHelper {
                 if let error = error {
                     debugPrint(error.message ?? "No error")
                     debugPrint(error.kind)
-                    BookmarkHelper.displayMoveButton(in: viewController)
+                    self.displayMoveButton()
                     var (_, _, description) = error.getDisplayInfo()
                     if error.isClientError() {
                         description = Strings.INVALID_FOLDER_NAME
@@ -302,7 +223,7 @@ class BookmarkHelper {
                     return
                 }
                 
-                BookmarkHelper.displayMoveButton(in: viewController)
+                self.displayMoveButton()
                 TTGSnackbar(message: Strings.BOOKMARK_MOVED_SUCCESSFULLY, duration: .middle).show()
                 let navigationViewController = viewController.presentingViewController?
                     .presentedViewController as! UINavigationController
@@ -330,4 +251,24 @@ class BookmarkHelper {
                 }
         })
     }
+}
+
+
+protocol BookmarkDelegate: AnyObject {
+    func onClickMoveButton()
+    
+    func removeBookmark()
+    
+    func displayRemoveButton()
+    
+    func onClickBookmarkButton()
+    
+    func getBookMarkParams() -> Parameters?
+    
+    func updateBookmark(bookmarkId: Int?)
+    
+    func displayBookmarkButton()
+    
+    func displayMoveButton()
+    
 }

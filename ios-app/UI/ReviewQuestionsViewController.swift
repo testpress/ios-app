@@ -26,8 +26,9 @@
 import TTGSnackbar
 import UIKit
 import WebKit
+import Alamofire
 
-class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
+class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler, BookmarkDelegate {
     
     var previousCommentsPager: CommentPager!
     var newCommentsPager: CommentPager!
@@ -41,6 +42,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         
         imageUploadHelper.delegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = self
         webView.loadHTMLString(
             WebViewUtils.getQuestionHeader() + getAdditionalHeaders() + getHtml(),
             baseURL: Bundle.main.bundleURL
@@ -393,6 +395,39 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: attemptItemBookmarked)
         }
         return html
+    }
+    
+    func onClickMoveButton() {
+    }
+    
+    func removeBookmark() {
+    }
+    
+    func displayRemoveButton() {
+    }
+    
+    func onClickBookmarkButton() {
+        self.evaluateJavaScript("hideBookmarkButton();")
+    }
+    
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = self.attemptItem.id
+        parameters["content_type"] = ["model": "userselectedanswer", "app_label": "exams"]
+        return parameters
+    }
+    
+    func updateBookmark(bookmarkId: Int?) {
+        self.attemptItem.bookmarkId = bookmarkId
+        self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
+    }
+    
+    func displayBookmarkButton() {
+        self.evaluateJavaScript("displayBookmarkButton();")
+    }
+    
+    func displayMoveButton() {
+        self.evaluateJavaScript("displayMoveButton();")
     }
     
 }
