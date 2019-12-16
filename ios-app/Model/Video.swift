@@ -30,8 +30,16 @@ public class Video {
     var id: Int!
     var title: String!
     var embedCode: String!
-    
+    var streams: [Stream] = []
+
     public required init?(map: Map) {
+    }
+    
+    func getHlsUrl() -> String {
+        let hls = self.streams.first{
+            $0.format == "HLS"
+        }
+        return hls?.url ?? self.url
     }
 }
 
@@ -41,5 +49,6 @@ extension Video: TestpressModel {
         id <- map["id"]
         title <- map["title"]
         embedCode <- map["embed_code"]
+        streams <- map["streams"]
     }
 }

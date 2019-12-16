@@ -86,6 +86,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         if contents.count < 2 {
             hideBottomNavBar()
         }
+        disableSwipeGesture()
     }
     
     func hideNavbarTitle() {
@@ -112,14 +113,22 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
             }
         }
 
-        if contentDetailDataSource.viewControllerAtIndex(position)! is VideoContentViewController {
-            navigationBarItem.rightBarButtonItems = [bookmarkButton]
-            
-            if contents[position].bookmarkId != nil {
-                bookmarkButton.image = Images.RemoveBookmark.image
+        enableBookmarkOption()
+    }
+    
+    func enableBookmarkOption() {
+        if !(pageViewController.viewControllers?.isEmpty)! {
+            if contentDetailDataSource.viewControllerAtIndex(getCurrentIndex())! is VideoContentViewController {
+                navigationBarItem.rightBarButtonItems = [bookmarkButton]
+                bookmarkButton.isEnabled = true
+                bookmarkButton.image = Images.AddBookmark.image
+                if contents[getCurrentIndex()].bookmarkId != nil {
+                    bookmarkButton.image = Images.RemoveBookmark.image
+                }
+            } else {
+                bookmarkButton.isEnabled = false
+                bookmarkButton.image = nil
             }
-        } else {
-            navigationBarItem.rightBarButtonItems = []
         }
     }
     
@@ -153,6 +162,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func getCurrentIndex() -> Int {
+        print("Content detail data source : \(contentDetailDataSource.contents)")
         return contentDetailDataSource.indexOfViewController(getCurretViewController())
     }
     
@@ -220,6 +230,11 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     func disableSwipeGesture() {
         pageViewController.dataSource = nil
+        for view in self.pageViewController!.view.subviews {
+            if let subView = view as? UIScrollView {
+                subView.bounces = false
+            }
+        }
     }
     
     func updateContent() {
@@ -302,7 +317,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     @IBAction func bookMark(_ sender: UIBarButtonItem) {
         if let viewController = self.getCurretViewController() as? VideoContentViewController {
-            viewController.addOrRemoveBookmark()
+            viewController.addOrRemoveBookmark(content: nil)
         }
     }
     

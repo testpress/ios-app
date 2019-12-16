@@ -260,6 +260,7 @@
 		8C2E7B62239A1E4D00BA2F41 /* VideoPlayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */; };
 		8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */; };
 		8C3D6433239D5D8E001C7FE4 /* RelatedContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */; };
+		8C4DEF4423A0C1EE008F76D2 /* Streams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4DEF4323A0C1EE008F76D2 /* Streams.swift */; };
 		8C5DF60223264D9400B9F8A0 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */; };
 		8C9E5BDC238E5ACA00D8790F /* AVPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */; };
 		8CA17128238CED7F00BD42E9 /* VideoAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA17127238CED7F00BD42E9 /* VideoAttempt.swift */; };
@@ -268,6 +269,7 @@
 		8CD78EA522BC9B8F00DD034D /* TestMainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */; };
 		8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA622BC9DA100DD034D /* TestUtils.swift */; };
 		8CF374DD237BBC8D0019D2BF /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24121CA0D760097C6FE /* FirebaseCore.framework */; };
+		8CDE2649239E1ACD00BA04C6 /* VideoPlayerSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */; };
 		8CDE264B239EAD2700BA04C6 /* TestVideoPlayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264A239EAD2700BA04C6 /* TestVideoPlayerUtils.swift */; };
 		8CDE264E239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */; };
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
@@ -585,6 +587,7 @@
 		8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerUtils.swift; sourceTree = "<group>"; };
 		8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentViewModel.swift; sourceTree = "<group>"; };
 		8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedContentsCell.swift; sourceTree = "<group>"; };
+		8C4DEF4323A0C1EE008F76D2 /* Streams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streams.swift; sourceTree = "<group>"; };
 		8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
 		8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerExtensions.swift; sourceTree = "<group>"; };
 		8CA17127238CED7F00BD42E9 /* VideoAttempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAttempt.swift; sourceTree = "<group>"; };
@@ -592,6 +595,7 @@
 		8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginViewController.swift; sourceTree = "<group>"; };
 		8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainMenuTabViewController.swift; sourceTree = "<group>"; };
 		8CD78EA622BC9DA100DD034D /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
+		8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSlider.swift; sourceTree = "<group>"; };
 		8CDE264A239EAD2700BA04C6 /* TestVideoPlayerUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoPlayerUtils.swift; sourceTree = "<group>"; };
 		8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerControlsViewTest.swift; sourceTree = "<group>"; };
 		8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewTest.swift; sourceTree = "<group>"; };
@@ -1007,6 +1011,7 @@
 				2506298D2264856E00539FB2 /* ApiError.swift */,
 				250629912265E74D00539FB2 /* LoginActivity.swift */,
 				8CA17127238CED7F00BD42E9 /* VideoAttempt.swift */,
+				8C4DEF4323A0C1EE008F76D2 /* Streams.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1051,6 +1056,7 @@
 			children = (
 				8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */,
 				8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */,
+				8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1380,6 +1386,7 @@
 				2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */,
 				2FC0F2E21F863AD70092BFDC /* Exam.swift in Sources */,
 				1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */,
+				8C4DEF4423A0C1EE008F76D2 /* Streams.swift in Sources */,
 				2FDF9C4B20B6CFBF0086245F /* BookmarksTableViewController.swift in Sources */,
 				2FC0F2DF1F863ACD0092BFDC /* AttemptAnswer.swift in Sources */,
 				2F56B73F1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift in Sources */,
@@ -1470,6 +1477,7 @@
 				2FF024212004CECA00E0047D /* BaseDBViewController.swift in Sources */,
 				2F515DFA1FF4D12A0005D8A5 /* ImagePicker.swift in Sources */,
 				2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */,
+				8CDE2649239E1ACD00BA04C6 /* VideoPlayerSlider.swift in Sources */,
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
 				2FC0F2DE1F863ACA0092BFDC /* Attempt.swift in Sources */,
 				2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */,

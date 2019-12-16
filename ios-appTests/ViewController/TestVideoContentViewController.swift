@@ -60,7 +60,7 @@ class TestVideoContentViewController: XCTestCase {
     }
     
     func testAddOrRemoveBookmark() {
-        controller!.addOrRemoveBookmark()
+        controller!.addOrRemoveBookmark(content: controller?.content)
         XCTAssertTrue(UIApplication.topViewController()!.isKind(of: BookmarkFolderTableViewController.self))
     }
     

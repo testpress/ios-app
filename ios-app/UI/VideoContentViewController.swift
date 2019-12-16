@@ -43,6 +43,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     var bookmarkHelper: BookmarkHelper!
     var bookmarkDelegate: BookmarkDelegate?
     var bookmarkContent: Content?
+    var position: Int! = 0
     
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -63,6 +64,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         showOrHideBottomBar()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()
+        bookmarkContent = content
         viewModel.createContentAttempt()
         addCustomView()
         desc.isHidden = true
@@ -82,14 +84,23 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     
     func showOrHideDescription() {
-        self.desc.isHidden = !self.desc.isHidden
-        
         if (self.desc.isHidden) {
-            self.titleToggleButton.setImage(Images.CaretDown.image, for: .normal)
+            showDescription()
         } else {
-            self.titleToggleButton.setImage(Images.CaretUp.image, for: .normal)
+            hideDescription()
         }
     }
+    
+    func showDescription() {
+        self.desc.isHidden = false
+        self.titleToggleButton.setImage(Images.CaretUp.image, for: .normal)
+    }
+    
+    func hideDescription() {
+        self.desc.isHidden = true
+        self.titleToggleButton.setImage(Images.CaretDown.image, for: .normal)
+    }
+    
     
     func addGestures() {
         titleStackView.addTapGestureRecognizer {
@@ -140,19 +151,27 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         customView.isHidden = false
     }
     
-    func addOrRemoveBookmark() {
-        bookmarkHelper?.onClickBookmarkButton(bookmarkId: content.bookmarkId)
+    func addOrRemoveBookmark(content: Content?) {
+        bookmarkContent = content ?? self.content
+        bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId)
     }
     
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
-        content.bookmarkId = bookmarkId
-        tableView.reloadData()
-        if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
-            if bookmarkId != nil {
-                contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.RemoveBookmark.image
-            } else {
-                contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
+        if bookmarkContent?.id == content.id {
+            content.bookmarkId = bookmarkId
+            tableView.reloadData()
+            if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
+                if bookmarkId != nil {
+                    contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.RemoveBookmark.image
+                } else {
+                    contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
+                }
+            }
+        } else {
+            if let cellContentId = contents.firstIndex(where: { $0.id == bookmarkContent?.id }) {
+                contents[cellContentId].bookmarkId = bookmarkId
+                tableView.reloadData()
             }
         }
     }
@@ -182,7 +201,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func initVideoPlayerView() {
         let playerFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: videoPlayer.frame.height)
-        videoPlayerView = VideoPlayerView(frame: playerFrame, url: URL(string: content.video!.url!)!)
+        videoPlayerView = VideoPlayerView(frame: playerFrame, url: URL(string: content.video!.getHlsUrl())!)
         videoPlayerView.playerDelegate = self
     }
     
@@ -226,22 +245,50 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
             contentDetailPageViewController.hideNavbarTitle()
+            contentDetailPageViewController.enableBookmarkOption()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidConnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidDisconnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+
         
         if #available(iOS 11.0, *) {
             NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: .UIScreenCapturedDidChange, object: nil)
         }
     }
     
+    @objc func willEnterForeground() {
+        videoPlayerView.play()
+    }
+    
+    func changeVideo(content: Content!) {
+        self.content = content
+        self.content.index = contents.firstIndex(where: { $0.id == content.id })
+        viewModel.content = content
+        hideDescription()
+        viewModel.createContentAttempt()
+        videoPlayerView.playVideo(url: URL(string: content.video!.getHlsUrl())!)
+        tableView.reloadData()
+        titleLabel.text = viewModel.getTitle()
+        desc.text = viewModel.getDescription()
+        titleStackView.layoutIfNeeded()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.stopPeriodicAttemptUpdater()
         videoPlayerView.dealloc()
+
+        if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
+            contentDetailPageViewController.disableSwipeGesture()
+            contentDetailPageViewController.enableBookmarkOption()
+        }
+
         NotificationCenter.default.removeObserver(self, name: .UIScreenDidConnect, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIScreenDidDisconnect, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+
         
         if #available(iOS 11.0, *) {
             NotificationCenter.default.removeObserver(self, name: .UIScreenCapturedDidChange, object: nil)
@@ -322,7 +369,7 @@ extension VideoContentViewController: BookmarkDelegate {
     
     func getBookMarkParams() -> Parameters? {
         var parameters: Parameters = Parameters()
-        parameters["object_id"] = content.id
+        parameters["object_id"] = bookmarkContent?.id
         parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
         return parameters
     }
