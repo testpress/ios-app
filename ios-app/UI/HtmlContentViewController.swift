@@ -25,9 +25,7 @@
 
 import UIKit
 import WebKit
-import AVFoundation
-import AVKit
-
+import  Alamofire
 
 class HtmlContentViewController: BaseWebViewController {
     
@@ -42,6 +40,7 @@ class HtmlContentViewController: BaseWebViewController {
         emptyView = EmptyView.getInstance(parentView: webView)
         webViewDelegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = self
         checkContentType()
     }
     
@@ -62,15 +61,6 @@ class HtmlContentViewController: BaseWebViewController {
     func checkContentType() {
         if content.htmlContentTitle != nil {
             loadHTMLContent()
-        } else if content.video != nil {
-            if content.video!.url != nil {
-                let button = UIButton(frame: CGRect(x: webView.scrollView.center.x-50, y: webView.scrollView.center.y, width: 110, height: 50))
-                button.backgroundColor = Colors.getRGB(Colors.PRIMARY)
-                button.setTitle("Play Video", for: .normal)
-                button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-                webView.scrollView.addSubview(button)
-            }
-            displayVideoContent()
         }
     }
     
@@ -136,17 +126,6 @@ class HtmlContentViewController: BaseWebViewController {
         )
     }
     
-    private func playVideo(url: String) {
-        let video_url = URL(string: url)
-        let player = AVPlayer(url: video_url!)
-        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
-        let playerController = AVPlayerViewController()
-        playerController.player = player
-        self.present(playerController, animated: true) {
-            player.play()
-        }
-    }
-    
     func createContentAttempt() {
         TPApiClient.request(
             type: ContentAttempt.self,
@@ -202,5 +181,45 @@ extension HtmlContentViewController: WKScriptMessageHandler {
                 bookmarkJavascriptListener(message: message)
             }
         }
+    }
+}
+
+
+extension HtmlContentViewController: BookmarkDelegate {
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = content.id
+        parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
+        print("Parameters : \(parameters)")
+        return parameters
+    }
+    
+    func onClickMoveButton() {
+        self.evaluateJavaScript("hideMoveButton();")
+    }
+    
+    func removeBookmark() {
+        self.evaluateJavaScript("hideRemoveButton();")
+    }
+    
+    func displayRemoveButton() {
+        self.evaluateJavaScript("displayRemoveButton();")
+    }
+    
+    func onClickBookmarkButton() {
+        self.evaluateJavaScript("hideBookmarkButton();")
+    }
+    
+    func updateBookmark(bookmarkId: Int?) {
+        self.content.bookmarkId = bookmarkId
+        self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
+    }
+    
+    func displayBookmarkButton() {
+        self.evaluateJavaScript("displayBookmarkButton();")
+    }
+    
+    func displayMoveButton() {
+        self.evaluateJavaScript("displayMoveButton();")
     }
 }

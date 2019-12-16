@@ -27,6 +27,7 @@ import UIKit
 
 class ContentDetailPageViewController: UIViewController, UIPageViewControllerDelegate {
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var contentsContainerView: UIView!
     @IBOutlet weak var prevArrow: UIImageView!
     @IBOutlet weak var prevButton: UIButton!
@@ -38,6 +39,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var bottomNavigationBar: UIStackView!
     @IBOutlet weak var bottomNavigationBarConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bookmarkButton: UIBarButtonItem!
     
     let bottomGradient = CAGradientLayer()
     var pageViewController: UIPageViewController!
@@ -82,10 +84,22 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         contentDetailDataSource = ContentDetailDataSource(contents, contentAttemptCreationDelegate)
         navigationBarItem.title = title
         if contents.count < 2 {
-            bottomShadowView.isHidden = true
-            bottomNavigationBar.isHidden = true
-            bottomNavigationBarConstraint.constant = 0
+            hideBottomNavBar()
         }
+    }
+    
+    func hideNavbarTitle() {
+        navigationBarItem.title = ""
+    }
+    
+    func hideBottomNavBar() {
+        bottomShadowView.isHidden = true
+        bottomNavigationBar.isHidden = true
+    }
+    
+    func showBottomNavbar() {
+        bottomShadowView.isHidden = false
+        bottomNavigationBar.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +110,16 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
             } else {
                 setFirstViewController()
             }
+        }
+
+        if contentDetailDataSource.viewControllerAtIndex(position)! is VideoContentViewController {
+            navigationBarItem.rightBarButtonItems = [bookmarkButton]
+            
+            if contents[position].bookmarkId != nil {
+                bookmarkButton.image = Images.RemoveBookmark.image
+            }
+        } else {
+            navigationBarItem.rightBarButtonItems = []
         }
     }
     
@@ -190,6 +214,14 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         }
     }
     
+    func enableSwipeGesture() {
+        pageViewController.dataSource = contentDetailDataSource
+    }
+    
+    func disableSwipeGesture() {
+        pageViewController.dataSource = nil
+    }
+    
     func updateContent() {
         activityIndicator.startAnimating()
         let content = contents[getCurrentIndex()]
@@ -261,13 +293,24 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     @IBAction func back() {
-        dismiss(animated: true, completion: nil)
+        if let navigationViewController = self.view.window?.rootViewController?.presentedViewController?.presentedViewController as? UINavigationController {
+            navigationViewController.dismiss(animated: true)
+        } else {
+            dismiss(animated: true)
+        }
+    }
+    
+    @IBAction func bookMark(_ sender: UIBarButtonItem) {
+        if let viewController = self.getCurretViewController() as? VideoContentViewController {
+            viewController.addOrRemoveBookmark()
+        }
     }
     
     override func viewDidLayoutSubviews() {
         // Add gradient shadow layer to the shadow container view
         UIUtils.updateBottomShadow(bottomShadowView: bottomShadowView,
                                    bottomGradient: bottomGradient)
+        emptyView.frame = contentsContainerView.bounds
         
     }
     
