@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -36,7 +36,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwU-LP-1zx">
-                    <rect key="frame" x="187" y="66" width="68" height="68"/>
+                    <rect key="frame" x="-13" y="66" width="68" height="68"/>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <state key="normal" image="rewind_icon"/>
                     <connections>
@@ -44,7 +44,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Md2-Me-Kr4">
-                    <rect key="frame" x="387" y="66" width="68" height="68"/>
+                    <rect key="frame" x="587" y="66" width="68" height="68"/>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <inset key="imageEdgeInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="forward_icon"/>
@@ -167,6 +167,7 @@
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
                 <mask key="constraints">
+                    <include reference="Pcn-t1-0RI"/>
                     <include reference="hGy-Bq-iZ2"/>
                     <include reference="Dcg-OY-M3a"/>
                 </mask>
