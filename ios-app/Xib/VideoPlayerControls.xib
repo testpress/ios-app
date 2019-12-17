@@ -167,6 +167,7 @@
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
                 <mask key="constraints">
+                    <include reference="Pcn-t1-0RI"/>
                     <include reference="hGy-Bq-iZ2"/>
                     <include reference="Dcg-OY-M3a"/>
                 </mask>
