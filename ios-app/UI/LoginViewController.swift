@@ -106,6 +106,7 @@ class LoginViewController: BaseTextFieldViewController {
             provider: provider,
             completion: {
                 testpressAuthToken, error in
+                self.alertController.dismiss(animated: true, completion: nil)
                 if let error = error {
                     debugPrint(error.message ?? "No error message found")
                     debugPrint(error.kind)
@@ -142,8 +143,10 @@ class LoginViewController: BaseTextFieldViewController {
                 let tabViewController = self.storyboard!.instantiateViewController(
                     withIdentifier: Constants.TAB_VIEW_CONTROLLER)
                 
-                self.alertController.dismiss(animated: true, completion: nil)
-                self.present(tabViewController, animated: true, completion: nil)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    self.alertController.dismiss(animated: true, completion: nil)
+                    self.present(tabViewController, animated: true, completion: nil)
+                })
             }
         )
     }
