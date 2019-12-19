@@ -100,6 +100,11 @@ class VideoSlider: UIControl {
         progressLayer.backgroundColor = UIColor.clear.cgColor
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+          backgroundLayer.path =  UIBezierPath(rect: CGRect(x: 0, y: (self.frame.size.height / 2) - self.frame.size.height / 4, width: self.frame.size.width, height: self.frame.size.height / 2.0)).cgPath
+    }
+    
     private func updateBufferLine()
     {
         let w = self.frame.size.width * CGFloat(currentBuffer)
@@ -134,6 +139,12 @@ class VideoSlider: UIControl {
             self.setNeedsDisplay()
         }
         return true
+    }
+    
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let bounds = self.bounds.insetBy(dx: -20, dy: -20)
+        return bounds.contains(point);
     }
     
     override public func endTracking(_ touch: UITouch?, with event: UIEvent?){

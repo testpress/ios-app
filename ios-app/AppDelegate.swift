@@ -35,6 +35,7 @@ import UserNotifications
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
+import AVKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -92,6 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UITabBarItem.appearance().titlePositionAdjustment =
                 UIOffset(horizontal: 0, vertical: -5)
         }
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
         
         SDKApplicationDelegate.shared.application(application,
                                                   didFinishLaunchingWithOptions: launchOptions)
