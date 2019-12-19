@@ -39,4 +39,12 @@ extension AVPlayer {
     var currentTimeInSeconds:Float64 {
         return CMTimeGetSeconds(currentTime())
     }
+    
+    func availableDuration() -> CMTime
+    {
+        if let range = currentItem?.loadedTimeRanges.first {
+            return CMTimeRangeGetEnd(range.timeRangeValue)
+        }
+        return kCMTimeZero
+    }
 }

@@ -69,7 +69,9 @@ class VideoPlayerView: UIView {
         let interval = CMTime(value: 1, timescale: 2)
         timeObserver = player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
             let seconds = CMTimeGetSeconds(progressTime)
+            let loadedDuration = CMTimeGetSeconds((self.player?.availableDuration())!)
             self.controlsContainerView.updateDuration(seconds:seconds, videoDuration: CMTimeGetSeconds((self.player?.currentItem?.duration)!))
+            self.controlsContainerView.updateLoadedDuration(seconds:loadedDuration)
         })
 
     }
@@ -144,6 +146,7 @@ extension VideoPlayerView: PlayerControlDelegate {
             player?.play()
             controlsContainerView.playerStatus = .playing
         }
+        startTime = seconds
     }
     
     func playOrPause() {
