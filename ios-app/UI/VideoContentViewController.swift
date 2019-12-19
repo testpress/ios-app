@@ -43,6 +43,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     var bookmarkHelper: BookmarkHelper!
     var bookmarkDelegate: BookmarkDelegate?
     var bookmarkContent: Content?
+    var position: Int! = 0
     
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -63,6 +64,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         showOrHideBottomBar()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()
+        bookmarkContent = content
         viewModel.createContentAttempt()
         addCustomView()
         desc.isHidden = true
@@ -140,19 +142,27 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         customView.isHidden = false
     }
     
-    func addOrRemoveBookmark() {
-        bookmarkHelper?.onClickBookmarkButton(bookmarkId: content.bookmarkId)
+    func addOrRemoveBookmark(content: Content?) {
+        bookmarkContent = content ?? self.content
+        bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId)
     }
     
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
-        content.bookmarkId = bookmarkId
-        tableView.reloadData()
-        if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
-            if bookmarkId != nil {
-                contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.RemoveBookmark.image
-            } else {
-                contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
+        if bookmarkContent?.id == content.id {
+            content.bookmarkId = bookmarkId
+            tableView.reloadData()
+            if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
+                if bookmarkId != nil {
+                    contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.RemoveBookmark.image
+                } else {
+                    contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
+                }
+            }
+        } else {
+            if let cellContentId = contents.firstIndex(where: { $0.id == bookmarkContent?.id }) {
+                contents[cellContentId].bookmarkId = bookmarkId
+                tableView.reloadData()
             }
         }
     }
@@ -322,7 +332,7 @@ extension VideoContentViewController: BookmarkDelegate {
     
     func getBookMarkParams() -> Parameters? {
         var parameters: Parameters = Parameters()
-        parameters["object_id"] = content.id
+        parameters["object_id"] = bookmarkContent?.id
         parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
         return parameters
     }

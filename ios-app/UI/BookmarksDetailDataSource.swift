@@ -63,6 +63,16 @@ class BookmarksDetailDataSource: NSObject, UIPageViewControllerDataSource {
                 viewController.bookmark = bookmark
                 viewController.position = index
                 return viewController
+            } else if content.video != nil {
+                let storyboard =
+                    UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.VIDEO_CONTENT_VIEW_CONTROLLER) as! VideoContentViewController
+                
+                viewController.content = content
+                viewController.contents = [content]
+                viewController.position = index
+                return viewController
             } else {
                 let viewController = BookmarkedHtmlContentViewController()
                 viewController.content = content
@@ -82,6 +92,8 @@ class BookmarksDetailDataSource: NSObject, UIPageViewControllerDataSource {
             return (viewController as! AttachmentDetailViewController).position
         } else if viewController is BookmarkedHtmlContentViewController {
             return (viewController as! BookmarkedHtmlContentViewController).position
+        } else if (viewController is VideoContentViewController) {
+            return (viewController as! VideoContentViewController).position
         }
         return -1
     }
