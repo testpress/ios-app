@@ -8,6 +8,8 @@
 
 import UIKit
 import AVKit
+import M3U8KitDynamic
+
 
 class VideoPlayerView: UIView {
     var url: URL!
@@ -18,6 +20,7 @@ class VideoPlayerView: UIView {
     var timeObserver: Any?
     var videoEndObserver: Any?
     var startTime: Float = 0.0
+    var resolutionInfo:[VideoQuality] = [VideoQuality(resolution:"Auto", bitrate: 0)]
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -62,8 +65,28 @@ class VideoPlayerView: UIView {
             player?.currentItem?.preferredForwardBufferDuration = 1
         }
         addObservers()
+        parseResolutionInfo()
     }
     
+    func parseResolutionInfo() {
+        do {
+            resolutionInfo.removeAll()
+            resolutionInfo = [VideoQuality(resolution:"Auto", bitrate: 0)]
+            let playlistModel = try M3U8PlaylistModel(url: url)
+            let masterPlaylist = playlistModel.masterPlaylist
+            guard let streamList = masterPlaylist?.xStreamList else {
+                return
+            }
+            streamList.sortByBandwidth(inOrder: .orderedAscending)
+            
+            for i in 0 ..< streamList.count {
+                if let extXStreamInf = streamList.xStreamInf(at: i){
+                    let resolution = "\(Int(extXStreamInf.resolution.height))p"
+                    resolutionInfo.append(VideoQuality(resolution: resolution, bitrate: extXStreamInf.bandwidth))
+                }
+            }
+        } catch {}
+    }
     
     func addObservers() {
         initPlayer()
@@ -132,9 +155,20 @@ class VideoPlayerView: UIView {
         }
     }
     
+    func changeBitrate(_ bitrate: Int) {
+        player?.currentItem?.preferredPeakBitRate = Double(bitrate)
+    }
+    
+    func getCurrentBitrate() -> Double {
+        return player?.currentItem?.preferredPeakBitRate ?? 0.0
+    }
+    
+    func getCurrenPlaybackSpeed() -> Float {
+        return player?.rate ?? 1.0
+    }
+    
     func changePlaybackSpeed(speed: PlaybackSpeed) {
         player?.rate = speed.value
-        controlsContainerView.playbackSpeed.setTitle(speed.label, for: .normal)
         controlsContainerView.playerStatus = .playing
     }
     
@@ -152,8 +186,8 @@ class VideoPlayerView: UIView {
 
 
 extension VideoPlayerView: PlayerControlDelegate {
-    func changePlayBackSpeed() {
-        playerDelegate?.changePlayBackSpeed()
+    func showOptionsMenu() {
+        playerDelegate?.showOptionsMenu()
     }
     
     func goTo(seconds: Float) {
@@ -229,5 +263,5 @@ extension VideoPlayerView: PlayerControlDelegate {
 }
 
 protocol VideoPlayerDelegate: class {
-    func changePlayBackSpeed()
+    func showOptionsMenu()
 }
