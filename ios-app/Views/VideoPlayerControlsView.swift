@@ -62,7 +62,7 @@ class VideoPlayerControlsView: UIView {
         
         
         optionsButton.addTapGestureRecognizer {
-            self.delegate?.changePlayBackSpeed();
+            self.delegate?.showOptionsMenu();
         }
     }
     
@@ -219,5 +219,5 @@ protocol PlayerControlDelegate: class {
     func rewind()
     func goTo(seconds:Float)
     func fullScreen()
-    func changePlayBackSpeed()
+    func showOptionsMenu()
 }

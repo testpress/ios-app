@@ -186,7 +186,7 @@ class VideoPlayerView: UIView {
 
 
 extension VideoPlayerView: PlayerControlDelegate {
-    func changePlayBackSpeed() {
+    func showOptionsMenu() {
         playerDelegate?.showOptionsMenu()
     }
     
