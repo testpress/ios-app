@@ -18,7 +18,7 @@ class RelatedContentsCell: UITableViewCell {
     var index: Int?
     var contents: [Content]?
     var parentViewController: UIViewController? = nil
-    var isCurrent: Bool = false
+    var isAlreadySelected: Bool = false
     
     func initCell(index: Int, contents: [Content], viewController: UIViewController, is_current: Bool=false) {
         parentViewController = viewController
@@ -27,7 +27,7 @@ class RelatedContentsCell: UITableViewCell {
         self.index = index
         title.text = content?.name
         bookmarkIcon.isHidden = false
-        isCurrent = false
+        isAlreadySelected = false
         
         if content?.exam != nil {
             contentIcon.image = Images.Quill.image
@@ -54,7 +54,7 @@ class RelatedContentsCell: UITableViewCell {
         desc.isHidden = true
         
         if (is_current) {
-            isCurrent = true
+            isAlreadySelected = true
             contentIcon.setImageColor(color: Colors.getRGB(Colors.PRIMARY))
             bookmarkIcon.setImageColor(color: Colors.getRGB(Colors.PRIMARY))
             self.backgroundColor = Colors.getRGB(Colors.PRIMARY, alpha: 0.1)
@@ -81,7 +81,7 @@ class RelatedContentsCell: UITableViewCell {
     }
     
     @objc func onItemClick() {
-        if isCurrent {
+        if isAlreadySelected {
             return
         }
         
