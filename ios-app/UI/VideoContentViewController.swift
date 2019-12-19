@@ -300,10 +300,48 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         let alert = UIAlertController(title: "Playback Speed", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         PlaybackSpeed.allCases.forEach{ playbackSpeed in
-            alert.addAction(UIAlertAction(title: playbackSpeed.rawValue, style: .default, handler: { (_) in
+            let action = UIAlertAction(title: playbackSpeed.rawValue, style: .default, handler: { (_) in
                 self.videoPlayerView.changePlaybackSpeed(speed: playbackSpeed)
-            }))
+            })
+            if (playbackSpeed.value == self.videoPlayerView.getCurrenPlaybackSpeed()){
+                action.setValue(UIImage.init(named: "tick"), forKey: "image")
+            } else if(self.videoPlayerView.getCurrenPlaybackSpeed() == 0.0 && playbackSpeed == .normal) {
+                action.setValue(UIImage.init(named: "tick"), forKey: "image")
+            }
+            
+            alert.addAction(action)
         }
+        alert.popoverPresentationController?.sourceView = self.view
+        self.present(alert, animated: true)
+    }
+    
+    func showQualitySelector() {
+        let alert = UIAlertController(title: "Quality", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        for resolutionInfo in videoPlayerView.resolutionInfo {
+            let action = UIAlertAction(title: resolutionInfo.resolution, style: .default, handler: { (_) in
+                self.videoPlayerView.changeBitrate(resolutionInfo.bitrate)
+            })
+            
+            if (Double(resolutionInfo.bitrate) == videoPlayerView.getCurrentBitrate()) {
+                action.setValue(UIImage.init(named: "tick"), forKey: "image")
+            }
+            alert.addAction(action)
+        }
+        alert.popoverPresentationController?.sourceView = self.view
+        self.present(alert, animated: true)
+    }
+    
+    func displayOptions() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Playback Speed", style: .default, handler: { _ in
+            self.showPlaybackSpeedMenu()
+        }))
+        alert.addAction(UIAlertAction(title: "Video Quality", style: .default, handler: { _ in
+            self.showQualitySelector()
+        }))
         alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated: true)
     }
@@ -326,8 +364,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
 }
 
 extension VideoContentViewController: VideoPlayerDelegate {
-    func changePlayBackSpeed() {
-        showPlaybackSpeedMenu()
+    func showOptionsMenu() {
+        displayOptions()
     }
 }
 
