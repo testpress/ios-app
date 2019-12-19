@@ -61,6 +61,7 @@ enum Images: String {
     case Article = "article"
     case Quill = "quill"
     case Attachment = "attachment"
+    case TickIcon = "tick"
 
     var image: UIImage {
         return UIImage(asset: self)

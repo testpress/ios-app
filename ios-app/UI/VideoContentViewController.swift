@@ -304,9 +304,9 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
                 self.videoPlayerView.changePlaybackSpeed(speed: playbackSpeed)
             })
             if (playbackSpeed.value == self.videoPlayerView.getCurrenPlaybackSpeed()){
-                action.setValue(UIImage.init(named: "tick"), forKey: "image")
+                action.setValue(Images.TickIcon.image, forKey: "image")
             } else if(self.videoPlayerView.getCurrenPlaybackSpeed() == 0.0 && playbackSpeed == .normal) {
-                action.setValue(UIImage.init(named: "tick"), forKey: "image")
+                action.setValue(Images.TickIcon.image, forKey: "image")
             }
             
             alert.addAction(action)
@@ -325,7 +325,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             })
             
             if (Double(resolutionInfo.bitrate) == videoPlayerView.getCurrentBitrate()) {
-                action.setValue(UIImage.init(named: "tick"), forKey: "image")
+                action.setValue(Images.TickIcon.image, forKey: "image")
             }
             alert.addAction(action)
         }
