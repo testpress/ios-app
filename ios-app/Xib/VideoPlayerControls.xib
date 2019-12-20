@@ -79,13 +79,6 @@
                         <action selector="onFullscreen:" destination="iN0-l3-epB" eventType="touchUpInside" id="bZ3-Mo-HVF"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mey-yi-8hf" customClass="VideoSlider" customModule="ios_app" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="192" width="642" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="2Nh-XF-PiB"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWE-NF-NgX">
                     <rect key="frame" x="604" y="0.0" width="38" height="42"/>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
