@@ -263,6 +263,7 @@
 		8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */; };
 		8C3D6433239D5D8E001C7FE4 /* RelatedContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */; };
 		8C4DEF4423A0C1EE008F76D2 /* Streams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4DEF4323A0C1EE008F76D2 /* Streams.swift */; };
+		8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5D579323AA08D200381DF8 /* M3U8KitDynamic.framework */; };
 		8C5DF60223264D9400B9F8A0 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */; };
 		8C9E5BDC238E5ACA00D8790F /* AVPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */; };
 		8CA17128238CED7F00BD42E9 /* VideoAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA17127238CED7F00BD42E9 /* VideoAttempt.swift */; };
@@ -589,6 +590,7 @@
 		8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentViewModel.swift; sourceTree = "<group>"; };
 		8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedContentsCell.swift; sourceTree = "<group>"; };
 		8C4DEF4323A0C1EE008F76D2 /* Streams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streams.swift; sourceTree = "<group>"; };
+		8C5D579323AA08D200381DF8 /* M3U8KitDynamic.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = M3U8KitDynamic.framework; path = Carthage/Build/iOS/M3U8KitDynamic.framework; sourceTree = "<group>"; };
 		8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
 		8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerExtensions.swift; sourceTree = "<group>"; };
 		8CA17127238CED7F00BD42E9 /* VideoAttempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAttempt.swift; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
 				8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */,
 				2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */,
 				2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */,
@@ -756,6 +759,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C5D579323AA08D200381DF8 /* M3U8KitDynamic.framework */,
 				8CF6972E2327180F0040A986 /* Sentry.framework */,
 				25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */,
 				2570A25221CA0DBE0097C6FE /* Protobuf.framework */,
@@ -1322,6 +1326,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/M3U8KitDynamic.framework",
 			);
 			name = "Run Script";
 			outputPaths = (

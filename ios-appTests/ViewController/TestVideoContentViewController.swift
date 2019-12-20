@@ -92,4 +92,29 @@ class TestVideoContentViewController: XCTestCase {
         XCTAssertEqual(cell.bookmarkIcon.imageColor, Colors.getRGB(Colors.PRIMARY))
         XCTAssertEqual(cell.desc.text, "Now Playing...")
     }
+    
+    func testPlaybackSpeedMenu() {
+        controller!.showPlaybackSpeedMenu()
+        let alertController = controller?.presentedViewController as? UIAlertController
+        
+        XCTAssertEqual(alertController?.title, "Playback Speed")
+        XCTAssertEqual(alertController?.actions.count, PlaybackSpeed.allCases.count + 1)
+    }
+    
+    func testOptionsMenu() {
+        controller!.showOptionsMenu()
+        let alertController = controller?.presentedViewController as? UIAlertController
+        
+        XCTAssertEqual(alertController?.title, nil)
+        XCTAssertEqual(alertController?.actions.count, 3)
+    }
+    
+    func testQualitySelectorMenu() {
+        controller!.showQualitySelector()
+        let alertController = controller?.presentedViewController as? UIAlertController
+        
+        XCTAssertEqual(alertController?.title, "Quality")
+        XCTAssertEqual(alertController?.actions.count, 2)
+    }
+    
 }
