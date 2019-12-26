@@ -26,7 +26,7 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://surgerysixer.testpress.in";
+    static let BASE_URL = "https://8a86f978.ngrok.io";
     static let APP_APPLE_ID = "1491701150"
     
     static let APP_SHARE_MESSAGE = "Get the surgery lectures from Dr Raja Mahendran. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID
