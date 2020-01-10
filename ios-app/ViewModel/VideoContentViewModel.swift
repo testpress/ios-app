@@ -27,7 +27,7 @@ class VideoContentViewModel {
     
     func startPeriodicAttemptUpdater() {
         timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.updateVideoAttempt), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(self.updateVideoAttempt), userInfo: nil, repeats: true)
     }
     
     func stopPeriodicAttemptUpdater() {
