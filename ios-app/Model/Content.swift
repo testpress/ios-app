@@ -54,6 +54,9 @@ public class Content {
     var attachmentId: Int!
     var active: Bool = true
     var bookmarkId: Int!
+    var isScheduled: Bool!
+    var start: String!
+    
     
     public required init?(map: Map) {
     }
@@ -108,5 +111,7 @@ extension Content: TestpressModel {
         attachmentId <- map["attachment_id"]
         active <- map["active"]
         bookmarkId <- map["bookmark_id"]
+        isScheduled <- map["is_scheduled"]
+        start <- map["start"]
     }
 }

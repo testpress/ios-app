@@ -275,6 +275,7 @@
                                     <outlet property="examDetailsLayout" destination="UNo-CL-zLz" id="PAi-K1-qHk"/>
                                     <outlet property="lock" destination="srE-j9-fbm" id="8zD-TI-Fbk"/>
                                     <outlet property="questionsCount" destination="G1F-p0-OYl" id="7Hu-Nb-hOU"/>
+                                    <outlet property="questionsCountStack" destination="fN9-zj-NV4" id="Oot-hp-YHW"/>
                                     <outlet property="thumbnailImage" destination="MOo-KI-ucC" id="0hw-Hp-j3e"/>
                                 </connections>
                             </tableViewCell>
