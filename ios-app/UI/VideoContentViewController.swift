@@ -248,6 +248,9 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             contentDetailPageViewController.enableBookmarkOption()
         }
         
+    }
+    
+    func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidConnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidDisconnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
