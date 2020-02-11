@@ -240,6 +240,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.startPeriodicAttemptUpdater()
+        addObservers()
         videoPlayerView.addObservers()
         
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
