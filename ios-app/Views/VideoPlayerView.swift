@@ -112,6 +112,7 @@ class VideoPlayerView: UIView {
     func initPlayer()  {
         if player != nil {
             player?.play()
+            controlsContainerView.playerStatus = .playing
         } else {
             playVideo(url: self.url)
         }
@@ -132,7 +133,6 @@ class VideoPlayerView: UIView {
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackBufferFull")
         player?.currentItem?.removeObserver(self, forKeyPath: "loadedTimeRanges")
-        player?.replaceCurrentItem(with: nil)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
