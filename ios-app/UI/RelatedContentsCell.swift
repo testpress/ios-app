@@ -87,6 +87,7 @@ class RelatedContentsCell: UITableViewCell {
         
         if (content?.video != nil && content!.video!.embedCode.isEmpty) {
             if let viewController = self.parentViewController as? VideoContentViewController {
+                viewController.updateVideoAttempt()
                 viewController.changeVideo(content: content)
                 return
             }
