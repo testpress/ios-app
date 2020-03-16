@@ -226,7 +226,7 @@ enum TPEndpoint {
         case .logoutDevices:
             return "/api/v2.4/auth/logout_devices/"
         case .userVideos:
-            return "/api/v2.3/user_videos/"
+            return "/api/v2.4/user_videos/"
         default:
             return ""
         }

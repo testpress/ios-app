@@ -239,7 +239,6 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.startPeriodicAttemptUpdater()
         addObservers()
         videoPlayerView.addObservers()
         
@@ -255,11 +254,16 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidConnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidDisconnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateVideoAttempt), name: .UIApplicationWillResignActive, object: nil)
 
         
         if #available(iOS 11.0, *) {
             NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: .UIScreenCapturedDidChange, object: nil)
         }
+    }
+    
+    @objc func updateVideoAttempt() {
+        viewModel.updateVideoAttempt()
     }
     
     @objc func willEnterForeground() {
@@ -281,7 +285,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.stopPeriodicAttemptUpdater()
+        viewModel.updateVideoAttempt()
         videoPlayerView.dealloc()
 
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
