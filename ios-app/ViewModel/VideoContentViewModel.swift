@@ -31,7 +31,8 @@ class VideoContentViewModel {
     
     func getDescription()  -> String{
         var description = ""
-        if (!content.description!.isEmpty) {
+ 
+        if !(content?.description?.isEmpty ?? true) {
             description = "\(content.description!) \n"
         }
         return description
