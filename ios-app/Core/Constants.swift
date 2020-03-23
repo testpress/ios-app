@@ -105,6 +105,7 @@ struct Constants {
     static let BOOKMARK_FOLDER_NAVIGATION_CONTROLLER = "BookmarkFolderNavigationController"
     static let BOOKMARK_FOLDER_TABLE_VIEW_CELL = "BookmarkFolderTableViewCell"
     static let VERIFY_PHONE_VIEW_CONTROLLER = "VerifyPhoneViewController"
+    static let SHARE_TO_UNLOCK_VIEW_CONTROLLER = "ShareToUnlockViewController"
     static let LOGIN_ACTIVITY_VIEW_CONTROLLER = "LoginActivityViewController"
 
     
