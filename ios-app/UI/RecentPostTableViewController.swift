@@ -72,7 +72,7 @@ class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITa
         tableView.tableFooterView = UIView()
         
         // Set table view footer as progress spinner
-        let pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let pagingSpinner = UIActivityIndicatorView(style: .gray)
         pagingSpinner.startAnimating()
         pagingSpinner.color = Colors.getRGB(Colors.PRIMARY)
         pagingSpinner.hidesWhenStopped = true

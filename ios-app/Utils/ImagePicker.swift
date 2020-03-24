@@ -96,10 +96,13 @@ extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDe
     }
     
     @objc func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any]) {
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
         picker.dismiss(animated: true, completion: nil)
-        if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let originalImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             let controller = TOCropViewController(image: originalImage)
             controller.delegate = self
             let navController = UINavigationController(rootViewController: controller)
@@ -123,7 +126,7 @@ extension ImagePicker: TOCropViewControllerDelegate {
         // thus rewrite the last "temp" image. Don't worry it won't be shown in Photos app.
         let imageName = "temp"
         let imageURL = URL(string: documentDirectory.appendingPathComponent(imageName))!
-        let data = UIImageJPEGRepresentation(image, 0)!
+        let data = image.jpegData(compressionQuality: 0)!
         do {
             try data.write(to: imageURL)
         } catch {
@@ -137,4 +140,14 @@ extension ImagePicker: TOCropViewControllerDelegate {
     {
         cropViewController.dismiss(animated: true) { () -> Void in  }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

@@ -57,7 +57,7 @@ class VideoPlayerView: UIView {
         self.url = url
         let playerItem = AVPlayerItem(url: url)
         player?.replaceCurrentItem(with: playerItem)
-        player?.seek(to: kCMTimeZero)
+        player?.seek(to: CMTime.zero)
         player?.rate = 1
         play()
         
@@ -203,7 +203,7 @@ extension VideoPlayerView: PlayerControlDelegate {
     
     func playOrPause() {
         if (controlsContainerView.playerStatus == .finished) {
-            player?.currentItem?.seek(to: kCMTimeZero, completionHandler: { _ in
+            player?.currentItem?.seek(to: CMTime.zero, completionHandler: { _ in
                 self.play()
             })
         } else {
@@ -223,8 +223,8 @@ extension VideoPlayerView: PlayerControlDelegate {
         let newTime = playerCurrentTime + 10
         
         if newTime < (CMTimeGetSeconds(duration)) {
-            let seekTime: CMTime = CMTimeMake(Int64(newTime * 1000 as Float64), 1000)
-            player?.seek(to: seekTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+            let seekTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
+            player?.seek(to: seekTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
             startTime = Float(newTime)
             
         }
@@ -238,8 +238,8 @@ extension VideoPlayerView: PlayerControlDelegate {
         if newTime < 0 {
             newTime = 0
         }
-        let seekTime: CMTime = CMTimeMake(Int64(newTime * 1000 as Float64), 1000)
-        player?.seek(to: seekTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+        let seekTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
+        player?.seek(to: seekTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         startTime = Float(newTime)
         
         if (controlsContainerView.playerStatus == .finished) {
