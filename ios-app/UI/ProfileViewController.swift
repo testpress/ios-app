@@ -24,7 +24,7 @@
 //
 
 import Alamofire
-import FacebookLogin
+import FBSDKLoginKit
 import Kingfisher
 import UIKit
 

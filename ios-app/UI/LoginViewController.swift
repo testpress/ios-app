@@ -24,8 +24,8 @@
 //
 
 import Alamofire
-import FacebookCore
-import FacebookLogin
+import FBSDKCoreKit
+import FBSDKLoginKit
 import UIKit
 
 class LoginViewController: BaseTextFieldViewController {
@@ -54,8 +54,9 @@ class LoginViewController: BaseTextFieldViewController {
             signUpLayout.isHidden = false
         }
 
-        let fbLoginButton = LoginButton(readPermissions:
-            [ .publicProfile, .email, .userBirthday, .userLocation ])
+
+        let fbLoginButton = FBLoginButton()
+
         
         fbLoginButton.center.x = facebookButtonLayout.center.x
         fbLoginButton.delegate = self
@@ -169,23 +170,18 @@ class LoginViewController: BaseTextFieldViewController {
 }
 
 extension LoginViewController: LoginButtonDelegate {
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+    }
     
-    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
-        switch result {
-        case .success(_, _, let token):
-            authenticate(username: token.userId!, password: token.authenticationToken,
-                         provider: .FACEBOOK)
-            break
-        case .cancelled:
-            
-            break
-        case .failed(let error):
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        if (error != nil) {
             print(error)
-            break
+            return
         }
+        
+        let token = result?.token
+        authenticate(username: (token?.userID)!, password: (token?.tokenString)!, provider: .FACEBOOK)
     }
     
-    func loginButtonDidLogOut(_ loginButton: LoginButton) {
-    }
 }
 

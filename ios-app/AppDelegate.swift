@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import FacebookCore
+import FBSDKCoreKit
 import IQKeyboardManagerSwift
 import RealmSwift
 import UIKit
@@ -95,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
         
-        SDKApplicationDelegate.shared.application(application,
+        ApplicationDelegate.shared.application(application,
                                                   didFinishLaunchingWithOptions: launchOptions)
         
         IQKeyboardManager.sharedManager().enable = true
@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         
-        return SDKApplicationDelegate.shared.application(application, open: url, options: options)
+        return ApplicationDelegate.shared.application(application, open: url, options: options)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
