@@ -1,21 +1,21 @@
 github "airbnb/lottie-ios" "2.5.0"
-github "Alamofire/Alamofire" "4.4.0"
+github "Alamofire/Alamofire" "4.9.0"
 github "Alua-Kinzhebayeva/iOS-PDF-Reader" "2.5.1"
 github "AssistoLab/DropDown" "v2.3.1"
 github "danielgindi/Charts" "v3.0.4"
-github "dekatotoro/SlideMenuControllerSwift" "3.0.2"
+github "AtomicSLLC/SlideMenuControllerSwift" "5.0.0"
 github "facebook/facebook-ios-sdk" == 5.7.0
 github "hackiftekhar/IQKeyboardManager" "v5.0.6"
 github "Hearst-DD/ObjectMapper" "3.4.0"
 github "LaurentiuUngur/LUExpandableTableView"  "3.0.0"
-github "onevcat/Kingfisher" "3.8.0"
-github "realm/realm-cocoa" "v3.13.1"
+github "onevcat/Kingfisher" "4.10.0"
+github "realm/realm-cocoa" "v3.15.0"
 github "schickling/Device.swift" "1.1.2"
 github "TimOliver/TOCropViewController" "2.4.0"
-github "xmartlabs/XLPagerTabStrip" "7.0.0"
+github "xmartlabs/XLPagerTabStrip" "8.1.0"
 github "zekunyan/TTGSnackbar" "1.7.1"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" == 6.8.0
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json" == 6.8.0
 github "getsentry/sentry-cocoa" "4.3.1"
 github "M3U8Kit/M3U8Parser" ~> 0.2.1 
-
+github "TimOliver/TOCropViewController" "2.5.2"
