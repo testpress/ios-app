@@ -168,7 +168,7 @@ class ActivityFeedTableViewCell: UITableViewCell {
     
     func setRubikMedium(in attributedString: NSMutableAttributedString, forRange: NSRange) {
         attributedString.addAttribute(
-            NSAttributedStringKey.font,
+            NSAttributedString.Key.font,
             value: UIFont(name: "lato-bold", size: 14.0)!,
             range: forRange
         )

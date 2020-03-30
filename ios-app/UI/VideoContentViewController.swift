@@ -251,14 +251,14 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidConnect, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidDisconnect, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateVideoAttempt), name: .UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: UIScreen.didConnectNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: UIScreen.didDisconnectNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateVideoAttempt), name: UIApplication.willResignActiveNotification, object: nil)
 
         
         if #available(iOS 11.0, *) {
-            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: .UIScreenCapturedDidChange, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: UIScreen.capturedDidChangeNotification, object: nil)
         }
     }
     
@@ -293,13 +293,13 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             contentDetailPageViewController.enableBookmarkOption()
         }
 
-        NotificationCenter.default.removeObserver(self, name: .UIScreenDidConnect, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIScreenDidDisconnect, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIScreen.didConnectNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIScreen.didDisconnectNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
 
         
         if #available(iOS 11.0, *) {
-            NotificationCenter.default.removeObserver(self, name: .UIScreenCapturedDidChange, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIScreen.capturedDidChangeNotification, object: nil)
         }
         
     }

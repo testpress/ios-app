@@ -178,7 +178,7 @@ extension TimeAnalyticsTableViewController: LUExpandableTableViewDelegate {
     func expandableTableView(_ expandableTableView: LUExpandableTableView,
                              heightForHeaderInSection section: Int) -> CGFloat {
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 
