@@ -31,6 +31,7 @@
 		25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */; };
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
 		25B0ADD521D615A200C702B9 /* Hippolyte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */; };
+		25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */; };
 		2F04053020D902530074D80E /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04052F20D902530074D80E /* Direction.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
 		2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */; };
@@ -107,7 +108,6 @@
 		2F515DFA1FF4D12A0005D8A5 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */; };
 		2F515DFC1FF4EF9C0005D8A5 /* FileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFB1FF4EF9C0005D8A5 /* FileDetails.swift */; };
 		2F515DFE1FF517160005D8A5 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFD1FF517160005D8A5 /* Permissions.swift */; };
-		2F515E001FF572690005D8A5 /* PhotoCropEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F515DFF1FF572690005D8A5 /* PhotoCropEditor.framework */; };
 		2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */; };
 		2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F52CB7A20173BA300592CD8 /* PDFReader.framework */; };
 		2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */; };
@@ -350,6 +350,7 @@
 		25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewController.swift; sourceTree = "<group>"; };
 		25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerification.swift; sourceTree = "<group>"; };
 		25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hippolyte.framework; path = Carthage/Build/iOS/Hippolyte.framework; sourceTree = "<group>"; };
+		25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CropViewController.framework; path = Carthage/Build/iOS/CropViewController.framework; sourceTree = "<group>"; };
 		2F04052F20D902530074D80E /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkFoldersDropDownCell.xib; sourceTree = "<group>"; };
 		2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFoldersDropDownCell.swift; sourceTree = "<group>"; };
@@ -613,6 +614,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */,
 				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
 				8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */,
 				2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */,
@@ -633,7 +635,6 @@
 				2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
 				2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */,
-				2F515E001FF572690005D8A5 /* PhotoCropEditor.framework in Frameworks */,
 				2F3F63542004C54900976053 /* Realm.framework in Frameworks */,
 				2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */,
 				2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */,
@@ -750,6 +751,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */,
 				8C5D579323AA08D200381DF8 /* M3U8KitDynamic.framework */,
 				8CF6972E2327180F0040A986 /* Sentry.framework */,
 				25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */,
@@ -1302,7 +1304,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/LUExpandableTableView.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/PhotoCropEditor.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
@@ -1312,6 +1313,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/M3U8KitDynamic.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CropViewController.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
