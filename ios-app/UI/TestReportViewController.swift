@@ -57,6 +57,8 @@ class TestReportViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setNavigationBarColor()
+
         
         examTitle.text = exam!.title!
         date.text = FormatDate.format(dateString: attempt!.date!,

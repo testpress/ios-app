@@ -43,6 +43,7 @@ class TimeAnalyticsTableViewController: UIViewController {
     var selectedIndexPath: IndexPath!
     
     override func viewDidLoad() {
+        self.setNavigationBarColor()
         emptyView = EmptyView.getInstance(parentView: contentView)
         emptyView.parentView = view
         tableView.tableFooterView = UIView(frame: .zero)

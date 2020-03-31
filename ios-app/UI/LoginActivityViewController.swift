@@ -59,6 +59,7 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
             infoLabel.text = Strings.PARALLEL_LOGIN_RESTRICTION_INFO + "\(instituteSettings.maxParallelLogins) \n"
             infoView.addBackground(color: Colors.getRGB(Colors.BLACK_TEXT))
         }
+        self.setNavigationBarColor()
         
     }
     
