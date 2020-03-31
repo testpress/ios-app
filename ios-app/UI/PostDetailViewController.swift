@@ -50,6 +50,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
         webViewDelegate = self
         commentBox.delegate = self
         commentBox.placeholder = placeholder

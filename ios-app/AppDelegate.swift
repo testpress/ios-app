@@ -82,12 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UIBarButtonItem.appearance().tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
         UINavigationBar.appearance().titleTextAttributes =
             [NSAttributedString.Key.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
-        
-        let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
-            as? UIView
-        
-        statusBar?.backgroundColor = Colors.getRGB(Colors.PRIMARY)
-        
         // Set tab bar item custom offset only on iPhone
         if !UIUtils.isiPad() {
             UITabBarItem.appearance().titlePositionAdjustment =

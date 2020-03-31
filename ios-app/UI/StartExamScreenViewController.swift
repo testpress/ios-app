@@ -54,6 +54,7 @@ class StartExamScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
         
         emptyView = EmptyView.getInstance(parentView: scrollView)
         view.addSubview(emptyView)

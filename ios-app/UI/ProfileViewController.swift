@@ -55,6 +55,7 @@ class ProfileViewController: UIViewController {
         emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
         bookmarkButtonLayout.isHidden = !Constants.BOOKMARKS_ENABLED
+        self.setStatusBarColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
