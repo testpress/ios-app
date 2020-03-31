@@ -43,7 +43,7 @@ class LoginViewController: BaseTextFieldViewController {
     var instituteSettings: InstituteSettings!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationBarColor()
+        self.setStatusBarColor()
         
         navigationbarItem.title = UIUtils.getAppName()
         UIUtils.setButtonDropShadow(loginButton)

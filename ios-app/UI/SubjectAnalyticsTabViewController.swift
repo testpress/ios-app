@@ -38,7 +38,7 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
     var pager: SubjectPager!
     
     override func viewDidLoad() {
-        self.setNavigationBarColor()
+        self.setStatusBarColor()
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = Colors.getRGB(Colors.PRIMARY)

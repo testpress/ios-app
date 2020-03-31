@@ -54,7 +54,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationBarColor()
+        self.setStatusBarColor()
 
         
         pageViewController = UIPageViewController(

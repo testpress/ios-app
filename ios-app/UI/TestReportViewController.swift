@@ -57,7 +57,7 @@ class TestReportViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationBarColor()
+        self.setStatusBarColor()
 
         
         examTitle.text = exam!.title!

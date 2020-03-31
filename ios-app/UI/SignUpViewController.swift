@@ -46,7 +46,7 @@ class SignUpViewController: BaseTextFieldViewController, UIPickerViewDataSource,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationBarColor()
+        self.setStatusBarColor()
 
         
         UIUtils.setButtonDropShadow(signUpButton)

@@ -32,7 +32,7 @@ class MainMenuTabViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationBarColor()
+        self.setStatusBarColor()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
         viewControllers?.remove(at: 6) // Access code

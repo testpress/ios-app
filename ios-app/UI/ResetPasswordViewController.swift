@@ -35,7 +35,7 @@ class ResetPasswordViewController: BaseTextFieldViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationBarColor()
+        self.setStatusBarColor()
 
         
         UIUtils.setButtonDropShadow(resetPasswordButton)

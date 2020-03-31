@@ -36,7 +36,7 @@ class AccessCodeExamsViewController: TPBasePagedTableViewController<Exam> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationBarColor()
+        self.setStatusBarColor()
         
         (pager as! ExamPager).accessCode = accessCode
         tableView.register(UINib(nibName: cellIdentifier, bundle: Bundle.main),

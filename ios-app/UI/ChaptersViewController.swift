@@ -50,7 +50,7 @@ class ChaptersViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.backgroundView = emptyView
         emptyView.frame = collectionView.frame
-        self.setNavigationBarColor()
+        self.setStatusBarColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
