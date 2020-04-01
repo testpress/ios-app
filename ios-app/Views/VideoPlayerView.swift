@@ -20,6 +20,7 @@ class VideoPlayerView: UIView {
     var timeObserver: Any?
     var videoEndObserver: Any?
     var startTime: Float = 0.0
+    var currentPlaybackSpeed: Float = 0.0
     var resolutionInfo:[VideoQuality] = [VideoQuality(resolution:"Auto", bitrate: 0)]
     
     required init?(coder aDecoder: NSCoder) {
@@ -59,6 +60,7 @@ class VideoPlayerView: UIView {
         player?.replaceCurrentItem(with: playerItem)
         player?.seek(to: CMTime.zero)
         player?.rate = 1
+        currentPlaybackSpeed = 1
         play()
         
         if #available(iOS 10.0, *) {
@@ -168,8 +170,8 @@ class VideoPlayerView: UIView {
     }
     
     func changePlaybackSpeed(speed: PlaybackSpeed) {
-        player?.rate = speed.value
-        controlsContainerView.playerStatus = .playing
+        currentPlaybackSpeed = speed.value
+        play()
     }
     
     func pause() {
@@ -178,7 +180,7 @@ class VideoPlayerView: UIView {
     }
     
     func play() {
-        player?.play()
+        player?.rate = currentPlaybackSpeed
         controlsContainerView.playerStatus = .playing
     }
     
