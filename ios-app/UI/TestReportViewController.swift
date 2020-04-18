@@ -57,6 +57,8 @@ class TestReportViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
+
         
         examTitle.text = exam!.title!
         date.text = FormatDate.format(dateString: attempt!.date!,
@@ -135,7 +137,7 @@ class TestReportViewController: UIViewController {
             goToAccessCodeExamsViewController(accessCodeExamsViewController)
         } else if presentingViewController is UITabBarController,
                 let tabViewController =
-                    presentingViewController?.childViewControllers[0] as? ExamsTabViewController {
+                    presentingViewController?.children[0] as? ExamsTabViewController {
             
             tabViewController.dismiss(animated: false, completion: {
                 if tabViewController.currentIndex != 2 {

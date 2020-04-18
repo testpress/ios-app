@@ -27,7 +27,7 @@
 // https://medium.com/@abhimuralidharan/accessing-photos-in-ios-swift-3-43da29ca4ccb
 //
 
-import PhotoCropEditor
+import TOCropViewController
 import TTGSnackbar
 import UIKit
 
@@ -42,7 +42,7 @@ class ImagePicker: NSObject {
     
     var delegate: ImagePickerDelegate?
     
-    func pickImage(sourceType: UIImagePickerControllerSourceType) {
+    func pickImage(sourceType: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(sourceType){
             let pickerController = UIImagePickerController()
             pickerController.delegate = self
@@ -96,14 +96,15 @@ extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDe
     }
     
     @objc func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any]) {
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
         picker.dismiss(animated: true, completion: nil)
-        if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let controller = CropViewController()
+        if let originalImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
+            let controller = TOCropViewController(image: originalImage)
             controller.delegate = self
-            controller.image = originalImage
-            controller.toolbarHidden = true
             let navController = UINavigationController(rootViewController: controller)
             viewController.present(navController, animated: true, completion: nil)
         } else {
@@ -112,12 +113,11 @@ extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDe
     }
 }
 
-extension ImagePicker: CropViewControllerDelegate {
-    
-    func cropViewController(_ controller: CropViewController,
-                            didFinishCroppingImage image: UIImage) {
+extension ImagePicker: TOCropViewControllerDelegate {
+    func cropViewController(_ cropViewController: TOCropViewController, didCropTo image: UIImage, with cropRect: CGRect, angle: Int)
+    {
+        cropViewController.dismiss(animated: true)
         
-        controller.dismiss(animated: true, completion: nil)
         let documentDirectory: NSString = NSSearchPathForDirectoriesInDomains(
             .documentDirectory, .userDomainMask, true).first! as NSString
         
@@ -126,7 +126,7 @@ extension ImagePicker: CropViewControllerDelegate {
         // thus rewrite the last "temp" image. Don't worry it won't be shown in Photos app.
         let imageName = "temp"
         let imageURL = URL(string: documentDirectory.appendingPathComponent(imageName))!
-        let data = UIImageJPEGRepresentation(image, 0)!
+        let data = image.jpegData(compressionQuality: 0)!
         do {
             try data.write(to: imageURL)
         } catch {
@@ -135,11 +135,19 @@ extension ImagePicker: CropViewControllerDelegate {
         delegate?.imagePicker(self, didFinishPickingImage: data, imagePath: imageURL.absoluteString)
     }
     
-    func cropViewController(_ controller: CropViewController, didFinishCroppingImage image: UIImage,
-                            transform: CGAffineTransform, cropRect: CGRect) {
-    }
     
-    func cropViewControllerDidCancel(_ controller: CropViewController) {
-        controller.dismiss(animated: true, completion: nil)
+    func cropViewController(_ cropViewController: TOCropViewController, didFinishCancelled cancelled: Bool)
+    {
+        cropViewController.dismiss(animated: true) { () -> Void in  }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

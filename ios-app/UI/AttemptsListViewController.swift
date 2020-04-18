@@ -141,7 +141,7 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
         
         // Customise items seperator
         cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
+        cell.separatorInset = UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 15);
         cell.layoutMargins = UIEdgeInsets.zero;
         return cell
     }

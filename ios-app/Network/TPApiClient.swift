@@ -165,14 +165,14 @@ class TPApiClient {
                                           preferredStyle: UIUtils.getActionSheetStyle())
             alert.addAction(UIAlertAction(
                 title: Strings.OK,
-                style: UIAlertActionStyle.destructive,
+                style: UIAlertAction.Style.destructive,
                 handler: { action in
                     let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
                     let tabViewController = storyboard.instantiateViewController(
                         withIdentifier: Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER)
                     rootViewController!.present(tabViewController, animated: true, completion: nil)
             }))
-            alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
+            alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertAction.Style.cancel))
             rootViewController!.present(alert, animated: true)
 
         } else if error.error_code == Constants.MAX_LOGIN_LIMIT_EXCEEDED {

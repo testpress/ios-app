@@ -31,6 +31,8 @@
 		25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */; };
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
 		25B0ADD521D615A200C702B9 /* Hippolyte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */; };
+		25F92A20243306A60084ADC8 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F92A1F243306A60084ADC8 /* UIViewController.swift */; };
+		25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */; };
 		2F04053020D902530074D80E /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04052F20D902530074D80E /* Direction.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
 		2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */; };
@@ -71,9 +73,7 @@
 		2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F634F2004A2D000976053 /* RealmSwift.framework */; };
 		2F3F63522004A75F00976053 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F63512004A75F00976053 /* DBManager.swift */; };
 		2F3F63542004C54900976053 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F63532004C54900976053 /* Realm.framework */; };
-		2F40CC592045446600A729CE /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC582045446600A729CE /* FacebookCore.framework */; };
 		2F40CC5D20456FEC00A729CE /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5C20456FEC00A729CE /* FBSDKCoreKit.framework */; };
-		2F40CC5F2045702100A729CE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5E2045702100A729CE /* Bolts.framework */; };
 		2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F412CC120219BC300B7F70C /* OrderedDictionary.swift */; };
 		2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */; };
 		2F4186A020BD3A33003D2D8A /* BookmarkFolderPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869F20BD3A33003D2D8A /* BookmarkFolderPager.swift */; };
@@ -109,7 +109,6 @@
 		2F515DFA1FF4D12A0005D8A5 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */; };
 		2F515DFC1FF4EF9C0005D8A5 /* FileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFB1FF4EF9C0005D8A5 /* FileDetails.swift */; };
 		2F515DFE1FF517160005D8A5 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFD1FF517160005D8A5 /* Permissions.swift */; };
-		2F515E001FF572690005D8A5 /* PhotoCropEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F515DFF1FF572690005D8A5 /* PhotoCropEditor.framework */; };
 		2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */; };
 		2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F52CB7A20173BA300592CD8 /* PDFReader.framework */; };
 		2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */; };
@@ -242,7 +241,6 @@
 		2FDF9C5B20B6F6C50086245F /* Bookmarks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF9C5A20B6F6C50086245F /* Bookmarks.storyboard */; };
 		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
-		2FE6B94F2051136F0091C7CA /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5A2045446B00A729CE /* FacebookLogin.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2FE6B958205144CD0091C7CA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */; };
 		2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
@@ -353,6 +351,8 @@
 		25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewController.swift; sourceTree = "<group>"; };
 		25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerification.swift; sourceTree = "<group>"; };
 		25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hippolyte.framework; path = Carthage/Build/iOS/Hippolyte.framework; sourceTree = "<group>"; };
+		25F92A1F243306A60084ADC8 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CropViewController.framework; path = Carthage/Build/iOS/CropViewController.framework; sourceTree = "<group>"; };
 		2F04052F20D902530074D80E /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkFoldersDropDownCell.xib; sourceTree = "<group>"; };
 		2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFoldersDropDownCell.swift; sourceTree = "<group>"; };
@@ -402,10 +402,7 @@
 		2F3F634F2004A2D000976053 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		2F3F63512004A75F00976053 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		2F3F63532004C54900976053 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
-		2F40CC582045446600A729CE /* FacebookCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookCore.framework; path = Carthage/Build/iOS/FacebookCore.framework; sourceTree = "<group>"; };
-		2F40CC5A2045446B00A729CE /* FacebookLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookLogin.framework; path = Carthage/Build/iOS/FacebookLogin.framework; sourceTree = "<group>"; };
 		2F40CC5C20456FEC00A729CE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Carthage/Build/iOS/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		2F40CC5E2045702100A729CE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
 		2F412CC120219BC300B7F70C /* OrderedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFolderTableViewController.swift; sourceTree = "<group>"; };
 		2F41869F20BD3A33003D2D8A /* BookmarkFolderPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFolderPager.swift; sourceTree = "<group>"; };
@@ -619,6 +616,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */,
 				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
 				8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */,
 				2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */,
@@ -628,13 +626,10 @@
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
 				2F763CFF1FBD83340033D495 /* Alamofire.framework in Frameworks */,
-				2F40CC5F2045702100A729CE /* Bolts.framework in Frameworks */,
 				2FE6B958205144CD0091C7CA /* FBSDKLoginKit.framework in Frameworks */,
 				2F936E821FDAD376008C353A /* Charts.framework in Frameworks */,
 				2F763D001FBD83340033D495 /* Device.framework in Frameworks */,
 				2F33BFFB206E7E7100D4CE6D /* DropDown.framework in Frameworks */,
-				2F40CC592045446600A729CE /* FacebookCore.framework in Frameworks */,
-				2FE6B94F2051136F0091C7CA /* FacebookLogin.framework in Frameworks */,
 				2F40CC5D20456FEC00A729CE /* FBSDKCoreKit.framework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
@@ -642,7 +637,6 @@
 				2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
 				2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */,
-				2F515E001FF572690005D8A5 /* PhotoCropEditor.framework in Frameworks */,
 				2F3F63542004C54900976053 /* Realm.framework in Frameworks */,
 				2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */,
 				2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */,
@@ -759,6 +753,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */,
 				8C5D579323AA08D200381DF8 /* M3U8KitDynamic.framework */,
 				8CF6972E2327180F0040A986 /* Sentry.framework */,
 				25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */,
@@ -775,10 +770,7 @@
 				2F429A0220DCD70100F5555C /* Lottie.framework */,
 				2F33BFFA206E7E7100D4CE6D /* DropDown.framework */,
 				2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */,
-				2F40CC5E2045702100A729CE /* Bolts.framework */,
 				2F40CC5C20456FEC00A729CE /* FBSDKCoreKit.framework */,
-				2F40CC5A2045446B00A729CE /* FacebookLogin.framework */,
-				2F40CC582045446600A729CE /* FacebookCore.framework */,
 				2F52CB7A20173BA300592CD8 /* PDFReader.framework */,
 				2F3F63532004C54900976053 /* Realm.framework */,
 				2F3F634F2004A2D000976053 /* RealmSwift.framework */,
@@ -1082,6 +1074,7 @@
 				8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */,
 				8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */,
 				8CA1E87F239A76AC0001FA5B /* UIView.swift */,
+				25F92A1F243306A60084ADC8 /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1181,7 +1174,7 @@
 					2F26ADE11E8249D70031E6F4 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = BHAB7LC35Y;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -1191,7 +1184,7 @@
 					};
 					2F26ADF51E8249D70031E6F4 = {
 						CreatedOnToolsVersion = 8.2.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2F26ADE11E8249D70031E6F4;
 					};
@@ -1315,19 +1308,16 @@
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/LUExpandableTableView.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/PhotoCropEditor.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FacebookCore.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FacebookLogin.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/FBSDKCoreKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Bolts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/M3U8KitDynamic.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CropViewController.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
@@ -1525,6 +1515,7 @@
 				2FA9285020B7DF2200CD3076 /* StringExtension.swift in Sources */,
 				8C2E7B5923979E5A00BA2F41 /* VideoPlayerView.swift in Sources */,
 				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,
+				25F92A20243306A60084ADC8 /* UIViewController.swift in Sources */,
 				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
 				2F5E0BB51FE2415800236AFE /* ActivityFeedPager.swift in Sources */,
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
@@ -1794,14 +1785,14 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.17.1;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.brilliantpalaclass;
 				PRODUCT_NAME = "Brilliantpala - Online Class";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1822,14 +1813,14 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.17.1;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.brilliantpalaclass;
 				PRODUCT_NAME = "Brilliantpala - Online Class";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1846,8 +1837,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "in.testpress.ios-appTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ios-app.app/ios-app";
 			};
 			name = Debug;
@@ -1865,8 +1855,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "in.testpress.ios-appTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ios-app.app/ios-app";
 			};
 			name = Release;

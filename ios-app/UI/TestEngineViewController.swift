@@ -436,7 +436,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         
         alertDialog.addAction(UIAlertAction(
             title: Strings.YES,
-            style: UIAlertActionStyle.default,
+            style: UIAlertAction.Style.default,
             handler: { action in
                 self.showLoadingProgress(completionHandler: {
                     self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
@@ -446,7 +446,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             }
         ))
         alertDialog.addAction(
-            UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
+            UIAlertAction(title: Strings.CANCEL, style: UIAlertAction.Style.cancel))
         
         present(alertDialog, animated: true, completion: {
             self.alertDialog.view.superview?.isUserInteractionEnabled = true
@@ -468,7 +468,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             preferredStyle: UIUtils.getActionSheetStyle()
         )
         alertDialog.addAction(UIAlertAction(
-            title: Strings.PAUSE, style: UIAlertActionStyle.default, handler: {
+            title: Strings.PAUSE, style: UIAlertAction.Style.default, handler: {
                 (action: UIAlertAction!) in
                 self.showLoadingProgress(completionHandler: {
                     self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
@@ -479,7 +479,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         ))
         if !firstAttemptOfLockedSectionExam {
             alertDialog.addAction(UIAlertAction(
-                title: Strings.END, style: UIAlertActionStyle.destructive,
+                title: Strings.END, style: UIAlertAction.Style.destructive,
                 handler: { (action: UIAlertAction!) in
                     if self.lockedSectionExam &&
                         self.currentSection + 1 < self.sections.count {
@@ -493,7 +493,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         }
         alertDialog.addAction(UIAlertAction(
             title: Strings.CANCEL,
-            style: UIAlertActionStyle.cancel
+            style: UIAlertAction.Style.cancel
         ))
         present(alertDialog, animated: true, completion: nil)
     }
@@ -546,7 +546,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             userInfo: nil,
             repeats: true
         )
-        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+        RunLoop.main.add(timer, forMode: RunLoop.Mode.common)
     }
     
     override func showLoadingProgress(completionHandler: (() -> Void)?) {
@@ -650,7 +650,7 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
             accessCodeExamsViewController.dismiss(animated: false, completion: nil)
         } else if presentingViewController is UITabBarController {
             let tabViewController =
-                presentingViewController?.childViewControllers[0] as! ExamsTabViewController
+                presentingViewController?.children[0] as! ExamsTabViewController
             
             tabViewController.dismiss(animated: false, completion: {
                 if tabViewController.currentIndex != 2 {

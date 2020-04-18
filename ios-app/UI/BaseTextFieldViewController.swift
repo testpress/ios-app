@@ -36,11 +36,11 @@ class BaseTextFieldViewController: UIViewController, UIGestureRecognizerDelegate
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
-                                               name:NSNotification.Name.UIKeyboardWillShow,
+                                               name:UIResponder.keyboardWillShowNotification,
                                                object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
-                                               name:NSNotification.Name.UIKeyboardWillHide,
+                                               name:UIResponder.keyboardWillHideNotification,
                                                object: nil)
     }
     
@@ -69,7 +69,7 @@ class BaseTextFieldViewController: UIViewController, UIGestureRecognizerDelegate
         // the user needs to tap
         var userInfo = notification.userInfo!
         var keyboardFrame:CGRect =
-            (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+            (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         var contentInset:UIEdgeInsets = scrollView.contentInset
