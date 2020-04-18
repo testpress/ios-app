@@ -91,13 +91,6 @@
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <state key="normal" image="more"/>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mey-yi-8hf" customClass="VideoSlider" customModule="ios_app" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="192" width="642" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="2Nh-XF-PiB"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -111,7 +104,6 @@
                 <constraint firstAttribute="bottom" secondItem="mey-yi-8hf" secondAttribute="bottom" constant="25" id="JW0-lz-5SS"/>
                 <constraint firstItem="EOa-fV-i3a" firstAttribute="leading" secondItem="JwU-LP-1zx" secondAttribute="leading" constant="100" id="MVx-vv-9Gx"/>
                 <constraint firstItem="Md2-Me-Kr4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="O5a-Vg-GL8"/>
-                <constraint firstAttribute="bottom" secondItem="mey-yi-8hf" secondAttribute="bottom" constant="-2" id="Pcn-t1-0RI"/>
                 <constraint firstItem="mey-yi-8hf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UX1-Hf-XLS"/>
                 <constraint firstItem="EOa-fV-i3a" firstAttribute="leading" secondItem="JwU-LP-1zx" secondAttribute="leading" constant="100" id="V55-aF-7k9"/>
                 <constraint firstItem="mey-yi-8hf" firstAttribute="top" secondItem="Zgk-gf-KAi" secondAttribute="bottom" constant="20" id="XQ8-Ub-XHS"/>

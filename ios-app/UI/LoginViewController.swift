@@ -179,10 +179,20 @@ extension LoginViewController: LoginButtonDelegate {
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         if (error != nil) {
-            print(error)
+            self.alertController.dismiss(animated: true, completion: nil)
+            UIUtils.showSimpleAlert(
+               title: "Login Failed",
+               message: "Unable to login with provided credentials",
+               viewController: self,
+               cancelable: true,
+               cancelHandler: #selector(self.closeAlert(gesture:))
+           )
             return
         }
         
+        if (result!.isCancelled) {
+            return
+        }
         let token = result?.token
         authenticate(username: (token?.userID)!, password: (token?.tokenString)!, provider: .FACEBOOK)
     }

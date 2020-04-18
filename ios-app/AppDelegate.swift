@@ -87,7 +87,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UITabBarItem.appearance().titlePositionAdjustment =
                 UIOffset(horizontal: 0, vertical: -5)
         }
-        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
+        do {
+            if #available(iOS 10.0, *) {
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            }
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error)
+        }
         
         ApplicationDelegate.shared.application(application,
                                                   didFinishLaunchingWithOptions: launchOptions)
