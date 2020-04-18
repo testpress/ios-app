@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1064046661341-au2upcc21m3mq2npg5avq8mqo9i1lbp7.apps.googleusercontent.com</string>
+	<string>325057965301-but1njsge9vaorg06nt15tve9ms7gvh2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1064046661341-au2upcc21m3mq2npg5avq8mqo9i1lbp7</string>
+	<string>com.googleusercontent.apps.325057965301-but1njsge9vaorg06nt15tve9ms7gvh2</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>1064046661341-j0c619a0re0ssqpk28o4gnipsag0ks21.apps.googleusercontent.com</string>
+	<string>325057965301-i3qtqfbudjc1ohbci83nbpod6jla3pip.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCtZdQO-mR9mdg-6uj4ZTmAIyvzMqhXJaE</string>
+	<string>AIzaSyBLW03hysVTqcoLOVaFOizLKLfAwMks34Y</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1064046661341</string>
+	<string>325057965301</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>in.testpress.ios-app</string>
+	<string>in.testpress.psmnavigator</string>
 	<key>PROJECT_ID</key>
-	<string>default-demo-app-bfeac</string>
+	<string>testpress3-714af</string>
 	<key>STORAGE_BUCKET</key>
-	<string>default-demo-app-bfeac.appspot.com</string>
+	<string>testpress3-714af.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1064046661341:ios:750aba75ca20d570</string>
+	<string>1:325057965301:ios:4e43d3deefe9d5e1ce29bc</string>
 	<key>DATABASE_URL</key>
-	<string>https://default-demo-app-bfeac-c6dd0.firebaseio.com</string>
+	<string>https://testpress3-714af.firebaseio.com</string>
 </dict>
 </plist>
