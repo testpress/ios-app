@@ -23,7 +23,6 @@
 //  THE SOFTWARE.
 //
 
-import PhotoCropEditor
 import TTGSnackbar
 import UIKit
 

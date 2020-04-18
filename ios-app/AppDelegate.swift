@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import FacebookCore
+import FBSDKCoreKit
 import IQKeyboardManagerSwift
 import RealmSwift
 import UIKit
@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var emptyView: EmptyView!
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         
         // Register for remote notifications. This shows a permission dialog on first run.
@@ -81,13 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UINavigationBar.appearance().barTintColor = Colors.getRGB(Colors.PRIMARY)
         UIBarButtonItem.appearance().tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
         UINavigationBar.appearance().titleTextAttributes =
-            [NSAttributedStringKey.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
-        
-        let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
-            as? UIView
-        
-        statusBar?.backgroundColor = Colors.getRGB(Colors.PRIMARY)
-        
+            [NSAttributedString.Key.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
         // Set tab bar item custom offset only on iPhone
         if !UIUtils.isiPad() {
             UITabBarItem.appearance().titlePositionAdjustment =
@@ -95,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
         
-        SDKApplicationDelegate.shared.application(application,
+        ApplicationDelegate.shared.application(application,
                                                   didFinishLaunchingWithOptions: launchOptions)
         
         IQKeyboardManager.sharedManager().enable = true
@@ -122,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             ]
         }
         
-        let config = Realm.Configuration(schemaVersion: 4)
+        let config = Realm.Configuration(schemaVersion: 5)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         
@@ -140,9 +134,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     
     func application(_ application: UIApplication, open url: URL,
-                     options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+                     options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         
-        return SDKApplicationDelegate.shared.application(application, open: url, options: options)
+        return ApplicationDelegate.shared.application(application, open: url, options: options)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -296,4 +290,9 @@ extension UIApplication {
         }
         return controller
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
 }

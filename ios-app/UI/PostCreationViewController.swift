@@ -48,6 +48,7 @@ class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
         categoryPickerView.delegate = self
         categoryPickerView.dataSource = self
         postContent.delegate = self

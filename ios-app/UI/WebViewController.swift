@@ -46,7 +46,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
     
         let navItem = UINavigationItem(title: title);
         navItem.leftBarButtonItem = UIBarButtonItem(customView: button)
-        navItem.leftBarButtonItem?.imageInsets =  UIEdgeInsetsMake(5, 50, -5, 30)
+        navItem.leftBarButtonItem?.imageInsets =  UIEdgeInsets.init(top: 5, left: 50, bottom: -5, right: 30)
         navBar!.setItems([navItem], animated: false);
         self.view.addSubview(navBar!);
         navBar!.translatesAutoresizingMaskIntoConstraints = false

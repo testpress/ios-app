@@ -154,9 +154,9 @@ class WebViewUtils {
     }
     
     public static func getFormattedDiscussionTitle(post: Post) -> String {
-        let timeIconData = UIImagePNGRepresentation(Images.TimeIcon.image)
+        let timeIconData = Images.TimeIcon.image.pngData()
         let encodedTimeIcon = timeIconData?.base64EncodedString()
-        let viewsIconData = UIImagePNGRepresentation(Images.ViewsIcon.image)
+        let viewsIconData = Images.ViewsIcon.image.pngData()
         let encodedViewsIcon = viewsIconData?.base64EncodedString()
         var html = "<div class='discussion_title'>" + post.title + "</div>"
         

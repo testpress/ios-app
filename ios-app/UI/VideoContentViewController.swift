@@ -239,7 +239,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.startPeriodicAttemptUpdater()
+        addObservers()
         videoPlayerView.addObservers()
         
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
@@ -248,14 +248,22 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             contentDetailPageViewController.enableBookmarkOption()
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidConnect, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidDisconnect, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+    }
+    
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: UIScreen.didConnectNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: UIScreen.didDisconnectNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateVideoAttempt), name: UIApplication.willResignActiveNotification, object: nil)
 
         
         if #available(iOS 11.0, *) {
-            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: .UIScreenCapturedDidChange, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: UIScreen.capturedDidChangeNotification, object: nil)
         }
+    }
+    
+    @objc func updateVideoAttempt() {
+        viewModel.updateVideoAttempt()
     }
     
     @objc func willEnterForeground() {
@@ -277,7 +285,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.stopPeriodicAttemptUpdater()
+        viewModel.updateVideoAttempt()
         videoPlayerView.dealloc()
 
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
@@ -285,13 +293,13 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             contentDetailPageViewController.enableBookmarkOption()
         }
 
-        NotificationCenter.default.removeObserver(self, name: .UIScreenDidConnect, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIScreenDidDisconnect, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIScreen.didConnectNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIScreen.didDisconnectNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
 
         
         if #available(iOS 11.0, *) {
-            NotificationCenter.default.removeObserver(self, name: .UIScreenCapturedDidChange, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIScreen.capturedDidChangeNotification, object: nil)
         }
         
     }
@@ -300,10 +308,48 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         let alert = UIAlertController(title: "Playback Speed", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         PlaybackSpeed.allCases.forEach{ playbackSpeed in
-            alert.addAction(UIAlertAction(title: playbackSpeed.rawValue, style: .default, handler: { (_) in
+            let action = UIAlertAction(title: playbackSpeed.rawValue, style: .default, handler: { (_) in
                 self.videoPlayerView.changePlaybackSpeed(speed: playbackSpeed)
-            }))
+            })
+            if (playbackSpeed.value == self.videoPlayerView.getCurrenPlaybackSpeed()){
+                action.setValue(Images.TickIcon.image, forKey: "image")
+            } else if(self.videoPlayerView.getCurrenPlaybackSpeed() == 0.0 && playbackSpeed == .normal) {
+                action.setValue(Images.TickIcon.image, forKey: "image")
+            }
+            
+            alert.addAction(action)
         }
+        alert.popoverPresentationController?.sourceView = self.view
+        self.present(alert, animated: true)
+    }
+    
+    func showQualitySelector() {
+        let alert = UIAlertController(title: "Quality", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        for resolutionInfo in videoPlayerView.resolutionInfo {
+            let action = UIAlertAction(title: resolutionInfo.resolution, style: .default, handler: { (_) in
+                self.videoPlayerView.changeBitrate(resolutionInfo.bitrate)
+            })
+            
+            if (Double(resolutionInfo.bitrate) == videoPlayerView.getCurrentBitrate()) {
+                action.setValue(Images.TickIcon.image, forKey: "image")
+            }
+            alert.addAction(action)
+        }
+        alert.popoverPresentationController?.sourceView = self.view
+        self.present(alert, animated: true)
+    }
+    
+    func displayOptions() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Playback Speed", style: .default, handler: { _ in
+            self.showPlaybackSpeedMenu()
+        }))
+        alert.addAction(UIAlertAction(title: "Video Quality", style: .default, handler: { _ in
+            self.showQualitySelector()
+        }))
         alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated: true)
     }
@@ -326,8 +372,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
 }
 
 extension VideoContentViewController: VideoPlayerDelegate {
-    func changePlayBackSpeed() {
-        showPlaybackSpeedMenu()
+    func showOptionsMenu() {
+        displayOptions()
     }
 }
 

@@ -79,3 +79,8 @@ enum VideoDurationType {
         }
     }
 }
+
+struct VideoQuality {
+    var resolution: String
+    var bitrate: Int
+}

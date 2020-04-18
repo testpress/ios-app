@@ -58,8 +58,8 @@ class BaseQuestionsViewController: BaseWebViewController, WKWebViewDelegate {
     
     func onFinishLoadingWebView() {
         // Bring top & bottom shadow to front
-        view.bringSubview(toFront: bottomShadowView)
-        view.bringSubview(toFront: topShadowView)
+        view.bringSubviewToFront(bottomShadowView)
+        view.bringSubviewToFront(topShadowView)
     }
 
 }

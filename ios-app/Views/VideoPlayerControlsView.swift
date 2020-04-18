@@ -17,8 +17,8 @@ class VideoPlayerControlsView: UIView {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var currentDurationLabel: UILabel!
     @IBOutlet weak var totalDurationLabel: UILabel!
-    @IBOutlet weak var playbackSpeed: UIButton!
     @IBOutlet weak var slider: VideoSlider!
+    @IBOutlet weak var optionsButton: UIButton!
     
     let TIMER_DELAY = 5.0
     var durationType = VideoDurationType.remainingTime
@@ -60,8 +60,9 @@ class VideoPlayerControlsView: UIView {
             self.totalDurationLabel.text = self.durationType.value(seconds: self.currentDuration, total: self.totalDuration)
         }
         
-        playbackSpeed.addTapGestureRecognizer {
-            self.delegate?.changePlayBackSpeed()
+        
+        optionsButton.addTapGestureRecognizer {
+            self.delegate?.showOptionsMenu();
         }
     }
     
@@ -131,6 +132,7 @@ class VideoPlayerControlsView: UIView {
         currentDurationLabel.isHidden = true
         totalDurationLabel.isHidden = true
         slider.isHidden = true
+        optionsButton.isHidden = true
         loadingIndicator.startAnimating()
     }
     
@@ -144,6 +146,7 @@ class VideoPlayerControlsView: UIView {
             fullScreen.isHidden = false
             totalDurationLabel.isHidden = false
             slider.isHidden = false
+            optionsButton.isHidden = false
             loadingIndicator.stopAnimating()
             loadingIndicator.isHidden = true
         }
@@ -216,5 +219,5 @@ protocol PlayerControlDelegate: class {
     func rewind()
     func goTo(seconds:Float)
     func fullScreen()
-    func changePlayBackSpeed()
+    func showOptionsMenu()
 }
