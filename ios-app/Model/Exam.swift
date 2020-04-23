@@ -59,8 +59,8 @@ public class Exam {
     var showScore: Bool = true
     var showPercentile: Bool = true
     var studentsAttemptedCount: Int!
-    var isGrowthHackEnabled: Bool? = true;
-    var shareTextForSolutionUnlock: String? = "Some content";
+    var isGrowthHackEnabled: Bool?;
+    var shareTextForSolutionUnlock: String? = "";
     
     public required init?(map: Map) {
     }
@@ -90,7 +90,6 @@ public class Exam {
     }
     
     func getNumberOfTimesShared() -> Int {
-//        UserDefaults.standard.set(0, forKey: getKey())
         return UserDefaults.standard.integer(forKey: getKey())
     }
     
