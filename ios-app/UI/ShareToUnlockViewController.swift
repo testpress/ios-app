@@ -29,18 +29,19 @@ class ShareToUnlockViewController: UIViewController {
         let activityViewController = UIActivityViewController(activityItems:
             [shareText], applicationActivities: nil)
         let excludeActivities = [
-            UIActivityType.print,
-            UIActivityType.assignToContact,
-            UIActivityType.saveToCameraRoll,
-            UIActivityType.addToReadingList,
-            UIActivityType.postToFlickr,
-            UIActivityType.postToTencentWeibo,
-            UIActivityType.airDrop,
-            UIActivityType.copyToPasteboard
+            UIActivity.ActivityType.print,
+            UIActivity.ActivityType.assignToContact,
+            UIActivity.ActivityType.saveToCameraRoll,
+            UIActivity.ActivityType.addToReadingList,
+            UIActivity.ActivityType.postToFlickr,
+            UIActivity.ActivityType.postToTencentWeibo,
+            UIActivity.ActivityType.airDrop,
+            UIActivity.ActivityType.copyToPasteboard
         ]
         activityViewController.excludedActivityTypes = excludeActivities;
         
-        activityViewController.completionWithItemsHandler = {(activityType:     UIActivityType?, completed: Bool, returnedItems:[Any]?, error: Error?) in
+        activityViewController.completionWithItemsHandler = {(activityType:
+            UIActivity.ActivityType?, completed: Bool, returnedItems:[Any]?, error: Error?) in
             if (completed) {
                 self.onShareCompletion!()
             }
