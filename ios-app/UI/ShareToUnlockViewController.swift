@@ -43,7 +43,7 @@ class ShareToUnlockViewController: UIViewController {
         activityViewController.completionWithItemsHandler = {(activityType:
             UIActivity.ActivityType?, completed: Bool, returnedItems:[Any]?, error: Error?) in
             if (completed) {
-                self.onShareCompletion!()
+                self.onShareCompletion?()
             }
         }
         self.present(activityViewController, animated: true,
