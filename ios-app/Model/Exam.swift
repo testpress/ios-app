@@ -59,6 +59,8 @@ public class Exam {
     var showScore: Bool = true
     var showPercentile: Bool = true
     var studentsAttemptedCount: Int!
+    var isGrowthHackEnabled: Bool?;
+    var shareTextForSolutionUnlock: String? = "";
     
     public required init?(map: Map) {
     }
@@ -81,6 +83,20 @@ public class Exam {
         }
         return date < Date()
     }
+    
+    private func getKey() -> String {
+        let id = String(self.id!)
+        return "\(id)_SHARE_TO_UNLOCK"
+    }
+    
+    func getNumberOfTimesShared() -> Int {
+        return UserDefaults.standard.integer(forKey: getKey())
+    }
+    
+    func incrementNumberOfTimesShared() {
+        UserDefaults.standard.set(getNumberOfTimesShared() + 1, forKey: getKey())
+    }
+    
 }
 
 extension Exam: TestpressModel {
@@ -118,5 +134,7 @@ extension Exam: TestpressModel {
         showScore <- map["show_score"]
         showPercentile <- map["show_percentile"]
         studentsAttemptedCount <- map["students_attempted_count"]
+        isGrowthHackEnabled <- map["is_growth_hack_enabled"]
+        shareTextForSolutionUnlock <- map["share_text_for_solution_unlock"]
     }
 }

@@ -51,6 +51,10 @@ class TestReportViewController: UIViewController {
     @IBOutlet weak var solutionsButton: UIButton!
     @IBOutlet weak var analyticsButton: UIButton!
     @IBOutlet weak var timeAnalyticsButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var solutionButtonLayout: UIStackView!
+    @IBOutlet weak var analyticsButtonLayout: UIStackView!
+    @IBOutlet weak var shareButtonLayout: UIStackView!
     
     var attempt: Attempt!
     var exam: Exam!
@@ -92,15 +96,58 @@ class TestReportViewController: UIViewController {
         UIUtils.setButtonDropShadow(solutionsButton)
         UIUtils.setButtonDropShadow(analyticsButton)
         UIUtils.setButtonDropShadow(timeAnalyticsButton)
+        showOrHideLockIconInSolutionButton()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        showOrHideLockIconInSolutionButton()
+    }
+    
+    func showOrHideLockIconInSolutionButton() {
+        if ((exam.isGrowthHackEnabled ?? false) && (exam.getNumberOfTimesShared() < 2)) {
+            shareButtonLayout.isHidden = false
+            analyticsButtonLayout.isHidden = true
+            solutionButtonLayout.isHidden = true
+            shareButton.tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
+            shareButton.setTitleColor(Colors.getRGB(Colors.PRIMARY_TEXT), for: .normal)
+            shareButton.backgroundColor = Colors.getRGB(Colors.PRIMARY)
+            shareButton.imageView?.contentMode = .scaleAspectFit
+            shareButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+        } else {
+            shareButtonLayout.isHidden = true
+            analyticsButtonLayout.isHidden = false
+            solutionButtonLayout.isHidden = false
+            solutionsButton.setImage(nil, for: .normal)
+        }
+    }
+    @IBAction func showShareScreen(_ sender: Any) {
+        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.SHARE_TO_UNLOCK_VIEW_CONTROLLER) as! ShareToUnlockViewController
+        viewController.shareText = exam.shareTextForSolutionUnlock ?? ""
+        viewController.onShareCompletion = {
+            self.exam.incrementNumberOfTimesShared()
+            if (self.exam.getNumberOfTimesShared() >= 2) {
+                viewController.dismiss(animated: false) {
+                    self.showSolutionsScreen()
+                }
+            }
+        }
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showSolutions(_ sender: UIButton) {
+        showSolutionsScreen()
     }
 
-    @IBAction func showSolutions(_ sender: UIButton) {
+    
+    func showSolutionsScreen() {
         let slideMenuController = self.storyboard?.instantiateViewController(withIdentifier:
-            Constants.REVIEW_NAVIGATION_VIEW_CONTROLLER) as! UINavigationController
-        
+        Constants.REVIEW_NAVIGATION_VIEW_CONTROLLER) as! UINavigationController
+    
         let viewController =
-            slideMenuController.viewControllers.first as! ReviewSlidingViewController
-        
+        slideMenuController.viewControllers.first as! ReviewSlidingViewController
+    
         viewController.exam = exam
         viewController.attempt = attempt
         self.present(slideMenuController, animated: true, completion: nil)
