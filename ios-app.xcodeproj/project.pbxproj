@@ -28,6 +28,7 @@
 		2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24621CA0D770097C6FE /* Firebase.framework */; };
 		2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24821CA0D770097C6FE /* FirebaseMessaging.framework */; };
 		2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A25221CA0DBE0097C6FE /* Protobuf.framework */; };
+		259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
 		25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */; };
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
 		25B0ADD521D615A200C702B9 /* Hippolyte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */; };
@@ -348,6 +349,7 @@
 		2570A24721CA0D770097C6FE /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Carthage/Build/iOS/FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		2570A24821CA0D770097C6FE /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseMessaging.framework; path = Carthage/Build/iOS/FirebaseMessaging.framework; sourceTree = "<group>"; };
 		2570A25221CA0DBE0097C6FE /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Protobuf.framework; path = Carthage/Build/iOS/Protobuf.framework; sourceTree = "<group>"; };
+		259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToUnlockViewController.swift; sourceTree = "<group>"; };
 		25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewController.swift; sourceTree = "<group>"; };
 		25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerification.swift; sourceTree = "<group>"; };
 		25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hippolyte.framework; path = Carthage/Build/iOS/Hippolyte.framework; sourceTree = "<group>"; };
@@ -962,6 +964,7 @@
 				8C205A072323918700596E66 /* LoginActivityCell.swift */,
 				8C2D130A238507C4005A7F39 /* VideoContentViewController.swift */,
 				8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */,
+				259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1452,6 +1455,7 @@
 				2FC0F3001F863B8F0092BFDC /* ExamsTableViewCell.swift in Sources */,
 				8C9E5BDC238E5ACA00D8790F /* AVPlayerExtensions.swift in Sources */,
 				2F96997C1FC2A625001B2B18 /* Video.swift in Sources */,
+				259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */,
 				2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */,
 				2FC0F2FC1F863B810092BFDC /* BaseQuestionsPageViewController.swift in Sources */,
 				2FC0F2F91F863B780092BFDC /* AttemptsListViewController.swift in Sources */,
