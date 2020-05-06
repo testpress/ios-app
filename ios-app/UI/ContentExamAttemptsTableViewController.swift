@@ -177,8 +177,8 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     private func canAttemptExam() -> Bool {
         // User can't retake an exam if retake disabled or max retake attemted or web only exam or
         // exam start date is future. If paused attempt exist, can resume it.
-        if (exam.attemptsCount! == 0 || pausedAttempts.count != 0 ||
-            ((exam.allowRetake!) && (attempts.count <= exam.maxRetakes! || exam.maxRetakes! < 0))) {
+        if (exam.attemptsCount == 0 || pausedAttempts.count != 0 ||
+            ((exam.allowRetake) && (attempts.count <= exam.maxRetakes || exam.maxRetakes < 0))) {
             
             if (exam.deviceAccessControl != nil && exam.deviceAccessControl == "web") {
                 return false;

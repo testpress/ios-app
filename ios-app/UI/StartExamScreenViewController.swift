@@ -65,7 +65,7 @@ class StartExamScreenViewController: UIViewController {
             }
         }
         examTitle.text = exam.title
-        questionsCount.text = String(exam.numberOfQuestions!)
+        questionsCount.text = String(exam.numberOfQuestions)
         if attempt?.remainingTime != nil {
             duration.text = attempt?.remainingTime!
             durationLabel.text = "Time Remaining"
@@ -77,8 +77,8 @@ class StartExamScreenViewController: UIViewController {
         startEndDate.text = FormatDate.format(dateString: exam?.startDate) + " -\n" +
             FormatDate.format(dateString: exam?.endDate)
         
-        if exam?.description != nil {
-            descriptionLabel.text = exam?.description
+        if exam?.examDescription != nil {
+            descriptionLabel.text = exam?.examDescription
         } else {
             descriptionLabel.isHidden = true
         }

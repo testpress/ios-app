@@ -666,7 +666,7 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
                 // Remove exsiting items
                 attemptsListViewController.attempts.removeAll()
                 // Load new attempts list with progress
-                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
+                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl)
             })
         } else if presentingViewController is ContentDetailPageViewController {
             

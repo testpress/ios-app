@@ -51,7 +51,7 @@ class ContentsTableViewCell: UITableViewCell {
         
         if content.exam != nil {
             duration.text = content.exam?.duration
-            questionsCount.text = String(content.exam!.numberOfQuestions!)
+            questionsCount.text = String(content.exam!.numberOfQuestions)
             examDetailsLayout.isHidden = false
         } else {
             examDetailsLayout.isHidden = true

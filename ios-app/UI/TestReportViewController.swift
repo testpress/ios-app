@@ -64,7 +64,7 @@ class TestReportViewController: UIViewController {
         self.setStatusBarColor()
 
         
-        examTitle.text = exam!.title!
+        examTitle.text = exam!.title
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
         
@@ -74,9 +74,9 @@ class TestReportViewController: UIViewController {
             rank.text = String.getValue(attempt!.rank!)
             maxRank.text = String.getValue(attempt!.maxRank!)
         }
-        totalQuestions.text = String(exam.numberOfQuestions!)
+        totalQuestions.text = String(exam.numberOfQuestions)
         totalMarks.text = exam.totalMarks
-        totalTime.text = String(exam.duration!)
+        totalTime.text = String(exam.duration)
         if !exam.showScore || attempt.score == "NA" {
             scoreLayout.isHidden = true
         } else {
@@ -200,7 +200,7 @@ class TestReportViewController: UIViewController {
                 // Remove exsiting items
                 attemptsListViewController.attempts.removeAll()
                 // Load new attempts list with progress
-                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
+                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl)
             })
         } else if let contentDetailPageViewController =
             presentingViewController?.presentingViewController as? ContentDetailPageViewController {

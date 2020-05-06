@@ -62,7 +62,7 @@ class ActivityFeedTableViewCell: UITableViewCell {
                     self.content = content
                     if contentAttempt.assessment != nil {
                         action = "attempted exam "
-                        actionObjectName = exams[contentAttempt.assessment.exam]!.title!
+                        actionObjectName = exams[contentAttempt.assessment.exam]!.title
                         thumbnailImage.image = Images.ExamAttemptedIcon.image
                     } else if contentAttempt.content != nil {
                         action = "read the article "
@@ -91,11 +91,11 @@ class ActivityFeedTableViewCell: UITableViewCell {
                     action += "an exam "
                     let exam = exams[content.examId]!
                     content.exam = exam
-                    actionObjectName = exam.title!
+                    actionObjectName = exam.title
                     thumbnailImage.image = Images.ExamAddedIcon.image
                     duration.text = exam.duration
-                    studentsAttemptedCount.text = "\(exam.studentsAttemptedCount!) students"
-                    questionsCount.text = String(exam.numberOfQuestions!)
+                    studentsAttemptedCount.text = "\(exam.studentsAttemptedCount) students"
+                    questionsCount.text = String(exam.numberOfQuestions)
                     examDetails.isHidden = false
                 } else if content.htmlContentId != nil {
                     action += "an ariticle "

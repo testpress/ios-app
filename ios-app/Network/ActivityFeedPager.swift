@@ -66,7 +66,7 @@ class ActivityFeedPager: BasePager<ActivityFeedResponse, ActivityFeed> {
                 attachments.updateValue(attachment, forKey: attachment.id)
             }
             response!.results.exams.forEach { exam in
-                exams.updateValue(exam, forKey: exam.id!)
+                exams.updateValue(exam, forKey: exam.id)
             }
             response!.results.chapterContents.forEach { content in
                 contents.updateValue(content, forKey: content.id)
