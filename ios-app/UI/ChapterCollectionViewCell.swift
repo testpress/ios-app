@@ -38,7 +38,7 @@ class ChapterCollectionViewCell: UICollectionViewCell {
         parentViewController = viewController
         self.chapter = chapter
         chapterName.text = chapter.name
-        thumbnailImage.kf.setImage(with: URL(string: chapter.image!),
+        thumbnailImage.kf.setImage(with: URL(string: chapter.image),
                                    placeholder: Images.PlaceHolder.image)
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
@@ -50,11 +50,11 @@ class ChapterCollectionViewCell: UICollectionViewCell {
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         var viewController: UIViewController
-        if chapter.childrenCount != 0 {
+        if !chapter.leaf {
             let chapterViewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
-            
-            chapterViewController.coursesUrl = chapter.courseUrl!
+            chapterViewController.courseId = chapter.courseId
+            chapterViewController.coursesUrl = chapter.url
             chapterViewController.parentId = chapter.id
             chapterViewController.title = chapter.name
             viewController = chapterViewController

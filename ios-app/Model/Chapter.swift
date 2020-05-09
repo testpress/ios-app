@@ -25,37 +25,33 @@
 
 import ObjectMapper
 
-public class Chapter {
-    var url: String!
-    var id: Int!
-    var name: String!
-    var description: String?
-    var image: String!
-    var modified: String!
-    var courseUrl: String!
-    var contentUrl: String!
-    var childrenUrl: String!
-    var slug: String!
-    var contentsCount: Int!
-    var childrenCount: Int!
-    var courseId: Int!
-    var parentId: Int?
-    var requiredTrophyCount: Int!
-    var order: Int!
-    var leaf: Bool!
-    var isLocked: Bool!
-    var active: Bool = true
+class Chapter: DBModel {
+    @objc dynamic var url: String = ""
+    @objc dynamic var id: Int = 0
+    @objc dynamic var name: String = ""
+    @objc dynamic var details: String = ""
+    @objc dynamic var image: String = ""
+    @objc dynamic var modified: String = ""
+    @objc dynamic var courseUrl: String = ""
+    @objc dynamic var contentUrl: String = ""
+    @objc dynamic var childrenUrl: String = ""
+    @objc dynamic var slug: String = ""
+    @objc dynamic var contentsCount: Int = 0
+    @objc dynamic var childrenCount: Int = 0
+    @objc dynamic var courseId: Int = 0
+    @objc dynamic var parentId = -1
+    @objc dynamic var requiredTrophyCount: Int = 0
+    @objc dynamic var order: Int = 0
+    @objc dynamic var leaf: Bool = false
+    @objc dynamic var isLocked: Bool = false
+    @objc dynamic var active: Bool = true
     
-    public required init?(map: Map) {
-    }
-}
 
-extension Chapter: TestpressModel {
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
         url <- map["url"]
         id <- map["id"]
         name <- map["name"]
-        description <- map["description"]
+        details <- map["description"]
         image <- map["image"]
         modified <- map["modified"]
         courseUrl <- map["course_url"]
@@ -71,5 +67,9 @@ extension Chapter: TestpressModel {
         leaf <- map["leaf"]
         isLocked <- map["is_locked"]
         active <- map["active"]
+    }
+    
+    override public static func primaryKey() -> String? {
+        return "id"
     }
 }

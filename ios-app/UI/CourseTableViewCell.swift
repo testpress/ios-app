@@ -89,6 +89,7 @@ class CourseTableViewCell: UITableViewCell {
                 let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
                     Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
                 
+                chaptersViewController.courseId = course.id
                 chaptersViewController.coursesUrl = course.url
                 chaptersViewController.title = course.title
                 viewController = chaptersViewController
