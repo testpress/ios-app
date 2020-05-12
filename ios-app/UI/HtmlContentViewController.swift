@@ -64,6 +64,13 @@ class HtmlContentViewController: BaseWebViewController {
     
     func loadHTMLContent() {
         title = content.htmlContentTitle
+        if (content.htmlObject != nil) {
+            self.webView.loadHTMLString(
+                self.getFormattedContent(content.htmlObject.textHtml!),
+                baseURL: Bundle.main.bundleURL
+            )
+            return
+        }
         if loading {
             return
         }
@@ -125,9 +132,10 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func createContentAttempt() {
+            let attemptsUrl = String(format: "%@%@%d/attempts/", Constants.BASE_URL , TPEndpoint.getContents.urlPath, content.id)
         TPApiClient.request(
             type: ContentAttempt.self,
-            endpointProvider: TPEndpointProvider(.post, url: content.attemptsUrl),
+            endpointProvider: TPEndpointProvider(.post, url: attemptsUrl),
             completion: {
                 contentAttempt, error in
                 if let error = error {

@@ -47,7 +47,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         if (attempts.isEmpty) {
-            loadAttemptsWithProgress(url: content.attemptsUrl!)
+            loadAttemptsWithProgress(url: content.getAttemptsUrl())
         }
         tableView.reloadData()
     }

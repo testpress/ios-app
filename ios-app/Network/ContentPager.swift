@@ -26,17 +26,50 @@
 import Alamofire
 import ObjectMapper
 
-class ContentPager: TPBasePager<Content> {
-    
+class ContentPager: BasePager<ContentsListResponse, Content> {
     var url: String!
     
-    override func getItems(page: Int) {
+    var videos = [Int: Video]()
+    var attachments = [Int: Attachment]()
+    var notes = [Int: HtmlContent]()
+    var streams = [Int: [Stream]]()
+    var exams = [Int: Exam]()
+    
+    override func getResponse(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
+            type: ContentsListResponse.self,
             endpointProvider: TPEndpointProvider(.getContents, url: url, queryParams: queryParams),
-            completion: resonseHandler!,
-            type: Content.self
+            completion: responseHandler!
         )
+    }
+    
+    override func getItems(_ resultResponse: ContentsListResponse) -> [Content] {
+        let contents: [Content] = resultResponse.contents
+        
+        if (!contents.isEmpty) {
+            response?.results.streams.forEach { stream in
+                streams[stream.videoId!]?.append(stream)
+            }
+            
+            response?.results.videos.forEach { video in
+                videos.updateValue(video, forKey: video.id)
+            }
+            
+            response?.results.attachements.forEach { attachement in
+                attachments.updateValue(attachement, forKey: attachement.id)
+            }
+            
+            response?.results.notes.forEach { note in
+                notes.updateValue(note, forKey: note.id)
+            }
+            
+            response?.results.exams.forEach { exam in
+                exams.updateValue(exam, forKey: exam.id)
+            }
+        }
+        
+        return contents
     }
     
     override func getId(resource: Content) -> Int {
@@ -44,10 +77,24 @@ class ContentPager: TPBasePager<Content> {
     }
     
     override func register(resource content: Content) -> Content? {
-        if content.active {
-            return content
+        print("Exam Id : \(content)")
+        if content.videoId != nil {
+            content.video = videos[content.videoId]!
+            content.video?.streams = streams[content.videoId] ?? []
+        } else if content.attachmentId != nil {
+            content.attachment = attachments[content.attachmentId]!
+        } else if content.htmlContentId != nil {
+            content.htmlObject = notes[content.htmlContentId]
+            content.htmlContentTitle = content.htmlObject.title
+        } else if content.examId != nil {
+            content.exam = exams[content.examId]
         }
-        return nil
+        return content
+    }
+    
+    override func clearValues() {
+        super.clearValues()
+        resetValues(of: [videos, attachments, streams, notes, exams])
     }
     
 }

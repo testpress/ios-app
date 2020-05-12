@@ -56,6 +56,7 @@ public class Content {
     var bookmarkId: Int!
     var isScheduled: Bool!
     var start: String!
+    var contentType: String!
     
     
     public required init?(map: Map) {
@@ -77,15 +78,20 @@ public class Content {
                 completion(content, error)
         })
     }
+    
+    public func getAttemptsUrl() -> String {
+        var url = String(format: "%@%@%d/attempts/", Constants.BASE_URL , TPEndpoint.getContents.urlPath, self.id)
+        url = url.replacingOccurrences(of: "v2.3", with: "v2.2.1")
+        return url
+    }
 }
 
 extension Content: TestpressModel {
     
     public func mapping(map: Map) {
-        
         url <- map["url"]
         id <- map["id"]
-        name <- map["name"]
+        name <- map["title"]
         description <- map["description"]
         image <- map["image"]
         modified <- map["modified"]
@@ -95,8 +101,7 @@ extension Content: TestpressModel {
         chapterId <- map["chapter_id"]
         attemptsCount <- map["attempts_count"]
         exam <- map["exam"]
-        examId <- map["exam"]
-        htmlContentId <- map["html_content"]
+        examId <- map["exam_id"]
         htmlContentId <- map["html_id"]
         htmlContentTitle <- map["html_content_title"]
         htmlContentUrl <- map["html_content_url"]
@@ -104,14 +109,13 @@ extension Content: TestpressModel {
         hasStarted <- map["has_started"]
         isLocked <- map["is_locked"]
         video <- map["video"]
-        videoId <- map["video_content"]
         videoId <- map["video_id"]
         attachment <- map["attachment"]
-        attachmentId <- map["attachment_content"]
         attachmentId <- map["attachment_id"]
         active <- map["active"]
         bookmarkId <- map["bookmark_id"]
         isScheduled <- map["is_scheduled"]
         start <- map["start"]
+        contentType <- map["content_type"]
     }
 }
