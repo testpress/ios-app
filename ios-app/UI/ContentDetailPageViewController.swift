@@ -219,7 +219,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
             getCurretViewController() as? ContentExamAttemptsTableViewController {
 
             viewController.attempts.removeAll()
-            viewController.loadAttemptsWithProgress(url: content.attemptsUrl)
+            viewController.loadAttemptsWithProgress(url: content.getAttemptsUrl())
         } else {
             contentAttemptCreationDelegate?.newAttemptCreated()
             updateContent()

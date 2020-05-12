@@ -29,7 +29,7 @@ protocol ContentAttemptCreationDelegate {
     func newAttemptCreated()
 }
 
-class ContentsTableViewController: TPBasePagedTableViewController<Content>,
+class ContentsTableViewController: BasePagedTableViewController<ContentsListResponse, Content>,
     ContentAttemptCreationDelegate {
     
     @IBOutlet weak var navigationBarItem: UINavigationItem!

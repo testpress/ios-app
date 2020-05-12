@@ -12,6 +12,7 @@ public class Stream {
     var url: String!
     var id: Int!
     var format: String!
+    var videoId: Int?
     
     public required init?(map: Map) {
     }
@@ -22,5 +23,6 @@ extension Stream: TestpressModel {
         url <- map["url"]
         id <- map["id"]
         format <- map["format"]
+        videoId <- map["video_id"]
     }
 }

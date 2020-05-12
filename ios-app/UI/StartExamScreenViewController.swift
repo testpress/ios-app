@@ -121,7 +121,7 @@ class StartExamScreenViewController: UIViewController {
         if content != nil && contentAttempt == nil {
             endpointProvider = TPEndpointProvider(
                 .post,
-                url: (content?.attemptsUrl)!
+                url: content.getAttemptsUrl()
             )
             startAttempt(type: ContentAttempt.self, endpointProvider: endpointProvider)
             return
