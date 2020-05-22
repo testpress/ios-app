@@ -68,11 +68,11 @@ class TestReportViewController: UIViewController {
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
         
-        if !(attempt!.rankEnabled!) || String.getValue(attempt!.rank!) == "NA" {
+        if !(attempt!.rankEnabled) || String.getValue(attempt!.rank) == "NA" {
             rankLayout.isHidden = true
         } else {
-            rank.text = String.getValue(attempt!.rank!)
-            maxRank.text = String.getValue(attempt!.maxRank!)
+            rank.text = String.getValue(attempt!.rank)
+            maxRank.text = String.getValue(attempt!.maxRank)
         }
         totalQuestions.text = String(exam.numberOfQuestions)
         totalMarks.text = exam.totalMarks
@@ -89,10 +89,10 @@ class TestReportViewController: UIViewController {
         }
         percentage.text = attempt.percentage
         cutoff.text = String(exam.passPercentage)
-        correct.text = String(attempt!.correctCount!)
-        incorrect.text = String(attempt!.incorrectCount!)
+        correct.text = String(attempt!.correctCount)
+        incorrect.text = String(attempt!.incorrectCount)
         timeTaken.text = attempt!.timeTaken ?? "NA"
-        accuracy.text = String(attempt!.accuracy!) + "%"
+        accuracy.text = String(attempt!.accuracy) + "%"
         UIUtils.setButtonDropShadow(solutionsButton)
         UIUtils.setButtonDropShadow(analyticsButton)
         UIUtils.setButtonDropShadow(timeAnalyticsButton)

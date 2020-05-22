@@ -49,7 +49,7 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
         
         if (!contents.isEmpty) {
             response?.results.streams.forEach { stream in
-                streams[stream.videoId!]?.append(stream)
+                streams[stream.videoId]?.append(stream)
             }
             
             response?.results.videos.forEach { video in
@@ -73,20 +73,19 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
     }
     
     override func getId(resource: Content) -> Int {
-        return resource.id!
+        return resource.id
     }
     
     override func register(resource content: Content) -> Content? {
-        print("Exam Id : \(content)")
-        if content.videoId != nil {
-            content.video = videos[content.videoId]!
-            content.video?.streams = streams[content.videoId] ?? []
-        } else if content.attachmentId != nil {
-            content.attachment = attachments[content.attachmentId]!
-        } else if content.htmlContentId != nil {
+        if content.videoId != -1 {
+            content.video = videos[content.videoId]
+            content.video?.streams.append(objectsIn: streams[content.videoId] ?? [])
+        } else if content.attachmentId != -1 {
+            content.attachment = attachments[content.attachmentId]
+        } else if content.htmlContentId != -1 {
             content.htmlObject = notes[content.htmlContentId]
-            content.htmlContentTitle = content.htmlObject.title
-        } else if content.examId != nil {
+            content.htmlContentTitle = content.htmlObject?.title
+        } else if content.examId != -1 {
             content.exam = exams[content.examId]
         }
         return content

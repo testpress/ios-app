@@ -1,37 +1,27 @@
 //
-//  QuestionsViewController.swift
+//  QuizQuestionViewController.swift
 //  ios-app
 //
-//  Copyright © 2017 Testpress. All rights reserved.
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
+//  Created by Karthik on 15/05/20.
+//  Copyright © 2020 Testpress. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import WebKit
 
-class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
+class QuizQuestionViewController:BaseWebViewController, WKWebViewDelegate, WKScriptMessageHandler {
+    var attemptItem: AttemptItem!
+    let attemptItemRepository = AttemptItemRepository()
     
-    @IBOutlet weak var indexView: UILabel!
-    @IBOutlet weak var reviewSwitch: UISwitch!
-    
-    private var selectedOptions: [Int] = []
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      webViewDelegate = self
+
+        webView.loadHTMLString(
+            WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader() + getHtml(),
+            baseURL: Bundle.main.bundleURL
+        )
+    }
     
     override func initWebView() {
         let contentController = WKUserContentController()
@@ -39,29 +29,13 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
         config.preferences.javaScriptEnabled = true
-        
-        webView = WKWebView( frame: self.containerView!.bounds, configuration: config)
+        webView = WKWebView( frame: self.view.bounds, configuration: config)
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
-        
-        // Set initial values of current selected answer & review
-        selectedOptions = Array(attemptItem!.selectedAnswers)
-        reviewSwitch.isOn = attemptItem!.review
-        attemptItem?.savedAnswers = attemptItem!.selectedAnswers
-        attemptItem?.currentReview = attemptItem!.review
-        attemptItem?.currentShortText = attemptItem!.shortText
-        
-        indexView!.text = String("\((attemptItem?.index)! + 1)")
-        webView.loadHTMLString(WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader()
-            + getQuestionHtml(), baseURL: Bundle.main.bundleURL)
-    }
-
+    
+    
     func userContentController(_ userContentController: WKUserContentController,
                                didReceive message: WKScriptMessage) {
+        var selectedOptions = [Int]()
         if (message.name == "callbackHandler") {
             let body = message.body
             if let dict = body as? Dictionary<String, AnyObject> {
@@ -76,9 +50,9 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                     } else {
                         selectedOptions = selectedOptions.filter { $0 != id }
                     }
-                    attemptItem.savedAnswers.append(objectsIn: selectedOptions)
+                    attemptItem = attemptItemRepository.selectAnswer(id: attemptItem.id, selectedOptions: selectedOptions)
                 } else if let shortText = dict["shortText"] as? String {
-                    attemptItem.currentShortText = shortText.trim()
+                    attemptItem = attemptItemRepository.selectAnswer(id: attemptItem.id, shortText: shortText.trim())
                 }
             }
         }
@@ -86,9 +60,9 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     
     override func getJavascript() -> String {
         var javascript = super.getJavascript()
-        var selectedAnswers: [Int] = Array((attemptItem?.selectedAnswers)!)
+        var selectedAnswers: [Int] = Array(attemptItem.selectedAnswers)
         if !selectedAnswers.isEmpty {
-            let optionType: String = (attemptItem?.question?.type)!
+            let optionType: String = (attemptItem.question?.type)!
             if optionType == "R" {
                 javascript +=
                     WebViewUtils.getRadioButtonInitializer(selectedOption: selectedAnswers[0])
@@ -99,10 +73,12 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         return javascript
     }
     
-    func getQuestionHtml() -> String {
-        let attemptQuestion: AttemptQuestion = (attemptItem?.question)!;
+    func getHtml() -> String {
+        let attemptQuestion: AttemptQuestion = attemptItem.question!;
         var htmlContent: String = "" +
         "<div style='padding-left: 10px; padding-right: 10px;'>";
+        htmlContent += "<div class='review-question-index'>\(attemptItem.index)</div>"
+
         
         // Add direction if present
         if (attemptQuestion.direction != nil &&
@@ -125,9 +101,11 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             htmlContent += "<table width='100%' style='margin-top:0px;'>"
             
             for attemptAnswer in attemptQuestion.answers {
-                if (attemptItem?.question?.type == "R") {
+                if (attemptQuestion.type == "R") {
                     htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
                         optionText: attemptAnswer.textHtml, id: attemptAnswer.id)
+                    let a = WebViewUtils.getRadioButtonOptionWithTags(
+                    optionText: attemptAnswer.textHtml, id: attemptAnswer.id)
                 } else {
                     htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
                         optionText: attemptAnswer.textHtml, id: attemptAnswer.id)
@@ -136,18 +114,48 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             htmlContent += "</table>"
         } else {
             let inputType = attemptQuestion.type == "N" ? "number" : "text"
-            let value =
-                attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
+            let value = ""
+//                attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
             
             htmlContent += "<input class='edit_box' type='\(inputType)' value='\(value)' " +
                 "onpaste='return false' oninput='onValueChange(this)' " +
                 "placeholder='YOUR ANSWER'>"
         }
-        print("Html Content :\(htmlContent)")
-        return htmlContent + "</div>";
+        htmlContent = htmlContent + "</div>";
+        htmlContent = htmlContent.replacingOccurrences(of: "Â", with: "")
+     
+//
+//        do {
+//            htmlContent = Entities.escape(htmlContent)
+//            print("Html Content : \(htmlContent)")
+//
+//            let a = convertSpecialCharacters(string: htmlContent)
+//
+//            return try Entities.unescape(a)
+//        }  catch {
+//
+//        }
+        return htmlContent
     }
     
-    @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
-        attemptItem?.currentReview = sender.isOn
+    
+    func onFinishLoadingWebView() {
+        
     }
+}
+
+func convertSpecialCharacters(string: String) -> String {
+        var newString = string
+        let char_dictionary = [
+            "&amp;" : "&",
+            "&lt;" : "<",
+            "&gt;" : ">",
+            "&quot;" : "\"",
+            "&apos;" : "'",
+            "&nbsp;": " "
+        ];
+        for (escaped_char, unescaped_char) in char_dictionary {
+            newString = newString.replacingOccurrences(of: escaped_char, with: unescaped_char, options: NSString.CompareOptions.literal, range: nil)
+        }
+        return newString
 }

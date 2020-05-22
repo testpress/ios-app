@@ -51,7 +51,7 @@ class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
     }
     
     func indexOfViewController(_ viewController: BaseQuestionsViewController) -> Int {
-        return viewController.attemptItem!.index!
+        return viewController.attemptItem!.index
     }
     
     // MARK: - Page View Controller Data Source

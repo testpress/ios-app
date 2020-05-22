@@ -31,6 +31,7 @@ import AVFoundation
 import Alamofire
 import Sentry
 import TTGSnackbar
+import RealmSwift
 
 
 class VideoContentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
@@ -68,7 +69,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         viewModel.createContentAttempt()
         addCustomView()
         desc.isHidden = true
-        udpateBookmarkButtonState(bookmarkId: content.bookmarkId)
+        udpateBookmarkButtonState(bookmarkId: content!.bookmarkId.value)
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         tableView.dataSource = self
@@ -153,13 +154,13 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func addOrRemoveBookmark(content: Content?) {
         bookmarkContent = content ?? self.content
-        bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId)
+        bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId.value)
     }
     
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
         if bookmarkContent?.id == content.id {
-            content.bookmarkId = bookmarkId
+            content.bookmarkId = RealmOptional<Int>(bookmarkId)
             tableView.reloadData()
             if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
                 if bookmarkId != nil {
@@ -170,7 +171,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             }
         } else {
             if let cellContentId = contents.firstIndex(where: { $0.id == bookmarkContent?.id }) {
-                contents[cellContentId].bookmarkId = bookmarkId
+                contents[cellContentId].bookmarkId = RealmOptional<Int>(bookmarkId)
                 tableView.reloadData()
             }
         }
@@ -272,7 +273,9 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func changeVideo(content: Content!) {
         self.content = content
-        self.content.index = contents.firstIndex(where: { $0.id == content.id })
+        try! Realm().write {
+            self.content.index = contents.firstIndex(where: { $0.id == content.id })!
+        }
         viewModel.content = content
         hideDescription()
         viewModel.createContentAttempt()

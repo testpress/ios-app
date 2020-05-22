@@ -46,7 +46,7 @@ class ContentsTableViewCell: UITableViewCell {
         self.position = position
         let content = parentViewController.items[position]
         contentName.text = content.name
-        thumbnailImage.kf.setImage(with: URL(string: content.image!),
+        thumbnailImage.kf.setImage(with: URL(string: content.image),
                                    placeholder: Images.PlaceHolder.image)
         if content.exam != nil {
             duration.text = content.exam?.duration

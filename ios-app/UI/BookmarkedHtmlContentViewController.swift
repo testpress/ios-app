@@ -43,7 +43,7 @@ class BookmarkedHtmlContentViewController: HtmlContentViewController {
     override func loadHTMLContent() {
         title = content.htmlContentTitle
         webView.loadHTMLString(
-            self.getFormattedContent(content.htmlObject.textHtml!),
+            self.getFormattedContent(content.htmlObject!.textHtml),
             baseURL: Bundle.main.bundleURL
         )
     }

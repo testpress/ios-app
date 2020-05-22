@@ -27,6 +27,7 @@ import Lottie
 import PDFReader
 import UIKit
 import Alamofire
+import RealmSwift
 
 class AttachmentDetailViewController: UIViewController {
     
@@ -101,7 +102,7 @@ class AttachmentDetailViewController: UIViewController {
         } else {
             contentDescription.isHidden = true
         }
-        attachmentUrl = URL(string: content.attachment!.attachmentUrl!)!
+        attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.pathExtension != "pdf" {
             viewAttachmentButton.isHidden = true
         } else {
@@ -176,11 +177,11 @@ class AttachmentDetailViewController: UIViewController {
     }
     
     @IBAction func bookmark(_ sender: UIButton) {
-        bookmarkHelper.onClickBookmarkButton(bookmarkId: content.bookmarkId)
+        bookmarkHelper.onClickBookmarkButton(bookmarkId: content?.bookmarkId.value)
     }
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
-        content.bookmarkId = bookmarkId
+        content.bookmarkId = RealmOptional<Int>(bookmarkId)
         if bookmarkId != nil {
             bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
             bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")

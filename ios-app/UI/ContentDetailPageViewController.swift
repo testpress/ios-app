@@ -244,7 +244,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         let content = contents[getCurrentIndex()]
         TPApiClient.request(
             type: Content.self,
-            endpointProvider: TPEndpointProvider(.get, url: content.url),
+            endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
             completion: {
                 content, error in
                 if let error = error {

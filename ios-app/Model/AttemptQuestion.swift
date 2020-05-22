@@ -24,27 +24,24 @@
 //
 
 import ObjectMapper
+import RealmSwift
 
-public class AttemptQuestion {
-    var id: Int?
-    var questionHtml: String?;
-    var subject: String!
-    var subjectId: Int!
-    var direction: String?;
-    var directionId: Int!
-    var explanationHtml: String?
-    var type: String?;
-    var commentsUrl: String!
-    var answers: [AttemptAnswer] = [];
-    var answerIds: [Int] = []
-    var translationIds: [Int] = []
-    var isCaseSensitive: Bool!
+class AttemptQuestion: DBModel {
+    @objc dynamic var id: Int = 0
+    @objc dynamic var questionHtml: String?;
+    @objc dynamic var subject: String = ""
+    @objc dynamic var subjectId: Int = -1
+    @objc dynamic var direction: String?;
+    @objc dynamic var directionId: Int = -1
+    @objc dynamic var explanationHtml: String?
+    @objc dynamic var type: String?;
+    @objc dynamic var commentsUrl: String! = ""
+    var answers = List<AttemptAnswer>()
+    var answerIds = List<Int>()
+    var translationIds = List<Int>()
+    @objc dynamic var isCaseSensitive: Bool = false
     
-    public required init?(map: Map) {
-    }
-    
-    public init() {
-    }
+
     
     public  func clone() -> AttemptQuestion {
         let newAttemptItem = AttemptQuestion()
@@ -63,10 +60,13 @@ public class AttemptQuestion {
         newAttemptItem.isCaseSensitive = isCaseSensitive
         return newAttemptItem
     }
-}
+    
+    
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
 
-extension AttemptQuestion: TestpressModel {
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
         id <- map["id"]
         questionHtml <- map["question_html"]
         subject <- map["subject"]
@@ -76,7 +76,7 @@ extension AttemptQuestion: TestpressModel {
         explanationHtml <- map["explanation_html"]
         type <- map["type"]
         commentsUrl <- map["comments_url"]
-        answers <- map["answers"]
+        answers <- (map["answers"], ListTransform<AttemptAnswer>())
         answerIds <- map["answer_ids"]
         translationIds <- map["translation_ids"]
         isCaseSensitive <- map["is_case_sensitive"]

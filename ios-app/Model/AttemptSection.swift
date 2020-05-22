@@ -25,26 +25,24 @@
 
 import ObjectMapper
 
-public class AttemptSection {
+class AttemptSection: DBModel {
     
-    var id: Int!
-    var state: String!
-    var questionsUrl: String!
-    var startUrl: String!
-    var endUrl: String!
-    var remainingTime: String!
-    var attemptId: Int!
-    var name: String!
-    var duration: String!
-    var order: Int!
+    @objc dynamic var id: Int = -1
+    @objc dynamic var state: String = "Not Started"
+    @objc dynamic var questionsUrl: String = ""
+    @objc dynamic var startUrl: String = ""
+    @objc dynamic var endUrl: String = ""
+    @objc dynamic var remainingTime: String = ""
+    @objc dynamic var attemptId: Int = -1
+    @objc dynamic var name: String = ""
+    @objc dynamic var duration: String = ""
+    @objc dynamic var order: Int = 0
     
-    public required init?(map: Map) {
+    override public static func primaryKey() -> String? {
+        return "id"
     }
     
-}
-
-extension AttemptSection: TestpressModel {
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
         id <- map["id"]
         state <- map["state"]
         questionsUrl <- map["questions_url"]

@@ -44,7 +44,7 @@ class AttemptPager: TPBasePager<Attempt> {
     }
     
     override func getId(resource: Attempt) -> Int {
-        return resource.id!
+        return resource.id
     }
     
 }

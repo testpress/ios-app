@@ -62,6 +62,11 @@ class Exam: DBModel {
     @objc dynamic var isGrowthHackEnabled: Bool = false;
     @objc dynamic var shareTextForSolutionUnlock: String = "";
     
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
+
+    
     public override func mapping(map: Map) {
         url <- map["url"]
         id <- map["id"]
@@ -132,4 +137,7 @@ class Exam: DBModel {
         UserDefaults.standard.set(getNumberOfTimesShared() + 1, forKey: getKey())
     }
     
+    func getQuestionsURL() -> String {
+        return Constants.BASE_URL + "/api/v2.4/exams/\(id)/questions/"
+    }
 }

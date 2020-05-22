@@ -430,7 +430,7 @@ class TPApiClient {
                            endpointProvider: TPEndpointProvider,
                            completion: @escaping (AttemptItem?, TPError?) -> Void) {
         
-        var parameters: Parameters = [ "selected_answers": selectedAnswer, "review": review ]
+        var parameters: Parameters = [ "selected_answers": selectedAnswer, "review": review, "files":[] ]
         if let shortAnswer = shortAnswer {
             parameters["short_text"] = shortAnswer
         }

@@ -26,6 +26,7 @@
 import UIKit
 import WebKit
 import  Alamofire
+import RealmSwift
 
 class HtmlContentViewController: BaseWebViewController {
     
@@ -66,7 +67,7 @@ class HtmlContentViewController: BaseWebViewController {
         title = content.htmlContentTitle
         if (content.htmlObject != nil) {
             self.webView.loadHTMLString(
-                self.getFormattedContent(content.htmlObject.textHtml!),
+                self.getFormattedContent(content.htmlObject!.textHtml),
                 baseURL: Bundle.main.bundleURL
             )
             return
@@ -104,7 +105,7 @@ class HtmlContentViewController: BaseWebViewController {
                 
                 self.loading = false
                 self.webView.loadHTMLString(
-                    self.getFormattedContent(htmlContent!.textHtml!),
+                    self.getFormattedContent(htmlContent!.textHtml),
                     baseURL: Bundle.main.bundleURL
                 )
             })
@@ -165,7 +166,7 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func bookmarkJavascriptListener(message: String) {
-        bookmarkHelper.javascriptListener(message: message, bookmarkId: content.bookmarkId)
+        bookmarkHelper.javascriptListener(message: message, bookmarkId: content.bookmarkId.value)
     }
     
 }
@@ -217,7 +218,7 @@ extension HtmlContentViewController: BookmarkDelegate {
     }
     
     func updateBookmark(bookmarkId: Int?) {
-        self.content.bookmarkId = bookmarkId
+        self.content.bookmarkId = RealmOptional<Int>(bookmarkId)
         self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
     }
     
