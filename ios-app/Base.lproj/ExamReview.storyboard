@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +43,7 @@
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxf-PL-fVq">
-                                <rect key="frame" x="0.0" y="44" width="320" height="666"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="588"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDB-Vf-fVH">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
@@ -1023,7 +1025,7 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D74-Wv-07Z">
-                                <rect key="frame" x="0.0" y="702" width="320" height="98"/>
+                                <rect key="frame" x="0.0" y="644" width="320" height="156"/>
                                 <subviews>
                                     <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cw2-cS-8Rg">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="8"/>
@@ -1033,7 +1035,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rEr-EX-qb1">
-                                        <rect key="frame" x="15" y="18" width="290" height="70"/>
+                                        <rect key="frame" x="15" y="18" width="290" height="128"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="oHa-OG-knM">
                                                 <rect key="frame" x="0.0" y="0.0" width="290" height="30"/>
@@ -1103,6 +1105,27 @@
                                                     <constraint firstAttribute="height" constant="30" id="eKV-NR-ww8"/>
                                                 </constraints>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fp-Iv-UDG">
+                                                <rect key="frame" x="0.0" y="80" width="290" height="48"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zMy-ns-bte">
+                                                        <rect key="frame" x="0.0" y="0.0" width="290" height="48"/>
+                                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
+                                                        <inset key="contentEdgeInsets" minX="0.0" minY="7" maxX="0.0" maxY="5"/>
+                                                        <state key="normal" title="SOLUTIONS" image="ic_lock_outline_18pt">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="showShareScreen:" destination="3z8-h4-idf" eventType="touchUpInside" id="vKA-Yz-F1C"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -1114,7 +1137,6 @@
                                     <constraint firstAttribute="bottom" secondItem="rEr-EX-qb1" secondAttribute="bottom" constant="10" id="WG3-BF-SHN"/>
                                     <constraint firstAttribute="trailing" secondItem="Cw2-cS-8Rg" secondAttribute="trailing" id="fLy-lU-CbH"/>
                                     <constraint firstItem="rEr-EX-qb1" firstAttribute="leading" secondItem="D74-Wv-07Z" secondAttribute="leading" constant="15" id="gJR-pq-T55"/>
-                                    <constraint firstAttribute="height" constant="98" id="lVr-ET-uLV"/>
                                     <constraint firstItem="Cw2-cS-8Rg" firstAttribute="top" secondItem="D74-Wv-07Z" secondAttribute="top" id="oEF-pd-Wq9"/>
                                 </constraints>
                             </view>
@@ -1140,6 +1162,7 @@
                     <connections>
                         <outlet property="accuracy" destination="BK1-03-BbW" id="TJw-XC-hru"/>
                         <outlet property="analyticsButton" destination="KCg-y8-gbZ" id="6nG-Ja-bOt"/>
+                        <outlet property="analyticsButtonLayout" destination="7XX-ai-BYG" id="Dc0-wG-qC9"/>
                         <outlet property="bottomShadowView" destination="Cw2-cS-8Rg" id="z9W-sx-4so"/>
                         <outlet property="contentView" destination="FY5-iF-FPQ" id="5Nf-9r-MMQ"/>
                         <outlet property="correct" destination="v6C-Ot-5g8" id="ck5-iU-lDn"/>
@@ -1156,6 +1179,9 @@
                         <outlet property="score" destination="7L9-hk-Iam" id="9jz-9t-hWO"/>
                         <outlet property="scoreLayout" destination="ayV-R2-20x" id="Czr-er-UOc"/>
                         <outlet property="scrollView" destination="Vxf-PL-fVq" id="uUV-3y-Thy"/>
+                        <outlet property="shareButton" destination="zMy-ns-bte" id="KJZ-yg-cEs"/>
+                        <outlet property="shareButtonLayout" destination="7fp-Iv-UDG" id="AYC-8c-nOz"/>
+                        <outlet property="solutionButtonLayout" destination="oHa-OG-knM" id="U4a-Y7-ieK"/>
                         <outlet property="solutionsButton" destination="Y79-Ub-iWU" id="kGM-oR-M8t"/>
                         <outlet property="timeAnalyticsButton" destination="Uox-a4-XPT" id="mt4-0p-whr"/>
                         <outlet property="timeTaken" destination="qpT-WA-WvI" id="3SG-tR-mOo"/>
@@ -2372,21 +2398,22 @@ You’ve earned</string>
         </scene>
     </scenes>
     <resources>
-        <image name="accurate_flat_icon" width="33" height="36"/>
-        <image name="clock_flat_icon" width="33" height="36"/>
-        <image name="correct_flat_icon" width="28" height="36"/>
-        <image name="cutoff_flat_icon" width="128" height="128"/>
-        <image name="ic_navigate_before" width="24" height="24"/>
-        <image name="ic_navigate_before_36pt" width="36" height="36"/>
-        <image name="ic_navigate_next" width="24" height="24"/>
-        <image name="incorrect_flat_icon" width="28" height="36"/>
-        <image name="percentage_badge_flat_icon" width="128" height="128"/>
+        <image name="accurate_flat_icon" width="66" height="72"/>
+        <image name="clock_flat_icon" width="66" height="72"/>
+        <image name="correct_flat_icon" width="56" height="72"/>
+        <image name="cutoff_flat_icon" width="400.69564819335938" height="400.69564819335938"/>
+        <image name="ic_lock_outline_18pt" width="36" height="36"/>
+        <image name="ic_navigate_before" width="48" height="48"/>
+        <image name="ic_navigate_before_36pt" width="72" height="72"/>
+        <image name="ic_navigate_next" width="48" height="48"/>
+        <image name="incorrect_flat_icon" width="56" height="72"/>
+        <image name="percentage_badge_flat_icon" width="384" height="384"/>
         <image name="percentile_flat_icon" width="128" height="128"/>
         <image name="questions_flat_icon" width="128" height="128"/>
         <image name="rank_flat_icon" width="108" height="96"/>
         <image name="score_flat_icon" width="102" height="108"/>
         <image name="stopwatch_flat_icon" width="128" height="128"/>
         <image name="total_marks_flat_icon" width="128" height="128"/>
-        <image name="trophy_flat_icon" width="55" height="64"/>
+        <image name="trophy_flat_icon" width="110" height="128"/>
     </resources>
 </document>

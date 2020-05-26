@@ -32,8 +32,8 @@ class VideoContentViewModel {
     func getDescription()  -> String{
         var description = ""
  
-        if !(content?.description?.isEmpty ?? true) {
-            description = "\(content.description!) \n"
+        if !(content?.contentDescription?.isEmpty ?? true) {
+            description = "\(String(describing: content.contentDescription)) \n"
         }
         return description
     }
@@ -87,7 +87,7 @@ class VideoContentViewModel {
     
     
     func removeBookmark(completion: (() -> Void)?) {
-        let urlPath = TPEndpointProvider.getBookmarkPath(bookmarkId: content.bookmarkId)
+        let urlPath = TPEndpointProvider.getBookmarkPath(bookmarkId: content!.bookmarkId.value!)
         TPApiClient.apiCall(
             endpointProvider: TPEndpointProvider(.delete, urlPath: urlPath),
             completion: {

@@ -24,26 +24,38 @@
 //
 
 import ObjectMapper
+import RealmSwift
 
-public class AttemptQuestion {
-    var id: Int?
-    var questionHtml: String?;
-    var subject: String!
-    var subjectId: Int!
-    var direction: String?;
-    var directionId: Int!
-    var explanationHtml: String?
-    var type: String?;
-    var commentsUrl: String!
-    var answers: [AttemptAnswer] = [];
-    var answerIds: [Int] = []
-    var translationIds: [Int] = []
-    var isCaseSensitive: Bool!
-    
-    public required init?(map: Map) {
+class AttemptQuestion: DBModel {
+    @objc dynamic var id: Int = 0
+    @objc dynamic var questionHtml: String?;
+    @objc dynamic var subject: String = ""
+    @objc dynamic var subjectId: Int = -1
+    @objc dynamic var direction: String?;
+    @objc dynamic var directionId: Int = -1
+    @objc dynamic var explanationHtml: String?
+    @objc dynamic var type: String?;
+    @objc dynamic var commentsUrl: String! = ""
+    var answers = List<AttemptAnswer>()
+    var answerIds = List<Int>()
+    var translationIds = List<Int>()
+    @objc dynamic var isCaseSensitive: Bool = false
+    var questionType: QuestionType {
+        get {
+            return QuestionType(rawValue: type ?? "Unknown") ?? .UNKNOWN
+        }
     }
-    
-    public init() {
+    var isSingleMcq: Bool {
+        get {questionType == .SINGLE_CORRECT_MCQ}
+    }
+    var isMultipleMcq: Bool {
+        get {questionType == .MULTIPLE_CORRECT_MCQ}
+    }
+    var isShortAnswer: Bool {
+        get {questionType == .SHORT_ANSWER}
+    }
+    var isNumerical: Bool {
+        get {questionType == .NUMERICAL}
     }
     
     public  func clone() -> AttemptQuestion {
@@ -63,22 +75,44 @@ public class AttemptQuestion {
         newAttemptItem.isCaseSensitive = isCaseSensitive
         return newAttemptItem
     }
-}
+    
+    
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
 
-extension AttemptQuestion: TestpressModel {
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
         id <- map["id"]
         questionHtml <- map["question_html"]
         subject <- map["subject"]
-        subjectId <- map["subject_id"]
+        subjectId <- (map["subject_id"], transform)
         direction <- map["direction"]
-        directionId <- map["direction_id"]
+        directionId <- (map["direction_id"], transform)
         explanationHtml <- map["explanation_html"]
         type <- map["type"]
         commentsUrl <- map["comments_url"]
-        answers <- map["answers"]
+        answers <- (map["answers"], ListTransform<AttemptAnswer>())
         answerIds <- map["answer_ids"]
         translationIds <- map["translation_ids"]
         isCaseSensitive <- map["is_case_sensitive"]
     }
+    
+    let transform = TransformOf<Int, Int>(fromJSON: { (value: Int?) -> Int? in
+        return Int(value ?? -1)
+    }, toJSON: { (value: Int?) -> Int? in
+        return Int(value ?? -1)
+    })
+
+}
+
+public enum QuestionType: String {
+    case SINGLE_CORRECT_MCQ = "R"
+    case MULTIPLE_CORRECT_MCQ = "C"
+    case SHORT_ANSWER = "S"
+    case NUMERICAL = "N"
+    case ESSAY = "E"
+    case FILE_TYPE = "F"
+    case MATCH = "M"
+    case NESTED = "T"
+    case UNKNOWN = "Unknown"
 }

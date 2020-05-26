@@ -37,4 +37,24 @@ class TestVideoPlayerView: XCTestCase {
         
         XCTAssertTrue(UIDevice.current.orientation.isLandscape)
     }
+    
+    func testPlayVideoShouldSetCurrentPlaybackSpeedAs1() {
+        videoPlayerView.playVideo(url: URL(string: "http://google.com")!)
+        
+        XCTAssertEqual(1.0, videoPlayerView.currentPlaybackSpeed)
+    }
+    
+    func testChangePlaybackSpeedShouldSetCurrentPlaybackSpeed() {
+        
+        videoPlayerView.changePlaybackSpeed(speed: PlaybackSpeed.double)
+        
+        XCTAssertEqual(PlaybackSpeed.double.value, videoPlayerView.currentPlaybackSpeed)
+    }
+    
+    func testPlayShouldUseCurrentPlaybackSpeed() {
+        videoPlayerView.currentPlaybackSpeed = 5.0
+        videoPlayerView.play()
+        
+        XCTAssertEqual(5.0, videoPlayerView.getCurrenPlaybackSpeed())
+    }
 }

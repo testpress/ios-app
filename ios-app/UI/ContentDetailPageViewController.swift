@@ -120,11 +120,11 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     func enableBookmarkOption() {
         if !(pageViewController.viewControllers?.isEmpty)! {
-            if contentDetailDataSource.viewControllerAtIndex(getCurrentIndex())! is VideoContentViewController {
+            if getCurrentIndex() != -1 && contentDetailDataSource.viewControllerAtIndex(getCurrentIndex())! is VideoContentViewController {
                 navigationBarItem.rightBarButtonItems = [bookmarkButton]
                 bookmarkButton.isEnabled = true
                 bookmarkButton.image = Images.AddBookmark.image
-                if contents[getCurrentIndex()].bookmarkId != nil {
+                if contents[getCurrentIndex()].bookmarkId.value != nil {
                     bookmarkButton.image = Images.RemoveBookmark.image
                 }
             } else {
@@ -164,7 +164,6 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func getCurrentIndex() -> Int {
-        print("Content detail data source : \(contentDetailDataSource.contents)")
         return contentDetailDataSource.indexOfViewController(getCurretViewController())
     }
     
@@ -214,12 +213,12 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func updateCurrentExamContent() {
-        let content = contents[getCurrentIndex()]
         if let viewController =
             getCurretViewController() as? ContentExamAttemptsTableViewController {
 
             viewController.attempts.removeAll()
-            viewController.loadAttemptsWithProgress(url: content.attemptsUrl)
+            let content = contents[getCurrentIndex()]
+            viewController.loadAttemptsWithProgress(url: content.getAttemptsUrl())
         } else {
             contentAttemptCreationDelegate?.newAttemptCreated()
             updateContent()
@@ -244,7 +243,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         let content = contents[getCurrentIndex()]
         TPApiClient.request(
             type: Content.self,
-            endpointProvider: TPEndpointProvider(.get, url: content.url),
+            endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
             completion: {
                 content, error in
                 if let error = error {

@@ -67,9 +67,9 @@ class TimeAnalyticsQuestionCell: UITableViewCell {
         
         var correctAnswerHtml: String = ""
         for (i, attemptAnswer) in attemptQuestion.answers.enumerated() {
-            if attemptAnswer.isCorrect! {
+            if attemptAnswer.isCorrect {
                 correctAnswerHtml += "\n" + WebViewUtils.getOptionWithTags(
-                    optionText: attemptAnswer.textHtml!,
+                    optionText: attemptAnswer.textHtml,
                     index: i,
                     color: nil
                 )
