@@ -8,21 +8,20 @@
 
 import ObjectMapper
 
-public class Stream {
-    var url: String!
-    var id: Int!
-    var format: String!
-    var videoId: Int?
+class Stream: DBModel {
+    @objc dynamic var url: String = ""
+    @objc dynamic var id: Int = -1
+    @objc dynamic var format: String = ""
+    @objc dynamic var videoId: Int = -1
     
-    public required init?(map: Map) {
-    }
-}
-
-extension Stream: TestpressModel {
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
         url <- map["url"]
         id <- map["id"]
         format <- map["format"]
         videoId <- map["video_id"]
+    }
+    
+    override public static func primaryKey() -> String? {
+        return "id"
     }
 }

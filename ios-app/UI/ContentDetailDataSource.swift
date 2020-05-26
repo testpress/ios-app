@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     
@@ -41,9 +42,11 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
         if (contents.count == 0) || (index >= contents.count) {
             return nil
         }
-        
         let content = contents[index]
-        content.index = index
+
+        try! Realm().write {
+            content.index = index
+        }
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         
         if content.exam != nil {

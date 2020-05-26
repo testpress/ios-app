@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ContentExamAttemptsTableViewController: UITableViewController {
     
@@ -91,7 +92,9 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                 if !(testpressResponse!.next.isEmpty) {
                     self.loadAttempts(url: testpressResponse!.next)
                 } else {
-                    self.content.attemptsCount = self.attempts.count
+                    try! Realm().write {
+                        self.content.attemptsCount = self.attempts.count
+                    }
                     self.displayAttemptsList()
                 }
         }, type: ContentAttempt.self)
@@ -180,7 +183,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
         if (exam.attemptsCount == 0 || pausedAttempts.count != 0 ||
             ((exam.allowRetake) && (attempts.count <= exam.maxRetakes || exam.maxRetakes < 0))) {
             
-            if (exam.deviceAccessControl != nil && exam.deviceAccessControl == "web") {
+            if (exam.deviceAccessControl == "web") {
                 return false;
             } else {
                 return exam.hasStarted()

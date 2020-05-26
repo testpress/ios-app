@@ -24,43 +24,42 @@
 //
 
 import ObjectMapper
+import Realm
+import RealmSwift
 
-public class Content {
+class Content: DBModel {
     
-    var index: Int!
-    var url: String!
-    var id: Int!
-    var name: String!
-    var description: String?
-    var image: String!
-    var modified: String!
-    var chapterUrl: String!
-    var attemptsUrl: String!
-    var chapterSlug: String!
-    var chapterId: Int!
-    var attemptsCount: Int = 0
-    var exam: Exam?
-    var examId: Int!
-    var htmlContentId: Int!
-    var htmlObject: HtmlContent!
-    var htmlContentTitle: String?
-    var htmlContentUrl: String!
-    var order: Int!
-    var hasStarted: Bool!
-    var isLocked: Bool!
-    var video: Video?
-    var videoId: Int!
-    var attachment: Attachment?
-    var attachmentId: Int!
-    var active: Bool = true
-    var bookmarkId: Int!
-    var isScheduled: Bool!
-    var start: String!
-    var contentType: String!
+    @objc dynamic var index: Int = -1
+    @objc dynamic var url: String = ""
+    @objc dynamic var id: Int = -1
+    @objc dynamic var name: String = ""
+    @objc dynamic var contentDescription: String?
+    @objc dynamic var image: String = ""
+    @objc dynamic var modified: String = ""
+    @objc dynamic var chapterUrl: String = ""
+    @objc dynamic var attemptsUrl: String = ""
+    @objc dynamic var chapterSlug: String = ""
+    @objc dynamic var chapterId: Int = -1
+    @objc dynamic var attemptsCount: Int = 0
+    @objc dynamic var exam: Exam?
+    @objc dynamic var examId: Int = -1
+    @objc dynamic var htmlContentId: Int = -1
+    @objc dynamic var htmlObject: HtmlContent?
+    @objc dynamic var htmlContentTitle: String?
+    @objc dynamic var htmlContentUrl: String!
+    @objc dynamic var order: Int = 0
+    @objc dynamic var hasStarted: Bool = false
+    @objc dynamic var isLocked: Bool = false
+    @objc dynamic var video: Video?
+    @objc dynamic var videoId: Int = -1
+    @objc dynamic var attachment: Attachment?
+    @objc dynamic var attachmentId: Int = -1
+    @objc dynamic var active: Bool = true
+    var bookmarkId = RealmOptional<Int>()
+    @objc dynamic var isScheduled: Bool = false
+    @objc dynamic var start: String = ""
+    @objc dynamic var contentType: String = ""
     
-    
-    public required init?(map: Map) {
-    }
     
     public static func fetchContent(url:String, completion: @escaping(Content?, TPError?) -> Void) {
         TPApiClient.request(
@@ -84,38 +83,65 @@ public class Content {
         url = url.replacingOccurrences(of: "v2.3", with: "v2.2.1")
         return url
     }
-}
-
-extension Content: TestpressModel {
     
-    public func mapping(map: Map) {
+    public func getContentType() -> ContentTypeEnum {
+        return ContentTypeEnum(rawValue: contentType) ?? .Unknown
+    }
+    
+    public func getUrl() -> String {
+        var contentDetailUrl = String(format: "%@/api/v2.4/contents/%d/", Constants.BASE_URL , self.id)
+        return url ?? contentDetailUrl
+    }
+
+    
+    public override func mapping(map: Map) {
         url <- map["url"]
         id <- map["id"]
         name <- map["title"]
-        description <- map["description"]
+        contentDescription <- map["description"]
         image <- map["image"]
         modified <- map["modified"]
         chapterUrl <- map["chapter_url"]
         attemptsUrl <- map["attempts_url"]
         chapterSlug <- map["chapter_slug"]
-        chapterId <- map["chapter_id"]
+        chapterId <- (map["chapter_id"], transform)
         attemptsCount <- map["attempts_count"]
         exam <- map["exam"]
-        examId <- map["exam_id"]
-        htmlContentId <- map["html_id"]
+        examId <- (map["exam_id"], transform)
+        htmlContentId <- (map["html_id"], transform)
         htmlContentTitle <- map["html_content_title"]
         htmlContentUrl <- map["html_content_url"]
         order <- map["order"]
         hasStarted <- map["has_started"]
         isLocked <- map["is_locked"]
         video <- map["video"]
-        videoId <- map["video_id"]
+        videoId <- (map["video_id"], transform)
         attachment <- map["attachment"]
-        attachmentId <- map["attachment_id"]
+        attachmentId <- (map["attachment_id"], transform)
         active <- map["active"]
         bookmarkId <- map["bookmark_id"]
         isScheduled <- map["is_scheduled"]
         start <- map["start"]
         contentType <- map["content_type"]
     }
+    
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
+}
+
+let transform = TransformOf<Int, Int>(fromJSON: { (value: Int?) -> Int? in
+    return Int(value ?? -1)
+}, toJSON: { (value: Int?) -> Int? in
+    return Int(value ?? -1)
+})
+
+public enum ContentTypeEnum: String {
+    case Exam = "Exam"
+    case Quiz = "Quiz"
+    case Notes = "Notes"
+    case Attachment = "Attachment"
+    case Html = "Html"
+    case Video = "Video"
+    case Unknown = "Unknown"
 }

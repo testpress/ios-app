@@ -137,13 +137,13 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
             break
         case "chaptercontent":
             let content = contents[bookmark.objectId]!
-            if content.videoId != nil {
+            if content.videoId != -1 {
                 content.video = videos[content.videoId]!
-            } else if content.attachmentId != nil {
+            } else if content.attachmentId != -1 {
                 content.attachment = attachments[content.attachmentId]!
-            } else if content.htmlContentId != nil {
+            } else if content.htmlContentId != -1 {
                 content.htmlObject = htmlContents[content.htmlContentId]
-                content.htmlContentTitle = content.htmlObject.title
+                content.htmlContentTitle = content.htmlObject?.title
             }
             bookmark.bookmarkedObject = content
             break

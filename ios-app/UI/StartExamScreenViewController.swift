@@ -25,6 +25,7 @@
 
 import SlideMenuControllerSwift
 import UIKit
+import RealmSwift
 
 class StartExamScreenViewController: UIViewController {
 
@@ -175,7 +176,9 @@ class StartExamScreenViewController: UIViewController {
                 self.alertController.dismiss(animated: true, completion: nil)
                 if let contentAttempt = attempt as? ContentAttempt {
                     self.contentAttempt = contentAttempt
-                    self.content.attemptsCount += 1
+                    try! Realm().write{
+                        self.content.attemptsCount += 1
+                    }
                     self.attempt = contentAttempt.assessment
                 } else {
                     self.attempt = attempt as? Attempt

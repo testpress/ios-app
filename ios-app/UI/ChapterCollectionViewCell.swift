@@ -67,6 +67,7 @@ class ChapterCollectionViewCell: UICollectionViewCell {
             
             contentViewController.contentsUrl = chapter.contentUrl
             contentViewController.title = chapter.name
+            contentViewController.chapterId = chapter.id
             viewController = contentsNavigationController
         }
         parentViewController.present(viewController, animated: true, completion: nil)
