@@ -90,9 +90,7 @@ class StartQuizExamViewController: UIViewController {
                         self.startExam(sender)
                     }
                 }
-                let (image, title, description) = (Images.TestpressAlertWarning.image,
-                Strings.LOADING_FAILED,
-                Strings.SOMETHIGN_WENT_WRONG)
+                let (image, title, description) = error.getDisplayInfo()
                 self.emptyView.show(image: image, title: title, description: description, retryButtonText: retryButtonText,  retryHandler: retryHandler)
                 
                 return
