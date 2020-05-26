@@ -24,7 +24,6 @@ class StartQuizExamViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     
     var content: Content!
-    var exam: Exam!
     var viewModel: QuizExamViewModel!
     var emptyView: EmptyView!
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
@@ -99,7 +98,17 @@ class StartQuizExamViewController: UIViewController {
             try! Realm().write {
                 self.content.attemptsCount += 1
             }
+            self.showQuestions(contentAttempt: contentAttempt!)
         }
+    }
+
+    func showQuestions(contentAttempt: ContentAttempt) {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
+        viewController.contentAttempt = contentAttempt
+        viewController.exam = content.exam
+        present(viewController, animated: true, completion: nil)
     }
 
     override func viewDidLayoutSubviews() {

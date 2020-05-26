@@ -97,7 +97,7 @@ class WebViewUtils {
         
     }
     
-    public static func getOptionWithTags(optionText: String, index: Int, color: String?) -> String {
+    public static func getOptionWithTags(optionText: String, index: Int, color: String?, isCorrect:Bool = false) -> String {
         var html = "\n<div class='review-option-item'>"
         if color == nil {
             html += "<div class='alphabetical-option-ring-general'>"
@@ -106,7 +106,11 @@ class WebViewUtils {
                 color! + "'>"
         }
         html += "\(Character(UnicodeScalar(65 + index)!))</div>"
-        html += "<div>" + optionText + "</div>"
+        if (isCorrect) {
+            html += "<div class='is-correct'>" + optionText + "</div>"
+        } else {
+            html += "<div>" + optionText + "</div>"
+        }
         html += "</div>"
         return html
     }

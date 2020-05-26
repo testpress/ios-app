@@ -137,4 +137,7 @@ class Exam: DBModel {
         UserDefaults.standard.set(getNumberOfTimesShared() + 1, forKey: getKey())
     }
     
+    func getQuestionsURL() -> String {
+        return Constants.BASE_URL + "/api/v2.4/exams/\(id)/questions/"
+    }
 }

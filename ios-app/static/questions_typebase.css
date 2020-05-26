@@ -106,6 +106,10 @@ p {
     font-family: 'Rubik-Medium', sans-serif;
 }
 
+.review-option-item .is-correct {
+    color: #00ccaa;
+}
+
 .question {
     font-family: 'Rubik-Medium', sans-serif;
     font-size: 1rem;

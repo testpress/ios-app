@@ -135,10 +135,23 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contentAttempt = attempts[indexPath.row]
         if contentAttempt.assessment.state == Constants.STATE_RUNNING {
+            if (content.getContentType() == .Quiz) {
+                self.loadQuestions(contentAttempt: contentAttempt)
+            }
             showStartExamScreen(contentAttempt: contentAttempt)
         } else {
             showTestReport(contentAttempt: contentAttempt)
         }
+    }
+    
+    func loadQuestions(contentAttempt: ContentAttempt) {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+              Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
+
+          viewController.contentAttempt = contentAttempt
+        viewController.exam = self.exam
+          present(viewController, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView,
@@ -159,7 +172,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                 pausedAttempts.append(attempt);
             }
         }
-        if canAttemptExam() {
+        if canAttemptExam() && content.getContentType() != .Quiz {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentAttemptFooterCell")
                 as! ContentAttemptFooterCell
             

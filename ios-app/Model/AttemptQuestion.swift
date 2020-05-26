@@ -40,8 +40,23 @@ class AttemptQuestion: DBModel {
     var answerIds = List<Int>()
     var translationIds = List<Int>()
     @objc dynamic var isCaseSensitive: Bool = false
-    
-
+    var questionType: QuestionType {
+        get {
+            return QuestionType(rawValue: type ?? "Unknown") ?? .UNKNOWN
+        }
+    }
+    var isSingleMcq: Bool {
+        get {questionType == .SINGLE_CORRECT_MCQ}
+    }
+    var isMultipleMcq: Bool {
+        get {questionType == .MULTIPLE_CORRECT_MCQ}
+    }
+    var isShortAnswer: Bool {
+        get {questionType == .SHORT_ANSWER}
+    }
+    var isNumerical: Bool {
+        get {questionType == .NUMERICAL}
+    }
     
     public  func clone() -> AttemptQuestion {
         let newAttemptItem = AttemptQuestion()
@@ -88,4 +103,16 @@ class AttemptQuestion: DBModel {
         return Int(value ?? -1)
     })
 
+}
+
+public enum QuestionType: String {
+    case SINGLE_CORRECT_MCQ = "R"
+    case MULTIPLE_CORRECT_MCQ = "C"
+    case SHORT_ANSWER = "S"
+    case NUMERICAL = "N"
+    case ESSAY = "E"
+    case FILE_TYPE = "F"
+    case MATCH = "M"
+    case NESTED = "T"
+    case UNKNOWN = "Unknown"
 }

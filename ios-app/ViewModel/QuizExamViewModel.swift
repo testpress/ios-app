@@ -11,13 +11,19 @@ import Foundation
 
 class QuizExamViewModel {
     private let exam: Exam
-    private let content: Content
+    private let content: Content?
     private let repository: AttemptRepository
     
     init(content: Content, repository: AttemptRepository = AttemptRepository()) {
         self.content = content
         self.exam = content.exam!
         self.repository = repository
+    }
+    
+    init(exam: Exam, repository: AttemptRepository = AttemptRepository()) {
+        self.exam = exam
+        self.repository = repository
+        self.content = nil
     }
 }
 
@@ -49,7 +55,14 @@ extension QuizExamViewModel {
     }
     
     public func loadAttempt(completion: @escaping(ContentAttempt?, TPError?) -> Void) {
-        repository.loadAttempt(attemptsUrl: content.getAttemptsUrl(), completion: completion)
+        if (content == nil) {
+            debugPrint("Content is nil")
+        }
+        repository.loadAttempt(attemptsUrl: content!.getAttemptsUrl(), completion: completion)
+    }
+    
+    public func loadQuestions(attemptId: Int, completion: @escaping([AttemptItem]?, TPError?) -> Void) {
+        repository.loadQuestions(url: exam.getQuestionsURL(), examId: exam.id, attemptId: attemptId, completion: completion)
     }
     
 }

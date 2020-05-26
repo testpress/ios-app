@@ -73,6 +73,10 @@ class AttemptItem: DBModel {
             (shortText != nil && shortText != currentShortText) ||
             (shortText == nil && currentShortText != nil && !currentShortText.isEmpty)
     }
+    
+    public func getSaveUrl() -> String {
+        return String(format: "%@/api/v2.4/attempts/%d/questions/%d/", Constants.BASE_URL , self.attemptId, self.examQuestionId)
+    }
 
     public override func mapping(map: Map) {
         id <- map["id"]
