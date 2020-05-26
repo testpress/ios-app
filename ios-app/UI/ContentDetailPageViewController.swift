@@ -213,11 +213,11 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func updateCurrentExamContent() {
-        let content = contents[getCurrentIndex()]
         if let viewController =
             getCurretViewController() as? ContentExamAttemptsTableViewController {
 
             viewController.attempts.removeAll()
+            let content = contents[getCurrentIndex()]
             viewController.loadAttemptsWithProgress(url: content.getAttemptsUrl())
         } else {
             contentAttemptCreationDelegate?.newAttemptCreated()

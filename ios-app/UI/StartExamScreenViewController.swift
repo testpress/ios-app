@@ -139,7 +139,7 @@ class StartExamScreenViewController: UIViewController {
         } else {
             endpointProvider = TPEndpointProvider(
                 .put,
-                url: attempt!.url! + TPEndpoint.resumeAttempt.urlPath
+                url: attempt!.url + TPEndpoint.resumeAttempt.urlPath
             )
         }
         startAttempt(type: Attempt.self, endpointProvider: endpointProvider)
