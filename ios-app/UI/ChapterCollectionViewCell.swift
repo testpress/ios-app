@@ -65,7 +65,7 @@ class ChapterCollectionViewCell: UICollectionViewCell {
             let contentViewController = contentsNavigationController.viewControllers.first
                 as! ContentsTableViewController
             
-            contentViewController.contentsUrl = chapter.contentUrl
+            contentViewController.contentsUrl = chapter.getContentsUrl()
             contentViewController.title = chapter.name
             contentViewController.chapterId = chapter.id
             viewController = contentsNavigationController

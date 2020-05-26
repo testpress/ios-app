@@ -72,4 +72,8 @@ class Chapter: DBModel {
     override public static func primaryKey() -> String? {
         return "id"
     }
+    
+    public func getContentsUrl() -> String {
+        return url + "contents/"
+    }
 }
