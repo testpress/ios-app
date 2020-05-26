@@ -71,6 +71,8 @@ struct Constants {
     static let ATTACHMENT_DETAIL_VIEW_CONTROLLER = "AttachmentDetailViewController"
     static let VIDEO_CONTENT_VIEW_CONTROLLER = "VideoContentViewController"
     static let CONTENT_START_EXAM_VIEW_CONTROLLER = "ContentStartExamViewController"
+    static let START_QUIZ_EXAM_VIEW_CONTROLLER = "StartQuizExamViewController"
+
     static let CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER = "ContentExamAttemptsTableViewController"
     static let POST_TABLE_VIEW_CELL = "PostTableViewCell"
     static let POST_STORYBOARD = "Post"
