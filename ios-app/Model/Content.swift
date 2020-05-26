@@ -90,7 +90,7 @@ class Content: DBModel {
     
     public func getUrl() -> String {
         var contentDetailUrl = String(format: "%@/api/v2.4/contents/%d/", Constants.BASE_URL , self.id)
-        return url ?? contentDetailUrl
+        return url.isEmpty ? contentDetailUrl : url
     }
 
     
