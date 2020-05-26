@@ -62,6 +62,11 @@ class Exam: DBModel {
     @objc dynamic var isGrowthHackEnabled: Bool = false;
     @objc dynamic var shareTextForSolutionUnlock: String = "";
     
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
+
+    
     public override func mapping(map: Map) {
         url <- map["url"]
         id <- map["id"]
