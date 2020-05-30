@@ -68,6 +68,7 @@ class WebViewUtils {
         header += "<link rel='stylesheet' type='text/css' href='post.css' />"
         header += "<link rel='stylesheet' type='text/css' href='icomoon/style.css' />"
         header += "<script src='comments.js'></script>"
+        header += "<script src='pseudo_element_selector.js'></script>"
         header += "<link rel='stylesheet' href='katex/katex.min.css' />"
         header += "<script src='katex/katex.min.js'></script>"
         header += "<script src='katex/contrib/auto-render.min.js'></script>"
@@ -284,4 +285,7 @@ class WebViewUtils {
         return "<img src='" + imageUrl + "'/>"
     }
     
+    public static func addWaterMark(imageUrl: String) -> String {
+         return "addWatermark('\(imageUrl)');"
+    }
 }

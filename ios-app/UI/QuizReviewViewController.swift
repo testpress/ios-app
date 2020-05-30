@@ -17,7 +17,7 @@ class QuizReviewViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         super.viewDidLoad()
         webViewDelegate = self
         webView.loadHTMLString(
-            WebViewUtils.getQuestionHeader() + getHtml(),
+            WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader() + getHtml(),
             baseURL: Bundle.main.bundleURL
         )
     }
@@ -142,6 +142,13 @@ class QuizReviewViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         }
         
         return html
+    }
+    
+    override func getJavascript() -> String {
+        let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        var javascript = super.getJavascript()
+        javascript += WebViewUtils.addWaterMark(imageUrl: instituteSettings.appToolbarLogo)
+        return javascript
     }
     
     func onFinishLoadingWebView() {
