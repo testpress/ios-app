@@ -358,7 +358,7 @@ extension VideoPlayerView: AVAssetResourceLoaderDelegate {
     func modifyVideoChunkURL(videoUrl: URL, m3u8Data: String) -> Data {
         /*
          Since video chunk urls will be relative paths, it will use url base as custom
-         host "fakehttps". But we are don't need to intercept video chunks so we are changing it
+         host "fakehttps". As we don't need to intercept video chunks so we are changing it
          to absolute URL.
         */
         let path:NSString = videoUrl.path as NSString
