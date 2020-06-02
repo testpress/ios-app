@@ -51,6 +51,8 @@
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
 		25B0ADD521D615A200C702B9 /* Hippolyte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */; };
 		25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
+		25DD9C442486551F000BB671 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25DD9C432486551F000BB671 /* SwiftKeychainWrapper.framework */; };
+		25DD9C452486551F000BB671 /* SwiftKeychainWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25DD9C432486551F000BB671 /* SwiftKeychainWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		25EF86ED247E2160005C2B96 /* pseudo_element_selector.js in Resources */ = {isa = PBXBuildFile; fileRef = 25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */; };
 		25F92A20243306A60084ADC8 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F92A1F243306A60084ADC8 /* UIViewController.swift */; };
 		25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */; };
@@ -333,6 +335,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				25DD9C452486551F000BB671 /* SwiftKeychainWrapper.framework in Embed Frameworks */,
 				2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -392,6 +395,8 @@
 		25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerification.swift; sourceTree = "<group>"; };
 		25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hippolyte.framework; path = Carthage/Build/iOS/Hippolyte.framework; sourceTree = "<group>"; };
 		25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsPageViewController.swift; sourceTree = "<group>"; };
+		25DD9C41248654AE000BB671 /* SwiftKeychainWrapper.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftKeychainWrapper.framework.dSYM; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework.dSYM; sourceTree = "<group>"; };
+		25DD9C432486551F000BB671 /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
 		25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = pseudo_element_selector.js; sourceTree = "<group>"; };
 		25F92A1F243306A60084ADC8 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CropViewController.framework; path = Carthage/Build/iOS/CropViewController.framework; sourceTree = "<group>"; };
@@ -673,6 +678,7 @@
 				2F763D001FBD83340033D495 /* Device.framework in Frameworks */,
 				2F33BFFB206E7E7100D4CE6D /* DropDown.framework in Frameworks */,
 				2F40CC5D20456FEC00A729CE /* FBSDKCoreKit.framework in Frameworks */,
+				25DD9C442486551F000BB671 /* SwiftKeychainWrapper.framework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
 				2F429A0320DCD70200F5555C /* Lottie.framework in Frameworks */,
@@ -805,6 +811,8 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25DD9C432486551F000BB671 /* SwiftKeychainWrapper.framework */,
+				25DD9C41248654AE000BB671 /* SwiftKeychainWrapper.framework.dSYM */,
 				25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */,
 				8C5D579323AA08D200381DF8 /* M3U8KitDynamic.framework */,
 				8CF6972E2327180F0040A986 /* Sentry.framework */,
@@ -1390,6 +1398,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/M3U8KitDynamic.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CropViewController.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
@@ -1863,7 +1872,6 @@
 		2F26AE001E8249D70031E6F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
@@ -1891,7 +1899,6 @@
 		2F26AE011E8249D70031E6F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
