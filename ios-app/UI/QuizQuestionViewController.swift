@@ -67,7 +67,9 @@ class QuizQuestionViewController:BaseWebViewController, WKWebViewDelegate, WKScr
     }
     
     override func getJavascript() -> String {
+        let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         var javascript = super.getJavascript()
+        javascript += WebViewUtils.addWaterMark(imageUrl: instituteSettings.appToolbarLogo)
         let selectedAnswers: [Int] = Array(attemptItem.selectedAnswers)
         if !selectedAnswers.isEmpty {
             let optionType: String = (attemptItem.question?.type)!
