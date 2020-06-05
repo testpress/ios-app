@@ -26,7 +26,7 @@
 import RealmSwift
 import UIKit
 
-class CoursesTableViewController: BaseDBViewController<Course> {
+class CoursesTableViewController: BaseDBTableViewController<Course> {
     
     required init?(coder aDecoder: NSCoder) {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
