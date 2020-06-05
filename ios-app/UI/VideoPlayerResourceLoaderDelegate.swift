@@ -10,15 +10,20 @@ import Foundation
 import AVKit
 import SwiftKeychainWrapper
 
+
 class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate {
     
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         guard let url = loadingRequest.request.url else { return false }
         if url.scheme == "fakehttps" {
-            fetchM3U8AndChangeEncryptionKeyUrl(url: url, loadingRequest: loadingRequest)
+            M3U8Handler().fetch(url: url) { data, response in
+                self.handleM3U8Response(loadingRequest: loadingRequest, data: data, response: response)
+            }
             return true
         } else if isEncryptionKeyUrl(url: url) {
-            obtainKeyAndLoadItInRequest(url: url, loadingRequest: loadingRequest)
+            EncryptionKeyHandler().getOrFetch(url: url) { data in
+                self.handleEncryptionKeyResponse(loadingRequest: loadingRequest, data: data)
+            }
             return true
         }
         
@@ -29,68 +34,58 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
         return url.scheme == "fakekeyhttps" || url.path.contains("encryption_key")
     }
     
-    func obtainKeyAndLoadItInRequest(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
-        let encryptionKeyUrl = convertFakeHttpsToHttps(url: url)
-        
-        let key: Data? = KeychainWrapper.standard.data(forKey: encryptionKeyUrl.absoluteString)
-        if (key != nil) {
-            loadKeyToRequest(loadingRequest: loadingRequest, key: key!)
-        } else {
-            fetchAndStoreEncryptionKey(keyUrl: encryptionKeyUrl, loadingRequest: loadingRequest)
-        }
+    func handleM3U8Response(loadingRequest: AVAssetResourceLoadingRequest, data: Data, response:URLResponse?) {
+        loadingRequest.contentInformationRequest?.contentType = response?.mimeType
+        loadingRequest.contentInformationRequest?.isByteRangeAccessSupported = true
+        loadingRequest.contentInformationRequest?.contentLength = response!.expectedContentLength
+        loadingRequest.dataRequest?.respond(with: data)
+        loadingRequest.finishLoading()
     }
     
-    
-    func convertFakeHttpsToHttps(url: URL) -> URL {
-        var urlComponents = URLComponents(
-            url: url,
-            resolvingAgainstBaseURL: false
-        )
-        urlComponents!.scheme = "https"
-        return urlComponents!.url!
+    func handleEncryptionKeyResponse(loadingRequest: AVAssetResourceLoadingRequest, data: Data) {
+        loadingRequest.contentInformationRequest?.contentType = AVStreamingKeyDeliveryPersistentContentKeyType
+        loadingRequest.contentInformationRequest?.isByteRangeAccessSupported = true
+        loadingRequest.contentInformationRequest?.contentLength = Int64(data.count)
+        loadingRequest.dataRequest?.respond(with: data)
+        loadingRequest.finishLoading()
     }
-    
-    func fetchM3U8AndChangeEncryptionKeyUrl(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
-        let request = URLRequest(url: convertFakeHttpsToHttps(url: url))
+}
+
+
+class M3U8Handler {
+    func fetch(url: URL, completion: @escaping(Data, URLResponse?) -> Void) {
+        let request = URLRequest(url: URLUtils.convertURLSchemeToHttps(url: url))
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: request) { data, response, _ in
             guard let data = data else { return }
-            let m3u8DataString = self.parseAndModifyM3U8Data(m3u8Data: data)
+            let m3u8DataString = self.modifyKeyURLToFakeHttps(m3u8Data: data)
             let modifiedData = self.replaceRelativeVideoChunkUrlsWithAbsoluteUrl(url: url, m3u8Data: m3u8DataString)
-            loadingRequest.contentInformationRequest?.contentType = response?.mimeType
-            loadingRequest.contentInformationRequest?.isByteRangeAccessSupported = true
-            loadingRequest.contentInformationRequest?.contentLength = response!.expectedContentLength
-            loadingRequest.dataRequest?.respond(with: modifiedData)
-            loadingRequest.finishLoading()
+            completion(modifiedData, response)
         }
         task.resume()
     }
     
-    func parseAndModifyM3U8Data(m3u8Data: Data) -> String {
+    
+    private func modifyKeyURLToFakeHttps(m3u8Data: Data) -> String {
+        /*
+         We are changing schema of the key URL so that we can intercept it.
+         */
         var m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
         
         if m3u8DataString.contains("EXT-X-KEY") {
-            m3u8DataString = self.modifyKeyURLToFakeHttps(m3u8Data: m3u8DataString)
+            let start = m3u8DataString.range(of: "URI=\"")!.upperBound
+            let end = m3u8DataString[start...].range(of: "\"")!.lowerBound
+            let keyUrl = m3u8DataString[start..<end]
+            let newKeyUrl = keyUrl.replacingOccurrences(of: "https://", with: "fakekeyhttps://")
+            m3u8DataString = m3u8DataString.replacingOccurrences(
+                of: keyUrl,
+                with: newKeyUrl
+            )
         }
         return m3u8DataString
     }
     
-    func modifyKeyURLToFakeHttps(m3u8Data: String) -> String {
-        /*
-         Since we need to add authorization header to key url, we need to intercept key url.
-         So we are changing schema of the key URL so that we can intercept it.
-         */
-        let start = m3u8Data.range(of: "URI=\"")!.upperBound
-        let end = m3u8Data[start...].range(of: "\"")!.lowerBound
-        let keyUrl = m3u8Data[start..<end]
-        let newKeyUrl = keyUrl.replacingOccurrences(of: "https://", with: "fakekeyhttps://")
-        return m3u8Data.replacingOccurrences(
-            of: keyUrl,
-            with: newKeyUrl
-        )
-    }
-    
-    func replaceRelativeVideoChunkUrlsWithAbsoluteUrl(url: URL, m3u8Data: String) -> Data {
+    private func replaceRelativeVideoChunkUrlsWithAbsoluteUrl(url: URL, m3u8Data: String) -> Data {
         /*
          Since video chunk urls will be relative paths, it will use base url("fakehttps") as its
          host. Urls with scheme "fakehttps" will get intercepted. But we don't need to intercept
@@ -106,24 +101,41 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
         return modifiedData.data(using: .utf8)!
     }
     
-    func fetchAndStoreEncryptionKey(keyUrl: URL, loadingRequest: AVAssetResourceLoadingRequest) {
-        var request = URLRequest(url: keyUrl)
-        let token: String = KeychainTokenItem.getToken()
-        request.setValue("JWT " + token, forHTTPHeaderField: "Authorization")
+}
+
+
+class EncryptionKeyHandler {
+    func getOrFetch(url: URL, onSuccess: @escaping(Data) -> Void) {
+        let encryptionKeyUrl = URLUtils.convertURLSchemeToHttps(url: url)
+        let key: Data? = getKeyFromCache(url: encryptionKeyUrl.absoluteString)
         
+        if (key != nil) {
+            onSuccess(key!)
+        } else {
+            fetch(url: encryptionKeyUrl) { _ in
+                onSuccess(self.getKeyFromCache(url: encryptionKeyUrl.absoluteString)!)
+            }
+        }
+    }
+    
+    private func getKeyFromCache(url: String) -> Data? {
+        return KeychainWrapper.standard.data(forKey: url)
+    }
+    
+    private func storeKeyToCache(url: String, key: Data) {
+        KeychainWrapper.standard.set(key, forKey: url)
+    }
+    
+    private func fetch(url: URL, onSuccess: @escaping(Data) -> Void) {
+        var request = URLRequest(url: url)
+        request.setValue("JWT " + KeychainTokenItem.getToken(), forHTTPHeaderField: "Authorization")
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: request) { data, response, _ in
-            KeychainWrapper.standard.set(data!, forKey: keyUrl.absoluteString)
-            self.loadKeyToRequest(loadingRequest: loadingRequest, key: data!)
+            guard let key = data else { return }
+            self.storeKeyToCache(url: url.absoluteString, key: key)
+            onSuccess(key)
         }
         task.resume()
     }
-    
-    func loadKeyToRequest(loadingRequest: AVAssetResourceLoadingRequest, key: Data) {
-        loadingRequest.contentInformationRequest?.contentType = AVStreamingKeyDeliveryPersistentContentKeyType
-        loadingRequest.contentInformationRequest?.isByteRangeAccessSupported = true
-        loadingRequest.contentInformationRequest?.contentLength = Int64(key.count)
-        loadingRequest.dataRequest?.respond(with: key)
-        loadingRequest.finishLoading()
-    }
 }
+
