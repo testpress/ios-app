@@ -17,12 +17,16 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
         if url.scheme == "fakehttps" {
             handleM3U8Requests(url: url, loadingRequest: loadingRequest)
             return true
-        } else if url.scheme == "fakekeyhttps" || url.path.contains("encryption_key") {
+        } else if isEncryptionKeyUrl(url: url) {
             handleKeyRequests(url: url, loadingRequest: loadingRequest)
             return true
         }
         
         return false
+    }
+    
+    func isEncryptionKeyUrl(url: URL) -> Bool {
+        return url.scheme == "fakekeyhttps" || url.path.contains("encryption_key")
     }
     
     func handleKeyRequests(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
