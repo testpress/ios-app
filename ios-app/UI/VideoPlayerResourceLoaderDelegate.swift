@@ -100,11 +100,13 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
          Since video chunk urls will be relative paths, it will use base url("fakehttps") as its
          host. Urls with scheme "fakehttps" will get intercepted. But we don't need to intercept
          video chunks so we are changing it to correct absolute URL ("https").
+         
+         Ex: #EXTINF:6, video240p/00000/video240p_00001.ts will be changed to #EXTINF:6 https://video.testpress.in/institute/demo/video240p/00000/video240p_00001.ts
          */
-        let baseUrlPath:NSString = url.path as NSString
-        let customPath = baseUrlPath.deletingLastPathComponent
+        let baseUrlWithFilenameAndExtension:NSString = url.path as NSString
+        let relativeVideoUrl = baseUrlWithFilenameAndExtension.deletingLastPathComponent
         let modifiedData = m3u8Data.replacingOccurrences(
-            of: "(#EXTINF:[0-9]*,\n)", with: String(format: "$1 https://%@%@/", url.host!, customPath), options: .regularExpression
+            of: "(#EXTINF:[0-9]*,\n)", with: String(format: "$1 https://%@%@/", url.host!, relativeVideoUrl), options: .regularExpression
         )
         return modifiedData.data(using: .utf8)!
     }
