@@ -73,13 +73,13 @@ class M3U8Handler {
         var m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
         
         if m3u8DataString.contains("EXT-X-KEY") {
-            let start = m3u8DataString.range(of: "URI=\"")!.upperBound
-            let end = m3u8DataString[start...].range(of: "\"")!.lowerBound
-            let keyUrl = m3u8DataString[start..<end]
-            let newKeyUrl = keyUrl.replacingOccurrences(of: "https://", with: "fakekeyhttps://")
+            let keyURLStartIndex = m3u8DataString.range(of: "URI=\"")!.upperBound
+            let keyURLEndIndex = m3u8DataString[keyURLStartIndex...].range(of: "\"")!.lowerBound
+            let keyUrl = m3u8DataString[keyURLStartIndex..<keyURLEndIndex]
+            let modifiedKeyURL = keyUrl.replacingOccurrences(of: "https://", with: "fakekeyhttps://")
             m3u8DataString = m3u8DataString.replacingOccurrences(
                 of: keyUrl,
-                with: newKeyUrl
+                with: modifiedKeyURL
             )
         }
         return m3u8DataString
@@ -138,4 +138,3 @@ class EncryptionKeyHandler {
         task.resume()
     }
 }
-
