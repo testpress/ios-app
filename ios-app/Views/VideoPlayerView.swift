@@ -78,6 +78,11 @@ class VideoPlayerView: UIView {
     }
 
     func getModifiedVideoURL() -> URL {
+        /*
+         We are modifying video URL so that videoPlayerResourceLoaderDelegate will handle video
+         requests.
+         i.e VideoPlayerResourceLoaderDelegate will get executed only if AVPlayer don't know URL Scheme
+         */
         var urlComponents = URLComponents(
             url: self.url,
             resolvingAgainstBaseURL: false
