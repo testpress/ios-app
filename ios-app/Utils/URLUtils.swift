@@ -10,11 +10,15 @@ import Foundation
 
 class URLUtils {
     static func convertURLSchemeToHttps(url: URL) -> URL {
+        return self.convertURLScheme(url: url, scheme: "https")
+    }
+    
+    static func convertURLScheme(url: URL, scheme: String) -> URL {
         var urlComponents = URLComponents(
             url: url,
             resolvingAgainstBaseURL: false
         )
-        urlComponents!.scheme = "https"
+        urlComponents!.scheme = scheme
         return urlComponents!.url!
     }
 }

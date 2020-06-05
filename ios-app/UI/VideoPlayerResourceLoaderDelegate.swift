@@ -16,7 +16,7 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         guard let url = loadingRequest.request.url else { return false }
         if url.scheme == "fakehttps" {
-            M3U8Handler().fetch(url: url) { data, response in
+            M3U8Handler().fetchAndModifyResponse(url: url) { data, response in
                 self.handleM3U8Response(loadingRequest: loadingRequest, data: data, response: response)
             }
             return true
@@ -53,7 +53,7 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
 
 
 class M3U8Handler {
-    func fetch(url: URL, completion: @escaping(Data, URLResponse?) -> Void) {
+    func fetchAndModifyResponse(url: URL, completion: @escaping(Data, URLResponse?) -> Void) {
         let request = URLRequest(url: URLUtils.convertURLSchemeToHttps(url: url))
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: request) { data, response, _ in

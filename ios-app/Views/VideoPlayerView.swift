@@ -58,7 +58,7 @@ class VideoPlayerView: UIView {
     func playVideo(url: URL) {
         controlsContainerView.startLoading()
         self.url = url
-        let playerItem = AVPlayerItem(asset: getAVAsset())
+        let playerItem = AVPlayerItem(asset: createAVAssetWithCustomURLScheme())
         player?.replaceCurrentItem(with: playerItem)
         player?.seek(to: CMTime.zero)
         player?.rate = 1
@@ -71,25 +71,11 @@ class VideoPlayerView: UIView {
         parseResolutionInfo()
     }
 
-    func getAVAsset() -> AVURLAsset {
-        let asset = AVURLAsset(url: getModifiedVideoURL())
+    func createAVAssetWithCustomURLScheme() -> AVURLAsset {
+        let modifiedURL = URLUtils.convertURLScheme(url: url, scheme: "fakehttps")
+        let asset = AVURLAsset(url: modifiedURL)
         asset.resourceLoader.setDelegate(videoPlayerResourceLoaderDelegate, queue: DispatchQueue.main)
         return asset
-    }
-
-    func getModifiedVideoURL() -> URL {
-        /*
-         We are modifying video URL so that videoPlayerResourceLoaderDelegate will handle video
-         requests.
-         i.e VideoPlayerResourceLoaderDelegate will get executed only if AVPlayer don't know URL Scheme
-         */
-        var urlComponents = URLComponents(
-            url: self.url,
-            resolvingAgainstBaseURL: false
-        )!
-        urlComponents.scheme = "fakehttps"
-        
-        return urlComponents.url!
     }
     
     func parseResolutionInfo() {
