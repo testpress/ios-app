@@ -48,7 +48,6 @@
 		2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259286892473B1E00035EBA4 /* QuizReviewViewController.swift */; };
 		2592868C2474316C0035EBA4 /* AttemptItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592868B2474316B0035EBA4 /* AttemptItemRepository.swift */; };
 		25985831248A5F14003591FA /* URLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985830248A5F14003591FA /* URLUtils.swift */; };
-		25985833248A6A92003591FA /* EncryptionKeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985832248A6A92003591FA /* EncryptionKeyHandler.swift */; };
 		25985835248A77BC003591FA /* EncryptionKeyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985834248A77BC003591FA /* EncryptionKeyRepository.swift */; };
 		25985837248A77F6003591FA /* M3U8Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985836248A77F6003591FA /* M3U8Handler.swift */; };
 		259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
@@ -397,7 +396,6 @@
 		259286892473B1E00035EBA4 /* QuizReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizReviewViewController.swift; sourceTree = "<group>"; };
 		2592868B2474316B0035EBA4 /* AttemptItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptItemRepository.swift; sourceTree = "<group>"; };
 		25985830248A5F14003591FA /* URLUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLUtils.swift; sourceTree = "<group>"; };
-		25985832248A6A92003591FA /* EncryptionKeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKeyHandler.swift; sourceTree = "<group>"; };
 		25985834248A77BC003591FA /* EncryptionKeyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKeyRepository.swift; sourceTree = "<group>"; };
 		25985836248A77F6003591FA /* M3U8Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M3U8Handler.swift; sourceTree = "<group>"; };
 		259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToUnlockViewController.swift; sourceTree = "<group>"; };
@@ -887,7 +885,6 @@
 				25705016246E48BA00E6C688 /* ListTransform.swift */,
 				256A909B247D03C100F4E12C /* IntArrayTransform.swift */,
 				25985830248A5F14003591FA /* URLUtils.swift */,
-				25985832248A6A92003591FA /* EncryptionKeyHandler.swift */,
 				25985836248A77F6003591FA /* M3U8Handler.swift */,
 			);
 			path = Utils;
@@ -1635,7 +1632,6 @@
 				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,
 				25F92A20243306A60084ADC8 /* UIViewController.swift in Sources */,
 				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
-				25985833248A6A92003591FA /* EncryptionKeyHandler.swift in Sources */,
 				2F5E0BB51FE2415800236AFE /* ActivityFeedPager.swift in Sources */,
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
 				8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */,

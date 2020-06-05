@@ -9,13 +9,13 @@
 import Foundation
 
 class M3U8Handler {
-    func fetch(url: URL, completion: @escaping(Data, URLResponse?) -> Void) {
+    func fetch(url: URL, onSuccess: @escaping(Data, URLResponse?) -> Void) {
         let request = URLRequest(url: URLUtils.convertURLSchemeToHttps(url: url))
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: request) { data, response, _ in
             guard let data = data else { return }
             let cleanedData = self.clean(data: data, baseUrl: url)
-            completion(cleanedData, response)
+            onSuccess(cleanedData, response)
         }
         task.resume()
     }
