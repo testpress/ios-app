@@ -15,10 +15,10 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         guard let url = loadingRequest.request.url else { return false }
         if url.scheme == "fakehttps" {
-            handleM3U8Requests(url: url, loadingRequest: loadingRequest)
+            fetchM3U8AndChangeEncryptionKeyUrl(url: url, loadingRequest: loadingRequest)
             return true
         } else if isEncryptionKeyUrl(url: url) {
-            handleKeyRequests(url: url, loadingRequest: loadingRequest)
+            obtainKeyAndLoadItInRequest(url: url, loadingRequest: loadingRequest)
             return true
         }
         
@@ -29,34 +29,29 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
         return url.scheme == "fakekeyhttps" || url.path.contains("encryption_key")
     }
     
-    func handleKeyRequests(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
-        var urlComponents = URLComponents(
-            url: url,
-            resolvingAgainstBaseURL: false
-        )
-        urlComponents!.scheme = "https"
-        let encryptionKeyUrl = urlComponents!.url!
+    func obtainKeyAndLoadItInRequest(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
+        let encryptionKeyUrl = convertFakeHttpsToHttps(url: url)
         
         let key: Data? = KeychainWrapper.standard.data(forKey: encryptionKeyUrl.absoluteString)
         if (key != nil) {
             loadKeyToRequest(loadingRequest: loadingRequest, key: key!)
         } else {
-            loadAndStoreEncryptionKey(keyUrl: encryptionKeyUrl, loadingRequest: loadingRequest)
+            fetchAndStoreEncryptionKey(keyUrl: encryptionKeyUrl, loadingRequest: loadingRequest)
         }
     }
     
-    func handleM3U8Requests(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
+    
+    func convertFakeHttpsToHttps(url: URL) -> URL {
         var urlComponents = URLComponents(
             url: url,
             resolvingAgainstBaseURL: false
         )
         urlComponents!.scheme = "https"
-        let m3u8Url =  urlComponents!.url
-        loadAndModifyM3U8(url: m3u8Url!, loadingRequest: loadingRequest)
+        return urlComponents!.url!
     }
     
-    func loadAndModifyM3U8(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
-        let request = URLRequest(url: url)
+    func fetchM3U8AndChangeEncryptionKeyUrl(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
+        let request = URLRequest(url: convertFakeHttpsToHttps(url: url))
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: request) { data, response, _ in
             guard let data = data else { return }
@@ -75,12 +70,12 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
         var m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
         
         if m3u8DataString.contains("EXT-X-KEY") {
-            m3u8DataString = self.modifyKeyURL(m3u8Data: m3u8DataString)
+            m3u8DataString = self.modifyKeyURLToFakeHttps(m3u8Data: m3u8DataString)
         }
         return m3u8DataString
     }
     
-    func modifyKeyURL(m3u8Data: String) -> String {
+    func modifyKeyURLToFakeHttps(m3u8Data: String) -> String {
         /*
          Since we need to add authorization header to key url, we need to intercept key url.
          So we are changing schema of the key URL so that we can intercept it.
@@ -111,7 +106,7 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
         return modifiedData.data(using: .utf8)!
     }
     
-    func loadAndStoreEncryptionKey(keyUrl: URL, loadingRequest: AVAssetResourceLoadingRequest) {
+    func fetchAndStoreEncryptionKey(keyUrl: URL, loadingRequest: AVAssetResourceLoadingRequest) {
         var request = URLRequest(url: keyUrl)
         let token: String = KeychainTokenItem.getToken()
         request.setValue("JWT " + token, forHTTPHeaderField: "Authorization")
