@@ -93,9 +93,9 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
     
     func modifyVideoChunkURL(videoUrl: URL, m3u8Data: String) -> Data {
         /*
-         Since video chunk urls will be relative paths, it will use url base as custom
-         host "fakehttps". As we don't need to intercept video chunks so we are changing it
-         to absolute URL.
+         Since video chunk urls will be relative paths, it will use base url("fakehttps") as its
+         host. Urls with scheme "fakehttps" will get intercepted. But we don't need to intercept
+         video chunks so we are changing it to correct absolute URL ("https").
          */
         let path:NSString = videoUrl.path as NSString
         let customPath = path.deletingLastPathComponent
