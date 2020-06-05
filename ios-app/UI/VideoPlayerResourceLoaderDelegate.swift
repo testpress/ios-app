@@ -15,49 +15,49 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         guard let url = loadingRequest.request.url else { return false }
         if url.scheme == "fakehttps" {
-            handleM3U8Requests(videoUrl: url, loadingRequest: loadingRequest)
+            handleM3U8Requests(url: url, loadingRequest: loadingRequest)
             return true
         } else if url.scheme == "fakekeyhttps" || url.path.contains("encryption_key") {
-            handleKeyRequests(videoUrl: url, loadingRequest: loadingRequest)
+            handleKeyRequests(url: url, loadingRequest: loadingRequest)
             return true
         }
         
         return false
     }
     
-    func handleKeyRequests(videoUrl: URL, loadingRequest: AVAssetResourceLoadingRequest) {
+    func handleKeyRequests(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
         var urlComponents = URLComponents(
-            url: videoUrl,
+            url: url,
             resolvingAgainstBaseURL: false
         )
         urlComponents!.scheme = "https"
-        let newUrl = urlComponents!.url!
+        let encryptionKeyUrl = urlComponents!.url!
         
-        let key: Data? = KeychainWrapper.standard.data(forKey: newUrl.absoluteString)
+        let key: Data? = KeychainWrapper.standard.data(forKey: encryptionKeyUrl.absoluteString)
         if (key != nil) {
-            loadHLSKey(loadingRequest: loadingRequest, key: key!)
+            loadKeyToRequest(loadingRequest: loadingRequest, key: key!)
         } else {
-            loadAndStoreHLSKey(keyUrl: newUrl, loadingRequest: loadingRequest)
+            loadAndStoreEncryptionKey(keyUrl: encryptionKeyUrl, loadingRequest: loadingRequest)
         }
     }
     
-    func handleM3U8Requests(videoUrl: URL, loadingRequest: AVAssetResourceLoadingRequest) {
+    func handleM3U8Requests(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
         var urlComponents = URLComponents(
-            url: videoUrl,
+            url: url,
             resolvingAgainstBaseURL: false
         )
         urlComponents!.scheme = "https"
-        let newUrl =  urlComponents!.url
-        loadAndModifyM3U8(videoUrl: newUrl!, loadingRequest: loadingRequest)
+        let m3u8Url =  urlComponents!.url
+        loadAndModifyM3U8(url: m3u8Url!, loadingRequest: loadingRequest)
     }
     
-    func loadAndModifyM3U8(videoUrl: URL, loadingRequest: AVAssetResourceLoadingRequest) {
-        let request = URLRequest(url: videoUrl)
+    func loadAndModifyM3U8(url: URL, loadingRequest: AVAssetResourceLoadingRequest) {
+        let request = URLRequest(url: url)
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: request) { data, response, _ in
             guard let data = data else { return }
             let m3u8DataString = self.parseAndModifyM3U8Data(m3u8Data: data)
-            let modifiedData = self.modifyVideoChunkURL(videoUrl: videoUrl, m3u8Data: m3u8DataString)
+            let modifiedData = self.replaceRelativeVideoChunkUrlsWithAbsoluteUrl(url: url, m3u8Data: m3u8DataString)
             loadingRequest.contentInformationRequest?.contentType = response?.mimeType
             loadingRequest.contentInformationRequest?.isByteRangeAccessSupported = true
             loadingRequest.contentInformationRequest?.contentLength = response!.expectedContentLength
@@ -91,22 +91,21 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
         )
     }
     
-    func modifyVideoChunkURL(videoUrl: URL, m3u8Data: String) -> Data {
+    func replaceRelativeVideoChunkUrlsWithAbsoluteUrl(url: URL, m3u8Data: String) -> Data {
         /*
          Since video chunk urls will be relative paths, it will use base url("fakehttps") as its
          host. Urls with scheme "fakehttps" will get intercepted. But we don't need to intercept
          video chunks so we are changing it to correct absolute URL ("https").
          */
-        let path:NSString = videoUrl.path as NSString
-        let customPath = path.deletingLastPathComponent
-        let newKey = m3u8Data.replacingOccurrences(
-            of: "(#EXTINF:[0-9]*,\n)", with: String(format: "$1 https://%@%@/", videoUrl.host!, customPath), options: .regularExpression
+        let baseUrlPath:NSString = url.path as NSString
+        let customPath = baseUrlPath.deletingLastPathComponent
+        let modifiedData = m3u8Data.replacingOccurrences(
+            of: "(#EXTINF:[0-9]*,\n)", with: String(format: "$1 https://%@%@/", url.host!, customPath), options: .regularExpression
         )
-        return newKey.data(using: .utf8)!
-        
+        return modifiedData.data(using: .utf8)!
     }
     
-    func loadAndStoreHLSKey(keyUrl: URL, loadingRequest: AVAssetResourceLoadingRequest) {
+    func loadAndStoreEncryptionKey(keyUrl: URL, loadingRequest: AVAssetResourceLoadingRequest) {
         var request = URLRequest(url: keyUrl)
         let token: String = KeychainTokenItem.getToken()
         request.setValue("JWT " + token, forHTTPHeaderField: "Authorization")
@@ -114,12 +113,12 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: request) { data, response, _ in
             KeychainWrapper.standard.set(data!, forKey: keyUrl.absoluteString)
-            self.loadHLSKey(loadingRequest: loadingRequest, key: data!)
+            self.loadKeyToRequest(loadingRequest: loadingRequest, key: data!)
         }
         task.resume()
     }
     
-    func loadHLSKey(loadingRequest: AVAssetResourceLoadingRequest, key: Data) {
+    func loadKeyToRequest(loadingRequest: AVAssetResourceLoadingRequest, key: Data) {
         loadingRequest.contentInformationRequest?.contentType = AVStreamingKeyDeliveryPersistentContentKeyType
         loadingRequest.contentInformationRequest?.isByteRangeAccessSupported = true
         loadingRequest.contentInformationRequest?.contentLength = Int64(key.count)
