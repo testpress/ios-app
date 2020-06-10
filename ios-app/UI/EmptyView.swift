@@ -89,12 +89,12 @@ class EmptyView: UIView {
         
         frame = parentView.frame
         isHidden = false
-        parentView.bringSubview(toFront: self)
+        parentView.bringSubviewToFront(self)
     }
     
     func hide() {
         isHidden = true
-        parentView.sendSubview(toBack: self)
+        parentView.sendSubviewToBack(self)
     }
 
     @IBAction func onRetry(_ sender: UIButton) {

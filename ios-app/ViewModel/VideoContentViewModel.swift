@@ -25,23 +25,15 @@ class VideoContentViewModel {
         self.content = content
     }
     
-    func startPeriodicAttemptUpdater() {
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.updateVideoAttempt), userInfo: nil, repeats: true)
-    }
-    
-    func stopPeriodicAttemptUpdater() {
-        timer?.invalidate()
-    }
-    
     func getTitle() -> String{
         return content!.name
     }
     
     func getDescription()  -> String{
         var description = ""
-        if (!content.description!.isEmpty) {
-            description = "\(content.description!) \n"
+ 
+        if !(content?.contentDescription?.isEmpty ?? true) {
+            description = "\(String(describing: content.contentDescription)) \n"
         }
         return description
     }
@@ -82,15 +74,11 @@ class VideoContentViewModel {
                 "time_ranges": [[videoPlayerView!.startTime, currentTime]]
             ]
             let url = TPEndpointProvider.getVideoAttemptPath(attemptID: contentAttemptId!)
-            
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.put, url: url), parameters: parameters,completion: {
                 videoAttempt, error in
                 if let error = error {
                     debugPrint(error.message ?? "No error")
                     debugPrint(error.kind)
-                    let event = Event(level: .error)
-                    event.message = error.message ?? "No error"
-                    Client.shared?.send(event: event)
                     return
                 }
             })
@@ -99,7 +87,7 @@ class VideoContentViewModel {
     
     
     func removeBookmark(completion: (() -> Void)?) {
-        let urlPath = TPEndpointProvider.getBookmarkPath(bookmarkId: content.bookmarkId)
+        let urlPath = TPEndpointProvider.getBookmarkPath(bookmarkId: content!.bookmarkId.value!)
         TPApiClient.apiCall(
             endpointProvider: TPEndpointProvider(.delete, urlPath: urlPath),
             completion: {

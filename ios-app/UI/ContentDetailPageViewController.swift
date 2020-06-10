@@ -54,6 +54,8 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
+
         
         pageViewController = UIPageViewController(
             transitionStyle: .scroll,
@@ -61,10 +63,10 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
             options: nil
         )
         pageViewController.delegate = self
-        addChildViewController(pageViewController)
+        addChild(pageViewController)
         contentsContainerView.addSubview(pageViewController.view)
         pageViewController.view.frame = contentsContainerView.bounds
-        pageViewController.didMove(toParentViewController: self)
+        pageViewController.didMove(toParent: self)
         // Set navigation buttons click listener
         let previousButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onClickPreviousButton(sender:)))
@@ -118,11 +120,11 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     
     func enableBookmarkOption() {
         if !(pageViewController.viewControllers?.isEmpty)! {
-            if contentDetailDataSource.viewControllerAtIndex(getCurrentIndex())! is VideoContentViewController {
+            if getCurrentIndex() != -1 && contentDetailDataSource.viewControllerAtIndex(getCurrentIndex())! is VideoContentViewController {
                 navigationBarItem.rightBarButtonItems = [bookmarkButton]
                 bookmarkButton.isEnabled = true
                 bookmarkButton.image = Images.AddBookmark.image
-                if contents[getCurrentIndex()].bookmarkId != nil {
+                if contents[getCurrentIndex()].bookmarkId.value != nil {
                     bookmarkButton.image = Images.RemoveBookmark.image
                 }
             } else {
@@ -162,7 +164,6 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func getCurrentIndex() -> Int {
-        print("Content detail data source : \(contentDetailDataSource.contents)")
         return contentDetailDataSource.indexOfViewController(getCurretViewController())
     }
     
@@ -173,7 +174,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         }
         
         let viewController = contentDetailDataSource.viewControllerAtIndex(index)!
-        let direction: UIPageViewControllerNavigationDirection =
+        let direction: UIPageViewController.NavigationDirection =
             index > currentIndex ? .forward : .reverse
         
         pageViewController.setViewControllers([viewController] , direction: direction,
@@ -212,12 +213,12 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func updateCurrentExamContent() {
-        let content = contents[getCurrentIndex()]
         if let viewController =
             getCurretViewController() as? ContentExamAttemptsTableViewController {
 
             viewController.attempts.removeAll()
-            viewController.loadAttemptsWithProgress(url: content.attemptsUrl)
+            let content = viewController.content!
+            viewController.loadAttemptsWithProgress(url: content.getAttemptsUrl())
         } else {
             contentAttemptCreationDelegate?.newAttemptCreated()
             updateContent()
@@ -242,7 +243,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         let content = contents[getCurrentIndex()]
         TPApiClient.request(
             type: Content.self,
-            endpointProvider: TPEndpointProvider(.get, url: content.url),
+            endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
             completion: {
                 content, error in
                 if let error = error {

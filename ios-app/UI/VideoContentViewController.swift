@@ -31,6 +31,7 @@ import AVFoundation
 import Alamofire
 import Sentry
 import TTGSnackbar
+import RealmSwift
 
 
 class VideoContentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
@@ -68,7 +69,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         viewModel.createContentAttempt()
         addCustomView()
         desc.isHidden = true
-        udpateBookmarkButtonState(bookmarkId: content.bookmarkId)
+        udpateBookmarkButtonState(bookmarkId: content!.bookmarkId.value)
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         tableView.dataSource = self
@@ -153,13 +154,13 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func addOrRemoveBookmark(content: Content?) {
         bookmarkContent = content ?? self.content
-        bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId)
+        bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId.value)
     }
     
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
         if bookmarkContent?.id == content.id {
-            content.bookmarkId = bookmarkId
+            content.bookmarkId = RealmOptional<Int>(bookmarkId)
             tableView.reloadData()
             if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
                 if bookmarkId != nil {
@@ -170,7 +171,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             }
         } else {
             if let cellContentId = contents.firstIndex(where: { $0.id == bookmarkContent?.id }) {
-                contents[cellContentId].bookmarkId = bookmarkId
+                contents[cellContentId].bookmarkId = RealmOptional<Int>(bookmarkId)
                 tableView.reloadData()
             }
         }
@@ -239,7 +240,6 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.startPeriodicAttemptUpdater()
         addObservers()
         videoPlayerView.addObservers()
         
@@ -252,14 +252,19 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidConnect, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: .UIScreenDidDisconnect, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: UIScreen.didConnectNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: UIScreen.didDisconnectNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateVideoAttempt), name: UIApplication.willResignActiveNotification, object: nil)
 
         
         if #available(iOS 11.0, *) {
-            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: .UIScreenCapturedDidChange, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: UIScreen.capturedDidChangeNotification, object: nil)
         }
+    }
+    
+    @objc func updateVideoAttempt() {
+        viewModel.updateVideoAttempt()
     }
     
     @objc func willEnterForeground() {
@@ -268,7 +273,9 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func changeVideo(content: Content!) {
         self.content = content
-        self.content.index = contents.firstIndex(where: { $0.id == content.id })
+        try! Realm().write {
+            self.content.index = contents.firstIndex(where: { $0.id == content.id })!
+        }
         viewModel.content = content
         hideDescription()
         viewModel.createContentAttempt()
@@ -281,21 +288,20 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.stopPeriodicAttemptUpdater()
+        viewModel.updateVideoAttempt()
         videoPlayerView.dealloc()
 
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
-            contentDetailPageViewController.enableBookmarkOption()
         }
 
-        NotificationCenter.default.removeObserver(self, name: .UIScreenDidConnect, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIScreenDidDisconnect, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIScreen.didConnectNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIScreen.didDisconnectNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
 
         
         if #available(iOS 11.0, *) {
-            NotificationCenter.default.removeObserver(self, name: .UIScreenCapturedDidChange, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIScreen.capturedDidChangeNotification, object: nil)
         }
         
     }

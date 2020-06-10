@@ -69,7 +69,7 @@ class ForumTableViewCell: UITableViewCell {
         let attributedString = NSMutableAttributedString(string: text)
         let range = (text as NSString).range(of: action)
         attributedString.addAttribute(
-            NSAttributedStringKey.font,
+            NSAttributedString.Key.font,
             value: UIFont(name: "Rubik-Regular", size: 12.0)!,
             range: range
         )

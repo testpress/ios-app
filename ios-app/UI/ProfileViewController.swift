@@ -24,7 +24,7 @@
 //
 
 import Alamofire
-import FacebookLogin
+import FBSDKLoginKit
 import Kingfisher
 import UIKit
 
@@ -55,6 +55,7 @@ class ProfileViewController: UIViewController {
         emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
         bookmarkButtonLayout.isHidden = !Constants.BOOKMARKS_ENABLED
+        self.setStatusBarColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,7 +129,7 @@ class ProfileViewController: UIViewController {
         
         alert.addAction(UIAlertAction(
             title: Strings.YES,
-            style: UIAlertActionStyle.destructive,
+            style: UIAlertAction.Style.destructive,
             handler: { action in
                 
                 UIUtils.logout()
@@ -138,7 +139,7 @@ class ProfileViewController: UIViewController {
                 self.present(loginViewController, animated: true, completion: nil)
             }
         ))
-        alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
+        alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertAction.Style.cancel))
         present(alert, animated: true)
     }
     
@@ -174,7 +175,7 @@ class ProfileViewController: UIViewController {
             UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         
         activityViewController.popoverPresentationController?.sourceView = view
-        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop ]
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
         present(activityViewController, animated: true, completion: nil)
     }
     

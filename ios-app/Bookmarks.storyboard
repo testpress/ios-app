@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +19,7 @@
         <!--Bookmarks-->
         <scene sceneID="JJz-LF-erK">
             <objects>
-                <tableViewController storyboardIdentifier="BookmarksTableViewController" id="mGj-Oi-hti" customClass="BookmarksTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="BookmarksTableViewController" modalPresentationStyle="fullScreen" id="mGj-Oi-hti" customClass="BookmarksTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="oVg-js-VSY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,17 +31,17 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zak-vL-U6S" id="NoG-Bx-ZSp" userLabel="Content View Cell">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="90.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="yma-DC-FcR">
-                                            <rect key="frame" x="15" y="20" width="290" height="50.5"/>
+                                            <rect key="frame" x="15" y="20" width="290" height="51"/>
                                             <subviews>
                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1mv-4I-KS4">
                                                     <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_added_icon" translatesAutoresizingMaskIntoConstraints="NO" id="DhM-cF-f8p">
-                                                            <rect key="frame" x="10" y="10.5" width="16" height="16"/>
+                                                            <rect key="frame" x="10" y="10" width="16" height="16"/>
                                                             <color key="tintColor" red="0.20784313725490194" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="16" id="ckO-IJ-w8d"/>
@@ -114,7 +112,7 @@ label</string>
         <!--Bookmarks-->
         <scene sceneID="TC1-oT-adu">
             <objects>
-                <viewController storyboardIdentifier="BookmarksSlidingViewController" id="wqJ-YU-N5h" customClass="BookmarksSlidingViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookmarksSlidingViewController" modalPresentationStyle="fullScreen" id="wqJ-YU-N5h" customClass="BookmarksSlidingViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sSi-xu-bsf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -140,9 +138,9 @@ label</string>
         <!--Navigation Controller-->
         <scene sceneID="VPJ-Pg-JCt">
             <objects>
-                <navigationController storyboardIdentifier="BookmarksListNavigationController" id="yrh-0e-9vU" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BookmarksListNavigationController" modalPresentationStyle="fullScreen" id="yrh-0e-9vU" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3n0-MY-S5X">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -156,13 +154,13 @@ label</string>
         <!--Bookmarks Detail Page View Controller-->
         <scene sceneID="cOa-ae-Aif">
             <objects>
-                <viewController storyboardIdentifier="BookmarksDetailPageViewController" id="LBn-9l-lOf" customClass="BookmarksDetailPageViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookmarksDetailPageViewController" modalPresentationStyle="fullScreen" id="LBn-9l-lOf" customClass="BookmarksDetailPageViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6hn-hd-5qN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e08-mP-ZH8">
-                                <rect key="frame" x="0.0" y="20" width="320" height="498"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                             </containerView>
                             <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puT-GM-4Dg">
                                 <rect key="frame" x="0.0" y="510" width="320" height="8"/>
@@ -260,7 +258,7 @@ label</string>
         <!--Bookmarked Question View Controller-->
         <scene sceneID="vEb-wN-ei4">
             <objects>
-                <viewController storyboardIdentifier="BookmarkedQuestionViewController" id="TrS-T0-EBS" customClass="BookmarkedQuestionViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookmarkedQuestionViewController" modalPresentationStyle="fullScreen" id="TrS-T0-EBS" customClass="BookmarkedQuestionViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dR8-yg-WyG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -273,14 +271,14 @@ label</string>
                                 </constraints>
                             </view>
                             <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-Vf-cv7">
-                                <rect key="frame" x="0.0" y="20" width="320" height="8"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="8"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="8" id="3Ge-lO-f9K"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yk0-Cg-nBN">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -317,9 +315,9 @@ label</string>
         <!--Navigation Controller-->
         <scene sceneID="nxV-qv-WuN">
             <objects>
-                <navigationController storyboardIdentifier="BookmarkFolderNavigationController" id="zJT-XN-hCl" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BookmarkFolderNavigationController" modalPresentationStyle="fullScreen" id="zJT-XN-hCl" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YGu-VP-WsP">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -333,7 +331,7 @@ label</string>
         <!--Select a folder-->
         <scene sceneID="aaB-C7-0wG">
             <objects>
-                <tableViewController storyboardIdentifier="BookmarkFolderTableViewController" id="KTT-Dz-PZw" customClass="BookmarkFolderTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="BookmarkFolderTableViewController" modalPresentationStyle="fullScreen" id="KTT-Dz-PZw" customClass="BookmarkFolderTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2C9-ZJ-sOS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -345,11 +343,11 @@ label</string>
                                 <rect key="frame" x="0.0" y="28" width="320" height="105"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cV8-AH-NLh" id="kep-20-1Fz" userLabel="Content View Cell">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="104.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tXg-Tu-Dby">
-                                            <rect key="frame" x="20" y="20" width="285" height="64.5"/>
+                                            <rect key="frame" x="20" y="20" width="285" height="65"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_folder_black_24pt" translatesAutoresizingMaskIntoConstraints="NO" id="TMT-pR-HEH">
                                                     <rect key="frame" x="0.0" y="20.5" width="24" height="24"/>
@@ -364,7 +362,7 @@ label</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDO-zd-GJ3">
-                                                    <rect key="frame" x="44" y="22.5" width="241" height="19.5"/>
+                                                    <rect key="frame" x="44" y="23" width="241" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

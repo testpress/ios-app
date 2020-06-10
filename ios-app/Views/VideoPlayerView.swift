@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 import M3U8KitDynamic
+import SwiftKeychainWrapper
 
 
 class VideoPlayerView: UIView {
@@ -20,7 +21,9 @@ class VideoPlayerView: UIView {
     var timeObserver: Any?
     var videoEndObserver: Any?
     var startTime: Float = 0.0
+    var currentPlaybackSpeed: Float = 0.0
     var resolutionInfo:[VideoQuality] = [VideoQuality(resolution:"Auto", bitrate: 0)]
+    let videoPlayerResourceLoaderDelegate = VideoPlayerResourceLoaderDelegate()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -55,17 +58,24 @@ class VideoPlayerView: UIView {
     func playVideo(url: URL) {
         controlsContainerView.startLoading()
         self.url = url
-        let playerItem = AVPlayerItem(url: url)
+        let playerItem = AVPlayerItem(asset: createAVAssetWithCustomURLScheme())
         player?.replaceCurrentItem(with: playerItem)
-        player?.seek(to: kCMTimeZero)
+        player?.seek(to: CMTime.zero)
         player?.rate = 1
+        currentPlaybackSpeed = 1
         play()
-        
         if #available(iOS 10.0, *) {
             player?.currentItem?.preferredForwardBufferDuration = 1
         }
         addObservers()
         parseResolutionInfo()
+    }
+
+    func createAVAssetWithCustomURLScheme() -> AVURLAsset {
+        let modifiedURL = URLUtils.convertURLScheme(url: url, scheme: "fakehttps")
+        let asset = AVURLAsset(url: modifiedURL)
+        asset.resourceLoader.setDelegate(videoPlayerResourceLoaderDelegate, queue: DispatchQueue.main)
+        return asset
     }
     
     func parseResolutionInfo() {
@@ -168,8 +178,8 @@ class VideoPlayerView: UIView {
     }
     
     func changePlaybackSpeed(speed: PlaybackSpeed) {
-        player?.rate = speed.value
-        controlsContainerView.playerStatus = .playing
+        currentPlaybackSpeed = speed.value
+        play()
     }
     
     func pause() {
@@ -178,7 +188,7 @@ class VideoPlayerView: UIView {
     }
     
     func play() {
-        player?.play()
+        player?.rate = currentPlaybackSpeed
         controlsContainerView.playerStatus = .playing
     }
     
@@ -203,7 +213,7 @@ extension VideoPlayerView: PlayerControlDelegate {
     
     func playOrPause() {
         if (controlsContainerView.playerStatus == .finished) {
-            player?.currentItem?.seek(to: kCMTimeZero, completionHandler: { _ in
+            player?.currentItem?.seek(to: CMTime.zero, completionHandler: { _ in
                 self.play()
             })
         } else {
@@ -223,8 +233,8 @@ extension VideoPlayerView: PlayerControlDelegate {
         let newTime = playerCurrentTime + 10
         
         if newTime < (CMTimeGetSeconds(duration)) {
-            let seekTime: CMTime = CMTimeMake(Int64(newTime * 1000 as Float64), 1000)
-            player?.seek(to: seekTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+            let seekTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
+            player?.seek(to: seekTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
             startTime = Float(newTime)
             
         }
@@ -238,8 +248,8 @@ extension VideoPlayerView: PlayerControlDelegate {
         if newTime < 0 {
             newTime = 0
         }
-        let seekTime: CMTime = CMTimeMake(Int64(newTime * 1000 as Float64), 1000)
-        player?.seek(to: seekTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+        let seekTime: CMTime = CMTimeMake(value: Int64(newTime * 1000 as Float64), timescale: 1000)
+        player?.seek(to: seekTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         startTime = Float(newTime)
         
         if (controlsContainerView.playerStatus == .finished) {
@@ -265,3 +275,4 @@ extension VideoPlayerView: PlayerControlDelegate {
 protocol VideoPlayerDelegate: class {
     func showOptionsMenu()
 }
+

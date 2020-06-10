@@ -108,3 +108,8 @@ function setSelectedOptionBackground(layout) {
 function removeBackground(layout) {
     layout.className = layout.className.replace( /(?:^|\s)selected-item(?!\S)/g , '' );
 }
+
+function addWatermark(imageUrl) {
+    document.body.pseudoStyle("before", "background-image", `url(${imageUrl})`);
+    document.body.classList.add("watermark");
+}
