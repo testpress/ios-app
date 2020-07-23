@@ -91,8 +91,28 @@ class TPApiClient {
                     if (statusCode == 403) {
                         error = TPError(message: json, response: httpResponse,
                                         kind: .unauthenticated)
+                    } else if (statusCode == 401){
+                        error = TPError(message: json, response: httpResponse, kind: .unauthenticated)
+                        UIUtils.logout()
+
+                        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                            while let presentedViewController = topController.presentedViewController {
+                                topController = presentedViewController
+                            }
+                            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+                            let loginViewController = storyboard.instantiateViewController(withIdentifier:
+                                                        Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+                            
+                            topController.present(loginViewController, animated: true, completion: nil)
+                            
+                        }
+                        
                     } else {
                         error = TPError(message: json, response: httpResponse, kind: .http)
+                    }
+
+                    if (error.kind == TPError.Kind.custom) {
+                        handleCustomError(error: error)
                     }
                     completion(nil, error)
                 }
@@ -120,7 +140,55 @@ class TPApiClient {
             let error = TPError(message: description, response: httpResponse,
                                 kind: .unexpected)
             
+            if (error.kind == TPError.Kind.custom) {
+                handleCustomError(error: error)
+            }
+            
             completion(nil, error)
+        }
+    }
+    
+    static func handleCustomError(error: TPError) {
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        
+        if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController
+        }
+
+        if error.error_code == Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE {
+            let alert = UIAlertController(title: Strings.LOADING_FAILED,
+                                          message: error.error_detail,
+                                          preferredStyle: UIUtils.getActionSheetStyle())
+            alert.addAction(UIAlertAction(
+                title: Strings.OK,
+                style: UIAlertAction.Style.destructive,
+                handler: { action in
+                    let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+                    let tabViewController = storyboard.instantiateViewController(
+                        withIdentifier: Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER)
+                    rootViewController!.present(tabViewController, animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertAction.Style.cancel))
+            rootViewController!.present(alert, animated: true)
+
+        } else if error.error_code == Constants.MAX_LOGIN_LIMIT_EXCEEDED {
+            var message = Strings.MAX_LOGIN_EXCEEDED_ERROR_MESSAGE
+            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+            
+            if !instituteSettings.cooloffTime.isEmpty {
+                message += Strings.ACCOUNT_UNLOCK_INFO + "\(instituteSettings.cooloffTime) hours"
+            }
+
+            UIUtils.showSimpleAlert(
+                title: Strings.ACCOUNT_LOCKED,
+                message: message,
+                viewController: rootViewController!,
+                cancelable: true
+            )
         }
     }
     
@@ -165,10 +233,9 @@ class TPApiClient {
     }
     
     static func getUserAgent() -> String {
+        // Testpress iOS App/1.17.0.1 iPhone8,4, iOS/12_1_4 CFNetwork
         let device = UIDevice.current
-        // Testpress iOS App/1.0.1 (iPhone; iPhoneSE OS 10_3_1)
-        return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) (iPhone; \(device.deviceType) "
-            + "OS \(device.systemVersion.replacingOccurrences(of: ".", with: "_")))"
+        return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) \(device.modelName), iOS/\(device.systemVersion.replacingOccurrences(of: ".", with: "_")) CFNetwork"
     }
     
     static func getListItems<T> (endpointProvider: TPEndpointProvider,
@@ -450,3 +517,4 @@ extension Dictionary {
         }
     }
 }
+

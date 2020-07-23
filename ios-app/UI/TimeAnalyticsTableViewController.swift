@@ -43,6 +43,7 @@ class TimeAnalyticsTableViewController: UIViewController {
     var selectedIndexPath: IndexPath!
     
     override func viewDidLoad() {
+        self.setStatusBarColor()
         emptyView = EmptyView.getInstance(parentView: contentView)
         emptyView.parentView = view
         tableView.tableFooterView = UIView(frame: .zero)
@@ -178,7 +179,7 @@ extension TimeAnalyticsTableViewController: LUExpandableTableViewDelegate {
     func expandableTableView(_ expandableTableView: LUExpandableTableView,
                              heightForHeaderInSection section: Int) -> CGFloat {
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 

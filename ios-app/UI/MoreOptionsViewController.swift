@@ -44,7 +44,7 @@ class MoreOptionsViewController: UIViewController {
             UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         
         activityViewController.popoverPresentationController?.sourceView = view
-        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop ]
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
         present(activityViewController, animated: true, completion: nil)
     }
 

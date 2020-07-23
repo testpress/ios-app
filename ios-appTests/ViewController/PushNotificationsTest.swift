@@ -21,6 +21,7 @@ class PushNotificationsTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    /*
     func testDidRegisterForRemoteNotificationsWithDeviceToken() {
         /*
          This tests whether device token is getting stored or not on register remote notifications.
@@ -32,6 +33,7 @@ class PushNotificationsTest: XCTestCase {
         XCTAssertEqual(UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)!, deviceTokenString)
         XCTAssertEqual(UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN), "true")
     }
+ */
     
     func testTopController() {
         /*

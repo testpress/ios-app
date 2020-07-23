@@ -25,7 +25,7 @@
 import RealmSwift
 import UIKit
 
-class CoursesTableViewController: BaseDBViewController<Course> {
+class CoursesTableViewController: BaseDBTableViewController<Course> {
     
     var customPager: TPBasePager<Course>
     var customItems = [CustomCourse]()

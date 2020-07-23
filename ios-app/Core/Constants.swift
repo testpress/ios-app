@@ -70,7 +70,13 @@ struct Constants {
     static let CONTENT_DETAIL_PAGE_VIEW_CONTROLLER = "ContentDetailPageViewController"
     static let HTML_CONTENT_VIEW_CONTROLLER = "HtmlContentViewController"
     static let ATTACHMENT_DETAIL_VIEW_CONTROLLER = "AttachmentDetailViewController"
+    static let VIDEO_CONTENT_VIEW_CONTROLLER = "VideoContentViewController"
     static let CONTENT_START_EXAM_VIEW_CONTROLLER = "ContentStartExamViewController"
+    static let START_QUIZ_EXAM_VIEW_CONTROLLER = "StartQuizExamViewController"
+    static let QUIZ_EXAM_VIEW_CONTROLLER = "QuizExamViewController"
+    static let QUIZ_QUESTION_VIEW_CONTROLLER = "QuizQuestionViewController"
+    static let QUIZ_QUESTIONS_PAGE_VIEW_CONTROLLER = "QuizQuestionsPageViewController"
+    
     static let CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER = "ContentExamAttemptsTableViewController"
     static let POST_TABLE_VIEW_CELL = "PostTableViewCell"
     static let POST_STORYBOARD = "Post"
@@ -106,6 +112,8 @@ struct Constants {
     static let BOOKMARK_FOLDER_NAVIGATION_CONTROLLER = "BookmarkFolderNavigationController"
     static let BOOKMARK_FOLDER_TABLE_VIEW_CELL = "BookmarkFolderTableViewCell"
     static let VERIFY_PHONE_VIEW_CONTROLLER = "VerifyPhoneViewController"
+    static let SHARE_TO_UNLOCK_VIEW_CONTROLLER = "ShareToUnlockViewController"
+    static let LOGIN_ACTIVITY_VIEW_CONTROLLER = "LoginActivityViewController"
 
     
     static let PAGE = "page"
@@ -125,7 +133,10 @@ struct Constants {
     static let DEVICE_TOKEN = "device_token"
     static let FCM_TOKEN = "fcm_token"
     static let REGISTER_DEVICE_TOKEN = "register_device_token"
-
+    
+    //    ERROR_CODES
+    static let MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE = "parallel_login_restriction"
+    static let MAX_LOGIN_LIMIT_EXCEEDED = "max_login_exceeded"
 
     
     static func getAppVersion() -> String {

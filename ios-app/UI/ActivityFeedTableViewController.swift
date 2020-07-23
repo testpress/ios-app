@@ -46,7 +46,7 @@ class ActivityFeedTableViewController: UITableViewController {
         activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 150)
         // Set table view footer as progress spinner
-        let pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let pagingSpinner = UIActivityIndicatorView(style: .gray)
         pagingSpinner.startAnimating()
         pagingSpinner.color = Colors.getRGB(Colors.PRIMARY)
         pagingSpinner.hidesWhenStopped = true

@@ -26,8 +26,9 @@
 import TTGSnackbar
 import UIKit
 import WebKit
+import Alamofire
 
-class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
+class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler, BookmarkDelegate {
     
     var previousCommentsPager: CommentPager!
     var newCommentsPager: CommentPager!
@@ -41,6 +42,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         
         imageUploadHelper.delegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = self
         webView.loadHTMLString(
             WebViewUtils.getQuestionHeader() + getAdditionalHeaders() + getHtml(),
             baseURL: Bundle.main.bundleURL
@@ -72,7 +74,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     func getPreviousCommentsPager() -> CommentPager {
         if previousCommentsPager == nil {
             attemptItem.question.commentsUrl =
-                TPEndpointProvider.getCommentsUrl(questionId: attemptItem.question.id!)
+                TPEndpointProvider.getCommentsUrl(questionId: attemptItem.question.id)
             
             previousCommentsPager = CommentPager(attemptItem.question.commentsUrl)
             previousCommentsPager.queryParams.updateValue("-created", forKey: Constants.ORDER)
@@ -277,8 +279,8 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         for (i, attemptAnswer) in attemptQuestion.answers.enumerated() {
             if isSingleMCQType || isMultipleMCQType {
                 var optionColor: String?
-                if attemptItem.selectedAnswers.contains(attemptAnswer.id!) {
-                    if attemptAnswer.isCorrect! {
+                if attemptItem.selectedAnswers.contains(attemptAnswer.id) {
+                    if attemptAnswer.isCorrect {
                         optionColor = Colors.MATERIAL_GREEN;
                     } else {
                         optionColor = Colors.MATERIAL_RED
@@ -289,7 +291,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                     index: i,
                     color: optionColor
                 )
-                if attemptAnswer.isCorrect! {
+                if attemptAnswer.isCorrect {
                     correctAnswerHtml += WebViewUtils.getCorrectAnswerIndexWithTags(index: i)
                 }
             } else if isNumericalType {
@@ -349,11 +351,11 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             "</div>";
         }
         // Add Subject
-        if attemptQuestion.subject != nil && !attemptQuestion.subject!.isEmpty &&
-            !attemptQuestion.subject!.elementsEqual("Uncategorized") {
+        if !attemptQuestion.subject.isEmpty &&
+            !attemptQuestion.subject.elementsEqual("Uncategorized") {
                 html += WebViewUtils.getReviewHeadingTags(headingText: Strings.SUBJECT_HEADING)
                 html += "<div class='subject'>" +
-                    attemptQuestion.subject! +
+                    attemptQuestion.subject +
                 "</div>";
         }
         html += "</div>"
@@ -387,12 +389,45 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     
     func getHtmlAboveQuestion() -> String {
         // Add index
-        var html = "<div class='review-question-index'>\((attemptItem!.index)! + 1)</div>"
+        var html = "<div class='review-question-index'>\((attemptItem!.index) + 1)</div>"
         if (Constants.BOOKMARKS_ENABLED) {
             let attemptItemBookmarked = attemptItem!.bookmarkId != nil
             html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: attemptItemBookmarked)
         }
         return html
+    }
+    
+    func onClickMoveButton() {
+    }
+    
+    func removeBookmark() {
+    }
+    
+    func displayRemoveButton() {
+    }
+    
+    func onClickBookmarkButton() {
+        self.evaluateJavaScript("hideBookmarkButton();")
+    }
+    
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = self.attemptItem.id
+        parameters["content_type"] = ["model": "userselectedanswer", "app_label": "exams"]
+        return parameters
+    }
+    
+    func updateBookmark(bookmarkId: Int?) {
+        self.attemptItem.bookmarkId = bookmarkId
+        self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
+    }
+    
+    func displayBookmarkButton() {
+        self.evaluateJavaScript("displayBookmarkButton();")
+    }
+    
+    func displayMoveButton() {
+        self.evaluateJavaScript("displayMoveButton();")
     }
     
 }

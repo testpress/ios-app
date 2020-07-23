@@ -90,12 +90,20 @@ class CourseTableViewCell: UITableViewCell {
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         let viewController: UIViewController
-        if course != nil {
-            if !course.external_content_link.isEmpty {
-                let webViewController = WebViewController()
-                webViewController.url = course.external_content_link
-                webViewController.title = course.title
-                parentViewController.present(webViewController, animated: true, completion: nil)
+        if !course.external_content_link.isEmpty {
+            let webViewController = WebViewController()
+            webViewController.url = course.external_content_link
+            webViewController.title = course.title
+            parentViewController.present(webViewController, animated: true, completion: nil)
+        } else {
+            if course.chaptersCount > 0 {
+                let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
+                
+                chaptersViewController.courseId = course.id
+                chaptersViewController.coursesUrl = course.url
+                chaptersViewController.title = course.title
+                viewController = chaptersViewController
             } else {
                 if course.chaptersCount > 0 {
                     let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
