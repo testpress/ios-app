@@ -61,6 +61,10 @@ class ContentsTableViewController: BaseDBTableViewControllerV2<ContentsListRespo
     }
     
     override func getItemsFromDb() -> [Content] {
+        if (chapterId == nil) {
+            return []
+        }
+        
         let filterQuery = String(format: "chapterId=%d", chapterId)
         return DBManager<Content>().getItemsFromDB(filteredBy: filterQuery, byKeyPath: "order")
     }

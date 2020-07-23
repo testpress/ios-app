@@ -49,7 +49,9 @@ class ImagePicker: NSObject {
             pickerController.sourceType = sourceType
             viewController.present(pickerController, animated: true, completion: nil)
         } else {
-            TTGSnackbar(message: Strings.YOUR_DEVAICE_NOT_SUPPORTED, duration: .middle).show()
+            DispatchQueue.main.async {
+                TTGSnackbar(message: Strings.YOUR_DEVAICE_NOT_SUPPORTED, duration: .middle).show()
+            }
         }
     }
     
