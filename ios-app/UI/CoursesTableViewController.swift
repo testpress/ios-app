@@ -36,10 +36,14 @@ class CoursesTableViewController: BaseDBTableViewController<Course> {
     let ILP2020 = CustomCourse(title: "ILP 2020",
                                        url: "https://ilp2020.iasbaba.com/",
                                        image: Images.PaperAirplaneIcon.image)
+    let ILP2021 = CustomCourse(title: "ILP 2021",
+                                       url: "https://learn.iasbaba.com/",
+                                       image: Images.PaperAirplaneIcon.image)
     
     required init?(coder aDecoder: NSCoder) {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
         customPager = CoursePager()
+        customItems.append(ILP2021)
         customItems.append(babapedia2020)
         customItems.append(ILP2020)
         super.init(pager: customPager, coder: aDecoder)

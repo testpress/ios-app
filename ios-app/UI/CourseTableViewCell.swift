@@ -41,20 +41,21 @@ class CourseTableViewCell: UITableViewCell {
         let coursesCount = viewController.items.count
         externalLinkLabel.isHidden = true
         
-        if coursesCount > position {
-            course = viewController.items[position]
+        if position < viewController.customItems.count {
+            course = nil
+            customCourse = viewController.customItems[position]
+            courseName.text = customCourse.title
+            thumbnailImage.image = customCourse.image
+        } else {
+            course = viewController.items[position - viewController.customItems.count]
             courseName.text = course.title
             thumbnailImage.kf.setImage(with: URL(string: course.image),
                                        placeholder: Images.PlaceHolder.image)
             if !course.external_content_link.isEmpty {
                 displayExternalLabel()
             }
-        } else {
-            course = nil
-            customCourse = viewController.customItems[position - coursesCount]
-            courseName.text = customCourse.title
-            thumbnailImage.image = customCourse.image
         }
+        
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
@@ -90,25 +91,29 @@ class CourseTableViewCell: UITableViewCell {
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         let viewController: UIViewController
-        if !course.external_content_link.isEmpty {
+        print("Course : ", customCourse)
+        if (customCourse != nil) {
+            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+            let browserViewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.IN_APP_BROWSER_VIEW_CONTROLLER) as! InAppBrowserViewController
+            
+            browserViewController.url = customCourse.url
+            browserViewController.title = customCourse.title
+            viewController = browserViewController
+            viewController.modalPresentationStyle = .fullScreen
+            parentViewController.present(viewController, animated: true, completion: nil)
+        } else if (course != nil && !course.external_content_link.isEmpty) {
             let webViewController = WebViewController()
             webViewController.url = course.external_content_link
             webViewController.title = course.title
+            webViewController.modalPresentationStyle = .fullScreen
             parentViewController.present(webViewController, animated: true, completion: nil)
         } else {
-            if course.chaptersCount > 0 {
-                let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
-                    Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
-                
-                chaptersViewController.courseId = course.id
-                chaptersViewController.coursesUrl = course.url
-                chaptersViewController.title = course.title
-                viewController = chaptersViewController
-            } else {
                 if course.chaptersCount > 0 {
                     let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
                         Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
                     
+                    chaptersViewController.courseId = course.id
                     chaptersViewController.coursesUrl = course.url
                     chaptersViewController.title = course.title
                     viewController = chaptersViewController
@@ -124,16 +129,6 @@ class CourseTableViewCell: UITableViewCell {
                     viewController = contentsNavigationController
                 }
                 parentViewController.present(viewController, animated: true, completion: nil)
-        }
-        }else {
-            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
-            let browserViewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.IN_APP_BROWSER_VIEW_CONTROLLER) as! InAppBrowserViewController
-            
-            browserViewController.url = customCourse.url
-            browserViewController.title = customCourse.title
-            viewController = browserViewController
-            parentViewController.present(viewController, animated: true, completion: nil)
         }
     
     }
