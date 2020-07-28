@@ -307,7 +307,12 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     func showPlaybackSpeedMenu() {
-        let alert = UIAlertController(title: "Playback Speed", message: nil, preferredStyle: .actionSheet)
+        var alert: UIAlertController!
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            alert = UIAlertController(title: "Playback Speed", message: nil, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: "Playback Speed", message: nil, preferredStyle: .actionSheet)
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         PlaybackSpeed.allCases.forEach{ playbackSpeed in
             let action = UIAlertAction(title: playbackSpeed.rawValue, style: .default, handler: { (_) in
@@ -326,7 +331,13 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     func showQualitySelector() {
-        let alert = UIAlertController(title: "Quality", message: nil, preferredStyle: .actionSheet)
+        var alert: UIAlertController!
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            alert = UIAlertController(title: "Quality", message: nil, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: "Quality", message: nil, preferredStyle: .actionSheet)
+        }
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         for resolutionInfo in videoPlayerView.resolutionInfo {
@@ -344,7 +355,12 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     func displayOptions() {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        var alert: UIAlertController!
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Playback Speed", style: .default, handler: { _ in
             self.showPlaybackSpeedMenu()
