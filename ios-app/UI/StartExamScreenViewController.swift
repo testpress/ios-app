@@ -25,6 +25,7 @@
 
 import SlideMenuControllerSwift
 import UIKit
+import RealmSwift
 
 class StartExamScreenViewController: UIViewController {
 
@@ -54,6 +55,7 @@ class StartExamScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
         
         emptyView = EmptyView.getInstance(parentView: scrollView)
         view.addSubview(emptyView)
@@ -64,7 +66,7 @@ class StartExamScreenViewController: UIViewController {
             }
         }
         examTitle.text = exam.title
-        questionsCount.text = String(exam.numberOfQuestions!)
+        questionsCount.text = String(exam.numberOfQuestions)
         if attempt?.remainingTime != nil {
             duration.text = attempt?.remainingTime!
             durationLabel.text = "Time Remaining"
@@ -76,8 +78,8 @@ class StartExamScreenViewController: UIViewController {
         startEndDate.text = FormatDate.format(dateString: exam?.startDate) + " -\n" +
             FormatDate.format(dateString: exam?.endDate)
         
-        if exam?.description != nil {
-            descriptionLabel.text = exam?.description
+        if exam?.examDescription != nil {
+            descriptionLabel.text = exam?.examDescription
         } else {
             descriptionLabel.isHidden = true
         }
@@ -120,7 +122,7 @@ class StartExamScreenViewController: UIViewController {
         if content != nil && contentAttempt == nil {
             endpointProvider = TPEndpointProvider(
                 .post,
-                url: (content?.attemptsUrl)!
+                url: content.getAttemptsUrl()
             )
             startAttempt(type: ContentAttempt.self, endpointProvider: endpointProvider)
             return
@@ -137,7 +139,7 @@ class StartExamScreenViewController: UIViewController {
         } else {
             endpointProvider = TPEndpointProvider(
                 .put,
-                url: attempt!.url! + TPEndpoint.resumeAttempt.urlPath
+                url: attempt!.url + TPEndpoint.resumeAttempt.urlPath
             )
         }
         startAttempt(type: Attempt.self, endpointProvider: endpointProvider)
@@ -174,7 +176,9 @@ class StartExamScreenViewController: UIViewController {
                 self.alertController.dismiss(animated: true, completion: nil)
                 if let contentAttempt = attempt as? ContentAttempt {
                     self.contentAttempt = contentAttempt
-                    self.content.attemptsCount += 1
+                    try! Realm().write{
+                        self.content.attemptsCount += 1
+                    }
                     self.attempt = contentAttempt.assessment
                 } else {
                     self.attempt = attempt as? Attempt

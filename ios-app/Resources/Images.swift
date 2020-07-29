@@ -49,7 +49,20 @@ enum Images: String {
     case ActivitiesFlatIcon = "activities_flat_icon"
     case LeaderboardFlatIcon = "leaderboard_flat_icon"
     case LoginActivityIcon = "lock"
-    
+    case PlayIcon = "play_icon"
+    case PauseIcon = "pause_icon"
+    case ReloadIcon = "reload"
+    case Round = "round"
+    case RemoveBookmark = "bookmark_filled"
+    case AddBookmark = "bookmark_outline"
+    case CaretUp = "caret_up"
+    case CaretDown = "caret_down"
+    case VideoIcon = "video"
+    case Article = "article"
+    case Quill = "quill"
+    case Attachment = "attachment"
+    case TickIcon = "tick"
+
     var image: UIImage {
         return UIImage(asset: self)
     }

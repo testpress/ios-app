@@ -36,6 +36,7 @@ class ContentsTableViewCell: UITableViewCell {
     @IBOutlet weak var attemptedTick: UIImageView!
     @IBOutlet weak var lock: UIView!
     @IBOutlet weak var contentLayout: UIStackView!
+    @IBOutlet weak var questionsCountStack: UIStackView!
     
     var parentViewController: ContentsTableViewController! = nil
     var position: Int!
@@ -45,21 +46,25 @@ class ContentsTableViewCell: UITableViewCell {
         self.position = position
         let content = parentViewController.items[position]
         contentName.text = content.name
-        thumbnailImage.kf.setImage(with: URL(string: content.image!),
+        thumbnailImage.kf.setImage(with: URL(string: content.image),
                                    placeholder: Images.PlaceHolder.image)
-        
         if content.exam != nil {
             duration.text = content.exam?.duration
-            questionsCount.text = String(content.exam!.numberOfQuestions!)
+            questionsCount.text = String(content.exam!.numberOfQuestions)
             examDetailsLayout.isHidden = false
         } else {
             examDetailsLayout.isHidden = true
         }
-        if content.isLocked || !content.hasStarted {
+        if content.isLocked || content.isScheduled{
             lock.isHidden = false
             contentLayout.alpha = 0.5
             thumbnailImage.alpha = 0.5
             attemptedTick.isHidden = true
+            
+            if (content.isScheduled) {
+                showScheduledDate()
+            }
+
         } else {
             lock.isHidden = true
             contentLayout.alpha = 1
@@ -72,7 +77,24 @@ class ContentsTableViewCell: UITableViewCell {
         contentViewCell.addGestureRecognizer(tapRecognizer)
     }
     
+    func showScheduledDate() {
+        let content = parentViewController.items[position]
+
+        if content.isScheduled {
+            examDetailsLayout.isHidden = false
+            let date = FormatDate.format(dateString: content.start)
+            duration.text = "This will be available on \(date)"
+            questionsCountStack.isHidden = true
+        }
+    }
+    
     @objc func onItemClick() {
+        let content = parentViewController.items[position]
+        
+        if (content.isScheduled) {
+            return
+        }
+        
         let viewController = parentViewController.storyboard?.instantiateViewController(
             withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
             as! ContentDetailPageViewController

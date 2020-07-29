@@ -51,7 +51,7 @@ class BookmarksTableViewCell: BaseTableViewCell {
                 contentName.text = content.attachment!.title
                 thumbnailImage.image = #imageLiteral(resourceName: "file_download_icon")
             } else if content.htmlObject != nil {
-                contentName.text = content.htmlObject.title
+                contentName.text = content.htmlObject?.title
                 thumbnailImage.image = #imageLiteral(resourceName: "ebook_content_icon")
             }
         }

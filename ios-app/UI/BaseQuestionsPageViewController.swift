@@ -62,10 +62,10 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                                                   options: nil)
         
         pageViewController.delegate = self
-        addChildViewController(pageViewController)
+        addChild(pageViewController)
         questionsContainerView.addSubview(pageViewController.view)
         pageViewController.view.frame = questionsContainerView.bounds
-        pageViewController.didMove(toParentViewController: self)
+        pageViewController.didMove(toParent: self)
         // Set navigation buttons click listener
         let previousButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onClickPreviousButton(sender:)))
@@ -132,7 +132,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                         })
                         return
                     }
-                    self.attemptItems = self.attemptItems.sorted(by: { $0.order! < $1.order! })
+                    self.attemptItems = self.attemptItems.sorted(by: { $0.order < $1.order })
                     self.baseQuestionsDataSource = self.getQuestionsDataSource()
                     // TODO: Handle empty questions
                     let startingViewController: BaseQuestionsViewController =
@@ -198,7 +198,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         let viewController =
             [baseQuestionsDataSource?.viewControllerAtIndex(index)] as! [UIViewController]
         
-        let direction: UIPageViewControllerNavigationDirection =
+        let direction: UIPageViewController.NavigationDirection =
             index > currentIndex ? .forward : .reverse
         
         pageViewController.setViewControllers(viewController , direction: direction,
@@ -264,11 +264,11 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
             alert = UIAlertController(
                 title: "No internet connection",
                 message: message,
-                preferredStyle: UIAlertControllerStyle.alert
+                preferredStyle: UIAlertController.Style.alert
             )
             
             alert.addAction(UIAlertAction(
-                title: "Retry", style: UIAlertActionStyle.default, handler: {
+                title: "Retry", style: UIAlertAction.Style.default, handler: {
                     (action: UIAlertAction!) in
                     alert.dismiss(animated: false)
                     self.showLoadingProgress(completionHandler: {
@@ -281,13 +281,13 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
             alert = UIAlertController(
                 title: "Loading Failed",
                 message: "Some thing went wrong, please try again later.",
-                preferredStyle: UIAlertControllerStyle.alert
+                preferredStyle: UIAlertController.Style.alert
             )
             cancelButtonTitle = "OK"
         }
         
         alert.addAction(UIAlertAction(
-            title: cancelButtonTitle, style: UIAlertActionStyle.default,
+            title: cancelButtonTitle, style: UIAlertAction.Style.default,
             handler: { (action: UIAlertAction!) in
                 self.questionsPageViewDelegate?.goBack()
             }

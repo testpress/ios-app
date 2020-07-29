@@ -26,6 +26,8 @@
 import Lottie
 import PDFReader
 import UIKit
+import Alamofire
+import RealmSwift
 
 class AttachmentDetailViewController: UIViewController {
     
@@ -61,6 +63,7 @@ class AttachmentDetailViewController: UIViewController {
         super.viewDidLoad()
         UIUtils.setButtonDropShadow(downloadAttachmentButton)
         bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = self
         bookmarkAnimationContainer.isHidden = true
         if Constants.BOOKMARKS_ENABLED {
             if bookmark == nil {
@@ -69,7 +72,7 @@ class AttachmentDetailViewController: UIViewController {
                 animationView.center.y = animationView.center.y - 5
                 animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
                 bookmarkOptionsLayout.isHidden = true
-                if content.bookmarkId != nil {
+                if content.bookmarkId.value != nil {
                     bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
                     bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")
                 }
@@ -94,12 +97,12 @@ class AttachmentDetailViewController: UIViewController {
     func displayAttachment() {
         contentTitle.text = content.attachment!.title
         let attachment = content.attachment!
-        if attachment.description != nil && attachment.description != "" {
-            contentDescription.text = attachment.description
+        if attachment.attachmentDescription != nil && attachment.attachmentDescription != "" {
+            contentDescription.text = attachment.attachmentDescription
         } else {
             contentDescription.isHidden = true
         }
-        attachmentUrl = URL(string: content.attachment!.attachmentUrl!)!
+        attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.pathExtension != "pdf" {
             viewAttachmentButton.isHidden = true
         } else {
@@ -169,16 +172,16 @@ class AttachmentDetailViewController: UIViewController {
         bookmarkHelper.onClickMoveButton(bookmark: bookmark)
     }
     
-    @IBAction func removeBookmark() {
+    @IBAction func onRemoveBookmark() {
         bookmarkHelper.onClickRemoveButton(bookmark: bookmark)
     }
     
     @IBAction func bookmark(_ sender: UIButton) {
-        bookmarkHelper.onClickBookmarkButton(bookmarkId: content.bookmarkId)
+        bookmarkHelper.onClickBookmarkButton(bookmarkId: content?.bookmarkId.value)
     }
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
-        content.bookmarkId = bookmarkId
+        content.bookmarkId = RealmOptional<Int>(bookmarkId)
         if bookmarkId != nil {
             bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
             bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")
@@ -214,6 +217,50 @@ class AttachmentDetailViewController: UIViewController {
     
     @objc func back() {
         dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+extension AttachmentDetailViewController: BookmarkDelegate {
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = content.id
+        parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
+        return parameters
+    }
+    
+    func updateBookmark(bookmarkId: Int?) {
+        self.udpateBookmarkButtonState(bookmarkId: bookmarkId)
+    }
+    
+    func onClickMoveButton() {
+        self.moveButton.isHidden = true
+        self.moveAnimationView.isHidden = false
+    }
+    
+    func displayRemoveButton() {
+        self.removeAnimationView.isHidden = true
+        self.removeButton.isHidden = false
+    }
+    
+    func onClickBookmarkButton() {
+        self.bookmarkButton.isHidden = true
+        self.bookmarkAnimationContainer.isHidden = false
+    }
+    
+    func removeBookmark() {
+        self.removeButton.isHidden = true
+        self.removeAnimationView.isHidden = false
+    }
+    
+    func displayBookmarkButton() {
+        self.bookmarkAnimationContainer.isHidden = true
+        self.bookmarkButton.isHidden = false
+    }
+    
+    func displayMoveButton() {
+        self.moveAnimationView.isHidden = true
+        self.moveButton.isHidden = false
     }
     
 }
