@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1064046661341-au2upcc21m3mq2npg5avq8mqo9i1lbp7.apps.googleusercontent.com</string>
+	<string>764761056705-pcmg034sqq38kjied2mgdumsvsjpcvfi.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1064046661341-au2upcc21m3mq2npg5avq8mqo9i1lbp7</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>1064046661341-j0c619a0re0ssqpk28o4gnipsag0ks21.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.764761056705-pcmg034sqq38kjied2mgdumsvsjpcvfi</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCtZdQO-mR9mdg-6uj4ZTmAIyvzMqhXJaE</string>
+	<string>AIzaSyBXNrcdQGDYvkoyezKBndyn9l0hv2UxncI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1064046661341</string>
+	<string>764761056705</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>in.testpress.ios-app</string>
+	<string>com.rays.raysonline</string>
 	<key>PROJECT_ID</key>
-	<string>default-demo-app-bfeac</string>
+	<string>rays-online</string>
 	<key>STORAGE_BUCKET</key>
-	<string>default-demo-app-bfeac.appspot.com</string>
+	<string>rays-online.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1064046661341:ios:750aba75ca20d570</string>
+	<string>1:764761056705:ios:236760b3adc677c486bb40</string>
 	<key>DATABASE_URL</key>
-	<string>https://default-demo-app-bfeac-c6dd0.firebaseio.com</string>
+	<string>https://rays-online.firebaseio.com</string>
 </dict>
 </plist>
