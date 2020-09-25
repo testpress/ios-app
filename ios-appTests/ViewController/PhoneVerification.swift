@@ -47,7 +47,7 @@ class PhoneVerification: XCTestCase {
         Hippolyte.shared.add(stubbedRequest: stub)
         Hippolyte.shared.start()
         let label = UIButton()
-        label.setTitle("button", for:UIControlState.normal)
+        label.setTitle("button", for:UIControl.State.normal)
         verifyPhoneViewController!.verifyCodeButton = label
 
         let textField: UITextField = UITextField()

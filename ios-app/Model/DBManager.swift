@@ -109,6 +109,12 @@ class DBManager<T: Object> {
         }
     }
     
+    func deleteFromDb(objects: [T]) {
+        try! database.write {
+            database.delete(objects)
+        }
+    }
+    
     func deleteFromDb(object: T) {
         try! database.write {
             database.delete(object)

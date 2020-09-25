@@ -36,7 +36,7 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
         activityIndicator?.center = CGPoint(x: tableView.center.x, y: tableView.center.y)
 
         // Set table view footer as progress spinner
-        let pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let pagingSpinner = UIActivityIndicatorView(style: .gray)
         pagingSpinner.startAnimating()
         pagingSpinner.color = Colors.getRGB(Colors.PRIMARY)
         pagingSpinner.hidesWhenStopped = true
@@ -59,6 +59,7 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
             infoLabel.text = Strings.PARALLEL_LOGIN_RESTRICTION_INFO + "\(instituteSettings.maxParallelLogins) \n"
             infoView.addBackground(color: Colors.getRGB(Colors.BLACK_TEXT))
         }
+        self.setStatusBarColor()
         
     }
     

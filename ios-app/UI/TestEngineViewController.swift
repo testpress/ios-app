@@ -25,6 +25,7 @@
 
 import DropDown
 import UIKit
+import RealmSwift
 
 class TestEngineViewController: BaseQuestionsPageViewController {
     
@@ -63,13 +64,13 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         dropdownContainerHeight.constant = 0
         dropdownContainer.isHidden = true
         
-        sections = attempt.sections
+        sections = Array(attempt.sections)
         if sections.count > 1 {
             for i in 0 ..< sections.count {
                 if sections[i].state == Attempt.RUNNING {
                     currentSection = i
                 }
-                if sections[i].duration == nil || sections[i].duration == "0:00:00" {
+                if sections[i].duration == "" || sections[i].duration == "0:00:00" {
                     unlockedSectionExam = true;
                 }
             }
@@ -212,7 +213,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             var currentSpinnerItem: String
             let currentAttemptItem = attemptItems[getCurrentIndex()]
             if unlockedSectionExam {
-                currentSpinnerItem = currentAttemptItem.attemptSection.name
+                currentSpinnerItem = currentAttemptItem.attemptSection!.name
             } else {
                 currentSpinnerItem = currentAttemptItem.question.subject
             }
@@ -259,7 +260,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         TPApiClient.updateAttemptState(
             endpointProvider: TPEndpointProvider(
                 .sendHeartBeat,
-                url: attempt!.url! + TPEndpoint.sendHeartBeat.urlPath
+                url: attempt!.url + TPEndpoint.sendHeartBeat.urlPath
             ),
             completion: {
                 attempt, error in
@@ -283,10 +284,10 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         if attemptItem.hasChanged() {
             loadingDialogController.message = Strings.SAVING_LAST_CHANGE
             TPApiClient.saveAnswer(
-                selectedAnswer: attemptItem.savedAnswers,
-                review: attemptItem.currentReview!,
+                selectedAnswer: Array(attemptItem.savedAnswers),
+                review: attemptItem.currentReview,
                 shortAnswer: attemptItem.currentShortText,
-                endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.url!),
+                endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.url),
                 completion: {
                     newAttemptItem, error in
                     if let error = error {
@@ -297,14 +298,16 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                     }
                     
                     if completionHandler != nil {
-                        // Saved the answer on user paused or end the exam
+                        // Saved the answer on user paused or end the exam  0x600000b2ddd0
                         self.hideLoadingProgress(completionHandler: completionHandler)
                         return
                     }
-                    // Saved the answer on user navigate to other question
-                    attemptItem.selectedAnswers = newAttemptItem!.selectedAnswers
-                    attemptItem.review = newAttemptItem!.review
-                    attemptItem.shortText = newAttemptItem!.shortText
+                    try! Realm().write {
+                        // Saved the answer on user navigate to other question
+                        attemptItem.selectedAnswers = newAttemptItem!.selectedAnswers
+                        attemptItem.review = newAttemptItem!.review
+                        attemptItem.shortText = newAttemptItem!.shortText
+                    }
                     self.attemptItems[index] = attemptItem;
                     
                     if self.showingProgress {
@@ -386,7 +389,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         } else {
             endpointProvider = TPEndpointProvider(
                 .put,
-                url: attempt!.url! + TPEndpoint.endExam.urlPath
+                url: attempt!.url + TPEndpoint.endExam.urlPath
             )
             endExam(type: Attempt.self, endpointProvider: endpointProvider)
         }
@@ -436,7 +439,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         
         alertDialog.addAction(UIAlertAction(
             title: Strings.YES,
-            style: UIAlertActionStyle.default,
+            style: UIAlertAction.Style.default,
             handler: { action in
                 self.showLoadingProgress(completionHandler: {
                     self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
@@ -446,7 +449,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             }
         ))
         alertDialog.addAction(
-            UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
+            UIAlertAction(title: Strings.CANCEL, style: UIAlertAction.Style.cancel))
         
         present(alertDialog, animated: true, completion: {
             self.alertDialog.view.superview?.isUserInteractionEnabled = true
@@ -468,7 +471,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             preferredStyle: UIUtils.getActionSheetStyle()
         )
         alertDialog.addAction(UIAlertAction(
-            title: Strings.PAUSE, style: UIAlertActionStyle.default, handler: {
+            title: Strings.PAUSE, style: UIAlertAction.Style.default, handler: {
                 (action: UIAlertAction!) in
                 self.showLoadingProgress(completionHandler: {
                     self.saveAnswer(index: self.getCurrentIndex(), completionHandler: {
@@ -479,7 +482,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         ))
         if !firstAttemptOfLockedSectionExam {
             alertDialog.addAction(UIAlertAction(
-                title: Strings.END, style: UIAlertActionStyle.destructive,
+                title: Strings.END, style: UIAlertAction.Style.destructive,
                 handler: { (action: UIAlertAction!) in
                     if self.lockedSectionExam &&
                         self.currentSection + 1 < self.sections.count {
@@ -493,7 +496,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         }
         alertDialog.addAction(UIAlertAction(
             title: Strings.CANCEL,
-            style: UIAlertActionStyle.cancel
+            style: UIAlertAction.Style.cancel
         ))
         present(alertDialog, animated: true, completion: nil)
     }
@@ -546,7 +549,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             userInfo: nil,
             repeats: true
         )
-        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+        RunLoop.main.add(timer, forMode: RunLoop.Mode.common)
     }
     
     override func showLoadingProgress(completionHandler: (() -> Void)?) {
@@ -565,7 +568,7 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
             var groupedAttemptItems = OrderedDictionary<String, [AttemptItem]>()
             for attemptItem in attemptItems {
                 if unlockedSectionExam {
-                    let section = attemptItem.attemptSection.name!
+                    let section = attemptItem.attemptSection!.name
                     groupAttemptItems(
                         spinnerItem: section,
                         attemptItem: attemptItem,
@@ -574,12 +577,14 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
                     )
                 } else {
                     let subject = attemptItem.question.subject
-                    if subject == nil || subject!.isEmpty {
-                        // If subject is empty, subject = "Uncategorized"
-                        attemptItem.question.subject = Constants.UNCATEGORIZED
+                    if subject.isEmpty {
+                        try! Realm().write {
+                            // If subject is empty, subject = "Uncategorized"
+                            attemptItem.question.subject = Constants.UNCATEGORIZED
+                        }
                     }
                     groupAttemptItems(
-                        spinnerItem: subject!,
+                        spinnerItem: subject,
                         attemptItem: attemptItem,
                         spinnerItemsList: &spinnerItemsList,
                         groupedAttemptItems: &groupedAttemptItems
@@ -650,7 +655,7 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
             accessCodeExamsViewController.dismiss(animated: false, completion: nil)
         } else if presentingViewController is UITabBarController {
             let tabViewController =
-                presentingViewController?.childViewControllers[0] as! ExamsTabViewController
+                presentingViewController?.children[0] as! ExamsTabViewController
             
             tabViewController.dismiss(animated: false, completion: {
                 if tabViewController.currentIndex != 2 {
@@ -666,7 +671,7 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
                 // Remove exsiting items
                 attemptsListViewController.attempts.removeAll()
                 // Load new attempts list with progress
-                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl!)
+                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl)
             })
         } else if presentingViewController is ContentDetailPageViewController {
             

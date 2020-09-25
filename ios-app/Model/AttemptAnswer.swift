@@ -25,23 +25,21 @@
 
 import ObjectMapper
 
-public class AttemptAnswer {
-    var textHtml: String!
-    var id: Int?;
-    var isCorrect: Bool? {
-        didSet { isCorrect = isCorrect != nil && isCorrect! }
-    }
-    var marks: String!
-    
-    public required init?(map: Map) {
-    }
-}
+class AttemptAnswer: DBModel {
+    @objc dynamic var textHtml: String = ""
+    @objc dynamic var id: Int = 0;
+    @objc dynamic var isCorrect: Bool = false
+    @objc dynamic var marks: String!
 
-extension AttemptAnswer: TestpressModel {
-    public func mapping(map: Map) {
+    
+    public override func mapping(map: Map) {
         textHtml <- map["text_html"]
         id <- map["id"]
         isCorrect <- map["is_correct"]
         marks <- map["marks"]
+    }
+    
+    override public static func primaryKey() -> String? {
+        return "id"
     }
 }

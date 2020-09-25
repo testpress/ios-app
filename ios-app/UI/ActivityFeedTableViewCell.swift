@@ -57,12 +57,12 @@ class ActivityFeedTableViewCell: UITableViewCell {
             if let contentAttempt = activityFeed.actionObject as? ContentAttempt {
                 if let content = pager.contents[contentAttempt.chapterContentId] {
                     content.order = 0
-                    content.url = Constants.BASE_URL + "/api/v2.2/contents/\(content.id!)/"
+                    content.url = Constants.BASE_URL + "/api/v2.2/contents/\(content.id)/"
                     content.attemptsUrl = content.url + "attempts/"
                     self.content = content
                     if contentAttempt.assessment != nil {
                         action = "attempted exam "
-                        actionObjectName = exams[contentAttempt.assessment.exam]!.title!
+                        actionObjectName = exams[contentAttempt.assessment.exam]!.title
                         thumbnailImage.image = Images.ExamAttemptedIcon.image
                     } else if contentAttempt.content != nil {
                         action = "read the article "
@@ -85,37 +85,37 @@ class ActivityFeedTableViewCell: UITableViewCell {
             if let content = activityFeed.actionObject as? Content {
                 action = " added "
                 content.order = 0
-                content.url = Constants.BASE_URL + "/api/v2.2/contents/\(content.id!)/"
+                content.url = Constants.BASE_URL + "/api/v2.2/contents/\(content.id)/"
                 content.attemptsUrl = content.url + "attempts/"
-                if content.examId != nil {
+                if content.examId != -1 {
                     action += "an exam "
                     let exam = exams[content.examId]!
                     content.exam = exam
-                    actionObjectName = exam.title!
+                    actionObjectName = exam.title
                     thumbnailImage.image = Images.ExamAddedIcon.image
                     duration.text = exam.duration
-                    studentsAttemptedCount.text = "\(exam.studentsAttemptedCount!) students"
-                    questionsCount.text = String(exam.numberOfQuestions!)
+                    studentsAttemptedCount.text = "\(exam.studentsAttemptedCount) students"
+                    questionsCount.text = String(exam.numberOfQuestions)
                     examDetails.isHidden = false
-                } else if content.htmlContentId != nil {
+                } else if content.htmlContentId != -1 {
                     action += "an ariticle "
                     let htmlContent = pager.htmlContents[content.htmlContentId]!
                     content.htmlContentTitle = htmlContent.title
                     content.htmlContentUrl = content.url + "html/"
-                    actionObjectName = htmlContent.title!
+                    actionObjectName = htmlContent.title
                     thumbnailImage.image = Images.PostAdded.image
                     content.htmlContentUrl = content.url + "html/"
-                } else if content.videoId != nil {
+                } else if content.videoId != -1 {
                     action += "a video "
                     let video = pager.videos[content.videoId]!
                     content.video = video
-                    actionObjectName = video.title!
+                    actionObjectName = video.title
                     thumbnailImage.image = Images.VideoAddedIcon.image
-                } else if content.attachmentId != nil {
+                } else if content.attachmentId != -1 {
                     action += "a file "
                     let attachment = pager.attachments[content.attachmentId]!
                     content.attachment = attachment
-                    actionObjectName = attachment.title!
+                    actionObjectName = attachment.title
                     thumbnailImage.image = Images.FileDownloadIcon.image
                 }
                 self.content = content
@@ -168,7 +168,7 @@ class ActivityFeedTableViewCell: UITableViewCell {
     
     func setRubikMedium(in attributedString: NSMutableAttributedString, forRange: NSRange) {
         attributedString.addAttribute(
-            NSAttributedStringKey.font,
+            NSAttributedString.Key.font,
             value: UIFont(name: "lato-bold", size: 14.0)!,
             range: forRange
         )

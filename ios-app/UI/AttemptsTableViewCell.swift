@@ -57,7 +57,7 @@ class AttemptsTableViewCell: UITableViewCell {
                                                    givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
             
             score.text = attempt.score!
-            correct.text = String(attempt.correctCount!) + "/" + String(attempt.totalQuestions!)
+            correct.text = String(attempt.correctCount) + "/" + String(attempt.totalQuestions)
             if trophiesEnabled {
                 reviewLabel.isHidden = true
                 let trophies = String.getValue(contentAttempt!.trophies!)

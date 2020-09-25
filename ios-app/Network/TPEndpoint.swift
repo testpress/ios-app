@@ -160,7 +160,7 @@ enum TPEndpoint {
         case .endExam:
             return "end/"
         case .getCourses:
-            return "/api/v2.2.1/courses/"
+            return "/api/v2.4/courses/"
         case .getChapters:
             return "chapters/"
         case .getProfile:
@@ -226,7 +226,7 @@ enum TPEndpoint {
         case .logoutDevices:
             return "/api/v2.4/auth/logout_devices/"
         case .userVideos:
-            return "/api/v2.3/user_videos/"
+            return "/api/v2.4/user_videos/"
         default:
             return ""
         }

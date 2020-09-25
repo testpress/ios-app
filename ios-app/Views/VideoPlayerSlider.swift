@@ -100,6 +100,11 @@ class VideoSlider: UIControl {
         progressLayer.backgroundColor = UIColor.clear.cgColor
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+          backgroundLayer.path =  UIBezierPath(rect: CGRect(x: 0, y: (self.frame.size.height / 2) - self.frame.size.height / 4, width: self.frame.size.width, height: self.frame.size.height / 2.0)).cgPath
+    }
+    
     private func updateBufferLine()
     {
         let w = self.frame.size.width * CGFloat(currentBuffer)
