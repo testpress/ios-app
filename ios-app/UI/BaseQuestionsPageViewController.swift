@@ -132,7 +132,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                         })
                         return
                     }
-                    self.attemptItems = self.attemptItems.sorted(by: { $0.order! < $1.order! })
+                    self.attemptItems = self.attemptItems.sorted(by: { $0.order < $1.order })
                     self.baseQuestionsDataSource = self.getQuestionsDataSource()
                     // TODO: Handle empty questions
                     let startingViewController: BaseQuestionsViewController =

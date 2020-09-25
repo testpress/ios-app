@@ -70,7 +70,7 @@ class ExamsTableViewCell: UITableViewCell {
         self.exam = exam
         examName.text = exam.title
         duration.text = exam.duration
-        noOfQuestions.text = String(exam.numberOfQuestions!)
+        noOfQuestions.text = String(exam.numberOfQuestions)
     }
     
     @objc func showStartExamScreen() {

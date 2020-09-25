@@ -25,18 +25,20 @@
 
 import UIKit
 
-class ChaptersViewController: UIViewController {
+class ChaptersViewController:
+BaseDBViewController<Chapter> {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var navigationItemBar: UINavigationItem!
     
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var emptyView: EmptyView!
-    var items = [Chapter]()
     var pager: ChapterPager!
     var loadingItems: Bool = false
     var coursesUrl: String!
+    var courseId: Int!
     var parentId: Int? = nil
+    var firstCallback: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +57,40 @@ class ChaptersViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if (items.isEmpty) {
-            activityIndicator?.startAnimating()
+        showItemsFromDB()
+        
+        if (items.isEmpty || firstCallback) {
+            firstCallback = false
+            if (items.isEmpty) {
+                activityIndicator?.startAnimating()
+            }
             pager.reset()
             loadItems()
+        }
+    }
+    
+    override func getItemsFromDB() -> [Chapter] {
+        var filterQuery = String(format: "courseId==%d", courseId)
+        
+        if (parentId != nil) {
+            filterQuery += String(format: " AND parentId==%d", parentId!)
+        } else {
+            filterQuery += String(format: " AND parentId=0")
+        }
+        
+        return DBManager<Chapter>().getItemsFromDB(filteredBy:filterQuery, byKeyPath: "order")
+    }
+    
+    func showItemsFromDB() {
+        if (!self.getItemsFromDB().isEmpty) {
+            self.items = self.getItemsFromDB()
+            self.loadingItems = false
+            self.items = self.items.sorted(by: { $0.order < $1.order })
+            self.collectionView.reloadData()
+            if (self.activityIndicator?.isAnimating)! {
+                self.activityIndicator?.stopAnimating()
+            }
+            return
         }
     }
     
@@ -81,10 +113,13 @@ class ChaptersViewController: UIViewController {
                 self.loadItems()
             } else {
                 self.items = Array(items!.values)
+                let chaptersFromDB = DBManager<Chapter>().getItemsFromDB(filteredBy: String(format: "courseId==%d", self.courseId), byKeyPath: "order")
+                DBManager<Chapter>().deleteFromDb(objects: chaptersFromDB)
+                DBManager<Chapter>().addData(objects: items!.values)
                 if self.items.count == 0 {
                     self.setEmptyText()
                 }
-                self.items = self.items.sorted(by: { $0.order! < $1.order! })
+                self.items = self.getItemsFromDB()
                 self.collectionView.reloadData()
                 if (self.activityIndicator?.isAnimating)! {
                     self.activityIndicator?.stopAnimating()

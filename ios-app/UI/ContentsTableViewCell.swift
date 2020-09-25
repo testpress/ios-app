@@ -46,17 +46,16 @@ class ContentsTableViewCell: UITableViewCell {
         self.position = position
         let content = parentViewController.items[position]
         contentName.text = content.name
-        thumbnailImage.kf.setImage(with: URL(string: content.image!),
+        thumbnailImage.kf.setImage(with: URL(string: content.image),
                                    placeholder: Images.PlaceHolder.image)
-        
         if content.exam != nil {
             duration.text = content.exam?.duration
-            questionsCount.text = String(content.exam!.numberOfQuestions!)
+            questionsCount.text = String(content.exam!.numberOfQuestions)
             examDetailsLayout.isHidden = false
         } else {
             examDetailsLayout.isHidden = true
         }
-        if content.isLocked || !content.hasStarted || content.isScheduled{
+        if content.isLocked || content.isScheduled{
             lock.isHidden = false
             contentLayout.alpha = 0.5
             thumbnailImage.alpha = 0.5
