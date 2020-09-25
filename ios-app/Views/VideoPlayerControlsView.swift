@@ -219,6 +219,5 @@ protocol PlayerControlDelegate: class {
     func rewind()
     func goTo(seconds:Float)
     func fullScreen()
-    func changePlayBackSpeed()
     func showOptionsMenu()
 }

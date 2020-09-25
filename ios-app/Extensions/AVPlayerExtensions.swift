@@ -45,6 +45,6 @@ extension AVPlayer {
         if let range = currentItem?.loadedTimeRanges.first {
             return CMTimeRangeGetEnd(range.timeRangeValue)
         }
-        return kCMTimeZero
+        return CMTime.zero
     }
 }
