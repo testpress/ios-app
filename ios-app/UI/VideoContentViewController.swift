@@ -81,6 +81,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             handleScreenCapture()
         }
         
+        var value = UIInterfaceOrientation.landscapeRight.rawValue
+          UIDevice.current.setValue(value, forKey: "orientation")
     }
     
     
@@ -276,6 +278,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         try! Realm().write {
             self.content.index = contents.firstIndex(where: { $0.id == content.id })!
         }
+        videoPlayerView.fullScreen()
+        videoPlayerView.fullScreen()
         viewModel.content = content
         hideDescription()
         viewModel.createContentAttempt()
