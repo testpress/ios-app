@@ -37,7 +37,7 @@ class SignUpWebViewController: BaseWebViewController, WKWebViewDelegate, WKScrip
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - getNavBarHeight())
         navBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: screenSize.width, height: getNavBarHeight()))
         let navItem = UINavigationItem(title: Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String);
-        navItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.goBack))
+        navItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.goBack))
         navBar!.setItems([navItem], animated: false);
         self.view.addSubview(navBar!);
         
