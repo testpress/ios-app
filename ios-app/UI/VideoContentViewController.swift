@@ -80,8 +80,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         if #available(iOS 11.0, *) {
             handleScreenCapture()
         }
-        
-    }
+
+        UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")    }
     
     
     func showOrHideDescription() {
@@ -276,6 +276,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         try! Realm().write {
             self.content.index = contents.firstIndex(where: { $0.id == content.id })!
         }
+        videoPlayerView.fullScreen()
+        videoPlayerView.fullScreen()
         viewModel.content = content
         hideDescription()
         viewModel.createContentAttempt()
