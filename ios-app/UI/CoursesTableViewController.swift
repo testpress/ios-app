@@ -26,7 +26,7 @@
 import RealmSwift
 import UIKit
 
-class CoursesTableViewController: BaseDBViewController<Course> {
+class CoursesTableViewController: BaseDBTableViewController<Course> {
     
     required init?(coder aDecoder: NSCoder) {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
@@ -36,6 +36,11 @@ class CoursesTableViewController: BaseDBViewController<Course> {
     override func getItemsFromDb() -> [Course] {
         return DBManager<Course>()
             .getItemsFromDB(filteredBy: "active = true", byKeyPath: "order")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+        super.viewDidAppear(animated)
     }
     
     override func loadItems() {

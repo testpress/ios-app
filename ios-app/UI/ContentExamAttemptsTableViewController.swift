@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ContentExamAttemptsTableViewController: UITableViewController {
     
@@ -47,7 +48,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         if (attempts.isEmpty) {
-            loadAttemptsWithProgress(url: content.attemptsUrl!)
+            loadAttemptsWithProgress(url: content.getAttemptsUrl())
         }
         tableView.reloadData()
     }
@@ -91,7 +92,9 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                 if !(testpressResponse!.next.isEmpty) {
                     self.loadAttempts(url: testpressResponse!.next)
                 } else {
-                    self.content.attemptsCount = self.attempts.count
+                    try! Realm().write {
+                        self.content.attemptsCount = self.attempts.count
+                    }
                     self.displayAttemptsList()
                 }
         }, type: ContentAttempt.self)
@@ -132,10 +135,23 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contentAttempt = attempts[indexPath.row]
         if contentAttempt.assessment.state == Constants.STATE_RUNNING {
+            if (content.getContentType() == .Quiz) {
+                self.loadQuestions(contentAttempt: contentAttempt)
+            }
             showStartExamScreen(contentAttempt: contentAttempt)
         } else {
             showTestReport(contentAttempt: contentAttempt)
         }
+    }
+    
+    func loadQuestions(contentAttempt: ContentAttempt) {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+              Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
+
+          viewController.contentAttempt = contentAttempt
+        viewController.exam = self.exam
+          present(viewController, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView,
@@ -156,7 +172,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                 pausedAttempts.append(attempt);
             }
         }
-        if canAttemptExam() {
+        if canAttemptExam() && content.getContentType() != .Quiz {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ContentAttemptFooterCell")
                 as! ContentAttemptFooterCell
             
@@ -177,10 +193,10 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     private func canAttemptExam() -> Bool {
         // User can't retake an exam if retake disabled or max retake attemted or web only exam or
         // exam start date is future. If paused attempt exist, can resume it.
-        if (exam.attemptsCount! == 0 || pausedAttempts.count != 0 ||
-            ((exam.allowRetake!) && (attempts.count <= exam.maxRetakes! || exam.maxRetakes! < 0))) {
+        if (exam.attemptsCount == 0 || pausedAttempts.count != 0 ||
+            ((exam.allowRetake) && (attempts.count <= exam.maxRetakes || exam.maxRetakes < 0))) {
             
-            if (exam.deviceAccessControl != nil && exam.deviceAccessControl == "web") {
+            if (exam.deviceAccessControl == "web") {
                 return false;
             } else {
                 return exam.hasStarted()

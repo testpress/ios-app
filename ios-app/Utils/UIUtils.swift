@@ -24,18 +24,20 @@
 //
 
 import UIKit
+import Alamofire
+import FBSDKLoginKit
 
 public class UIUtils {
 
 
     static func initActivityIndicator(parentView: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(frame: parentView.frame)
-        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.style = .whiteLarge
         activityIndicator.color = Colors.getRGB(Colors.PRIMARY)
         activityIndicator.backgroundColor = UIColor.white
         activityIndicator.center = parentView.center
         parentView.addSubview(activityIndicator)
-        parentView.bringSubview(toFront: activityIndicator)
+        parentView.bringSubviewToFront(activityIndicator)
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }
@@ -44,7 +46,7 @@ public class UIUtils {
         let alertController = UIAlertController(title: nil, message: message,
                                                 preferredStyle: .alert)
         
-        let spinnerIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        let spinnerIndicator = UIActivityIndicatorView(style: .whiteLarge)
         
         spinnerIndicator.center = CGPoint(x: 135.0, y: 65.5)
         spinnerIndicator.color = UIColor.black
@@ -59,7 +61,7 @@ public class UIUtils {
                                 message: String? = nil,
                                 viewController: UIViewController,
                                 positiveButtonText: String = Strings.OK,
-                                positiveButtonStyle: UIAlertActionStyle = .default,
+                                positiveButtonStyle: UIAlertAction.Style = .default,
                                 negativeButtonText: String? = nil,
                                 cancelable: Bool = false,
                                 cancelHandler: Selector? = nil,
@@ -68,7 +70,7 @@ public class UIUtils {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if negativeButtonText != nil {
             alert.addAction(UIAlertAction(title: negativeButtonText!,
-                                          style: UIAlertActionStyle.default))
+                                          style: UIAlertAction.Style.default))
         }
         alert.addAction(UIAlertAction(title: positiveButtonText, style: positiveButtonStyle,
                                       handler: completion))
@@ -96,7 +98,7 @@ public class UIUtils {
     
     static func setTableViewSeperatorInset(_ tableView: UITableView, size: CGFloat) {
         tableView.preservesSuperviewLayoutMargins = false
-        tableView.separatorInset = UIEdgeInsetsMake(0, size, 0, size);
+        tableView.separatorInset = UIEdgeInsets.init(top: 0, left: size, bottom: 0, right: size);
         tableView.layoutMargins = UIEdgeInsets.zero;
     }
     
@@ -104,7 +106,7 @@ public class UIUtils {
         return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? ""
     }
     
-    static func getActionSheetStyle() -> UIAlertControllerStyle {
+    static func getActionSheetStyle() -> UIAlertController.Style {
         return (UIDevice.current.userInterfaceIdiom == .phone) ? .actionSheet : .alert
     }
     
@@ -420,4 +422,28 @@ public class UIUtils {
             let countryDialingCode = prefix[countryRegionCode]
             return countryDialingCode!
         }
+    
+    static func logout() {
+        let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
+        let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
+        
+        if (fcmToken != nil && deviceToken != nil ) {
+            let parameters: Parameters = [
+                "device_id": deviceToken!,
+                "registration_id": fcmToken!,
+                "platform": "ios"
+            ]
+            
+            TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.unRegisterDevice), parameters: parameters,
+                                completion: { _, _ in})
+        }
+        UIApplication.shared.unregisterForRemoteNotifications()
+        
+        // Clear only user related tables
+        DBInstance.clearTables()
+        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), completion: {_,_ in})
+        // Logout on Facebook
+        LoginManager().logOut()
+        KeychainTokenItem.clearKeychainItems()
+    }
 }

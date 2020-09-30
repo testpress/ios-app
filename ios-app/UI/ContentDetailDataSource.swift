@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     
@@ -41,12 +42,20 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
         if (contents.count == 0) || (index >= contents.count) {
             return nil
         }
-        
         let content = contents[index]
-        content.index = index
+
+        try! Realm().write {
+            content.index = index
+        }
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         
-        if content.exam != nil {
+        if content.getContentType() == .Quiz {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.START_QUIZ_EXAM_VIEW_CONTROLLER) as! StartQuizExamViewController
+            
+            viewController.content = content
+            return viewController
+        } else if content.exam != nil {
             if content.attemptsCount > 0 {
                 let viewController = storyboard.instantiateViewController(
                     withIdentifier: Constants.CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER
@@ -68,6 +77,13 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             viewController.content = content
             viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
             return viewController
+        } else if (content.video != nil && content.video!.embedCode.isEmpty) {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.VIDEO_CONTENT_VIEW_CONTROLLER) as! VideoContentViewController
+             viewController.content = content
+             viewController.contents = contents
+            return viewController
+
         } else {
             let viewController = HtmlContentViewController()
             viewController.content = content
@@ -83,6 +99,10 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             return (viewController as! StartExamScreenViewController).content.index
         } else if viewController is AttachmentDetailViewController {
             return (viewController as! AttachmentDetailViewController).content.index
+        } else if viewController is VideoContentViewController {
+            return (viewController as! VideoContentViewController).content.index
+        } else if viewController is StartQuizExamViewController{
+            return (viewController as! StartQuizExamViewController).content.index
         } else {
             return (viewController as! HtmlContentViewController).content.index
         }

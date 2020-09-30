@@ -73,6 +73,10 @@ enum TPEndpoint {
     case unRegisterDevice
     case verifyPhoneNumber
     case signUpWebView
+    case logout
+    case loginActivity
+    case logoutDevices
+    case userVideos
 
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -130,7 +134,9 @@ enum TPEndpoint {
              .uploadImage,
              .registerDevice,
              .unRegisterDevice,
-             .verifyPhoneNumber:
+             .verifyPhoneNumber,
+             .logoutDevices,
+             .logout:
             return .post
         case .put:
             return .put
@@ -144,7 +150,7 @@ enum TPEndpoint {
     var urlPath: String {
         switch self {
         case .authenticateUser:
-            return "/api/v2.2/auth-token/"
+            return "/api/v2.3/auth-token/"
         case .registerNewUser:
             return "/api/v2.3/register/"
         case .getExams:
@@ -156,7 +162,7 @@ enum TPEndpoint {
         case .endExam:
             return "end/"
         case .getCourses:
-            return "/api/v2.2/courses/"
+            return "/api/v2.4/courses/"
         case .getChapters:
             return "chapters/"
         case .getProfile:
@@ -200,7 +206,7 @@ enum TPEndpoint {
         case .bookmarkFolders:
             return "/api/v2.4/folders/"
         case .getContents:
-            return "/api/v2.2/contents/"
+            return "/api/v2.3/contents/"
         case .attemptsPath:
             return "/attempts/"
         case .getQuestions:
@@ -217,6 +223,14 @@ enum TPEndpoint {
             return "/api/v2.2/verify/"
         case .signUpWebView:
             return "/register/"
+        case .logout:
+            return "/api/v2.4/auth/logout/"
+        case .loginActivity:
+            return "/api/v2.3/me/login_activity/"
+        case .logoutDevices:
+            return "/api/v2.4/auth/logout_devices/"
+        case .userVideos:
+            return "/api/v2.4/user_videos/"
         default:
             return ""
         }
@@ -277,6 +291,14 @@ struct TPEndpointProvider {
     static func getCommentsUrl(questionId: Int) -> String {
         return Constants.BASE_URL + TPEndpoint.getQuestions.urlPath + "\(questionId)"
             + TPEndpoint.commentsPath.urlPath
+    }
+    
+    static func getContentAttemptUrl(contentID: Int) -> String {
+        return Constants.BASE_URL + TPEndpoint.getContents.urlPath + "\(contentID)" + TPEndpoint.attemptsPath.urlPath
+    }
+    
+    static func getVideoAttemptPath(attemptID: Int) -> String {
+        return Constants.BASE_URL + TPEndpoint.userVideos.urlPath + "\(attemptID)/"
     }
     
 }

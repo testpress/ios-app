@@ -32,13 +32,14 @@ class MainMenuTabViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
         viewControllers?.remove(at: 6) // Access code
         if (!instituteSettings.forumEnabled) {
             viewControllers?.remove(at: 5)
         }
-
+        
         if (!instituteSettings.postsEnabled) {
             viewControllers?.remove(at: 4)
         }
@@ -52,6 +53,10 @@ class MainMenuTabViewController: UITabBarController {
             
         } else {
             viewControllers?.remove(at: 1)
+        }
+        
+        if (!instituteSettings.activityFeedEnabled) {
+            viewControllers?.remove(at: 0)
         }
 
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
