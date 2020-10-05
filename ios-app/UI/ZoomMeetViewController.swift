@@ -24,24 +24,33 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     
     override func viewDidLoad() {
         self.setStatusBarColor()
+        initializeLoading()
         emptyView = EmptyView.getInstance(parentView: containerView)
-        initialize()
+        self.initialize()
+    }
+    
+    func initializeLoading() {
+        activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
+        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y + 70)
+        let pagingSpinner = UIActivityIndicatorView(style: .gray)
+        pagingSpinner.startAnimating()
+        pagingSpinner.color = Colors.getRGB(Colors.PRIMARY)
+        pagingSpinner.hidesWhenStopped = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        activityIndicator?.startAnimating()
+        if let klass = NSClassFromString("ZMNavigationController") {
+            if self.presentedViewController?.isKind(of: klass) ?? false{
+                self.previousPage()
+            }
+        }
     }
     
     func initialize() {
-        initializeLoadingScreen()
-        initializeZoomSDK()
-    }
-    
-    func initializeLoadingScreen() {
-        let navbarAndStatusBarOffset = 70
-        activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
-        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y + navbarAndStatusBarOffset)
-    }
-    
-    func initializeZoomSDK() {
         let zoomSDK = MobileRTCSDKInitContext()
         zoomSDK.domain = "zoom.us"
+        zoomSDK.enableLog = true
         MobileRTC.shared().initialize(zoomSDK)
         let authService = MobileRTC.shared().getAuthService()
         authService?.delegate = self
@@ -49,41 +58,11 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         authService?.sdkAuth()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        showLoading()
-        if isBackButtonPressedFromZoomMeeting() {
-            /*
-             If user presses back button from zoom meeting we should show content detail page.
-             This is because this page is just to handle zoom meeting initialization,
-             so appropriate screen to display is content detail page.
-             */
-            self.gotoPreviousPage()
-        }
-    }
-    
-    func showLoading() {
-        activityIndicator?.startAnimating()
-    }
-    
-    func stopLoading() {
-        activityIndicator?.stopAnimating()
-    }
-    
-    func isBackButtonPressedFromZoomMeeting() {
-        if let klass = NSClassFromString("ZMNavigationController") {
-            if self.presentedViewController?.isKind(of: klass) ?? false{
-                return true
-            }
-        }
-        
-        return false
-    }
-    
     @IBAction func back(_ sender: Any) {
-        gotoPreviousPage()
+        previousPage()
     }
     
-    func gotoPreviousPage() {
+    func previousPage() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.TAB_VIEW_CONTROLLER)
@@ -92,47 +71,29 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     func onMobileRTCAuthReturn(_ returnValue: MobileRTCAuthError) {
-        if (returnValue == MobileRTCAuthError_Success) {
-            prepareAndJoin()
-        } else {
-            refetchAccessTokenAndInitialize()
-        }
-    }
-    
-    func refetchAccessTokenAndInitialize() {
-        fetchAccessToken() { accessToken, error in
-            if (error != nil) {
-                let (image, title, description) = error!.getDisplayInfo()
-                self.emptyView.show(image: image, title: title, description: description)
-                return
+        if (returnValue != MobileRTCAuthError_Success) {
+            fetchAccessToken() { accessToken, error in
+                if (error != nil) {
+                    let (image, title, description) = error!.getDisplayInfo()
+                    self.emptyView.show(image: image, title: title, description: description)
+                    return
+                }
+                self.accessToken = accessToken!
+                self.initialize()
             }
-            self.accessToken = accessToken!
-            self.initializeZoomSDK()
+            return
         }
-    }
-    
-    func prepareAndJoin() {
-        showLoading()
-        configureMeeting()
-        // Zoom SDK requires view controller which joins zoom meet to be root view controller
-        changeRootViewController()
-        join()
-    }
-    
-    func configureMeeting() {
-        let meetingSettings = MobileRTC.shared().getMeetingSettings()
-        meetingSettings?.meetingPasswordHidden = true
-        meetingSettings?.meetingInviteHidden = true
-        meetingSettings?.meetingShareHidden = true
-    }
-    
-    func changeRootViewController() {
-        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-        appDelegate.window?.rootViewController = self
+        self.join()
     }
     
     func join() {
-        if let service = MobileRTC.shared().getMeetingService() {
+        activityIndicator?.startAnimating()
+        let getservice = MobileRTC.shared().getMeetingService()
+        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        appDelegate.window?.rootViewController = self
+        configureMeeting()
+        
+        if let service = getservice {
             service.delegate = self
             service.customizeMeetingTitle(meetingTitle)
             let joinParams = MobileRTCMeetingJoinParam()
@@ -143,38 +104,33 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         }
     }
     
-    func onMeetingStateChange(_ state: MobileRTCMeetingState) {
-        if isNoMeetingRunning(state) {
-            gotoPreviousPage()
-        }
+    func configureMeeting() {
+        let meetingSettings = MobileRTC.shared().getMeetingSettings()
+        meetingSettings?.meetingPasswordHidden = true
+        meetingSettings?.meetingInviteHidden = true
+        meetingSettings?.meetingShareHidden = true
     }
     
-    func isNoMeetingRunning(meetingState: MobileRTCMeetingState) {
-        return meetingState == MobileRTCMeetingState_Idle && !self.hasError
+    func onMeetingStateChange(_ state: MobileRTCMeetingState) {
+        if (state == MobileRTCMeetingState_Idle && !self.hasError) {
+            activityIndicator?.stopAnimating()
+            previousPage()
+        }
     }
     
     func onMeetingError(_ error: MobileRTCMeetError, message: String?) {
-        stopLoading()
-        if error == MobileRTCMeetError_Success {
-            return
+        activityIndicator?.stopAnimating()
+        if error != MobileRTCMeetError_Success {
+            self.hasError = true
+            if error == MobileRTCMeetError_NetworkError || error == MobileRTCMeetError_ReconnectError {
+                emptyView.show(image: Images.TestpressAlertWarning.image, title: "Error Occurred", description: message?.capitalized, retryButtonText: "Go Back",
+                               retryHandler: { self.join()})
+            } else {
+                emptyView.show(image: Images.TestpressAlertWarning.image, title: "Error Occurred", description: message?.capitalized, retryButtonText: "Go Back",
+                               retryHandler: { self.previousPage()})
+            }
+            
         }
-        
-        self.hasError = true
-        if isNetworkError(error: error){
-            showErrorScreen(errorMessage: message)
-        } else {
-            showErrorScreen(errorMessage: message, allowRetry: false)
-        }
-    }
-    
-    func isNetworkError(error: MobileRTCMeetError) -> Bool {
-        return error == MobileRTCMeetError_NetworkError || error == MobileRTCMeetError_ReconnectError
-    }
-    
-    func showErrorScreen(errorMessage: String, allowRetry: Bool = true) {
-        let retryButtonText = allowRetry ? "Retry" : "Go Back"
-        let retryHandler = allowRetry ? {self.prepareAndJoin()} : {self.gotoPreviousPage()}
-        emptyView.show(image: Images.TestpressAlertWarning.image, title: "Error Occurred", description: message?.capitalized, retryButtonText: retryButtonText,retryHandler: retryHandler)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -190,7 +146,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
 }
 
 class Zoom {
-    static func enableFullScreenForMeetingWaitView() {
+    static func showWaitViewControllerInFullScreen() {
         if let klass = NSClassFromString("ZPMeetingWaitViewController") {
             guard let original = class_getInstanceMethod(klass, #selector(getter: UIViewController.modalPresentationStyle)), let replacement = class_getInstanceMethod(self, #selector(getter:Zoom.modalPresentationStyle))
                 else { return }
