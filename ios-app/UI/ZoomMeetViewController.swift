@@ -24,12 +24,12 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     
     override func viewDidLoad() {
         self.setStatusBarColor()
-        initializeLoading()
+        initializeLoadingScreen()
         emptyView = EmptyView.getInstance(parentView: containerView)
         self.initialize()
     }
     
-    func initializeLoading() {
+    func initializeLoadingScreen() {
         activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y + 70)
         let pagingSpinner = UIActivityIndicatorView(style: .gray)
@@ -40,6 +40,10 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     
     override func viewWillAppear(_ animated: Bool) {
         activityIndicator?.startAnimating()
+        openPreviousPageIfBackButtonPressedFromZoom()
+    }
+    
+    func openPreviousPageIfBackButtonPressedFromZoom() {
         if let klass = NSClassFromString("ZMNavigationController") {
             if self.presentedViewController?.isKind(of: klass) ?? false{
                 self.previousPage()
