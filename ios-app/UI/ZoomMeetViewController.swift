@@ -150,7 +150,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
 }
 
 class Zoom {
-    static func showWaitViewControllerInFullScreen() {
+    static func enableFullScreenForMeetingWaitView() {
         if let klass = NSClassFromString("ZPMeetingWaitViewController") {
             guard let original = class_getInstanceMethod(klass, #selector(getter: UIViewController.modalPresentationStyle)), let replacement = class_getInstanceMethod(self, #selector(getter:Zoom.modalPresentationStyle))
                 else { return }

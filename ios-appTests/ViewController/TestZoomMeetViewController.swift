@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Mockingbird
 import MobileRTC
 import MobileCoreServices
 
