@@ -52,6 +52,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     override func viewWillAppear(_ animated: Bool) {
         showLoading()
         if isBackButtonPressedFromZoomMeeting() {
+            // If user presses back button from zoom meeting we should show content detail page
             self.gotoPreviousPage()
         }
     }
@@ -87,11 +88,11 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     func onMobileRTCAuthReturn(_ returnValue: MobileRTCAuthError) {
-        if (returnValue != MobileRTCAuthError_Success) {
+        if (returnValue == MobileRTCAuthError_Success) {
+            join()
+        } else {
             refetchAccessTokenAndInitialize()
-            return
         }
-        join()
     }
     
     func refetchAccessTokenAndInitialize() {
@@ -131,9 +132,13 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     func onMeetingStateChange(_ state: MobileRTCMeetingState) {
-        if (state == MobileRTCMeetingState_Idle && !self.hasError) {
+        if isNoMeetingRunning(state) {
             gotoPreviousPage()
         }
+    }
+    
+    func isNoMeetingRunning(meetingState: MobileRTCMeetingState) {
+        return meetingState == MobileRTCMeetingState_Idle && !self.hasError
     }
     
     func onMeetingError(_ error: MobileRTCMeetError, message: String?) {
