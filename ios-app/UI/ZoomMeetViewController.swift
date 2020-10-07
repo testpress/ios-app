@@ -24,18 +24,29 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     
     override func viewDidLoad() {
         self.setStatusBarColor()
-        initializeLoadingScreen()
         emptyView = EmptyView.getInstance(parentView: containerView)
-        self.initialize()
+        initialize()
+    }
+    
+    func initialize() {
+        initializeLoadingScreen()
+        initializeZoomSDK()
     }
     
     func initializeLoadingScreen() {
+        let navbarAndStatusBarOffset = 70
         activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
-        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y + 70)
-        let pagingSpinner = UIActivityIndicatorView(style: .gray)
-        pagingSpinner.startAnimating()
-        pagingSpinner.color = Colors.getRGB(Colors.PRIMARY)
-        pagingSpinner.hidesWhenStopped = true
+        activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y + navbarAndStatusBarOffset)
+    }
+    
+    func initializeZoomSDK() {
+        let zoomSDK = MobileRTCSDKInitContext()
+        zoomSDK.domain = "zoom.us"
+        MobileRTC.shared().initialize(zoomSDK)
+        let authService = MobileRTC.shared().getAuthService()
+        authService?.delegate = self
+        authService?.jwtToken = accessToken!
+        authService?.sdkAuth()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,17 +60,6 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
                 self.gotoPreviousPage()
             }
         }
-    }
-    
-    func initialize() {
-        let zoomSDK = MobileRTCSDKInitContext()
-        zoomSDK.domain = "zoom.us"
-        zoomSDK.enableLog = true
-        MobileRTC.shared().initialize(zoomSDK)
-        let authService = MobileRTC.shared().getAuthService()
-        authService?.delegate = self
-        authService?.jwtToken = accessToken!
-        authService?.sdkAuth()
     }
     
     @IBAction func back(_ sender: Any) {
@@ -76,18 +76,22 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     
     func onMobileRTCAuthReturn(_ returnValue: MobileRTCAuthError) {
         if (returnValue != MobileRTCAuthError_Success) {
-            fetchAccessToken() { accessToken, error in
-                if (error != nil) {
-                    let (image, title, description) = error!.getDisplayInfo()
-                    self.emptyView.show(image: image, title: title, description: description)
-                    return
-                }
-                self.accessToken = accessToken!
-                self.initialize()
-            }
+            refetchAccessTokenAndInitialize()
             return
         }
         self.join()
+    }
+    
+    func refetchAccessTokenAndInitialize() {
+        fetchAccessToken() { accessToken, error in
+            if (error != nil) {
+                let (image, title, description) = error!.getDisplayInfo()
+                self.emptyView.show(image: image, title: title, description: description)
+                return
+            }
+            self.accessToken = accessToken!
+            self.initializeZoomSDK()
+        }
     }
     
     func join() {
