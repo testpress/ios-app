@@ -50,16 +50,28 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        activityIndicator?.startAnimating()
-        openPreviousPageIfBackButtonPressedFromZoom()
+        showLoading()
+        if isBackButtonPressedFromZoomMeeting() {
+            self.gotoPreviousPage()
+        }
     }
     
-    func openPreviousPageIfBackButtonPressedFromZoom() {
+    func showLoading() {
+        activityIndicator?.startAnimating()
+    }
+    
+    func stopLoading() {
+        activityIndicator?.stopAnimating()
+    }
+    
+    func isBackButtonPressedFromZoomMeeting() {
         if let klass = NSClassFromString("ZMNavigationController") {
             if self.presentedViewController?.isKind(of: klass) ?? false{
-                self.gotoPreviousPage()
+                return true
             }
         }
+        
+        return false
     }
     
     @IBAction func back(_ sender: Any) {
@@ -95,13 +107,12 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     func join() {
-        activityIndicator?.startAnimating()
-        let getservice = MobileRTC.shared().getMeetingService()
+        showLoading()
+        configureMeeting()
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
         appDelegate.window?.rootViewController = self
-        configureMeeting()
-        
-        if let service = getservice {
+
+        if let service = MobileRTC.shared().getMeetingService() {
             service.delegate = self
             service.customizeMeetingTitle(meetingTitle)
             let joinParams = MobileRTCMeetingJoinParam()
@@ -121,13 +132,12 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     
     func onMeetingStateChange(_ state: MobileRTCMeetingState) {
         if (state == MobileRTCMeetingState_Idle && !self.hasError) {
-            activityIndicator?.stopAnimating()
             gotoPreviousPage()
         }
     }
     
     func onMeetingError(_ error: MobileRTCMeetError, message: String?) {
-        activityIndicator?.stopAnimating()
+        stopLoading()
         if error != MobileRTCMeetError_Success {
             self.hasError = true
             if error == MobileRTCMeetError_NetworkError || error == MobileRTCMeetError_ReconnectError {
