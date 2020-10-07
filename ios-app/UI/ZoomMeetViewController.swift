@@ -114,9 +114,24 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     func join() {
         showLoading()
         configureMeeting()
+        // Zoom SDK requires view controller which joins zoom meet to be root view controller
+        changeRootViewController()
+        joinZoomMeeting()
+    }
+    
+    func configureMeeting() {
+        let meetingSettings = MobileRTC.shared().getMeetingSettings()
+        meetingSettings?.meetingPasswordHidden = true
+        meetingSettings?.meetingInviteHidden = true
+        meetingSettings?.meetingShareHidden = true
+    }
+    
+    func changeRootViewController() {
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
         appDelegate.window?.rootViewController = self
-        
+    }
+    
+    func joinZoomMeeting() {
         if let service = MobileRTC.shared().getMeetingService() {
             service.delegate = self
             service.customizeMeetingTitle(meetingTitle)
@@ -126,13 +141,6 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
             joinParams.password = password
             service.joinMeeting(with: joinParams)
         }
-    }
-    
-    func configureMeeting() {
-        let meetingSettings = MobileRTC.shared().getMeetingSettings()
-        meetingSettings?.meetingPasswordHidden = true
-        meetingSettings?.meetingInviteHidden = true
-        meetingSettings?.meetingShareHidden = true
     }
     
     func onMeetingStateChange(_ state: MobileRTCMeetingState) {
