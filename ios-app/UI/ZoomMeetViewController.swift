@@ -52,7 +52,11 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     override func viewWillAppear(_ animated: Bool) {
         showLoading()
         if isBackButtonPressedFromZoomMeeting() {
-            // If user presses back button from zoom meeting we should show content detail page
+            /*
+             If user presses back button from zoom meeting we should show content detail page.
+             This is because this page is just to handle zoom meeting initialization,
+             so appropriate screen to display is content detail page.
+             */
             self.gotoPreviousPage()
         }
     }
