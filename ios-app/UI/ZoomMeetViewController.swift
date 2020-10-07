@@ -91,7 +91,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
             refetchAccessTokenAndInitialize()
             return
         }
-        self.join()
+        join()
     }
     
     func refetchAccessTokenAndInitialize() {
@@ -111,7 +111,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         configureMeeting()
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
         appDelegate.window?.rootViewController = self
-
+        
         if let service = MobileRTC.shared().getMeetingService() {
             service.delegate = self
             service.customizeMeetingTitle(meetingTitle)
@@ -138,17 +138,26 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     
     func onMeetingError(_ error: MobileRTCMeetError, message: String?) {
         stopLoading()
-        if error != MobileRTCMeetError_Success {
-            self.hasError = true
-            if error == MobileRTCMeetError_NetworkError || error == MobileRTCMeetError_ReconnectError {
-                emptyView.show(image: Images.TestpressAlertWarning.image, title: "Error Occurred", description: message?.capitalized, retryButtonText: "Go Back",
-                               retryHandler: { self.join()})
-            } else {
-                emptyView.show(image: Images.TestpressAlertWarning.image, title: "Error Occurred", description: message?.capitalized, retryButtonText: "Go Back",
-                               retryHandler: { self.gotoPreviousPage()})
-            }
-            
+        if error == MobileRTCMeetError_Success {
+            return
         }
+        
+        self.hasError = true
+        if isNetworkError(error: error){
+            showErrorScreen(errorMessage: message)
+        } else {
+            showErrorScreen(errorMessage: message, allowRetry: false)
+        }
+    }
+    
+    func isNetworkError(error: MobileRTCMeetError) -> Bool {
+        return error == MobileRTCMeetError_NetworkError || error == MobileRTCMeetError_ReconnectError
+    }
+    
+    func showErrorScreen(errorMessage: String, allowRetry: Bool = true) {
+        let retryButtonText = allowRetry ? "Retry" : "Go Back"
+        let retryHandler = allowRetry ? {self.join()} : {self.gotoPreviousPage()}
+        emptyView.show(image: Images.TestpressAlertWarning.image, title: "Error Occurred", description: message?.capitalized, retryButtonText: retryButtonText,retryHandler: retryHandler)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
