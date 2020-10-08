@@ -19,11 +19,11 @@ class VideoConferenceViewController: UIViewController {
         displayTitleAndDescription()
         displayVideoConferenceDetails(content.videoConference)
     }
-
+    
     func displayTitleAndDescription() {
         titleView.text = content.name
         contentDescription.text = content.contentDescription
-
+        
         if content.contentDescription.isNilOrEmpty {
             contentDescription.isHidden = true
         }
@@ -34,7 +34,7 @@ class VideoConferenceViewController: UIViewController {
         startDate.text = FormatDate.getDate(from: videoConference.start, givenFormat: "dd-MM-yyyy")
         startTime.text = FormatDate.getDate(from: videoConference.start, givenFormat: "hh:mm a")
     }
-
+    
     @IBAction func openZoomMeeting(_ sender: Any?) {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(
