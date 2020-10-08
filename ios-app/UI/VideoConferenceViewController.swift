@@ -30,10 +30,10 @@ class VideoConferenceViewController: UIViewController {
     }
     
     func displayVideoConferenceDetails() {
-        let videoConference = content.videoConference
+        let videoConference = content.videoConference!
         duration.text = String(videoConference.duration)
-        startDate.text = FormatDate.getDate(from: videoConference.start, givenFormat: "dd-MM-yyyy")
-        startTime.text = FormatDate.getDate(from: videoConference.start, givenFormat: "hh:mm a")
+        startDate.text = FormatDate.format(dateString: videoConference.start, requiredFormat: "dd-MM-yyyy")
+        startTime.text = FormatDate.format(dateString: videoConference.start, requiredFormat: "hh:mm a")
     }
     
     @IBAction func openZoomMeeting(_ sender: Any?) {
