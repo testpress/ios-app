@@ -47,7 +47,7 @@ class TestZoomMeetViewController: XCTestCase {
     }
     
     func testPreviousPageShouldBeOpenedInCaseNoMeetingIsRunning() {
-        controller.join()
+        controller.prepareAndJoin()
         controller.onMeetingStateChange(MobileRTCMeetingState_Idle)
         
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)

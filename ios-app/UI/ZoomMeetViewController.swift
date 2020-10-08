@@ -93,7 +93,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     
     func onMobileRTCAuthReturn(_ returnValue: MobileRTCAuthError) {
         if (returnValue == MobileRTCAuthError_Success) {
-            join()
+            prepareAndJoin()
         } else {
             refetchAccessTokenAndInitialize()
         }
@@ -111,12 +111,12 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         }
     }
     
-    func join() {
+    func prepareAndJoin() {
         showLoading()
         configureMeeting()
         // Zoom SDK requires view controller which joins zoom meet to be root view controller
         changeRootViewController()
-        joinZoomMeeting()
+        join()
     }
     
     func configureMeeting() {
@@ -131,7 +131,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         appDelegate.window?.rootViewController = self
     }
     
-    func joinZoomMeeting() {
+    func join() {
         if let service = MobileRTC.shared().getMeetingService() {
             service.delegate = self
             service.customizeMeetingTitle(meetingTitle)
@@ -173,7 +173,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     
     func showErrorScreen(errorMessage: String, allowRetry: Bool = true) {
         let retryButtonText = allowRetry ? "Retry" : "Go Back"
-        let retryHandler = allowRetry ? {self.join()} : {self.gotoPreviousPage()}
+        let retryHandler = allowRetry ? {self.prepareAndJoin()} : {self.gotoPreviousPage()}
         emptyView.show(image: Images.TestpressAlertWarning.image, title: "Error Occurred", description: message?.capitalized, retryButtonText: retryButtonText,retryHandler: retryHandler)
     }
     
