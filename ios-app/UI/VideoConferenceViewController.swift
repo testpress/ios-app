@@ -17,7 +17,7 @@ class VideoConferenceViewController: UIViewController {
     
     override func viewDidLoad() {
         displayTitleAndDescription()
-        displayVideoConferenceDetails(content.videoConference)
+        displayVideoConferenceDetails()
     }
     
     func displayTitleAndDescription() {
@@ -29,7 +29,8 @@ class VideoConferenceViewController: UIViewController {
         }
     }
     
-    func displayVideoConferenceDetails(videoConference: VideoConference) {
+    func displayVideoConferenceDetails() {
+        let videoConference = content.videoConference
         duration.text = String(videoConference.duration)
         startDate.text = FormatDate.getDate(from: videoConference.start, givenFormat: "dd-MM-yyyy")
         startTime.text = FormatDate.getDate(from: videoConference.start, givenFormat: "hh:mm a")

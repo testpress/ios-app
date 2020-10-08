@@ -29,17 +29,23 @@ class TestVideoConferenceViewController: XCTestCase {
         return Content(JSONString: jsonString)!
     }
 
-    func testDisplayShouldShowVideoConferenceDetails() {
-        controller.display()
+    func testDisplayTitleAndDescriptionShouldDisplayContentTitleAndDescription() {
+        controller.displayTitleAndDescription()
         
         XCTAssertEqual(controller.titleView.text, "My Zoom Meet")
+        XCTAssertEqual(controller.contentDescription.text, "")
+    }
+    
+    func testDisplayVideoConferenceDetailsShouldShowVideoConferenceDetails() {
+        controller.displayVideoConferenceDetails()
+        
         XCTAssertEqual(controller.startTime.text, "03:00 PM")
         XCTAssertEqual(controller.startDate.text, "07-07-2020")
         XCTAssertEqual(controller.duration.text, "60")
     }
     
     func testOnStartButtonClickZoomMeetViewShouldOpen() {
-        controller.onStartClick(nil)
+        controller.openZoomMeeting(nil)
         
         XCTAssertTrue(UIApplication.topViewController()!.isKind(of: ZoomMeetViewController.self))
     }
