@@ -34,7 +34,8 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
     var notes = [Int: HtmlContent]()
     var streams = [Int: [Stream]]()
     var exams = [Int: Exam]()
-    
+    var videoConferences = [Int: VideoConference]()
+
     override func getResponse(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
@@ -60,6 +61,10 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
             
             response?.results.videos.forEach { video in
                 videos.updateValue(video, forKey: video.id)
+            }
+            
+            response?.results.videoConferences.forEach { videoConference in
+                videoConferences.updateValue(videoConference, forKey: videoConference.id)
             }
             
             response?.results.attachements.forEach { attachement in
@@ -92,13 +97,15 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
             content.htmlContentTitle = content.htmlObject?.title
         } else if content.examId != -1 {
             content.exam = exams[content.examId]
+        } else if content.videoConferenceId != -1 {
+            content.videoConference = videoConferences[content.videoConferenceId]
         }
         return content
     }
     
     override func clearValues() {
         super.clearValues()
-        resetValues(of: [videos, attachments, streams, notes, exams])
+        resetValues(of: [videos, attachments, streams, notes, exams, videoConferences])
     }
     
 }
