@@ -34,7 +34,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     func initializeLoadingScreen() {
-        let navbarAndStatusBarOffset = 70
+        let navbarAndStatusBarOffset: CGFloat = 70
         activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y + navbarAndStatusBarOffset)
     }
