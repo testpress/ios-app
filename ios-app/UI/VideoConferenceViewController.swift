@@ -46,13 +46,13 @@ class VideoConferenceViewController: UIViewController {
         viewController.password = content.videoConference?.password
         viewController.meetingTitle = content.name
         viewController.fetchAccessToken = { completion in
-            self.updateContent(completion: completion)
+            self.fetchAccessToken(completion: completion)
         }
         self.present(viewController, animated: true, completion: nil)
     }
     
     
-    func updateContent(completion: @escaping(String?, TPError?) -> Void) {
+    func fetchAccessToken(completion: @escaping(String?, TPError?) -> Void) {
         TPApiClient.request(
             type: Content.self,
             endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
