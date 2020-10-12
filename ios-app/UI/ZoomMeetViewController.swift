@@ -69,7 +69,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         activityIndicator?.stopAnimating()
     }
     
-    func isBackButtonPressedFromZoomMeeting() {
+    func isBackButtonPressedFromZoomMeeting() -> Bool {
         if let klass = NSClassFromString("ZMNavigationController") {
             if self.presentedViewController?.isKind(of: klass) ?? false{
                 return true
@@ -149,7 +149,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         }
     }
     
-    func isNoMeetingRunning(meetingState: MobileRTCMeetingState) {
+    func isNoMeetingRunning(meetingState: MobileRTCMeetingState) -> Bool {
         return meetingState == MobileRTCMeetingState_Idle && !self.hasError
     }
     
