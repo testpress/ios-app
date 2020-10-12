@@ -31,6 +31,7 @@ import AVFoundation
 import Alamofire
 import Sentry
 import TTGSnackbar
+import RealmSwift
 
 
 class VideoContentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
@@ -68,7 +69,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         viewModel.createContentAttempt()
         addCustomView()
         desc.isHidden = true
-        udpateBookmarkButtonState(bookmarkId: content.bookmarkId)
+        udpateBookmarkButtonState(bookmarkId: content!.bookmarkId.value)
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         tableView.dataSource = self
@@ -153,13 +154,13 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func addOrRemoveBookmark(content: Content?) {
         bookmarkContent = content ?? self.content
-        bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId)
+        bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId.value)
     }
     
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
         if bookmarkContent?.id == content.id {
-            content.bookmarkId = bookmarkId
+            content.bookmarkId = RealmOptional<Int>(bookmarkId)
             tableView.reloadData()
             if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
                 if bookmarkId != nil {
@@ -170,7 +171,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             }
         } else {
             if let cellContentId = contents.firstIndex(where: { $0.id == bookmarkContent?.id }) {
-                contents[cellContentId].bookmarkId = bookmarkId
+                contents[cellContentId].bookmarkId = RealmOptional<Int>(bookmarkId)
                 tableView.reloadData()
             }
         }
@@ -272,7 +273,9 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func changeVideo(content: Content!) {
         self.content = content
-        self.content.index = contents.firstIndex(where: { $0.id == content.id })
+        try! Realm().write {
+            self.content.index = contents.firstIndex(where: { $0.id == content.id })!
+        }
         viewModel.content = content
         hideDescription()
         viewModel.createContentAttempt()
@@ -290,7 +293,6 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
 
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
-            contentDetailPageViewController.enableBookmarkOption()
         }
 
         NotificationCenter.default.removeObserver(self, name: UIScreen.didConnectNotification, object: nil)
@@ -305,7 +307,12 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     func showPlaybackSpeedMenu() {
-        let alert = UIAlertController(title: "Playback Speed", message: nil, preferredStyle: .actionSheet)
+        var alert: UIAlertController!
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            alert = UIAlertController(title: "Playback Speed", message: nil, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: "Playback Speed", message: nil, preferredStyle: .actionSheet)
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         PlaybackSpeed.allCases.forEach{ playbackSpeed in
             let action = UIAlertAction(title: playbackSpeed.rawValue, style: .default, handler: { (_) in
@@ -324,7 +331,13 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     func showQualitySelector() {
-        let alert = UIAlertController(title: "Quality", message: nil, preferredStyle: .actionSheet)
+        var alert: UIAlertController!
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            alert = UIAlertController(title: "Quality", message: nil, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: "Quality", message: nil, preferredStyle: .actionSheet)
+        }
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         for resolutionInfo in videoPlayerView.resolutionInfo {
@@ -342,7 +355,12 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     func displayOptions() {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        var alert: UIAlertController!
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Playback Speed", style: .default, handler: { _ in
             self.showPlaybackSpeedMenu()

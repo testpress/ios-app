@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             ]
         }
         
-        let config = Realm.Configuration(schemaVersion: 5)
+        let config = Realm.Configuration(schemaVersion: 11)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         
@@ -136,6 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
+        Zoom.enableFullScreenForMeetingWaitView()
         return true
     }
     

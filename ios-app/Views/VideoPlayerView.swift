@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 import M3U8KitDynamic
+import SwiftKeychainWrapper
 
 
 class VideoPlayerView: UIView {
@@ -22,6 +23,7 @@ class VideoPlayerView: UIView {
     var startTime: Float = 0.0
     var currentPlaybackSpeed: Float = 0.0
     var resolutionInfo:[VideoQuality] = [VideoQuality(resolution:"Auto", bitrate: 0)]
+    let videoPlayerResourceLoaderDelegate = VideoPlayerResourceLoaderDelegate()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -56,18 +58,24 @@ class VideoPlayerView: UIView {
     func playVideo(url: URL) {
         controlsContainerView.startLoading()
         self.url = url
-        let playerItem = AVPlayerItem(url: url)
+        let playerItem = AVPlayerItem(asset: createAVAssetWithCustomURLScheme())
         player?.replaceCurrentItem(with: playerItem)
         player?.seek(to: CMTime.zero)
         player?.rate = 1
         currentPlaybackSpeed = 1
         play()
-        
         if #available(iOS 10.0, *) {
             player?.currentItem?.preferredForwardBufferDuration = 1
         }
         addObservers()
         parseResolutionInfo()
+    }
+
+    func createAVAssetWithCustomURLScheme() -> AVURLAsset {
+        let modifiedURL = URLUtils.convertURLScheme(url: url, scheme: "fakehttps")
+        let asset = AVURLAsset(url: modifiedURL)
+        asset.resourceLoader.setDelegate(videoPlayerResourceLoaderDelegate, queue: DispatchQueue.main)
+        return asset
     }
     
     func parseResolutionInfo() {
@@ -267,3 +275,4 @@ extension VideoPlayerView: PlayerControlDelegate {
 protocol VideoPlayerDelegate: class {
     func showOptionsMenu()
 }
+

@@ -26,6 +26,7 @@
 import UIKit
 import WebKit
 import  Alamofire
+import RealmSwift
 
 class HtmlContentViewController: BaseWebViewController {
     
@@ -55,13 +56,20 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func checkContentType() {
-        if content.htmlContentTitle != nil {
+        if content.htmlObject != nil {
             loadHTMLContent()
         }
     }
     
     func loadHTMLContent() {
-        title = content.htmlContentTitle
+        title = content.htmlObject?.title
+        if (content.htmlObject != nil) {
+            self.webView.loadHTMLString(
+                self.getFormattedContent(content.htmlObject!.textHtml),
+                baseURL: Bundle.main.bundleURL
+            )
+            return
+        }
         if loading {
             return
         }
@@ -95,7 +103,7 @@ class HtmlContentViewController: BaseWebViewController {
                 
                 self.loading = false
                 self.webView.loadHTMLString(
-                    self.getFormattedContent(htmlContent!.textHtml!),
+                    self.getFormattedContent(htmlContent!.textHtml),
                     baseURL: Bundle.main.bundleURL
                 )
             })
@@ -123,9 +131,10 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func createContentAttempt() {
+            let attemptsUrl = String(format: "%@%@%d/attempts/", Constants.BASE_URL , TPEndpoint.getContents.urlPath, content.id)
         TPApiClient.request(
             type: ContentAttempt.self,
-            endpointProvider: TPEndpointProvider(.post, url: content.attemptsUrl),
+            endpointProvider: TPEndpointProvider(.post, url: attemptsUrl),
             completion: {
                 contentAttempt, error in
                 if let error = error {
@@ -145,7 +154,7 @@ class HtmlContentViewController: BaseWebViewController {
         if Constants.BOOKMARKS_ENABLED {
             html += WebViewUtils.getBookmarkHeader()
         }
-        let bookmarked = content.bookmarkId != nil
+        let bookmarked = content.bookmarkId.value != nil
         html += WebViewUtils.getFormattedTitle(
             title: title!,
             withBookmarkButton: Constants.BOOKMARKS_ENABLED,
@@ -155,7 +164,7 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func bookmarkJavascriptListener(message: String) {
-        bookmarkHelper.javascriptListener(message: message, bookmarkId: content.bookmarkId)
+        bookmarkHelper.javascriptListener(message: message, bookmarkId: content.bookmarkId.value)
     }
     
 }
@@ -207,7 +216,7 @@ extension HtmlContentViewController: BookmarkDelegate {
     }
     
     func updateBookmark(bookmarkId: Int?) {
-        self.content.bookmarkId = bookmarkId
+        self.content.bookmarkId = RealmOptional<Int>(bookmarkId)
         self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
     }
     

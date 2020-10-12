@@ -27,6 +27,7 @@ import Lottie
 import PDFReader
 import UIKit
 import Alamofire
+import RealmSwift
 
 class AttachmentDetailViewController: UIViewController {
     
@@ -71,7 +72,7 @@ class AttachmentDetailViewController: UIViewController {
                 animationView.center.y = animationView.center.y - 5
                 animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
                 bookmarkOptionsLayout.isHidden = true
-                if content.bookmarkId != nil {
+                if content.bookmarkId.value != nil {
                     bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
                     bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")
                 }
@@ -96,12 +97,12 @@ class AttachmentDetailViewController: UIViewController {
     func displayAttachment() {
         contentTitle.text = content.attachment!.title
         let attachment = content.attachment!
-        if attachment.description != nil && attachment.description != "" {
-            contentDescription.text = attachment.description
+        if attachment.attachmentDescription != nil && attachment.attachmentDescription != "" {
+            contentDescription.text = attachment.attachmentDescription
         } else {
             contentDescription.isHidden = true
         }
-        attachmentUrl = URL(string: content.attachment!.attachmentUrl!)!
+        attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.pathExtension != "pdf" {
             viewAttachmentButton.isHidden = true
         } else {
@@ -176,11 +177,11 @@ class AttachmentDetailViewController: UIViewController {
     }
     
     @IBAction func bookmark(_ sender: UIButton) {
-        bookmarkHelper.onClickBookmarkButton(bookmarkId: content.bookmarkId)
+        bookmarkHelper.onClickBookmarkButton(bookmarkId: content?.bookmarkId.value)
     }
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
-        content.bookmarkId = bookmarkId
+        content.bookmarkId = RealmOptional<Int>(bookmarkId)
         if bookmarkId != nil {
             bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
             bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")
