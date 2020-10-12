@@ -161,9 +161,9 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         
         self.hasError = true
         if isNetworkError(error: error){
-            showErrorScreen(errorMessage: message)
+            showErrorScreen(errorMessage: message ?? "")
         } else {
-            showErrorScreen(errorMessage: message, allowRetry: false)
+            showErrorScreen(errorMessage: message ?? "", allowRetry: false)
         }
     }
     
