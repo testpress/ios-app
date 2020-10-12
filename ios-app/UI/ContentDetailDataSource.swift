@@ -84,6 +84,11 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
              viewController.contents = contents
             return viewController
 
+        } else if (content.getContentType() == .VideoConference) {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.VIDEO_CONFERENCE_VIEW_CONTROLLER) as! VideoConferenceViewController
+            viewController.content = content
+            return viewController
         } else {
             let viewController = HtmlContentViewController()
             viewController.content = content
@@ -103,6 +108,8 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             return (viewController as! VideoContentViewController).content.index
         } else if viewController is StartQuizExamViewController{
             return (viewController as! StartQuizExamViewController).content.index
+        } else if viewController is VideoConferenceViewController {
+            return (viewController as! VideoConferenceViewController).content.index
         } else {
             return (viewController as! HtmlContentViewController).content.index
         }

@@ -54,6 +54,8 @@ class Content: DBModel {
     @objc dynamic var videoId: Int = -1
     @objc dynamic var attachment: Attachment?
     @objc dynamic var attachmentId: Int = -1
+    @objc dynamic var videoConference: VideoConference?
+    @objc dynamic var videoConferenceId: Int = -1
     @objc dynamic var active: Bool = true
     var bookmarkId = RealmOptional<Int>()
     @objc dynamic var isScheduled: Bool = false
@@ -118,6 +120,8 @@ class Content: DBModel {
         videoId <- (map["video_id"], transform)
         attachment <- map["attachment"]
         attachmentId <- (map["attachment_id"], transform)
+        videoConference <- map["video_conference"]
+        videoConferenceId <- (map["video_conference_id"], transform)
         active <- map["active"]
         bookmarkId <- map["bookmark_id"]
         isScheduled <- map["is_scheduled"]
@@ -144,4 +148,5 @@ public enum ContentTypeEnum: String {
     case Html = "Html"
     case Video = "Video"
     case Unknown = "Unknown"
+    case VideoConference = "VideoConference"
 }
