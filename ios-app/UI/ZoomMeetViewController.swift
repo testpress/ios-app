@@ -144,7 +144,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     func onMeetingStateChange(_ state: MobileRTCMeetingState) {
-        if isNoMeetingRunning(state) {
+        if isNoMeetingRunning(meetingState: state) {
             gotoPreviousPage()
         }
     }
@@ -174,7 +174,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     func showErrorScreen(errorMessage: String, allowRetry: Bool = true) {
         let retryButtonText = allowRetry ? "Retry" : "Go Back"
         let retryHandler = allowRetry ? {self.prepareAndJoin()} : {self.gotoPreviousPage()}
-        emptyView.show(image: Images.TestpressAlertWarning.image, title: "Error Occurred", description: message?.capitalized, retryButtonText: retryButtonText,retryHandler: retryHandler)
+        emptyView.show(image: Images.TestpressAlertWarning.image, title: "Error Occurred", description: errorMessage.capitalized, retryButtonText: retryButtonText,retryHandler: retryHandler)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
