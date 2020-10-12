@@ -58,7 +58,7 @@ class M3U8Handler {
         let baseUrlWithFilenameAndExtension:NSString = url.path as NSString
         let relativeVideoUrl = baseUrlWithFilenameAndExtension.deletingLastPathComponent
         let modifiedData = m3u8DataString.replacingOccurrences(
-            of: "(#EXTINF:[0-9]*,\n)", with: String(format: "$1 https://%@%@/", url.host!, relativeVideoUrl), options: .regularExpression
+            of: "(#EXTINF:[0-9.]*,\n)", with: String(format: "$1 https://%@%@/", url.host!, relativeVideoUrl), options: .regularExpression
         )
         return modifiedData.data(using: .utf8)!
     }
