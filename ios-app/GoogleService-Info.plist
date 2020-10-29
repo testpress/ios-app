@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>234956709117-ajpqh4agq00r9v5fr8tondmafj1t53ho.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.234956709117-ajpqh4agq00r9v5fr8tondmafj1t53ho</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>234956709117-f7fb8notkq6ursqieb0ubmsiru0s866j.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA0YjEemcexSdcsEQ7M_9xcNwzd6Up1IEI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>234956709117</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>in.testpress.ranjitharpathology</string>
+	<key>PROJECT_ID</key>
+	<string>testpress-apps</string>
+	<key>STORAGE_BUCKET</key>
+	<string>testpress-apps.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:234956709117:ios:95d031ca26fd1f1305b294</string>
+	<key>DATABASE_URL</key>
+	<string>https://testpress-apps.firebaseio.com</string>
+</dict>
+</plist>
