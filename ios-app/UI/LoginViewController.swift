@@ -51,9 +51,9 @@ class LoginViewController: BaseTextFieldViewController {
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         
         signUpLayout.isHidden = true
-        if(instituteSettings.allowSignup) {
-            signUpLayout.isHidden = false
-        }
+//        if(instituteSettings.allowSignup) {
+//            signUpLayout.isHidden = false
+//        }
 
 
         let fbLoginButton = FBLoginButton()
