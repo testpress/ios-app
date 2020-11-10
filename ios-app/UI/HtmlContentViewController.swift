@@ -125,11 +125,34 @@ class HtmlContentViewController: BaseWebViewController {
             
             return
         }
-        let videoContentHtml = "<div class='videoWrapper'>" + content.video!.embedCode + "</div>"
-        webView.loadHTMLString(
-            getFormattedContent(videoContentHtml),
-            baseURL: Bundle.main.bundleURL
-        )
+
+        
+        if (content.video?.isDomainRestricted == true) {
+            playDomainRestrictedVideo(embedCode: content.video!.embedCode)
+        } else {
+            let videoContentHtml = "<div class='videoWrapper'>" + content.video!.embedCode + "</div>"
+            webView.loadHTMLString(
+                getFormattedContent(videoContentHtml),
+                baseURL: Bundle.main.bundleURL
+            )
+        }
+    }
+    
+    func playDomainRestrictedVideo(embedCode: String) {
+        let domainRestrictedURL = String(format: "%@%@", Constants.BASE_URL, "/embed/domain-restricted-video/")
+        print("Domain restricted URL : \(domainRestrictedURL)")
+        let parameters: Parameters = ["embed_code": embedCode]
+        var postRequest = URLRequest(url: URL(string: domainRestrictedURL)!)
+        postRequest.httpMethod = "POST"
+        postRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        postRequest.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options:
+               JSONSerialization.WritingOptions.prettyPrinted)
+        if (KeychainTokenItem.isExist()) {
+             let token: String = KeychainTokenItem.getToken()
+             postRequest.setValue("JWT " + token, forHTTPHeaderField: "Authorization")
+         }
+
+        webView.load(postRequest)
     }
     
     func createContentAttempt() {

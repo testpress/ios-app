@@ -34,6 +34,7 @@ class Video: DBModel {
     @objc dynamic var embedCode: String = ""
     @objc dynamic var duration: String = ""
 
+    @objc dynamic var isDomainRestricted: Bool = false
     var streams = List<Stream>()
 
     
@@ -56,5 +57,6 @@ class Video: DBModel {
         embedCode <- map["embed_code"]
         streams <- map["streams"]
         duration <- map["duration"]
+        isDomainRestricted <- map["is_domain_restricted"]
     }
 }
