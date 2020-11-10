@@ -18,6 +18,7 @@
 		250629942265E8E900539FB2 /* LoginActivityPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629932265E8E900539FB2 /* LoginActivityPager.swift */; };
 		250629962266F9C000539FB2 /* LoginActivityViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629952266F9C000539FB2 /* LoginActivityViewControllerTest.swift */; };
 		2506299A2266FEC800539FB2 /* LoginActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629992266FEC800539FB2 /* LoginActivity.swift */; };
+		250888DA251C5EC80023DCF6 /* ZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */; };
 		250C4CAD2463D24600FD7636 /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250C4CAC2463D24600FD7636 /* BaseDBViewController.swift */; };
 		250DA7BD246A585D00EDB31C /* StartQuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */; };
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
@@ -26,6 +27,9 @@
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		2555A0C42466A59400D56707 /* ContentsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555A0C32466A59400D56707 /* ContentsListResponse.swift */; };
+		25681BCE252F1D4B002352E8 /* MobileRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25681BCD252F1D4A002352E8 /* MobileRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */; };
+		25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25681BCD252F1D4A002352E8 /* MobileRTC.framework */; };
 		256A909C247D03C100F4E12C /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
 		256A909E247D21F500F4E12C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909D247D21F500F4E12C /* UIButton.swift */; };
 		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
@@ -45,12 +49,15 @@
 		257BB695246AB4C900524D2C /* QuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB694246AB4C900524D2C /* QuizExamViewController.swift */; };
 		257BB697246AC22B00524D2C /* ExamQuestionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB696246AC22B00524D2C /* ExamQuestionsResponse.swift */; };
 		257BB699246AC2ED00524D2C /* ExamQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB698246AC2ED00524D2C /* ExamQuestion.swift */; };
+		2590B1FA2510BB90003C0A03 /* VideoConference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1F92510BB90003C0A03 /* VideoConference.swift */; };
+		2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */; };
 		2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259286892473B1E00035EBA4 /* QuizReviewViewController.swift */; };
 		2592868C2474316C0035EBA4 /* AttemptItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592868B2474316B0035EBA4 /* AttemptItemRepository.swift */; };
 		25985831248A5F14003591FA /* URLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985830248A5F14003591FA /* URLUtils.swift */; };
 		25985835248A77BC003591FA /* EncryptionKeyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985834248A77BC003591FA /* EncryptionKeyRepository.swift */; };
 		25985837248A77F6003591FA /* M3U8Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985836248A77F6003591FA /* M3U8Handler.swift */; };
 		259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
+		25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */; };
 		25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */; };
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
 		25B0ADD521D615A200C702B9 /* Hippolyte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */; };
@@ -60,6 +67,7 @@
 		25EF86ED247E2160005C2B96 /* pseudo_element_selector.js in Resources */ = {isa = PBXBuildFile; fileRef = 25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */; };
 		25F92A20243306A60084ADC8 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F92A1F243306A60084ADC8 /* UIViewController.swift */; };
 		25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */; };
+		25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */; };
 		2F04053020D902530074D80E /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04052F20D902530074D80E /* Direction.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
 		2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */; };
@@ -339,6 +347,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				25681BCE252F1D4B002352E8 /* MobileRTC.framework in Embed Frameworks */,
 				25DD9C452486551F000BB671 /* SwiftKeychainWrapper.framework in Embed Frameworks */,
 				2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */,
 			);
@@ -359,6 +368,9 @@
 		250629932265E8E900539FB2 /* LoginActivityPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityPager.swift; sourceTree = "<group>"; };
 		250629952266F9C000539FB2 /* LoginActivityViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityViewControllerTest.swift; sourceTree = "<group>"; };
 		250629992266FEC800539FB2 /* LoginActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivity.swift; sourceTree = "<group>"; };
+		250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomMeetViewController.swift; sourceTree = "<group>"; };
+		250888DB251C5F2C0023DCF6 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTCResources.bundle"; sourceTree = "<group>"; };
+		250888DD251C5F420023DCF6 /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileRTC.framework; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTC.framework"; sourceTree = "<group>"; };
 		250C4CAC2463D24600FD7636 /* BaseDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBViewController.swift; sourceTree = "<group>"; };
 		250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizExamViewController.swift; sourceTree = "<group>"; };
 		250E68F521BA4AA600DA81F1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -369,6 +381,8 @@
 		254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testpress_iOS_AppUITests.swift; sourceTree = "<group>"; };
 		254E69C521DCF199009A4E61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2555A0C32466A59400D56707 /* ContentsListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsListResponse.swift; sourceTree = "<group>"; };
+		25681BCD252F1D4A002352E8 /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileRTC.framework; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTC.framework"; sourceTree = "<group>"; };
+		25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTCResources.bundle"; sourceTree = "<group>"; };
 		256A909B247D03C100F4E12C /* IntArrayTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntArrayTransform.swift; sourceTree = "<group>"; };
 		256A909D247D21F500F4E12C /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsViewModel.swift; sourceTree = "<group>"; };
@@ -393,12 +407,15 @@
 		257BB694246AB4C900524D2C /* QuizExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizExamViewController.swift; sourceTree = "<group>"; };
 		257BB696246AC22B00524D2C /* ExamQuestionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestionsResponse.swift; sourceTree = "<group>"; };
 		257BB698246AC2ED00524D2C /* ExamQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestion.swift; sourceTree = "<group>"; };
+		2590B1F92510BB90003C0A03 /* VideoConference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoConference.swift; sourceTree = "<group>"; };
+		2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoConferenceViewController.swift; sourceTree = "<group>"; };
 		259286892473B1E00035EBA4 /* QuizReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizReviewViewController.swift; sourceTree = "<group>"; };
 		2592868B2474316B0035EBA4 /* AttemptItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptItemRepository.swift; sourceTree = "<group>"; };
 		25985830248A5F14003591FA /* URLUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLUtils.swift; sourceTree = "<group>"; };
 		25985834248A77BC003591FA /* EncryptionKeyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKeyRepository.swift; sourceTree = "<group>"; };
 		25985836248A77F6003591FA /* M3U8Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M3U8Handler.swift; sourceTree = "<group>"; };
 		259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToUnlockViewController.swift; sourceTree = "<group>"; };
+		25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoConferenceViewController.swift; sourceTree = "<group>"; };
 		25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewController.swift; sourceTree = "<group>"; };
 		25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerification.swift; sourceTree = "<group>"; };
 		25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hippolyte.framework; path = Carthage/Build/iOS/Hippolyte.framework; sourceTree = "<group>"; };
@@ -408,6 +425,7 @@
 		25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = pseudo_element_selector.js; sourceTree = "<group>"; };
 		25F92A1F243306A60084ADC8 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CropViewController.framework; path = Carthage/Build/iOS/CropViewController.framework; sourceTree = "<group>"; };
+		25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestZoomMeetViewController.swift; sourceTree = "<group>"; };
 		2F04052F20D902530074D80E /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkFoldersDropDownCell.xib; sourceTree = "<group>"; };
 		2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFoldersDropDownCell.swift; sourceTree = "<group>"; };
@@ -657,6 +675,7 @@
 		8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoContentViewController.swift; sourceTree = "<group>"; };
 		8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stackview+BackgroundColor.swift"; sourceTree = "<group>"; };
 		8CF6972E2327180F0040A986 /* Sentry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sentry.framework; path = Carthage/Build/iOS/Sentry.framework; sourceTree = "<group>"; };
+		9B482AA21F7CADEABC2BF009 /* ios_appTests-ios_appMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ios_appTests-ios_appMocks.generated.swift"; path = "MockingbirdMocks/ios_appTests-ios_appMocks.generated.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -671,6 +690,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */,
 				25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */,
 				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
 				8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */,
@@ -727,6 +747,8 @@
 				250629952266F9C000539FB2 /* LoginActivityViewControllerTest.swift */,
 				25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */,
 				8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */,
+				25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */,
+				25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -753,11 +775,14 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
+				25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */,
+				25681BCD252F1D4A002352E8 /* MobileRTC.framework */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
 				2F26ADE31E8249D70031E6F4 /* Products */,
 				2FBEDB781E82BBD0000CF05C /* Frameworks */,
+				322BFA670C6561A068806630 /* Generated Mocks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -820,6 +845,8 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				250888DD251C5F420023DCF6 /* MobileRTC.framework */,
+				250888DB251C5F2C0023DCF6 /* MobileRTCResources.bundle */,
 				25DD9C432486551F000BB671 /* SwiftKeychainWrapper.framework */,
 				25DD9C41248654AE000BB671 /* SwiftKeychainWrapper.framework.dSYM */,
 				25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */,
@@ -1046,6 +1073,8 @@
 				259286892473B1E00035EBA4 /* QuizReviewViewController.swift */,
 				2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */,
 				2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */,
+				2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */,
+				250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1097,6 +1126,7 @@
 				2555A0C32466A59400D56707 /* ContentsListResponse.swift */,
 				257BB696246AC22B00524D2C /* ExamQuestionsResponse.swift */,
 				257BB698246AC2ED00524D2C /* ExamQuestion.swift */,
+				2590B1F92510BB90003C0A03 /* VideoConference.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1134,6 +1164,14 @@
 				250629932265E8E900539FB2 /* LoginActivityPager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		322BFA670C6561A068806630 /* Generated Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				9B482AA21F7CADEABC2BF009 /* ios_appTests-ios_appMocks.generated.swift */,
+			);
+			name = "Generated Mocks";
 			sourceTree = "<group>";
 		};
 		8C2E7B5723979DF800BA2F41 /* Views */ = {
@@ -1314,6 +1352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
 				2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */,
@@ -1417,7 +1456,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "rm -rf ${TMPDIR}TemporaryItems/*carthage*\n/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1440,10 +1479,12 @@
 				2F4186A420BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift in Sources */,
 				8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */,
 				2FD846601FC30D1900D6F016 /* ContentDetailDataSource.swift in Sources */,
+				250888DA251C5EC80023DCF6 /* ZoomMeetViewController.swift in Sources */,
 				2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */,
 				25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */,
 				2F6F167F1FC4164100FB768C /* Reachability.swift in Sources */,
 				2F48C80F1FD2899E009C686C /* Post.swift in Sources */,
+				2590B1FA2510BB90003C0A03 /* VideoConference.swift in Sources */,
 				2F515DF21FF3B0990005D8A5 /* RichTextEditor.swift in Sources */,
 				25705019246E71B600E6C688 /* QuizQuestionViewController.swift in Sources */,
 				2FC0F3121F863BBD0092BFDC /* CALayerBorderColor.swift in Sources */,
@@ -1501,6 +1542,7 @@
 				2FDF9C5320B6D7FC0086245F /* BasePager.swift in Sources */,
 				2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */,
 				2FC0F2EF1F863B110092BFDC /* ExamPager.swift in Sources */,
+				2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */,
 				2F5E0BBB1FE2871900236AFE /* ContentAttempt.swift in Sources */,
 				2F452C3020BBE3E6007833A0 /* BookmarksDetailDataSource.swift in Sources */,
 				2F4A81EF20E52CB50062DE8A /* BaseTableViewCell.swift in Sources */,
@@ -1657,9 +1699,11 @@
 			files = (
 				8CDE264B239EAD2700BA04C6 /* TestVideoPlayerUtils.swift in Sources */,
 				8CD78EA522BC9B8F00DD034D /* TestMainMenuTabViewController.swift in Sources */,
+				25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */,
 				8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */,
 				8CD78EA322BC917D00DD034D /* TestLoginViewController.swift in Sources */,
 				8CDE264E239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift in Sources */,
+				25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */,
 				8C04229122AA77C90015269B /* TestCourseViewController.swift in Sources */,
 				2506299A2266FEC800539FB2 /* LoginActivity.swift in Sources */,
 				8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */,
@@ -1897,6 +1941,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1924,6 +1969,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
