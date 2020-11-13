@@ -18,7 +18,6 @@
 		250629942265E8E900539FB2 /* LoginActivityPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629932265E8E900539FB2 /* LoginActivityPager.swift */; };
 		250629962266F9C000539FB2 /* LoginActivityViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629952266F9C000539FB2 /* LoginActivityViewControllerTest.swift */; };
 		2506299A2266FEC800539FB2 /* LoginActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629992266FEC800539FB2 /* LoginActivity.swift */; };
-		250888DA251C5EC80023DCF6 /* ZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */; };
 		250C4CAD2463D24600FD7636 /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250C4CAC2463D24600FD7636 /* BaseDBViewController.swift */; };
 		250DA7BD246A585D00EDB31C /* StartQuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */; };
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
@@ -27,9 +26,7 @@
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		2555A0C42466A59400D56707 /* ContentsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555A0C32466A59400D56707 /* ContentsListResponse.swift */; };
-		25681BCE252F1D4B002352E8 /* MobileRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25681BCD252F1D4A002352E8 /* MobileRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */; };
-		25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25681BCD252F1D4A002352E8 /* MobileRTC.framework */; };
 		256A909C247D03C100F4E12C /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
 		256A909E247D21F500F4E12C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909D247D21F500F4E12C /* UIButton.swift */; };
 		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
@@ -44,13 +41,13 @@
 		2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24621CA0D770097C6FE /* Firebase.framework */; };
 		2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24821CA0D770097C6FE /* FirebaseMessaging.framework */; };
 		2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A25221CA0DBE0097C6FE /* Protobuf.framework */; };
+		2576A279255A9C8E002BC005 /* VideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */; };
 		257BB691246A964400524D2C /* AttemptRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB690246A964400524D2C /* AttemptRepository.swift */; };
 		257BB693246A9BA000524D2C /* QuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB692246A9BA000524D2C /* QuizExamViewModel.swift */; };
 		257BB695246AB4C900524D2C /* QuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB694246AB4C900524D2C /* QuizExamViewController.swift */; };
 		257BB697246AC22B00524D2C /* ExamQuestionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB696246AC22B00524D2C /* ExamQuestionsResponse.swift */; };
 		257BB699246AC2ED00524D2C /* ExamQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB698246AC2ED00524D2C /* ExamQuestion.swift */; };
 		2590B1FA2510BB90003C0A03 /* VideoConference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1F92510BB90003C0A03 /* VideoConference.swift */; };
-		2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */; };
 		2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259286892473B1E00035EBA4 /* QuizReviewViewController.swift */; };
 		2592868C2474316C0035EBA4 /* AttemptItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592868B2474316B0035EBA4 /* AttemptItemRepository.swift */; };
 		25985831248A5F14003591FA /* URLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985830248A5F14003591FA /* URLUtils.swift */; };
@@ -347,7 +344,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				25681BCE252F1D4B002352E8 /* MobileRTC.framework in Embed Frameworks */,
 				25DD9C452486551F000BB671 /* SwiftKeychainWrapper.framework in Embed Frameworks */,
 				2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */,
 			);
@@ -690,7 +686,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */,
 				25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */,
 				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
 				8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */,
@@ -1473,13 +1468,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2576A279255A9C8E002BC005 /* VideoConferenceViewController.swift in Sources */,
 				2FC0F2F11F863B160092BFDC /* TPApiClient.swift in Sources */,
 				2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */,
 				2FA9285420B8160A00CD3076 /* BookmarksSlidingViewController.swift in Sources */,
 				2F4186A420BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift in Sources */,
 				8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */,
 				2FD846601FC30D1900D6F016 /* ContentDetailDataSource.swift in Sources */,
-				250888DA251C5EC80023DCF6 /* ZoomMeetViewController.swift in Sources */,
 				2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */,
 				25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */,
 				2F6F167F1FC4164100FB768C /* Reachability.swift in Sources */,
@@ -1542,7 +1537,6 @@
 				2FDF9C5320B6D7FC0086245F /* BasePager.swift in Sources */,
 				2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */,
 				2FC0F2EF1F863B110092BFDC /* ExamPager.swift in Sources */,
-				2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */,
 				2F5E0BBB1FE2871900236AFE /* ContentAttempt.swift in Sources */,
 				2F452C3020BBE3E6007833A0 /* BookmarksDetailDataSource.swift in Sources */,
 				2F4A81EF20E52CB50062DE8A /* BaseTableViewCell.swift in Sources */,
@@ -1946,7 +1940,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -1974,7 +1968,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",

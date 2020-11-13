@@ -84,11 +84,6 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
              viewController.contents = contents
             return viewController
 
-        } else if (content.getContentType() == .VideoConference) {
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-            Constants.VIDEO_CONFERENCE_VIEW_CONTROLLER) as! VideoConferenceViewController
-            viewController.content = content
-            return viewController
         } else {
             let viewController = HtmlContentViewController()
             viewController.content = content
