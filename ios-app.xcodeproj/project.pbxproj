@@ -34,6 +34,7 @@
 		256A909E247D21F500F4E12C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909D247D21F500F4E12C /* UIButton.swift */; };
 		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
 		256A90A2247D30DA00F4E12C /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A90A1247D30DA00F4E12C /* Collection.swift */; };
+		256DE79E256F8CF200F02995 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256DE79D256F8CF100F02995 /* PaddingLabel.swift */; };
 		25705017246E48BA00E6C688 /* ListTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705016246E48BA00E6C688 /* ListTransform.swift */; };
 		25705019246E71B600E6C688 /* QuizQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705018246E71B600E6C688 /* QuizQuestionViewController.swift */; };
 		2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2570501A246EA32600E6C688 /* LoadingViewController.swift */; };
@@ -387,6 +388,7 @@
 		256A909D247D21F500F4E12C /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsViewModel.swift; sourceTree = "<group>"; };
 		256A90A1247D30DA00F4E12C /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		256DE79D256F8CF100F02995 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		256EF50721CA15A200C743F0 /* ios-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-app.entitlements"; sourceTree = "<group>"; };
 		25705016246E48BA00E6C688 /* ListTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransform.swift; sourceTree = "<group>"; };
 		25705018246E71B600E6C688 /* QuizQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionViewController.swift; sourceTree = "<group>"; };
@@ -1180,6 +1182,7 @@
 				8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */,
 				8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */,
 				8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */,
+				256DE79D256F8CF100F02995 /* PaddingLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1537,6 +1540,7 @@
 				2FC0F3041F863B9E0092BFDC /* ExamsTabViewController.swift in Sources */,
 				25985835248A77BC003591FA /* EncryptionKeyRepository.swift in Sources */,
 				2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */,
+				256DE79E256F8CF200F02995 /* PaddingLabel.swift in Sources */,
 				2F5E0BB91FE2452D00236AFE /* ActivityFeedTableViewCell.swift in Sources */,
 				250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */,
 				2FDF9C5320B6D7FC0086245F /* BasePager.swift in Sources */,
