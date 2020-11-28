@@ -91,6 +91,7 @@ class ContentsTableViewCell: UITableViewCell {
     
     func addThumbnail(content: Content) {
         if (content.coverImageSmall != nil) {
+            thumbnailImage.isHidden = false
             thumbnailImage.contentMode = .scaleToFill
             thumbnailImage.kf.setImage(with: URL(string: content.coverImageSmall),
                                        placeholder: Images.PlaceHolder.image)
