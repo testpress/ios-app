@@ -110,6 +110,7 @@ BaseDBViewController<Chapter> {
             }
             
             if self.pager.hasMore {
+                self.loadingItems = false
                 self.loadItems()
             } else {
                 self.items = Array(items!.values)
