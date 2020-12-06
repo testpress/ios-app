@@ -54,8 +54,13 @@ class DBInstance {
          as it is neccessary for login screen after logout.
         */
         let course = sharedInstance.database.objects(Course.self)
+        let chapters = sharedInstance.database.objects(Chapter.self)
+        let contents = sharedInstance.database.objects(Content.self)
+
         try! sharedInstance.database.write {
             sharedInstance.database.delete(course)
+            sharedInstance.database.delete(chapters)
+            sharedInstance.database.delete(contents)
         }
     }
     
