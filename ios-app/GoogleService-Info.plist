@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>234956709117-22a94to47s3nf4pdgil0kvgca20d3h0o.apps.googleusercontent.com</string>
+	<string>211376158773-fgl12j53geogdldps1b0kd6hmttea3s3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.234956709117-22a94to47s3nf4pdgil0kvgca20d3h0o</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>234956709117-0de2p1pn9jr3l65j9hu53lgdvtommnhm.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.211376158773-fgl12j53geogdldps1b0kd6hmttea3s3</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA0YjEemcexSdcsEQ7M_9xcNwzd6Up1IEI</string>
+	<string>AIzaSyBhr3ncglco1LBxqhRi6pAqFroj1tPrUAk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>234956709117</string>
+	<string>211376158773</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>n.testpress.pohankarsgurukul</string>
+	<string>in.testpress.indirection</string>
 	<key>PROJECT_ID</key>
-	<string>testpress-apps</string>
+	<string>direction-43034</string>
 	<key>STORAGE_BUCKET</key>
-	<string>testpress-apps.appspot.com</string>
+	<string>direction-43034.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:234956709117:ios:37fdcf1b6941ea4005b294</string>
-	<key>DATABASE_URL</key>
-	<string>https://testpress-apps.firebaseio.com</string>
+	<string>1:211376158773:ios:ed4a3b33193b58315fd97c</string>
 </dict>
 </plist>
