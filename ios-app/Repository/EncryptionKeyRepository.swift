@@ -18,21 +18,12 @@ class EncryptionKeyRepository {
         }
     }
     
-    private func getKey(url: String) -> Data? {
-        return KeychainWrapper.standard.data(forKey: url)
-    }
-    
-    private func storeKey(url: String, key: Data) {
-        KeychainWrapper.standard.set(key, forKey: url)
-    }
-    
     private func fetchFromNetwork(url: URL, onSuccess: @escaping(Data) -> Void) {
         var request = URLRequest(url: url)
         request.setValue("JWT " + KeychainTokenItem.getToken(), forHTTPHeaderField: "Authorization")
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: request) { data, response, _ in
             guard let key = data else { return }
-            self.storeKey(url: url.absoluteString, key: key)
             onSuccess(key)
         }
         task.resume()
