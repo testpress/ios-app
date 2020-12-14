@@ -61,7 +61,10 @@ class Content: DBModel {
     @objc dynamic var isScheduled: Bool = false
     @objc dynamic var start: String = ""
     @objc dynamic var contentType: String = ""
-    
+    @objc dynamic var coverImage: String!
+    @objc dynamic var coverImageSmall: String!
+    @objc dynamic var coverImageMedium: String!
+
     
     public static func fetchContent(url:String, completion: @escaping(Content?, TPError?) -> Void) {
         TPApiClient.request(
@@ -127,6 +130,9 @@ class Content: DBModel {
         isScheduled <- map["is_scheduled"]
         start <- map["start"]
         contentType <- map["content_type"]
+        coverImage <- map["cover_image"]
+        coverImageSmall <- map["cover_image_small"]
+        coverImageMedium <- map["cover_image_medium"]
     }
     
     override public static func primaryKey() -> String? {
