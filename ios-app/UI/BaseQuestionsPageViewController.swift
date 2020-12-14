@@ -133,6 +133,9 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                         return
                     }
                     self.attemptItems = self.attemptItems.sorted(by: { $0.order < $1.order })
+                    if self.questionsPageViewDelegate?.questionsDidLoad != nil {
+                        self.questionsPageViewDelegate?.questionsDidLoad!()
+                    }
                     self.baseQuestionsDataSource = self.getQuestionsDataSource()
                     // TODO: Handle empty questions
                     let startingViewController: BaseQuestionsViewController =
@@ -147,11 +150,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                     self.parentviewController
                         .questionsSlidingMenuDelegate.updateQuestions(self.attemptItems)
                     
-                    self.hideLoadingProgress(completionHandler: {
-                        if self.questionsPageViewDelegate?.questionsDidLoad != nil {
-                            self.questionsPageViewDelegate?.questionsDidLoad!()
-                        }
-                    })
+                    self.hideLoadingProgress()
                 }
             }
         )
