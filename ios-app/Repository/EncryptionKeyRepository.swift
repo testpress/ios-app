@@ -13,14 +13,8 @@ import SwiftKeychainWrapper
 class EncryptionKeyRepository {
     func load(url: URL, onSuccess: @escaping(Data) -> Void) {
         let encryptionKeyUrl = URLUtils.convertURLSchemeToHttps(url: url)
-        let key: Data? = getKey(url: encryptionKeyUrl.absoluteString)
-        
-        if (key != nil) {
-            onSuccess(key!)
-        } else {
-            fetchFromNetwork(url: encryptionKeyUrl) { _ in
-                onSuccess(self.getKey(url: encryptionKeyUrl.absoluteString)!)
-            }
+        fetchFromNetwork(url: encryptionKeyUrl) { key in
+            onSuccess(key)
         }
     }
     
