@@ -25,12 +25,16 @@
 		2510859B2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */; };
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
+		254D8F1225813D90001A54FE /* MobileRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 254D8F1125813D8F001A54FE /* MobileRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		2555A0C42466A59400D56707 /* ContentsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555A0C32466A59400D56707 /* ContentsListResponse.swift */; };
+		25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */; };
+		25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25681BCD252F1D4A002352E8 /* MobileRTC.framework */; };
 		256A909C247D03C100F4E12C /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
 		256A909E247D21F500F4E12C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909D247D21F500F4E12C /* UIButton.swift */; };
 		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
 		256A90A2247D30DA00F4E12C /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A90A1247D30DA00F4E12C /* Collection.swift */; };
+		256DE79E256F8CF200F02995 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256DE79D256F8CF100F02995 /* PaddingLabel.swift */; };
 		25705017246E48BA00E6C688 /* ListTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705016246E48BA00E6C688 /* ListTransform.swift */; };
 		25705019246E71B600E6C688 /* QuizQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705018246E71B600E6C688 /* QuizQuestionViewController.swift */; };
 		2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2570501A246EA32600E6C688 /* LoadingViewController.swift */; };
@@ -346,6 +350,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				254D8F1225813D90001A54FE /* MobileRTC.framework in Embed Frameworks */,
 				25DD9C452486551F000BB671 /* SwiftKeychainWrapper.framework in Embed Frameworks */,
 				2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */,
 			);
@@ -375,6 +380,7 @@
 		2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerResourceLoaderDelegate.swift; sourceTree = "<group>"; };
 		2519C12D21B0083600D26551 /* InstituteSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstituteSettings.swift; sourceTree = "<group>"; };
 		2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBTableViewControllerV2.swift; sourceTree = "<group>"; };
+		254D8F1125813D8F001A54FE /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileRTC.framework; path = Carthage/Build/iOS/MobileRTC.framework; sourceTree = "<group>"; };
 		254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Testpress iOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testpress_iOS_AppUITests.swift; sourceTree = "<group>"; };
 		254E69C521DCF199009A4E61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -385,6 +391,7 @@
 		256A909D247D21F500F4E12C /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsViewModel.swift; sourceTree = "<group>"; };
 		256A90A1247D30DA00F4E12C /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		256DE79D256F8CF100F02995 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		256EF50721CA15A200C743F0 /* ios-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-app.entitlements"; sourceTree = "<group>"; };
 		25705016246E48BA00E6C688 /* ListTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransform.swift; sourceTree = "<group>"; };
 		25705018246E71B600E6C688 /* QuizQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionViewController.swift; sourceTree = "<group>"; };
@@ -775,7 +782,9 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
-				2576E34F25341FAB0091DE8E /* MobileRTCResources.bundle */,
+				254D8F1125813D8F001A54FE /* MobileRTC.framework */,
+				25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */,
+				25681BCD252F1D4A002352E8 /* MobileRTC.framework */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
@@ -1182,6 +1191,7 @@
 				8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */,
 				8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */,
 				8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */,
+				256DE79D256F8CF100F02995 /* PaddingLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1540,6 +1550,7 @@
 				2FC0F3041F863B9E0092BFDC /* ExamsTabViewController.swift in Sources */,
 				25985835248A77BC003591FA /* EncryptionKeyRepository.swift in Sources */,
 				2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */,
+				256DE79E256F8CF200F02995 /* PaddingLabel.swift in Sources */,
 				2F5E0BB91FE2452D00236AFE /* ActivityFeedTableViewCell.swift in Sources */,
 				250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */,
 				2FDF9C5320B6D7FC0086245F /* BasePager.swift in Sources */,
