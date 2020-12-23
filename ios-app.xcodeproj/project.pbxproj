@@ -28,8 +28,6 @@
 		254D8F1225813D90001A54FE /* MobileRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 254D8F1125813D8F001A54FE /* MobileRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		2555A0C42466A59400D56707 /* ContentsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555A0C32466A59400D56707 /* ContentsListResponse.swift */; };
-		25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */; };
-		25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25681BCD252F1D4A002352E8 /* MobileRTC.framework */; };
 		256A909C247D03C100F4E12C /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
 		256A909E247D21F500F4E12C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909D247D21F500F4E12C /* UIButton.swift */; };
 		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
@@ -760,6 +758,14 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		2520F071258E5DA9000A2B16 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				2576E34F25341FAB0091DE8E /* MobileRTCResources.bundle */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -783,14 +789,13 @@
 			isa = PBXGroup;
 			children = (
 				254D8F1125813D8F001A54FE /* MobileRTC.framework */,
-				25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */,
-				25681BCD252F1D4A002352E8 /* MobileRTC.framework */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
 				2F26ADE31E8249D70031E6F4 /* Products */,
 				2FBEDB781E82BBD0000CF05C /* Frameworks */,
 				322BFA670C6561A068806630 /* Generated Mocks */,
+				2520F071258E5DA9000A2B16 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1949,7 +1954,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1960,7 +1965,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -1977,7 +1982,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1988,7 +1993,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",

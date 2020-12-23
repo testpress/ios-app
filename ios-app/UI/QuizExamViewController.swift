@@ -16,6 +16,7 @@ class QuizExamViewController: UIViewController {
     var questionsPageViewController: QuizQuestionsPageViewController!
     var emptyView: EmptyView!
     var viewModel: QuizExamViewModel!
+    var attemptItems = [AttemptItem]()
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var navigationBarItem: UINavigationItem!

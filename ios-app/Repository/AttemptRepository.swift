@@ -26,12 +26,21 @@ class AttemptRepository {
             completion(attemptItems, nil)
             return
         }
-        
+        self.fetchQuestions(url: url, examId: examId, attemptId: attemptId, completion: completion)
+    }
+    
+    func fetchQuestions(url: String, examId: Int, attemptId: Int, completion: @escaping([AttemptItem]?, TPError?) -> Void) {
         TPApiClient.request(type: ApiResponse<ExamQuestionsResponse>.self, endpointProvider: TPEndpointProvider(.get, url: url), completion:  { response, error in
-            self.storeInDB(examQuestions: response?.results.parse() ?? [])
-            let examQuestions = self.getExamquestionsFromDB(examId: examId)
-            let attemptItems = self.createAttemptItems(examQuestions: examQuestions, attemptId: attemptId)
-            completion(attemptItems, error)
+          
+            if (!(response!.next.isEmpty)) {
+                self.storeInDB(examQuestions: response?.results.parse() ?? [])
+                self.fetchQuestions(url: response!.next, examId: examId, attemptId: attemptId, completion: completion)
+            } else {
+                let examQuestions = self.getExamquestionsFromDB(examId: examId)
+                print("Exam Questions : \(examQuestions)")
+                let attemptItems = self.createAttemptItems(examQuestions: examQuestions, attemptId: attemptId)
+                completion(attemptItems, error)
+            }
         })
     }
     
