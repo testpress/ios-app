@@ -32,6 +32,8 @@ class Video: DBModel {
     @objc dynamic var id: Int = -1
     @objc dynamic var title: String = ""
     @objc dynamic var embedCode: String = ""
+    @objc dynamic var duration: String = ""
+
     var streams = List<Stream>()
 
     
@@ -53,5 +55,6 @@ class Video: DBModel {
         title <- map["title"]
         embedCode <- map["embed_code"]
         streams <- map["streams"]
+        duration <- map["duration"]
     }
 }

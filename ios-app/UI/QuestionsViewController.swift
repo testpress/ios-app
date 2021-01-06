@@ -156,6 +156,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
-        attemptItem?.currentReview = sender.isOn
+        try! Realm().write {
+            attemptItem?.currentReview = sender.isOn
+        }
     }
 }

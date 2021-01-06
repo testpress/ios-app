@@ -62,6 +62,15 @@ enum Images: String {
     case Quill = "quill"
     case Attachment = "attachment"
     case TickIcon = "tick"
+    case AttachmentIcon = "ic_attachment_icon_small"
+    case ExamIcon = "ic_exam_icon"
+    case NotesIcon = "ic_notes_icon"
+    case VideoConferenceIcon = "ic_video_conference_icon"
+    case AttachmentIconWhite = "attachment_icon_white"
+    case NotesIconWhite = "notes_icon_white"
+    case ExamIconWhite = "exam_icon_white"
+    case VideoIconWhite = "video_icon_white"
+    case LiveClassIcon = "live_class_icon"
 
     var image: UIImage {
         return UIImage(asset: self)

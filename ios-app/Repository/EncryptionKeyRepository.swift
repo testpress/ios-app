@@ -13,23 +13,9 @@ import SwiftKeychainWrapper
 class EncryptionKeyRepository {
     func load(url: URL, onSuccess: @escaping(Data) -> Void) {
         let encryptionKeyUrl = URLUtils.convertURLSchemeToHttps(url: url)
-        let key: Data? = getKey(url: encryptionKeyUrl.absoluteString)
-        
-        if (key != nil) {
-            onSuccess(key!)
-        } else {
-            fetchFromNetwork(url: encryptionKeyUrl) { _ in
-                onSuccess(self.getKey(url: encryptionKeyUrl.absoluteString)!)
-            }
+        fetchFromNetwork(url: encryptionKeyUrl) { key in
+            onSuccess(key)
         }
-    }
-    
-    private func getKey(url: String) -> Data? {
-        return KeychainWrapper.standard.data(forKey: url)
-    }
-    
-    private func storeKey(url: String, key: Data) {
-        KeychainWrapper.standard.set(key, forKey: url)
     }
     
     private func fetchFromNetwork(url: URL, onSuccess: @escaping(Data) -> Void) {
@@ -38,7 +24,6 @@ class EncryptionKeyRepository {
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: request) { data, response, _ in
             guard let key = data else { return }
-            self.storeKey(url: url.absoluteString, key: key)
             onSuccess(key)
         }
         task.resume()

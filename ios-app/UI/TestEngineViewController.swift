@@ -70,7 +70,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 if sections[i].state == Attempt.RUNNING {
                     currentSection = i
                 }
-                if sections[i].duration == nil || sections[i].duration == "0:00:00" {
+                if sections[i].duration == "" || sections[i].duration == "0:00:00" {
                     unlockedSectionExam = true;
                 }
             }

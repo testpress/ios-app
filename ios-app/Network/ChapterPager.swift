@@ -38,6 +38,7 @@ class ChapterPager: TPBasePager<Chapter> {
     }
     
     override func getItems(page: Int) {
+        queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
             endpointProvider: TPEndpointProvider(.getChapters, url: url, queryParams: queryParams),
             completion: resonseHandler!,
