@@ -48,7 +48,6 @@ class AttachmentDetailViewController: UIViewController {
     @IBOutlet weak var bookmarkAnimationContainer: UIView!
     
     var content: Content!
-    var attachmentUrl: URL!
     var bookmark: Bookmark!
     var position: Int!
     var loading: Bool = false
@@ -110,7 +109,7 @@ class AttachmentDetailViewController: UIViewController {
     }
     
     func displayAttachment() {
-        attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
+        let attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.pathExtension != "pdf" {
             viewAttachmentButton.isHidden = true
         } else {
@@ -121,17 +120,18 @@ class AttachmentDetailViewController: UIViewController {
     }
     
     @IBAction func viewAttachment(_ sender: UIButton) {
+        var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.scheme == "http" {
             attachmentUrl = URL(string: "https://" + attachmentUrl.host! + attachmentUrl.path
-                + "?" + attachmentUrl.query!)
+                + "?" + attachmentUrl.query!)!
         }
         present(alertController, animated: false, completion: {
-            self.loadPdf()
+            self.loadPdf(url: attachmentUrl)
         })
     }
     
-    func loadPdf() {
-        let pdfDocument = PDFDocument(url: attachmentUrl!)
+    func loadPdf(url: URL) {
+        let pdfDocument = PDFDocument(url: url)
         alertController.dismiss(animated: false, completion: {
             self.displayPdf(pdfDocument)
         })
@@ -154,6 +154,7 @@ class AttachmentDetailViewController: UIViewController {
     }
     
     @IBAction func downloadAttachment(_ sender: UIButton) {
+        var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         UIApplication.shared.openURL(attachmentUrl)
         createContentAttempt()
     }
