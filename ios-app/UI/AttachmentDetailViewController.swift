@@ -62,6 +62,11 @@ class AttachmentDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UIUtils.setButtonDropShadow(downloadAttachmentButton)
+        initializeBookmarkHelper()
+        displayAttachment()
+    }
+    
+    func initializeBookmarkHelper() {
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         bookmarkAnimationContainer.isHidden = true
@@ -91,7 +96,6 @@ class AttachmentDetailViewController: UIViewController {
             bookmarkOptionsLayout.isHidden = true
             bookmarkButton.isHidden = true
         }
-        displayAttachment()
     }
     
     func displayAttachment() {
