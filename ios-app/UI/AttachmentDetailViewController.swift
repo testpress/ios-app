@@ -119,13 +119,11 @@ class AttachmentDetailViewController: UIViewController {
     }
     
     func showViewButton() {
-        UIUtils.setButtonDropShadow(viewAttachmentButton)
         viewAttachmentButton.isHidden = false
     }
     
     
     func showDownloadButton() {
-        UIUtils.setButtonDropShadow(downloadAttachmentButton)
         downloadAttachmentButton.isHidden = false
     }
     
