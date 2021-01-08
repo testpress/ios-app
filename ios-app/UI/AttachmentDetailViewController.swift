@@ -48,7 +48,6 @@ class AttachmentDetailViewController: UIViewController {
     @IBOutlet weak var bookmarkAnimationContainer: UIView!
     
     var content: Content!
-    var attachmentUrl: URL!
     var bookmark: Bookmark!
     var position: Int!
     var loading: Bool = false
@@ -61,7 +60,18 @@ class AttachmentDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIUtils.setButtonDropShadow(downloadAttachmentButton)
+        initializeBookmarkHelper()
+        showTitleAndDescription()
+        addShadowToButtons()
+
+        if (content.attachment?.isRenderable == true) {
+            showViewButton()
+        } else {
+            showDownloadButton()
+        }
+    }
+    
+    func initializeBookmarkHelper() {
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         bookmarkAnimationContainer.isHidden = true
@@ -91,10 +101,9 @@ class AttachmentDetailViewController: UIViewController {
             bookmarkOptionsLayout.isHidden = true
             bookmarkButton.isHidden = true
         }
-        displayAttachment()
     }
     
-    func displayAttachment() {
+    func showTitleAndDescription() {
         contentTitle.text = content.attachment!.title
         let attachment = content.attachment!
         if attachment.attachmentDescription != nil && attachment.attachmentDescription != "" {
@@ -102,28 +111,35 @@ class AttachmentDetailViewController: UIViewController {
         } else {
             contentDescription.isHidden = true
         }
-        attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
-        if attachmentUrl.pathExtension != "pdf" {
-            viewAttachmentButton.isHidden = true
-        } else {
-            UIUtils.setButtonDropShadow(viewAttachmentButton)
-            viewAttachmentButton.isHidden = false
-        }
-        viewDidLayoutSubviews()
+    }
+    
+    func addShadowToButtons() {
+        UIUtils.setButtonDropShadow(viewAttachmentButton)
+        UIUtils.setButtonDropShadow(downloadAttachmentButton)
+    }
+    
+    func showViewButton() {
+        viewAttachmentButton.isHidden = false
+    }
+    
+    
+    func showDownloadButton() {
+        downloadAttachmentButton.isHidden = false
     }
     
     @IBAction func viewAttachment(_ sender: UIButton) {
+        var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.scheme == "http" {
             attachmentUrl = URL(string: "https://" + attachmentUrl.host! + attachmentUrl.path
-                + "?" + attachmentUrl.query!)
+                + "?" + attachmentUrl.query!)!
         }
         present(alertController, animated: false, completion: {
-            self.loadPdf()
+            self.loadPdf(url: attachmentUrl)
         })
     }
     
-    func loadPdf() {
-        let pdfDocument = PDFDocument(url: attachmentUrl!)
+    func loadPdf(url: URL) {
+        let pdfDocument = PDFDocument(url: url)
         alertController.dismiss(animated: false, completion: {
             self.displayPdf(pdfDocument)
         })
@@ -146,6 +162,7 @@ class AttachmentDetailViewController: UIViewController {
     }
     
     @IBAction func downloadAttachment(_ sender: UIButton) {
+        var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         UIApplication.shared.openURL(attachmentUrl)
         createContentAttempt()
     }
