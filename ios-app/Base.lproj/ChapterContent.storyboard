@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,7 +23,7 @@
         <!--Chapters View Controller-->
         <scene sceneID="oG9-tA-lkP">
             <objects>
-                <viewController storyboardIdentifier="ChaptersViewController" modalPresentationStyle="fullScreen" id="EFS-EC-ph2" customClass="ChaptersViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChaptersViewController" modalPresentationStyle="fullScreen" id="EFS-EC-ph2" customClass="ChaptersViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xMs-xg-Sl2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -51,7 +51,7 @@
                                     <inset key="sectionInset" minX="35" minY="32" maxX="35" maxY="32"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChapterCollectionViewCell" id="nuR-BK-O52" customClass="ChapterCollectionViewCell" customModule="Veranda_Learning" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChapterCollectionViewCell" id="nuR-BK-O52" customClass="ChapterCollectionViewCell" customModule="Testpress" customModuleProvider="target">
                                         <rect key="frame" x="35" y="32" width="108" height="114"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -130,12 +130,12 @@
         <!--Contents-->
         <scene sceneID="tRY-Nd-dXg">
             <objects>
-                <tableViewController storyboardIdentifier="ContentsTableViewController" modalPresentationStyle="fullScreen" id="Ku1-zq-U2A" customClass="ContentsTableViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ContentsTableViewController" modalPresentationStyle="fullScreen" id="Ku1-zq-U2A" customClass="ContentsTableViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qfg-lC-tjC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContentsTableViewCell" rowHeight="105" id="vt7-UG-lJF" customClass="ContentsTableViewCell" customModule="Veranda_Learning" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContentsTableViewCell" rowHeight="105" id="vt7-UG-lJF" customClass="ContentsTableViewCell" customModule="Testpress" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="105"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vt7-UG-lJF" id="05z-Q8-pY2" userLabel="Content View Cell">
@@ -346,7 +346,7 @@
         <!--Content Detail View Controller-->
         <scene sceneID="cok-gh-mkD">
             <objects>
-                <viewController storyboardIdentifier="ContentDetailViewController" modalPresentationStyle="fullScreen" id="No9-Gd-aIp" customClass="ContentDetailViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContentDetailViewController" modalPresentationStyle="fullScreen" id="No9-Gd-aIp" customClass="ContentDetailViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gba-Oq-yBQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -408,7 +408,7 @@
         <!--Video Content View Controller-->
         <scene sceneID="LEQ-MV-zdJ">
             <objects>
-                <viewController storyboardIdentifier="VideoContentViewController" modalPresentationStyle="fullScreen" id="YyX-uQ-TlB" customClass="VideoContentViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoContentViewController" modalPresentationStyle="fullScreen" id="YyX-uQ-TlB" customClass="VideoContentViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fck-Sf-0dO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -502,7 +502,7 @@
                                             </constraints>
                                         </view>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RelatedContentsCell" id="rdJ-HN-YVu" customClass="RelatedContentsCell" customModule="Veranda_Learning" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RelatedContentsCell" id="rdJ-HN-YVu" customClass="RelatedContentsCell" customModule="Testpress" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="87" width="414" height="64"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rdJ-HN-YVu" id="Lvs-lf-bm3">
@@ -624,7 +624,7 @@
         <!--Content Detail Page View Controller-->
         <scene sceneID="7E0-ul-Nfv">
             <objects>
-                <viewController storyboardIdentifier="ContentDetailPageViewController" modalPresentationStyle="fullScreen" id="nmb-5t-Gcl" customClass="ContentDetailPageViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContentDetailPageViewController" modalPresentationStyle="fullScreen" id="nmb-5t-Gcl" customClass="ContentDetailPageViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AKn-yK-SVC"/>
                         <viewControllerLayoutGuide type="bottom" id="L8w-rl-66t"/>
@@ -760,7 +760,7 @@
         <!--Attachment Detail View Controller-->
         <scene sceneID="Afu-2d-sj5">
             <objects>
-                <viewController storyboardIdentifier="AttachmentDetailViewController" modalPresentationStyle="fullScreen" id="5sd-P7-T9l" customClass="AttachmentDetailViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AttachmentDetailViewController" modalPresentationStyle="fullScreen" id="5sd-P7-T9l" customClass="AttachmentDetailViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="URl-ec-CXi"/>
                         <viewControllerLayoutGuide type="bottom" id="Fs2-g7-Vw5"/>
@@ -776,7 +776,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="453"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Jdu-yi-uQ2">
-                                                <rect key="frame" x="20" y="0.0" width="374" height="339.5"/>
+                                                <rect key="frame" x="20" y="0.0" width="374" height="301.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iip-bR-Et3">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
@@ -902,10 +902,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ac8-yT-A6n">
-                                                        <rect key="frame" x="0.0" y="280.5" width="374" height="38"/>
+                                                        <rect key="frame" x="0.0" y="280.5" width="374" height="0.0"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dwp-a5-1om">
-                                                                <rect key="frame" x="0.0" y="0.0" width="177" height="38"/>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dwp-a5-1om">
+                                                                <rect key="frame" x="0.0" y="0.0" width="125" height="38"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="i3Q-b8-w8U"/>
@@ -924,8 +924,8 @@
                                                                     <action selector="downloadAttachment:" destination="5sd-P7-T9l" eventType="touchUpInside" id="ptC-BP-QGq"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I76-VM-96z">
-                                                                <rect key="frame" x="197" y="0.0" width="177" height="38"/>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I76-VM-96z">
+                                                                <rect key="frame" x="0.0" y="0.0" width="125" height="38"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="4TK-fv-8Ec"/>
@@ -947,7 +947,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFo-AH-Kyw">
-                                                        <rect key="frame" x="0.0" y="338.5" width="374" height="1"/>
+                                                        <rect key="frame" x="0.0" y="300.5" width="374" height="1"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="xw9-ks-HJW"/>
@@ -1013,7 +1013,7 @@
         <!--Start Exam Screen View Controller-->
         <scene sceneID="R2F-EW-Fct">
             <objects>
-                <viewController storyboardIdentifier="ContentStartExamViewController" modalPresentationStyle="fullScreen" id="hZW-Ne-SuA" customClass="StartExamScreenViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContentStartExamViewController" modalPresentationStyle="fullScreen" id="hZW-Ne-SuA" customClass="StartExamScreenViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CQk-wv-T0R"/>
                         <viewControllerLayoutGuide type="bottom" id="nZc-F1-Ok9"/>
@@ -1310,7 +1310,7 @@
         <!--Start Quiz Exam View Controller-->
         <scene sceneID="IBP-LK-3po">
             <objects>
-                <viewController storyboardIdentifier="StartQuizExamViewController" modalPresentationStyle="fullScreen" id="eYP-ny-dWT" customClass="StartQuizExamViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartQuizExamViewController" modalPresentationStyle="fullScreen" id="eYP-ny-dWT" customClass="StartQuizExamViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rnh-He-zn8"/>
                         <viewControllerLayoutGuide type="bottom" id="QL2-qa-xC8"/>
@@ -1527,13 +1527,13 @@
         <!--Content Exam Attempts Table View Controller-->
         <scene sceneID="shb-Zl-WFK">
             <objects>
-                <tableViewController storyboardIdentifier="ContentExamAttemptsTableViewController" modalPresentationStyle="fullScreen" id="lFX-SI-Iwx" customClass="ContentExamAttemptsTableViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ContentExamAttemptsTableViewController" modalPresentationStyle="fullScreen" id="lFX-SI-Iwx" customClass="ContentExamAttemptsTableViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" estimatedRowHeight="-1" sectionHeaderHeight="55" sectionFooterHeight="65" id="CMc-nD-65o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="bottom" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttemptsListHeader" rowHeight="55" id="RbS-GT-5SM" customClass="AttemptsListHeader" customModule="Veranda_Learning" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="bottom" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttemptsListHeader" rowHeight="55" id="RbS-GT-5SM" customClass="AttemptsListHeader" customModule="Testpress" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RbS-GT-5SM" id="ucq-LW-Hdv">
@@ -1612,7 +1612,7 @@
                                     <outlet property="trophiesLabel" destination="XUC-Nq-VfF" id="ye9-KP-IJd"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompletedAttemptTableViewCell" rowHeight="65" id="Lce-0w-nPE" customClass="AttemptsTableViewCell" customModule="Veranda_Learning" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompletedAttemptTableViewCell" rowHeight="65" id="Lce-0w-nPE" customClass="AttemptsTableViewCell" customModule="Testpress" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="83" width="414" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lce-0w-nPE" id="790-oe-cVh">
@@ -1690,7 +1690,7 @@
                                     <outlet property="trophiesCount" destination="trT-Is-f7v" id="qps-aW-4eU"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PausedAttemptTableViewCell" id="S3m-fA-3fI" customClass="AttemptsTableViewCell" customModule="Veranda_Learning" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PausedAttemptTableViewCell" id="S3m-fA-3fI" customClass="AttemptsTableViewCell" customModule="Testpress" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="148" width="414" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S3m-fA-3fI" id="8Gm-Tc-YNd">
@@ -1774,7 +1774,7 @@
                                     <outlet property="resumeLabel" destination="acm-nc-T3V" id="L6U-yS-oAA"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="bottom" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContentAttemptFooterCell" rowHeight="65" id="IJ9-9b-eJ5" customClass="ContentAttemptFooterCell" customModule="Veranda_Learning" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="bottom" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContentAttemptFooterCell" rowHeight="65" id="IJ9-9b-eJ5" customClass="ContentAttemptFooterCell" customModule="Testpress" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="213" width="414" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="IJ9-9b-eJ5" id="y8K-gU-HJ1">
@@ -1836,7 +1836,7 @@
         <!--Video Conference View Controller-->
         <scene sceneID="aUi-fe-thf">
             <objects>
-                <viewController storyboardIdentifier="VideoConferenceViewController" modalPresentationStyle="fullScreen" id="EHF-XV-t6w" customClass="VideoConferenceViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoConferenceViewController" modalPresentationStyle="fullScreen" id="EHF-XV-t6w" customClass="VideoConferenceViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8CK-mS-utd"/>
                         <viewControllerLayoutGuide type="bottom" id="Vbd-HU-feQ"/>
@@ -2183,7 +2183,7 @@
         <!--Zoom Meet View Controller-->
         <scene sceneID="12H-jy-zPI">
             <objects>
-                <viewController storyboardIdentifier="ZoomMeetViewController" modalPresentationStyle="fullScreen" id="TY7-Ko-s1O" customClass="ZoomMeetViewController" customModule="Veranda_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ZoomMeetViewController" modalPresentationStyle="fullScreen" id="TY7-Ko-s1O" customClass="ZoomMeetViewController" customModule="Testpress" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x3d-Mw-G1f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
