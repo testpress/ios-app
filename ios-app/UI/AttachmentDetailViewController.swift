@@ -63,6 +63,7 @@ class AttachmentDetailViewController: UIViewController {
         super.viewDidLoad()
         UIUtils.setButtonDropShadow(downloadAttachmentButton)
         initializeBookmarkHelper()
+        showTitleAndDescription()
         displayAttachment()
     }
     
@@ -98,7 +99,7 @@ class AttachmentDetailViewController: UIViewController {
         }
     }
     
-    func displayAttachment() {
+    func showTitleAndDescription() {
         contentTitle.text = content.attachment!.title
         let attachment = content.attachment!
         if attachment.attachmentDescription != nil && attachment.attachmentDescription != "" {
@@ -106,6 +107,9 @@ class AttachmentDetailViewController: UIViewController {
         } else {
             contentDescription.isHidden = true
         }
+    }
+    
+    func displayAttachment() {
         attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.pathExtension != "pdf" {
             viewAttachmentButton.isHidden = true
