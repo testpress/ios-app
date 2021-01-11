@@ -134,7 +134,7 @@ class VideoPlayerView: UIView {
         controlsContainerView.playerStatus = .finished
     }
     
-    func dealloc() {
+    func deallocate() {
         player?.pause()
         controlsContainerView.playerStatus = .paused
         player?.removeTimeObserver(timeObserver!)
