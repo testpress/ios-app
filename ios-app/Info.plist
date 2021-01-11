@@ -45,6 +45,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>We use this for zoom classes</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>We will use your Bluetooth to access your Bluetooth headphones.</string>
 	<key>NSCameraUsageDescription</key>
