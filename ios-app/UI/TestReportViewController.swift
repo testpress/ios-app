@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TestReportViewController: UIViewController {
 
@@ -220,8 +221,9 @@ class TestReportViewController: UIViewController {
                 let currentIndex = contentDetailPageViewController.getCurrentIndex()
                 let nextContent =
                     contentDetailPageViewController.contents[currentIndex]
-                
-                nextContent.isLocked = false
+                try! Realm().write {
+                    nextContent.isLocked = false
+                }
             }
             contentDetailPageViewController.updateCurrentExamContent()
         })
