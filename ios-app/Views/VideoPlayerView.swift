@@ -143,7 +143,6 @@ class VideoPlayerView: UIView {
         } else {
             playVideo(url: self.url)
         }
-        self.timer?.invalidate()
     }
     
     @objc func playerDidFinishPlaying() {
@@ -156,6 +155,7 @@ class VideoPlayerView: UIView {
         player?.pause()
         controlsContainerView.playerStatus = .paused
         player?.removeTimeObserver(timeObserver!)
+        self.timer?.invalidate()
         NotificationCenter.default.removeObserver(videoEndObserver!)
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackBufferEmpty")
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
