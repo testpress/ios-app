@@ -60,10 +60,15 @@ class VideoPlayerView: UIView {
     }
     
     private func displayWatermark() {
-        watermarkLabel = MarqueeLabel.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 20), duration: 8.0, fadeLength: 0.0)
-        watermarkLabel?.text = KeychainTokenItem.getAccount().padding(toLength: Int((self.frame.width)/2), withPad: " ", startingAt: 0)
-        watermarkLabel?.numberOfLines = 1
+        watermarkLabel = initializeWatermarkLabel()
         addSubview(watermarkLabel!)
+    }
+    
+    private func initializeWatermarkLabel() -> MarqueeLabel {
+        let watermarkLabel = MarqueeLabel.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 20), duration: 8.0, fadeLength: 0.0)
+        watermarkLabel.text = KeychainTokenItem.getAccount().padding(toLength: Int((self.frame.width)/2), withPad: " ", startingAt: 0)
+        watermarkLabel.numberOfLines = 1
+        return watermarkLabel
     }
     
     
