@@ -158,19 +158,23 @@ class AttachmentDetailViewController: UIViewController {
                                                             title: content.attachment!.title,
                                                             backButton: backButton)
             pdfController.navigationItem.rightBarButtonItem = nil
-            displayWatermark(view: pdfController.view)
+            initializeWatermark(view: pdfController.view)
+            view.addSubview(watermarkLabel!)
+            startTimerToMoveWatermarkPosition()
             let navigationController = UINavigationController(rootViewController: pdfController)
             present(navigationController, animated: true)
             createContentAttempt()
         }
     }
     
-    private func displayWatermark(view: UIView) {
+    private func startTimerToMoveWatermarkPosition() {
+        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
+    }
+    
+    private func initializeWatermark(view: UIView) {
         watermarkLabel = MarqueeLabel.init(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: 20), duration: 8.0, fadeLength: 0.0)
         watermarkLabel?.text = KeychainTokenItem.getAccount().padding(toLength: Int((view.frame.width)/2), withPad: " ", startingAt: 0)
         watermarkLabel?.numberOfLines = 1
-        view.addSubview(watermarkLabel!)
-        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
     }
     
     @objc func moveWatermarkPosition() {
