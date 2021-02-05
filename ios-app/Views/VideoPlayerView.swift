@@ -10,6 +10,7 @@ import UIKit
 import AVKit
 import M3U8KitDynamic
 import SwiftKeychainWrapper
+import MarqueeLabel
 
 
 class VideoPlayerView: UIView {
@@ -24,6 +25,8 @@ class VideoPlayerView: UIView {
     var currentPlaybackSpeed: Float = 0.0
     var resolutionInfo:[VideoQuality] = [VideoQuality(resolution:"Auto", bitrate: 0)]
     let videoPlayerResourceLoaderDelegate = VideoPlayerResourceLoaderDelegate()
+    var timer: Timer?
+    var watermarkLabel: MarqueeLabel?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -37,6 +40,7 @@ class VideoPlayerView: UIView {
         controlsContainerView.delegate = self
         controlsContainerView.setUp()
         addSubview(controlsContainerView)
+        displayWatermark()
         addObservers()
         
         self.addTapGestureRecognizer {
@@ -53,6 +57,23 @@ class VideoPlayerView: UIView {
         playerLayer = AVPlayerLayer(player: player)
         self.layer.addSublayer(playerLayer!)
         playerLayer?.frame = self.frame
+    }
+    
+    private func displayWatermark() {
+        watermarkLabel = initializeWatermarkLabel()
+        addSubview(watermarkLabel!)
+    }
+    
+    private func initializeWatermarkLabel() -> MarqueeLabel {
+        let watermarkLabel = MarqueeLabel.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 20), duration: 8.0, fadeLength: 0.0)
+        watermarkLabel.text = KeychainTokenItem.getAccount().padding(toLength: Int((self.frame.width)/2), withPad: " ", startingAt: 0)
+        watermarkLabel.numberOfLines = 1
+        return watermarkLabel
+    }
+    
+    
+    @objc func moveWatermarkPosition() {
+        watermarkLabel?.frame.origin.y = CGFloat(Int.random(in: 0..<Int(self.frame.height)))
     }
     
     func playVideo(url: URL) {
@@ -100,6 +121,7 @@ class VideoPlayerView: UIView {
     
     func addObservers() {
         initPlayer()
+        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackBufferEmpty", options: .new, context: nil)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: .new, context: nil)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackBufferFull", options: .new, context: nil)
@@ -138,6 +160,7 @@ class VideoPlayerView: UIView {
         player?.pause()
         controlsContainerView.playerStatus = .paused
         player?.removeTimeObserver(timeObserver!)
+        self.timer?.invalidate()
         NotificationCenter.default.removeObserver(videoEndObserver!)
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackBufferEmpty")
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
