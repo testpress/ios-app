@@ -69,7 +69,7 @@ class TPApiClient {
     static func request(dataRequest: DataRequest,
                         completion: @escaping (String?, TPError?) -> Void) {
         
-        dataRequest.responseString() { response in
+        dataRequest.responseString(queue: nil, encoding: String.Encoding.utf8) { response in
             #if DEBUG
                 print(NSString(data: response.request?.httpBody ?? Data(),
                                encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
