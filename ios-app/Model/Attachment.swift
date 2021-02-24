@@ -31,12 +31,14 @@ class Attachment: DBModel {
     @objc dynamic var id: Int = -1
     @objc dynamic var title: String = ""
     @objc dynamic var attachmentDescription: String?
+    @objc dynamic var isRenderable: Bool = false
 
     public override func mapping(map: Map) {
         attachmentUrl <- map["attachment_url"]
         id <- map["id"]
         title <- map["title"]
         attachmentDescription <- map["description"]
+        isRenderable <- map["is_renderable"]
     }
     
     override public static func primaryKey() -> String? {

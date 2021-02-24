@@ -24,6 +24,7 @@
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
 		2510859B2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */; };
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
+		252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 252E050D25C2C06800BE1B38 /* MarqueeLabel.framework */; };
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		2555A0C42466A59400D56707 /* ContentsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555A0C32466A59400D56707 /* ContentsListResponse.swift */; };
@@ -287,6 +288,7 @@
 		2FEDFF5A206CE7560002CF04 /* CategoryPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF59206CE7560002CF04 /* CategoryPager.swift */; };
 		2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */; };
 		2FF024212004CECA00E0047D /* BaseDBTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF024202004CECA00E0047D /* BaseDBTableViewController.swift */; };
+		84F3494925A82C190048487F /* TestAttachmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F3494825A82C190048487F /* TestAttachmentDetailViewController.swift */; };
 		8C04228F22AA3FD40015269B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04228E22AA3FD40015269B /* WebViewController.swift */; };
 		8C04229122AA77C90015269B /* TestCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04229022AA77C90015269B /* TestCourseViewController.swift */; };
 		8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205A072323918700596E66 /* LoginActivityCell.swift */; };
@@ -378,6 +380,7 @@
 		250E68F521BA4AA600DA81F1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerResourceLoaderDelegate.swift; sourceTree = "<group>"; };
 		2519C12D21B0083600D26551 /* InstituteSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstituteSettings.swift; sourceTree = "<group>"; };
+		252E050D25C2C06800BE1B38 /* MarqueeLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarqueeLabel.framework; path = Carthage/Build/iOS/MarqueeLabel.framework; sourceTree = "<group>"; };
 		2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBTableViewControllerV2.swift; sourceTree = "<group>"; };
 		254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Testpress iOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testpress_iOS_AppUITests.swift; sourceTree = "<group>"; };
@@ -653,6 +656,7 @@
 		2FEDFF59206CE7560002CF04 /* CategoryPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPager.swift; sourceTree = "<group>"; };
 		2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostTableViewController.swift; sourceTree = "<group>"; };
 		2FF024202004CECA00E0047D /* BaseDBTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBTableViewController.swift; sourceTree = "<group>"; };
+		84F3494825A82C190048487F /* TestAttachmentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAttachmentDetailViewController.swift; sourceTree = "<group>"; };
 		8C04228E22AA3FD40015269B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8C04229022AA77C90015269B /* TestCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCourseViewController.swift; sourceTree = "<group>"; };
 		8C205A072323918700596E66 /* LoginActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityCell.swift; sourceTree = "<group>"; };
@@ -694,6 +698,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */,
 				25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */,
 				25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */,
 				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
@@ -754,6 +759,7 @@
 				8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */,
 				25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */,
 				25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */,
+				84F3494825A82C190048487F /* TestAttachmentDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -851,6 +857,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				252E050D25C2C06800BE1B38 /* MarqueeLabel.framework */,
 				250888DD251C5F420023DCF6 /* MobileRTC.framework */,
 				250888DB251C5F2C0023DCF6 /* MobileRTCResources.bundle */,
 				25DD9C432486551F000BB671 /* SwiftKeychainWrapper.framework */,
@@ -1428,7 +1435,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "rm -rf ${TMPDIR}/TemporaryItems/*carthage*\n/usr/local/bin/carthage copy-frameworks\n";
 		};
 		2FBEDB7F1E82BC48000CF05C /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1457,13 +1464,14 @@
 				"$(SRCROOT)/Carthage/Build/iOS/M3U8KitDynamic.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CropViewController.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MarqueeLabel.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf ${TMPDIR}TemporaryItems/*carthage*\n/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1716,6 +1724,7 @@
 				2506299A2266FEC800539FB2 /* LoginActivity.swift in Sources */,
 				8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */,
 				8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */,
+				84F3494925A82C190048487F /* TestAttachmentDetailViewController.swift in Sources */,
 				250629962266F9C000539FB2 /* LoginActivityViewControllerTest.swift in Sources */,
 				2F26ADFB1E8249D70031E6F4 /* PushNotificationsTest.swift in Sources */,
 				25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */,

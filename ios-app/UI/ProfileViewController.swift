@@ -44,6 +44,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var accuracy: UILabel!
     @IBOutlet weak var bookmarkButtonLayout: UIStackView!
     
+    @IBOutlet weak var shareButtonView: UIView!
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var emptyView: EmptyView!
     var user: User?
@@ -175,6 +176,7 @@ class ProfileViewController: UIViewController {
             UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         
         activityViewController.popoverPresentationController?.sourceView = view
+        activityViewController.popoverPresentationController?.sourceRect = shareButtonView.frame
         activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
         present(activityViewController, animated: true, completion: nil)
     }
