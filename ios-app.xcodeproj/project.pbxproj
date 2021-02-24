@@ -18,8 +18,8 @@
 		250629942265E8E900539FB2 /* LoginActivityPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629932265E8E900539FB2 /* LoginActivityPager.swift */; };
 		250629962266F9C000539FB2 /* LoginActivityViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629952266F9C000539FB2 /* LoginActivityViewControllerTest.swift */; };
 		2506299A2266FEC800539FB2 /* LoginActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629992266FEC800539FB2 /* LoginActivity.swift */; };
-		250A5F8722090F120098FF35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250A5F8622090F120098FF35 /* LaunchScreen.storyboard */; };
 		250888DA251C5EC80023DCF6 /* ZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */; };
+		250A5F8722090F120098FF35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250A5F8622090F120098FF35 /* LaunchScreen.storyboard */; };
 		250C4CAD2463D24600FD7636 /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250C4CAC2463D24600FD7636 /* BaseDBViewController.swift */; };
 		250DA7BD246A585D00EDB31C /* StartQuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */; };
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
@@ -27,11 +27,8 @@
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
 		252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 252E050D25C2C06800BE1B38 /* MarqueeLabel.framework */; };
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
-		254D8F1225813D90001A54FE /* MobileRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 254D8F1125813D8F001A54FE /* MobileRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		2555A0C42466A59400D56707 /* ContentsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555A0C32466A59400D56707 /* ContentsListResponse.swift */; };
-		25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */; };
-		25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25681BCD252F1D4A002352E8 /* MobileRTC.framework */; };
 		256A909C247D03C100F4E12C /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
 		256A909E247D21F500F4E12C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909D247D21F500F4E12C /* UIButton.swift */; };
 		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
@@ -351,7 +348,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				254D8F1225813D90001A54FE /* MobileRTC.framework in Embed Frameworks */,
 				25DD9C452486551F000BB671 /* SwiftKeychainWrapper.framework in Embed Frameworks */,
 				2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */,
 			);
@@ -372,10 +368,10 @@
 		250629932265E8E900539FB2 /* LoginActivityPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityPager.swift; sourceTree = "<group>"; };
 		250629952266F9C000539FB2 /* LoginActivityViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityViewControllerTest.swift; sourceTree = "<group>"; };
 		250629992266FEC800539FB2 /* LoginActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivity.swift; sourceTree = "<group>"; };
-		250A5F8622090F120098FF35 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomMeetViewController.swift; sourceTree = "<group>"; };
 		250888DB251C5F2C0023DCF6 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTCResources.bundle"; sourceTree = "<group>"; };
 		250888DD251C5F420023DCF6 /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileRTC.framework; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTC.framework"; sourceTree = "<group>"; };
+		250A5F8622090F120098FF35 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		250C4CAC2463D24600FD7636 /* BaseDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBViewController.swift; sourceTree = "<group>"; };
 		250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizExamViewController.swift; sourceTree = "<group>"; };
 		250E68F521BA4AA600DA81F1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -702,7 +698,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */,
-				25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */,
 				25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */,
 				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
 				8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */,
@@ -1370,7 +1365,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
 				2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */,
@@ -1968,7 +1962,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.18.3;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -1995,7 +1989,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.18.2;
+				MARKETING_VERSION = 1.18.3;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
