@@ -28,6 +28,8 @@ import PDFReader
 import UIKit
 import Alamofire
 import RealmSwift
+import MarqueeLabel
+
 
 class AttachmentDetailViewController: UIViewController {
     
@@ -48,7 +50,6 @@ class AttachmentDetailViewController: UIViewController {
     @IBOutlet weak var bookmarkAnimationContainer: UIView!
     
     var content: Content!
-    var attachmentUrl: URL!
     var bookmark: Bookmark!
     var position: Int!
     var loading: Bool = false
@@ -58,10 +59,23 @@ class AttachmentDetailViewController: UIViewController {
     var moveAnimationView: LOTAnimationView!
     var removeAnimationView: LOTAnimationView!
     let alertController = UIUtils.initProgressDialog(message: Strings.LOADING + "\n\n")
+    var timer: Timer?
+    var watermarkLabel: MarqueeLabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIUtils.setButtonDropShadow(downloadAttachmentButton)
+        initializeBookmarkHelper()
+        showTitleAndDescription()
+        addShadowToButtons()
+
+        if (content.attachment?.isRenderable == true) {
+            showViewButton()
+        } else {
+            showDownloadButton()
+        }
+    }
+    
+    func initializeBookmarkHelper() {
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         bookmarkAnimationContainer.isHidden = true
@@ -91,10 +105,9 @@ class AttachmentDetailViewController: UIViewController {
             bookmarkOptionsLayout.isHidden = true
             bookmarkButton.isHidden = true
         }
-        displayAttachment()
     }
     
-    func displayAttachment() {
+    func showTitleAndDescription() {
         contentTitle.text = content.attachment!.title
         let attachment = content.attachment!
         if attachment.attachmentDescription != nil && attachment.attachmentDescription != "" {
@@ -102,28 +115,35 @@ class AttachmentDetailViewController: UIViewController {
         } else {
             contentDescription.isHidden = true
         }
-        attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
-        if attachmentUrl.pathExtension != "pdf" {
-            viewAttachmentButton.isHidden = true
-        } else {
-            UIUtils.setButtonDropShadow(viewAttachmentButton)
-            viewAttachmentButton.isHidden = false
-        }
-        viewDidLayoutSubviews()
+    }
+    
+    func addShadowToButtons() {
+        UIUtils.setButtonDropShadow(viewAttachmentButton)
+        UIUtils.setButtonDropShadow(downloadAttachmentButton)
+    }
+    
+    func showViewButton() {
+        viewAttachmentButton.isHidden = false
+    }
+    
+    
+    func showDownloadButton() {
+        downloadAttachmentButton.isHidden = false
     }
     
     @IBAction func viewAttachment(_ sender: UIButton) {
+        var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.scheme == "http" {
             attachmentUrl = URL(string: "https://" + attachmentUrl.host! + attachmentUrl.path
-                + "?" + attachmentUrl.query!)
+                + "?" + attachmentUrl.query!)!
         }
         present(alertController, animated: false, completion: {
-            self.loadPdf()
+            self.loadPdf(url: attachmentUrl)
         })
     }
     
-    func loadPdf() {
-        let pdfDocument = PDFDocument(url: attachmentUrl!)
+    func loadPdf(url: URL) {
+        let pdfDocument = PDFDocument(url: url)
         alertController.dismiss(animated: false, completion: {
             self.displayPdf(pdfDocument)
         })
@@ -137,15 +157,37 @@ class AttachmentDetailViewController: UIViewController {
             let pdfController = PDFViewController.createNew(with: pdfDocument!,
                                                             title: content.attachment!.title,
                                                             backButton: backButton)
-            
             pdfController.navigationItem.rightBarButtonItem = nil
+            watermarkLabel = initializeWatermark(view: pdfController.view)
+            view.addSubview(watermarkLabel!)
+            startTimerToMoveWatermarkPosition()
             let navigationController = UINavigationController(rootViewController: pdfController)
             present(navigationController, animated: true)
             createContentAttempt()
         }
     }
     
+    private func startTimerToMoveWatermarkPosition() {
+        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
+    }
+    
+    private func initializeWatermark(view: UIView) -> MarqueeLabel {
+        let watermarkLabel = MarqueeLabel.init(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: 20), duration: 8.0, fadeLength: 0.0)
+        watermarkLabel.text = KeychainTokenItem.getAccount().padding(toLength: Int((view.frame.width)/2), withPad: " ", startingAt: 0)
+        watermarkLabel.numberOfLines = 1
+        return watermarkLabel
+    }
+    
+    @objc func moveWatermarkPosition() {
+        watermarkLabel?.frame.origin.y = CGFloat(Int.random(in: 0..<Int(self.view.frame.height)))
+    }
+
+    deinit {
+        self.timer?.invalidate()
+    }
+    
     @IBAction func downloadAttachment(_ sender: UIButton) {
+        var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         UIApplication.shared.openURL(attachmentUrl)
         createContentAttempt()
     }
