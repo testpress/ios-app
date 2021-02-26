@@ -26,11 +26,8 @@
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
 		252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 252E050D25C2C06800BE1B38 /* MarqueeLabel.framework */; };
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
-		254D8F1225813D90001A54FE /* MobileRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 254D8F1125813D8F001A54FE /* MobileRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		2555A0C42466A59400D56707 /* ContentsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555A0C32466A59400D56707 /* ContentsListResponse.swift */; };
-		25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */; };
-		25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25681BCD252F1D4A002352E8 /* MobileRTC.framework */; };
 		256A909C247D03C100F4E12C /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
 		256A909E247D21F500F4E12C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909D247D21F500F4E12C /* UIButton.swift */; };
 		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
@@ -350,7 +347,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				254D8F1225813D90001A54FE /* MobileRTC.framework in Embed Frameworks */,
 				25DD9C452486551F000BB671 /* SwiftKeychainWrapper.framework in Embed Frameworks */,
 				2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */,
 			);
@@ -447,7 +443,7 @@
 		2F25D561201F5C8800C01CCE /* TargetThreatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetThreatViewController.swift; sourceTree = "<group>"; };
 		2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
-		2F26ADE21E8249D70031E6F4 /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F26ADE21E8249D70031E6F4 /* GSN Publishers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GSN Publishers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F26ADEA1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -698,7 +694,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */,
-				25681BD1252F1DB6002352E8 /* MobileRTC.framework in Frameworks */,
 				25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */,
 				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
 				8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */,
@@ -799,7 +794,7 @@
 		2F26ADE31E8249D70031E6F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2F26ADE21E8249D70031E6F4 /* ios-app.app */,
+				2F26ADE21E8249D70031E6F4 /* GSN Publishers.app */,
 				2F26ADF61E8249D70031E6F4 /* ios-appTests.xctest */,
 				254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */,
 			);
@@ -1274,7 +1269,7 @@
 			);
 			name = "ios-app";
 			productName = "ios-app";
-			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
+			productReference = 2F26ADE21E8249D70031E6F4 /* GSN Publishers.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2F26ADF51E8249D70031E6F4 /* ios-appTests */ = {
@@ -1364,7 +1359,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
 				2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */,
@@ -1966,8 +1960,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
-				PRODUCT_NAME = "ios-app";
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.gsnpublishers;
+				PRODUCT_NAME = "GSN Publishers";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -1994,8 +1988,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
-				PRODUCT_NAME = "ios-app";
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.gsnpublishers;
+				PRODUCT_NAME = "GSN Publishers";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

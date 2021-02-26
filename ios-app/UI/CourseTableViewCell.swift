@@ -85,7 +85,7 @@ class CourseTableViewCell: UITableViewCell {
             webViewController.title = course.title
             parentViewController.present(webViewController, animated: true, completion: nil)
         } else {
-            if course.chaptersCount > 0 {
+            if (course.chaptersCount > 0 || (course.chaptersCount == 0 && course.contentsCount == 0)) {
                 let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
                     Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
                 
