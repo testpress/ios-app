@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "login_screen_image.png",
+      "filename" : "legacy_ias_login.png",
       "scale" : "1x"
     },
     {
