@@ -28,14 +28,23 @@ import UIKit
 
 class CoursesTableViewController: BaseDBTableViewController<Course> {
     
+    var tags: [String] = []
+
     required init?(coder aDecoder: NSCoder) {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
         super.init(pager: CoursePager(), coder: aDecoder)
     }
     
     override func getItemsFromDb() -> [Course] {
-        return DBManager<Course>()
+        var courses = DBManager<Course>()
             .getItemsFromDB(filteredBy: "active = true", byKeyPath: "order")
+        
+        if tags.count > 0 {
+            courses = courses.filter { (course: Course) in
+                !Set(course.tags).isDisjoint(with: tags)
+            }
+        }
+        return courses
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,6 +83,7 @@ class CoursesTableViewController: BaseDBTableViewController<Course> {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.COURSE_LIST_VIEW_CELL, for: indexPath) as! CourseTableViewCell
 
+        print("Cells : \(items)")
         cell.initCell(items[indexPath.row], viewController: self)
         return cell
     }
