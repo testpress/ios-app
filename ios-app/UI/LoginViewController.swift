@@ -38,7 +38,8 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var signUpLayout: UIStackView!
     @IBOutlet weak var socialLoginLayout: UIStackView!
     @IBOutlet weak var facebookButtonLayout: UIView!
-        
+    @IBOutlet weak var featuredImage: UIImageView!
+    
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     var instituteSettings: InstituteSettings!
     override func viewDidLoad() {
@@ -46,7 +47,6 @@ class LoginViewController: BaseTextFieldViewController {
         self.setStatusBarColor()
         
         navigationbarItem.title = UIUtils.getAppName()
-        UIUtils.setButtonDropShadow(loginButton)
         
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         
@@ -150,6 +150,10 @@ class LoginViewController: BaseTextFieldViewController {
         )
     }
     
+    override func viewDidLayoutSubviews() {
+        featuredImage.roundCorners(cornerRadius: 120.0)
+    }
+    
     @IBAction func showSignUpView() {
         let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
             Constants.SIGNUP_VIEW_CONTROLLER) as! SignUpViewController
@@ -186,3 +190,13 @@ extension LoginViewController: LoginButtonDelegate {
     
 }
 
+
+extension UIView {
+    func roundCorners(cornerRadius: Double) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.bottomRight], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = self.bounds
+        maskLayer.path = path.cgPath
+        self.layer.mask = maskLayer
+    }
+}
