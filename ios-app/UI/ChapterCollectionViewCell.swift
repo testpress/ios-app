@@ -50,6 +50,7 @@ class ChapterCollectionViewCell: UICollectionViewCell {
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         var viewController: UIViewController
+        debugPrint("Is object invalidated : \(chapter.isInvalidated)")
         if !chapter.leaf {
             let chapterViewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController

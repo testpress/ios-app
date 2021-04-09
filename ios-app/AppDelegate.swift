@@ -111,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         do {
-            Client.shared = try Client(dsn: "https://15420a637fb7479a832b721fb7cc0ceb@sentry.testpress.in/4")
+            Client.shared = try Client(dsn: "https://b26e3d55ef144bdfbdd00ed9c63a09b7@sentry.testpress.in/4")
             try Client.shared?.startCrashHandler()
         } catch let error {
             print("\(error)")

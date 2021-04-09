@@ -16,7 +16,7 @@ class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePag
     var firstCallBack: Bool = true // On firstCallBack load modified items if items already exists
 
     override func viewWillAppear(_ animated: Bool) {
-        items = getItemsFromDb()
+//        items = getItemsFromDb()
         super.viewWillAppear(animated)
     }
     

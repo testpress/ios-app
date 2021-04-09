@@ -115,7 +115,7 @@ BaseDBViewController<Chapter> {
             } else {
                 self.items = Array(items!.values)
                 let chaptersFromDB = DBManager<Chapter>().getItemsFromDB(filteredBy: String(format: "courseId==%d", self.courseId), byKeyPath: "order")
-                DBManager<Chapter>().deleteFromDb(objects: chaptersFromDB)
+//                DBManager<Chapter>().deleteFromDb(objects: chaptersFromDB)
                 DBManager<Chapter>().addData(objects: items!.values)
                 if self.items.count == 0 {
                     self.setEmptyText()

@@ -281,3 +281,8 @@ body.watermark::before {
     background-position: center;
     overflow: hidden;
 }
+
+video {
+    width: 100%;
+    height: auto;
+}
