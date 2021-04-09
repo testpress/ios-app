@@ -75,7 +75,7 @@ class BaseTableViewController<T: Mappable>: UITableViewController {
     func onLoadFinished(items: [T]) {
         self.items = items
         self.tableView.reloadData()
-        if (self.activityIndicator?.isAnimating)! {
+        if (self.activityIndicator?.isAnimating ?? false) {
             self.activityIndicator?.stopAnimating()
         }
     }
