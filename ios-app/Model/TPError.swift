@@ -63,16 +63,23 @@ public class TPError: Error {
         self.kind = kind
 
 
-        if let error_detail = self.getErrorBodyAs(type: TestpressAPIError.self), error_detail.detail?.error_code != nil {
-            self.kind = Kind.custom
-            self.error_detail = error_detail.detail?.message
-            self.error_code = error_detail.detail?.error_code
+        if isCustomError() {
+            let error = self.getErrorBodyAs(type: TestpressAPIError.self)?.detail
+            self.populateErrorData(code: error?.message, detail: error?.error_code)
         } else if let error_detail = self.getErrorBodyAs(type: ApiError.self) {
-            self.kind = Kind.custom
-            self.error_detail = error_detail.detail
-            self.error_code = error_detail.error_code
+            self.populateErrorData(code: error_detail.detail, detail: error_detail.error_code)
         }
         
+    }
+    
+    func isCustomError() -> Bool {
+        return self.getErrorBodyAs(type: TestpressAPIError.self) != nil
+    }
+    
+    func populateErrorData(code: String?, detail: String?) {
+        self.kind = Kind.custom
+        self.error_detail = detail
+        self.error_code = code
     }
     
     public func isNetworkError() -> Bool {
