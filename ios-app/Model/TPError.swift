@@ -62,12 +62,15 @@ public class TPError: Error {
         self.response = response
         self.kind = kind
 
-        if let error_detail = self.getErrorBodyAs(type: ApiError.self) {
-            if (error_detail.detail != nil) {
-                self.kind = Kind.custom
-                self.error_detail = error_detail.detail
-                self.error_code = error_detail.error_code
-            }
+
+        if let error_detail = self.getErrorBodyAs(type: TestpressAPIError.self), error_detail.detail?.error_code != nil {
+            self.kind = Kind.custom
+            self.error_detail = error_detail.detail?.message
+            self.error_code = error_detail.detail?.error_code
+        } else if let error_detail = self.getErrorBodyAs(type: ApiError.self) {
+            self.kind = Kind.custom
+            self.error_detail = error_detail.detail
+            self.error_code = error_detail.error_code
         }
         
     }
