@@ -116,7 +116,7 @@ class TestReportViewController: UIViewController {
             shareButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         } else {
             shareButtonLayout.isHidden = true
-            analyticsButtonLayout.isHidden = false
+            analyticsButtonLayout.isHidden = true // Hide analytics buttons
             solutionButtonLayout.isHidden = false
             solutionsButton.setImage(nil, for: .normal)
         }
