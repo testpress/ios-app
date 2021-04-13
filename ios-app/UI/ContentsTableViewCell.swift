@@ -138,7 +138,7 @@ class ContentsTableViewCell: UITableViewCell {
     @objc func onItemClick() {
         let content = parentViewController.items[position]
         
-        if (content.isScheduled) {
+        if (content.isScheduled || content.isLocked) {
             return
         }
         
