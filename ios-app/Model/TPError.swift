@@ -65,15 +65,16 @@ public class TPError: Error {
 
         if isCustomError() {
             let error = self.getErrorBodyAs(type: TestpressAPIError.self)?.detail
-            self.populateErrorData(code: error?.message, detail: error?.error_code)
+            self.populateErrorData(code: error?.error_code, detail: error?.message)
         } else if let error_detail = self.getErrorBodyAs(type: ApiError.self) {
-            self.populateErrorData(code: error_detail.detail, detail: error_detail.error_code)
+            self.populateErrorData(code: error_detail.error_code, detail: error_detail.detail)
         }
         
     }
     
     func isCustomError() -> Bool {
-        return self.getErrorBodyAs(type: TestpressAPIError.self) != nil
+        let error = self.getErrorBodyAs(type: TestpressAPIError.self)
+        return error != nil && error?.detail?.message != nil
     }
     
     func populateErrorData(code: String?, detail: String?) {
