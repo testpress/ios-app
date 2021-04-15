@@ -143,8 +143,15 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 }
             }
             htmlContent += "</table>"
+        } else if (attemptQuestion.type == "N") {
+            let value =
+                attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
+            
+            htmlContent += "<input class='edit_box' type='number' pattern='\\d*' inputmode='decimal' value='\(value)'" +
+                "onpaste='return false' oninput='onValueChange(this)' " +
+                "placeholder='YOUR ANSWER'>"
         } else {
-            let inputType = attemptQuestion.type == "N" ? "number" : "text"
+            let inputType = "text"
             let value =
                 attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
             
