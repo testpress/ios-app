@@ -86,6 +86,12 @@ function setCheckboxState(option, check) {
     }
 }
 
+function validate(element) {
+    var letters = element.value.replace(/[^a-zA-Z]+/g, '');
+    var numbers = element.value.replace(/\D/g,'');
+    element.value = numbers;
+}
+
 function onValueChange(element) {
     var message = { "shortText": element.value };
     webkit.messageHandlers.callbackHandler.postMessage(message);

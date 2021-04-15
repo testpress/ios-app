@@ -147,8 +147,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             let value =
                 attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
             
-            htmlContent += "<input class='edit_box' type='number' pattern='\\d*' inputmode='decimal' value='\(value)'" +
-                "onpaste='return false' oninput='onValueChange(this)' " +
+            htmlContent += "<input class='edit_box' type='number' autocorrect='off'  step='0.01' value='\(value)'" +
+                "onpaste='return false'  onkeyup='validate(this)' oninput='onValueChange(this)' " +
                 "placeholder='YOUR ANSWER'>"
         } else {
             let inputType = "text"
