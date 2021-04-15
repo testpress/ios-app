@@ -86,10 +86,8 @@ function setCheckboxState(option, check) {
     }
 }
 
-function validate(element) {
-    var letters = element.value.replace(/[^a-zA-Z]+/g, '');
-    var numbers = element.value.replace(/\D/g,'');
-    element.value = numbers;
+function removeNonNumericValues(event) {
+    event.value = event.value.replace(/[^0-9\-\.]/g, '')
 }
 
 function onValueChange(element) {
