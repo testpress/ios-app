@@ -73,7 +73,8 @@ public class TPError: Error {
     }
     
     func isCustomError() -> Bool {
-        return self.getErrorBodyAs(type: TestpressAPIError.self) != nil
+        let error = self.getErrorBodyAs(type: TestpressAPIError.self)
+        return error != nil && error?.detail?.message != nil
     }
     
     func populateErrorData(code: String?, detail: String?) {
