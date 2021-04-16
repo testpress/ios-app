@@ -26,6 +26,7 @@
 import UIKit
 import WebKit
 import RealmSwift
+import SwiftSoup
 
 class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
     
@@ -33,7 +34,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     @IBOutlet weak var reviewSwitch: UISwitch!
     
     private var selectedOptions: [Int] = []
-    
+    private var gapFilledResponse: [String: AnyObject] = [:]
+
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
@@ -69,7 +71,21 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         if (message.name == "callbackHandler") {
             let body = message.body
             if let dict = body as? Dictionary<String, AnyObject> {
-                if let checked = dict["checked"] as? Bool {
+                if dict["type"] as! String? == "gap_filled_response" {
+                    gapFilledResponse[dict["order"] as! String] = dict["answer"]
+                    try! Realm().write {
+                      attemptItem.gapFillResponses.removeAll()
+                        let arr = List<GapFillResponse>()
+                            
+                        gapFilledResponse.forEach {
+                            let response = GapFillResponse()
+                            response.order = Int($0)!
+                            response.answer = $1 as! String
+                            arr.append(response)
+                        }
+                      attemptItem.gapFillResponses.append(objectsIn: arr)
+                    }
+                } else if let checked = dict["checked"] as? Bool {
                     let radioOption = dict["radioOption"] as! Bool
                     let id = Int(dict["clickedOptionId"] as! String)!
                     if checked {
@@ -143,6 +159,21 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 }
             }
             htmlContent += "</table>"
+        } else if (attemptQuestion.type == "G") {
+            do {
+                let doc = try SwiftSoup.parse(htmlContent)
+                let elements = try doc.select("input")
+                for element in elements {
+                    try element.attr("oninput", "onGapValueChange(this)")
+                    try element.addClass("gap_box")
+                }
+                htmlContent = try doc.html()
+            } catch Exception.Error(let type, let message) {
+                print(message)
+            } catch {
+                print("error")
+            }
+
         } else {
             let inputType = attemptQuestion.type == "N" ? "number" : "text"
             let value =
