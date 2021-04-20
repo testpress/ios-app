@@ -19,4 +19,4 @@ github "getsentry/sentry-cocoa" "4.3.1"
 github "M3U8Kit/M3U8Parser" ~> 0.2.1 
 github "TimOliver/TOCropViewController" "2.5.2"
 github "jrendel/SwiftKeychainWrapper" ~> 3.4
-github "cbpowell/MarqueeLabel" ~> "4.0.5"
+github "cbpowell/MarqueeLabel" "4.0.5"
