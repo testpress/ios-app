@@ -26,6 +26,7 @@
 import Alamofire
 import Device
 import UIKit
+import RealmSwift
 
 enum AuthProvider: String {
     case TESTPRESS
@@ -427,12 +428,18 @@ class TPApiClient {
     static func saveAnswer(selectedAnswer: [Int],
                            review: Bool,
                            shortAnswer: String?,
+                           gapFilledResponses: List<GapFillResponse>?,
                            endpointProvider: TPEndpointProvider,
                            completion: @escaping (AttemptItem?, TPError?) -> Void) {
         
         var parameters: Parameters = [ "selected_answers": selectedAnswer, "review": review ]
         if let shortAnswer = shortAnswer {
             parameters["short_text"] = shortAnswer
+        }
+                
+        if let gapFilledResponses = gapFilledResponses {
+            let vals : [[String: String]] = gapFilledResponses.map{["order": String($0.order), "answer": $0.answer]}
+            parameters["gap_fill_responses"] = vals
         }
         apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
             json, error in
