@@ -287,6 +287,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 selectedAnswer: Array(attemptItem.savedAnswers),
                 review: attemptItem.currentReview,
                 shortAnswer: attemptItem.currentShortText,
+                gapFilledResponses: attemptItem.gapFillResponses,
                 endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.url),
                 completion: {
                     newAttemptItem, error in
