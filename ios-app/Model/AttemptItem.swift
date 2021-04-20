@@ -79,7 +79,7 @@ class AttemptItem: DBModel {
         return String(format: "%@/api/v2.4/attempts/%d/questions/%d/", Constants.BASE_URL , self.attemptId, self.examQuestionId)
     }
     
-    public func setGapFilledResponses(_ gapFillOrderAnswerMap: [Int: AnyObject] ) {
+    public func setGapFillResponses(_ gapFillOrderAnswerMap: [Int: AnyObject] ) {
         try! Realm().write {
             let gapFillResponseList = List<GapFillResponse>()
             gapFillOrderAnswerMap.forEach {

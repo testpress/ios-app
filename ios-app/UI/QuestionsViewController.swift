@@ -103,7 +103,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     func handleGapFillTypeInput(_ gapFillData: [String : AnyObject]) {
         let order = gapFillData["order"] as! NSString
         gapFilledResponse[order.integerValue] = gapFillData["answer"]
-        attemptItem.setGapFilledResponses(gapFilledResponse)
+        attemptItem.setGapFillResponses(gapFilledResponse)
     }
     
     override func getJavascript() -> String {
