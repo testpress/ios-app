@@ -83,7 +83,6 @@ class CoursesTableViewController: BaseDBTableViewController<Course> {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.COURSE_LIST_VIEW_CELL, for: indexPath) as! CourseTableViewCell
 
-        print("Cells : \(items)")
         cell.initCell(items[indexPath.row], viewController: self)
         return cell
     }
