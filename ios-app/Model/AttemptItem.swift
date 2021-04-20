@@ -78,6 +78,19 @@ class AttemptItem: DBModel {
     public func getSaveUrl() -> String {
         return String(format: "%@/api/v2.4/attempts/%d/questions/%d/", Constants.BASE_URL , self.attemptId, self.examQuestionId)
     }
+    
+    public func setGapFilledResponses(_ gapFillTypeOrderAnswerMap: [Int: AnyObject] ) {
+        try! Realm().write {
+            let gapFillResponseList = List<GapFillResponse>()
+            gapFillTypeOrderAnswerMap.forEach {
+                let response = GapFillResponse.create(order: $0, answer: $1 as! String)
+                gapFillResponseList.append(response)
+            }
+            
+            self.gapFillResponses.removeAll()
+            self.gapFillResponses.append(objectsIn: gapFillResponseList)
+        }
+    }
 
     public override func mapping(map: Map) {
         id <- map["id"]

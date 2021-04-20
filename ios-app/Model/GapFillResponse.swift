@@ -18,4 +18,11 @@ class GapFillResponse: DBModel {
         order <- map["order"]
         answer <- map["answer"]
     }
+    
+    public static func create(order: Int, answer: String) -> GapFillResponse{
+        let response = GapFillResponse()
+        response.order = order
+        response.answer = answer
+        return response
+    }
 }

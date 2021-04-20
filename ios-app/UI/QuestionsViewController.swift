@@ -75,7 +75,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             let body = message.body
             if let dict = body as? Dictionary<String, AnyObject> {
                 if dict["type"] as! String? == "gap_filled_response" {
-                    handleGapFillTypeSelection(dict)
+                    handleGapFillTypeInput(dict)
                 } else if let checked = dict["checked"] as? Bool {
                     let radioOption = dict["radioOption"] as! Bool
                     let id = Int(dict["clickedOptionId"] as! String)!
@@ -100,21 +100,10 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         }
     }
     
-    func handleGapFillTypeSelection(_ gapFillData: [String : AnyObject]) {
+    func handleGapFillTypeInput(_ gapFillData: [String : AnyObject]) {
         let order = gapFillData["order"] as! NSString
         gapFilledResponse[order.integerValue] = gapFillData["answer"]
-        try! Realm().write {
-            attemptItem.gapFillResponses.removeAll()
-            let gapFillResponseList = List<GapFillResponse>()
-            
-            gapFilledResponse.forEach {
-                let response = GapFillResponse()
-                response.order = $0
-                response.answer = $1 as! String
-                gapFillResponseList.append(response)
-            }
-            attemptItem.gapFillResponses.append(objectsIn: gapFillResponseList)
-        }
+        attemptItem.setGapFilledResponses(gapFilledResponse)
     }
     
     override func getJavascript() -> String {
@@ -137,17 +126,21 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             let doc = try SwiftSoup.parse(htmlContent)
             let elements = try doc.select("input")
             for (index, element) in elements.enumerated() {
-                try element.attr("oninput", "onFillInTheBlankValueChange(this)")
-                try element.addClass("gap_box")
-                if (gapFilledResponse[index + 1] != nil) {
-                    try element.val(gapFilledResponse[index + 1] as! String)
-                }
+                try updateGapFillInputElement(element: element, value: gapFilledResponse[index + 1] as? String)
             }
             return try doc.html()
-        } catch Exception.Error(let _, let _) {
+        } catch Exception.Error( _, _) {
             return htmlContent
         } catch {
             return htmlContent
+        }
+    }
+    
+    func updateGapFillInputElement(element: Element, value: String?) throws {
+        try element.attr("oninput", "onFillInTheBlankValueChange(this)")
+        try element.addClass("gap_box")
+        if value != nil {
+            try element.val(value!)
         }
     }
     
