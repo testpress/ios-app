@@ -34,7 +34,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     @IBOutlet weak var reviewSwitch: UISwitch!
     
     private var selectedOptions: [Int] = []
-    private var gapFilledResponse: [String: AnyObject] = [:]
+    private var gapFilledResponse: [Int: AnyObject] = [:]
 
     override func initWebView() {
         let contentController = WKUserContentController()
@@ -59,32 +59,23 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             attemptItem?.savedAnswers.append(objectsIn: selectedOptions)
             attemptItem?.currentReview = attemptItem!.review
             attemptItem?.currentShortText = attemptItem!.shortText
+            attemptItem?.gapFillResponses.forEach { response in
+                gapFilledResponse[response.order] = response.answer as AnyObject
+            }
         }
 
         indexView!.text = String("\((attemptItem?.index)! + 1)")
         webView.loadHTMLString(WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader()
             + getQuestionHtml(), baseURL: Bundle.main.bundleURL)
     }
-
+    
     func userContentController(_ userContentController: WKUserContentController,
                                didReceive message: WKScriptMessage) {
         if (message.name == "callbackHandler") {
             let body = message.body
             if let dict = body as? Dictionary<String, AnyObject> {
                 if dict["type"] as! String? == "gap_filled_response" {
-                    gapFilledResponse[dict["order"] as! String] = dict["answer"]
-                    try! Realm().write {
-                      attemptItem.gapFillResponses.removeAll()
-                        let arr = List<GapFillResponse>()
-                            
-                        gapFilledResponse.forEach {
-                            let response = GapFillResponse()
-                            response.order = Int($0)!
-                            response.answer = $1 as! String
-                            arr.append(response)
-                        }
-                      attemptItem.gapFillResponses.append(objectsIn: arr)
-                    }
+                    handleGapFillTypeSelection(dict)
                 } else if let checked = dict["checked"] as? Bool {
                     let radioOption = dict["radioOption"] as! Bool
                     let id = Int(dict["clickedOptionId"] as! String)!
@@ -109,6 +100,23 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         }
     }
     
+    func handleGapFillTypeSelection(_ gapFillData: [String : AnyObject]) {
+        let order = gapFillData["order"] as! NSString
+        gapFilledResponse[order.integerValue] = gapFillData["answer"]
+        try! Realm().write {
+            attemptItem.gapFillResponses.removeAll()
+            let gapFillResponseList = List<GapFillResponse>()
+            
+            gapFilledResponse.forEach {
+                let response = GapFillResponse()
+                response.order = $0
+                response.answer = $1 as! String
+                gapFillResponseList.append(response)
+            }
+            attemptItem.gapFillResponses.append(objectsIn: gapFillResponseList)
+        }
+    }
+    
     override func getJavascript() -> String {
         var javascript = super.getJavascript()
         var selectedAnswers: [Int] = Array((attemptItem?.selectedAnswers)!)
@@ -122,6 +130,25 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             }
         }
         return javascript
+    }
+    
+    func getGapFilledQuestionHtml(_ htmlContent: String) -> String {
+        do {
+            let doc = try SwiftSoup.parse(htmlContent)
+            let elements = try doc.select("input")
+            for (index, element) in elements.enumerated() {
+                try element.attr("oninput", "onFillInTheBlankValueChange(this)")
+                try element.addClass("gap_box")
+                if (gapFilledResponse[index + 1] != nil) {
+                    try element.val(gapFilledResponse[index + 1] as! String)
+                }
+            }
+            return try doc.html()
+        } catch Exception.Error(let _, let _) {
+            return htmlContent
+        } catch {
+            return htmlContent
+        }
     }
     
     func getQuestionHtml() -> String {
@@ -160,20 +187,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             }
             htmlContent += "</table>"
         } else if (attemptQuestion.type == "G") {
-            do {
-                let doc = try SwiftSoup.parse(htmlContent)
-                let elements = try doc.select("input")
-                for element in elements {
-                    try element.attr("oninput", "onGapValueChange(this)")
-                    try element.addClass("gap_box")
-                }
-                htmlContent = try doc.html()
-            } catch Exception.Error(let type, let message) {
-                print(message)
-            } catch {
-                print("error")
-            }
-
+            htmlContent = getGapFilledQuestionHtml(htmlContent)
         } else {
             let inputType = attemptQuestion.type == "N" ? "number" : "text"
             let value =

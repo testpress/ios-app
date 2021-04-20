@@ -13,4 +13,9 @@ import RealmSwift
 class GapFillResponse: DBModel {
     @objc dynamic var order: Int = -1
     @objc dynamic var answer: String = "";
+    
+    public override func mapping(map: Map) {
+        order <- map["order"]
+        answer <- map["answer"]
+    }
 }
