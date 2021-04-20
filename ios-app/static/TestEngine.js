@@ -86,6 +86,10 @@ function setCheckboxState(option, check) {
     }
 }
 
+function removeNonNumericValues(event) {
+    event.value = event.value.replace(/[^0-9\-\.]/g, '')
+}
+
 function onValueChange(element) {
     var message = { "shortText": element.value };
     webkit.messageHandlers.callbackHandler.postMessage(message);
