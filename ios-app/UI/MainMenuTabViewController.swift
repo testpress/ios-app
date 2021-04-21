@@ -55,8 +55,31 @@ class MainMenuTabViewController: UITabBarController {
             viewControllers?.remove(at: 1)
         }
         
+        viewControllers?.remove(at: 0)
+
         if (!instituteSettings.activityFeedEnabled) {
             viewControllers?.remove(at: 0)
+        }
+
+
+        
+        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+        if let secondViewController = storyboard.instantiateViewController(
+        withIdentifier: "CoursesTableViewController") as? CoursesTableViewController {
+            secondViewController.tags = ["exams"]
+            let navgitaionController1 = UINavigationController(rootViewController: secondViewController)
+            navgitaionController1.title = "Exams"
+            navgitaionController1.tabBarItem.image = Images.BookIcon.image
+            self.viewControllers?.insert(navgitaionController1, at: 0)
+        }
+        
+        if let thirdViewController = storyboard.instantiateViewController(
+        withIdentifier: "CoursesTableViewController") as? CoursesTableViewController {
+            thirdViewController.tags = ["classes"]
+            let navgitaionController1 = UINavigationController(rootViewController: thirdViewController)
+            navgitaionController1.title = "Classes"
+            navgitaionController1.tabBarItem.image = Images.ExamIconHome.image
+            self.viewControllers?.insert(navgitaionController1, at: 1)
         }
 
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {

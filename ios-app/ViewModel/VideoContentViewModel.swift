@@ -26,7 +26,7 @@ class VideoContentViewModel {
     }
     
     func getTitle() -> String{
-        return content!.name
+        return content.video?.title ?? content.name
     }
     
     func getDescription()  -> String{
