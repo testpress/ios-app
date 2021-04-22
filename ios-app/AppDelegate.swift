@@ -111,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         
-        let config = Realm.Configuration(schemaVersion: 14)
+        let config = Realm.Configuration(schemaVersion: 15)
         Realm.Configuration.defaultConfiguration = config
         
         if (InstituteSettings.isAvailable()) {
@@ -131,7 +131,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }
         
-
         let viewController:UIViewController
         
         if (!InstituteSettings.isAvailable()) {
