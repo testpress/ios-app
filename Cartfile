@@ -21,3 +21,4 @@ github "TimOliver/TOCropViewController" "2.5.2"
 github "jrendel/SwiftKeychainWrapper" ~> 3.4
 github "cbpowell/MarqueeLabel" "4.0.5"
 github "scinfu/SwiftSoup" ~> 2.3.2
+github "airbnb/epoxy-ios"

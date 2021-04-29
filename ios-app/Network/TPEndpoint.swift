@@ -76,6 +76,7 @@ enum TPEndpoint {
     case loginActivity
     case logoutDevices
     case userVideos
+    case dashboard
 
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -227,6 +228,8 @@ enum TPEndpoint {
             return "/api/v2.4/auth/logout_devices/"
         case .userVideos:
             return "/api/v2.4/user_videos/"
+        case .dashboard:
+            return "/api/v2.4/dashboard/"
         default:
             return ""
         }

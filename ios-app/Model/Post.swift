@@ -45,6 +45,7 @@ public class Post {
     var lastCommentedBy: User!
     var lastCommentedTime: String!
     var participantsCount: Int!
+    var coverImageMedium: String?
     
     public required init?(map: Map) {
     }

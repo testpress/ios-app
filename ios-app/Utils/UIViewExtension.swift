@@ -34,6 +34,7 @@ extension UIView {
         set {
             layer.cornerRadius = newValue
             layer.masksToBounds = newValue > 0
+            self.clipsToBounds = true
         }
     }
     

@@ -135,7 +135,9 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func setFirstViewController() {
+        print("setFirstViewController")
         let startingViewController = contentDetailDataSource.viewControllerAtIndex(position)!
+        print("Starting View Controller : \(startingViewController)")
         pageViewController.setViewControllers(
             [startingViewController],
             direction: .forward,
@@ -301,6 +303,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
                     
                     return
                 }
+                print("Streams : \(content?.video)")
                 self.contents[self.position] = content!
                 self.contentDetailDataSource.contents = self.contents
                 self.setFirstViewController()

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostCarouselViewCell" id="gTV-IL-0wX" customClass="PostCarouselViewCell" customModule="ios_app" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4tl-iA-eLx">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="120"/>
+                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5C-ig-BSI">
+                        <rect key="frame" x="0.0" y="123" width="200" height="17"/>
+                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="i5C-ig-BSI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5GK-yx-CEA"/>
+                <constraint firstItem="4tl-iA-eLx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="9Rw-YY-M94"/>
+                <constraint firstAttribute="bottom" secondItem="i5C-ig-BSI" secondAttribute="bottom" constant="10" id="Dbr-fO-eoQ"/>
+                <constraint firstItem="i5C-ig-BSI" firstAttribute="top" secondItem="4tl-iA-eLx" secondAttribute="bottom" constant="10" id="JFm-62-LN4"/>
+                <constraint firstAttribute="trailing" secondItem="i5C-ig-BSI" secondAttribute="trailing" id="SWR-rN-FfH"/>
+                <constraint firstAttribute="trailing" secondItem="4tl-iA-eLx" secondAttribute="trailing" id="U4R-p9-brO"/>
+                <constraint firstItem="4tl-iA-eLx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dsO-vV-5fg"/>
+            </constraints>
+            <connections>
+                <outlet property="image" destination="4tl-iA-eLx" id="VGb-hk-Y8A"/>
+                <outlet property="title" destination="i5C-ig-BSI" id="i2D-0L-Jtk"/>
+            </connections>
+            <point key="canvasLocation" x="74" y="86"/>
+        </collectionViewCell>
+    </objects>
+</document>

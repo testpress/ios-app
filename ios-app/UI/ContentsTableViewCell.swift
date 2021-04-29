@@ -61,7 +61,7 @@ class ContentsTableViewCell: UITableViewCell {
             thumbnailImageContainer.addSubview(videoDurationLabel)
             videoDurationLabel.addRoundedCorners(radius: 2.0)
             videoDurationLabel.isHidden = false
-            videoDurationLabel.text = content.video?.duration
+//            videoDurationLabel.text = String(content.video?.duration ?? "")
             examDetailsLayout.isHidden = true
         } else {
             examDetailsLayout.isHidden = true
