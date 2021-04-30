@@ -57,10 +57,20 @@ extension DashboardViewController: ListAdapterDataSource {
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-        let sectionController = LeaderboardSectionController()
-        sectionController.dashboardData = dashboardData
-        sectionController.currentSection = object as? DashboardSection
-        return sectionController
+        
+        let currentSection = object as? DashboardSection
+        if (currentSection?.contentType == "trophy_leaderboard") {
+            let sectionController = LeaderboardSectionController()
+            sectionController.dashboardData = dashboardData
+            sectionController.currentSection = currentSection
+            return sectionController
+        }
+        
+        let carouselSectionController = CarouselSectionController()
+        carouselSectionController.sections = sections
+        carouselSectionController.currentSection = object as? DashboardSection
+        carouselSectionController.dashboardData = dashboardData
+        return carouselSectionController
     }
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
