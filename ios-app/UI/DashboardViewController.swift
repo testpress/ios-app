@@ -65,11 +65,12 @@ extension DashboardViewController: ListAdapterDataSource {
             sectionController.currentSection = currentSection
             return sectionController
         }
-        let sectionsController1 = CarouselSectionController()
-        sectionsController1.sections = sections
-        sectionsController1.currentSection = object as? DashboardSection
-        sectionsController1.dashboardData = dashboardData
-        return sectionsController1
+        
+        let carouseSectionController = CarouselSectionController()
+        carouseSectionController.sections = sections
+        carouseSectionController.currentSection = object as? DashboardSection
+        carouseSectionController.dashboardData = dashboardData
+        return carouseSectionController
     }
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
