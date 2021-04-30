@@ -14,6 +14,10 @@ final class LeaderboardSectionController: BaseSectionController {
         return CGSize(width: collectionContext!.containerSize.width, height: 50)
     }
     
+    override func numberOfItems() -> Int {
+        return currentSection?.items?.count ?? 0
+    }
+    
     override func cellForItem(at index: Int) -> UICollectionViewCell {
         let cell: LeaderboardItemViewCell = collectionContext?.dequeueReusableCell(withNibName: "LeaderboardItemViewCell", bundle: nil, for: self, at: index) as! LeaderboardItemViewCell
         cell.dashboardData = dashboardData

@@ -13,13 +13,9 @@ class BaseSectionController: ListSectionController, ListSupplementaryViewSource 
     var currentSection: DashboardSection?
     var dashboardData: DashboardResponse?
     
-    
-    override func numberOfItems() -> Int {
-        return currentSection?.items?.count ?? 0
-    }
-    
     override init() {
         super.init()
+        self.inset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         supplementaryViewSource = self
     }
     
