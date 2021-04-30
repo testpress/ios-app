@@ -25,7 +25,7 @@ class CarouselSectionController: BaseSectionController {
     }
     
     override func sizeForItem(at index: Int) -> CGSize {
-        return CGSize(width: collectionContext!.containerSize.width, height: 220)
+        return CGSize(width: collectionContext!.containerSize.width, height: 200)
     }
 }
 
@@ -36,7 +36,6 @@ extension CarouselSectionController: ListAdapterDataSource {
     }
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        print("Current section : \(currentSection)")
         return (currentSection?.items ?? []) as [ListDiffable]
     }
     

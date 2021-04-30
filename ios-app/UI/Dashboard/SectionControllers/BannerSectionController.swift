@@ -16,7 +16,7 @@ class BannerSectionController: ListSectionController {
     
     override init() {
         super.init()
-        self.inset = UIEdgeInsets(top: 20, left: 10, bottom: 50, right: 10)
+        self.inset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
     }
     
     override func sizeForItem(at index: Int) -> CGSize {
@@ -37,5 +37,14 @@ class BannerSectionController: ListSectionController {
     
     override func didUpdate(to object: Any) {
         contentId = object as? Int
+    }
+    
+    override func didSelectItem(at index: Int) {
+        let bannerAd = dashboardData?.getBanner(id: contentId!)
+        if (bannerAd != nil && bannerAd?.url != nil) {
+            let webViewController = WebViewController()
+            webViewController.url = bannerAd!.url!
+            viewController?.present(webViewController, animated: true, completion: nil)
+        }
     }
 }
