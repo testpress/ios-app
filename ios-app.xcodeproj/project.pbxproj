@@ -12,6 +12,8 @@
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
 		18F25D29212FDC5300097425 /* LockableSectionDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */; };
 		18F25D2B213000D700097425 /* SectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D2A213000D700097425 /* SectionInfo.swift */; };
+		2503DF43263BE81F003226AD /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254D8F1125813D8F001A54FE /* MobileRTC.framework */; };
+		2503DF44263BE825003226AD /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */; };
 		2506298E2264856E00539FB2 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506298D2264856E00539FB2 /* ApiError.swift */; };
 		250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506298F2265B7D600539FB2 /* LoginActivityViewController.swift */; };
 		250629922265E74D00539FB2 /* LoginActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629912265E74D00539FB2 /* LoginActivity.swift */; };
@@ -428,7 +430,6 @@
 		25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewController.swift; sourceTree = "<group>"; };
 		25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerification.swift; sourceTree = "<group>"; };
 		25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hippolyte.framework; path = Carthage/Build/iOS/Hippolyte.framework; sourceTree = "<group>"; };
-		25C2950A21FF22EE00026A64 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		25C2950C21FF2AA300026A64 /* SignUpWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWebViewController.swift; sourceTree = "<group>"; };
 		25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsPageViewController.swift; sourceTree = "<group>"; };
 		25DD9C41248654AE000BB671 /* SwiftKeychainWrapper.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftKeychainWrapper.framework.dSYM; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework.dSYM; sourceTree = "<group>"; };
@@ -703,6 +704,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2503DF43263BE81F003226AD /* MobileRTC.framework in Frameworks */,
 				253DD680262863C900C6D0A8 /* SwiftSoup.framework in Frameworks */,
 				252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */,
 				25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */,
@@ -1374,6 +1376,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2503DF44263BE825003226AD /* MobileRTCResources.bundle in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
 				2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */,
@@ -1474,6 +1477,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MarqueeLabel.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MobileRTC.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
@@ -1966,6 +1970,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4ZCXA7W722;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1974,7 +1979,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.18.3;
+				MARKETING_VERSION = 1.18.4;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -1993,6 +1998,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4ZCXA7W722;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -2001,7 +2007,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.18.3;
+				MARKETING_VERSION = 1.18.4;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
