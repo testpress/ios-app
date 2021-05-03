@@ -35,30 +35,28 @@ class MainMenuTabViewController: UITabBarController {
         self.setStatusBarColor()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
-        viewControllers?.remove(at: 6) // Access code
+        viewControllers?.remove(at: 7) // Access code
         if (!instituteSettings.forumEnabled) {
-            viewControllers?.remove(at: 5)
+            viewControllers?.remove(at: 6)
         }
         
         if (!instituteSettings.postsEnabled) {
-            viewControllers?.remove(at: 4)
+            viewControllers?.remove(at: 5)
         }
         
         if (!instituteSettings.coursesEnableGamification) {
-            viewControllers?.remove(at: 3)
+            viewControllers?.remove(at: 4)
         }
         
         if (instituteSettings.showGameFrontend) {
-            viewControllers?.remove(at: 2) // Exams list
+            viewControllers?.remove(at: 3) // Exams list
             
         } else {
-            viewControllers?.remove(at: 1)
+            viewControllers?.remove(at: 2)
         }
         
-        viewControllers?.remove(at: 0)
-
         if (!instituteSettings.activityFeedEnabled) {
-            viewControllers?.remove(at: 0)
+            viewControllers?.remove(at: 1)
         }
 
 
@@ -68,9 +66,9 @@ class MainMenuTabViewController: UITabBarController {
         withIdentifier: "CoursesTableViewController") as? CoursesTableViewController {
             secondViewController.tags = ["exams"]
             let navgitaionController1 = UINavigationController(rootViewController: secondViewController)
-            navgitaionController1.title = "Exams"
+            navgitaionController1.title = "Tests"
             navgitaionController1.tabBarItem.image = Images.BookIcon.image
-            self.viewControllers?.insert(navgitaionController1, at: 0)
+            self.viewControllers?.insert(navgitaionController1, at: 1)
         }
         
         if let thirdViewController = storyboard.instantiateViewController(
@@ -79,7 +77,7 @@ class MainMenuTabViewController: UITabBarController {
             let navgitaionController1 = UINavigationController(rootViewController: thirdViewController)
             navgitaionController1.title = "Classes"
             navgitaionController1.tabBarItem.image = Images.ExamIconHome.image
-            self.viewControllers?.insert(navgitaionController1, at: 1)
+            self.viewControllers?.insert(navgitaionController1, at: 2)
         }
 
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {

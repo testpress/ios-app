@@ -359,31 +359,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 "</div>";
         }
         html += "</div>"
-        html += "<hr style='margin-top:20px;'>"
-        html += WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS);
-        html += "<div class='comment_box_layout'>" +
-                    "<div><span class='icon-add-a-photo' onclick='insertImage()'></span></div>" +
-                    "<div contentEditable='true' class='comment_box' " +
-                            "data-placeholder='Write a comment...'></div>" +
-                    "<div><span class='icon-paper-plane' onclick='sendComment()'></span></div>" +
-                "</div>"
-        
-        html += WebViewUtils.getLoadingProgressBar(className: "new_comments_loading_layout",
-                                                   visible: false)
-        
-        html += "<div class='load_new_comments_layout' style='display:none;'>" +
-                    "<hr>" +
-                    "<div class='load_new_comments' onclick='loadNewComments()'></div>" +
-                "</div>"
-        
-        html += "<div id='comments_layout'></div>"
-        
-        html += WebViewUtils.getLoadingProgressBar(className: "preview_comments_loading_layout")
-        html += "<div class='load_more_comments_layout' style='display:none;'>" +
-                    "<hr>" +
-                    "<div class='load_more_comments' onclick='loadMoreComments()'></div>" +
-                "</div>"
-        
         return html + "</div>"
     }
     
