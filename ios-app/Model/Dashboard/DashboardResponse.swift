@@ -24,7 +24,7 @@ public class DashboardResponse {
     var userVideos: [VideoAttempt]?
     var contents: [HtmlContent]?
     var videos: [Video]?
-    var acceptedContentTypes = ["trophy_leaderboard", "banner_ad"]
+    var acceptedContentTypes = ["trophy_leaderboard", "banner_ad", "post"]
     
     
     private var contentMap = [Int: Content]()

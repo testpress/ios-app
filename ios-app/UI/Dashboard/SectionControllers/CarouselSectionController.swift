@@ -40,6 +40,14 @@ extension CarouselSectionController: ListAdapterDataSource {
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+        
+        if (currentSection?.contentType == "post") {
+            let sectionController = PostSectionController()
+            sectionController.dashboardData = dashboardData
+            sectionController.currentSection = currentSection
+            return sectionController
+        }
+
         let sectionController = BannerSectionController()
         sectionController.dashboardData = dashboardData
         sectionController.currentSection = currentSection
