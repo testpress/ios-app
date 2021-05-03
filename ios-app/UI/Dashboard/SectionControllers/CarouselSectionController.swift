@@ -25,6 +25,9 @@ class CarouselSectionController: BaseSectionController {
     }
     
     override func sizeForItem(at index: Int) -> CGSize {
+        if (currentSection?.contentType == "chapter_content") {
+            return CGSize(width: collectionContext!.containerSize.width, height: 155)
+        }
         return CGSize(width: collectionContext!.containerSize.width, height: 200)
     }
 }
@@ -43,6 +46,16 @@ extension CarouselSectionController: ListAdapterDataSource {
         
         if (currentSection?.contentType == "post") {
             let sectionController = PostSectionController()
+            sectionController.dashboardData = dashboardData
+            sectionController.currentSection = currentSection
+            return sectionController
+        } else if (currentSection?.contentType == "chapter_content") {
+            let sectionController = ChapterContentSectionController()
+            sectionController.dashboardData = dashboardData
+            sectionController.currentSection = currentSection
+            return sectionController
+        } else if (currentSection?.contentType == "chapter_content_attempt") {
+            let sectionController = ContentAttemptSectionController()
             sectionController.dashboardData = dashboardData
             sectionController.currentSection = currentSection
             return sectionController

@@ -17,6 +17,15 @@
 		2503DF57263C02C3003226AD /* BannerAdViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF55263C02C3003226AD /* BannerAdViewCell.swift */; };
 		2503DF58263C02C3003226AD /* BannerAdViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2503DF56263C02C3003226AD /* BannerAdViewCell.xib */; };
 		2503DF5B263C03B1003226AD /* HorizontalSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF5A263C03B1003226AD /* HorizontalSectionCell.swift */; };
+		2503DF66263C177A003226AD /* PostSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF65263C177A003226AD /* PostSectionController.swift */; };
+		2503DF6A263C17DA003226AD /* PostCarouselViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF68263C17DA003226AD /* PostCarouselViewCell.swift */; };
+		2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2503DF69263C17DA003226AD /* PostCarouselViewCell.xib */; };
+		2503DF6F263FAC0A003226AD /* ChapterContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF6D263FAC0A003226AD /* ChapterContentViewCell.swift */; };
+		2503DF70263FAC0A003226AD /* ChapterContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2503DF6E263FAC0A003226AD /* ChapterContentViewCell.xib */; };
+		2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF72263FAC4F003226AD /* PillLabel.swift */; };
+		2503DF76263FADD0003226AD /* StringTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF75263FADD0003226AD /* StringTransform.swift */; };
+		2503DF79263FB21F003226AD /* ChapterContentSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF78263FB21F003226AD /* ChapterContentSectionController.swift */; };
+		2503DF7C263FBECD003226AD /* ContentAttemptSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF7B263FBECD003226AD /* ContentAttemptSectionController.swift */; };
 		2506298E2264856E00539FB2 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506298D2264856E00539FB2 /* ApiError.swift */; };
 		250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506298F2265B7D600539FB2 /* LoginActivityViewController.swift */; };
 		250629922265E74D00539FB2 /* LoginActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629912265E74D00539FB2 /* LoginActivity.swift */; };
@@ -393,6 +402,15 @@
 		2503DF55263C02C3003226AD /* BannerAdViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdViewCell.swift; sourceTree = "<group>"; };
 		2503DF56263C02C3003226AD /* BannerAdViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannerAdViewCell.xib; sourceTree = "<group>"; };
 		2503DF5A263C03B1003226AD /* HorizontalSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSectionCell.swift; sourceTree = "<group>"; };
+		2503DF65263C177A003226AD /* PostSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSectionController.swift; sourceTree = "<group>"; };
+		2503DF68263C17DA003226AD /* PostCarouselViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCarouselViewCell.swift; sourceTree = "<group>"; };
+		2503DF69263C17DA003226AD /* PostCarouselViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCarouselViewCell.xib; sourceTree = "<group>"; };
+		2503DF6D263FAC0A003226AD /* ChapterContentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterContentViewCell.swift; sourceTree = "<group>"; };
+		2503DF6E263FAC0A003226AD /* ChapterContentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChapterContentViewCell.xib; sourceTree = "<group>"; };
+		2503DF72263FAC4F003226AD /* PillLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillLabel.swift; sourceTree = "<group>"; };
+		2503DF75263FADD0003226AD /* StringTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTransform.swift; sourceTree = "<group>"; };
+		2503DF78263FB21F003226AD /* ChapterContentSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterContentSectionController.swift; sourceTree = "<group>"; };
+		2503DF7B263FBECD003226AD /* ContentAttemptSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAttemptSectionController.swift; sourceTree = "<group>"; };
 		2506298D2264856E00539FB2 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		2506298F2265B7D600539FB2 /* LoginActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityViewController.swift; sourceTree = "<group>"; };
 		250629912265E74D00539FB2 /* LoginActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivity.swift; sourceTree = "<group>"; };
@@ -858,6 +876,9 @@
 				25E435DC263ADCCF00243FD3 /* BaseSectionController.swift */,
 				2503DF4F263C01E8003226AD /* CarouselSectionController.swift */,
 				2503DF52263C0296003226AD /* BannerSectionController.swift */,
+				2503DF65263C177A003226AD /* PostSectionController.swift */,
+				2503DF78263FB21F003226AD /* ChapterContentSectionController.swift */,
+				2503DF7B263FBECD003226AD /* ContentAttemptSectionController.swift */,
 			);
 			path = SectionControllers;
 			sourceTree = "<group>";
@@ -872,6 +893,10 @@
 				2503DF55263C02C3003226AD /* BannerAdViewCell.swift */,
 				2503DF56263C02C3003226AD /* BannerAdViewCell.xib */,
 				2503DF5A263C03B1003226AD /* HorizontalSectionCell.swift */,
+				2503DF68263C17DA003226AD /* PostCarouselViewCell.swift */,
+				2503DF69263C17DA003226AD /* PostCarouselViewCell.xib */,
+				2503DF6D263FAC0A003226AD /* ChapterContentViewCell.swift */,
+				2503DF6E263FAC0A003226AD /* ChapterContentViewCell.xib */,
 			);
 			path = CarouselCellViews;
 			sourceTree = "<group>";
@@ -1021,6 +1046,7 @@
 				25985830248A5F14003591FA /* URLUtils.swift */,
 				25985836248A77F6003591FA /* M3U8Handler.swift */,
 				25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */,
+				2503DF75263FADD0003226AD /* StringTransform.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1293,6 +1319,7 @@
 				8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */,
 				8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */,
 				256DE79D256F8CF100F02995 /* PaddingLabel.swift */,
+				2503DF72263FAC4F003226AD /* PillLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1466,11 +1493,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
 				25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
 				2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */,
 				2FCA8BBE20E65F4C00B8ED87 /* bookmark in Resources */,
+				2503DF70263FAC0A003226AD /* ChapterContentViewCell.xib in Resources */,
 				2FC0F31B1F863BCE0092BFDC /* TestEngine.js in Resources */,
 				2F48C8051FD030A7009C686C /* icomoon in Resources */,
 				2570A23F21CA0D260097C6FE /* GoogleService-Info.plist in Resources */,
@@ -1628,6 +1657,7 @@
 				2FC0F2FD1F863B850092BFDC /* BaseQuestionsViewController.swift in Sources */,
 				2FC0F2FE1F863B890092BFDC /* BaseTextFieldViewController.swift in Sources */,
 				25985831248A5F14003591FA /* URLUtils.swift in Sources */,
+				2503DF6F263FAC0A003226AD /* ChapterContentViewCell.swift in Sources */,
 				2F48C8011FCE9963009C686C /* ContentObject.swift in Sources */,
 				25E435BB263AD8CC00243FD3 /* DashboardViewController.swift in Sources */,
 				2FC0F3061F863BA90092BFDC /* ProfileViewController.swift in Sources */,
@@ -1702,6 +1732,7 @@
 				2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */,
 				2FC0F3051F863BA90092BFDC /* MoreOptionsViewController.swift in Sources */,
 				2F763D061FBDA89C0033D495 /* CoursePager.swift in Sources */,
+				2503DF6A263C17DA003226AD /* PostCarouselViewCell.swift in Sources */,
 				2F763CFE1FBD7AE40033D495 /* Course.swift in Sources */,
 				18F25D2B213000D700097425 /* SectionInfo.swift in Sources */,
 				2F763D111FBECFD30033D495 /* ChapterPager.swift in Sources */,
@@ -1754,6 +1785,7 @@
 				25DFC1682609B00700E06BA7 /* StringArrayTransform.swift in Sources */,
 				8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */,
 				2F48C8111FD28E7A009C686C /* PostPager.swift in Sources */,
+				2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */,
 				2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */,
 				2F3A53031FDA6AE400C64123 /* SubjectPager.swift in Sources */,
 				25E435C6263ADA0A00243FD3 /* UserStats.swift in Sources */,
@@ -1772,6 +1804,7 @@
 				253DD67E262860B200C6D0A8 /* GapFillResponse.swift in Sources */,
 				25E435D5263ADBAA00243FD3 /* UserDefaults.swift in Sources */,
 				2FCBDD4E20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift in Sources */,
+				2503DF7C263FBECD003226AD /* ContentAttemptSectionController.swift in Sources */,
 				2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */,
 				2F6F167D1FC3FE0200FB768C /* HtmlContent.swift in Sources */,
 				2F2866FA1FD6C1D600FC6BAA /* UIViewExtension.swift in Sources */,
@@ -1785,6 +1818,7 @@
 				2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */,
 				250DA7BD246A585D00EDB31C /* StartQuizExamViewController.swift in Sources */,
 				2F56B73B1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift in Sources */,
+				2503DF66263C177A003226AD /* PostSectionController.swift in Sources */,
 				257BB691246A964400524D2C /* AttemptRepository.swift in Sources */,
 				250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */,
 				2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */,
@@ -1796,6 +1830,7 @@
 				2F4A81ED20E4DDFD0062DE8A /* UINavigationControllerExtension.swift in Sources */,
 				2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */,
 				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
+				2503DF76263FADD0003226AD /* StringTransform.swift in Sources */,
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
 				2F4186A020BD3A33003D2D8A /* BookmarkFolderPager.swift in Sources */,
 				2F25D562201F5C8800C01CCE /* TargetThreatViewController.swift in Sources */,
@@ -1816,6 +1851,7 @@
 				2F5E0BB51FE2415800236AFE /* ActivityFeedPager.swift in Sources */,
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
 				8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */,
+				2503DF79263FB21F003226AD /* ChapterContentSectionController.swift in Sources */,
 				2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */,
 				250C4CAD2463D24600FD7636 /* BaseDBViewController.swift in Sources */,
 				2FDF9C5720B6E5260086245F /* BookmarkFolder.swift in Sources */,
