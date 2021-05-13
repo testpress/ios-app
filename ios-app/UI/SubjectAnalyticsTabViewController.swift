@@ -29,6 +29,7 @@ import XLPagerTabStrip
 class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     var activityIndicator: UIActivityIndicatorView! // Progress bar
     var emptyView: EmptyView!
@@ -36,6 +37,7 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
     var analyticsUrl: String!
     var subjects: [Subject] = []
     var pager: SubjectPager!
+    var shouldHideNavbar = false
     
     override func viewDidLoad() {
         self.setStatusBarColor()
@@ -62,6 +64,18 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
         buttonBarView.isHidden = true
         emptyView = EmptyView.getInstance(parentView: contentView)
         activityIndicator = UIUtils.initActivityIndicator(parentView: contentView)
+        if shouldHideNavbar {
+            hideNavbar()
+        }
+    }
+    
+    func hideNavbar() {
+        navigationBar.removeFromSuperview()
+        if #available(iOS 11.0, *) {
+            contentView.translatesAutoresizingMaskIntoConstraints = false
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

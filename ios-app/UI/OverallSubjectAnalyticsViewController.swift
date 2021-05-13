@@ -36,6 +36,7 @@ class OverallSubjectAnalyticsViewController: UIViewController {
     @IBOutlet weak var chartViewHeightConstraint: NSLayoutConstraint!
     
     var subjects = [Subject]()
+    var url: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()

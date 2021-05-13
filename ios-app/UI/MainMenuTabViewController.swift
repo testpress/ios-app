@@ -79,7 +79,8 @@ class MainMenuTabViewController: UITabBarController {
             navgitaionController1.tabBarItem.image = Images.ExamIconHome.image
             self.viewControllers?.insert(navgitaionController1, at: 2)
         }
-
+        
+        showAnalytics()
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
             let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
             let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
@@ -90,5 +91,18 @@ class MainMenuTabViewController: UITabBarController {
             ]
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters,completion: { _, _ in})
         }
+    }
+    
+    func showAnalytics() {
+        let examStoryboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: nil)
+        let subjectAnalyticsViewController = examStoryboard.instantiateViewController(
+            withIdentifier: Constants.SUBJECT_ANALYTICS_TAB_VIEW_CONTROLLER)
+            as! SubjectAnalyticsTabViewController
+        let navgitaionController2 = UINavigationController(rootViewController: subjectAnalyticsViewController)
+        subjectAnalyticsViewController.shouldHideNavbar = true
+        navgitaionController2.title = "Analytics"
+        navgitaionController2.tabBarItem.image = Images.AnalyticsIcon.image
+
+        self.viewControllers?.insert(navgitaionController2, at: 3)
     }
 }
