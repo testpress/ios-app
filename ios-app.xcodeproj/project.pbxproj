@@ -79,6 +79,7 @@
 		25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */; };
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
 		25B0ADD521D615A200C702B9 /* Hippolyte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */; };
+		25B1489A264CFE0500AECC39 /* MathJax-2.7.1 in Resources */ = {isa = PBXBuildFile; fileRef = 25B14899264CFE0500AECC39 /* MathJax-2.7.1 */; };
 		25B60E90263FCB95006CDDBE /* IGListKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B60E8F263FCB95006CDDBE /* IGListKit.framework */; };
 		25B60E93263FCBCD006CDDBE /* IGListDiffKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B60E92263FCBCD006CDDBE /* IGListDiffKit.framework */; };
 		25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
@@ -475,6 +476,7 @@
 		25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewController.swift; sourceTree = "<group>"; };
 		25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerification.swift; sourceTree = "<group>"; };
 		25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hippolyte.framework; path = Carthage/Build/iOS/Hippolyte.framework; sourceTree = "<group>"; };
+		25B14899264CFE0500AECC39 /* MathJax-2.7.1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "MathJax-2.7.1"; sourceTree = "<group>"; };
 		25B60E8F263FCB95006CDDBE /* IGListKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IGListKit.framework; path = Carthage/Build/iOS/IGListKit.framework; sourceTree = "<group>"; };
 		25B60E92263FCBCD006CDDBE /* IGListDiffKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IGListDiffKit.framework; path = Carthage/Build/iOS/IGListDiffKit.framework; sourceTree = "<group>"; };
 		25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsPageViewController.swift; sourceTree = "<group>"; };
@@ -1062,6 +1064,7 @@
 		2FC0F2581F8619220092BFDC /* static */ = {
 			isa = PBXGroup;
 			children = (
+				25B14899264CFE0500AECC39 /* MathJax-2.7.1 */,
 				2FCA8BBD20E65F4C00B8ED87 /* bookmark */,
 				2F48C8041FD030A7009C686C /* icomoon */,
 				2F452C3A20BC3463007833A0 /* images */,
@@ -1526,6 +1529,7 @@
 				2F515DF51FF3B7B10005D8A5 /* RichTextEditor.html in Resources */,
 				2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */,
 				2FB049BB1FD838860049D5B0 /* post.css in Resources */,
+				25B1489A264CFE0500AECC39 /* MathJax-2.7.1 in Resources */,
 				2F515DF61FF3B7B10005D8A5 /* RichTextEditor.js in Resources */,
 				2F3A14311FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib in Resources */,
 				2F368C0C215DEC77000999FA /* symbol.ttf in Resources */,
