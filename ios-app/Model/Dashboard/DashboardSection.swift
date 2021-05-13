@@ -23,7 +23,22 @@ public class DashboardSection {
     }
     
     func getIcon() -> UIImage {
-        return Images.LeaderboardIcon.image
+        switch slug {
+        case "posts":
+            return Images.RecentPostsIcon.image
+        case "banner_ads":
+            return Images.OffersIcon.image
+        case "whats_new":
+            return Images.WhatsNewIcon.image
+        case "leaderboard":
+            return Images.LeaderboardIcon.image
+        case "completed":
+            return Images.CompletedIcon.image
+        case "resume":
+            return Images.ResumeStudyIcon.image
+        default:
+            return Images.LeaderboardIcon.image
+        }
     }
 }
 
