@@ -55,7 +55,7 @@ class Video: DBModel {
         id <- map["id"]
         title <- map["title"]
         embedCode <- map["embed_code"]
-        streams <- map["streams"]
+        streams <- (map["streams"], ListTransform<Stream>())
         isDomainRestricted <- map["is_domain_restricted"]
         duration <- (map["duration"], StringTransform())
     }
