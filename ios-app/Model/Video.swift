@@ -57,6 +57,6 @@ class Video: DBModel {
         embedCode <- map["embed_code"]
         streams <- map["streams"]
         isDomainRestricted <- map["is_domain_restricted"]
-        duration <- map["duration"]
+        duration <- (map["duration"], StringTransform())
     }
 }
