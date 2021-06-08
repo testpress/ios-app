@@ -29,6 +29,7 @@ import RealmSwift
 
 class InstituteSettings: DBModel {
     
+    @objc dynamic var name: String = ""
     @objc dynamic var baseUrl: String = ""
     @objc dynamic var verificationMethod: String = ""
     @objc dynamic var allowSignup: Bool = false
@@ -90,6 +91,7 @@ class InstituteSettings: DBModel {
         lockoutLimit <- map["lockout_limit"]
         cooloffTime <- map["cooloff_time"]
         appToolbarLogo <- map["app_toolbar_logo"]
+        name <- map["name"]
     }
     
     override public static func primaryKey() -> String? {

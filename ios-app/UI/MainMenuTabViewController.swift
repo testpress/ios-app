@@ -33,8 +33,10 @@ class MainMenuTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setStatusBarColor()
-        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-        viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
+        instituteSettings = DBManager<InstituteSettings>().getItemsFromDB().first(where: {$0.name.contains("Reproneet")}) ?? DBManager<InstituteSettings>().getItemsFromDB()[0]
+    
+        viewControllers?[5].tabBarItem.title = instituteSettings.postsLabel
+
         viewControllers?.remove(at: 7) // Access code
         if (!instituteSettings.forumEnabled) {
             viewControllers?.remove(at: 6)
