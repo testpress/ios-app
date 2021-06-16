@@ -59,7 +59,6 @@
 		2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24621CA0D770097C6FE /* Firebase.framework */; };
 		2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24821CA0D770097C6FE /* FirebaseMessaging.framework */; };
 		2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A25221CA0DBE0097C6FE /* Protobuf.framework */; };
-		2576E35025341FAB0091DE8E /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2576E34F25341FAB0091DE8E /* MobileRTCResources.bundle */; };
 		2576E35225341FD20091DE8E /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2576E35125341FD20091DE8E /* MobileRTC.framework */; };
 		257BB691246A964400524D2C /* AttemptRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB690246A964400524D2C /* AttemptRepository.swift */; };
 		257BB693246A9BA000524D2C /* QuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB692246A9BA000524D2C /* QuizExamViewModel.swift */; };
@@ -420,7 +419,6 @@
 		250629992266FEC800539FB2 /* LoginActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivity.swift; sourceTree = "<group>"; };
 		250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomMeetViewController.swift; sourceTree = "<group>"; };
 		250888DB251C5F2C0023DCF6 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTCResources.bundle"; sourceTree = "<group>"; };
-		250888DD251C5F420023DCF6 /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileRTC.framework; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTC.framework"; sourceTree = "<group>"; };
 		250C4CAC2463D24600FD7636 /* BaseDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBViewController.swift; sourceTree = "<group>"; };
 		250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartQuizExamViewController.swift; sourceTree = "<group>"; };
 		250E68F521BA4AA600DA81F1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -854,6 +852,14 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		25BCEC87267A30B200A5154F /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				2576E35125341FD20091DE8E /* MobileRTC.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		25E435C0263AD9C500243FD3 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -918,6 +924,7 @@
 				2F26ADE31E8249D70031E6F4 /* Products */,
 				2FBEDB781E82BBD0000CF05C /* Frameworks */,
 				322BFA670C6561A068806630 /* Generated Mocks */,
+				25BCEC87267A30B200A5154F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1503,7 +1510,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
-				25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
 				2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */,
@@ -2135,7 +2141,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.21.1;
+				MARKETING_VERSION = 1.22.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2163,7 +2169,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.21.1;
+				MARKETING_VERSION = 1.22.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
