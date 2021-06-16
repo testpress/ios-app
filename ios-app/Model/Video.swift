@@ -55,6 +55,6 @@ class Video: DBModel {
         title <- map["title"]
         embedCode <- map["embed_code"]
         streams <- map["streams"]
-        duration <- map["duration"]
+        duration <- (map["duration"], StringTransform())
     }
 }

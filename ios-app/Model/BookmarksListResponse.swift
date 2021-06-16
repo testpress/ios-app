@@ -43,6 +43,7 @@ public class BookmarksListResponse {
     var chapterContents: [Content] = []
     var htmlContents: [HtmlContent] = []
     var videos: [Video] = []
+    var streams: [Stream] = []
     var attachments: [Attachment] = []
     
     public required init?(map: Map) {
@@ -70,5 +71,6 @@ extension BookmarksListResponse: TestpressModel {
         htmlContents <- map["html_contents"]
         videos <- map["videos"]
         attachments <- map["attachments"]
+        streams <- map["streams"]
     }
 }
