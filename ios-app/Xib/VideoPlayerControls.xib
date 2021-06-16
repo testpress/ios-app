@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="kXs-IP-jHb">
-                    <rect key="frame" x="302.5" y="81.5" width="37" height="37"/>
+                    <rect key="frame" x="302.66666666666669" y="81.666666666666671" width="37" height="37"/>
                 </activityIndicatorView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EOa-fV-i3a">
                     <rect key="frame" x="287" y="66" width="68" height="68"/>
@@ -90,6 +90,7 @@
                     <state key="normal" image="more"/>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hJH-op-Ia2" secondAttribute="trailing" constant="10" id="1xu-Wh-qEX"/>
@@ -120,7 +121,6 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="JW0-lz-5SS"/>
@@ -137,6 +137,13 @@
                     <include reference="JW0-lz-5SS"/>
                     <include reference="V55-aF-7k9"/>
                     <include reference="Flb-lN-sSq"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="JW0-lz-5SS"/>
+                    <include reference="hGy-Bq-iZ2"/>
+                    <include reference="Dcg-OY-M3a"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">

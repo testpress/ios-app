@@ -35,28 +35,28 @@ class MainMenuTabViewController: UITabBarController {
         self.setStatusBarColor()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
-        viewControllers?.remove(at: 6) // Access code
+        viewControllers?.remove(at: 7) // Access code
         if (!instituteSettings.forumEnabled) {
-            viewControllers?.remove(at: 5)
+            viewControllers?.remove(at: 6)
         }
         
         if (!instituteSettings.postsEnabled) {
-            viewControllers?.remove(at: 4)
+            viewControllers?.remove(at: 5)
         }
 
         if (!instituteSettings.coursesEnableGamification) {
-            viewControllers?.remove(at: 3)
+            viewControllers?.remove(at: 4)
         }
         
         if (instituteSettings.showGameFrontend) {
-            viewControllers?.remove(at: 2) // Exams list
+            viewControllers?.remove(at: 3) // Exams list
             
         } else {
-            viewControllers?.remove(at: 1)
+            viewControllers?.remove(at: 2)
         }
         
         if (!instituteSettings.activityFeedEnabled) {
-            viewControllers?.remove(at: 0)
+            viewControllers?.remove(at: 1)
         }
 
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {

@@ -287,13 +287,20 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 selectedAnswer: Array(attemptItem.savedAnswers),
                 review: attemptItem.currentReview,
                 shortAnswer: attemptItem.currentShortText,
+                gapFilledResponses: attemptItem.gapFillResponses,
                 endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.url),
                 completion: {
                     newAttemptItem, error in
                     if let error = error {
-                        self.showAlert(error: error, retryHandler: {
-                            self.saveAnswer(index: index, completionHandler: completionHandler)
-                        })
+                        
+                        if error.error_code == "max_attemptable_questions_limit_reached" {
+                            self.showMaxQuestionsAttemptedError(error: error)
+                            self.setCurrentQuestion(index: index)
+                        } else {
+                            self.showAlert(error: error, retryHandler: {
+                                self.saveAnswer(index: index, completionHandler: completionHandler)
+                            })
+                        }
                         return
                     }
                     
@@ -322,6 +329,31 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 completionHandler!()
             }
         }
+    }
+    
+    func showMaxQuestionsAttemptedError(error: TPError) {
+        if showingProgress {
+            hideLoadingProgress(completionHandler: {
+                self.showAlert(error: error, retryHandler: {})
+            })
+            return
+        }
+        
+        var alert: UIAlertController
+        var cancelButtonTitle: String
+        
+        alert = UIAlertController(
+            title: "Maximum questions attempted",
+            message: error.error_detail,
+            preferredStyle: UIAlertController.Style.alert
+        )
+        cancelButtonTitle = "OK"
+        
+        alert.addAction(UIAlertAction(
+            title: cancelButtonTitle, style: UIAlertAction.Style.default
+        ))
+        
+        present(alert, animated: true, completion: nil)
     }
     
     func endSection() {
