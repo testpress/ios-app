@@ -62,6 +62,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             attemptItem?.gapFillResponses.forEach { response in
                 gapFilledResponse[response.order] = response.answer as AnyObject
             }
+            attemptItem.localEssayTopic = attemptItem.essayTopic
+            attemptItem.localEssayText = attemptItem.essayText
         }
 
         indexView!.text = String("\((attemptItem?.index)! + 1)")
@@ -79,7 +81,11 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 } else if let checked = dict["checked"] as? Bool {
                     let radioOption = dict["radioOption"] as! Bool
                     let id = Int(dict["clickedOptionId"] as! String)!
-                    if checked {
+                    if (attemptItem.question.isEssayType) {
+                        try! Realm().write {
+                            attemptItem.localEssayTopic = String(id)
+                        }
+                    } else if checked {
                         if radioOption {
                             selectedOptions = []
                         }
@@ -94,6 +100,10 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 } else if let shortText = dict["shortText"] as? String {
                     try! Realm().write {
                         attemptItem.currentShortText = shortText.trim()
+                    }
+                } else if let essay = dict["essay"] as? String {
+                    try! Realm().write {
+                        attemptItem.localEssayText = essay
                     }
                 }
             }
@@ -117,6 +127,11 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             } else {
                 javascript += WebViewUtils.getCheckBoxInitializer(selectedOptions: selectedAnswers)
             }
+        }
+        
+        if (attemptItem.essayTopic != nil) {
+            javascript +=
+                WebViewUtils.getRadioButtonInitializer(selectedOption: (attemptItem.essayTopic as! NSString).integerValue)
         }
         return javascript
     }
@@ -179,6 +194,16 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 }
             }
             htmlContent += "</table>"
+        } else if (attemptQuestion.type == "E") {
+            htmlContent += "<table width='100%' style='margin-top:0px;'>"
+            
+            for essayTopic in attemptQuestion.essayTopics {
+            htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
+                        optionText: essayTopic.title, id: essayTopic.id)
+            }
+            htmlContent += "</table> <textarea class='essay_topic'  oninput='onEssayValueChange(this)' rows='10'>";
+            htmlContent += "</textarea>";
+
         } else if (attemptQuestion.type == "G") {
             htmlContent = getGapFilledQuestionHtml(htmlContent)
         } else {

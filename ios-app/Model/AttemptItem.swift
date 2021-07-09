@@ -57,7 +57,11 @@ class AttemptItem: DBModel {
     @objc dynamic var attemptId: Int = -1
     @objc dynamic var examQuestionId: Int = -1
     var gapFillResponses = List<GapFillResponse>()
-
+    @objc dynamic var essayTopic: String?
+    @objc dynamic var localEssayTopic: String!
+    @objc dynamic var essayText: String?
+    @objc dynamic var localEssayText: String!
+    
     public required convenience init?(map: Map) {
         self.init()
     }
@@ -114,5 +118,7 @@ class AttemptItem: DBModel {
         result <- map["result"]
         attemptId <- map["attempt_id"]
         gapFillResponses <- (map["gap_fill_responses"], ListTransform<GapFillResponse>())
+        essayTopic <- map["essay_topic"]
+        essayText <- map["essay_text"]
     }
 }

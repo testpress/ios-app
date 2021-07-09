@@ -45,6 +45,8 @@ class AttemptQuestion: DBModel {
             return QuestionType(rawValue: type ?? "Unknown") ?? .UNKNOWN
         }
     }
+    var essayTopics = List<EssayTopic>()
+
     var isSingleMcq: Bool {
         get {questionType == .SINGLE_CORRECT_MCQ}
     }
@@ -56,6 +58,9 @@ class AttemptQuestion: DBModel {
     }
     var isNumerical: Bool {
         get {questionType == .NUMERICAL}
+    }
+    var isEssayType: Bool {
+        get {questionType == .ESSAY}
     }
     
     public  func clone() -> AttemptQuestion {
@@ -95,6 +100,7 @@ class AttemptQuestion: DBModel {
         answerIds <- map["answer_ids"]
         translationIds <- map["translation_ids"]
         isCaseSensitive <- map["is_case_sensitive"]
+        essayTopics <- (map["essay_topics"], ListTransform<EssayTopic>())
     }
     
     let transform = TransformOf<Int, Int>(fromJSON: { (value: Int?) -> Int? in

@@ -299,3 +299,17 @@ body.watermark::before {
 .gap_box:focus, .gap_box:active, .gap_box:hover {
   outline: none;
 }
+
+.essay_topic {
+    font-family: 'Rubik-Regular', serif;
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    border: solid 1px #cccccc;
+    min-height: 20px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    -webkit-user-select: text;
+    user-select: text;
+    width: 98%;
+}
