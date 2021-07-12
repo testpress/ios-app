@@ -57,6 +57,9 @@ class AttemptQuestion: DBModel {
     var isNumerical: Bool {
         get {questionType == .NUMERICAL}
     }
+    var isFileType: Bool {
+        get {questionType == .FILE_TYPE}
+    }
     
     public  func clone() -> AttemptQuestion {
         let newAttemptItem = AttemptQuestion()

@@ -26,7 +26,7 @@
 import Foundation
 
 struct Constants {
-    static let BASE_URL = "https://lmsdemo.testpress.in";
+    static let BASE_URL = "https://sandbox.testpress.in";
     static let APP_APPLE_ID = "1434052944"
     
     static let APP_SHARE_MESSAGE = "Good app to prepare for online exams. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID
@@ -133,6 +133,12 @@ struct Constants {
     static let DEVICE_TOKEN = "device_token"
     static let FCM_TOKEN = "fcm_token"
     static let REGISTER_DEVICE_TOKEN = "register_device_token"
+    
+    static let CAMERA = "Camera"
+    static let GALLERY = "Gallery"
+    static let VIDEO = "Video"
+    static let FILE = "File"
+    static let CANCEL = "Cancel"
     
     //    ERROR_CODES
     static let MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE = "parallel_login_restriction"

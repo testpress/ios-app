@@ -76,6 +76,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             if let dict = body as? Dictionary<String, AnyObject> {
                 if dict["type"] as! String? == "gap_filled_response" {
                     handleGapFillTypeInput(dict)
+                } else if dict["type"] as! String? == "file_type" {
+                    MediaPicker.shared.showActions(viewController: self, type: .all)
                 } else if let checked = dict["checked"] as? Bool {
                     let radioOption = dict["radioOption"] as! Bool
                     let id = Int(dict["clickedOptionId"] as! String)!
@@ -181,6 +183,9 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             htmlContent += "</table>"
         } else if (attemptQuestion.type == "G") {
             htmlContent = getGapFilledQuestionHtml(htmlContent)
+        } else if (attemptQuestion.isFileType) {
+            htmlContent += "<button onclick='triggerFileUpload()'> Upload Files </button>"
+            
         } else {
             let inputType = attemptQuestion.type == "N" ? "number" : "text"
             let value =
