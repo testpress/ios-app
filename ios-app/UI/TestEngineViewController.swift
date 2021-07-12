@@ -315,6 +315,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                         attemptItem.selectedAnswers = newAttemptItem!.selectedAnswers
                         attemptItem.review = newAttemptItem!.review
                         attemptItem.shortText = newAttemptItem!.shortText
+                        attemptItem.essayText = newAttemptItem?.essayText
                     }
                     self.attemptItems[index] = attemptItem;
                     

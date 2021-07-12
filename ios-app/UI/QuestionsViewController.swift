@@ -62,7 +62,6 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             attemptItem?.gapFillResponses.forEach { response in
                 gapFilledResponse[response.order] = response.answer as AnyObject
             }
-            attemptItem.localEssayTopic = attemptItem.essayTopic
             attemptItem.localEssayText = attemptItem.essayText
         }
 
@@ -81,11 +80,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 } else if let checked = dict["checked"] as? Bool {
                     let radioOption = dict["radioOption"] as! Bool
                     let id = Int(dict["clickedOptionId"] as! String)!
-                    if (attemptItem.question.isEssayType) {
-                        try! Realm().write {
-                            attemptItem.localEssayTopic = String(id)
-                        }
-                    } else if checked {
+                    if checked {
                         if radioOption {
                             selectedOptions = []
                         }
@@ -129,10 +124,6 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             }
         }
         
-        if (attemptItem.essayTopic != nil) {
-            javascript +=
-                WebViewUtils.getRadioButtonInitializer(selectedOption: (attemptItem.essayTopic as! NSString).integerValue)
-        }
         return javascript
     }
     
@@ -195,14 +186,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             }
             htmlContent += "</table>"
         } else if (attemptQuestion.type == "E") {
-            htmlContent += "<table width='100%' style='margin-top:0px;'>"
-            
-            for essayTopic in attemptQuestion.essayTopics {
-            htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
-                        optionText: essayTopic.title, id: essayTopic.id)
-            }
-            htmlContent += "</table> <textarea class='essay_topic'  oninput='onEssayValueChange(this)' rows='10'>";
-            htmlContent += "</textarea>";
+            htmlContent += getEssayQuestionHtml()
 
         } else if (attemptQuestion.type == "G") {
             htmlContent = getGapFilledQuestionHtml(htmlContent)
@@ -216,6 +200,16 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 "placeholder='YOUR ANSWER'>"
         }
         return htmlContent + "</div>";
+    }
+    
+    func getEssayQuestionHtml() -> String {
+        var htmlContent = "<textarea class='essay_topic'  oninput='onEssayValueChange(this)' rows='10'>";
+        if !attemptItem.localEssayText.isNilOrEmpty {
+            htmlContent += attemptItem.localEssayText
+        }
+        htmlContent += "</textarea>";
+        
+        return htmlContent
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {

@@ -439,7 +439,6 @@ class TPApiClient {
         }
         
         if attemptItem.question.isEssayType {
-            parameters["essay_topic"] = attemptItem.localEssayTopic
             parameters["essay_text"] = attemptItem.localEssayText
         }
                 
