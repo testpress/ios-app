@@ -293,7 +293,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.updateVideoAttempt()
-        videoPlayerView.dealloc()
+        videoPlayerView.deallocate()
 
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
