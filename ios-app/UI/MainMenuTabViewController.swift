@@ -34,7 +34,7 @@ class MainMenuTabViewController: UITabBarController {
         super.viewDidLoad()
         self.setStatusBarColor()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-        viewControllers?[4].tabBarItem.title = instituteSettings.postsLabel
+        viewControllers?[5].tabBarItem.title = instituteSettings.postsLabel
         viewControllers?.remove(at: 7) // Access code
         if (!instituteSettings.forumEnabled) {
             viewControllers?.remove(at: 6)
