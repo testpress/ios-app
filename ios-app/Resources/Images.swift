@@ -71,6 +71,18 @@ enum Images: String {
     case ExamIconWhite = "exam_icon_white"
     case VideoIconWhite = "video_icon_white"
     case LiveClassIcon = "live_class_icon"
+    case LeaderboardIcon = "leaderboard_icon"
+    case Dinosaur = "dinosaur"
+    case VideoIconSmall = "ic_video"
+    case ExamIconSmall = "ic_exam"
+    case WhatsNewIcon = "star"
+    case ResumeStudyIcon = "resume"
+    case RecentPostsIcon = "post"
+    case CompletedIcon = "completed"
+    case AttachmentIconSmall = "notes_small"
+    case NotesIconSmall = "attachment_small"
+    case AnalyticsIcon = "analytics"
+    case OffersIcon = "offers"
 
     var image: UIImage {
         return UIImage(asset: self)
