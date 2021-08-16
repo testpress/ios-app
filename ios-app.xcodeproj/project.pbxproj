@@ -81,7 +81,6 @@
 		25B60E93263FCBCD006CDDBE /* IGListDiffKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B60E92263FCBCD006CDDBE /* IGListDiffKit.framework */; };
 		25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
 		25DD9C442486551F000BB671 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25DD9C432486551F000BB671 /* SwiftKeychainWrapper.framework */; };
-		25DD9C452486551F000BB671 /* SwiftKeychainWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25DD9C432486551F000BB671 /* SwiftKeychainWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		25DFC1682609B00700E06BA7 /* StringArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */; };
 		25E435BB263AD8CC00243FD3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */; };
 		25E435BE263AD94500243FD3 /* DashboardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435BD263AD94500243FD3 /* DashboardResponse.swift */; };
@@ -311,7 +310,6 @@
 		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
 		2FE6B958205144CD0091C7CA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */; };
-		2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
 		2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */; };
 		2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */; };
@@ -374,18 +372,6 @@
 			files = (
 			);
 			name = "Copy Files";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2FE6B95A205144CD0091C7CA /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				25DD9C452486551F000BB671 /* SwiftKeychainWrapper.framework in Embed Frameworks */,
-				2FE6B959205144CD0091C7CA /* FBSDKLoginKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -1400,7 +1386,6 @@
 				2F26ADDE1E8249D70031E6F4 /* Sources */,
 				2F26ADDF1E8249D70031E6F4 /* Frameworks */,
 				2F26ADE01E8249D70031E6F4 /* Resources */,
-				2FE6B95A205144CD0091C7CA /* Embed Frameworks */,
 				2FBEDB7F1E82BC48000CF05C /* Run Script */,
 			);
 			buildRules = (
@@ -2130,7 +2115,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.20.1;
+				MARKETING_VERSION = 1.21.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2157,7 +2142,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.20.1;
+				MARKETING_VERSION = 1.21.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",

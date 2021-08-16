@@ -149,6 +149,10 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     }
     
     func loadPreviousComments() {
+        if (post.commentsUrl == nil) {
+            return
+        }
+        
         getPreviousCommentsPager().resources.removeAll()
         getPreviousCommentsPager().next(completion: {
             items, error in
@@ -272,6 +276,9 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     }
     
     @IBAction func postComment(_ sender: Any) {
+        if (post.commentsUrl == nil) {
+            return
+        }
         commentBox.endEditing(true)
         let comment: String? = commentBox.text
         if (comment == nil) ||
@@ -284,6 +291,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     }
     
     func postComment(_ comment: String) {
+        
         TPApiClient.postComment(
             comment: comment,
             commentsUrl: post.commentsUrl,
@@ -321,27 +329,28 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         var html = WebViewUtils.getHeader() + getTitle() +
             WebViewUtils.getHtmlContentWithMargin(contentHtml)
         
-        html += "<hr style='margin-top:20px;'>"
-        html += WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS);
-        
-        html += "<div id='empty_comments_description' style='display:none;'>" +
-                    "Be the first to post a comment</div>"
-        
-        html += WebViewUtils.getLoadingProgressBar(className: "preview_comments_loading_layout")
-        html += "<div class='load_more_comments_layout' style='display:none;'>" +
-                    "<hr>" +
-                    "<div class='load_more_comments' onclick='loadMoreComments()'></div>" +
-                    "<hr>" +
-                "</div>"
-        
-        html += "<div id='comments_layout'></div>"
-        html += WebViewUtils.getLoadingProgressBar(className: "new_comments_loading_layout",
-                                                   visible: false)
-        
-        html += "<div class='load_new_comments_layout' style='display:none;'>" +
-                    "<div class='load_new_comments' onclick='loadNewComments()'></div>" +
-                "</div>"
-        
+        if (post.commentsUrl != nil) {
+            html += "<hr style='margin-top:20px;'>"
+            html += WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS);
+            
+            html += "<div id='empty_comments_description' style='display:none;'>" +
+                        "Be the first to post a comment</div>"
+            
+            html += WebViewUtils.getLoadingProgressBar(className: "preview_comments_loading_layout")
+            html += "<div class='load_more_comments_layout' style='display:none;'>" +
+                        "<hr>" +
+                        "<div class='load_more_comments' onclick='loadMoreComments()'></div>" +
+                        "<hr>" +
+                    "</div>"
+            
+            html += "<div id='comments_layout'></div>"
+            html += WebViewUtils.getLoadingProgressBar(className: "new_comments_loading_layout",
+                                                       visible: false)
+            
+            html += "<div class='load_new_comments_layout' style='display:none;'>" +
+                        "<div class='load_new_comments' onclick='loadNewComments()'></div>" +
+                    "</div>"
+        }
         return html
     }
     
