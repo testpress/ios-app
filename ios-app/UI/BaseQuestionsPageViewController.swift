@@ -189,8 +189,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     
     func setCurrentQuestion(index: Int) {
         let currentIndex: Int = getCurrentIndex()
-        if  index < 0 || index >= (baseQuestionsDataSource?.attemptItems.count)! ||
-                index == currentIndex {
+        if  index < 0 || index >= (baseQuestionsDataSource?.attemptItems.count)! {
             
             return
         }

@@ -57,7 +57,7 @@ class ChapterContentViewCell: UICollectionViewCell {
             infoLayout.isHidden = false
             let htmlContent = dashboardData?.getHtmlContent(id: content!.htmlContentId)
             if (htmlContent != nil) {
-                infoTitle.text = "\(htmlContent?.readTime)"
+                infoTitle.text = htmlContent?.readTime ?? ""
                 infoSubtitle.isHidden = true
             }
             contentTypeIcon.image = Images.NotesIconSmall.image

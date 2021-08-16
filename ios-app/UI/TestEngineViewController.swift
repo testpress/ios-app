@@ -332,13 +332,6 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func showMaxQuestionsAttemptedError(error: TPError) {
-        if showingProgress {
-            hideLoadingProgress(completionHandler: {
-                self.showAlert(error: error, retryHandler: {})
-            })
-            return
-        }
-        
         var alert: UIAlertController
         var cancelButtonTitle: String
         
@@ -353,7 +346,13 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             title: cancelButtonTitle, style: UIAlertAction.Style.default
         ))
         
-        present(alert, animated: true, completion: nil)
+        if showingProgress {
+            hideLoadingProgress(completionHandler: {
+                self.present(alert, animated: true, completion: nil)
+            })
+        } else {
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     func endSection() {
