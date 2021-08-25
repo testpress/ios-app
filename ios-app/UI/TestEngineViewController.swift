@@ -289,6 +289,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 shortAnswer: attemptItem.currentShortText,
                 gapFilledResponses: attemptItem.gapFillResponses,
                 endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.url),
+                attemptItem: attemptItem,
                 completion: {
                     newAttemptItem, error in
                     if let error = error {
@@ -314,6 +315,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                         attemptItem.selectedAnswers = newAttemptItem!.selectedAnswers
                         attemptItem.review = newAttemptItem!.review
                         attemptItem.shortText = newAttemptItem!.shortText
+                        attemptItem.essayText = newAttemptItem?.essayText
                     }
                     self.attemptItems[index] = attemptItem;
                     

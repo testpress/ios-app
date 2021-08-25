@@ -91,6 +91,11 @@ function onValueChange(element) {
     webkit.messageHandlers.callbackHandler.postMessage(message);
 }
 
+function onEssayValueChange(element) {
+    var message = { "essay": element.value };
+    webkit.messageHandlers.callbackHandler.postMessage(message);
+}
+
 function onFillInTheBlankValueChange(element) {
     var message = {"order": element.getAttribute("data-order"), "answer": element.value, "type": "gap_filled_response"}
     webkit.messageHandlers.callbackHandler.postMessage(message);
