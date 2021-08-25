@@ -62,6 +62,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             attemptItem?.gapFillResponses.forEach { response in
                 gapFilledResponse[response.order] = response.answer as AnyObject
             }
+            attemptItem.localEssayText = attemptItem.essayText
         }
 
         indexView!.text = String("\((attemptItem?.index)! + 1)")
@@ -94,6 +95,10 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 } else if let shortText = dict["shortText"] as? String {
                     try! Realm().write {
                         attemptItem.currentShortText = shortText.trim()
+                    }
+                } else if let essay = dict["essay"] as? String {
+                    try! Realm().write {
+                        attemptItem.localEssayText = essay
                     }
                 }
             }
@@ -179,6 +184,9 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 }
             }
             htmlContent += "</table>"
+        } else if (attemptQuestion.type == "E") {
+            htmlContent += getEssayQuestionHtml()
+
         } else if (attemptQuestion.type == "G") {
             htmlContent = getGapFilledQuestionHtml(htmlContent)
         } else {
@@ -191,6 +199,16 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 "placeholder='YOUR ANSWER'>"
         }
         return htmlContent + "</div>";
+    }
+    
+    func getEssayQuestionHtml() -> String {
+        var htmlContent = "<textarea class='essay_topic'  oninput='onEssayValueChange(this)' rows='10'>";
+        if !attemptItem.localEssayText.isNilOrEmpty {
+            htmlContent += attemptItem.localEssayText
+        }
+        htmlContent += "</textarea>";
+        
+        return htmlContent
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
