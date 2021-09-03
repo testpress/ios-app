@@ -59,6 +59,7 @@ class InstituteSettings: DBModel {
     @objc dynamic var lockoutLimit: String = ""
     @objc dynamic var cooloffTime: String = ""
     @objc dynamic var appToolbarLogo: String = ""
+    @objc dynamic var customRegistrationEnabled: Bool = false
 
     public override func mapping(map: Map) {
         verificationMethod <- map["verification_method"]
@@ -90,6 +91,7 @@ class InstituteSettings: DBModel {
         lockoutLimit <- map["lockout_limit"]
         cooloffTime <- map["cooloff_time"]
         appToolbarLogo <- map["app_toolbar_logo"]
+        customRegistrationEnabled <- map["custom_registration_enabled"]
     }
     
     override public static func primaryKey() -> String? {
