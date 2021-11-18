@@ -300,4 +300,7 @@ struct TPEndpointProvider {
         return Constants.BASE_URL + TPEndpoint.userVideos.urlPath + "\(attemptID)/"
     }
     
+    static func getDRMLicenseURL(contentID: Int) -> String {
+        return Constants.BASE_URL + "/api/v2.5/chapter_contents/\(contentID)/drm_license/"
+    }
 }

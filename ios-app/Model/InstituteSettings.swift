@@ -60,6 +60,7 @@ class InstituteSettings: DBModel {
     @objc dynamic var cooloffTime: String = ""
     @objc dynamic var appToolbarLogo: String = ""
     @objc dynamic var customRegistrationEnabled: Bool = false
+    @objc dynamic var fairplayCertificateUrl: String = ""
 
     public override func mapping(map: Map) {
         verificationMethod <- map["verification_method"]
@@ -92,6 +93,7 @@ class InstituteSettings: DBModel {
         cooloffTime <- map["cooloff_time"]
         appToolbarLogo <- map["app_toolbar_logo"]
         customRegistrationEnabled <- map["custom_registration_enabled"]
+        fairplayCertificateUrl <- map["fairplay_certificate_url"]
     }
     
     override public static func primaryKey() -> String? {
