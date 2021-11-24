@@ -46,7 +46,7 @@ class ForumTableViewCell: UITableViewCell {
         
         postTitle.text = post.title
         authorName.text = post.createdBy.displayName
-        categoryName.text = post.category.name
+        categoryName.text = post.category?.name ?? "Uncategorized"
         commentsCount.text = String(post.commentsCount)
         if post.lastCommentedBy == nil {
             displayLastResponder(userName: post.createdBy.displayName, action: " started ",
