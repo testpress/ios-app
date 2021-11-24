@@ -169,7 +169,7 @@ enum TPEndpoint {
         case .getPosts:
             return "/api/v2.2/posts/"
         case .getForum, .createForumPost:
-            return "/api/v2.3/forum/"
+            return "/api/v2.5/discussions/"
         case .getForumCategories:
             return "/api/v2.3/forum/categories/"
         case .getSubjectAnalytics:
