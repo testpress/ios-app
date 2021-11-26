@@ -62,14 +62,6 @@ class DRMKeySessionDelegate: NSObject, AVContentKeySessionDelegate {
         return applicationCertificate!
     }
     
-    func getLicenseURL(completion: @escaping(String?, TPError?) -> Void) {
-        let parameters: Parameters = ["drm_type": "fairplay"]
-        
-        TPApiClient.request(type: DRMLicenseKeyResponse.self, endpointProvider: TPEndpointProvider(.post, url: drmLicenseURL!), parameters: parameters) { response, error in
-            completion(response?.licenseURL, error)
-        }
-    }
-    
     func requestContentKeyFromKeySecurityModule(spcData: Data, assetID: String, completion: @escaping(Data?) -> Void)  {
         let contentKeyIdentifierURL = URL(string: assetID)
         let assetIDString = contentKeyIdentifierURL!.host
@@ -88,6 +80,14 @@ class DRMKeySessionDelegate: NSObject, AVContentKeySessionDelegate {
                 _ = semaphore.wait(timeout: .distantFuture)
                 completion(data)
             }
+        }
+    }
+    
+    func getLicenseURL(completion: @escaping(String?, TPError?) -> Void) {
+        let parameters: Parameters = ["drm_type": "fairplay"]
+        
+        TPApiClient.request(type: DRMLicenseKeyResponse.self, endpointProvider: TPEndpointProvider(.post, url: drmLicenseURL!), parameters: parameters) { response, error in
+            completion(response?.licenseURL, error)
         }
     }
     
