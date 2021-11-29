@@ -78,8 +78,7 @@ class ForumTableViewCell: UITableViewCell {
     
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier:
-            Constants.POST_DETAIL_VIEW_CONTROLLER) as! PostDetailViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier:"DiscussionThreadDetailViewController") as! DiscussionThreadDetailViewController
         
         viewController.post = post
         viewController.forum = true
