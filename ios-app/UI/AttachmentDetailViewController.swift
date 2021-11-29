@@ -159,7 +159,7 @@ class AttachmentDetailViewController: UIViewController {
                                                             backButton: backButton)
             pdfController.navigationItem.rightBarButtonItem = nil
             watermarkLabel = initializeWatermark(view: pdfController.view)
-            view.addSubview(watermarkLabel!)
+            pdfController.view.addSubview(watermarkLabel!)
             startTimerToMoveWatermarkPosition()
             let navigationController = UINavigationController(rootViewController: pdfController)
             present(navigationController, animated: true)

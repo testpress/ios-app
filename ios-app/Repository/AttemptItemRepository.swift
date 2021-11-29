@@ -22,7 +22,7 @@ class AttemptItemRepository: AttemptRepository {
             review: false,
             shortAnswer: attemptItem.currentShortText,
             gapFilledResponses: List<GapFillResponse>(),
-            endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.getSaveUrl()),
+            endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.getSaveUrl()), attemptItem: attemptItem,
             completion: {
                 newAttemptItem, error in
                 if (newAttemptItem != nil) {
