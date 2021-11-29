@@ -61,9 +61,7 @@ class ForumViewController: UIViewController, DiscussionFilterDelegate {
     }
     
     func applyFilters(value: [String : Any]) {
-        if (value.count > 0) {
-            self.forumTableViewController.filter(dict: value)
-        }
+        self.forumTableViewController.filter(dict: value)
     }
     
     
