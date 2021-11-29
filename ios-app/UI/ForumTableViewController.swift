@@ -45,6 +45,14 @@ class ForumTableViewController: TPBasePagedTableViewController<Post> {
                             description: Strings.NO_FORUM_POSTS_DESCRIPTION)
     }
     
+    func filter(dict: [String: Any]) {
+        self.pager.reset()
+        for (k, v) in dict {
+            self.pager.queryParams.updateValue(v as! String, forKey: k)
+        }
+        self.refreshWithProgress()
+    }
+    
     func search(searchString: String) {
         self.pager.reset()
         self.pager.queryParams.updateValue(searchString, forKey: "search")
