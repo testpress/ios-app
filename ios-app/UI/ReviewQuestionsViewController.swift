@@ -311,6 +311,12 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             }
         }
         
+        if attemptQuestion.isEssayType  {
+            html += getUserEssayAnswer()
+            html += getEssayMarks()
+        }
+        
+        
         if isShortAnswerType || isNumericalType {
             html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
                 WebViewUtils.getReviewHeadingTags(headingText: Strings.YOUR_ANSWER) +
@@ -360,6 +366,20 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         }
         html += "</div>"
         return html + "</div>"
+    }
+    
+    func getUserEssayAnswer() -> String {
+        return "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+            WebViewUtils.getReviewHeadingTags(headingText: Strings.YOUR_ANSWER) +
+            (attemptItem.essayText ?? "") +
+        "</div>"
+    }
+    
+    func getEssayMarks() -> String {
+        return "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+            WebViewUtils.getReviewHeadingTags(headingText: Strings.MARKS_AWARDED) +
+            (attemptItem.marks ?? "")! +
+        "</div>"
     }
     
     func getHtmlAboveQuestion() -> String {

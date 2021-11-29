@@ -44,6 +44,7 @@
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		2555A0C42466A59400D56707 /* ContentsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555A0C32466A59400D56707 /* ContentsListResponse.swift */; };
+		2566A5952745102F00D9E71D /* DRMLicenseKeyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */; };
 		256A909C247D03C100F4E12C /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
 		256A909E247D21F500F4E12C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909D247D21F500F4E12C /* UIButton.swift */; };
 		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
@@ -64,6 +65,7 @@
 		257BB695246AB4C900524D2C /* QuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB694246AB4C900524D2C /* QuizExamViewController.swift */; };
 		257BB697246AC22B00524D2C /* ExamQuestionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB696246AC22B00524D2C /* ExamQuestionsResponse.swift */; };
 		257BB699246AC2ED00524D2C /* ExamQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB698246AC2ED00524D2C /* ExamQuestion.swift */; };
+		258036A52743AA2400397639 /* DRMKeySessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */; };
 		2590B1FA2510BB90003C0A03 /* VideoConference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1F92510BB90003C0A03 /* VideoConference.swift */; };
 		2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */; };
 		2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259286892473B1E00035EBA4 /* QuizReviewViewController.swift */; };
@@ -434,6 +436,7 @@
 		254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testpress_iOS_AppUITests.swift; sourceTree = "<group>"; };
 		254E69C521DCF199009A4E61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2555A0C32466A59400D56707 /* ContentsListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsListResponse.swift; sourceTree = "<group>"; };
+		2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRMLicenseKeyResponse.swift; sourceTree = "<group>"; };
 		25681BCD252F1D4A002352E8 /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileRTC.framework; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTC.framework"; sourceTree = "<group>"; };
 		25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTCResources.bundle"; sourceTree = "<group>"; };
 		256A909B247D03C100F4E12C /* IntArrayTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntArrayTransform.swift; sourceTree = "<group>"; };
@@ -461,6 +464,7 @@
 		257BB694246AB4C900524D2C /* QuizExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizExamViewController.swift; sourceTree = "<group>"; };
 		257BB696246AC22B00524D2C /* ExamQuestionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestionsResponse.swift; sourceTree = "<group>"; };
 		257BB698246AC2ED00524D2C /* ExamQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestion.swift; sourceTree = "<group>"; };
+		258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRMKeySessionDelegate.swift; sourceTree = "<group>"; };
 		2590B1F92510BB90003C0A03 /* VideoConference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoConference.swift; sourceTree = "<group>"; };
 		2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoConferenceViewController.swift; sourceTree = "<group>"; };
 		259286892473B1E00035EBA4 /* QuizReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizReviewViewController.swift; sourceTree = "<group>"; };
@@ -1219,6 +1223,7 @@
 				2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */,
 				250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */,
 				25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */,
+				258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1273,6 +1278,7 @@
 				257BB698246AC2ED00524D2C /* ExamQuestion.swift */,
 				2590B1F92510BB90003C0A03 /* VideoConference.swift */,
 				253DD67D262860B200C6D0A8 /* GapFillResponse.swift */,
+				2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1730,6 +1736,7 @@
 				2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */,
 				25705017246E48BA00E6C688 /* ListTransform.swift in Sources */,
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
+				258036A52743AA2400397639 /* DRMKeySessionDelegate.swift in Sources */,
 				2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */,
 				2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */,
 				2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */,
@@ -1856,6 +1863,7 @@
 				2F3A53011FDA652A00C64123 /* Subject.swift in Sources */,
 				25985837248A77F6003591FA /* M3U8Handler.swift in Sources */,
 				2FA9285020B7DF2200CD3076 /* StringExtension.swift in Sources */,
+				2566A5952745102F00D9E71D /* DRMLicenseKeyResponse.swift in Sources */,
 				8C2E7B5923979E5A00BA2F41 /* VideoPlayerView.swift in Sources */,
 				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,
 				25F92A20243306A60084ADC8 /* UIViewController.swift in Sources */,
@@ -2134,7 +2142,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.4;
 				OTHER_LDFLAGS = (
@@ -2165,7 +2173,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.4;
 				OTHER_LDFLAGS = (

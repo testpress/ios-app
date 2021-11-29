@@ -11,6 +11,12 @@ import AVKit
 
 
 class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate {
+    var contentKeySession: AVContentKeySession?
+
+    func setContentKeySession(contentKeySession: AVContentKeySession) {
+        self.contentKeySession = contentKeySession
+    }
+    
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         guard let url = loadingRequest.request.url else { return false }
         if url.scheme == "fakehttps" {
@@ -18,6 +24,10 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
                 self.setM3U8Response(loadingRequest: loadingRequest, data: data, response: response)
             }
             return true
+        } else if url.scheme == "skd" {
+            if #available(iOS 11, *) {
+                contentKeySession?.processContentKeyRequest(withIdentifier: url, initializationData: nil, options: nil)
+            }
         } else if isEncryptionKeyUrl(url: url) {
             EncryptionKeyRepository().load(url: url) { data in
                 self.setEncryptionKeyResponse(loadingRequest: loadingRequest, data: data)
