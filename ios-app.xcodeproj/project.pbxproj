@@ -907,7 +907,6 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
-				25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
@@ -2131,7 +2130,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2159,7 +2158,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
