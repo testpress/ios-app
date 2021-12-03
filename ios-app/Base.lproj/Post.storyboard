@@ -161,7 +161,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="603"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lJr-NC-AHF">
-                                                <rect key="frame" x="25" y="0.0" width="270" height="463.5"/>
+                                                <rect key="frame" x="25" y="0.0" width="270" height="464"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNH-4s-faq">
                                                         <rect key="frame" x="0.0" y="0.0" width="270" height="1"/>
@@ -171,7 +171,7 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Brr-5K-xTj">
-                                                        <rect key="frame" x="0.0" y="21" width="270" height="70.5"/>
+                                                        <rect key="frame" x="0.0" y="21" width="270" height="71"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Nk-zG-nWy">
                                                                 <rect key="frame" x="0.0" y="0.0" width="270" height="0.0"/>
@@ -187,7 +187,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RPw-XS-x4c">
-                                                                <rect key="frame" x="0.0" y="35.5" width="270" height="35"/>
+                                                                <rect key="frame" x="0.0" y="35.5" width="270" height="35.5"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -206,7 +206,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="x5F-f6-L7T">
-                                                        <rect key="frame" x="0.0" y="111.5" width="270" height="125.5"/>
+                                                        <rect key="frame" x="0.0" y="112" width="270" height="125.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICK A TOPIC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxr-6u-tRg">
                                                                 <rect key="frame" x="0.0" y="0.0" width="270" height="15.5"/>
@@ -223,7 +223,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0uQ-O4-pEx">
-                                                        <rect key="frame" x="0.0" y="257" width="270" height="125.5"/>
+                                                        <rect key="frame" x="0.0" y="257.5" width="270" height="125.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POST CONTENT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I4D-8X-6Rh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="270" height="15.5"/>
@@ -255,7 +255,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nli-PZ-9wT">
-                                                        <rect key="frame" x="0.0" y="402.5" width="270" height="40"/>
+                                                        <rect key="frame" x="0.0" y="403" width="270" height="40"/>
                                                         <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="oh4-yM-C7w"/>
@@ -274,7 +274,7 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mJT-7d-SCq">
-                                                        <rect key="frame" x="0.0" y="462.5" width="270" height="1"/>
+                                                        <rect key="frame" x="0.0" y="463" width="270" height="1"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="GDw-AI-sfj"/>
@@ -475,6 +475,21 @@
                                             <inset key="imageInsets" minX="-10" minY="0.0" maxX="-20" maxY="0.0"/>
                                             <connections>
                                                 <action selector="back" destination="jNO-bv-qfx" id="SSL-pR-mUR"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="8K9-wz-OFb">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="0gR-Tl-9Rj">
+                                                <rect key="frame" x="233" y="7" width="71" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Report">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onReportClick:" destination="jNO-bv-qfx" eventType="touchUpInside" id="w1Z-S3-bkJ"/>
+                                                </connections>
+                                            </button>
+                                            <connections>
+                                                <action selector="onReportButtonClick:" destination="jNO-bv-qfx" id="gly-f7-VVF"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>

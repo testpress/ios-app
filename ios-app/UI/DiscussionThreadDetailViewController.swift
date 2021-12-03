@@ -44,4 +44,10 @@ class DiscussionThreadDetailViewController: PostDetailViewController {
         
         return html
     }
+    
+    @IBAction func onReportClick(_ sender: Any) {
+        let vc = ReportDiscussionThreadViewController()
+        vc.discussionSlug = post.slug
+        self.present(vc, animated: true, completion: nil)
+    }
 }

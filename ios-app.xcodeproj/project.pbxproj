@@ -72,6 +72,7 @@
 		257BB695246AB4C900524D2C /* QuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB694246AB4C900524D2C /* QuizExamViewController.swift */; };
 		257BB697246AC22B00524D2C /* ExamQuestionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB696246AC22B00524D2C /* ExamQuestionsResponse.swift */; };
 		257BB699246AC2ED00524D2C /* ExamQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB698246AC2ED00524D2C /* ExamQuestion.swift */; };
+		258EDBA1275A13B300042311 /* ReportDiscussionThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258EDBA0275A13B300042311 /* ReportDiscussionThread.swift */; };
 		2590B1FA2510BB90003C0A03 /* VideoConference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1F92510BB90003C0A03 /* VideoConference.swift */; };
 		2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */; };
 		2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259286892473B1E00035EBA4 /* QuizReviewViewController.swift */; };
@@ -477,6 +478,7 @@
 		257BB694246AB4C900524D2C /* QuizExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizExamViewController.swift; sourceTree = "<group>"; };
 		257BB696246AC22B00524D2C /* ExamQuestionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestionsResponse.swift; sourceTree = "<group>"; };
 		257BB698246AC2ED00524D2C /* ExamQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestion.swift; sourceTree = "<group>"; };
+		258EDBA0275A13B300042311 /* ReportDiscussionThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDiscussionThread.swift; sourceTree = "<group>"; };
 		2590B1F92510BB90003C0A03 /* VideoConference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoConference.swift; sourceTree = "<group>"; };
 		2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoConferenceViewController.swift; sourceTree = "<group>"; };
 		259286892473B1E00035EBA4 /* QuizReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizReviewViewController.swift; sourceTree = "<group>"; };
@@ -1242,6 +1244,7 @@
 				25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */,
 				25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */,
 				25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */,
+				258EDBA0275A13B300042311 /* ReportDiscussionThread.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1884,6 +1887,7 @@
 				2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */,
 				2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
+				258EDBA1275A13B300042311 /* ReportDiscussionThread.swift in Sources */,
 				2F3A53011FDA652A00C64123 /* Subject.swift in Sources */,
 				25985837248A77F6003591FA /* M3U8Handler.swift in Sources */,
 				2FA9285020B7DF2200CD3076 /* StringExtension.swift in Sources */,
