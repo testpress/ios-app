@@ -27,6 +27,7 @@ import UIKit
 
 class ForumViewController: UIViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var postCreateButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     
@@ -34,6 +35,7 @@ class ForumViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchBar.delegate = self
         UIUtils.setButtonDropShadow(postCreateButton)
     }
     
@@ -60,4 +62,17 @@ class ForumViewController: UIViewController {
         UIUtils.showProfileDetails(self)
     }
     
+}
+
+
+extension ForumViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        Debounce<String>.input(searchText, delay: 0.5, current: searchBar.text ?? "") {_ in
+            self.forumTableViewController.search(searchString: searchText)
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.forumTableViewController.search(searchString: "")
+    }
 }

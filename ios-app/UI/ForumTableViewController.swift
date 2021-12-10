@@ -45,4 +45,9 @@ class ForumTableViewController: TPBasePagedTableViewController<Post> {
                             description: Strings.NO_FORUM_POSTS_DESCRIPTION)
     }
     
+    func search(searchString: String) {
+        self.pager.reset()
+        self.pager.queryParams.updateValue(searchString, forKey: "search")
+        self.refreshWithProgress()
+    }
 }

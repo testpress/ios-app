@@ -1573,13 +1573,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="srX-Sy-VLl">
                                                     <rect key="frame" x="74" y="30.5" width="226" height="43.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6c-dG-tJf">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6c-dG-tJf">
                                                             <rect key="frame" x="0.0" y="0.0" width="226" height="19"/>
                                                             <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gM-gw-FQa">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gM-gw-FQa">
                                                             <rect key="frame" x="0.0" y="29" width="226" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                             <nil key="textColor"/>
@@ -1734,8 +1734,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="p62-bi-PM9">
+                                <rect key="frame" x="0.0" y="44" width="320" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMY-a7-Yrk">
-                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                                <rect key="frame" x="0.0" y="100" width="320" height="419"/>
                                 <connections>
                                     <segue destination="qlb-mJ-cnn" kind="embed" identifier="ForumListSegue" id="qJ0-zs-S4N"/>
                                 </connections>
@@ -1761,10 +1765,13 @@
                         <viewLayoutGuide key="safeArea" id="ygy-Tj-Tfk"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="p62-bi-PM9" firstAttribute="leading" secondItem="ygy-Tj-Tfk" secondAttribute="leading" id="5AS-zH-bbJ"/>
                             <constraint firstItem="HMY-a7-Yrk" firstAttribute="leading" secondItem="ygy-Tj-Tfk" secondAttribute="leading" id="5cV-aQ-QDe"/>
                             <constraint firstItem="ygy-Tj-Tfk" firstAttribute="bottom" secondItem="0lg-3Y-TnJ" secondAttribute="bottom" constant="15" id="5l7-AF-VUE"/>
-                            <constraint firstItem="HMY-a7-Yrk" firstAttribute="top" secondItem="ygy-Tj-Tfk" secondAttribute="top" id="89R-ZK-PIo"/>
+                            <constraint firstItem="HMY-a7-Yrk" firstAttribute="top" secondItem="p62-bi-PM9" secondAttribute="bottom" id="89R-ZK-PIo"/>
                             <constraint firstItem="HMY-a7-Yrk" firstAttribute="trailing" secondItem="ygy-Tj-Tfk" secondAttribute="trailing" id="8RA-YC-vuE"/>
+                            <constraint firstItem="p62-bi-PM9" firstAttribute="top" secondItem="ygy-Tj-Tfk" secondAttribute="top" id="8bG-tu-pEs"/>
+                            <constraint firstItem="p62-bi-PM9" firstAttribute="trailing" secondItem="ygy-Tj-Tfk" secondAttribute="trailing" id="H4i-KJ-EyL"/>
                             <constraint firstItem="ygy-Tj-Tfk" firstAttribute="trailing" secondItem="0lg-3Y-TnJ" secondAttribute="trailing" constant="15" id="NGf-sM-cKI"/>
                             <constraint firstItem="HMY-a7-Yrk" firstAttribute="bottom" secondItem="ygy-Tj-Tfk" secondAttribute="bottom" id="Qln-5o-RzI"/>
                         </constraints>
@@ -1779,6 +1786,7 @@
                     <connections>
                         <outlet property="containerView" destination="HMY-a7-Yrk" id="M8V-hE-E2H"/>
                         <outlet property="postCreateButton" destination="0lg-3Y-TnJ" id="QIa-Ui-weX"/>
+                        <outlet property="searchBar" destination="p62-bi-PM9" id="ppM-yJ-UI0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jzd-o4-hAv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1790,9 +1798,13 @@
             <objects>
                 <tableViewController storyboardIdentifier="ForumTableViewController" id="qlb-mJ-cnn" customClass="ForumTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2j8-UH-VMJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="475"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="419"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <stackView key="tableFooterView" opaque="NO" contentMode="scaleToFill" axis="vertical" id="VDw-wb-ffv">
+                            <rect key="frame" x="0.0" y="171" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </stackView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ForumTableViewCell" rowHeight="115" id="q5o-xK-Hod" customClass="ForumTableViewCell" customModule="ios_app" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="115"/>
@@ -1924,7 +1936,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pXG-pB-Yl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1380" y="3327"/>
+            <point key="canvasLocation" x="1500" y="3830"/>
         </scene>
         <!--Articles-->
         <scene sceneID="Kme-qm-gBh">
