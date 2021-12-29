@@ -47,6 +47,8 @@
 		25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */; };
 		25520BB92750FB4F001A58AB /* Former.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25520BB82750FB4E001A58AB /* Former.framework */; };
 		25520BBE2751093D001A58AB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BBD2751093C001A58AB /* String.swift */; };
+		25520BC327546AF9001A58AB /* DiscussionThreadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */; };
+		25520BC627547006001A58AB /* DiscussionThreadAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BC527547006001A58AB /* DiscussionThreadAnswer.swift */; };
 		2555A0C42466A59400D56707 /* ContentsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555A0C32466A59400D56707 /* ContentsListResponse.swift */; };
 		2566A5952745102F00D9E71D /* DRMLicenseKeyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */; };
 		25681BD0252F1D69002352E8 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25681BCF252F1D68002352E8 /* MobileRTCResources.bundle */; };
@@ -447,6 +449,8 @@
 		25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumFilterViewController.swift; sourceTree = "<group>"; };
 		25520BB82750FB4E001A58AB /* Former.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Former.framework; path = Carthage/Build/iOS/Former.framework; sourceTree = "<group>"; };
 		25520BBD2751093C001A58AB /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadDetailViewController.swift; sourceTree = "<group>"; };
+		25520BC527547006001A58AB /* DiscussionThreadAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadAnswer.swift; sourceTree = "<group>"; };
 		2555A0C32466A59400D56707 /* ContentsListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsListResponse.swift; sourceTree = "<group>"; };
 		2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRMLicenseKeyResponse.swift; sourceTree = "<group>"; };
 		25681BCD252F1D4A002352E8 /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileRTC.framework; path = "../Downloads/ios-mobilertc-all-5.0.24433.0616-clientlog/lib/MobileRTC.framework"; sourceTree = "<group>"; };
@@ -1242,6 +1246,7 @@
 				25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */,
 				258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */,
 				25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */,
+				25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1297,6 +1302,7 @@
 				2590B1F92510BB90003C0A03 /* VideoConference.swift */,
 				253DD67D262860B200C6D0A8 /* GapFillResponse.swift */,
 				2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */,
+				25520BC527547006001A58AB /* DiscussionThreadAnswer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1686,6 +1692,7 @@
 				2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */,
 				2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */,
 				2FEDFF5A206CE7560002CF04 /* CategoryPager.swift in Sources */,
+				25520BC327546AF9001A58AB /* DiscussionThreadDetailViewController.swift in Sources */,
 				2FC0F2E51F863AE00092BFDC /* TPAuthToken.swift in Sources */,
 				8C04228F22AA3FD40015269B /* WebViewController.swift in Sources */,
 				25E435DD263ADCCF00243FD3 /* BaseSectionController.swift in Sources */,
@@ -1739,6 +1746,7 @@
 				2FC0F2EF1F863B110092BFDC /* ExamPager.swift in Sources */,
 				2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */,
 				2F5E0BBB1FE2871900236AFE /* ContentAttempt.swift in Sources */,
+				25520BC627547006001A58AB /* DiscussionThreadAnswer.swift in Sources */,
 				25E435CC263ADA4300243FD3 /* Banner.swift in Sources */,
 				2F452C3020BBE3E6007833A0 /* BookmarksDetailDataSource.swift in Sources */,
 				2F4A81EF20E52CB50062DE8A /* BaseTableViewCell.swift in Sources */,
