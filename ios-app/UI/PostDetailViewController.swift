@@ -149,6 +149,10 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     }
     
     func loadPreviousComments() {
+        if (post.commentsUrl == nil) {
+            return
+        }
+        
         getPreviousCommentsPager().resources.removeAll()
         getPreviousCommentsPager().next(completion: {
             items, error in
@@ -272,6 +276,9 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     }
     
     @IBAction func postComment(_ sender: Any) {
+        if (post.commentsUrl == nil) {
+            return
+        }
         commentBox.endEditing(true)
         let comment: String? = commentBox.text
         if (comment == nil) ||
