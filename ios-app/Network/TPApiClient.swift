@@ -430,11 +430,16 @@ class TPApiClient {
                            shortAnswer: String?,
                            gapFilledResponses: List<GapFillResponse>?,
                            endpointProvider: TPEndpointProvider,
+                           attemptItem: AttemptItem,
                            completion: @escaping (AttemptItem?, TPError?) -> Void) {
         
         var parameters: Parameters = [ "selected_answers": selectedAnswer, "review": review ]
         if let shortAnswer = shortAnswer {
             parameters["short_text"] = shortAnswer
+        }
+        
+        if attemptItem.question.isEssayType {
+            parameters["essay_text"] = attemptItem.localEssayText
         }
                 
         if let gapFilledResponses = gapFilledResponses {

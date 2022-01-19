@@ -22,26 +22,30 @@ class AttemptRepository {
             } else {
                 attemptItems = getAttemtItems(attemptId: attemptId)
             }
-            
             completion(attemptItems, nil)
+            fetchQuestions(url:url, attemptId: attemptId, examId: examId, completion: nil)
             return
         }
-        self.fetchQuestions(url: url, examId: examId, attemptId: attemptId, completion: completion)
+        
+        fetchQuestions(url: url, attemptId: attemptId, examId: examId, completion: completion)
     }
     
-    func fetchQuestions(url: String, examId: Int, attemptId: Int, completion: @escaping([AttemptItem]?, TPError?) -> Void) {
+    func fetchQuestions(url: String, attemptId: Int, examId: Int, completion: (([AttemptItem]?, TPError?) -> Void)?) {
+        
         TPApiClient.request(type: ApiResponse<ExamQuestionsResponse>.self, endpointProvider: TPEndpointProvider(.get, url: url), completion:  { response, error in
             self.storeInDB(examQuestions: response?.results.parse() ?? [])
-            if (!(response!.next.isEmpty)) {
-                self.fetchQuestions(url: response!.next, examId: examId, attemptId: attemptId, completion: completion)
-            } else {
+
+            if (response?.next != nil && response?.next.isEmpty == false) {
+                self.fetchQuestions(url: response!.next, attemptId: attemptId, examId: examId, completion: completion)
+            } else if (completion != nil) {
                 let examQuestions = self.getExamquestionsFromDB(examId: examId)
                 let attemptItems = self.createAttemptItems(examQuestions: examQuestions, attemptId: attemptId)
-                completion(attemptItems, error)
+                completion?(attemptItems, error)
             }
+            
         })
     }
-    
+
     func getExamquestionsFromDB(examId: Int) -> [ExamQuestion] {
         return DBManager<ExamQuestion>().getItemsFromDB(filteredBy: "examId=\(examId)", byKeyPath: "order")
     }
