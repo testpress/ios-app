@@ -10,12 +10,14 @@ import ObjectMapper
 
 class Stream: DBModel {
     @objc dynamic var url: String = ""
+    @objc dynamic var hlsUrl: String = ""
     @objc dynamic var id: Int = -1
     @objc dynamic var format: String = ""
     @objc dynamic var videoId: Int = -1
     
     public override func mapping(map: Map) {
         url <- map["url"]
+        hlsUrl <- map["hls_url"]
         id <- map["id"]
         format <- map["format"]
         videoId <- map["video_id"]

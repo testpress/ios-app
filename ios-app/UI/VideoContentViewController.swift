@@ -202,7 +202,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func initVideoPlayerView() {
         let playerFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: videoPlayer.frame.height)
-        videoPlayerView = VideoPlayerView(frame: playerFrame, url: URL(string: content.video!.getHlsUrl())!)
+        let drmLicenseURL = content.video?.isDRMProtected == true ? TPEndpointProvider.getDRMLicenseURL(contentID: content.id) : nil
+        videoPlayerView = VideoPlayerView(frame: playerFrame, url: URL(string: content.video!.getHlsUrl())!, drmLicenseURL: drmLicenseURL)
         videoPlayerView.playerDelegate = self
     }
     

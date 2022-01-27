@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             ]
         }
         
-        let config = Realm.Configuration(schemaVersion: 20)
+        let config = Realm.Configuration(schemaVersion: 22)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         

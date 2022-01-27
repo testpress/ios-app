@@ -41,7 +41,7 @@ class BannerSectionController: ListSectionController {
     
     override func didSelectItem(at index: Int) {
         let bannerAd = dashboardData?.getBanner(id: contentId!)
-        if (bannerAd != nil && bannerAd?.url != nil) {
+        if (bannerAd != nil && bannerAd?.url != nil &&  bannerAd?.url != "") {
             let webViewController = WebViewController()
             webViewController.url = bannerAd!.url!
             viewController?.present(webViewController, animated: true, completion: nil)
