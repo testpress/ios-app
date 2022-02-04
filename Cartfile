@@ -21,3 +21,5 @@ github "TimOliver/TOCropViewController" "2.5.2"
 github "jrendel/SwiftKeychainWrapper" ~> 3.4
 github "cbpowell/MarqueeLabel" "4.0.5"
 github "scinfu/SwiftSoup" ~> 2.3.2
+github "Instagram/IGListKit" ~> 4.0.0
+github "ra1028/Former"

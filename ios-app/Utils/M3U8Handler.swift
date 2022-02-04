@@ -33,7 +33,7 @@ class M3U8Handler {
          */
         var m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
         
-        if m3u8DataString.contains("EXT-X-KEY") {
+        if m3u8DataString.contains("EXT-X-KEY:METHOD=AES-128") {
             let keyURLStartIndex = m3u8DataString.range(of: "URI=\"")!.upperBound
             let keyURLEndIndex = m3u8DataString[keyURLStartIndex...].range(of: "\"")!.lowerBound
             let keyUrl = m3u8DataString[keyURLStartIndex..<keyURLEndIndex]
@@ -57,8 +57,11 @@ class M3U8Handler {
         let m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
         let baseUrlWithFilenameAndExtension:NSString = url.path as NSString
         let relativeVideoUrl = baseUrlWithFilenameAndExtension.deletingLastPathComponent
-        let modifiedData = m3u8DataString.replacingOccurrences(
+        var modifiedData = m3u8DataString.replacingOccurrences(
             of: "(#EXTINF:[0-9.]*,\n)", with: String(format: "$1 https://%@%@/", url.host!, relativeVideoUrl), options: .regularExpression
+        )
+        modifiedData = modifiedData.replacingOccurrences(
+            of: "#EXT-X-MAP:URI=\"(.*?)\"", with: String(format: "#EXT-X-MAP:URI=\"https://%@%@/%@\"", url.host!, relativeVideoUrl, "$1"), options: .regularExpression
         )
         return modifiedData.data(using: .utf8)!
     }

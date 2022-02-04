@@ -151,8 +151,16 @@ class LoginViewController: BaseTextFieldViewController {
     }
     
     @IBAction func showSignUpView() {
-        let tabViewController = SignUpWebViewController()
-        self.present(tabViewController, animated: true, completion: nil)
+        if (instituteSettings.customRegistrationEnabled) {
+            let webViewController = WebViewController()
+            webViewController.url = Constants.BASE_URL + "/register/"
+            present(webViewController, animated: true, completion: nil)
+        } else {
+            let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
+                Constants.SIGNUP_VIEW_CONTROLLER) as! SignUpViewController
+            
+            present(tabViewController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func showResetPasswordView() {
