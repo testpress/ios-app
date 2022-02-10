@@ -29,15 +29,23 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
     override func viewDidLoad() {
         super.viewDidLoad()
         webViewDelegate = self
+        initializeLoadingIndicator()
+        showLoading()
         let url = URL(string: self.url)!
         webView.load(URLRequest(url: url))
         self.showNavbar()
     }
+
+    func initializeLoadingIndicator() {
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - getNavBarHeight())
+    }
+
+    func showLoading() {
+        activityIndicator?.startAnimating()
+    }
     
     func showNavbar() {
         let screenSize: CGRect = UIScreen.main.bounds
-        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - getNavBarHeight())
-        activityIndicator?.startAnimating()
 
         navBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: screenSize.width, height: getNavBarHeight()))
         let title = self.title ?? Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
