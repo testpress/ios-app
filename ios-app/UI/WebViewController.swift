@@ -31,7 +31,10 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
         webViewDelegate = self
         let url = URL(string: self.url)!
         webView.load(URLRequest(url: url))
-        
+        self.showNavbar()
+    }
+    
+    func showNavbar() {
         let screenSize: CGRect = UIScreen.main.bounds
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - getNavBarHeight())
         activityIndicator?.startAnimating()
