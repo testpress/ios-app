@@ -32,6 +32,8 @@ class BaseWebViewController: UIViewController {
     var parentView: UIView!
     var activityIndicator: UIActivityIndicatorView!
     var webViewDelegate: WKWebViewDelegate!
+    var shouldOpenLinksWithinWebview = false
+    var shouldReload = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +81,11 @@ extension BaseWebViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         activityIndicator.startAnimating()
+
+        if (self.shouldReload) {
+            webView.reload()
+            self.shouldReload = false
+        }
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -91,8 +98,7 @@ extension BaseWebViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        if navigationAction.navigationType == .linkActivated,
+        if !shouldOpenLinksWithinWebview && navigationAction.navigationType == .linkActivated,
             let url = navigationAction.request.url, UIApplication.shared.canOpenURL(url) {
             
                 if #available(iOS 10.0, *) {
@@ -103,6 +109,8 @@ extension BaseWebViewController: WKNavigationDelegate {
                 }
                 decisionHandler(.cancel)
                 return
+        } else if (navigationAction.navigationType == .backForward) {
+            self.shouldReload = true
         }
         decisionHandler(.allow)
     }

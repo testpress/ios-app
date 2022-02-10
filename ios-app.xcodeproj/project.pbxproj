@@ -88,6 +88,7 @@
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
 		25B0ADD521D615A200C702B9 /* Hippolyte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */; };
 		25B1489A264CFE0500AECC39 /* MathJax-2.7.1 in Resources */ = {isa = PBXBuildFile; fileRef = 25B14899264CFE0500AECC39 /* MathJax-2.7.1 */; };
+		25B4D0BF27B0F8BB0061D100 /* SSOUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */; };
 		25B60E90263FCB95006CDDBE /* IGListKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B60E8F263FCB95006CDDBE /* IGListKit.framework */; };
 		25B60E93263FCBCD006CDDBE /* IGListDiffKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B60E92263FCBCD006CDDBE /* IGListDiffKit.framework */; };
 		25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
@@ -495,6 +496,7 @@
 		25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerification.swift; sourceTree = "<group>"; };
 		25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hippolyte.framework; path = Carthage/Build/iOS/Hippolyte.framework; sourceTree = "<group>"; };
 		25B14899264CFE0500AECC39 /* MathJax-2.7.1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "MathJax-2.7.1"; sourceTree = "<group>"; };
+		25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSOUrl.swift; sourceTree = "<group>"; };
 		25B60E8F263FCB95006CDDBE /* IGListKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IGListKit.framework; path = Carthage/Build/iOS/IGListKit.framework; sourceTree = "<group>"; };
 		25B60E92263FCBCD006CDDBE /* IGListDiffKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IGListDiffKit.framework; path = Carthage/Build/iOS/IGListDiffKit.framework; sourceTree = "<group>"; };
 		25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsPageViewController.swift; sourceTree = "<group>"; };
@@ -1303,6 +1305,7 @@
 				253DD67D262860B200C6D0A8 /* GapFillResponse.swift */,
 				2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */,
 				25520BC527547006001A58AB /* DiscussionThreadAnswer.swift */,
+				25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1825,6 +1828,7 @@
 				256A909E247D21F500F4E12C /* UIButton.swift in Sources */,
 				2FC0F2F41F863B280092BFDC /* Constants.swift in Sources */,
 				25E435D2263ADB5B00243FD3 /* DashboardRepository.swift in Sources */,
+				25B4D0BF27B0F8BB0061D100 /* SSOUrl.swift in Sources */,
 				2F763D0F1FBECBBC0033D495 /* Chapter.swift in Sources */,
 				2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */,
 				2F56B73D1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift in Sources */,
