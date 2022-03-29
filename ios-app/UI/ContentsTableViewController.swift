@@ -29,12 +29,13 @@ protocol ContentAttemptCreationDelegate {
     func newAttemptCreated()
 }
 
-class ContentsTableViewController: TPBasePagedTableViewController<Content>,
+class ContentsTableViewController: BaseDBTableViewControllerV2<ContentsListResponse, Content>,
     ContentAttemptCreationDelegate {
     
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     
     var contentsUrl: String!
+    var chapterId: Int!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(pager: ContentPager(), coder: aDecoder)
@@ -56,7 +57,12 @@ class ContentsTableViewController: TPBasePagedTableViewController<Content>,
     }
     
     override func onLoadFinished(items: [Content]) {
-        super.onLoadFinished(items: items.sorted(by: { $0.order! < $1.order! }))
+        super.onLoadFinished(items: items.sorted(by: { $0.order < $1.order }))
+    }
+    
+    override func getItemsFromDb() -> [Content] {
+        let filterQuery = String(format: "chapterId=%d", chapterId)
+        return DBManager<Content>().getItemsFromDB(filteredBy: filterQuery, byKeyPath: "order")
     }
     
     func newAttemptCreated() {

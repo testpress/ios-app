@@ -26,16 +26,30 @@
 import RealmSwift
 import UIKit
 
-class CoursesTableViewController: BaseDBViewController<Course> {
+class CoursesTableViewController: BaseDBTableViewController<Course> {
     
+    var tags: [String] = []
+
     required init?(coder aDecoder: NSCoder) {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
         super.init(pager: CoursePager(), coder: aDecoder)
     }
     
     override func getItemsFromDb() -> [Course] {
-        return DBManager<Course>()
+        var courses = DBManager<Course>()
             .getItemsFromDB(filteredBy: "active = true", byKeyPath: "order")
+        
+        if tags.count > 0 {
+            courses = courses.filter { (course: Course) in
+                !Set(course.tags).isDisjoint(with: tags)
+            }
+        }
+        return courses
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+        super.viewDidAppear(animated)
     }
     
     override func loadItems() {

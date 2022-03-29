@@ -24,37 +24,48 @@
 //
 
 import ObjectMapper
+import RealmSwift
 
-public class AttemptItem {
+
+class AttemptItem: DBModel {
     
     public static let ANSWERED_CORRECT = "Correct"
     public static let ANSWERED_INCORRECT = "Incorrect"
     public static let UNANSWERED = "Unanswered"
     
-    var id: Int!
-    var url: String?;
-    var question: AttemptQuestion!;
-    var questionId: Int!
-    var review: Bool! {
-       didSet { review = review != nil && review }
-    }
-    var index: Int!
-    var currentReview: Bool!
-    var selectedAnswers: [Int] = []
-    var savedAnswers: [Int] = []
-    var order: Int?
-    var commentsCount: Int!
-    var duration: Float!
-    var bestDuration: Float!
-    var averageDuration: Float!
-    var bookmarkId: Int!
-    var attemptSection: AttemptSection!
-    var shortText: String?
-    var currentShortText: String!
-    var marks: String?
-    var result: String!
+    @objc dynamic var id: Int = -1
+    @objc dynamic var url: String = "";
+    @objc dynamic var question: AttemptQuestion!;
+    @objc dynamic var questionId: Int = -1
+    @objc dynamic var review: Bool = false
+    @objc dynamic var isAttempted: Bool = false
+    @objc dynamic var index: Int = -1
+    @objc dynamic var currentReview: Bool = false
+    var selectedAnswers = List<Int>()
+    var savedAnswers = List<Int>()
+    @objc dynamic var order: Int = 0
+    @objc dynamic var commentsCount: Int = 0
+    @objc dynamic var duration: Float = 0.0
+    @objc dynamic var bestDuration: Float = 0.0
+    @objc dynamic var averageDuration: Float = 0.0
+    var bookmarkId: Int? = nil
+    @objc dynamic var attemptSection: AttemptSection?
+    @objc dynamic var shortText: String?
+    @objc dynamic var currentShortText: String!
+    @objc dynamic var marks: String?
+    @objc dynamic var result: String!
+    @objc dynamic var attemptId: Int = -1
+    @objc dynamic var examQuestionId: Int = -1
+    var gapFillResponses = List<GapFillResponse>()
+    @objc dynamic var essayText: String?
+    @objc dynamic var localEssayText: String!
     
-    public required init?(map: Map) {
+    public required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    override public static func primaryKey() -> String? {
+        return "id"
     }
     
     public func hasChanged() -> Bool {
@@ -65,11 +76,25 @@ public class AttemptItem {
             (shortText != nil && shortText != currentShortText) ||
             (shortText == nil && currentShortText != nil && !currentShortText.isEmpty)
     }
+    
+    public func getSaveUrl() -> String {
+        return String(format: "%@/api/v2.4/attempts/%d/questions/%d/", Constants.BASE_URL , self.attemptId, self.examQuestionId)
+    }
+    
+    public func setGapFillResponses(_ gapFillOrderAnswerMap: [Int: AnyObject] ) {
+        try! Realm().write {
+            let gapFillResponseList = List<GapFillResponse>()
+            gapFillOrderAnswerMap.forEach {
+                let response = GapFillResponse.create(order: $0, answer: $1 as! String)
+                gapFillResponseList.append(response)
+            }
+            
+            self.gapFillResponses.removeAll()
+            self.gapFillResponses.append(objectsIn: gapFillResponseList)
+        }
+    }
 
-}
-
-extension AttemptItem: TestpressModel {
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
         id <- map["id"]
         url <- map["url"]
         question <- map["question"]
@@ -77,9 +102,8 @@ extension AttemptItem: TestpressModel {
         review <- map["review"]
         index <- map["index"]
         currentReview <- map["current_review"]
-        selectedAnswers <- map["selected_answers"]
-        selectedAnswers <- map["selected_answer_ids"]
-        savedAnswers <- map["saved_answers"]
+        selectedAnswers <- (map["selected_answers"], IntArrayTransform())
+        savedAnswers <- (map["saved_answers"], IntArrayTransform())
         order <- map["order"]
         commentsCount <- map["comments_count"]
         duration <- map["duration"]
@@ -90,5 +114,8 @@ extension AttemptItem: TestpressModel {
         shortText <- map["short_text"]
         marks <- map["marks"]
         result <- map["result"]
+        attemptId <- map["attempt_id"]
+        gapFillResponses <- (map["gap_fill_responses"], ListTransform<GapFillResponse>())
+        essayText <- map["essay_text"]
     }
 }

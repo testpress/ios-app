@@ -26,6 +26,7 @@
 import Alamofire
 import Device
 import UIKit
+import RealmSwift
 
 enum AuthProvider: String {
     case TESTPRESS
@@ -69,7 +70,7 @@ class TPApiClient {
     static func request(dataRequest: DataRequest,
                         completion: @escaping (String?, TPError?) -> Void) {
         
-        dataRequest.responseString() { response in
+        dataRequest.responseString(queue: nil, encoding: String.Encoding.utf8) { response in
             #if DEBUG
                 print(NSString(data: response.request?.httpBody ?? Data(),
                                encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
@@ -91,8 +92,28 @@ class TPApiClient {
                     if (statusCode == 403) {
                         error = TPError(message: json, response: httpResponse,
                                         kind: .unauthenticated)
+                    } else if (statusCode == 401){
+                        error = TPError(message: json, response: httpResponse, kind: .unauthenticated)
+                        UIUtils.logout()
+
+                        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                            while let presentedViewController = topController.presentedViewController {
+                                topController = presentedViewController
+                            }
+                            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+                            let loginViewController = storyboard.instantiateViewController(withIdentifier:
+                                                        Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+                            
+                            topController.present(loginViewController, animated: true, completion: nil)
+                            
+                        }
+                        
                     } else {
                         error = TPError(message: json, response: httpResponse, kind: .http)
+                    }
+
+                    if (error.kind == TPError.Kind.custom) {
+                        handleCustomError(error: error)
                     }
                     completion(nil, error)
                 }
@@ -120,7 +141,55 @@ class TPApiClient {
             let error = TPError(message: description, response: httpResponse,
                                 kind: .unexpected)
             
+            if (error.kind == TPError.Kind.custom) {
+                handleCustomError(error: error)
+            }
+            
             completion(nil, error)
+        }
+    }
+    
+    static func handleCustomError(error: TPError) {
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        
+        if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController
+        }
+
+        if error.error_code == Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE {
+            let alert = UIAlertController(title: Strings.LOADING_FAILED,
+                                          message: error.error_detail,
+                                          preferredStyle: UIUtils.getActionSheetStyle())
+            alert.addAction(UIAlertAction(
+                title: Strings.OK,
+                style: UIAlertAction.Style.destructive,
+                handler: { action in
+                    let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+                    let tabViewController = storyboard.instantiateViewController(
+                        withIdentifier: Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER)
+                    rootViewController!.present(tabViewController, animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertAction.Style.cancel))
+            rootViewController!.present(alert, animated: true)
+
+        } else if error.error_code == Constants.MAX_LOGIN_LIMIT_EXCEEDED {
+            var message = Strings.MAX_LOGIN_EXCEEDED_ERROR_MESSAGE
+            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+            
+            if !instituteSettings.cooloffTime.isEmpty {
+                message += Strings.ACCOUNT_UNLOCK_INFO + "\(instituteSettings.cooloffTime) hours"
+            }
+
+            UIUtils.showSimpleAlert(
+                title: Strings.ACCOUNT_LOCKED,
+                message: message,
+                viewController: rootViewController!,
+                cancelable: true
+            )
         }
     }
     
@@ -165,10 +234,9 @@ class TPApiClient {
     }
     
     static func getUserAgent() -> String {
+        // Testpress iOS App/1.17.0.1 iPhone8,4, iOS/12_1_4 CFNetwork
         let device = UIDevice.current
-        // Testpress iOS App/1.0.1 (iPhone; iPhoneSE OS 10_3_1)
-        return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) (iPhone; \(device.deviceType) "
-            + "OS \(device.systemVersion.replacingOccurrences(of: ".", with: "_")))"
+        return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) \(device.modelName), iOS/\(device.systemVersion.replacingOccurrences(of: ".", with: "_")) CFNetwork"
     }
     
     static func getListItems<T> (endpointProvider: TPEndpointProvider,
@@ -261,10 +329,9 @@ class TPApiClient {
         })
     }
     
-    static func registerNewUser(username: String, email: String, password: String, phone: String,
-                                completion: @escaping (TestpressModel?, TPError?) -> Void) {
+    static func registerNewUser(username: String, email: String, password: String, phone: String, country_code:String, completion: @escaping (TestpressModel?, TPError?) -> Void) {
         
-        let parameters: Parameters = ["username": username, "email": email, "password": password, "phone": phone]
+        let parameters: Parameters = ["username": username, "email": email, "password": password, "phone": phone, "country_code":country_code]
         apiCall(endpointProvider: TPEndpointProvider(.registerNewUser), parameters: parameters,
                 completion: { json, error in
                     
@@ -361,12 +428,23 @@ class TPApiClient {
     static func saveAnswer(selectedAnswer: [Int],
                            review: Bool,
                            shortAnswer: String?,
+                           gapFilledResponses: List<GapFillResponse>?,
                            endpointProvider: TPEndpointProvider,
+                           attemptItem: AttemptItem,
                            completion: @escaping (AttemptItem?, TPError?) -> Void) {
         
         var parameters: Parameters = [ "selected_answers": selectedAnswer, "review": review ]
         if let shortAnswer = shortAnswer {
             parameters["short_text"] = shortAnswer
+        }
+        
+        if attemptItem.question.isEssayType {
+            parameters["essay_text"] = attemptItem.localEssayText
+        }
+                
+        if let gapFilledResponses = gapFilledResponses {
+            let vals : [[String: String]] = gapFilledResponses.map{["order": String($0.order), "answer": $0.answer]}
+            parameters["gap_fill_responses"] = vals
         }
         apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
             json, error in
@@ -401,6 +479,24 @@ class TPApiClient {
             }
             completion(testpressResponse, error)
         })
+    }
+    
+    static func getSSOUrl(completion: @escaping(SSOUrl?, TPError?) -> Void) {
+        apiCall(endpointProvider: TPEndpointProvider(.getSSOUrl),
+                completion: {
+                    json, error in
+                    var sso_detail: SSOUrl? = nil
+                    if let json = json {
+                        sso_detail = TPModelMapper<SSOUrl>().mapFromJSON(json: json)
+                        debugPrint(sso_detail?.url ?? "Error")
+                        guard sso_detail != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(sso_detail, error)
+        }
+        )
     }
     
     static func getProfile(endpointProvider: TPEndpointProvider,
@@ -451,3 +547,4 @@ extension Dictionary {
         }
     }
 }
+
