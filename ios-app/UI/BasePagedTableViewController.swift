@@ -51,7 +51,7 @@ class BasePagedTableViewController<T: TestpressModel, L: TestpressModel>
         super.viewDidLoad()
         
         // Set table view footer as progress spinner
-        let pagingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let pagingSpinner = UIActivityIndicatorView(style: .gray)
         pagingSpinner.startAnimating()
         pagingSpinner.color = Colors.getRGB(Colors.PRIMARY)
         pagingSpinner.hidesWhenStopped = true

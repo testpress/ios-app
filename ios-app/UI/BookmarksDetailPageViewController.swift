@@ -59,10 +59,10 @@ class BookmarksDetailPageViewController: UIViewController, UIPageViewControllerD
                                                   options: nil)
         
         pageViewController.delegate = self
-        addChildViewController(pageViewController)
+        addChild(pageViewController)
         questionsContainerView.addSubview(pageViewController.view)
         pageViewController.view.frame = questionsContainerView.bounds
-        pageViewController.didMove(toParentViewController: self)
+        pageViewController.didMove(toParent: self)
         // Set navigation buttons click listener
         let previousButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onClickPreviousButton(sender:)))
@@ -129,7 +129,7 @@ class BookmarksDetailPageViewController: UIViewController, UIPageViewControllerD
         let viewController =
             [bookmarksDataSource.viewControllerAtIndex(position)] as! [UIViewController]
         
-        var direction: UIPageViewControllerNavigationDirection = .forward
+        var direction: UIPageViewController.NavigationDirection = .forward
         if currentPosition != -1 {
             direction = position >= currentPosition ? .forward : .reverse
         }

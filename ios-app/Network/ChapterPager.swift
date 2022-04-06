@@ -39,8 +39,6 @@ class ChapterPager: TPBasePager<Chapter> {
     
     override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
-        let parent = parentId == nil ? "null" : String(parentId!)
-        queryParams.updateValue(parent, forKey: Constants.PARENT)
         TPApiClient.getListItems(
             endpointProvider: TPEndpointProvider(.getChapters, url: url, queryParams: queryParams),
             completion: resonseHandler!,
@@ -49,7 +47,7 @@ class ChapterPager: TPBasePager<Chapter> {
     }
     
     override func getId(resource: Chapter) -> Int {
-        return resource.id!
+        return resource.id
     }
     
     override func register(resource chapter: Chapter) -> Chapter? {

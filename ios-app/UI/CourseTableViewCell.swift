@@ -30,7 +30,7 @@ class CourseTableViewCell: UITableViewCell {
     @IBOutlet weak var courseName: UILabel!
     @IBOutlet weak var courseViewCell: UIView!
     @IBOutlet weak var thumbnailImage: UIImageView!
-    @IBOutlet weak var external_link_label: UILabel!
+    @IBOutlet weak var externalLinkLabel: UILabel!
     
     var webView: WKWebView!
     var parentViewController: UIViewController! = nil
@@ -45,62 +45,75 @@ class CourseTableViewCell: UITableViewCell {
         
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
-        external_link_label.isHidden = true
+        externalLinkLabel.isHidden = true
         if !course.external_content_link.isEmpty {
-            external_link_label.text = course.external_link_label
-            external_link_label.isHidden = false
-            external_link_label.textColor = Colors.getRGB(Colors.PRIMARY)
+            externalLinkLabel.text = course.external_link_label
+            externalLinkLabel.isHidden = false
+            externalLinkLabel.textColor = Colors.getRGB(Colors.PRIMARY)
         }
         
         courseViewCell.addGestureRecognizer(tapRecognizer)
+
+        externalLinkLabel.isHidden = true
+        if !course.external_content_link.isEmpty {
+            displayExternalLabel()
+        }
     }
     
-
-    @IBAction func externalLinkButtonClick(_ sender: UIButton) {
-        // This is custom code
-        let tabViewController = SignUpWebViewController()
-        tabViewController.url = course.external_content_link
-        parentViewController.present(tabViewController, animated: true, completion: nil)
+    func displayExternalLabel() {
+        externalLinkLabel.text = course.external_link_label
+        externalLinkLabel.sizeToFit()
+        externalLinkLabel.frame.size.width = externalLinkLabel.intrinsicContentSize.width + 10
+        externalLinkLabel.frame.size.height = externalLinkLabel.intrinsicContentSize.height + 10
+        externalLinkLabel.textAlignment = .center
+        externalLinkLabel.isHidden = false
+        externalLinkLabel.layer.borderWidth = 1.0
+        externalLinkLabel.layer.cornerRadius = 2
+        externalLinkLabel.layer.borderColor = Colors.getRGB(Colors.PRIMARY).cgColor
+        externalLinkLabel.textColor = Colors.getRGB(Colors.PRIMARY)
     }
+    
+    override func layoutSubviews() {
+        /*
+         In case of device rotation, external link label should be redrawn.
+         */
+        super.layoutSubviews()
+        if !course.external_content_link.isEmpty {
+            displayExternalLabel()
+        }
+    }
+    
 
     @objc func onItemClick() {
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         let viewController: UIViewController
         if !course.external_content_link.isEmpty {
-            let tabViewController = SignUpWebViewController()
-            tabViewController.url = course.external_content_link
-            parentViewController.present(tabViewController, animated: true, completion: nil)
+            let webViewController = WebViewController()
+            webViewController.url = course.external_content_link
+            webViewController.title = course.title
+            parentViewController.present(webViewController, animated: true, completion: nil)
         } else {
-        if course.chaptersCount > 0 {
-            let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
-            
-            chaptersViewController.coursesUrl = course.url
-            chaptersViewController.title = course.title
-            viewController = chaptersViewController
-        } else {
-            let contentsNavigationController = storyboard.instantiateViewController(withIdentifier:
-                Constants.CONTENTS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
-            
-            let contentViewController = contentsNavigationController.viewControllers.first
-                as! ContentsTableViewController
-            
-            contentViewController.contentsUrl = course.contentsUrl
-            contentViewController.title = course.title
-            viewController = contentsNavigationController
+            if course.chaptersCount > 0 {
+                let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
+                
+                chaptersViewController.courseId = course.id
+                chaptersViewController.coursesUrl = course.url
+                chaptersViewController.title = course.title
+                viewController = chaptersViewController
+            } else {
+                let contentsNavigationController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.CONTENTS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
+                
+                let contentViewController = contentsNavigationController.viewControllers.first
+                    as! ContentsTableViewController
+                
+                contentViewController.contentsUrl = course.contentsUrl
+                contentViewController.title = course.title
+                viewController = contentsNavigationController
+            }
+            parentViewController.present(viewController, animated: true, completion: nil)
         }
-        parentViewController.present(viewController, animated: true, completion: nil)
-        }
-    }
-    
-    
-    
-    func onFinishLoadingWebView() {
-        
-    }
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        
     }
     
 }

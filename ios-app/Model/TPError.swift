@@ -37,6 +37,7 @@ public class TPError: Error {
         unauthenticated,
         /// A non-200 HTTP status code was received from the server.
         http,
+        custom,
         /// All other errors
         unexpected
     }
@@ -49,6 +50,9 @@ public class TPError: Error {
     
     public var response: HTTPURLResponse?
     
+    public var error_detail: String?
+    public var error_code: String?
+    
     /// Identifies the event kind which triggered this error
     public var kind: Kind
     
@@ -57,6 +61,26 @@ public class TPError: Error {
         self.message = message
         self.response = response
         self.kind = kind
+
+
+        if isCustomError() {
+            let error = self.getErrorBodyAs(type: TestpressAPIError.self)?.detail
+            self.populateErrorData(code: error?.error_code, detail: error?.message)
+        } else if let error_detail = self.getErrorBodyAs(type: ApiError.self) {
+            self.populateErrorData(code: error_detail.error_code, detail: error_detail.detail)
+        }
+        
+    }
+    
+    func isCustomError() -> Bool {
+        let error = self.getErrorBodyAs(type: TestpressAPIError.self)
+        return error != nil && error?.detail?.message != nil
+    }
+    
+    func populateErrorData(code: String?, detail: String?) {
+        self.kind = Kind.custom
+        self.error_detail = detail
+        self.error_code = code
     }
     
     public func isNetworkError() -> Bool {
@@ -82,7 +106,10 @@ public class TPError: Error {
             return (Images.TestpressAlertWarning.image,
                     Strings.AUTHENTICATION_FAILED,
                     Strings.PLEASE_LOGIN)
-            
+        case .custom:
+            return (Images.TestpressAlertWarning.image,
+                    Strings.LOADING_FAILED,
+                    self.error_detail!)
         default:
             return (Images.TestpressAlertWarning.image,
                     Strings.LOADING_FAILED,
