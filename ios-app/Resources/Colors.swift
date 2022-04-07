@@ -22,12 +22,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-
+    
 import UIKit
 
 class Colors {
     
-    static let PRIMARY = "#2196F3"
+    static let PRIMARY = "#FE8300"
     static let PRIMARY_TEXT = "#ffffff"
     static let MATERIAL_GREEN = "#00ccaa"
     static let MATERIAL_GREEN2 = "#00bb9c"
