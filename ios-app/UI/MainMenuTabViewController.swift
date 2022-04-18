@@ -59,6 +59,8 @@ class MainMenuTabViewController: UITabBarController {
             viewControllers?.remove(at: 1)
         }
         
+        print("Is Helpdesk enabled :\(instituteSettings.isHelpdeskEnabled) \(instituteSettings)")
+        
         if (instituteSettings.isHelpdeskEnabled) {
             viewControllers?.insert(self.getDoubtsWebViewController(), at: 3)
         }
