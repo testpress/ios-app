@@ -14,7 +14,7 @@ class TestVideoPlayerView: XCTestCase {
     var videoPlayerView: VideoPlayerView!
     
     override func setUp() {
-        videoPlayerView = VideoPlayerView(frame: CGRect(x:0, y:0, width:0, height:0), url: URL(string: "http://google.com")!)
+        videoPlayerView = VideoPlayerView(frame: CGRect(x:0, y:0, width:20, height:100), url: URL(string: "http://google.com")!)
     }
     
     func testInit() {
@@ -56,5 +56,16 @@ class TestVideoPlayerView: XCTestCase {
         videoPlayerView.play()
         
         XCTAssertEqual(5.0, videoPlayerView.getCurrenPlaybackSpeed())
+    }
+    
+    func testWatermarkShouldBeInitialized() {
+        XCTAssertEqual("testpress ", videoPlayerView.watermarkLabel?.text)
+    }
+    
+    func testMoveWatermarkShouldChangeWatermarkPosition() {
+        let initialPosition = videoPlayerView.watermarkLabel?.frame
+        
+        videoPlayerView.moveWatermarkPosition()
+        XCTAssertNotEqual(initialPosition, videoPlayerView.watermarkLabel?.frame)
     }
 }
