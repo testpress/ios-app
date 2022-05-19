@@ -37,6 +37,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     private let placeholder = "Write a comment..."
     
     var post: Post!
+    var url: String? = nil
     var forum: Bool = false
     var emptyView: EmptyView!
     var loading: Bool = false
@@ -49,13 +50,19 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
         webViewDelegate = self
         commentBox.delegate = self
         commentBox.placeholder = placeholder
         imageUploadHelper.delegate = self
         activityIndicator.center = CGPoint(x: view.center.x, y: webView.center.y)
         emptyView = EmptyView.getInstance(parentView: webView)
-        loadHTMLContent()
+        if let postUrl = url {
+            loadHTMLContent(url:postUrl)
+        } else {
+            loadHTMLContent(url:nil)
+        }
+        
     }
     
     override func getParentView() -> UIView {
@@ -72,15 +79,16 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         webView = WKWebView( frame: self.contentView!.bounds, configuration: config)
     }
     
-    func loadHTMLContent() {
+    func loadHTMLContent(url: String?) {
         if loading {
             return
         }
+        let postUrl = url ?? post.url
         activityIndicator.startAnimating()
         loading = true
         TPApiClient.request(
             type: Post.self,
-            endpointProvider: TPEndpointProvider(.get, url: post.url),
+            endpointProvider: TPEndpointProvider(.get, url: postUrl!),
             completion: {
                 post, error in
                 if let error = error {
@@ -90,7 +98,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
                     if error.kind == .network {
                         retryHandler = {
                             self.emptyView.hide()
-                            self.loadHTMLContent()
+                            self.loadHTMLContent(url:postUrl)
                         }
                     }
                     if (self.activityIndicator?.isAnimating)! {
@@ -103,10 +111,10 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
                     self.loading = false
                     return
                 }
-                
                 self.loading = false
+                self.post = post
                 self.webView.loadHTMLString(
-                    self.getFormattedContent(post!.contentHtml!),
+                    self.getFormattedContent(post),
                     baseURL: Bundle.main.bundleURL
                 )
         })
@@ -141,6 +149,10 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     }
     
     func loadPreviousComments() {
+        if (post.commentsUrl == nil) {
+            return
+        }
+
         getPreviousCommentsPager().resources.removeAll()
         getPreviousCommentsPager().next(completion: {
             items, error in
@@ -309,9 +321,9 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         return WebViewUtils.getFormattedTitle(title: post.title)
     }
     
-    func getFormattedContent(_ contentHtml: String) -> String {
+    func getFormattedContent(_ post: Post?) -> String {
         var html = WebViewUtils.getHeader() + getTitle() +
-            WebViewUtils.getHtmlContentWithMargin(contentHtml)
+            WebViewUtils.getHtmlContentWithMargin(post?.contentHtml ?? "")
         
         html += "<hr style='margin-top:20px;'>"
         html += WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS);

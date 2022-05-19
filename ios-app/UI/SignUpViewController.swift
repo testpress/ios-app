@@ -25,7 +25,8 @@
 
 import UIKit
 
-class SignUpViewController: BaseTextFieldViewController {
+class SignUpViewController: BaseTextFieldViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+
 
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
@@ -33,16 +34,67 @@ class SignUpViewController: BaseTextFieldViewController {
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var pleaseFillLabel: UILabel!
+    @IBOutlet weak var phoneNumberField: UITextField!
+    @IBOutlet weak var countryCodeField: UITextField!
+    @IBOutlet weak var phoneStackView: UIStackView!
     
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
-    
+    var instituteSettings: InstituteSettings!
+    let countryList = UIUtils.getCountryList()
+    var countryCodes: [String]?
+    var countryCode: String = "IN"
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
+
         
         UIUtils.setButtonDropShadow(signUpButton)
         
         // Set firstTextField in super class to set the cursor initialy in the username field
         firstTextField = usernameField
+        phoneStackView.isHidden = true
+        phoneNumberField.isHidden = true
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        if (instituteSettings.verificationMethod == "M") {
+            phoneNumberField.isHidden = false
+            phoneStackView.isHidden = false
+        }
+        
+        countryCodeField.isHidden = false
+        countryCodeField.tintColor = UIColor.clear
+        if(!instituteSettings.twilioEnabled){
+            countryCodeField.isHidden = true
+        }
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        countryCodeField.inputView = pickerView
+        countryCodes = Array(countryList.keys).sorted()
+        countryCodeField.text = "91"
+    }
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // Sets the number of rows in the picker view
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return countryCodes!.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return countryList[countryCodes![row]]![0]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        countryCode = countryCodes![row]
+        countryCodeField.text = countryList[countryCodes![row]]![1]
+    }
+    
+    
+    @IBAction func moveToPasswordField(_ sender: UITextField) {
+        passwordField.becomeFirstResponder()
     }
     
     @IBAction func moveToEmailField(_ sender: UITextField) {
@@ -50,23 +102,29 @@ class SignUpViewController: BaseTextFieldViewController {
         emailField.becomeFirstResponder()
     }
     
-    @IBAction func moveToPasswordField(_ sender: UITextField) {
-        passwordField.becomeFirstResponder()
+    @IBAction func moveToNextField(_ sender: UITextField) {
+        if (phoneNumberField.isHidden) {
+            passwordField.becomeFirstResponder()
+        } else {
+            phoneNumberField.becomeFirstResponder()
+        }
     }
     
     @IBAction func moveToConfirmPasswordField(_ sender: UITextField) {
         confirmPasswordField.becomeFirstResponder()
     }
     
+    
     @IBAction func onSignUpButtonClick(_ sender: UIView) {
         if validate() {
             hideKeyboard()
             present(alertController, animated: false, completion: nil)
-        
             TPApiClient.registerNewUser(
                 username: usernameField.text!,
                 email: emailField.text!,
                 password: passwordField.text!,
+                phone: phoneNumberField.text!,
+                country_code: countryCode,
                 completion: { response, error in
                     if let error = error {
                         debugPrint(error.message ?? "No error message found")
@@ -99,27 +157,41 @@ class SignUpViewController: BaseTextFieldViewController {
                         }
                         return
                     }
-                    
-                    let viewController = self.storyboard?.instantiateViewController(withIdentifier:
-                        Constants.SUCCESS_VIEW_CONTROLLER) as! SuccessViewController
-                    
-                    viewController.initSuccessViewController(
-                        successDescription: Strings.ACTIVATION_MAIL_SENT,
-                        actionButtonText: Strings.LOGIN,
-                        backButtonClickHandler: {
-                            self.presentingViewController?.dismiss(animated: true)
+                    if (self.instituteSettings.verificationMethod == "M") {
+                        let viewController = self.storyboard?.instantiateViewController(withIdentifier:
+                            Constants.VERIFY_PHONE_VIEW_CONTROLLER) as! VerifyPhoneViewController
+                        viewController.initVerify(username:self.usernameField.text!, password:self.passwordField.text!)
+                        self.alertController.dismiss(animated: true, completion: nil)
+                        self.present(viewController, animated: true, completion: nil)
+
+                    } else {
+                        let viewController = self.storyboard?.instantiateViewController(withIdentifier:
+                            Constants.SUCCESS_VIEW_CONTROLLER) as! SuccessViewController
+                        
+                        viewController.initSuccessViewController(
+                            successDescription: Strings.ACTIVATION_MAIL_SENT,
+                            actionButtonText: Strings.LOGIN,
+                            backButtonClickHandler: {
+                                self.presentingViewController?.dismiss(animated: true)
                         }
-                    )
-                    self.alertController.dismiss(animated: true, completion: nil)
-                    self.present(viewController, animated: true)
+                        )
+                        self.alertController.dismiss(animated: true, completion: nil)
+                        self.present(viewController, animated: true)
+                    }
                 }
             )
         }
     }
     
     @IBAction func onTextChangeListener() {
-        let allDetailsProvided = usernameField.hasText && emailField.hasText &&
+        let allDetailsProvided: Bool
+        if (phoneNumberField.isHidden) {
+            allDetailsProvided = usernameField.hasText && emailField.hasText &&
             passwordField.hasText && confirmPasswordField.hasText
+        } else {
+            allDetailsProvided = usernameField.hasText && emailField.hasText &&
+                passwordField.hasText && confirmPasswordField.hasText && phoneNumberField.hasText
+        }
         
         signUpButton.isEnabled = allDetailsProvided
         pleaseFillLabel.isHidden = allDetailsProvided
@@ -150,13 +222,23 @@ class SignUpViewController: BaseTextFieldViewController {
             setFieldError(textField: passwordField, errorMessage: Strings.PASSWORD_NOT_MATCH)
             return false
         }
+        if (!phoneNumberField.isHidden) {
+            let phoneNumberRegEx = "[0-9]{10}"
+            let phoneNumberTest = NSPredicate(format:"SELF MATCHES %@", phoneNumberRegEx)
+            if !phoneNumberTest.evaluate(with: phoneNumberField.text) {
+                setFieldError(textField: phoneNumberField, errorMessage: Strings.ENTER_VALID_PHONE_NUMBER)
+                return false
+            }
+        } else {
+            phoneNumberField.text = ""
+        }
         return true
     }
     
     func setFieldError(textField: UITextField, errorMessage: String) {
         textField.text = ""
         textField.attributedPlaceholder = NSAttributedString(string: errorMessage,
-            attributes: [NSAttributedStringKey.foregroundColor: UIColor.red])
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
         
         textField.becomeFirstResponder()
     }

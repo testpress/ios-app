@@ -60,7 +60,7 @@ class ExamPager: TPBasePager<Exam> {
     }
     
     override func getId(resource: Exam) -> Int {
-        return resource.id!
+        return resource.id
     }
     
 }

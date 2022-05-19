@@ -43,6 +43,7 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
     var contents = [Int: Content]()
     var htmlContents = [Int: HtmlContent]()
     var videos = [Int: Video]()
+    var streams = [Int: [Stream]]()
     var attachments = [Int: Attachment]()
     
     var folder: String!
@@ -79,16 +80,16 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
                 reviewItems.updateValue(reviewItem, forKey: reviewItem.id)
             }
             response!.results.questions.forEach { question in
-                questions.updateValue(question, forKey: question.id!)
+                questions.updateValue(question, forKey: question.id)
             }
             response!.results.answers.forEach { answer in
-                answers.updateValue(answer, forKey: answer.id!)
+                answers.updateValue(answer, forKey: answer.id)
             }
             response!.results.translations.forEach { translation in
-                translations.updateValue(translation, forKey: translation.id!)
+                translations.updateValue(translation, forKey: translation.id)
             }
             response!.results.answerTranslations.forEach { answerTranslation in
-                answerTranslations.updateValue(answerTranslation, forKey: answerTranslation.id!)
+                answerTranslations.updateValue(answerTranslation, forKey: answerTranslation.id)
             }
             
             response!.results.directions.forEach { direction in
@@ -104,6 +105,8 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
             response!.results.htmlContents.forEach { htmlContent in
                 htmlContents.updateValue(htmlContent, forKey: htmlContent.id)
             }
+            
+            self.storeStreams()
             response!.results.videos.forEach { video in
                 videos.updateValue(video, forKey: video.id)
             }
@@ -112,6 +115,18 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
             }
         }
         return bookmarks
+    }
+    
+    func storeStreams() {
+        response?.results.streams.forEach { stream in
+            if(streams[stream.videoId] == nil) {
+                streams.updateValue([stream], forKey: stream.videoId)
+            } else {
+                var existingStreams = streams[stream.videoId]
+                existingStreams!.append(stream)
+                streams.updateValue(existingStreams!, forKey: stream.videoId)
+            }
+        }
     }
     
     override func register(resource bookmark: Bookmark) -> Bookmark? {
@@ -127,23 +142,24 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
             for answerId in reviewItem.question.answerIds {
                 reviewItem.question.answers.append(answers[answerId]!)
             }
-            if let directionId = reviewItem.question.directionId {
-                reviewItem.question.direction = directions[directionId]?.html
+            if reviewItem.question.directionId != -1{
+                reviewItem.question.direction = directions[reviewItem.question.directionId]?.html
             }
-            if let subjectId = reviewItem.question.subjectId {
-                reviewItem.question.subject = subjects[subjectId]?.name
+            if reviewItem.question.subjectId != -1{
+                reviewItem.question.subject = subjects[reviewItem.question.subjectId]?.name ?? "Uncategorized"
             }
             bookmark.bookmarkedObject = reviewItem
             break
         case "chaptercontent":
             let content = contents[bookmark.objectId]!
-            if content.videoId != nil {
+            if content.videoId != -1 {
                 content.video = videos[content.videoId]!
-            } else if content.attachmentId != nil {
+                content.video?.streams.append(objectsIn: streams[content.videoId] ?? [])
+            } else if content.attachmentId != -1 {
                 content.attachment = attachments[content.attachmentId]!
-            } else if content.htmlContentId != nil {
+            } else if content.htmlContentId != -1 {
                 content.htmlObject = htmlContents[content.htmlContentId]
-                content.htmlContentTitle = content.htmlObject.title
+                content.htmlContentTitle = content.htmlObject?.title
             }
             bookmark.bookmarkedObject = content
             break

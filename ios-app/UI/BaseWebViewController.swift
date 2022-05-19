@@ -32,6 +32,8 @@ class BaseWebViewController: UIViewController {
     var parentView: UIView!
     var activityIndicator: UIActivityIndicatorView!
     var webViewDelegate: WKWebViewDelegate!
+    var shouldOpenLinksWithinWebview = false
+    var shouldReload = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +56,6 @@ class BaseWebViewController: UIViewController {
     }
 
     func getJavascript() -> String {
-        let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "MathJaxRender",
-                                                            ofType:"js")!)
-        do {
-            return try String(contentsOf: fileURL, encoding: String.Encoding.utf8)
-        } catch let error as NSError {
-            debugPrint(error.localizedDescription)
-        }
         return ""
     }
     
@@ -79,6 +74,11 @@ extension BaseWebViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         activityIndicator.startAnimating()
+
+        if (self.shouldReload) {
+            webView.reload()
+            self.shouldReload = false
+        }
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -91,18 +91,19 @@ extension BaseWebViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        if navigationAction.navigationType == .linkActivated,
+        if !shouldOpenLinksWithinWebview && navigationAction.navigationType == .linkActivated,
             let url = navigationAction.request.url, UIApplication.shared.canOpenURL(url) {
             
                 if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
                 } else {
                     // openURL(_:) is deprecated in iOS 10+.
                     UIApplication.shared.openURL(url)
                 }
                 decisionHandler(.cancel)
                 return
+        } else if (navigationAction.navigationType == .backForward) {
+            self.shouldReload = true
         }
         decisionHandler(.allow)
     }
@@ -111,4 +112,9 @@ extension BaseWebViewController: WKNavigationDelegate {
 
 protocol WKWebViewDelegate {
     func onFinishLoadingWebView()
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

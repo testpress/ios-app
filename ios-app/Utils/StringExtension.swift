@@ -48,4 +48,13 @@ extension String {
     func trim() -> String {
         return trimmingCharacters(in: .whitespacesAndNewlines)
     }
+    
+    static func getValue(_ anyValue: Any) -> String {
+        if let intValue = anyValue as? Int {
+            return String(intValue)
+        } else if let stringValue = anyValue as? String {
+            return stringValue
+        }
+        return "NA"
+    }
 }

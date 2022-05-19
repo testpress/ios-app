@@ -54,7 +54,7 @@ enum TPEndpoint {
     case getRank
     case getLeaderboard
     case getTargets
-    case getThreads
+    case getThreats
     case resetPassword
     case getPostCategories
     case authenticateSocialUser
@@ -64,11 +64,21 @@ enum TPEndpoint {
     case bookmarkFolders
     case attemptsPath
     case commentsPath
+    case instituteSettings
     case get
     case post
     case put
     case delete
-    
+    case registerDevice
+    case unRegisterDevice
+    case verifyPhoneNumber
+    case logout
+    case loginActivity
+    case logoutDevices
+    case userVideos
+    case dashboard
+    case getSSOUrl
+
     var method: Alamofire.HTTPMethod {
         switch self {
         case .authenticateUser:
@@ -109,7 +119,7 @@ enum TPEndpoint {
              .getRank,
              .getLeaderboard,
              .getTargets,
-             .getThreads,
+             .getThreats,
              .getPostCategories,
              .getAccessCodeExams,
              .bookmarks,
@@ -121,7 +131,13 @@ enum TPEndpoint {
         case .post,
              .resetPassword,
              .authenticateSocialUser,
-             .uploadImage:
+             .uploadImage,
+             .registerDevice,
+             .unRegisterDevice,
+             .verifyPhoneNumber,
+             .logoutDevices,
+             .logout,
+             .getSSOUrl:
             return .post
         case .put:
             return .put
@@ -135,9 +151,9 @@ enum TPEndpoint {
     var urlPath: String {
         switch self {
         case .authenticateUser:
-            return "/api/v2.2/auth-token/"
+            return "/api/v2.3/auth-token/"
         case .registerNewUser:
-            return "/api/v2.2/register/"
+            return "/api/v2.3/register/"
         case .getExams:
             return "/api/v2.2/exams/"
         case .sendHeartBeat:
@@ -147,7 +163,7 @@ enum TPEndpoint {
         case .endExam:
             return "end/"
         case .getCourses:
-            return "/api/v2.2/courses/"
+            return "/api/v2.4/courses/"
         case .getChapters:
             return "chapters/"
         case .getProfile:
@@ -155,7 +171,7 @@ enum TPEndpoint {
         case .getPosts:
             return "/api/v2.2/posts/"
         case .getForum, .createForumPost:
-            return "/api/v2.3/forum/"
+            return "/api/v2.5/discussions/"
         case .getForumCategories:
             return "/api/v2.3/forum/categories/"
         case .getSubjectAnalytics:
@@ -174,7 +190,7 @@ enum TPEndpoint {
             return "/api/v2.2/leaderboard/"
         case .getTargets:
             return "/api/v2.2/me/targets/"
-        case .getThreads:
+        case .getThreats:
             return "/api/v2.2/me/threats/"
         case .resetPassword:
             return "/api/v2.2/password/reset/"
@@ -191,13 +207,33 @@ enum TPEndpoint {
         case .bookmarkFolders:
             return "/api/v2.4/folders/"
         case .getContents:
-            return "/api/v2.2/contents/"
+            return "/api/v2.3/contents/"
         case .attemptsPath:
             return "/attempts/"
         case .getQuestions:
             return "/api/v2.2/questions/"
         case .commentsPath:
             return "/comments/"
+        case .instituteSettings:
+            return "/api/v2.3/settings/"
+        case .registerDevice:
+            return "/api/v2.2/devices/register/"
+        case .unRegisterDevice:
+            return "/api/v2.2/devices/unregister/"
+        case .verifyPhoneNumber:
+            return "/api/v2.2/verify/"
+        case .logout:
+            return "/api/v2.4/auth/logout/"
+        case .loginActivity:
+            return "/api/v2.3/me/login_activity/"
+        case .logoutDevices:
+            return "/api/v2.4/auth/logout_devices/"
+        case .userVideos:
+            return "/api/v2.4/user_videos/"
+        case .dashboard:
+            return "/api/v2.4/dashboard/"
+        case .getSSOUrl:
+            return "/api/v2.3/presigned_sso_url/"
         default:
             return ""
         }
@@ -260,4 +296,15 @@ struct TPEndpointProvider {
             + TPEndpoint.commentsPath.urlPath
     }
     
+    static func getContentAttemptUrl(contentID: Int) -> String {
+        return Constants.BASE_URL + TPEndpoint.getContents.urlPath + "\(contentID)" + TPEndpoint.attemptsPath.urlPath
+    }
+    
+    static func getVideoAttemptPath(attemptID: Int) -> String {
+        return Constants.BASE_URL + TPEndpoint.userVideos.urlPath + "\(attemptID)/"
+    }
+    
+    static func getDRMLicenseURL(contentID: Int) -> String {
+        return Constants.BASE_URL + "/api/v2.5/chapter_contents/\(contentID)/drm_license/"
+    }
 }

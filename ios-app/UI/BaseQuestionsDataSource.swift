@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
     
@@ -40,7 +41,9 @@ class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
         }
         
         let attemptItem = attemptItems[index]
-        attemptItem.index = index
+        try! Realm().write {
+            attemptItem.index = index
+        }
         let viewController = getQuestionsViewController()
         viewController.attemptItem = attemptItem
         return viewController
@@ -51,7 +54,7 @@ class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
     }
     
     func indexOfViewController(_ viewController: BaseQuestionsViewController) -> Int {
-        return viewController.attemptItem!.index!
+        return viewController.attemptItem!.index
     }
     
     // MARK: - Page View Controller Data Source

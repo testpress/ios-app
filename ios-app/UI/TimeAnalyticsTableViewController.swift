@@ -43,6 +43,7 @@ class TimeAnalyticsTableViewController: UIViewController {
     var selectedIndexPath: IndexPath!
     
     override func viewDidLoad() {
+        self.setStatusBarColor()
         emptyView = EmptyView.getInstance(parentView: contentView)
         emptyView.parentView = view
         tableView.tableFooterView = UIView(frame: .zero)
@@ -178,7 +179,7 @@ extension TimeAnalyticsTableViewController: LUExpandableTableViewDelegate {
     func expandableTableView(_ expandableTableView: LUExpandableTableView,
                              heightForHeaderInSection section: Int) -> CGFloat {
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 
@@ -219,10 +220,8 @@ extension TimeAnalyticsTableViewController: WKNavigationDelegate {
             js += "var message = {'height': document.body.offsetHeight, 'index': \(webView.tag)};"
             js += "webkit.messageHandlers.callbackHandler.postMessage(message);"
         }
-        let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "MathJaxRender",
-                                                            ofType:"js")!)
         do {
-            return try String(contentsOf: fileURL, encoding: String.Encoding.utf8) + js
+            return js
         } catch let error as NSError {
             debugPrint(error.localizedDescription)
         }

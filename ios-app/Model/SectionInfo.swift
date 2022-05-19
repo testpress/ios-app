@@ -30,6 +30,7 @@ public class SectionInfo {
     var name: String!
     var duration: String!
     var order: Int!
+    var id: Int!
     
     public required init?(map: Map) {
     }
@@ -41,5 +42,6 @@ extension SectionInfo: TestpressModel {
         name <- map["name"]
         duration <- map["duration"]
         order <- map["order"]
+        id <- map["id"]
     }
 }

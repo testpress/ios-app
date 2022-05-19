@@ -46,6 +46,19 @@ class DBInstance {
         }
     }
     
+    static func clearTables() {
+        // TODO: Clear all tables except institute settings through loop
+        /*
+         This method is used to clear user related tables.
+         The objective of this method is to not clear InstituteSettings tables
+         as it is neccessary for login screen after logout.
+        */
+        let course = sharedInstance.database.objects(Course.self)
+        try! sharedInstance.database.write {
+            sharedInstance.database.delete(course)
+        }
+    }
+    
 }
 
 class DBManager<T: Object> {
@@ -58,6 +71,10 @@ class DBManager<T: Object> {
     
     func getResultsFromDB() -> Results<T> {
         return database.objects(T.self)
+    }
+    
+    func isEmpty() -> Bool {
+        return database.objects(T.self).isEmpty
     }
     
     func getItemsFromDB() -> [T] {
@@ -89,6 +106,12 @@ class DBManager<T: Object> {
     func deleteAllFromDatabase() {
         try! database.write {
             database.delete(getResultsFromDB())
+        }
+    }
+    
+    func deleteFromDb(objects: [T]) {
+        try! database.write {
+            database.delete(objects)
         }
     }
     

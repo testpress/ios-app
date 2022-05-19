@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,13 +21,13 @@
         <!--Test Report View Controller-->
         <scene sceneID="vCU-C2-AKm">
             <objects>
-                <viewController storyboardIdentifier="TestReportViewController" id="3z8-h4-idf" customClass="TestReportViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TestReportViewController" modalPresentationStyle="fullScreen" id="3z8-h4-idf" customClass="TestReportViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JQM-uy-KcH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Pg-wp-aPm">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="lqf-5e-oVb"/>
                                 </constraints>
@@ -44,13 +43,13 @@
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxf-PL-fVq">
-                                <rect key="frame" x="0.0" y="64" width="320" height="646"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="588"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDB-Vf-fVH">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FY5-iF-FPQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="586"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="643"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLm-8B-qy5">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
@@ -60,16 +59,16 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ofz-f3-BtV">
-                                                        <rect key="frame" x="0.0" y="20" width="320" height="53"/>
+                                                        <rect key="frame" x="0.0" y="20" width="320" height="110"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exam Title  Exam Title Exam Title Exam Title Exam Title Exam Title Exam Title " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9V-zB-dkG">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="28.5"/>
+                                                                <rect key="frame" x="2.5" y="0.0" width="315" height="85.5"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="24"/>
                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJ5-6x-sca">
-                                                                <rect key="frame" x="145" y="38.5" width="30.5" height="14.5"/>
+                                                                <rect key="frame" x="145" y="95.5" width="30.5" height="14.5"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                                 <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -77,14 +76,14 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hh-ZV-5Qx">
-                                                        <rect key="frame" x="0.0" y="93" width="320" height="10"/>
+                                                        <rect key="frame" x="0.0" y="150" width="320" height="10"/>
                                                         <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="10" id="mCQ-9g-tBM"/>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Q9v-jO-pyz">
-                                                        <rect key="frame" x="0.0" y="123" width="320" height="463"/>
+                                                        <rect key="frame" x="0.0" y="180" width="320" height="463"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="V9q-U9-wUA">
                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
@@ -1026,7 +1025,7 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D74-Wv-07Z">
-                                <rect key="frame" x="0.0" y="702" width="320" height="98"/>
+                                <rect key="frame" x="0.0" y="644" width="320" height="156"/>
                                 <subviews>
                                     <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cw2-cS-8Rg">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="8"/>
@@ -1036,7 +1035,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rEr-EX-qb1">
-                                        <rect key="frame" x="15" y="18" width="290" height="70"/>
+                                        <rect key="frame" x="15" y="18" width="290" height="128"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="oHa-OG-knM">
                                                 <rect key="frame" x="0.0" y="0.0" width="290" height="30"/>
@@ -1106,6 +1105,27 @@
                                                     <constraint firstAttribute="height" constant="30" id="eKV-NR-ww8"/>
                                                 </constraints>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fp-Iv-UDG">
+                                                <rect key="frame" x="0.0" y="80" width="290" height="48"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zMy-ns-bte">
+                                                        <rect key="frame" x="0.0" y="0.0" width="290" height="48"/>
+                                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
+                                                        <inset key="contentEdgeInsets" minX="0.0" minY="7" maxX="0.0" maxY="5"/>
+                                                        <state key="normal" title="SOLUTIONS" image="ic_lock_outline_18pt">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="showShareScreen:" destination="3z8-h4-idf" eventType="touchUpInside" id="vKA-Yz-F1C"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -1117,7 +1137,6 @@
                                     <constraint firstAttribute="bottom" secondItem="rEr-EX-qb1" secondAttribute="bottom" constant="10" id="WG3-BF-SHN"/>
                                     <constraint firstAttribute="trailing" secondItem="Cw2-cS-8Rg" secondAttribute="trailing" id="fLy-lU-CbH"/>
                                     <constraint firstItem="rEr-EX-qb1" firstAttribute="leading" secondItem="D74-Wv-07Z" secondAttribute="leading" constant="15" id="gJR-pq-T55"/>
-                                    <constraint firstAttribute="height" constant="98" id="lVr-ET-uLV"/>
                                     <constraint firstItem="Cw2-cS-8Rg" firstAttribute="top" secondItem="D74-Wv-07Z" secondAttribute="top" id="oEF-pd-Wq9"/>
                                 </constraints>
                             </view>
@@ -1143,6 +1162,7 @@
                     <connections>
                         <outlet property="accuracy" destination="BK1-03-BbW" id="TJw-XC-hru"/>
                         <outlet property="analyticsButton" destination="KCg-y8-gbZ" id="6nG-Ja-bOt"/>
+                        <outlet property="analyticsButtonLayout" destination="7XX-ai-BYG" id="Dc0-wG-qC9"/>
                         <outlet property="bottomShadowView" destination="Cw2-cS-8Rg" id="z9W-sx-4so"/>
                         <outlet property="contentView" destination="FY5-iF-FPQ" id="5Nf-9r-MMQ"/>
                         <outlet property="correct" destination="v6C-Ot-5g8" id="ck5-iU-lDn"/>
@@ -1159,6 +1179,9 @@
                         <outlet property="score" destination="7L9-hk-Iam" id="9jz-9t-hWO"/>
                         <outlet property="scoreLayout" destination="ayV-R2-20x" id="Czr-er-UOc"/>
                         <outlet property="scrollView" destination="Vxf-PL-fVq" id="uUV-3y-Thy"/>
+                        <outlet property="shareButton" destination="zMy-ns-bte" id="KJZ-yg-cEs"/>
+                        <outlet property="shareButtonLayout" destination="7fp-Iv-UDG" id="AYC-8c-nOz"/>
+                        <outlet property="solutionButtonLayout" destination="oHa-OG-knM" id="U4a-Y7-ieK"/>
                         <outlet property="solutionsButton" destination="Y79-Ub-iWU" id="kGM-oR-M8t"/>
                         <outlet property="timeAnalyticsButton" destination="Uox-a4-XPT" id="mt4-0p-whr"/>
                         <outlet property="timeTaken" destination="qpT-WA-WvI" id="3SG-tR-mOo"/>
@@ -1174,7 +1197,7 @@
         <!--Solutions-->
         <scene sceneID="zwm-o3-szz">
             <objects>
-                <viewController storyboardIdentifier="ReviewSlidingViewController" id="7nr-DQ-qDd" customClass="ReviewSlidingViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewSlidingViewController" modalPresentationStyle="fullScreen" id="7nr-DQ-qDd" customClass="ReviewSlidingViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oYG-1N-NUp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1200,9 +1223,9 @@
         <!--Navigation Controller-->
         <scene sceneID="EVg-xI-N1M">
             <objects>
-                <navigationController storyboardIdentifier="ReviewNavigationViewController" id="dxf-Xr-dqr" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ReviewNavigationViewController" modalPresentationStyle="fullScreen" id="dxf-Xr-dqr" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oVT-H4-q2N">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1216,13 +1239,13 @@
         <!--Review Solutions View Controller-->
         <scene sceneID="Utx-Ef-CY9">
             <objects>
-                <viewController storyboardIdentifier="ReviewSolutionsViewController" id="r0V-bB-YTq" customClass="ReviewSolutionsViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewSolutionsViewController" modalPresentationStyle="fullScreen" id="r0V-bB-YTq" customClass="ReviewSolutionsViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="B0A-gc-1ef">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRi-gR-yd2">
-                                <rect key="frame" x="0.0" y="20" width="320" height="498"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qv7-B6-GTS">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
@@ -1328,7 +1351,7 @@
         <!--Review Questions View Controller-->
         <scene sceneID="r4h-U6-W1u">
             <objects>
-                <viewController storyboardIdentifier="ReviewQuestionsViewController" id="7Is-wM-CBe" customClass="ReviewQuestionsViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewQuestionsViewController" modalPresentationStyle="fullScreen" id="7Is-wM-CBe" customClass="ReviewQuestionsViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yc6-8H-a6r">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1341,14 +1364,14 @@
                                 </constraints>
                             </view>
                             <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPX-Su-VgR">
-                                <rect key="frame" x="0.0" y="20" width="320" height="8"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="8"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="8" id="tHp-TJ-d2P"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1qI-Ny-he3">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -1385,7 +1408,7 @@
         <!--Review Question List View Controller-->
         <scene sceneID="nQd-uY-U9x">
             <objects>
-                <viewController storyboardIdentifier="ReviewQuestionListViewController" id="nOy-ST-vke" customClass="ReviewQuestionListViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewQuestionListViewController" modalPresentationStyle="fullScreen" id="nOy-ST-vke" customClass="ReviewQuestionListViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yCm-0Z-cNI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1430,7 +1453,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PjU-XF-VZS">
-                                <rect key="frame" x="0.0" y="20" width="320" height="498"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -1459,16 +1482,16 @@
         <!--Overall Subject Analytics View Controller-->
         <scene sceneID="aFg-6n-evy">
             <objects>
-                <viewController storyboardIdentifier="OverallSubjectAnalyticsViewController" id="9pB-U4-xq5" customClass="OverallSubjectAnalyticsViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OverallSubjectAnalyticsViewController" modalPresentationStyle="fullScreen" id="9pB-U4-xq5" customClass="OverallSubjectAnalyticsViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bTw-PL-r7F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOC-Gm-4pr">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGX-Lf-REP">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dvu-M9-KyJ">
                                                 <rect key="frame" x="0.0" y="20" width="300" height="336"/>
@@ -1591,7 +1614,7 @@
         <!--Individual Subject Analytics View Controller-->
         <scene sceneID="Y5E-cC-tAs">
             <objects>
-                <tableViewController storyboardIdentifier="IndividualSubjectAnalyticsViewController" id="mcw-lO-jBK" customClass="IndividualSubjectAnalyticsViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="IndividualSubjectAnalyticsViewController" modalPresentationStyle="fullScreen" id="mcw-lO-jBK" customClass="IndividualSubjectAnalyticsViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ts6-JT-Rts">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1601,7 +1624,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JLl-la-hQe" id="0IE-78-ntr">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="54.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="SOl-WO-BcP">
@@ -1648,7 +1671,7 @@
                                             </subviews>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tre-QI-Ill">
-                                            <rect key="frame" x="0.0" y="53.5" width="320" height="1"/>
+                                            <rect key="frame" x="0.0" y="54" width="320" height="1"/>
                                             <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="4Kz-X2-Aff"/>
@@ -1670,14 +1693,14 @@
                                 <rect key="frame" x="0.0" y="83" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IZJ-M8-nYD" id="THv-ol-98L">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="61.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cdV-gt-ebq">
-                                            <rect key="frame" x="10" y="20" width="310" height="21.5"/>
+                                            <rect key="frame" x="10" y="20" width="310" height="22"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uncategorized" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G2h-fS-PK6">
-                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="21.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="cb0-jP-MZp"/>
                                                     </constraints>
@@ -1713,7 +1736,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_navigate_next" translatesAutoresizingMaskIntoConstraints="NO" id="leY-9L-sKI">
-                                                    <rect key="frame" x="286" y="0.0" width="24" height="21.5"/>
+                                                    <rect key="frame" x="286" y="0.0" width="24" height="22"/>
                                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                                                     <constraints>
@@ -1742,17 +1765,17 @@
                                 <rect key="frame" x="0.0" y="145" width="320" height="271"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1uY-d0-37L" id="fje-Nc-GXP">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="270.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="271"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mx-ht-U5Q">
-                                            <rect key="frame" x="20" y="15" width="280" height="21.5"/>
+                                            <rect key="frame" x="20" y="15" width="280" height="22"/>
                                             <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="18"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="BVo-4d-Bm5">
-                                            <rect key="frame" x="20" y="51.5" width="264" height="39"/>
+                                            <rect key="frame" x="20" y="52" width="264" height="39"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="GiF-5y-Gkn">
                                                     <rect key="frame" x="0.0" y="0.0" width="132" height="39"/>
@@ -1835,7 +1858,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bsA-1r-gK7">
-                                            <rect key="frame" x="20" y="100.5" width="280" height="170"/>
+                                            <rect key="frame" x="20" y="101" width="280" height="170"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WUl-AK-J29">
                                                     <rect key="frame" x="30" y="0.0" width="220.5" height="170"/>
@@ -1849,7 +1872,7 @@
                                                             </constraints>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OvD-1K-tTk">
-                                                            <rect key="frame" x="170" y="52" width="50.5" height="66.5"/>
+                                                            <rect key="frame" x="170" y="51.5" width="50.5" height="67.5"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uDg-Zq-MDE">
                                                                     <rect key="frame" x="0.0" y="0.0" width="50.5" height="16"/>
@@ -1893,10 +1916,10 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EbD-ZR-t3r">
-                                                                    <rect key="frame" x="0.0" y="51.5" width="50.5" height="15"/>
+                                                                    <rect key="frame" x="0.0" y="51.5" width="50.5" height="16"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evw-zc-KLN">
-                                                                            <rect key="frame" x="0.0" y="2.5" width="10" height="10"/>
+                                                                            <rect key="frame" x="0.0" y="3" width="10" height="10"/>
                                                                             <color key="backgroundColor" red="1" green="0.63921568627450975" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="10" id="cm9-cZ-bPb"/>
@@ -1904,7 +1927,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 %" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tP9-OE-5L0">
-                                                                            <rect key="frame" x="20" y="0.0" width="30.5" height="15"/>
+                                                                            <rect key="frame" x="20" y="0.0" width="30.5" height="15.5"/>
                                                                             <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="13"/>
                                                                             <color key="textColor" red="1" green="0.63921568627450975" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -1963,13 +1986,13 @@
         <!--Subject Analytics Tab View Controller-->
         <scene sceneID="inM-6O-yHo">
             <objects>
-                <viewController storyboardIdentifier="SubjectAnalyticsTabViewController" extendedLayoutIncludesOpaqueBars="YES" id="Zin-dW-ZPA" customClass="SubjectAnalyticsTabViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SubjectAnalyticsTabViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="Zin-dW-ZPA" customClass="SubjectAnalyticsTabViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jf4-4Y-jMi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qzJ-ZH-DBQ">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="0Rt-9n-md5"/>
                                 </constraints>
@@ -1985,7 +2008,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOz-Xx-JC4">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nBm-6N-5uq" customClass="ButtonBarView" customModule="XLPagerTabStrip">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
@@ -2009,7 +2032,7 @@
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQA-We-K6l" userLabel="Container View">
-                                        <rect key="frame" x="0.0" y="56" width="320" height="448"/>
+                                        <rect key="frame" x="0.0" y="56" width="320" height="468"/>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2053,13 +2076,13 @@
         <!--Time Analytics Table View Controller-->
         <scene sceneID="0wS-7L-ls4">
             <objects>
-                <viewController storyboardIdentifier="TimeAnalyticsTableViewController" id="DFv-J4-tdU" customClass="TimeAnalyticsTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TimeAnalyticsTableViewController" modalPresentationStyle="fullScreen" id="DFv-J4-tdU" customClass="TimeAnalyticsTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H9X-UC-Odx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Y1-0P-pwV">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="apm-YX-Fj1"/>
                                 </constraints>
@@ -2075,7 +2098,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHO-SL-XKh">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bsr-9I-eRW">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
@@ -2130,14 +2153,14 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="7Gr-I5-MMx" customClass="LUExpandableTableView" customModule="LUExpandableTableView">
-                                        <rect key="frame" x="0.0" y="56" width="320" height="448"/>
+                                        <rect key="frame" x="0.0" y="56" width="320" height="468"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimeAnalyticsQuestionCell" rowHeight="62" id="bev-r1-igj" customClass="TimeAnalyticsQuestionCell" customModule="ios_app" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="55.5" width="320" height="62"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bev-r1-igj" id="SiH-eS-hKI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="61.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -2180,7 +2203,7 @@
         <!--Trophies Achieved View Controller-->
         <scene sceneID="nVI-o1-f8C">
             <objects>
-                <viewController storyboardIdentifier="TrophiesAchievedViewController" id="zmG-CW-brg" customClass="TrophiesAchievedViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrophiesAchievedViewController" modalPresentationStyle="fullScreen" id="zmG-CW-brg" customClass="TrophiesAchievedViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BmR-Sx-Abm"/>
                         <viewControllerLayoutGuide type="bottom" id="xXq-eL-c1Z"/>
@@ -2190,10 +2213,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="517-8O-Ws1">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNe-Fo-6TG">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="w8y-Z7-8Fe">
                                                 <rect key="frame" x="25" y="0.0" width="270" height="519"/>
@@ -2248,7 +2271,7 @@ You’ve earned</string>
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trophies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnn-5w-WMq">
-                                                                                <rect key="frame" x="2.5" y="85.5" width="95" height="28.5"/>
+                                                                                <rect key="frame" x="2" y="85.5" width="95" height="28.5"/>
                                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="24"/>
                                                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -2375,21 +2398,22 @@ You’ve earned</string>
         </scene>
     </scenes>
     <resources>
-        <image name="accurate_flat_icon" width="33" height="36"/>
-        <image name="clock_flat_icon" width="33" height="36"/>
-        <image name="correct_flat_icon" width="28" height="36"/>
-        <image name="cutoff_flat_icon" width="128" height="128"/>
-        <image name="ic_navigate_before" width="24" height="24"/>
-        <image name="ic_navigate_before_36pt" width="36" height="36"/>
-        <image name="ic_navigate_next" width="24" height="24"/>
-        <image name="incorrect_flat_icon" width="28" height="36"/>
-        <image name="percentage_badge_flat_icon" width="128" height="128"/>
+        <image name="accurate_flat_icon" width="66" height="72"/>
+        <image name="clock_flat_icon" width="66" height="72"/>
+        <image name="correct_flat_icon" width="56" height="72"/>
+        <image name="cutoff_flat_icon" width="400.69564819335938" height="400.69564819335938"/>
+        <image name="ic_lock_outline_18pt" width="36" height="36"/>
+        <image name="ic_navigate_before" width="48" height="48"/>
+        <image name="ic_navigate_before_36pt" width="72" height="72"/>
+        <image name="ic_navigate_next" width="48" height="48"/>
+        <image name="incorrect_flat_icon" width="56" height="72"/>
+        <image name="percentage_badge_flat_icon" width="384" height="384"/>
         <image name="percentile_flat_icon" width="128" height="128"/>
         <image name="questions_flat_icon" width="128" height="128"/>
         <image name="rank_flat_icon" width="108" height="96"/>
         <image name="score_flat_icon" width="102" height="108"/>
         <image name="stopwatch_flat_icon" width="128" height="128"/>
         <image name="total_marks_flat_icon" width="128" height="128"/>
-        <image name="trophy_flat_icon" width="55" height="64"/>
+        <image name="trophy_flat_icon" width="110" height="128"/>
     </resources>
 </document>

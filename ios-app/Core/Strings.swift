@@ -26,7 +26,7 @@
 import Foundation
 
 struct Strings {
-    
+
     static let YES = "Yes"
     static let NO = "No"
     static let OK = "OK"
@@ -97,6 +97,7 @@ struct Strings {
     
     static let ENTER_VALID_EMAIL = "Please enter a valid email address"
     static let ENTER_VALID_USERNAME = "Use only alphabets or numbers"
+    static let ENTER_VALID_PHONE_NUMBER = "Please enter valid phone number"
     static let PASSWORD_MUST_HAVE_SIX_CHARACTERS = "Require at least 6 digits"
     static let PASSWORD_NOT_MATCH = "Passwords not matching"
     
@@ -127,7 +128,7 @@ struct Strings {
     static let SETTINGS = "Settings"
     
     static let LEADERBOARD = "LEADERBOARD"
-    static let TARGETS_AND_THREADS = "TARGETS / THREADS"
+    static let TARGETS_AND_THREATS = "TARGETS / THREATS"
     
     static let EXAM_ENDED = "This exam has ended"
     static let CAN_START_EXAM_ONLY_AFTER = "You can attempt this exam only after \n"
@@ -181,5 +182,10 @@ struct Strings {
     static let NOTE = "Note:"
     static let CASE_INSENSITIVE = "Answers are case insensitive"
     static let CASE_SENSITIVE = "Answers are case sensitive"
+    
+    static let PARALLEL_LOGIN_RESTRICTION_INFO = "Note : Admin has restricted parallel logged in devices to "
+    static let ACCOUNT_LOCKED = "Account Locked"
+    static let MAX_LOGIN_EXCEEDED_ERROR_MESSAGE = "Your account has been locked as it has exceeded maximum devices it can be used."
+    static let ACCOUNT_UNLOCK_INFO = "Your account will automatically get unlocked within "
     
 }
