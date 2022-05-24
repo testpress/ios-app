@@ -26,6 +26,10 @@
 import Lottie
 import PDFReader
 import UIKit
+import Alamofire
+import RealmSwift
+import MarqueeLabel
+
 
 class AttachmentDetailViewController: UIViewController {
     
@@ -46,7 +50,6 @@ class AttachmentDetailViewController: UIViewController {
     @IBOutlet weak var bookmarkAnimationContainer: UIView!
     
     var content: Content!
-    var attachmentUrl: URL!
     var bookmark: Bookmark!
     var position: Int!
     var loading: Bool = false
@@ -56,11 +59,25 @@ class AttachmentDetailViewController: UIViewController {
     var moveAnimationView: LOTAnimationView!
     var removeAnimationView: LOTAnimationView!
     let alertController = UIUtils.initProgressDialog(message: Strings.LOADING + "\n\n")
+    var timer: Timer?
+    var watermarkLabel: MarqueeLabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIUtils.setButtonDropShadow(downloadAttachmentButton)
+        initializeBookmarkHelper()
+        showTitleAndDescription()
+        addShadowToButtons()
+
+        if (content.attachment?.isRenderable == true) {
+            showViewButton()
+        } else {
+            showDownloadButton()
+        }
+    }
+    
+    func initializeBookmarkHelper() {
         bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = self
         bookmarkAnimationContainer.isHidden = true
         if Constants.BOOKMARKS_ENABLED {
             if bookmark == nil {
@@ -69,7 +86,7 @@ class AttachmentDetailViewController: UIViewController {
                 animationView.center.y = animationView.center.y - 5
                 animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
                 bookmarkOptionsLayout.isHidden = true
-                if content.bookmarkId != nil {
+                if content.bookmarkId.value != nil {
                     bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
                     bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")
                 }
@@ -88,39 +105,45 @@ class AttachmentDetailViewController: UIViewController {
             bookmarkOptionsLayout.isHidden = true
             bookmarkButton.isHidden = true
         }
-        displayAttachment()
     }
     
-    func displayAttachment() {
+    func showTitleAndDescription() {
         contentTitle.text = content.attachment!.title
         let attachment = content.attachment!
-        if attachment.description != nil && attachment.description != "" {
-            contentDescription.text = attachment.description
+        if attachment.attachmentDescription != nil && attachment.attachmentDescription != "" {
+            contentDescription.text = attachment.attachmentDescription
         } else {
             contentDescription.isHidden = true
         }
-        attachmentUrl = URL(string: content.attachment!.attachmentUrl!)!
-        if attachmentUrl.pathExtension != "pdf" {
-            viewAttachmentButton.isHidden = true
-        } else {
-            UIUtils.setButtonDropShadow(viewAttachmentButton)
-            viewAttachmentButton.isHidden = false
-        }
-        viewDidLayoutSubviews()
+    }
+    
+    func addShadowToButtons() {
+        UIUtils.setButtonDropShadow(viewAttachmentButton)
+        UIUtils.setButtonDropShadow(downloadAttachmentButton)
+    }
+    
+    func showViewButton() {
+        viewAttachmentButton.isHidden = false
+    }
+    
+    
+    func showDownloadButton() {
+        downloadAttachmentButton.isHidden = false
     }
     
     @IBAction func viewAttachment(_ sender: UIButton) {
+        var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.scheme == "http" {
             attachmentUrl = URL(string: "https://" + attachmentUrl.host! + attachmentUrl.path
-                + "?" + attachmentUrl.query!)
+                + "?" + attachmentUrl.query!)!
         }
         present(alertController, animated: false, completion: {
-            self.loadPdf()
+            self.loadPdf(url: attachmentUrl)
         })
     }
     
-    func loadPdf() {
-        let pdfDocument = PDFDocument(url: attachmentUrl!)
+    func loadPdf(url: URL) {
+        let pdfDocument = PDFDocument(url: url)
         alertController.dismiss(animated: false, completion: {
             self.displayPdf(pdfDocument)
         })
@@ -134,15 +157,37 @@ class AttachmentDetailViewController: UIViewController {
             let pdfController = PDFViewController.createNew(with: pdfDocument!,
                                                             title: content.attachment!.title,
                                                             backButton: backButton)
-            
             pdfController.navigationItem.rightBarButtonItem = nil
+            watermarkLabel = initializeWatermark(view: pdfController.view)
+            pdfController.view.addSubview(watermarkLabel!)
+            startTimerToMoveWatermarkPosition()
             let navigationController = UINavigationController(rootViewController: pdfController)
             present(navigationController, animated: true)
             createContentAttempt()
         }
     }
     
+    private func startTimerToMoveWatermarkPosition() {
+        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
+    }
+    
+    private func initializeWatermark(view: UIView) -> MarqueeLabel {
+        let watermarkLabel = MarqueeLabel.init(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: 20), duration: 8.0, fadeLength: 0.0)
+        watermarkLabel.text = KeychainTokenItem.getAccount().padding(toLength: Int((view.frame.width)/2), withPad: " ", startingAt: 0)
+        watermarkLabel.numberOfLines = 1
+        return watermarkLabel
+    }
+    
+    @objc func moveWatermarkPosition() {
+        watermarkLabel?.frame.origin.y = CGFloat(Int.random(in: 0..<Int(self.view.frame.height)))
+    }
+
+    deinit {
+        self.timer?.invalidate()
+    }
+    
     @IBAction func downloadAttachment(_ sender: UIButton) {
+        var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         UIApplication.shared.openURL(attachmentUrl)
         createContentAttempt()
     }
@@ -169,16 +214,16 @@ class AttachmentDetailViewController: UIViewController {
         bookmarkHelper.onClickMoveButton(bookmark: bookmark)
     }
     
-    @IBAction func removeBookmark() {
+    @IBAction func onRemoveBookmark() {
         bookmarkHelper.onClickRemoveButton(bookmark: bookmark)
     }
     
     @IBAction func bookmark(_ sender: UIButton) {
-        bookmarkHelper.onClickBookmarkButton(bookmarkId: content.bookmarkId)
+        bookmarkHelper.onClickBookmarkButton(bookmarkId: content?.bookmarkId.value)
     }
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
-        content.bookmarkId = bookmarkId
+        content.bookmarkId = RealmOptional<Int>(bookmarkId)
         if bookmarkId != nil {
             bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
             bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")
@@ -214,6 +259,50 @@ class AttachmentDetailViewController: UIViewController {
     
     @objc func back() {
         dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+extension AttachmentDetailViewController: BookmarkDelegate {
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = content.id
+        parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
+        return parameters
+    }
+    
+    func updateBookmark(bookmarkId: Int?) {
+        self.udpateBookmarkButtonState(bookmarkId: bookmarkId)
+    }
+    
+    func onClickMoveButton() {
+        self.moveButton.isHidden = true
+        self.moveAnimationView.isHidden = false
+    }
+    
+    func displayRemoveButton() {
+        self.removeAnimationView.isHidden = true
+        self.removeButton.isHidden = false
+    }
+    
+    func onClickBookmarkButton() {
+        self.bookmarkButton.isHidden = true
+        self.bookmarkAnimationContainer.isHidden = false
+    }
+    
+    func removeBookmark() {
+        self.removeButton.isHidden = true
+        self.removeAnimationView.isHidden = false
+    }
+    
+    func displayBookmarkButton() {
+        self.bookmarkAnimationContainer.isHidden = true
+        self.bookmarkButton.isHidden = false
+    }
+    
+    func displayMoveButton() {
+        self.moveAnimationView.isHidden = true
+        self.moveButton.isHidden = false
     }
     
 }

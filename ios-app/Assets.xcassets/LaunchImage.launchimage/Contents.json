@@ -39,6 +39,15 @@
     {
       "extent" : "full-screen",
       "idiom" : "iphone",
+      "subtype" : "736h",
+      "filename" : "LaunchImage-1242@3x~iphone6s-landscape_2208x1242.png",
+      "minimum-system-version" : "8.0",
+      "orientation" : "landscape",
+      "scale" : "3x"
+    },
+    {
+      "extent" : "full-screen",
+      "idiom" : "iphone",
       "subtype" : "667h",
       "filename" : "Launch_Scrn6P.png",
       "minimum-system-version" : "8.0",

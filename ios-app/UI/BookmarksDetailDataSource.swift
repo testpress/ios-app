@@ -51,7 +51,7 @@ class BookmarksDetailDataSource: NSObject, UIPageViewControllerDataSource {
             return viewController
         } else if let content = bookmark.bookmarkedObject as? Content {
             content.attemptsUrl = Constants.BASE_URL + TPEndpoint.getContents.urlPath
-                + "\(content.id!)" + TPEndpoint.attemptsPath.urlPath
+                + "\(content.id)" + TPEndpoint.attemptsPath.urlPath
             
             if content.attachment != nil {
                 let storyboard =
@@ -61,6 +61,16 @@ class BookmarksDetailDataSource: NSObject, UIPageViewControllerDataSource {
                 
                 viewController.content = content
                 viewController.bookmark = bookmark
+                viewController.position = index
+                return viewController
+            } else if content.video != nil {
+                let storyboard =
+                    UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.VIDEO_CONTENT_VIEW_CONTROLLER) as! VideoContentViewController
+                
+                viewController.content = content
+                viewController.contents = [content]
                 viewController.position = index
                 return viewController
             } else {
@@ -82,6 +92,8 @@ class BookmarksDetailDataSource: NSObject, UIPageViewControllerDataSource {
             return (viewController as! AttachmentDetailViewController).position
         } else if viewController is BookmarkedHtmlContentViewController {
             return (viewController as! BookmarkedHtmlContentViewController).position
+        } else if (viewController is VideoContentViewController) {
+            return (viewController as! VideoContentViewController).position
         }
         return -1
     }

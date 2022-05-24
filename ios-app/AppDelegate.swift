@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import FacebookCore
+import FBSDKCoreKit
 import IQKeyboardManagerSwift
 import RealmSwift
 import UIKit
@@ -35,6 +35,7 @@ import UserNotifications
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
+import AVKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -45,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var emptyView: EmptyView!
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         
         // Register for remote notifications. This shows a permission dialog on first run.
@@ -80,20 +81,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UINavigationBar.appearance().barTintColor = Colors.getRGB(Colors.PRIMARY)
         UIBarButtonItem.appearance().tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
         UINavigationBar.appearance().titleTextAttributes =
-            [NSAttributedStringKey.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
-        
-        let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
-            as? UIView
-        
-        statusBar?.backgroundColor = Colors.getRGB(Colors.PRIMARY)
-        
+            [NSAttributedString.Key.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
         // Set tab bar item custom offset only on iPhone
         if !UIUtils.isiPad() {
             UITabBarItem.appearance().titlePositionAdjustment =
                 UIOffset(horizontal: 0, vertical: -5)
         }
+        do {
+            if #available(iOS 10.0, *) {
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            }
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error)
+        }
         
-        SDKApplicationDelegate.shared.application(application,
+        ApplicationDelegate.shared.application(application,
                                                   didFinishLaunchingWithOptions: launchOptions)
         
         IQKeyboardManager.sharedManager().enable = true
@@ -120,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             ]
         }
         
-        let config = Realm.Configuration(schemaVersion: 4)
+        let config = Realm.Configuration(schemaVersion: 23)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         
@@ -133,14 +136,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
+        Zoom.enableFullScreenForMeetingWaitView()
         return true
     }
     
     
     func application(_ application: UIApplication, open url: URL,
-                     options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+                     options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         
-        return SDKApplicationDelegate.shared.application(application, open: url, options: options)
+        return ApplicationDelegate.shared.application(application, open: url, options: options)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -294,4 +298,9 @@ extension UIApplication {
         }
         return controller
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
 }

@@ -42,7 +42,7 @@ class TimeAnalyticsHeaderViewCell: LUExpandableTableViewSectionHeader {
         
         self.attemptItem = attemptItem
         self.parentViewController = parentViewController
-        questionIndex.text = String(attemptItem.index!)
+        questionIndex.text = String(attemptItem.index)
         yourTime.text = getFormattedValue(attemptItem.duration)
         bestTime.text = getFormattedValue(attemptItem.bestDuration)
         averageTime.text = getFormattedValue(attemptItem.averageDuration)
@@ -68,8 +68,8 @@ class TimeAnalyticsHeaderViewCell: LUExpandableTableViewSectionHeader {
             color = Colors.MATERIAL_GREEN;
             // If question is attempted & any of the selected option is incorrect then set red color
             for attemptAnswer in (attemptItem.question?.answers)! {
-                if attemptItem.selectedAnswers.contains(attemptAnswer.id!) &&
-                    !(attemptAnswer.isCorrect!) {
+                if attemptItem.selectedAnswers.contains(attemptAnswer.id) &&
+                    !(attemptAnswer.isCorrect) {
                     color = Colors.MATERIAL_RED
                 }
             }

@@ -30,12 +30,15 @@ class ContentsTableViewCell: UITableViewCell {
     @IBOutlet weak var contentName: UILabel!
     @IBOutlet weak var contentViewCell: UIView!
     @IBOutlet weak var thumbnailImage: UIImageView!
+    @IBOutlet weak var videoDurationLabel: UILabel!
+    @IBOutlet weak var thumbnailImageContainer: UIView!
     @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var questionsCount: UILabel!
     @IBOutlet weak var examDetailsLayout: UIStackView!
     @IBOutlet weak var attemptedTick: UIImageView!
     @IBOutlet weak var lock: UIView!
     @IBOutlet weak var contentLayout: UIStackView!
+    @IBOutlet weak var questionsCountStack: UIStackView!
     
     var parentViewController: ContentsTableViewController! = nil
     var position: Int!
@@ -45,34 +48,112 @@ class ContentsTableViewCell: UITableViewCell {
         self.position = position
         let content = parentViewController.items[position]
         contentName.text = content.name
-        thumbnailImage.kf.setImage(with: URL(string: content.image!),
-                                   placeholder: Images.PlaceHolder.image)
-        
+        thumbnailImage.addRoundedCorners(radius: 3.0)
+        lock.addRoundedCorners(radius: 9.0)
+        addThumbnail(content: content)
+
         if content.exam != nil {
             duration.text = content.exam?.duration
-            questionsCount.text = String(content.exam!.numberOfQuestions!)
+            questionsCount.text = String(content.exam!.numberOfQuestions)
             examDetailsLayout.isHidden = false
+
+        } else if content.video != nil {
+            thumbnailImageContainer.addSubview(videoDurationLabel)
+            videoDurationLabel.addRoundedCorners(radius: 2.0)
+            videoDurationLabel.isHidden = false
+            videoDurationLabel.text = content.video?.duration
+            examDetailsLayout.isHidden = true
         } else {
             examDetailsLayout.isHidden = true
         }
-        if content.isLocked || !content.hasStarted {
+        if content.isLocked || content.isScheduled || content.hasEnded{
             lock.isHidden = false
             contentLayout.alpha = 0.5
             thumbnailImage.alpha = 0.5
             attemptedTick.isHidden = true
+            
+            if (content.isScheduled) {
+                showScheduledDate()
+            }
+            
+            if (content.hasEnded) {
+                showExpiryInfo()
+            }
+
         } else {
             lock.isHidden = true
             contentLayout.alpha = 1
             thumbnailImage.alpha = 1
             attemptedTick.isHidden = content.attemptsCount == 0
         }
+        thumbnailImageContainer.addSubview(attemptedTick)
         let tapRecognizer = UITapGestureRecognizer(target: self,
                                                    action: #selector(self.onItemClick))
         
         contentViewCell.addGestureRecognizer(tapRecognizer)
     }
     
+    func addThumbnail(content: Content) {
+        if (content.coverImageSmall != nil) {
+            thumbnailImage.isHidden = false
+            thumbnailImage.contentMode = .scaleToFill
+            thumbnailImage.kf.setImage(with: URL(string: content.coverImageSmall),
+                                       placeholder: Images.PlaceHolder.image)
+        } else {
+            thumbnailImageContainer.backgroundColor = UIColor.lightGray
+            thumbnailImage.isHidden = true
+
+            let frontimgview = UIImageView(image: getThumbnailIcon(content: content))
+            frontimgview.frame = CGRect(x: (thumbnailImageContainer.frame.width / 2) - 13, y: (thumbnailImageContainer.frame.height / 2) - 13, width: 32, height: 32)
+            thumbnailImageContainer.addSubview(frontimgview)
+        }
+    }
+    
+    func getThumbnailIcon(content: Content) -> UIImage {
+        if (content.video != nil) {
+            return Images.VideoIconWhite.image
+        } else if (content.videoConference != nil) {
+            return Images.LiveClassIcon.image
+        } else if (content.htmlObject != nil) {
+            return Images.NotesIconWhite.image
+        } else if (content.attachment != nil) {
+            return Images.AttachmentIconWhite.image
+        }
+        return Images.ExamIconWhite.image
+    }
+    
+    func showScheduledDate() {
+        let content = parentViewController.items[position]
+
+        if content.isScheduled {
+            examDetailsLayout.isHidden = false
+            let date = FormatDate.format(dateString: content.start)
+            duration.text = "This will be available on \(date)"
+            questionsCountStack.isHidden = true
+        }
+    }
+    
+    func showExpiryInfo() {
+        let content = parentViewController.items[position]
+        examDetailsLayout.isHidden = false
+        let date = FormatDate.format(dateString: content.end)
+        duration.text = "This content is expired on \(date)"
+        questionsCountStack.isHidden = true
+    }
+    
+    func addOverlay(on view: UIView) {
+        let overlay: UIView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        overlay.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.1)
+        view.addSubview(overlay)
+    }
+    
     @objc func onItemClick() {
+        let content = parentViewController.items[position]
+        
+        if (content.isScheduled || content.isLocked || content.hasEnded) {
+            return
+        }
+        
         let viewController = parentViewController.storyboard?.instantiateViewController(
             withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
             as! ContentDetailPageViewController
@@ -84,4 +165,12 @@ class ContentsTableViewCell: UITableViewCell {
         parentViewController.present(viewController, animated: true, completion: nil)
     }
     
+}
+
+
+extension UIView {
+    func addRoundedCorners(radius: Float) {
+        layer.cornerRadius = 3.0
+        self.clipsToBounds = true
+    }
 }
