@@ -38,7 +38,7 @@ class ReviewSolutionsViewController: BaseQuestionsPageViewController {
         return ReviewQuestionsDataSource(attemptItems)
     }
     
-    override func getAttemptItems() -> Array<AttemptItem > {
+    override func getSortedAttemptItems() -> Array<AttemptItem > {
         return self.attemptItems
     }
     
