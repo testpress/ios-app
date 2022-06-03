@@ -38,6 +38,10 @@ class ReviewSolutionsViewController: BaseQuestionsPageViewController {
         return ReviewQuestionsDataSource(attemptItems)
     }
     
+    override func getAttemptItems() -> Array<AttemptItem > {
+        return self.attemptItems
+    }
+    
 }
 
 extension ReviewSolutionsViewController: QuestionsPageViewDelegate {
