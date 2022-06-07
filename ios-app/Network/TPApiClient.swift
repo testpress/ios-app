@@ -26,6 +26,7 @@
 import Alamofire
 import Device
 import UIKit
+import RealmSwift
 
 enum AuthProvider: String {
     case TESTPRESS
@@ -69,7 +70,7 @@ class TPApiClient {
     static func request(dataRequest: DataRequest,
                         completion: @escaping (String?, TPError?) -> Void) {
         
-        dataRequest.responseString() { response in
+        dataRequest.responseString(queue: nil, encoding: String.Encoding.utf8) { response in
             #if DEBUG
                 print(NSString(data: response.request?.httpBody ?? Data(),
                                encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
@@ -427,12 +428,23 @@ class TPApiClient {
     static func saveAnswer(selectedAnswer: [Int],
                            review: Bool,
                            shortAnswer: String?,
+                           gapFilledResponses: List<GapFillResponse>?,
                            endpointProvider: TPEndpointProvider,
+                           attemptItem: AttemptItem,
                            completion: @escaping (AttemptItem?, TPError?) -> Void) {
         
         var parameters: Parameters = [ "selected_answers": selectedAnswer, "review": review ]
         if let shortAnswer = shortAnswer {
             parameters["short_text"] = shortAnswer
+        }
+        
+        if attemptItem.question.isEssayType {
+            parameters["essay_text"] = attemptItem.localEssayText
+        }
+                
+        if let gapFilledResponses = gapFilledResponses {
+            let vals : [[String: String]] = gapFilledResponses.map{["order": String($0.order), "answer": $0.answer]}
+            parameters["gap_fill_responses"] = vals
         }
         apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
             json, error in
@@ -467,6 +479,24 @@ class TPApiClient {
             }
             completion(testpressResponse, error)
         })
+    }
+    
+    static func getSSOUrl(completion: @escaping(SSOUrl?, TPError?) -> Void) {
+        apiCall(endpointProvider: TPEndpointProvider(.getSSOUrl),
+                completion: {
+                    json, error in
+                    var sso_detail: SSOUrl? = nil
+                    if let json = json {
+                        sso_detail = TPModelMapper<SSOUrl>().mapFromJSON(json: json)
+                        debugPrint(sso_detail?.url ?? "Error")
+                        guard sso_detail != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(sso_detail, error)
+        }
+        )
     }
     
     static func getProfile(endpointProvider: TPEndpointProvider,
