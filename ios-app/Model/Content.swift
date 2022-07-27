@@ -38,6 +38,7 @@ class Content: DBModel {
     @objc dynamic var modified: String = ""
     @objc dynamic var chapterUrl: String = ""
     @objc dynamic var attemptsUrl: String = ""
+    @objc dynamic var examStartUrl: String = ""
     @objc dynamic var chapterSlug: String = ""
     @objc dynamic var chapterId: Int = -1
     @objc dynamic var attemptsCount: Int = 0
@@ -137,6 +138,7 @@ class Content: DBModel {
         coverImageMedium <- map["cover_image_medium"]
         hasEnded <- map["has_ended"]
         end <- map["end"]
+        examStartUrl <- map["exam_start_url"]
     }
     
     override public static func primaryKey() -> String? {
