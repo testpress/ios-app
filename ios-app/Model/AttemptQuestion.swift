@@ -61,6 +61,10 @@ class AttemptQuestion: DBModel {
         get {questionType == .ESSAY}
     }
     
+    var isAudioType: Bool {
+        get {questionType == .AUDIO}
+    }
+    
     public  func clone() -> AttemptQuestion {
         let newAttemptItem = AttemptQuestion()
         newAttemptItem.id = id
@@ -117,5 +121,6 @@ public enum QuestionType: String {
     case FILE_TYPE = "F"
     case MATCH = "M"
     case NESTED = "T"
+    case AUDIO = "A"
     case UNKNOWN = "Unknown"
 }

@@ -316,6 +316,10 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             html += getEssayMarks()
         }
         
+        if attemptQuestion.isAudioType {
+            html += getAudioTypeAnswerHtml()
+        }
+                
         
         if isShortAnswerType || isNumericalType {
             html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
@@ -398,6 +402,14 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             WebViewUtils.getReviewHeadingTags(headingText: Strings.YOUR_ANSWER) +
             (attemptItem.essayText ?? "") +
         "</div>"
+    }
+    
+    func getAudioTypeAnswerHtml() -> String {
+        let audioHtml = attemptItem.files.map { file in
+            "<audio controls><source src='\(file.url)' type='audio/wav' /></audio><a href='\(file.url)'>Download</a>"
+        }.joined(separator: "<br />")
+        return "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+        WebViewUtils.getReviewHeadingTags(headingText: Strings.YOUR_ANSWER) + audioHtml + "</div>"
     }
     
     func getEssayMarks() -> String {
