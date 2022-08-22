@@ -481,6 +481,24 @@ class TPApiClient {
         })
     }
     
+    static func getSSOUrl(completion: @escaping(SSOUrl?, TPError?) -> Void) {
+        apiCall(endpointProvider: TPEndpointProvider(.getSSOUrl),
+                completion: {
+                    json, error in
+                    var sso_detail: SSOUrl? = nil
+                    if let json = json {
+                        sso_detail = TPModelMapper<SSOUrl>().mapFromJSON(json: json)
+                        debugPrint(sso_detail?.url ?? "Error")
+                        guard sso_detail != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(sso_detail, error)
+        }
+        )
+    }
+    
     static func getProfile(endpointProvider: TPEndpointProvider,
                            completion: @escaping(User?, TPError?) -> Void) {
         
