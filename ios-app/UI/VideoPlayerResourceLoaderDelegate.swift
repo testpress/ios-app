@@ -51,7 +51,7 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
     }
     
     func setEncryptionKeyResponse(loadingRequest: AVAssetResourceLoadingRequest, data: Data) {
-        loadingRequest.contentInformationRequest?.contentType = AVStreamingKeyDeliveryPersistentContentKeyType
+        loadingRequest.contentInformationRequest?.contentType = AVStreamingKeyDeliveryContentKeyType
         loadingRequest.contentInformationRequest?.isByteRangeAccessSupported = true
         loadingRequest.contentInformationRequest?.contentLength = Int64(data.count)
         loadingRequest.dataRequest?.respond(with: data)
