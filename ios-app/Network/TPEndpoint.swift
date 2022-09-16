@@ -77,6 +77,7 @@ enum TPEndpoint {
     case logoutDevices
     case userVideos
     case dashboard
+    case getSSOUrl
 
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -135,7 +136,8 @@ enum TPEndpoint {
              .unRegisterDevice,
              .verifyPhoneNumber,
              .logoutDevices,
-             .logout:
+             .logout,
+             .getSSOUrl:
             return .post
         case .put:
             return .put
@@ -230,6 +232,8 @@ enum TPEndpoint {
             return "/api/v2.4/user_videos/"
         case .dashboard:
             return "/api/v2.4/dashboard/"
+        case .getSSOUrl:
+            return "/api/v2.3/presigned_sso_url/"
         default:
             return ""
         }

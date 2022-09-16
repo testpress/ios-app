@@ -51,10 +51,24 @@ class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate
     }
     
     func setEncryptionKeyResponse(loadingRequest: AVAssetResourceLoadingRequest, data: Data) {
-        loadingRequest.contentInformationRequest?.contentType = AVStreamingKeyDeliveryPersistentContentKeyType
+        loadingRequest.contentInformationRequest?.contentType = getContentType(contentInformationRequest: loadingRequest.contentInformationRequest)
         loadingRequest.contentInformationRequest?.isByteRangeAccessSupported = true
         loadingRequest.contentInformationRequest?.contentLength = Int64(data.count)
         loadingRequest.dataRequest?.respond(with: data)
         loadingRequest.finishLoading()
+    }
+    
+    func getContentType(contentInformationRequest: AVAssetResourceLoadingContentInformationRequest?) -> String{
+        var contentType = AVStreamingKeyDeliveryPersistentContentKeyType
+                 
+        if #available(iOS 11.2, *) {
+            if let allowedContentType = contentInformationRequest?.allowedContentTypes?.first{
+                if allowedContentType == AVStreamingKeyDeliveryContentKeyType{
+                    contentType = AVStreamingKeyDeliveryContentKeyType
+                }
+            }
+        }
+        
+        return contentType
     }
 }

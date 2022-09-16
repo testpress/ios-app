@@ -152,7 +152,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         if (post.commentsUrl == nil) {
             return
         }
-        
+
         getPreviousCommentsPager().resources.removeAll()
         getPreviousCommentsPager().next(completion: {
             items, error in

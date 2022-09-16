@@ -217,7 +217,7 @@ class TestReportViewController: UIViewController {
             contentDetailPageViewController as! ContentDetailPageViewController
         
         contentDetailPageViewController.dismiss(animated: false, completion: {
-            if Double(self.attempt.percentage)! >= self.exam.passPercentage {
+            if Double(self.attempt.percentage) ?? 0 >= self.exam.passPercentage {
                 let currentIndex = contentDetailPageViewController.getCurrentIndex()
                 let nextContent =
                     contentDetailPageViewController.contents[currentIndex]

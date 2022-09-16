@@ -132,7 +132,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                         })
                         return
                     }
-                    self.attemptItems = self.attemptItems.sorted(by: { $0.order < $1.order })
+                    self.attemptItems = self.getSortedAttemptItems()
                     if self.questionsPageViewDelegate?.questionsDidLoad != nil {
                         self.questionsPageViewDelegate?.questionsDidLoad!()
                     }
@@ -154,6 +154,10 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                 }
             }
         )
+    }
+    
+    func getSortedAttemptItems() -> Array<AttemptItem > {
+        return self.attemptItems.sorted(by: { $0.order < $1.order })
     }
     
     // MARK: - UIPageViewController delegate methods
