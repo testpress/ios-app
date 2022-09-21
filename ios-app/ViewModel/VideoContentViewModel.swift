@@ -33,7 +33,7 @@ class VideoContentViewModel {
         var description = ""
  
         if !(content?.contentDescription?.isEmpty ?? true) {
-            description = "\(String(describing: content.contentDescription)) \n"
+            description = content.contentDescription!
         }
         return description
     }
