@@ -1461,7 +1461,7 @@
 					};
 					2F26ADE11E8249D70031E6F4 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = BHAB7LC35Y;
+						DevelopmentTeam = 24RUG46VZ3;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -2143,7 +2143,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = BHAB7LC35Y;
+				DEVELOPMENT_TEAM = 24RUG46VZ3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2153,7 +2153,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.20.0;
+				MARKETING_VERSION = 1.21.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2171,7 +2171,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = BHAB7LC35Y;
+				DEVELOPMENT_TEAM = 24RUG46VZ3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2181,7 +2181,7 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.20.0;
+				MARKETING_VERSION = 1.21.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
