@@ -78,7 +78,7 @@ BaseDBViewController<Chapter> {
             filterQuery += String(format: " AND parentId=0")
         }
         
-        return DBManager<Chapter>().getItemsFromDB(filteredBy:filterQuery, byKeyPath: "order")
+        return DBManager<Chapter>().getItemsFromDB(filteredBy:filterQuery, byKeyPath: "order").detached()
     }
     
     func showItemsFromDB() {
