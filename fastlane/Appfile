@@ -1,0 +1,8 @@
+app_identifier("in.testpress.demo") # The bundle identifier of your app
+apple_id("testpress.in@gmail.com") # Your Apple Developer Portal username
+
+itc_team_id("118655114") # App Store Connect Team ID
+team_id("BHAB7LC35Y") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
