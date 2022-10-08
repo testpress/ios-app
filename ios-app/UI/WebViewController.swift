@@ -23,6 +23,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
     var backButton = UIButton(type: .system)
     var navItem: UINavigationItem?
     var refreshControl:UIRefreshControl?
+    var showBackButton: Bool = false
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.current.orientation.isLandscape {
@@ -49,7 +50,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
         } else {
             self.loadWebView()
         }
-    
+        self.setStatusBarColor()
     }
 
     func initializeLoadingIndicator() {
@@ -195,7 +196,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
 
     func onFinishLoadingWebView() {
         activityIndicator?.stopAnimating()
-        if (webView.canGoBack) {
+        if (webView.canGoBack || showBackButton) {
             navItem?.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         } else {
             navItem?.leftBarButtonItem = nil

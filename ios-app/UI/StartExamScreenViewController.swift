@@ -188,18 +188,30 @@ class StartExamScreenViewController: UIViewController {
     }
     
     func gotoTestEngine() {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
-        let slideMenuController = storyboard.instantiateViewController(withIdentifier:
-            Constants.TEST_ENGINE_NAVIGATION_CONTROLLER) as! UINavigationController
-        
-        let viewController =
-            slideMenuController.viewControllers.first as! TestEngineSlidingViewController
-        
-        viewController.exam = exam
-        viewController.attempt = attempt
-        viewController.courseContent = content
-        viewController.contentAttempt = contentAttempt
-        present(slideMenuController, animated: true, completion: nil)
+        if exam.hasAudioQuestions || exam.templateType == 12 {
+            let viewController = WebViewController()
+            viewController.url = "&next=\(self.content.examStartUrl)/"
+            viewController.useSSOLogin = true
+            viewController.shouldOpenLinksWithinWebview = true
+            viewController.title = exam.title
+            viewController.displayNavbar = true
+            viewController.showBackButton = true
+            present(viewController, animated: true, completion: nil)
+        } else {
+            let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+            let slideMenuController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TEST_ENGINE_NAVIGATION_CONTROLLER) as! UINavigationController
+            
+            let viewController =
+                slideMenuController.viewControllers.first as! TestEngineSlidingViewController
+            
+            viewController.exam = exam
+            viewController.attempt = attempt
+            viewController.courseContent = content
+            viewController.contentAttempt = contentAttempt
+            present(viewController, animated: true, completion: nil)
+        }
+
     }
     
     // Set frames of the views in this method to support both portrait & landscape view

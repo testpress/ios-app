@@ -112,6 +112,9 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
                 loadContent()
             } else {
                 setFirstViewController()
+                if (contents[getCurrentIndex()].examId != -1) {
+                    self.loadContent()
+                }
             }
         }
 
