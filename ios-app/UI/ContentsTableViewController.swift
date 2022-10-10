@@ -60,13 +60,6 @@ class ContentsTableViewController: BaseDBTableViewControllerV2<ContentsListRespo
         super.onLoadFinished(items: items.sorted(by: { $0.order < $1.order }))
     }
     
-    override func loadItems() {
-        let filterQuery = String(format: "chapterId=%d", chapterId)
-        let contentsFromDB = DBManager<Content>().getItemsFromDB(filteredBy: filterQuery, byKeyPath: "order")
-        DBManager<Content>().deleteFromDb(objects: contentsFromDB)
-        super.loadItems()
-    }
-    
     override func getItemsFromDb() -> [Content] {
         let filterQuery = String(format: "chapterId=%d", chapterId)
         return DBManager<Content>().getItemsFromDB(filteredBy: filterQuery, byKeyPath: "order").detached()

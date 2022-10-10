@@ -14,6 +14,7 @@ import RealmSwift
 class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePagedTableViewController<T, L> where L:Object {
     
     var firstCallBack: Bool = true // On firstCallBack load modified items if items already exists
+    var data : [L] = []
 
     override func viewWillAppear(_ animated: Bool) {
         items = getItemsFromDb()
@@ -31,7 +32,7 @@ class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePag
     }
     
     func getItemsFromDb() -> [L] {
-        return DBManager<L>().getItemsFromDB()
+        return DBManager<L>().getItemsFromDB().detached()
     }
     
     
@@ -49,9 +50,16 @@ class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePag
                 return
             }
             
-            let items = Array(items!.values)
-            DBManager<L>().addData(objects: items)
-            self.onLoadFinished(items: self.getItemsFromDb())
+            self.data.append(contentsOf: items!.values)
+            
+            if self.pager.hasMore {
+                self.loadingItems = false
+                self.loadItems()
+            } else {
+                DBManager<L>().deleteAllFromDatabase()
+                DBManager<L>().addData(objects: self.data)
+                self.onLoadFinished(items: self.getItemsFromDb())
+            }
         })
     }
 }
