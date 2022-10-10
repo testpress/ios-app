@@ -14,7 +14,7 @@ import RealmSwift
 class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePagedTableViewController<T, L> where L:Object {
     
     var firstCallBack: Bool = true // On firstCallBack load modified items if items already exists
-    var response : [L] = []
+    var networkItems : [L] = []
 
     override func viewWillAppear(_ animated: Bool) {
         items = getItemsFromDb().detached()
@@ -42,21 +42,21 @@ class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePag
         }
         loadingItems = true
         pager.next(completion: {
-            response, error in
+            items, error in
             if let error = error {
                 debugPrint(error.message ?? "No error")
                 debugPrint(error.kind)
                 self.handleError(error)
                 return
             }
-            self.response.append(contentsOf: response!.values)
+            self.networkItems.append(contentsOf: items!.values)
             
             if self.pager.hasMore {
                 self.loadingItems = false
                 self.loadItems()
             } else {
                 self.deleteExistingItemsFromDB()
-                DBManager<L>().addData(objects: self.response)
+                DBManager<L>().addData(objects: self.networkItems)
                 self.onLoadFinished(items: self.getItemsFromDb())
             }
         })
