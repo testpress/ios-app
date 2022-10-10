@@ -14,10 +14,10 @@ import RealmSwift
 class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePagedTableViewController<T, L> where L:Object {
     
     var firstCallBack: Bool = true // On firstCallBack load modified items if items already exists
-    var data : [L] = []
+    var response : [L] = []
 
     override func viewWillAppear(_ animated: Bool) {
-        items = getItemsFromDb()
+        items = getItemsFromDb().detached()
         super.viewWillAppear(animated)
     }
     
@@ -32,7 +32,7 @@ class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePag
     }
     
     func getItemsFromDb() -> [L] {
-        return DBManager<L>().getItemsFromDB().detached()
+        return DBManager<L>().getItemsFromDB()
     }
     
     
@@ -42,24 +42,27 @@ class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePag
         }
         loadingItems = true
         pager.next(completion: {
-            items, error in
+            response, error in
             if let error = error {
                 debugPrint(error.message ?? "No error")
                 debugPrint(error.kind)
                 self.handleError(error)
                 return
             }
-            
-            self.data.append(contentsOf: items!.values)
+            self.response.append(contentsOf: response!.values)
             
             if self.pager.hasMore {
                 self.loadingItems = false
                 self.loadItems()
             } else {
-                DBManager<L>().deleteAllFromDatabase()
-                DBManager<L>().addData(objects: self.data)
+                self.deleteExistingItemsFromDB()
+                DBManager<L>().addData(objects: self.response)
                 self.onLoadFinished(items: self.getItemsFromDb())
             }
         })
+    }
+    
+    func deleteExistingItemsFromDB() {
+        DBManager<L>().deleteFromDb(objects: getItemsFromDb())
     }
 }

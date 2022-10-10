@@ -62,7 +62,7 @@ class ContentsTableViewController: BaseDBTableViewControllerV2<ContentsListRespo
     
     override func getItemsFromDb() -> [Content] {
         let filterQuery = String(format: "chapterId=%d", chapterId)
-        return DBManager<Content>().getItemsFromDB(filteredBy: filterQuery, byKeyPath: "order").detached()
+        return DBManager<Content>().getItemsFromDB(filteredBy: filterQuery, byKeyPath: "order")
     }
     
     func newAttemptCreated() {
