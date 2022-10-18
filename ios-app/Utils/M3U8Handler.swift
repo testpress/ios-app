@@ -22,28 +22,41 @@ class M3U8Handler {
     
     private func clean(data: Data, baseUrl: URL) -> Data {
         var modifiedData = data
-        modifiedData = self.fakeEncryptionKeyURL(m3u8Data: modifiedData)
+        modifiedData = self.fakeEncryptionKeyURL(baseURL:baseUrl, m3u8Data: modifiedData)
         modifiedData = self.modifyChunkedVideoURLs(url: baseUrl, m3u8Data: modifiedData)
         return modifiedData
     }
     
-    private func fakeEncryptionKeyURL(m3u8Data: Data) -> Data {
+    private func fakeEncryptionKeyURL(baseURL: URL, m3u8Data: Data) -> Data {
         /*
          We are changing schema of the key URL so that we can intercept it.
          */
-        var m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
+         var m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
         
         if m3u8DataString.contains("EXT-X-KEY:METHOD=AES-128") {
-            let keyURLStartIndex = m3u8DataString.range(of: "URI=\"")!.upperBound
-            let keyURLEndIndex = m3u8DataString[keyURLStartIndex...].range(of: "\"")!.lowerBound
-            let keyUrl = m3u8DataString[keyURLStartIndex..<keyURLEndIndex]
-            let modifiedKeyURL = keyUrl.replacingOccurrences(of: "https://", with: "fakekeyhttps://")
+            let keyUrl = self.getKeyURL(m3u8DataString: m3u8DataString)
+            let absoluteKeyURL = self.getAbsoluteURL(parentURL: baseURL, keyURL: keyUrl)
+            let modifiedKeyURL = absoluteKeyURL.replacingOccurrences(of: "https://", with: "fakekeyhttps://")
             m3u8DataString = m3u8DataString.replacingOccurrences(
                 of: keyUrl,
                 with: modifiedKeyURL
             )
         }
         return m3u8DataString.data(using: .utf8)!
+    }
+    
+    private func getKeyURL(m3u8DataString: String) -> Substring{
+        let keyURLStartIndex = m3u8DataString.range(of: "URI=\"")!.upperBound
+        let keyURLEndIndex = m3u8DataString[keyURLStartIndex...].range(of: "\"")!.lowerBound
+        return m3u8DataString[keyURLStartIndex..<keyURLEndIndex]
+    }
+    
+    private func getAbsoluteURL(parentURL: URL, keyURL: Substring)-> String{
+        if keyURL.starts(with: "https://"){
+            return String(keyURL)
+        }
+        
+        return "https://\(parentURL.host!)/\(parentURL.deletingLastPathComponent().relativeString)/\(keyURL)"
     }
     
     private func modifyChunkedVideoURLs(url: URL, m3u8Data: Data) -> Data {
