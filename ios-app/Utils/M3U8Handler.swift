@@ -56,7 +56,7 @@ class M3U8Handler {
             return String(keyURL)
         }
         
-        return "https://\(parentURL.host!)/\(parentURL.deletingLastPathComponent().relativeString)/\(keyURL)"
+        return "https://\(parentURL.host!)\(parentURL.deletingLastPathComponent().relativePath)/\(keyURL)"
     }
     
     private func modifyChunkedVideoURLs(url: URL, m3u8Data: Data) -> Data {
