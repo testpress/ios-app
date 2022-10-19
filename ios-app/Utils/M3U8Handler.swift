@@ -34,9 +34,8 @@ class M3U8Handler {
         var m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
         
         if m3u8DataString.contains("EXT-X-KEY:METHOD=AES-128") {
-            let keyUrl = self.getKeyURL(m3u8DataString: m3u8DataString)
-            let absoluteKeyURL = self.getAbsoluteURL(parentURL: baseURL, keyURL: keyUrl)
-            let modifiedKeyURL = absoluteKeyURL.replacingOccurrences(of: "https://", with: "fakekeyhttps://")
+            let keyUrl = self.getKeyURL(parentURL: baseURL, m3u8DataString: m3u8DataString)
+            let modifiedKeyURL = self.constructAbsoluteURL(parentURL: baseURL, keyURL: keyUrl).replacingOccurrences(of: "https://", with: "fakekeyhttps://")
             m3u8DataString = m3u8DataString.replacingOccurrences(
                 of: keyUrl,
                 with: modifiedKeyURL
@@ -45,18 +44,20 @@ class M3U8Handler {
         return m3u8DataString.data(using: .utf8)!
     }
     
-    private func getKeyURL(m3u8DataString: String) -> Substring{
+    private func getKeyURL(m3u8DataString: String) -> String{
         let keyURLStartIndex = m3u8DataString.range(of: "URI=\"")!.upperBound
         let keyURLEndIndex = m3u8DataString[keyURLStartIndex...].range(of: "\"")!.lowerBound
-        return m3u8DataString[keyURLStartIndex..<keyURLEndIndex]
+        return String(m3u8DataString[keyURLStartIndex..<keyURLEndIndex])
     }
     
-    private func getAbsoluteURL(parentURL: URL, keyURL: Substring)-> String{
+    private func constructAbsoluteURL(parentURL: URL, keyURL: String)-> String{
         if keyURL.starts(with: "https://"){
-            return String(keyURL)
+            return keyURL
         }
         
-        return "https://\(parentURL.host!)\(parentURL.deletingLastPathComponent().relativePath)/\(keyURL)"
+        let relativePath = parentURL.deletingLastPathComponent().relativePath
+        let path = relativePath + "/" + keyURL
+        return "https://" + parentURL.host! + path
     }
     
     private func modifyChunkedVideoURLs(url: URL, m3u8Data: Data) -> Data {
