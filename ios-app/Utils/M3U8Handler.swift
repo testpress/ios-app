@@ -31,7 +31,7 @@ class M3U8Handler {
         /*
          We are changing schema of the key URL so that we can intercept it.
          */
-         var m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
+        var m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
         
         if m3u8DataString.contains("EXT-X-KEY:METHOD=AES-128") {
             let keyUrl = self.getKeyURL(m3u8DataString: m3u8DataString)
