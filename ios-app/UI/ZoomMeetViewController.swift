@@ -137,6 +137,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
             service.customizeMeetingTitle(meetingTitle)
             let joinParams = MobileRTCMeetingJoinParam()
             joinParams.userName = KeychainTokenItem.getAccount()
+            joinParams.customerKey = KeychainTokenItem.getAccount()
             joinParams.meetingNumber = meetingNumber
             joinParams.password = password
             service.joinMeeting(with: joinParams)
