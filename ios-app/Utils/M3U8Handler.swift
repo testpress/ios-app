@@ -34,7 +34,7 @@ class M3U8Handler {
         var m3u8DataString = String(data: m3u8Data, encoding: .utf8)!
         
         if m3u8DataString.contains("EXT-X-KEY:METHOD=AES-128") {
-            let keyUrl = self.getKeyURL(parentURL: baseURL, m3u8DataString: m3u8DataString)
+            let keyUrl = self.getKeyURL(m3u8DataString: m3u8DataString)
             let modifiedKeyURL = self.constructAbsoluteURL(parentURL: baseURL, keyURL: keyUrl).replacingOccurrences(of: "https://", with: "fakekeyhttps://")
             m3u8DataString = m3u8DataString.replacingOccurrences(
                 of: keyUrl,
