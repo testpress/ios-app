@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>493170280361-odd1cv4ijrnhnkhqkhg1vr27o01pjj37.apps.googleusercontent.com</string>
+	<string>1024179395437-23b7j61f0s39il5a3v8ojilufe483i1t.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.493170280361-odd1cv4ijrnhnkhqkhg1vr27o01pjj37</string>
+	<string>com.googleusercontent.apps.1024179395437-23b7j61f0s39il5a3v8ojilufe483i1t</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDeS6nHcn5K9NUxWXkzyJ8lmaiISgVpcCM</string>
+	<string>AIzaSyAiIARnyNIq2QWWijnEYj5pqq8z6pk-2As</string>
 	<key>GCM_SENDER_ID</key>
-	<string>493170280361</string>
+	<string>1024179395437</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>in.testpress.metier</string>
+	<string>com.catking</string>
 	<key>PROJECT_ID</key>
-	<string>testpress-apps-9</string>
+	<string>testpress-catking</string>
 	<key>STORAGE_BUCKET</key>
-	<string>testpress-apps-9.appspot.com</string>
+	<string>testpress-catking.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:493170280361:ios:fce082fe51fd63b59526b8</string>
+	<string>1:1024179395437:ios:62d79e416bc30adde01864</string>
 </dict>
 </plist>
