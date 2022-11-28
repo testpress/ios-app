@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>415377538152-h0h1v05v6vm4vl6ol04vp477rpbm27k3.apps.googleusercontent.com</string>
+	<string>369166839267-3s2jjr80kfghk61o9g1ollhbtegovfb7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.415377538152-h0h1v05v6vm4vl6ol04vp477rpbm27k3</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>415377538152-drkd9sa5addm2ob366bdccbqujrj8ma3.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.369166839267-3s2jjr80kfghk61o9g1ollhbtegovfb7</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBUxq6Fd2-VIuy-6thtbqREdF7jCvY-sfQ</string>
+	<string>AIzaSyBrGyjIOPZLFWspO6rQQ22EdnS9s2HfrWw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>415377538152</string>
+	<string>369166839267</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.eenadupratiba</string>
+	<string>net.epratibha.www</string>
 	<key>PROJECT_ID</key>
-	<string>eea-apps</string>
+	<string>eenadu-pratibha-career-guru</string>
 	<key>STORAGE_BUCKET</key>
-	<string>eea-apps.appspot.com</string>
+	<string>eenadu-pratibha-career-guru.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:415377538152:ios:bbecd99f0ad456260b8fdd</string>
+	<string>1:369166839267:ios:fc1321f9f2933ef6f984d6</string>
 </dict>
 </plist>
