@@ -1724,7 +1724,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c9T-X4-ska" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="630" y="2672.5352112676055"/>
+            <point key="canvasLocation" x="1125" y="2206"/>
         </scene>
         <!--Discussion-->
         <scene sceneID="Pgp-Jd-ASa">
@@ -1734,8 +1734,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSc-lo-MEM">
+                                <rect key="frame" x="0.0" y="44" width="320" height="56"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="p62-bi-PM9">
+                                        <rect key="frame" x="0.0" y="0.0" width="221" height="56"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhd-p1-io2">
+                                        <rect key="frame" x="221" y="0.0" width="99" height="56"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                        </accessibility>
+                                        <state key="normal" image="filter">
+                                            <color key="titleColor" systemColor="labelColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onFilterButtonClick:" destination="Qu3-Qm-bXH" eventType="touchUpInside" id="Cxq-s3-wxY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMY-a7-Yrk">
-                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                                <rect key="frame" x="0.0" y="100" width="320" height="419"/>
                                 <connections>
                                     <segue destination="qlb-mJ-cnn" kind="embed" identifier="ForumListSegue" id="qJ0-zs-S4N"/>
                                 </connections>
@@ -1763,10 +1784,13 @@
                         <constraints>
                             <constraint firstItem="HMY-a7-Yrk" firstAttribute="leading" secondItem="ygy-Tj-Tfk" secondAttribute="leading" id="5cV-aQ-QDe"/>
                             <constraint firstItem="ygy-Tj-Tfk" firstAttribute="bottom" secondItem="0lg-3Y-TnJ" secondAttribute="bottom" constant="15" id="5l7-AF-VUE"/>
-                            <constraint firstItem="HMY-a7-Yrk" firstAttribute="top" secondItem="ygy-Tj-Tfk" secondAttribute="top" id="89R-ZK-PIo"/>
                             <constraint firstItem="HMY-a7-Yrk" firstAttribute="trailing" secondItem="ygy-Tj-Tfk" secondAttribute="trailing" id="8RA-YC-vuE"/>
+                            <constraint firstItem="hSc-lo-MEM" firstAttribute="trailing" secondItem="ygy-Tj-Tfk" secondAttribute="trailing" id="JNa-dL-XbM"/>
                             <constraint firstItem="ygy-Tj-Tfk" firstAttribute="trailing" secondItem="0lg-3Y-TnJ" secondAttribute="trailing" constant="15" id="NGf-sM-cKI"/>
                             <constraint firstItem="HMY-a7-Yrk" firstAttribute="bottom" secondItem="ygy-Tj-Tfk" secondAttribute="bottom" id="Qln-5o-RzI"/>
+                            <constraint firstItem="HMY-a7-Yrk" firstAttribute="top" secondItem="hSc-lo-MEM" secondAttribute="bottom" id="R2b-lT-OUD"/>
+                            <constraint firstItem="hSc-lo-MEM" firstAttribute="leading" secondItem="ygy-Tj-Tfk" secondAttribute="leading" id="f79-4B-uo0"/>
+                            <constraint firstItem="hSc-lo-MEM" firstAttribute="top" secondItem="ygy-Tj-Tfk" secondAttribute="top" id="xIo-QW-du2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Discussion" id="wPv-ek-vLZ">
@@ -1779,6 +1803,7 @@
                     <connections>
                         <outlet property="containerView" destination="HMY-a7-Yrk" id="M8V-hE-E2H"/>
                         <outlet property="postCreateButton" destination="0lg-3Y-TnJ" id="QIa-Ui-weX"/>
+                        <outlet property="searchBar" destination="p62-bi-PM9" id="ppM-yJ-UI0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jzd-o4-hAv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1790,9 +1815,13 @@
             <objects>
                 <tableViewController storyboardIdentifier="ForumTableViewController" id="qlb-mJ-cnn" customClass="ForumTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2j8-UH-VMJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="475"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="419"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <stackView key="tableFooterView" opaque="NO" contentMode="scaleToFill" axis="vertical" id="VDw-wb-ffv">
+                            <rect key="frame" x="0.0" y="171" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </stackView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ForumTableViewCell" rowHeight="115" id="q5o-xK-Hod" customClass="ForumTableViewCell" customModule="ios_app" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="115"/>
@@ -1924,7 +1953,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pXG-pB-Yl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1380" y="3327"/>
+            <point key="canvasLocation" x="1500" y="3830"/>
         </scene>
         <!--Articles-->
         <scene sceneID="Kme-qm-gBh">
@@ -2140,7 +2169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kqS-eJ-0aA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2758.125" y="2440.1408450704225"/>
+            <point key="canvasLocation" x="5750.625" y="2440.1408450704225"/>
         </scene>
         <!--Post Categories Table View Controller-->
         <scene sceneID="wk1-XD-7PZ">
@@ -2205,7 +2234,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bea-LA-KQU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3555" y="2672.5352112676055"/>
+            <point key="canvasLocation" x="6547.5" y="2672.5352112676055"/>
         </scene>
         <!--Articles-->
         <scene sceneID="GuG-Vl-33S">
@@ -2909,7 +2938,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TIU-T8-LRz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-607.5" y="2672.5352112676055"/>
+            <point key="canvasLocation" x="-928" y="2673"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="kDp-0n-DqY">
@@ -2931,7 +2960,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jge-ls-oHe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1297.5" y="2672.5352112676055"/>
+            <point key="canvasLocation" x="-1605" y="2673"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="I4y-b2-d8J">
@@ -2964,6 +2993,7 @@
         <image name="exam_added_icon" width="16" height="16"/>
         <image name="exam_outline" width="24" height="24"/>
         <image name="feed_tab_icon" width="32" height="32"/>
+        <image name="filter" width="24" height="24"/>
         <image name="happy" width="22.5" height="22.5"/>
         <image name="ic_chat_bubble_outline" width="24" height="24"/>
         <image name="ic_edit_white" width="24" height="24"/>
@@ -2985,6 +3015,9 @@
         <image name="tp_exam_icon" width="64" height="64"/>
         <image name="views_icon" width="16" height="11"/>
         <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">

@@ -83,6 +83,7 @@ enum Images: String {
     case NotesIconSmall = "attachment_small"
     case AnalyticsIcon = "analytics"
     case OffersIcon = "offers"
+    case DoubtsIcon = "doubt"
 
     var image: UIImage {
         return UIImage(asset: self)

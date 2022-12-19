@@ -17,7 +17,13 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
     var url: String = ""
     var loading: Bool = false
     var navBar: UINavigationBar?
-    
+    var useSSOLogin: Bool = false
+    var displayNavbar = true
+    var useWebviewNavigation = false
+    var backButton = UIButton(type: .system)
+    var navItem: UINavigationItem?
+    var refreshControl:UIRefreshControl?
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.current.orientation.isLandscape {
             navBar?.frame.size.height = getNavBarHeight() + UIApplication.shared.statusBarFrame.size.height
@@ -29,25 +35,45 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
     override func viewDidLoad() {
         super.viewDidLoad()
         webViewDelegate = self
-        let url = URL(string: self.url)!
-        webView.load(URLRequest(url: url))
+        self.emptyView = EmptyView.getInstance(parentView: view)
+        initializeLoadingIndicator()
+        if (displayNavbar) {
+            self.showNavbar()
+        }
         
-        let screenSize: CGRect = UIScreen.main.bounds
-        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - getNavBarHeight())
-        activityIndicator?.startAnimating()
+        addPullToRefresh()
+        
+        if (useSSOLogin) {
+            self.emptyView.hide()
+            self.fetchSSOURLAndLoadPage();
+        } else {
+            self.loadWebView()
+        }
+    
+    }
 
+    func initializeLoadingIndicator() {
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - getNavBarHeight())
+    }
+
+    func showLoading() {
+        activityIndicator?.startAnimating()
+    }
+    
+    func showNavbar() {
+        let screenSize: CGRect = UIScreen.main.bounds
+        
         navBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: screenSize.width, height: getNavBarHeight()))
         let title = self.title ?? Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
         
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "ic_navigate_before_36pt"), for: .normal)
-        button.addTarget(self, action: #selector(self.goBack), for: .touchUpInside)
-        button.tintColor = .white
+        backButton.setImage(UIImage(named: "ic_navigate_before_36pt"), for: .normal)
+        backButton.addTarget(self, action: #selector(self.goBack), for: .touchUpInside)
+        backButton.tintColor = .white
     
-        let navItem = UINavigationItem(title: title);
-        navItem.leftBarButtonItem = UIBarButtonItem(customView: button)
-        navItem.leftBarButtonItem?.imageInsets =  UIEdgeInsets.init(top: 5, left: 50, bottom: -5, right: 30)
-        navBar!.setItems([navItem], animated: false);
+        navItem = UINavigationItem(title: title);
+        navItem?.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        navItem?.leftBarButtonItem?.imageInsets =  UIEdgeInsets.init(top: 5, left: 50, bottom: -5, right: 30)
+        navBar!.setItems([navItem!], animated: false);
         self.view.addSubview(navBar!);
         navBar!.translatesAutoresizingMaskIntoConstraints = false
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,13 +91,87 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
         view.addConstraint(NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: navBar, attribute: .bottom, multiplier: 1, constant: 0))
     }
     
+    func addPullToRefresh() {
+        self.refreshControl = UIRefreshControl.init()
+        refreshControl!.addTarget(self, action:#selector(refreshControlClicked), for: UIControl.Event.valueChanged)
+        self.webView.scrollView.addSubview(self.refreshControl!)
+    }
+    
+    @objc func refreshControlClicked(){
+        webView.reload()
+        refreshControl?.endRefreshing() 
+    }
+    
     func getNavBarHeight() -> CGFloat {
         return UINavigationController().navigationBar.frame.size.height
     }
     
     @objc func goBack() {
-        self.cleanAllCookies()
-        self.dismiss(animated: true, completion: nil)
+        if (useWebviewNavigation) {
+            if (webView.canGoBack) {
+                webView.goBack()
+            }
+        } else {
+            self.cleanAllCookies()
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
+    func loadWebView() {
+        showLoading()
+        self.emptyView.hide()
+        let url = URL(string: self.url)!
+        webView.load(URLRequest(url: url))
+    }
+    
+    func removeCookies(){
+         let cookieJar = HTTPCookieStorage.shared
+
+         for cookie in cookieJar.cookies! {
+             cookieJar.deleteCookie(cookie)
+         }
+     }
+    
+    
+    func fetchSSOURLAndLoadPage() {
+            activityIndicator?.startAnimating()
+            self.removeCookies()
+            TPApiClient.getSSOUrl(
+                completion: {
+                    sso_detail, error in
+                                                                                                                                                   
+                    if let error = error {
+                        self.showErrorMessage(error: error)
+                        return
+                    }
+                    
+                    self.url = Constants.BASE_URL + sso_detail!.url + self.url
+                    self.loadWebView()
+                    return
+            }
+            )
+        }
+    
+    func showErrorMessage(error: TPError) {
+        debugPrint(error.message ?? "No error")
+        debugPrint(error.kind)
+        var retryButtonText: String?
+        var retryHandler: (() -> Void)?
+        if error.kind == .network {
+            retryButtonText = Strings.TRY_AGAIN
+            retryHandler = {
+                self.emptyView.hide()
+                self.fetchSSOURLAndLoadPage()
+            }
+        }
+        self.activityIndicator.stopAnimating()
+        let (image, title, description) = error.getDisplayInfo()
+        self.emptyView.show(image: image, title: title, description: description,
+                            retryButtonText: retryButtonText, retryHandler: retryHandler)
+        if (self.displayNavbar) {
+            self.showNavbar()
+        }
     }
     
     override func initWebView() {
@@ -95,6 +195,11 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
 
     func onFinishLoadingWebView() {
         activityIndicator?.stopAnimating()
+        if (webView.canGoBack) {
+            navItem?.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        } else {
+            navItem?.leftBarButtonItem = nil
+        }
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
