@@ -118,10 +118,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let config = Realm.Configuration(schemaVersion: 25)
         Realm.Configuration.defaultConfiguration = config
-        let viewController:UIViewController = MainViewController()
-        deleteExistingInstituteSettingsFromDB()
-
+        let viewController:UIViewController
         
+        refreshInstituteSettings()
+        
+        if (!InstituteSettings.isAvailable()) {
+            viewController = MainViewController()
+        } else {
+            viewController = UIUtils.getLoginOrTabViewController()
+        }
+
         if (InstituteSettings.isAvailable()){
             let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
             do {
@@ -138,6 +144,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.makeKeyAndVisible()
         Zoom.enableFullScreenForMeetingWaitView()
         return true
+    }
+    
+    func refreshInstituteSettings(){
+        deleteExistingInstituteSettingsFromDB()
+        UIUtils.fetchInstituteSettings(completion:{ _,_  in })
     }
     
     func deleteExistingInstituteSettingsFromDB(){
