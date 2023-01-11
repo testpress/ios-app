@@ -127,7 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         } else {
             viewController = UIUtils.getLoginOrTabViewController()
         }
-
+        
         if (InstituteSettings.isAvailable()){
             let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
             do {
