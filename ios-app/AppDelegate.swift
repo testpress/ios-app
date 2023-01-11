@@ -120,11 +120,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         
-        refreshInstituteSettings()
         
         if (!InstituteSettings.isAvailable()) {
             viewController = MainViewController()
         } else {
+            UIUtils.fetchInstituteSettings(completion:{ _,_  in })
             viewController = UIUtils.getLoginOrTabViewController()
         }
         
@@ -145,18 +145,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Zoom.enableFullScreenForMeetingWaitView()
         return true
     }
-    
-    func refreshInstituteSettings(){
-        deleteExistingInstituteSettingsFromDB()
-        UIUtils.fetchInstituteSettings(completion:{ _,_  in })
-    }
-    
-    func deleteExistingInstituteSettingsFromDB(){
-        if(InstituteSettings.isAvailable()){
-            DBManager<InstituteSettings>().deleteFromDb(objects: DBManager<InstituteSettings>().getItemsFromDB())
-        }
-    }
-    
     
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
