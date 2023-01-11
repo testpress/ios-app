@@ -51,8 +51,6 @@ class LoginViewController: BaseTextFieldViewController {
         
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         
-        print("disableForgotPassword \(instituteSettings.disableForgotPassword)")
-        
         forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
         
         signUpLayout.isHidden = true
