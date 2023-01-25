@@ -35,13 +35,22 @@ class Video: DBModel {
     @objc dynamic var duration: String = ""
 
     var streams = List<Stream>()
-
     
     func getHlsUrl() -> String {
-        let hls = self.streams.first{
-            $0.format == "HLS"
+        if let hlsURL = self.streams.first(where: {$0.hlsUrl.isNotEmpty}) {
+            return hlsURL.hlsUrl
         }
-        return hls?.url ?? self.url
+        
+        if let hls = self.streams.first(where: {$0.format == "HLS"}) {
+            return hls.url
+        }
+        return self.url
+    }
+    
+    var isDRMProtected: Bool {
+        get {
+            return self.streams.contains(where: {$0.hlsUrl.isNotEmpty})
+        }
     }
     
     override public static func primaryKey() -> String? {
@@ -54,7 +63,7 @@ class Video: DBModel {
         id <- map["id"]
         title <- map["title"]
         embedCode <- map["embed_code"]
-        streams <- map["streams"]
-        duration <- map["duration"]
+        streams <- (map["streams"], ListTransform<Stream>())
+        duration <- (map["duration"], StringTransform())
     }
 }

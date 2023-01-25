@@ -28,6 +28,8 @@ import PDFReader
 import UIKit
 import Alamofire
 import RealmSwift
+import MarqueeLabel
+
 
 class AttachmentDetailViewController: UIViewController {
     
@@ -57,6 +59,8 @@ class AttachmentDetailViewController: UIViewController {
     var moveAnimationView: LOTAnimationView!
     var removeAnimationView: LOTAnimationView!
     let alertController = UIUtils.initProgressDialog(message: Strings.LOADING + "\n\n")
+    var timer: Timer?
+    var watermarkLabel: MarqueeLabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,12 +157,33 @@ class AttachmentDetailViewController: UIViewController {
             let pdfController = PDFViewController.createNew(with: pdfDocument!,
                                                             title: content.attachment!.title,
                                                             backButton: backButton)
-            
             pdfController.navigationItem.rightBarButtonItem = nil
+            watermarkLabel = initializeWatermark(view: pdfController.view)
+            pdfController.view.addSubview(watermarkLabel!)
+            startTimerToMoveWatermarkPosition()
             let navigationController = UINavigationController(rootViewController: pdfController)
             present(navigationController, animated: true)
             createContentAttempt()
         }
+    }
+    
+    private func startTimerToMoveWatermarkPosition() {
+        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
+    }
+    
+    private func initializeWatermark(view: UIView) -> MarqueeLabel {
+        let watermarkLabel = MarqueeLabel.init(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: 20), duration: 8.0, fadeLength: 0.0)
+        watermarkLabel.text = KeychainTokenItem.getAccount().padding(toLength: Int((view.frame.width)/2), withPad: " ", startingAt: 0)
+        watermarkLabel.numberOfLines = 1
+        return watermarkLabel
+    }
+    
+    @objc func moveWatermarkPosition() {
+        watermarkLabel?.frame.origin.y = CGFloat(Int.random(in: 0..<Int(self.view.frame.height)))
+    }
+
+    deinit {
+        self.timer?.invalidate()
     }
     
     @IBAction func downloadAttachment(_ sender: UIButton) {
