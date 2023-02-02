@@ -13,3 +13,9 @@ extension Optional where Wrapped: Collection {
         return self?.isEmpty ?? true
     }    
 }
+
+extension Collection {
+    public var isNotEmpty: Bool {
+        return !self.isEmpty
+    }
+}

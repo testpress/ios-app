@@ -92,7 +92,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     func onMobileRTCAuthReturn(_ returnValue: MobileRTCAuthError) {
-        if (returnValue == MobileRTCAuthError_Success) {
+        if (returnValue == MobileRTCAuthError.success) {
             prepareAndJoin()
         } else {
             refetchAccessTokenAndInitialize()
@@ -137,6 +137,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
             service.customizeMeetingTitle(meetingTitle)
             let joinParams = MobileRTCMeetingJoinParam()
             joinParams.userName = KeychainTokenItem.getAccount()
+            joinParams.customerKey = KeychainTokenItem.getAccount()
             joinParams.meetingNumber = meetingNumber
             joinParams.password = password
             service.joinMeeting(with: joinParams)
@@ -150,12 +151,12 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     func isNoMeetingRunning(meetingState: MobileRTCMeetingState) -> Bool {
-        return meetingState == MobileRTCMeetingState_Idle && !self.hasError
+        return meetingState == MobileRTCMeetingState.idle && !self.hasError
     }
     
     func onMeetingError(_ error: MobileRTCMeetError, message: String?) {
         stopLoading()
-        if error == MobileRTCMeetError_Success {
+        if error == MobileRTCMeetError.success {
             return
         }
         
@@ -168,7 +169,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     func isNetworkError(error: MobileRTCMeetError) -> Bool {
-        return error == MobileRTCMeetError_NetworkError || error == MobileRTCMeetError_ReconnectError
+        return error == MobileRTCMeetError.networkError || error == MobileRTCMeetError.reconnectError
     }
     
     func showErrorScreen(errorMessage: String, allowRetry: Bool = true) {
@@ -204,3 +205,4 @@ class Zoom {
         .fullScreen
     }
 }
+
