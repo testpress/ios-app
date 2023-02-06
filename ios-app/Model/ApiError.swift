@@ -23,3 +23,29 @@ extension ApiError: TestpressModel {
         detail <- map["detail"]
     }
 }
+
+
+public class TestpressAPIError: TestpressModel {
+    var detail: ErrorDetail?
+    
+    public required init?(map: Map) {
+    }
+    
+    public func mapping(map: Map) {
+        detail <- map["detail"]
+    }
+}
+
+
+class ErrorDetail: TestpressModel {
+    var error_code: String?
+    var message: String?
+    
+    public required init?(map: Map) {
+    }
+    
+    public func mapping(map: Map) {
+        error_code <- map["error_code"]
+        message <- map["message"]
+    }
+}

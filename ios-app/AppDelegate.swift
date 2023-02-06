@@ -110,20 +110,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaults.synchronize() // Forces the app to update UserDefaults
         }
         
-        do {
-            Client.shared = try Client(dsn: "https://15420a637fb7479a832b721fb7cc0ceb@sentry.testpress.in/4")
-            try Client.shared?.startCrashHandler()
-        } catch let error {
-            print("\(error)")
-        }
-        
         if (KeychainTokenItem.isExist()) {
             Client.shared?.extra = [
                 "username": KeychainTokenItem.getAccount()
             ]
         }
         
-        let config = Realm.Configuration(schemaVersion: 12)
+        let config = Realm.Configuration(schemaVersion: 25)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         
@@ -133,6 +126,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UIUtils.fetchInstituteSettings(completion:{ _,_  in })
             viewController = UIUtils.getLoginOrTabViewController()
         }
+        
+        if (InstituteSettings.isAvailable()){
+            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+            do {
+                Client.shared = try Client(dsn: instituteSettings.sentryDSN)
+                try Client.shared?.startCrashHandler()
+            } catch let error {
+                print("\(error)")
+            }
+            
+        }
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()

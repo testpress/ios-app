@@ -287,13 +287,21 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 selectedAnswer: Array(attemptItem.savedAnswers),
                 review: attemptItem.currentReview,
                 shortAnswer: attemptItem.currentShortText,
+                gapFilledResponses: attemptItem.gapFillResponses,
                 endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.url),
+                attemptItem: attemptItem,
                 completion: {
                     newAttemptItem, error in
                     if let error = error {
-                        self.showAlert(error: error, retryHandler: {
-                            self.saveAnswer(index: index, completionHandler: completionHandler)
-                        })
+                        
+                        if error.error_code == "max_attemptable_questions_limit_reached" {
+                            self.showMaxQuestionsAttemptedError(error: error)
+                            self.setCurrentQuestion(index: index)
+                        } else {
+                            self.showAlert(error: error, retryHandler: {
+                                self.saveAnswer(index: index, completionHandler: completionHandler)
+                            })
+                        }
                         return
                     }
                     
@@ -307,6 +315,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                         attemptItem.selectedAnswers = newAttemptItem!.selectedAnswers
                         attemptItem.review = newAttemptItem!.review
                         attemptItem.shortText = newAttemptItem!.shortText
+                        attemptItem.essayText = newAttemptItem?.essayText
                     }
                     self.attemptItems[index] = attemptItem;
                     
@@ -321,6 +330,30 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             if completionHandler != nil {
                 completionHandler!()
             }
+        }
+    }
+    
+    func showMaxQuestionsAttemptedError(error: TPError) {
+        var alert: UIAlertController
+        var cancelButtonTitle: String
+        
+        alert = UIAlertController(
+            title: "Maximum questions attempted",
+            message: error.error_detail,
+            preferredStyle: UIAlertController.Style.alert
+        )
+        cancelButtonTitle = "OK"
+        
+        alert.addAction(UIAlertAction(
+            title: cancelButtonTitle, style: UIAlertAction.Style.default
+        ))
+        
+        if showingProgress {
+            hideLoadingProgress(completionHandler: {
+                self.present(alert, animated: true, completion: nil)
+            })
+        } else {
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -525,19 +558,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             return 0
         }
         
-        let dateFormatter = DateFormatter()
-        var inputStringFormat = "HH:mm:ss"
-        if inputString!.contains(".") {
-            inputStringFormat = "HH:mm:ss.SSSSSS"
-        }
-        dateFormatter.dateFormat = inputStringFormat
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        guard let date = dateFormatter.date(from: inputString!) else {
-            assert(false, "no date from string")
-            return 0
-        }
-        
-        return Int(date.timeIntervalSince1970)
+        return inputString?.secondsFromString ?? 0
     }
     
     func startTimer() {
