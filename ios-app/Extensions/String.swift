@@ -14,6 +14,14 @@ extension String {
         guard let range = Range(nsrange, in: self) else { return nil }
         return self[range]
     }
+    
+    var secondsFromString : Int{
+        var n = 3600
+        return self.components(separatedBy: ":").reduce(0) {
+            defer { n /= 60 }
+            return $0 + (Int($1) ?? 0) * n
+        }
+    }
 }
 
 

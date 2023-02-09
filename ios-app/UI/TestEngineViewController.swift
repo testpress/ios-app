@@ -558,19 +558,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             return 0
         }
         
-        let dateFormatter = DateFormatter()
-        var inputStringFormat = "HH:mm:ss"
-        if inputString!.contains(".") {
-            inputStringFormat = "HH:mm:ss.SSSSSS"
-        }
-        dateFormatter.dateFormat = inputStringFormat
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        guard let date = dateFormatter.date(from: inputString!) else {
-            assert(false, "no date from string")
-            return 0
-        }
-        
-        return Int(date.timeIntervalSince1970)
+        return inputString?.secondsFromString ?? 0
     }
     
     func startTimer() {

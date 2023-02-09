@@ -44,6 +44,7 @@ struct Strings {
     static let USERNAME_PASSWORD_NOT_MATCHED = "Username & Password didn't match. Please try again."
     
     static let NO_ITEMS_EXIST = "No items exist"
+    static let NO_CONTENTS_EXIST = "Empty Course"
     static let NO_EXAMS = "Learning can't wait"
     static let NO_AVAILABLE_EXAM = "Looks like you don't have any active exams. Contact administrator for more details."
     static let NO_UPCOMING_EXAM = "Looks like you don't have any upcoming exams."
@@ -53,7 +54,7 @@ struct Strings {
     
     static let NO_COURSES = "Learning can't wait"
     static let NO_COURSE_DESCRIPTION = "Looks like you don’t have any active courses. Kindly contact admin."
-    static let NO_CHAPTER_DESCRIPTION = "Looks like chapters not available. Check back later."
+    static let NO_CHAPTER_DESCRIPTION = "The course doesn't have any chapters or contents"
     static let NO_CONTENT_DESCRIPTION = "Looks like contents not available. Check back later."
     
     static let NO_POSTS = "Breaking news!"

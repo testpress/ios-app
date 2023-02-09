@@ -150,7 +150,7 @@ BaseDBViewController<Chapter> {
     }
     
     func setEmptyText() {
-        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_ITEMS_EXIST,
+        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_CONTENTS_EXIST,
                             description: Strings.NO_CHAPTER_DESCRIPTION)
     }
     
