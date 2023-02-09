@@ -189,20 +189,3 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         meetingService?.delegate = nil
     }
 }
-
-class Zoom {
-    static func enableFullScreenForMeetingWaitView() {
-        if let klass = NSClassFromString("ZPMeetingWaitViewController") {
-            guard let original = class_getInstanceMethod(klass, #selector(getter: UIViewController.modalPresentationStyle)), let replacement = class_getInstanceMethod(self, #selector(getter:Zoom.modalPresentationStyle))
-                else { return }
-            method_exchangeImplementations(original, replacement)
-        } else {
-            debugPrint("No Class named `ZPMeetingWaitViewController`")
-        }
-    }
-    
-    @objc var modalPresentationStyle: UIModalPresentationStyle {
-        .fullScreen
-    }
-}
-
