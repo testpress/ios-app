@@ -124,6 +124,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         meetingSettings?.meetingPasswordHidden = true
         meetingSettings?.meetingInviteHidden = true
         meetingSettings?.meetingShareHidden = true
+        meetingSettings?.meetingInviteUrlHidden = true
     }
     
     func changeRootViewController() {
