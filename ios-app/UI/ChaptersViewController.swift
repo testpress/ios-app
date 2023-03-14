@@ -78,7 +78,7 @@ BaseDBViewController<Chapter> {
             filterQuery += String(format: " AND parentId=0")
         }
         
-        return DBManager<Chapter>().getItemsFromDB(filteredBy:filterQuery, byKeyPath: "order")
+        return DBManager<Chapter>().getItemsFromDB(filteredBy:filterQuery, byKeyPath: "order").detached()
     }
     
     func showItemsFromDB() {
@@ -150,7 +150,7 @@ BaseDBViewController<Chapter> {
     }
     
     func setEmptyText() {
-        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_ITEMS_EXIST,
+        emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_CONTENTS_EXIST,
                             description: Strings.NO_CHAPTER_DESCRIPTION)
     }
     
