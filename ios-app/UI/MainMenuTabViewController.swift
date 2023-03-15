@@ -60,7 +60,11 @@ class MainMenuTabViewController: UITabBarController {
         if (!instituteSettings.activityFeedEnabled) {
             viewControllers?.remove(at: 1)
         }
-
+        
+        if (instituteSettings.isHelpdeskEnabled) {
+            viewControllers?.insert(self.getDoubtsWebViewController(), at: 3)
+        }
+        
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
             let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
             let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
@@ -71,5 +75,17 @@ class MainMenuTabViewController: UITabBarController {
             ]
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters,completion: { _, _ in})
         }
+    }
+    
+    func getDoubtsWebViewController() -> WebViewController {
+        let secondViewController = WebViewController()
+        secondViewController.url = "&next=/tickets/mobile"
+        secondViewController.useWebviewNavigation = true
+        secondViewController.useSSOLogin = true
+        secondViewController.shouldOpenLinksWithinWebview = true
+        secondViewController.title = "Doubts"
+        secondViewController.displayNavbar = true
+        secondViewController.tabBarItem.image = Images.DoubtsIcon.image
+        return secondViewController
     }
 }

@@ -60,6 +60,11 @@ class InstituteSettings: DBModel {
     @objc dynamic var lockoutLimit: String = ""
     @objc dynamic var cooloffTime: String = ""
     @objc dynamic var appToolbarLogo: String = ""
+    @objc dynamic var customRegistrationEnabled: Bool = false
+    @objc dynamic var fairplayCertificateUrl: String = ""
+    @objc dynamic var isHelpdeskEnabled: Bool = false
+    @objc dynamic var sentryDSN: String = ""
+    @objc dynamic var disableForgotPassword: Bool = false
 
     public override func mapping(map: Map) {
         verificationMethod <- map["verification_method"]
@@ -91,7 +96,11 @@ class InstituteSettings: DBModel {
         lockoutLimit <- map["lockout_limit"]
         cooloffTime <- map["cooloff_time"]
         appToolbarLogo <- map["app_toolbar_logo"]
-        name <- map["name"]
+        customRegistrationEnabled <- map["custom_registration_enabled"]
+        fairplayCertificateUrl <- map["fairplay_certificate_url"]
+        isHelpdeskEnabled <- map["is_helpdesk_enabled"]
+        sentryDSN <- map["ios_sentry_dns"]
+        disableForgotPassword <- map["disable_forgot_password"]
     }
     
     override public static func primaryKey() -> String? {

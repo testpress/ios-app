@@ -46,6 +46,7 @@ public class Post {
     var lastCommentedTime: String!
     var participantsCount: Int!
     var coverImageMedium: String?
+    var acceptedAnswer: DiscussionThreadAnswer?
 
     public required init?(map: Map) {
     }
@@ -72,5 +73,6 @@ extension Post: TestpressModel {
         lastCommentedTime <- map["last_commented_time"]
         participantsCount <- map["participants_count"]
         coverImageMedium <- map["cover_image_medium"]
+        acceptedAnswer <- map["accepted_answer"]
     }
 }
