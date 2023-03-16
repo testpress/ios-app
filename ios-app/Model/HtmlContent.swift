@@ -30,11 +30,13 @@ class HtmlContent: DBModel {
     @objc dynamic var id: Int = 0
     @objc dynamic var title: String = ""
     @objc dynamic var textHtml: String = ""
+    @objc dynamic var readTime: String = ""
 
     public override func mapping(map: Map) {
         id <- map["id"]
         title <- map["title"]
         textHtml <- map["text_html"]
+        readTime <- map["read_time"]
     }
     
     override public static func primaryKey() -> String? {

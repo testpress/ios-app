@@ -66,7 +66,7 @@ class ContentsTableViewCell: UITableViewCell {
         } else {
             examDetailsLayout.isHidden = true
         }
-        if content.isLocked || content.isScheduled{
+        if content.isLocked || content.isScheduled || content.hasEnded{
             lock.isHidden = false
             contentLayout.alpha = 0.5
             thumbnailImage.alpha = 0.5
@@ -74,6 +74,10 @@ class ContentsTableViewCell: UITableViewCell {
             
             if (content.isScheduled) {
                 showScheduledDate()
+            }
+            
+            if (content.hasEnded) {
+                showExpiryInfo()
             }
 
         } else {
@@ -129,6 +133,14 @@ class ContentsTableViewCell: UITableViewCell {
         }
     }
     
+    func showExpiryInfo() {
+        let content = parentViewController.items[position]
+        examDetailsLayout.isHidden = false
+        let date = FormatDate.format(dateString: content.end)
+        duration.text = "This content is expired on \(date)"
+        questionsCountStack.isHidden = true
+    }
+    
     func addOverlay(on view: UIView) {
         let overlay: UIView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         overlay.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.1)
@@ -138,7 +150,7 @@ class ContentsTableViewCell: UITableViewCell {
     @objc func onItemClick() {
         let content = parentViewController.items[position]
         
-        if (content.isScheduled) {
+        if (content.isScheduled || content.isLocked || content.hasEnded) {
             return
         }
         

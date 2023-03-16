@@ -21,7 +21,8 @@ class AttemptItemRepository: AttemptRepository {
             selectedAnswer: Array(attemptItem.savedAnswers),
             review: false,
             shortAnswer: attemptItem.currentShortText,
-            endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.getSaveUrl()),
+            gapFilledResponses: List<GapFillResponse>(),
+            endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.getSaveUrl()), attemptItem: attemptItem,
             completion: {
                 newAttemptItem, error in
                 if (newAttemptItem != nil) {

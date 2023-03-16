@@ -69,9 +69,23 @@ class WebViewUtils {
         header += "<link rel='stylesheet' type='text/css' href='icomoon/style.css' />"
         header += "<script src='comments.js'></script>"
         header += "<script src='pseudo_element_selector.js'></script>"
-        header += "<link rel='stylesheet' href='katex/katex.min.css' />"
-        header += "<script src='katex/katex.min.js'></script>"
-        header += "<script src='katex/contrib/auto-render.min.js'></script>"
+        header += "<script type='text/x-mathjax-config'>" +
+            "    MathJax.Hub.Config({" +
+            "      messageStyle: 'none'," +
+            "      tex2jax: {" +
+            "        inlineMath: [['\\\\[','\\\\]'], ['\\\\(','\\\\)']]," +
+            "        displayMath: [ ['$$','$$'] ]," +
+            "        processEscapes: true" +
+            "      }" +
+            "    });" +
+            "</script>" +
+            "<script src='MathJax-2.7.1/MathJax.js?noContrib'></script>" +
+            "<script type='text/x-mathjax-config'>" +
+            "    MathJax.Ajax.config.path['MathJax'] = 'MathJax-2.7.1';" +
+            "    MathJax.Ajax.config.path['Contrib'] = 'MathJax-2.7.1/contrib';" +
+            "</script>" +
+            "<script src='MathJax-2.7.1/config/TeX-MML-AM_CHTML-full.js'></script>" +
+            "<script src='MathJax-2.7.1/extensions/TeX/mhchem3/mhchem.js'></script>"
         return header
     }
     

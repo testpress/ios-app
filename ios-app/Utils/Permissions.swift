@@ -79,6 +79,9 @@ func checkPhotoLibraryAuthorizationStatus(viewController: UIViewController,
     case .denied:
         showGoToSettingsAlert(title: message, viewController: viewController)
         break
+    case .limited:
+        showGoToSettingsAlert(title: message, viewController: viewController)
+        break
     }
 }
 

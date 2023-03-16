@@ -25,15 +25,19 @@
 
 import UIKit
 
-class ForumViewController: UIViewController {
+class ForumViewController: UIViewController, DiscussionFilterDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var postCreateButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     
+    let viewController = ForumFilterViewController()
     var forumTableViewController: ForumTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewController.delegate = self
+        self.searchBar.delegate = self
         UIUtils.setButtonDropShadow(postCreateButton)
     }
     
@@ -56,8 +60,30 @@ class ForumViewController: UIViewController {
         present(viewController, animated: true, completion: nil)
     }
     
+    func applyFilters(value: [String : Any]) {
+        self.forumTableViewController.filter(dict: value)
+    }
+    
+    
     @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
         UIUtils.showProfileDetails(self)
     }
     
+    @IBAction func onFilterButtonClick(_ sender: Any) {
+        present(viewController, animated: true, completion: nil)
+    }
+    
+}
+
+
+extension ForumViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        Debounce<String>.input(searchText, delay: 0.5, current: searchBar.text ?? "") {_ in
+            self.forumTableViewController.search(searchString: searchText)
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.forumTableViewController.search(searchString: "")
+    }
 }

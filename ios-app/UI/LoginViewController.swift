@@ -38,7 +38,8 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var signUpLayout: UIStackView!
     @IBOutlet weak var socialLoginLayout: UIStackView!
     @IBOutlet weak var facebookButtonLayout: UIView!
-        
+    @IBOutlet weak var forgotPasswordButton: UIButton!
+    
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     var instituteSettings: InstituteSettings!
     override func viewDidLoad() {
@@ -49,6 +50,8 @@ class LoginViewController: BaseTextFieldViewController {
         UIUtils.setButtonDropShadow(loginButton)
         
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        
+        forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
         
         signUpLayout.isHidden = true
         if(instituteSettings.allowSignup) {
@@ -151,10 +154,18 @@ class LoginViewController: BaseTextFieldViewController {
     }
     
     @IBAction func showSignUpView() {
-        let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
-            Constants.SIGNUP_VIEW_CONTROLLER) as! SignUpViewController
+        print("Custom : \(instituteSettings.allowSignup)")
         
-        present(tabViewController, animated: true, completion: nil)
+        if (instituteSettings.customRegistrationEnabled) {
+            let webViewController = WebViewController()
+            webViewController.url = Constants.BASE_URL + "/register/"
+            present(webViewController, animated: true, completion: nil)
+        } else {
+            let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
+                Constants.SIGNUP_VIEW_CONTROLLER) as! SignUpViewController
+            
+            present(tabViewController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func showResetPasswordView() {

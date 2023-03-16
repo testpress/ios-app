@@ -220,10 +220,8 @@ extension TimeAnalyticsTableViewController: WKNavigationDelegate {
             js += "var message = {'height': document.body.offsetHeight, 'index': \(webView.tag)};"
             js += "webkit.messageHandlers.callbackHandler.postMessage(message);"
         }
-        let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "MathJaxRender",
-                                                            ofType:"js")!)
         do {
-            return try String(contentsOf: fileURL, encoding: String.Encoding.utf8) + js
+            return js
         } catch let error as NSError {
             debugPrint(error.localizedDescription)
         }

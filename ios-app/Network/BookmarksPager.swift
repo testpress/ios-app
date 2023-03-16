@@ -43,6 +43,7 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
     var contents = [Int: Content]()
     var htmlContents = [Int: HtmlContent]()
     var videos = [Int: Video]()
+    var streams = [Int: [Stream]]()
     var attachments = [Int: Attachment]()
     
     var folder: String!
@@ -104,6 +105,8 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
             response!.results.htmlContents.forEach { htmlContent in
                 htmlContents.updateValue(htmlContent, forKey: htmlContent.id)
             }
+            
+            self.storeStreams()
             response!.results.videos.forEach { video in
                 videos.updateValue(video, forKey: video.id)
             }
@@ -112,6 +115,18 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
             }
         }
         return bookmarks
+    }
+    
+    func storeStreams() {
+        response?.results.streams.forEach { stream in
+            if(streams[stream.videoId] == nil) {
+                streams.updateValue([stream], forKey: stream.videoId)
+            } else {
+                var existingStreams = streams[stream.videoId]
+                existingStreams!.append(stream)
+                streams.updateValue(existingStreams!, forKey: stream.videoId)
+            }
+        }
     }
     
     override func register(resource bookmark: Bookmark) -> Bookmark? {
@@ -139,6 +154,7 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
             let content = contents[bookmark.objectId]!
             if content.videoId != -1 {
                 content.video = videos[content.videoId]!
+                content.video?.streams.append(objectsIn: streams[content.videoId] ?? [])
             } else if content.attachmentId != -1 {
                 content.attachment = attachments[content.attachmentId]!
             } else if content.htmlContentId != -1 {

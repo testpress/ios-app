@@ -15,6 +15,7 @@ import MarqueeLabel
 
 class VideoPlayerView: UIView {
     var url: URL!
+    var drmLicenseURL: String?
     var playerLayer: AVPlayerLayer?
     var player: AVPlayer? = AVPlayer()
     var playerDelegate: VideoPlayerDelegate!
@@ -24,16 +25,20 @@ class VideoPlayerView: UIView {
     var startTime: Float = 0.0
     var currentPlaybackSpeed: Float = 0.0
     var resolutionInfo:[VideoQuality] = [VideoQuality(resolution:"Auto", bitrate: 0)]
-    let videoPlayerResourceLoaderDelegate = VideoPlayerResourceLoaderDelegate()
     var timer: Timer?
     var watermarkLabel: MarqueeLabel?
+    var contentKeySessionDelegate: DRMKeySessionDelegate!
+    var videoPlayerResourceLoaderDelegate: VideoPlayerResourceLoaderDelegate!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    init(frame: CGRect, url: URL) {
+    init(frame: CGRect, url: URL, drmLicenseURL: String?) {
         self.url = url
+        self.drmLicenseURL = drmLicenseURL
+        self.contentKeySessionDelegate = DRMKeySessionDelegate(drmLicenseURL: drmLicenseURL)!
+        self.videoPlayerResourceLoaderDelegate = VideoPlayerResourceLoaderDelegate()
         super.init(frame: frame)
         setupPlayer()
         controlsContainerView.frame = frame
@@ -96,6 +101,14 @@ class VideoPlayerView: UIView {
         let modifiedURL = URLUtils.convertURLScheme(url: url, scheme: "fakehttps")
         let asset = AVURLAsset(url: modifiedURL)
         asset.resourceLoader.setDelegate(videoPlayerResourceLoaderDelegate, queue: DispatchQueue.main)
+        if #available(iOS 11.0, *) {
+            if drmLicenseURL != nil {
+                let contentKeySession = AVContentKeySession(keySystem: AVContentKeySystem.fairPlayStreaming)
+                contentKeySession.setDelegate(contentKeySessionDelegate, queue: DispatchQueue.main)
+                contentKeySession.addContentKeyRecipient(asset)
+                videoPlayerResourceLoaderDelegate.setContentKeySession(contentKeySession: contentKeySession)
+            }
+        }
         return asset
     }
     

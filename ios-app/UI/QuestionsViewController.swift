@@ -26,6 +26,7 @@
 import UIKit
 import WebKit
 import RealmSwift
+import SwiftSoup
 
 class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
     
@@ -33,7 +34,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     @IBOutlet weak var reviewSwitch: UISwitch!
     
     private var selectedOptions: [Int] = []
-    
+    private var gapFilledResponse: [Int: AnyObject] = [:]
+
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
@@ -57,19 +59,25 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             attemptItem?.savedAnswers.append(objectsIn: selectedOptions)
             attemptItem?.currentReview = attemptItem!.review
             attemptItem?.currentShortText = attemptItem!.shortText
+            attemptItem?.gapFillResponses.forEach { response in
+                gapFilledResponse[response.order] = response.answer as AnyObject
+            }
+            attemptItem.localEssayText = attemptItem.essayText
         }
 
         indexView!.text = String("\((attemptItem?.index)! + 1)")
         webView.loadHTMLString(WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader()
             + getQuestionHtml(), baseURL: Bundle.main.bundleURL)
     }
-
+    
     func userContentController(_ userContentController: WKUserContentController,
                                didReceive message: WKScriptMessage) {
         if (message.name == "callbackHandler") {
             let body = message.body
             if let dict = body as? Dictionary<String, AnyObject> {
-                if let checked = dict["checked"] as? Bool {
+                if dict["type"] as! String? == "gap_filled_response" {
+                    handleGapFillTypeInput(dict)
+                } else if let checked = dict["checked"] as? Bool {
                     let radioOption = dict["radioOption"] as! Bool
                     let id = Int(dict["clickedOptionId"] as! String)!
                     if checked {
@@ -88,9 +96,19 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                     try! Realm().write {
                         attemptItem.currentShortText = shortText.trim()
                     }
+                } else if let essay = dict["essay"] as? String {
+                    try! Realm().write {
+                        attemptItem.localEssayText = essay
+                    }
                 }
             }
         }
+    }
+    
+    func handleGapFillTypeInput(_ gapFillData: [String : AnyObject]) {
+        let order = gapFillData["order"] as! NSString
+        gapFilledResponse[order.integerValue] = gapFillData["answer"]
+        attemptItem.setGapFillResponses(gapFilledResponse)
     }
     
     override func getJavascript() -> String {
@@ -106,6 +124,29 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             }
         }
         return javascript
+    }
+    
+    func getGapFilledQuestionHtml(_ htmlContent: String) -> String {
+        do {
+            let doc = try SwiftSoup.parse(htmlContent)
+            let elements = try doc.select("input")
+            for (index, element) in elements.enumerated() {
+                try updateGapFillInputElement(element: element, value: gapFilledResponse[index + 1] as? String)
+            }
+            return try doc.html()
+        } catch Exception.Error( _, _) {
+            return htmlContent
+        } catch {
+            return htmlContent
+        }
+    }
+    
+    func updateGapFillInputElement(element: Element, value: String?) throws {
+        try element.attr("oninput", "onFillInTheBlankValueChange(this)")
+        try element.addClass("gap_box")
+        if value != nil {
+            try element.val(value!)
+        }
     }
     
     func getQuestionHtml() -> String {
@@ -143,6 +184,11 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 }
             }
             htmlContent += "</table>"
+        } else if (attemptQuestion.type == "E") {
+            htmlContent += getEssayQuestionHtml()
+
+        } else if (attemptQuestion.type == "G") {
+            htmlContent = getGapFilledQuestionHtml(htmlContent)
         } else {
             let inputType = attemptQuestion.type == "N" ? "number" : "text"
             let value =
@@ -153,6 +199,16 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
                 "placeholder='YOUR ANSWER'>"
         }
         return htmlContent + "</div>";
+    }
+    
+    func getEssayQuestionHtml() -> String {
+        var htmlContent = "<textarea class='essay_topic'  oninput='onEssayValueChange(this)' rows='10'>";
+        if !attemptItem.localEssayText.isNilOrEmpty {
+            htmlContent += attemptItem.localEssayText
+        }
+        htmlContent += "</textarea>";
+        
+        return htmlContent
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
