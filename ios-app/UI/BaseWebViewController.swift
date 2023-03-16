@@ -56,13 +56,6 @@ class BaseWebViewController: UIViewController {
     }
 
     func getJavascript() -> String {
-        let fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "MathJaxRender",
-                                                            ofType:"js")!)
-        do {
-            return try String(contentsOf: fileURL, encoding: String.Encoding.utf8)
-        } catch let error as NSError {
-            debugPrint(error.localizedDescription)
-        }
         return ""
     }
     

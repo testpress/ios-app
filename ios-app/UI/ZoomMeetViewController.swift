@@ -124,6 +124,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         meetingSettings?.meetingPasswordHidden = true
         meetingSettings?.meetingInviteHidden = true
         meetingSettings?.meetingShareHidden = true
+        meetingSettings?.meetingInviteUrlHidden = true
     }
     
     func changeRootViewController() {
@@ -137,6 +138,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
             service.customizeMeetingTitle(meetingTitle)
             let joinParams = MobileRTCMeetingJoinParam()
             joinParams.userName = KeychainTokenItem.getAccount()
+            joinParams.customerKey = KeychainTokenItem.getAccount()
             joinParams.meetingNumber = meetingNumber
             joinParams.password = password
             service.joinMeeting(with: joinParams)
@@ -186,21 +188,5 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         authService?.delegate = nil
         let meetingService = MobileRTC.shared().getMeetingService()
         meetingService?.delegate = nil
-    }
-}
-
-class Zoom {
-    static func enableFullScreenForMeetingWaitView() {
-        if let klass = NSClassFromString("ZPMeetingWaitViewController") {
-            guard let original = class_getInstanceMethod(klass, #selector(getter: UIViewController.modalPresentationStyle)), let replacement = class_getInstanceMethod(self, #selector(getter:Zoom.modalPresentationStyle))
-                else { return }
-            method_exchangeImplementations(original, replacement)
-        } else {
-            debugPrint("No Class named `ZPMeetingWaitViewController`")
-        }
-    }
-    
-    @objc var modalPresentationStyle: UIModalPresentationStyle {
-        .fullScreen
     }
 }
