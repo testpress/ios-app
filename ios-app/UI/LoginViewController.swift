@@ -38,7 +38,8 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var signUpLayout: UIStackView!
     @IBOutlet weak var socialLoginLayout: UIStackView!
     @IBOutlet weak var facebookButtonLayout: UIView!
-        
+    @IBOutlet weak var forgotPasswordButton: UIButton!
+    
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     var instituteSettings: InstituteSettings!
     override func viewDidLoad() {
@@ -49,6 +50,8 @@ class LoginViewController: BaseTextFieldViewController {
         UIUtils.setButtonDropShadow(loginButton)
         
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        
+        forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
         
         signUpLayout.isHidden = true
 //        if(instituteSettings.allowSignup) {
