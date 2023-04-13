@@ -37,14 +37,13 @@ class Video: DBModel {
     var streams = List<Stream>()
     
     func getHlsUrl() -> String {
+        var url = self.url
         if let hlsURL = self.streams.first(where: {$0.hlsUrl.isNotEmpty}) {
-            return hlsURL.hlsUrl
+            url = hlsURL.hlsUrl
+        } else if let hls = self.streams.first(where: {$0.format == "HLS"}) {
+            url = hls.url
         }
-        
-        if let hls = self.streams.first(where: {$0.format == "HLS"}) {
-            return hls.url
-        }
-        return self.url
+        return url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? url
     }
     
     var isDRMProtected: Bool {
