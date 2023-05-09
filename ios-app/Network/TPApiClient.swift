@@ -195,7 +195,6 @@ class TPApiClient {
     static func uploadImage(imageData: Data, fileName: String,
                             completion: @escaping (FileDetails?, TPError?) -> Void) {
         
-        print("---------------------==================")
         let url =  URL(string: TPEndpointProvider(.uploadImage).getUrl())!
         var headers: HTTPHeaders = ["User-Agent": getUserAgent()]
         if (KeychainTokenItem.isExist()) {
