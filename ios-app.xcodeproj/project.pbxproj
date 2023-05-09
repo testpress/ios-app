@@ -91,6 +91,7 @@
 		259932792A0A4D1E00866CA8 /* LUExpandableTableView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */; };
 		2599327B2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */; };
 		2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */; };
+		2599327F2A0A505300866CA8 /* Kingfisher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327E2A0A505300866CA8 /* Kingfisher.xcframework */; };
 		259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
 		259ED9F9274E5B3100A87A71 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259ED9F8274E5B3100A87A71 /* Misc.swift */; };
 		25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */; };
@@ -217,7 +218,6 @@
 		2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763CFB1FBD79F60033D495 /* CoursesTableViewController.swift */; };
 		2F763CFE1FBD7AE40033D495 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763CFD1FBD7AE40033D495 /* Course.swift */; };
 		2F763D001FBD83340033D495 /* Device.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC0F31E1F866BC30092BFDC /* Device.framework */; };
-		2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */; };
 		2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */; };
 		2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1474701F8B73FF0017151B /* SlideMenuControllerSwift.framework */; };
 		2F763D061FBDA89C0033D495 /* CoursePager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D051FBDA89C0033D495 /* CoursePager.swift */; };
@@ -496,6 +496,7 @@
 		259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LUExpandableTableView.xcframework; path = Carthage/Build/LUExpandableTableView.xcframework; sourceTree = "<group>"; };
 		2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8KitDynamic.xcframework; path = Carthage/Build/M3U8KitDynamic.xcframework; sourceTree = "<group>"; };
 		2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Sentry.xcframework; path = Carthage/Build/Sentry.xcframework; sourceTree = "<group>"; };
+		2599327E2A0A505300866CA8 /* Kingfisher.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Kingfisher.xcframework; path = Carthage/Build/Kingfisher.xcframework; sourceTree = "<group>"; };
 		259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToUnlockViewController.swift; sourceTree = "<group>"; };
 		259ED9F8274E5B3100A87A71 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoConferenceViewController.swift; sourceTree = "<group>"; };
@@ -815,12 +816,12 @@
 				259932752A0A4BB800866CA8 /* Lottie.xcframework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
 				259932732A0A4B9A00866CA8 /* Former.xcframework in Frameworks */,
-				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
 				2599326F2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework in Frameworks */,
 				2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */,
 				2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */,
 				259932792A0A4D1E00866CA8 /* LUExpandableTableView.xcframework in Frameworks */,
 				259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */,
+				2599327F2A0A505300866CA8 /* Kingfisher.xcframework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
 				259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */,
 				2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */,
@@ -1009,6 +1010,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2599327E2A0A505300866CA8 /* Kingfisher.xcframework */,
 				2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */,
 				2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */,
 				259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */,
@@ -1638,7 +1640,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Device.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SlideMenuControllerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TTGSnackbar.framework",
@@ -2193,7 +2194,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2223,7 +2224,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
