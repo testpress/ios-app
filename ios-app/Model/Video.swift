@@ -29,7 +29,6 @@ import RealmSwift
 
 class Video: DBModel {
     @objc dynamic var url: String = ""
-    @objc dynamic var id: Int = -1
     @objc dynamic var title: String = ""
     @objc dynamic var embedCode: String = ""
     @objc dynamic var duration: String = ""
@@ -57,7 +56,7 @@ class Video: DBModel {
     }
 
 
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         title <- map["title"]

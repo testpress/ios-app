@@ -11,7 +11,6 @@ import ObjectMapper
 class Stream: DBModel {
     @objc dynamic var url: String = ""
     @objc dynamic var hlsUrl: String = ""
-    @objc dynamic var id: Int = -1
     @objc dynamic var format: String = ""
     @objc dynamic var videoId: Int = -1
     
