@@ -79,7 +79,8 @@
 		25985831248A5F14003591FA /* URLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985830248A5F14003591FA /* URLUtils.swift */; };
 		25985835248A77BC003591FA /* EncryptionKeyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985834248A77BC003591FA /* EncryptionKeyRepository.swift */; };
 		25985837248A77F6003591FA /* M3U8Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985836248A77F6003591FA /* M3U8Handler.swift */; };
-		259932642A0A17F200866CA8 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932632A0A17F200866CA8 /* Alamofire.xcframework */; };
+		259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932652A0A28C000866CA8 /* TOCropViewController.xcframework */; };
+		259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932632A0A17F200866CA8 /* Alamofire.xcframework */; };
 		259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
 		259ED9F9274E5B3100A87A71 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259ED9F8274E5B3100A87A71 /* Misc.swift */; };
 		25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */; };
@@ -111,7 +112,6 @@
 		25EF86ED247E2160005C2B96 /* pseudo_element_selector.js in Resources */ = {isa = PBXBuildFile; fileRef = 25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */; };
 		25F7522127FEB143000D8137 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7522027FEB143000D8137 /* TimeUtils.swift */; };
 		25F92A20243306A60084ADC8 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F92A1F243306A60084ADC8 /* UIViewController.swift */; };
-		25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FE5F1B242A38CF00BFEC1F /* CropViewController.framework */; };
 		25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */; };
 		2F04053020D902530074D80E /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04052F20D902530074D80E /* Direction.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
@@ -482,6 +482,7 @@
 		25985834248A77BC003591FA /* EncryptionKeyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKeyRepository.swift; sourceTree = "<group>"; };
 		25985836248A77F6003591FA /* M3U8Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M3U8Handler.swift; sourceTree = "<group>"; };
 		259932632A0A17F200866CA8 /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
+		259932652A0A28C000866CA8 /* TOCropViewController.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TOCropViewController.xcframework; path = Carthage/Build/TOCropViewController.xcframework; sourceTree = "<group>"; };
 		259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToUnlockViewController.swift; sourceTree = "<group>"; };
 		259ED9F8274E5B3100A87A71 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoConferenceViewController.swift; sourceTree = "<group>"; };
@@ -782,11 +783,10 @@
 			files = (
 				25520BB92750FB4F001A58AB /* Former.framework in Frameworks */,
 				25B60E93263FCBCD006CDDBE /* IGListDiffKit.framework in Frameworks */,
+				259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */,
 				25B60E90263FCB95006CDDBE /* IGListKit.framework in Frameworks */,
 				253DD680262863C900C6D0A8 /* SwiftSoup.framework in Frameworks */,
-				259932642A0A17F200866CA8 /* Alamofire.xcframework in Frameworks */,
 				252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */,
-				25FE5F1C242A38CF00BFEC1F /* CropViewController.framework in Frameworks */,
 				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
 				8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */,
 				2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */,
@@ -803,6 +803,7 @@
 				25DD9C442486551F000BB671 /* SwiftKeychainWrapper.framework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
+				259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */,
 				2F429A0320DCD70200F5555C /* Lottie.framework in Frameworks */,
 				2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
@@ -993,6 +994,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				259932652A0A28C000866CA8 /* TOCropViewController.xcframework */,
 				259932632A0A17F200866CA8 /* Alamofire.xcframework */,
 				25520BB82750FB4E001A58AB /* Former.framework */,
 				25520BB22750F50A001A58AB /* AUPickerCell.framework */,
@@ -1627,7 +1629,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/M3U8KitDynamic.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/CropViewController.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MarqueeLabel.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
