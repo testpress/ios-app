@@ -33,6 +33,10 @@
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>733962776688753</string>
+	<key>FacebookClientToken</key>
+	<string>22e1f6d1ae335d6aa0ea63d98fc420d6</string>
+	<key>FacebookDisplayName</key>
+	<string>Testpress</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

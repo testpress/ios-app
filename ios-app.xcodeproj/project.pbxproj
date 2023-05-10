@@ -81,6 +81,11 @@
 		25985837248A77F6003591FA /* M3U8Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985836248A77F6003591FA /* M3U8Handler.swift */; };
 		259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932652A0A28C000866CA8 /* TOCropViewController.xcframework */; };
 		259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932632A0A17F200866CA8 /* Alamofire.xcframework */; };
+		259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */; };
+		2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */; };
+		2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; };
+		2599326F2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; };
+		259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; };
 		259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
 		259ED9F9274E5B3100A87A71 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259ED9F8274E5B3100A87A71 /* Misc.swift */; };
 		25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */; };
@@ -153,7 +158,6 @@
 		2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F634F2004A2D000976053 /* RealmSwift.framework */; };
 		2F3F63522004A75F00976053 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F63512004A75F00976053 /* DBManager.swift */; };
 		2F3F63542004C54900976053 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F63532004C54900976053 /* Realm.framework */; };
-		2F40CC5D20456FEC00A729CE /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F40CC5C20456FEC00A729CE /* FBSDKCoreKit.framework */; };
 		2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F412CC120219BC300B7F70C /* OrderedDictionary.swift */; };
 		2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */; };
 		2F4186A020BD3A33003D2D8A /* BookmarkFolderPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869F20BD3A33003D2D8A /* BookmarkFolderPager.swift */; };
@@ -214,7 +218,6 @@
 		2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3817FA1EC35EDE00B3813E /* Kingfisher.framework */; };
 		2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */; };
 		2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1474701F8B73FF0017151B /* SlideMenuControllerSwift.framework */; };
-		2F763D041FBD83340033D495 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F2CA1DA1EBDC59300ED1C99 /* XLPagerTabStrip.framework */; };
 		2F763D061FBDA89C0033D495 /* CoursePager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D051FBDA89C0033D495 /* CoursePager.swift */; };
 		2F763D081FBDB4D30033D495 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */; };
 		2F763D0B1FBEC7260033D495 /* ChapterContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F763D091FBEC7260033D495 /* ChapterContent.storyboard */; };
@@ -320,7 +323,6 @@
 		2FDF9C5B20B6F6C50086245F /* Bookmarks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF9C5A20B6F6C50086245F /* Bookmarks.storyboard */; };
 		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
-		2FE6B958205144CD0091C7CA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE6B9562051419E0091C7CA /* FBSDKLoginKit.framework */; };
 		2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
 		2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */; };
 		2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */; };
@@ -483,6 +485,11 @@
 		25985836248A77F6003591FA /* M3U8Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M3U8Handler.swift; sourceTree = "<group>"; };
 		259932632A0A17F200866CA8 /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
 		259932652A0A28C000866CA8 /* TOCropViewController.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TOCropViewController.xcframework; path = Carthage/Build/TOCropViewController.xcframework; sourceTree = "<group>"; };
+		259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = XLPagerTabStrip.xcframework; path = Carthage/Build/XLPagerTabStrip.xcframework; sourceTree = "<group>"; };
+		2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit.xcframework; path = Carthage/Build/FBSDKCoreKit.xcframework; sourceTree = "<group>"; };
+		2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKLoginKit.xcframework; path = Carthage/Build/FBSDKLoginKit.xcframework; sourceTree = "<group>"; };
+		2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit_Basics.xcframework; path = Carthage/Build/FBSDKCoreKit_Basics.xcframework; sourceTree = "<group>"; };
+		259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBAEMKit.xcframework; path = Carthage/Build/FBAEMKit.xcframework; sourceTree = "<group>"; };
 		259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToUnlockViewController.swift; sourceTree = "<group>"; };
 		259ED9F8274E5B3100A87A71 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoConferenceViewController.swift; sourceTree = "<group>"; };
@@ -785,6 +792,7 @@
 				25B60E93263FCBCD006CDDBE /* IGListDiffKit.framework in Frameworks */,
 				259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */,
 				25B60E90263FCB95006CDDBE /* IGListKit.framework in Frameworks */,
+				259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */,
 				253DD680262863C900C6D0A8 /* SwiftSoup.framework in Frameworks */,
 				252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */,
 				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
@@ -795,24 +803,25 @@
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
-				2FE6B958205144CD0091C7CA /* FBSDKLoginKit.framework in Frameworks */,
 				2F936E821FDAD376008C353A /* Charts.framework in Frameworks */,
 				2F763D001FBD83340033D495 /* Device.framework in Frameworks */,
 				2F33BFFB206E7E7100D4CE6D /* DropDown.framework in Frameworks */,
-				2F40CC5D20456FEC00A729CE /* FBSDKCoreKit.framework in Frameworks */,
 				25DD9C442486551F000BB671 /* SwiftKeychainWrapper.framework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
+				2599326F2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework in Frameworks */,
+				2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */,
+				2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */,
 				259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */,
 				2F429A0320DCD70200F5555C /* Lottie.framework in Frameworks */,
 				2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
+				259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */,
 				2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */,
 				2F3F63542004C54900976053 /* Realm.framework in Frameworks */,
 				2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */,
 				2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */,
 				2F48C8071FD13ABD009C686C /* TTGSnackbar.framework in Frameworks */,
-				2F763D041FBD83340033D495 /* XLPagerTabStrip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,6 +1003,11 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */,
+				2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */,
+				2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */,
+				2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */,
+				259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */,
 				259932652A0A28C000866CA8 /* TOCropViewController.xcframework */,
 				259932632A0A17F200866CA8 /* Alamofire.xcframework */,
 				25520BB82750FB4E001A58AB /* Former.framework */,
@@ -1612,7 +1626,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/XLPagerTabStrip.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Device.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SlideMenuControllerSwift.framework",
@@ -1624,8 +1637,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FBSDKCoreKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/M3U8KitDynamic.framework",
