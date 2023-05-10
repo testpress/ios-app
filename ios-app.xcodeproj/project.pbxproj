@@ -217,7 +217,6 @@
 		2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7179541EC740C6009114C4 /* TestEngine.storyboard */; };
 		2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763CFB1FBD79F60033D495 /* CoursesTableViewController.swift */; };
 		2F763CFE1FBD7AE40033D495 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763CFD1FBD7AE40033D495 /* Course.swift */; };
-		2F763D001FBD83340033D495 /* Device.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC0F31E1F866BC30092BFDC /* Device.framework */; };
 		2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FBEDB7D1E82BC02000CF05C /* ObjectMapper.framework */; };
 		2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1474701F8B73FF0017151B /* SlideMenuControllerSwift.framework */; };
 		2F763D061FBDA89C0033D495 /* CoursePager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D051FBDA89C0033D495 /* CoursePager.swift */; };
@@ -814,7 +813,6 @@
 				259932872A0A64F800866CA8 /* RealmSwift.xcframework in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
 				2F936E821FDAD376008C353A /* Charts.framework in Frameworks */,
-				2F763D001FBD83340033D495 /* Device.framework in Frameworks */,
 				2F33BFFB206E7E7100D4CE6D /* DropDown.framework in Frameworks */,
 				25DD9C442486551F000BB671 /* SwiftKeychainWrapper.framework in Frameworks */,
 				259932752A0A4BB800866CA8 /* Lottie.xcframework in Frameworks */,
@@ -1644,7 +1642,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Device.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SlideMenuControllerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TTGSnackbar.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
