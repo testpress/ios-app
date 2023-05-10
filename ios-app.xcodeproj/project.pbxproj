@@ -43,6 +43,7 @@
 		25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; };
 		25489A9B2A0B9331009619FD /* Charts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9A2A0B9331009619FD /* Charts.xcframework */; };
 		25489A9D2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */; };
+		25489A9F2A0B9EEA009619FD /* TTGSnackbar.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */; };
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */; };
@@ -179,7 +180,6 @@
 		2F48C8011FCE9963009C686C /* ContentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8001FCE9963009C686C /* ContentObject.swift */; };
 		2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8021FCE9A37009C686C /* CommentPager.swift */; };
 		2F48C8051FD030A7009C686C /* icomoon in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8041FD030A7009C686C /* icomoon */; };
-		2F48C8071FD13ABD009C686C /* TTGSnackbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F48C8061FD13ABC009C686C /* TTGSnackbar.framework */; };
 		2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80A1FD288C6009C686C /* PostTableViewController.swift */; };
 		2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80C1FD28902009C686C /* PostTableViewCell.swift */; };
 		2F48C80F1FD2899E009C686C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80E1FD2899E009C686C /* Post.swift */; };
@@ -438,6 +438,7 @@
 		25489A982A0B7F43009619FD /* SwiftSoup.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftSoup.xcframework; path = Carthage/Build/SwiftSoup.xcframework; sourceTree = "<group>"; };
 		25489A9A2A0B9331009619FD /* Charts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Charts.xcframework; path = Carthage/Build/Charts.xcframework; sourceTree = "<group>"; };
 		25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IQKeyboardManagerSwift.xcframework; path = Carthage/Build/IQKeyboardManagerSwift.xcframework; sourceTree = "<group>"; };
+		25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TTGSnackbar.xcframework; path = Carthage/Build/TTGSnackbar.xcframework; sourceTree = "<group>"; };
 		2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBTableViewControllerV2.swift; sourceTree = "<group>"; };
 		254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Testpress iOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testpress_iOS_AppUITests.swift; sourceTree = "<group>"; };
@@ -825,11 +826,11 @@
 				259932792A0A4D1E00866CA8 /* LUExpandableTableView.xcframework in Frameworks */,
 				259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */,
 				2599327F2A0A505300866CA8 /* Kingfisher.xcframework in Frameworks */,
+				25489A9F2A0B9EEA009619FD /* TTGSnackbar.xcframework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
 				259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */,
 				2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */,
 				2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */,
-				2F48C8071FD13ABD009C686C /* TTGSnackbar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1011,6 +1012,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */,
 				25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */,
 				25489A9A2A0B9331009619FD /* Charts.xcframework */,
 				25489A982A0B7F43009619FD /* SwiftSoup.xcframework */,
@@ -1647,7 +1649,6 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SlideMenuControllerSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/TTGSnackbar.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MarqueeLabel.framework",
