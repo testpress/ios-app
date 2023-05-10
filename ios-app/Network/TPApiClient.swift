@@ -24,7 +24,6 @@
 //
 
 import Alamofire
-import Device
 import UIKit
 import RealmSwift
 
