@@ -11,7 +11,7 @@ github "LaurentiuUngur/LUExpandableTableView"  "3.0.0"
 github "onevcat/Kingfisher" "4.10.0"
 github "realm/realm-cocoa" "v3.20.0"
 github "schickling/Device.swift" "1.1.2"
-github "xmartlabs/XLPagerTabStrip" "8.1.0"
+github "xmartlabs/XLPagerTabStrip" "9.0.0"
 github "zekunyan/TTGSnackbar" "1.7.1"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" == 6.8.0
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json" == 6.8.0
