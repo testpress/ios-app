@@ -27,7 +27,6 @@ import ObjectMapper
 
 class Direction: DBModel {
     
-    @objc dynamic var id: Int = 0
     @objc dynamic var html: String = ""
 
     public override func mapping(map: Map) {

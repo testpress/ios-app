@@ -9,7 +9,6 @@
 import ObjectMapper
 
 class ExamQuestion: DBModel {
-    @objc dynamic var id = 0
     @objc dynamic var marks = ""
     @objc dynamic var negativeMarks = ""
     @objc dynamic var order = -1
