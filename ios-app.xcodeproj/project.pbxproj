@@ -44,7 +44,6 @@
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */; };
-		25520BB92750FB4F001A58AB /* Former.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25520BB82750FB4E001A58AB /* Former.framework */; };
 		25520BBE2751093D001A58AB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BBD2751093C001A58AB /* String.swift */; };
 		25520BC327546AF9001A58AB /* DiscussionThreadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */; };
 		25520BC627547006001A58AB /* DiscussionThreadAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BC527547006001A58AB /* DiscussionThreadAnswer.swift */; };
@@ -86,6 +85,12 @@
 		2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; };
 		2599326F2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; };
 		259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; };
+		259932732A0A4B9A00866CA8 /* Former.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932722A0A4B9A00866CA8 /* Former.xcframework */; };
+		259932752A0A4BB800866CA8 /* Lottie.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932742A0A4BB800866CA8 /* Lottie.xcframework */; };
+		259932772A0A4BC300866CA8 /* IGListKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932762A0A4BC200866CA8 /* IGListKit.xcframework */; };
+		259932792A0A4D1E00866CA8 /* LUExpandableTableView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */; };
+		2599327B2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */; };
+		2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */; };
 		259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
 		259ED9F9274E5B3100A87A71 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259ED9F8274E5B3100A87A71 /* Misc.swift */; };
 		25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */; };
@@ -94,7 +99,6 @@
 		25B0ADD521D615A200C702B9 /* Hippolyte.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B0ADC921D5FFC800C702B9 /* Hippolyte.framework */; };
 		25B1489A264CFE0500AECC39 /* MathJax-2.7.1 in Resources */ = {isa = PBXBuildFile; fileRef = 25B14899264CFE0500AECC39 /* MathJax-2.7.1 */; };
 		25B4D0BF27B0F8BB0061D100 /* SSOUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */; };
-		25B60E90263FCB95006CDDBE /* IGListKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B60E8F263FCB95006CDDBE /* IGListKit.framework */; };
 		25B60E93263FCBCD006CDDBE /* IGListDiffKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B60E92263FCBCD006CDDBE /* IGListDiffKit.framework */; };
 		25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
 		25DD9C442486551F000BB671 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25DD9C432486551F000BB671 /* SwiftKeychainWrapper.framework */; };
@@ -143,7 +147,6 @@
 		2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
 		2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
 		2F368C0C215DEC77000999FA /* symbol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F368C0B215DEC68000999FA /* symbol.ttf */; };
-		2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3A142E1FE0EEED007CEE84 /* LUExpandableTableView.framework */; };
 		2F3A14311FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F3A14301FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib */; };
 		2F3A14331FE15E98007CEE84 /* ActivityFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A14321FE15E97007CEE84 /* ActivityFeed.swift */; };
 		2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */; };
@@ -162,7 +165,6 @@
 		2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */; };
 		2F4186A020BD3A33003D2D8A /* BookmarkFolderPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869F20BD3A33003D2D8A /* BookmarkFolderPager.swift */; };
 		2F4186A420BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4186A320BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift */; };
-		2F429A0320DCD70200F5555C /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F429A0220DCD70100F5555C /* Lottie.framework */; };
 		2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F429A0620DD323A00F5555C /* dotted_loader.css */; };
 		2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */; };
 		2F452C3020BBE3E6007833A0 /* BookmarksDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F452C2F20BBE3E6007833A0 /* BookmarksDetailDataSource.swift */; };
@@ -342,7 +344,6 @@
 		8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */; };
 		8C3D6433239D5D8E001C7FE4 /* RelatedContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */; };
 		8C4DEF4423A0C1EE008F76D2 /* Streams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4DEF4323A0C1EE008F76D2 /* Streams.swift */; };
-		8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5D579323AA08D200381DF8 /* M3U8KitDynamic.framework */; };
 		8C5DF60223264D9400B9F8A0 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */; };
 		8C9E5BDC238E5ACA00D8790F /* AVPlayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9E5BDB238E5ACA00D8790F /* AVPlayerExtensions.swift */; };
 		8CA17128238CED7F00BD42E9 /* VideoAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA17127238CED7F00BD42E9 /* VideoAttempt.swift */; };
@@ -356,7 +357,6 @@
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
 		8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */; };
-		8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF6972E2327180F0040A986 /* Sentry.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -490,6 +490,12 @@
 		2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKLoginKit.xcframework; path = Carthage/Build/FBSDKLoginKit.xcframework; sourceTree = "<group>"; };
 		2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit_Basics.xcframework; path = Carthage/Build/FBSDKCoreKit_Basics.xcframework; sourceTree = "<group>"; };
 		259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBAEMKit.xcframework; path = Carthage/Build/FBAEMKit.xcframework; sourceTree = "<group>"; };
+		259932722A0A4B9A00866CA8 /* Former.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Former.xcframework; path = Carthage/Build/Former.xcframework; sourceTree = "<group>"; };
+		259932742A0A4BB800866CA8 /* Lottie.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Lottie.xcframework; path = Carthage/Build/Lottie.xcframework; sourceTree = "<group>"; };
+		259932762A0A4BC200866CA8 /* IGListKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IGListKit.xcframework; path = Carthage/Build/IGListKit.xcframework; sourceTree = "<group>"; };
+		259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LUExpandableTableView.xcframework; path = Carthage/Build/LUExpandableTableView.xcframework; sourceTree = "<group>"; };
+		2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8KitDynamic.xcframework; path = Carthage/Build/M3U8KitDynamic.xcframework; sourceTree = "<group>"; };
+		2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Sentry.xcframework; path = Carthage/Build/Sentry.xcframework; sourceTree = "<group>"; };
 		259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToUnlockViewController.swift; sourceTree = "<group>"; };
 		259ED9F8274E5B3100A87A71 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoConferenceViewController.swift; sourceTree = "<group>"; };
@@ -788,17 +794,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25520BB92750FB4F001A58AB /* Former.framework in Frameworks */,
 				25B60E93263FCBCD006CDDBE /* IGListDiffKit.framework in Frameworks */,
 				259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */,
-				25B60E90263FCB95006CDDBE /* IGListKit.framework in Frameworks */,
 				259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */,
+				259932772A0A4BC300866CA8 /* IGListKit.xcframework in Frameworks */,
 				253DD680262863C900C6D0A8 /* SwiftSoup.framework in Frameworks */,
+				2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */,
 				252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */,
-				8C5D579523AA16DE00381DF8 /* M3U8KitDynamic.framework in Frameworks */,
-				8CF6972F2327180F0040A986 /* Sentry.framework in Frameworks */,
 				2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */,
 				2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */,
+				2599327B2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework in Frameworks */,
 				2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */,
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
@@ -807,14 +812,15 @@
 				2F763D001FBD83340033D495 /* Device.framework in Frameworks */,
 				2F33BFFB206E7E7100D4CE6D /* DropDown.framework in Frameworks */,
 				25DD9C442486551F000BB671 /* SwiftKeychainWrapper.framework in Frameworks */,
+				259932752A0A4BB800866CA8 /* Lottie.xcframework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
+				259932732A0A4B9A00866CA8 /* Former.xcframework in Frameworks */,
 				2F763D011FBD83340033D495 /* Kingfisher.framework in Frameworks */,
 				2599326F2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework in Frameworks */,
 				2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */,
 				2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */,
+				259932792A0A4D1E00866CA8 /* LUExpandableTableView.xcframework in Frameworks */,
 				259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */,
-				2F429A0320DCD70200F5555C /* Lottie.framework in Frameworks */,
-				2F3A142F1FE0EEED007CEE84 /* LUExpandableTableView.framework in Frameworks */,
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
 				259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */,
 				2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */,
@@ -1003,6 +1009,12 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */,
+				2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */,
+				259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */,
+				259932762A0A4BC200866CA8 /* IGListKit.xcframework */,
+				259932742A0A4BB800866CA8 /* Lottie.xcframework */,
+				259932722A0A4B9A00866CA8 /* Former.xcframework */,
 				259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */,
 				2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */,
 				2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */,
@@ -1632,20 +1644,14 @@
 				"$(SRCROOT)/Carthage/Build/iOS/TTGSnackbar.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/LUExpandableTableView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Sentry.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/M3U8KitDynamic.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MarqueeLabel.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/IGListKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IGListDiffKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Former.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
