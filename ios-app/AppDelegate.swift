@@ -99,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         ApplicationDelegate.shared.application(application,
                                                   didFinishLaunchingWithOptions: launchOptions)
         
-        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared.enable = true
         
         // Clear keychain items if app is launching the first time after installation
         let userDefaults = UserDefaults.standard
