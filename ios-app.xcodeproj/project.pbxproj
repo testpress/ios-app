@@ -104,7 +104,6 @@
 		25B4D0BF27B0F8BB0061D100 /* SSOUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */; };
 		25B60E93263FCBCD006CDDBE /* IGListDiffKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25B60E92263FCBCD006CDDBE /* IGListDiffKit.framework */; };
 		25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
-		25DD9C442486551F000BB671 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25DD9C432486551F000BB671 /* SwiftKeychainWrapper.framework */; };
 		25DFC1682609B00700E06BA7 /* StringArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */; };
 		25E435BB263AD8CC00243FD3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */; };
 		25E435BE263AD94500243FD3 /* DashboardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435BD263AD94500243FD3 /* DashboardResponse.swift */; };
@@ -814,7 +813,6 @@
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
 				2F936E821FDAD376008C353A /* Charts.framework in Frameworks */,
 				2F33BFFB206E7E7100D4CE6D /* DropDown.framework in Frameworks */,
-				25DD9C442486551F000BB671 /* SwiftKeychainWrapper.framework in Frameworks */,
 				259932752A0A4BB800866CA8 /* Lottie.xcframework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
 				259932732A0A4B9A00866CA8 /* Former.xcframework in Frameworks */,
@@ -1648,7 +1646,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MarqueeLabel.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IGListDiffKit.framework",
