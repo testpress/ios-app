@@ -41,6 +41,7 @@
 		252E050E25C2C06800BE1B38 /* MarqueeLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 252E050D25C2C06800BE1B38 /* MarqueeLabel.framework */; };
 		253DD67E262860B200C6D0A8 /* GapFillResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253DD67D262860B200C6D0A8 /* GapFillResponse.swift */; };
 		25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; };
+		25489A9B2A0B9331009619FD /* Charts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9A2A0B9331009619FD /* Charts.xcframework */; };
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */; };
@@ -229,7 +230,6 @@
 		2F909E6920DBC60700FE9B8D /* material_wave_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F909E6820DBC60700FE9B8D /* material_wave_loading.json */; };
 		2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */; };
 		2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */; };
-		2F936E821FDAD376008C353A /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F936E811FDAD376008C353A /* Charts.framework */; };
 		2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */; };
 		2F96997A1FC2A22A001B2B18 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699791FC2A22A001B2B18 /* Content.swift */; };
 		2F96997C1FC2A625001B2B18 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96997B1FC2A625001B2B18 /* Video.swift */; };
@@ -436,6 +436,7 @@
 		253DD67D262860B200C6D0A8 /* GapFillResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapFillResponse.swift; sourceTree = "<group>"; };
 		253DD67F262863C900C6D0A8 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		25489A982A0B7F43009619FD /* SwiftSoup.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftSoup.xcframework; path = Carthage/Build/SwiftSoup.xcframework; sourceTree = "<group>"; };
+		25489A9A2A0B9331009619FD /* Charts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Charts.xcframework; path = Carthage/Build/Charts.xcframework; sourceTree = "<group>"; };
 		2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBTableViewControllerV2.swift; sourceTree = "<group>"; };
 		254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Testpress iOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testpress_iOS_AppUITests.swift; sourceTree = "<group>"; };
@@ -807,12 +808,12 @@
 				2599327B2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework in Frameworks */,
 				2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */,
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
+				25489A9B2A0B9331009619FD /* Charts.xcframework in Frameworks */,
 				25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
 				259932862A0A64F800866CA8 /* Realm.xcframework in Frameworks */,
 				259932872A0A64F800866CA8 /* RealmSwift.xcframework in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
-				2F936E821FDAD376008C353A /* Charts.framework in Frameworks */,
 				2F33BFFB206E7E7100D4CE6D /* DropDown.framework in Frameworks */,
 				259932752A0A4BB800866CA8 /* Lottie.xcframework in Frameworks */,
 				2F48C81A1FD566B3009C686C /* IQKeyboardManagerSwift.framework in Frameworks */,
@@ -1009,6 +1010,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25489A9A2A0B9331009619FD /* Charts.xcframework */,
 				25489A982A0B7F43009619FD /* SwiftSoup.xcframework */,
 				259932802A0A616800866CA8 /* Realm.xcframework */,
 				259932812A0A616800866CA8 /* RealmSwift.xcframework */,
@@ -1645,7 +1647,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SlideMenuControllerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TTGSnackbar.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MarqueeLabel.framework",
