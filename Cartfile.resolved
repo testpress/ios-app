@@ -2,7 +2,7 @@ binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.j
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json" "6.8.0"
 github "Alamofire/Alamofire" "5.0.2"
 github "Alua-Kinzhebayeva/iOS-PDF-Reader" "2.5.1"
-github "AssistoLab/DropDown" "v2.3.1"
+github "testpress/DropDown-Swift" "2.3.14"
 github "AtomicSLLC/SlideMenuControllerSwift" "5.0.0"
 github "Hearst-DD/ObjectMapper" "3.4.0"
 github "Instagram/IGListKit" "4.0.0"
