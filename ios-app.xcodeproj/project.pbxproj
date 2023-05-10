@@ -92,6 +92,8 @@
 		2599327B2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */; };
 		2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */; };
 		2599327F2A0A505300866CA8 /* Kingfisher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327E2A0A505300866CA8 /* Kingfisher.xcframework */; };
+		259932862A0A64F800866CA8 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932802A0A616800866CA8 /* Realm.xcframework */; };
+		259932872A0A64F800866CA8 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932812A0A616800866CA8 /* RealmSwift.xcframework */; };
 		259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
 		259ED9F9274E5B3100A87A71 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259ED9F8274E5B3100A87A71 /* Misc.swift */; };
 		25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */; };
@@ -159,9 +161,7 @@
 		2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21920186417004EDAF2 /* ActivityFeedResponse.swift */; };
 		2F3DD21C20186B93004EDAF2 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21B20186B93004EDAF2 /* ContentType.swift */; };
 		2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3DD21F20187B5D004EDAF2 /* ApiResponse.swift */; };
-		2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F634F2004A2D000976053 /* RealmSwift.framework */; };
 		2F3F63522004A75F00976053 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F63512004A75F00976053 /* DBManager.swift */; };
-		2F3F63542004C54900976053 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3F63532004C54900976053 /* Realm.framework */; };
 		2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F412CC120219BC300B7F70C /* OrderedDictionary.swift */; };
 		2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */; };
 		2F4186A020BD3A33003D2D8A /* BookmarkFolderPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869F20BD3A33003D2D8A /* BookmarkFolderPager.swift */; };
@@ -497,6 +497,8 @@
 		2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8KitDynamic.xcframework; path = Carthage/Build/M3U8KitDynamic.xcframework; sourceTree = "<group>"; };
 		2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Sentry.xcframework; path = Carthage/Build/Sentry.xcframework; sourceTree = "<group>"; };
 		2599327E2A0A505300866CA8 /* Kingfisher.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Kingfisher.xcframework; path = Carthage/Build/Kingfisher.xcframework; sourceTree = "<group>"; };
+		259932802A0A616800866CA8 /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
+		259932812A0A616800866CA8 /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
 		259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToUnlockViewController.swift; sourceTree = "<group>"; };
 		259ED9F8274E5B3100A87A71 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoConferenceViewController.swift; sourceTree = "<group>"; };
@@ -808,6 +810,8 @@
 				2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */,
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
+				259932862A0A64F800866CA8 /* Realm.xcframework in Frameworks */,
+				259932872A0A64F800866CA8 /* RealmSwift.xcframework in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
 				2F936E821FDAD376008C353A /* Charts.framework in Frameworks */,
 				2F763D001FBD83340033D495 /* Device.framework in Frameworks */,
@@ -825,8 +829,6 @@
 				2F763D021FBD83340033D495 /* ObjectMapper.framework in Frameworks */,
 				259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */,
 				2F52CB7B20173BA300592CD8 /* PDFReader.framework in Frameworks */,
-				2F3F63542004C54900976053 /* Realm.framework in Frameworks */,
-				2F3F63502004A2D000976053 /* RealmSwift.framework in Frameworks */,
 				2F763D031FBD83340033D495 /* SlideMenuControllerSwift.framework in Frameworks */,
 				2F48C8071FD13ABD009C686C /* TTGSnackbar.framework in Frameworks */,
 			);
@@ -1010,6 +1012,8 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				259932802A0A616800866CA8 /* Realm.xcframework */,
+				259932812A0A616800866CA8 /* RealmSwift.xcframework */,
 				2599327E2A0A505300866CA8 /* Kingfisher.xcframework */,
 				2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */,
 				2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */,
@@ -1645,8 +1649,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/TTGSnackbar.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PDFReader.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/DropDown.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
