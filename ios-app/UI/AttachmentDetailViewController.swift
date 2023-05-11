@@ -240,9 +240,8 @@ class AttachmentDetailViewController: UIViewController {
         animationView.contentMode = .scaleAspectFill
         animationView.frame.size.width = 50
         animationView.frame.size.height = 25
-        let primaryColor = Colors.getRGB(Colors.PRIMARY).ciColor
         let fillKeypath = AnimationKeypath(keypath: "**.Fill 1.Color")
-        let valueProvider = ColorValueProvider(LottieColor(r: primaryColor.red, g: primaryColor.green, b: primaryColor.blue, a: primaryColor.alpha))
+        let valueProvider = ColorValueProvider(LottieColor(r: 1, g: 0.2, b: 0.3, a: 1))
         animationView.setValueProvider(valueProvider, keypath: fillKeypath)
         animationView.loopMode = .loop
         animationView.play()
