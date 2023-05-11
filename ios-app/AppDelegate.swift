@@ -111,9 +111,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         if (KeychainTokenItem.isExist()) {
-            Client.shared?.extra = [
-                "username": KeychainTokenItem.getAccount()
-            ]
+            let user = Sentry.User()
+            user.username = KeychainTokenItem.getAccount()
+            SentrySDK.setUser(user)
         }
         
         let config = Realm.Configuration(schemaVersion: 27)
@@ -129,11 +129,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         if (InstituteSettings.isAvailable()){
             let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-            do {
-                Client.shared = try Client(dsn: instituteSettings.sentryDSN)
-                try Client.shared?.startCrashHandler()
-            } catch let error {
-                print("\(error)")
+            SentrySDK.start { options in
+                options.dsn = instituteSettings.sentryDSN
+                options.debug = true
             }
             
         }
