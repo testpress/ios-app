@@ -15,7 +15,7 @@ github "zekunyan/TTGSnackbar" "1.11.1"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" == 6.8.0
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json" == 6.8.0
 github "getsentry/sentry-cocoa" "4.3.1"
-github "M3U8Kit/M3U8Parser" ~> 0.2.1
+github "M3U8Kit/M3U8Parser" ~> 1.0.0
 github "TimOliver/TOCropViewController" "2.6.1"
 github "testpress/MarqueeLabel" "4.3.2"
 github "scinfu/SwiftSoup" "2.5.3"
