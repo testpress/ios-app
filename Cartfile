@@ -9,7 +9,7 @@ github "hackiftekhar/IQKeyboardManager" "v6.5.11"
 github "Hearst-DD/ObjectMapper" "4.2.0"
 github "LaurentiuUngur/LUExpandableTableView"  "3.0.0"
 github "onevcat/Kingfisher" "7.6.2"
-github "realm/realm-cocoa" "v10.28.6"
+github "realm/realm-swift" "v10.39.1"
 github "xmartlabs/XLPagerTabStrip" "9.0.0"
 github "zekunyan/TTGSnackbar" "1.11.1"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" == 6.8.0
