@@ -27,7 +27,6 @@ import ObjectMapper
 
 class Chapter: DBModel {
     @objc dynamic var url: String = ""
-    @objc dynamic var id: Int = 0
     @objc dynamic var name: String = ""
     @objc dynamic var details: String = ""
     @objc dynamic var image: String = ""

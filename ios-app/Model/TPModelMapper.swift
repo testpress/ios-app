@@ -28,29 +28,23 @@ import Realm
 import RealmSwift
 
 public protocol TestpressModel: Mappable {
-    init?(map: Map)
-    mutating func mapping(map: Map)
+    init?(map: ObjectMapper.Map)
+    mutating func mapping(map: ObjectMapper.Map)
 }
 
+
 class DBModel: Object, TestpressModel {
-    
-    public required init?(map: Map) {
+    @objc dynamic var id: Int = -1
+
+    public required init?(map: ObjectMapper.Map) {
         super.init()
         mapping(map: map)
     }
     
-    public func mapping(map: Map) {}
+    public func mapping(map: ObjectMapper.Map) {}
     
-    required public init(realm: RLMRealm, schema: RLMObjectSchema) {
-        super.init(realm: realm, schema: schema)
-    }
-    
-    required public init() {
+    required public override init() {
         super.init()
-    }
-    
-    required public init(value: Any, schema: RLMSchema) {
-        super.init(value: value, schema: schema)
     }
 }
 

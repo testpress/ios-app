@@ -14,9 +14,13 @@ class GapFillResponse: DBModel {
     @objc dynamic var order: Int = -1
     @objc dynamic var answer: String = "";
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         order <- map["order"]
         answer <- map["answer"]
+    }
+    
+    override class func ignoredProperties() -> [String] {
+        return ["id"]
     }
     
     public static func create(order: Int, answer: String) -> GapFillResponse{

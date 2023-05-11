@@ -65,7 +65,7 @@ class InstituteSettings: DBModel {
     @objc dynamic var sentryDSN: String = ""
     @objc dynamic var disableForgotPassword: Bool = false
 
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         verificationMethod <- map["verification_method"]
         allowSignup <- map["allow_signup"]
         forceStudentData <- map["force_student_data"]
