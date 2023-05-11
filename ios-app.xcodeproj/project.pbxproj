@@ -354,6 +354,32 @@
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
 		8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */; };
+		D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA62A0BBC44009619FD /* PDFReader.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1E22A0CF10700A6CB2E /* ObjectMapper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA42A0BB621009619FD /* ObjectMapper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1E32A0CF10700A6CB2E /* DropDown.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA22A0BB309009619FD /* DropDown.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1E42A0CF10700A6CB2E /* MarqueeLabel.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1E62A0CF10700A6CB2E /* IQKeyboardManagerSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1E72A0CF10800A6CB2E /* Charts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9A2A0B9331009619FD /* Charts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1E92A0CF10800A6CB2E /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932802A0A616800866CA8 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1EA2A0CF10800A6CB2E /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932812A0A616800866CA8 /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1EB2A0CF10800A6CB2E /* Kingfisher.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327E2A0A505300866CA8 /* Kingfisher.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1EC2A0CF10800A6CB2E /* Sentry.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1ED2A0CF10800A6CB2E /* LUExpandableTableView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1EE2A0CF10800A6CB2E /* IGListKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932762A0A4BC200866CA8 /* IGListKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1EF2A0CF10800A6CB2E /* Lottie.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932742A0A4BB800866CA8 /* Lottie.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1F02A0CF10800A6CB2E /* Former.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932722A0A4B9A00866CA8 /* Former.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1F42A0CF10800A6CB2E /* FBSDKCoreKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1F52A0CF10800A6CB2E /* XLPagerTabStrip.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1F62A0CF10800A6CB2E /* TOCropViewController.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932652A0A28C000866CA8 /* TOCropViewController.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9EDF1F72A0CF10800A6CB2E /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932632A0A17F200866CA8 /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -386,10 +412,36 @@
 		};
 		2FE6B95A205144CD0091C7CA /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */,
+				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
+				D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */,
+				D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */,
+				D9EDF1E22A0CF10700A6CB2E /* ObjectMapper.xcframework in Embed Frameworks */,
+				D9EDF1E32A0CF10700A6CB2E /* DropDown.xcframework in Embed Frameworks */,
+				D9EDF1E42A0CF10700A6CB2E /* MarqueeLabel.xcframework in Embed Frameworks */,
+				D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */,
+				D9EDF1E62A0CF10700A6CB2E /* IQKeyboardManagerSwift.xcframework in Embed Frameworks */,
+				D9EDF1E72A0CF10800A6CB2E /* Charts.xcframework in Embed Frameworks */,
+				D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */,
+				D9EDF1E92A0CF10800A6CB2E /* Realm.xcframework in Embed Frameworks */,
+				D9EDF1EA2A0CF10800A6CB2E /* RealmSwift.xcframework in Embed Frameworks */,
+				D9EDF1EB2A0CF10800A6CB2E /* Kingfisher.xcframework in Embed Frameworks */,
+				D9EDF1EC2A0CF10800A6CB2E /* Sentry.xcframework in Embed Frameworks */,
+				D9EDF1ED2A0CF10800A6CB2E /* LUExpandableTableView.xcframework in Embed Frameworks */,
+				D9EDF1EE2A0CF10800A6CB2E /* IGListKit.xcframework in Embed Frameworks */,
+				D9EDF1EF2A0CF10800A6CB2E /* Lottie.xcframework in Embed Frameworks */,
+				D9EDF1F02A0CF10800A6CB2E /* Former.xcframework in Embed Frameworks */,
+				D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */,
+				D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */,
+				D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */,
+				D9EDF1F42A0CF10800A6CB2E /* FBSDKCoreKit.xcframework in Embed Frameworks */,
+				D9EDF1F52A0CF10800A6CB2E /* XLPagerTabStrip.xcframework in Embed Frameworks */,
+				D9EDF1F62A0CF10800A6CB2E /* TOCropViewController.xcframework in Embed Frameworks */,
+				D9EDF1F72A0CF10800A6CB2E /* Alamofire.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,7 +545,6 @@
 		259932742A0A4BB800866CA8 /* Lottie.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Lottie.xcframework; path = Carthage/Build/Lottie.xcframework; sourceTree = "<group>"; };
 		259932762A0A4BC200866CA8 /* IGListKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IGListKit.xcframework; path = Carthage/Build/IGListKit.xcframework; sourceTree = "<group>"; };
 		259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LUExpandableTableView.xcframework; path = Carthage/Build/LUExpandableTableView.xcframework; sourceTree = "<group>"; };
-		2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8KitDynamic.xcframework; path = Carthage/Build/M3U8KitDynamic.xcframework; sourceTree = "<group>"; };
 		2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Sentry.xcframework; path = Carthage/Build/Sentry.xcframework; sourceTree = "<group>"; };
 		2599327E2A0A505300866CA8 /* Kingfisher.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Kingfisher.xcframework; path = Carthage/Build/Kingfisher.xcframework; sourceTree = "<group>"; };
 		259932802A0A616800866CA8 /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
@@ -997,7 +1048,6 @@
 				259932812A0A616800866CA8 /* RealmSwift.xcframework */,
 				2599327E2A0A505300866CA8 /* Kingfisher.xcframework */,
 				2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */,
-				2599327A2A0A4D2700866CA8 /* M3U8KitDynamic.xcframework */,
 				259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */,
 				259932762A0A4BC200866CA8 /* IGListKit.xcframework */,
 				259932742A0A4BB800866CA8 /* Lottie.xcframework */,
