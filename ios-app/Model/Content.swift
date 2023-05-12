@@ -31,7 +31,6 @@ class Content: DBModel {
     
     @objc dynamic var index: Int = -1
     @objc dynamic var url: String = ""
-    @objc dynamic var id: Int = -1
     @objc dynamic var name: String = ""
     @objc dynamic var contentDescription: String?
     @objc dynamic var image: String = ""
@@ -101,7 +100,7 @@ class Content: DBModel {
     }
 
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         name <- map["title"]
