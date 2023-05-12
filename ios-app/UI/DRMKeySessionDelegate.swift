@@ -14,13 +14,13 @@ class DRMKeySessionDelegate: NSObject, AVContentKeySessionDelegate {
     @available(iOS 10.3, *)
     func contentKeySession(_ session: AVContentKeySession, didProvide keyRequest: AVContentKeyRequest) {
         
-        guard let contentKeyIdentifier = keyRequest.identifier as? NSURL, let contentId = contentKeyIdentifier.host
-            else {
-                print("Failed to retrieve the assetID from the keyRequest!")
-                return
+        if let contentKeyIdentifier = keyRequest.identifier as? NSURL{
+            let contentId = contentKeyIdentifier.host!
+            fetchDRMKey(keyRequest, contentId)
+        } else if let contentId = keyRequest.identifier as? String{
+            fetchDRMKey(keyRequest, contentId)
         }
         
-        fetchDRMKey(keyRequest, contentId)
     }
     
     
