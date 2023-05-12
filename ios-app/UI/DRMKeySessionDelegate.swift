@@ -14,9 +14,10 @@ class DRMKeySessionDelegate: NSObject, AVContentKeySessionDelegate {
     @available(iOS 10.3, *)
     func contentKeySession(_ session: AVContentKeySession, didProvide keyRequest: AVContentKeyRequest) {
         
-        guard let contentId = keyRequest.identifier as? String else {
-            keyRequest.processContentKeyResponseError(DRMError.noContentId)
-            return
+        guard let contentKeyIdentifier = keyRequest.identifier as? NSURL, let contentId = contentKeyIdentifier.host
+            else {
+                print("Failed to retrieve the assetID from the keyRequest!")
+                return
         }
         
         fetchDRMKey(keyRequest, contentId)
@@ -95,7 +96,6 @@ class DRMKeySessionDelegate: NSObject, AVContentKeySessionDelegate {
         var request = URLRequest(url: URL(string: licenseURL)!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/octet-stream", forHTTPHeaderField: "Accept")
         do {
             try request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         } catch {}
