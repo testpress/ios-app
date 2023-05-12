@@ -31,11 +31,10 @@ class BookmarkFolder: DBModel {
     
     static let UNCATEGORIZED = "Uncategorized"
     
-    @objc dynamic var id = 0
     @objc dynamic var name: String = ""
     @objc dynamic var bookmarksCount = 0
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         id <- map["id"]
         name <- map["name"]
         bookmarksCount <- map["bookmarks_count"]
