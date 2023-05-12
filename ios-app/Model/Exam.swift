@@ -27,7 +27,6 @@ import ObjectMapper
 
 class Exam: DBModel {
     @objc dynamic var url: String = "";
-    @objc dynamic var id = 0;
     @objc dynamic var title: String = "";
     @objc dynamic var examDescription: String = "";
     @objc dynamic var startDate: String = "";
@@ -67,7 +66,7 @@ class Exam: DBModel {
     }
 
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         title <- map["title"]
