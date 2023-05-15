@@ -31,7 +31,6 @@ import UIKit
 
 class Bookmark: DBModel {
     
-    @objc dynamic var id = 0
     @objc dynamic var folder: String? = nil
     @objc dynamic var folderId = 0
     @objc dynamic var objectId = 0
@@ -42,7 +41,12 @@ class Bookmark: DBModel {
     
     var bookmarkedObject: Any!
     
-    public override func mapping(map: Map) {
+    
+    override class func ignoredProperties() -> [String] {
+        return ["bookmarkedObject"]
+    }
+    
+    public override func mapping(map: ObjectMapper.Map) {
         id <- map["id"]
         folder <- map["folder"]
         folderId <- map["folder_id"]

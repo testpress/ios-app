@@ -33,7 +33,6 @@ class AttemptItem: DBModel {
     public static let ANSWERED_INCORRECT = "Incorrect"
     public static let UNANSWERED = "Unanswered"
     
-    @objc dynamic var id: Int = -1
     @objc dynamic var url: String = "";
     @objc dynamic var question: AttemptQuestion!;
     @objc dynamic var questionId: Int = -1
@@ -60,7 +59,7 @@ class AttemptItem: DBModel {
     @objc dynamic var essayText: String?
     @objc dynamic var localEssayText: String!
     
-    public required convenience init?(map: Map) {
+    public required convenience init?(map: ObjectMapper.Map) {
         self.init()
     }
     
@@ -94,7 +93,7 @@ class AttemptItem: DBModel {
         }
     }
 
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         id <- map["id"]
         url <- map["url"]
         question <- map["question"]

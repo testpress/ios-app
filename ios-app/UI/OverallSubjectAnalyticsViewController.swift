@@ -58,7 +58,7 @@ class OverallSubjectAnalyticsViewController: UIViewController {
             
             entries.append(entry)
         }
-        let barDataSet = BarChartDataSet(values: entries, label: "")
+        let barDataSet = BarChartDataSet(entries: entries, label: "")
         barDataSet.colors = [Colors.getRGB(Colors.MATERIAL_GREEN),
                              Colors.getRGB(Colors.MATERIAL_RED),
                              Colors.getRGB(Colors.ORANGE)]
@@ -119,7 +119,7 @@ class OverallSubjectAnalyticsViewController: UIViewController {
         }
         
         chart.data = data
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription.enabled = false
         chart.fitBars = true
         chart.legend.enabled = false
         chart.setScaleEnabled(false)
