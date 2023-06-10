@@ -24,40 +24,41 @@
 //
 
 import ObjectMapper
+import Realm
+import RealmSwift
 
-public class Attempt {
+class Attempt: DBModel {
     
     public static let RUNNING = "Running";
     
-    var url: String!;
-    var id: Int?;
-    var date: String?;
-    var totalQuestions: Int?;
-    var score: String?;
-    var rank: Any?;
-    var maxRank: Any?;
-    var rankEnabled: Bool?;
-    var reviewUrl: String?;
-    var questionsUrl: String?;
-    var correctCount: Int?;
-    var incorrectCount: Int?;
-    var lastStartedTime: String?;
-    var remainingTime: String?;
-    var timeTaken: String?;
-    var state: String?;
-    var percentile: Double = 0
-    var percentage: String = ""
-    var speed: Int?
-    var accuracy: Int?
-    var exam: Int!
-    var sections: [AttemptSection] = [];
+    @objc var url: String = "";
+    @objc  var date: String?;
+    @objc var totalQuestions: Int = 0;
+    @objc var score: String?;
+    @objc var rank: Int = 0;
+    @objc var maxRank: Int = 0;
+    @objc var rankEnabled: Bool = false;
+    @objc var reviewUrl: String?;
+    @objc var questionsUrl: String?;
+    @objc var correctCount: Int = 0;
+    @objc var incorrectCount: Int = 0;
+    @objc var lastStartedTime: String?;
+    @objc var remainingTime: String?;
+    @objc var timeTaken: String?;
+    @objc var state: String?;
+    @objc var percentile: Double = 0
+    @objc var percentage: String = ""
+    @objc var speed: Int = 0
+    @objc var accuracy: Int = 0
+    @objc var exam: Int = -1
+    var sections = List<AttemptSection>()
     
-    public required init?(map: Map) {
-    }
-}
 
-extension Attempt: TestpressModel {
-    public func mapping(map: Map) {
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         date <- map["date"]
@@ -79,6 +80,6 @@ extension Attempt: TestpressModel {
         speed <- map["speed"]
         accuracy <- map["accuracy"]
         exam <- map["exam"]
-        sections <- map["sections"]
+        sections <- (map["sections"], ListTransform<AttemptSection>())
     }
 }

@@ -25,6 +25,8 @@
 
 import UIKit
 import WebKit
+import RealmSwift
+import SwiftSoup
 
 class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
     
@@ -32,7 +34,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     @IBOutlet weak var reviewSwitch: UISwitch!
     
     private var selectedOptions: [Int] = []
-    
+    private var gapFilledResponse: [Int: AnyObject] = [:]
+
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
@@ -49,41 +52,68 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
         
         // Set initial values of current selected answer & review
-        selectedOptions = attemptItem!.selectedAnswers
-        reviewSwitch.isOn = attemptItem!.review!
-        attemptItem?.savedAnswers = attemptItem!.selectedAnswers
-        attemptItem?.currentReview = attemptItem!.review
-        
+        selectedOptions = Array(attemptItem!.selectedAnswers)
+        reviewSwitch.isOn = attemptItem!.review
+        try! Realm().write {
+            attemptItem?.savedAnswers.removeAll()
+            attemptItem?.savedAnswers.append(objectsIn: selectedOptions)
+            attemptItem?.currentReview = attemptItem!.review
+            attemptItem?.currentShortText = attemptItem!.shortText
+            attemptItem?.gapFillResponses.forEach { response in
+                gapFilledResponse[response.order] = response.answer as AnyObject
+            }
+            attemptItem.localEssayText = attemptItem.essayText
+        }
+
         indexView!.text = String("\((attemptItem?.index)! + 1)")
         webView.loadHTMLString(WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader()
             + getQuestionHtml(), baseURL: Bundle.main.bundleURL)
     }
-
+    
     func userContentController(_ userContentController: WKUserContentController,
                                didReceive message: WKScriptMessage) {
-        
         if (message.name == "callbackHandler") {
             let body = message.body
             if let dict = body as? Dictionary<String, AnyObject> {
-                let checked = dict["checked"] as! Bool
-                let radioOption = dict["radioOption"] as! Bool
-                let id = Int(dict["clickedOptionId"] as! String)!
-                if (checked) {
-                    if (radioOption) {
-                        selectedOptions = []
+                if dict["type"] as! String? == "gap_filled_response" {
+                    handleGapFillTypeInput(dict)
+                } else if let checked = dict["checked"] as? Bool {
+                    let radioOption = dict["radioOption"] as! Bool
+                    let id = Int(dict["clickedOptionId"] as! String)!
+                    if checked {
+                        if radioOption {
+                            selectedOptions = []
+                        }
+                        selectedOptions.append(id)
+                    } else {
+                        selectedOptions = selectedOptions.filter { $0 != id }
                     }
-                    selectedOptions.append(id)
-                } else {
-                    selectedOptions = selectedOptions.filter { $0 != id } ;
+                    try! Realm().write {
+                        attemptItem.savedAnswers.removeAll()
+                        attemptItem.savedAnswers.append(objectsIn: selectedOptions)
+                    }
+                } else if let shortText = dict["shortText"] as? String {
+                    try! Realm().write {
+                        attemptItem.currentShortText = shortText.trim()
+                    }
+                } else if let essay = dict["essay"] as? String {
+                    try! Realm().write {
+                        attemptItem.localEssayText = essay
+                    }
                 }
-                attemptItem?.savedAnswers = selectedOptions;
             }
         }
     }
     
+    func handleGapFillTypeInput(_ gapFillData: [String : AnyObject]) {
+        let order = gapFillData["order"] as! NSString
+        gapFilledResponse[order.integerValue] = gapFillData["answer"]
+        attemptItem.setGapFillResponses(gapFilledResponse)
+    }
+    
     override func getJavascript() -> String {
         var javascript = super.getJavascript()
-        var selectedAnswers: [Int] = (attemptItem?.selectedAnswers)!
+        var selectedAnswers: [Int] = Array((attemptItem?.selectedAnswers)!)
         if !selectedAnswers.isEmpty {
             let optionType: String = (attemptItem?.question?.type)!
             if optionType == "R" {
@@ -94,6 +124,29 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             }
         }
         return javascript
+    }
+    
+    func getGapFilledQuestionHtml(_ htmlContent: String) -> String {
+        do {
+            let doc = try SwiftSoup.parse(htmlContent)
+            let elements = try doc.select("input")
+            for (index, element) in elements.enumerated() {
+                try updateGapFillInputElement(element: element, value: gapFilledResponse[index + 1] as? String)
+            }
+            return try doc.html()
+        } catch Exception.Error( _, _) {
+            return htmlContent
+        } catch {
+            return htmlContent
+        }
+    }
+    
+    func updateGapFillInputElement(element: Element, value: String?) throws {
+        try element.attr("oninput", "onFillInTheBlankValueChange(this)")
+        try element.addClass("gap_box")
+        if value != nil {
+            try element.val(value!)
+        }
     }
     
     func getQuestionHtml() -> String {
@@ -117,22 +170,50 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             attemptQuestion.questionHtml! +
         "</div>";
         
-        // Add options
-        htmlContent += "<table width='100%' style='margin-top:0px;'>";
-        for attemptAnswer in attemptQuestion.answers {
-            if (attemptItem?.question?.type == "R") {
-                htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
-                    optionText: attemptAnswer.textHtml!, id: attemptAnswer.id!);
-            } else {
-                htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
-                    optionText: attemptAnswer.textHtml!, id: attemptAnswer.id!);
+        if attemptQuestion.type == "R" || attemptQuestion.type == "C" {
+            // Add options
+            htmlContent += "<table width='100%' style='margin-top:0px;'>"
+            
+            for attemptAnswer in attemptQuestion.answers {
+                if (attemptItem?.question?.type == "R") {
+                    htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
+                        optionText: attemptAnswer.textHtml, id: attemptAnswer.id)
+                } else {
+                    htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
+                        optionText: attemptAnswer.textHtml, id: attemptAnswer.id)
+                }
             }
+            htmlContent += "</table>"
+        } else if (attemptQuestion.type == "E") {
+            htmlContent += getEssayQuestionHtml()
+
+        } else if (attemptQuestion.type == "G") {
+            htmlContent = getGapFilledQuestionHtml(htmlContent)
+        } else {
+            let inputType = attemptQuestion.type == "N" ? "number" : "text"
+            let value =
+                attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
+            
+            htmlContent += "<input class='edit_box' type='\(inputType)' value='\(value)' " +
+                "onpaste='return false' oninput='onValueChange(this)' " +
+                "placeholder='YOUR ANSWER'>"
         }
+        return htmlContent + "</div>";
+    }
+    
+    func getEssayQuestionHtml() -> String {
+        var htmlContent = "<textarea class='essay_topic'  oninput='onEssayValueChange(this)' rows='10'>";
+        if !attemptItem.localEssayText.isNilOrEmpty {
+            htmlContent += attemptItem.localEssayText
+        }
+        htmlContent += "</textarea>";
         
-        return htmlContent + "</table></div>";
+        return htmlContent
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
-        attemptItem?.currentReview = sender.isOn
+        try! Realm().write {
+            attemptItem?.currentReview = sender.isOn
+        }
     }
 }

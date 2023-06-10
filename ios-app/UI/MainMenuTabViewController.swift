@@ -24,15 +24,66 @@
 //
 
 import UIKit
+import Alamofire
 
 class MainMenuTabViewController: UITabBarController {
     
+    var instituteSettings: InstituteSettings!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        viewControllers?[5].tabBarItem.title = instituteSettings.postsLabel
+        viewControllers?.remove(at: 7) // Access code
+        if (!instituteSettings.forumEnabled) {
+            viewControllers?.remove(at: 6)
+        }
         
-        viewControllers?.remove(at: 2) // Exams list
-        viewControllers?.remove(at: 4) // Discussion Forum
-        viewControllers?.remove(at: 0) // Activity Feed
+        if (!instituteSettings.postsEnabled) {
+            viewControllers?.remove(at: 5)
+        }
+        
+        if (!instituteSettings.coursesEnableGamification) {
+            viewControllers?.remove(at: 4)
+        }
+        
+        if (instituteSettings.showGameFrontend) {
+            viewControllers?.remove(at: 3) // Exams list
+            
+        } else {
+            viewControllers?.remove(at: 2)
+        }
+        
+        if (!instituteSettings.activityFeedEnabled) {
+            viewControllers?.remove(at: 1)
+        }
+        
+        if (instituteSettings.isHelpdeskEnabled) {
+            viewControllers?.insert(self.getDoubtsWebViewController(), at: 3)
+        }
+        
+        if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
+            let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
+            let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
+            let parameters: Parameters = [
+                "device_id": deviceToken!,
+                "registration_id": fcmToken!,
+                "platform": "ios"
+            ]
+            TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters,completion: { _, _ in})
+        }
     }
     
+    func getDoubtsWebViewController() -> WebViewController {
+        let secondViewController = WebViewController()
+        secondViewController.url = "&next=/tickets/mobile"
+        secondViewController.useWebviewNavigation = true
+        secondViewController.useSSOLogin = true
+        secondViewController.shouldOpenLinksWithinWebview = true
+        secondViewController.title = "Doubts"
+        secondViewController.displayNavbar = true
+        secondViewController.tabBarItem.image = Images.DoubtsIcon.image
+        return secondViewController
+    }
 }

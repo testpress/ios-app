@@ -25,70 +25,51 @@
 
 import ObjectMapper
 
-public class Exam {
-    var url: String?;
-    var id: Int?;
-    var title: String?;
-    var description: String?;
-    var startDate: String?;
-    var endDate: String?;
-    var duration: String?;
-    var numberOfQuestions: Int?;
-    var negativeMarks: String?;
-    var markPerQuestion: String?;
-    var templateType: Int?;
-    var allowRetake: Bool?;
-    var maxRetakes: Int?;
-    var enableRanks: Bool?;
-    var rankPublishingDate: String?;
-    var attemptsUrl: String?;
-    var attemptsCount: Int!;
-    var pausedAttemptsCount: Int!;
-    var allowPdf: Bool?;
-    var allowQuestionPdf: Bool?;
-    var created: String?;
-    var slug: String?;
-    var variableMarkPerQuestion: Bool?;
-    var showAnswers: Bool?;
-    var commentsCount: Int?;
-    var allowPreemptiveSectionEnding: Bool?;
-    var immediateFeedback: Bool?;
-    var deviceAccessControl: String?;
-    var totalMarks: String = ""
-    var passPercentage: Double = 0
-    var showScore: Bool = true
-    var showPercentile: Bool = true
-    var studentsAttemptedCount: Int!
+class Exam: DBModel {
+    @objc dynamic var url: String = "";
+    @objc dynamic var title: String = "";
+    @objc dynamic var examDescription: String = "";
+    @objc dynamic var startDate: String = "";
+    @objc dynamic var endDate: String = "";
+    @objc dynamic var duration: String = "";
+    @objc dynamic var numberOfQuestions: Int = 0;
+    @objc dynamic var negativeMarks: String = "";
+    @objc dynamic var markPerQuestion: String = "";
+    @objc dynamic var templateType: Int = 0;
+    @objc dynamic var allowRetake: Bool = true;
+    @objc dynamic var maxRetakes: Int = 0;
+    @objc dynamic var enableRanks: Bool = false;
+    @objc dynamic var rankPublishingDate: String = "";
+    @objc dynamic var attemptsUrl: String = "";
+    @objc dynamic var attemptsCount: Int = 0;
+    @objc dynamic var pausedAttemptsCount: Int = 0;
+    @objc dynamic var allowPdf: Bool = false;
+    @objc dynamic var allowQuestionPdf: Bool = false;
+    @objc dynamic var created: String = "";
+    @objc dynamic var slug: String = "";
+    @objc dynamic var variableMarkPerQuestion: Bool = false;
+    @objc dynamic var showAnswers: Bool = false;
+    @objc dynamic var commentsCount: Int = 0;
+    @objc dynamic var allowPreemptiveSectionEnding: Bool = false;
+    @objc dynamic var immediateFeedback: Bool = false;
+    @objc dynamic var deviceAccessControl: String = "";
+    @objc dynamic var totalMarks: String = ""
+    @objc dynamic var passPercentage: Double = 0
+    @objc dynamic var showScore: Bool = true
+    @objc dynamic var showPercentile: Bool = true
+    @objc dynamic var studentsAttemptedCount: Int = 0
+    @objc dynamic var isGrowthHackEnabled: Bool = false;
+    @objc dynamic var shareTextForSolutionUnlock: String = "";
     
-    public required init?(map: Map) {
+    override public static func primaryKey() -> String? {
+        return "id"
     }
-    
-    func hasStarted() -> Bool {
-        guard let date = FormatDate.getDate(from: startDate!) else {
-            assert(false, "no date from string")
-            return true
-        }
-        return date < Date()
-    }
-    
-    func hasEnded() -> Bool {
-        if endDate == nil || endDate == "" {
-            return false
-        }
-        guard let date = FormatDate.getDate(from: endDate!) else {
-            assert(false, "no date from string")
-            return false
-        }
-        return date < Date()
-    }
-}
 
-extension Exam: TestpressModel {
-    public func mapping(map: Map) {
+    
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         title <- map["title"]
-        description <- map["description"]
         startDate <- map["start_date"]
         endDate <- map["end_date"]
         duration <- map["duration"]
@@ -118,5 +99,44 @@ extension Exam: TestpressModel {
         showScore <- map["show_score"]
         showPercentile <- map["show_percentile"]
         studentsAttemptedCount <- map["students_attempted_count"]
+        isGrowthHackEnabled <- map["is_growth_hack_enabled"]
+        shareTextForSolutionUnlock <- map["share_text_for_solution_unlock"]
+        examDescription <- map["description"]
+    }
+    
+    func hasStarted() -> Bool {
+        guard let date = FormatDate.getDate(from: startDate) else {
+            assert(false, "no date from string")
+            return true
+        }
+        return date < Date()
+    }
+    
+    func hasEnded() -> Bool {
+        if endDate == nil || endDate == "" {
+            return false
+        }
+        guard let date = FormatDate.getDate(from: endDate) else {
+            assert(false, "no date from string")
+            return false
+        }
+        return date < Date()
+    }
+    
+    private func getKey() -> String {
+        let id = String(self.id)
+        return "\(id)_SHARE_TO_UNLOCK"
+    }
+    
+    func getNumberOfTimesShared() -> Int {
+        return UserDefaults.standard.integer(forKey: getKey())
+    }
+    
+    func incrementNumberOfTimesShared() {
+        UserDefaults.standard.set(getNumberOfTimesShared() + 1, forKey: getKey())
+    }
+    
+    func getQuestionsURL() -> String {
+        return Constants.BASE_URL + "/api/v2.4/exams/\(id)/questions/"
     }
 }

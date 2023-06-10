@@ -25,20 +25,21 @@
 
 import ObjectMapper
 
-public class HtmlContent {
+class HtmlContent: DBModel {
     
-    var id: Int = 0
-    var title: String!
-    var textHtml: String!
-    
-    public required init?(map: Map) {
-    }
-}
+    @objc dynamic var title: String = ""
+    @objc dynamic var textHtml: String = ""
+    @objc dynamic var readTime: String = ""
 
-extension HtmlContent: TestpressModel {
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
         id <- map["id"]
         title <- map["title"]
         textHtml <- map["text_html"]
+        readTime <- map["read_time"]
     }
+    
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
+
 }

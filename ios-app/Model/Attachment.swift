@@ -25,22 +25,23 @@
 
 import ObjectMapper
 
-public class Attachment {
+class Attachment: DBModel {
     
-    var attachmentUrl: String!
-    var id: Int!
-    var title: String!
-    var description: String?;
-    
-    public required init?(map: Map) {
-    }
-}
+    @objc dynamic var attachmentUrl: String = ""
+    @objc dynamic var title: String = ""
+    @objc dynamic var attachmentDescription: String?
+    @objc dynamic var isRenderable: Bool = false
 
-extension Attachment: TestpressModel {
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
         attachmentUrl <- map["attachment_url"]
         id <- map["id"]
         title <- map["title"]
-        description <- map["description"]
+        attachmentDescription <- map["description"]
+        isRenderable <- map["is_renderable"]
     }
+    
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
+
 }

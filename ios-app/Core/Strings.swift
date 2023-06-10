@@ -26,7 +26,7 @@
 import Foundation
 
 struct Strings {
-    
+
     static let YES = "Yes"
     static let NO = "No"
     static let OK = "OK"
@@ -44,6 +44,7 @@ struct Strings {
     static let USERNAME_PASSWORD_NOT_MATCHED = "Username & Password didn't match. Please try again."
     
     static let NO_ITEMS_EXIST = "No items exist"
+    static let NO_CONTENTS_EXIST = "Empty Course"
     static let NO_EXAMS = "Learning can't wait"
     static let NO_AVAILABLE_EXAM = "Looks like you don't have any active exams. Contact administrator for more details."
     static let NO_UPCOMING_EXAM = "Looks like you don't have any upcoming exams."
@@ -53,7 +54,7 @@ struct Strings {
     
     static let NO_COURSES = "Learning can't wait"
     static let NO_COURSE_DESCRIPTION = "Looks like you don’t have any active courses. Kindly contact admin."
-    static let NO_CHAPTER_DESCRIPTION = "Looks like chapters not available. Check back later."
+    static let NO_CHAPTER_DESCRIPTION = "The course doesn't have any chapters or contents"
     static let NO_CONTENT_DESCRIPTION = "Looks like contents not available. Check back later."
     
     static let NO_POSTS = "Breaking news!"
@@ -97,6 +98,7 @@ struct Strings {
     
     static let ENTER_VALID_EMAIL = "Please enter a valid email address"
     static let ENTER_VALID_USERNAME = "Use only alphabets or numbers"
+    static let ENTER_VALID_PHONE_NUMBER = "Please enter valid phone number"
     static let PASSWORD_MUST_HAVE_SIX_CHARACTERS = "Require at least 6 digits"
     static let PASSWORD_NOT_MATCH = "Passwords not matching"
     
@@ -127,7 +129,7 @@ struct Strings {
     static let SETTINGS = "Settings"
     
     static let LEADERBOARD = "LEADERBOARD"
-    static let TARGETS_AND_THREADS = "TARGETS / THREADS"
+    static let TARGETS_AND_THREATS = "TARGETS / THREATS"
     
     static let EXAM_ENDED = "This exam has ended"
     static let CAN_START_EXAM_ONLY_AFTER = "You can attempt this exam only after \n"
@@ -175,5 +177,16 @@ struct Strings {
     static let ENDING_EXAM = "Ending exam\n\n"
     static let STARTING_SECTION = "Starting next section\n\n"
     static let SAVING_LAST_CHANGE = "Saving your last change\n\n"
+    
+    static let YOUR_ANSWER = "Your Answer:"
+    static let MARKS_AWARDED = "Marks Awarded:"
+    static let NOTE = "Note:"
+    static let CASE_INSENSITIVE = "Answers are case insensitive"
+    static let CASE_SENSITIVE = "Answers are case sensitive"
+    
+    static let PARALLEL_LOGIN_RESTRICTION_INFO = "Note : Admin has restricted parallel logged in devices to "
+    static let ACCOUNT_LOCKED = "Account Locked"
+    static let MAX_LOGIN_EXCEEDED_ERROR_MESSAGE = "Your account has been locked as it has exceeded maximum devices it can be used."
+    static let ACCOUNT_UNLOCK_INFO = "Your account will automatically get unlocked within "
     
 }

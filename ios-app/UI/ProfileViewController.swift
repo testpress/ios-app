@@ -23,7 +23,8 @@
 //  THE SOFTWARE.
 //
 
-import FacebookLogin
+import Alamofire
+import FBSDKLoginKit
 import Kingfisher
 import UIKit
 
@@ -43,6 +44,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var accuracy: UILabel!
     @IBOutlet weak var bookmarkButtonLayout: UIStackView!
     
+    @IBOutlet weak var shareButtonView: UIView!
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var emptyView: EmptyView!
     var user: User?
@@ -54,6 +56,7 @@ class ProfileViewController: UIViewController {
         emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
         bookmarkButtonLayout.isHidden = !Constants.BOOKMARKS_ENABLED
+        self.setStatusBarColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,20 +130,17 @@ class ProfileViewController: UIViewController {
         
         alert.addAction(UIAlertAction(
             title: Strings.YES,
-            style: UIAlertActionStyle.destructive,
+            style: UIAlertAction.Style.destructive,
             handler: { action in
                 
-                DBInstance.clearAllTables()
-                // Logout on Facebook
-                LoginManager().logOut()
-                KeychainTokenItem.clearKeychainItems()
+                UIUtils.logout()
                 let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
                     Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
                 
                 self.present(loginViewController, animated: true, completion: nil)
             }
         ))
-        alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertActionStyle.cancel))
+        alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertAction.Style.cancel))
         present(alert, animated: true)
     }
     
@@ -150,6 +150,13 @@ class ProfileViewController: UIViewController {
             Constants.BOOKMARKS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
         
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showLoginActivity() {
+        let loginActivityViewController = self.storyboard!.instantiateViewController(
+            withIdentifier: Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER)
+        
+        self.present(loginActivityViewController, animated: true, completion: nil)
     }
     
     @IBAction func rateUs() {
@@ -169,7 +176,8 @@ class ProfileViewController: UIViewController {
             UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         
         activityViewController.popoverPresentationController?.sourceView = view
-        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop ]
+        activityViewController.popoverPresentationController?.sourceRect = shareButtonView.frame
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
         present(activityViewController, animated: true, completion: nil)
     }
     

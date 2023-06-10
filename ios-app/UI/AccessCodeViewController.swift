@@ -39,7 +39,7 @@ class AccessCodeViewController: BaseTextFieldViewController {
         firstTextField = accessCode
         showKeyboardOnStart = false
         accessCode.defaultTextAttributes
-            .updateValue(10.0, forKey: NSAttributedStringKey.kern.rawValue)
+            .updateValue(10.0, forKey: NSAttributedString.Key(rawValue: NSAttributedString.Key.kern.rawValue))
     }
     
     @IBAction func getExams() {
@@ -89,4 +89,9 @@ class AccessCodeViewController: BaseTextFieldViewController {
         UIUtils.showProfileDetails(self)
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKeyDictionary(_ input: [NSAttributedString.Key: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
 }

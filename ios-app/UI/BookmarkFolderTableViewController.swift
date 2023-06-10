@@ -28,11 +28,12 @@ import TTGSnackbar
 import UIKit
 
 class BookmarkFolderTableViewController:
-    BasePagedTableViewController<BookmarksListResponse, BookmarkFolder> {
+    BasePagedTableViewController<BookmarksListResponse, BookmarkFolder>, UITextFieldDelegate {
     
     var bookmark: Bookmark!
     var sourceViewController: UIViewController!
     var bookmarkHelper: BookmarkHelper!
+    var bookmarkDelegate: BookmarkDelegate?
     var selectedIndex: Int!
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,6 +48,7 @@ class BookmarkFolderTableViewController:
         (pager as! BookmarkFolderPager).resources[0] = folder
         tableView.delegate = self
         bookmarkHelper = BookmarkHelper(viewController: sourceViewController)
+        bookmarkHelper.delegate = bookmarkDelegate
     }
     
     // MARK: - Table view data source
@@ -62,9 +64,9 @@ class BookmarkFolderTableViewController:
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let folderName = items[indexPath.row].name
         if bookmark == nil {
-            BookmarkHelper.bookmark(folderName: folderName, viewController: sourceViewController)
+            bookmarkHelper.bookmark(folderName: folderName)
         } else if folderName != bookmark.folder {
-            BookmarkHelper.update(folderName: folderName, in: bookmark.id, on: sourceViewController)
+            bookmarkHelper.update(folderName: folderName, in: bookmark.id, on: sourceViewController)
         } else {
             hideProgressBar()
         }
@@ -118,10 +120,10 @@ class BookmarkFolderTableViewController:
             return
         }
         if bookmark != nil {
-            BookmarkHelper.update(folderName: folderName, in: bookmark.id,
+            bookmarkHelper.update(folderName: folderName, in: bookmark.id,
                                   on: sourceViewController, newFolder: true)
         } else {
-            BookmarkHelper.bookmark(folderName: folderName, viewController: sourceViewController)
+            bookmarkHelper.bookmark(folderName: folderName)
         }
         dismiss(animated: true)
     }
@@ -138,18 +140,15 @@ class BookmarkFolderTableViewController:
     
     func hideProgressBar() {
         if bookmark != nil {
-            BookmarkHelper.displayMoveButton(in: sourceViewController)
+            bookmarkHelper.displayMoveButton()
         } else {
-            BookmarkHelper.displayBookmarkButton(in: sourceViewController)
+            bookmarkHelper.displayBookmarkButton()
         }
     }
-    
-}
-
-extension BookmarkFolderTableViewController: UITextFieldDelegate {
     
     @nonobjc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         createNewFolder(textField: textField)
         return true
     }
+    
 }

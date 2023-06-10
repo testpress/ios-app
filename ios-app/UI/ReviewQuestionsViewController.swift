@@ -26,8 +26,9 @@
 import TTGSnackbar
 import UIKit
 import WebKit
+import Alamofire
 
-class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
+class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler, BookmarkDelegate {
     
     var previousCommentsPager: CommentPager!
     var newCommentsPager: CommentPager!
@@ -41,6 +42,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         
         imageUploadHelper.delegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
+        bookmarkHelper.delegate = self
         webView.loadHTMLString(
             WebViewUtils.getQuestionHeader() + getAdditionalHeaders() + getHtml(),
             baseURL: Bundle.main.bundleURL
@@ -72,7 +74,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     func getPreviousCommentsPager() -> CommentPager {
         if previousCommentsPager == nil {
             attemptItem.question.commentsUrl =
-                TPEndpointProvider.getCommentsUrl(questionId: attemptItem.question.id!)
+                TPEndpointProvider.getCommentsUrl(questionId: attemptItem.question.id)
             
             previousCommentsPager = CommentPager(attemptItem.question.commentsUrl)
             previousCommentsPager.queryParams.updateValue("-created", forKey: Constants.ORDER)
@@ -252,29 +254,99 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                     attemptQuestion.questionHtml! +
                 "</div>";
         
+        var isSingleMCQType = false
+        var isMultipleMCQType = false
+        var isShortAnswerType = false
+        var isNumericalType = false
+        switch attemptQuestion.type {
+        case "R":
+            isSingleMCQType = true
+            break
+        case "C":
+            isMultipleMCQType = true
+            break
+        case "S":
+            isShortAnswerType = true
+            break
+        case "N":
+            isNumericalType = true
+            break
+        default:
+            break
+        }
         // Add options
         var correctAnswerHtml: String = ""
         for (i, attemptAnswer) in attemptQuestion.answers.enumerated() {
-            var optionColor: String?
-            if attemptItem.selectedAnswers.contains(attemptAnswer.id!) {
-                if attemptAnswer.isCorrect! {
-                    optionColor = Colors.MATERIAL_GREEN;
-                } else {
-                    optionColor = Colors.MATERIAL_RED
+            if isSingleMCQType || isMultipleMCQType {
+                var optionColor: String?
+                if attemptItem.selectedAnswers.contains(attemptAnswer.id) {
+                    if attemptAnswer.isCorrect {
+                        optionColor = Colors.MATERIAL_GREEN;
+                    } else {
+                        optionColor = Colors.MATERIAL_RED
+                    }
                 }
-            }
-            html += "\n" + WebViewUtils.getOptionWithTags(optionText: attemptAnswer.textHtml!,
-                                                          index: i, color: optionColor)
-            if attemptAnswer.isCorrect! {
-                correctAnswerHtml += "\n" + WebViewUtils.getCorrectAnswerIndexWithTags(index: i);
+                html += "\n" + WebViewUtils.getOptionWithTags(
+                    optionText: attemptAnswer.textHtml,
+                    index: i,
+                    color: optionColor
+                )
+                if attemptAnswer.isCorrect {
+                    correctAnswerHtml += WebViewUtils.getCorrectAnswerIndexWithTags(index: i)
+                }
+            } else if isNumericalType {
+                correctAnswerHtml = attemptAnswer.textHtml
+            } else {
+                if i == 0 {
+                    html += "<table width='100%' style='margin-top:0px; margin-bottom:15px;'>"
+                        + WebViewUtils.getShortAnswerHeadersWithTags()
+                }
+                html += WebViewUtils.getShortAnswersWithTags(
+                    shortAnswerText: attemptAnswer.textHtml,
+                    marksAllocated: attemptAnswer.marks!
+                )
+                if i == attemptQuestion.answers.count - 1 {
+                    html += "</table>"
+                }
             }
         }
         
-        // Add correct answer
-        html += "<div style='display:block;'>" +
-            WebViewUtils.getReviewHeadingTags(headingText: Strings.CORRECT_ANSWER) +
-            correctAnswerHtml +
-        "</div>";
+        if attemptQuestion.isEssayType  {
+            html += getUserEssayAnswer()
+            html += getEssayMarks()
+        }
+        
+        
+        if isShortAnswerType || isNumericalType {
+            html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+                WebViewUtils.getReviewHeadingTags(headingText: Strings.YOUR_ANSWER) +
+                (attemptItem.shortText ?? "") +
+            "</div>"
+        }
+        
+        if isSingleMCQType || isMultipleMCQType || isNumericalType {
+            // Add correct answer
+            html += "<div style='display:block;'>" +
+                WebViewUtils.getReviewHeadingTags(headingText: Strings.CORRECT_ANSWER) +
+                correctAnswerHtml +
+            "</div>"
+        }
+        
+        if isShortAnswerType || isNumericalType {
+            html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+                WebViewUtils.getReviewHeadingTags(headingText: Strings.MARKS_AWARDED) +
+                (attemptItem.marks ?? "")! +
+            "</div>"
+            if isShortAnswerType {
+                let note = attemptQuestion.isCaseSensitive ?
+                    Strings.CASE_SENSITIVE : Strings.CASE_INSENSITIVE
+                
+                html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+                    WebViewUtils.getReviewHeadingTags(headingText: Strings.NOTE) +
+                    note +
+                "</div>"
+            }
+        }
         
         // Add explanation
         let explanationHtml = attemptQuestion.explanationHtml
@@ -285,11 +357,11 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             "</div>";
         }
         // Add Subject
-        if attemptQuestion.subject != nil && !attemptQuestion.subject!.isEmpty &&
-            !attemptQuestion.subject!.elementsEqual("Uncategorized") {
+        if !attemptQuestion.subject.isEmpty &&
+            !attemptQuestion.subject.elementsEqual("Uncategorized") {
                 html += WebViewUtils.getReviewHeadingTags(headingText: Strings.SUBJECT_HEADING)
                 html += "<div class='subject'>" +
-                    attemptQuestion.subject! +
+                    attemptQuestion.subject +
                 "</div>";
         }
         html += "</div>"
@@ -321,14 +393,61 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         return html + "</div>"
     }
     
+    func getUserEssayAnswer() -> String {
+        return "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+            WebViewUtils.getReviewHeadingTags(headingText: Strings.YOUR_ANSWER) +
+            (attemptItem.essayText ?? "") +
+        "</div>"
+    }
+    
+    func getEssayMarks() -> String {
+        return "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+            WebViewUtils.getReviewHeadingTags(headingText: Strings.MARKS_AWARDED) +
+            (attemptItem.marks ?? "")! +
+        "</div>"
+    }
+    
     func getHtmlAboveQuestion() -> String {
         // Add index
-        var html = "<div class='review-question-index'>\((attemptItem!.index)! + 1)</div>"
+        var html = "<div class='review-question-index'>\((attemptItem!.index) + 1)</div>"
         if (Constants.BOOKMARKS_ENABLED) {
             let attemptItemBookmarked = attemptItem!.bookmarkId != nil
             html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: attemptItemBookmarked)
         }
         return html
+    }
+    
+    func onClickMoveButton() {
+    }
+    
+    func removeBookmark() {
+    }
+    
+    func displayRemoveButton() {
+    }
+    
+    func onClickBookmarkButton() {
+        self.evaluateJavaScript("hideBookmarkButton();")
+    }
+    
+    func getBookMarkParams() -> Parameters? {
+        var parameters: Parameters = Parameters()
+        parameters["object_id"] = self.attemptItem.id
+        parameters["content_type"] = ["model": "userselectedanswer", "app_label": "exams"]
+        return parameters
+    }
+    
+    func updateBookmark(bookmarkId: Int?) {
+        self.attemptItem.bookmarkId = bookmarkId
+        self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
+    }
+    
+    func displayBookmarkButton() {
+        self.evaluateJavaScript("displayBookmarkButton();")
+    }
+    
+    func displayMoveButton() {
+        self.evaluateJavaScript("displayMoveButton();")
     }
     
 }

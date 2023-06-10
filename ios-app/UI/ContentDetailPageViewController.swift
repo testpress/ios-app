@@ -27,6 +27,7 @@ import UIKit
 
 class ContentDetailPageViewController: UIViewController, UIPageViewControllerDelegate {
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var contentsContainerView: UIView!
     @IBOutlet weak var prevArrow: UIImageView!
     @IBOutlet weak var prevButton: UIButton!
@@ -38,6 +39,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var bottomNavigationBar: UIStackView!
     @IBOutlet weak var bottomNavigationBarConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bookmarkButton: UIBarButtonItem!
     
     let bottomGradient = CAGradientLayer()
     var pageViewController: UIPageViewController!
@@ -48,9 +50,12 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     var position: Int!
     var emptyView: EmptyView!
     var activityIndicator: UIActivityIndicatorView!
+    var url: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
+
         
         pageViewController = UIPageViewController(
             transitionStyle: .scroll,
@@ -58,10 +63,10 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
             options: nil
         )
         pageViewController.delegate = self
-        addChildViewController(pageViewController)
+        addChild(pageViewController)
         contentsContainerView.addSubview(pageViewController.view)
         pageViewController.view.frame = contentsContainerView.bounds
-        pageViewController.didMove(toParentViewController: self)
+        pageViewController.didMove(toParent: self)
         // Set navigation buttons click listener
         let previousButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onClickPreviousButton(sender:)))
@@ -81,10 +86,23 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         contentDetailDataSource = ContentDetailDataSource(contents, contentAttemptCreationDelegate)
         navigationBarItem.title = title
         if contents.count < 2 {
-            bottomShadowView.isHidden = true
-            bottomNavigationBar.isHidden = true
-            bottomNavigationBarConstraint.constant = 0
+            hideBottomNavBar()
         }
+        disableSwipeGesture()
+    }
+    
+    func hideNavbarTitle() {
+        navigationBarItem.title = ""
+    }
+    
+    func hideBottomNavBar() {
+        bottomShadowView.isHidden = true
+        bottomNavigationBar.isHidden = true
+    }
+    
+    func showBottomNavbar() {
+        bottomShadowView.isHidden = false
+        bottomNavigationBar.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +112,24 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
                 loadContent()
             } else {
                 setFirstViewController()
+            }
+        }
+
+        enableBookmarkOption()
+    }
+    
+    func enableBookmarkOption() {
+        if !(pageViewController.viewControllers?.isEmpty)! {
+            if getCurrentIndex() != -1 && contentDetailDataSource.viewControllerAtIndex(getCurrentIndex())! is VideoContentViewController {
+                navigationBarItem.rightBarButtonItems = [bookmarkButton]
+                bookmarkButton.isEnabled = true
+                bookmarkButton.image = Images.AddBookmark.image
+                if contents[getCurrentIndex()].bookmarkId.value != nil {
+                    bookmarkButton.image = Images.RemoveBookmark.image
+                }
+            } else {
+                bookmarkButton.isEnabled = false
+                bookmarkButton.image = nil
             }
         }
     }
@@ -138,7 +174,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         }
         
         let viewController = contentDetailDataSource.viewControllerAtIndex(index)!
-        let direction: UIPageViewControllerNavigationDirection =
+        let direction: UIPageViewController.NavigationDirection =
             index > currentIndex ? .forward : .reverse
         
         pageViewController.setViewControllers([viewController] , direction: direction,
@@ -177,15 +213,28 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     func updateCurrentExamContent() {
-        let content = contents[getCurrentIndex()]
         if let viewController =
             getCurretViewController() as? ContentExamAttemptsTableViewController {
 
             viewController.attempts.removeAll()
-            viewController.loadAttemptsWithProgress(url: content.attemptsUrl)
+            let content = viewController.content!
+            viewController.loadAttemptsWithProgress(url: content.getAttemptsUrl())
         } else {
             contentAttemptCreationDelegate?.newAttemptCreated()
             updateContent()
+        }
+    }
+    
+    func enableSwipeGesture() {
+        pageViewController.dataSource = contentDetailDataSource
+    }
+    
+    func disableSwipeGesture() {
+        pageViewController.dataSource = nil
+        for view in self.pageViewController!.view.subviews {
+            if let subView = view as? UIScrollView {
+                subView.bounces = false
+            }
         }
     }
     
@@ -194,7 +243,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         let content = contents[getCurrentIndex()]
         TPApiClient.request(
             type: Content.self,
-            endpointProvider: TPEndpointProvider(.get, url: content.url),
+            endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
             completion: {
                 content, error in
                 if let error = error {
@@ -252,7 +301,6 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
                     
                     return
                 }
-                
                 self.contents[self.position] = content!
                 self.contentDetailDataSource.contents = self.contents
                 self.setFirstViewController()
@@ -261,13 +309,24 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     }
     
     @IBAction func back() {
-        dismiss(animated: true, completion: nil)
+        if let navigationViewController = self.view.window?.rootViewController?.presentedViewController?.presentedViewController as? UINavigationController {
+            navigationViewController.dismiss(animated: true)
+        } else {
+            dismiss(animated: true)
+        }
+    }
+    
+    @IBAction func bookMark(_ sender: UIBarButtonItem) {
+        if let viewController = self.getCurretViewController() as? VideoContentViewController {
+            viewController.addOrRemoveBookmark(content: nil)
+        }
     }
     
     override func viewDidLayoutSubviews() {
         // Add gradient shadow layer to the shadow container view
         UIUtils.updateBottomShadow(bottomShadowView: bottomShadowView,
                                    bottomGradient: bottomGradient)
+        emptyView.frame = contentsContainerView.bounds
         
     }
     

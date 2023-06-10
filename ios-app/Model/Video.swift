@@ -24,22 +24,44 @@
 //
 
 import ObjectMapper
+import RealmSwift
 
-public class Video {
-    var url: String!
-    var id: Int!
-    var title: String!
-    var embedCode: String!
+
+class Video: DBModel {
+    @objc dynamic var url: String = ""
+    @objc dynamic var title: String = ""
+    @objc dynamic var embedCode: String = ""
+    @objc dynamic var duration: String = ""
+
+    var streams = List<Stream>()
     
-    public required init?(map: Map) {
+    func getHlsUrl() -> String {
+        var url = self.url
+        if let hlsURL = self.streams.first(where: {$0.hlsUrl.isNotEmpty}) {
+            url = hlsURL.hlsUrl
+        } else if let hls = self.streams.first(where: {$0.format == "HLS"}) {
+            url = hls.url
+        }
+        return url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? url
     }
-}
+    
+    var isDRMProtected: Bool {
+        get {
+            return self.streams.contains(where: {$0.hlsUrl.isNotEmpty})
+        }
+    }
+    
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
 
-extension Video: TestpressModel {
-    public func mapping(map: Map) {
+
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         title <- map["title"]
         embedCode <- map["embed_code"]
+        streams <- (map["streams"], ListTransform<Stream>())
+        duration <- (map["duration"], StringTransform())
     }
 }

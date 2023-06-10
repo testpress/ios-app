@@ -68,9 +68,24 @@ class WebViewUtils {
         header += "<link rel='stylesheet' type='text/css' href='post.css' />"
         header += "<link rel='stylesheet' type='text/css' href='icomoon/style.css' />"
         header += "<script src='comments.js'></script>"
-        header += "<link rel='stylesheet' href='katex/katex.min.css' />"
-        header += "<script src='katex/katex.min.js'></script>"
-        header += "<script src='katex/contrib/auto-render.min.js'></script>"
+        header += "<script src='pseudo_element_selector.js'></script>"
+        header += "<script type='text/x-mathjax-config'>" +
+            "    MathJax.Hub.Config({" +
+            "      messageStyle: 'none'," +
+            "      tex2jax: {" +
+            "        inlineMath: [['\\\\[','\\\\]'], ['\\\\(','\\\\)']]," +
+            "        displayMath: [ ['$$','$$'] ]," +
+            "        processEscapes: true" +
+            "      }" +
+            "    });" +
+            "</script>" +
+            "<script src='MathJax-2.7.1/MathJax.js?noContrib'></script>" +
+            "<script type='text/x-mathjax-config'>" +
+            "    MathJax.Ajax.config.path['MathJax'] = 'MathJax-2.7.1';" +
+            "    MathJax.Ajax.config.path['Contrib'] = 'MathJax-2.7.1/contrib';" +
+            "</script>" +
+            "<script src='MathJax-2.7.1/config/TeX-MML-AM_CHTML-full.js'></script>" +
+            "<script src='MathJax-2.7.1/extensions/TeX/mhchem3/mhchem.js'></script>"
         return header
     }
     
@@ -97,7 +112,7 @@ class WebViewUtils {
         
     }
     
-    public static func getOptionWithTags(optionText: String, index: Int, color: String?) -> String {
+    public static func getOptionWithTags(optionText: String, index: Int, color: String?, isCorrect:Bool = false) -> String {
         var html = "\n<div class='review-option-item'>"
         if color == nil {
             html += "<div class='alphabetical-option-ring-general'>"
@@ -106,7 +121,11 @@ class WebViewUtils {
                 color! + "'>"
         }
         html += "\(Character(UnicodeScalar(65 + index)!))</div>"
-        html += "<div>" + optionText + "</div>"
+        if (isCorrect) {
+            html += "<div class='is-correct'>" + optionText + "</div>"
+        } else {
+            html += "<div>" + optionText + "</div>"
+        }
         html += "</div>"
         return html
     }
@@ -118,6 +137,25 @@ class WebViewUtils {
     
     public static func getReviewHeadingTags(headingText: String) -> String {
         return "<div class='review-heading'>" + headingText + "</div>"
+    }
+    
+    public static func getShortAnswerHeadersWithTags() -> String {
+        return "" +
+            "<tr>" +
+            "   <th class='short_answer_option_item table-without-border'>Answers</th>" +
+            "   <th class='short_answer_option_item table-without-border'>Marks</th>" +
+            "</tr>"
+    }
+    
+    public static func getShortAnswersWithTags(shortAnswerText: String,
+                                               marksAllocated: String) -> String {
+        return "" +
+            "<tr>" +
+            "   <td class='short_answer_option_item table-without-border'>" +
+                shortAnswerText + "</td>" +
+            "   <td class='short_answer_option_item table-without-border'>" +
+                marksAllocated + "%</td>" +
+            "</tr>";
     }
     
     public static func getFormattedTitle(title: String,
@@ -135,9 +173,9 @@ class WebViewUtils {
     }
     
     public static func getFormattedDiscussionTitle(post: Post) -> String {
-        let timeIconData = UIImagePNGRepresentation(Images.TimeIcon.image)
+        let timeIconData = Images.TimeIcon.image.pngData()
         let encodedTimeIcon = timeIconData?.base64EncodedString()
-        let viewsIconData = UIImagePNGRepresentation(Images.ViewsIcon.image)
+        let viewsIconData = Images.ViewsIcon.image.pngData()
         let encodedViewsIcon = viewsIconData?.base64EncodedString()
         var html = "<div class='discussion_title'>" + post.title + "</div>"
         
@@ -261,4 +299,7 @@ class WebViewUtils {
         return "<img src='" + imageUrl + "'/>"
     }
     
+    public static func addWaterMark(imageUrl: String) -> String {
+         return "addWatermark('\(imageUrl)');"
+    }
 }

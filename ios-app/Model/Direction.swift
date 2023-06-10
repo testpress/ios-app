@@ -25,18 +25,16 @@
 
 import ObjectMapper
 
-public class Direction {
+class Direction: DBModel {
     
-    var id: Int!
-    var html: String!
-    
-    public required init?(map: Map) {
-    }
-}
+    @objc dynamic var html: String = ""
 
-extension Direction: TestpressModel {
-    public func mapping(map: Map) {
+    public override func mapping(map: Map) {
         id <- map["id"]
         html <- map["html"]
+    }
+    
+    public override class func primaryKey() -> String? {
+        return "id"
     }
 }
