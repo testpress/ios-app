@@ -8,8 +8,7 @@
 
 import UIKit
 import AVKit
-import M3U8KitDynamic
-import SwiftKeychainWrapper
+import M3U8Kit
 import MarqueeLabel
 
 
