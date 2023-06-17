@@ -272,7 +272,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         UIApplication.shared.keyWindow?.removeVideoPlayerView()
         view.addSubview(videoPlayerView)
         
-        if (self.getCurrentOrientation().isLandscape) {
+        if (getCurrentOrientation().isLandscape) {
             playerFrame = UIScreen.main.bounds
             UIApplication.shared.keyWindow!.addSubview(videoPlayerView)
         }
@@ -281,32 +281,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         videoPlayerView.layoutIfNeeded()
         videoPlayerView.playerLayer?.frame = playerFrame
     }
-    
-    func getCurrentOrientation() -> UIInterfaceOrientation {
-        if #available(iOS 16.0, *) {
-            if let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation {
-                return orientation
-            }
-        } else {
-            let deviceOrientation = UIDevice.current.orientation
-            switch deviceOrientation {
-            case .portrait:
-                return .portrait
-            case .portraitUpsideDown:
-                return .portraitUpsideDown
-            case .landscapeLeft:
-                return .landscapeRight
-            case .landscapeRight:
-                return .landscapeLeft
-            default:
-                break
-            }
-        }
-        
-        return .unknown
-    }
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers()
@@ -468,8 +443,13 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
 }
 
 extension VideoContentViewController: VideoPlayerDelegate {
+    
+    func showOptionsMenu() {
+        displayOptions()
+    }
+    
     func toggleFullScreen() {
-        if self.getCurrentOrientation().isLandscape {
+        if getCurrentOrientation().isLandscape {
             changeDeviceOrientation(orientation: .portrait)
         } else {
             changeDeviceOrientation(orientation: .landscapeRight)
@@ -478,16 +458,12 @@ extension VideoContentViewController: VideoPlayerDelegate {
     }
     
     func changeDeviceOrientation(orientation: UIInterfaceOrientationMask) {
-            if #available(iOS 16.0, *) {
-                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: orientation))
-            } else {
-                UIDevice.current.setValue(orientation.toUIInterfaceOrientation.rawValue, forKey: "orientation")
-            }
+        if #available(iOS 16.0, *) {
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: orientation))
+        } else {
+            UIDevice.current.setValue(orientation.toUIInterfaceOrientation.rawValue, forKey: "orientation")
         }
-    
-    func showOptionsMenu() {
-        displayOptions()
     }
 }
 
