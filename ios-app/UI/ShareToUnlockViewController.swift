@@ -11,7 +11,6 @@ import UIKit
 class ShareToUnlockViewController: UIViewController {
     var shareText: String = ""
     var onShareCompletion: (() -> Void)?
-    var activityViewController: UIActivityViewController? = nil
     
     @IBOutlet weak var shareButton: UIButton!
     
@@ -26,13 +25,8 @@ class ShareToUnlockViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        setUpPopover()
-    }
-    
-    @IBAction func share(_ sender: Any) {
-        activityViewController = UIActivityViewController(activityItems:
+    @IBAction func share(_ sender: UIButton) {
+        let activityViewController = UIActivityViewController(activityItems:
             [shareText], applicationActivities: nil)
         let excludeActivities = [
             UIActivity.ActivityType.print,
@@ -44,26 +38,16 @@ class ShareToUnlockViewController: UIViewController {
             UIActivity.ActivityType.airDrop,
             UIActivity.ActivityType.copyToPasteboard
         ]
-        activityViewController?.excludedActivityTypes = excludeActivities;
-        setUpPopover()
-        activityViewController?.completionWithItemsHandler = {(activityType:
+        activityViewController.excludedActivityTypes = excludeActivities;
+        activityViewController.popoverPresentationController?.sourceView = sender
+        activityViewController.completionWithItemsHandler = {(activityType:
             UIActivity.ActivityType?, completed: Bool, returnedItems:[Any]?, error: Error?) in
             if (completed) {
                 self.onShareCompletion?()
             }
         }
-        self.present(activityViewController!, animated: true, completion: nil)
+        self.present(activityViewController, animated: true,
+                     completion: nil)
     }
-
-    func setUpPopover() {
-        if let popoverPresentationController = activityViewController?.popoverPresentationController {
-            popoverPresentationController.sourceView = self.view
-            popoverPresentationController.permittedArrowDirections = []
-            let screenWidth = UIScreen.main.bounds.width
-            let screenHeight = UIScreen.main.bounds.height
-            let centerPoint = CGPoint(x: screenWidth / 2, y: screenHeight / 2)
-            popoverPresentationController.sourceRect = CGRect(origin: centerPoint, size: .zero)
-        }
-    }
     
 }
