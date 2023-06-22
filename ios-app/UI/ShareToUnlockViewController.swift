@@ -48,6 +48,6 @@ class ShareToUnlockViewController: UIViewController {
         }
         self.present(activityViewController, animated: true,
                      completion: nil)
+
     }
-    
 }
