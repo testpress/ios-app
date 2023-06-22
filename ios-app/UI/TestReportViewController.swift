@@ -153,7 +153,7 @@ class TestReportViewController: UIViewController {
             analyticsButtonLayout.isHidden = true
         }
     }
-
+    
     @IBAction func showSolutions(_ sender: UIButton) {
         showSolutionsScreen()
     }
