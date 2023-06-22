@@ -117,10 +117,19 @@ class TestReportViewController: UIViewController {
         } else {
             shareButtonLayout.isHidden = true
             showOrHideAnalytics()
-            solutionButtonLayout.isHidden = false
+            showOrHideSolutions()
             solutionsButton.setImage(nil, for: .normal)
         }
     }
+
+    private func showOrHideSolutions() {
+        if (exam.showAnswers) {
+            solutionButtonLayout.isHidden = false
+        } else {
+            solutionButtonLayout.isHidden = true
+        }
+    }
+
     @IBAction func showShareScreen(_ sender: Any) {
         let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
@@ -144,7 +153,7 @@ class TestReportViewController: UIViewController {
             analyticsButtonLayout.isHidden = true
         }
     }
-    
+
     @IBAction func showSolutions(_ sender: UIButton) {
         showSolutionsScreen()
     }
