@@ -68,7 +68,7 @@ class TestReportViewController: UIViewController {
         examTitle.text = exam!.title
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-        
+
         totalQuestions.text = String(exam.numberOfQuestions)
         totalMarks.text = exam.totalMarks
         totalTime.text = String(exam.duration)
@@ -90,7 +90,7 @@ class TestReportViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         showOrHideLockIconInSolutionButton()
     }
-    
+
     func showOrHideRank() {
         if attempt.rankEnabled {
             rank.text = String.getValue(attempt!.rank)
@@ -115,7 +115,7 @@ class TestReportViewController: UIViewController {
             percentileLayout.isHidden = true
         }
     }
-    
+
     func showOrHideLockIconInSolutionButton() {
         if ((exam.isGrowthHackEnabled ?? false) && (exam.getNumberOfTimesShared() < 2)) {
             shareButtonLayout.isHidden = false
