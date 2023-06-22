@@ -80,7 +80,7 @@ class TestReportViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         showOrHideLockIconInSolutionButton()
     }
-    
+
     private func setExamDetails() {
         examTitle.text = exam?.title ?? "Custom Module"
         totalQuestions.text = String(exam?.numberOfQuestions ?? attempt.totalQuestions)
@@ -93,7 +93,7 @@ class TestReportViewController: UIViewController {
         timeTaken.text = attempt!.timeTaken ?? "NA"
         accuracy.text = String(attempt!.accuracy) + "%"
     }
-    
+
     func showOrHideRank() {
         if attempt.rankEnabled {
             rank.text = String.getValue(attempt!.rank)
