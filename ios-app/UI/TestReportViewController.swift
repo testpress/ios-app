@@ -120,7 +120,7 @@ class TestReportViewController: UIViewController {
             percentileLayout.isHidden = true
         }
     }
-    
+
     func showOrHideLockIconInSolutionButton() {
         if (exam != nil && (exam!.isGrowthHackEnabled) && (exam!.getNumberOfTimesShared() < 2)) {
             shareButtonLayout.isHidden = false
