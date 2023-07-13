@@ -69,25 +69,9 @@ class TestReportViewController: UIViewController {
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
         
-        if !(attempt!.rankEnabled) || String.getValue(attempt!.rank) == "NA" {
-            rankLayout.isHidden = true
-        } else {
-            rank.text = String.getValue(attempt!.rank)
-            maxRank.text = String.getValue(attempt!.maxRank)
-        }
         totalQuestions.text = String(exam.numberOfQuestions)
         totalMarks.text = exam.totalMarks
         totalTime.text = String(exam.duration)
-        if !exam.showScore || attempt.score == "NA" {
-            scoreLayout.isHidden = true
-        } else {
-            score.text = attempt.score!
-        }
-        if !exam.showPercentile || attempt.percentile == 0 {
-            percentileLayout.isHidden = true
-        } else {
-            percentile.text = String(attempt.percentile)
-        }
         percentage.text = attempt.percentage
         cutoff.text = String(exam.passPercentage)
         correct.text = String(attempt!.correctCount)
@@ -97,11 +81,39 @@ class TestReportViewController: UIViewController {
         UIUtils.setButtonDropShadow(solutionsButton)
         UIUtils.setButtonDropShadow(analyticsButton)
         UIUtils.setButtonDropShadow(timeAnalyticsButton)
+        showOrHideRank()
+        showOrHideScore()
+        showOrHidePercentile()
         showOrHideLockIconInSolutionButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         showOrHideLockIconInSolutionButton()
+    }
+    
+    func showOrHideRank() {
+        if attempt.rankEnabled {
+            rank.text = String.getValue(attempt!.rank)
+            maxRank.text = String.getValue(attempt!.maxRank)
+        } else {
+            rankLayout.isHidden = true
+        }
+    }
+
+    func showOrHideScore() {
+        if exam.showScore && attempt.hasScore() {
+            score.text = attempt.score!
+        } else {
+            scoreLayout.isHidden = true
+        }
+    }
+
+    func showOrHidePercentile() {
+        if exam.showPercentile && attempt.percentile != 0 {
+            percentile.text = String(attempt.percentile)
+        } else {
+            percentileLayout.isHidden = true
+        }
     }
     
     func showOrHideLockIconInSolutionButton() {
