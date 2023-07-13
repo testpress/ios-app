@@ -63,8 +63,12 @@ class TestReportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setStatusBarColor()
+
+        
         examTitle.text = exam!.title
-        date.text = FormatDate.format(dateString: attempt!.date!, givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+        date.text = FormatDate.format(dateString: attempt!.date!,
+                                      givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+        
         totalQuestions.text = String(exam.numberOfQuestions)
         totalMarks.text = exam.totalMarks
         totalTime.text = String(exam.duration)
@@ -83,6 +87,10 @@ class TestReportViewController: UIViewController {
         showOrHideLockIconInSolutionButton()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        showOrHideLockIconInSolutionButton()
+    }
+    
     func showOrHideRank() {
         if attempt.rankEnabled {
             rank.text = String.getValue(attempt!.rank)
@@ -91,7 +99,7 @@ class TestReportViewController: UIViewController {
             rankLayout.isHidden = true
         }
     }
-    
+
     func showOrHideScore() {
         if exam.showScore && attempt.hasScore() {
             score.text = attempt.score!
@@ -99,7 +107,7 @@ class TestReportViewController: UIViewController {
             scoreLayout.isHidden = true
         }
     }
-    
+
     func showOrHidePercentile() {
         if exam.showPercentile && attempt.percentile != 0 {
             percentile.text = String(attempt.percentile)
@@ -107,7 +115,7 @@ class TestReportViewController: UIViewController {
             percentileLayout.isHidden = true
         }
     }
-
+    
     func showOrHideLockIconInSolutionButton() {
         if ((exam.isGrowthHackEnabled ?? false) && (exam.getNumberOfTimesShared() < 2)) {
             shareButtonLayout.isHidden = false
@@ -125,14 +133,6 @@ class TestReportViewController: UIViewController {
             solutionsButton.setImage(nil, for: .normal)
         }
     }
-    
-    private func showOrHideAnalytics() {
-        if (exam.showAnalytics) {
-            analyticsButtonLayout.isHidden = false
-        } else {
-            analyticsButtonLayout.isHidden = true
-        }
-    }
 
     private func showOrHideSolutions() {
         if (exam.showAnswers) {
@@ -142,23 +142,6 @@ class TestReportViewController: UIViewController {
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        showOrHideLockIconInSolutionButton()
-    }
-    
-    // Set frames of the views in this method to support both portrait & landscape view
-    override func viewDidLayoutSubviews() {
-        // Add gradient shadow layer to the shadow container view
-        let bottomGradient = CAGradientLayer()
-        bottomGradient.frame = bottomShadowView.bounds
-        bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
-        bottomShadowView.layer.addSublayer(bottomGradient)
-        
-        // Set scroll view content height to support the scroll
-        scrollView.contentSize.height = contentView.frame.size.height
-    }
-
-    
     @IBAction func showShareScreen(_ sender: Any) {
         let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
@@ -175,6 +158,31 @@ class TestReportViewController: UIViewController {
         self.present(viewController, animated: true, completion: nil)
     }
     
+    private func showOrHideAnalytics() {
+        if (exam.showAnalytics) {
+            analyticsButtonLayout.isHidden = false
+        } else {
+            analyticsButtonLayout.isHidden = true
+        }
+    }
+    
+    @IBAction func showSolutions(_ sender: UIButton) {
+        showSolutionsScreen()
+    }
+
+    
+    func showSolutionsScreen() {
+        let slideMenuController = self.storyboard?.instantiateViewController(withIdentifier:
+        Constants.REVIEW_NAVIGATION_VIEW_CONTROLLER) as! UINavigationController
+    
+        let viewController =
+        slideMenuController.viewControllers.first as! ReviewSlidingViewController
+    
+        viewController.exam = exam
+        viewController.attempt = attempt
+        self.present(slideMenuController, animated: true, completion: nil)
+    }
+    
     @IBAction func showSubjectAnalytics(_ sender: UIButton) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier:
             Constants.SUBJECT_ANALYTICS_TAB_VIEW_CONTROLLER) as! SubjectAnalyticsTabViewController
@@ -189,22 +197,6 @@ class TestReportViewController: UIViewController {
         
         viewController.attempt = attempt
         present(viewController, animated: true, completion: nil)
-    }
-    
-    @IBAction func showSolutions(_ sender: UIButton) {
-        showSolutionsScreen()
-    }
-    
-    func showSolutionsScreen() {
-        let slideMenuController = self.storyboard?.instantiateViewController(withIdentifier:
-        Constants.REVIEW_NAVIGATION_VIEW_CONTROLLER) as! UINavigationController
-    
-        let viewController =
-        slideMenuController.viewControllers.first as! ReviewSlidingViewController
-    
-        viewController.exam = exam
-        viewController.attempt = attempt
-        self.present(slideMenuController, animated: true, completion: nil)
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
@@ -249,11 +241,6 @@ class TestReportViewController: UIViewController {
         }
     }
     
-    func goToAccessCodeExamsViewController(_ viewController: AccessCodeExamsViewController) {
-        viewController.items.removeAll()
-        viewController.dismiss(animated: false, completion: nil)
-    }
-    
     func goToContentDetailPageViewController(_ contentDetailPageViewController: UIViewController) {
         let contentDetailPageViewController =
             contentDetailPageViewController as! ContentDetailPageViewController
@@ -270,4 +257,22 @@ class TestReportViewController: UIViewController {
             contentDetailPageViewController.updateCurrentExamContent()
         })
     }
+    
+    func goToAccessCodeExamsViewController(_ viewController: AccessCodeExamsViewController) {
+        viewController.items.removeAll()
+        viewController.dismiss(animated: false, completion: nil)
+    }
+    
+    // Set frames of the views in this method to support both portrait & landscape view
+    override func viewDidLayoutSubviews() {
+        // Add gradient shadow layer to the shadow container view
+        let bottomGradient = CAGradientLayer()
+        bottomGradient.frame = bottomShadowView.bounds
+        bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+        bottomShadowView.layer.addSublayer(bottomGradient)
+        
+        // Set scroll view content height to support the scroll
+        scrollView.contentSize.height = contentView.frame.size.height
+    }
+
 }
