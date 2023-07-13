@@ -64,7 +64,7 @@ class TestReportViewController: UIViewController {
         super.viewDidLoad()
         self.setStatusBarColor()
 
-        
+
         examTitle.text = exam!.title
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
@@ -170,7 +170,7 @@ class TestReportViewController: UIViewController {
         showSolutionsScreen()
     }
 
-    
+
     func showSolutionsScreen() {
         let slideMenuController = self.storyboard?.instantiateViewController(withIdentifier:
         Constants.REVIEW_NAVIGATION_VIEW_CONTROLLER) as! UINavigationController
@@ -186,19 +186,19 @@ class TestReportViewController: UIViewController {
     @IBAction func showSubjectAnalytics(_ sender: UIButton) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier:
             Constants.SUBJECT_ANALYTICS_TAB_VIEW_CONTROLLER) as! SubjectAnalyticsTabViewController
-        
+
         viewController.analyticsUrl = attempt!.url + TPEndpoint.getAttemptSubjectAnalytics.urlPath
         present(viewController, animated: true, completion: nil)
     }
-    
+
     @IBAction func showTimeAnalytics(_ sender: UIButton) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier:
             Constants.TIME_ANALYTICS_TABLE_VIEW_CONTROLLER) as! TimeAnalyticsTableViewController
-        
+
         viewController.attempt = attempt
         present(viewController, animated: true, completion: nil)
     }
-    
+
     @IBAction func back(_ sender: UIBarButtonItem) {
         let presentingViewController =
             self.presentingViewController?.presentingViewController?.presentingViewController
@@ -240,7 +240,7 @@ class TestReportViewController: UIViewController {
             dismiss(animated: true, completion: nil)
         }
     }
-    
+
     func goToContentDetailPageViewController(_ contentDetailPageViewController: UIViewController) {
         let contentDetailPageViewController =
             contentDetailPageViewController as! ContentDetailPageViewController
@@ -257,12 +257,12 @@ class TestReportViewController: UIViewController {
             contentDetailPageViewController.updateCurrentExamContent()
         })
     }
-    
+
     func goToAccessCodeExamsViewController(_ viewController: AccessCodeExamsViewController) {
         viewController.items.removeAll()
         viewController.dismiss(animated: false, completion: nil)
     }
-    
+
     // Set frames of the views in this method to support both portrait & landscape view
     override func viewDidLayoutSubviews() {
         // Add gradient shadow layer to the shadow container view
@@ -270,7 +270,7 @@ class TestReportViewController: UIViewController {
         bottomGradient.frame = bottomShadowView.bounds
         bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
         bottomShadowView.layer.addSublayer(bottomGradient)
-        
+
         // Set scroll view content height to support the scroll
         scrollView.contentSize.height = contentView.frame.size.height
     }
