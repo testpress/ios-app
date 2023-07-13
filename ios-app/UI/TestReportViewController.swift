@@ -96,7 +96,7 @@ class TestReportViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         showOrHideLockIconInSolutionButton()
     }
-
+    
     func showOrHideRank() {
         if attempt.rankEnabled {
             rank.text = String.getValue(attempt!.rank)
@@ -125,7 +125,7 @@ class TestReportViewController: UIViewController {
             percentileLayout.isHidden = true
         }
     }
-
+    
     func showOrHideLockIconInSolutionButton() {
         if (exam != nil && (exam!.isGrowthHackEnabled ?? false) && (exam!.getNumberOfTimesShared() < 2)) {
             shareButtonLayout.isHidden = false
@@ -184,7 +184,7 @@ class TestReportViewController: UIViewController {
         showSolutionsScreen()
     }
 
-
+    
     func showSolutionsScreen() {
         let slideMenuController = self.storyboard?.instantiateViewController(withIdentifier:
         Constants.REVIEW_NAVIGATION_VIEW_CONTROLLER) as! UINavigationController
@@ -200,11 +200,11 @@ class TestReportViewController: UIViewController {
     @IBAction func showSubjectAnalytics(_ sender: UIButton) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier:
             Constants.SUBJECT_ANALYTICS_TAB_VIEW_CONTROLLER) as! SubjectAnalyticsTabViewController
-
+        
         viewController.analyticsUrl = attempt!.url + TPEndpoint.getAttemptSubjectAnalytics.urlPath
         present(viewController, animated: true, completion: nil)
     }
-
+    
     @IBAction func showTimeAnalytics(_ sender: UIButton) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier:
             Constants.TIME_ANALYTICS_TABLE_VIEW_CONTROLLER) as! TimeAnalyticsTableViewController
@@ -212,7 +212,7 @@ class TestReportViewController: UIViewController {
         viewController.attempt = attempt
         present(viewController, animated: true, completion: nil)
     }
-
+    
     @IBAction func back(_ sender: UIBarButtonItem) {
         let presentingViewController =
             self.presentingViewController?.presentingViewController?.presentingViewController
@@ -254,7 +254,7 @@ class TestReportViewController: UIViewController {
             dismiss(animated: true, completion: nil)
         }
     }
-
+    
     func goToContentDetailPageViewController(_ contentDetailPageViewController: UIViewController) {
         let contentDetailPageViewController =
             contentDetailPageViewController as! ContentDetailPageViewController
@@ -271,7 +271,7 @@ class TestReportViewController: UIViewController {
             contentDetailPageViewController.updateCurrentExamContent()
         })
     }
-
+    
     func goToAccessCodeExamsViewController(_ viewController: AccessCodeExamsViewController) {
         viewController.items.removeAll()
         viewController.dismiss(animated: false, completion: nil)
@@ -284,7 +284,7 @@ class TestReportViewController: UIViewController {
         bottomGradient.frame = bottomShadowView.bounds
         bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
         bottomShadowView.layer.addSublayer(bottomGradient)
-
+        
         // Set scroll view content height to support the scroll
         scrollView.contentSize.height = contentView.frame.size.height
     }
