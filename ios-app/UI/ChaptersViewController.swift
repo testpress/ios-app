@@ -39,6 +39,11 @@ BaseDBViewController<Chapter> {
     var courseId: Int!
     var parentId: Int? = nil
     var firstCallback: Bool = true
+    var allowCustomTestGeneration: Bool = false
+    
+    @objc func openCustomTestGenereationView() {
+            print("hi -------------")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +57,14 @@ BaseDBViewController<Chapter> {
         collectionView.dataSource = self
         collectionView.backgroundView = emptyView
         emptyView.frame = collectionView.frame
+        showCustomTestIcon()
         self.setStatusBarColor()
+    }
+    
+    func showOrHideCustomTestIcon(){
+        if (allowCustomTestGeneration && parentId == nil) {
+            navigationItemBar.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "custom_test_icon"), style: .plain, target: self, action: #selector(openCustomTestGenereationView))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
