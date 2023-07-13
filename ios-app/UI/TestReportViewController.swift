@@ -199,7 +199,7 @@ class TestReportViewController: UIViewController {
     @IBAction func showTimeAnalytics(_ sender: UIButton) {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier:
             Constants.TIME_ANALYTICS_TABLE_VIEW_CONTROLLER) as! TimeAnalyticsTableViewController
-
+        
         viewController.attempt = attempt
         present(viewController, animated: true, completion: nil)
     }
@@ -269,7 +269,7 @@ class TestReportViewController: UIViewController {
         viewController.items.removeAll()
         viewController.dismiss(animated: false, completion: nil)
     }
-
+    
     // Set frames of the views in this method to support both portrait & landscape view
     override func viewDidLayoutSubviews() {
         // Add gradient shadow layer to the shadow container view
