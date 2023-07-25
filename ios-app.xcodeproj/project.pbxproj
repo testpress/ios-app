@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		031676092A25FFBB00861105 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 031676082A25FFBB00861105 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0316760A2A25FFE000861105 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031676082A25FFBB00861105 /* MobileRTC.xcframework */; };
-		0316760F2A26129E00861105 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0316760E2A26129E00861105 /* MobileRTCResources.bundle */; };
 		1825F5FD212E8BF900AC25E5 /* AttemptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */; };
 		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
@@ -357,6 +354,8 @@
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
 		8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */; };
+		D971C1A42A6FEC3800136155 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D971C1A32A6FEC3800136155 /* MobileRTC.xcframework */; };
+		D971C1A62A6FEC4F00136155 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D971C1A52A6FEC4F00136155 /* MobileRTCResources.bundle */; };
 		D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -383,6 +382,7 @@
 		D9EDF1F52A0CF10800A6CB2E /* XLPagerTabStrip.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F62A0CF10800A6CB2E /* TOCropViewController.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932652A0A28C000866CA8 /* TOCropViewController.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F72A0CF10800A6CB2E /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932632A0A17F200866CA8 /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9F4104B2A6FECBE00753827 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D971C1A32A6FEC3800136155 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -419,7 +419,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				031676092A25FFBB00861105 /* MobileRTC.xcframework in Embed Frameworks */,
+				D9F4104B2A6FECBE00753827 /* MobileRTC.xcframework in Embed Frameworks */,
 				D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */,
 				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
 				D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */,
@@ -453,8 +453,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		031676082A25FFBB00861105 /* MobileRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
-		0316760E2A26129E00861105 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 		1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptSection.swift; sourceTree = "<group>"; };
 		1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainDropDown.swift; sourceTree = "<group>"; };
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
@@ -813,6 +811,8 @@
 		8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoContentViewController.swift; sourceTree = "<group>"; };
 		8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stackview+BackgroundColor.swift"; sourceTree = "<group>"; };
 		9B482AA21F7CADEABC2BF009 /* ios_appTests-ios_appMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ios_appTests-ios_appMocks.generated.swift"; path = "MockingbirdMocks/ios_appTests-ios_appMocks.generated.swift"; sourceTree = "<group>"; };
+		D971C1A32A6FEC3800136155 /* MobileRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
+		D971C1A52A6FEC4F00136155 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -827,7 +827,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0316760A2A25FFE000861105 /* MobileRTC.xcframework in Frameworks */,
+				D971C1A42A6FEC3800136155 /* MobileRTC.xcframework in Frameworks */,
 				2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */,
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
 				25489AA52A0BB621009619FD /* ObjectMapper.xcframework in Frameworks */,
@@ -972,8 +972,7 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
-				0316760E2A26129E00861105 /* MobileRTCResources.bundle */,
-				031676082A25FFBB00861105 /* MobileRTC.xcframework */,
+				D971C1A52A6FEC4F00136155 /* MobileRTCResources.bundle */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
@@ -1042,6 +1041,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D971C1A32A6FEC3800136155 /* MobileRTC.xcframework */,
 				25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */,
 				25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */,
 				25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */,
@@ -1565,7 +1565,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0316760F2A26129E00861105 /* MobileRTCResources.bundle in Resources */,
+				D971C1A62A6FEC4F00136155 /* MobileRTCResources.bundle in Resources */,
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
@@ -2180,7 +2180,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2196,7 +2196,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2213,7 +2213,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2229,7 +2229,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
