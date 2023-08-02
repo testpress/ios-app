@@ -104,18 +104,18 @@ class TestReportViewController: UIViewController {
     }
 
     func showOrHideScore() {
-        if let attemptScore = attempt.score, (exam == nil || exam!.showScore && attempt.hasScore()) {
-            score.text = attemptScore
-            scoreLayout.isHidden = false
+        if exam == nil {
+            score.text = attempt.score!
+        } else if exam!.showScore && attempt.hasScore() {
+            score.text = attempt.score!
         } else {
             scoreLayout.isHidden = true
         }
     }
 
     func showOrHidePercentile() {
-        if let exam = exam, exam.showPercentile, attempt.percentile != 0 {
+        if exam != nil && exam!.showPercentile && attempt.percentile != 0 {
             percentile.text = String(attempt.percentile)
-            percentileLayout.isHidden = false
         } else {
             percentileLayout.isHidden = true
         }
