@@ -67,24 +67,7 @@ class TestReportViewController: UIViewController {
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 
-        if(exam != nil){
-            examTitle.text = exam!.title
-            totalQuestions.text = String(exam!.numberOfQuestions)
-            totalMarks.text = exam!.totalMarks
-            totalTime.text = String(exam!.duration)
-            cutoff.text = String(exam!.passPercentage)
-        } else {
-            examTitle.text = "Custom Module"
-            totalQuestions.text = String(attempt.totalQuestions)
-            totalMarks.text = String("")
-            totalTime.text = String("")
-            cutoff.text = String("")
-        }
-        percentage.text = attempt.percentage
-        correct.text = String(attempt!.correctCount)
-        incorrect.text = String(attempt!.incorrectCount)
-        timeTaken.text = attempt!.timeTaken ?? "NA"
-        accuracy.text = String(attempt!.accuracy) + "%"
+        setExamDetails()
         UIUtils.setButtonDropShadow(solutionsButton)
         UIUtils.setButtonDropShadow(analyticsButton)
         UIUtils.setButtonDropShadow(timeAnalyticsButton)
@@ -98,6 +81,19 @@ class TestReportViewController: UIViewController {
         showOrHideLockIconInSolutionButton()
     }
     
+    private func setExamDetails() {
+        examTitle.text = exam?.title ?? "Custom Module"
+        totalQuestions.text = String(exam?.numberOfQuestions ?? attempt.totalQuestions)
+        totalMarks.text = exam?.totalMarks ?? ""
+        totalTime.text = exam?.duration ?? ""
+        cutoff.text = String(exam?.passPercentage ?? 0.0)
+        percentage.text = attempt.percentage
+        correct.text = String(attempt!.correctCount)
+        incorrect.text = String(attempt!.incorrectCount)
+        timeTaken.text = attempt!.timeTaken ?? "NA"
+        accuracy.text = String(attempt!.accuracy) + "%"
+    }
+    
     func showOrHideRank() {
         if attempt.rankEnabled {
             rank.text = String.getValue(attempt!.rank)
@@ -108,20 +104,18 @@ class TestReportViewController: UIViewController {
     }
 
     func showOrHideScore() {
-        if exam == nil {
-            score.text = attempt.score!
-        } else if exam!.showScore && attempt.hasScore() {
-            score.text = attempt.score!
+        if let attemptScore = attempt.score, (exam == nil || exam!.showScore && attempt.hasScore()) {
+            score.text = attemptScore
+            scoreLayout.isHidden = false
         } else {
             scoreLayout.isHidden = true
         }
     }
 
     func showOrHidePercentile() {
-        if exam == nil {
-            percentileLayout.isHidden = true
-        } else if exam!.showPercentile && attempt.percentile != 0 {
+        if let exam = exam, exam.showPercentile, attempt.percentile != 0 {
             percentile.text = String(attempt.percentile)
+            percentileLayout.isHidden = false
         } else {
             percentileLayout.isHidden = true
         }
@@ -146,12 +140,10 @@ class TestReportViewController: UIViewController {
     }
 
     private func showOrHideSolutions() {
-        if exam == nil {
-            solutionButtonLayout.isHidden = false
-        }else if (exam!.showAnswers) {
-            solutionButtonLayout.isHidden = false
-        } else {
+        if (exam != nil && !exam!.showAnswers) {
             solutionButtonLayout.isHidden = true
+        } else {
+            solutionButtonLayout.isHidden = false
         }
     }
 
@@ -172,12 +164,10 @@ class TestReportViewController: UIViewController {
     }
     
     private func showOrHideAnalytics() {
-        if exam == nil {
-            analyticsButtonLayout.isHidden = false
-        }else if (exam!.showAnalytics) {
-            analyticsButtonLayout.isHidden = false
-        } else {
+        if (exam != nil && !exam!.showAnalytics) {
             analyticsButtonLayout.isHidden = true
+        } else {
+            analyticsButtonLayout.isHidden = false
         }
     }
     
