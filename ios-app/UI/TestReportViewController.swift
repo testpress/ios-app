@@ -76,10 +76,11 @@ class TestReportViewController: UIViewController {
         } else {
             examTitle.text = "Custom Module"
             totalQuestions.text = String(attempt.totalQuestions)
-            totalMarks.text = String("NA")
-            totalTime.text = String("NA")
-            cutoff.text = String("NA")
+            totalMarks.text = String("")
+            totalTime.text = String("")
+            cutoff.text = String("")
         }
+        percentage.text = attempt.percentage
         correct.text = String(attempt!.correctCount)
         incorrect.text = String(attempt!.incorrectCount)
         timeTaken.text = attempt!.timeTaken ?? "NA"
