@@ -127,7 +127,7 @@ class TestReportViewController: UIViewController {
     }
     
     func showOrHideLockIconInSolutionButton() {
-        if (exam != nil && (exam!.isGrowthHackEnabled ?? false) && (exam!.getNumberOfTimesShared() < 2)) {
+        if (exam != nil && (exam!.isGrowthHackEnabled) && (exam!.getNumberOfTimesShared() < 2)) {
             shareButtonLayout.isHidden = false
             analyticsButtonLayout.isHidden = true
             solutionButtonLayout.isHidden = true
@@ -158,7 +158,7 @@ class TestReportViewController: UIViewController {
         let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.SHARE_TO_UNLOCK_VIEW_CONTROLLER) as! ShareToUnlockViewController
-        viewController.shareText = exam!.shareTextForSolutionUnlock ?? ""
+        viewController.shareText = exam!.shareTextForSolutionUnlock
         viewController.onShareCompletion = {
             self.exam!.incrementNumberOfTimesShared()
             if (self.exam!.getNumberOfTimesShared() >= 2) {
