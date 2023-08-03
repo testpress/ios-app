@@ -195,7 +195,7 @@ class StartExamScreenViewController: UIViewController {
         let viewController =
             slideMenuController.viewControllers.first as! TestEngineSlidingViewController
         
-        viewController.exam = exam
+        //viewController.exam = exam
         viewController.attempt = attempt
         viewController.courseContent = content
         viewController.contentAttempt = contentAttempt
