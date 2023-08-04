@@ -169,11 +169,12 @@ BaseDBViewController<Chapter> {
     func showCustomTestPage(_ viewController: UIViewController) {
         let secondViewController = CustomTestGenerationViewController()
         secondViewController.url = "&next=/courses/custom_test_generation/?course_id="+String(courseId)
-        secondViewController.useWebviewNavigation = true
+        secondViewController.useWebviewNavigation = false
         secondViewController.useSSOLogin = true
-        secondViewController.shouldOpenLinksWithinWebview = false
+        secondViewController.shouldOpenLinksWithinWebview = true
         secondViewController.title = "Custom Module"
         secondViewController.displayNavbar = true
+        secondViewController.modalPresentationStyle = .fullScreen
         viewController.present(secondViewController, animated: true)
     }
     

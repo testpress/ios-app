@@ -46,11 +46,28 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
                     return
                 }
                 
-                print(attempt?.url)
-                print(attempt?.id)
-                print(attempt?.date)
+                // Attempt we are receiving here does not contain remaining time because its
+                // infinite timing exam attempt. As our app doesn't support exams with infinite
+                // timing, so we are set 24 hours for remainingTime in this attempt.
+                attempt?.remainingTime = "24:00:00"
+                
+                self.gotoTestEngine(attempt!)
             })
             
+    }
+    
+    func gotoTestEngine(_ attempt : Attempt) {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let slideMenuController = storyboard.instantiateViewController(withIdentifier:
+            Constants.TEST_ENGINE_NAVIGATION_CONTROLLER) as! UINavigationController
+        let viewController =
+            slideMenuController.viewControllers.first as! TestEngineSlidingViewController
+        viewController.attempt = attempt
+        present(slideMenuController, animated: true, completion: nil)
+    }
+    
+    override func onFinishLoadingWebView() {
+        activityIndicator?.stopAnimating()
     }
             
     
