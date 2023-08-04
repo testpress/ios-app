@@ -79,13 +79,13 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         checkExamHasLockedSection()
         setupSectionsDropDown()
     }
-    
+
     private func showOrHideTimer(){
         if(exam == nil) {
             parentSlidingViewController.remainingTimeLabel.isHidden = true
         }
     }
-    
+
     private func hideDropdownContainer() {
         dropdownContainerHeight.constant = 0
         dropdownContainer.isHidden = true
@@ -148,7 +148,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     private func isFirstCourseContentAttempt() -> (Bool) {
         return (courseContent != nil && courseContent.attemptsCount <= 1)
     }
-    
+
     private func isFirstExamAttempt() -> (Bool) {
         return (courseContent == nil && (exam!.attemptsCount == 0 || (exam!.attemptsCount == 1 && exam!.pausedAttemptsCount == 1)))
     }
@@ -599,7 +599,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         ))
         present(alertDialog, animated: true, completion: nil)
     }
-    
+
     func gotoTestReport() {
         let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: nil)
         if contentAttempt != nil {
