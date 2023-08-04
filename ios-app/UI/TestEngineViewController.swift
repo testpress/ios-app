@@ -58,9 +58,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         nextButton.setTitle("NEXT", for: .normal)
         
         setupPauseButtonGesture()
-        hideDropdownContainer()
-        checkExamHasLockedSection()
-        setupSectionsDropDown()
+        initializeDropDownContainerForSections()
         
         if !firstAttemptOfLockedSectionExam {
             nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
@@ -70,8 +68,14 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     
     private func setupPauseButtonGesture() {
         let pauseButtonGesture = UITapGestureRecognizer(target: self, action:
-                                                            #selector(self.onPressPauseButton(sender:)))
+            #selector(self.onPressPauseButton(sender:)))
         parentSlidingViewController.pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
+    }
+    
+    private func initializeDropDownContainerForSections() {
+        hideDropdownContainer()
+        checkExamHasLockedSection()
+        setupSectionsDropDown()
     }
     
     private func hideDropdownContainer() {
