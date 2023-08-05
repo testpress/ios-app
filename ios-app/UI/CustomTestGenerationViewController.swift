@@ -11,6 +11,11 @@ import WebKit
 
 class CustomTestGenerationViewController: WebViewController, WKScriptMessageHandler {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setStatusBarColor()
+    }
+    
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "IosInterface")
