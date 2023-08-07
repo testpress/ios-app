@@ -168,7 +168,7 @@ BaseDBViewController<Chapter> {
     
     func showCustomTestPage(_ viewController: UIViewController) {
         let secondViewController = CustomTestGenerationViewController()
-        secondViewController.url = "&next=/courses/custom_test_generation/?course_id="+String(courseId)
+        secondViewController.url = "&next=/courses/custom_test_generation/?course_id="+String(courseId)+"%26device=IosTestpressApp"
         secondViewController.useWebviewNavigation = false
         secondViewController.useSSOLogin = true
         secondViewController.shouldOpenLinksWithinWebview = true
