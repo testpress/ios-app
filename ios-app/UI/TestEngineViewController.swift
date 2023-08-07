@@ -65,9 +65,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             nextButton.setTitle("END", for: .disabled)
         }
 
-        if(exam == nil) {
-            parentSlidingViewController.remainingTimeLabel.isHidden = true
-        }
+        showOrHideTimer()
     }
     
     private func setupPauseButtonGesture() {
@@ -80,6 +78,12 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         hideDropdownContainer()
         checkExamHasLockedSection()
         setupSectionsDropDown()
+    }
+    
+    private func showOrHideTimer(){
+        if(exam == nil) {
+            parentSlidingViewController.remainingTimeLabel.isHidden = true
+        }
     }
     
     private func hideDropdownContainer() {
@@ -138,10 +142,15 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             }
             self.onSwitchLockedSection(index: index)
         }
-        firstAttemptOfLockedSectionExam =
-        (courseContent != nil && courseContent.attemptsCount <= 1) ||
-        (courseContent == nil && (exam!.attemptsCount == 0 ||
-                                  (exam!.attemptsCount == 1 && exam!.pausedAttemptsCount == 1)))
+        firstAttemptOfLockedSectionExam = isFirstCourseContentAttempt() || isFirstExamAttempt()
+    }
+
+    private func isFirstCourseContentAttempt() -> (Bool) {
+        return (courseContent != nil && courseContent.attemptsCount <= 1)
+    }
+    
+    private func isFirstExamAttempt() -> (Bool) {
+        return (courseContent == nil && (exam!.attemptsCount == 0 || (exam!.attemptsCount == 1 && exam!.pausedAttemptsCount == 1)))
     }
     
     private func setUpDropDownForSections() {
