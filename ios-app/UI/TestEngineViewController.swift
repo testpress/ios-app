@@ -59,7 +59,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         
         setupPauseButtonGesture()
         initializeDropDownContainerForSections()
-
+        
         if !firstAttemptOfLockedSectionExam {
             nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
             nextButton.setTitle("END", for: .disabled)
@@ -67,30 +67,30 @@ class TestEngineViewController: BaseQuestionsPageViewController {
 
         showOrHideTimer()
     }
-
+    
     private func setupPauseButtonGesture() {
         let pauseButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onPressPauseButton(sender:)))
         parentSlidingViewController.pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
     }
-
+    
     private func initializeDropDownContainerForSections() {
         hideDropdownContainer()
         checkExamHasLockedSection()
         setupSectionsDropDown()
     }
-
+    
     private func showOrHideTimer(){
         if(exam == nil) {
             parentSlidingViewController.remainingTimeLabel.isHidden = true
         }
     }
-
+    
     private func hideDropdownContainer() {
         dropdownContainerHeight.constant = 0
         dropdownContainer.isHidden = true
     }
-
+    
     private func checkExamHasLockedSection() {
         sections = Array(attempt.sections)
         if sections.count > 1 {
@@ -105,7 +105,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             lockedSectionExam = !unlockedSectionExam;
         }
     }
-
+    
     private func setupSectionsDropDown() {
         if lockedSectionExam {
             setUpDropDownForLockedSections()
@@ -134,7 +134,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         plainDropDown.setCurrentItem(index: currentSection)
         dropdownContainerHeight.constant =
         TestEngineViewController.DROP_DOWN_CONTAINER_HEIGHT
-
+        
         dropdownContainer.isHidden = false
         plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
             if index == self.currentSection {
@@ -148,7 +148,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     private func isFirstCourseContentAttempt() -> (Bool) {
         return (courseContent != nil && courseContent.attemptsCount <= 1)
     }
-
+    
     private func isFirstExamAttempt() -> (Bool) {
         return (courseContent == nil && (exam!.attemptsCount == 0 || (exam!.attemptsCount == 1 && exam!.pausedAttemptsCount == 1)))
     }
@@ -599,7 +599,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         ))
         present(alertDialog, animated: true, completion: nil)
     }
-
+    
     func gotoTestReport() {
         let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: nil)
         if contentAttempt != nil {
