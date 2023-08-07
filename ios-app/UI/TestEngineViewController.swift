@@ -109,7 +109,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             setUpDropDownForSections()
         }
     }
-
+    
     private func setUpDropDownForLockedSections() {
         plainDropDown = PlainDropDown(containerView: dropdownContainer)
         plainDropDown.dropDown.selectionBackgroundColor = UIColor.clear
@@ -118,7 +118,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         
         plainDropDown.dropDown.customCellConfiguration = {
             (index: Index, item: String, cell: DropDownCell) -> Void in
-
+            
             let cell = cell as! LockableSectionDropDownCell
             let selectedItemIndex = self.plainDropDown.dropDown.indexForSelectedRow
             cell.initCell(index: index, sectionName: item, selectedItem: selectedItemIndex!)
