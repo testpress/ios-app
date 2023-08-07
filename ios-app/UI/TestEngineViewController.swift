@@ -119,7 +119,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         plainDropDown.dropDown.selectionBackgroundColor = UIColor.clear
         plainDropDown.dropDown.cellNib =
         UINib(nibName: "LockableSectionDropDownCell", bundle: nil)
-
+        
         plainDropDown.dropDown.customCellConfiguration = {
             (index: Index, item: String, cell: DropDownCell) -> Void in
             
@@ -152,7 +152,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     private func isFirstExamAttempt() -> (Bool) {
         return (courseContent == nil && (exam!.attemptsCount == 0 || (exam!.attemptsCount == 1 && exam!.pausedAttemptsCount == 1)))
     }
-
+    
     private func setUpDropDownForSections() {
         if exam != nil && (exam!.templateType == 2 || unlockedSectionExam) {
             plainDropDown = PlainDropDown(containerView: dropdownContainer)
