@@ -59,7 +59,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         
         setupPauseButtonGesture()
         initializeDropDownContainerForSections()
-
+        
         if !firstAttemptOfLockedSectionExam {
             nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
             nextButton.setTitle("END", for: .disabled)
@@ -69,24 +69,24 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             parentSlidingViewController.remainingTimeLabel.isHidden = true
         }
     }
-
+    
     private func setupPauseButtonGesture() {
         let pauseButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onPressPauseButton(sender:)))
         parentSlidingViewController.pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
     }
-
+    
     private func initializeDropDownContainerForSections() {
         hideDropdownContainer()
         checkExamHasLockedSection()
         setupSectionsDropDown()
     }
-
+    
     private func hideDropdownContainer() {
         dropdownContainerHeight.constant = 0
         dropdownContainer.isHidden = true
     }
-
+    
     private func checkExamHasLockedSection() {
         sections = Array(attempt.sections)
         if sections.count > 1 {
@@ -101,7 +101,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             lockedSectionExam = !unlockedSectionExam;
         }
     }
-
+    
     private func setupSectionsDropDown() {
         if lockedSectionExam {
             setUpDropDownForLockedSections()
@@ -115,7 +115,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         plainDropDown.dropDown.selectionBackgroundColor = UIColor.clear
         plainDropDown.dropDown.cellNib =
         UINib(nibName: "LockableSectionDropDownCell", bundle: nil)
-
+        
         plainDropDown.dropDown.customCellConfiguration = {
             (index: Index, item: String, cell: DropDownCell) -> Void in
 
@@ -130,7 +130,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         plainDropDown.setCurrentItem(index: currentSection)
         dropdownContainerHeight.constant =
         TestEngineViewController.DROP_DOWN_CONTAINER_HEIGHT
-
+        
         dropdownContainer.isHidden = false
         plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
             if index == self.currentSection {
@@ -143,7 +143,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         (courseContent == nil && (exam!.attemptsCount == 0 ||
                                   (exam!.attemptsCount == 1 && exam!.pausedAttemptsCount == 1)))
     }
-
+    
     private func setUpDropDownForSections() {
         if exam != nil && (exam!.templateType == 2 || unlockedSectionExam) {
             plainDropDown = PlainDropDown(containerView: dropdownContainer)
