@@ -64,6 +64,8 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
             nextButton.setTitle("END", for: .disabled)
         }
+
+        showOrHideTimer()
     }
     
     private func setupPauseButtonGesture() {
@@ -76,6 +78,12 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         hideDropdownContainer()
         checkExamHasLockedSection()
         setupSectionsDropDown()
+    }
+    
+    private func showOrHideTimer(){
+        if(exam == nil) {
+            parentSlidingViewController.remainingTimeLabel.isHidden = true
+        }
     }
     
     private func hideDropdownContainer() {
@@ -134,14 +142,19 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             }
             self.onSwitchLockedSection(index: index)
         }
-        firstAttemptOfLockedSectionExam =
-        (courseContent != nil && courseContent.attemptsCount <= 1) ||
-        (courseContent == nil && (exam.attemptsCount == 0 ||
-                                  (exam.attemptsCount == 1 && exam.pausedAttemptsCount == 1)))
+        firstAttemptOfLockedSectionExam = isFirstCourseContentAttempt() || isFirstExamAttempt()
+    }
+
+    private func isFirstCourseContentAttempt() -> (Bool) {
+        return (courseContent != nil && courseContent.attemptsCount <= 1)
+    }
+    
+    private func isFirstExamAttempt() -> (Bool) {
+        return (courseContent == nil && (exam!.attemptsCount == 0 || (exam!.attemptsCount == 1 && exam!.pausedAttemptsCount == 1)))
     }
     
     private func setUpDropDownForSections() {
-        if exam.templateType == 2 || unlockedSectionExam {
+        if exam != nil && (exam!.templateType == 2 || unlockedSectionExam) {
             plainDropDown = PlainDropDown(containerView: dropdownContainer)
             plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
                 self.plainDropDown.titleButton.setTitle(item, for: .normal)
@@ -492,6 +505,10 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     @objc func onPressPauseButton(sender: UITapGestureRecognizer) {
+        if exam == nil {
+            showEndExamDialog()
+            return
+        }
         alertDialog = UIAlertController(title: Strings.EXIT_EXAM,
                                       message: Strings.PAUSE_MESSAGE,
                                       preferredStyle: .alert)
@@ -524,6 +541,10 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func onPressStopButton() {
+        if exam == nil {
+            showEndExamDialog()
+            return
+        }
         alertDialog = UIAlertController(
             title: Strings.EXIT_EXAM,
             message: Strings.END_MESSAGE,
@@ -553,6 +574,25 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 }
             ))
         }
+        alertDialog.addAction(UIAlertAction(
+            title: Strings.CANCEL,
+            style: UIAlertAction.Style.cancel
+        ))
+        present(alertDialog, animated: true, completion: nil)
+    }
+
+    func showEndExamDialog() {
+        alertDialog = UIAlertController(
+            title: Strings.EXIT_EXAM,
+            message: "Are you sure? Want to end the exam",
+            preferredStyle: UIUtils.getActionSheetStyle()
+        )
+        alertDialog.addAction(UIAlertAction(
+            title: Strings.END, style: UIAlertAction.Style.destructive,
+            handler: { (action: UIAlertAction!) in
+                self.onClickEnd()
+            }
+        ))
         alertDialog.addAction(UIAlertAction(
             title: Strings.CANCEL,
             style: UIAlertAction.Style.cancel
@@ -609,7 +649,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
 extension TestEngineViewController: QuestionsPageViewDelegate {
     
     func questionsDidLoad() {
-        if sections.count <= 1 && exam.templateType == 2 || unlockedSectionExam {
+        if sections.count <= 1 && exam != nil && (exam!.templateType == 2 || unlockedSectionExam) {
             // Used to get items in order as it fetched
             var spinnerItemsList = [String]()
             var groupedAttemptItems = OrderedDictionary<String, [AttemptItem]>()
