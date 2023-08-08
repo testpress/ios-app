@@ -107,10 +107,8 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
     }
     
     @objc func goBack() {
-        if (useWebviewNavigation) {
-            if (webView.canGoBack) {
-                webView.goBack()
-            }
+        if (useWebviewNavigation && webView.canGoBack) {
+            webView.goBack()
         } else {
             self.cleanAllCookies()
             self.dismiss(animated: true, completion: nil)
