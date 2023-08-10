@@ -64,7 +64,7 @@ BaseDBViewController<Chapter> {
             navigationItemBar.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "custom_test_icon"), style: .plain, target: self, action: #selector(openCustomTestGenereationView))
         }
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         showItemsFromDB()
@@ -167,7 +167,7 @@ BaseDBViewController<Chapter> {
     @objc func openCustomTestGenereationView() {
        showCustomTestPage(self)
     }
-
+    
     func showCustomTestPage(_ viewController: UIViewController) {
         let secondViewController = CustomTestGenerationViewController()
         secondViewController.url = "&next=/courses/custom_test_generation/?course_id="+String(courseId)+"%26testpress_app=ios"
@@ -179,7 +179,7 @@ BaseDBViewController<Chapter> {
         secondViewController.modalPresentationStyle = .fullScreen
         viewController.present(secondViewController, animated: true)
     }
-
+    
     @IBAction func back() {
         dismiss(animated: true, completion: nil)
     }
