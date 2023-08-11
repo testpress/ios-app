@@ -40,7 +40,8 @@ BaseDBViewController<Chapter> {
     var parentId: Int? = nil
     var firstCallback: Bool = true
     var allowCustomTestGeneration: Bool = false
-    
+    var instituteSettings: InstituteSettings?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,6 +49,7 @@ BaseDBViewController<Chapter> {
         pager = ChapterPager(coursesUrl: coursesUrl, parentId: parentId)
         activityIndicator = UIUtils.initActivityIndicator(parentView: collectionView)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         // Set collection view background
         emptyView = EmptyView.getInstance()
         collectionView.dataSource = self
@@ -58,7 +60,7 @@ BaseDBViewController<Chapter> {
     }
     
     func showOrHideCustomTestIcon(){
-        if (allowCustomTestGeneration && parentId == nil) {
+        if ((instituteSettings?.enableCustomTest ?? false) && allowCustomTestGeneration && parentId == nil) {
             navigationItemBar.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "custom_test_icon"), style: .plain, target: self, action: #selector(openCustomTestGenereationView))
         }
     }

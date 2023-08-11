@@ -58,7 +58,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
                 
                 self.gotoTestEngine(attempt!)
             })
-            
+        
     }
     
     func gotoTestEngine(_ attempt : Attempt) {
