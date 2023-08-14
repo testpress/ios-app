@@ -315,6 +315,7 @@
                     </view>
                     <connections>
                         <outlet property="facebookButtonLayout" destination="ozZ-X7-GX9" id="EBw-bO-voE"/>
+                        <outlet property="forgotPasswordButton" destination="9fg-Is-jIf" id="XNU-zK-ReL"/>
                         <outlet property="featuredImage" destination="OhZ-6d-pCK" id="A2N-hL-ueo"/>
                         <outlet property="loginButton" destination="SKF-zT-5yA" id="Owh-dc-0FD"/>
                         <outlet property="navigationbarItem" destination="y21-8k-c3o" id="23P-l9-DYy"/>
@@ -1736,13 +1737,16 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Learn" id="W2o-cs-1Hy">
-                        <barButtonItem key="rightBarButtonItem" image="happy" id="vYP-7B-iqN">
+                        <barButtonItem key="rightBarButtonItem" image="custom_test_icon" id="vYP-7B-iqN">
                             <connections>
-                                <action selector="showProfileDetails:" destination="rm9-cp-SlX" id="Sqm-eb-sY8"/>
+                                <action selector="showCustomTestPage:" destination="rm9-cp-SlX" id="mWS-0v-6yz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="customTestIcon" destination="vYP-7B-iqN" id="UTn-dM-PFd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jsR-Yy-ajm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3109,6 +3113,7 @@
         <image name="bookmarks_flat_icon" width="128" height="128"/>
         <image name="category_icon" width="16" height="16"/>
         <image name="clock_flat_icon" width="33" height="36"/>
+        <image name="custom_test_icon" width="32" height="32"/>
         <image name="dashboard" width="24" height="24"/>
         <image name="discussion_icon" width="24" height="24"/>
         <image name="exam_added_icon" width="16" height="16"/>

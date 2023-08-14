@@ -38,8 +38,9 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var signUpLayout: UIStackView!
     @IBOutlet weak var socialLoginLayout: UIStackView!
     @IBOutlet weak var facebookButtonLayout: UIView!
+    @IBOutlet weak var forgotPasswordButton: UIButton!
     @IBOutlet weak var featuredImage: UIImageView!
-    
+
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     var instituteSettings: InstituteSettings!
     override func viewDidLoad() {
@@ -50,6 +51,8 @@ class LoginViewController: BaseTextFieldViewController {
         
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         
+        forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
+
         signUpLayout.isHidden = true
         if(instituteSettings.allowSignup) {
             signUpLayout.isHidden = false
@@ -153,7 +156,7 @@ class LoginViewController: BaseTextFieldViewController {
     override func viewDidLayoutSubviews() {
         featuredImage.roundCorners(cornerRadius: 120.0)
     }
-    
+
     @IBAction func showSignUpView() {
         print("Custom : \(instituteSettings.allowSignup)")
         

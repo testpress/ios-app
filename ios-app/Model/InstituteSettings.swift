@@ -62,8 +62,11 @@ class InstituteSettings: DBModel {
     @objc dynamic var customRegistrationEnabled: Bool = false
     @objc dynamic var fairplayCertificateUrl: String = ""
     @objc dynamic var isHelpdeskEnabled: Bool = false
+    @objc dynamic var sentryDSN: String = ""
+    @objc dynamic var disableForgotPassword: Bool = false
+    @objc dynamic var enableCustomTest: Bool = false
 
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         verificationMethod <- map["verification_method"]
         allowSignup <- map["allow_signup"]
         forceStudentData <- map["force_student_data"]
@@ -96,6 +99,9 @@ class InstituteSettings: DBModel {
         customRegistrationEnabled <- map["custom_registration_enabled"]
         fairplayCertificateUrl <- map["fairplay_certificate_url"]
         isHelpdeskEnabled <- map["is_helpdesk_enabled"]
+        sentryDSN <- map["ios_sentry_dns"]
+        disableForgotPassword <- map["disable_forgot_password"]
+        enableCustomTest <- map["enable_custom_test"]
     }
     
     override public static func primaryKey() -> String? {
