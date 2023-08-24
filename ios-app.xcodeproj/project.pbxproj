@@ -355,9 +355,10 @@
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
 		8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */; };
-		D959DAEC2A7CD26800563B40 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9DCBDD42A7CD22200F40EE7 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9DCBDD52A7CD22200F40EE7 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9DCBDD42A7CD22200F40EE7 /* MobileRTC.xcframework */; };
-		D9DCBDD72A7CD23700F40EE7 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9DCBDD62A7CD23700F40EE7 /* MobileRTCResources.bundle */; };
+		D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */; };
+		D932304D2A97952D006C8BBA /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9DCBDD42A7CD22200F40EE7 /* MobileRTC.xcframework */; };
+		D932304F2A979546006C8BBA /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D932304E2A979546006C8BBA /* MobileRTCResources.bundle */; };
+		D93230502A979576006C8BBA /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9DCBDD42A7CD22200F40EE7 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -420,7 +421,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D959DAEC2A7CD26800563B40 /* MobileRTC.xcframework in Embed Frameworks */,
+				D93230502A979576006C8BBA /* MobileRTC.xcframework in Embed Frameworks */,
 				D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */,
 				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
 				D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */,
@@ -813,8 +814,9 @@
 		8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoContentViewController.swift; sourceTree = "<group>"; };
 		8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stackview+BackgroundColor.swift"; sourceTree = "<group>"; };
 		9B482AA21F7CADEABC2BF009 /* ios_appTests-ios_appMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ios_appTests-ios_appMocks.generated.swift"; path = "MockingbirdMocks/ios_appTests-ios_appMocks.generated.swift"; sourceTree = "<group>"; };
+		D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestGenerationViewController.swift; sourceTree = "<group>"; };
+		D932304E2A979546006C8BBA /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 		D9DCBDD42A7CD22200F40EE7 /* MobileRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
-		D9DCBDD62A7CD23700F40EE7 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -829,7 +831,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9DCBDD52A7CD22200F40EE7 /* MobileRTC.xcframework in Frameworks */,
+				D932304D2A97952D006C8BBA /* MobileRTC.xcframework in Frameworks */,
 				2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */,
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
 				25489AA52A0BB621009619FD /* ObjectMapper.xcframework in Frameworks */,
@@ -974,13 +976,14 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
-				D9DCBDD62A7CD23700F40EE7 /* MobileRTCResources.bundle */,
+				D932304E2A979546006C8BBA /* MobileRTCResources.bundle */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
 				2F26ADE31E8249D70031E6F4 /* Products */,
 				2FBEDB781E82BBD0000CF05C /* Frameworks */,
 				322BFA670C6561A068806630 /* Generated Mocks */,
+				D932304A2A979421006C8BBA /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1043,7 +1046,6 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D9DCBDD42A7CD22200F40EE7 /* MobileRTC.xcframework */,
 				25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */,
 				25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */,
 				25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */,
@@ -1280,6 +1282,7 @@
 				258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */,
 				25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */,
 				25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */,
+				D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1442,6 +1445,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		D932304A2A979421006C8BBA /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				D9DCBDD42A7CD22200F40EE7 /* MobileRTC.xcframework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1519,6 +1530,7 @@
 					};
 					2F26ADE11E8249D70031E6F4 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = BHAB7LC35Y;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1568,7 +1580,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9DCBDD72A7CD23700F40EE7 /* MobileRTCResources.bundle in Resources */,
+				D932304F2A979546006C8BBA /* MobileRTCResources.bundle in Resources */,
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
@@ -1779,6 +1791,7 @@
 				2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */,
 				2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */,
 				2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */,
+				D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */,
 				2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */,
 				2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */,
 				2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */,
@@ -2184,7 +2197,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2217,7 +2230,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
