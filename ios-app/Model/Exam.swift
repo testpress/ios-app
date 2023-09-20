@@ -27,7 +27,6 @@ import ObjectMapper
 
 class Exam: DBModel {
     @objc dynamic var url: String = "";
-    @objc dynamic var id = 0;
     @objc dynamic var title: String = "";
     @objc dynamic var examDescription: String = "";
     @objc dynamic var startDate: String = "";
@@ -61,13 +60,14 @@ class Exam: DBModel {
     @objc dynamic var studentsAttemptedCount: Int = 0
     @objc dynamic var isGrowthHackEnabled: Bool = false;
     @objc dynamic var shareTextForSolutionUnlock: String = "";
+    @objc dynamic var showAnalytics: Bool = false
     
     override public static func primaryKey() -> String? {
         return "id"
     }
 
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         title <- map["title"]
@@ -103,6 +103,7 @@ class Exam: DBModel {
         isGrowthHackEnabled <- map["is_growth_hack_enabled"]
         shareTextForSolutionUnlock <- map["share_text_for_solution_unlock"]
         examDescription <- map["description"]
+        showAnalytics <- map["show_analytics"]
     }
     
     func hasStarted() -> Bool {

@@ -34,7 +34,7 @@ import TTGSnackbar
 import RealmSwift
 
 
-class VideoContentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class VideoContentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     var content: Content!
     var contents: [Content]!
     var videoPlayerView: VideoPlayerView!
@@ -48,7 +48,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     @IBOutlet weak var videoPlayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var desc: UITextView!
     @IBOutlet weak var titleToggleButton: UIButton!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var headerView: UIView!
@@ -64,11 +64,10 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         viewModel.videoPlayerView = videoPlayerView
         showOrHideBottomBar()
         titleLabel.text = viewModel.getTitle()
-        desc.text = viewModel.getDescription()
+        initializeDescription()
         bookmarkContent = content
         viewModel.createContentAttempt()
         addCustomView()
-        desc.isHidden = true
         udpateBookmarkButtonState(bookmarkId: content!.bookmarkId.value)
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
@@ -83,6 +82,12 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         
     }
     
+    
+    func initializeDescription() {
+        desc.attributedText = parseVideoDescription()
+        desc.isHidden = true
+        desc.delegate = self
+    }
     
     func showOrHideDescription() {
         if (self.desc.isHidden) {
@@ -100,6 +105,45 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     func hideDescription() {
         self.desc.isHidden = true
         self.titleToggleButton.setImage(Images.CaretDown.image, for: .normal)
+    }
+    
+    func parseVideoDescription() -> NSMutableAttributedString? {
+        let description = """
+        <html>
+          <head>
+            <style>
+              body {
+                font-family: -apple-system;
+                font-size: 16px;
+              }
+            </style>
+          </head>
+          <body>
+            \(viewModel.getDescription())
+          </body>
+        </html>
+        """
+
+        let data = description.data(using: .utf8)!
+        let urlAttribute = [
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0),
+            NSAttributedString.Key.link: URL(string: "dummy_link")!,
+        ] as [NSAttributedString.Key : Any]
+
+        let attributedString = try? NSMutableAttributedString(
+            data: data,
+            options: [.documentType: NSAttributedString.DocumentType.html],
+            documentAttributes: nil
+            )
+
+        let durationRegex = "([0-2]?[0-9]?:?[0-5]?[0-9]:[0-5][0-9])"
+        let ranges = attributedString!.string.nsRanges(of: durationRegex, options: .regularExpression)
+        for range in ranges {
+            attributedString!.addAttributes(urlAttribute, range: range)
+        }
+        
+        return attributedString
     }
     
     
@@ -202,7 +246,8 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func initVideoPlayerView() {
         let playerFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: videoPlayer.frame.height)
-        videoPlayerView = VideoPlayerView(frame: playerFrame, url: URL(string: content.video!.getHlsUrl())!)
+        let drmLicenseURL = content.video?.isDRMProtected == true ? TPEndpointProvider.getDRMLicenseURL(contentID: content.id) : nil
+        videoPlayerView = VideoPlayerView(frame: playerFrame, url: URL(string: content.video!.getHlsUrl())!, drmLicenseURL: drmLicenseURL)
         videoPlayerView.playerDelegate = self
     }
     
@@ -227,7 +272,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         UIApplication.shared.keyWindow?.removeVideoPlayerView()
         view.addSubview(videoPlayerView)
         
-        if (UIDevice.current.orientation.isLandscape) {
+        if (getCurrentOrientation().isLandscape) {
             playerFrame = UIScreen.main.bounds
             UIApplication.shared.keyWindow!.addSubview(videoPlayerView)
         }
@@ -236,8 +281,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         videoPlayerView.layoutIfNeeded()
         videoPlayerView.playerLayer?.frame = playerFrame
     }
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers()
@@ -387,14 +431,41 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         }
         
     }
-}
-
-extension VideoContentViewController: VideoPlayerDelegate {
-    func showOptionsMenu() {
-        displayOptions()
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        let duration = textView.text.substring(with: characterRange)
+        if duration != nil {
+            let seconds = TimeUtils.convertDurationStringToSeconds(durationString: String(duration!))
+            self.videoPlayerView.goTo(seconds: Float(seconds))
+        }
+        return true
     }
 }
 
+extension VideoContentViewController: VideoPlayerDelegate {
+    
+    func showOptionsMenu() {
+        displayOptions()
+    }
+    
+    func toggleFullScreen() {
+        if getCurrentOrientation().isLandscape {
+            changeDeviceOrientation(orientation: .portrait)
+        } else {
+            changeDeviceOrientation(orientation: .landscapeRight)
+        }
+                                 
+    }
+    
+    func changeDeviceOrientation(orientation: UIInterfaceOrientationMask) {
+        if #available(iOS 16.0, *) {
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: orientation))
+        } else {
+            UIDevice.current.setValue(orientation.toUIInterfaceOrientation.rawValue, forKey: "orientation")
+        }
+    }
+}
 
 extension UIWindow {
     func removeVideoPlayerView() {

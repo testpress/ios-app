@@ -29,19 +29,26 @@ import RealmSwift
 
 class Video: DBModel {
     @objc dynamic var url: String = ""
-    @objc dynamic var id: Int = -1
     @objc dynamic var title: String = ""
     @objc dynamic var embedCode: String = ""
     @objc dynamic var duration: String = ""
 
     var streams = List<Stream>()
-
     
     func getHlsUrl() -> String {
-        let hls = self.streams.first{
-            $0.format == "HLS"
+        var url = self.url
+        if let hlsURL = self.streams.first(where: {$0.hlsUrl.isNotEmpty}) {
+            url = hlsURL.hlsUrl
+        } else if let hls = self.streams.first(where: {$0.format == "HLS"}) {
+            url = hls.url
         }
-        return hls?.url ?? self.url
+        return url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? url
+    }
+    
+    var isDRMProtected: Bool {
+        get {
+            return self.streams.contains(where: {$0.hlsUrl.isNotEmpty})
+        }
     }
     
     override public static func primaryKey() -> String? {
@@ -49,12 +56,12 @@ class Video: DBModel {
     }
 
 
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         title <- map["title"]
         embedCode <- map["embed_code"]
-        streams <- map["streams"]
-        duration <- map["duration"]
+        streams <- (map["streams"], ListTransform<Stream>())
+        duration <- (map["duration"], StringTransform())
     }
 }

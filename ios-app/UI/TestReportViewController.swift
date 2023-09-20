@@ -58,45 +58,22 @@ class TestReportViewController: UIViewController {
     @IBOutlet weak var shareButtonLayout: UIStackView!
     
     var attempt: Attempt!
-    var exam: Exam!
+    var exam: Exam?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setStatusBarColor()
 
-        
-        examTitle.text = exam!.title
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-        
-        if !(attempt!.rankEnabled) || String.getValue(attempt!.rank) == "NA" {
-            rankLayout.isHidden = true
-        } else {
-            rank.text = String.getValue(attempt!.rank)
-            maxRank.text = String.getValue(attempt!.maxRank)
-        }
-        totalQuestions.text = String(exam.numberOfQuestions)
-        totalMarks.text = exam.totalMarks
-        totalTime.text = String(exam.duration)
-        if !exam.showScore || attempt.score == "NA" {
-            scoreLayout.isHidden = true
-        } else {
-            score.text = attempt.score!
-        }
-        if !exam.showPercentile || attempt.percentile == 0 {
-            percentileLayout.isHidden = true
-        } else {
-            percentile.text = String(attempt.percentile)
-        }
-        percentage.text = attempt.percentage
-        cutoff.text = String(exam.passPercentage)
-        correct.text = String(attempt!.correctCount)
-        incorrect.text = String(attempt!.incorrectCount)
-        timeTaken.text = attempt!.timeTaken ?? "NA"
-        accuracy.text = String(attempt!.accuracy) + "%"
+
+        setExamDetails()
         UIUtils.setButtonDropShadow(solutionsButton)
         UIUtils.setButtonDropShadow(analyticsButton)
         UIUtils.setButtonDropShadow(timeAnalyticsButton)
+        showOrHideRank()
+        showOrHideScore()
+        showOrHidePercentile()
         showOrHideLockIconInSolutionButton()
     }
     
@@ -104,8 +81,48 @@ class TestReportViewController: UIViewController {
         showOrHideLockIconInSolutionButton()
     }
     
+    private func setExamDetails() {
+        examTitle.text = exam?.title ?? "Custom Module"
+        totalQuestions.text = String(exam?.numberOfQuestions ?? attempt.totalQuestions)
+        totalMarks.text = exam?.totalMarks ?? ""
+        totalTime.text = exam?.duration ?? ""
+        cutoff.text = String(exam?.passPercentage ?? 0.0)
+        percentage.text = attempt.percentage
+        correct.text = String(attempt!.correctCount)
+        incorrect.text = String(attempt!.incorrectCount)
+        timeTaken.text = attempt!.timeTaken ?? "NA"
+        accuracy.text = String(attempt!.accuracy) + "%"
+    }
+    
+    func showOrHideRank() {
+        if attempt.rankEnabled {
+            rank.text = String.getValue(attempt!.rank)
+            maxRank.text = String.getValue(attempt!.maxRank)
+        } else {
+            rankLayout.isHidden = true
+        }
+    }
+
+    func showOrHideScore() {
+        if exam == nil {
+            score.text = attempt.score!
+        } else if exam!.showScore && attempt.hasScore() {
+            score.text = attempt.score!
+        } else {
+            scoreLayout.isHidden = true
+        }
+    }
+
+    func showOrHidePercentile() {
+        if exam != nil && exam!.showPercentile && attempt.percentile != 0 {
+            percentile.text = String(attempt.percentile)
+        } else {
+            percentileLayout.isHidden = true
+        }
+    }
+    
     func showOrHideLockIconInSolutionButton() {
-        if ((exam.isGrowthHackEnabled ?? false) && (exam.getNumberOfTimesShared() < 2)) {
+        if (exam != nil && (exam!.isGrowthHackEnabled) && (exam!.getNumberOfTimesShared() < 2)) {
             shareButtonLayout.isHidden = false
             analyticsButtonLayout.isHidden = true
             solutionButtonLayout.isHidden = true
@@ -116,25 +133,42 @@ class TestReportViewController: UIViewController {
             shareButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         } else {
             shareButtonLayout.isHidden = true
-            analyticsButtonLayout.isHidden = false
-            solutionButtonLayout.isHidden = false
+            showOrHideAnalytics()
+            showOrHideSolutions()
             solutionsButton.setImage(nil, for: .normal)
         }
     }
+
+    private func showOrHideSolutions() {
+        if (exam != nil && !exam!.showAnswers) {
+            solutionButtonLayout.isHidden = true
+        } else {
+            solutionButtonLayout.isHidden = false
+        }
+    }
+
     @IBAction func showShareScreen(_ sender: Any) {
         let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.SHARE_TO_UNLOCK_VIEW_CONTROLLER) as! ShareToUnlockViewController
-        viewController.shareText = exam.shareTextForSolutionUnlock ?? ""
+        viewController.shareText = exam!.shareTextForSolutionUnlock
         viewController.onShareCompletion = {
-            self.exam.incrementNumberOfTimesShared()
-            if (self.exam.getNumberOfTimesShared() >= 2) {
+            self.exam!.incrementNumberOfTimesShared()
+            if (self.exam!.getNumberOfTimesShared() >= 2) {
                 viewController.dismiss(animated: false) {
                     self.showSolutionsScreen()
                 }
             }
         }
         self.present(viewController, animated: true, completion: nil)
+    }
+    
+    private func showOrHideAnalytics() {
+        if (exam != nil && !exam!.showAnalytics) {
+            analyticsButtonLayout.isHidden = true
+        } else {
+            analyticsButtonLayout.isHidden = false
+        }
     }
     
     @IBAction func showSolutions(_ sender: UIButton) {
@@ -207,6 +241,8 @@ class TestReportViewController: UIViewController {
             presentingViewController?.presentingViewController as? ContentDetailPageViewController {
             
             goToContentDetailPageViewController(contentDetailPageViewController)
+        } else if exam == nil {
+            presentingViewController?.dismiss(animated: true)
         } else {
             dismiss(animated: true, completion: nil)
         }
@@ -217,7 +253,7 @@ class TestReportViewController: UIViewController {
             contentDetailPageViewController as! ContentDetailPageViewController
         
         contentDetailPageViewController.dismiss(animated: false, completion: {
-            if Double(self.attempt.percentage)! >= self.exam.passPercentage {
+            if Double(self.attempt.percentage) ?? 0 >= self.exam?.passPercentage ?? 0 {
                 let currentIndex = contentDetailPageViewController.getCurrentIndex()
                 let nextContent =
                     contentDetailPageViewController.contents[currentIndex]

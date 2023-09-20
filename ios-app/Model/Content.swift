@@ -31,7 +31,6 @@ class Content: DBModel {
     
     @objc dynamic var index: Int = -1
     @objc dynamic var url: String = ""
-    @objc dynamic var id: Int = -1
     @objc dynamic var name: String = ""
     @objc dynamic var contentDescription: String?
     @objc dynamic var image: String = ""
@@ -60,10 +59,12 @@ class Content: DBModel {
     var bookmarkId = RealmOptional<Int>()
     @objc dynamic var isScheduled: Bool = false
     @objc dynamic var start: String = ""
+    @objc dynamic var end: String = ""
     @objc dynamic var contentType: String = ""
     @objc dynamic var coverImage: String!
     @objc dynamic var coverImageSmall: String!
     @objc dynamic var coverImageMedium: String!
+    @objc dynamic var hasEnded: Bool = false
 
     
     public static func fetchContent(url:String, completion: @escaping(Content?, TPError?) -> Void) {
@@ -99,7 +100,7 @@ class Content: DBModel {
     }
 
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         name <- map["title"]
@@ -133,6 +134,8 @@ class Content: DBModel {
         coverImage <- map["cover_image"]
         coverImageSmall <- map["cover_image_small"]
         coverImageMedium <- map["cover_image_medium"]
+        hasEnded <- map["has_ended"]
+        end <- map["end"]
     }
     
     override public static func primaryKey() -> String? {

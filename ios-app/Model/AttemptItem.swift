@@ -33,7 +33,6 @@ class AttemptItem: DBModel {
     public static let ANSWERED_INCORRECT = "Incorrect"
     public static let UNANSWERED = "Unanswered"
     
-    @objc dynamic var id: Int = -1
     @objc dynamic var url: String = "";
     @objc dynamic var question: AttemptQuestion!;
     @objc dynamic var questionId: Int = -1
@@ -56,8 +55,11 @@ class AttemptItem: DBModel {
     @objc dynamic var result: String!
     @objc dynamic var attemptId: Int = -1
     @objc dynamic var examQuestionId: Int = -1
+    var gapFillResponses = List<GapFillResponse>()
+    @objc dynamic var essayText: String?
+    @objc dynamic var localEssayText: String!
     
-    public required convenience init?(map: Map) {
+    public required convenience init?(map: ObjectMapper.Map) {
         self.init()
     }
     
@@ -77,8 +79,21 @@ class AttemptItem: DBModel {
     public func getSaveUrl() -> String {
         return String(format: "%@/api/v2.4/attempts/%d/questions/%d/", Constants.BASE_URL , self.attemptId, self.examQuestionId)
     }
+    
+    public func setGapFillResponses(_ gapFillOrderAnswerMap: [Int: AnyObject] ) {
+        try! Realm().write {
+            let gapFillResponseList = List<GapFillResponse>()
+            gapFillOrderAnswerMap.forEach {
+                let response = GapFillResponse.create(order: $0, answer: $1 as! String)
+                gapFillResponseList.append(response)
+            }
+            
+            self.gapFillResponses.removeAll()
+            self.gapFillResponses.append(objectsIn: gapFillResponseList)
+        }
+    }
 
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         id <- map["id"]
         url <- map["url"]
         question <- map["question"]
@@ -99,5 +114,7 @@ class AttemptItem: DBModel {
         marks <- map["marks"]
         result <- map["result"]
         attemptId <- map["attempt_id"]
+        gapFillResponses <- (map["gap_fill_responses"], ListTransform<GapFillResponse>())
+        essayText <- map["essay_text"]
     }
 }

@@ -30,7 +30,6 @@ import RealmSwift
 class Course: DBModel {
     
     @objc dynamic var url: String = ""
-    @objc dynamic var id = 0
     @objc dynamic var title: String = ""
     @objc dynamic var image: String = ""
     @objc dynamic var modified: String = ""
@@ -45,8 +44,10 @@ class Course: DBModel {
     @objc dynamic var active = true
     @objc dynamic var external_content_link: String = ""
     @objc dynamic var external_link_label: String = ""
+    @objc dynamic var allowCustomTestGeneration = false
+    var tags = List<String>()
 
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         title <- map["title"]
@@ -63,6 +64,8 @@ class Course: DBModel {
         active <- map["active"]
         external_content_link <- map["external_content_link"]
         external_link_label <- map["external_link_label"]
+        allowCustomTestGeneration <- map["allow_custom_test_generation"]
+        tags <- (map["tags"], StringArrayTransform())
     }
     
     override public static func primaryKey() -> String? {

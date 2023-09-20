@@ -55,9 +55,9 @@ class AttachmentDetailViewController: UIViewController {
     var loading: Bool = false
     var bookmarkHelper: BookmarkHelper!
     var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
-    var animationView: LOTAnimationView!
-    var moveAnimationView: LOTAnimationView!
-    var removeAnimationView: LOTAnimationView!
+    var animationView: LottieAnimationView!
+    var moveAnimationView: LottieAnimationView!
+    var removeAnimationView: LottieAnimationView!
     let alertController = UIUtils.initProgressDialog(message: Strings.LOADING + "\n\n")
     var timer: Timer?
     var watermarkLabel: MarqueeLabel?
@@ -159,7 +159,7 @@ class AttachmentDetailViewController: UIViewController {
                                                             backButton: backButton)
             pdfController.navigationItem.rightBarButtonItem = nil
             watermarkLabel = initializeWatermark(view: pdfController.view)
-            view.addSubview(watermarkLabel!)
+            pdfController.view.addSubview(watermarkLabel!)
             startTimerToMoveWatermarkPosition()
             let navigationController = UINavigationController(rootViewController: pdfController)
             present(navigationController, animated: true)
@@ -235,16 +235,15 @@ class AttachmentDetailViewController: UIViewController {
         bookmarkButton.isHidden = false
     }
     
-    func initAnimationView() -> LOTAnimationView {
-        let animationView = LOTAnimationView(name: "material_wave_loading")
+    func initAnimationView() -> LottieAnimationView {
+        let animationView = LottieAnimationView(name: "material_wave_loading")
         animationView.contentMode = .scaleAspectFill
         animationView.frame.size.width = 50
         animationView.frame.size.height = 25
-        let primaryColor = Colors.getRGB(Colors.PRIMARY).cgColor
-        animationView.setValueDelegate(LOTColorValueCallback(color: primaryColor),
-                                       for: LOTKeypath(string: "**.Fill 1.Color"))
-        
-        animationView.loopAnimation = true
+        let fillKeypath = AnimationKeypath(keypath: "**.Fill 1.Color")
+        let valueProvider = ColorValueProvider(LottieColor(r: 1, g: 0.2, b: 0.3, a: 1))
+        animationView.setValueProvider(valueProvider, keypath: fillKeypath)
+        animationView.loopMode = .loop
         animationView.play()
         return animationView
     }

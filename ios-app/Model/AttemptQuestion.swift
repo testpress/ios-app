@@ -27,7 +27,6 @@ import ObjectMapper
 import RealmSwift
 
 class AttemptQuestion: DBModel {
-    @objc dynamic var id: Int = 0
     @objc dynamic var questionHtml: String?;
     @objc dynamic var subject: String = ""
     @objc dynamic var subjectId: Int = -1
@@ -57,6 +56,9 @@ class AttemptQuestion: DBModel {
     var isNumerical: Bool {
         get {questionType == .NUMERICAL}
     }
+    var isEssayType: Bool {
+        get {questionType == .ESSAY}
+    }
     
     public  func clone() -> AttemptQuestion {
         let newAttemptItem = AttemptQuestion()
@@ -81,7 +83,7 @@ class AttemptQuestion: DBModel {
         return "id"
     }
 
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         id <- map["id"]
         questionHtml <- map["question_html"]
         subject <- map["subject"]

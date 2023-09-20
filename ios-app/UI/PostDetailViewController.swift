@@ -114,7 +114,7 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
                 self.loading = false
                 self.post = post
                 self.webView.loadHTMLString(
-                    self.getFormattedContent(post!.contentHtml!),
+                    self.getFormattedContent(post),
                     baseURL: Bundle.main.bundleURL
                 )
         })
@@ -149,6 +149,10 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
     }
     
     func loadPreviousComments() {
+        if (post.commentsUrl == nil) {
+            return
+        }
+
         getPreviousCommentsPager().resources.removeAll()
         getPreviousCommentsPager().next(completion: {
             items, error in
@@ -317,9 +321,9 @@ class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScri
         return WebViewUtils.getFormattedTitle(title: post.title)
     }
     
-    func getFormattedContent(_ contentHtml: String) -> String {
+    func getFormattedContent(_ post: Post?) -> String {
         var html = WebViewUtils.getHeader() + getTitle() +
-            WebViewUtils.getHtmlContentWithMargin(contentHtml)
+            WebViewUtils.getHtmlContentWithMargin(post?.contentHtml ?? "")
         
         html += "<hr style='margin-top:20px;'>"
         html += WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS);
