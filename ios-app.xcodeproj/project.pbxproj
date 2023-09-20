@@ -355,6 +355,9 @@
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
 		8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */; };
+		D9103C9C2ABB35CF00AF47A0 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9103C9B2ABB35CF00AF47A0 /* MobileRTC.xcframework */; };
+		D9103C9E2ABB35DF00AF47A0 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9103C9D2ABB35DF00AF47A0 /* MobileRTCResources.bundle */; };
+		D9103C9F2ABB35ED00AF47A0 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9103C9B2ABB35CF00AF47A0 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */; };
 		D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -418,6 +421,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D9103C9F2ABB35ED00AF47A0 /* MobileRTC.xcframework in Embed Frameworks */,
 				D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */,
 				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
 				D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */,
@@ -595,7 +599,7 @@
 		2F25D561201F5C8800C01CCE /* TargetThreatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetThreatViewController.swift; sourceTree = "<group>"; };
 		2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
-		2F26ADE21E8249D70031E6F4 /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F26ADE21E8249D70031E6F4 /* LEGACY IAS ONLINE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LEGACY IAS ONLINE.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F26ADEA1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -810,6 +814,8 @@
 		8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoContentViewController.swift; sourceTree = "<group>"; };
 		8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stackview+BackgroundColor.swift"; sourceTree = "<group>"; };
 		9B482AA21F7CADEABC2BF009 /* ios_appTests-ios_appMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ios_appTests-ios_appMocks.generated.swift"; path = "MockingbirdMocks/ios_appTests-ios_appMocks.generated.swift"; sourceTree = "<group>"; };
+		D9103C9B2ABB35CF00AF47A0 /* MobileRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
+		D9103C9D2ABB35DF00AF47A0 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 		D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestGenerationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -825,6 +831,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9103C9C2ABB35CF00AF47A0 /* MobileRTC.xcframework in Frameworks */,
 				2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */,
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
 				25489AA52A0BB621009619FD /* ObjectMapper.xcframework in Frameworks */,
@@ -969,6 +976,7 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
+				D9103C9D2ABB35DF00AF47A0 /* MobileRTCResources.bundle */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
@@ -981,7 +989,7 @@
 		2F26ADE31E8249D70031E6F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2F26ADE21E8249D70031E6F4 /* ios-app.app */,
+				2F26ADE21E8249D70031E6F4 /* LEGACY IAS ONLINE.app */,
 				2F26ADF61E8249D70031E6F4 /* ios-appTests.xctest */,
 				254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */,
 			);
@@ -1037,6 +1045,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9103C9B2ABB35CF00AF47A0 /* MobileRTC.xcframework */,
 				25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */,
 				25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */,
 				25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */,
@@ -1473,7 +1482,7 @@
 			);
 			name = "ios-app";
 			productName = "ios-app";
-			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
+			productReference = 2F26ADE21E8249D70031E6F4 /* LEGACY IAS ONLINE.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2F26ADF51E8249D70031E6F4 /* ios-appTests */ = {
@@ -1563,6 +1572,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9103C9E2ABB35DF00AF47A0 /* MobileRTCResources.bundle in Resources */,
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
