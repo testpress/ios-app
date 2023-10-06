@@ -46,7 +46,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     var questionsPageViewDelegate: QuestionsPageViewDelegate?
     var parentviewController: BaseQuestionsSlidingViewController!
     var currentIndex: Int!
-    var exam: Exam!
+    var exam: Exam?
     var attempt: Attempt!
     var attemptItems = [AttemptItem]()
     var courseContent: Content!

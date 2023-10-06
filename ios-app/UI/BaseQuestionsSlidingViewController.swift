@@ -39,7 +39,7 @@ class BaseQuestionsSlidingViewController: SlideMenuController {
     
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     
-    var exam: Exam!
+    var exam: Exam?
     var attempt: Attempt!
     var courseContent: Content!
     var contentAttempt: ContentAttempt!
