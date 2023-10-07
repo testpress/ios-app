@@ -294,12 +294,7 @@ extension VideoPlayerView: PlayerControlDelegate {
     }
     
     func fullScreen() {
-        var value = UIInterfaceOrientation.landscapeRight.rawValue
-
-        if UIDevice.current.orientation.isLandscape {
-            value = UIInterfaceOrientation.portrait.rawValue
-        }
-        UIDevice.current.setValue(value, forKey: "orientation")
+        playerDelegate?.toggleFullScreen()
     }
     
     func isPlaying() -> Bool {
@@ -309,5 +304,6 @@ extension VideoPlayerView: PlayerControlDelegate {
 
 protocol VideoPlayerDelegate: class {
     func showOptionsMenu()
+    func toggleFullScreen()
 }
 

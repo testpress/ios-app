@@ -64,10 +64,11 @@ class ImagePicker: NSObject {
             title: Strings.CAMERA,
             style: .default,
             handler: { (alert:UIAlertAction!) -> Void in
-                checkCameraAuthorizationStatus(viewController: viewController, completion: {
-                    authorized in
-                    if authorized {
-                        self.pickImage(sourceType: .camera)
+                checkCameraAuthorizationStatus(viewController: viewController, completion: { authorized in
+                    DispatchQueue.main.async {
+                        if authorized {
+                            self.pickImage(sourceType: .camera)
+                        }
                     }
                 })
                 
@@ -76,10 +77,11 @@ class ImagePicker: NSObject {
             title: Strings.PHOTO_LIBRARY,
             style: .default,
             handler: { (alert:UIAlertAction!) -> Void in
-                checkPhotoLibraryAuthorizationStatus(viewController: viewController, completion: {
-                    authorized in
-                    if authorized {
-                        self.pickImage(sourceType: .photoLibrary)
+                checkPhotoLibraryAuthorizationStatus(viewController: viewController, completion: { authorized in
+                    DispatchQueue.main.async {
+                        if authorized {
+                            self.pickImage(sourceType: .photoLibrary)
+                        }
                     }
                 })
         }))

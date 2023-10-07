@@ -272,7 +272,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         UIApplication.shared.keyWindow?.removeVideoPlayerView()
         view.addSubview(videoPlayerView)
         
-        if (UIDevice.current.orientation.isLandscape) {
+        if (getCurrentOrientation().isLandscape) {
             playerFrame = UIScreen.main.bounds
             UIApplication.shared.keyWindow!.addSubview(videoPlayerView)
         }
@@ -281,8 +281,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         videoPlayerView.layoutIfNeeded()
         videoPlayerView.playerLayer?.frame = playerFrame
     }
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers()
@@ -444,11 +443,29 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
 }
 
 extension VideoContentViewController: VideoPlayerDelegate {
+    
     func showOptionsMenu() {
         displayOptions()
     }
+    
+    func toggleFullScreen() {
+        if getCurrentOrientation().isLandscape {
+            changeDeviceOrientation(orientation: .portrait)
+        } else {
+            changeDeviceOrientation(orientation: .landscapeRight)
+        }
+                                 
+    }
+    
+    func changeDeviceOrientation(orientation: UIInterfaceOrientationMask) {
+        if #available(iOS 16.0, *) {
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: orientation))
+        } else {
+            UIDevice.current.setValue(orientation.toUIInterfaceOrientation.rawValue, forKey: "orientation")
+        }
+    }
 }
-
 
 extension UIWindow {
     func removeVideoPlayerView() {

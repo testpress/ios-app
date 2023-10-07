@@ -11,7 +11,7 @@ import TTGSnackbar
 import UIKit
 import WebKit
 
-class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessageHandler {
+class WebViewController: BaseWebViewController, WKWebViewDelegate {
     
     var emptyView: EmptyView!
     var url: String = ""
@@ -107,10 +107,8 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
     }
     
     @objc func goBack() {
-        if (useWebviewNavigation) {
-            if (webView.canGoBack) {
-                webView.goBack()
-            }
+        if (useWebviewNavigation && webView.canGoBack) {
+            webView.goBack()
         } else {
             self.cleanAllCookies()
             self.dismiss(animated: true, completion: nil)
@@ -175,12 +173,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
     }
     
     override func initWebView() {
-        let contentController = WKUserContentController()
-        contentController.add(self, name: "callbackHandler")
-        let config = WKWebViewConfiguration()
-        config.userContentController = contentController
-        config.preferences.javaScriptEnabled = true
-        webView = WKWebView( frame: parentView.bounds, configuration: config)
+        webView = WKWebView( frame: parentView.bounds)
     }
 
     func cleanAllCookies() {
@@ -201,8 +194,4 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
             navItem?.leftBarButtonItem = nil
         }
     }
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    }
-    
 }
