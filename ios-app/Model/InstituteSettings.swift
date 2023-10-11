@@ -64,6 +64,7 @@ class InstituteSettings: DBModel {
     @objc dynamic var isHelpdeskEnabled: Bool = false
     @objc dynamic var sentryDSN: String = ""
     @objc dynamic var disableForgotPassword: Bool = false
+    @objc dynamic var enableCustomTest: Bool = false
 
     public override func mapping(map: ObjectMapper.Map) {
         verificationMethod <- map["verification_method"]
@@ -100,6 +101,7 @@ class InstituteSettings: DBModel {
         isHelpdeskEnabled <- map["is_helpdesk_enabled"]
         sentryDSN <- map["ios_sentry_dns"]
         disableForgotPassword <- map["disable_forgot_password"]
+        enableCustomTest <- map["enable_custom_test"]
     }
     
     override public static func primaryKey() -> String? {
