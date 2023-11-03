@@ -9,7 +9,7 @@
 import Foundation
 
 class AttemptRepository {
-    func loadAttempt(attemptsUrl: String, completion: @escaping(ContentAttempt?, TPError?) -> Void) {
+    func loadContentAttempt(attemptsUrl: String, completion: @escaping(ContentAttempt?, TPError?) -> Void) {
         TPApiClient.request(type: ContentAttempt.self, endpointProvider: TPEndpointProvider(.post, url: attemptsUrl), completion: completion)
     }
     
