@@ -86,4 +86,8 @@ class Attempt: DBModel {
     func hasScore() -> Bool {
         return self.score != nil && self.score != "NA"
     }
+    
+    func getEndAttemptUrl() -> String {
+        return url + "end/";
+    }
 }

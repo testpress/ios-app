@@ -9,8 +9,9 @@
 import UIKit
 
 class QuizExamViewController: UIViewController {
-    var contentAttempt: ContentAttempt!
-    var exam: Exam!
+    var contentAttempt: ContentAttempt?
+    var exam: Exam?
+    var attempt: Attempt?
     let attemptRepository = AttemptRepository()
     let loadingViewController = LoadingViewController()
     var questionsPageViewController: QuizQuestionsPageViewController!
@@ -23,7 +24,11 @@ class QuizExamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = QuizExamViewModel(exam: exam)
+        if exam == nil {
+            viewModel = QuizExamViewModel()
+        } else {
+            viewModel = QuizExamViewModel(exam: exam!)
+        }
         self.setStatusBarColor()
         initializeQuizQuestionsPageViewController()
         loadQuestions()
@@ -43,7 +48,13 @@ class QuizExamViewController: UIViewController {
     
     func loadQuestions() {
         showLoadingScreen()
-        viewModel.loadQuestions(attemptId: contentAttempt.assessment.id) {attemptItems,error in
+        let attemptId: Int
+        if exam != nil {
+            attemptId = contentAttempt?.assessment.id ?? 0
+        } else {
+            attemptId = attempt?.id ?? 0
+        }
+        viewModel.loadQuestions(attemptId: attemptId) {attemptItems,error in
             self.loadingViewController.remove()
             if let error = error {
                 self.showErrorView(error: error)
@@ -55,10 +66,11 @@ class QuizExamViewController: UIViewController {
     }
     
     func showQuestionsPageView(attemptItems: [AttemptItem]){
-        self.navigationBarItem.title = self.exam.title
+        self.navigationBarItem.title = self.exam?.title ?? "Custom Module"
         self.questionsPageViewController.attemptItems = attemptItems
         self.questionsPageViewController.contentAttempt = self.contentAttempt
         self.questionsPageViewController.exam = self.exam
+        self.questionsPageViewController.attempt = self.attempt
         self.add(self.questionsPageViewController)
         self.questionsPageViewController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.questionsPageViewController.view.frame = CGRect(x:0, y:self.containerView.frame.origin.y + self.navigationBar.frame.height, width: self.view.frame.width, height: self.view.frame.height - (self.containerView.frame.origin.y + self.navigationBar.frame.height))
@@ -104,10 +116,17 @@ class QuizExamViewController: UIViewController {
         let loadingDialogController = UIUtils.initProgressDialog(message: Strings.ENDING_EXAM)
         present(loadingDialogController, animated: false)
         let attemptRepository = AttemptRepository()
-        attemptRepository.endExam(url: contentAttempt.getEndAttemptUrl(), completion: { contentAttempt, error in
-            loadingDialogController.dismiss(animated: false, completion: nil)
-            self.dismiss(animated: true, completion: nil)
-        })
+        if exam != nil {
+            attemptRepository.endExam(url: contentAttempt!.getEndAttemptUrl(), completion: { contentAttempt, error in
+                loadingDialogController.dismiss(animated: false, completion: nil)
+                self.dismiss(animated: true, completion: nil)
+            })
+        } else {
+            attemptRepository.endAttempt(url: attempt!.getEndAttemptUrl(), completion: { attempt, error in
+                loadingDialogController.dismiss(animated: false, completion: nil)
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
     }
     
     @objc func closeAlert(gesture: UITapGestureRecognizer) {

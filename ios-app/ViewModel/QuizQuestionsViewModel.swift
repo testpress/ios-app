@@ -14,16 +14,22 @@ class QuizQuestionsViewModel {
     private let attempt: Attempt?
     private let contentAttempt: ContentAttempt?
 
-    init(contentAttempt: ContentAttempt, repository: AttemptItemRepository = AttemptItemRepository()) {
+    init(contentAttempt: ContentAttempt?, repository: AttemptItemRepository = AttemptItemRepository()) {
         self.repository = repository
         self.contentAttempt = contentAttempt
-        self.attempt = contentAttempt.assessment
+        self.attempt = contentAttempt!.assessment
     }
     
     init(repository: AttemptItemRepository = AttemptItemRepository()) {
         self.repository = repository
         self.contentAttempt = nil
         self.attempt = nil
+    }
+    
+    init(attempt: Attempt?, repository: AttemptItemRepository = AttemptItemRepository()) {
+        self.repository = repository
+        self.contentAttempt = nil
+        self.attempt = attempt
     }
     
     func getFirstUnAttemptedItemIndex() -> Int {
@@ -38,6 +44,11 @@ class QuizQuestionsViewModel {
     func endExam(completion: @escaping(ContentAttempt?, TPError?) -> Void) {
         assert(contentAttempt != nil, "Content Attempt cannot be null")
         repository.endExam(url: contentAttempt!.getEndAttemptUrl(), completion: completion)
+    }
+    
+    func endAttempt(completion: @escaping(Attempt?, TPError?) -> Void) {
+        assert(attempt != nil, "Attempt cannot be nil")
+        repository.endAttempt(url: attempt!.getEndAttemptUrl(), completion: completion)
     }
     
     func submitAnswer(id: Int) {
