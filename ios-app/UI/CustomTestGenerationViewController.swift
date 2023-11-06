@@ -19,6 +19,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "IosInterface")
+        contentController.add(self, name: "startCustomTestInQuizMode")
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
         config.preferences.javaScriptEnabled = true
@@ -32,11 +33,18 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
             self.activityIndicator?.startAnimating()
             let attemptId = message.body
             print(attemptId)
-            loadAttempts(attemptId as! String)
+            loadAttempts(attemptId as! String, false)
+        }
+        if message.name == "startCustomTestInQuizMode" {
+            self.emptyView.hide()
+            self.activityIndicator?.startAnimating()
+            let attemptId = message.body
+            print(attemptId)
+            loadAttempts(attemptId as! String, true)
         }
     }
     
-    func loadAttempts(_ attemptId: String) {
+    func loadAttempts(_ attemptId: String, _ quizMode: Bool) {
         TPApiClient.request(
             type: Attempt.self,
             endpointProvider: TPEndpointProvider(
@@ -56,7 +64,11 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
                 // timing, so we are set 24 hours for remainingTime in this attempt.
                 attempt?.remainingTime = "24:00:00"
                 
-                self.gotoTestEngine(attempt!)
+                if quizMode {
+                    self.goToQuizExam(attempt!)
+                } else {
+                    self.gotoTestEngine(attempt!)
+                }
             })
         
     }
@@ -69,6 +81,14 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
             slideMenuController.viewControllers.first as! TestEngineSlidingViewController
         viewController.attempt = attempt
         present(slideMenuController, animated: true, completion: nil)
+    }
+    
+    func goToQuizExam(_ attempt: Attempt) {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
+        viewController.attempt = attempt
+        present(viewController, animated: true, completion: nil)
     }
     
     override func onFinishLoadingWebView() {
