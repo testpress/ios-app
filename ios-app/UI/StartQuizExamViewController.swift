@@ -106,8 +106,9 @@ class StartQuizExamViewController: UIViewController {
         let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
-        viewController.contentAttempt = contentAttempt
-        viewController.exam = content.exam
+        viewController.contentAttempt = nil
+        viewController.attempt = contentAttempt.assessment
+        viewController.exam = nil
         present(viewController, animated: true, completion: nil)
     }
 
