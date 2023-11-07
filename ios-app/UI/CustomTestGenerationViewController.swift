@@ -56,7 +56,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
                 // timing, so we are set 24 hours for remainingTime in this attempt.
                 attempt?.remainingTime = "24:00:00"
                 
-                self.goToQuizExam(attempt!)
+                self.gotoTestEngine(attempt!)
             })
         
     }
@@ -69,14 +69,6 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
             slideMenuController.viewControllers.first as! TestEngineSlidingViewController
         viewController.attempt = attempt
         present(slideMenuController, animated: true, completion: nil)
-    }
-    
-    func goToQuizExam(_ attempt: Attempt) {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier:
-            Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
-        viewController.attempt = attempt
-        present(viewController, animated: true, completion: nil)
     }
     
     override func onFinishLoadingWebView() {
