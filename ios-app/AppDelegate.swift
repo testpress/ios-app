@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             SentrySDK.setUser(user)
         }
         
-        let config = Realm.Configuration(schemaVersion: 28)
+        let config = Realm.Configuration(schemaVersion: 31)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         
