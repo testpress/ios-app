@@ -99,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         ApplicationDelegate.shared.application(application,
                                                   didFinishLaunchingWithOptions: launchOptions)
         
-        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared.enable = true
         
         // Clear keychain items if app is launching the first time after installation
         let userDefaults = UserDefaults.standard
@@ -110,20 +110,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaults.synchronize() // Forces the app to update UserDefaults
         }
         
-        do {
-            Client.shared = try Client(dsn: "https://15420a637fb7479a832b721fb7cc0ceb@sentry.testpress.in/4")
-            try Client.shared?.startCrashHandler()
-        } catch let error {
-            print("\(error)")
-        }
-        
         if (KeychainTokenItem.isExist()) {
-            Client.shared?.extra = [
-                "username": KeychainTokenItem.getAccount()
-            ]
+            let user = Sentry.User()
+            user.username = KeychainTokenItem.getAccount()
+            SentrySDK.setUser(user)
         }
         
-        let config = Realm.Configuration(schemaVersion: 23)
+        let config = Realm.Configuration(schemaVersion: 31)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         
@@ -133,10 +126,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UIUtils.fetchInstituteSettings(completion:{ _,_  in })
             viewController = UIUtils.getLoginOrTabViewController()
         }
+        
+        if (InstituteSettings.isAvailable()){
+            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+            SentrySDK.start { options in
+                options.dsn = instituteSettings.sentryDSN
+                options.debug = true
+            }
+            
+        }
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
-        Zoom.enableFullScreenForMeetingWaitView()
         return true
     }
     

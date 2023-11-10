@@ -27,7 +27,6 @@ import ObjectMapper
 
 class AttemptSection: DBModel {
     
-    @objc dynamic var id: Int = -1
     @objc dynamic var state: String = "Not Started"
     @objc dynamic var questionsUrl: String = ""
     @objc dynamic var startUrl: String = ""
