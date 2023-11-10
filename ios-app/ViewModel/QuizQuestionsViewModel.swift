@@ -17,7 +17,7 @@ class QuizQuestionsViewModel {
     init(contentAttempt: ContentAttempt?, repository: AttemptItemRepository = AttemptItemRepository()) {
         self.repository = repository
         self.contentAttempt = contentAttempt
-        self.attempt = contentAttempt!.assessment
+        self.attempt = contentAttempt?.assessment
     }
     
     init(repository: AttemptItemRepository = AttemptItemRepository()) {
