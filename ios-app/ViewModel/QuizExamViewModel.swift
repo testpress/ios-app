@@ -68,12 +68,7 @@ extension QuizExamViewModel {
     }
     
     public func loadQuestions(attemptId: Int, completion: @escaping([AttemptItem]?, TPError?) -> Void) {
-        let examId: Int
-        if exam == nil {
-            examId = -1
-        } else {
-            examId = exam!.id
-        }
+        let examId: Int = exam?.id ?? -1
         let questionUrl = Constants.BASE_URL + "/api/v2.5/attempts/\(attemptId)/questions/"
         repository.loadQuestions(url: questionUrl, examId: examId, attemptId: attemptId, completion: completion)
     }
