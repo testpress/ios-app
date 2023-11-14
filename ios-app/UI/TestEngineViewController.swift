@@ -81,7 +81,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     private func showOrHideTimer(){
-        if(exam == nil) {
+        if(exam == nil && attempt?.remainingTime == DEFAULT_EXAM_TIME) {
             parentSlidingViewController.remainingTimeLabel.isHidden = true
         }
     }
