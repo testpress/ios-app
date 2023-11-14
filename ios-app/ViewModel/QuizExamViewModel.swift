@@ -20,7 +20,7 @@ class QuizExamViewModel: QuizExamViewModelDelegate {
         self.repository = repository
     }
     
-    init(exam: Exam, repository: AttemptRepository = AttemptRepository()) {
+    init(exam: Exam?, repository: AttemptRepository = AttemptRepository()) {
         self.exam = exam
         self.repository = repository
         self.content = nil
