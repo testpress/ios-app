@@ -58,8 +58,9 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
                     self.showErrorMessage(error: error)
                     return
                 }
-                // If the attempt has 0:00:00 remaining time, it means infinite timing.
-                // Since our app doesn't support exams with infinite timing, we set the remaining time to 24 hours.
+                // Check if the remaining time for the attempt is "0:00:00" that's indicating infinite time.
+                // If the remaining time is infinite, set it to a default value of 24 hours.
+                // This is done because our app doesn't support exams with infinite timing.
                 if attempt?.remainingTime == "0:00:00" {
                     attempt?.remainingTime = "24:00:00"
                 }
