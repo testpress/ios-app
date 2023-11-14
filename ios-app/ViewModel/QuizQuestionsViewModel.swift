@@ -31,7 +31,7 @@ class QuizQuestionsViewModel {
         self.contentAttempt = nil
         self.attempt = attempt
     }
-
+    
     func getFirstUnAttemptedItemIndex() -> Int {
         assert(attempt != nil, "Attempt cannot be nil")
         return repository.getIndexOfFirstUnAttemptedItem(attemptId: attempt!.id)
@@ -50,7 +50,7 @@ class QuizQuestionsViewModel {
         assert(attempt != nil, "Attempt cannot be nil")
         repository.endAttempt(url: attempt!.getEndAttemptUrl(), completion: completion)
     }
-
+    
     func submitAnswer(id: Int) {
         repository.submitAnswer(id: id)
     }
