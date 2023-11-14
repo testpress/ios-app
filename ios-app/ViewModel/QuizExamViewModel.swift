@@ -9,8 +9,8 @@
 import Foundation
 
 
-class QuizExamViewModel {
-    private let exam: Exam?
+class QuizExamViewModel: QuizExamViewModelDelegate {
+    private let exam: Exam
     private let content: Content?
     private let repository: AttemptRepository
     
@@ -20,7 +20,7 @@ class QuizExamViewModel {
         self.repository = repository
     }
     
-    init(exam: Exam?, repository: AttemptRepository = AttemptRepository()) {
+    init(exam: Exam, repository: AttemptRepository = AttemptRepository()) {
         self.exam = exam
         self.repository = repository
         self.content = nil
@@ -31,25 +31,25 @@ class QuizExamViewModel {
 
 extension QuizExamViewModel {
     var title: String {
-        return exam!.title
+        return exam.title
     }
     var noOfQuestions: String {
-        return String(exam!.numberOfQuestions)
+        return String(exam.numberOfQuestions)
     }
     var startEndDate: String {
-        return FormatDate.format(dateString: exam!.startDate) + " -\n" +
-            FormatDate.format(dateString: exam!.endDate)
+        return FormatDate.format(dateString: exam.startDate) + " -\n" +
+            FormatDate.format(dateString: exam.endDate)
     }
     var description: String {
-        return exam!.examDescription
+        return exam.examDescription
     }
     var canStartExam: Bool {
-        return exam!.deviceAccessControl != "web" && exam!.hasStarted() && !exam!.hasEnded()
+        return exam.deviceAccessControl != "web" && exam.hasStarted() && !exam.hasEnded()
     }
     var examInfo: String {
-        if(!exam!.hasStarted()) {
-            return Strings.CAN_START_EXAM_ONLY_AFTER + FormatDate.format(dateString: exam!.startDate)
-        } else if exam!.hasEnded() {
+        if(!exam.hasStarted()) {
+            return Strings.CAN_START_EXAM_ONLY_AFTER + FormatDate.format(dateString: exam.startDate)
+        } else if exam.hasEnded() {
             return Strings.EXAM_ENDED
         }
         return ""
@@ -63,9 +63,7 @@ extension QuizExamViewModel {
     }
     
     public func loadQuestions(attemptId: Int, completion: @escaping([AttemptItem]?, TPError?) -> Void) {
-        let examId: Int = exam?.id ?? -1
-        let questionUrl = Constants.BASE_URL + "/api/v2.5/attempts/\(attemptId)/questions/"
-        repository.loadQuestions(url: questionUrl, examId: examId, attemptId: attemptId, completion: completion)
+        repository.loadQuestions(url: exam.getQuestionsURL(), examId: exam.id, attemptId: attemptId, completion: completion)
     }
     
 }

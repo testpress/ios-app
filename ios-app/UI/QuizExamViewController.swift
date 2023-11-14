@@ -16,7 +16,7 @@ class QuizExamViewController: UIViewController {
     let loadingViewController = LoadingViewController()
     var questionsPageViewController: QuizQuestionsPageViewController!
     var emptyView: EmptyView!
-    var viewModel: QuizExamViewModel!
+    var viewModel: QuizExamViewModelDelegate!
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var navigationBarItem: UINavigationItem!
@@ -24,7 +24,11 @@ class QuizExamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = QuizExamViewModel(exam: exam)
+        if exam != nil {
+            viewModel = QuizExamViewModel(exam: exam!)
+        } else {
+            viewModel = CustomTestQuizExamViewModel()
+        }
         self.setStatusBarColor()
         initializeQuizQuestionsPageViewController()
         loadQuestions()
