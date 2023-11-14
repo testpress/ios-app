@@ -9,6 +9,9 @@
 import Foundation
 import WebKit
 
+let DEFAULT_EXAM_TIME = "24:00:00"
+let INFINITE_EXAM_TIME = "24:00:00"
+
 class CustomTestGenerationViewController: WebViewController, WKScriptMessageHandler {
     
     override func viewDidLoad() {
@@ -58,11 +61,10 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
                     self.showErrorMessage(error: error)
                     return
                 }
-                // Check if the remaining time for the attempt is "0:00:00" that's indicating infinite time.
-                // If the remaining time is infinite, set it to a default value of 24 hours.
+                // Check if the remaining time for the attempt is infinite we reset to default value of 24 hours.
                 // This is done because our app doesn't support exams with infinite timing.
-                if attempt?.remainingTime == "0:00:00" {
-                    attempt?.remainingTime = "24:00:00"
+                if attempt?.remainingTime == INFINITE_EXAM_TIME {
+                    attempt?.remainingTime = DEFAULT_EXAM_TIME
                 }
                 
                 if quizMode {
