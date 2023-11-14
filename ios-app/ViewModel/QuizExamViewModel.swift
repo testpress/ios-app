@@ -20,17 +20,12 @@ class QuizExamViewModel {
         self.repository = repository
     }
     
-    init(exam: Exam, repository: AttemptRepository = AttemptRepository()) {
+    init(exam: Exam?, repository: AttemptRepository = AttemptRepository()) {
         self.exam = exam
         self.repository = repository
         self.content = nil
     }
-    
-    init(repository: AttemptRepository = AttemptRepository()) {
-        self.exam = nil
-        self.repository = repository
-        self.content = nil
-    }
+
 }
 
 

@@ -24,11 +24,7 @@ class QuizExamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if exam == nil {
-            viewModel = QuizExamViewModel()
-        } else {
-            viewModel = QuizExamViewModel(exam: exam!)
-        }
+        viewModel = QuizExamViewModel(exam: exam)
         self.setStatusBarColor()
         initializeQuizQuestionsPageViewController()
         loadQuestions()
@@ -48,12 +44,7 @@ class QuizExamViewController: UIViewController {
     
     func loadQuestions() {
         showLoadingScreen()
-        let attemptId: Int
-        if exam != nil {
-            attemptId = contentAttempt?.assessment.id ?? 0
-        } else {
-            attemptId = attempt?.id ?? 0
-        }
+        let attemptId = (exam != nil) ? contentAttempt?.assessment.id ?? 0 : attempt?.id ?? 0
         viewModel.loadQuestions(attemptId: attemptId) {attemptItems,error in
             self.loadingViewController.remove()
             if let error = error {
