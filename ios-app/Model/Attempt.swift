@@ -82,4 +82,12 @@ class Attempt: DBModel {
         exam <- map["exam"]
         sections <- (map["sections"], ListTransform<AttemptSection>())
     }
+
+    func hasScore() -> Bool {
+        return self.score != nil && self.score != "NA"
+    }
+    
+    func getEndAttemptUrl() -> String {
+        return url + "end/";
+    }
 }

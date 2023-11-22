@@ -57,13 +57,41 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         questionsPageViewDelegate = self
         nextButton.setTitle("NEXT", for: .normal)
         
+        setupPauseButtonGesture()
+        initializeDropDownContainerForSections()
+        
+        if !firstAttemptOfLockedSectionExam {
+            nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
+            nextButton.setTitle("END", for: .disabled)
+        }
+
+        showOrHideTimer()
+    }
+    
+    private func setupPauseButtonGesture() {
         let pauseButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onPressPauseButton(sender:)))
         parentSlidingViewController.pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
-        
+    }
+    
+    private func initializeDropDownContainerForSections() {
+        hideDropdownContainer()
+        checkExamHasLockedSection()
+        setupSectionsDropDown()
+    }
+    
+    private func showOrHideTimer(){
+        if(exam == nil && attempt?.remainingTime == DEFAULT_EXAM_TIME) {
+            parentSlidingViewController.remainingTimeLabel.isHidden = true
+        }
+    }
+    
+    private func hideDropdownContainer() {
         dropdownContainerHeight.constant = 0
         dropdownContainer.isHidden = true
-        
+    }
+    
+    private func checkExamHasLockedSection() {
         sections = Array(attempt.sections)
         if sections.count > 1 {
             for i in 0 ..< sections.count {
@@ -76,52 +104,63 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             }
             lockedSectionExam = !unlockedSectionExam;
         }
-        
+    }
+    
+    private func setupSectionsDropDown() {
         if lockedSectionExam {
-            plainDropDown = PlainDropDown(containerView: dropdownContainer)
-            plainDropDown.dropDown.selectionBackgroundColor = UIColor.clear
-            plainDropDown.dropDown.cellNib =
-                UINib(nibName: "LockableSectionDropDownCell", bundle: nil)
-            
-            plainDropDown.dropDown.customCellConfiguration = {
-                (index: Index, item: String, cell: DropDownCell) -> Void in
-                
-                let cell = cell as! LockableSectionDropDownCell
-                let selectedItemIndex = self.plainDropDown.dropDown.indexForSelectedRow
-                cell.initCell(index: index, sectionName: item, selectedItem: selectedItemIndex!)
-            }
-            for section in sections {
-                plainDropDown.items.append(section.name)
-            }
-            plainDropDown.addItems(items: plainDropDown.items)
-            plainDropDown.setCurrentItem(index: currentSection)
-            dropdownContainerHeight.constant =
-                TestEngineViewController.DROP_DOWN_CONTAINER_HEIGHT
-            
-            dropdownContainer.isHidden = false
-            plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
-                if index == self.currentSection {
-                    return
-                }
-                self.onSwitchLockedSection(index: index)
-            }
-            firstAttemptOfLockedSectionExam =
-                (courseContent != nil && courseContent.attemptsCount <= 1) ||
-                (courseContent == nil && (exam.attemptsCount == 0 ||
-                    (exam.attemptsCount == 1 && exam.pausedAttemptsCount == 1)))
+            setUpDropDownForLockedSections()
         } else {
-            if exam.templateType == 2 || unlockedSectionExam {
-                plainDropDown = PlainDropDown(containerView: dropdownContainer)
-                plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
-                    self.plainDropDown.titleButton.setTitle(item, for: .normal)
-                    self.selectedPlainSpinnerItemOffset = self.plainSpinnerItemOffsets[item]!
-                    self.setCurrentQuestion(index: self.plainSpinnerItemOffsets[item]!)
-                }
-            }
+            setUpDropDownForSections()
         }
-        if !firstAttemptOfLockedSectionExam {
-            nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
-            nextButton.setTitle("END", for: .disabled)
+    }
+    
+    private func setUpDropDownForLockedSections() {
+        plainDropDown = PlainDropDown(containerView: dropdownContainer)
+        plainDropDown.dropDown.selectionBackgroundColor = UIColor.clear
+        plainDropDown.dropDown.cellNib =
+        UINib(nibName: "LockableSectionDropDownCell", bundle: nil)
+        
+        plainDropDown.dropDown.customCellConfiguration = {
+            (index: Index, item: String, cell: DropDownCell) -> Void in
+            
+            let cell = cell as! LockableSectionDropDownCell
+            let selectedItemIndex = self.plainDropDown.dropDown.indexForSelectedRow
+            cell.initCell(index: index, sectionName: item, selectedItem: selectedItemIndex!)
+        }
+        for section in sections {
+            plainDropDown.items.append(section.name)
+        }
+        plainDropDown.addItems(items: plainDropDown.items)
+        plainDropDown.setCurrentItem(index: currentSection)
+        dropdownContainerHeight.constant =
+        TestEngineViewController.DROP_DOWN_CONTAINER_HEIGHT
+        
+        dropdownContainer.isHidden = false
+        plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
+            if index == self.currentSection {
+                return
+            }
+            self.onSwitchLockedSection(index: index)
+        }
+        firstAttemptOfLockedSectionExam = isFirstCourseContentAttempt() || isFirstExamAttempt()
+    }
+
+    private func isFirstCourseContentAttempt() -> (Bool) {
+        return (courseContent != nil && courseContent.attemptsCount <= 1)
+    }
+    
+    private func isFirstExamAttempt() -> (Bool) {
+        return (courseContent == nil && (exam!.attemptsCount == 0 || (exam!.attemptsCount == 1 && exam!.pausedAttemptsCount == 1)))
+    }
+    
+    private func setUpDropDownForSections() {
+        if exam != nil && (exam!.templateType == 2 || unlockedSectionExam) {
+            plainDropDown = PlainDropDown(containerView: dropdownContainer)
+            plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
+                self.plainDropDown.titleButton.setTitle(item, for: .normal)
+                self.selectedPlainSpinnerItemOffset = self.plainSpinnerItemOffsets[item]!
+                self.setCurrentQuestion(index: self.plainSpinnerItemOffsets[item]!)
+            }
         }
     }
     
@@ -466,6 +505,10 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     @objc func onPressPauseButton(sender: UITapGestureRecognizer) {
+        if exam == nil {
+            showEndExamDialog()
+            return
+        }
         alertDialog = UIAlertController(title: Strings.EXIT_EXAM,
                                       message: Strings.PAUSE_MESSAGE,
                                       preferredStyle: .alert)
@@ -498,6 +541,10 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func onPressStopButton() {
+        if exam == nil {
+            showEndExamDialog()
+            return
+        }
         alertDialog = UIAlertController(
             title: Strings.EXIT_EXAM,
             message: Strings.END_MESSAGE,
@@ -527,6 +574,25 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 }
             ))
         }
+        alertDialog.addAction(UIAlertAction(
+            title: Strings.CANCEL,
+            style: UIAlertAction.Style.cancel
+        ))
+        present(alertDialog, animated: true, completion: nil)
+    }
+
+    func showEndExamDialog() {
+        alertDialog = UIAlertController(
+            title: Strings.EXIT_EXAM,
+            message: "Are you sure? Want to end the exam",
+            preferredStyle: UIUtils.getActionSheetStyle()
+        )
+        alertDialog.addAction(UIAlertAction(
+            title: Strings.END, style: UIAlertAction.Style.destructive,
+            handler: { (action: UIAlertAction!) in
+                self.onClickEnd()
+            }
+        ))
         alertDialog.addAction(UIAlertAction(
             title: Strings.CANCEL,
             style: UIAlertAction.Style.cancel
@@ -583,7 +649,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
 extension TestEngineViewController: QuestionsPageViewDelegate {
     
     func questionsDidLoad() {
-        if sections.count <= 1 && exam.templateType == 2 || unlockedSectionExam {
+        if sections.count <= 1 && exam != nil && (exam!.templateType == 2 || unlockedSectionExam) {
             // Used to get items in order as it fetched
             var spinnerItemsList = [String]()
             var groupedAttemptItems = OrderedDictionary<String, [AttemptItem]>()

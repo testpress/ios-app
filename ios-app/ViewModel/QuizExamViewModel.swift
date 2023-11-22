@@ -9,7 +9,7 @@
 import Foundation
 
 
-class QuizExamViewModel {
+class QuizExamViewModel: QuizExamViewModelDelegate {
     private let exam: Exam
     private let content: Content?
     private let repository: AttemptRepository
@@ -25,6 +25,7 @@ class QuizExamViewModel {
         self.repository = repository
         self.content = nil
     }
+
 }
 
 
@@ -54,11 +55,11 @@ extension QuizExamViewModel {
         return ""
     }
     
-    public func loadAttempt(completion: @escaping(ContentAttempt?, TPError?) -> Void) {
+    public func loadContentAttempt(completion: @escaping(ContentAttempt?, TPError?) -> Void) {
         if (content == nil) {
             debugPrint("Content is nil")
         }
-        repository.loadAttempt(attemptsUrl: content!.getAttemptsUrl(), completion: completion)
+        repository.loadContentAttempt(attemptsUrl: content!.getAttemptsUrl(), completion: completion)
     }
     
     public func loadQuestions(attemptId: Int, completion: @escaping([AttemptItem]?, TPError?) -> Void) {
