@@ -108,6 +108,33 @@ class StartExamScreenViewController: UIViewController {
     }
     
     @IBAction func startExam(_ sender: UIButton) {
+        if(exam.enableQuizMode) {
+            showExamModePopUp(sender)
+        } else {
+            startExam()
+        }
+    }
+    
+    private func showExamModePopUp(_ sender: UIButton) {
+        let actionSheet = UIAlertController(title: "Select Exam Mode", message: nil, preferredStyle: .actionSheet)
+        let option1 = UIAlertAction(title: "Regular Mode", style: .default) { _ in
+            self.startExam()
+        }
+        let option2 = UIAlertAction(title: "Quiz Mode", style: .default) { _ in
+            self.startExam()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(option1)
+        actionSheet.addAction(option2)
+        actionSheet.addAction(cancelAction)
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = sender
+            popoverController.permittedArrowDirections = [.up, .down]
+        }
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func startExam() {
         present(alertController, animated: false, completion: nil)
         startButton.isHidden = true
         startAttempt()
