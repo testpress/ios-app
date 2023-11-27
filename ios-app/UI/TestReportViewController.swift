@@ -25,6 +25,7 @@
 
 import UIKit
 import RealmSwift
+import Foundation
 
 class TestReportViewController: UIViewController {
 
@@ -85,7 +86,7 @@ class TestReportViewController: UIViewController {
         examTitle.text = exam?.title ?? "Custom Module"
         totalQuestions.text = String(exam?.numberOfQuestions ?? attempt.totalQuestions)
         totalMarks.text = exam?.totalMarks ?? ""
-        totalTime.text = exam?.duration ?? ""
+        totalTime.text = getTotalTime()
         cutoff.text = String(exam?.passPercentage ?? 0.0)
         percentage.text = attempt.percentage
         correct.text = String(attempt!.correctCount)
@@ -145,6 +146,24 @@ class TestReportViewController: UIViewController {
         } else {
             solutionButtonLayout.isHidden = false
         }
+    }
+    
+    private func getTotalTime() -> String {
+        if (exam != nil){
+            return exam?.totalMarks ?? ""
+        } else if (attempt?.remainingTime == INFINITE_EXAM_TIME) {
+            return ""
+        } else {
+            return addTimeStrings(attempt?.timeTaken ?? INFINITE_EXAM_TIME, attempt?.remainingTime ?? INFINITE_EXAM_TIME)
+        }
+    }
+    
+    func addTimeStrings(_ timeTaken: String,_ remainingTime: String) -> String {
+        let totalTime = timeTaken.secondsFromString + remainingTime.secondsFromString + 1
+        let hours = (totalTime / (60 * 60)) % 12
+        let minutes = (totalTime / 60) % 60
+        let seconds = totalTime % 60
+        return String(format: "%d:%02d:%02d", hours, minutes, seconds)
     }
 
     @IBAction func showShareScreen(_ sender: Any) {
