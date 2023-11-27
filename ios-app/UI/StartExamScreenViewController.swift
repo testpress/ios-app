@@ -28,6 +28,9 @@ import UIKit
 import RealmSwift
 
 class StartExamScreenViewController: UIViewController {
+    
+    static let REGULAR_ATTEMPT = 0
+    static let QUIZ_ATTEMPT = 1
 
     @IBOutlet weak var examTitle: UILabel!
     @IBOutlet weak var questionsCount: UILabel!
@@ -109,23 +112,23 @@ class StartExamScreenViewController: UIViewController {
     
     @IBAction func startExam(_ sender: UIButton) {
         if (contentAttempt?.assessment?.state == "Running"){
-            startExam(contentAttempt?.assessment?.attemptType ?? 0)
+            startExam(contentAttempt?.assessment?.attemptType ?? StartExamScreenViewController.REGULAR_ATTEMPT)
             return
         }
         if(exam.enableQuizMode) {
             showExamModePopUp(sender)
         } else {
-            startExam(0)
+            startExam(StartExamScreenViewController.REGULAR_ATTEMPT)
         }
     }
     
     private func showExamModePopUp(_ sender: UIButton) {
         let actionSheet = UIAlertController(title: "Select Exam Mode", message: nil, preferredStyle: .actionSheet)
         let option1 = UIAlertAction(title: "Regular Mode", style: .default) { _ in
-            self.startExam(0)
+            self.startExam(StartExamScreenViewController.REGULAR_ATTEMPT)
         }
         let option2 = UIAlertAction(title: "Quiz Mode", style: .default) { _ in
-            self.startExam(1)
+            self.startExam(StartExamScreenViewController.QUIZ_ATTEMPT)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         actionSheet.addAction(option1)
@@ -215,7 +218,7 @@ class StartExamScreenViewController: UIViewController {
                 } else {
                     self.attempt = attempt as? Attempt
                 }
-                if (self.attempt?.attemptType == 1){
+                if (self.attempt?.attemptType == StartExamScreenViewController.QUIZ_ATTEMPT){
                     self.goToQuizExam()
                 } else {
                     self.gotoTestEngine()
