@@ -25,7 +25,6 @@
 
 import UIKit
 import RealmSwift
-import Foundation
 
 class TestReportViewController: UIViewController {
 
