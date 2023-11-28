@@ -124,15 +124,15 @@ class StartExamScreenViewController: UIViewController {
     
     private func showExamModePopUp(_ sender: UIButton) {
         let actionSheet = UIAlertController(title: "Select Exam Mode", message: nil, preferredStyle: .actionSheet)
-        let option1 = UIAlertAction(title: "Regular Mode", style: .default) { _ in
+        let regularModeButton = UIAlertAction(title: "Regular Mode", style: .default) { _ in
             self.startExam(StartExamScreenViewController.REGULAR_ATTEMPT)
         }
-        let option2 = UIAlertAction(title: "Quiz Mode", style: .default) { _ in
+        let quizModeButton = UIAlertAction(title: "Quiz Mode", style: .default) { _ in
             self.startExam(StartExamScreenViewController.QUIZ_ATTEMPT)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        actionSheet.addAction(option1)
-        actionSheet.addAction(option2)
+        actionSheet.addAction(regularModeButton)
+        actionSheet.addAction(quizModeButton)
         actionSheet.addAction(cancelAction)
         if let popoverController = actionSheet.popoverPresentationController {
             popoverController.sourceView = sender
