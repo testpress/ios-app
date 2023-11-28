@@ -61,6 +61,7 @@ class Exam: DBModel {
     @objc dynamic var isGrowthHackEnabled: Bool = false;
     @objc dynamic var shareTextForSolutionUnlock: String = "";
     @objc dynamic var showAnalytics: Bool = false
+    @objc dynamic var enableQuizMode: Bool = false;
     
     override public static func primaryKey() -> String? {
         return "id"
@@ -104,6 +105,7 @@ class Exam: DBModel {
         shareTextForSolutionUnlock <- map["share_text_for_solution_unlock"]
         examDescription <- map["description"]
         showAnalytics <- map["show_analytics"]
+        enableQuizMode <- map["enable_quiz_mode"]
     }
     
     func hasStarted() -> Bool {

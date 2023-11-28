@@ -28,6 +28,9 @@ import UIKit
 import RealmSwift
 
 class StartExamScreenViewController: UIViewController {
+    
+    static let REGULAR_ATTEMPT = 0
+    static let QUIZ_ATTEMPT = 1
 
     @IBOutlet weak var examTitle: UILabel!
     @IBOutlet weak var questionsCount: UILabel!
@@ -108,23 +111,54 @@ class StartExamScreenViewController: UIViewController {
     }
     
     @IBAction func startExam(_ sender: UIButton) {
+        if (contentAttempt?.assessment?.state == "Running"){
+            startExam(contentAttempt?.assessment?.attemptType ?? StartExamScreenViewController.REGULAR_ATTEMPT)
+            return
+        }
+        if(exam.enableQuizMode) {
+            showExamModePopUp(sender)
+        } else {
+            startExam(StartExamScreenViewController.REGULAR_ATTEMPT)
+        }
+    }
+    
+    private func showExamModePopUp(_ sender: UIButton) {
+        let actionSheet = UIAlertController(title: "Select Exam Mode", message: nil, preferredStyle: .actionSheet)
+        let regularModeButton = UIAlertAction(title: "Regular Mode", style: .default) { _ in
+            self.startExam(StartExamScreenViewController.REGULAR_ATTEMPT)
+        }
+        let quizModeButton = UIAlertAction(title: "Quiz Mode", style: .default) { _ in
+            self.startExam(StartExamScreenViewController.QUIZ_ATTEMPT)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(regularModeButton)
+        actionSheet.addAction(quizModeButton)
+        actionSheet.addAction(cancelAction)
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = sender
+            popoverController.permittedArrowDirections = [.up, .down]
+        }
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func startExam(_ examMode: Int) {
         present(alertController, animated: false, completion: nil)
         startButton.isHidden = true
-        startAttempt()
+        startAttempt(examMode)
     }
     
     @IBAction func back() {
         dismiss(animated: true, completion: nil)
     }
     
-    func startAttempt() {
+    func startAttempt(_ examMode: Int) {
         var endpointProvider: TPEndpointProvider
         if content != nil && contentAttempt == nil {
             endpointProvider = TPEndpointProvider(
                 .post,
                 url: content.getAttemptsUrl()
             )
-            startAttempt(type: ContentAttempt.self, endpointProvider: endpointProvider)
+            startAttempt(examMode: examMode, type: ContentAttempt.self, endpointProvider: endpointProvider)
             return
         } else if attempt == nil {
             var queryParams = [String: String]()
@@ -142,13 +176,14 @@ class StartExamScreenViewController: UIViewController {
                 url: attempt!.url + TPEndpoint.resumeAttempt.urlPath
             )
         }
-        startAttempt(type: Attempt.self, endpointProvider: endpointProvider)
+        startAttempt(examMode: examMode, type: Attempt.self, endpointProvider: endpointProvider)
     }
     
-    func startAttempt<T: TestpressModel>(type: T.Type, endpointProvider: TPEndpointProvider) {
+    func startAttempt<T: TestpressModel>(examMode: Int, type: T.Type, endpointProvider: TPEndpointProvider) {
         TPApiClient.request(
             type: type,
             endpointProvider: endpointProvider,
+            parameters: ["attempt_type":examMode],
             completion: {
                 attempt, error in
                 
@@ -161,7 +196,7 @@ class StartExamScreenViewController: UIViewController {
                         retryButtonText = Strings.TRY_AGAIN
                         retryHandler = {
                             self.present(self.alertController, animated: false, completion: nil)
-                            self.startAttempt()
+                            self.startAttempt(examMode)
                         }
                     }
                     let (image, title, description) = error.getDisplayInfo()
@@ -183,7 +218,12 @@ class StartExamScreenViewController: UIViewController {
                 } else {
                     self.attempt = attempt as? Attempt
                 }
-                self.gotoTestEngine()
+                if (self.attempt?.attemptType == StartExamScreenViewController.QUIZ_ATTEMPT){
+                    self.goToQuizExam()
+                } else {
+                    self.gotoTestEngine()
+                }
+                
         })
     }
     
@@ -200,6 +240,15 @@ class StartExamScreenViewController: UIViewController {
         viewController.courseContent = content
         viewController.contentAttempt = contentAttempt
         present(slideMenuController, animated: true, completion: nil)
+    }
+    
+    func goToQuizExam() {
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
+        viewController.contentAttempt = contentAttempt
+        viewController.exam = content.exam
+        present(viewController, animated: true, completion: nil)
     }
     
     // Set frames of the views in this method to support both portrait & landscape view
