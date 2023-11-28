@@ -85,7 +85,7 @@ class TestReportViewController: UIViewController {
         examTitle.text = exam?.title ?? "Custom Module"
         totalQuestions.text = String(exam?.numberOfQuestions ?? attempt.totalQuestions)
         totalMarks.text = exam?.totalMarks ?? ""
-        totalTime.text = exam?.duration ?? ""
+        totalTime.text = getTotalTime()
         cutoff.text = String(exam?.passPercentage ?? 0.0)
         percentage.text = attempt.percentage
         correct.text = String(attempt!.correctCount)
@@ -144,6 +144,16 @@ class TestReportViewController: UIViewController {
             solutionButtonLayout.isHidden = true
         } else {
             solutionButtonLayout.isHidden = false
+        }
+    }
+    
+    private func getTotalTime() -> String {
+        if (exam != nil){
+            return exam?.duration ?? ""
+        } else if (attempt?.remainingTime == INFINITE_EXAM_TIME) {
+            return ""
+        } else {
+            return TimeUtils.addTimeStrings(attempt?.timeTaken, attempt?.remainingTime)
         }
     }
 
