@@ -149,20 +149,12 @@ class TestReportViewController: UIViewController {
     
     private func getTotalTime() -> String {
         if (exam != nil){
-            return exam?.totalMarks ?? ""
+            return exam?.duration ?? ""
         } else if (attempt?.remainingTime == INFINITE_EXAM_TIME) {
             return ""
         } else {
-            return addTimeStrings(attempt?.timeTaken ?? INFINITE_EXAM_TIME, attempt?.remainingTime ?? INFINITE_EXAM_TIME)
+            return TimeUtils.addTimeStrings(attempt?.timeTaken, attempt?.remainingTime)
         }
-    }
-    
-    func addTimeStrings(_ timeTaken: String,_ remainingTime: String) -> String {
-        let totalTime = timeTaken.secondsFromString + remainingTime.secondsFromString + 1
-        let hours = (totalTime / (60 * 60)) % 12
-        let minutes = (totalTime / 60) % 60
-        let seconds = totalTime % 60
-        return String(format: "%d:%02d:%02d", hours, minutes, seconds)
     }
 
     @IBAction func showShareScreen(_ sender: Any) {
