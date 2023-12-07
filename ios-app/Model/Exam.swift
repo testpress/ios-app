@@ -24,6 +24,7 @@
 //
 
 import ObjectMapper
+import RealmSwift
 
 class Exam: DBModel {
     @objc dynamic var url: String = "";
@@ -63,7 +64,7 @@ class Exam: DBModel {
     @objc dynamic var showAnalytics: Bool = false
     @objc dynamic var enableQuizMode: Bool = false;
     @objc dynamic var selectedLanguage: Language?
-    @objc dynamic var languages: [Language]?
+    var languages = List<Language>()
     
     override public static func primaryKey() -> String? {
         return "id"
@@ -109,7 +110,7 @@ class Exam: DBModel {
         showAnalytics <- map["show_analytics"]
         enableQuizMode <- map["enable_quiz_mode"]
         selectedLanguage <- map["selected_language"]
-        languages <- map["languages"]
+        languages <- (map["languages"], ListTransform<Language>())
     }
     
     func hasStarted() -> Bool {
