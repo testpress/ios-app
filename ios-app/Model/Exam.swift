@@ -62,6 +62,8 @@ class Exam: DBModel {
     @objc dynamic var shareTextForSolutionUnlock: String = "";
     @objc dynamic var showAnalytics: Bool = false
     @objc dynamic var enableQuizMode: Bool = false;
+    @objc dynamic var selectedLanguage: Language?
+    @objc dynamic var languages: [Language]
     
     override public static func primaryKey() -> String? {
         return "id"
@@ -106,6 +108,8 @@ class Exam: DBModel {
         examDescription <- map["description"]
         showAnalytics <- map["show_analytics"]
         enableQuizMode <- map["enable_quiz_mode"]
+        selectedLanguage <- map["selected_language"]
+        languages <- map["languages"]
     }
     
     func hasStarted() -> Bool {
