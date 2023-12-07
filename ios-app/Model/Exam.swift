@@ -63,7 +63,7 @@ class Exam: DBModel {
     @objc dynamic var showAnalytics: Bool = false
     @objc dynamic var enableQuizMode: Bool = false;
     @objc dynamic var selectedLanguage: Language?
-    @objc dynamic var languages: [Language]
+    @objc dynamic var languages: [Language]?
     
     override public static func primaryKey() -> String? {
         return "id"
