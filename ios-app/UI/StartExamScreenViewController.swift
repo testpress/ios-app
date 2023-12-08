@@ -47,7 +47,10 @@ class StartExamScreenViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIStackView!
     @IBOutlet weak var navigationBarItem: UINavigationItem!
-    
+    var activityIndicator: UIActivityIndicatorView! // Progress bar
+    var languages: [Language] = []
+    @IBOutlet weak var languageButton: UIButton!
+                
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
     var emptyView: EmptyView!
     var content: Content!
@@ -59,6 +62,8 @@ class StartExamScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setStatusBarColor()
+        activityIndicator = UIUtils.initActivityIndicator(parentView: view)
+        activityIndicator.startAnimating()
         
         emptyView = EmptyView.getInstance(parentView: scrollView)
         view.addSubview(emptyView)
@@ -68,6 +73,7 @@ class StartExamScreenViewController: UIViewController {
                 attempt = contentAttempt.assessment
             }
         }
+        fetchLanguages(url: Constants.BASE_URL+"/api/v2.3/exams/"+exam.slug+"/languages/")
         examTitle.text = exam.title
         questionsCount.text = String(exam.numberOfQuestions)
         if attempt?.remainingTime != nil {
@@ -108,7 +114,79 @@ class StartExamScreenViewController: UIViewController {
                 navigationBarItem?.title = Strings.RESUME_EXAM
             }
         }
+        
+        
     }
+    
+    func setupLanguageButton() {
+        if #available(iOS 14.0, *) {
+            languageButton.showsMenuAsPrimaryAction = true
+            languageButton.menu = UIMenu(title: "Select Language",
+                                 children: [
+                                    UIAction(title: "Select...",state: .on, handler: {_ in print("Select===============================")}),
+                                    UIAction(title: self.exam.languages[0].title, handler: {_ in print(self.exam.languages[0].title+"===============================")}),
+                                    UIAction(title: self.exam.languages[1].title, handler: {_ in print(self.exam.languages[1].title+"===============================")})
+                                 ])
+        } else {
+            // Fallback on earlier versions
+        }
+        
+    }
+    
+    @IBAction func languageButton(_ sender: UIButton) {
+//        if #available(iOS 14.0, *) {
+//            sender.menu = UIMenu(title: "Select Language",
+//                                 children: [
+//                                    UIAction(title: "Ok", handler: {_ in print("hi===============================")}),
+//                                    UIAction(title: "Cancel", handler: {_ in print("hi===============================")})
+//                                 ])
+//
+//        } else {
+//            // Fallback on earlier versions
+//        }
+    }
+    
+    func fetchLanguages(url: String) {
+            TPApiClient.getListItems(
+                endpointProvider: TPEndpointProvider(.get, url: url),
+                completion: {
+                    testpressResponse, error in
+                    if let error = error {
+                        debugPrint(error.message ?? "No error")
+                        debugPrint(error.kind)
+                        var retryButtonText: String?
+                        var retryHandler: (() -> Void)?
+                        if error.kind == .network {
+                            retryButtonText = Strings.TRY_AGAIN
+                            retryHandler = {
+                                self.emptyView.hide()
+                                self.fetchLanguages(url: url)
+                            }
+                        }
+                        if self.activityIndicator.isAnimating {
+                            self.activityIndicator.stopAnimating()
+                        }
+                        let (image, title, description) = error.getDisplayInfo()
+                        self.emptyView.show(image: image, title: title, description: description,
+                                            retryButtonText: retryButtonText,
+                                            retryHandler: retryHandler)
+                        
+                        return
+                    }
+                    try! Realm().write {
+                        self.exam.languages.append(objectsIn: testpressResponse!.results)
+                    }
+                    if !(testpressResponse!.next.isEmpty) {
+                        self.fetchLanguages(url: testpressResponse!.next)
+                    } else {
+                        if self.activityIndicator.isAnimating {
+                            self.activityIndicator.stopAnimating()
+                        }
+                        self.setupLanguageButton()
+                    }
+    
+            }, type: Language.self)
+        }
     
     @IBAction func startExam(_ sender: UIButton) {
         if (contentAttempt?.assessment?.state == "Running"){
