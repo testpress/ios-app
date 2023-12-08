@@ -23,6 +23,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
         let contentController = WKUserContentController()
         contentController.add(self, name: "IosInterface")
         contentController.add(self, name: "startCustomTestInQuizMode")
+        contentController.add(self, name: "showReview")
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
         config.preferences.javaScriptEnabled = true
@@ -44,6 +45,12 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
             let attemptId = message.body
             print(attemptId)
             loadAttempts(attemptId as! String, true)
+        }
+        if message.name == "showReview" {
+            self.emptyView.hide()
+            self.activityIndicator?.startAnimating()
+            let attemptId = message.body
+            getAttempt(attemptId as! String)
         }
     }
     
@@ -76,6 +83,27 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
         
     }
     
+    func getAttempt(_ attemptId: String) {
+        TPApiClient.request(
+            type: Attempt.self,
+            endpointProvider: TPEndpointProvider(
+                .get,
+                url: Constants.BASE_URL+"/api/v2.2/attempts/"+attemptId+"/"
+            ),
+            completion: {
+                attempt, error in
+                
+                if let error = error {
+                    self.showErrorMessage(error: error)
+                    return
+                }
+                if attempt != nil {
+                    self.gotoTestReport(attempt!)
+                }
+                
+            })
+    }
+    
     func gotoTestEngine(_ attempt : Attempt) {
         let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
         let slideMenuController = storyboard.instantiateViewController(withIdentifier:
@@ -90,6 +118,14 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
         let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
+        viewController.attempt = attempt
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    func gotoTestReport(_ attempt: Attempt) {
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
         viewController.attempt = attempt
         present(viewController, animated: true, completion: nil)
     }

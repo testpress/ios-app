@@ -251,6 +251,10 @@ class TestReportViewController: UIViewController {
             presentingViewController?.presentingViewController as? ContentDetailPageViewController {
             
             goToContentDetailPageViewController(contentDetailPageViewController)
+        } else if let customTestViewController =
+                    self.presentingViewController as? CustomTestGenerationViewController {
+            
+            customTestViewController.presentingViewController?.dismiss(animated: true, completion: nil)
         } else if exam == nil {
             presentingViewController?.dismiss(animated: true)
         } else {
