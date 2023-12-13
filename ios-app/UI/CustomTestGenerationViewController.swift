@@ -47,11 +47,15 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
             loadAttempts(attemptId as! String, true)
         }
         if message.name == "showReview" {
-            self.emptyView.hide()
-            self.activityIndicator?.startAnimating()
-            let attemptId = message.body
-            getAttempt(attemptId as! String)
+            handleShowReviewMessage(message)
         }
+    }
+    
+    func handleShowReviewMessage(_ message: WKScriptMessage) {
+        self.emptyView.hide()
+        self.activityIndicator?.startAnimating()
+        let attemptId = message.body
+        getAttempt(attemptId as! String)
     }
     
     func loadAttempts(_ attemptId: String, _ quizMode: Bool) {
