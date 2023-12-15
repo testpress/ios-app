@@ -49,7 +49,7 @@ class StartExamScreenViewController: UIViewController {
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     var activityIndicator: UIActivityIndicatorView! // Progress bar
     var languages: [Language] = []
-    @IBOutlet weak var languageButton: UIButton!
+    @IBOutlet weak var selectLanguageLabel: UILabel!
                 
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
     var emptyView: EmptyView!
@@ -114,36 +114,43 @@ class StartExamScreenViewController: UIViewController {
                 navigationBarItem?.title = Strings.RESUME_EXAM
             }
         }
-        
-        
+        setUpLanguageLable()
     }
     
-    func setupLanguageButton() {
-        if #available(iOS 14.0, *) {
-            languageButton.showsMenuAsPrimaryAction = true
-            languageButton.menu = UIMenu(title: "Select Language",
-                                 children: [
-                                    UIAction(title: "Select...",state: .on, handler: {_ in print("Select===============================")}),
-                                    UIAction(title: self.exam.languages[0].title, handler: {_ in print(self.exam.languages[0].title+"===============================")}),
-                                    UIAction(title: self.exam.languages[1].title, handler: {_ in print(self.exam.languages[1].title+"===============================")})
-                                 ])
-        } else {
-            // Fallback on earlier versions
+    func setUpLanguageLable() {
+        try! Realm().write {
+            self.exam.selectedLanguage = nil
         }
-        
+        selectLanguageLabel.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentLanguageActionSheet(_:)))
+        selectLanguageLabel.addGestureRecognizer(tapGesture)
     }
-    
-    @IBAction func languageButton(_ sender: UIButton) {
-//        if #available(iOS 14.0, *) {
-//            sender.menu = UIMenu(title: "Select Language",
-//                                 children: [
-//                                    UIAction(title: "Ok", handler: {_ in print("hi===============================")}),
-//                                    UIAction(title: "Cancel", handler: {_ in print("hi===============================")})
-//                                 ])
-//
-//        } else {
-//            // Fallback on earlier versions
-//        }
+
+    @objc func presentLanguageActionSheet(_ sender: UITapGestureRecognizer) {
+        let actionSheet = UIAlertController(title: "Select Language", message: nil, preferredStyle: .actionSheet)
+
+        let languageOptions = self.languageOptions()
+        languageOptions.forEach { actionSheet.addAction($0) }
+
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = self.selectLanguageLabel
+            popoverController.permittedArrowDirections = [.up, .down]
+        }
+
+        present(actionSheet, animated: true, completion: nil)
+    }
+
+
+    private func languageOptions() -> [UIAlertAction] {
+        return exam.languages.map { language in
+            UIAlertAction(title: language.title, style: .default) { _ in
+                self.selectLanguageLabel.text = language.title
+                try! Realm().write {
+                    self.exam.selectedLanguage = language
+                }
+                print("hihihi"+(self.exam.selectedLanguage?.title ?? "hihihi"))
+            }
+        } + [UIAlertAction(title: "Cancel", style: .cancel, handler: nil)]
     }
     
     func fetchLanguages(url: String) {
@@ -174,6 +181,7 @@ class StartExamScreenViewController: UIViewController {
                         return
                     }
                     try! Realm().write {
+                        self.exam.languages.removeAll()
                         self.exam.languages.append(objectsIn: testpressResponse!.results)
                     }
                     if !(testpressResponse!.next.isEmpty) {
@@ -182,7 +190,6 @@ class StartExamScreenViewController: UIViewController {
                         if self.activityIndicator.isAnimating {
                             self.activityIndicator.stopAnimating()
                         }
-                        self.setupLanguageButton()
                     }
     
             }, type: Language.self)
