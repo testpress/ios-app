@@ -114,20 +114,20 @@ class StartExamScreenViewController: UIViewController {
                 navigationBarItem?.title = Strings.RESUME_EXAM
             }
         }
-        setUpLanguageLable()
+        initializeLanguageSelection()()
     }
     
-    func setUpLanguageLable() {
+    func initializeLanguageSelection()() {
         setSelectedLanguage(nil)
         selectLanguageLabel.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentLanguageActionSheet))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLanguageActionSheet))
         selectLanguageLabel.addGestureRecognizer(tapGesture)
     }
 
-    @objc func presentLanguageActionSheet() {
+    @objc func showLanguageActionSheet() {
         let actionSheet = UIAlertController(title: "Select Language", message: nil, preferredStyle: .actionSheet)
 
-        let languageOptions = self.languageOptions()
+        let languageOptions = self.getLanguageOptions()
         languageOptions.forEach { actionSheet.addAction($0) }
 
         if let popoverController = actionSheet.popoverPresentationController {
@@ -139,7 +139,7 @@ class StartExamScreenViewController: UIViewController {
     }
 
 
-    private func languageOptions() -> [UIAlertAction] {
+    private func getLanguageOptions() -> [UIAlertAction] {
         return exam.languages.map { language in
             UIAlertAction(title: language.title, style: .default) { _ in
                 self.selectLanguageLabel.text = language.title
@@ -155,7 +155,7 @@ class StartExamScreenViewController: UIViewController {
                     testpressResponse, error in
                     
                     if let error = error {
-                        self.handleFetchLanguagesError(error, url: url)
+                        self.showError(error, url: url)
                         return
                     }
                     
@@ -164,14 +164,14 @@ class StartExamScreenViewController: UIViewController {
                     if !(testpressResponse!.next.isEmpty) {
                         self.fetchLanguages(url: testpressResponse!.next)
                     } else {
-                        self.handleFetchLanguagesSuccess(self.languages)
+                        self.saveDataInDB(self.languages)
                         self.hideLoading()
                     }
     
             }, type: Language.self)
         }
     
-    private func handleFetchLanguagesError(_ error: TPError, url: String) {
+    private func showError(_ error: TPError, url: String) {
         debugPrint(error.message ?? "No error")
         debugPrint(error.kind)
         var retryButtonText: String?
@@ -191,7 +191,7 @@ class StartExamScreenViewController: UIViewController {
                             retryHandler: retryHandler)
     }
     
-    private func handleFetchLanguagesSuccess(_ languages: List<Language>) {
+    private func saveDataInDB(_ languages: List<Language>) {
         if (languages.count < 2) {
             try! Realm().write {
                 self.exam.languages.removeAll()
@@ -224,7 +224,7 @@ class StartExamScreenViewController: UIViewController {
     
     @IBAction func startExam(_ sender: UIButton) {
         if (exam.hasMultipleLanguages() && exam.selectedLanguage == nil){
-            presentLanguageActionSheet()
+            showLanguageActionSheet()
             return
         }
         
