@@ -47,13 +47,11 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
             loadAttempts(attemptId as! String, true)
         }
         if message.name == "showReview" {
-            self.emptyView.hide()
-            self.activityIndicator?.startAnimating()
             let attemptId = message.body
             fetchAttemptAndShowReview(attemptId as! String)
         }
     }
-    
+
     func loadAttempts(_ attemptId: String, _ quizMode: Bool) {
         TPApiClient.request(
             type: Attempt.self,
@@ -84,6 +82,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
     }
     
     func fetchAttemptAndShowReview(_ attemptId: String) {
+        showLoading()
         TPApiClient.request(
             type: Attempt.self,
             endpointProvider: TPEndpointProvider(
