@@ -184,6 +184,7 @@ class StartExamScreenViewController: UIViewController {
             }
         }
         self.hideLoading()
+        self.startButton.isHidden = true
         let (image, title, description) = error.getDisplayInfo()
         self.emptyView.show(image: image, title: title, description: description,
                             retryButtonText: retryButtonText,
