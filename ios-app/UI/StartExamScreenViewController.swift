@@ -114,10 +114,10 @@ class StartExamScreenViewController: UIViewController {
                 navigationBarItem?.title = Strings.RESUME_EXAM
             }
         }
-        initializeLanguageSelection()()
+        initializeLanguageSelection()
     }
     
-    func initializeLanguageSelection()() {
+    func initializeLanguageSelection() {
         setSelectedLanguage(nil)
         selectLanguageLabel.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLanguageActionSheet))
