@@ -70,7 +70,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zil-3G-n8B">
-                                                                    <rect key="frame" x="34.5" y="74" width="39.5" height="40"/>
+                                                                    <rect key="frame" x="33" y="74" width="42" height="40"/>
                                                                     <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
                                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1193,7 +1193,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Bgt-Lt-dTD">
                                                                 <rect key="frame" x="0.0" y="190" width="270" height="18"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testpress_calendar_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Jku-hp-ZYJ">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="language_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Jku-hp-ZYJ">
                                                                         <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="18" id="fGQ-bM-LFe"/>
@@ -1322,6 +1322,7 @@
                         <outlet property="duration" destination="Eac-KF-Fe3" id="xr1-wc-MhX"/>
                         <outlet property="durationLabel" destination="QED-zo-4W8" id="lSV-P3-b6s"/>
                         <outlet property="examTitle" destination="5e9-PG-dF3" id="TPo-D3-HHg"/>
+                        <outlet property="languageContainer" destination="Bgt-Lt-dTD" id="7Vb-wM-Lm5"/>
                         <outlet property="markPerQuestion" destination="Nhp-sC-4lj" id="JaF-PH-M5R"/>
                         <outlet property="negativeMarks" destination="dad-py-NgM" id="od8-fW-aLF"/>
                         <outlet property="questionsCount" destination="ocj-CE-eIB" id="8X8-U0-8QP"/>
@@ -1356,7 +1357,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="270"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cbV-74-7tl">
-                                                <rect key="frame" x="25" y="0.0" width="364" height="299"/>
+                                                <rect key="frame" x="25" y="0.0" width="364" height="300.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRU-z0-oNl">
                                                         <rect key="frame" x="182" y="0.0" width="0.0" height="0.0"/>
@@ -1367,10 +1368,10 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4n6-ad-7ST">
-                                                        <rect key="frame" x="161" y="20" width="42" height="20"/>
+                                                        <rect key="frame" x="159.5" y="20" width="45" height="20.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELS-I4-LSz">
-                                                                <rect key="frame" x="0.0" y="0.0" width="42" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="17"/>
                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1378,7 +1379,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="W5B-5I-1v9">
-                                                        <rect key="frame" x="47" y="60" width="270" height="77"/>
+                                                        <rect key="frame" x="47" y="60.5" width="270" height="77"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fUE-Ah-x54">
                                                                 <rect key="frame" x="0.0" y="0.0" width="270" height="18"/>
@@ -1418,7 +1419,7 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Start &amp; End date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWz-aT-2yc">
-                                                                        <rect key="frame" x="38" y="0.0" width="120" height="16.5"/>
+                                                                        <rect key="frame" x="38" y="0.0" width="120" height="17"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="fJj-Rr-Sdv"/>
                                                                         </constraints>
@@ -1427,7 +1428,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dts-9y-Wsx">
-                                                                        <rect key="frame" x="178" y="0.0" width="92" height="16.5"/>
+                                                                        <rect key="frame" x="178" y="0.0" width="92" height="17"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="92" id="u8b-ds-Nak"/>
                                                                         </constraints>
@@ -1450,28 +1451,28 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5u6-3B-btI">
-                                                        <rect key="frame" x="0.0" y="157" width="364" height="142"/>
+                                                        <rect key="frame" x="0.0" y="157.5" width="364" height="143"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5w-u0-DtG">
-                                                                <rect key="frame" x="165" y="0.0" width="34.5" height="16.5"/>
+                                                                <rect key="frame" x="164.5" y="0.0" width="35.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="This exam can only be attempt on the website." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BbD-h5-BzA">
-                                                                <rect key="frame" x="36" y="36.5" width="292.5" height="16.5"/>
+                                                                <rect key="frame" x="31" y="37" width="302.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                                 <color key="textColor" red="0.90196078430000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="j4J-i3-Y52">
-                                                                <rect key="frame" x="126" y="73" width="112.5" height="19"/>
+                                                                <rect key="frame" x="122" y="74" width="120" height="19"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_thumb_up_18pt" translatesAutoresizingMaskIntoConstraints="NO" id="iaX-AP-Zl6">
                                                                         <rect key="frame" x="0.0" y="1" width="18" height="18"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All the best!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohk-aO-dte">
-                                                                        <rect key="frame" x="28" y="0.0" width="84.5" height="19"/>
+                                                                        <rect key="frame" x="28" y="0.0" width="92" height="19"/>
                                                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
                                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -1479,7 +1480,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vlM-ON-OON">
-                                                                <rect key="frame" x="0.0" y="112" width="364" height="30"/>
+                                                                <rect key="frame" x="0.0" y="113" width="364" height="30"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
                                                                 <state key="normal" title="START">
@@ -2271,6 +2272,7 @@
         <image name="ic_navigate_before_36pt" width="36" height="36"/>
         <image name="ic_navigate_next" width="24" height="24"/>
         <image name="ic_thumb_up_18pt" width="18" height="18"/>
+        <image name="language_icon" width="128" height="128"/>
         <image name="lock_outline" width="10" height="16"/>
         <image name="move_bookmark" width="12" height="15"/>
         <image name="questions_outline_16pt" width="16" height="16"/>

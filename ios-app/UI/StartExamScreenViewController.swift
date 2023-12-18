@@ -47,9 +47,10 @@ class StartExamScreenViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIStackView!
     @IBOutlet weak var navigationBarItem: UINavigationItem!
-    var activityIndicator: UIActivityIndicatorView! // Progress bar
-    var languages: [Language] = []
+    @IBOutlet weak var languageContainer: UIStackView!
     @IBOutlet weak var selectLanguageLabel: UILabel!
+    var activityIndicator: UIActivityIndicatorView! // Progress bar
+    var languages = List<Language>()
                 
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
     var emptyView: EmptyView!
@@ -122,11 +123,11 @@ class StartExamScreenViewController: UIViewController {
             self.exam.selectedLanguage = nil
         }
         selectLanguageLabel.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentLanguageActionSheet(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentLanguageActionSheet))
         selectLanguageLabel.addGestureRecognizer(tapGesture)
     }
 
-    @objc func presentLanguageActionSheet(_ sender: UITapGestureRecognizer) {
+    @objc func presentLanguageActionSheet() {
         let actionSheet = UIAlertController(title: "Select Language", message: nil, preferredStyle: .actionSheet)
 
         let languageOptions = self.languageOptions()
@@ -148,7 +149,6 @@ class StartExamScreenViewController: UIViewController {
                 try! Realm().write {
                     self.exam.selectedLanguage = language
                 }
-                print("hihihi"+(self.exam.selectedLanguage?.title ?? "hihihi"))
             }
         } + [UIAlertAction(title: "Cancel", style: .cancel, handler: nil)]
     }
@@ -180,13 +180,26 @@ class StartExamScreenViewController: UIViewController {
                         
                         return
                     }
-                    try! Realm().write {
-                        self.exam.languages.removeAll()
-                        self.exam.languages.append(objectsIn: testpressResponse!.results)
-                    }
+                    
+                    self.languages.append(objectsIn: testpressResponse!.results)
+                    
                     if !(testpressResponse!.next.isEmpty) {
                         self.fetchLanguages(url: testpressResponse!.next)
                     } else {
+                        if (self.languages.count < 2){
+                            try! Realm().write {
+                                self.exam.languages.removeAll()
+                            }
+                            self.languageContainer.isHidden = true
+                            if self.activityIndicator.isAnimating {
+                                self.activityIndicator.stopAnimating()
+                            }
+                            return
+                        }
+                        try! Realm().write {
+                            self.exam.languages.removeAll()
+                            self.exam.languages = self.languages
+                        }
                         if self.activityIndicator.isAnimating {
                             self.activityIndicator.stopAnimating()
                         }
@@ -196,6 +209,11 @@ class StartExamScreenViewController: UIViewController {
         }
     
     @IBAction func startExam(_ sender: UIButton) {
+        if (exam.hasMultipleLanguages() && exam.selectedLanguage == nil){
+            presentLanguageActionSheet()
+            return
+        }
+        
         if (contentAttempt?.assessment?.state == "Running"){
             startExam(contentAttempt?.assessment?.attemptType ?? StartExamScreenViewController.REGULAR_ATTEMPT)
             return
