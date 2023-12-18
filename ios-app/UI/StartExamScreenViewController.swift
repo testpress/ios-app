@@ -73,7 +73,7 @@ class StartExamScreenViewController: UIViewController {
                 attempt = contentAttempt.assessment
             }
         }
-        fetchLanguages(url: Constants.BASE_URL+"/api/v2.3/exams/"+exam.slug+"/languages/")
+        fetchAvailableLanguages(url: Constants.BASE_URL+"/api/v2.3/exams/"+exam.slug+"/languages/")
         examTitle.text = exam.title
         questionsCount.text = String(exam.numberOfQuestions)
         if attempt?.remainingTime != nil {
@@ -154,7 +154,7 @@ class StartExamScreenViewController: UIViewController {
         } + [UIAlertAction(title: "Cancel", style: .cancel, handler: nil)]
     }
     
-    func fetchLanguages(url: String) {
+    func fetchAvailableLanguages(url: String) {
             TPApiClient.getListItems(
                 endpointProvider: TPEndpointProvider(.get, url: url),
                 completion: {
@@ -168,7 +168,7 @@ class StartExamScreenViewController: UIViewController {
                     self.languages.append(objectsIn: testpressResponse!.results)
                     
                     if !(testpressResponse!.next.isEmpty) {
-                        self.fetchLanguages(url: testpressResponse!.next)
+                        self.fetchAvailableLanguages(url: testpressResponse!.next)
                     } else {
                         self.saveDataInDB(self.languages)
                         self.hideLoading()
@@ -184,7 +184,7 @@ class StartExamScreenViewController: UIViewController {
             retryButtonText = Strings.TRY_AGAIN
             retryHandler = {
                 self.emptyView.hide()
-                self.fetchLanguages(url: url)
+                self.fetchAvailableLanguages(url: url)
             }
         }
         self.hideLoading()
