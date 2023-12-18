@@ -117,23 +117,6 @@ class StartExamScreenViewController: UIViewController {
         setUpLanguageLable()
     }
     
-    private func showLoading() {
-        activityIndicator = UIUtils.initActivityIndicator(parentView: view)
-        activityIndicator.startAnimating()
-    }
-    
-    private func hideLoading() {
-        if self.activityIndicator.isAnimating {
-            self.activityIndicator.stopAnimating()
-        }
-    }
-    
-    private func setSelectedLanguage(_ language: Language?) {
-        try! Realm().write {
-            self.exam.selectedLanguage = language
-        }
-    }
-    
     func setUpLanguageLable() {
         setSelectedLanguage(nil)
         selectLanguageLabel.isUserInteractionEnabled = true
@@ -218,6 +201,23 @@ class StartExamScreenViewController: UIViewController {
                 self.exam.languages.removeAll()
                 self.exam.languages = self.languages
             }
+        }
+    }
+    
+    private func showLoading() {
+        activityIndicator = UIUtils.initActivityIndicator(parentView: view)
+        activityIndicator.startAnimating()
+    }
+    
+    private func hideLoading() {
+        if self.activityIndicator.isAnimating {
+            self.activityIndicator.stopAnimating()
+        }
+    }
+    
+    private func setSelectedLanguage(_ language: Language?) {
+        try! Realm().write {
+            self.exam.selectedLanguage = language
         }
     }
     
