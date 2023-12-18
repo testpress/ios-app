@@ -251,10 +251,9 @@ class TestReportViewController: UIViewController {
             presentingViewController?.presentingViewController as? ContentDetailPageViewController {
             
             goToContentDetailPageViewController(contentDetailPageViewController)
-        } else if let customTestViewController =
-                    self.presentingViewController as? CustomTestGenerationViewController {
+        } else if isPresentedFromCustomTestViewController() {
             
-            goToCourseListView(customTestViewController)
+            goToCourseListView()
         } else if exam == nil {
             presentingViewController?.dismiss(animated: true)
         } else {
@@ -262,8 +261,14 @@ class TestReportViewController: UIViewController {
         }
     }
     
-    func goToCourseListView(_ customTestViewController: UIViewController) {
-        customTestViewController.presentingViewController?.dismiss(animated: true, completion: nil)
+    func isPresentedFromCustomTestViewController() -> Bool {
+        let customTestViewController = self.presentingViewController as? CustomTestGenerationViewController
+        return customTestViewController is CustomTestGenerationViewController?
+    }
+    
+    func goToCourseListView() {
+        let customTestViewController = self.presentingViewController as? CustomTestGenerationViewController
+        customTestViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
     func goToContentDetailPageViewController(_ contentDetailPageViewController: UIViewController) {
