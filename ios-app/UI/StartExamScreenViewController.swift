@@ -118,13 +118,19 @@ class StartExamScreenViewController: UIViewController {
     }
     
     func initializeLanguageSelection() {
-        setSelectedLanguage(nil)
+        updateSelectedLanguageTitle()
         selectLanguageLabel.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLanguageActionSheet))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLanguages))
         selectLanguageLabel.addGestureRecognizer(tapGesture)
     }
+    
+    func updateSelectedLanguageTitle() {
+        if (exam.selectedLanguage != nil){
+            selectLanguageLabel.text = exam.selectedLanguage?.title
+        }
+    }
 
-    @objc func showLanguageActionSheet() {
+    @objc func showLanguages() {
         let actionSheet = UIAlertController(title: "Select Language", message: nil, preferredStyle: .actionSheet)
 
         let languageOptions = self.getLanguageOptions()
@@ -155,7 +161,7 @@ class StartExamScreenViewController: UIViewController {
                     testpressResponse, error in
                     
                     if let error = error {
-                        self.showError(error, url: url)
+                        self.showErrorView(error, url: url)
                         return
                     }
                     
@@ -171,9 +177,7 @@ class StartExamScreenViewController: UIViewController {
             }, type: Language.self)
         }
     
-    private func showError(_ error: TPError, url: String) {
-        debugPrint(error.message ?? "No error")
-        debugPrint(error.kind)
+    private func showErrorView(_ error: TPError, url: String) {
         var retryButtonText: String?
         var retryHandler: (() -> Void)?
         if error.kind == .network {
@@ -192,17 +196,11 @@ class StartExamScreenViewController: UIViewController {
     }
     
     private func saveDataInDB(_ languages: List<Language>) {
-        if (languages.count < 2) {
-            try! Realm().write {
-                self.exam.languages.removeAll()
-            }
-            self.languageContainer.isHidden = true
-        } else {
-            try! Realm().write {
-                self.exam.languages.removeAll()
-                self.exam.languages = self.languages
-            }
+        try! Realm().write {
+            self.exam.languages.removeAll()
+            self.exam.languages = languages
         }
+        self.languageContainer.isHidden = languages.count < 2
     }
     
     private func showLoading() {
@@ -216,7 +214,7 @@ class StartExamScreenViewController: UIViewController {
         }
     }
     
-    private func setSelectedLanguage(_ language: Language?) {
+    private func setSelectedLanguage(_ language: Language) {
         try! Realm().write {
             self.exam.selectedLanguage = language
         }
@@ -224,7 +222,7 @@ class StartExamScreenViewController: UIViewController {
     
     @IBAction func startExam(_ sender: UIButton) {
         if (exam.hasMultipleLanguages() && exam.selectedLanguage == nil){
-            showLanguageActionSheet()
+            showLanguages()
             return
         }
         
