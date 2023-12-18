@@ -50,7 +50,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
             self.emptyView.hide()
             self.activityIndicator?.startAnimating()
             let attemptId = message.body
-            fetchAttempt(attemptId as! String)
+            fetchAttemptAndShowReview(attemptId as! String)
         }
     }
     
@@ -83,7 +83,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
         
     }
     
-    func fetchAttempt(_ attemptId: String) {
+    func fetchAttemptAndShowReview(_ attemptId: String) {
         TPApiClient.request(
             type: Attempt.self,
             endpointProvider: TPEndpointProvider(
