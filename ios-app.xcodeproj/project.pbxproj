@@ -358,6 +358,9 @@
 		D907E7A92B19D11C00BEA874 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = D907E7A82B19D11C00BEA874 /* Language.swift */; };
 		D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */; };
 		D98010692B035E780071C397 /* CustomTestQuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */; };
+		D990C7EE2B316C6300B3ED4D /* AttemptAnswerTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */; };
+		D990C7F02B31731300B3ED4D /* AttemptQuestionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */; };
+		D990C7F22B31765E00B3ED4D /* DirectionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */; };
 		D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -815,6 +818,9 @@
 		D907E7A82B19D11C00BEA874 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Language.swift; path = "ios-app/Model/Language.swift"; sourceTree = SOURCE_ROOT; };
 		D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestGenerationViewController.swift; sourceTree = "<group>"; };
 		D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestQuizExamViewModel.swift; sourceTree = "<group>"; };
+		D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptAnswerTranslation.swift; sourceTree = "<group>"; };
+		D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptQuestionTranslation.swift; sourceTree = "<group>"; };
+		D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionTranslation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1336,6 +1342,9 @@
 				2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */,
 				25520BC527547006001A58AB /* DiscussionThreadAnswer.swift */,
 				25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */,
+				D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */,
+				D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */,
+				D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1768,6 +1777,7 @@
 				2FC0F30A1F863BA90092BFDC /* ReviewQuestionsViewController.swift in Sources */,
 				2FDF9C5920B6F5240086245F /* BasePagedTableViewController.swift in Sources */,
 				2F515DF81FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift in Sources */,
+				D990C7F02B31731300B3ED4D /* AttemptQuestionTranslation.swift in Sources */,
 				2FC0F2E81F863AE80092BFDC /* User.swift in Sources */,
 				2586782728ABB81700E149B5 /* Object.swift in Sources */,
 				257BB695246AB4C900524D2C /* QuizExamViewController.swift in Sources */,
@@ -1907,6 +1917,7 @@
 				2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */,
 				2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
+				D990C7EE2B316C6300B3ED4D /* AttemptAnswerTranslation.swift in Sources */,
 				2F3A53011FDA652A00C64123 /* Subject.swift in Sources */,
 				25985837248A77F6003591FA /* M3U8Handler.swift in Sources */,
 				2FA9285020B7DF2200CD3076 /* StringExtension.swift in Sources */,
@@ -1923,6 +1934,7 @@
 				250C4CAD2463D24600FD7636 /* BaseDBViewController.swift in Sources */,
 				2FDF9C5720B6E5260086245F /* BookmarkFolder.swift in Sources */,
 				2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */,
+				D990C7F22B31765E00B3ED4D /* DirectionTranslation.swift in Sources */,
 				256A90A2247D30DA00F4E12C /* Collection.swift in Sources */,
 				2FDF9C4D20B6D01B0086245F /* Bookmark.swift in Sources */,
 				2FDF9C4F20B6D40D0086245F /* BookmarksPager.swift in Sources */,
