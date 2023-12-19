@@ -160,14 +160,14 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             
             htmlContent += "" +
                 "<div class='question' style='padding-bottom: 0px;'>" +
-            getDirectionHtmlString(attemptQuestion) +
+            attemptQuestion.getLanguageBasedDirection(self.language) +
             "</div>";
         }
         
         // Add question
         htmlContent += "" +
             "<div class='question' style='padding-bottom: 0px;'>" +
-            getQuestionHtmlString(attemptQuestion) +
+            attemptQuestion.getLanguageBasedQuestion(self.language) +
         "</div>";
         
         if attemptQuestion.type == "R" || attemptQuestion.type == "C" {
@@ -177,10 +177,10 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             for attemptAnswer in attemptQuestion.answers {
                 if (attemptItem?.question?.type == "R") {
                     htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
-                        optionText: getAnswerHtmlString(attemptQuestion, attemptAnswer), id: attemptAnswer.id)
+                        optionText: attemptQuestion.getLanguageBasedAnswer(attemptAnswer, self.language), id: attemptAnswer.id)
                 } else {
                     htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
-                        optionText: getAnswerHtmlString(attemptQuestion, attemptAnswer), id: attemptAnswer.id)
+                        optionText: attemptQuestion.getLanguageBasedAnswer(attemptAnswer, self.language), id: attemptAnswer.id)
                 }
             }
             htmlContent += "</table>"
@@ -217,33 +217,36 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         }
     }
     
-    func getQuestionHtmlString(_ attemptQuestion: AttemptQuestion) -> String {
-        if let selectedLanguage = self.language {
-            for translation in attemptQuestion.translations {
+}
+
+extension AttemptQuestion {
+    
+    func getLanguageBasedQuestion(_ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in self.translations {
                 if translation.language == selectedLanguage.code {
-                    return translation.questionHtml ?? attemptQuestion.questionHtml!
+                    return translation.questionHtml ?? self.questionHtml!
                 }
             }
         }
         // Return default question HTML if no matching translation is found
-        return attemptQuestion.questionHtml!
+        return self.questionHtml!
     }
     
-    func getDirectionHtmlString(_ attemptQuestion: AttemptQuestion) -> String {
-        if let selectedLanguage = self.language {
-            for translation in attemptQuestion.translations {
+    func getLanguageBasedDirection(_ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in self.translations {
                 if translation.language == selectedLanguage.code {
-                    return translation.direction?.html ?? attemptQuestion.direction!
+                    return translation.direction?.html ?? self.direction!
                 }
             }
         }
-        // Return default question HTML if no matching translation is found
-        return attemptQuestion.direction!
+        return self.direction!
     }
     
-    func getAnswerHtmlString(_ attemptQuestion: AttemptQuestion,_ attemptanswer: AttemptAnswer) -> String {
-        if let selectedLanguage = self.language {
-            for translation in attemptQuestion.translations {
+    func getLanguageBasedAnswer(_ attemptanswer: AttemptAnswer, _ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in self.translations {
                 if translation.language == selectedLanguage.code {
                     for answerTranslation in translation.answers {
                         if attemptanswer.id == answerTranslation.id {
@@ -257,4 +260,5 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         // Return default question HTML if no matching translation is found
         return attemptanswer.textHtml
     }
+    
 }

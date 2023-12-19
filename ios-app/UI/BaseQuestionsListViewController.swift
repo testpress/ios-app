@@ -74,12 +74,12 @@ class BaseQuestionsListViewController: BaseWebViewController {
                 attemptQuestion.questionHtml!.isEmpty) {
                 
                 html += "<div class='question-list-content' style='padding-bottom: 0px;'>" +
-                    getDirectionHtml(attemptQuestion) +
+                    attemptQuestion.getLanguageBasedDirection(self.language) +
                 "</div>\n";
             }
             // Add question
             html += "<div class='question-list-content'>" +
-                    getQuestionHtml(attemptQuestion) +
+                attemptQuestion.getLanguageBasedQuestion(self.language) +
             "</div>\n";
             
             html += "</td></tr>"
@@ -102,30 +102,6 @@ class BaseQuestionsListViewController: BaseWebViewController {
         bottomGradient.frame = bottomShadowView.bounds
         bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
         bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
-    }
-    
-    func getDirectionHtml(_ attemptQuestion: AttemptQuestion) -> String {
-        if let selectedLanguage = self.language {
-            for translation in attemptQuestion.translations {
-                if translation.language == selectedLanguage.code {
-                    return translation.direction?.html ?? attemptQuestion.direction!
-                }
-            }
-        }
-        // Return default question HTML if no matching translation is found
-        return attemptQuestion.direction!
-    }
-    
-    func getQuestionHtml(_ attemptQuestion: AttemptQuestion) -> String {
-        if let selectedLanguage = self.language {
-            for translation in attemptQuestion.translations {
-                if translation.language == selectedLanguage.code {
-                    return translation.questionHtml ?? attemptQuestion.questionHtml!
-                }
-            }
-        }
-        // Return default question HTML if no matching translation is found
-        return attemptQuestion.questionHtml!
     }
 }
 
