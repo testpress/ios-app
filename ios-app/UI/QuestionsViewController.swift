@@ -177,10 +177,10 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             for attemptAnswer in attemptQuestion.answers {
                 if (attemptItem?.question?.type == "R") {
                     htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
-                        optionText: attemptQuestion.getLanguageBasedAnswer(attemptAnswer, self.language), id: attemptAnswer.id)
+                        optionText: attemptAnswer.getTextHtml(attemptQuestion, self.language), id: attemptAnswer.id)
                 } else {
                     htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
-                        optionText: attemptQuestion.getLanguageBasedAnswer(attemptAnswer, self.language), id: attemptAnswer.id)
+                        optionText: attemptAnswer.getTextHtml(attemptQuestion, self.language), id: attemptAnswer.id)
                 }
             }
             htmlContent += "</table>"
@@ -229,7 +229,6 @@ extension AttemptQuestion {
                 }
             }
         }
-        // Return default question HTML if no matching translation is found
         return self.questionHtml!
     }
     
@@ -243,22 +242,24 @@ extension AttemptQuestion {
         }
         return self.direction!
     }
+}
+
+extension AttemptAnswer {
     
-    func getLanguageBasedAnswer(_ attemptanswer: AttemptAnswer, _ language: Language?) -> String {
+    func getTextHtml(_ attemptQuestion: AttemptQuestion, _ language: Language?) -> String {
         if let selectedLanguage = language {
-            for translation in self.translations {
+            for translation in attemptQuestion.translations {
                 if translation.language == selectedLanguage.code {
                     for answerTranslation in translation.answers {
-                        if attemptanswer.id == answerTranslation.id {
+                        if self.id == answerTranslation.id {
                             return answerTranslation.textHtml
                         }
                     }
-                    return attemptanswer.textHtml
+                    return self.textHtml
                 }
             }
         }
-        // Return default question HTML if no matching translation is found
-        return attemptanswer.textHtml
+        return self.textHtml
     }
     
 }
