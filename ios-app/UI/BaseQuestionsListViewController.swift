@@ -37,6 +37,7 @@ class BaseQuestionsListViewController: BaseWebViewController {
     @IBOutlet weak var bottomShadowView: UIView!
     
     var attemptItems = [AttemptItem]()
+    var language: Language?
     var currentPosition: Int!
     var delegate: QuestionListDelegate?
     
@@ -73,12 +74,12 @@ class BaseQuestionsListViewController: BaseWebViewController {
                 attemptQuestion.questionHtml!.isEmpty) {
                 
                 html += "<div class='question-list-content' style='padding-bottom: 0px;'>" +
-                    attemptQuestion.direction! +
+                    getDirectionHtml(attemptQuestion) +
                 "</div>\n";
             }
             // Add question
             html += "<div class='question-list-content'>" +
-                attemptQuestion.questionHtml! +
+                    getQuestionHtml(attemptQuestion) +
             "</div>\n";
             
             html += "</td></tr>"
@@ -101,6 +102,30 @@ class BaseQuestionsListViewController: BaseWebViewController {
         bottomGradient.frame = bottomShadowView.bounds
         bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
         bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
+    }
+    
+    func getDirectionHtml(_ attemptQuestion: AttemptQuestion) -> String {
+        if let selectedLanguage = self.language {
+            for translation in attemptQuestion.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.direction?.html ?? attemptQuestion.direction!
+                }
+            }
+        }
+        // Return default question HTML if no matching translation is found
+        return attemptQuestion.direction!
+    }
+    
+    func getQuestionHtml(_ attemptQuestion: AttemptQuestion) -> String {
+        if let selectedLanguage = self.language {
+            for translation in attemptQuestion.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.questionHtml ?? attemptQuestion.questionHtml!
+                }
+            }
+        }
+        // Return default question HTML if no matching translation is found
+        return attemptQuestion.questionHtml!
     }
 }
 
@@ -133,8 +158,9 @@ extension BaseQuestionsListViewController: WKWebViewDelegate {
 
 extension BaseQuestionsListViewController: QuestionsSlidingMenuDelegate {
     
-    func updateQuestions(_ attemptItems: [AttemptItem]) {
+    func updateQuestions(_ attemptItems: [AttemptItem],_ language: Language?) {
         self.attemptItems = attemptItems
+        self.language = language
     }
     
     func displayQuestions(currentQuestionIndex: Int) {
