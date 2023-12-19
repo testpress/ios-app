@@ -160,14 +160,14 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             
             htmlContent += "" +
                 "<div class='question' style='padding-bottom: 0px;'>" +
-                attemptQuestion.direction! +
+            getDirectionHtmlString(attemptQuestion) +
             "</div>";
         }
         
         // Add question
         htmlContent += "" +
             "<div class='question' style='padding-bottom: 0px;'>" +
-            attemptQuestion.questionHtml! +
+            getQuestionHtmlString(attemptQuestion) +
         "</div>";
         
         if attemptQuestion.type == "R" || attemptQuestion.type == "C" {
@@ -177,10 +177,10 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             for attemptAnswer in attemptQuestion.answers {
                 if (attemptItem?.question?.type == "R") {
                     htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
-                        optionText: attemptAnswer.textHtml, id: attemptAnswer.id)
+                        optionText: getAnswerHtmlString(attemptQuestion, attemptAnswer), id: attemptAnswer.id)
                 } else {
                     htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
-                        optionText: attemptAnswer.textHtml, id: attemptAnswer.id)
+                        optionText: getAnswerHtmlString(attemptQuestion, attemptAnswer), id: attemptAnswer.id)
                 }
             }
             htmlContent += "</table>"
@@ -215,5 +215,46 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         try! Realm().write {
             attemptItem?.currentReview = sender.isOn
         }
+    }
+    
+    func getQuestionHtmlString(_ attemptQuestion: AttemptQuestion) -> String {
+        if let selectedLanguage = self.language {
+            for translation in attemptQuestion.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.questionHtml ?? attemptQuestion.questionHtml!
+                }
+            }
+        }
+        // Return default question HTML if no matching translation is found
+        return attemptQuestion.questionHtml!
+    }
+    
+    func getDirectionHtmlString(_ attemptQuestion: AttemptQuestion) -> String {
+        if let selectedLanguage = self.language {
+            for translation in attemptQuestion.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.direction?.html ?? attemptQuestion.direction!
+                }
+            }
+        }
+        // Return default question HTML if no matching translation is found
+        return attemptQuestion.direction!
+    }
+    
+    func getAnswerHtmlString(_ attemptQuestion: AttemptQuestion,_ attemptanswer: AttemptAnswer) -> String {
+        if let selectedLanguage = self.language {
+            for translation in attemptQuestion.translations {
+                if translation.language == selectedLanguage.code {
+                    for answerTranslation in translation.answers {
+                        if attemptanswer.id == answerTranslation.id {
+                            return answerTranslation.textHtml
+                        }
+                    }
+                    return attemptanswer.textHtml
+                }
+            }
+        }
+        // Return default question HTML if no matching translation is found
+        return attemptanswer.textHtml
     }
 }

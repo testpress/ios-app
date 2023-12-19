@@ -29,10 +29,12 @@ import RealmSwift
 class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
     
     var attemptItems = [AttemptItem]()
+    var language: Language?
     
-    init(_ attemptItems: [AttemptItem] = [AttemptItem]()) {
+    init(_ attemptItems: [AttemptItem] = [AttemptItem](),_ language: Language? = nil) {
         super.init()
         self.attemptItems = attemptItems
+        self.language = language
     }
     
     func viewControllerAtIndex(_ index: Int) -> BaseQuestionsViewController? {
@@ -46,6 +48,7 @@ class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
         }
         let viewController = getQuestionsViewController()
         viewController.attemptItem = attemptItem
+        viewController.language = self.language
         return viewController
     }
     

@@ -108,6 +108,13 @@ class StartExamScreenViewController: UIViewController {
                 navigationBarItem?.title = Strings.RESUME_EXAM
             }
         }
+        try! Realm().write{
+            let language = Language()
+            language.id = 1
+            language.code = "hi"
+            language.title = "Tamil"
+            self.exam.selectedLanguage = language
+        }
     }
     
     @IBAction func startExam(_ sender: UIButton) {

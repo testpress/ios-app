@@ -219,7 +219,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     override func getQuestionsDataSource() -> BaseQuestionsDataSource {
-        return QuestionsControllerSource(attemptItems)
+        return QuestionsControllerSource(attemptItems, exam?.selectedLanguage)
     }
     
     override func getQuestionsUrl() -> String {
