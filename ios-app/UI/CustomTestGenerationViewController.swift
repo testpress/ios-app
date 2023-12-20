@@ -132,6 +132,9 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
     override func onFinishLoadingWebView() {
         activityIndicator?.stopAnimating()
     }
-            
-    
+
+    override func goBack() {
+        self.cleanAllCookies()
+        self.dismiss(animated: true, completion: nil)
+    }
 }
