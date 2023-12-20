@@ -37,6 +37,10 @@ class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
         self.language = language
     }
     
+    func setLanguage(_ language: Language) {
+        self.language = language
+    }
+    
     func viewControllerAtIndex(_ index: Int) -> BaseQuestionsViewController? {
         if (attemptItems.count == 0) || (index >= attemptItems.count) {
             return nil

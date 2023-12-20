@@ -1102,42 +1102,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4eD-I4-GXJ">
-                                <rect key="frame" x="226" y="70" width="94" height="44"/>
+                                <rect key="frame" x="197" y="70" width="113" height="44"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eeC-Wm-7Zb">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pee-tu-NtQ" userLabel="Pause Button Layout">
+                                        <rect key="frame" x="0.0" y="10" width="84" height="24"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_pause_circle_outline_white" translatesAutoresizingMaskIntoConstraints="NO" id="hY5-ee-Kdq">
+                                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="vdn-sa-ODR"/>
+                                                    <constraint firstAttribute="height" constant="24" id="zgY-9r-G43"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wD2-8z-6mb">
+                                                <rect key="frame" x="24" y="0.0" width="60" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="cWB-oH-MIp"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPO-td-fYe">
+                                        <rect key="frame" x="89" y="10" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" id="QjO-NC-gmI"/>
+                                            <constraint firstAttribute="height" constant="24" id="R2V-nd-LIr"/>
+                                            <constraint firstAttribute="width" constant="24" id="jna-s2-ZJQ"/>
                                         </constraints>
-                                    </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_pause_circle_outline_white" translatesAutoresizingMaskIntoConstraints="NO" id="hY5-ee-Kdq">
-                                        <rect key="frame" x="5" y="10" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="vdn-sa-ODR"/>
-                                            <constraint firstAttribute="height" constant="24" id="zgY-9r-G43"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wD2-8z-6mb">
-                                        <rect key="frame" x="34" y="13" width="60" height="18"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="cWB-oH-MIp"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <state key="normal" title="Button" image="language_icon_white"/>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="wD2-8z-6mb" firstAttribute="top" secondItem="4eD-I4-GXJ" secondAttribute="top" constant="13" id="igt-7d-xfZ"/>
                                     <constraint firstAttribute="height" constant="44" id="jlh-J9-YHF"/>
-                                    <constraint firstItem="eeC-Wm-7Zb" firstAttribute="top" secondItem="4eD-I4-GXJ" secondAttribute="top" id="xZf-Gm-crL"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="4eD-I4-GXJ" secondAttribute="trailing" id="FAQ-I1-VdU"/>
+                            <constraint firstAttribute="trailing" secondItem="4eD-I4-GXJ" secondAttribute="trailing" constant="10" id="Mxf-co-990"/>
                             <constraint firstItem="4eD-I4-GXJ" firstAttribute="top" secondItem="3Xc-27-a21" secondAttribute="bottom" id="azL-8y-N51"/>
                         </constraints>
                     </view>
@@ -1150,8 +1154,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="languagefilter" destination="MPO-td-fYe" id="8JD-xX-6yJ"/>
                         <outlet property="navigationBarItem" destination="TpM-1H-8rh" id="Y2p-l0-co3"/>
-                        <outlet property="pauseButtonLayout" destination="4eD-I4-GXJ" id="LCu-Wo-Hrp"/>
+                        <outlet property="pauseButtonLayout" destination="Pee-tu-NtQ" id="3CT-Kd-wmT"/>
                         <outlet property="remainingTimeLabel" destination="wD2-8z-6mb" id="thG-2C-Fiw"/>
                     </connections>
                 </viewController>
@@ -1341,6 +1346,7 @@
         <image name="ic_pause_circle_outline_white" width="24" height="24"/>
         <image name="ic_thumb_up_18pt" width="18" height="18"/>
         <image name="language_icon" width="128" height="128"/>
+        <image name="language_icon_white" width="288" height="288"/>
         <image name="testpress_calendar_icon" width="24" height="24"/>
         <image name="testpress_duration" width="25" height="25"/>
         <image name="testpress_marks" width="25" height="25"/>

@@ -72,6 +72,53 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         let pauseButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onPressPauseButton(sender:)))
         parentSlidingViewController.pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
+        
+        let languageFilterGeester = UITapGestureRecognizer(target: self, action:
+            #selector(self.showLanguages(sender:)))
+        parentSlidingViewController.languagefilter.addGestureRecognizer(languageFilterGeester)
+    }
+    
+    @objc func showLanguages(sender: UITapGestureRecognizer) {
+        let actionSheet = UIAlertController(title: "Select Language", message: nil, preferredStyle: .actionSheet)
+
+        let languageOptions = self.getLanguageOptions()
+        languageOptions.forEach { actionSheet.addAction($0) }
+
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.permittedArrowDirections = [.up, .down]
+        }
+
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func getLanguageOptions() -> [UIAlertAction] {
+        if let exam = self.exam {
+            return exam.languages.map { language in
+                let action = UIAlertAction(title: language.title, style: .default) { _ in
+                    self.updateLanguage(language)
+                }
+                if language.code == self.exam?.selectedLanguage?.code {
+                    let checkmarkImage = UIImage(named: "testpress_check_mark")
+                    action.setValue(checkmarkImage, forKey: "image")
+                }
+                return action
+            } + [UIAlertAction(title: "Cancel", style: .cancel, handler: nil)]
+        }
+        return [UIAlertAction(title: "Cancel", style: .cancel, handler: nil)]
+    }
+    
+    func updateLanguage(_ language: Language) {
+        setSelectedLanguage(language)
+        baseQuestionsDataSource.setLanguage(language)
+        parentSlidingViewController.questionListViewController?.setLanguage(language)
+        setCurrentQuestion(index: getCurrentIndex())
+    }
+    
+    private func setSelectedLanguage(_ language: Language) {
+        try! Realm().write {
+            self.exam?.selectedLanguage = language
+        }
     }
     
     private func initializeDropDownContainerForSections() {
