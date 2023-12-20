@@ -268,7 +268,9 @@ class TestReportViewController: UIViewController {
     
     func goToCourseListView() {
         let customTestViewController = self.presentingViewController as? CustomTestGenerationViewController
-        customTestViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        customTestViewController?.dismiss(animated: true, completion: {
+            customTestViewController?.onFinishLoadingWebView()
+        })
     }
 
     func goToContentDetailPageViewController(_ contentDetailPageViewController: UIViewController) {
