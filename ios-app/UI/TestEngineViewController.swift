@@ -109,6 +109,9 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func updateLanguage(_ language: Language) {
+        if self.exam?.selectedLanguage?.code == language.code {
+            return
+        }
         setSelectedLanguage(language)
         baseQuestionsDataSource.setLanguage(language)
         parentSlidingViewController.questionListViewController?.setLanguage(language)
