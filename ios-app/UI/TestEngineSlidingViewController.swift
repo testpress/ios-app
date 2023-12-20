@@ -29,6 +29,8 @@ class TestEngineSlidingViewController: BaseQuestionsSlidingViewController {
     
     @IBOutlet weak var remainingTimeLabel: UILabel!
     @IBOutlet weak var pauseButtonLayout: UIStackView!
+    @IBOutlet weak var languagefilter: UIButton!
+    var questionListViewController: QuestionListViewController? = nil
     
     override func awakeFromNib() {
         let mainViewController = storyboard?.instantiateViewController(
@@ -37,16 +39,17 @@ class TestEngineSlidingViewController: BaseQuestionsSlidingViewController {
         self.mainViewController = mainViewController
         slidingMenuDelegate = mainViewController
         mainViewController.parentSlidingViewController = self
-        let leftViewController = storyboard?.instantiateViewController(
-            withIdentifier: Constants.QUESTION_LIST_VIEW_CONTROLLER) as! QuestionListViewController
+        questionListViewController = storyboard?.instantiateViewController(
+            withIdentifier: Constants.QUESTION_LIST_VIEW_CONTROLLER) as? QuestionListViewController
         
-        self.leftViewController = leftViewController
+        self.leftViewController = questionListViewController
         super.awakeFromNib()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarItem.rightBarButtonItem = UIBarButtonItem(customView: pauseButtonLayout)
+        navigationBarItem.rightBarButtonItems = [UIBarButtonItem(customView: languagefilter), UIBarButtonItem(customView: pauseButtonLayout)]
+        showOrHideLanguageButton()
     }
     
     override func leftDidClose() {
@@ -59,4 +62,7 @@ class TestEngineSlidingViewController: BaseQuestionsSlidingViewController {
         navigationBarItem.leftBarButtonItem?.image = Images.BackButton.image
     }
     
+    func showOrHideLanguageButton() {
+        languagefilter.isHidden = !(self.exam?.hasMultipleLanguages() ?? true)
+    }
 }

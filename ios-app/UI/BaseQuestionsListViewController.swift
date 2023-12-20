@@ -41,6 +41,10 @@ class BaseQuestionsListViewController: BaseWebViewController {
     var currentPosition: Int!
     var delegate: QuestionListDelegate?
     
+    func setLanguage(_ language: Language) {
+        self.language = language
+    }
+    
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
