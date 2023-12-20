@@ -85,7 +85,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         languageOptions.forEach { actionSheet.addAction($0) }
 
         if let popoverController = actionSheet.popoverPresentationController {
-            popoverController.sourceView = self.view
+            popoverController.sourceView = sender.view
             popoverController.permittedArrowDirections = [.up, .down]
         }
 

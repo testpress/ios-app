@@ -1102,31 +1102,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4eD-I4-GXJ">
-                                <rect key="frame" x="197" y="70" width="113" height="44"/>
+                                <rect key="frame" x="187" y="64" width="123" height="44"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pee-tu-NtQ" userLabel="Pause Button Layout">
-                                        <rect key="frame" x="0.0" y="10" width="84" height="24"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bY9-ms-WDN">
+                                        <rect key="frame" x="0.0" y="0.0" width="94" height="44"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_pause_circle_outline_white" translatesAutoresizingMaskIntoConstraints="NO" id="hY5-ee-Kdq">
-                                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JB2-1j-brI">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="24" id="vdn-sa-ODR"/>
-                                                    <constraint firstAttribute="height" constant="24" id="zgY-9r-G43"/>
+                                                    <constraint firstAttribute="width" id="dWF-cy-6BN"/>
+                                                </constraints>
+                                            </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_pause_circle_outline_white" translatesAutoresizingMaskIntoConstraints="NO" id="OsO-J6-qb7">
+                                                <rect key="frame" x="5" y="10" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="3R8-2p-UQq"/>
+                                                    <constraint firstAttribute="width" constant="24" id="GNj-b0-T7R"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wD2-8z-6mb">
-                                                <rect key="frame" x="24" y="0.0" width="60" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1J-8c-3TH">
+                                                <rect key="frame" x="34" y="13" width="60" height="18"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="cWB-oH-MIp"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="6aT-fu-Lpb"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="16"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="JB2-1j-brI" firstAttribute="top" secondItem="bY9-ms-WDN" secondAttribute="top" id="OGY-0V-OFF"/>
+                                            <constraint firstItem="T1J-8c-3TH" firstAttribute="top" secondItem="bY9-ms-WDN" secondAttribute="top" constant="13" id="P38-0B-Sk3"/>
+                                            <constraint firstAttribute="height" constant="44" id="aQT-To-mcN"/>
+                                        </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPO-td-fYe">
-                                        <rect key="frame" x="89" y="10" width="24" height="24"/>
+                                        <rect key="frame" x="99" y="10" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="R2V-nd-LIr"/>
                                             <constraint firstAttribute="width" constant="24" id="jna-s2-ZJQ"/>
@@ -1156,8 +1168,8 @@
                     <connections>
                         <outlet property="languagefilter" destination="MPO-td-fYe" id="8JD-xX-6yJ"/>
                         <outlet property="navigationBarItem" destination="TpM-1H-8rh" id="Y2p-l0-co3"/>
-                        <outlet property="pauseButtonLayout" destination="Pee-tu-NtQ" id="3CT-Kd-wmT"/>
-                        <outlet property="remainingTimeLabel" destination="wD2-8z-6mb" id="thG-2C-Fiw"/>
+                        <outlet property="pauseButtonLayout" destination="bY9-ms-WDN" id="8XE-VW-RCq"/>
+                        <outlet property="remainingTimeLabel" destination="T1J-8c-3TH" id="eUW-LS-ZdR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFG-59-dOD" userLabel="First Responder" sceneMemberID="firstResponder"/>
