@@ -73,9 +73,9 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             #selector(self.onPressPauseButton(sender:)))
         parentSlidingViewController.pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
         
-        let languageFilterGeester = UITapGestureRecognizer(target: self, action:
+        let languageFilterGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.showLanguages(sender:)))
-        parentSlidingViewController.languagefilter.addGestureRecognizer(languageFilterGeester)
+        parentSlidingViewController.languagefilter.addGestureRecognizer(languageFilterGesture)
     }
     
     @objc func showLanguages(sender: UITapGestureRecognizer) {
