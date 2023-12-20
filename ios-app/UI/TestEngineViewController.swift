@@ -72,12 +72,12 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         let pauseButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onPressPauseButton(sender:)))
         parentSlidingViewController.pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
-        
+
         let languageFilterGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.showLanguages(sender:)))
         parentSlidingViewController.languagefilter.addGestureRecognizer(languageFilterGesture)
     }
-    
+
     @objc func showLanguages(sender: UITapGestureRecognizer) {
         let actionSheet = UIAlertController(title: "Select Language", message: nil, preferredStyle: .actionSheet)
 
@@ -91,7 +91,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
 
         present(actionSheet, animated: true, completion: nil)
     }
-    
+
     private func getLanguageOptions() -> [UIAlertAction] {
         if let exam = self.exam {
             return exam.languages.map { language in
@@ -107,7 +107,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         }
         return [UIAlertAction(title: "Cancel", style: .cancel, handler: nil)]
     }
-    
+
     func updateLanguage(_ language: Language) {
         if self.exam?.selectedLanguage?.code == language.code {
             return
@@ -117,7 +117,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         parentSlidingViewController.questionListViewController?.setLanguage(language)
         setCurrentQuestion(index: getCurrentIndex())
     }
-    
+
     private func setSelectedLanguage(_ language: Language) {
         try! Realm().write {
             self.exam?.selectedLanguage = language
