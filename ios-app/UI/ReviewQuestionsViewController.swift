@@ -245,13 +245,13 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         // Add direction/passage if present
         if (attemptQuestion.direction != nil && !(attemptQuestion.direction!.isEmpty)) {
             html += "<div class='question' style='padding-bottom: 0px;'>" +
-                        attemptQuestion.direction! +
+            attemptQuestion.getLanguageBasedDirection(self.language) +
                     "</div>";
         }
         
         // Add question
         html += "<div class='question'>" +
-                    attemptQuestion.questionHtml! +
+        attemptQuestion.getLanguageBasedQuestion(self.language) +
                 "</div>";
         
         var isSingleMCQType = false
@@ -287,7 +287,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                     }
                 }
                 html += "\n" + WebViewUtils.getOptionWithTags(
-                    optionText: attemptAnswer.textHtml,
+                    optionText: attemptAnswer.getTextHtml(attemptQuestion, self.language),
                     index: i,
                     color: optionColor
                 )
@@ -295,14 +295,14 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                     correctAnswerHtml += WebViewUtils.getCorrectAnswerIndexWithTags(index: i)
                 }
             } else if isNumericalType {
-                correctAnswerHtml = attemptAnswer.textHtml
+                correctAnswerHtml = attemptAnswer.getTextHtml(attemptQuestion, self.language)
             } else {
                 if i == 0 {
                     html += "<table width='100%' style='margin-top:0px; margin-bottom:15px;'>"
                         + WebViewUtils.getShortAnswerHeadersWithTags()
                 }
                 html += WebViewUtils.getShortAnswersWithTags(
-                    shortAnswerText: attemptAnswer.textHtml,
+                    shortAnswerText: attemptAnswer.getTextHtml(attemptQuestion, self.language),
                     marksAllocated: attemptAnswer.marks!
                 )
                 if i == attemptQuestion.answers.count - 1 {
@@ -349,7 +349,8 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         }
         
         // Add explanation
-        let explanationHtml = attemptQuestion.explanationHtml
+        let explanationHtml = attemptQuestion.getExplanationHtml(self.language)
+        print("hihihi",explanationHtml)
         if (explanationHtml != nil && !explanationHtml!.isEmpty) {
             html += WebViewUtils.getReviewHeadingTags(headingText: Strings.EXPLANATION)
             html += "<div class='review-explanation'>" +

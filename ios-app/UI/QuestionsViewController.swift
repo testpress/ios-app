@@ -242,6 +242,17 @@ extension AttemptQuestion {
         }
         return self.direction!
     }
+    
+    func getExplanationHtml(_ language: Language?) -> String? {
+        if let selectedLanguage = language {
+            for translation in self.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.explanationHtml
+                }
+            }
+        }
+        return self.explanationHtml
+    }
 }
 
 extension AttemptAnswer {

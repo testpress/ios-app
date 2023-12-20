@@ -1196,12 +1196,6 @@
         <scene sceneID="zwm-o3-szz">
             <objects>
                 <viewController storyboardIdentifier="ReviewSlidingViewController" modalPresentationStyle="fullScreen" id="7nr-DQ-qDd" customClass="ReviewSlidingViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="oYG-1N-NUp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="5mI-ei-zcp"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
                     <navigationItem key="navigationItem" title="Solutions" id="eKO-XP-b8c">
                         <barButtonItem key="leftBarButtonItem" image="ic_navigate_before_36pt" style="done" id="nyJ-qG-nlK">
                             <inset key="imageInsets" minX="-10" minY="0.0" maxX="-20" maxY="0.0"/>
@@ -1209,11 +1203,14 @@
                                 <action selector="onPressBackButton" destination="7nr-DQ-qDd" id="GAO-tA-XZV"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="language_icon" id="Z1E-tU-cXF">
-                            <inset key="imageInsets" minX="0.0" minY="0.0" maxX="-15" maxY="0.0"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="language_icon" style="done" id="Z1E-tU-cXF">
+                            <connections>
+                                <action selector="languageFiterButton:" destination="7nr-DQ-qDd" id="Pem-oj-Lv8"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="languagefilter" destination="Z1E-tU-cXF" id="ZHz-cJ-JUT"/>
                         <outlet property="navigationBarItem" destination="eKO-XP-b8c" id="qWC-Ya-qBz"/>
                     </connections>
                 </viewController>

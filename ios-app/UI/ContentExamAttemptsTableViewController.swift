@@ -34,6 +34,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     var exam: Exam!
     var attempts: [ContentAttempt] = []
     var pausedAttempts: [ContentAttempt] = []
+    var languages = List<Language>()
     
     override func viewDidLoad() {
         emptyView = EmptyView.getInstance(parentView: view)
@@ -51,6 +52,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
             loadAttemptsWithProgress(url: content.getAttemptsUrl())
         }
         tableView.reloadData()
+        self.fetchAvailableLanguages(url: Constants.BASE_URL+"/api/v2.3/exams/"+self.exam.slug+"/languages/")
     }
     
     func loadAttemptsWithProgress(url: String) {
@@ -61,6 +63,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     }
     
     func loadAttempts(url: String) {
+        print("hihihi1")
         TPApiClient.getListItems(
             endpointProvider: TPEndpointProvider(.loadAttempts, url: url),
             completion: {
@@ -99,6 +102,61 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                 }
         }, type: ContentAttempt.self)
     }
+    
+    func fetchAvailableLanguages(url: String) {
+        print("hihihi2")
+                TPApiClient.getListItems(
+                    endpointProvider: TPEndpointProvider(.get, url: url),
+                    completion: {
+                        testpressResponse, error in
+
+                        if let error = error {
+                            self.showErrorView(error, url: url)
+                            return
+                        }
+
+                        self.languages.append(objectsIn: testpressResponse!.results)
+
+                        if !(testpressResponse!.next.isEmpty) {
+                            self.fetchAvailableLanguages(url: testpressResponse!.next)
+                        } else {
+                            self.saveDataInDB(self.languages)
+                            self.hideLoading()
+                        }
+
+                }, type: Language.self)
+            }
+
+        private func showErrorView(_ error: TPError, url: String) {
+            var retryButtonText: String?
+            var retryHandler: (() -> Void)?
+            if error.kind == .network {
+                retryButtonText = Strings.TRY_AGAIN
+                retryHandler = {
+                    self.emptyView.hide()
+                    self.fetchAvailableLanguages(url: url)
+                }
+            }
+            self.hideLoading()
+            let (image, title, description) = error.getDisplayInfo()
+            self.emptyView.show(image: image, title: title, description: description,
+                                retryButtonText: retryButtonText,
+                                retryHandler: retryHandler)
+        }
+
+        private func saveDataInDB(_ languages: List<Language>) {
+            try! Realm().write {
+                self.exam.languages.removeAll()
+                self.exam.languages = languages
+                self.exam.selectedLanguage = languages.first
+            }
+        }
+
+        private func hideLoading() {
+            if (self.activityIndicator?.isAnimating)! {
+                self.activityIndicator?.stopAnimating()
+            }
+        }
     
     // MARK: - Table view data source
     

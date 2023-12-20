@@ -23,18 +23,88 @@
 //  THE SOFTWARE.
 //
 
+import UIKit
+import RealmSwift
+
 class ReviewSlidingViewController: BaseQuestionsSlidingViewController {
     
+    @IBOutlet weak var languagefilter: UIBarButtonItem!
+    
+    var reviewSolutionViewController: ReviewSolutionsViewController? = nil
+    var reviewQuestionListViewController: ReviewQuestionListViewController? = nil
+    
     override func awakeFromNib() {
-        let mainViewController = storyboard?.instantiateViewController(withIdentifier:
-            Constants.REVIEW_SOLUTIONS_VIEW_CONTROLLER) as! ReviewSolutionsViewController
+        reviewSolutionViewController = storyboard?.instantiateViewController(withIdentifier:
+            Constants.REVIEW_SOLUTIONS_VIEW_CONTROLLER) as? ReviewSolutionsViewController
         
-        self.mainViewController = mainViewController
-        slidingMenuDelegate = mainViewController
-        let leftViewController = storyboard?.instantiateViewController(withIdentifier:
-            Constants.REVIEW_QUESTION_LIST_VIEW_CONTROLLER) as! ReviewQuestionListViewController
+        self.mainViewController = reviewSolutionViewController
+        slidingMenuDelegate = reviewSolutionViewController
+        reviewQuestionListViewController = storyboard?.instantiateViewController(withIdentifier:
+            Constants.REVIEW_QUESTION_LIST_VIEW_CONTROLLER) as? ReviewQuestionListViewController
         
-        self.leftViewController = leftViewController
+        self.leftViewController = reviewQuestionListViewController
         super.awakeFromNib()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showOrHideLanguageIcon()
+    }
+    
+    func showOrHideLanguageIcon(){
+        print("hihihi", self.exam?.hasMultipleLanguages() )
+            if (self.exam?.hasMultipleLanguages() ?? false) {
+                languagefilter.isEnabled = true
+                languagefilter.tintColor = nil
+            } else {
+                languagefilter.isEnabled = false
+                languagefilter.tintColor = UIColor.clear
+            }
+    }
+    
+    @IBAction func languageFiterButton(_ sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: "Select Language", message: nil, preferredStyle: .actionSheet)
+
+        let languageOptions = self.getLanguageOptions()
+        languageOptions.forEach { actionSheet.addAction($0) }
+
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.permittedArrowDirections = [.up, .down]
+        }
+
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func getLanguageOptions() -> [UIAlertAction] {
+        if let exam = self.exam {
+            return exam.languages.map { language in
+                let action = UIAlertAction(title: language.title, style: .default) { _ in
+                    self.updateLanguage(language)
+                }
+                if language.code == self.exam?.selectedLanguage?.code {
+                    let checkmarkImage = UIImage(named: "testpress_check_mark")
+                    action.setValue(checkmarkImage, forKey: "image")
+                }
+                return action
+            } + [UIAlertAction(title: "Cancel", style: .cancel, handler: nil)]
+        }
+        return [UIAlertAction(title: "Cancel", style: .cancel, handler: nil)]
+    }
+    
+    func updateLanguage(_ language: Language) {
+        if self.exam?.selectedLanguage?.code == language.code {
+            return
+        }
+        setSelectedLanguage(language)
+        reviewSolutionViewController?.baseQuestionsDataSource.setLanguage(language)
+        reviewQuestionListViewController?.setLanguage(language)
+        reviewSolutionViewController?.setCurrentQuestion(index: reviewSolutionViewController?.getCurrentIndex() ?? 0)
+    }
+
+    private func setSelectedLanguage(_ language: Language) {
+        try! Realm().write {
+            self.exam?.selectedLanguage = language
+        }
     }
 }
