@@ -37,6 +37,7 @@ class BaseQuestionsListViewController: BaseWebViewController {
     @IBOutlet weak var bottomShadowView: UIView!
     
     var attemptItems = [AttemptItem]()
+    var language: Language?
     var currentPosition: Int!
     var delegate: QuestionListDelegate?
     
@@ -73,12 +74,12 @@ class BaseQuestionsListViewController: BaseWebViewController {
                 attemptQuestion.questionHtml!.isEmpty) {
                 
                 html += "<div class='question-list-content' style='padding-bottom: 0px;'>" +
-                    attemptQuestion.direction! +
+                    attemptQuestion.getLanguageBasedDirection(self.language) +
                 "</div>\n";
             }
             // Add question
             html += "<div class='question-list-content'>" +
-                attemptQuestion.questionHtml! +
+                attemptQuestion.getLanguageBasedQuestion(self.language) +
             "</div>\n";
             
             html += "</td></tr>"
@@ -133,8 +134,9 @@ extension BaseQuestionsListViewController: WKWebViewDelegate {
 
 extension BaseQuestionsListViewController: QuestionsSlidingMenuDelegate {
     
-    func updateQuestions(_ attemptItems: [AttemptItem]) {
+    func updateQuestions(_ attemptItems: [AttemptItem],_ language: Language?) {
         self.attemptItems = attemptItems
+        self.language = language
     }
     
     func displayQuestions(currentQuestionIndex: Int) {

@@ -148,4 +148,8 @@ class Exam: DBModel {
     func getQuestionsURL() -> String {
         return Constants.BASE_URL + "/api/v2.4/exams/\(id)/questions/"
     }
+    
+    func hasMultipleLanguages() -> Bool {
+        return languages.count > 1
+    }
 }
