@@ -350,7 +350,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         
         // Add explanation
         let explanationHtml = attemptQuestion.getExplanationHtml(self.language)
-        print("hihihi",explanationHtml)
         if (explanationHtml != nil && !explanationHtml!.isEmpty) {
             html += WebViewUtils.getReviewHeadingTags(headingText: Strings.EXPLANATION)
             html += "<div class='review-explanation'>" +
