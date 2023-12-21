@@ -52,14 +52,13 @@ class ReviewSlidingViewController: BaseQuestionsSlidingViewController {
     }
     
     func showOrHideLanguageIcon(){
-        print("hihihi", self.exam?.hasMultipleLanguages() )
-            if (self.exam?.hasMultipleLanguages() ?? false) {
-                languagefilter.isEnabled = true
-                languagefilter.tintColor = nil
-            } else {
-                languagefilter.isEnabled = false
-                languagefilter.tintColor = UIColor.clear
-            }
+        if (self.exam?.hasMultipleLanguages() ?? false) {
+            languagefilter.isEnabled = true
+            languagefilter.tintColor = nil
+        } else {
+            languagefilter.isEnabled = false
+            languagefilter.tintColor = UIColor.clear
+        }
     }
     
     @IBAction func languageFiterButton(_ sender: UIBarButtonItem) {
