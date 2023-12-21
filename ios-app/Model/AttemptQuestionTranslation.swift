@@ -25,7 +25,7 @@ class AttemptQuestionTranslation: DBModel {
         id <- map["id"]
         questionHtml <- map["question_html"]
         direction <- map["direction"]
-        explanationHtml <- map["explanation_html"]
+        explanationHtml <- map["explanation"]
         answers <- (map["answers"], ListTransform<AttemptAnswerTranslation>())
         language <- map["language"]
     }
