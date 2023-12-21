@@ -263,7 +263,7 @@ class TestReportViewController: UIViewController {
     
     func isPresentedFromCustomTestViewController() -> Bool {
         let customTestViewController = self.presentingViewController as? CustomTestGenerationViewController
-        return customTestViewController is CustomTestGenerationViewController?
+        return customTestViewController != nil
     }
     
     func goToCourseListView() {
