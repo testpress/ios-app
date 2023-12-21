@@ -12,8 +12,8 @@ import RealmSwift
 
 class Language: DBModel {
         
-    @objc var code: String = ""
-    @objc var title: String = ""
+    @objc dynamic var code: String = ""
+    @objc dynamic var title: String = ""
     
     public override func mapping(map: ObjectMapper.Map) {
         code <- map["code"]
