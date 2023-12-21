@@ -160,14 +160,14 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             
             htmlContent += "" +
                 "<div class='question' style='padding-bottom: 0px;'>" +
-                attemptQuestion.direction! +
+            attemptQuestion.getLanguageBasedDirection(self.language) +
             "</div>";
         }
         
         // Add question
         htmlContent += "" +
             "<div class='question' style='padding-bottom: 0px;'>" +
-            attemptQuestion.questionHtml! +
+            attemptQuestion.getLanguageBasedQuestion(self.language) +
         "</div>";
         
         if attemptQuestion.type == "R" || attemptQuestion.type == "C" {
@@ -177,10 +177,10 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             for attemptAnswer in attemptQuestion.answers {
                 if (attemptItem?.question?.type == "R") {
                     htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
-                        optionText: attemptAnswer.textHtml, id: attemptAnswer.id)
+                        optionText: attemptAnswer.getTextHtml(attemptQuestion, self.language), id: attemptAnswer.id)
                 } else {
                     htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
-                        optionText: attemptAnswer.textHtml, id: attemptAnswer.id)
+                        optionText: attemptAnswer.getTextHtml(attemptQuestion, self.language), id: attemptAnswer.id)
                 }
             }
             htmlContent += "</table>"
@@ -216,4 +216,61 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             attemptItem?.currentReview = sender.isOn
         }
     }
+    
+}
+
+extension AttemptQuestion {
+    
+    func getLanguageBasedQuestion(_ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in self.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.questionHtml ?? self.questionHtml!
+                }
+            }
+        }
+        return self.questionHtml!
+    }
+    
+    func getLanguageBasedDirection(_ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in self.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.direction?.html ?? self.direction!
+                }
+            }
+        }
+        return self.direction!
+    }
+    
+    func getExplanationHtml(_ language: Language?) -> String? {
+        if let selectedLanguage = language {
+            for translation in self.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.explanationHtml
+                }
+            }
+        }
+        return self.explanationHtml
+    }
+}
+
+extension AttemptAnswer {
+    
+    func getTextHtml(_ attemptQuestion: AttemptQuestion, _ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in attemptQuestion.translations {
+                if translation.language == selectedLanguage.code {
+                    for answerTranslation in translation.answers {
+                        if self.id == answerTranslation.id {
+                            return answerTranslation.textHtml
+                        }
+                    }
+                    return self.textHtml
+                }
+            }
+        }
+        return self.textHtml
+    }
+    
 }
