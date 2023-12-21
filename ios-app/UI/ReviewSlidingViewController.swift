@@ -69,7 +69,7 @@ class ReviewSlidingViewController: BaseQuestionsSlidingViewController {
         languageOptions.forEach { actionSheet.addAction($0) }
 
         if let popoverController = actionSheet.popoverPresentationController {
-            popoverController.sourceView = self.view
+            popoverController.sourceView = sender.plainView
             popoverController.permittedArrowDirections = [.up, .down]
         }
 
