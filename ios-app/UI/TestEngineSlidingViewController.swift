@@ -63,6 +63,6 @@ class TestEngineSlidingViewController: BaseQuestionsSlidingViewController {
     }
     
     func showOrHideLanguageButton() {
-        languagefilter.isHidden = !(self.exam?.hasMultipleLanguages() ?? true)
+        languagefilter.isHidden = !(self.exam?.hasMultipleLanguages() ?? false)
     }
 }
