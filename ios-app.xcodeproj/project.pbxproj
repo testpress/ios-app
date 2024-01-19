@@ -355,10 +355,15 @@
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
 		8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */; };
-		D9103C9C2ABB35CF00AF47A0 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9103C9B2ABB35CF00AF47A0 /* MobileRTC.xcframework */; };
-		D9103C9E2ABB35DF00AF47A0 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9103C9D2ABB35DF00AF47A0 /* MobileRTCResources.bundle */; };
-		D9103C9F2ABB35ED00AF47A0 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9103C9B2ABB35CF00AF47A0 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D907E7A92B19D11C00BEA874 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = D907E7A82B19D11C00BEA874 /* Language.swift */; };
 		D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */; };
+		D94A5A252B5AB12000382583 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D94A5A242B5AB12000382583 /* MobileRTC.xcframework */; };
+		D94A5A272B5AB12F00382583 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D94A5A262B5AB12E00382583 /* MobileRTCResources.bundle */; };
+		D94A5A282B5AB13900382583 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D94A5A242B5AB12000382583 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D98010692B035E780071C397 /* CustomTestQuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */; };
+		D990C7EE2B316C6300B3ED4D /* AttemptAnswerTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */; };
+		D990C7F02B31731300B3ED4D /* AttemptQuestionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */; };
+		D990C7F22B31765E00B3ED4D /* DirectionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */; };
 		D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -421,7 +426,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D9103C9F2ABB35ED00AF47A0 /* MobileRTC.xcframework in Embed Frameworks */,
+				D94A5A282B5AB13900382583 /* MobileRTC.xcframework in Embed Frameworks */,
 				D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */,
 				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
 				D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */,
@@ -814,9 +819,14 @@
 		8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoContentViewController.swift; sourceTree = "<group>"; };
 		8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stackview+BackgroundColor.swift"; sourceTree = "<group>"; };
 		9B482AA21F7CADEABC2BF009 /* ios_appTests-ios_appMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ios_appTests-ios_appMocks.generated.swift"; path = "MockingbirdMocks/ios_appTests-ios_appMocks.generated.swift"; sourceTree = "<group>"; };
-		D9103C9B2ABB35CF00AF47A0 /* MobileRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
-		D9103C9D2ABB35DF00AF47A0 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
+		D907E7A82B19D11C00BEA874 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Language.swift; path = "ios-app/Model/Language.swift"; sourceTree = SOURCE_ROOT; };
 		D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestGenerationViewController.swift; sourceTree = "<group>"; };
+		D94A5A242B5AB12000382583 /* MobileRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
+		D94A5A262B5AB12E00382583 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
+		D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestQuizExamViewModel.swift; sourceTree = "<group>"; };
+		D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptAnswerTranslation.swift; sourceTree = "<group>"; };
+		D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptQuestionTranslation.swift; sourceTree = "<group>"; };
+		D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionTranslation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -831,7 +841,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9103C9C2ABB35CF00AF47A0 /* MobileRTC.xcframework in Frameworks */,
+				D94A5A252B5AB12000382583 /* MobileRTC.xcframework in Frameworks */,
 				2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */,
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
 				25489AA52A0BB621009619FD /* ObjectMapper.xcframework in Frameworks */,
@@ -976,7 +986,7 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
-				D9103C9D2ABB35DF00AF47A0 /* MobileRTCResources.bundle */,
+				D94A5A262B5AB12E00382583 /* MobileRTCResources.bundle */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
@@ -1045,7 +1055,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D9103C9B2ABB35CF00AF47A0 /* MobileRTC.xcframework */,
+				D94A5A242B5AB12000382583 /* MobileRTC.xcframework */,
 				25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */,
 				25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */,
 				25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */,
@@ -1294,6 +1304,7 @@
 				2F3A14321FE15E97007CEE84 /* ActivityFeed.swift */,
 				2F3DD21920186417004EDAF2 /* ActivityFeedResponse.swift */,
 				2F3DD21F20187B5D004EDAF2 /* ApiResponse.swift */,
+				D907E7A82B19D11C00BEA874 /* Language.swift */,
 				2F96997D1FC2A761001B2B18 /* Attachment.swift */,
 				2FC0F2C31F86385B0092BFDC /* Attempt.swift */,
 				2FC0F2C41F86385B0092BFDC /* AttemptAnswer.swift */,
@@ -1340,6 +1351,9 @@
 				2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */,
 				25520BC527547006001A58AB /* DiscussionThreadAnswer.swift */,
 				25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */,
+				D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */,
+				D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */,
+				D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1432,6 +1446,7 @@
 				8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */,
 				257BB692246A9BA000524D2C /* QuizExamViewModel.swift */,
 				256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */,
+				D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1571,7 +1586,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9103C9E2ABB35DF00AF47A0 /* MobileRTCResources.bundle in Resources */,
+				D94A5A272B5AB12F00382583 /* MobileRTCResources.bundle in Resources */,
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
@@ -1680,6 +1695,7 @@
 				2FC0F2F11F863B160092BFDC /* TPApiClient.swift in Sources */,
 				25E435DA263ADCA700243FD3 /* LeaderboardSectionController.swift in Sources */,
 				2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */,
+				D907E7A92B19D11C00BEA874 /* Language.swift in Sources */,
 				2FA9285420B8160A00CD3076 /* BookmarksSlidingViewController.swift in Sources */,
 				2F4186A420BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift in Sources */,
 				8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */,
@@ -1770,6 +1786,7 @@
 				2FC0F30A1F863BA90092BFDC /* ReviewQuestionsViewController.swift in Sources */,
 				2FDF9C5920B6F5240086245F /* BasePagedTableViewController.swift in Sources */,
 				2F515DF81FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift in Sources */,
+				D990C7F02B31731300B3ED4D /* AttemptQuestionTranslation.swift in Sources */,
 				2FC0F2E81F863AE80092BFDC /* User.swift in Sources */,
 				2586782728ABB81700E149B5 /* Object.swift in Sources */,
 				257BB695246AB4C900524D2C /* QuizExamViewController.swift in Sources */,
@@ -1821,6 +1838,7 @@
 				8C9E5BDC238E5ACA00D8790F /* AVPlayerExtensions.swift in Sources */,
 				2F96997C1FC2A625001B2B18 /* Video.swift in Sources */,
 				259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */,
+				D98010692B035E780071C397 /* CustomTestQuizExamViewModel.swift in Sources */,
 				2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */,
 				2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */,
 				2FC0F2FC1F863B810092BFDC /* BaseQuestionsPageViewController.swift in Sources */,
@@ -1908,6 +1926,7 @@
 				2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */,
 				2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
+				D990C7EE2B316C6300B3ED4D /* AttemptAnswerTranslation.swift in Sources */,
 				2F3A53011FDA652A00C64123 /* Subject.swift in Sources */,
 				25985837248A77F6003591FA /* M3U8Handler.swift in Sources */,
 				2FA9285020B7DF2200CD3076 /* StringExtension.swift in Sources */,
@@ -1924,6 +1943,7 @@
 				250C4CAD2463D24600FD7636 /* BaseDBViewController.swift in Sources */,
 				2FDF9C5720B6E5260086245F /* BookmarkFolder.swift in Sources */,
 				2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */,
+				D990C7F22B31765E00B3ED4D /* DirectionTranslation.swift in Sources */,
 				256A90A2247D30DA00F4E12C /* Collection.swift in Sources */,
 				2FDF9C4D20B6D01B0086245F /* Bookmark.swift in Sources */,
 				2FDF9C4F20B6D40D0086245F /* BookmarksPager.swift in Sources */,
@@ -2204,7 +2224,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.2.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2237,7 +2257,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.2.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
