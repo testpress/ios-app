@@ -84,4 +84,8 @@ class PDFViewController: UIViewController {
         pdfView.autoScales = true
     }
     
+    deinit {
+        self.timer?.invalidate()
+    }
+    
 }

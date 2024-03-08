@@ -59,8 +59,6 @@ class AttachmentDetailViewController: UIViewController {
     var moveAnimationView: LottieAnimationView!
     var removeAnimationView: LottieAnimationView!
     let alertController = UIUtils.initProgressDialog(message: Strings.LOADING + "\n\n")
-    var timer: Timer?
-    var watermarkLabel: MarqueeLabel?
     let cacheDirectoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     
     override func viewDidLoad() {
@@ -207,29 +205,6 @@ class AttachmentDetailViewController: UIViewController {
         
     }
     
-    @objc func back() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    private func startTimerToMoveWatermarkPosition() {
-        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
-    }
-    
-    private func initializeWatermark(view: UIView) -> MarqueeLabel {
-        let watermarkLabel = MarqueeLabel.init(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: 20), duration: 8.0, fadeLength: 0.0)
-        watermarkLabel.text = KeychainTokenItem.getAccount().padding(toLength: Int((view.frame.width)/2), withPad: " ", startingAt: 0)
-        watermarkLabel.numberOfLines = 1
-        return watermarkLabel
-    }
-    
-    @objc func moveWatermarkPosition() {
-        watermarkLabel?.frame.origin.y = CGFloat(Int.random(in: 0..<Int(self.view.frame.height)))
-    }
-
-    deinit {
-        self.timer?.invalidate()
-    }
-    
     @IBAction func downloadAttachment(_ sender: UIButton) {
         var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         UIApplication.shared.openURL(attachmentUrl)
@@ -300,9 +275,9 @@ class AttachmentDetailViewController: UIViewController {
         contentView.layoutIfNeeded()
     }
     
-//    @objc func back() {
-//        dismiss(animated: true, completion: nil)
-//    }
+    @objc func back() {
+        dismiss(animated: true, completion: nil)
+    }
     
 }
 
