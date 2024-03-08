@@ -2256,6 +2256,36 @@
             </objects>
             <point key="canvasLocation" x="4607" y="-603"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="8GU-P4-0us">
+            <objects>
+                <viewController storyboardIdentifier="PDFViewController" id="2dF-1v-giC" customClass="PDFViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KcC-IT-yl3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOB-Xs-tz3" customClass="PDFView">
+                                <rect key="frame" x="0.0" y="48" width="414" height="800"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ccu-ap-YYO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OOB-Xs-tz3" firstAttribute="leading" secondItem="Ccu-ap-YYO" secondAttribute="leading" id="7kx-eC-YLj"/>
+                            <constraint firstItem="OOB-Xs-tz3" firstAttribute="top" secondItem="Ccu-ap-YYO" secondAttribute="top" id="Gj6-AJ-21m"/>
+                            <constraint firstItem="OOB-Xs-tz3" firstAttribute="centerY" secondItem="KcC-IT-yl3" secondAttribute="centerY" id="WII-lH-DYE"/>
+                            <constraint firstItem="OOB-Xs-tz3" firstAttribute="centerX" secondItem="KcC-IT-yl3" secondAttribute="centerX" id="Z9F-Kg-pve"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pdfView" destination="OOB-Xs-tz3" id="g3S-0l-dPy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rqo-5A-lDw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4107.2463768115949" y="171.42857142857142"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="gc5-34-E3A">
@@ -2272,7 +2302,7 @@
         <image name="ic_navigate_before_36pt" width="36" height="36"/>
         <image name="ic_navigate_next" width="24" height="24"/>
         <image name="ic_thumb_up_18pt" width="18" height="18"/>
-        <image name="language_icon" width="128" height="128"/>
+        <image name="language_icon" width="20" height="20"/>
         <image name="lock_outline" width="10" height="16"/>
         <image name="move_bookmark" width="12" height="15"/>
         <image name="questions_outline_16pt" width="16" height="16"/>

@@ -24,7 +24,7 @@
 //
 
 import Lottie
-import PDFReader
+import PDFKit
 import UIKit
 import Alamofire
 import RealmSwift
@@ -131,41 +131,138 @@ class AttachmentDetailViewController: UIViewController {
         downloadAttachmentButton.isHidden = false
     }
     
-    @IBAction func viewAttachment(_ sender: UIButton) {
-        var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
-        if attachmentUrl.scheme == "http" {
-            attachmentUrl = URL(string: "https://" + attachmentUrl.host! + attachmentUrl.path
-                + "?" + attachmentUrl.query!)!
-        }
-        present(alertController, animated: false, completion: {
-            self.loadPdf(url: attachmentUrl)
-        })
-    }
+//    @IBAction func viewAttachment(_ sender: UIButton) {
+//        var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
+//        if attachmentUrl.scheme == "http" {
+//            attachmentUrl = URL(string: "https://" + attachmentUrl.host! + attachmentUrl.path
+//                + "?" + attachmentUrl.query!)!
+//        }
+//        present(alertController, animated: false, completion: {
+//            self.loadPdf(url: attachmentUrl)
+//        })
+//    }
+//
+//    func loadPdf(url: URL) {
+//        let pdfDocument = PDFDocument(url: url)
+//        alertController.dismiss(animated: false, completion: {
+//            self.displayPdf(pdfDocument)
+//        })
+//    }
+//
+//    func displayPdf(_ pdfDocument: PDFDocument?) {
+//        if pdfDocument != nil {
+//            let backButton = UIBarButtonItem(title: "Back", style: .done, target: self,
+//                                             action:  #selector(back))
+//
+//            let pdfController = PDFViewController.createNew(with: pdfDocument!,
+//                                                            title: content.attachment!.title,
+//                                                            backButton: backButton)
+//            pdfController.navigationItem.rightBarButtonItem = nil
+//            watermarkLabel = initializeWatermark(view: pdfController.view)
+//            pdfController.view.addSubview(watermarkLabel!)
+//            startTimerToMoveWatermarkPosition()
+//            let navigationController = UINavigationController(rootViewController: pdfController)
+//            present(navigationController, animated: true)
+//            createContentAttempt()
+//        }
+//    }
     
-    func loadPdf(url: URL) {
-        let pdfDocument = PDFDocument(url: url)
-        alertController.dismiss(animated: false, completion: {
-            self.displayPdf(pdfDocument)
-        })
-    }
-    
-    func displayPdf(_ pdfDocument: PDFDocument?) {
-        if pdfDocument != nil {
-            let backButton = UIBarButtonItem(title: "Back", style: .done, target: self,
-                                             action:  #selector(back))
-            
-            let pdfController = PDFViewController.createNew(with: pdfDocument!,
-                                                            title: content.attachment!.title,
-                                                            backButton: backButton)
-            pdfController.navigationItem.rightBarButtonItem = nil
-            watermarkLabel = initializeWatermark(view: pdfController.view)
-            pdfController.view.addSubview(watermarkLabel!)
-            startTimerToMoveWatermarkPosition()
-            let navigationController = UINavigationController(rootViewController: pdfController)
-            present(navigationController, animated: true)
-            createContentAttempt()
+    var pdfDocument: PDFDocument?
+        var pdfView: PDFView?
+        let cacheDirectoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+
+        @IBAction func viewAttachment(_ sender: UIButton) {
+            // Show loading indicator
+            let loadingAlert = UIAlertController(title: nil, message: "Downloading PDF...", preferredStyle: .alert)
+            loadingAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                // Cancel download if needed
+            }))
+            present(loadingAlert, animated: true, completion: nil)
+
+            var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
+            if attachmentUrl.scheme == "http" {
+                attachmentUrl = URL(string: "https://" + attachmentUrl.host! + attachmentUrl.path
+                    + "?" + attachmentUrl.query!)!
+            }
+
+            // Check if PDF exists in cache directory
+            let pdfFilePath = cacheDirectoryURL.appendingPathComponent(attachmentUrl.lastPathComponent)
+
+            if FileManager.default.fileExists(atPath: pdfFilePath.path) {
+                // Load PDF from cache
+                dismiss(animated: true) {
+                    self.loadPDFFromURL(pdfFilePath)
+                }
+            } else {
+                // Download PDF and save to cache
+                downloadPDF(from: attachmentUrl, to: pdfFilePath) {
+                    // Dismiss loading indicator after download completes
+                    loadingAlert.dismiss(animated: true) {
+                        self.loadPDFFromURL(pdfFilePath)
+                    }
+                }
+            }
         }
-    }
+
+        func downloadPDF(from url: URL, to destinationURL: URL, completion: @escaping () -> Void) {
+            URLSession.shared.downloadTask(with: url) { (location, response, error) in
+                guard let location = location, error == nil else {
+                    print("Failed to download PDF: \(error?.localizedDescription ?? "Unknown error")")
+                    DispatchQueue.main.async {
+                        // Dismiss loading indicator if download fails
+                        self.dismiss(animated: true) {
+                            // Display an error message to the user
+                            let alert = UIAlertController(title: "Error", message: "Failed to download PDF", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                    return
+                }
+
+                do {
+                    try FileManager.default.moveItem(at: location, to: destinationURL)
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                } catch {
+                    print("Failed to move downloaded file to cache directory: \(error)")
+                }
+            }.resume()
+        }
+
+
+        func loadPDFFromURL(_ url: URL) {
+            pdfDocument = PDFDocument(url: url)
+            if let pdfDocument = pdfDocument {
+                let storyboard =
+                    UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
+                let pdfViewController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.PDF_VIEW_CONTROLLER) as! PDFViewController
+                pdfViewController.pdfDocument = pdfDocument
+                pdfViewController.contentTitle = content.attachment!.title
+                let navigationController = UINavigationController(rootViewController: pdfViewController)
+                navigationController.title = content.attachment!.title
+                present(navigationController, animated: true)
+            } else {
+                print("Failed to load PDF from URL: \(url)")
+                let alert = UIAlertController(title: "Error", message: "Failed to load PDF", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+
+        }
+
+        @objc func back() {
+            dismissPDFView()
+            dismiss(animated: true, completion: nil)
+        }
+
+        func dismissPDFView() {
+            pdfView?.removeFromSuperview()
+            pdfView = nil
+            pdfDocument = nil
+        }
     
     private func startTimerToMoveWatermarkPosition() {
         timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
@@ -256,9 +353,9 @@ class AttachmentDetailViewController: UIViewController {
         contentView.layoutIfNeeded()
     }
     
-    @objc func back() {
-        dismiss(animated: true, completion: nil)
-    }
+//    @objc func back() {
+//        dismiss(animated: true, completion: nil)
+//    }
     
 }
 
