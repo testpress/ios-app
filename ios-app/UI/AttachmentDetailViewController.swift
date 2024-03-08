@@ -136,7 +136,7 @@ class AttachmentDetailViewController: UIViewController {
         var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.scheme == "http" {
             attachmentUrl = URL(string: "https://" + attachmentUrl.host! + attachmentUrl.path
-                                + "?" + attachmentUrl.query!)!
+                + "?" + attachmentUrl.query!)!
         }
         
         // Check if PDF exists in cache directory
