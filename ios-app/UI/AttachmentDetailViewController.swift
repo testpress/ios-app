@@ -31,7 +31,7 @@ import RealmSwift
 import MarqueeLabel
 
 
-class AttachmentDetailViewController: UIViewController {
+class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -60,6 +60,8 @@ class AttachmentDetailViewController: UIViewController {
     var removeAnimationView: LottieAnimationView!
     let alertController = UIUtils.initProgressDialog(message: Strings.LOADING + "\n\n")
     let cacheDirectoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+    var session: URLSession!
+    var pdfFilePath: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +74,7 @@ class AttachmentDetailViewController: UIViewController {
         } else {
             showDownloadButton()
         }
+        session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
     }
     
     func initializeBookmarkHelper() {
@@ -139,49 +142,78 @@ class AttachmentDetailViewController: UIViewController {
                 + "?" + attachmentUrl.query!)!
         }
         
-        // Check if PDF exists in cache directory
-        let pdfFilePath = cacheDirectoryURL.appendingPathComponent(attachmentUrl.lastPathComponent)
-        
-        if FileManager.default.fileExists(atPath: pdfFilePath.path) {
-            alertController.dismiss(animated: true) {
-                self.loadPdf(pdfFilePath)
-            }
-        } else {
-            downloadPDF(from: attachmentUrl, to: pdfFilePath) {
+        if isCacheAvailable(attachmentUrl) {
+            showPdf()
+        } else{
+            downloadAndShowPdf(attachmentUrl)
+        }
+    }
+    
+    func isCacheAvailable(_ attachmentUrl: URL) -> Bool {
+        pdfFilePath = cacheDirectoryURL.appendingPathComponent(attachmentUrl.lastPathComponent)
+        return FileManager.default.fileExists(atPath: pdfFilePath.path)
+    }
+    
+    func showPdf() {
+        alertController.dismiss(animated: true) {
+            self.loadPdf(self.pdfFilePath)
+        }
+    }
+    
+    func downloadAndShowPdf(_ attachmentUrl: URL) {
+        let downloadTask = session.downloadTask(with: attachmentUrl)
+        downloadTask.resume()
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        // This method will be called when the download is completed
+        do {
+            try FileManager.default.moveItem(at: location, to: pdfFilePath)
+            DispatchQueue.main.async {
                 self.alertController.dismiss(animated: true) {
-                    self.loadPdf(pdfFilePath)
+                    self.loadPdf(self.pdfFilePath)
+                }
+            }
+        } catch {
+            print("Failed to move downloaded file to cache directory: \(error)")
+        }
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        // This method will be called when the download is error
+        if let error = error {
+            let errorMessage: String
+            switch error {
+            case URLError.notConnectedToInternet:
+                errorMessage = "No internet connection."
+            case URLError.networkConnectionLost:
+                errorMessage = "Network connection lost."
+            case URLError.cannotFindHost,
+                 URLError.cannotConnectToHost:
+                errorMessage = "Cannot connect to the server."
+            default:
+                errorMessage = "An error occurred: \(error.localizedDescription)"
+            }
+            
+            DispatchQueue.main.async {
+                self.alertController.dismiss(animated: true) {
+                    let errorAlert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
                 }
             }
         }
     }
-    
-    func downloadPDF(from url: URL, to destinationURL: URL, completion: @escaping () -> Void) {
-        URLSession.shared.downloadTask(with: url) { (location, response, error) in
-            guard let location = location, error == nil else {
-                print("Failed to download PDF: \(error?.localizedDescription ?? "Unknown error")")
-                DispatchQueue.main.async {
-                    // Dismiss loading indicator if download fails
-                    self.dismiss(animated: true) {
-                        // Display an error message to the user
-                        let alert = UIAlertController(title: "Error", message: "Failed to download PDF", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-                return
-            }
-            
-            do {
-                try FileManager.default.moveItem(at: location, to: destinationURL)
-                DispatchQueue.main.async {
-                    completion()
-                }
-            } catch {
-                print("Failed to move downloaded file to cache directory: \(error)")
-            }
-        }.resume()
+
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        // This method will be called periodically to update the download progress
+        let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+        let percentage = Int(progress * 100)
+        
+        DispatchQueue.main.async {
+            self.alertController.message = "\(Strings.LOADING) \(percentage)%\n\n"
+        }
     }
-    
     
     func loadPdf(_ url: URL) {
         let pdfDocument = PDFDocument(url: url)
@@ -192,17 +224,10 @@ class AttachmentDetailViewController: UIViewController {
                                                                             Constants.PDF_VIEW_CONTROLLER) as! PDFViewController
             pdfViewController.pdfDocument = pdfDocument
             pdfViewController.contentTitle = content.attachment!.title
-            let navigationController = UINavigationController(rootViewController: pdfViewController)
-            navigationController.title = content.attachment!.title
-            present(navigationController, animated: true)
+            pdfViewController.modalPresentationStyle = .fullScreen
+            present(pdfViewController, animated: true)
             createContentAttempt()
-        } else {
-            print("Failed to load PDF from URL: \(url)")
-            let alert = UIAlertController(title: "Error", message: "Failed to load PDF", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
         }
-        
     }
     
     @IBAction func downloadAttachment(_ sender: UIButton) {

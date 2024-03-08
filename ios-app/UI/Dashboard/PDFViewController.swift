@@ -6,6 +6,7 @@ import MarqueeLabel
 class PDFViewController: UIViewController {
     var pdfDocument: PDFDocument?
     @IBOutlet var pdfView: PDFView!
+    @IBOutlet weak var navigationBarItem: UINavigationItem!
     private var currentPageIndex = 0
     var watermarkLabel: MarqueeLabel?
     var timer: Timer?
@@ -13,8 +14,33 @@ class PDFViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setStatusBarColor()
         setupPDFView()
         addPanGesture()
+        addWaterMark()
+    }
+    
+    func setupPDFView() {
+        pdfView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+        pdfView.displayMode = .singlePage
+        pdfView.displayDirection = .horizontal
+        pdfView.minScaleFactor = 0.5
+        pdfView.maxScaleFactor = 5.0
+        pdfView.autoScales = true
+        pdfView.document = pdfDocument
+        pdfView.documentView?.isUserInteractionEnabled = false
+        
+        navigationBarItem.title = contentTitle
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(back))
+//        navigationItem.title = contentTitle
+    }
+    
+    func addPanGesture() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+        pdfView.addGestureRecognizer(panGesture)
+    }
+    
+    func addWaterMark() {
         watermarkLabel = initializeWatermark(view: view)
         view.addSubview(watermarkLabel!)
         startTimerToMoveWatermarkPosition()
@@ -35,27 +61,8 @@ class PDFViewController: UIViewController {
         watermarkLabel?.frame.origin.y = CGFloat(Int.random(in: 0..<Int(self.view.frame.height)))
     }
     
-    func setupPDFView() {
-        pdfView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        pdfView.displayMode = .singlePage
-        pdfView.displayDirection = .horizontal
-        pdfView.minScaleFactor = 0.5
-        pdfView.maxScaleFactor = 5.0
-        pdfView.autoScales = true
-        pdfView.document = pdfDocument
-        pdfView.documentView?.isUserInteractionEnabled = false
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(back))
-        navigationItem.title = contentTitle
-    }
-    
-    @objc func back(_ sender: Any) {
+    @IBAction func back(_ sender: Any) {
         self.dismiss(animated: true)
-    }
-    
-    func addPanGesture() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
-        pdfView.addGestureRecognizer(panGesture)
     }
     
     @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
@@ -67,15 +74,17 @@ class PDFViewController: UIViewController {
         
         let translation = recognizer.translation(in: pdfView)
         let velocity = recognizer.velocity(in: pdfView)
-        
-        if translation.x < -50 && velocity.x < -500 && currentPageIndex < pdfDocument.pageCount {
-            // Swipe left
+        let isSwipeLeft = translation.x < -50 && velocity.x < -500
+        let isSwipeRight = translation.x > 50 && velocity.x > 500
+        let canNavigateForward = currentPageIndex < pdfDocument.pageCount
+        let canNavigateBackward = currentPageIndex > 0
+
+        if isSwipeLeft && canNavigateForward {
             currentPageIndex += 1
             if let nextPage = pdfDocument.page(at: currentPageIndex) {
                 pdfView.go(to: nextPage)
             }
-        } else if translation.x > 50 && velocity.x > 500 && currentPageIndex > 0 {
-            // Swipe right
+        } else if isSwipeRight && canNavigateBackward {
             currentPageIndex -= 1
             if let prevPage = pdfDocument.page(at: currentPageIndex) {
                 pdfView.go(to: prevPage)

@@ -2254,7 +2254,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBC-E7-d8K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4607" y="-603"/>
+            <point key="canvasLocation" x="4605.7971014492759" y="-603.34821428571422"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8GU-P4-0us">
@@ -2264,27 +2264,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOB-Xs-tz3" customClass="PDFView">
-                                <rect key="frame" x="0.0" y="48" width="414" height="800"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eo7-Aq-G9x" userLabel="PDFView" customClass="PDFView">
+                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qE2-0Y-rq0">
+                                <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="lt4-aO-HLK" userLabel="Navigation Bar Item">
+                                        <barButtonItem key="leftBarButtonItem" image="ic_navigate_before_36pt" style="done" id="hXJ-1N-HD6" userLabel="Back">
+                                            <connections>
+                                                <action selector="back:" destination="2dF-1v-giC" id="jJH-4v-Tv4"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ccu-ap-YYO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="OOB-Xs-tz3" firstAttribute="leading" secondItem="Ccu-ap-YYO" secondAttribute="leading" id="7kx-eC-YLj"/>
-                            <constraint firstItem="OOB-Xs-tz3" firstAttribute="top" secondItem="Ccu-ap-YYO" secondAttribute="top" id="Gj6-AJ-21m"/>
-                            <constraint firstItem="OOB-Xs-tz3" firstAttribute="centerY" secondItem="KcC-IT-yl3" secondAttribute="centerY" id="WII-lH-DYE"/>
-                            <constraint firstItem="OOB-Xs-tz3" firstAttribute="centerX" secondItem="KcC-IT-yl3" secondAttribute="centerX" id="Z9F-Kg-pve"/>
+                            <constraint firstItem="Eo7-Aq-G9x" firstAttribute="bottom" secondItem="Ccu-ap-YYO" secondAttribute="bottom" id="GKh-sf-xXr"/>
+                            <constraint firstItem="qE2-0Y-rq0" firstAttribute="leading" secondItem="Eo7-Aq-G9x" secondAttribute="leading" id="HYj-lS-P4x"/>
+                            <constraint firstItem="qE2-0Y-rq0" firstAttribute="trailing" secondItem="Eo7-Aq-G9x" secondAttribute="trailing" id="IBa-wA-VFU"/>
+                            <constraint firstItem="Eo7-Aq-G9x" firstAttribute="top" secondItem="qE2-0Y-rq0" secondAttribute="bottom" id="R3P-HP-mga"/>
+                            <constraint firstItem="Eo7-Aq-G9x" firstAttribute="leading" secondItem="Ccu-ap-YYO" secondAttribute="leading" id="aGj-Vd-2wR"/>
+                            <constraint firstItem="Eo7-Aq-G9x" firstAttribute="top" secondItem="Ccu-ap-YYO" secondAttribute="top" constant="44" id="hgN-RO-AWO"/>
+                            <constraint firstItem="qE2-0Y-rq0" firstAttribute="centerX" secondItem="KcC-IT-yl3" secondAttribute="centerX" id="rqj-lb-0SW"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="pdfView" destination="OOB-Xs-tz3" id="g3S-0l-dPy"/>
+                        <outlet property="navigationBarItem" destination="lt4-aO-HLK" id="taq-8e-0VW"/>
+                        <outlet property="pdfView" destination="Eo7-Aq-G9x" id="dse-DJ-IK8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqo-5A-lDw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4107.2463768115949" y="171.42857142857142"/>
+            <point key="canvasLocation" x="4170" y="133"/>
         </scene>
     </scenes>
     <designables>
