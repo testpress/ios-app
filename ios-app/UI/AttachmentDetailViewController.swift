@@ -207,11 +207,17 @@ class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelega
 
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         // This method will be called periodically to update the download progress
-        let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
-        let percentage = Int(progress * 100)
-        
-        DispatchQueue.main.async {
-            self.alertController.message = "\(Strings.LOADING) \(percentage)%\n\n"
+        if totalBytesExpectedToWrite > 0 {
+            let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+            let percentage = Int(progress * 100)
+            
+            DispatchQueue.main.async {
+                self.alertController.message = "\(Strings.LOADING)\(percentage)%\n\n"
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.alertController.message = "\(Strings.LOADING)\n\n" // or any other appropriate indication
+            }
         }
     }
     

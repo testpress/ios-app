@@ -31,8 +31,6 @@ class PDFViewController: UIViewController {
         pdfView.documentView?.isUserInteractionEnabled = false
         
         navigationBarItem.title = contentTitle
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(back))
-//        navigationItem.title = contentTitle
     }
     
     func addPanGesture() {
