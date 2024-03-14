@@ -51,6 +51,7 @@ class Attempt: DBModel {
     @objc var speed: Int = 0
     @objc var accuracy: Int = 0
     @objc var exam: Int = -1
+    @objc var attemptType: Int = 0
     var sections = List<AttemptSection>()
     
 
@@ -80,10 +81,15 @@ class Attempt: DBModel {
         speed <- map["speed"]
         accuracy <- map["accuracy"]
         exam <- map["exam"]
+        attemptType <- map["attempt_type"]
         sections <- (map["sections"], ListTransform<AttemptSection>())
     }
 
     func hasScore() -> Bool {
         return self.score != nil && self.score != "NA"
+    }
+    
+    func getEndAttemptUrl() -> String {
+        return url + "end/";
     }
 }

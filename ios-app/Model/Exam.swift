@@ -24,6 +24,7 @@
 //
 
 import ObjectMapper
+import RealmSwift
 
 class Exam: DBModel {
     @objc dynamic var url: String = "";
@@ -61,6 +62,9 @@ class Exam: DBModel {
     @objc dynamic var isGrowthHackEnabled: Bool = false;
     @objc dynamic var shareTextForSolutionUnlock: String = "";
     @objc dynamic var showAnalytics: Bool = false
+    @objc dynamic var enableQuizMode: Bool = false;
+    @objc dynamic var selectedLanguage: Language?
+    var languages = List<Language>()
     
     override public static func primaryKey() -> String? {
         return "id"
@@ -104,6 +108,9 @@ class Exam: DBModel {
         shareTextForSolutionUnlock <- map["share_text_for_solution_unlock"]
         examDescription <- map["description"]
         showAnalytics <- map["show_analytics"]
+        enableQuizMode <- map["enable_quiz_mode"]
+        selectedLanguage <- map["selected_language"]
+        languages <- (map["languages"], ListTransform<Language>())
     }
     
     func hasStarted() -> Bool {
@@ -140,5 +147,9 @@ class Exam: DBModel {
     
     func getQuestionsURL() -> String {
         return Constants.BASE_URL + "/api/v2.4/exams/\(id)/questions/"
+    }
+    
+    func hasMultipleLanguages() -> Bool {
+        return languages.count > 1
     }
 }
