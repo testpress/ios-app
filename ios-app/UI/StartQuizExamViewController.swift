@@ -77,7 +77,7 @@ class StartQuizExamViewController: UIViewController {
     
     @IBAction func startExam(_ sender: UIButton) {
         present(alertController, animated: false, completion: nil)
-        viewModel.loadAttempt { contentAttempt, error in
+        viewModel.loadContentAttempt { contentAttempt, error in
             self.alertController.dismiss(animated: true, completion: nil)
             
             if let error = error {
