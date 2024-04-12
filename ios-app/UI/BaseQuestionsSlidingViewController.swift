@@ -32,7 +32,7 @@ protocol SlidingMenuDelegate {
 
 protocol QuestionsSlidingMenuDelegate {
     func displayQuestions(currentQuestionIndex: Int)
-    func updateQuestions(_ attemptItems: [AttemptItem])
+    func updateQuestions(_ attemptItems: [AttemptItem], _ language: Language?)
 }
 
 class BaseQuestionsSlidingViewController: SlideMenuController {
