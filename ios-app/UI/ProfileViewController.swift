@@ -224,8 +224,4 @@ class ProfileViewController: UIViewController {
 
         self.present(webViewController, animated: true, completion: nil)
     }
-    
-    func presentLoginPage(){
-        
-    }
 }
