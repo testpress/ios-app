@@ -185,6 +185,21 @@ class ProfileViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func showProfileEditPage(_ sender: Any) {
+        let webViewController = WebViewController()
+        webViewController.title = "Edit profile"
+        webViewController.url = "&next=/settings/profile/mobile"
+        webViewController.useWebviewNavigation = false
+        webViewController.useSSOLogin = true
+        webViewController.displayNavbar = true
+        webViewController.shouldOpenLinksWithinWebview = true
+        webViewController.modalPresentationStyle = .fullScreen
+        webViewController.setStatusBarColor()
+        
+        self.present(webViewController, animated: true, completion: nil)
+    }
+    
+    
     // Set frames of the views in this method to support both portrait & landscape view
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
