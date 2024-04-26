@@ -188,10 +188,5 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
 
     func onFinishLoadingWebView() {
         activityIndicator?.stopAnimating()
-        if (webView.canGoBack) {
-            navItem?.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        } else {
-            navItem?.leftBarButtonItem = nil
-        }
     }
 }
