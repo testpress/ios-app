@@ -26,6 +26,7 @@
 import DropDown
 import UIKit
 import RealmSwift
+import WebKit
 
 class TestEngineViewController: BaseQuestionsPageViewController {
     
@@ -45,6 +46,9 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     var plainDropDown: PlainDropDown!
     var selectedPlainSpinnerItemOffset: Int = 0
     var navigationButtonPressed: Bool = false
+    @IBOutlet weak var sectionInstructionsButton: UIButton!
+    var webView: WKWebView!
+    var instructionsPopup: UIAlertController?
     /**
      * Map of subjects/sections & its starting point(first question index)
      */
@@ -59,6 +63,8 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         
         setupPauseButtonGesture()
         initializeDropDownContainerForSections()
+        setupSectionInstructionsBtn()
+        webView = WKWebView()
         
         if !firstAttemptOfLockedSectionExam {
             nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
@@ -469,9 +475,33 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 } else {
                     self.plainDropDown.setCurrentItem(index: self.currentSection)
                     self.startSection()
+                    self.setupSectionInstructionsBtn()
                 }
         })
     }
+    
+    func setupSectionInstructionsBtn(){
+        self.sectionInstructionsButton.isHidden = !isCurrentSectionHasInstructions()
+    }
+    
+    func isCurrentSectionHasInstructions() -> Bool {
+        guard currentSection < sections.count else { return false }
+        return sections[currentSection].instructions.isNotEmpty
+    }
+    
+    @IBAction func showCurrentSectionInstructions(_ sender: Any) {
+        if !isCurrentSectionHasInstructions() { return }
+        var instructions = self.sections[self.currentSection].instructions
+
+        instructionsPopup = UIAlertController(title: "Instructions", message: nil, preferredStyle: .alert)
+        webView.backgroundColor = UIColor.clear
+        webView.sizeToFit()
+        webView.loadHTMLString(instructions, baseURL: Bundle.main.bundleURL)
+        instructionsPopup!.view.addSubview(webView)
+        instructionsPopup!.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+        present(instructionsPopup!, animated: true, completion: nil)
+    }
+    
     
     func startSection() {
         loadingDialogController.message = Strings.STARTING_SECTION
