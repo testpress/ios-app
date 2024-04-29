@@ -45,6 +45,8 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     var plainDropDown: PlainDropDown!
     var selectedPlainSpinnerItemOffset: Int = 0
     var navigationButtonPressed: Bool = false
+    @IBOutlet weak var sectionInstructionsButton: UIButton!
+    var instructionsPopup: UIAlertController?
     /**
      * Map of subjects/sections & its starting point(first question index)
      */
@@ -59,6 +61,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         
         setupPauseButtonGesture()
         initializeDropDownContainerForSections()
+        setupSectionInstructionsBtn()
         
         if !firstAttemptOfLockedSectionExam {
             nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
@@ -469,9 +472,35 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 } else {
                     self.plainDropDown.setCurrentItem(index: self.currentSection)
                     self.startSection()
+                    self.setupSectionInstructionsBtn()
                 }
         })
     }
+    
+    func setupSectionInstructionsBtn(){
+        self.sectionInstructionsButton.isHidden = !isCurrentSectionHasInstructions()
+    }
+    
+    func isCurrentSectionHasInstructions() -> Bool {
+        guard currentSection < sections.count else { return false }
+        return sections[currentSection].instructions.isNotEmpty
+    }
+    
+    @IBAction func showCurrentSectionInstructions(_ sender: Any) {
+        if !isCurrentSectionHasInstructions() { return }
+        let instructions = self.sections[self.currentSection].instructions
+
+        instructionsPopup = UIAlertController(title: "Instructions", message: nil, preferredStyle: .alert)
+        instructionsPopup!.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+        
+        if let attributedString = try? NSAttributedString(data: instructions.data(using: .utf8)!,
+                                                           options: [.documentType: NSAttributedString.DocumentType.html],
+                                                           documentAttributes: nil) {
+            instructionsPopup!.setValue(attributedString, forKey: "attributedMessage")
+        }
+        present(instructionsPopup!, animated: true, completion: nil)
+    }
+    
     
     func startSection() {
         loadingDialogController.message = Strings.STARTING_SECTION
