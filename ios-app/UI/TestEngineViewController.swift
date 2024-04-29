@@ -26,7 +26,6 @@
 import DropDown
 import UIKit
 import RealmSwift
-import WebKit
 
 class TestEngineViewController: BaseQuestionsPageViewController {
     
@@ -47,7 +46,6 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     var selectedPlainSpinnerItemOffset: Int = 0
     var navigationButtonPressed: Bool = false
     @IBOutlet weak var sectionInstructionsButton: UIButton!
-    var webView: WKWebView!
     var instructionsPopup: UIAlertController?
     /**
      * Map of subjects/sections & its starting point(first question index)
@@ -64,7 +62,6 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         setupPauseButtonGesture()
         initializeDropDownContainerForSections()
         setupSectionInstructionsBtn()
-        webView = WKWebView()
         
         if !firstAttemptOfLockedSectionExam {
             nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
