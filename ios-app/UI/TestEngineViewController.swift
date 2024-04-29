@@ -491,14 +491,16 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     
     @IBAction func showCurrentSectionInstructions(_ sender: Any) {
         if !isCurrentSectionHasInstructions() { return }
-        var instructions = self.sections[self.currentSection].instructions
+        let instructions = self.sections[self.currentSection].instructions
 
         instructionsPopup = UIAlertController(title: "Instructions", message: nil, preferredStyle: .alert)
-        webView.backgroundColor = UIColor.clear
-        webView.sizeToFit()
-        webView.loadHTMLString(instructions, baseURL: Bundle.main.bundleURL)
-        instructionsPopup!.view.addSubview(webView)
         instructionsPopup!.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+        
+        if let attributedString = try? NSAttributedString(data: instructions.data(using: .utf8)!,
+                                                           options: [.documentType: NSAttributedString.DocumentType.html],
+                                                           documentAttributes: nil) {
+            instructionsPopup!.setValue(attributedString, forKey: "attributedMessage")
+        }
         present(instructionsPopup!, animated: true, completion: nil)
     }
     
