@@ -89,7 +89,7 @@
 		25985835248A77BC003591FA /* EncryptionKeyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985834248A77BC003591FA /* EncryptionKeyRepository.swift */; };
 		25985837248A77F6003591FA /* M3U8Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985836248A77F6003591FA /* M3U8Handler.swift */; };
 		259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932652A0A28C000866CA8 /* TOCropViewController.xcframework */; };
-		259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932632A0A17F200866CA8 /* Alamofire.xcframework */; };
+		259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932632A0A17F200866CA8 /* Alamofire.xcframework */; settings = {ATTRIBUTES = (Required, ); }; };
 		259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */; };
 		2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */; };
 		2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; };
@@ -2234,7 +2234,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.3.1;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2268,7 +2268,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3;
+				MARKETING_VERSION = 2.3.1;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
