@@ -728,8 +728,10 @@ class TestEngineViewController: BaseQuestionsPageViewController {
 extension TestEngineViewController: QuestionsPageViewDelegate {
     
     func questionsDidLoad() {
+        let shouldGroupAttemptItemsBasedOnSubject = exam?.IsExamUsingIBPSTemplate() == true && sections.count <= 1
+        
         var result: (spinnerItemsList: [String], groupedAttemptItems: OrderedDictionary<String, [AttemptItem]>)
-        if sections.count <= 1 && exam != nil && (exam!.templateType == 2 || unlockedSectionExam) {
+        if (shouldGroupAttemptItemsBasedOnSubject || unlockedSectionExam) {
             result = unlockedSectionExam ? groupAttemptItemsBasedOnSection() : groupAttemptItemsBasedOnSubject()
             setUpSectionsDropDown(spinnerItemsList: result.spinnerItemsList, groupedAttemptItems: result.groupedAttemptItems)
         }
