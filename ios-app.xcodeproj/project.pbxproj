@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -495,7 +495,6 @@
 		2519C12D21B0083600D26551 /* InstituteSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstituteSettings.swift; sourceTree = "<group>"; };
 		253DD67D262860B200C6D0A8 /* GapFillResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapFillResponse.swift; sourceTree = "<group>"; };
 		25489A982A0B7F43009619FD /* SwiftSoup.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftSoup.xcframework; path = Carthage/Build/SwiftSoup.xcframework; sourceTree = "<group>"; };
-		25489A9A2A0B9331009619FD /* Charts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Charts.xcframework; path = Carthage/Build/Charts.xcframework; sourceTree = "<group>"; };
 		25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IQKeyboardManagerSwift.xcframework; path = Carthage/Build/IQKeyboardManagerSwift.xcframework; sourceTree = "<group>"; };
 		25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TTGSnackbar.xcframework; path = Carthage/Build/TTGSnackbar.xcframework; sourceTree = "<group>"; };
 		25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MarqueeLabel.xcframework; path = Carthage/Build/MarqueeLabel.xcframework; sourceTree = "<group>"; };
@@ -555,7 +554,7 @@
 		2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit_Basics.xcframework; path = Carthage/Build/FBSDKCoreKit_Basics.xcframework; sourceTree = "<group>"; };
 		259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBAEMKit.xcframework; path = Carthage/Build/FBAEMKit.xcframework; sourceTree = "<group>"; };
 		259932722A0A4B9A00866CA8 /* Former.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Former.xcframework; path = Carthage/Build/Former.xcframework; sourceTree = "<group>"; };
-		259932742A0A4BB800866CA8 /* Lottie.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Lottie.xcframework; path = Carthage/Build/Lottie.xcframework; sourceTree = "<group>"; };
+		259932742A0A4BB800866CA8 /* Lottie.xcframework */ = {isa = PBXFileReference; expectedSignature = "SelfSigned:892F1B43047B50538F2F46EAD92900DD3D4811F3582178C061A5FB20F111CB26"; lastKnownFileType = wrapper.xcframework; name = Lottie.xcframework; path = Carthage/Build/Lottie.xcframework; sourceTree = "<group>"; };
 		259932762A0A4BC200866CA8 /* IGListKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IGListKit.xcframework; path = Carthage/Build/IGListKit.xcframework; sourceTree = "<group>"; };
 		259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LUExpandableTableView.xcframework; path = Carthage/Build/LUExpandableTableView.xcframework; sourceTree = "<group>"; };
 		2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Sentry.xcframework; path = Carthage/Build/Sentry.xcframework; sourceTree = "<group>"; };
@@ -571,7 +570,6 @@
 		25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSOUrl.swift; sourceTree = "<group>"; };
 		25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsPageViewController.swift; sourceTree = "<group>"; };
 		25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringArrayTransform.swift; sourceTree = "<group>"; };
-		25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8Kit.xcframework; path = Carthage/Build/M3U8Kit.xcframework; sourceTree = "<group>"; };
 		25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		25E435BD263AD94500243FD3 /* DashboardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardResponse.swift; sourceTree = "<group>"; };
 		25E435C1263AD9ED00243FD3 /* DashboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSection.swift; sourceTree = "<group>"; };
@@ -1056,7 +1054,6 @@
 			children = (
 				038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */,
 				038695FC2BF6095D00E36F8F /* DGCharts.xcframework */,
-				25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */,
 				25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */,
 				25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */,
 				25489AA62A0BBC44009619FD /* PDFReader.xcframework */,
@@ -1065,7 +1062,6 @@
 				25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */,
 				25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */,
 				25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */,
-				25489A9A2A0B9331009619FD /* Charts.xcframework */,
 				25489A982A0B7F43009619FD /* SwiftSoup.xcframework */,
 				259932802A0A616800866CA8 /* Realm.xcframework */,
 				259932812A0A616800866CA8 /* RealmSwift.xcframework */,
