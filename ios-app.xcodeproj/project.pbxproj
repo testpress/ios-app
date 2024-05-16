@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		036654CD2A3D98930005BDDF /* UIInterfaceOrientationMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
+		038695FD2BF6095D00E36F8F /* DGCharts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FC2BF6095D00E36F8F /* DGCharts.xcframework */; };
+		038695FE2BF6095D00E36F8F /* DGCharts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FC2BF6095D00E36F8F /* DGCharts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1825F5FD212E8BF900AC25E5 /* AttemptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */; };
 		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
@@ -42,7 +44,6 @@
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
 		253DD67E262860B200C6D0A8 /* GapFillResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253DD67D262860B200C6D0A8 /* GapFillResponse.swift */; };
 		25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; };
-		25489A9B2A0B9331009619FD /* Charts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9A2A0B9331009619FD /* Charts.xcframework */; };
 		25489A9D2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */; };
 		25489A9F2A0B9EEA009619FD /* TTGSnackbar.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */; };
 		25489AA12A0BAD81009619FD /* MarqueeLabel.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */; };
@@ -372,7 +373,6 @@
 		D9EDF1E42A0CF10700A6CB2E /* MarqueeLabel.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E62A0CF10700A6CB2E /* IQKeyboardManagerSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9EDF1E72A0CF10800A6CB2E /* Charts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9A2A0B9331009619FD /* Charts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E92A0CF10800A6CB2E /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932802A0A616800866CA8 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1EA2A0CF10800A6CB2E /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932812A0A616800866CA8 /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -434,7 +434,6 @@
 				D9EDF1E42A0CF10700A6CB2E /* MarqueeLabel.xcframework in Embed Frameworks */,
 				D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */,
 				D9EDF1E62A0CF10700A6CB2E /* IQKeyboardManagerSwift.xcframework in Embed Frameworks */,
-				D9EDF1E72A0CF10800A6CB2E /* Charts.xcframework in Embed Frameworks */,
 				D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */,
 				D9EDF1E92A0CF10800A6CB2E /* Realm.xcframework in Embed Frameworks */,
 				D9EDF1EA2A0CF10800A6CB2E /* RealmSwift.xcframework in Embed Frameworks */,
@@ -449,6 +448,7 @@
 				D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */,
 				D9EDF1F42A0CF10800A6CB2E /* FBSDKCoreKit.xcframework in Embed Frameworks */,
 				D9EDF1F52A0CF10800A6CB2E /* XLPagerTabStrip.xcframework in Embed Frameworks */,
+				038695FE2BF6095D00E36F8F /* DGCharts.xcframework in Embed Frameworks */,
 				D9EDF1F62A0CF10800A6CB2E /* TOCropViewController.xcframework in Embed Frameworks */,
 				D9EDF1F72A0CF10800A6CB2E /* Alamofire.xcframework in Embed Frameworks */,
 			);
@@ -460,6 +460,7 @@
 /* Begin PBXFileReference section */
 		036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInterfaceOrientationMask.swift; sourceTree = "<group>"; };
 		03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDeletionViewController.swift; sourceTree = "<group>"; };
+		038695FC2BF6095D00E36F8F /* DGCharts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DGCharts.xcframework; path = Carthage/Build/DGCharts.xcframework; sourceTree = "<group>"; };
 		1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptSection.swift; sourceTree = "<group>"; };
 		1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainDropDown.swift; sourceTree = "<group>"; };
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
@@ -852,7 +853,6 @@
 				2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */,
 				2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */,
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
-				25489A9B2A0B9331009619FD /* Charts.xcframework in Frameworks */,
 				25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
 				259932862A0A64F800866CA8 /* Realm.xcframework in Frameworks */,
@@ -867,6 +867,7 @@
 				2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */,
 				2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */,
 				259932792A0A4D1E00866CA8 /* LUExpandableTableView.xcframework in Frameworks */,
+				038695FD2BF6095D00E36F8F /* DGCharts.xcframework in Frameworks */,
 				259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */,
 				2599327F2A0A505300866CA8 /* Kingfisher.xcframework in Frameworks */,
 				25489A9F2A0B9EEA009619FD /* TTGSnackbar.xcframework in Frameworks */,
@@ -1052,6 +1053,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				038695FC2BF6095D00E36F8F /* DGCharts.xcframework */,
 				25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */,
 				25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */,
 				25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */,
