@@ -9,19 +9,19 @@
 /* Begin PBXBuildFile section */
 		036654CD2A3D98930005BDDF /* UIInterfaceOrientationMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
-		03B867CC2BEBB7FD006E79EA /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B867CB2BEBB7FD006E79EA /* MobileRTC.xcframework */; };
-		03B867CE2BEBB811006E79EA /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 03B867CD2BEBB811006E79EA /* MobileRTCResources.bundle */; };
-		03B867CF2BEBB81A006E79EA /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03B867CB2BEBB7FD006E79EA /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		038695FD2BF6095D00E36F8F /* DGCharts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FC2BF6095D00E36F8F /* DGCharts.xcframework */; };
 		038695FE2BF6095D00E36F8F /* DGCharts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FC2BF6095D00E36F8F /* DGCharts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		038696002BF6355E00E36F8F /* M3U8Parser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */; };
 		038696012BF6355E00E36F8F /* M3U8Parser.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		038696162BF65D9500E36F8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; };
 		038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		038696242BF7692900E36F8F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */; };
 		0386961C2BF7602600E36F8F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0386961B2BF7602600E36F8F /* Alamofire */; };
 		0386961F2BF762DD00E36F8F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0386961E2BF762DD00E36F8F /* IQKeyboardManagerSwift */; };
 		038696222BF7635C00E36F8F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 038696212BF7635C00E36F8F /* Kingfisher */; };
+		038696242BF7692900E36F8F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */; };
+		03B867CC2BEBB7FD006E79EA /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B867CB2BEBB7FD006E79EA /* MobileRTC.xcframework */; };
+		03B867CE2BEBB811006E79EA /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 03B867CD2BEBB811006E79EA /* MobileRTCResources.bundle */; };
+		03B867CF2BEBB81A006E79EA /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03B867CB2BEBB7FD006E79EA /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1825F5FD212E8BF900AC25E5 /* AttemptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */; };
 		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
@@ -456,11 +456,11 @@
 /* Begin PBXFileReference section */
 		036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInterfaceOrientationMask.swift; sourceTree = "<group>"; };
 		03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDeletionViewController.swift; sourceTree = "<group>"; };
-		03B867CB2BEBB7FD006E79EA /* MobileRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
-		03B867CD2BEBB811006E79EA /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 		038695FC2BF6095D00E36F8F /* DGCharts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DGCharts.xcframework; path = Carthage/Build/DGCharts.xcframework; sourceTree = "<group>"; };
 		038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8Parser.xcframework; path = Carthage/Build/M3U8Parser.xcframework; sourceTree = "<group>"; };
 		038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		03B867CB2BEBB7FD006E79EA /* MobileRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
+		03B867CD2BEBB811006E79EA /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 		1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptSection.swift; sourceTree = "<group>"; };
 		1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainDropDown.swift; sourceTree = "<group>"; };
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
@@ -2238,7 +2238,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.3.1;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2271,7 +2271,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.3.1;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
