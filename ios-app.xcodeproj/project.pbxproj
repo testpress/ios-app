@@ -15,6 +15,7 @@
 		038696012BF6355E00E36F8F /* M3U8Parser.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		038696162BF65D9500E36F8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; };
 		038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		038696242BF7692900E36F8F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */; };
 		1825F5FD212E8BF900AC25E5 /* AttemptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */; };
 		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
@@ -459,6 +460,7 @@
 		03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDeletionViewController.swift; sourceTree = "<group>"; };
 		038695FC2BF6095D00E36F8F /* DGCharts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DGCharts.xcframework; path = Carthage/Build/DGCharts.xcframework; sourceTree = "<group>"; };
 		038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8Parser.xcframework; path = Carthage/Build/M3U8Parser.xcframework; sourceTree = "<group>"; };
+		038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptSection.swift; sourceTree = "<group>"; };
 		1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainDropDown.swift; sourceTree = "<group>"; };
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
@@ -980,6 +982,7 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
+				038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
@@ -1616,6 +1619,7 @@
 				2F368C0C215DEC77000999FA /* symbol.ttf in Resources */,
 				25E435E7263ADD9100243FD3 /* LeaderboardItemViewCell.xib in Resources */,
 				2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */,
+				038696242BF7692900E36F8F /* PrivacyInfo.xcprivacy in Resources */,
 				18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */,
 				2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */,
 				2F48C7FB1FCDA957009C686C /* comments.js in Resources */,
