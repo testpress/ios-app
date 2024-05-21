@@ -129,7 +129,7 @@ class Content: DBModel {
         videoConference <- map["video_conference"]
         videoConferenceId <- (map["video_conference_id"], transform)
         liveStream <- map["live_stream"]
-        videoConferenceId <- (map["live_stream_id"], transform)
+        liveStreamId <- (map["live_stream_id"], transform)
         active <- map["active"]
         bookmarkId <- map["bookmark_id"]
         isScheduled <- map["is_scheduled"]
