@@ -6,14 +6,14 @@
 //  Copyright © 2024 Testpress. All rights reserved.
 //
 
-import Foundation
+import ObjectMapper
+import Realm
 import RealmSwift
 
-class LiveStream: Object {
-    @objc dynamic var id: Int = 0
+class LiveStream: DBModel {
     @objc dynamic var title: String = ""
     @objc dynamic var streamURL: String = ""
-    @objc dynamic var duration: Int = 0
+    @objc dynamic var duration: Int = -1
     @objc dynamic var showRecordedVideo: Bool = false
     @objc dynamic var status: String = ""
     @objc dynamic var chatEmbedURL: String = ""
@@ -22,14 +22,13 @@ class LiveStream: Object {
         return "id"
     }
     
-    convenience init(id: Int, title: String, streamURL: String, duration: Int?, showRecordedVideo: Bool, status: String, chatEmbedURL: String) {
-        self.init()
-        self.id = id
-        self.title = title
-        self.streamURL = streamURL
-        self.duration = duration ?? 0
-        self.showRecordedVideo = showRecordedVideo
-        self.status = status
-        self.chatEmbedURL = chatEmbedURL
+    public override func mapping(map: ObjectMapper.Map) {
+        title <- map["title"]
+        id <- map["id"]
+        streamURL <- map["stream_url"]
+        duration <- map["duration"]
+        showRecordedVideo <- map["show_recorded_video"]
+        status <- map["status"]
+        chatEmbedURL <- map["chat_embed_url"]
     }
 }
