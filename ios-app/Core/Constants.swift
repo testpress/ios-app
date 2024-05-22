@@ -114,6 +114,7 @@ struct Constants {
     static let VERIFY_PHONE_VIEW_CONTROLLER = "VerifyPhoneViewController"
     static let SHARE_TO_UNLOCK_VIEW_CONTROLLER = "ShareToUnlockViewController"
     static let LOGIN_ACTIVITY_VIEW_CONTROLLER = "LoginActivityViewController"
+    static let PDF_VIEW_CONTROLLER = "PDFViewController"
 
     
     static let PAGE = "page"

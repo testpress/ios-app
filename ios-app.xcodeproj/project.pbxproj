@@ -3,11 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		036654CD2A3D98930005BDDF /* UIInterfaceOrientationMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */; };
+		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
+		038695FD2BF6095D00E36F8F /* DGCharts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FC2BF6095D00E36F8F /* DGCharts.xcframework */; };
+		038695FE2BF6095D00E36F8F /* DGCharts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FC2BF6095D00E36F8F /* DGCharts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		038696002BF6355E00E36F8F /* M3U8Parser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */; };
+		038696012BF6355E00E36F8F /* M3U8Parser.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		038696162BF65D9500E36F8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; };
+		038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0386961C2BF7602600E36F8F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0386961B2BF7602600E36F8F /* Alamofire */; };
+		0386961F2BF762DD00E36F8F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0386961E2BF762DD00E36F8F /* IQKeyboardManagerSwift */; };
+		038696222BF7635C00E36F8F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 038696212BF7635C00E36F8F /* Kingfisher */; };
+		038696242BF7692900E36F8F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */; };
+		03A91DEF2BFB7E2500B9E1C6 /* LiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */; };
 		1825F5FD212E8BF900AC25E5 /* AttemptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */; };
 		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
@@ -41,8 +53,6 @@
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
 		253DD67E262860B200C6D0A8 /* GapFillResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253DD67D262860B200C6D0A8 /* GapFillResponse.swift */; };
 		25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; };
-		25489A9B2A0B9331009619FD /* Charts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9A2A0B9331009619FD /* Charts.xcframework */; };
-		25489A9D2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */; };
 		25489A9F2A0B9EEA009619FD /* TTGSnackbar.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */; };
 		25489AA12A0BAD81009619FD /* MarqueeLabel.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */; };
 		25489AA32A0BB309009619FD /* DropDown.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA22A0BB309009619FD /* DropDown.xcframework */; };
@@ -88,7 +98,6 @@
 		25985835248A77BC003591FA /* EncryptionKeyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985834248A77BC003591FA /* EncryptionKeyRepository.swift */; };
 		25985837248A77F6003591FA /* M3U8Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985836248A77F6003591FA /* M3U8Handler.swift */; };
 		259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932652A0A28C000866CA8 /* TOCropViewController.xcframework */; };
-		259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932632A0A17F200866CA8 /* Alamofire.xcframework */; };
 		259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */; };
 		2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */; };
 		2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; };
@@ -99,9 +108,6 @@
 		259932772A0A4BC300866CA8 /* IGListKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932762A0A4BC200866CA8 /* IGListKit.xcframework */; };
 		259932792A0A4D1E00866CA8 /* LUExpandableTableView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */; };
 		2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */; };
-		2599327F2A0A505300866CA8 /* Kingfisher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327E2A0A505300866CA8 /* Kingfisher.xcframework */; };
-		259932862A0A64F800866CA8 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932802A0A616800866CA8 /* Realm.xcframework */; };
-		259932872A0A64F800866CA8 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932812A0A616800866CA8 /* RealmSwift.xcframework */; };
 		259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
 		259ED9F9274E5B3100A87A71 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259ED9F8274E5B3100A87A71 /* Misc.swift */; };
 		25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */; };
@@ -111,7 +117,6 @@
 		25B4D0BF27B0F8BB0061D100 /* SSOUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */; };
 		25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
 		25DFC1682609B00700E06BA7 /* StringArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */; };
-		25E0E7022A0CB28000EE6D19 /* M3U8Kit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */; };
 		25E435BB263AD8CC00243FD3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */; };
 		25E435BE263AD94500243FD3 /* DashboardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435BD263AD94500243FD3 /* DashboardResponse.swift */; };
 		25E435C2263AD9ED00243FD3 /* DashboardSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435C1263AD9ED00243FD3 /* DashboardSection.swift */; };
@@ -357,11 +362,11 @@
 		8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */; };
 		D907E7A92B19D11C00BEA874 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = D907E7A82B19D11C00BEA874 /* Language.swift */; };
 		D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */; };
+		D9533ABE2B99CD2700E73A78 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */; };
 		D98010692B035E780071C397 /* CustomTestQuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */; };
 		D990C7EE2B316C6300B3ED4D /* AttemptAnswerTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */; };
 		D990C7F02B31731300B3ED4D /* AttemptQuestionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */; };
 		D990C7F22B31765E00B3ED4D /* DirectionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */; };
-		D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA62A0BBC44009619FD /* PDFReader.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -369,12 +374,7 @@
 		D9EDF1E32A0CF10700A6CB2E /* DropDown.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA22A0BB309009619FD /* DropDown.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E42A0CF10700A6CB2E /* MarqueeLabel.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9EDF1E62A0CF10700A6CB2E /* IQKeyboardManagerSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9EDF1E72A0CF10800A6CB2E /* Charts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9A2A0B9331009619FD /* Charts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9EDF1E92A0CF10800A6CB2E /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932802A0A616800866CA8 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9EDF1EA2A0CF10800A6CB2E /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932812A0A616800866CA8 /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9EDF1EB2A0CF10800A6CB2E /* Kingfisher.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327E2A0A505300866CA8 /* Kingfisher.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1EC2A0CF10800A6CB2E /* Sentry.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1ED2A0CF10800A6CB2E /* LUExpandableTableView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1EE2A0CF10800A6CB2E /* IGListKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932762A0A4BC200866CA8 /* IGListKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -386,7 +386,6 @@
 		D9EDF1F42A0CF10800A6CB2E /* FBSDKCoreKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F52A0CF10800A6CB2E /* XLPagerTabStrip.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F62A0CF10800A6CB2E /* TOCropViewController.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932652A0A28C000866CA8 /* TOCropViewController.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9EDF1F72A0CF10800A6CB2E /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932632A0A17F200866CA8 /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -423,7 +422,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D9EDF1DE2A0CF10700A6CB2E /* M3U8Kit.xcframework in Embed Frameworks */,
 				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
 				D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */,
 				D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */,
@@ -431,12 +429,8 @@
 				D9EDF1E32A0CF10700A6CB2E /* DropDown.xcframework in Embed Frameworks */,
 				D9EDF1E42A0CF10700A6CB2E /* MarqueeLabel.xcframework in Embed Frameworks */,
 				D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */,
-				D9EDF1E62A0CF10700A6CB2E /* IQKeyboardManagerSwift.xcframework in Embed Frameworks */,
-				D9EDF1E72A0CF10800A6CB2E /* Charts.xcframework in Embed Frameworks */,
+				038696012BF6355E00E36F8F /* M3U8Parser.xcframework in Embed Frameworks */,
 				D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */,
-				D9EDF1E92A0CF10800A6CB2E /* Realm.xcframework in Embed Frameworks */,
-				D9EDF1EA2A0CF10800A6CB2E /* RealmSwift.xcframework in Embed Frameworks */,
-				D9EDF1EB2A0CF10800A6CB2E /* Kingfisher.xcframework in Embed Frameworks */,
 				D9EDF1EC2A0CF10800A6CB2E /* Sentry.xcframework in Embed Frameworks */,
 				D9EDF1ED2A0CF10800A6CB2E /* LUExpandableTableView.xcframework in Embed Frameworks */,
 				D9EDF1EE2A0CF10800A6CB2E /* IGListKit.xcframework in Embed Frameworks */,
@@ -447,8 +441,9 @@
 				D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */,
 				D9EDF1F42A0CF10800A6CB2E /* FBSDKCoreKit.xcframework in Embed Frameworks */,
 				D9EDF1F52A0CF10800A6CB2E /* XLPagerTabStrip.xcframework in Embed Frameworks */,
+				038695FE2BF6095D00E36F8F /* DGCharts.xcframework in Embed Frameworks */,
 				D9EDF1F62A0CF10800A6CB2E /* TOCropViewController.xcframework in Embed Frameworks */,
-				D9EDF1F72A0CF10800A6CB2E /* Alamofire.xcframework in Embed Frameworks */,
+				038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +452,11 @@
 
 /* Begin PBXFileReference section */
 		036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInterfaceOrientationMask.swift; sourceTree = "<group>"; };
+		03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDeletionViewController.swift; sourceTree = "<group>"; };
+		038695FC2BF6095D00E36F8F /* DGCharts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DGCharts.xcframework; path = Carthage/Build/DGCharts.xcframework; sourceTree = "<group>"; };
+		038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8Parser.xcframework; path = Carthage/Build/M3U8Parser.xcframework; sourceTree = "<group>"; };
+		038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStream.swift; sourceTree = "<group>"; };
 		1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptSection.swift; sourceTree = "<group>"; };
 		1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainDropDown.swift; sourceTree = "<group>"; };
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
@@ -490,7 +490,6 @@
 		2519C12D21B0083600D26551 /* InstituteSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstituteSettings.swift; sourceTree = "<group>"; };
 		253DD67D262860B200C6D0A8 /* GapFillResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapFillResponse.swift; sourceTree = "<group>"; };
 		25489A982A0B7F43009619FD /* SwiftSoup.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftSoup.xcframework; path = Carthage/Build/SwiftSoup.xcframework; sourceTree = "<group>"; };
-		25489A9A2A0B9331009619FD /* Charts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Charts.xcframework; path = Carthage/Build/Charts.xcframework; sourceTree = "<group>"; };
 		25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IQKeyboardManagerSwift.xcframework; path = Carthage/Build/IQKeyboardManagerSwift.xcframework; sourceTree = "<group>"; };
 		25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TTGSnackbar.xcframework; path = Carthage/Build/TTGSnackbar.xcframework; sourceTree = "<group>"; };
 		25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MarqueeLabel.xcframework; path = Carthage/Build/MarqueeLabel.xcframework; sourceTree = "<group>"; };
@@ -545,12 +544,12 @@
 		259932632A0A17F200866CA8 /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
 		259932652A0A28C000866CA8 /* TOCropViewController.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TOCropViewController.xcframework; path = Carthage/Build/TOCropViewController.xcframework; sourceTree = "<group>"; };
 		259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = XLPagerTabStrip.xcframework; path = Carthage/Build/XLPagerTabStrip.xcframework; sourceTree = "<group>"; };
-		2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit.xcframework; path = Carthage/Build/FBSDKCoreKit.xcframework; sourceTree = "<group>"; };
-		2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKLoginKit.xcframework; path = Carthage/Build/FBSDKLoginKit.xcframework; sourceTree = "<group>"; };
-		2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit_Basics.xcframework; path = Carthage/Build/FBSDKCoreKit_Basics.xcframework; sourceTree = "<group>"; };
-		259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBAEMKit.xcframework; path = Carthage/Build/FBAEMKit.xcframework; sourceTree = "<group>"; };
+		2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:V9WTTPBFK9:Meta Platforms, Inc."; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit.xcframework; path = Carthage/Build/FBSDKCoreKit.xcframework; sourceTree = "<group>"; };
+		2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:V9WTTPBFK9:Meta Platforms, Inc."; lastKnownFileType = wrapper.xcframework; name = FBSDKLoginKit.xcframework; path = Carthage/Build/FBSDKLoginKit.xcframework; sourceTree = "<group>"; };
+		2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:V9WTTPBFK9:Meta Platforms, Inc."; lastKnownFileType = wrapper.xcframework; name = FBSDKCoreKit_Basics.xcframework; path = Carthage/Build/FBSDKCoreKit_Basics.xcframework; sourceTree = "<group>"; };
+		259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:V9WTTPBFK9:Meta Platforms, Inc."; lastKnownFileType = wrapper.xcframework; name = FBAEMKit.xcframework; path = Carthage/Build/FBAEMKit.xcframework; sourceTree = "<group>"; };
 		259932722A0A4B9A00866CA8 /* Former.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Former.xcframework; path = Carthage/Build/Former.xcframework; sourceTree = "<group>"; };
-		259932742A0A4BB800866CA8 /* Lottie.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Lottie.xcframework; path = Carthage/Build/Lottie.xcframework; sourceTree = "<group>"; };
+		259932742A0A4BB800866CA8 /* Lottie.xcframework */ = {isa = PBXFileReference; expectedSignature = "SelfSigned:892F1B43047B50538F2F46EAD92900DD3D4811F3582178C061A5FB20F111CB26"; lastKnownFileType = wrapper.xcframework; name = Lottie.xcframework; path = Carthage/Build/Lottie.xcframework; sourceTree = "<group>"; };
 		259932762A0A4BC200866CA8 /* IGListKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IGListKit.xcframework; path = Carthage/Build/IGListKit.xcframework; sourceTree = "<group>"; };
 		259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LUExpandableTableView.xcframework; path = Carthage/Build/LUExpandableTableView.xcframework; sourceTree = "<group>"; };
 		2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Sentry.xcframework; path = Carthage/Build/Sentry.xcframework; sourceTree = "<group>"; };
@@ -566,7 +565,6 @@
 		25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSOUrl.swift; sourceTree = "<group>"; };
 		25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsPageViewController.swift; sourceTree = "<group>"; };
 		25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringArrayTransform.swift; sourceTree = "<group>"; };
-		25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8Kit.xcframework; path = Carthage/Build/M3U8Kit.xcframework; sourceTree = "<group>"; };
 		25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		25E435BD263AD94500243FD3 /* DashboardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardResponse.swift; sourceTree = "<group>"; };
 		25E435C1263AD9ED00243FD3 /* DashboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSection.swift; sourceTree = "<group>"; };
@@ -817,6 +815,7 @@
 		9B482AA21F7CADEABC2BF009 /* ios_appTests-ios_appMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ios_appTests-ios_appMocks.generated.swift"; path = "MockingbirdMocks/ios_appTests-ios_appMocks.generated.swift"; sourceTree = "<group>"; };
 		D907E7A82B19D11C00BEA874 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Language.swift; path = "ios-app/Model/Language.swift"; sourceTree = SOURCE_ROOT; };
 		D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestGenerationViewController.swift; sourceTree = "<group>"; };
+		D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestQuizExamViewModel.swift; sourceTree = "<group>"; };
 		D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptAnswerTranslation.swift; sourceTree = "<group>"; };
 		D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptQuestionTranslation.swift; sourceTree = "<group>"; };
@@ -836,24 +835,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */,
+				0386961C2BF7602600E36F8F /* Alamofire in Frameworks */,
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
 				25489AA52A0BB621009619FD /* ObjectMapper.xcframework in Frameworks */,
 				25489AA32A0BB309009619FD /* DropDown.xcframework in Frameworks */,
 				25489AA12A0BAD81009619FD /* MarqueeLabel.xcframework in Frameworks */,
-				25489A9D2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework in Frameworks */,
 				259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */,
+				038696002BF6355E00E36F8F /* M3U8Parser.xcframework in Frameworks */,
 				259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */,
 				259932772A0A4BC300866CA8 /* IGListKit.xcframework in Frameworks */,
 				2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */,
 				2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */,
 				2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */,
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
-				25489A9B2A0B9331009619FD /* Charts.xcframework in Frameworks */,
 				25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
-				259932862A0A64F800866CA8 /* Realm.xcframework in Frameworks */,
-				25E0E7022A0CB28000EE6D19 /* M3U8Kit.xcframework in Frameworks */,
-				259932872A0A64F800866CA8 /* RealmSwift.xcframework in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
 				259932752A0A4BB800866CA8 /* Lottie.xcframework in Frameworks */,
 				25489AA72A0BBC44009619FD /* PDFReader.xcframework in Frameworks */,
@@ -862,10 +858,12 @@
 				25489AA92A0BC022009619FD /* SlideMenuControllerSwift.xcframework in Frameworks */,
 				2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */,
 				2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */,
+				038696222BF7635C00E36F8F /* Kingfisher in Frameworks */,
 				259932792A0A4D1E00866CA8 /* LUExpandableTableView.xcframework in Frameworks */,
-				259932672A0A2BC900866CA8 /* Alamofire.xcframework in Frameworks */,
-				2599327F2A0A505300866CA8 /* Kingfisher.xcframework in Frameworks */,
+				038695FD2BF6095D00E36F8F /* DGCharts.xcframework in Frameworks */,
+				0386961F2BF762DD00E36F8F /* IQKeyboardManagerSwift in Frameworks */,
 				25489A9F2A0B9EEA009619FD /* TTGSnackbar.xcframework in Frameworks */,
+				038696162BF65D9500E36F8F /* RealmSwift in Frameworks */,
 				259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -940,6 +938,7 @@
 			children = (
 				25E435DF263ADD4800243FD3 /* CarouselCellViews */,
 				25E435D8263ADC9200243FD3 /* SectionControllers */,
+				D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -979,6 +978,7 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
+				038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
 				254E69C221DCF199009A4E61 /* Testpress iOS AppUITests */,
@@ -1047,7 +1047,8 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				25E0E7012A0CB28000EE6D19 /* M3U8Kit.xcframework */,
+				038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */,
+				038695FC2BF6095D00E36F8F /* DGCharts.xcframework */,
 				25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */,
 				25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */,
 				25489AA62A0BBC44009619FD /* PDFReader.xcframework */,
@@ -1056,7 +1057,6 @@
 				25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */,
 				25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */,
 				25489A9C2A0B963C009619FD /* IQKeyboardManagerSwift.xcframework */,
-				25489A9A2A0B9331009619FD /* Charts.xcframework */,
 				25489A982A0B7F43009619FD /* SwiftSoup.xcframework */,
 				259932802A0A616800866CA8 /* Realm.xcframework */,
 				259932812A0A616800866CA8 /* RealmSwift.xcframework */,
@@ -1284,6 +1284,7 @@
 				25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */,
 				25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */,
 				D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */,
+				03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1345,6 +1346,7 @@
 				D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */,
 				D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */,
 				D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */,
+				03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1487,6 +1489,12 @@
 			dependencies = (
 			);
 			name = "ios-app";
+			packageProductDependencies = (
+				038696152BF65D9500E36F8F /* RealmSwift */,
+				0386961B2BF7602600E36F8F /* Alamofire */,
+				0386961E2BF762DD00E36F8F /* IQKeyboardManagerSwift */,
+				038696212BF7635C00E36F8F /* Kingfisher */,
+			);
 			productName = "ios-app";
 			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
 			productType = "com.apple.product-type.application";
@@ -1554,6 +1562,12 @@
 				Base,
 			);
 			mainGroup = 2F26ADD91E8249D70031E6F4;
+			packageReferences = (
+				038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */,
+				0386961A2BF7602600E36F8F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				0386961D2BF762DD00E36F8F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				038696202BF7635C00E36F8F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 2F26ADE31E8249D70031E6F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1607,6 +1621,7 @@
 				2F368C0C215DEC77000999FA /* symbol.ttf in Resources */,
 				25E435E7263ADD9100243FD3 /* LeaderboardItemViewCell.xib in Resources */,
 				2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */,
+				038696242BF7692900E36F8F /* PrivacyInfo.xcprivacy in Resources */,
 				18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */,
 				2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */,
 				2F48C7FB1FCDA957009C686C /* comments.js in Resources */,
@@ -1785,6 +1800,7 @@
 				2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */,
 				25705017246E48BA00E6C688 /* ListTransform.swift in Sources */,
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
+				D9533ABE2B99CD2700E73A78 /* PDFViewController.swift in Sources */,
 				258036A52743AA2400397639 /* DRMKeySessionDelegate.swift in Sources */,
 				2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */,
 				2F48C8031FCE9A37009C686C /* CommentPager.swift in Sources */,
@@ -1834,6 +1850,7 @@
 				2FC0F2FC1F863B810092BFDC /* BaseQuestionsPageViewController.swift in Sources */,
 				2FC0F2F91F863B780092BFDC /* AttemptsListViewController.swift in Sources */,
 				25F7522127FEB143000D8137 /* TimeUtils.swift in Sources */,
+				03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */,
 				2FC0F3131F863BBD0092BFDC /* FormatDate.swift in Sources */,
 				250629942265E8E900539FB2 /* LoginActivityPager.swift in Sources */,
 				2503DF50263C01E8003226AD /* CarouselSectionController.swift in Sources */,
@@ -1847,6 +1864,7 @@
 				25E435EC263ADE7500243FD3 /* DashboardSectionHeaderCell.swift in Sources */,
 				256A909E247D21F500F4E12C /* UIButton.swift in Sources */,
 				2FC0F2F41F863B280092BFDC /* Constants.swift in Sources */,
+				03A91DEF2BFB7E2500B9E1C6 /* LiveStream.swift in Sources */,
 				25E435D2263ADB5B00243FD3 /* DashboardRepository.swift in Sources */,
 				25B4D0BF27B0F8BB0061D100 /* SSOUrl.swift in Sources */,
 				2F763D0F1FBECBBC0033D495 /* Chapter.swift in Sources */,
@@ -2209,12 +2227,12 @@
 				INFOPLIST_FILE = "ios-app/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Namma KPSC";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.3.0;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2240,9 +2258,9 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Namma KPSC";
+                INFOPLIST_KEY_CFBundleDisplayName = "Namma KPSC";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2342,6 +2360,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.49.3;
+			};
+		};
+		0386961A2BF7602600E36F8F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		0386961D2BF762DD00E36F8F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.3;
+			};
+		};
+		038696202BF7635C00E36F8F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		038696152BF65D9500E36F8F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		0386961B2BF7602600E36F8F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0386961A2BF7602600E36F8F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		0386961E2BF762DD00E36F8F /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0386961D2BF762DD00E36F8F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		038696212BF7635C00E36F8F /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 038696202BF7635C00E36F8F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2F26ADDA1E8249D70031E6F4 /* Project object */;
 }
