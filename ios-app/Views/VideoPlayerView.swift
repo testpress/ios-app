@@ -8,7 +8,7 @@
 
 import UIKit
 import AVKit
-import M3U8Kit
+import M3U8Parser
 import MarqueeLabel
 
 
