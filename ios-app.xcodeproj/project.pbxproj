@@ -20,6 +20,7 @@
 		038696222BF7635C00E36F8F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 038696212BF7635C00E36F8F /* Kingfisher */; };
 		038696242BF7692900E36F8F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */; };
 		03A91DEF2BFB7E2500B9E1C6 /* LiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */; };
+		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		1825F5FD212E8BF900AC25E5 /* AttemptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */; };
 		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
@@ -457,6 +458,7 @@
 		038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8Parser.xcframework; path = Carthage/Build/M3U8Parser.xcframework; sourceTree = "<group>"; };
 		038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStream.swift; sourceTree = "<group>"; };
+		03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptSection.swift; sourceTree = "<group>"; };
 		1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainDropDown.swift; sourceTree = "<group>"; };
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
@@ -1285,6 +1287,7 @@
 				25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */,
 				D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */,
 				03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */,
+				03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1955,6 +1958,7 @@
 				D990C7F22B31765E00B3ED4D /* DirectionTranslation.swift in Sources */,
 				256A90A2247D30DA00F4E12C /* Collection.swift in Sources */,
 				2FDF9C4D20B6D01B0086245F /* Bookmark.swift in Sources */,
+				03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */,
 				2FDF9C4F20B6D40D0086245F /* BookmarksPager.swift in Sources */,
 				8CA17128238CED7F00BD42E9 /* VideoAttempt.swift in Sources */,
 				2F48C8131FD3E417009C686C /* Category.swift in Sources */,
