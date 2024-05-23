@@ -15,6 +15,7 @@ class LiveStreamContentViewController: UIViewController {
     var reloadTimer: Timer?
     
     @IBOutlet weak var playerContainer: UIView!
+    @IBOutlet weak var liveChatContainer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,15 @@ class LiveStreamContentViewController: UIViewController {
         addChild(playerViewController!)
         playerContainer.addSubview(playerViewController!.view)
         playerViewController!.view.frame = playerContainer.bounds
+    }
+    
+    func setupLiveChatView(){
+        let webViewController = WebViewController()
+        webViewController.url = content.liveStream!.chatEmbedURL
+        webViewController.displayNavbar = false
+        addChild(webViewController)
+        liveChatContainer.addSubview(webViewController.view)
+        webViewController.view.frame = liveChatContainer.bounds
     }
     
     func showNoticeView(){
