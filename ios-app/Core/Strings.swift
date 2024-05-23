@@ -189,4 +189,9 @@ struct Strings {
     static let MAX_LOGIN_EXCEEDED_ERROR_MESSAGE = "Your account has been locked as it has exceeded maximum devices it can be used."
     static let ACCOUNT_UNLOCK_INFO = "Your account will automatically get unlocked within "
     
+    static let LIVE_ENDED_TITLE = "Live Stream Finished"
+    static let LIVE_ENDED_WITH_RECORDING_DESC = "The live stream has come to an end. Stay tuned, we\'ll have the recording ready for you shortly."
+    static let LIVE_ENDED_WITHOUT_RECORDING_DESC = "The live stream has ended. See you at the next one!"
+    static let LIVE_NOT_STARTED_TITLE = "Waiting for the Live Stream"
+    static let LIVE_NOT_STARTED_DESC = "Hang tight! The live stream will kick off in a few moments."
 }
