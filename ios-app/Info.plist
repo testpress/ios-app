@@ -53,8 +53,12 @@
 	</dict>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>We will use your Bluetooth to access your Bluetooth headphones.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>This app requires access to your calendar to schedule and manage meetings.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>To take image &amp; upload in comments/forum</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires access to your contacts to allow you to invite others to meetings.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>For people to hear you during meetings, we need access to your microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
