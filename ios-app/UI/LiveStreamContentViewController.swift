@@ -13,7 +13,6 @@ class LiveStreamContentViewController: UIViewController {
     var content: Content!
     var position: Int!
     var emptyView: EmptyView!
-    var activityIndicator: UIActivityIndicatorView!
     var playerViewController: VideoPlayerViewController!
     
     @IBOutlet weak var playerContainer: UIView!
@@ -21,21 +20,8 @@ class LiveStreamContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         emptyView = EmptyView.getInstance(parentView: view)
-        setupActivityIndicator()
-        setupContentView()
-    }
-    
-    func setupActivityIndicator(){
-        activityIndicator = UIUtils.initActivityIndicator(parentView: view)
-        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
-    }
-    
-    func setupContentView(){
-        if(content.liveStream!.isRunning){
-            setupPlayerView()
-        } else {
-            setupNoticeView()
-        }
+        setupPlayerView()
+        showNoticeView()
     }
     
     func setupPlayerView(){
@@ -46,29 +32,17 @@ class LiveStreamContentViewController: UIViewController {
         playerViewController!.view.frame = playerContainer.bounds
     }
     
-    func setupNoticeView(){
+    func showNoticeView(){
         if(content.liveStream!.isEnded){
             let description = content.liveStream!.showRecordedVideo ? Strings.LIVE_ENDED_WITH_RECORDING_DESC : Strings.LIVE_ENDED_WITHOUT_RECORDING_DESC
             
-            emptyView.show(
-                image: Images.LiveStreamEnded.image,
-                title: Strings.LIVE_ENDED_TITLE,
-                description: description
-            )
-        } else {
-            emptyView.show(
-                image: Images.ScheduledContent.image,
-                title: Strings.LIVE_NOT_STARTED_TITLE,
-                description: Strings.LIVE_NOT_STARTED_DESC,
-                retryHandler: { [weak self] in
-                    self?.reloadContent()
-                }
-            )
+            self.playerViewController.showWarning(text: description)
+        } else if(content.liveStream!.isRunning) {
+            self.playerViewController.showWarning(text: Strings.LIVE_NOT_STARTED_DESC)
         }
     }
     
     func reloadContent() {
-        hideEmptyViewAndStartLoading()
         fetchContent { [weak self] content, error in
             guard let self = self else { return }
  
@@ -77,14 +51,7 @@ class LiveStreamContentViewController: UIViewController {
             } else if let content = content {
                 self.handleSuccess(content)
             }
-            
-            self.activityIndicator.stopAnimating()
         }
-    }
-
-    private func hideEmptyViewAndStartLoading() {
-        emptyView.hide()
-        activityIndicator.startAnimating()
     }
 
     private func fetchContent(completion: @escaping (Content?, TPError?) -> Void) {
@@ -109,5 +76,4 @@ class LiveStreamContentViewController: UIViewController {
     private func handleSuccess(_ content: Content) {
         self.content = content
         DBManager<Content>().addData(object: content)
-        setupContentView()
     }}
