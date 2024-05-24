@@ -14,6 +14,8 @@ class LiveStreamContentViewController: UIViewController {
     var playerViewController: VideoPlayerViewController!
     var reloadTimer: Timer?
     
+    var viewModel: ChapterContentDetailViewModel?
+    
     @IBOutlet weak var playerContainer: UIView!
     @IBOutlet weak var liveChatContainer: UIView!
     
@@ -23,6 +25,14 @@ class LiveStreamContentViewController: UIViewController {
         setupLiveChatView()
         showNoticeView()
         pollUntilLiveStreamStart()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if(content.liveStream.isRunning) {
+            viewModel?.createContentAttempt()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,6 +93,7 @@ class LiveStreamContentViewController: UIViewController {
                     self.playerViewController.hideWarning()
                     self.playerViewController.playerView.play()
                     setupLiveChatView()
+                    viewModel?.createContentAttempt()
                 }
             }
         }

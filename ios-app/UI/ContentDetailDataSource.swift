@@ -135,6 +135,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     private func createLiveStreamContentViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: Constants.LIVE_STREAM_VIEW_CONTROLLER) as! LiveStreamContentViewController
         viewController.content = content
+        viewController.viewModel = ChapterContentDetailViewModel(content, contentAttemptCreationDelegate)
         return viewController
     }
     
