@@ -60,9 +60,9 @@ class VideoPlayerViewController: UIViewController {
         warningLabel.textAlignment = .center
         warningLabel.numberOfLines = 3
         
-        warningView = UIView(frame: playerView.frame)
+        warningView = UIView(frame: view.bounds)
         warningView.backgroundColor = UIColor.black
-        warningView.center = CGPoint(x: view.center.x, y: playerView.center.y)
+        warningView.center = CGPoint(x: view.center.x, y: view.center.y)
         warningLabel.center = warningView.center
         warningView.addSubview(warningLabel)
         warningView.isHidden = true
@@ -184,7 +184,7 @@ class VideoPlayerViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        warningView.frame = playerView.frame
+        warningView.frame = view.bounds
         handleFullScreen()
     }
     
@@ -198,8 +198,9 @@ class VideoPlayerViewController: UIViewController {
             UIApplication.shared.keyWindow!.addSubview(playerView)
         }
         playerView.frame = playerFrame
-        warningView.frame = playerView.frame
+        warningLabel.center = warningView.center
         playerView.layoutIfNeeded()
+        warningView.layoutIfNeeded()
         playerView.playerLayer?.frame = playerFrame
     }
 
