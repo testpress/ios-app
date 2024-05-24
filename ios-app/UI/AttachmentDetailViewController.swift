@@ -54,7 +54,7 @@ class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelega
     var position: Int!
     var loading: Bool = false
     var bookmarkHelper: BookmarkHelper!
-    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
+    var viewModel: ChapterContentDetailViewModel?
     var animationView: LottieAnimationView!
     var moveAnimationView: LottieAnimationView!
     var removeAnimationView: LottieAnimationView!
@@ -232,32 +232,14 @@ class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelega
             pdfViewController.contentTitle = content.attachment!.title
             pdfViewController.modalPresentationStyle = .fullScreen
             present(pdfViewController, animated: true)
-            createContentAttempt()
+            viewModel?.createContentAttempt()
         }
     }
     
     @IBAction func downloadAttachment(_ sender: UIButton) {
         var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         UIApplication.shared.openURL(attachmentUrl)
-        createContentAttempt()
-    }
-    
-    func createContentAttempt() {
-        TPApiClient.request(
-            type: ContentAttempt.self,
-            endpointProvider: TPEndpointProvider(.post, url: content.attemptsUrl),
-            completion: {
-                contentAttempt, error in
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    return
-                }
-                
-                if self.content.attemptsCount == 0 {
-                    self.contentAttemptCreationDelegate?.newAttemptCreated()
-                }
-        })
+        viewModel?.createContentAttempt()
     }
     
     @IBAction func moveBookmark() {

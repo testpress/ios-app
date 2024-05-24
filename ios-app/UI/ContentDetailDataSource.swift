@@ -104,7 +104,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     private func createAttachmentViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: Constants.ATTACHMENT_DETAIL_VIEW_CONTROLLER) as! AttachmentDetailViewController
         viewController.content = content
-        viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
+        viewController.viewModel = ChapterContentDetailViewModel(content, contentAttemptCreationDelegate)
         return viewController
     }
 
@@ -124,7 +124,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     private func createHtmlContentViewController(for content: Content) -> UIViewController {
         let viewController = HtmlContentViewController()
         viewController.content = content
-        viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
+        viewController.viewModel = ChapterContentDetailViewModel(content, contentAttemptCreationDelegate)
         return viewController
     }
     
