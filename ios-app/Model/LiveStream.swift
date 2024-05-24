@@ -39,4 +39,9 @@ class LiveStream: DBModel {
     public var isRunning: Bool {
         return status == "Running"
     }
+    
+    public var isNotStarted: Bool {
+        return status == "Not Started"
+    }
+
 }
