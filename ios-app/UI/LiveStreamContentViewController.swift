@@ -20,6 +20,7 @@ class LiveStreamContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPlayerView()
+        setupLiveChatView()
         showNoticeView()
         pollUntilLiveStreamStart()
     }
@@ -38,12 +39,14 @@ class LiveStreamContentViewController: UIViewController {
     }
     
     func setupLiveChatView(){
-        let webViewController = WebViewController()
-        webViewController.url = content.liveStream!.chatEmbedURL
-        webViewController.displayNavbar = false
-        addChild(webViewController)
-        liveChatContainer.addSubview(webViewController.view)
-        webViewController.view.frame = liveChatContainer.bounds
+        guard content.liveStream!.isRunning else { return }
+        guard let request = createLiveChatEmbedURLRequest() else {
+                print("Failed to create request")
+                return
+            }
+        
+        let webViewController = createWebViewController(with: request)
+        attachLiveChat(webViewController: webViewController)
     }
     
     func showNoticeView(){
@@ -79,6 +82,7 @@ class LiveStreamContentViewController: UIViewController {
                     self.stopReloadingContent()
                     self.playerViewController.hideWarning()
                     self.playerViewController.playerView.play()
+                    setupLiveChatView()
                 }
             }
         }
@@ -90,5 +94,31 @@ class LiveStreamContentViewController: UIViewController {
             endpointProvider: TPEndpointProvider(.get, url: content.url),
             completion: completion
         )
+    }
+    
+    private func createLiveChatEmbedURLRequest() -> URLRequest? {
+        guard let chatEmbedURLString = content.liveStream?.chatEmbedURL,
+              let chatEmbedURL = URL(string: chatEmbedURLString) else {
+            print("Invalid chat embed URL")
+            return nil
+        }
+        
+        var request = URLRequest(url: chatEmbedURL)
+        request.setValue("JWT \( KeychainTokenItem.getToken())", forHTTPHeaderField: "Authorization")
+        return request
+    }
+    
+    private func createWebViewController(with request: URLRequest) -> WebViewController {
+        let webViewController = WebViewController()
+        webViewController.request = request
+        webViewController.displayNavbar = false
+        return webViewController
+    }
+
+    private func attachLiveChat(webViewController: WebViewController) {
+        addChild(webViewController)
+        liveChatContainer.addSubview(webViewController.view)
+        webViewController.view.frame = liveChatContainer.bounds
+        webViewController.didMove(toParent: self)
     }
 }
