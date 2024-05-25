@@ -42,22 +42,18 @@ class LiveStreamContentViewController: UIViewController {
     }
     
     func startReloadingContent() {
-        print("startReloadingContent 47")
         guard content.liveStream!.isNotStarted else { return }
-        print("startReloadingContent 46")
         
         reloadContent()
         reloadTimer = Timer.scheduledTimer(timeInterval: 15.0, target: self, selector: #selector(reloadContent), userInfo: nil, repeats: true)
     }
     
     func stopReloadingContent() {
-        print("stop called")
         reloadTimer?.invalidate()
         reloadTimer = nil
     }
     
     @objc func reloadContent() {
-        print("reloadContent called")
         fetchContent { [weak self] content, error in
             guard let self = self else { return }
             
