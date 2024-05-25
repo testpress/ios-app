@@ -23,6 +23,11 @@ class LiveStreamContentViewController: UIViewController {
         startReloadingContent()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopReloadingContent()
+    }
+    
     func setupPlayerView(){
         playerViewController = VideoPlayerViewController(hlsURL: content.liveStream!.streamURL, drmLicenseURL: nil)
         
