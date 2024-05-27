@@ -84,8 +84,6 @@ enum Images: String {
     case AnalyticsIcon = "analytics"
     case OffersIcon = "offers"
     case DoubtsIcon = "doubt"
-    case LiveStreamEnded = "live_stream_ended"
-    case ScheduledContent = "scheduled_content"
 
     var image: UIImage {
         return UIImage(asset: self)
