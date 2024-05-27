@@ -131,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
             SentrySDK.start { options in
                 options.dsn = instituteSettings.sentryDSN
-                options.debug = true
+                options.debug = false
             }
             
         }
