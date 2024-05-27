@@ -30,7 +30,7 @@ class LiveStreamContentViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if(content.liveStream.isRunning) {
+        if(content.liveStream!.isRunning) {
             viewModel?.createContentAttempt()
         }
     }
