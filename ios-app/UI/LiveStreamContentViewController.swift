@@ -20,7 +20,7 @@ class LiveStreamContentViewController: UIViewController {
         super.viewDidLoad()
         setupPlayerView()
         showNoticeView()
-        startReloadingContent()
+        pollUntilLiveStreamStart()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -46,7 +46,7 @@ class LiveStreamContentViewController: UIViewController {
         }
     }
     
-    func startReloadingContent() {
+    func pollUntilLiveStreamStart() {
         guard content.liveStream!.isNotStarted else { return }
         
         reloadContent()
