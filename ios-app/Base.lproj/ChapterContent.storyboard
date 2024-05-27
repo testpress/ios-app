@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -246,22 +246,22 @@
                                                     <rect key="frame" x="125" y="0.0" width="269" height="43"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAO-CF-Zhc">
-                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="19"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="39.5" height="19"/>
                                                             <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="UNo-CL-zLz">
-                                                            <rect key="frame" x="0.0" y="27" width="142.5" height="16"/>
+                                                            <rect key="frame" x="0.0" y="27" width="141.5" height="16"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="PuT-gl-XN6">
-                                                                    <rect key="frame" x="0.0" y="0.5" width="51.5" height="15"/>
+                                                                    <rect key="frame" x="0.0" y="0.5" width="50.5" height="15"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock_outline_16pt" translatesAutoresizingMaskIntoConstraints="NO" id="ee3-7V-o2U">
                                                                             <rect key="frame" x="0.0" y="0.0" width="16" height="15"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsZ-Nf-XPr">
-                                                                            <rect key="frame" x="21" y="0.5" width="30.5" height="14.5"/>
+                                                                            <rect key="frame" x="21" y="0.5" width="29.5" height="14"/>
                                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -269,19 +269,19 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fN9-zj-NV4">
-                                                                    <rect key="frame" x="71.5" y="0.0" width="71" height="16"/>
+                                                                    <rect key="frame" x="70.5" y="0.0" width="71" height="16"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="questions_outline_16pt" translatesAutoresizingMaskIntoConstraints="NO" id="zG6-Zb-LMK">
                                                                             <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1F-p0-OYl">
-                                                                            <rect key="frame" x="21" y="1" width="30.5" height="14.5"/>
+                                                                            <rect key="frame" x="21" y="1" width="29.5" height="14"/>
                                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRe-Mh-HUY">
-                                                                            <rect key="frame" x="56.5" y="1" width="14.5" height="14.5"/>
+                                                                            <rect key="frame" x="55.5" y="1" width="15.5" height="14"/>
                                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -2302,6 +2302,43 @@
             </objects>
             <point key="canvasLocation" x="4170" y="133"/>
         </scene>
+        <!--Live Stream Content View Controller-->
+        <scene sceneID="DMx-vO-GXB">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ajE-eL-MVY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="LiveStreamContentViewController" modalPresentationStyle="fullScreen" id="dP6-xa-1Pc" customClass="LiveStreamContentViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Kf-rZ-teO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2U-sI-hW7" userLabel="VideoPlayer View">
+                                <rect key="frame" x="0.0" y="48" width="414" height="269"/>
+                                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbG-Mx-Awq">
+                                <rect key="frame" x="0.0" y="317" width="414" height="545"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Mev-kt-zAI"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="r2U-sI-hW7" firstAttribute="leading" secondItem="Mev-kt-zAI" secondAttribute="leading" id="6FB-ye-2eg"/>
+                            <constraint firstItem="jbG-Mx-Awq" firstAttribute="leading" secondItem="Mev-kt-zAI" secondAttribute="leading" id="Abp-xq-dUH"/>
+                            <constraint firstItem="Mev-kt-zAI" firstAttribute="trailing" secondItem="r2U-sI-hW7" secondAttribute="trailing" id="Om3-Vw-E2W"/>
+                            <constraint firstItem="r2U-sI-hW7" firstAttribute="top" secondItem="Mev-kt-zAI" secondAttribute="top" id="Yc2-H0-c7S"/>
+                            <constraint firstItem="Mev-kt-zAI" firstAttribute="bottom" secondItem="jbG-Mx-Awq" secondAttribute="bottom" id="ehy-yO-Otn"/>
+                            <constraint firstItem="r2U-sI-hW7" firstAttribute="height" secondItem="2Kf-rZ-teO" secondAttribute="height" multiplier="0.3" id="jKT-aM-t20"/>
+                            <constraint firstItem="jbG-Mx-Awq" firstAttribute="top" secondItem="r2U-sI-hW7" secondAttribute="bottom" id="krk-un-yAs"/>
+                            <constraint firstItem="Mev-kt-zAI" firstAttribute="trailing" secondItem="jbG-Mx-Awq" secondAttribute="trailing" id="pjm-JO-cIj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="playerContainer" destination="r2U-sI-hW7" id="Nih-NI-XT7"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1260.8695652173915" y="937.5"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="gc5-34-E3A">
@@ -2336,7 +2373,7 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
