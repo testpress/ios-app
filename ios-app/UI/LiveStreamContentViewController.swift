@@ -46,6 +46,7 @@ class LiveStreamContentViewController: UIViewController {
         addChild(playerViewController!)
         playerContainer.addSubview(playerViewController!.view)
         playerViewController!.view.frame = playerContainer.bounds
+        playerViewController.playerView.isLive = true
     }
     
     func setupLiveChatView(){
