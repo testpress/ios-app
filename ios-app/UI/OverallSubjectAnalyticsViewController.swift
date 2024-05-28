@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import Charts
+import DGCharts
 import UIKit
 import XLPagerTabStrip
 
