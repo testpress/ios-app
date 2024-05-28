@@ -28,8 +28,12 @@ class VideoPlayerView: UIView {
     var watermarkLabel: MarqueeLabel?
     var contentKeySessionDelegate: DRMKeySessionDelegate!
     var videoPlayerResourceLoaderDelegate: VideoPlayerResourceLoaderDelegate!
-   
-    var isLive: Bool = false
+    var isLive: Bool = false {
+        didSet {
+            controlsContainerView.isLive = isLive
+        }
+    }
+    
     public var videoDuration: CMTime {
         guard let currentItem = player?.currentItem else {
             return .invalid
