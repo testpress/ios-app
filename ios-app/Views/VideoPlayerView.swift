@@ -29,13 +29,7 @@ class VideoPlayerView: UIView {
     var contentKeySessionDelegate: DRMKeySessionDelegate!
     var videoPlayerResourceLoaderDelegate: VideoPlayerResourceLoaderDelegate!
    
-    var isLive: Bool {
-        guard let currentItem = player?.currentItem else {
-            return false
-        }
-        return currentItem.duration.isIndefinite
-    }
-    
+    var isLive: Bool = false
     public var videoDuration: CMTime {
         guard let currentItem = player?.currentItem else {
             return .invalid
