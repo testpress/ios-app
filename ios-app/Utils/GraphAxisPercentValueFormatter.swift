@@ -23,7 +23,8 @@
 //  THE SOFTWARE.
 //
 
-import Charts
+import Foundation
+import DGCharts
 
 public class GraphAxisPercentValueFormatter: NumberFormatter {
     

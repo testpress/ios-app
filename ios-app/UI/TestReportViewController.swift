@@ -85,7 +85,7 @@ class TestReportViewController: UIViewController {
         examTitle.text = exam?.title ?? "Custom Module"
         totalQuestions.text = String(exam?.numberOfQuestions ?? attempt.totalQuestions)
         totalMarks.text = exam?.totalMarks ?? ""
-        totalTime.text = exam?.duration ?? ""
+        totalTime.text = getTotalTime()
         cutoff.text = String(exam?.passPercentage ?? 0.0)
         percentage.text = attempt.percentage
         correct.text = String(attempt!.correctCount)
@@ -144,6 +144,16 @@ class TestReportViewController: UIViewController {
             solutionButtonLayout.isHidden = true
         } else {
             solutionButtonLayout.isHidden = false
+        }
+    }
+    
+    private func getTotalTime() -> String {
+        if (exam != nil){
+            return exam?.duration ?? ""
+        } else if (attempt?.remainingTime == INFINITE_EXAM_TIME) {
+            return ""
+        } else {
+            return TimeUtils.addTimeStrings(attempt?.timeTaken, attempt?.remainingTime)
         }
     }
 
@@ -241,6 +251,9 @@ class TestReportViewController: UIViewController {
             presentingViewController?.presentingViewController as? ContentDetailPageViewController {
             
             goToContentDetailPageViewController(contentDetailPageViewController)
+        } else if isPresentedFromCustomTestViewController() {
+            
+            goToCourseListView()
         } else if exam == nil {
             presentingViewController?.dismiss(animated: true)
         } else {
@@ -248,6 +261,18 @@ class TestReportViewController: UIViewController {
         }
     }
     
+    func isPresentedFromCustomTestViewController() -> Bool {
+        let customTestViewController = self.presentingViewController as? CustomTestGenerationViewController
+        return customTestViewController != nil
+    }
+    
+    func goToCourseListView() {
+        let customTestViewController = self.presentingViewController as? CustomTestGenerationViewController
+        customTestViewController?.dismiss(animated: true, completion: {
+            customTestViewController?.onFinishLoadingWebView()
+        })
+    }
+
     func goToContentDetailPageViewController(_ contentDetailPageViewController: UIViewController) {
         let contentDetailPageViewController =
             contentDetailPageViewController as! ContentDetailPageViewController
