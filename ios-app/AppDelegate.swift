@@ -110,12 +110,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaults.synchronize() // Forces the app to update UserDefaults
         }
         
-        if (KeychainTokenItem.isExist()) {
-            let user = Sentry.User()
-            user.username = KeychainTokenItem.getAccount()
-            SentrySDK.setUser(user)
-        }
-        
         let config = Realm.Configuration(schemaVersion: 38)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
@@ -134,6 +128,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 options.debug = false
             }
             
+            if (KeychainTokenItem.isExist()) {
+                let user = Sentry.User()
+                user.username = KeychainTokenItem.getAccount()
+                SentrySDK.setUser(user)
+            }
         }
         
         window = UIWindow(frame: UIScreen.main.bounds)
