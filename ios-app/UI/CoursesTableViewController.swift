@@ -29,7 +29,9 @@ import UIKit
 class CoursesTableViewController: BaseDBTableViewController<Course> {
     
     var tags: [String] = []
-
+    @IBOutlet weak var customTestIcon: UIBarButtonItem!
+    var instituteSettings: InstituteSettings?
+    
     required init?(coder aDecoder: NSCoder) {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
         super.init(pager: CoursePager(), coder: aDecoder)
@@ -50,6 +52,18 @@ class CoursesTableViewController: BaseDBTableViewController<Course> {
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
         super.viewDidAppear(animated)
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        showOrHideCustomTestIcon()
+    }
+    
+    func showOrHideCustomTestIcon(){
+        if ((instituteSettings?.enableCustomTest ?? false)) {
+            customTestIcon.isEnabled = true
+            customTestIcon.tintColor = nil
+        } else {
+            customTestIcon.isEnabled = false
+            customTestIcon.tintColor = UIColor.clear
+        }
     }
     
     override func loadItems() {
@@ -92,8 +106,28 @@ class CoursesTableViewController: BaseDBTableViewController<Course> {
                             description: Strings.NO_COURSE_DESCRIPTION)
     }
     
-    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+    @IBAction func showCustomTestPage(_ sender: UIBarButtonItem) {
+        showCustomTestWebviewPage(self)
+    }
+    
+    func showCustomTestWebviewPage(_ viewController: UIViewController) {
+        let secondViewController = CustomTestGenerationViewController()
+        secondViewController.url = "&next=/courses/custom_test_generation/?"+constrictQueryParamForAvailableCourses()+"%26testpress_app=ios"
+        secondViewController.useWebviewNavigation = true
+        secondViewController.useSSOLogin = true
+        secondViewController.shouldOpenLinksWithinWebview = true
+        secondViewController.title = "Custom Module"
+        secondViewController.displayNavbar = true
+        secondViewController.modalPresentationStyle = .fullScreen
+        viewController.present(secondViewController, animated: true)
+    }
+    
+    func constrictQueryParamForAvailableCourses() -> String {
+        var queryParam = ""
+        for course in getItemsFromDb() {
+            queryParam += "course_id=\(course.id)%26"
+        }
+        return queryParam
     }
     
 }

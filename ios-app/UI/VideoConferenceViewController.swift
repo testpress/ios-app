@@ -33,22 +33,22 @@ class VideoConferenceViewController: UIViewController {
         let videoConference = content.videoConference!
         duration.text = String(videoConference.duration)
         startDate.text = FormatDate.format(dateString: videoConference.start, requiredFormat: "dd-MM-yyyy")
-        startTime.text = FormatDate.format(dateString: videoConference.start, requiredFormat: "hh:mm a")
+        startTime.text = FormatDate.utcToLocalTime(dateStr: FormatDate.format(dateString: videoConference.start, requiredFormat: "hh:mm ss"))
     }
     
     @IBAction func openZoomMeeting(_ sender: Any?) {
-        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
-        let viewController = storyboard.instantiateViewController(
-            withIdentifier: Constants.ZOOM_MEET_VIEW_CONTROLLER)
-            as! ZoomMeetViewController
-        viewController.accessToken = content.videoConference?.accessToken
-        viewController.meetingNumber = content.videoConference?.conferenceId
-        viewController.password = content.videoConference?.password
-        viewController.meetingTitle = content.name
-        viewController.fetchAccessToken = { completion in
-            self.fetchAccessToken(completion: completion)
-        }
-        self.present(viewController, animated: true, completion: nil)
+       let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
+       let viewController = storyboard.instantiateViewController(
+           withIdentifier: Constants.ZOOM_MEET_VIEW_CONTROLLER)
+           as! ZoomMeetViewController
+       viewController.accessToken = content.videoConference?.accessToken
+       viewController.meetingNumber = content.videoConference?.conferenceId
+       viewController.password = content.videoConference?.password
+       viewController.meetingTitle = content.name
+       viewController.fetchAccessToken = { completion in
+           self.fetchAccessToken(completion: completion)
+       }
+       self.present(viewController, animated: true, completion: nil)
     }
     
     

@@ -32,14 +32,14 @@ protocol SlidingMenuDelegate {
 
 protocol QuestionsSlidingMenuDelegate {
     func displayQuestions(currentQuestionIndex: Int)
-    func updateQuestions(_ attemptItems: [AttemptItem])
+    func updateQuestions(_ attemptItems: [AttemptItem], _ language: Language?)
 }
 
 class BaseQuestionsSlidingViewController: SlideMenuController {
     
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     
-    var exam: Exam!
+    var exam: Exam?
     var attempt: Attempt!
     var courseContent: Content!
     var contentAttempt: ContentAttempt!

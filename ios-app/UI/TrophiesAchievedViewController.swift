@@ -36,7 +36,7 @@ class TrophiesAchievedViewController: UIViewController {
     @IBOutlet weak var okayButton: UIButton!
     @IBOutlet weak var trophyImageLayout: UIView!
     
-    var exam: Exam!
+    var exam: Exam?
     var contentAttempt: ContentAttempt!
     
     override func viewDidLoad() {

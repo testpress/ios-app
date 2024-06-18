@@ -44,6 +44,7 @@ struct Strings {
     static let USERNAME_PASSWORD_NOT_MATCHED = "Username & Password didn't match. Please try again."
     
     static let NO_ITEMS_EXIST = "No items exist"
+    static let NO_CONTENTS_EXIST = "Empty Course"
     static let NO_EXAMS = "Learning can't wait"
     static let NO_AVAILABLE_EXAM = "Looks like you don't have any active exams. Contact administrator for more details."
     static let NO_UPCOMING_EXAM = "Looks like you don't have any upcoming exams."
@@ -53,7 +54,7 @@ struct Strings {
     
     static let NO_COURSES = "Learning can't wait"
     static let NO_COURSE_DESCRIPTION = "Looks like you don’t have any active courses. Kindly contact admin."
-    static let NO_CHAPTER_DESCRIPTION = "Looks like chapters not available. Check back later."
+    static let NO_CHAPTER_DESCRIPTION = "The course doesn't have any chapters or contents"
     static let NO_CONTENT_DESCRIPTION = "Looks like contents not available. Check back later."
     
     static let NO_POSTS = "Breaking news!"
@@ -187,5 +188,8 @@ struct Strings {
     static let ACCOUNT_LOCKED = "Account Locked"
     static let MAX_LOGIN_EXCEEDED_ERROR_MESSAGE = "Your account has been locked as it has exceeded maximum devices it can be used."
     static let ACCOUNT_UNLOCK_INFO = "Your account will automatically get unlocked within "
-    
+
+    static let LIVE_ENDED_WITH_RECORDING_DESC = "The live stream has come to an end. Stay tuned, we\'ll have the recording ready for you shortly."
+    static let LIVE_ENDED_WITHOUT_RECORDING_DESC = "The live stream has ended. See you at the next one!"
+    static let LIVE_NOT_STARTED_DESC = "Hang tight! The live stream will kick off in a few moments."
 }

@@ -27,7 +27,6 @@ import ObjectMapper
 import RealmSwift
 
 class AttemptQuestion: DBModel {
-    @objc dynamic var id: Int = 0
     @objc dynamic var questionHtml: String?;
     @objc dynamic var subject: String = ""
     @objc dynamic var subjectId: Int = -1
@@ -39,6 +38,7 @@ class AttemptQuestion: DBModel {
     var answers = List<AttemptAnswer>()
     var answerIds = List<Int>()
     var translationIds = List<Int>()
+    var translations = List<AttemptQuestionTranslation>()
     @objc dynamic var isCaseSensitive: Bool = false
     var questionType: QuestionType {
         get {
@@ -76,6 +76,7 @@ class AttemptQuestion: DBModel {
         newAttemptItem.answerIds = answerIds
         newAttemptItem.translationIds = translationIds
         newAttemptItem.isCaseSensitive = isCaseSensitive
+        newAttemptItem.translations = translations
         return newAttemptItem
     }
     
@@ -84,7 +85,7 @@ class AttemptQuestion: DBModel {
         return "id"
     }
 
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         id <- map["id"]
         questionHtml <- map["question_html"]
         subject <- map["subject"]
@@ -98,6 +99,7 @@ class AttemptQuestion: DBModel {
         answerIds <- map["answer_ids"]
         translationIds <- map["translation_ids"]
         isCaseSensitive <- map["is_case_sensitive"]
+        translations <- (map["translations"], ListTransform<AttemptQuestionTranslation>())
     }
     
     let transform = TransformOf<Int, Int>(fromJSON: { (value: Int?) -> Int? in
