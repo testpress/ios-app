@@ -27,7 +27,6 @@ import ObjectMapper
 
 class AttemptAnswer: DBModel {
     @objc dynamic var textHtml: String = ""
-    @objc dynamic var id: Int = 0;
     @objc dynamic var isCorrect: Bool = false
     @objc dynamic var marks: String!
 

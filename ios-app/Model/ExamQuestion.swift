@@ -9,11 +9,11 @@
 import ObjectMapper
 
 class ExamQuestion: DBModel {
-    @objc dynamic var id = 0
     @objc dynamic var marks = ""
     @objc dynamic var negativeMarks = ""
     @objc dynamic var order = -1
     @objc dynamic var examId = 8989
+    @objc dynamic var attemptId = -1
     @objc dynamic var question: AttemptQuestion? = nil
     @objc dynamic var questionId: Int = -1
     
@@ -23,6 +23,7 @@ class ExamQuestion: DBModel {
         negativeMarks <- map["negative_marks"]
         order <- map["order"]
         examId <- map["exam_id"]
+        attemptId <- map["attempt_id"]
         questionId <- map["question_id"]
     }
     
