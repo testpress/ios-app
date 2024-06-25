@@ -20,6 +20,8 @@ class VideoPlayerControlsView: UIView {
     @IBOutlet weak var slider: VideoSlider!
     @IBOutlet weak var optionsButton: UIButton!
     
+    @IBOutlet weak var liveLabelContainer: UIView!
+    
     let TIMER_DELAY = 5.0
     var durationType = VideoDurationType.remainingTime
     weak var delegate: PlayerControlDelegate?
@@ -32,6 +34,32 @@ class VideoPlayerControlsView: UIView {
             changeButtonStatus(playerStatus)
         }
     }
+    var isLive: Bool = false {
+        didSet {
+            if(isLive){
+                totalDurationLabel.isHidden = true
+                liveLabelContainer.isHidden = false
+                setupLiveLabelView()
+            }
+        }
+    }
+    
+    private let dotView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 5
+        return view
+    }()
+
+    private let liveLabel: UILabel = {
+        let label = UILabel()
+        label.text = "LIVE"
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     
     func setUp() {
@@ -40,7 +68,7 @@ class VideoPlayerControlsView: UIView {
         playerStatus = .playing
         self.addSubview(slider!)
         addGestureRecognizers()
-        
+
     }
     
     func addGestureRecognizers() {
@@ -134,6 +162,7 @@ class VideoPlayerControlsView: UIView {
         slider.isHidden = true
         optionsButton.isHidden = true
         loadingIndicator.startAnimating()
+        liveLabelContainer.isHidden = true
     }
     
     func stopLoading() {
@@ -144,9 +173,14 @@ class VideoPlayerControlsView: UIView {
             playPauseButton.isHidden = false
             currentDurationLabel.isHidden = false
             fullScreen.isHidden = false
-            totalDurationLabel.isHidden = false
             slider.isHidden = false
             optionsButton.isHidden = false
+            if isLive {
+                liveLabelContainer.isHidden = false
+            } else {
+                totalDurationLabel.isHidden = false
+            }
+            
             loadingIndicator.stopAnimating()
             loadingIndicator.isHidden = true
         }
@@ -190,6 +224,23 @@ class VideoPlayerControlsView: UIView {
         }
     }
     
+    private func setupLiveLabelView() {
+        liveLabelContainer.addSubview(dotView)
+        liveLabelContainer.addSubview(liveLabel)
+        liveLabelContainer.backgroundColor = .clear
+        
+        NSLayoutConstraint.activate([
+            dotView.widthAnchor.constraint(equalToConstant: 8),
+            dotView.heightAnchor.constraint(equalToConstant: 8),
+            dotView.leadingAnchor.constraint(equalTo: liveLabelContainer.leadingAnchor),
+            dotView.centerYAnchor.constraint(equalTo: liveLabelContainer.centerYAnchor),
+
+
+            liveLabel.leadingAnchor.constraint(equalTo: dotView.trailingAnchor, constant: 5),
+            liveLabel.centerYAnchor.constraint(equalTo: liveLabelContainer.centerYAnchor),
+            liveLabel.trailingAnchor.constraint(equalTo: liveLabelContainer.trailingAnchor)
+        ])
+    }
     
     @IBAction func playPauseClick(_ sender: Any) {
         delegate?.playOrPause()

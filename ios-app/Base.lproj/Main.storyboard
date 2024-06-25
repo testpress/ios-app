@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -765,7 +765,7 @@
             <objects>
                 <viewController storyboardIdentifier="ProfileViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="htN-nI-XSU" customClass="ProfileViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="txK-3L-7uh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="910"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="909"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTQ-Xg-ndX">
@@ -781,20 +781,25 @@
                                                 <action selector="back" destination="htN-nI-XSU" id="eQD-ar-h50"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="3c3-mK-UAy">
+                                            <connections>
+                                                <action selector="showProfileEditPage:" destination="htN-nI-XSU" id="YFf-65-TvZ"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Kk-gz-6pT">
-                                <rect key="frame" x="0.0" y="64" width="320" height="846"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="845"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="03L-kf-Ab5">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="910"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qnX-6g-mU6">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="939"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="999"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GsQ-eO-JqD">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="939"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="999"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3rh-NL-UVS">
                                                                 <rect key="frame" x="40" y="0.0" width="240" height="1"/>
@@ -1412,8 +1417,26 @@
                                                                     <action selector="onLoginButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZBT-cA-h3X"/>
                                                                 </connections>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2W-NX-cSR" userLabel="Delete account button">
+                                                                <rect key="frame" x="30" y="938" width="260" height="40"/>
+                                                                <color key="backgroundColor" red="0.91514414364529639" green="0.2427647774127335" blue="0.19791743947625828" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="P4P-df-zL5"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="16"/>
+                                                                <color key="tintColor" systemColor="systemRedColor"/>
+                                                                <state key="normal" title="DELETE ACCOUNT"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="20"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="deleteAccount:" destination="htN-nI-XSU" eventType="touchUpInside" id="Hjc-Rg-2IE"/>
+                                                                </connections>
+                                                            </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hwy-gS-ieE">
-                                                                <rect key="frame" x="40" y="938" width="240" height="1"/>
+                                                                <rect key="frame" x="40" y="998" width="240" height="1"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="1" id="E0y-m0-QGJ"/>
@@ -1423,7 +1446,8 @@
                                                         <constraints>
                                                             <constraint firstItem="vkG-IH-Ike" firstAttribute="leading" secondItem="GsQ-eO-JqD" secondAttribute="leading" id="8RJ-qi-X6w"/>
                                                             <constraint firstItem="JP9-qk-duN" firstAttribute="leading" secondItem="GsQ-eO-JqD" secondAttribute="leading" constant="30" id="8Zw-ao-Mcm"/>
-                                                            <constraint firstAttribute="trailing" secondItem="JP9-qk-duN" secondAttribute="trailing" constant="30" id="9XC-HJ-gwC"/>
+                                                            <constraint firstAttribute="trailing" secondItem="c2W-NX-cSR" secondAttribute="trailing" constant="30" id="EcB-QI-ix9"/>
+                                                            <constraint firstItem="c2W-NX-cSR" firstAttribute="leading" secondItem="GsQ-eO-JqD" secondAttribute="leading" constant="30" id="Heg-pO-Q1E"/>
                                                             <constraint firstItem="JP9-qk-duN" firstAttribute="top" secondItem="gbK-m2-8Az" secondAttribute="bottom" constant="20" id="b8m-FQ-CPv"/>
                                                             <constraint firstAttribute="trailing" secondItem="vkG-IH-Ike" secondAttribute="trailing" id="eVw-Ez-i0Y"/>
                                                         </constraints>
@@ -1462,15 +1486,16 @@
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="910"/>
+                    <size key="freeformSize" width="320" height="909"/>
                     <connections>
                         <outlet property="accuracy" destination="CGk-W6-gLq" id="9I1-ZQ-keu"/>
                         <outlet property="bookmarkButtonLayout" destination="v5l-x2-0PX" id="k4V-Id-neY"/>
                         <outlet property="contentStackView" destination="qnX-6g-mU6" id="bU9-K2-cgP"/>
                         <outlet property="contentView" destination="03L-kf-Ab5" id="pgx-je-BU5"/>
                         <outlet property="contentViewHeightConstraint" destination="75S-PP-5MT" id="4Dh-at-rNS"/>
+                        <outlet property="deleteAccountButton" destination="c2W-NX-cSR" id="WC0-qr-bX3"/>
                         <outlet property="imageView" destination="g63-qh-6PY" id="gtD-2N-Zut"/>
-                        <outlet property="logoutButton" destination="JP9-qk-duN" id="Qah-kV-FiN"/>
+                        <outlet property="logoutButton" destination="JP9-qk-duN" id="XuD-I4-pkA"/>
                         <outlet property="score" destination="vOW-e0-vcm" id="hQQ-zO-s8k"/>
                         <outlet property="scrollView" destination="1Kk-gz-6pT" id="m6Q-xw-ona"/>
                         <outlet property="shareButtonView" destination="Bo3-CJ-FOp" id="NlG-9f-BCK"/>
@@ -3023,10 +3048,13 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

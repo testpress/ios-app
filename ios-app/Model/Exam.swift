@@ -152,4 +152,8 @@ class Exam: DBModel {
     func hasMultipleLanguages() -> Bool {
         return languages.count > 1
     }
+    
+    func IsExamUsingIBPSTemplate() -> Bool{
+        return templateType == 2
+    }
 }
