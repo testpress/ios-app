@@ -31,6 +31,10 @@
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>733962776688753</string>
+	<key>FacebookClientToken</key>
+	<string>22e1f6d1ae335d6aa0ea63d98fc420d6</string>
+	<key>FacebookDisplayName</key>
+	<string>Testpress</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -47,8 +51,12 @@
 	</dict>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>We will use your Bluetooth to access your Bluetooth headphones.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app requires access to your calendar to schedule and manage meetings.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>To take image &amp; upload in comments/forum</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires access to your contacts to allow you to invite others to meetings.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>For people to hear you during meetings, we need access to your microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -85,6 +93,8 @@
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>FacebookAutoLogAppEventsEnabled</key>
 	<false/>
 </dict>
 </plist>

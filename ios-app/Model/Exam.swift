@@ -24,10 +24,10 @@
 //
 
 import ObjectMapper
+import RealmSwift
 
 class Exam: DBModel {
     @objc dynamic var url: String = "";
-    @objc dynamic var id = 0;
     @objc dynamic var title: String = "";
     @objc dynamic var examDescription: String = "";
     @objc dynamic var startDate: String = "";
@@ -61,13 +61,17 @@ class Exam: DBModel {
     @objc dynamic var studentsAttemptedCount: Int = 0
     @objc dynamic var isGrowthHackEnabled: Bool = false;
     @objc dynamic var shareTextForSolutionUnlock: String = "";
+    @objc dynamic var showAnalytics: Bool = false
+    @objc dynamic var enableQuizMode: Bool = false;
+    @objc dynamic var selectedLanguage: Language?
+    var languages = List<Language>()
     
     override public static func primaryKey() -> String? {
         return "id"
     }
 
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         title <- map["title"]
@@ -103,6 +107,10 @@ class Exam: DBModel {
         isGrowthHackEnabled <- map["is_growth_hack_enabled"]
         shareTextForSolutionUnlock <- map["share_text_for_solution_unlock"]
         examDescription <- map["description"]
+        showAnalytics <- map["show_analytics"]
+        enableQuizMode <- map["enable_quiz_mode"]
+        selectedLanguage <- map["selected_language"]
+        languages <- (map["languages"], ListTransform<Language>())
     }
     
     func hasStarted() -> Bool {
@@ -139,5 +147,13 @@ class Exam: DBModel {
     
     func getQuestionsURL() -> String {
         return Constants.BASE_URL + "/api/v2.4/exams/\(id)/questions/"
+    }
+    
+    func hasMultipleLanguages() -> Bool {
+        return languages.count > 1
+    }
+    
+    func IsExamUsingIBPSTemplate() -> Bool{
+        return templateType == 2
     }
 }

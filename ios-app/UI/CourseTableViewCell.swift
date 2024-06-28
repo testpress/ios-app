@@ -85,25 +85,14 @@ class CourseTableViewCell: UITableViewCell {
             webViewController.title = course.title
             parentViewController.present(webViewController, animated: true, completion: nil)
         } else {
-            if course.chaptersCount > 0 {
-                let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
-                    Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
-                
-                chaptersViewController.courseId = course.id
-                chaptersViewController.coursesUrl = course.url
-                chaptersViewController.title = course.title
-                viewController = chaptersViewController
-            } else {
-                let contentsNavigationController = storyboard.instantiateViewController(withIdentifier:
-                    Constants.CONTENTS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
-                
-                let contentViewController = contentsNavigationController.viewControllers.first
-                    as! ContentsTableViewController
-                
-                contentViewController.contentsUrl = course.contentsUrl
-                contentViewController.title = course.title
-                viewController = contentsNavigationController
-            }
+            let chaptersViewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
+
+            chaptersViewController.courseId = course.id
+            chaptersViewController.coursesUrl = course.url
+            chaptersViewController.title = course.title
+            chaptersViewController.allowCustomTestGeneration = course.allowCustomTestGeneration
+            viewController = chaptersViewController
             parentViewController.present(viewController, animated: true, completion: nil)
         }
     }
