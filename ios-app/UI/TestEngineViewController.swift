@@ -45,6 +45,8 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     var plainDropDown: PlainDropDown!
     var selectedPlainSpinnerItemOffset: Int = 0
     var navigationButtonPressed: Bool = false
+    @IBOutlet weak var sectionInstructionsButton: UIButton!
+    var instructionsPopup: UIAlertController?
     /**
      * Map of subjects/sections & its starting point(first question index)
      */
@@ -57,13 +59,92 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         questionsPageViewDelegate = self
         nextButton.setTitle("NEXT", for: .normal)
         
+        setupPauseButtonGesture()
+        initializeDropDownContainerForSections()
+        setupSectionInstructionsBtn()
+        
+        if !firstAttemptOfLockedSectionExam {
+            nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
+            nextButton.setTitle("END", for: .disabled)
+        }
+
+        showOrHideTimer()
+    }
+    
+    private func setupPauseButtonGesture() {
         let pauseButtonGesture = UITapGestureRecognizer(target: self, action:
             #selector(self.onPressPauseButton(sender:)))
         parentSlidingViewController.pauseButtonLayout.addGestureRecognizer(pauseButtonGesture)
         
+        let languageFilterGesture = UITapGestureRecognizer(target: self, action:
+            #selector(self.showLanguages(sender:)))
+        parentSlidingViewController.languagefilter.addGestureRecognizer(languageFilterGesture)
+    }
+    
+    @objc func showLanguages(sender: UITapGestureRecognizer) {
+        let actionSheet = UIAlertController(title: "Select Language", message: nil, preferredStyle: .actionSheet)
+
+        let languageOptions = self.getLanguageOptions()
+        languageOptions.forEach { actionSheet.addAction($0) }
+
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = sender.view
+            popoverController.permittedArrowDirections = [.up, .down]
+        }
+
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func getLanguageOptions() -> [UIAlertAction] {
+        if let exam = self.exam {
+            return exam.languages.map { language in
+                let action = UIAlertAction(title: language.title, style: .default) { _ in
+                    self.updateLanguage(language)
+                }
+                if language.code == self.exam?.selectedLanguage?.code {
+                    let checkmarkImage = UIImage(named: "testpress_check_mark")
+                    action.setValue(checkmarkImage, forKey: "image")
+                }
+                return action
+            } + [UIAlertAction(title: "Cancel", style: .cancel, handler: nil)]
+        }
+        return [UIAlertAction(title: "Cancel", style: .cancel, handler: nil)]
+    }
+    
+    func updateLanguage(_ language: Language) {
+        if self.exam?.selectedLanguage?.code == language.code {
+            return
+        }
+        setSelectedLanguage(language)
+        baseQuestionsDataSource.setLanguage(language)
+        parentSlidingViewController.questionListViewController?.setLanguage(language)
+        setCurrentQuestion(index: getCurrentIndex())
+    }
+    
+    private func setSelectedLanguage(_ language: Language) {
+        try! Realm().write {
+            self.exam?.selectedLanguage = language
+        }
+    }
+    
+    private func initializeDropDownContainerForSections() {
+        hideDropdownContainer()
+        checkExamHasLockedSection()
+        setupSectionsDropDown()
+    }
+    
+    private func showOrHideTimer(){
+        if(exam == nil && attempt?.remainingTime == DEFAULT_EXAM_TIME) {
+            parentSlidingViewController.remainingTimeLabel.isHidden = true
+        }
+    }
+    
+    private func hideDropdownContainer() {
         dropdownContainerHeight.constant = 0
         dropdownContainer.isHidden = true
-        
+    }
+    
+    private func checkExamHasLockedSection() {
         sections = Array(attempt.sections)
         if sections.count > 1 {
             for i in 0 ..< sections.count {
@@ -76,52 +157,63 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             }
             lockedSectionExam = !unlockedSectionExam;
         }
-        
+    }
+    
+    private func setupSectionsDropDown() {
         if lockedSectionExam {
-            plainDropDown = PlainDropDown(containerView: dropdownContainer)
-            plainDropDown.dropDown.selectionBackgroundColor = UIColor.clear
-            plainDropDown.dropDown.cellNib =
-                UINib(nibName: "LockableSectionDropDownCell", bundle: nil)
-            
-            plainDropDown.dropDown.customCellConfiguration = {
-                (index: Index, item: String, cell: DropDownCell) -> Void in
-                
-                let cell = cell as! LockableSectionDropDownCell
-                let selectedItemIndex = self.plainDropDown.dropDown.indexForSelectedRow
-                cell.initCell(index: index, sectionName: item, selectedItem: selectedItemIndex!)
-            }
-            for section in sections {
-                plainDropDown.items.append(section.name)
-            }
-            plainDropDown.addItems(items: plainDropDown.items)
-            plainDropDown.setCurrentItem(index: currentSection)
-            dropdownContainerHeight.constant =
-                TestEngineViewController.DROP_DOWN_CONTAINER_HEIGHT
-            
-            dropdownContainer.isHidden = false
-            plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
-                if index == self.currentSection {
-                    return
-                }
-                self.onSwitchLockedSection(index: index)
-            }
-            firstAttemptOfLockedSectionExam =
-                (courseContent != nil && courseContent.attemptsCount <= 1) ||
-                (courseContent == nil && (exam.attemptsCount == 0 ||
-                    (exam.attemptsCount == 1 && exam.pausedAttemptsCount == 1)))
+            setUpDropDownForLockedSections()
         } else {
-            if exam.templateType == 2 || unlockedSectionExam {
-                plainDropDown = PlainDropDown(containerView: dropdownContainer)
-                plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
-                    self.plainDropDown.titleButton.setTitle(item, for: .normal)
-                    self.selectedPlainSpinnerItemOffset = self.plainSpinnerItemOffsets[item]!
-                    self.setCurrentQuestion(index: self.plainSpinnerItemOffsets[item]!)
-                }
-            }
+            setUpDropDownForSections()
         }
-        if !firstAttemptOfLockedSectionExam {
-            nextButton.setTitleColor(Colors.getRGB(Colors.MATERIAL_RED), for: .disabled)
-            nextButton.setTitle("END", for: .disabled)
+    }
+    
+    private func setUpDropDownForLockedSections() {
+        plainDropDown = PlainDropDown(containerView: dropdownContainer)
+        plainDropDown.dropDown.selectionBackgroundColor = UIColor.clear
+        plainDropDown.dropDown.cellNib =
+        UINib(nibName: "LockableSectionDropDownCell", bundle: nil)
+        
+        plainDropDown.dropDown.customCellConfiguration = {
+            (index: Index, item: String, cell: DropDownCell) -> Void in
+            
+            let cell = cell as! LockableSectionDropDownCell
+            let selectedItemIndex = self.plainDropDown.dropDown.indexForSelectedRow
+            cell.initCell(index: index, sectionName: item, selectedItem: selectedItemIndex!)
+        }
+        for section in sections {
+            plainDropDown.items.append(section.name)
+        }
+        plainDropDown.addItems(items: plainDropDown.items)
+        plainDropDown.setCurrentItem(index: currentSection)
+        dropdownContainerHeight.constant =
+        TestEngineViewController.DROP_DOWN_CONTAINER_HEIGHT
+        
+        dropdownContainer.isHidden = false
+        plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
+            if index == self.currentSection {
+                return
+            }
+            self.onSwitchLockedSection(index: index)
+        }
+        firstAttemptOfLockedSectionExam = isFirstCourseContentAttempt() || isFirstExamAttempt()
+    }
+
+    private func isFirstCourseContentAttempt() -> (Bool) {
+        return (courseContent != nil && courseContent.attemptsCount <= 1)
+    }
+    
+    private func isFirstExamAttempt() -> (Bool) {
+        return (courseContent == nil && (exam!.attemptsCount == 0 || (exam!.attemptsCount == 1 && exam!.pausedAttemptsCount == 1)))
+    }
+    
+    private func setUpDropDownForSections() {
+        if exam != nil && (exam!.templateType == 2 || unlockedSectionExam) {
+            plainDropDown = PlainDropDown(containerView: dropdownContainer)
+            plainDropDown.dropDown.selectionAction = { (index: Int, item: String) in
+                self.plainDropDown.titleButton.setTitle(item, for: .normal)
+                self.selectedPlainSpinnerItemOffset = self.plainSpinnerItemOffsets[item]!
+                self.setCurrentQuestion(index: self.plainSpinnerItemOffsets[item]!)
+            }
         }
     }
     
@@ -180,7 +272,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     override func getQuestionsDataSource() -> BaseQuestionsDataSource {
-        return QuestionsControllerSource(attemptItems)
+        return QuestionsControllerSource(attemptItems, exam?.selectedLanguage)
     }
     
     override func getQuestionsUrl() -> String {
@@ -265,6 +357,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             completion: {
                 attempt, error in
                 if let error = error {
+                    error.logErrorToSentry()
                     self.loadingDialogController.message = Strings.PLEASE_WAIT + "\n\n"
                     self.showAlert(error: error, retryHandler: { self.sendHeartBeat() })
                     return
@@ -298,6 +391,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                             self.showMaxQuestionsAttemptedError(error: error)
                             self.setCurrentQuestion(index: index)
                         } else {
+                            error.logErrorToSentry()
                             self.showAlert(error: error, retryHandler: {
                                 self.saveAnswer(index: index, completionHandler: completionHandler)
                             })
@@ -365,6 +459,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             completion: {
                 attemptSection, error in
                 if let error = error {
+                    error.logErrorToSentry()
                     self.showAlert(
                         error: error,
                         message: Strings.EXAM_PAUSED_CHECK_INTERNET_TO_END,
@@ -380,9 +475,35 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 } else {
                     self.plainDropDown.setCurrentItem(index: self.currentSection)
                     self.startSection()
+                    self.setupSectionInstructionsBtn()
                 }
         })
     }
+    
+    func setupSectionInstructionsBtn(){
+        self.sectionInstructionsButton.isHidden = !isCurrentSectionHasInstructions()
+    }
+    
+    func isCurrentSectionHasInstructions() -> Bool {
+        guard currentSection < sections.count else { return false }
+        return sections[currentSection].instructions.isNotEmpty
+    }
+    
+    @IBAction func showCurrentSectionInstructions(_ sender: Any) {
+        if !isCurrentSectionHasInstructions() { return }
+        let instructions = self.sections[self.currentSection].instructions
+
+        instructionsPopup = UIAlertController(title: "Instructions", message: nil, preferredStyle: .alert)
+        instructionsPopup!.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+        
+        if let attributedString = try? NSAttributedString(data: instructions.data(using: .utf8)!,
+                                                           options: [.documentType: NSAttributedString.DocumentType.html],
+                                                           documentAttributes: nil) {
+            instructionsPopup!.setValue(attributedString, forKey: "attributedMessage")
+        }
+        present(instructionsPopup!, animated: true, completion: nil)
+    }
+    
     
     func startSection() {
         loadingDialogController.message = Strings.STARTING_SECTION
@@ -392,6 +513,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             completion: {
                 attemptSection, error in
                 if let error = error {
+                    error.logErrorToSentry()
                     self.showAlert(error: error, retryHandler: { self.startSection() })
                     return
                 }
@@ -436,6 +558,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             completion: {
                 attempt, error in
                 if let error = error {
+                    error.logErrorToSentry()
                     self.showAlert(
                         error: error,
                         message: Strings.EXAM_PAUSED_CHECK_INTERNET_TO_END,
@@ -466,6 +589,10 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     @objc func onPressPauseButton(sender: UITapGestureRecognizer) {
+        if exam == nil {
+            showEndExamDialog()
+            return
+        }
         alertDialog = UIAlertController(title: Strings.EXIT_EXAM,
                                       message: Strings.PAUSE_MESSAGE,
                                       preferredStyle: .alert)
@@ -498,6 +625,10 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func onPressStopButton() {
+        if exam == nil {
+            showEndExamDialog()
+            return
+        }
         alertDialog = UIAlertController(
             title: Strings.EXIT_EXAM,
             message: Strings.END_MESSAGE,
@@ -527,6 +658,25 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 }
             ))
         }
+        alertDialog.addAction(UIAlertAction(
+            title: Strings.CANCEL,
+            style: UIAlertAction.Style.cancel
+        ))
+        present(alertDialog, animated: true, completion: nil)
+    }
+
+    func showEndExamDialog() {
+        alertDialog = UIAlertController(
+            title: Strings.EXIT_EXAM,
+            message: "Are you sure? Want to end the exam",
+            preferredStyle: UIUtils.getActionSheetStyle()
+        )
+        alertDialog.addAction(UIAlertAction(
+            title: Strings.END, style: UIAlertAction.Style.destructive,
+            handler: { (action: UIAlertAction!) in
+                self.onClickEnd()
+            }
+        ))
         alertDialog.addAction(UIAlertAction(
             title: Strings.CANCEL,
             style: UIAlertAction.Style.cancel
@@ -583,74 +733,82 @@ class TestEngineViewController: BaseQuestionsPageViewController {
 extension TestEngineViewController: QuestionsPageViewDelegate {
     
     func questionsDidLoad() {
-        if sections.count <= 1 && exam.templateType == 2 || unlockedSectionExam {
-            // Used to get items in order as it fetched
-            var spinnerItemsList = [String]()
-            var groupedAttemptItems = OrderedDictionary<String, [AttemptItem]>()
-            for attemptItem in attemptItems {
-                if unlockedSectionExam {
-                    let section = attemptItem.attemptSection!.name
-                    groupAttemptItems(
-                        spinnerItem: section,
-                        attemptItem: attemptItem,
-                        spinnerItemsList: &spinnerItemsList,
-                        groupedAttemptItems: &groupedAttemptItems
-                    )
-                } else {
-                    let subject = attemptItem.question.subject
-                    if subject.isEmpty {
-                        try! Realm().write {
-                            // If subject is empty, subject = "Uncategorized"
-                            attemptItem.question.subject = Constants.UNCATEGORIZED
-                        }
-                    }
-                    groupAttemptItems(
-                        spinnerItem: subject,
-                        attemptItem: attemptItem,
-                        spinnerItemsList: &spinnerItemsList,
-                        groupedAttemptItems: &groupedAttemptItems
-                    )
-                }
-            }
-            if spinnerItemsList.count > 1 {
-                // Clear the previous data stored while loading which might be unordered
-                attemptItems = []
-                // Store each set of items to attemptItemList
-                for spinnerItem in spinnerItemsList {
-                    // Add spinner item & it starting point
-                    plainSpinnerItemOffsets[spinnerItem] = attemptItems.count
-                    attemptItems.append(contentsOf: groupedAttemptItems[spinnerItem]!)
-                }
-                plainDropDown.addItems(items: spinnerItemsList)
-                dropdownContainerHeight.constant =
-                    TestEngineViewController.DROP_DOWN_CONTAINER_HEIGHT
-                
-                dropdownContainer.isHidden = false
-                selectedPlainSpinnerItemOffset = 0
-                plainDropDown.setCurrentItem(index: 0)
-            }
+        let shouldGroupAttemptItemsBasedOnSubject = exam?.IsExamUsingIBPSTemplate() == true && sections.count <= 1
+        
+        var result: (spinnerItemsList: [String], groupedAttemptItems: OrderedDictionary<String, [AttemptItem]>)
+        if (shouldGroupAttemptItemsBasedOnSubject || unlockedSectionExam) {
+            result = unlockedSectionExam ? groupAttemptItemsBasedOnSection() : groupAttemptItemsBasedOnSubject()
+            setUpSectionsDropDown(spinnerItemsList: result.spinnerItemsList, groupedAttemptItems: result.groupedAttemptItems)
         }
         
-        remainingTime = getSecondsFromInputString(attempt.remainingTime)
-        if lockedSectionExam {
-            remainingTime = getSecondsFromInputString(sections[currentSection].remainingTime)
-        }
+        setRemainingTime()
         startTimer()
     }
     
-    func groupAttemptItems(spinnerItem: String,
-                           attemptItem: AttemptItem,
-                           spinnerItemsList: inout [String],
-                           groupedAttemptItems: inout OrderedDictionary<String, [AttemptItem]>) {
+    
+    func groupAttemptItemsBasedOnSection() -> (spinnerItemsList: [String], groupedAttemptItems: OrderedDictionary<String, [AttemptItem]>) {
+        var spinnerItemsList = [String]()
+        var groupedAttemptItems = OrderedDictionary<String, [AttemptItem]>()
         
-        if groupedAttemptItems.keys.contains(spinnerItem) {
-            // Check spinnerItem is already added if added simply add the item it
-            groupedAttemptItems[spinnerItem]!.append(attemptItem)
-        } else {
-            // Add the spinnerItem & then add item to it
-            groupedAttemptItems[spinnerItem] = [AttemptItem]()
-            groupedAttemptItems[spinnerItem]!.append(attemptItem)
-            spinnerItemsList.append(spinnerItem)
+        for attemptItem in attemptItems {
+            let section = attemptItem.attemptSection!.name
+            if groupedAttemptItems.keys.contains(section) {
+                groupedAttemptItems[section]!.append(attemptItem)
+            } else {
+                groupedAttemptItems[section] = [attemptItem]
+                spinnerItemsList.append(section)
+            }
+        }
+
+        return (spinnerItemsList, groupedAttemptItems)
+    }
+
+    func groupAttemptItemsBasedOnSubject() -> (spinnerItemsList: [String], groupedAttemptItems: OrderedDictionary<String, [AttemptItem]>) {
+        var spinnerItemsList = [String]()
+        var groupedAttemptItems = OrderedDictionary<String, [AttemptItem]>()
+        
+        for attemptItem in attemptItems {
+            let subject = attemptItem.question.subject                    
+            if subject.isEmpty {
+                try! Realm().write {
+                    attemptItem.question.subject = Constants.UNCATEGORIZED
+                }
+            }
+            if groupedAttemptItems.keys.contains(subject) {
+                groupedAttemptItems[subject]!.append(attemptItem)
+            } else {
+                groupedAttemptItems[subject] = [attemptItem]
+                spinnerItemsList.append(subject)
+            }
+        }
+
+        return (spinnerItemsList, groupedAttemptItems)
+    }
+    
+    func setUpSectionsDropDown(spinnerItemsList: [String], groupedAttemptItems: OrderedDictionary<String, [AttemptItem]>) {
+        guard spinnerItemsList.count > 1 else { return }
+        
+        // Clear the previous data stored while loading which might be unordered
+        attemptItems = []
+        
+        // Store each set of items to attemptItemList
+        for spinnerItem in spinnerItemsList {
+            // Add spinner item & its starting point
+            plainSpinnerItemOffsets[spinnerItem] = attemptItems.count
+            attemptItems.append(contentsOf: groupedAttemptItems[spinnerItem]!)
+        }
+        
+        plainDropDown.addItems(items: spinnerItemsList)
+        dropdownContainerHeight.constant = TestEngineViewController.DROP_DOWN_CONTAINER_HEIGHT
+        dropdownContainer.isHidden = false
+        selectedPlainSpinnerItemOffset = 0
+        plainDropDown.setCurrentItem(index: 0)
+    }
+    
+    func setRemainingTime(){
+        remainingTime = getSecondsFromInputString(attempt.remainingTime)
+        if lockedSectionExam {
+            remainingTime = getSecondsFromInputString(sections[currentSection].remainingTime)
         }
     }
     

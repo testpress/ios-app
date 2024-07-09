@@ -78,6 +78,7 @@ struct Constants {
     static let QUIZ_EXAM_VIEW_CONTROLLER = "QuizExamViewController"
     static let QUIZ_QUESTION_VIEW_CONTROLLER = "QuizQuestionViewController"
     static let QUIZ_QUESTIONS_PAGE_VIEW_CONTROLLER = "QuizQuestionsPageViewController"
+    static let LIVE_STREAM_VIEW_CONTROLLER = "LiveStreamContentViewController"
     
     static let CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER = "ContentExamAttemptsTableViewController"
     static let POST_TABLE_VIEW_CELL = "PostTableViewCell"
@@ -115,6 +116,7 @@ struct Constants {
     static let VERIFY_PHONE_VIEW_CONTROLLER = "VerifyPhoneViewController"
     static let SHARE_TO_UNLOCK_VIEW_CONTROLLER = "ShareToUnlockViewController"
     static let LOGIN_ACTIVITY_VIEW_CONTROLLER = "LoginActivityViewController"
+    static let PDF_VIEW_CONTROLLER = "PDFViewController"
 
     
     static let PAGE = "page"
