@@ -35,7 +35,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     
     private var selectedOptions: [Int] = []
     private var gapFilledResponse: [Int: AnyObject] = [:]
-
+    
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
@@ -45,7 +45,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         
         webView = WKWebView( frame: self.containerView!.bounds, configuration: config)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,10 +64,10 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             }
             attemptItem.localEssayText = attemptItem.essayText
         }
-
+        
         indexView!.text = String("\((attemptItem?.index)! + 1)")
         webView.loadHTMLString(WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader()
-            + getQuestionHtml(), baseURL: Bundle.main.bundleURL)
+                               + getQuestionHtml(), baseURL: Bundle.main.bundleURL)
     }
     
     func userContentController(_ userContentController: WKUserContentController,
@@ -118,7 +118,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             let optionType: String = (attemptItem?.question?.type)!
             if optionType == "R" {
                 javascript +=
-                    WebViewUtils.getRadioButtonInitializer(selectedOption: selectedAnswers[0])
+                WebViewUtils.getRadioButtonInitializer(selectedOption: selectedAnswers[0])
             } else {
                 javascript += WebViewUtils.getCheckBoxInitializer(selectedOptions: selectedAnswers)
             }
@@ -159,15 +159,15 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             !(attemptQuestion.direction!.isEmpty)) {
             
             htmlContent += "" +
-                "<div class='question' style='padding-bottom: 0px;'>" +
+            "<div class='question' style='padding-bottom: 0px;'>" +
             attemptQuestion.getLanguageBasedDirection(self.language) +
             "</div>";
         }
         
         // Add question
         htmlContent += "" +
-            "<div class='question' style='padding-bottom: 0px;'>" +
-            attemptQuestion.getLanguageBasedQuestion(self.language) +
+        "<div class='question' style='padding-bottom: 0px;'>" +
+        attemptQuestion.getLanguageBasedQuestion(self.language) +
         "</div>";
         
         if attemptQuestion.type == "R" || attemptQuestion.type == "C" {
@@ -186,17 +186,17 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             htmlContent += "</table>"
         } else if (attemptQuestion.type == "E") {
             htmlContent += getEssayQuestionHtml()
-
+            
         } else if (attemptQuestion.type == "G") {
             htmlContent = getGapFilledQuestionHtml(htmlContent)
         } else {
             let inputType = attemptQuestion.type == "N" ? "number" : "text"
             let value =
-                attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
+            attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
             
             htmlContent += "<input class='edit_box' type='\(inputType)' value='\(value)' " +
-                "onpaste='return false' oninput='onValueChange(this)' " +
-                "placeholder='YOUR ANSWER'>"
+            "onpaste='return false' oninput='onValueChange(this)' " +
+            "placeholder='YOUR ANSWER'>"
         }
         return htmlContent + "</div>";
     }
