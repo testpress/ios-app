@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     var activityIndicator: UIActivityIndicatorView!
     var emptyView: EmptyView!
+    var blurEffectView: UIVisualEffectView?
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -110,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaults.synchronize() // Forces the app to update UserDefaults
         }
         
-        let config = Realm.Configuration(schemaVersion: 39)
+        let config = Realm.Configuration(schemaVersion: 40)
         Realm.Configuration.defaultConfiguration = config
         let viewController:UIViewController
         
@@ -132,6 +133,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 let user = Sentry.User()
                 user.username = KeychainTokenItem.getAccount()
                 SentrySDK.setUser(user)
+            }
+            
+            if(!instituteSettings.AllowScreenShotInApp){
+                NotificationCenter.default.addObserver(self, selector: #selector(screenRecordingChanged), name: UIScreen.capturedDidChangeNotification, object: nil)
             }
         }
         
@@ -281,7 +286,55 @@ extension AppDelegate {
         completionHandler()
     }
     
-    
+    @objc func screenRecordingChanged() {
+        if UIScreen.main.isCaptured {
+            addBlurView(withMessage: "Screen recording is not allowed.")
+        } else {
+            removeBlurView()
+        }
+    }
+
+    func addBlurView(withMessage message: String) {
+        guard blurEffectView == nil else { return }
+        
+        blurEffectView = createBlurEffectView()
+        let warningLabel = createWarningLabel(withMessage: message)
+        
+        blurEffectView?.contentView.addSubview(warningLabel)
+        centerLabelInBlurView(warningLabel)
+        
+        window?.addSubview(blurEffectView!)
+    }
+
+    private func createBlurEffectView() -> UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = window?.bounds ?? .zero
+        return blurEffectView
+    }
+
+    private func createWarningLabel(withMessage message: String) -> UILabel {
+        let warningLabel = UILabel()
+        warningLabel.text = message
+        warningLabel.textColor = .white
+        warningLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        warningLabel.textAlignment = .center
+        warningLabel.translatesAutoresizingMaskIntoConstraints = false
+        return warningLabel
+    }
+
+    private func centerLabelInBlurView(_ label: UILabel) {
+        guard let blurEffectView = blurEffectView else { return }
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: blurEffectView.contentView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: blurEffectView.contentView.centerYAnchor)
+        ])
+    }
+
+    func removeBlurView() {
+        blurEffectView?.removeFromSuperview()
+        blurEffectView = nil
+    }
 }
 
 extension UIApplication {
