@@ -38,7 +38,6 @@ class WebViewUtils {
     static func getRadioButtonInitializer(selectedOption: Int) -> String {
         return "initRadioGroup(\(selectedOption));"
     }
-    
     static func getCheckBoxInitializer(selectedOptions: [Int]) -> String {
         return "initCheckBoxGroup(\(selectedOptions));"
     }

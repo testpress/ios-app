@@ -442,6 +442,9 @@ class TPApiClient {
         if attemptItem.question.isEssayType {
             parameters["essay_text"] = attemptItem.localEssayText
         }
+        if attemptItem.question.isEssayType {
+            parameters["files"] = attemptItem.files
+        }
                 
         if let gapFilledResponses = gapFilledResponses {
             let vals : [[String: String]] = gapFilledResponses.map{["order": String($0.order), "answer": $0.answer]}

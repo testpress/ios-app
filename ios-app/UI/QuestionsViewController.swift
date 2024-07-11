@@ -35,6 +35,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     
     private var selectedOptions: [Int] = []
     private var gapFilledResponse: [Int: AnyObject] = [:]
+    private var fileUploadHelper: FileUploadHelper!
     
     override func initWebView() {
         let contentController = WKUserContentController()
@@ -63,6 +64,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         setupActivityIndicator()
         loadAttemptItemData()
         setupWebView()
+        fileUploadHelper = FileUploadHelper(presentingViewController: self, fileUploadPath: "hari/testing")
     }
     
     private func setupActivityIndicator() {
@@ -115,6 +117,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             htmlContent += getOptionsHtml(for: attemptQuestion)
         case "E":
             htmlContent += getEssayQuestionInputHtml()
+        case "F":
+            htmlContent += getFileQuestionInputHtml()
         default:
             htmlContent += getShortAnswerInputHtml(for: attemptQuestion)
         }
@@ -166,6 +170,16 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         return "<input class='edit_box' type='\(inputType)' value='\(value)' onpaste='return false' oninput='onValueChange(this)' placeholder='YOUR ANSWER'>"
     }
     
+    func getFileQuestionInputHtml() -> String {
+        return """
+        <div>
+            <div id="fileStatus"></div>
+            <button class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE);" onclick="onUploadFileButtonClick()">Upload File</button>
+            <button id="clearFileButton" class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE); display: none;" onclick="clearFile()">Clear File</button>
+        </div>
+        """
+    }
+    
     func updateGapFillInputElement(element: Element, value: String?) throws {
         try element.attr("oninput", "onFillInTheBlankValueChange(this)")
         try element.addClass("gap_box")
@@ -187,6 +201,23 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             handleShortTextInput(dict)
         case "essay_response":
             handleEssayInput(dict)
+        case "file_upload":
+            fileUploadHelper.showFileSelectorAndUpload { uploadedPath, error in
+                if let error = error {
+                    return
+                }
+                
+                try! Realm().write {
+                    self.attemptItem?.files.append(uploadedPath!)
+                }
+                
+                let fileName = URL(fileURLWithPath: uploadedPath!).lastPathComponent
+                
+                DispatchQueue.main.async {
+                    self.webView.evaluateJavaScript("document.getElementById('fileStatus').innerText = 'Uploaded \(fileName)';")
+                    self.webView.evaluateJavaScript("document.getElementById('clearFileButton').style.display = 'block';")
+                }
+            }
         default:
             break
         }
@@ -230,6 +261,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             attemptItem?.localEssayText = essay
         }
     }
+    
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
         try! Realm().write {

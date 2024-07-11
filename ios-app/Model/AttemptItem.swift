@@ -58,6 +58,7 @@ class AttemptItem: DBModel {
     var gapFillResponses = List<GapFillResponse>()
     @objc dynamic var essayText: String?
     @objc dynamic var localEssayText: String!
+    var files = List<String>()
     
     public required convenience init?(map: ObjectMapper.Map) {
         self.init()
@@ -116,5 +117,6 @@ class AttemptItem: DBModel {
         attemptId <- map["attempt_id"]
         gapFillResponses <- (map["gap_fill_responses"], ListTransform<GapFillResponse>())
         essayText <- map["essay_text"]
+        files <- (map["files"], StringArrayTransform())
     }
 }
