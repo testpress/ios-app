@@ -64,7 +64,11 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         setupActivityIndicator()
         loadAttemptItemData()
         setupWebView()
-        fileUploadHelper = FileUploadHelper(presentingViewController: self, fileUploadPath: "hari/testing")
+        fileUploadHelper = FileUploadHelper(
+            presentingViewController: self,
+            fileUploadPath: "users/attempts/\(attemptItem.id)/answers/\(attemptItem.id)/file_type_responses",
+            maxFileInMb: 60.0
+        )
     }
     
     private func setupActivityIndicator() {
@@ -171,11 +175,16 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     }
     
     func getFileQuestionInputHtml() -> String {
+        let uploadButtonDisplay = attemptItem.localFiles.isEmpty ? "block" : "none"
+        let fileStatusDisplay = attemptItem.localFiles.isEmpty ? "none" : "block"
+        let clearButtonDisplay = attemptItem.localFiles.isEmpty ? "none" : "block"
+        let fileStatusText = attemptItem.localFiles.isEmpty ? "" : "File Uploaded"
+
         return """
-        <div>
-            <div id="fileStatus"></div>
-            <button class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE);" onclick="onUploadFileButtonClick()">Upload File</button>
-            <button id="clearFileButton" class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE); display: none;" onclick="clearFile()">Clear File</button>
+        <div id="fileUploadSection">
+            <div id="fileStatus" style="display: \(fileStatusDisplay);">\(fileStatusText)</div>
+            <button id="uploadFileButton" class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE); display: \(uploadButtonDisplay);"" onclick="onUploadFileButtonClick()">Upload File</button>
+            <button id="clearFileButton" class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE); display: \(clearButtonDisplay);" onclick="clearFile()">Clear File</button>
         </div>
         """
     }
@@ -202,22 +211,9 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         case "essay_response":
             handleEssayInput(dict)
         case "file_upload":
-            fileUploadHelper.showFileSelectorAndUpload { uploadedPath, error in
-                if let error = error {
-                    return
-                }
-                
-                try! Realm().write {
-                    self.attemptItem?.files.append(uploadedPath!)
-                }
-                
-                let fileName = URL(fileURLWithPath: uploadedPath!).lastPathComponent
-                
-                DispatchQueue.main.async {
-                    self.webView.evaluateJavaScript("document.getElementById('fileStatus').innerText = 'Uploaded \(fileName)';")
-                    self.webView.evaluateJavaScript("document.getElementById('clearFileButton').style.display = 'block';")
-                }
-            }
+            handleFileUpload()
+        case "clear_uploaded_file":
+            clearUploadedFile()
         default:
             break
         }
@@ -262,6 +258,45 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         }
     }
     
+    private func handleFileUpload() {
+        fileUploadHelper.presentFileSelector { [weak self] uploadedPath, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                DispatchQueue.main.async {
+                    var message = "File uploading failed: "
+                    if (error as NSError).domain == "FileUploadHelper" {
+                        message += error.localizedDescription
+                    } else {
+                        message += "Please try again."
+                    }
+                    self.updateFileStatus(with: message)
+                }
+                return
+            }
+            
+            guard let uploadedPath = uploadedPath else { return }
+            attemptItem.saveUploadedFilePath(with: uploadedPath)
+            self.updateFileUploadSection()
+        }
+    }
+    
+    private func clearUploadedFile(){
+        attemptItem.clearLocalFiles()
+        updateFileUploadSection()
+    }
+
+    private func updateFileUploadSection() {
+        let updatedHtml = getFileQuestionInputHtml()
+        DispatchQueue.main.async {
+            self.webView.evaluateJavaScript("document.getElementById('fileUploadSection').innerHTML = `\(updatedHtml)`;")
+        }
+    }
+    
+    private func updateFileStatus(with message: String) {
+        webView.evaluateJavaScript("document.getElementById('fileStatus').innerText = '\(message)';", completionHandler: nil)
+        webView.evaluateJavaScript("document.getElementById('fileStatus').style.display = 'block';", completionHandler: nil)
+    }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
         try! Realm().write {

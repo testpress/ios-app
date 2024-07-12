@@ -15,15 +15,26 @@ class FileUploadHelper: NSObject {
     private var uploadCompletionCallback: ((String?, Error?) -> Void)?
     private var presentingViewController: UIViewController
     private var fileUploadPath: String
+    private var maxFileInMb: Double
     
-    init(presentingViewController: UIViewController, fileUploadPath: String){
+    init(presentingViewController: UIViewController, fileUploadPath: String, maxFileInMb: Double) {
         self.presentingViewController = presentingViewController
         self.fileUploadPath = fileUploadPath
+        self.maxFileInMb = maxFileInMb
         super.init()
     }
 
-    func showFileSelectorAndUpload(callback: @escaping (String?, Error?) -> Void) {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
+    func presentFileSelector(callback: @escaping (String?, Error?) -> Void) {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [
+            "com.microsoft.word.doc",
+            "com.microsoft.excel.xls",
+            "com.microsoft.powerpoint.​ppt",
+            "public.text",
+            "public.plain-text",
+            "public.image",
+            "com.adobe.pdf",
+            
+        ], in: .import)
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
         
@@ -39,16 +50,42 @@ extension FileUploadHelper: UIDocumentPickerDelegate {
         guard let fileURL = urls.first else {
             return
         }
+        
+         if isFileSizeExceedsLimit(fileURL: fileURL) {
+             let error = NSError(domain: "FileUploadHelper", code: -1, userInfo: [NSLocalizedDescriptionKey: "File is too large. Maximum allowed size is \(maxFileInMb) MB."])
+             self.uploadCompletionCallback?(nil, error)
+             return
+         }
+        
+        
+        let progressDialog = UIUtils.initProgressDialog(message: "Uploading...\n\n")
+        presentingViewController.present(progressDialog, animated: true, completion: nil)
 
-        uploadFileWithPreSignedURL(from: fileURL) { uploadedPath, error in
+        uploadFile(fileURL) { uploadedPath, error in
             self.uploadCompletionCallback?(uploadedPath, error)
             self.filePickerController = nil
             self.uploadCompletionCallback = nil
+            
+            self.presentingViewController.dismiss(animated: true, completion: nil)
         }
     }
     
-    private func uploadFileWithPreSignedURL(from fileURL: URL, completion: @escaping (String?, Error?) -> Void) {
-        getPresignedURL(fileName: fileURL.lastPathComponent) { presignedURL, error in
+    private func isFileSizeExceedsLimit(fileURL: URL) -> Bool {
+        do {
+            let fileAttributes = try FileManager.default.attributesOfItem(atPath: fileURL.path)
+            if let fileSize = fileAttributes[.size] as? NSNumber {
+                let fileSizeInMB = fileSize.doubleValue / (1024.0 * 1024.0)
+                return fileSizeInMB > maxFileInMb
+            }
+        } catch {
+            print("Error getting file size: \(error.localizedDescription)")
+        }
+        return false
+    }
+
+    
+    private func uploadFile(_ fileURL: URL, completion: @escaping (String?, Error?) -> Void) {
+        requestPresignedURL(for: fileURL.lastPathComponent) { presignedURL, error in
             if let error = error {
                 completion(nil, error)
                 return
@@ -59,7 +96,7 @@ extension FileUploadHelper: UIDocumentPickerDelegate {
                 return
             }
             
-            self.uploadFile(from: fileURL, to: presignedURL) { uploadError in
+            self.uploadToPresignedURL(fileURL, presignedURL: presignedURL) { uploadError in
                 if let uploadError = uploadError {
                     completion(nil, uploadError)
                 } else {
@@ -70,7 +107,7 @@ extension FileUploadHelper: UIDocumentPickerDelegate {
         }
     }
 
-    private func getPresignedURL(fileName: String, completion: @escaping (URL?, Error?) -> Void) {
+    private func requestPresignedURL(for fileName: String, completion: @escaping (URL?, Error?) -> Void) {
         var parameters: [String: Any] = ["filename": fileName]
         parameters["folder"] = self.fileUploadPath
 
@@ -86,22 +123,15 @@ extension FileUploadHelper: UIDocumentPickerDelegate {
         }
     }
 
-    private func uploadFile(from fileURL: URL, to presignedURL: URL, completion: @escaping (Error?) -> Void) {
-        let headers: HTTPHeaders = ["Content-Type": "multipart/form-data", "x-amz-acl": "public-read"]
-        let formData = MultipartFormData()
-
-        do {
-            let fileData = try Data(contentsOf: fileURL)
-            formData.append(fileData, withName: "file", fileName: fileURL.lastPathComponent, mimeType: "application/octet-stream")
-        } catch {
-            completion(error)
-            return
-        }
-
+    private func uploadToPresignedURL(_ fileURL: URL, presignedURL: URL, completion: @escaping (Error?) -> Void) {
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/octet-stream",
+            "x-amz-acl": "public-read"
+        ]
+        
         AF.upload(
-            multipartFormData: formData,
+            fileURL,
             to: presignedURL,
-            usingThreshold: .max,
             method: .put,
             headers: headers,
             interceptor: nil,
@@ -125,8 +155,6 @@ extension FileUploadHelper: UIDocumentPickerDelegate {
             return nil
         }
         
-        let substring = String(path[startIndex...])
-        return substring
+        return String(path[startIndex...])
     }
 }
-

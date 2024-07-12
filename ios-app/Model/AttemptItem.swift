@@ -58,7 +58,8 @@ class AttemptItem: DBModel {
     var gapFillResponses = List<GapFillResponse>()
     @objc dynamic var essayText: String?
     @objc dynamic var localEssayText: String!
-    var files = List<String>()
+    var files = List<UserFileResponse>()
+    var localFiles = List<String>()
     
     public required convenience init?(map: ObjectMapper.Map) {
         self.init()
@@ -74,7 +75,7 @@ class AttemptItem: DBModel {
         }
         return savedAnswers != selectedAnswers || currentReview != review ||
             (shortText != nil && shortText != currentShortText) ||
-            (shortText == nil && currentShortText != nil && !currentShortText.isEmpty)
+            (shortText == nil && currentShortText != nil && !currentShortText.isEmpty) || files != localFiles
     }
     
     public func getSaveUrl() -> String {
@@ -91,6 +92,30 @@ class AttemptItem: DBModel {
             
             self.gapFillResponses.removeAll()
             self.gapFillResponses.append(objectsIn: gapFillResponseList)
+        }
+    }
+    
+    func clearLocalFiles() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.localFiles.removeAll()
+            }
+        } catch {
+            print("Error updating Realm: \(error)")
+            return
+        }
+    }
+
+    func saveUploadedFilePath(with uploadedPath: String) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.localFiles.append(uploadedPath)
+            }
+        } catch {
+            print("Error updating Realm: \(error)")
+            return
         }
     }
 
@@ -117,6 +142,6 @@ class AttemptItem: DBModel {
         attemptId <- map["attempt_id"]
         gapFillResponses <- (map["gap_fill_responses"], ListTransform<GapFillResponse>())
         essayText <- map["essay_text"]
-        files <- (map["files"], StringArrayTransform())
+        files <- (map["files"], ListTransform<UserFileResponse>())
     }
 }

@@ -107,8 +107,8 @@ function onUploadFileButtonClick() {
 }
 
 function clearFile() {
-    document.getElementById('fileStatus').innerText = 'No file selected';
-    document.getElementById('clearFileButton').style.display = 'none';
+    var message = {"type": "clear_uploaded_file"}
+    webkit.messageHandlers.callbackHandler.postMessage(message);
 }
 
 // Common functions
