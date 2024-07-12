@@ -46,85 +46,104 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         webView = WKWebView( frame: self.containerView!.bounds, configuration: config)
     }
     
+    override func getJavascript() -> String {
+        var javascript = super.getJavascript()
+        var selectedAnswers: [Int] = Array((attemptItem?.selectedAnswers)!)
+        guard let questionType = attemptItem?.question?.type else { return javascript }
+        
+        if !selectedAnswers.isEmpty {
+            javascript += (questionType == "R") ? WebViewUtils.getRadioButtonInitializer(selectedOption: selectedAnswers[0]) : WebViewUtils.getCheckBoxInitializer(selectedOptions: selectedAnswers)
+        }
+        return javascript
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupActivityIndicator()
+        loadAttemptItemData()
+        setupWebView()
+    }
+    
+    private func setupActivityIndicator() {
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
+    }
+    
+    private func loadAttemptItemData() {
+        guard let attemptItem = attemptItem else { return }
         
         // Set initial values of current selected answer & review
-        selectedOptions = Array(attemptItem!.selectedAnswers)
-        reviewSwitch.isOn = attemptItem!.review
+        selectedOptions = Array(attemptItem.selectedAnswers)
+        reviewSwitch.isOn = attemptItem.review
+        
         try! Realm().write {
-            attemptItem?.savedAnswers.removeAll()
-            attemptItem?.savedAnswers.append(objectsIn: selectedOptions)
-            attemptItem?.currentReview = attemptItem!.review
-            attemptItem?.currentShortText = attemptItem!.shortText
-            attemptItem?.gapFillResponses.forEach { response in
+            attemptItem.savedAnswers.removeAll()
+            attemptItem.savedAnswers.append(objectsIn: selectedOptions)
+            attemptItem.currentReview = attemptItem.review
+            attemptItem.currentShortText = attemptItem.shortText
+            attemptItem.gapFillResponses.forEach { response in
                 gapFilledResponse[response.order] = response.answer as AnyObject
             }
             attemptItem.localEssayText = attemptItem.essayText
         }
         
-        indexView!.text = String("\((attemptItem?.index)! + 1)")
-        webView.loadHTMLString(WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader()
-                               + getQuestionHtml(), baseURL: Bundle.main.bundleURL)
+        indexView.text = String(attemptItem.index + 1)
     }
     
-    func userContentController(_ userContentController: WKUserContentController,
-                               didReceive message: WKScriptMessage) {
-        if (message.name == "callbackHandler") {
-            let body = message.body
-            if let dict = body as? Dictionary<String, AnyObject> {
-                if dict["type"] as! String? == "gap_filled_response" {
-                    handleGapFillTypeInput(dict)
-                } else if let checked = dict["checked"] as? Bool {
-                    let radioOption = dict["radioOption"] as! Bool
-                    let id = Int(dict["clickedOptionId"] as! String)!
-                    if checked {
-                        if radioOption {
-                            selectedOptions = []
-                        }
-                        selectedOptions.append(id)
-                    } else {
-                        selectedOptions = selectedOptions.filter { $0 != id }
-                    }
-                    try! Realm().write {
-                        attemptItem.savedAnswers.removeAll()
-                        attemptItem.savedAnswers.append(objectsIn: selectedOptions)
-                    }
-                } else if let shortText = dict["shortText"] as? String {
-                    try! Realm().write {
-                        attemptItem.currentShortText = shortText.trim()
-                    }
-                } else if let essay = dict["essay"] as? String {
-                    try! Realm().write {
-                        attemptItem.localEssayText = essay
-                    }
-                }
-            }
+    private func setupWebView() {
+        webView.loadHTMLString(
+            WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader() + getQuestionHtml(),
+            baseURL: Bundle.main.bundleURL
+        )
+    }
+    
+    func getQuestionHtml() -> String {
+        guard let attemptQuestion = attemptItem?.question else { return "" }
+        
+        var htmlContent = "<div style='padding-left: 10px; padding-right: 10px;'>"
+        
+        if let direction = attemptQuestion.direction, !direction.isEmpty {
+            htmlContent += "<div class='question' style='padding-bottom: 0px;'>\(attemptQuestion.getLanguageBasedDirection(self.language))</div>"
         }
+        
+        htmlContent += "<div class='question' style='padding-bottom: 0px;'>\(attemptQuestion.getLanguageBasedQuestion(self.language))</div>"
+        
+        switch attemptQuestion.type {
+        case "G":
+            htmlContent = getGapFilledQuestionHtml(htmlContent)
+        case "R", "C":
+            htmlContent += getOptionsHtml(for: attemptQuestion)
+        case "E":
+            htmlContent += getEssayQuestionInputHtml()
+        default:
+            htmlContent += getShortAnswerInputHtml(for: attemptQuestion)
+        }
+        
+        return htmlContent + "</div>"
     }
     
-    func handleGapFillTypeInput(_ gapFillData: [String : AnyObject]) {
-        let order = gapFillData["order"] as! NSString
-        gapFilledResponse[order.integerValue] = gapFillData["answer"]
-        attemptItem.setGapFillResponses(gapFilledResponse)
-    }
-    
-    override func getJavascript() -> String {
-        var javascript = super.getJavascript()
-        var selectedAnswers: [Int] = Array((attemptItem?.selectedAnswers)!)
-        if !selectedAnswers.isEmpty {
-            let optionType: String = (attemptItem?.question?.type)!
-            if optionType == "R" {
-                javascript +=
-                WebViewUtils.getRadioButtonInitializer(selectedOption: selectedAnswers[0])
+    private func getOptionsHtml(for question: AttemptQuestion) -> String {
+        var htmlContent = "<table width='100%' style='margin-top:0px;'>"
+        
+        question.answers.forEach { answer in
+            if question.type == "R" {
+                htmlContent += WebViewUtils.getRadioButtonOptionWithTags(optionText: answer.getTextHtml(question, self.language), id: answer.id)
             } else {
-                javascript += WebViewUtils.getCheckBoxInitializer(selectedOptions: selectedAnswers)
+                htmlContent += WebViewUtils.getCheckBoxOptionWithTags(optionText: answer.getTextHtml(question, self.language), id: answer.id)
             }
         }
-        return javascript
+        
+        return htmlContent + "</table>"
     }
+    
+    func getEssayQuestionInputHtml() -> String {
+        var htmlContent = "<textarea class='essay_topic' oninput='onEssayValueChange(this)' rows='10'>"
+        if let essayText = attemptItem?.localEssayText, !essayText.isEmpty {
+            htmlContent += essayText
+        }
+        return htmlContent + "</textarea>"
+    }
+    
     
     func getGapFilledQuestionHtml(_ htmlContent: String) -> String {
         do {
@@ -141,74 +160,75 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         }
     }
     
+    private func getShortAnswerInputHtml(for question: AttemptQuestion) -> String {
+        let inputType = question.type == "N" ? "number" : "text"
+        let value = attemptItem?.currentShortText ?? ""
+        return "<input class='edit_box' type='\(inputType)' value='\(value)' onpaste='return false' oninput='onValueChange(this)' placeholder='YOUR ANSWER'>"
+    }
+    
     func updateGapFillInputElement(element: Element, value: String?) throws {
         try element.attr("oninput", "onFillInTheBlankValueChange(this)")
         try element.addClass("gap_box")
-        if value != nil {
-            try element.val(value!)
+        if let value = value {
+            try element.val(value)
         }
     }
     
-    func getQuestionHtml() -> String {
-        let attemptQuestion: AttemptQuestion = (attemptItem?.question)!;
-        var htmlContent: String = "" +
-        "<div style='padding-left: 10px; padding-right: 10px;'>";
-        
-        // Add direction if present
-        if (attemptQuestion.direction != nil &&
-            !(attemptQuestion.direction!.isEmpty)) {
-            
-            htmlContent += "" +
-            "<div class='question' style='padding-bottom: 0px;'>" +
-            attemptQuestion.getLanguageBasedDirection(self.language) +
-            "</div>";
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard message.name == "callbackHandler", let dict = message.body as? [String: AnyObject] else { return }
+
+        switch dict["type"] as? String {
+        case "gap_filled_response":
+            handleGapFillTypeInput(dict)
+        case let type where type == "radio_response" || type == "checkbox_response":
+            handleOptionSelection(dict)
+        case "short_text_response":
+            handleShortTextInput(dict)
+        case "essay_response":
+            handleEssayInput(dict)
+        default:
+            break
         }
+    }
+    
+    func handleGapFillTypeInput(_ gapFillData: [String: AnyObject]) {
+        guard let order = gapFillData["order"] as? NSString else { return }
         
-        // Add question
-        htmlContent += "" +
-        "<div class='question' style='padding-bottom: 0px;'>" +
-        attemptQuestion.getLanguageBasedQuestion(self.language) +
-        "</div>";
+        gapFilledResponse[order.integerValue] = gapFillData["answer"]
+        attemptItem?.setGapFillResponses(gapFilledResponse)
+    }
+    
+    private func handleOptionSelection(_ dict: [String: AnyObject]) {
+        guard let checked = dict["checked"] as? Bool, let id = Int(dict["clickedOptionId"] as? String ?? ""), let radioOption = dict["radioOption"] as? Bool else { return }
         
-        if attemptQuestion.type == "R" || attemptQuestion.type == "C" {
-            // Add options
-            htmlContent += "<table width='100%' style='margin-top:0px;'>"
-            
-            for attemptAnswer in attemptQuestion.answers {
-                if (attemptItem?.question?.type == "R") {
-                    htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
-                        optionText: attemptAnswer.getTextHtml(attemptQuestion, self.language), id: attemptAnswer.id)
-                } else {
-                    htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
-                        optionText: attemptAnswer.getTextHtml(attemptQuestion, self.language), id: attemptAnswer.id)
-                }
-            }
-            htmlContent += "</table>"
-        } else if (attemptQuestion.type == "E") {
-            htmlContent += getEssayQuestionHtml()
-            
-        } else if (attemptQuestion.type == "G") {
-            htmlContent = getGapFilledQuestionHtml(htmlContent)
+        if checked {
+            if radioOption { selectedOptions = [] }
+            selectedOptions.append(id)
         } else {
-            let inputType = attemptQuestion.type == "N" ? "number" : "text"
-            let value =
-            attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
-            
-            htmlContent += "<input class='edit_box' type='\(inputType)' value='\(value)' " +
-            "onpaste='return false' oninput='onValueChange(this)' " +
-            "placeholder='YOUR ANSWER'>"
+            selectedOptions.removeAll { $0 == id }
         }
-        return htmlContent + "</div>";
+        
+        try! Realm().write {
+            attemptItem?.savedAnswers.removeAll()
+            attemptItem?.savedAnswers.append(objectsIn: selectedOptions)
+        }
     }
     
-    func getEssayQuestionHtml() -> String {
-        var htmlContent = "<textarea class='essay_topic'  oninput='onEssayValueChange(this)' rows='10'>";
-        if !attemptItem.localEssayText.isNilOrEmpty {
-            htmlContent += attemptItem.localEssayText
-        }
-        htmlContent += "</textarea>";
+    private func handleShortTextInput(_ dict: [String: AnyObject]) {
+        guard let shortText = dict["shortText"] as? String else { return }
         
-        return htmlContent
+        try! Realm().write {
+            attemptItem?.currentShortText = shortText.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+    }
+    
+    private func handleEssayInput(_ dict: [String: AnyObject]) {
+        guard let essay = dict["essay"] as? String else { return }
+        
+        try! Realm().write {
+            attemptItem?.localEssayText = essay
+        }
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
