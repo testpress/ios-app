@@ -101,6 +101,16 @@ function onFillInTheBlankValueChange(element) {
     webkit.messageHandlers.callbackHandler.postMessage(message);
 }
 
+function onUploadFileButtonClick() {
+    var message = {"type": "file_upload"}
+    webkit.messageHandlers.callbackHandler.postMessage(message);
+}
+
+function clearFile() {
+    var message = {"type": "clear_uploaded_file"}
+    webkit.messageHandlers.callbackHandler.postMessage(message);
+}
+
 // Common functions
 
 function getWidget(layout) {

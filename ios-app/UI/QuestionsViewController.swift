@@ -35,6 +35,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     
     private var selectedOptions: [Int] = []
     private var gapFilledResponse: [Int: AnyObject] = [:]
+    private var fileUploadHelper: FileUploadPicker!
     
     override func initWebView() {
         let contentController = WKUserContentController()
@@ -63,6 +64,11 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         setupActivityIndicator()
         loadAttemptItemData()
         setupWebView()
+        fileUploadHelper = FileUploadPicker(
+            presentingViewController: self,
+            fileUploadPath: "users/attempts/\(attemptItem.id)/answers/\(attemptItem.id)/file_type_responses",
+            maxFileInMb: 60.0
+        )
     }
     
     private func setupActivityIndicator() {
@@ -115,6 +121,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             htmlContent += getOptionsHtml(for: attemptQuestion)
         case "E":
             htmlContent += getEssayQuestionInputHtml()
+        case "F":
+            htmlContent += getFileQuestionInputHtml()
         default:
             htmlContent += getShortAnswerInputHtml(for: attemptQuestion)
         }
@@ -166,6 +174,21 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         return "<input class='edit_box' type='\(inputType)' value='\(value)' onpaste='return false' oninput='onValueChange(this)' placeholder='YOUR ANSWER'>"
     }
     
+    func getFileQuestionInputHtml() -> String {
+        let uploadButtonDisplay = attemptItem.localFiles.isEmpty ? "block" : "none"
+        let fileStatusDisplay = attemptItem.localFiles.isEmpty ? "none" : "block"
+        let clearButtonDisplay = attemptItem.localFiles.isEmpty ? "none" : "block"
+        let fileStatusText = attemptItem.localFiles.isEmpty ? "" : "File Uploaded"
+
+        return """
+        <div id="fileUploadSection">
+            <div id="fileStatus" style="display: \(fileStatusDisplay);">\(fileStatusText)</div>
+            <button id="uploadFileButton" class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE); display: \(uploadButtonDisplay);"" onclick="onUploadFileButtonClick()">Upload File</button>
+            <button id="clearFileButton" class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE); display: \(clearButtonDisplay);" onclick="clearFile()">Clear File</button>
+        </div>
+        """
+    }
+    
     func updateGapFillInputElement(element: Element, value: String?) throws {
         try element.attr("oninput", "onFillInTheBlankValueChange(this)")
         try element.addClass("gap_box")
@@ -187,6 +210,10 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             handleShortTextInput(dict)
         case "essay_response":
             handleEssayInput(dict)
+        case "file_upload":
+            handleFileUpload()
+        case "clear_uploaded_file":
+            clearUploadedFile()
         default:
             break
         }
@@ -229,6 +256,46 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         try! Realm().write {
             attemptItem?.localEssayText = essay
         }
+    }
+    
+    private func handleFileUpload() {
+        fileUploadHelper.presentFileSelector { [weak self] uploadedPath, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                DispatchQueue.main.async {
+                    var message = "File uploading failed: "
+                    if (error as NSError).domain == "FileUploadHelper" {
+                        message += error.localizedDescription
+                    } else {
+                        message += "Please try again."
+                    }
+                    self.updateFileStatus(with: message)
+                }
+                return
+            }
+            
+            guard let uploadedPath = uploadedPath else { return }
+            attemptItem.saveUploadedFilePath(with: uploadedPath)
+            self.updateFileUploadSection()
+        }
+    }
+    
+    private func clearUploadedFile(){
+        attemptItem.clearLocalFiles()
+        updateFileUploadSection()
+    }
+
+    private func updateFileUploadSection() {
+        let updatedHtml = getFileQuestionInputHtml()
+        DispatchQueue.main.async {
+            self.webView.evaluateJavaScript("document.getElementById('fileUploadSection').innerHTML = `\(updatedHtml)`;")
+        }
+    }
+    
+    private func updateFileStatus(with message: String) {
+        webView.evaluateJavaScript("document.getElementById('fileStatus').innerText = '\(message)';", completionHandler: nil)
+        webView.evaluateJavaScript("document.getElementById('fileStatus').style.display = 'block';", completionHandler: nil)
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {

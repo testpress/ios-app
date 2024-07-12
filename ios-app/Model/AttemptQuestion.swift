@@ -60,6 +60,9 @@ class AttemptQuestion: DBModel {
     var isEssayType: Bool {
         get {questionType == .ESSAY}
     }
+    var isFileType: Bool {
+        get {questionType == .FILE_TYPE}
+    }
     
     public  func clone() -> AttemptQuestion {
         let newAttemptItem = AttemptQuestion()
