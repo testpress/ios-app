@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import UIKit
 
-class FileUploadHelper: NSObject {
+class FileUploadPicker: NSObject {
     private var filePickerController: UIDocumentPickerViewController?
     private var uploadCompletionCallback: ((String?, Error?) -> Void)?
     private var presentingViewController: UIViewController
@@ -45,7 +45,7 @@ class FileUploadHelper: NSObject {
     }
 }
 
-extension FileUploadHelper: UIDocumentPickerDelegate {
+extension FileUploadPicker: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let fileURL = urls.first else {
             return

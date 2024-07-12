@@ -35,7 +35,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     
     private var selectedOptions: [Int] = []
     private var gapFilledResponse: [Int: AnyObject] = [:]
-    private var fileUploadHelper: FileUploadHelper!
+    private var fileUploadHelper: FileUploadPicker!
     
     override func initWebView() {
         let contentController = WKUserContentController()
@@ -64,7 +64,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         setupActivityIndicator()
         loadAttemptItemData()
         setupWebView()
-        fileUploadHelper = FileUploadHelper(
+        fileUploadHelper = FileUploadPicker(
             presentingViewController: self,
             fileUploadPath: "users/attempts/\(attemptItem.id)/answers/\(attemptItem.id)/file_type_responses",
             maxFileInMb: 60.0
