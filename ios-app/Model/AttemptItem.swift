@@ -75,8 +75,9 @@ class AttemptItem: DBModel {
         let shortTextChanged = (shortText != nil && shortText != currentShortText) ||
                                (shortText == nil && currentShortText != nil && !currentShortText.isEmpty)
         let filesChanged = files != localFiles
+        let essayTextChanged = localEssayText != essayText
         
-        return answersChanged || reviewStatusChanged || shortTextChanged || filesChanged
+        return answersChanged || reviewStatusChanged || shortTextChanged || filesChanged || essayTextChanged || gapFillResponses.isNotEmpty
     }
     
     public func getSaveUrl() -> String {
