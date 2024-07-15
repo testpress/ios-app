@@ -70,12 +70,13 @@ class AttemptItem: DBModel {
     }
     
     public func hasChanged() -> Bool {
-        if currentReview == nil {
-            currentReview = false
-        }
-        return savedAnswers != selectedAnswers || currentReview != review ||
-            (shortText != nil && shortText != currentShortText) ||
-            (shortText == nil && currentShortText != nil && !currentShortText.isEmpty) || files != localFiles
+        let reviewStatusChanged = currentReview != review
+        let answersChanged = savedAnswers != selectedAnswers
+        let shortTextChanged = (shortText != nil && shortText != currentShortText) ||
+                               (shortText == nil && currentShortText != nil && !currentShortText.isEmpty)
+        let filesChanged = files != localFiles
+        
+        return answersChanged || reviewStatusChanged || shortTextChanged || filesChanged
     }
     
     public func getSaveUrl() -> String {
