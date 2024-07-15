@@ -35,7 +35,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     
     private var selectedOptions: [Int] = []
     private var gapFilledResponse: [Int: AnyObject] = [:]
-    private var fileUploadHelper: FileUploadPicker!
+    private var fileUploadHelper: FileUploadPicker?
     
     override func initWebView() {
         let contentController = WKUserContentController()
@@ -64,11 +64,6 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         setupActivityIndicator()
         loadAttemptItemData()
         setupWebView()
-        fileUploadHelper = FileUploadPicker(
-            presentingViewController: self,
-            fileUploadPath: "users/attempts/\(attemptItem.id)/answers/\(attemptItem.id)/file_type_responses",
-            maxFileInMb: 60.0
-        )
     }
     
     private func setupActivityIndicator() {
@@ -101,7 +96,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader() + getQuestionHtml(),
             baseURL: Bundle.main.bundleURL
         )
-    }
+    }                                                                                           
     
     func getQuestionHtml() -> String {
         guard let attemptQuestion = attemptItem?.question else { return "" }
@@ -259,7 +254,13 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     }
     
     private func handleFileUpload() {
-        fileUploadHelper.presentFileSelector { [weak self] uploadedPath, error in
+        fileUploadHelper = FileUploadPicker(
+            presentingViewController: self,
+            fileUploadPath: "users/attempts/\(attemptItem.id)/answers/\(attemptItem.id)/file_type_responses",
+            maxFileInMb: 60.0
+        )
+        
+        fileUploadHelper?.presentFileSelector { [weak self] uploadedPath, error in
             guard let self = self else { return }
             
             if let error = error {
