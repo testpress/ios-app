@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import UIKit
+import MobileCoreServices
 
 class FileUploadPicker: NSObject {
     private var filePickerController: UIDocumentPickerViewController?
@@ -125,7 +126,7 @@ extension FileUploadPicker: UIDocumentPickerDelegate {
 
     private func uploadToPresignedURL(_ fileURL: URL, presignedURL: URL, completion: @escaping (Error?) -> Void) {
         let headers: HTTPHeaders = [
-            "Content-Type": "application/octet-stream",
+            "Content-Type": self.getMimeType(for: fileURL),
             "x-amz-acl": "public-read"
         ]
         
@@ -156,5 +157,16 @@ extension FileUploadPicker: UIDocumentPickerDelegate {
         }
         
         return String(path[startIndex...])
+    }
+    
+    func getMimeType(for url: URL) -> String {
+        let pathExtension = url.pathExtension as CFString
+        
+        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension, nil)?.takeRetainedValue(),
+           let mimeType = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
+            return mimeType as String
+        }
+        
+        return "application/octet-stream"
     }
 }
