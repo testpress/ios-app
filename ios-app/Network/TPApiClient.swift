@@ -443,8 +443,8 @@ class TPApiClient {
             parameters["essay_text"] = attemptItem.localEssayText
         }
         
-        if attemptItem.question.isFileType && attemptItem.localFiles.isNotEmpty {
-            parameters["files"] = Array(attemptItem.localFiles)
+        if attemptItem.question.isFileType {
+            parameters["files"] = Array(attemptItem.localFiles.map {$0.path})
         }
                 
         if let gapFilledResponses = gapFilledResponses {

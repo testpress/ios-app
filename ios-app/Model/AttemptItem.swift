@@ -59,7 +59,7 @@ class AttemptItem: DBModel {
     @objc dynamic var essayText: String?
     @objc dynamic var localEssayText: String!
     var files = List<UserFileResponse>()
-    var localFiles = List<String>()
+    var localFiles = List<UserFileResponse>()
     
     public required convenience init?(map: ObjectMapper.Map) {
         self.init()
@@ -74,10 +74,17 @@ class AttemptItem: DBModel {
         let answersChanged = savedAnswers != selectedAnswers
         let shortTextChanged = (shortText != nil && shortText != currentShortText) ||
                                (shortText == nil && currentShortText != nil && !currentShortText.isEmpty)
-        let filesChanged = files != localFiles
+        let filesChanged = !compareUserFileResponsePaths(files, localFiles)
         let essayTextChanged = localEssayText != essayText
         
         return answersChanged || reviewStatusChanged || shortTextChanged || filesChanged || essayTextChanged || gapFillResponses.isNotEmpty
+    }
+    
+    private func compareUserFileResponsePaths(_ list1: List<UserFileResponse>, _ list2: List<UserFileResponse>) -> Bool {
+        let paths1 = Set(list1.map { $0.path })
+        let paths2 = Set(list2.map { $0.path })
+        
+        return paths1 == paths2
     }
     
     public func getSaveUrl() -> String {
@@ -112,8 +119,9 @@ class AttemptItem: DBModel {
     func saveUploadedFilePath(with uploadedPath: String) {
         do {
             let realm = try Realm()
+            let userFileResponse = UserFileResponse.create(uploadedPath: uploadedPath)
             try realm.write {
-                self.localFiles.append(uploadedPath)
+                self.localFiles.append(userFileResponse)
             }
         } catch {
             print("Error updating Realm: \(error)")

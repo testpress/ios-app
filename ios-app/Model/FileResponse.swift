@@ -22,4 +22,10 @@ class UserFileResponse: DBModel {
         path <- map["path"]
         url <- map["url"]
     }
+    
+    public static func create(uploadedPath: String) -> UserFileResponse{
+        let response = UserFileResponse()
+        response.path = uploadedPath
+        return response
+    }
 }
