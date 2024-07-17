@@ -130,6 +130,8 @@ class AttemptItem: DBModel {
     }
 
     public override func mapping(map: ObjectMapper.Map) {
+        let userFileResponseListTransform = getUserFileResponseListTransform()
+        
         id <- map["id"]
         url <- map["url"]
         question <- map["question"]
@@ -152,6 +154,28 @@ class AttemptItem: DBModel {
         attemptId <- map["attempt_id"]
         gapFillResponses <- (map["gap_fill_responses"], ListTransform<GapFillResponse>())
         essayText <- map["essay_text"]
-        files <- (map["files"], ListTransform<UserFileResponse>())
+        files <- (map["files"], userFileResponseListTransform)
+        localFiles <- (map["files"], userFileResponseListTransform)
+    }
+    
+
+    // Handles the transformation of user-uploaded file responses from the API, which can be either a list of strings (file paths) or a list of JSON objects (UserFileResponse).
+    private func getUserFileResponseListTransform() -> TransformOf<List<UserFileResponse>, Any> {
+        return TransformOf<List<UserFileResponse>, Any>(fromJSON: { (value: Any?) -> List<UserFileResponse>? in
+            let list = List<UserFileResponse>()
+            if let stringArray = value as? [String] {
+                for path in stringArray {
+                    let response = UserFileResponse.create(uploadedPath: path)
+                    list.append(response)
+                }
+            } else if let jsonArray = value as? [Any] {
+                if let objects = Mapper<UserFileResponse>().mapArray(JSONObject: jsonArray) {
+                    list.append(objectsIn: objects)
+                }
+            }
+            return list
+        }, toJSON: { (value: List<UserFileResponse>?) -> Any? in
+            return value?.compactMap { $0.toJSON() }
+        })
     }
 }
