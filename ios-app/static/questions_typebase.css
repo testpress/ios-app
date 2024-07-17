@@ -324,3 +324,20 @@ body.watermark::before {
     outline: none;
     cursor: pointer;
 }
+
+.file-question {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.file-entry {
+    margin-top: 5px;
+}
+
+.file-entry label {
+    margin-right: 10px;
+}
+
+.file-entry button {
+    margin-left: 5px;
+}
