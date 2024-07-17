@@ -313,3 +313,14 @@ body.watermark::before {
     user-select: text;
     width: 98%;
 }
+
+.rounded-button {
+    width: 120px;
+    height: 40px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}

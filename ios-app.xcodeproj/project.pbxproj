@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0332D2432C3FD17100345BA9 /* FileUploadPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */; };
+		0332D2452C4104A900345BA9 /* FileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2442C4104A900345BA9 /* FileResponse.swift */; };
 		036654CD2A3D98930005BDDF /* UIInterfaceOrientationMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
 		038695FD2BF6095D00E36F8F /* DGCharts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FC2BF6095D00E36F8F /* DGCharts.xcframework */; };
@@ -458,6 +460,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadPicker.swift; sourceTree = "<group>"; };
+		0332D2442C4104A900345BA9 /* FileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileResponse.swift; sourceTree = "<group>"; };
 		036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInterfaceOrientationMask.swift; sourceTree = "<group>"; };
 		03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDeletionViewController.swift; sourceTree = "<group>"; };
 		038695FC2BF6095D00E36F8F /* DGCharts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DGCharts.xcframework; path = Carthage/Build/DGCharts.xcframework; sourceTree = "<group>"; };
@@ -1130,6 +1134,7 @@
 				25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */,
 				2503DF75263FADD0003226AD /* StringTransform.swift */,
 				25F7522027FEB143000D8137 /* TimeUtils.swift */,
+				0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1364,6 +1369,7 @@
 				D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */,
 				D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */,
 				03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */,
+				0332D2442C4104A900345BA9 /* FileResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1741,6 +1747,7 @@
 				250629922265E74D00539FB2 /* LoginActivity.swift in Sources */,
 				2FC0F2FB1F863B7E0092BFDC /* BaseQuestionsDataSource.swift in Sources */,
 				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
+				0332D2452C4104A900345BA9 /* FileResponse.swift in Sources */,
 				2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */,
 				2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */,
 				2FEDFF5A206CE7560002CF04 /* CategoryPager.swift in Sources */,
@@ -1962,6 +1969,7 @@
 				2566A5952745102F00D9E71D /* DRMLicenseKeyResponse.swift in Sources */,
 				8C2E7B5923979E5A00BA2F41 /* VideoPlayerView.swift in Sources */,
 				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,
+				0332D2432C3FD17100345BA9 /* FileUploadPicker.swift in Sources */,
 				25F92A20243306A60084ADC8 /* UIViewController.swift in Sources */,
 				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
 				2F5E0BB51FE2415800236AFE /* ActivityFeedPager.swift in Sources */,
