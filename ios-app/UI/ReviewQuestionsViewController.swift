@@ -292,7 +292,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     func getAnswersHtml(attemptItem: AttemptItem) -> String {
         var attemptQuestion = attemptItem.question!
         var html = ""
-        var correctAnswerHtml = ""
 
         for (i, attemptAnswer) in attemptQuestion.answers.enumerated() {
             if attemptQuestion.isSingleMcq || attemptQuestion.isMultipleMcq {
@@ -305,12 +304,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                     index: i,
                     color: optionColor
                 )
-                if attemptAnswer.isCorrect {
-                    correctAnswerHtml += WebViewUtils.getCorrectAnswerIndexWithTags(index: i)
-                }
-            } else if attemptQuestion.isNumerical {
-                correctAnswerHtml = attemptAnswer.getTextHtml(attemptQuestion, self.language)
-            } else {
+            } else if !attemptQuestion.isNumerical {
                 if i == 0 {
                     html += "<table width='100%' style='margin-top:0px; margin-bottom:15px;'>"
                         + WebViewUtils.getShortAnswerHeadersWithTags()
