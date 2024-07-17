@@ -12,6 +12,7 @@ import ObjectMapper
 class UserFileResponse: DBModel {
     @objc dynamic var path: String = ""
     @objc dynamic var url: String = ""
+    @objc dynamic var pdfPreviewUrl: String?
         
     override class func ignoredProperties() -> [String] {
         return ["id"]
@@ -21,6 +22,7 @@ class UserFileResponse: DBModel {
         id <- map["id"]
         path <- map["path"]
         url <- map["url"]
+        pdfPreviewUrl <- map["pdf_preview_url"]
     }
     
     public static func create(uploadedPath: String) -> UserFileResponse{

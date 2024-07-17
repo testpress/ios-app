@@ -51,7 +51,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     }
     
     private func loadWebViewContent() {
-        let htmlString = WebViewUtils.getQuestionHeader() + getAdditionalHeaders() + getHtml()
+        let htmlString = WebViewUtils.getQuestionHeader() + WebViewUtils.getQuestionReviewPageHeader() + getAdditionalHeaders() + getHtml()
         
         webView.loadHTMLString(htmlString, baseURL: Bundle.main.bundleURL)
     }
@@ -63,6 +63,9 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
+        contentController.add(self, name: "previewFile")
+        contentController.add(self, name: "downloadFile")
+        
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
         config.preferences.javaScriptEnabled = true
@@ -203,6 +206,14 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 present(loadingDialogController, animated: true)
                 postComment(comment)
             }
+        } else if message.name == "previewFile" {
+            if let fileUrl = message.body as? String {
+                handlePreviewFile(url: fileUrl)
+            }
+        } else if message.name == "downloadFile" {
+            if let fileUrl = message.body as? String {
+                handleDownloadFile(url: fileUrl)
+            }
         }
     }
     
@@ -248,6 +259,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         html += getDirectionHtml(attemptQuestion)
         html += getQuestionHtml(attemptQuestion)
         html += getAnswersHtml(attemptItem: attemptItem)
+        html += getFileTypeQuestionResponseHtml(attemptItem: attemptItem)
         html += getEssayHtml(attemptQuestion: attemptQuestion)
         html += getAnswerDetailsHtml(attemptItem: attemptItem)
         html += getMarkingDetailsHtml(attemptItem: attemptItem)
@@ -321,6 +333,32 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         return html
     }
     
+    func getFileTypeQuestionResponseHtml(attemptItem: AttemptItem) -> String {
+        guard let attemptQuestion = attemptItem.question else {
+            return ""
+        }
+
+        var html = ""
+        if attemptQuestion.isFileType && !attemptItem.files.isEmpty {
+            html += "<div class='file-question'>"
+            html += "<label>Uploaded Files:</label>"
+
+            for (index, file) in attemptItem.files.enumerated() {
+                let fileLabel = "File \(index + 1)"
+                html += """
+                <div class='file-entry'>
+                    <label>\(fileLabel)</label>
+                    \(file.pdfPreviewUrl != nil ? "<button onclick='previewFile(\"\(file.pdfPreviewUrl!)\")'>Preview</button>" : "")
+                    <button onclick='downloadFile(\"\(file.url)\")'>Download</button>
+                </div>
+                """
+            }
+
+            html += "</div>"
+        }
+        return html
+    }
+    
     func getEssayHtml(attemptQuestion: AttemptQuestion) -> String {
         var html = ""
         if attemptQuestion.isEssayType {
@@ -350,7 +388,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 WebViewUtils.getReviewHeadingTags(headingText: Strings.CORRECT_ANSWER) +
             getCorrectAnswersHtml(attemptQuestion: attemptItem.question!) + "</div>"
         }
-        if question.isShortAnswer || question.isNumerical {
+        if question.isShortAnswer || question.isNumerical || question.isFileType {
             html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
                 WebViewUtils.getReviewHeadingTags(headingText: Strings.MARKS_AWARDED) +
                 (attemptItem.marks ?? "")! +
@@ -460,6 +498,34 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         }
         
         return correctAnswerHtml
+    }
+    
+    func handlePreviewFile(url: String) {
+        let webViewController = WebViewController()
+        webViewController.title = "PDF Preview"
+        webViewController.url = url
+        present(webViewController, animated: true, completion: nil)
+    }
+    
+    func handleDownloadFile(url: String) {
+        guard let fileUrl = URL(string: url) else {
+            print("Invalid URL.")
+            return
+        }
+
+        FileDownloadUtility.shared.downloadFile(viewController: self, from: fileUrl) { (destinationURL, error) in
+            if let destinationURL = destinationURL {
+                debugPrint(destinationURL)
+            } else if let error = error {
+                self.presentErrorDialog(error: error)
+            }
+        }
+    }
+    
+    private func presentErrorDialog(error: Error) {
+        let errorAlert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        errorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(errorAlert, animated: true, completion: nil)
     }
     
     func onClickBookmarkButton() {

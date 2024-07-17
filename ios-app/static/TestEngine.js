@@ -133,3 +133,5 @@ function addWatermark(imageUrl) {
     document.body.pseudoStyle("before", "background-image", `url(${imageUrl})`);
     document.body.classList.add("watermark");
 }
+
+
