@@ -63,10 +63,11 @@ class TPApiClient {
         }
         
         let dataRequest = Alamofire.AF.request(request)
-        self.request(dataRequest: dataRequest, completion: completion)
+        self.request(dataRequest: dataRequest, endpointProvider: endpointProvider, completion: completion)
     }
     
     static func request(dataRequest: DataRequest,
+                        endpointProvider: TPEndpointProvider,
                         completion: @escaping (String?, TPError?) -> Void) {
         
         dataRequest.responseString(queue: .main, encoding: String.Encoding.utf8) { response in
@@ -90,7 +91,7 @@ class TPApiClient {
                     if (statusCode == 403) {
                         error = TPError(message: json, response: httpResponse,
                                         kind: .unauthenticated)
-                    } else if (statusCode == 401){
+                    } else if (statusCode == 401 && ![TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)){
                         error = TPError(message: json, response: httpResponse, kind: .unauthenticated)
                         UIUtils.logout()
 
@@ -440,6 +441,10 @@ class TPApiClient {
         
         if attemptItem.question.isEssayType {
             parameters["essay_text"] = attemptItem.localEssayText
+        }
+        
+        if attemptItem.question.isFileType {
+            parameters["files"] = Array(attemptItem.localFiles.map {$0.path})
         }
                 
         if let gapFilledResponses = gapFilledResponses {

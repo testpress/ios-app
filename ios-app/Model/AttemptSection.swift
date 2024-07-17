@@ -34,6 +34,7 @@ class AttemptSection: DBModel {
     @objc dynamic var remainingTime: String = ""
     @objc dynamic var attemptId: Int = -1
     @objc dynamic var name: String = ""
+    @objc dynamic var instructions: String = ""
     @objc dynamic var duration: String = ""
     @objc dynamic var order: Int = 0
     
@@ -50,6 +51,7 @@ class AttemptSection: DBModel {
         remainingTime <- map["remaining_time"]
         attemptId <- map["attempt_id"]
         name <- map["name"]
+        instructions <- map["instructions"]
         duration <- map["duration"]
         order <- map["order"]
     }

@@ -12,7 +12,7 @@ function initRadioGroup(selectedRadioOptionId) {
 
 function onRadioOptionClick(clickedOption) {
     if (selectedRadioOption == clickedOption) {
-        var message = { "clickedOptionId": clickedOption.id, "checked": false, "radioOption": true }
+        var message = {"type": "radio_response", "clickedOptionId": clickedOption.id, "checked": false, "radioOption": true }
         webkit.messageHandlers.callbackHandler.postMessage(message);
         setRadioButtonState(clickedOption, false);
         selectedRadioOption = null;
@@ -20,7 +20,7 @@ function onRadioOptionClick(clickedOption) {
         if (selectedRadioOption) {
             setRadioButtonState(selectedRadioOption, false);
         }
-        var message = {"clickedOptionId": clickedOption.id, "checked": true, "radioOption": true }
+        var message = {"type": "radio_response", "clickedOptionId": clickedOption.id, "checked": true, "radioOption": true }
         webkit.messageHandlers.callbackHandler.postMessage(message);
         setRadioButtonState(clickedOption, true);
     }
@@ -59,11 +59,11 @@ function initCheckBoxGroup(selectedCheckBoxOptionIds) {
 
 function onCheckBoxOptionClick(option) {
     if (isCheckedOption(option)) {
-        var message = { "clickedOptionId": option.id, "checked": false, "radioOption": false }
+        var message = {"type": "checkbox_response", "clickedOptionId": option.id, "checked": false, "radioOption": false }
         webkit.messageHandlers.callbackHandler.postMessage(message);
         setCheckboxState(option, false);
     } else {
-        var message = { "clickedOptionId": option.id, "checked": true, "radioOption": false }
+        var message = {"type": "checkbox_response", "clickedOptionId": option.id, "checked": true, "radioOption": false }
         webkit.messageHandlers.callbackHandler.postMessage(message);
         setCheckboxState(option, true);
     }
@@ -87,17 +87,27 @@ function setCheckboxState(option, check) {
 }
 
 function onValueChange(element) {
-    var message = { "shortText": element.value };
+    var message = {"type": "short_text_response", "shortText": element.value };
     webkit.messageHandlers.callbackHandler.postMessage(message);
 }
 
 function onEssayValueChange(element) {
-    var message = { "essay": element.value };
+    var message = {"type": "essay_response", "essay": element.value };
     webkit.messageHandlers.callbackHandler.postMessage(message);
 }
 
 function onFillInTheBlankValueChange(element) {
     var message = {"order": element.getAttribute("data-order"), "answer": element.value, "type": "gap_filled_response"}
+    webkit.messageHandlers.callbackHandler.postMessage(message);
+}
+
+function onUploadFileButtonClick() {
+    var message = {"type": "file_upload"}
+    webkit.messageHandlers.callbackHandler.postMessage(message);
+}
+
+function clearFile() {
+    var message = {"type": "clear_uploaded_file"}
     webkit.messageHandlers.callbackHandler.postMessage(message);
 }
 

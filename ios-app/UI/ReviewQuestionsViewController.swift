@@ -40,20 +40,24 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupHelpers()
+        loadWebViewContent()
+    }
+    
+    private func setupHelpers() {
         imageUploadHelper.delegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
-        webView.loadHTMLString(
-            WebViewUtils.getQuestionHeader() + getAdditionalHeaders() + getHtml(),
-            baseURL: Bundle.main.bundleURL
-        )
+    }
+    
+    private func loadWebViewContent() {
+        let htmlString = WebViewUtils.getQuestionHeader() + getAdditionalHeaders() + getHtml()
+        
+        webView.loadHTMLString(htmlString, baseURL: Bundle.main.bundleURL)
     }
     
     func getAdditionalHeaders() -> String {
-        if Constants.BOOKMARKS_ENABLED {
-            return WebViewUtils.getBookmarkHeader()
-        }
-        return ""
+        return Constants.BOOKMARKS_ENABLED ? WebViewUtils.getBookmarkHeader() : ""
     }
     
     override func initWebView() {
@@ -74,7 +78,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     func getPreviousCommentsPager() -> CommentPager {
         if previousCommentsPager == nil {
             attemptItem.question.commentsUrl =
-                TPEndpointProvider.getCommentsUrl(questionId: attemptItem.question.id)
+            TPEndpointProvider.getCommentsUrl(questionId: attemptItem.question.id)
             
             previousCommentsPager = CommentPager(attemptItem.question.commentsUrl)
             previousCommentsPager.queryParams.updateValue("-created", forKey: Constants.ORDER)
@@ -122,7 +126,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             var comments = Array(items!.values)
             comments = comments.sorted(by: {
                 FormatDate.compareDate(dateString1:  $0.created!, dateString2: $1.created!)
-             })
+            })
             self.comments.append(contentsOf: comments)
             var html = ""
             for comment in comments {
@@ -211,200 +215,52 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             comment: comment,
             commentsUrl: attemptItem.question.commentsUrl,
             completion: { comment, error in
-            
-            if let error = error {
-                debugPrint(error.message ?? "No error")
-                debugPrint(error.kind)
+                
+                if let error = error {
+                    self.loadingDialogController.dismiss(animated: false)
+                    let (_, title, _) = error.getDisplayInfo()
+                    let snackbar = TTGSnackbar(message: title, duration: .middle)
+                    snackbar.show()
+                    return
+                }
+                
+                self.evaluateJavaScript("clearCommentBox();")
                 self.loadingDialogController.dismiss(animated: false)
-                let (_, title, _) = error.getDisplayInfo()
-                let snackbar = TTGSnackbar(message: title, duration: .middle)
-                snackbar.show()
-                return
-            }
-            
-            self.evaluateJavaScript("clearCommentBox();")
-            self.loadingDialogController.dismiss(animated: false)
-            self.getNewCommentsPager().reset()
-            self.loadNewComments()
-        })
+                self.getNewCommentsPager().reset()
+                self.loadNewComments()
+            })
     }
     
     func uploadImage() {
         imageUploadHelper.showImagePicker(viewController: self,
                                           loadingDialogController: loadingDialogController)
     }
-
+    
     func getHtml() -> String {
-        let attemptItem = self.attemptItem!
-        let attemptQuestion: AttemptQuestion = (attemptItem.question)!
+        guard let attemptItem = attemptItem, let attemptQuestion = attemptItem.question else {
+                return ""
+            }
+        
         var html: String = "<div style='padding-left: 5px; padding-right: 5px;'>"
         html += "<div style='overflow:scroll'>"
         
         html += getHtmlAboveQuestion()
-        
-        // Add direction/passage if present
-        if (attemptQuestion.direction != nil && !(attemptQuestion.direction!.isEmpty)) {
-            html += "<div class='question' style='padding-bottom: 0px;'>" +
-                        attemptQuestion.direction! +
-                    "</div>";
-        }
-        
-        // Add question
-        html += "<div class='question'>" +
-                    attemptQuestion.questionHtml! +
-                "</div>";
-        
-        var isSingleMCQType = false
-        var isMultipleMCQType = false
-        var isShortAnswerType = false
-        var isNumericalType = false
-        switch attemptQuestion.type {
-        case "R":
-            isSingleMCQType = true
-            break
-        case "C":
-            isMultipleMCQType = true
-            break
-        case "S":
-            isShortAnswerType = true
-            break
-        case "N":
-            isNumericalType = true
-            break
-        default:
-            break
-        }
-        // Add options
-        var correctAnswerHtml: String = ""
-        for (i, attemptAnswer) in attemptQuestion.answers.enumerated() {
-            if isSingleMCQType || isMultipleMCQType {
-                var optionColor: String?
-                if attemptItem.selectedAnswers.contains(attemptAnswer.id) {
-                    if attemptAnswer.isCorrect {
-                        optionColor = Colors.MATERIAL_GREEN;
-                    } else {
-                        optionColor = Colors.MATERIAL_RED
-                    }
-                }
-                html += "\n" + WebViewUtils.getOptionWithTags(
-                    optionText: attemptAnswer.textHtml,
-                    index: i,
-                    color: optionColor
-                )
-                if attemptAnswer.isCorrect {
-                    correctAnswerHtml += WebViewUtils.getCorrectAnswerIndexWithTags(index: i)
-                }
-            } else if isNumericalType {
-                correctAnswerHtml = attemptAnswer.textHtml
-            } else {
-                if i == 0 {
-                    html += "<table width='100%' style='margin-top:0px; margin-bottom:15px;'>"
-                        + WebViewUtils.getShortAnswerHeadersWithTags()
-                }
-                html += WebViewUtils.getShortAnswersWithTags(
-                    shortAnswerText: attemptAnswer.textHtml,
-                    marksAllocated: attemptAnswer.marks!
-                )
-                if i == attemptQuestion.answers.count - 1 {
-                    html += "</table>"
-                }
-            }
-        }
-        
-        if attemptQuestion.isEssayType  {
-            html += getUserEssayAnswer()
-            html += getEssayMarks()
-        }
-        
-        
-        if isShortAnswerType || isNumericalType {
-            html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
-                WebViewUtils.getReviewHeadingTags(headingText: Strings.YOUR_ANSWER) +
-                (attemptItem.shortText ?? "") +
-            "</div>"
-        }
-        
-        if isSingleMCQType || isMultipleMCQType || isNumericalType {
-            // Add correct answer
-            html += "<div style='display:block;'>" +
-                WebViewUtils.getReviewHeadingTags(headingText: Strings.CORRECT_ANSWER) +
-                correctAnswerHtml +
-            "</div>"
-        }
-        
-        if isShortAnswerType || isNumericalType {
-            html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
-                WebViewUtils.getReviewHeadingTags(headingText: Strings.MARKS_AWARDED) +
-                (attemptItem.marks ?? "")! +
-            "</div>"
-            if isShortAnswerType {
-                let note = attemptQuestion.isCaseSensitive ?
-                    Strings.CASE_SENSITIVE : Strings.CASE_INSENSITIVE
-                
-                html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
-                    WebViewUtils.getReviewHeadingTags(headingText: Strings.NOTE) +
-                    note +
-                "</div>"
-            }
-        }
-        
-        // Add explanation
-        let explanationHtml = attemptQuestion.explanationHtml
-        if (explanationHtml != nil && !explanationHtml!.isEmpty) {
-            html += WebViewUtils.getReviewHeadingTags(headingText: Strings.EXPLANATION)
-            html += "<div class='review-explanation'>" +
-                explanationHtml! +
-            "</div>";
-        }
-        // Add Subject
-        if !attemptQuestion.subject.isEmpty &&
-            !attemptQuestion.subject.elementsEqual("Uncategorized") {
-                html += WebViewUtils.getReviewHeadingTags(headingText: Strings.SUBJECT_HEADING)
-                html += "<div class='subject'>" +
-                    attemptQuestion.subject +
-                "</div>";
-        }
-        html += "</div>"
-        html += "<hr style='margin-top:20px;'>"
-        html += WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS);
-        html += "<div class='comment_box_layout'>" +
-                    "<div><span class='icon-add-a-photo' onclick='insertImage()'></span></div>" +
-                    "<div contentEditable='true' class='comment_box' " +
-                            "data-placeholder='Write a comment...'></div>" +
-                    "<div><span class='icon-paper-plane' onclick='sendComment()'></span></div>" +
-                "</div>"
-        
-        html += WebViewUtils.getLoadingProgressBar(className: "new_comments_loading_layout",
-                                                   visible: false)
-        
-        html += "<div class='load_new_comments_layout' style='display:none;'>" +
-                    "<hr>" +
-                    "<div class='load_new_comments' onclick='loadNewComments()'></div>" +
-                "</div>"
-        
-        html += "<div id='comments_layout'></div>"
-        
-        html += WebViewUtils.getLoadingProgressBar(className: "preview_comments_loading_layout")
-        html += "<div class='load_more_comments_layout' style='display:none;'>" +
-                    "<hr>" +
-                    "<div class='load_more_comments' onclick='loadMoreComments()'></div>" +
-                "</div>"
-        
-        return html + "</div>"
-    }
-    
-    func getUserEssayAnswer() -> String {
-        return "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
-            WebViewUtils.getReviewHeadingTags(headingText: Strings.YOUR_ANSWER) +
-            (attemptItem.essayText ?? "") +
-        "</div>"
-    }
-    
-    func getEssayMarks() -> String {
-        return "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
-            WebViewUtils.getReviewHeadingTags(headingText: Strings.MARKS_AWARDED) +
-            (attemptItem.marks ?? "")! +
-        "</div>"
+        html += getDirectionHtml(attemptQuestion)
+        html += getQuestionHtml(attemptQuestion)
+        html += getAnswersHtml(attemptItem: attemptItem)
+        html += getEssayHtml(attemptQuestion: attemptQuestion)
+        html += getAnswerDetailsHtml(attemptItem: attemptItem)
+        html += getMarkingDetailsHtml(attemptItem: attemptItem)
+        html += getExplanationSectionHtml(attemptQuestion)
+        html += getSubjectSectionHtml(attemptQuestion) + "</div>"
+        html += getDividerHtml()
+        html += getCommentBoxHtml()
+        html += getLoadNewCommentsHtml()
+        html += getCommentsLayoutHtml()
+        html += getLoadMoreCommentsHtml() + "</div>"
+        html += getDividerHtml() + "</div>"
+
+        return html
     }
     
     func getHtmlAboveQuestion() -> String {
@@ -417,13 +273,193 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         return html
     }
     
-    func onClickMoveButton() {
+    private func getDirectionHtml(_ question: AttemptQuestion) -> String {
+        guard let direction = question.direction, !direction.isEmpty else {
+            return ""
+        }
+        
+        return "<div class='question' style='padding-bottom: 0px;'>" +
+               question.getLanguageBasedDirection(self.language) +
+               "</div>"
     }
     
-    func removeBookmark() {
+    private func getQuestionHtml(_ question: AttemptQuestion) -> String {
+        return "<div class='question'>" +
+               question.getLanguageBasedQuestion(self.language) +
+               "</div>"
     }
     
-    func displayRemoveButton() {
+    func getAnswersHtml(attemptItem: AttemptItem) -> String {
+        var attemptQuestion = attemptItem.question!
+        var html = ""
+
+        for (i, attemptAnswer) in attemptQuestion.answers.enumerated() {
+            if attemptQuestion.isSingleMcq || attemptQuestion.isMultipleMcq {
+                var optionColor: String?
+                if attemptItem.selectedAnswers.contains(attemptAnswer.id) {
+                    optionColor = attemptAnswer.isCorrect ? Colors.MATERIAL_GREEN : Colors.MATERIAL_RED
+                }
+                html += "\n" + WebViewUtils.getOptionWithTags(
+                    optionText: attemptAnswer.getTextHtml(attemptQuestion, self.language),
+                    index: i,
+                    color: optionColor
+                )
+            } else if !attemptQuestion.isNumerical {
+                if i == 0 {
+                    html += "<table width='100%' style='margin-top:0px; margin-bottom:15px;'>"
+                        + WebViewUtils.getShortAnswerHeadersWithTags()
+                }
+                html += WebViewUtils.getShortAnswersWithTags(
+                    shortAnswerText: attemptAnswer.getTextHtml(attemptQuestion, self.language),
+                    marksAllocated: attemptAnswer.marks!
+                )
+                if i == attemptQuestion.answers.count - 1 {
+                    html += "</table>"
+                }
+            }
+        }
+        return html
+    }
+    
+    func getEssayHtml(attemptQuestion: AttemptQuestion) -> String {
+        var html = ""
+        if attemptQuestion.isEssayType {
+            html += getUserEssayAnswer()
+            html += getEssayMarks()
+        }
+        return html
+    }
+
+    func getAnswerDetailsHtml(attemptItem: AttemptItem) -> String {
+        var attemptQuestion = attemptItem.question!
+        var html = ""
+        if attemptQuestion.isShortAnswer || attemptQuestion.isNumerical {
+            html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+                WebViewUtils.getReviewHeadingTags(headingText: Strings.YOUR_ANSWER) +
+                (attemptItem.shortText ?? "") +
+                "</div>"
+        }
+        return html
+    }
+
+    func getMarkingDetailsHtml(attemptItem: AttemptItem) -> String {
+        var question = attemptItem.question!
+        var html = ""
+        if question.isSingleMcq || question.isMultipleMcq || question.isNumerical {
+            html += "<div style='display:block;'>" +
+                WebViewUtils.getReviewHeadingTags(headingText: Strings.CORRECT_ANSWER) +
+            getCorrectAnswersHtml(attemptQuestion: attemptItem.question!) + "</div>"
+        }
+        if question.isShortAnswer || question.isNumerical {
+            html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+                WebViewUtils.getReviewHeadingTags(headingText: Strings.MARKS_AWARDED) +
+                (attemptItem.marks ?? "")! +
+                "</div>"
+            if question.isShortAnswer {
+                let note = question.isCaseSensitive ?
+                    Strings.CASE_SENSITIVE : Strings.CASE_INSENSITIVE
+
+                html += "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+                    WebViewUtils.getReviewHeadingTags(headingText: Strings.NOTE) +
+                    note +
+                    "</div>"
+            }
+        }
+        return html
+    }
+    
+    private func getExplanationSectionHtml(_ question: AttemptQuestion) -> String {
+        var html = ""
+        let explanationHtml = question.getExplanationHtml(self.language)
+        if let explanationHtml = explanationHtml, !explanationHtml.isEmpty {
+            html += WebViewUtils.getReviewHeadingTags(headingText: Strings.EXPLANATION)
+            html += "<div class='review-explanation'>"
+            html += explanationHtml
+            html += "</div>"
+        }
+        return html
+    }
+
+    private func getSubjectSectionHtml(_ question: AttemptQuestion) -> String {
+        var html = ""
+        if !question.subject.isEmpty && question.subject != "Uncategorized" {
+            html += WebViewUtils.getReviewHeadingTags(headingText: Strings.SUBJECT_HEADING)
+            html += "<div class='subject'>"
+            html += question.subject
+            html += "</div>"
+        }
+        return html
+    }
+    
+    private func getCommentBoxHtml() -> String {
+        var html = WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS)
+        html += "<div class='comment_box_layout'>" +
+                "<div><span class='icon-add-a-photo' onclick='insertImage()'></span></div>" +
+                "<div contentEditable='true' class='comment_box' " +
+                "data-placeholder='Write a comment...'></div>" +
+                "<div><span class='icon-paper-plane' onclick='sendComment()'></span></div>" +
+                "</div>"
+        
+        return html
+    }
+
+    private func getLoadNewCommentsHtml() -> String {
+        var html = WebViewUtils.getLoadingProgressBar(className: "new_comments_loading_layout",
+                                                      visible: false)
+        html += "<div class='load_new_comments_layout' style='display:none;'>" +
+                "<hr>" +
+                "<div class='load_new_comments' onclick='loadNewComments()'></div>" +
+                "</div>"
+        
+        return html
+    }
+    
+    private func getCommentsLayoutHtml() -> String {
+        return "<div id='comments_layout'></div>"
+    }
+
+    private func getLoadMoreCommentsHtml() -> String {
+        var html = WebViewUtils.getLoadingProgressBar(className: "preview_comments_loading_layout")
+        html += "<div class='load_more_comments_layout' style='display:none;'>" +
+                "<hr>" +
+                "<div class='load_more_comments' onclick='loadMoreComments()'></div>" +
+                "</div>"
+        
+        return html
+    }
+    
+    private func getDividerHtml() -> String {
+        return "<hr style='margin-top:20px;'>"
+    }
+    
+    
+    func getUserEssayAnswer() -> String {
+        return "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+        WebViewUtils.getReviewHeadingTags(headingText: Strings.YOUR_ANSWER) +
+        (attemptItem.essayText ?? "") +
+        "</div>"
+    }
+    
+    func getEssayMarks() -> String {
+        return "<div style='display:box; display:-webkit-box; margin-bottom:10px;'>" +
+        WebViewUtils.getReviewHeadingTags(headingText: Strings.MARKS_AWARDED) +
+        (attemptItem.marks ?? "")! +
+        "</div>"
+    }
+    
+    func getCorrectAnswersHtml(attemptQuestion: AttemptQuestion) -> String {
+        var correctAnswerHtml = ""
+        
+        if attemptQuestion.isSingleMcq || attemptQuestion.isMultipleMcq {
+            correctAnswerHtml = attemptQuestion.answers.enumerated()
+                .filter { $0.element.isCorrect }
+                .map { WebViewUtils.getCorrectAnswerIndexWithTags(index: $0.offset) }
+                .joined()
+        } else if attemptQuestion.isNumerical {
+            correctAnswerHtml = attemptQuestion.answers.first?.getTextHtml(attemptQuestion, self.language) ?? ""
+        }
+        
+        return correctAnswerHtml
     }
     
     func onClickBookmarkButton() {
@@ -450,10 +486,12 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         self.evaluateJavaScript("displayMoveButton();")
     }
     
+    func onClickMoveButton() {}
+    func removeBookmark() {}
+    func displayRemoveButton() {}
 }
 
 extension ReviewQuestionsViewController: ImageUploadHelperDelegate {
-    
     func imageUploadHelper(_ helper: ImageUploadHelper, didFinishUploadImage imageUrl: String) {
         postComment(WebViewUtils.appendImageTag(imageUrl: imageUrl))
     }
