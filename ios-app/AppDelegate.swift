@@ -47,106 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var blurEffectView: UIVisualEffectView?
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        
-        // Register for remote notifications. This shows a permission dialog on first run.
-        // [START register_for_notifications]
-        if #available(iOS 10.0, *) {
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self
-            
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
-        } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
-        
-        application.registerForRemoteNotifications()
-        
-        // [END register_for_notifications]
-        FirebaseApp.configure()
-        
-        // [START set_messaging_delegate]
-        Messaging.messaging().delegate = self
-        // [END set_messaging_delegate]
-        
-        
-        // Customise navigation bar
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().backgroundColor = Colors.getRGB(Colors.PRIMARY)
-        UINavigationBar.appearance().barTintColor = Colors.getRGB(Colors.PRIMARY)
-        UIBarButtonItem.appearance().tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
-        UINavigationBar.appearance().titleTextAttributes =
-            [NSAttributedString.Key.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
-        // Set tab bar item custom offset only on iPhone
-        if !UIUtils.isiPad() {
-            UITabBarItem.appearance().titlePositionAdjustment =
-                UIOffset(horizontal: 0, vertical: -5)
-        }
-        do {
-            if #available(iOS 10.0, *) {
-                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            }
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print(error)
-        }
-        
-        ApplicationDelegate.shared.application(application,
-                                                  didFinishLaunchingWithOptions: launchOptions)
-        
-        IQKeyboardManager.shared.enable = true
-        
-        // Clear keychain items if app is launching the first time after installation
-        let userDefaults = UserDefaults.standard
-        if userDefaults.bool(forKey: Constants.LAUNCHED_APP_BEFORE) == false {
-            KeychainTokenItem.clearKeychainItems()
-            
-            userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
-            userDefaults.synchronize() // Forces the app to update UserDefaults
-        }
-        
-        let config = Realm.Configuration(schemaVersion: 43)
-        Realm.Configuration.defaultConfiguration = config
-        let viewController:UIViewController
-        
-        if (!InstituteSettings.isAvailable()) {
-            viewController = MainViewController()
-        } else {
-            UIUtils.fetchInstituteSettings(completion:{ _,_  in })
-            viewController = UIUtils.getLoginOrTabViewController()
-        }
-        
-        if (InstituteSettings.isAvailable()){
-            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-            SentrySDK.start { options in
-                options.dsn = instituteSettings.sentryDSN
-                options.debug = false
-            }
-            
-            if (KeychainTokenItem.isExist()) {
-                let user = Sentry.User()
-                user.username = KeychainTokenItem.getAccount()
-                SentrySDK.setUser(user)
-            }
-            
-            if(!instituteSettings.AllowScreenShotInApp){
-                NotificationCenter.default.addObserver(self, selector: #selector(screenRecordingChanged), name: UIScreen.capturedDidChangeNotification, object: nil)
-            }
-        }
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = viewController
-        window?.makeKeyAndVisible()
-        return true
-    }
-    
-    
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         
@@ -175,7 +75,125 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        registerForNotifications(application)
+        configureFirebase()
+        customizeAppearance()
+        configureAudioSession()
+        initializeFacebook(application, launchOptions: launchOptions)
+        configureKeyboardManager()
+        handleFirstLaunch()
+        configureRealm()
+        setupRootViewController()
+        
+        if let instituteSettings = fetchInstituteSettings() {
+            setupSentry(instituteSettings: instituteSettings)
+            restrictScreenRecording(instituteSettings: instituteSettings)
+        }
+
+        return true
+    }
+
+    private func registerForNotifications(_ application: UIApplication) {
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _, _ in })
+        } else {
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        application.registerForRemoteNotifications()
+    }
+
+    private func configureFirebase() {
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+    }
+
+    private func customizeAppearance() {
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.isTranslucent = false
+        navBarAppearance.backgroundColor = Colors.getRGB(Colors.PRIMARY)
+        navBarAppearance.barTintColor = Colors.getRGB(Colors.PRIMARY)
+        UIBarButtonItem.appearance().tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
+        navBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
+
+        if !UIUtils.isiPad() {
+            UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)
+        }
+    }
+
+    private func configureAudioSession() {
+        do {
+            if #available(iOS 10.0, *) {
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            }
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error)
+        }
+    }
+
+    private func initializeFacebook(_ application: UIApplication, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+
+    private func configureKeyboardManager() {
+        IQKeyboardManager.shared.enable = true
+    }
+
+    private func handleFirstLaunch() {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.bool(forKey: Constants.LAUNCHED_APP_BEFORE) == false {
+            KeychainTokenItem.clearKeychainItems()
+            userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
+            userDefaults.synchronize()
+        }
+    }
+
+    private func configureRealm() {
+        let config = Realm.Configuration(schemaVersion: 43)
+        Realm.Configuration.defaultConfiguration = config
+    }
+
+    private func setupRootViewController() {
+        let viewController: UIViewController
+        if !InstituteSettings.isAvailable() {
+            viewController = MainViewController()
+        } else {
+            UIUtils.fetchInstituteSettings(completion: { _, _ in })
+            viewController = UIUtils.getLoginOrTabViewController()
+        }
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
+    }
+
+    private func fetchInstituteSettings() -> InstituteSettings? {
+        guard InstituteSettings.isAvailable() else { return nil }
+        return DBManager<InstituteSettings>().getResultsFromDB().first
+    }
+
+    private func setupSentry(instituteSettings: InstituteSettings) {
+        SentrySDK.start { options in
+            options.dsn = instituteSettings.sentryDSN
+            options.debug = false
+        }
+
+        if KeychainTokenItem.isExist() {
+            let user = Sentry.User()
+            user.username = KeychainTokenItem.getAccount()
+            SentrySDK.setUser(user)
+        }
+    }
+
+    private func restrictScreenRecording(instituteSettings: InstituteSettings) {
+        if !instituteSettings.AllowScreenShotInApp {
+            NotificationCenter.default.addObserver(self, selector: #selector(screenRecordingChanged), name: UIScreen.capturedDidChangeNotification, object: nil)
+        }
+    }
 }
 
 extension AppDelegate {
