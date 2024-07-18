@@ -182,6 +182,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             options.debug = false
         }
 
+        if let buildID = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String {
+            SentrySDK.configureScope { scope in
+                scope.setTag(value: buildID, key: "build.id")
+            }
+        }
+
         if KeychainTokenItem.isExist() {
             let user = Sentry.User()
             user.username = KeychainTokenItem.getAccount()
