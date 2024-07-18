@@ -357,7 +357,6 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             completion: {
                 attempt, error in
                 if let error = error {
-                    error.logErrorToSentry()
                     self.loadingDialogController.message = Strings.PLEASE_WAIT + "\n\n"
                     self.showAlert(error: error, retryHandler: { self.sendHeartBeat() })
                     return
@@ -391,7 +390,6 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                             self.showMaxQuestionsAttemptedError(error: error)
                             self.setCurrentQuestion(index: index)
                         } else {
-                            error.logErrorToSentry()
                             self.showAlert(error: error, retryHandler: {
                                 self.saveAnswer(index: index, completionHandler: completionHandler)
                             })
@@ -459,7 +457,6 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             completion: {
                 attemptSection, error in
                 if let error = error {
-                    error.logErrorToSentry()
                     self.showAlert(
                         error: error,
                         message: Strings.EXAM_PAUSED_CHECK_INTERNET_TO_END,
@@ -513,7 +510,6 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             completion: {
                 attemptSection, error in
                 if let error = error {
-                    error.logErrorToSentry()
                     self.showAlert(error: error, retryHandler: { self.startSection() })
                     return
                 }
@@ -558,7 +554,6 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             completion: {
                 attempt, error in
                 if let error = error {
-                    error.logErrorToSentry()
                     self.showAlert(
                         error: error,
                         message: Strings.EXAM_PAUSED_CHECK_INTERNET_TO_END,

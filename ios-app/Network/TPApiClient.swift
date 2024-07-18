@@ -109,6 +109,7 @@ class TPApiClient {
                         
                     } else {
                         error = TPError(message: json, response: httpResponse, kind: .http)
+                        error.logErrorToSentry()
                     }
 
                     if (error.kind == TPError.Kind.custom) {
@@ -135,6 +136,7 @@ class TPApiClient {
             let error = TPError(message: description, response: httpResponse,
                                 kind: .network)
             
+            error.logErrorToSentry()
             completion(nil, error)
         } else {
             let error = TPError(message: description, response: httpResponse,
@@ -144,6 +146,7 @@ class TPApiClient {
                 handleCustomError(error: error)
             }
             
+            error.logErrorToSentry()
             completion(nil, error)
         }
     }
