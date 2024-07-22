@@ -367,6 +367,9 @@
 		8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */; };
 		D907E7A92B19D11C00BEA874 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = D907E7A82B19D11C00BEA874 /* Language.swift */; };
 		D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */; };
+		D923330C2C4E8C7000F6D06C /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D923330B2C4E8C6F00F6D06C /* MobileRTC.xcframework */; };
+		D923330E2C4E8C7E00F6D06C /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D923330D2C4E8C7E00F6D06C /* MobileRTCResources.bundle */; };
+		D923330F2C4E8C8800F6D06C /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D923330B2C4E8C6F00F6D06C /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9533ABE2B99CD2700E73A78 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */; };
 		D98010692B035E780071C397 /* CustomTestQuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */; };
 		D990C7EE2B316C6300B3ED4D /* AttemptAnswerTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */; };
@@ -427,6 +430,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D923330F2C4E8C8800F6D06C /* MobileRTC.xcframework in Embed Frameworks */,
 				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
 				D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */,
 				D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */,
@@ -825,6 +829,8 @@
 		9B482AA21F7CADEABC2BF009 /* ios_appTests-ios_appMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ios_appTests-ios_appMocks.generated.swift"; path = "MockingbirdMocks/ios_appTests-ios_appMocks.generated.swift"; sourceTree = "<group>"; };
 		D907E7A82B19D11C00BEA874 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Language.swift; path = "ios-app/Model/Language.swift"; sourceTree = SOURCE_ROOT; };
 		D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestGenerationViewController.swift; sourceTree = "<group>"; };
+		D923330B2C4E8C6F00F6D06C /* MobileRTC.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:BJ4HAAB9B3:Zoom Video Communications, Inc."; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
+		D923330D2C4E8C7E00F6D06C /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 		D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestQuizExamViewModel.swift; sourceTree = "<group>"; };
 		D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptAnswerTranslation.swift; sourceTree = "<group>"; };
@@ -844,6 +850,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D923330C2C4E8C7000F6D06C /* MobileRTC.xcframework in Frameworks */,
 				2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */,
 				0386961C2BF7602600E36F8F /* Alamofire in Frameworks */,
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
@@ -988,6 +995,7 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
+				D923330D2C4E8C7E00F6D06C /* MobileRTCResources.bundle */,
 				038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
@@ -1057,6 +1065,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D923330B2C4E8C6F00F6D06C /* MobileRTC.xcframework */,
 				038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */,
 				038695FC2BF6095D00E36F8F /* DGCharts.xcframework */,
 				25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */,
@@ -1551,7 +1560,6 @@
 					};
 					2F26ADE11E8249D70031E6F4 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = BHAB7LC35Y;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1607,6 +1615,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D923330E2C4E8C7E00F6D06C /* MobileRTCResources.bundle in Resources */,
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
@@ -2253,7 +2262,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.5.4;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2288,7 +2297,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.5.4;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
