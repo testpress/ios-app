@@ -35,7 +35,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     
     private var selectedOptions: [Int] = []
     private var gapFilledResponse: [Int: AnyObject] = [:]
-
+    private var fileUploadHelper: FileUploadPicker?
+    
     override func initWebView() {
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
@@ -45,86 +46,107 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         
         webView = WKWebView( frame: self.containerView!.bounds, configuration: config)
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
-        
-        // Set initial values of current selected answer & review
-        selectedOptions = Array(attemptItem!.selectedAnswers)
-        reviewSwitch.isOn = attemptItem!.review
-        try! Realm().write {
-            attemptItem?.savedAnswers.removeAll()
-            attemptItem?.savedAnswers.append(objectsIn: selectedOptions)
-            attemptItem?.currentReview = attemptItem!.review
-            attemptItem?.currentShortText = attemptItem!.shortText
-            attemptItem?.gapFillResponses.forEach { response in
-                gapFilledResponse[response.order] = response.answer as AnyObject
-            }
-            attemptItem.localEssayText = attemptItem.essayText
-        }
-
-        indexView!.text = String("\((attemptItem?.index)! + 1)")
-        webView.loadHTMLString(WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader()
-            + getQuestionHtml(), baseURL: Bundle.main.bundleURL)
-    }
-    
-    func userContentController(_ userContentController: WKUserContentController,
-                               didReceive message: WKScriptMessage) {
-        if (message.name == "callbackHandler") {
-            let body = message.body
-            if let dict = body as? Dictionary<String, AnyObject> {
-                if dict["type"] as! String? == "gap_filled_response" {
-                    handleGapFillTypeInput(dict)
-                } else if let checked = dict["checked"] as? Bool {
-                    let radioOption = dict["radioOption"] as! Bool
-                    let id = Int(dict["clickedOptionId"] as! String)!
-                    if checked {
-                        if radioOption {
-                            selectedOptions = []
-                        }
-                        selectedOptions.append(id)
-                    } else {
-                        selectedOptions = selectedOptions.filter { $0 != id }
-                    }
-                    try! Realm().write {
-                        attemptItem.savedAnswers.removeAll()
-                        attemptItem.savedAnswers.append(objectsIn: selectedOptions)
-                    }
-                } else if let shortText = dict["shortText"] as? String {
-                    try! Realm().write {
-                        attemptItem.currentShortText = shortText.trim()
-                    }
-                } else if let essay = dict["essay"] as? String {
-                    try! Realm().write {
-                        attemptItem.localEssayText = essay
-                    }
-                }
-            }
-        }
-    }
-    
-    func handleGapFillTypeInput(_ gapFillData: [String : AnyObject]) {
-        let order = gapFillData["order"] as! NSString
-        gapFilledResponse[order.integerValue] = gapFillData["answer"]
-        attemptItem.setGapFillResponses(gapFilledResponse)
-    }
     
     override func getJavascript() -> String {
         var javascript = super.getJavascript()
         var selectedAnswers: [Int] = Array((attemptItem?.selectedAnswers)!)
+        guard let questionType = attemptItem?.question?.type else { return javascript }
+        
         if !selectedAnswers.isEmpty {
-            let optionType: String = (attemptItem?.question?.type)!
-            if optionType == "R" {
-                javascript +=
-                    WebViewUtils.getRadioButtonInitializer(selectedOption: selectedAnswers[0])
-            } else {
-                javascript += WebViewUtils.getCheckBoxInitializer(selectedOptions: selectedAnswers)
-            }
+            javascript += (questionType == "R") ? WebViewUtils.getRadioButtonInitializer(selectedOption: selectedAnswers[0]) : WebViewUtils.getCheckBoxInitializer(selectedOptions: selectedAnswers)
         }
         return javascript
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupActivityIndicator()
+        loadAttemptItemData()
+        setupWebView()
+    }
+    
+    private func setupActivityIndicator() {
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y)
+    }
+    
+    private func loadAttemptItemData() {
+        guard let attemptItem = attemptItem else { return }
+        
+        // Set initial values of current selected answer & review
+        selectedOptions = Array(attemptItem.selectedAnswers)
+        reviewSwitch.isOn = attemptItem.review
+        
+        try! Realm().write {
+            attemptItem.savedAnswers.removeAll()
+            attemptItem.savedAnswers.append(objectsIn: selectedOptions)
+            attemptItem.currentReview = attemptItem.review
+            attemptItem.currentShortText = attemptItem.shortText
+            attemptItem.gapFillResponses.forEach { response in
+                gapFilledResponse[response.order] = response.answer as AnyObject
+            }
+            attemptItem.localEssayText = attemptItem.essayText
+        }
+        
+        indexView.text = String(attemptItem.index + 1)
+    }
+    
+    private func setupWebView() {
+        webView.loadHTMLString(
+            WebViewUtils.getQuestionHeader() + WebViewUtils.getTestEngineHeader() + getQuestionHtml(),
+            baseURL: Bundle.main.bundleURL
+        )
+    }                                                                                           
+    
+    func getQuestionHtml() -> String {
+        guard let attemptQuestion = attemptItem?.question else { return "" }
+        
+        var htmlContent = "<div style='padding-left: 10px; padding-right: 10px;'>"
+        
+        if let direction = attemptQuestion.direction, !direction.isEmpty {
+            htmlContent += "<div class='question' style='padding-bottom: 0px;'>\(attemptQuestion.getLanguageBasedDirection(self.language))</div>"
+        }
+        
+        htmlContent += "<div class='question' style='padding-bottom: 0px;'>\(attemptQuestion.getLanguageBasedQuestion(self.language))</div>"
+        
+        switch attemptQuestion.type {
+        case "G":
+            htmlContent = getGapFilledQuestionHtml(htmlContent)
+        case "R", "C":
+            htmlContent += getOptionsHtml(for: attemptQuestion)
+        case "E":
+            htmlContent += getEssayQuestionInputHtml()
+        case "F":
+            htmlContent += getFileQuestionInputHtml()
+        default:
+            htmlContent += getShortAnswerInputHtml(for: attemptQuestion)
+        }
+        
+        return htmlContent + "</div>"
+    }
+    
+    private func getOptionsHtml(for question: AttemptQuestion) -> String {
+        var htmlContent = "<table width='100%' style='margin-top:0px;'>"
+        
+        question.answers.forEach { answer in
+            if question.type == "R" {
+                htmlContent += WebViewUtils.getRadioButtonOptionWithTags(optionText: answer.getTextHtml(question, self.language), id: answer.id)
+            } else {
+                htmlContent += WebViewUtils.getCheckBoxOptionWithTags(optionText: answer.getTextHtml(question, self.language), id: answer.id)
+            }
+        }
+        
+        return htmlContent + "</table>"
+    }
+    
+    func getEssayQuestionInputHtml() -> String {
+        var htmlContent = "<textarea class='essay_topic' oninput='onEssayValueChange(this)' rows='10'>"
+        if let essayText = attemptItem?.localEssayText, !essayText.isEmpty {
+            htmlContent += essayText
+        }
+        return htmlContent + "</textarea>"
+    }
+    
     
     func getGapFilledQuestionHtml(_ htmlContent: String) -> String {
         do {
@@ -141,136 +163,146 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         }
     }
     
+    private func getShortAnswerInputHtml(for question: AttemptQuestion) -> String {
+        let inputType = question.type == "N" ? "number" : "text"
+        let value = attemptItem?.currentShortText ?? ""
+        return "<input class='edit_box' type='\(inputType)' value='\(value)' onpaste='return false' oninput='onValueChange(this)' placeholder='YOUR ANSWER'>"
+    }
+    
+    func getFileQuestionInputHtml() -> String {
+        let uploadButtonDisplay = attemptItem.localFiles.isEmpty ? "block" : "none"
+        let fileStatusDisplay = attemptItem.localFiles.isEmpty ? "none" : "block"
+        let clearButtonDisplay = attemptItem.localFiles.isEmpty ? "none" : "block"
+        let fileStatusText = attemptItem.localFiles.isEmpty ? "" : "File Uploaded"
+
+        return """
+        <div id="fileUploadSection">
+            <div id="fileStatus" style="display: \(fileStatusDisplay);">\(fileStatusText)</div>
+            <button id="uploadFileButton" class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE); display: \(uploadButtonDisplay);"" onclick="onUploadFileButtonClick()">Upload File</button>
+            <button id="clearFileButton" class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE); display: \(clearButtonDisplay);" onclick="clearFile()">Clear File</button>
+        </div>
+        """
+    }
+    
     func updateGapFillInputElement(element: Element, value: String?) throws {
         try element.attr("oninput", "onFillInTheBlankValueChange(this)")
         try element.addClass("gap_box")
-        if value != nil {
-            try element.val(value!)
+        if let value = value {
+            try element.val(value)
         }
     }
     
-    func getQuestionHtml() -> String {
-        let attemptQuestion: AttemptQuestion = (attemptItem?.question)!;
-        var htmlContent: String = "" +
-        "<div style='padding-left: 10px; padding-right: 10px;'>";
-        
-        // Add direction if present
-        if (attemptQuestion.direction != nil &&
-            !(attemptQuestion.direction!.isEmpty)) {
-            
-            htmlContent += "" +
-                "<div class='question' style='padding-bottom: 0px;'>" +
-            attemptQuestion.getLanguageBasedDirection(self.language) +
-            "</div>";
-        }
-        
-        // Add question
-        htmlContent += "" +
-            "<div class='question' style='padding-bottom: 0px;'>" +
-            attemptQuestion.getLanguageBasedQuestion(self.language) +
-        "</div>";
-        
-        if attemptQuestion.type == "R" || attemptQuestion.type == "C" {
-            // Add options
-            htmlContent += "<table width='100%' style='margin-top:0px;'>"
-            
-            for attemptAnswer in attemptQuestion.answers {
-                if (attemptItem?.question?.type == "R") {
-                    htmlContent += "\n" + WebViewUtils.getRadioButtonOptionWithTags(
-                        optionText: attemptAnswer.getTextHtml(attemptQuestion, self.language), id: attemptAnswer.id)
-                } else {
-                    htmlContent += "\n" + WebViewUtils.getCheckBoxOptionWithTags(
-                        optionText: attemptAnswer.getTextHtml(attemptQuestion, self.language), id: attemptAnswer.id)
-                }
-            }
-            htmlContent += "</table>"
-        } else if (attemptQuestion.type == "E") {
-            htmlContent += getEssayQuestionHtml()
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard message.name == "callbackHandler", let dict = message.body as? [String: AnyObject] else { return }
 
-        } else if (attemptQuestion.type == "G") {
-            htmlContent = getGapFilledQuestionHtml(htmlContent)
-        } else {
-            let inputType = attemptQuestion.type == "N" ? "number" : "text"
-            let value =
-                attemptItem.currentShortText != nil ? attemptItem.currentShortText! : ""
-            
-            htmlContent += "<input class='edit_box' type='\(inputType)' value='\(value)' " +
-                "onpaste='return false' oninput='onValueChange(this)' " +
-                "placeholder='YOUR ANSWER'>"
+        switch dict["type"] as? String {
+        case "gap_filled_response":
+            handleGapFillTypeInput(dict)
+        case let type where type == "radio_response" || type == "checkbox_response":
+            handleOptionSelection(dict)
+        case "short_text_response":
+            handleShortTextInput(dict)
+        case "essay_response":
+            handleEssayInput(dict)
+        case "file_upload":
+            handleFileUpload()
+        case "clear_uploaded_file":
+            clearUploadedFile()
+        default:
+            break
         }
-        return htmlContent + "</div>";
     }
     
-    func getEssayQuestionHtml() -> String {
-        var htmlContent = "<textarea class='essay_topic'  oninput='onEssayValueChange(this)' rows='10'>";
-        if !attemptItem.localEssayText.isNilOrEmpty {
-            htmlContent += attemptItem.localEssayText
-        }
-        htmlContent += "</textarea>";
+    func handleGapFillTypeInput(_ gapFillData: [String: AnyObject]) {
+        guard let order = gapFillData["order"] as? NSString else { return }
         
-        return htmlContent
+        gapFilledResponse[order.integerValue] = gapFillData["answer"]
+        attemptItem?.setGapFillResponses(gapFilledResponse)
+    }
+    
+    private func handleOptionSelection(_ dict: [String: AnyObject]) {
+        guard let checked = dict["checked"] as? Bool, let id = Int(dict["clickedOptionId"] as? String ?? ""), let radioOption = dict["radioOption"] as? Bool else { return }
+        
+        if checked {
+            if radioOption { selectedOptions = [] }
+            selectedOptions.append(id)
+        } else {
+            selectedOptions.removeAll { $0 == id }
+        }
+        
+        try! Realm().write {
+            attemptItem?.savedAnswers.removeAll()
+            attemptItem?.savedAnswers.append(objectsIn: selectedOptions)
+        }
+    }
+    
+    private func handleShortTextInput(_ dict: [String: AnyObject]) {
+        guard let shortText = dict["shortText"] as? String else { return }
+        
+        try! Realm().write {
+            attemptItem?.currentShortText = shortText.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+    }
+    
+    private func handleEssayInput(_ dict: [String: AnyObject]) {
+        guard let essay = dict["essay"] as? String else { return }
+        
+        try! Realm().write {
+            attemptItem?.localEssayText = essay
+        }
+    }
+    
+    private func handleFileUpload() {
+        fileUploadHelper = FileUploadPicker(
+            presentingViewController: self,
+            fileUploadPath: "users/attempts/\(attemptItem.id)/answers/\(attemptItem.id)/file_type_responses",
+            maxFileInMb: 60.0
+        )
+        
+        fileUploadHelper?.presentFileSelector { [weak self] uploadedPath, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                DispatchQueue.main.async {
+                    var message = "File uploading failed: "
+                    if (error as NSError).domain == "FileUploadHelper" {
+                        message += error.localizedDescription
+                    } else {
+                        message += "Please try again."
+                    }
+                    self.updateFileStatus(with: message)
+                }
+                return
+            }
+            
+            guard let uploadedPath = uploadedPath else { return }
+            attemptItem.saveUploadedFilePath(with: uploadedPath)
+            self.updateFileUploadSection()
+        }
+    }
+    
+    private func clearUploadedFile(){
+        attemptItem.clearLocalFiles()
+        updateFileUploadSection()
+    }
+
+    private func updateFileUploadSection() {
+        let updatedHtml = getFileQuestionInputHtml()
+        DispatchQueue.main.async {
+            self.webView.evaluateJavaScript("document.getElementById('fileUploadSection').innerHTML = `\(updatedHtml)`;")
+        }
+    }
+    
+    private func updateFileStatus(with message: String) {
+        webView.evaluateJavaScript("document.getElementById('fileStatus').innerText = '\(message)';", completionHandler: nil)
+        webView.evaluateJavaScript("document.getElementById('fileStatus').style.display = 'block';", completionHandler: nil)
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
         try! Realm().write {
             attemptItem?.currentReview = sender.isOn
         }
-    }
-    
-}
-
-extension AttemptQuestion {
-    
-    func getLanguageBasedQuestion(_ language: Language?) -> String {
-        if let selectedLanguage = language {
-            for translation in self.translations {
-                if translation.language == selectedLanguage.code {
-                    return translation.questionHtml ?? self.questionHtml!
-                }
-            }
-        }
-        return self.questionHtml!
-    }
-    
-    func getLanguageBasedDirection(_ language: Language?) -> String {
-        if let selectedLanguage = language {
-            for translation in self.translations {
-                if translation.language == selectedLanguage.code {
-                    return translation.direction?.html ?? self.direction!
-                }
-            }
-        }
-        return self.direction!
-    }
-    
-    func getExplanationHtml(_ language: Language?) -> String? {
-        if let selectedLanguage = language {
-            for translation in self.translations {
-                if translation.language == selectedLanguage.code {
-                    return translation.explanationHtml
-                }
-            }
-        }
-        return self.explanationHtml
-    }
-}
-
-extension AttemptAnswer {
-    
-    func getTextHtml(_ attemptQuestion: AttemptQuestion, _ language: Language?) -> String {
-        if let selectedLanguage = language {
-            for translation in attemptQuestion.translations {
-                if translation.language == selectedLanguage.code {
-                    for answerTranslation in translation.answers {
-                        if self.id == answerTranslation.id {
-                            return answerTranslation.textHtml
-                        }
-                    }
-                    return self.textHtml
-                }
-            }
-        }
-        return self.textHtml
     }
     
 }

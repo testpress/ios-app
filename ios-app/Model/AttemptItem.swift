@@ -58,6 +58,8 @@ class AttemptItem: DBModel {
     var gapFillResponses = List<GapFillResponse>()
     @objc dynamic var essayText: String?
     @objc dynamic var localEssayText: String!
+    var files = List<UserFileResponse>()
+    var localFiles = List<UserFileResponse>()
     
     public required convenience init?(map: ObjectMapper.Map) {
         self.init()
@@ -68,12 +70,21 @@ class AttemptItem: DBModel {
     }
     
     public func hasChanged() -> Bool {
-        if currentReview == nil {
-            currentReview = false
-        }
-        return savedAnswers != selectedAnswers || currentReview != review ||
-            (shortText != nil && shortText != currentShortText) ||
-            (shortText == nil && currentShortText != nil && !currentShortText.isEmpty)
+        let reviewStatusChanged = currentReview != review
+        let answersChanged = savedAnswers != selectedAnswers
+        let shortTextChanged = (shortText != nil && shortText != currentShortText) ||
+                               (shortText == nil && currentShortText != nil && !currentShortText.isEmpty)
+        let filesChanged = !compareUserFileResponsePaths(files, localFiles)
+        let essayTextChanged = localEssayText != essayText
+        
+        return answersChanged || reviewStatusChanged || shortTextChanged || filesChanged || essayTextChanged || gapFillResponses.isNotEmpty
+    }
+    
+    private func compareUserFileResponsePaths(_ list1: List<UserFileResponse>, _ list2: List<UserFileResponse>) -> Bool {
+        let paths1 = Set(list1.map { $0.path })
+        let paths2 = Set(list2.map { $0.path })
+        
+        return paths1 == paths2
     }
     
     public func getSaveUrl() -> String {
@@ -92,8 +103,35 @@ class AttemptItem: DBModel {
             self.gapFillResponses.append(objectsIn: gapFillResponseList)
         }
     }
+    
+    func clearLocalFiles() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.localFiles.removeAll()
+            }
+        } catch {
+            print("Error updating Realm: \(error)")
+            return
+        }
+    }
+
+    func saveUploadedFilePath(with uploadedPath: String) {
+        do {
+            let realm = try Realm()
+            let userFileResponse = UserFileResponse.create(uploadedPath: uploadedPath)
+            try realm.write {
+                self.localFiles.append(userFileResponse)
+            }
+        } catch {
+            print("Error updating Realm: \(error)")
+            return
+        }
+    }
 
     public override func mapping(map: ObjectMapper.Map) {
+        let userFileResponseListTransform = getUserFileResponseListTransform()
+        
         id <- map["id"]
         url <- map["url"]
         question <- map["question"]
@@ -116,5 +154,28 @@ class AttemptItem: DBModel {
         attemptId <- map["attempt_id"]
         gapFillResponses <- (map["gap_fill_responses"], ListTransform<GapFillResponse>())
         essayText <- map["essay_text"]
+        files <- (map["files"], userFileResponseListTransform)
+        localFiles <- (map["files"], userFileResponseListTransform)
+    }
+    
+
+    // Handles the transformation of user-uploaded file responses from the API, which can be either a list of strings (file paths) or a list of JSON objects (UserFileResponse).
+    private func getUserFileResponseListTransform() -> TransformOf<List<UserFileResponse>, Any> {
+        return TransformOf<List<UserFileResponse>, Any>(fromJSON: { (value: Any?) -> List<UserFileResponse>? in
+            let list = List<UserFileResponse>()
+            if let stringArray = value as? [String] {
+                for path in stringArray {
+                    let response = UserFileResponse.create(uploadedPath: path)
+                    list.append(response)
+                }
+            } else if let jsonArray = value as? [Any] {
+                if let objects = Mapper<UserFileResponse>().mapArray(JSONObject: jsonArray) {
+                    list.append(objectsIn: objects)
+                }
+            }
+            return list
+        }, toJSON: { (value: List<UserFileResponse>?) -> Any? in
+            return value?.compactMap { $0.toJSON() }
+        })
     }
 }

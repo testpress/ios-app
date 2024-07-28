@@ -37,7 +37,7 @@ import RealmSwift
 class VideoContentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     var content: Content!
     var contents: [Content]!
-    var videoPlayerView: VideoPlayerView!
+    var playerViewController: VideoPlayerViewController!
     var viewModel: VideoContentViewModel!
     var customView: UIView!
     var warningLabel: UILabel!
@@ -59,29 +59,28 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = VideoContentViewModel(content)
-        initVideoPlayerView()
-        view.addSubview(videoPlayerView)
-        viewModel.videoPlayerView = videoPlayerView
+        initalizePlayerViewController()
+        videoPlayer.addSubview(playerViewController.view)
+        viewModel.videoPlayerView = playerViewController.playerView
         showOrHideBottomBar()
         titleLabel.text = viewModel.getTitle()
         initializeDescription()
         bookmarkContent = content
         viewModel.createContentAttempt()
-        addCustomView()
         udpateBookmarkButtonState(bookmarkId: content!.bookmarkId.value)
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
         addGestures()
-        
-        handleExternalDisplay()
-        if #available(iOS 11.0, *) {
-            handleScreenCapture()
-        }
-        
     }
     
+    func initalizePlayerViewController(){
+        let drmLicenseURL = content.video?.isDRMProtected == true ? TPEndpointProvider.getDRMLicenseURL(contentID: content.id) : nil
+        playerViewController = VideoPlayerViewController(hlsURL: content.video!.getHlsUrl(), drmLicenseURL: drmLicenseURL)
+        playerViewController.view.frame = videoPlayer.bounds
+        addChild(playerViewController)
+    }
     
     func initializeDescription() {
         desc.attributedText = parseVideoDescription()
@@ -172,30 +171,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
-    func addCustomView() {
-        warningLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
-        warningLabel.textColor = UIColor.white
-        warningLabel.textAlignment = .center
-        warningLabel.numberOfLines = 3
         
-        customView = UIView(frame: videoPlayerView.frame)
-        customView.backgroundColor = UIColor.black
-        customView.center = CGPoint(x: view.center.x, y: videoPlayerView.center.y)
-        warningLabel.center = customView.center
-        customView.addSubview(warningLabel)
-        customView.isHidden = true
-        view.addSubview(customView)
-    }
-    
-    func showWarning(text: String) {
-        videoPlayerView.pause()
-        videoPlayerView.isHidden = true
-        warningLabel.text = text
-        warningLabel.sizeToFit()
-        customView.isHidden = false
-    }
-    
     func addOrRemoveBookmark(content: Content?) {
         bookmarkContent = content ?? self.content
         bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId.value)
@@ -221,36 +197,6 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         }
     }
     
-    
-    func hideWarning() {
-        videoPlayerView.isHidden = false
-        customView.isHidden = true
-    }
-    
-    @objc func handleExternalDisplay() {
-        if (UIScreen.screens.count > 1) {
-            showWarning(text: "Please stop casting to external devices")
-        } else {
-            hideWarning()
-        }
-    }
-    
-    @available(iOS 11.0, *)
-    @objc func handleScreenCapture() {
-        if (UIScreen.main.isCaptured) {
-            showWarning(text: "Please stop screen recording to continue watching video")
-        } else {
-            hideWarning()
-        }
-    }
-    
-    func initVideoPlayerView() {
-        let playerFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: videoPlayer.frame.height)
-        let drmLicenseURL = content.video?.isDRMProtected == true ? TPEndpointProvider.getDRMLicenseURL(contentID: content.id) : nil
-        videoPlayerView = VideoPlayerView(frame: playerFrame, url: URL(string: content.video!.getHlsUrl())!, drmLicenseURL: drmLicenseURL)
-        videoPlayerView.playerDelegate = self
-    }
-    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         showOrHideBottomBar()
     }
@@ -266,53 +212,24 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             }
         }
     }
-    
-    func handleFullScreen() {
-        var playerFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: videoPlayer.frame.height)
-        UIApplication.shared.keyWindow?.removeVideoPlayerView()
-        view.addSubview(videoPlayerView)
-        
-        if (getCurrentOrientation().isLandscape) {
-            playerFrame = UIScreen.main.bounds
-            UIApplication.shared.keyWindow!.addSubview(videoPlayerView)
-        }
-        videoPlayerView.frame = playerFrame
-        customView.frame = videoPlayerView.frame
-        videoPlayerView.layoutIfNeeded()
-        videoPlayerView.playerLayer?.frame = playerFrame
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers()
-        videoPlayerView.addObservers()
         
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
             contentDetailPageViewController.hideNavbarTitle()
             contentDetailPageViewController.enableBookmarkOption()
         }
-        
     }
     
     func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: UIScreen.didConnectNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: UIScreen.didDisconnectNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateVideoAttempt), name: UIApplication.willResignActiveNotification, object: nil)
-
-        
-        if #available(iOS 11.0, *) {
-            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenCapture), name: UIScreen.capturedDidChangeNotification, object: nil)
-        }
     }
     
     @objc func updateVideoAttempt() {
         viewModel.updateVideoAttempt()
-    }
-    
-    @objc func willEnterForeground() {
-        videoPlayerView.play()
     }
     
     func changeVideo(content: Content!) {
@@ -323,7 +240,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         viewModel.content = content
         hideDescription()
         viewModel.createContentAttempt()
-        videoPlayerView.playVideo(url: URL(string: content.video!.getHlsUrl())!)
+        playerViewController.playerView.playVideo(url: URL(string: content.video!.getHlsUrl())!)
         tableView.reloadData()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()
@@ -333,93 +250,15 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.updateVideoAttempt()
-        videoPlayerView.deallocate()
 
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
         }
-
-        NotificationCenter.default.removeObserver(self, name: UIScreen.didConnectNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIScreen.didDisconnectNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
-
-        
-        if #available(iOS 11.0, *) {
-            NotificationCenter.default.removeObserver(self, name: UIScreen.capturedDidChangeNotification, object: nil)
-        }
-        
-    }
-    
-    func showPlaybackSpeedMenu() {
-        var alert: UIAlertController!
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
-            alert = UIAlertController(title: "Playback Speed", message: nil, preferredStyle: .alert)
-        } else {
-            alert = UIAlertController(title: "Playback Speed", message: nil, preferredStyle: .actionSheet)
-        }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        PlaybackSpeed.allCases.forEach{ playbackSpeed in
-            let action = UIAlertAction(title: playbackSpeed.rawValue, style: .default, handler: { (_) in
-                self.videoPlayerView.changePlaybackSpeed(speed: playbackSpeed)
-            })
-            if (playbackSpeed.value == self.videoPlayerView.getCurrenPlaybackSpeed()){
-                action.setValue(Images.TickIcon.image, forKey: "image")
-            } else if(self.videoPlayerView.getCurrenPlaybackSpeed() == 0.0 && playbackSpeed == .normal) {
-                action.setValue(Images.TickIcon.image, forKey: "image")
-            }
-            
-            alert.addAction(action)
-        }
-        alert.popoverPresentationController?.sourceView = self.view
-        self.present(alert, animated: true)
-    }
-    
-    func showQualitySelector() {
-        var alert: UIAlertController!
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
-            alert = UIAlertController(title: "Quality", message: nil, preferredStyle: .alert)
-        } else {
-            alert = UIAlertController(title: "Quality", message: nil, preferredStyle: .actionSheet)
-        }
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
-        for resolutionInfo in videoPlayerView.resolutionInfo {
-            let action = UIAlertAction(title: resolutionInfo.resolution, style: .default, handler: { (_) in
-                self.videoPlayerView.changeBitrate(resolutionInfo.bitrate)
-            })
-            
-            if (Double(resolutionInfo.bitrate) == videoPlayerView.getCurrentBitrate()) {
-                action.setValue(Images.TickIcon.image, forKey: "image")
-            }
-            alert.addAction(action)
-        }
-        alert.popoverPresentationController?.sourceView = self.view
-        self.present(alert, animated: true)
-    }
-    
-    func displayOptions() {
-        var alert: UIAlertController!
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
-            alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        } else {
-            alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Playback Speed", style: .default, handler: { _ in
-            self.showPlaybackSpeedMenu()
-        }))
-        alert.addAction(UIAlertAction(title: "Video Quality", style: .default, handler: { _ in
-            self.showQualitySelector()
-        }))
-        alert.popoverPresentationController?.sourceView = self.view
-        self.present(alert, animated: true)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         desc.sizeToFit()
-        handleFullScreen()
         
         if let tableHeaderView = tableView.tableHeaderView  {
             if !desc.isHidden && desc.text != nil {
@@ -436,44 +275,9 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
         let duration = textView.text.substring(with: characterRange)
         if duration != nil {
             let seconds = TimeUtils.convertDurationStringToSeconds(durationString: String(duration!))
-            self.videoPlayerView.goTo(seconds: Float(seconds))
+            playerViewController.playerView.goTo(seconds: Float(seconds))
         }
         return true
-    }
-}
-
-extension VideoContentViewController: VideoPlayerDelegate {
-    
-    func showOptionsMenu() {
-        displayOptions()
-    }
-    
-    func toggleFullScreen() {
-        if getCurrentOrientation().isLandscape {
-            changeDeviceOrientation(orientation: .portrait)
-        } else {
-            changeDeviceOrientation(orientation: .landscapeRight)
-        }
-                                 
-    }
-    
-    func changeDeviceOrientation(orientation: UIInterfaceOrientationMask) {
-        if #available(iOS 16.0, *) {
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-            windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: orientation))
-        } else {
-            UIDevice.current.setValue(orientation.toUIInterfaceOrientation.rawValue, forKey: "orientation")
-        }
-    }
-}
-
-extension UIWindow {
-    func removeVideoPlayerView() {
-        for subview in self.subviews {
-            if subview is VideoPlayerView  {
-                subview.removeFromSuperview()
-            }
-        }
     }
 }
 
