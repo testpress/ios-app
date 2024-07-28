@@ -93,4 +93,15 @@ class AttemptRepository {
                 completion(contentAttempt, error)
         })
     }
+    
+    func endAttempt(url: String, completion: @escaping(Attempt?, TPError?) -> Void) {
+        TPApiClient.request(
+            type: Attempt.self,
+            endpointProvider: TPEndpointProvider(.put, url: url),
+            completion: {
+                attempt, error in
+                DBManager<Attempt>().addData(object: attempt!)
+                completion(attempt, error)
+        })
+    }
 }
