@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import Charts
+import DGCharts
 
 public class GraphAxisLabelFormatter: IndexAxisValueFormatter {
     

@@ -11,7 +11,6 @@ import Realm
 import RealmSwift
 
 class VideoConference: DBModel {
-    @objc dynamic var id: Int = -1
     @objc dynamic var accessToken: String = ""
     @objc dynamic var duration: Int = -1
     @objc dynamic var conferenceId: String = ""
@@ -21,7 +20,7 @@ class VideoConference: DBModel {
     @objc dynamic var start: String = ""
     @objc dynamic var title: String = ""
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         joinUrl <- map["join_url"]
         id <- map["id"]
         accessToken <- map["access_token"]

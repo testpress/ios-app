@@ -39,61 +39,31 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     }
     
     func viewControllerAtIndex(_ index: Int) -> UIViewController? {
-        if (contents.count == 0) || (index >= contents.count) {
+        guard !contents.isEmpty, index < contents.count else {
             return nil
         }
+        
         let content = contents[index]
-
         try! Realm().write {
             content.index = index
         }
+        
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
         
         if content.getContentType() == .Quiz {
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.START_QUIZ_EXAM_VIEW_CONTROLLER) as! StartQuizExamViewController
-            
-            viewController.content = content
-            return viewController
-        } else if content.exam != nil {
-            if content.attemptsCount > 0 {
-                let viewController = storyboard.instantiateViewController(
-                    withIdentifier: Constants.CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER
-                    ) as! ContentExamAttemptsTableViewController
-                
-                viewController.content = content
-                return viewController
-            } else {
-                let viewController = storyboard.instantiateViewController(withIdentifier:
-                    Constants.CONTENT_START_EXAM_VIEW_CONTROLLER) as! StartExamScreenViewController
-                
-                viewController.content = content
-                return viewController
-            }
-        } else if content.attachment != nil {
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.ATTACHMENT_DETAIL_VIEW_CONTROLLER) as! AttachmentDetailViewController
-            
-            viewController.content = content
-            viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
-            return viewController
-        } else if (content.video != nil && content.video!.embedCode.isEmpty) {
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.VIDEO_CONTENT_VIEW_CONTROLLER) as! VideoContentViewController
-             viewController.content = content
-             viewController.contents = contents
-            return viewController
-
-        } else if (content.getContentType() == .VideoConference) {
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-            Constants.VIDEO_CONFERENCE_VIEW_CONTROLLER) as! VideoConferenceViewController
-            viewController.content = content
-            return viewController
+            return createQuizViewController(for: content, storyboard: storyboard)
+        } else if content.getContentType() == .Exam {
+            return createExamViewController(for: content, storyboard: storyboard)
+        } else if content.getContentType() == .Attachment {
+            return createAttachmentViewController(for: content, storyboard: storyboard)
+        } else if let video = content.video, video.embedCode.isEmpty {
+            return createVideoViewController(for: content, storyboard: storyboard)
+        } else if content.getContentType() == .VideoConference {
+            return createVideoConferenceViewController(for: content, storyboard: storyboard)
+        } else if content.getContentType() == .LiveStream {
+            return createLiveStreamContentViewController(for: content, storyboard: storyboard)
         } else {
-            let viewController = HtmlContentViewController()
-            viewController.content = content
-            viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
-            return viewController
+            return createHtmlContentViewController(for: content)
         }
     }
     
@@ -110,9 +80,63 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             return (viewController as! StartQuizExamViewController).content.index
         } else if viewController is VideoConferenceViewController {
             return (viewController as! VideoConferenceViewController).content.index
+        } else if viewController is LiveStreamContentViewController {
+            return (viewController as! LiveStreamContentViewController).content.index
         } else {
             return (viewController as! HtmlContentViewController).content.index
         }
+    }
+    
+    private func createQuizViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
+        let viewController = storyboard.instantiateViewController(withIdentifier: Constants.START_QUIZ_EXAM_VIEW_CONTROLLER) as! StartQuizExamViewController
+        viewController.content = content
+        return viewController
+    }
+
+    private func createExamViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
+        if content.attemptsCount > 0 {
+            let viewController = storyboard.instantiateViewController(withIdentifier: Constants.CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER) as! ContentExamAttemptsTableViewController
+            viewController.content = content
+            return viewController
+        } else {
+            let viewController = storyboard.instantiateViewController(withIdentifier: Constants.CONTENT_START_EXAM_VIEW_CONTROLLER) as! StartExamScreenViewController
+            viewController.content = content
+            return viewController
+        }
+    }
+
+    private func createAttachmentViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
+        let viewController = storyboard.instantiateViewController(withIdentifier: Constants.ATTACHMENT_DETAIL_VIEW_CONTROLLER) as! AttachmentDetailViewController
+        viewController.content = content
+        viewController.viewModel = ChapterContentDetailViewModel(content, contentAttemptCreationDelegate)
+        return viewController
+    }
+
+    private func createVideoViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
+        let viewController = storyboard.instantiateViewController(withIdentifier: Constants.VIDEO_CONTENT_VIEW_CONTROLLER) as! VideoContentViewController
+        viewController.content = content
+        viewController.contents = contents
+        return viewController
+    }
+
+    private func createVideoConferenceViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
+        let viewController = storyboard.instantiateViewController(withIdentifier: Constants.VIDEO_CONFERENCE_VIEW_CONTROLLER) as! VideoConferenceViewController
+        viewController.content = content
+        return viewController
+    }
+
+    private func createHtmlContentViewController(for content: Content) -> UIViewController {
+        let viewController = HtmlContentViewController()
+        viewController.content = content
+        viewController.viewModel = ChapterContentDetailViewModel(content, contentAttemptCreationDelegate)
+        return viewController
+    }
+    
+    private func createLiveStreamContentViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
+        let viewController = storyboard.instantiateViewController(withIdentifier: Constants.LIVE_STREAM_VIEW_CONTROLLER) as! LiveStreamContentViewController
+        viewController.content = content
+        viewController.viewModel = ChapterContentDetailViewModel(content, contentAttemptCreationDelegate)
+        return viewController
     }
     
     // MARK: - Page View Controller Data Source
