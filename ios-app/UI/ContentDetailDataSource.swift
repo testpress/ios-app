@@ -60,6 +60,8 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             return createVideoViewController(for: content, storyboard: storyboard)
         } else if content.getContentType() == .VideoConference {
             return createVideoConferenceViewController(for: content, storyboard: storyboard)
+        } else if content.getContentType() == .LiveStream {
+            return createLiveStreamContentViewController(for: content, storyboard: storyboard)
         } else {
             return createHtmlContentViewController(for: content)
         }
@@ -78,6 +80,8 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             return (viewController as! StartQuizExamViewController).content.index
         } else if viewController is VideoConferenceViewController {
             return (viewController as! VideoConferenceViewController).content.index
+        } else if viewController is LiveStreamContentViewController {
+            return (viewController as! LiveStreamContentViewController).content.index
         } else {
             return (viewController as! HtmlContentViewController).content.index
         }
@@ -104,7 +108,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     private func createAttachmentViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: Constants.ATTACHMENT_DETAIL_VIEW_CONTROLLER) as! AttachmentDetailViewController
         viewController.content = content
-        viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
+        viewController.viewModel = ChapterContentDetailViewModel(content, contentAttemptCreationDelegate)
         return viewController
     }
 
@@ -124,7 +128,14 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     private func createHtmlContentViewController(for content: Content) -> UIViewController {
         let viewController = HtmlContentViewController()
         viewController.content = content
-        viewController.contentAttemptCreationDelegate = contentAttemptCreationDelegate
+        viewController.viewModel = ChapterContentDetailViewModel(content, contentAttemptCreationDelegate)
+        return viewController
+    }
+    
+    private func createLiveStreamContentViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
+        let viewController = storyboard.instantiateViewController(withIdentifier: Constants.LIVE_STREAM_VIEW_CONTROLLER) as! LiveStreamContentViewController
+        viewController.content = content
+        viewController.viewModel = ChapterContentDetailViewModel(content, contentAttemptCreationDelegate)
         return viewController
     }
     

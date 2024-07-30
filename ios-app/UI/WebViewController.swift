@@ -15,6 +15,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
     
     var emptyView: EmptyView!
     var url: String = ""
+    var request: URLRequest?
     var loading: Bool = false
     var navBar: UINavigationBar?
     var useSSOLogin: Bool = false
@@ -119,8 +120,12 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
     func loadWebView() {
         showLoading()
         self.emptyView.hide()
-        let url = URL(string: self.url)!
-        webView.load(URLRequest(url: url))
+        if let request = self.request {
+            webView.load(request)
+        } else {
+            let url = URL(string: self.url)!
+            webView.load(URLRequest(url: url))
+        }
     }
     
     func removeCookies(){

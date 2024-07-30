@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031FBACB2C47B23A00AAF71D /* QuestionReviewPage.js in Resources */ = {isa = PBXBuildFile; fileRef = 031FBACA2C47B23A00AAF71D /* QuestionReviewPage.js */; };
+		031FBACD2C47C49F00AAF71D /* FileDownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */; };
+		0332D2432C3FD17100345BA9 /* FileUploadPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */; };
+		0332D2452C4104A900345BA9 /* FileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2442C4104A900345BA9 /* FileResponse.swift */; };
 		036654CD2A3D98930005BDDF /* UIInterfaceOrientationMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
 		038695FD2BF6095D00E36F8F /* DGCharts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FC2BF6095D00E36F8F /* DGCharts.xcframework */; };
@@ -20,6 +24,9 @@
 		038696222BF7635C00E36F8F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 038696212BF7635C00E36F8F /* Kingfisher */; };
 		038696242BF7692900E36F8F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */; };
 		03A91DEF2BFB7E2500B9E1C6 /* LiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */; };
+		03AFFB832C0076AE0015C029 /* ChapterContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */; };
+		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
+		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
 		1825F5FD212E8BF900AC25E5 /* AttemptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */; };
 		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
@@ -451,12 +458,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		031FBACA2C47B23A00AAF71D /* QuestionReviewPage.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuestionReviewPage.js; sourceTree = "<group>"; };
+		031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloadUtility.swift; sourceTree = "<group>"; };
+		0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadPicker.swift; sourceTree = "<group>"; };
+		0332D2442C4104A900345BA9 /* FileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileResponse.swift; sourceTree = "<group>"; };
 		036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInterfaceOrientationMask.swift; sourceTree = "<group>"; };
 		03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDeletionViewController.swift; sourceTree = "<group>"; };
 		038695FC2BF6095D00E36F8F /* DGCharts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DGCharts.xcframework; path = Carthage/Build/DGCharts.xcframework; sourceTree = "<group>"; };
 		038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = M3U8Parser.xcframework; path = Carthage/Build/M3U8Parser.xcframework; sourceTree = "<group>"; };
 		038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStream.swift; sourceTree = "<group>"; };
+		03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterContentDetailViewModel.swift; sourceTree = "<group>"; };
+		03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamContentViewController.swift; sourceTree = "<group>"; };
 		1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptSection.swift; sourceTree = "<group>"; };
 		1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainDropDown.swift; sourceTree = "<group>"; };
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
@@ -1115,6 +1129,8 @@
 				25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */,
 				2503DF75263FADD0003226AD /* StringTransform.swift */,
 				25F7522027FEB143000D8137 /* TimeUtils.swift */,
+				0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */,
+				031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1147,6 +1163,7 @@
 				2F6F167A1FC3F08900FB768C /* typebase.css */,
 				2FE290711F8D07D0004D7574 /* QuestionListHandler.js */,
 				25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */,
+				031FBACA2C47B23A00AAF71D /* QuestionReviewPage.js */,
 			);
 			path = static;
 			sourceTree = "<group>";
@@ -1285,6 +1302,8 @@
 				25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */,
 				D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */,
 				03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */,
+				03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */,
+				03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1347,6 +1366,7 @@
 				D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */,
 				D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */,
 				03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */,
+				0332D2442C4104A900345BA9 /* FileResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1440,6 +1460,7 @@
 				257BB692246A9BA000524D2C /* QuizExamViewModel.swift */,
 				256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */,
 				D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */,
+				03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1618,6 +1639,7 @@
 				25B1489A264CFE0500AECC39 /* MathJax-2.7.1 in Resources */,
 				2F515DF61FF3B7B10005D8A5 /* RichTextEditor.js in Resources */,
 				2F3A14311FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib in Resources */,
+				031FBACB2C47B23A00AAF71D /* QuestionReviewPage.js in Resources */,
 				2F368C0C215DEC77000999FA /* symbol.ttf in Resources */,
 				25E435E7263ADD9100243FD3 /* LeaderboardItemViewCell.xib in Resources */,
 				2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */,
@@ -1722,6 +1744,7 @@
 				250629922265E74D00539FB2 /* LoginActivity.swift in Sources */,
 				2FC0F2FB1F863B7E0092BFDC /* BaseQuestionsDataSource.swift in Sources */,
 				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
+				0332D2452C4104A900345BA9 /* FileResponse.swift in Sources */,
 				2F412CC220219BC300B7F70C /* OrderedDictionary.swift in Sources */,
 				2F25D55C201EFE7B00C01CCE /* LeaderboardPager.swift in Sources */,
 				2FEDFF5A206CE7560002CF04 /* CategoryPager.swift in Sources */,
@@ -1729,12 +1752,14 @@
 				2FC0F2E51F863AE00092BFDC /* TPAuthToken.swift in Sources */,
 				8C04228F22AA3FD40015269B /* WebViewController.swift in Sources */,
 				25E435DD263ADCCF00243FD3 /* BaseSectionController.swift in Sources */,
+				03AFFB832C0076AE0015C029 /* ChapterContentDetailViewModel.swift in Sources */,
 				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,
 				2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */,
 				2FC0F3091F863BA90092BFDC /* ReviewQuestionsDataSource.swift in Sources */,
 				2FC0F2F31F863B1B0092BFDC /* TPEndpoint.swift in Sources */,
 				2FC0F2FD1F863B850092BFDC /* BaseQuestionsViewController.swift in Sources */,
 				2FC0F2FE1F863B890092BFDC /* BaseTextFieldViewController.swift in Sources */,
+				03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */,
 				25985831248A5F14003591FA /* URLUtils.swift in Sources */,
 				2503DF6F263FAC0A003226AD /* ChapterContentViewCell.swift in Sources */,
 				2F48C8011FCE9963009C686C /* ContentObject.swift in Sources */,
@@ -1941,10 +1966,12 @@
 				2566A5952745102F00D9E71D /* DRMLicenseKeyResponse.swift in Sources */,
 				8C2E7B5923979E5A00BA2F41 /* VideoPlayerView.swift in Sources */,
 				2F48C7FF1FCE9750009C686C /* Comment.swift in Sources */,
+				0332D2432C3FD17100345BA9 /* FileUploadPicker.swift in Sources */,
 				25F92A20243306A60084ADC8 /* UIViewController.swift in Sources */,
 				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
 				2F5E0BB51FE2415800236AFE /* ActivityFeedPager.swift in Sources */,
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
+				031FBACD2C47C49F00AAF71D /* FileDownloadUtility.swift in Sources */,
 				8CF6972D232652A80040A986 /* Stackview+BackgroundColor.swift in Sources */,
 				2503DF79263FB21F003226AD /* ChapterContentSectionController.swift in Sources */,
 				2F3DD21A20186417004EDAF2 /* ActivityFeedResponse.swift in Sources */,
@@ -1954,6 +1981,7 @@
 				D990C7F22B31765E00B3ED4D /* DirectionTranslation.swift in Sources */,
 				256A90A2247D30DA00F4E12C /* Collection.swift in Sources */,
 				2FDF9C4D20B6D01B0086245F /* Bookmark.swift in Sources */,
+				03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */,
 				2FDF9C4F20B6D40D0086245F /* BookmarksPager.swift in Sources */,
 				8CA17128238CED7F00BD42E9 /* VideoAttempt.swift in Sources */,
 				2F48C8131FD3E417009C686C /* Category.swift in Sources */,
