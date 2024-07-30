@@ -31,6 +31,10 @@ class WebViewUtils {
         return "<script src='TestEngine.js'></script>"
     }
     
+    static func getQuestionReviewPageHeader() -> String {
+        return "<script src='QuestionReviewPage.js'></script>"
+    }
+    
     static func getQuestionListHeader() -> String {
         return "<script src='QuestionListHandler.js'></script>"
     }
@@ -38,7 +42,6 @@ class WebViewUtils {
     static func getRadioButtonInitializer(selectedOption: Int) -> String {
         return "initRadioGroup(\(selectedOption));"
     }
-    
     static func getCheckBoxInitializer(selectedOptions: [Int]) -> String {
         return "initCheckBoxGroup(\(selectedOptions));"
     }

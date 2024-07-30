@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -2302,6 +2302,44 @@
             </objects>
             <point key="canvasLocation" x="4170" y="133"/>
         </scene>
+        <!--Live Stream Content View Controller-->
+        <scene sceneID="DMx-vO-GXB">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ajE-eL-MVY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="LiveStreamContentViewController" modalPresentationStyle="fullScreen" id="dP6-xa-1Pc" customClass="LiveStreamContentViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Kf-rZ-teO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2U-sI-hW7" userLabel="VideoPlayer View">
+                                <rect key="frame" x="0.0" y="48" width="414" height="269"/>
+                                <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbG-Mx-Awq">
+                                <rect key="frame" x="0.0" y="317" width="414" height="545"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Mev-kt-zAI"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="r2U-sI-hW7" firstAttribute="leading" secondItem="Mev-kt-zAI" secondAttribute="leading" id="6FB-ye-2eg"/>
+                            <constraint firstItem="jbG-Mx-Awq" firstAttribute="leading" secondItem="Mev-kt-zAI" secondAttribute="leading" id="Abp-xq-dUH"/>
+                            <constraint firstItem="Mev-kt-zAI" firstAttribute="trailing" secondItem="r2U-sI-hW7" secondAttribute="trailing" id="Om3-Vw-E2W"/>
+                            <constraint firstItem="r2U-sI-hW7" firstAttribute="top" secondItem="Mev-kt-zAI" secondAttribute="top" id="Yc2-H0-c7S"/>
+                            <constraint firstItem="Mev-kt-zAI" firstAttribute="bottom" secondItem="jbG-Mx-Awq" secondAttribute="bottom" id="ehy-yO-Otn"/>
+                            <constraint firstItem="r2U-sI-hW7" firstAttribute="height" secondItem="2Kf-rZ-teO" secondAttribute="height" multiplier="0.3" id="jKT-aM-t20"/>
+                            <constraint firstItem="jbG-Mx-Awq" firstAttribute="top" secondItem="r2U-sI-hW7" secondAttribute="bottom" id="krk-un-yAs"/>
+                            <constraint firstItem="Mev-kt-zAI" firstAttribute="trailing" secondItem="jbG-Mx-Awq" secondAttribute="trailing" id="pjm-JO-cIj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="liveChatContainer" destination="jbG-Mx-Awq" id="MRM-uP-nsz"/>
+                        <outlet property="playerContainer" destination="r2U-sI-hW7" id="Nih-NI-XT7"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1260.8695652173915" y="937.5"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="gc5-34-E3A">
@@ -2336,7 +2374,7 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
