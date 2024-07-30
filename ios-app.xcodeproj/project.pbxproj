@@ -27,6 +27,9 @@
 		03AFFB832C0076AE0015C029 /* ChapterContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */; };
 		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
+		03EB5EA02C5933B2003D4766 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EB5E9F2C5933B2003D4766 /* MobileRTC.xcframework */; };
+		03EB5EA22C5933C1003D4766 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 03EB5EA12C5933C1003D4766 /* MobileRTCResources.bundle */; };
+		03EB5EA32C5933CB003D4766 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03EB5E9F2C5933B2003D4766 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1825F5FD212E8BF900AC25E5 /* AttemptSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */; };
 		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
@@ -429,6 +432,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				03EB5EA32C5933CB003D4766 /* MobileRTC.xcframework in Embed Frameworks */,
 				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
 				D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */,
 				D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */,
@@ -471,6 +475,8 @@
 		03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterContentDetailViewModel.swift; sourceTree = "<group>"; };
 		03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamContentViewController.swift; sourceTree = "<group>"; };
+		03EB5E9F2C5933B2003D4766 /* MobileRTC.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:BJ4HAAB9B3:Zoom Video Communications, Inc."; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
+		03EB5EA12C5933C1003D4766 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 		1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptSection.swift; sourceTree = "<group>"; };
 		1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainDropDown.swift; sourceTree = "<group>"; };
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
@@ -848,6 +854,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03EB5EA02C5933B2003D4766 /* MobileRTC.xcframework in Frameworks */,
 				2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */,
 				0386961C2BF7602600E36F8F /* Alamofire in Frameworks */,
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
@@ -992,6 +999,7 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
+				03EB5EA12C5933C1003D4766 /* MobileRTCResources.bundle */,
 				038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
@@ -1061,6 +1069,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				03EB5E9F2C5933B2003D4766 /* MobileRTC.xcframework */,
 				038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */,
 				038695FC2BF6095D00E36F8F /* DGCharts.xcframework */,
 				25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */,
@@ -1612,6 +1621,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03EB5EA22C5933C1003D4766 /* MobileRTCResources.bundle in Resources */,
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
@@ -2260,7 +2270,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.5.4;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2293,7 +2303,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.5.4;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
