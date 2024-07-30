@@ -221,6 +221,11 @@ class StartExamScreenViewController: UIViewController {
     }
     
     @IBAction func startExam(_ sender: UIButton) {
+        if [ExamTemplateType.IELTS_TEMPLATE, ExamTemplateType.CTET_TEMPLATE].contains(exam.templateType) {
+            startExamInWebview()
+            return
+        }
+
         if (exam.hasMultipleLanguages() && exam.selectedLanguage == nil){
             showLanguages()
             return
@@ -236,6 +241,21 @@ class StartExamScreenViewController: UIViewController {
             startExam(StartExamScreenViewController.REGULAR_ATTEMPT)
         }
     }
+    
+    private func startExamInWebview() {
+        guard let exam = exam, let examStartUrl = exam.examStartUrl else {
+            return
+        }
+        let webViewController = WebViewController()
+        webViewController.url = "&next=\(examStartUrl)"
+        webViewController.title = exam.title
+        webViewController.useSSOLogin = true
+        webViewController.shouldOpenLinksWithinWebview = true
+        webViewController.displayNavbar = true
+        webViewController.modalPresentationStyle = .fullScreen
+        present(webViewController, animated: true, completion: nil)
+    }
+
     
     private func showExamModePopUp(_ sender: UIButton) {
         let actionSheet = UIAlertController(title: "Select Exam Mode", message: nil, preferredStyle: .actionSheet)
