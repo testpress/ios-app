@@ -24,6 +24,7 @@
 //
 
 import ObjectMapper
+import RealmSwift
 
 class Exam: DBModel {
     @objc dynamic var url: String = "";
@@ -60,6 +61,11 @@ class Exam: DBModel {
     @objc dynamic var studentsAttemptedCount: Int = 0
     @objc dynamic var isGrowthHackEnabled: Bool = false;
     @objc dynamic var shareTextForSolutionUnlock: String = "";
+    @objc dynamic var showAnalytics: Bool = false
+    @objc dynamic var enableQuizMode: Bool = false;
+    @objc dynamic var selectedLanguage: Language?
+    var languages = List<Language>()
+    @objc dynamic var examStartUrl: String?
     
     override public static func primaryKey() -> String? {
         return "id"
@@ -102,6 +108,11 @@ class Exam: DBModel {
         isGrowthHackEnabled <- map["is_growth_hack_enabled"]
         shareTextForSolutionUnlock <- map["share_text_for_solution_unlock"]
         examDescription <- map["description"]
+        showAnalytics <- map["show_analytics"]
+        enableQuizMode <- map["enable_quiz_mode"]
+        selectedLanguage <- map["selected_language"]
+        languages <- (map["languages"], ListTransform<Language>())
+        examStartUrl <- map["exam_start_url"]
     }
     
     func hasStarted() -> Bool {
@@ -139,4 +150,17 @@ class Exam: DBModel {
     func getQuestionsURL() -> String {
         return Constants.BASE_URL + "/api/v2.4/exams/\(id)/questions/"
     }
+    
+    func hasMultipleLanguages() -> Bool {
+        return languages.count > 1
+    }
+    
+    func IsExamUsingIBPSTemplate() -> Bool{
+        return templateType == 2
+    }
+}
+
+struct ExamTemplateType {
+    static let IELTS_TEMPLATE = 12
+    static let CTET_TEMPLATE = 15
 }

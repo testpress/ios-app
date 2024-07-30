@@ -39,7 +39,9 @@ BaseDBViewController<Chapter> {
     var courseId: Int!
     var parentId: Int? = nil
     var firstCallback: Bool = true
-    
+    var allowCustomTestGeneration: Bool = false
+    var instituteSettings: InstituteSettings?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,12 +49,20 @@ BaseDBViewController<Chapter> {
         pager = ChapterPager(coursesUrl: coursesUrl, parentId: parentId)
         activityIndicator = UIUtils.initActivityIndicator(parentView: collectionView)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         // Set collection view background
         emptyView = EmptyView.getInstance()
         collectionView.dataSource = self
         collectionView.backgroundView = emptyView
         emptyView.frame = collectionView.frame
+        showOrHideCustomTestIcon()
         self.setStatusBarColor()
+    }
+    
+    func showOrHideCustomTestIcon(){
+        if ((instituteSettings?.enableCustomTest ?? false) && allowCustomTestGeneration && parentId == nil) {
+            navigationItemBar.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "custom_test_icon"), style: .plain, target: self, action: #selector(openCustomTestGenereationView))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -152,6 +162,22 @@ BaseDBViewController<Chapter> {
     func setEmptyText() {
         emptyView.setValues(image: Images.LearnFlatIcon.image, title: Strings.NO_CONTENTS_EXIST,
                             description: Strings.NO_CHAPTER_DESCRIPTION)
+    }
+    
+    @objc func openCustomTestGenereationView() {
+       showCustomTestPage(self)
+    }
+    
+    func showCustomTestPage(_ viewController: UIViewController) {
+        let secondViewController = CustomTestGenerationViewController()
+        secondViewController.url = "&next=/courses/custom_test_generation/?course_id="+String(courseId)+"%26testpress_app=ios"
+        secondViewController.useWebviewNavigation = true
+        secondViewController.useSSOLogin = true
+        secondViewController.shouldOpenLinksWithinWebview = true
+        secondViewController.title = "Custom Module"
+        secondViewController.displayNavbar = true
+        secondViewController.modalPresentationStyle = .fullScreen
+        viewController.present(secondViewController, animated: true)
     }
     
     @IBAction func back() {
