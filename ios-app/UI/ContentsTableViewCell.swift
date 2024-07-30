@@ -118,6 +118,8 @@ class ContentsTableViewCell: UITableViewCell {
             return Images.NotesIconWhite.image
         } else if (content.attachment != nil) {
             return Images.AttachmentIconWhite.image
+        } else if (content.liveStream != nil) {
+            return Images.LiveClassIcon.image
         }
         return Images.ExamIconWhite.image
     }

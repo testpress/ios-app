@@ -24,7 +24,6 @@
 //
 
 import Alamofire
-import Device
 import UIKit
 import RealmSwift
 
@@ -45,7 +44,7 @@ class TPApiClient {
         request.httpMethod = endpointProvider.endpoint.method.rawValue
         
         // Add given headers
-        if headers != nil {
+        if let headers = headers?.dictionary {
             request.allHTTPHeaderFields = headers
         }
         
@@ -63,21 +62,21 @@ class TPApiClient {
                 JSONSerialization.WritingOptions.prettyPrinted)
         }
         
-        let dataRequest = Alamofire.request(request)
-        self.request(dataRequest: dataRequest, completion: completion)
+        let dataRequest = Alamofire.AF.request(request)
+        self.request(dataRequest: dataRequest, endpointProvider: endpointProvider, completion: completion)
     }
     
     static func request(dataRequest: DataRequest,
+                        endpointProvider: TPEndpointProvider,
                         completion: @escaping (String?, TPError?) -> Void) {
         
-        dataRequest.responseString(queue: nil, encoding: String.Encoding.utf8) { response in
+        dataRequest.responseString(queue: .main, encoding: String.Encoding.utf8) { response in
             #if DEBUG
                 print(NSString(data: response.request?.httpBody ?? Data(),
                                encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
                 print(response)
                 print(response.response ?? "No HTTP response")
-                print("requestDuration-", response.timeline.requestDuration)
-                print("totalDuration-", response.timeline.totalDuration)
+                print(response.metrics)
             #endif
             
             let httpResponse: HTTPURLResponse? = response.response
@@ -92,7 +91,7 @@ class TPApiClient {
                     if (statusCode == 403) {
                         error = TPError(message: json, response: httpResponse,
                                         kind: .unauthenticated)
-                    } else if (statusCode == 401){
+                    } else if (statusCode == 401 && ![TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)){
                         error = TPError(message: json, response: httpResponse, kind: .unauthenticated)
                         UIUtils.logout()
 
@@ -110,6 +109,7 @@ class TPApiClient {
                         
                     } else {
                         error = TPError(message: json, response: httpResponse, kind: .http)
+                        error.logErrorToSentry()
                     }
 
                     if (error.kind == TPError.Kind.custom) {
@@ -136,6 +136,7 @@ class TPApiClient {
             let error = TPError(message: description, response: httpResponse,
                                 kind: .network)
             
+            error.logErrorToSentry()
             completion(nil, error)
         } else {
             let error = TPError(message: description, response: httpResponse,
@@ -145,6 +146,7 @@ class TPApiClient {
                 handleCustomError(error: error)
             }
             
+            error.logErrorToSentry()
             completion(nil, error)
         }
     }
@@ -202,35 +204,37 @@ class TPApiClient {
             let token: String = KeychainTokenItem.getToken()
             headers["Authorization"] = "JWT " + token
         }
-        Alamofire.upload(
+        
+      
+        Alamofire.AF.upload(
             multipartFormData: { multipartFormData in
                 multipartFormData.append(imageData, withName: "file", fileName: fileName,
                                          mimeType: "image/jpg")
-        },
+            },
             to: url,
-            headers: headers
-        ) { (result) in
-            switch result {
-            case .success(let upload, _, _):
-                request(dataRequest: upload, completion: {
-                    json, error in
-                    var fileDetails: FileDetails? = nil
-                    if let json = json {
-                        fileDetails = TPModelMapper<FileDetails>().mapFromJSON(json: json)
-                        guard fileDetails != nil else {
-                            completion(nil, TPError(message: json, kind: .unexpected))
-                            return
-                        }
+            usingThreshold: .max,
+            method: .post,
+            headers: headers,
+            interceptor: nil,
+            fileManager: .default
+        ).validate()
+            .responseString { response in
+                switch response.result {
+                case .success(let value):
+                    let fileDetails = TPModelMapper<FileDetails>().mapFromJSON(json: value)
+                    guard fileDetails != nil else {
+                        completion(nil, TPError(message: value,   kind: .unexpected))
+                        return
                     }
-                    completion(fileDetails, error)
-                })
-            case .failure(let error):
-                handleError(error: error, completion: {
-                    json, error in
-                    completion(nil, error)
-                })
+                    completion(fileDetails, nil)
+                case .failure(let error):
+                    handleError(error: error, completion: {
+                        json, error in
+                        completion(nil, error)
+                    })
+                }
             }
-        }
+
     }
     
     static func getUserAgent() -> String {
@@ -440,6 +444,10 @@ class TPApiClient {
         
         if attemptItem.question.isEssayType {
             parameters["essay_text"] = attemptItem.localEssayText
+        }
+        
+        if attemptItem.question.isFileType {
+            parameters["files"] = Array(attemptItem.localFiles.map {$0.path})
         }
                 
         if let gapFilledResponses = gapFilledResponses {

@@ -46,4 +46,28 @@ extension UIViewController {
         view.removeFromSuperview()
         removeFromParent()
     }
+    
+    func getCurrentOrientation() -> UIInterfaceOrientation {
+        if #available(iOS 16.0, *) {
+            if let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation {
+                return orientation
+            }
+        } else {
+            let deviceOrientation = UIDevice.current.orientation
+            switch deviceOrientation {
+            case .portrait:
+                return .portrait
+            case .portraitUpsideDown:
+                return .portraitUpsideDown
+            case .landscapeLeft:
+                return .landscapeRight
+            case .landscapeRight:
+                return .landscapeLeft
+            default:
+                break
+            }
+        }
+        
+        return .unknown
+    }
 }

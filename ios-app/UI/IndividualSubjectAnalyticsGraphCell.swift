@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import Charts
+import DGCharts
 import UIKit
 
 class IndividualSubjectAnalyticsGraphCell: UITableViewCell {
@@ -53,7 +53,7 @@ class IndividualSubjectAnalyticsGraphCell: UITableViewCell {
         chartView.holeRadiusPercent = 0.48
         chartView.transparentCircleRadiusPercent = 0.51
         chartView.transparentCircleColor = UIColor.white
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription.enabled = false
         chartView.setExtraOffsets(left: 0, top: 0, right: 0, bottom: 0);
         chartView.legend.enabled = false
     }
@@ -66,7 +66,7 @@ class IndividualSubjectAnalyticsGraphCell: UITableViewCell {
             entries.append(PieChartDataEntry(value: subject.unansweredPercentage,
                                              data: 2 as AnyObject))
         
-        let dataSet = PieChartDataSet(values: entries, label: subject.name)
+        let dataSet = PieChartDataSet(entries: entries, label: subject.name)
         dataSet.colors = [Colors.getRGB(Colors.MATERIAL_GREEN),
                           Colors.getRGB(Colors.MATERIAL_RED),
                           Colors.getRGB(Colors.ORANGE)]

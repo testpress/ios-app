@@ -33,7 +33,7 @@ class HtmlContentViewController: BaseWebViewController {
     var content: Content!
     var emptyView: EmptyView!
     var loading: Bool = false
-    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
+    var viewModel: ChapterContentDetailViewModel?
     var bookmarkHelper: BookmarkHelper!
     
     override func viewDidLoad() {
@@ -132,25 +132,6 @@ class HtmlContentViewController: BaseWebViewController {
         )
     }
     
-    func createContentAttempt() {
-            let attemptsUrl = String(format: "%@%@%d/attempts/", Constants.BASE_URL , TPEndpoint.getContents.urlPath, content.id)
-        TPApiClient.request(
-            type: ContentAttempt.self,
-            endpointProvider: TPEndpointProvider(.post, url: attemptsUrl),
-            completion: {
-                contentAttempt, error in
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    return
-                }
-                
-                if self.content.attemptsCount == 0 {
-                    self.contentAttemptCreationDelegate?.newAttemptCreated()
-                }
-        })
-    }
-    
     func getFormattedContent(_ contentHtml: String) -> String {
         var html = WebViewUtils.getHeader()
         if Constants.BOOKMARKS_ENABLED {
@@ -174,7 +155,7 @@ class HtmlContentViewController: BaseWebViewController {
 extension HtmlContentViewController: WKWebViewDelegate {
     
     func onFinishLoadingWebView() {
-        createContentAttempt()
+        viewModel?.createContentAttempt()
     }
 }
 

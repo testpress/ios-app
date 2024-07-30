@@ -35,6 +35,7 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
     var streams = [Int: [Stream]]()
     var exams = [Int: Exam]()
     var videoConferences = [Int: VideoConference]()
+    var liveStreams = [Int: LiveStream]()
 
     override func getResponse(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
@@ -78,6 +79,10 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
             response?.results.exams.forEach { exam in
                 exams.updateValue(exam, forKey: exam.id)
             }
+            
+            response?.results.liveStreams.forEach { liveStream in
+                liveStreams.updateValue(liveStream, forKey: liveStream.id)
+            }
         }
         return contents
     }
@@ -99,13 +104,15 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
             content.exam = exams[content.examId]
         } else if content.videoConferenceId != -1 {
             content.videoConference = videoConferences[content.videoConferenceId]
+        } else if content.liveStreamId != -1 {
+            content.liveStream = liveStreams[content.liveStreamId]
         }
         return content
     }
     
     override func clearValues() {
         super.clearValues()
-        resetValues(of: [videos, attachments, streams, notes, exams, videoConferences])
+        resetValues(of: [videos, attachments, streams, notes, exams, videoConferences, liveStreams])
     }
     
 }

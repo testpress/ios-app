@@ -27,7 +27,6 @@ import ObjectMapper
 
 class HtmlContent: DBModel {
     
-    @objc dynamic var id: Int = 0
     @objc dynamic var title: String = ""
     @objc dynamic var textHtml: String = ""
     @objc dynamic var readTime: String = ""

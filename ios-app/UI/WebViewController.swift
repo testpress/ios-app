@@ -11,10 +11,11 @@ import TTGSnackbar
 import UIKit
 import WebKit
 
-class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessageHandler {
+class WebViewController: BaseWebViewController, WKWebViewDelegate {
     
     var emptyView: EmptyView!
     var url: String = ""
+    var request: URLRequest?
     var loading: Bool = false
     var navBar: UINavigationBar?
     var useSSOLogin: Bool = false
@@ -107,10 +108,8 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
     }
     
     @objc func goBack() {
-        if (useWebviewNavigation) {
-            if (webView.canGoBack) {
-                webView.goBack()
-            }
+        if (useWebviewNavigation && webView.canGoBack) {
+            webView.goBack()
         } else {
             self.cleanAllCookies()
             self.dismiss(animated: true, completion: nil)
@@ -121,8 +120,12 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
     func loadWebView() {
         showLoading()
         self.emptyView.hide()
-        let url = URL(string: self.url)!
-        webView.load(URLRequest(url: url))
+        if let request = self.request {
+            webView.load(request)
+        } else {
+            let url = URL(string: self.url)!
+            webView.load(URLRequest(url: url))
+        }
     }
     
     func removeCookies(){
@@ -175,12 +178,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
     }
     
     override func initWebView() {
-        let contentController = WKUserContentController()
-        contentController.add(self, name: "callbackHandler")
-        let config = WKWebViewConfiguration()
-        config.userContentController = contentController
-        config.preferences.javaScriptEnabled = true
-        webView = WKWebView( frame: parentView.bounds, configuration: config)
+        webView = WKWebView( frame: parentView.bounds)
     }
 
     func cleanAllCookies() {
@@ -195,14 +193,5 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessa
 
     func onFinishLoadingWebView() {
         activityIndicator?.stopAnimating()
-        if (webView.canGoBack) {
-            navItem?.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        } else {
-            navItem?.leftBarButtonItem = nil
-        }
     }
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    }
-    
 }

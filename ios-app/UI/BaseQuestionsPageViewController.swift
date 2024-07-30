@@ -46,7 +46,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     var questionsPageViewDelegate: QuestionsPageViewDelegate?
     var parentviewController: BaseQuestionsSlidingViewController!
     var currentIndex: Int!
-    var exam: Exam!
+    var exam: Exam?
     var attempt: Attempt!
     var attemptItems = [AttemptItem]()
     var courseContent: Content!
@@ -148,7 +148,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                     self.pageViewController.dataSource = self.baseQuestionsDataSource
                     self.updateNavigationButtons(index: self.getCurrentIndex())
                     self.parentviewController
-                        .questionsSlidingMenuDelegate.updateQuestions(self.attemptItems)
+                        .questionsSlidingMenuDelegate.updateQuestions(self.attemptItems, self.exam?.selectedLanguage)
                     
                     self.hideLoadingProgress()
                 }

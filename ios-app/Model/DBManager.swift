@@ -93,13 +93,13 @@ class DBManager<T: Object> {
     
     func addData(object: T) {
         try! database.write {
-            database.add(object, update: true)
+            database.add(object, update: .modified)
         }
     }
     
     func addData(objects: [T]) {
         try! database.write {
-            database.add(objects, update: true)
+            database.add(objects, update: .modified)
         }
     }
     

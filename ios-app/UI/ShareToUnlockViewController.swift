@@ -25,7 +25,7 @@ class ShareToUnlockViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    @IBAction func share(_ sender: Any) {
+    @IBAction func share(_ sender: UIButton) {
         let activityViewController = UIActivityViewController(activityItems:
             [shareText], applicationActivities: nil)
         let excludeActivities = [
@@ -39,7 +39,7 @@ class ShareToUnlockViewController: UIViewController {
             UIActivity.ActivityType.copyToPasteboard
         ]
         activityViewController.excludedActivityTypes = excludeActivities;
-        
+        activityViewController.popoverPresentationController?.sourceView = sender
         activityViewController.completionWithItemsHandler = {(activityType:
             UIActivity.ActivityType?, completed: Bool, returnedItems:[Any]?, error: Error?) in
             if (completed) {
