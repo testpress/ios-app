@@ -31,4 +31,17 @@ class LiveStream: DBModel {
         status <- map["status"]
         chatEmbedURL <- map["chat_embed_url"]
     }
+    
+    public var isEnded: Bool {
+        return status == "Completed"
+    }
+    
+    public var isRunning: Bool {
+        return status == "Running"
+    }
+    
+    public var isNotStarted: Bool {
+        return status == "Not Started"
+    }
+
 }

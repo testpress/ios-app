@@ -28,6 +28,26 @@ class VideoPlayerView: UIView {
     var watermarkLabel: MarqueeLabel?
     var contentKeySessionDelegate: DRMKeySessionDelegate!
     var videoPlayerResourceLoaderDelegate: VideoPlayerResourceLoaderDelegate!
+    var isLive: Bool = false {
+        didSet {
+            controlsContainerView.isLive = isLive
+        }
+    }
+    
+    public var videoDuration: CMTime {
+        guard let currentItem = player?.currentItem else {
+            return .invalid
+        }
+
+        if isLive {
+            guard let seekableTimeRange = currentItem.seekableTimeRanges.last?.timeRangeValue else {
+                return .invalid
+            }
+            return CMTime(seconds: seekableTimeRange.end.seconds, preferredTimescale: 1_000)
+        } else {
+            return currentItem.duration
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -146,7 +166,7 @@ class VideoPlayerView: UIView {
             let seconds = CMTimeGetSeconds(progressTime)
             if (self.player?.currentItem != nil) {
                 let loadedDuration = CMTimeGetSeconds((self.player?.availableDuration())!)
-                self.controlsContainerView.updateDuration(seconds:seconds, videoDuration: CMTimeGetSeconds((self.player?.currentItem?.duration)!))
+                self.controlsContainerView.updateDuration(seconds:seconds, videoDuration: self.videoDuration.seconds)
                 self.controlsContainerView.updateLoadedDuration(seconds:loadedDuration)
             }
         })

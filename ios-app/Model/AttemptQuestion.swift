@@ -60,6 +60,9 @@ class AttemptQuestion: DBModel {
     var isEssayType: Bool {
         get {questionType == .ESSAY}
     }
+    var isFileType: Bool {
+        get {questionType == .FILE_TYPE}
+    }
     
     public  func clone() -> AttemptQuestion {
         let newAttemptItem = AttemptQuestion()
@@ -120,4 +123,40 @@ public enum QuestionType: String {
     case MATCH = "M"
     case NESTED = "T"
     case UNKNOWN = "Unknown"
+}
+
+
+extension AttemptQuestion {
+    func getLanguageBasedQuestion(_ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in self.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.questionHtml ?? self.questionHtml!
+                }
+            }
+        }
+        return self.questionHtml!
+    }
+    
+    func getLanguageBasedDirection(_ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in self.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.direction?.html ?? self.direction!
+                }
+            }
+        }
+        return self.direction!
+    }
+    
+    func getExplanationHtml(_ language: Language?) -> String? {
+        if let selectedLanguage = language {
+            for translation in self.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.explanationHtml
+                }
+            }
+        }
+        return self.explanationHtml
+    }
 }

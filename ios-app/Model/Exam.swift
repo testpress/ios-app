@@ -65,6 +65,7 @@ class Exam: DBModel {
     @objc dynamic var enableQuizMode: Bool = false;
     @objc dynamic var selectedLanguage: Language?
     var languages = List<Language>()
+    @objc dynamic var examStartUrl: String?
     
     override public static func primaryKey() -> String? {
         return "id"
@@ -111,6 +112,7 @@ class Exam: DBModel {
         enableQuizMode <- map["enable_quiz_mode"]
         selectedLanguage <- map["selected_language"]
         languages <- (map["languages"], ListTransform<Language>())
+        examStartUrl <- map["exam_start_url"]
     }
     
     func hasStarted() -> Bool {
@@ -156,4 +158,9 @@ class Exam: DBModel {
     func IsExamUsingIBPSTemplate() -> Bool{
         return templateType == 2
     }
+}
+
+struct ExamTemplateType {
+    static let IELTS_TEMPLATE = 12
+    static let CTET_TEMPLATE = 15
 }

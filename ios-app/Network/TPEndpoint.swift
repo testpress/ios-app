@@ -78,6 +78,7 @@ enum TPEndpoint {
     case userVideos
     case dashboard
     case getSSOUrl
+    case getS3PreSignedUrl
 
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -137,7 +138,8 @@ enum TPEndpoint {
              .verifyPhoneNumber,
              .logoutDevices,
              .logout,
-             .getSSOUrl:
+             .getSSOUrl,
+             .getS3PreSignedUrl:
             return .post
         case .put:
             return .put
@@ -234,6 +236,8 @@ enum TPEndpoint {
             return "/api/v2.4/dashboard/"
         case .getSSOUrl:
             return "/api/v2.3/presigned_sso_url/"
+        case .getS3PreSignedUrl:
+            return "/api/v2.3/presigned_url/"
         default:
             return ""
         }
