@@ -12,7 +12,6 @@ import RealmSwift
 
 class LoginActivity: DBModel {
     
-    @objc dynamic var id = 0
     @objc dynamic var userAgent: String = ""
     @objc dynamic var ipAddress: String = ""
     @objc dynamic var lastUsed: String = ""
@@ -20,7 +19,7 @@ class LoginActivity: DBModel {
     @objc dynamic var currentDevice: Bool = false
 
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         id <- map["id"]
         userAgent <- map["user_agent"]
         ipAddress <- map["ip_address"]

@@ -28,7 +28,6 @@ import ObjectMapper
 class Attachment: DBModel {
     
     @objc dynamic var attachmentUrl: String = ""
-    @objc dynamic var id: Int = -1
     @objc dynamic var title: String = ""
     @objc dynamic var attachmentDescription: String?
     @objc dynamic var isRenderable: Bool = false

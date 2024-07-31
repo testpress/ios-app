@@ -27,7 +27,6 @@ import ObjectMapper
 
 class AttemptAnswer: DBModel {
     @objc dynamic var textHtml: String = ""
-    @objc dynamic var id: Int = 0;
     @objc dynamic var isCorrect: Bool = false
     @objc dynamic var marks: String!
 
@@ -41,5 +40,23 @@ class AttemptAnswer: DBModel {
     
     override public static func primaryKey() -> String? {
         return "id"
+    }
+}
+
+extension AttemptAnswer {
+    func getTextHtml(_ attemptQuestion: AttemptQuestion, _ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in attemptQuestion.translations {
+                if translation.language == selectedLanguage.code {
+                    for answerTranslation in translation.answers {
+                        if self.id == answerTranslation.id {
+                            return answerTranslation.textHtml
+                        }
+                    }
+                    return self.textHtml
+                }
+            }
+        }
+        return self.textHtml
     }
 }

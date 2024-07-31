@@ -32,7 +32,6 @@ class Attempt: DBModel {
     public static let RUNNING = "Running";
     
     @objc var url: String = "";
-    @objc var id: Int = -1;
     @objc  var date: String?;
     @objc var totalQuestions: Int = 0;
     @objc var score: String?;
@@ -52,6 +51,7 @@ class Attempt: DBModel {
     @objc var speed: Int = 0
     @objc var accuracy: Int = 0
     @objc var exam: Int = -1
+    @objc var attemptType: Int = 0
     var sections = List<AttemptSection>()
     
 
@@ -59,7 +59,7 @@ class Attempt: DBModel {
         return "id"
     }
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         date <- map["date"]
@@ -81,6 +81,15 @@ class Attempt: DBModel {
         speed <- map["speed"]
         accuracy <- map["accuracy"]
         exam <- map["exam"]
+        attemptType <- map["attempt_type"]
         sections <- (map["sections"], ListTransform<AttemptSection>())
+    }
+
+    func hasScore() -> Bool {
+        return self.score != nil && self.score != "NA"
+    }
+    
+    func getEndAttemptUrl() -> String {
+        return url + "end/";
     }
 }

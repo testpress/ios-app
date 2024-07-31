@@ -24,14 +24,14 @@
 //
 
 import Lottie
-import PDFReader
+import PDFKit
 import UIKit
 import Alamofire
 import RealmSwift
 import MarqueeLabel
 
 
-class AttachmentDetailViewController: UIViewController {
+class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -54,13 +54,14 @@ class AttachmentDetailViewController: UIViewController {
     var position: Int!
     var loading: Bool = false
     var bookmarkHelper: BookmarkHelper!
-    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
-    var animationView: LOTAnimationView!
-    var moveAnimationView: LOTAnimationView!
-    var removeAnimationView: LOTAnimationView!
+    var viewModel: ChapterContentDetailViewModel?
+    var animationView: LottieAnimationView!
+    var moveAnimationView: LottieAnimationView!
+    var removeAnimationView: LottieAnimationView!
     let alertController = UIUtils.initProgressDialog(message: Strings.LOADING + "\n\n")
-    var timer: Timer?
-    var watermarkLabel: MarqueeLabel?
+    let cacheDirectoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+    var session: URLSession!
+    var pdfFilePath: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +74,7 @@ class AttachmentDetailViewController: UIViewController {
         } else {
             showDownloadButton()
         }
+        session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
     }
     
     func initializeBookmarkHelper() {
@@ -132,82 +134,112 @@ class AttachmentDetailViewController: UIViewController {
     }
     
     @IBAction func viewAttachment(_ sender: UIButton) {
+        present(alertController, animated: false, completion: nil)
+        
         var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         if attachmentUrl.scheme == "http" {
             attachmentUrl = URL(string: "https://" + attachmentUrl.host! + attachmentUrl.path
                 + "?" + attachmentUrl.query!)!
         }
-        present(alertController, animated: false, completion: {
-            self.loadPdf(url: attachmentUrl)
-        })
-    }
-    
-    func loadPdf(url: URL) {
-        let pdfDocument = PDFDocument(url: url)
-        alertController.dismiss(animated: false, completion: {
-            self.displayPdf(pdfDocument)
-        })
-    }
-    
-    func displayPdf(_ pdfDocument: PDFDocument?) {
-        if pdfDocument != nil {
-            let backButton = UIBarButtonItem(title: "Back", style: .done, target: self,
-                                             action:  #selector(back))
-            
-            let pdfController = PDFViewController.createNew(with: pdfDocument!,
-                                                            title: content.attachment!.title,
-                                                            backButton: backButton)
-            pdfController.navigationItem.rightBarButtonItem = nil
-            watermarkLabel = initializeWatermark(view: pdfController.view)
-            pdfController.view.addSubview(watermarkLabel!)
-            startTimerToMoveWatermarkPosition()
-            let navigationController = UINavigationController(rootViewController: pdfController)
-            present(navigationController, animated: true)
-            createContentAttempt()
+        
+        if isCacheAvailable(attachmentUrl) {
+            showPdf()
+        } else{
+            downloadAndShowPdf(attachmentUrl)
         }
     }
     
-    private func startTimerToMoveWatermarkPosition() {
-        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
+    func isCacheAvailable(_ attachmentUrl: URL) -> Bool {
+        pdfFilePath = cacheDirectoryURL.appendingPathComponent(attachmentUrl.lastPathComponent)
+        return FileManager.default.fileExists(atPath: pdfFilePath.path)
     }
     
-    private func initializeWatermark(view: UIView) -> MarqueeLabel {
-        let watermarkLabel = MarqueeLabel.init(frame: CGRect(x: 0, y: 100, width: view.frame.width, height: 20), duration: 8.0, fadeLength: 0.0)
-        watermarkLabel.text = KeychainTokenItem.getAccount().padding(toLength: Int((view.frame.width)/2), withPad: " ", startingAt: 0)
-        watermarkLabel.numberOfLines = 1
-        return watermarkLabel
+    func showPdf() {
+        alertController.dismiss(animated: true) {
+            self.loadPdf(self.pdfFilePath)
+        }
     }
     
-    @objc func moveWatermarkPosition() {
-        watermarkLabel?.frame.origin.y = CGFloat(Int.random(in: 0..<Int(self.view.frame.height)))
+    func downloadAndShowPdf(_ attachmentUrl: URL) {
+        let downloadTask = session.downloadTask(with: attachmentUrl)
+        downloadTask.resume()
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        // This method will be called when the download is completed
+        do {
+            try FileManager.default.moveItem(at: location, to: pdfFilePath)
+            DispatchQueue.main.async {
+                self.alertController.dismiss(animated: true) {
+                    self.loadPdf(self.pdfFilePath)
+                }
+            }
+        } catch {
+            print("Failed to move downloaded file to cache directory: \(error)")
+        }
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        // This method will be called when the download is error
+        if let error = error {
+            let errorMessage: String
+            switch error {
+            case URLError.notConnectedToInternet:
+                errorMessage = "No internet connection."
+            case URLError.networkConnectionLost:
+                errorMessage = "Network connection lost."
+            case URLError.cannotFindHost,
+                 URLError.cannotConnectToHost:
+                errorMessage = "Cannot connect to the server."
+            default:
+                errorMessage = "An error occurred: \(error.localizedDescription)"
+            }
+            
+            DispatchQueue.main.async {
+                self.alertController.dismiss(animated: true) {
+                    let errorAlert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+            }
+        }
     }
 
-    deinit {
-        self.timer?.invalidate()
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        // This method will be called periodically to update the download progress
+        if totalBytesExpectedToWrite > 0 {
+            let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+            let percentage = Int(progress * 100)
+            
+            DispatchQueue.main.async {
+                self.alertController.message = "\(Strings.LOADING)\(percentage)%\n\n"
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.alertController.message = "\(Strings.LOADING)\n\n" // or any other appropriate indication
+            }
+        }
+    }
+    
+    func loadPdf(_ url: URL) {
+        let pdfDocument = PDFDocument(url: url)
+        if let pdfDocument = pdfDocument {
+            let storyboard =
+            UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
+            let pdfViewController = storyboard.instantiateViewController(withIdentifier:
+                                                                            Constants.PDF_VIEW_CONTROLLER) as! PDFViewController
+            pdfViewController.pdfDocument = pdfDocument
+            pdfViewController.contentTitle = content.attachment!.title
+            pdfViewController.modalPresentationStyle = .fullScreen
+            present(pdfViewController, animated: true)
+            viewModel?.createContentAttempt()
+        }
     }
     
     @IBAction func downloadAttachment(_ sender: UIButton) {
         var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
         UIApplication.shared.openURL(attachmentUrl)
-        createContentAttempt()
-    }
-    
-    func createContentAttempt() {
-        TPApiClient.request(
-            type: ContentAttempt.self,
-            endpointProvider: TPEndpointProvider(.post, url: content.attemptsUrl),
-            completion: {
-                contentAttempt, error in
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    return
-                }
-                
-                if self.content.attemptsCount == 0 {
-                    self.contentAttemptCreationDelegate?.newAttemptCreated()
-                }
-        })
+        viewModel?.createContentAttempt()
     }
     
     @IBAction func moveBookmark() {
@@ -235,16 +267,15 @@ class AttachmentDetailViewController: UIViewController {
         bookmarkButton.isHidden = false
     }
     
-    func initAnimationView() -> LOTAnimationView {
-        let animationView = LOTAnimationView(name: "material_wave_loading")
+    func initAnimationView() -> LottieAnimationView {
+        let animationView = LottieAnimationView(name: "material_wave_loading")
         animationView.contentMode = .scaleAspectFill
         animationView.frame.size.width = 50
         animationView.frame.size.height = 25
-        let primaryColor = Colors.getRGB(Colors.PRIMARY).cgColor
-        animationView.setValueDelegate(LOTColorValueCallback(color: primaryColor),
-                                       for: LOTKeypath(string: "**.Fill 1.Color"))
-        
-        animationView.loopAnimation = true
+        let fillKeypath = AnimationKeypath(keypath: "**.Fill 1.Color")
+        let valueProvider = ColorValueProvider(LottieColor(r: 1, g: 0.2, b: 0.3, a: 1))
+        animationView.setValueProvider(valueProvider, keypath: fillKeypath)
+        animationView.loopMode = .loop
         animationView.play()
         return animationView
     }
