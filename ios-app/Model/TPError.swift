@@ -25,6 +25,7 @@
 
 import UIKit
 import Alamofire
+import Sentry
 
 public class TPError: Error {
     
@@ -121,6 +122,18 @@ public class TPError: Error {
         return TPModelMapper<T>().mapFromJSON(json: message!)
     }
     
+    public func logErrorToSentry() {
+        let event = Event(level: .error)
+        event.message = SentryMessage(formatted: self.message ?? "Some error occured")
+        event.extra = [
+            "statusCode": self.statusCode,
+            "error_detail": self.error_detail ?? "",
+            "error_code": self.error_code ?? "",
+            "kind": "\(self.kind)"
+        ]
+        
+        SentrySDK.capture(event: event)
+    }
 }
 
 

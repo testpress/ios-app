@@ -11,8 +11,9 @@ import UIKit
 class QuizQuestionsPageViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     var currentIndex: Int!
     var attemptItems: [AttemptItem]!
-    var exam: Exam!
-    var contentAttempt: ContentAttempt!
+    var exam: Exam?
+    var attempt: Attempt?
+    var contentAttempt: ContentAttempt?
     var viewModel: QuizQuestionsViewModel!
     
     @IBOutlet weak var containerView: UIView!
@@ -24,7 +25,11 @@ class QuizQuestionsPageViewController: UIViewController, UIPageViewControllerDat
     var pageViewController: UIPageViewController!
     
     override func viewDidLoad() {
-        viewModel = QuizQuestionsViewModel(contentAttempt: contentAttempt)
+        if exam == nil {
+            viewModel = QuizQuestionsViewModel(attempt: attempt)
+        } else {
+            viewModel = QuizQuestionsViewModel(contentAttempt: contentAttempt)
+        }
         submitButton.addTextSpacing(spacing: 1.0)
         currentIndex = viewModel.getFirstUnAttemptedItemIndex()
         initializePageViewController()
@@ -82,20 +87,36 @@ class QuizQuestionsPageViewController: UIViewController, UIPageViewControllerDat
     
     func endExam() {
         present(loadingDialogController, animated: false)
-        viewModel.endExam { contentAttempt, error in
-            self.loadingDialogController.dismiss(animated: false, completion: nil)
-            self.gotoTestReport(contentAttempt: contentAttempt!)
+        if exam != nil {
+            viewModel.endExam { contentAttempt, error in
+                self.loadingDialogController.dismiss(animated: false, completion: nil)
+                self.gotoTestReport(contentAttempt: contentAttempt!, attempt: nil)
+            }
+        } else {
+            viewModel.endAttempt { attempt, error in
+                self.loadingDialogController.dismiss(animated: false, completion: nil)
+                self.gotoTestReport(contentAttempt: nil, attempt: attempt!)
+            }
         }
     }
     
-    func gotoTestReport(contentAttempt: ContentAttempt) {
+    func gotoTestReport(contentAttempt: ContentAttempt?, attempt: Attempt?) {
         let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier:
-            Constants.TROPHIES_ACHIEVED_VIEW_CONTROLLER) as! TrophiesAchievedViewController
-        
-        viewController.exam = exam
-        viewController.contentAttempt = contentAttempt
-        present(viewController, animated: true, completion: nil)
+        if contentAttempt != nil {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TROPHIES_ACHIEVED_VIEW_CONTROLLER) as! TrophiesAchievedViewController
+            
+            viewController.exam = exam
+            viewController.contentAttempt = contentAttempt
+            present(viewController, animated: true, completion: nil)
+        } else {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
+            
+            viewController.exam = exam
+            viewController.attempt = attempt
+            present(viewController, animated: true, completion: nil)
+        }
     }
     
     
