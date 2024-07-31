@@ -15,6 +15,8 @@ public class ContentsListResponse {
     var notes: [HtmlContent] = []
     var streams: [Stream] = []
     var exams: [Exam] = []
+    var videoConferences: [VideoConference] = []
+    var liveStreams: [LiveStream] = []
     
     public required init?(map: Map) {
         mapping(map: map)
@@ -29,5 +31,7 @@ extension ContentsListResponse: TestpressModel {
         notes <- map["notes"]
         streams <- map["streams"]
         exams <- map["exams"]
+        videoConferences <- map["video_conferences"]
+        liveStreams <- map["live_streams"]
     }
 }

@@ -25,6 +25,7 @@
 
 import UIKit
 import Alamofire
+import Sentry
 
 public class TPError: Error {
     
@@ -62,14 +63,25 @@ public class TPError: Error {
         self.response = response
         self.kind = kind
 
-        if let error_detail = self.getErrorBodyAs(type: ApiError.self) {
-            if (error_detail.detail != nil) {
-                self.kind = Kind.custom
-                self.error_detail = error_detail.detail
-                self.error_code = error_detail.error_code
-            }
+
+        if isCustomError() {
+            let error = self.getErrorBodyAs(type: TestpressAPIError.self)?.detail
+            self.populateErrorData(code: error?.error_code, detail: error?.message)
+        } else if let error_detail = self.getErrorBodyAs(type: ApiError.self) {
+            self.populateErrorData(code: error_detail.error_code, detail: error_detail.detail)
         }
         
+    }
+    
+    func isCustomError() -> Bool {
+        let error = self.getErrorBodyAs(type: TestpressAPIError.self)
+        return error != nil && error?.detail?.message != nil
+    }
+    
+    func populateErrorData(code: String?, detail: String?) {
+        self.kind = Kind.custom
+        self.error_detail = detail
+        self.error_code = code
     }
     
     public func isNetworkError() -> Bool {
@@ -110,6 +122,18 @@ public class TPError: Error {
         return TPModelMapper<T>().mapFromJSON(json: message!)
     }
     
+    public func logErrorToSentry() {
+        let event = Event(level: .error)
+        event.message = SentryMessage(formatted: self.message ?? "Some error occured")
+        event.extra = [
+            "statusCode": self.statusCode,
+            "error_detail": self.error_detail ?? "",
+            "error_code": self.error_code ?? "",
+            "kind": "\(self.kind)"
+        ]
+        
+        SentrySDK.capture(event: event)
+    }
 }
 
 

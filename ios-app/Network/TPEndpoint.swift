@@ -76,6 +76,9 @@ enum TPEndpoint {
     case loginActivity
     case logoutDevices
     case userVideos
+    case dashboard
+    case getSSOUrl
+    case getS3PreSignedUrl
 
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -134,7 +137,9 @@ enum TPEndpoint {
              .unRegisterDevice,
              .verifyPhoneNumber,
              .logoutDevices,
-             .logout:
+             .logout,
+             .getSSOUrl,
+             .getS3PreSignedUrl:
             return .post
         case .put:
             return .put
@@ -168,7 +173,7 @@ enum TPEndpoint {
         case .getPosts:
             return "/api/v2.2/posts/"
         case .getForum, .createForumPost:
-            return "/api/v2.3/forum/"
+            return "/api/v2.5/discussions/"
         case .getForumCategories:
             return "/api/v2.3/forum/categories/"
         case .getSubjectAnalytics:
@@ -227,6 +232,12 @@ enum TPEndpoint {
             return "/api/v2.4/auth/logout_devices/"
         case .userVideos:
             return "/api/v2.4/user_videos/"
+        case .dashboard:
+            return "/api/v2.4/dashboard/"
+        case .getSSOUrl:
+            return "/api/v2.3/presigned_sso_url/"
+        case .getS3PreSignedUrl:
+            return "/api/v2.3/presigned_url/"
         default:
             return ""
         }
@@ -297,4 +308,7 @@ struct TPEndpointProvider {
         return Constants.BASE_URL + TPEndpoint.userVideos.urlPath + "\(attemptID)/"
     }
     
+    static func getDRMLicenseURL(contentID: Int) -> String {
+        return Constants.BASE_URL + "/api/v2.5/chapter_contents/\(contentID)/drm_license/"
+    }
 }

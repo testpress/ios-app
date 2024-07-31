@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var deleteAccountButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
@@ -44,6 +45,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var accuracy: UILabel!
     @IBOutlet weak var bookmarkButtonLayout: UIStackView!
     
+    @IBOutlet weak var shareButtonView: UIView!
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var emptyView: EmptyView!
     var user: User?
@@ -54,6 +56,7 @@ class ProfileViewController: UIViewController {
         emptyView = EmptyView.getInstance(parentView: contentStackView)
         emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
+        UIUtils.setButtonDropShadow(deleteAccountButton)
         bookmarkButtonLayout.isHidden = !Constants.BOOKMARKS_ENABLED
         self.setStatusBarColor()
     }
@@ -206,6 +209,7 @@ class ProfileViewController: UIViewController {
             UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         
         activityViewController.popoverPresentationController?.sourceView = view
+        activityViewController.popoverPresentationController?.sourceRect = shareButtonView.frame
         activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop ]
         present(activityViewController, animated: true, completion: nil)
     }
@@ -213,6 +217,21 @@ class ProfileViewController: UIViewController {
     @IBAction func back() {
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func showProfileEditPage(_ sender: Any) {
+        let webViewController = WebViewController()
+        webViewController.title = "Edit profile"
+        webViewController.url = "&next=/settings/profile/mobile"
+        webViewController.useWebviewNavigation = false
+        webViewController.useSSOLogin = true
+        webViewController.displayNavbar = true
+        webViewController.shouldOpenLinksWithinWebview = true
+        webViewController.modalPresentationStyle = .fullScreen
+        webViewController.setStatusBarColor()
+        
+        self.present(webViewController, animated: true, completion: nil)
+    }
+    
     
     // Set frames of the views in this method to support both portrait & landscape view
     override func viewDidLayoutSubviews() {
@@ -224,4 +243,16 @@ class ProfileViewController: UIViewController {
         contentView.layoutIfNeeded()
     }
     
+    @IBAction func deleteAccount(_ sender: Any) {
+        let webViewController = ConfirmDeletionViewController()
+        webViewController.title = "Delete Account"
+        webViewController.useSSOLogin = true
+        webViewController.displayNavbar = true
+        webViewController.useWebviewNavigation = false
+        webViewController.shouldOpenLinksWithinWebview = false
+        webViewController.url = "&next=/settings/account/delete"
+        webViewController.modalPresentationStyle = .fullScreen
+
+        self.present(webViewController, animated: true, completion: nil)
+    }
 }

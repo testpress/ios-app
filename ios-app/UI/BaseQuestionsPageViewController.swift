@@ -46,7 +46,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     var questionsPageViewDelegate: QuestionsPageViewDelegate?
     var parentviewController: BaseQuestionsSlidingViewController!
     var currentIndex: Int!
-    var exam: Exam!
+    var exam: Exam?
     var attempt: Attempt!
     var attemptItems = [AttemptItem]()
     var courseContent: Content!
@@ -132,7 +132,10 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                         })
                         return
                     }
-                    self.attemptItems = self.attemptItems.sorted(by: { $0.order < $1.order })
+                    self.attemptItems = self.getSortedAttemptItems()
+                    if self.questionsPageViewDelegate?.questionsDidLoad != nil {
+                        self.questionsPageViewDelegate?.questionsDidLoad!()
+                    }
                     self.baseQuestionsDataSource = self.getQuestionsDataSource()
                     // TODO: Handle empty questions
                     let startingViewController: BaseQuestionsViewController =
@@ -145,16 +148,16 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
                     self.pageViewController.dataSource = self.baseQuestionsDataSource
                     self.updateNavigationButtons(index: self.getCurrentIndex())
                     self.parentviewController
-                        .questionsSlidingMenuDelegate.updateQuestions(self.attemptItems)
+                        .questionsSlidingMenuDelegate.updateQuestions(self.attemptItems, self.exam?.selectedLanguage)
                     
-                    self.hideLoadingProgress(completionHandler: {
-                        if self.questionsPageViewDelegate?.questionsDidLoad != nil {
-                            self.questionsPageViewDelegate?.questionsDidLoad!()
-                        }
-                    })
+                    self.hideLoadingProgress()
                 }
             }
         )
+    }
+    
+    func getSortedAttemptItems() -> Array<AttemptItem > {
+        return self.attemptItems.sorted(by: { $0.order < $1.order })
     }
     
     // MARK: - UIPageViewController delegate methods
@@ -190,8 +193,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
     
     func setCurrentQuestion(index: Int) {
         let currentIndex: Int = getCurrentIndex()
-        if  index < 0 || index >= (baseQuestionsDataSource?.attemptItems.count)! ||
-                index == currentIndex {
+        if  index < 0 || index >= (baseQuestionsDataSource?.attemptItems.count)! {
             
             return
         }

@@ -8,12 +8,13 @@
 
 import UIKit
 import AVKit
-import M3U8KitDynamic
-import SwiftKeychainWrapper
+import M3U8Parser
+import MarqueeLabel
 
 
 class VideoPlayerView: UIView {
     var url: URL!
+    var drmLicenseURL: String?
     var playerLayer: AVPlayerLayer?
     var player: AVPlayer? = AVPlayer()
     var playerDelegate: VideoPlayerDelegate!
@@ -23,20 +24,47 @@ class VideoPlayerView: UIView {
     var startTime: Float = 0.0
     var currentPlaybackSpeed: Float = 0.0
     var resolutionInfo:[VideoQuality] = [VideoQuality(resolution:"Auto", bitrate: 0)]
-    let videoPlayerResourceLoaderDelegate = VideoPlayerResourceLoaderDelegate()
+    var timer: Timer?
+    var watermarkLabel: MarqueeLabel?
+    var contentKeySessionDelegate: DRMKeySessionDelegate!
+    var videoPlayerResourceLoaderDelegate: VideoPlayerResourceLoaderDelegate!
+    var isLive: Bool = false {
+        didSet {
+            controlsContainerView.isLive = isLive
+        }
+    }
+    
+    public var videoDuration: CMTime {
+        guard let currentItem = player?.currentItem else {
+            return .invalid
+        }
+
+        if isLive {
+            guard let seekableTimeRange = currentItem.seekableTimeRanges.last?.timeRangeValue else {
+                return .invalid
+            }
+            return CMTime(seconds: seekableTimeRange.end.seconds, preferredTimescale: 1_000)
+        } else {
+            return currentItem.duration
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    init(frame: CGRect, url: URL) {
+    init(frame: CGRect, url: URL, drmLicenseURL: String?) {
         self.url = url
+        self.drmLicenseURL = drmLicenseURL
+        self.contentKeySessionDelegate = DRMKeySessionDelegate(drmLicenseURL: drmLicenseURL)!
+        self.videoPlayerResourceLoaderDelegate = VideoPlayerResourceLoaderDelegate()
         super.init(frame: frame)
         setupPlayer()
         controlsContainerView.frame = frame
         controlsContainerView.delegate = self
         controlsContainerView.setUp()
         addSubview(controlsContainerView)
+        displayWatermark()
         addObservers()
         
         self.addTapGestureRecognizer {
@@ -53,6 +81,23 @@ class VideoPlayerView: UIView {
         playerLayer = AVPlayerLayer(player: player)
         self.layer.addSublayer(playerLayer!)
         playerLayer?.frame = self.frame
+    }
+    
+    private func displayWatermark() {
+        watermarkLabel = initializeWatermarkLabel()
+        addSubview(watermarkLabel!)
+    }
+    
+    private func initializeWatermarkLabel() -> MarqueeLabel {
+        let watermarkLabel = MarqueeLabel.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 20), duration: 8.0, fadeLength: 0.0)
+        watermarkLabel.text = KeychainTokenItem.getAccount().padding(toLength: Int((self.frame.width)/2), withPad: " ", startingAt: 0)
+        watermarkLabel.numberOfLines = 1
+        return watermarkLabel
+    }
+    
+    
+    @objc func moveWatermarkPosition() {
+        watermarkLabel?.frame.origin.y = CGFloat(Int.random(in: 0..<Int(self.frame.height)))
     }
     
     func playVideo(url: URL) {
@@ -75,6 +120,14 @@ class VideoPlayerView: UIView {
         let modifiedURL = URLUtils.convertURLScheme(url: url, scheme: "fakehttps")
         let asset = AVURLAsset(url: modifiedURL)
         asset.resourceLoader.setDelegate(videoPlayerResourceLoaderDelegate, queue: DispatchQueue.main)
+        if #available(iOS 11.0, *) {
+            if drmLicenseURL != nil {
+                let contentKeySession = AVContentKeySession(keySystem: AVContentKeySystem.fairPlayStreaming)
+                contentKeySession.setDelegate(contentKeySessionDelegate, queue: DispatchQueue.main)
+                contentKeySession.addContentKeyRecipient(asset)
+                videoPlayerResourceLoaderDelegate.setContentKeySession(contentKeySession: contentKeySession)
+            }
+        }
         return asset
     }
     
@@ -100,6 +153,7 @@ class VideoPlayerView: UIView {
     
     func addObservers() {
         initPlayer()
+        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackBufferEmpty", options: .new, context: nil)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: .new, context: nil)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackBufferFull", options: .new, context: nil)
@@ -112,7 +166,7 @@ class VideoPlayerView: UIView {
             let seconds = CMTimeGetSeconds(progressTime)
             if (self.player?.currentItem != nil) {
                 let loadedDuration = CMTimeGetSeconds((self.player?.availableDuration())!)
-                self.controlsContainerView.updateDuration(seconds:seconds, videoDuration: CMTimeGetSeconds((self.player?.currentItem?.duration)!))
+                self.controlsContainerView.updateDuration(seconds:seconds, videoDuration: self.videoDuration.seconds)
                 self.controlsContainerView.updateLoadedDuration(seconds:loadedDuration)
             }
         })
@@ -134,10 +188,11 @@ class VideoPlayerView: UIView {
         controlsContainerView.playerStatus = .finished
     }
     
-    func dealloc() {
+    func deallocate() {
         player?.pause()
         controlsContainerView.playerStatus = .paused
         player?.removeTimeObserver(timeObserver!)
+        self.timer?.invalidate()
         NotificationCenter.default.removeObserver(videoEndObserver!)
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackBufferEmpty")
         player?.currentItem?.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
@@ -259,12 +314,7 @@ extension VideoPlayerView: PlayerControlDelegate {
     }
     
     func fullScreen() {
-        var value = UIInterfaceOrientation.landscapeRight.rawValue
-
-        if UIDevice.current.orientation.isLandscape {
-            value = UIInterfaceOrientation.portrait.rawValue
-        }
-        UIDevice.current.setValue(value, forKey: "orientation")
+        playerDelegate?.toggleFullScreen()
     }
     
     func isPlaying() -> Bool {
@@ -274,5 +324,6 @@ extension VideoPlayerView: PlayerControlDelegate {
 
 protocol VideoPlayerDelegate: class {
     func showOptionsMenu()
+    func toggleFullScreen()
 }
 

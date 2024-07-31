@@ -31,7 +31,6 @@ class Content: DBModel {
     
     @objc dynamic var index: Int = -1
     @objc dynamic var url: String = ""
-    @objc dynamic var id: Int = -1
     @objc dynamic var name: String = ""
     @objc dynamic var contentDescription: String?
     @objc dynamic var image: String = ""
@@ -54,12 +53,21 @@ class Content: DBModel {
     @objc dynamic var videoId: Int = -1
     @objc dynamic var attachment: Attachment?
     @objc dynamic var attachmentId: Int = -1
+    @objc dynamic var videoConference: VideoConference?
+    @objc dynamic var videoConferenceId: Int = -1
+    @objc dynamic var liveStream: LiveStream?
+    @objc dynamic var liveStreamId: Int = -1
     @objc dynamic var active: Bool = true
     var bookmarkId = RealmOptional<Int>()
     @objc dynamic var isScheduled: Bool = false
     @objc dynamic var start: String = ""
+    @objc dynamic var end: String = ""
     @objc dynamic var contentType: String = ""
-    
+    @objc dynamic var coverImage: String!
+    @objc dynamic var coverImageSmall: String!
+    @objc dynamic var coverImageMedium: String!
+    @objc dynamic var hasEnded: Bool = false
+
     
     public static func fetchContent(url:String, completion: @escaping(Content?, TPError?) -> Void) {
         TPApiClient.request(
@@ -94,7 +102,7 @@ class Content: DBModel {
     }
 
     
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         url <- map["url"]
         id <- map["id"]
         name <- map["title"]
@@ -118,11 +126,20 @@ class Content: DBModel {
         videoId <- (map["video_id"], transform)
         attachment <- map["attachment"]
         attachmentId <- (map["attachment_id"], transform)
+        videoConference <- map["video_conference"]
+        videoConferenceId <- (map["video_conference_id"], transform)
+        liveStream <- map["live_stream"]
+        liveStreamId <- (map["live_stream_id"], transform)
         active <- map["active"]
         bookmarkId <- map["bookmark_id"]
         isScheduled <- map["is_scheduled"]
         start <- map["start"]
         contentType <- map["content_type"]
+        coverImage <- map["cover_image"]
+        coverImageSmall <- map["cover_image_small"]
+        coverImageMedium <- map["cover_image_medium"]
+        hasEnded <- map["has_ended"]
+        end <- map["end"]
     }
     
     override public static func primaryKey() -> String? {
@@ -144,4 +161,6 @@ public enum ContentTypeEnum: String {
     case Html = "Html"
     case Video = "Video"
     case Unknown = "Unknown"
+    case VideoConference = "VideoConference"
+    case LiveStream = "Live Stream"
 }

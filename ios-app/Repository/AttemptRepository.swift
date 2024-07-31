@@ -9,12 +9,12 @@
 import Foundation
 
 class AttemptRepository {
-    func loadAttempt(attemptsUrl: String, completion: @escaping(ContentAttempt?, TPError?) -> Void) {
+    func loadContentAttempt(attemptsUrl: String, completion: @escaping(ContentAttempt?, TPError?) -> Void) {
         TPApiClient.request(type: ContentAttempt.self, endpointProvider: TPEndpointProvider(.post, url: attemptsUrl), completion: completion)
     }
-    
+
     func loadQuestions(url: String, examId: Int, attemptId: Int, completion: @escaping([AttemptItem]?, TPError?) -> Void) {
-        let examQuestions = getExamquestionsFromDB(examId: examId)
+        let examQuestions = getExamquestionsFromDB(examId: examId, attemptId: attemptId)
         if (!examQuestions.isEmpty) {
             var attemptItems: [AttemptItem]
             if (getAttemtItems(attemptId: attemptId).isEmpty) {
@@ -22,24 +22,41 @@ class AttemptRepository {
             } else {
                 attemptItems = getAttemtItems(attemptId: attemptId)
             }
-            
             completion(attemptItems, nil)
+            fetchQuestions(url:url, attemptId: attemptId, examId: examId, completion: nil)
             return
         }
         
+        fetchQuestions(url: url, attemptId: attemptId, examId: examId, completion: completion)
+    }
+    
+    func fetchQuestions(url: String, attemptId: Int, examId: Int, completion: (([AttemptItem]?, TPError?) -> Void)?) {
+        
         TPApiClient.request(type: ApiResponse<ExamQuestionsResponse>.self, endpointProvider: TPEndpointProvider(.get, url: url), completion:  { response, error in
-            self.storeInDB(examQuestions: response?.results.parse() ?? [])
-            let examQuestions = self.getExamquestionsFromDB(examId: examId)
-            let attemptItems = self.createAttemptItems(examQuestions: examQuestions, attemptId: attemptId)
-            completion(attemptItems, error)
+            self.storeInDB(examQuestions: response?.results.parse() ?? [],examId: examId, attemptId: attemptId)
+            if (response?.next != nil && response?.next.isEmpty == false) {
+                self.fetchQuestions(url: response!.next, attemptId: attemptId, examId: examId, completion: completion)
+            } else if (completion != nil) {
+                let examQuestions = self.getExamquestionsFromDB(examId: examId, attemptId: attemptId)
+                let attemptItems = self.createAttemptItems(examQuestions: examQuestions, attemptId: attemptId)
+                completion?(attemptItems, error)
+            }
+            
         })
     }
-    
-    func getExamquestionsFromDB(examId: Int) -> [ExamQuestion] {
-        return DBManager<ExamQuestion>().getItemsFromDB(filteredBy: "examId=\(examId)", byKeyPath: "order")
+    func getExamquestionsFromDB(examId: Int, attemptId: Int) -> [ExamQuestion] {
+        if examId == -1 {
+            return DBManager<ExamQuestion>().getItemsFromDB(filteredBy: "attemptId=\(attemptId)", byKeyPath: "order")
+        } else {
+            return DBManager<ExamQuestion>().getItemsFromDB(filteredBy: "examId=\(examId)", byKeyPath: "order")
+        }
     }
     
-    func storeInDB(examQuestions: [ExamQuestion]) {
+    func storeInDB(examQuestions: [ExamQuestion], examId: Int, attemptId: Int) {
+        for question in examQuestions {
+                question.examId = examId
+                question.attemptId = attemptId
+            }
         DBManager<ExamQuestion>().addData(objects: examQuestions)
     }
     
@@ -74,6 +91,17 @@ class AttemptRepository {
                 contentAttempt, error in
                 DBManager<Attempt>().addData(object: contentAttempt!.assessment)
                 completion(contentAttempt, error)
+        })
+    }
+    
+    func endAttempt(url: String, completion: @escaping(Attempt?, TPError?) -> Void) {
+        TPApiClient.request(
+            type: Attempt.self,
+            endpointProvider: TPEndpointProvider(.put, url: url),
+            completion: {
+                attempt, error in
+                DBManager<Attempt>().addData(object: attempt!)
+                completion(attempt, error)
         })
     }
 }

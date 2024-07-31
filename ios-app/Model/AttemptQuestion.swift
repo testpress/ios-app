@@ -27,7 +27,6 @@ import ObjectMapper
 import RealmSwift
 
 class AttemptQuestion: DBModel {
-    @objc dynamic var id: Int = 0
     @objc dynamic var questionHtml: String?;
     @objc dynamic var subject: String = ""
     @objc dynamic var subjectId: Int = -1
@@ -39,6 +38,7 @@ class AttemptQuestion: DBModel {
     var answers = List<AttemptAnswer>()
     var answerIds = List<Int>()
     var translationIds = List<Int>()
+    var translations = List<AttemptQuestionTranslation>()
     @objc dynamic var isCaseSensitive: Bool = false
     var questionType: QuestionType {
         get {
@@ -57,6 +57,12 @@ class AttemptQuestion: DBModel {
     var isNumerical: Bool {
         get {questionType == .NUMERICAL}
     }
+    var isEssayType: Bool {
+        get {questionType == .ESSAY}
+    }
+    var isFileType: Bool {
+        get {questionType == .FILE_TYPE}
+    }
     
     public  func clone() -> AttemptQuestion {
         let newAttemptItem = AttemptQuestion()
@@ -73,6 +79,7 @@ class AttemptQuestion: DBModel {
         newAttemptItem.answerIds = answerIds
         newAttemptItem.translationIds = translationIds
         newAttemptItem.isCaseSensitive = isCaseSensitive
+        newAttemptItem.translations = translations
         return newAttemptItem
     }
     
@@ -81,7 +88,7 @@ class AttemptQuestion: DBModel {
         return "id"
     }
 
-    public override func mapping(map: Map) {
+    public override func mapping(map: ObjectMapper.Map) {
         id <- map["id"]
         questionHtml <- map["question_html"]
         subject <- map["subject"]
@@ -95,6 +102,7 @@ class AttemptQuestion: DBModel {
         answerIds <- map["answer_ids"]
         translationIds <- map["translation_ids"]
         isCaseSensitive <- map["is_case_sensitive"]
+        translations <- (map["translations"], ListTransform<AttemptQuestionTranslation>())
     }
     
     let transform = TransformOf<Int, Int>(fromJSON: { (value: Int?) -> Int? in
@@ -115,4 +123,40 @@ public enum QuestionType: String {
     case MATCH = "M"
     case NESTED = "T"
     case UNKNOWN = "Unknown"
+}
+
+
+extension AttemptQuestion {
+    func getLanguageBasedQuestion(_ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in self.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.questionHtml ?? self.questionHtml!
+                }
+            }
+        }
+        return self.questionHtml!
+    }
+    
+    func getLanguageBasedDirection(_ language: Language?) -> String {
+        if let selectedLanguage = language {
+            for translation in self.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.direction?.html ?? self.direction!
+                }
+            }
+        }
+        return self.direction!
+    }
+    
+    func getExplanationHtml(_ language: Language?) -> String? {
+        if let selectedLanguage = language {
+            for translation in self.translations {
+                if translation.language == selectedLanguage.code {
+                    return translation.explanationHtml
+                }
+            }
+        }
+        return self.explanationHtml
+    }
 }

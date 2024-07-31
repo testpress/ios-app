@@ -22,41 +22,48 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+
 import RealmSwift
 import UIKit
 
 class CoursesTableViewController: BaseDBTableViewController<Course> {
     
-    var customPager: TPBasePager<Course>
-    var customItems = [CustomCourse]()
- 
-    let babapedia2020 = CustomCourse(title: "Babapedia 2020", url: "https://babapedia2020.iasbaba.com",
-                                 image: Images.BookIcon.image)
-    
-    let ILP2020 = CustomCourse(title: "ILP 2020",
-                                       url: "https://ilp2020.iasbaba.com/",
-                                       image: Images.PaperAirplaneIcon.image)
-    let ILP2021 = CustomCourse(title: "ILP 2021",
-                                       url: "https://learn.iasbaba.com/",
-                                       image: Images.PaperAirplaneIcon.image)
-    
+    var tags: [String] = []
+    @IBOutlet weak var customTestIcon: UIBarButtonItem!
+    var instituteSettings: InstituteSettings?
+
     required init?(coder aDecoder: NSCoder) {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
-        customPager = CoursePager()
-        customItems.append(ILP2021)
-        customItems.append(babapedia2020)
-        customItems.append(ILP2020)
-        super.init(pager: customPager, coder: aDecoder)
+        super.init(pager: CoursePager(), coder: aDecoder)
     }
     
     override func getItemsFromDb() -> [Course] {
-        return DBManager<Course>()
+        var courses = DBManager<Course>()
             .getItemsFromDB(filteredBy: "active = true", byKeyPath: "order")
+
+        if tags.count > 0 {
+            courses = courses.filter { (course: Course) in
+                !Set(course.tags).isDisjoint(with: tags)
+            }
+        }
+        return courses
     }
     
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
         super.viewDidAppear(animated)
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        showOrHideCustomTestIcon()
+    }
+
+    func showOrHideCustomTestIcon(){
+        if ((instituteSettings?.enableCustomTest ?? false)) {
+            customTestIcon.isEnabled = true
+            customTestIcon.tintColor = nil
+        } else {
+            customTestIcon.isEnabled = false
+            customTestIcon.tintColor = UIColor.clear
+        }
     }
     
     override func loadItems() {
@@ -81,7 +88,6 @@ class CoursesTableViewController: BaseDBTableViewController<Course> {
                 DBManager<Course>().deleteAllFromDatabase() // Delete previous items
                 DBManager<Course>().addData(objects: items)
                 self.onLoadFinished(items: self.getItemsFromDb())
-
             }
         })
     }
@@ -90,14 +96,9 @@ class CoursesTableViewController: BaseDBTableViewController<Course> {
     override func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.COURSE_LIST_VIEW_CELL, for: indexPath) as! CourseTableViewCell
-        
-        cell.initCell(indexPath.row, viewController: self)
+
+        cell.initCell(items[indexPath.row], viewController: self)
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = super.tableView(tableView, numberOfRowsInSection: section)
-        return count == 0 ? 0 : count + customItems.count
     }
     
     override func setEmptyText() {
@@ -105,8 +106,28 @@ class CoursesTableViewController: BaseDBTableViewController<Course> {
                             description: Strings.NO_COURSE_DESCRIPTION)
     }
     
-    @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+    @IBAction func showCustomTestPage(_ sender: UIBarButtonItem) {
+        showCustomTestWebviewPage(self)
+    }
+
+    func showCustomTestWebviewPage(_ viewController: UIViewController) {
+        let secondViewController = CustomTestGenerationViewController()
+        secondViewController.url = "&next=/courses/custom_test_generation/?"+constrictQueryParamForAvailableCourses()+"%26testpress_app=ios"
+        secondViewController.useWebviewNavigation = true
+        secondViewController.useSSOLogin = true
+        secondViewController.shouldOpenLinksWithinWebview = true
+        secondViewController.title = "Custom Module"
+        secondViewController.displayNavbar = true
+        secondViewController.modalPresentationStyle = .fullScreen
+        viewController.present(secondViewController, animated: true)
+    }
+
+    func constrictQueryParamForAvailableCourses() -> String {
+        var queryParam = ""
+        for course in getItemsFromDb() {
+            queryParam += "course_id=\(course.id)%26"
+        }
+        return queryParam
     }
     
 }
