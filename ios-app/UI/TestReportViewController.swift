@@ -58,26 +58,16 @@ class TestReportViewController: UIViewController {
     @IBOutlet weak var shareButtonLayout: UIStackView!
     
     var attempt: Attempt!
-    var exam: Exam!
+    var exam: Exam?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setStatusBarColor()
 
-        
-        examTitle.text = exam!.title
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-        
-        totalQuestions.text = String(exam.numberOfQuestions)
-        totalMarks.text = exam.totalMarks
-        totalTime.text = String(exam.duration)
-        percentage.text = attempt.percentage
-        cutoff.text = String(exam.passPercentage)
-        correct.text = String(attempt!.correctCount)
-        incorrect.text = String(attempt!.incorrectCount)
-        timeTaken.text = attempt!.timeTaken ?? "NA"
-        accuracy.text = String(attempt!.accuracy) + "%"
+
+        setExamDetails()
         UIUtils.setButtonDropShadow(solutionsButton)
         UIUtils.setButtonDropShadow(analyticsButton)
         UIUtils.setButtonDropShadow(timeAnalyticsButton)
@@ -91,6 +81,19 @@ class TestReportViewController: UIViewController {
         showOrHideLockIconInSolutionButton()
     }
     
+    private func setExamDetails() {
+        examTitle.text = exam?.title ?? "Custom Module"
+        totalQuestions.text = String(exam?.numberOfQuestions ?? attempt.totalQuestions)
+        totalMarks.text = exam?.totalMarks ?? ""
+        totalTime.text = getTotalTime()
+        cutoff.text = String(exam?.passPercentage ?? 0.0)
+        percentage.text = attempt.percentage
+        correct.text = String(attempt!.correctCount)
+        incorrect.text = String(attempt!.incorrectCount)
+        timeTaken.text = attempt!.timeTaken ?? "NA"
+        accuracy.text = String(attempt!.accuracy) + "%"
+    }
+    
     func showOrHideRank() {
         if attempt.rankEnabled {
             rank.text = String.getValue(attempt!.rank)
@@ -101,7 +104,9 @@ class TestReportViewController: UIViewController {
     }
 
     func showOrHideScore() {
-        if exam.showScore && attempt.hasScore() {
+        if exam == nil {
+            score.text = attempt.score!
+        } else if exam!.showScore && attempt.hasScore() {
             score.text = attempt.score!
         } else {
             scoreLayout.isHidden = true
@@ -109,7 +114,7 @@ class TestReportViewController: UIViewController {
     }
 
     func showOrHidePercentile() {
-        if exam.showPercentile && attempt.percentile != 0 {
+        if exam != nil && exam!.showPercentile && attempt.percentile != 0 {
             percentile.text = String(attempt.percentile)
         } else {
             percentileLayout.isHidden = true
@@ -117,7 +122,7 @@ class TestReportViewController: UIViewController {
     }
     
     func showOrHideLockIconInSolutionButton() {
-        if ((exam.isGrowthHackEnabled ?? false) && (exam.getNumberOfTimesShared() < 2)) {
+        if (exam != nil && (exam!.isGrowthHackEnabled) && (exam!.getNumberOfTimesShared() < 2)) {
             shareButtonLayout.isHidden = false
             analyticsButtonLayout.isHidden = true
             solutionButtonLayout.isHidden = true
@@ -135,10 +140,20 @@ class TestReportViewController: UIViewController {
     }
 
     private func showOrHideSolutions() {
-        if (exam.showAnswers) {
-            solutionButtonLayout.isHidden = false
-        } else {
+        if (exam != nil && !exam!.showAnswers) {
             solutionButtonLayout.isHidden = true
+        } else {
+            solutionButtonLayout.isHidden = false
+        }
+    }
+    
+    private func getTotalTime() -> String {
+        if (exam != nil){
+            return exam?.duration ?? ""
+        } else if (attempt?.remainingTime == INFINITE_EXAM_TIME) {
+            return ""
+        } else {
+            return TimeUtils.addTimeStrings(attempt?.timeTaken, attempt?.remainingTime)
         }
     }
 
@@ -146,10 +161,10 @@ class TestReportViewController: UIViewController {
         let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.SHARE_TO_UNLOCK_VIEW_CONTROLLER) as! ShareToUnlockViewController
-        viewController.shareText = exam.shareTextForSolutionUnlock ?? ""
+        viewController.shareText = exam!.shareTextForSolutionUnlock
         viewController.onShareCompletion = {
-            self.exam.incrementNumberOfTimesShared()
-            if (self.exam.getNumberOfTimesShared() >= 2) {
+            self.exam!.incrementNumberOfTimesShared()
+            if (self.exam!.getNumberOfTimesShared() >= 2) {
                 viewController.dismiss(animated: false) {
                     self.showSolutionsScreen()
                 }
@@ -159,10 +174,10 @@ class TestReportViewController: UIViewController {
     }
     
     private func showOrHideAnalytics() {
-        if (exam.showAnalytics) {
-            analyticsButtonLayout.isHidden = false
-        } else {
+        if (exam != nil && !exam!.showAnalytics) {
             analyticsButtonLayout.isHidden = true
+        } else {
+            analyticsButtonLayout.isHidden = false
         }
     }
     
@@ -236,17 +251,34 @@ class TestReportViewController: UIViewController {
             presentingViewController?.presentingViewController as? ContentDetailPageViewController {
             
             goToContentDetailPageViewController(contentDetailPageViewController)
+        } else if isPresentedFromCustomTestViewController() {
+            
+            goToCourseListView()
+        } else if exam == nil {
+            presentingViewController?.dismiss(animated: true)
         } else {
             dismiss(animated: true, completion: nil)
         }
     }
     
+    func isPresentedFromCustomTestViewController() -> Bool {
+        let customTestViewController = self.presentingViewController as? CustomTestGenerationViewController
+        return customTestViewController != nil
+    }
+    
+    func goToCourseListView() {
+        let customTestViewController = self.presentingViewController as? CustomTestGenerationViewController
+        customTestViewController?.dismiss(animated: true, completion: {
+            customTestViewController?.onFinishLoadingWebView()
+        })
+    }
+
     func goToContentDetailPageViewController(_ contentDetailPageViewController: UIViewController) {
         let contentDetailPageViewController =
             contentDetailPageViewController as! ContentDetailPageViewController
         
         contentDetailPageViewController.dismiss(animated: false, completion: {
-            if Double(self.attempt.percentage) ?? 0 >= self.exam.passPercentage {
+            if Double(self.attempt.percentage) ?? 0 >= self.exam?.passPercentage ?? 0 {
                 let currentIndex = contentDetailPageViewController.getCurrentIndex()
                 let nextContent =
                     contentDetailPageViewController.contents[currentIndex]

@@ -1,21 +1,17 @@
-github "airbnb/lottie-ios" "4.2.0"
-github "Alamofire/Alamofire" "5.0.2"
+github "airbnb/lottie-ios" "4.4.3"
 github "testpress/iOS-PDF-Reader" "2.5.2"
 github "testpress/DropDown-Swift" "2.3.14"
-github "danielgindi/Charts" "v4.1.0"
+github "danielgindi/Charts" "5.1.0"
 github "testpress/SlideMenuControllerSwift" "5.0.1"
-github "facebook/facebook-ios-sdk" "v13.0.0"
-github "hackiftekhar/IQKeyboardManager" "v6.5.11"
+github "facebook/facebook-ios-sdk" "v17.0.1"
 github "Hearst-DD/ObjectMapper" "4.2.0"
 github "LaurentiuUngur/LUExpandableTableView"  "3.0.0"
-github "onevcat/Kingfisher" "7.6.2"
-github "realm/realm-swift" "v10.39.1"
 github "xmartlabs/XLPagerTabStrip" "9.0.0"
 github "zekunyan/TTGSnackbar" "1.11.1"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" == 6.8.0
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json" == 6.8.0
 github "getsentry/sentry-cocoa" "8.7.0"
-github "M3U8Kit/M3U8Parser" ~> 1.0.0
+github "M3U8Kit/M3U8Parser" ~> 1.1.0
 github "TimOliver/TOCropViewController" "2.6.1"
 github "testpress/MarqueeLabel" "4.3.2"
 github "scinfu/SwiftSoup" "2.5.3"
