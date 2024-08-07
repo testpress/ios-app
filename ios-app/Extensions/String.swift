@@ -16,11 +16,15 @@ extension String {
     }
     
     var secondsFromString : Int{
-        var n = 3600
-        return self.components(separatedBy: ":").reduce(0) {
-            defer { n /= 60 }
-            return $0 + (Int($1) ?? 0) * n
-        }
+        let components = self.components(separatedBy: ":")
+            guard components.count == 3 else { return 0 } // Handle invalid format
+
+            let hours = Double(components[0]) ?? 0
+            let minutes = Double(components[1]) ?? 0
+            let secondsComponents = components[2].components(separatedBy: ".")
+            let seconds = Double(secondsComponents[0]) ?? 0
+            let totalSeconds = (hours * 3600) + (minutes * 60) + seconds
+            return Int(totalSeconds)
     }
 }
 
