@@ -167,7 +167,7 @@ struct Strings {
     static let EXAM_PAUSED_CHECK_INTERNET_TO_END = "Exam is paused, Please check your internet connection & try again."
     
     static let CANNOT_SWITCH_SECTION = "Can\'t Switch Section!"
-    static let CANNOT_SWITCH_IN_FIRST_ATTEMPT = "You can\'t switch sections in the first attempt."
+    static let CANNOT_SWITCH_IN_FIRST_ATTEMPT = "Section is locked. Switching section is not allowed."
     static let ALREADY_SUBMITTED = "You have already submitted this section."
     static let SWITCH_SECTION = "Switch Section?"
     static let SWITCH_SECTION_MESSAGE = "Are you sure want to move to the next section? You won\'t be able to switch back to this section."

@@ -109,6 +109,7 @@ class TPApiClient {
                         
                     } else {
                         error = TPError(message: json, response: httpResponse, kind: .http)
+                        error.logErrorToSentry()
                     }
 
                     if (error.kind == TPError.Kind.custom) {
@@ -135,6 +136,7 @@ class TPApiClient {
             let error = TPError(message: description, response: httpResponse,
                                 kind: .network)
             
+            error.logErrorToSentry()
             completion(nil, error)
         } else {
             let error = TPError(message: description, response: httpResponse,
@@ -144,6 +146,7 @@ class TPApiClient {
                 handleCustomError(error: error)
             }
             
+            error.logErrorToSentry()
             completion(nil, error)
         }
     }
@@ -441,6 +444,10 @@ class TPApiClient {
         
         if attemptItem.question.isEssayType {
             parameters["essay_text"] = attemptItem.localEssayText
+        }
+        
+        if attemptItem.question.isFileType {
+            parameters["files"] = Array(attemptItem.localFiles.map {$0.path})
         }
                 
         if let gapFilledResponses = gapFilledResponses {
