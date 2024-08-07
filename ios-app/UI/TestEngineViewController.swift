@@ -195,15 +195,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
             }
             self.onSwitchLockedSection(index: index)
         }
-        firstAttemptOfLockedSectionExam = isFirstCourseContentAttempt() || isFirstExamAttempt()
-    }
-
-    private func isFirstCourseContentAttempt() -> (Bool) {
-        return (courseContent != nil && courseContent.attemptsCount <= 1)
-    }
-    
-    private func isFirstExamAttempt() -> (Bool) {
-        return (courseContent == nil && (exam!.attemptsCount == 0 || (exam!.attemptsCount == 1 && exam!.pausedAttemptsCount == 1)))
+        firstAttemptOfLockedSectionExam = !(exam?.allowPreemptiveSectionEnding ?? false)
     }
     
     private func setUpDropDownForSections() {
