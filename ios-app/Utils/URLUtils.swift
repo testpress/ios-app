@@ -21,13 +21,4 @@ class URLUtils {
         urlComponents!.scheme = scheme
         return urlComponents!.url!
     }
-    
-    static func changeDomain(url: URL, newDomain: String) -> URL {
-        var urlComponents = URLComponents(
-            url: url,
-            resolvingAgainstBaseURL: false
-        )
-        urlComponents!.host = URLComponents(string: newDomain)!.host
-        return urlComponents!.url!
-    }
 }
