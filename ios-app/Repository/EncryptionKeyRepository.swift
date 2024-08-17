@@ -12,7 +12,11 @@ import Foundation
 class EncryptionKeyRepository {
     func load(url: URL, onSuccess: @escaping(Data) -> Void) {
         let encryptionKeyUrl = URLUtils.convertURLSchemeToHttps(url: url)
-        fetchFromNetwork(url: encryptionKeyUrl) { key in
+        let baseURLComponents = URLComponents(string: Constants.BASE_URL)!
+        let baseHost = baseURLComponents.host!
+        // Change the domain to the testpress domain
+        let finalURL = URLUtils.changeDomain(url: encryptionKeyUrl, newDomain: baseHost)
+        fetchFromNetwork(url: finalURL) { key in
             onSuccess(key)
         }
     }
