@@ -14,7 +14,7 @@ class EncryptionKeyRepository {
         let encryptionKeyUrl = URLUtils.convertURLSchemeToHttps(url: url)
         let baseURLComponents = URLComponents(string: Constants.BASE_URL)!
         let baseHost = baseURLComponents.host!
-        // Change the domain to the testpress domain
+        // Update the custom domain to the Testpress domain
         let finalURL = URLUtils.changeDomain(url: encryptionKeyUrl, newDomain: baseHost)
         fetchFromNetwork(url: finalURL) { key in
             onSuccess(key)
