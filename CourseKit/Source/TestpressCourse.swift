@@ -6,29 +6,28 @@ public class TestpressCourse {
     private init() {}
 
     public func showMyCourses(from context: UIViewController) {
-        let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for: TestpressCourse.self))
-        guard let courseListVC = storyboard.instantiateViewController(withIdentifier: "CourseListViewController") as? CourseListViewController else {
-            return
-        }
-        
-        if let navController = context.navigationController {
-            navController.pushViewController(courseListVC, animated: true)
-        } else {
-            context.present(courseListVC, animated: true, completion: nil)
-        }
+        let courseListVC: CourseListViewController? = instantiateViewController(withIdentifier: "CourseListViewController")
+        presentViewController(courseListVC, from: context)
     }
 
     public func showContentDetail(from context: UIViewController, contentId: Int) {
+        let contentDetailVC: ContentDetailViewController? = instantiateViewController(withIdentifier: "ContentDetailViewController")
+        contentDetailVC?.contentId = contentId
+        contentDetailVC?.modalPresentationStyle = .fullScreen
+        presentViewController(contentDetailVC, from: context)
+    }
+    
+    private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {
         let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for: TestpressCourse.self))
-        guard let contentDetailVC = storyboard.instantiateViewController(withIdentifier: "ContentDetailViewController") as? ContentDetailViewController else {
-            return
-        }
-        contentDetailVC.contentId = contentId
-        contentDetailVC.modalPresentationStyle = .fullScreen
+        return storyboard.instantiateViewController(withIdentifier: identifier) as? T
+    }
+
+    private func presentViewController(_ viewController: UIViewController?, from context: UIViewController) {
+        guard let viewController = viewController else { return }
         if let navController = context.navigationController {
-            navController.pushViewController(contentDetailVC, animated: true)
+            navController.pushViewController(viewController, animated: true)
         } else {
-            context.present(contentDetailVC, animated: true, completion: nil)
+            context.present(viewController, animated: true, completion: nil)
         }
     }
 }
