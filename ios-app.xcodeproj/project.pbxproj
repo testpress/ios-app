@@ -384,6 +384,9 @@
 		D990C7EE2B316C6300B3ED4D /* AttemptAnswerTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */; };
 		D990C7F02B31731300B3ED4D /* AttemptQuestionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */; };
 		D990C7F22B31765E00B3ED4D /* DirectionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */; };
+		D9BCAD6E2C9DB31E0093AB10 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BCAD6D2C9DB31D0093AB10 /* MobileRTC.xcframework */; };
+		D9BCAD702C9DB3290093AB10 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9BCAD6F2C9DB3290093AB10 /* MobileRTCResources.bundle */; };
+		D9BCAD712C9DB3310093AB10 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9BCAD6D2C9DB31D0093AB10 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA62A0BBC44009619FD /* PDFReader.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E22A0CF10700A6CB2E /* ObjectMapper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA42A0BB621009619FD /* ObjectMapper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -457,6 +460,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D9BCAD712C9DB3310093AB10 /* MobileRTC.xcframework in Embed Frameworks */,
 				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
 				D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */,
 				D9EDF1E22A0CF10700A6CB2E /* ObjectMapper.xcframework in Embed Frameworks */,
@@ -869,6 +873,8 @@
 		D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptAnswerTranslation.swift; sourceTree = "<group>"; };
 		D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptQuestionTranslation.swift; sourceTree = "<group>"; };
 		D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionTranslation.swift; sourceTree = "<group>"; };
+		D9BCAD6D2C9DB31D0093AB10 /* MobileRTC.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:BJ4HAAB9B3:Zoom Video Communications, Inc."; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
+		D9BCAD6F2C9DB3290093AB10 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -883,6 +889,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9BCAD6E2C9DB31E0093AB10 /* MobileRTC.xcframework in Frameworks */,
 				2599327D2A0A4D2C00866CA8 /* Sentry.xcframework in Frameworks */,
 				0386961C2BF7602600E36F8F /* Alamofire in Frameworks */,
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
@@ -1043,6 +1050,7 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
+				D9BCAD6F2C9DB3290093AB10 /* MobileRTCResources.bundle */,
 				038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
@@ -1116,6 +1124,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9BCAD6D2C9DB31D0093AB10 /* MobileRTC.xcframework */,
 				038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */,
 				038695FC2BF6095D00E36F8F /* DGCharts.xcframework */,
 				25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */,
@@ -1776,6 +1785,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9BCAD702C9DB3290093AB10 /* MobileRTCResources.bundle in Resources */,
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
 				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
@@ -2458,7 +2468,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2467,18 +2477,19 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Testpress;
+				INFOPLIST_KEY_CFBundleDisplayName = "USMLE Boards Academy";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.20.0;
+				MARKETING_VERSION = 2.5.5;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.ubar;
 				PRODUCT_NAME = "ios-app";
 				SWIFT_VERSION = 4.2;
 			};
@@ -2491,7 +2502,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "ios-app/ios-app.entitlements";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2500,18 +2511,19 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Testpress;
+				INFOPLIST_KEY_CFBundleDisplayName = "USMLE Boards Academy";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.20.0;
+				MARKETING_VERSION = 2.5.5;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.ubar;
 				PRODUCT_NAME = "ios-app";
 				SWIFT_VERSION = 4.2;
 			};
