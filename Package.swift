@@ -1,3 +1,4 @@
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
@@ -17,7 +18,7 @@ let package = Package(
     // Targets can depend on other targets in this package and products from dependencies.
     .target(
       name: "CourseKit",
-      path: "Source"
+      path: "CourseKit/Source"
     )
   ],  
   swiftLanguageVersions: [
