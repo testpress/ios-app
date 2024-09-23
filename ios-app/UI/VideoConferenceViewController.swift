@@ -37,18 +37,18 @@ class VideoConferenceViewController: UIViewController {
     }
     
     @IBAction func openZoomMeeting(_ sender: Any?) {
-//        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
-//        let viewController = storyboard.instantiateViewController(
-//            withIdentifier: Constants.ZOOM_MEET_VIEW_CONTROLLER)
-//            as! ZoomMeetViewController
-//        viewController.accessToken = content.videoConference?.accessToken
-//        viewController.meetingNumber = content.videoConference?.conferenceId
-//        viewController.password = content.videoConference?.password
-//        viewController.meetingTitle = content.name
-//        viewController.fetchAccessToken = { completion in
-//            self.fetchAccessToken(completion: completion)
-//        }
-//        self.present(viewController, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
+        let viewController = storyboard.instantiateViewController(
+            withIdentifier: Constants.ZOOM_MEET_VIEW_CONTROLLER)
+            as! ZoomMeetViewController
+        viewController.accessToken = content.videoConference?.accessToken
+        viewController.meetingNumber = content.videoConference?.conferenceId
+        viewController.password = content.videoConference?.password
+        viewController.meetingTitle = content.name
+        viewController.fetchAccessToken = { completion in
+            self.fetchAccessToken(completion: completion)
+        }
+        self.present(viewController, animated: true, completion: nil)
     }
     
     
