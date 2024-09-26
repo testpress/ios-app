@@ -10,14 +10,11 @@ public class TestpressCourse {
         //let courseListVC: CourseListViewController? = instantiateViewController(withIdentifier: "CourseListViewController")
         let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for:CourseListViewController.self))
 
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "CourseListViewController") as? T {
-            return viewController
-        } else {
-            print("Error: Could not instantiate view controller with identifier \(identifier)")
-            return nil
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "CourseListViewController") as? CourseListViewController? {
+            presentViewController(viewController, from: context)
+            print("presented")
         }
-        presentViewController(viewController, from: context)
-        print("presented")
+        print("else presented")
     }
 
     public func showContentDetail(from context: UIViewController, contentId: Int) {
