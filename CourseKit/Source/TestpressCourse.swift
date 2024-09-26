@@ -28,8 +28,7 @@ public class TestpressCourse {
         print(storyboard)
         print("=========================instatitate end============")
         print(storyboard.instantiateViewController(withIdentifier: identifier))
-        print(storyboard.instantiateViewController(withIdentifier: identifier) as? T)
-        return storyboard.instantiateViewController(withIdentifier: identifier) as? T
+        return storyboard.instantiateViewController(withIdentifier: identifier)
     }
 
     private func presentViewController(_ viewController: UIViewController?, from context: UIViewController) {
