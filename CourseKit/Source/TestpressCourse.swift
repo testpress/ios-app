@@ -21,7 +21,7 @@ public class TestpressCourse {
         presentViewController(contentDetailVC, from: context)
     }
     
-    private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {
+    private func instantiateViewController<T>(withIdentifier identifier: String) -> CourseListViewController? {
         print("=========================instatitate start============")
         print(identifier)
         let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for: TestpressCourse.self))
