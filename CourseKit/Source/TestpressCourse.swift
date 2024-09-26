@@ -6,12 +6,13 @@ public class TestpressCourse {
     private init() {}
 
     public func showMyCourses(from context: UIViewController) {
-        print("CALLED")
-        let courseListVC: CourseListViewController? = instantiateViewController(withIdentifier: "CourseListViewController")
-        print(courseListVC)
-        print("couurselistvc called")
-        presentViewController(courseListVC, from: context)
-        print("presented")
+        let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for: TestpressCourse.self))
+        if let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? CourseListViewController {
+            return viewController
+        } else {
+            return nil
+        }
+        presentViewController(viewController, from: context)
     }
 
     public func showContentDetail(from context: UIViewController, contentId: Int) {
