@@ -27,6 +27,9 @@ public class TestpressCourse {
         let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for: TestpressCourse.self))
         print(storyboard)
         print("=========================instatitate end============")
+        print(storyboard.instantiateViewController())
+        print(storyboard.instantiateViewController(withIdentifier: identifier))
+        print(storyboard.instantiateViewController(withIdentifier: identifier) as? T)
         return storyboard.instantiateViewController(withIdentifier: identifier) as? T
     }
 
