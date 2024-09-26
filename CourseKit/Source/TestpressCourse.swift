@@ -6,8 +6,12 @@ public class TestpressCourse {
     private init() {}
 
     public func showMyCourses(from context: UIViewController) {
+        print("CALLED")
         let courseListVC: CourseListViewController? = instantiateViewController(withIdentifier: "CourseListViewController")
+        print(courseListVC)
+        print("couurselistvc called")
         presentViewController(courseListVC, from: context)
+        print("presented")
     }
 
     public func showContentDetail(from context: UIViewController, contentId: Int) {
