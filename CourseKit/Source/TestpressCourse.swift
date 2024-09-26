@@ -24,7 +24,7 @@ public class TestpressCourse {
     private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {
         print("=========================instatitate start============")
         print(identifier)
-        let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for: UIViewController.self))
+        let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for: TestpressCourse.self))
         print(storyboard)
         print("=========================instatitate end============")
         print(storyboard.instantiateViewController(withIdentifier: identifier))
