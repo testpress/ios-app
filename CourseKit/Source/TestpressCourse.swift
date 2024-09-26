@@ -6,13 +6,18 @@ public class TestpressCourse {
     private init() {}
 
     public func showMyCourses(from context: UIViewController) {
-        let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for: TestpressCourse.self))
-        if let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? CourseListViewController {
+        print("CALLED")
+        //let courseListVC: CourseListViewController? = instantiateViewController(withIdentifier: "CourseListViewController")
+        let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for:CourseListViewController.self))
+
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "CourseListViewController") as? T {
             return viewController
         } else {
+            print("Error: Could not instantiate view controller with identifier \(identifier)")
             return nil
         }
         presentViewController(viewController, from: context)
+        print("presented")
     }
 
     public func showContentDetail(from context: UIViewController, contentId: Int) {
@@ -22,14 +27,14 @@ public class TestpressCourse {
         presentViewController(contentDetailVC, from: context)
     }
     
-    private func instantiateViewController<T>(withIdentifier identifier: String) -> CourseListViewController? {
+    private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {
         print("=========================instatitate start============")
         print(identifier)
         let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for: TestpressCourse.self))
         print(storyboard)
         print("=========================instatitate end============")
         print(storyboard.instantiateViewController(withIdentifier: identifier))
-        if let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? CourseListViewController {
+        if let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? T {
             return viewController
         } else {
             print("Error: Could not instantiate view controller with identifier \(identifier)")
