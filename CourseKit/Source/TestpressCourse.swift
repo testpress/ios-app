@@ -28,7 +28,7 @@ public class TestpressCourse {
         print(storyboard)
         print("=========================instatitate end============")
         print(storyboard.instantiateViewController(withIdentifier: identifier))
-        if let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? T {
+        if let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? CourseListViewController {
             return viewController
         } else {
             print("Error: Could not instantiate view controller with identifier \(identifier)")
