@@ -8,18 +8,22 @@ public class TestpressCourse {
     public func showMyCourses(from context: UIViewController) {
         print("CALLED")
         let storyboardName = "Course"
-            let storyboardID = "CourseListViewController"
-            let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
-            
-            print("Attempting to load storyboard with name: \(storyboardName)")
-            
-            if let viewController = storyboard.instantiateViewController(withIdentifier: storyboardID) as? CourseListViewController {
-                print("Successfully instantiated CourseListViewController")
-                context.present(viewController, animated: true, completion: nil)
-                print("presented")
-            } else {
-                print("Failed to instantiate CourseListViewController with ID: \(storyboardID)")
-            }
+        let storyboardID = "CourseListViewController"
+
+        // Load the storyboard
+        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+        print("Attempting to load storyboard with name: \(storyboardName)")
+
+        // Attempt to instantiate the view controller
+        if let viewController = storyboard.instantiateViewController(withIdentifier: storyboardID) as? CourseListViewController {
+            print("Successfully instantiated CourseListViewController")
+            context.present(viewController, animated: true, completion: nil)
+            print("Presented CourseListViewController")
+        } else {
+            // Provide detailed information about what might have gone wrong
+            print("Failed to instantiate CourseListViewController with ID: \(storyboardID)")
+            print("Make sure the storyboard name and ID are correct, and that the view controller exists in the storyboard.")
+        }
     }
 
     public func showContentDetail(from context: UIViewController, contentId: Int) {
