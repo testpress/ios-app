@@ -1,4 +1,6 @@
 import Former
+import Foundation
+import UIKit
 
 class ForumFilterViewController: FormViewController {
     var advancedFilters = [CustomCheckRowFormer<FormCheckCell>]()

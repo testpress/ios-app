@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "former",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ra1028/Former",
+      "state" : {
+        "branch" : "master",
+        "revision" : "6e9d10c0c34105990507b65916281dae4cf6b899"
+      }
+    },
+    {
       "identity" : "fxpagecontrol",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nicklockwood/FXPageControl.git",
