@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import Foundation
 
 class AttemptAnswerTranslation: DBModel {
     @objc dynamic var textHtml: String = ""

@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import Foundation
 
 extension UserDefaults: ObjectSavable {
     func saveObject<Object>(_ object: Object, forKey: String) throws where Object: Mappable {

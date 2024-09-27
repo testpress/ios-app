@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import Foundation
 
 class ExamQuestion: DBModel {
     @objc dynamic var marks = ""

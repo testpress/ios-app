@@ -26,6 +26,7 @@
 import ObjectMapper
 import Realm
 import RealmSwift
+import Foundation
 
 public protocol TestpressModel: Mappable {
     init?(map: ObjectMapper.Map)

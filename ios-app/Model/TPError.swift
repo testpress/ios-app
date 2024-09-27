@@ -27,6 +27,7 @@ import UIKit
 import Alamofire
 import Sentry
 
+
 public class TPError: Error {
     
     /// Identifies the event kind which triggered TestpressError.

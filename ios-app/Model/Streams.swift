@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import Foundation
 
 class Stream: DBModel {
     @objc dynamic var url: String = ""

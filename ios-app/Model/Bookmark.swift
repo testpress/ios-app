@@ -28,6 +28,7 @@ import Realm
 import RealmSwift
 import TTGSnackbar
 import UIKit
+import Foundation
 
 class Bookmark: DBModel {
     

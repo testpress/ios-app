@@ -1,6 +1,5 @@
 github "airbnb/lottie-ios" "4.4.3"
 github "facebook/facebook-ios-sdk" "v17.0.1"
-github "Hearst-DD/ObjectMapper" "4.2.0"
 github "LaurentiuUngur/LUExpandableTableView"  "3.0.0"
 github "xmartlabs/XLPagerTabStrip" "9.0.0"
 github "zekunyan/TTGSnackbar" "1.11.1"

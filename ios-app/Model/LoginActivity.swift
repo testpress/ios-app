@@ -9,6 +9,7 @@
 import ObjectMapper
 import Realm
 import RealmSwift
+import Foundation
 
 class LoginActivity: DBModel {
     

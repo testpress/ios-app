@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import Foundation
 
 class DirectionTranslation: DBModel {
     

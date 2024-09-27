@@ -9,6 +9,7 @@
 import ObjectMapper
 import Realm
 import RealmSwift
+import Foundation
 
 class LiveStream: DBModel {
     @objc dynamic var title: String = ""

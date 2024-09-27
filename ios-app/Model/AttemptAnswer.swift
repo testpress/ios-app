@@ -24,6 +24,7 @@
 //
 
 import ObjectMapper
+import Foundation
 
 class AttemptAnswer: DBModel {
     @objc dynamic var textHtml: String = ""

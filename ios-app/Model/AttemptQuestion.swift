@@ -25,6 +25,7 @@
 
 import ObjectMapper
 import RealmSwift
+import Foundation
 
 class AttemptQuestion: DBModel {
     @objc dynamic var questionHtml: String?;

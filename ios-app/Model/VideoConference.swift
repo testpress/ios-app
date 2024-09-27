@@ -9,6 +9,7 @@
 import ObjectMapper
 import Realm
 import RealmSwift
+import Foundation
 
 class VideoConference: DBModel {
     @objc dynamic var accessToken: String = ""

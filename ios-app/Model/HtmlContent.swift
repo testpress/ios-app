@@ -24,6 +24,7 @@
 //
 
 import ObjectMapper
+import Foundation
 
 class HtmlContent: DBModel {
     

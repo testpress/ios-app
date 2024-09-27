@@ -24,6 +24,7 @@
 //
 
 import ObjectMapper
+import Foundation
 
 class Chapter: DBModel {
     @objc dynamic var url: String = ""

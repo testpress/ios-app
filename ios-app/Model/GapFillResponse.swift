@@ -8,6 +8,7 @@
 
 import ObjectMapper
 import RealmSwift
+import Foundation
 
 
 class GapFillResponse: DBModel {

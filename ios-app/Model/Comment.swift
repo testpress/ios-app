@@ -24,6 +24,7 @@
 //
 
 import ObjectMapper
+import Foundation
 
 public class Comment {
     

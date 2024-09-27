@@ -8,6 +8,7 @@
 
 import Foundation
 import ObjectMapper
+import Foundation
 
 class UserFileResponse: DBModel {
     @objc dynamic var path: String = ""
