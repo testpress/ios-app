@@ -73,6 +73,15 @@
       }
     },
     {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios",
+      "state" : {
+        "revision" : "769b88d83a42ca8d5572b020c96f47e3690b3796",
+        "version" : "4.4.3"
+      }
+    },
+    {
       "identity" : "m3u8parser",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/M3U8Kit/M3U8Parser",
