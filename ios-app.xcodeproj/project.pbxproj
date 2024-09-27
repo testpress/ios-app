@@ -24,6 +24,7 @@
 		036CE86F2CA6F79600183BA8 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE86E2CA6F79600183BA8 /* IGListDiffKit */; };
 		036CE8722CA6F8D500183BA8 /* XLPagerTabStrip in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8712CA6F8D500183BA8 /* XLPagerTabStrip */; };
 		036CE8752CA6FA1100183BA8 /* TTGSnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8742CA6FA1100183BA8 /* TTGSnackbar */; };
+		036CE8782CA6FB8B00183BA8 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8772CA6FB8B00183BA8 /* SwiftSoup */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
 		038696162BF65D9500E36F8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; };
 		038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -67,7 +68,6 @@
 		2510859B2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */; };
 		2519C12E21B0083600D26551 /* InstituteSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519C12D21B0083600D26551 /* InstituteSettings.swift */; };
 		253DD67E262860B200C6D0A8 /* GapFillResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253DD67D262860B200C6D0A8 /* GapFillResponse.swift */; };
-		25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; };
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */; };
@@ -382,7 +382,6 @@
 		D990C7EE2B316C6300B3ED4D /* AttemptAnswerTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */; };
 		D990C7F02B31731300B3ED4D /* AttemptQuestionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */; };
 		D990C7F22B31765E00B3ED4D /* DirectionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */; };
-		D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1EC2A0CF10800A6CB2E /* Sentry.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1ED2A0CF10800A6CB2E /* LUExpandableTableView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932782A0A4D1E00866CA8 /* LUExpandableTableView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1EF2A0CF10800A6CB2E /* Lottie.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932742A0A4BB800866CA8 /* Lottie.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -448,7 +447,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */,
 				D9EDF1EC2A0CF10800A6CB2E /* Sentry.xcframework in Embed Frameworks */,
 				D9EDF1ED2A0CF10800A6CB2E /* LUExpandableTableView.xcframework in Embed Frameworks */,
 				D9EDF1EF2A0CF10800A6CB2E /* Lottie.xcframework in Embed Frameworks */,
@@ -876,7 +874,6 @@
 				2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */,
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
 				036CE8532CA6D6B400183BA8 /* MarqueeLabel in Frameworks */,
-				25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */,
 				036CE86F2CA6F79600183BA8 /* IGListDiffKit in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
@@ -895,6 +892,7 @@
 				036CE86D2CA6F67F00183BA8 /* IGListKit in Frameworks */,
 				038696162BF65D9500E36F8F /* RealmSwift in Frameworks */,
 				036CE85C2CA6E34400183BA8 /* DGCharts in Frameworks */,
+				036CE8782CA6FB8B00183BA8 /* SwiftSoup in Frameworks */,
 				036CE8672CA6EFE000183BA8 /* TOCropViewController in Frameworks */,
 				036CE8722CA6F8D500183BA8 /* XLPagerTabStrip in Frameworks */,
 			);
@@ -1621,6 +1619,7 @@
 				036CE86E2CA6F79600183BA8 /* IGListDiffKit */,
 				036CE8712CA6F8D500183BA8 /* XLPagerTabStrip */,
 				036CE8742CA6FA1100183BA8 /* TTGSnackbar */,
+				036CE8772CA6FB8B00183BA8 /* SwiftSoup */,
 			);
 			productName = "ios-app";
 			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
@@ -1748,6 +1747,7 @@
 				036CE86B2CA6F67F00183BA8 /* XCRemoteSwiftPackageReference "IGListKit" */,
 				036CE8702CA6F8D400183BA8 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */,
 				036CE8732CA6FA1100183BA8 /* XCRemoteSwiftPackageReference "TTGSnackbar" */,
+				036CE8762CA6FB8B00183BA8 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 2F26ADE31E8249D70031E6F4 /* Products */;
 			projectDirPath = "";
@@ -2848,6 +2848,14 @@
 				version = 1.11.1;
 			};
 		};
+		036CE8762CA6FB8B00183BA8 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = exactVersion;
+				version = 2.5.3;
+			};
+		};
 		038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -2942,6 +2950,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8732CA6FA1100183BA8 /* XCRemoteSwiftPackageReference "TTGSnackbar" */;
 			productName = TTGSnackbar;
+		};
+		036CE8772CA6FB8B00183BA8 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8762CA6FB8B00183BA8 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 		038696152BF65D9500E36F8F /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
