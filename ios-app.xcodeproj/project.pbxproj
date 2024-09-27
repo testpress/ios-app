@@ -64,7 +64,6 @@
 		25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; };
 		25489A9F2A0B9EEA009619FD /* TTGSnackbar.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */; };
 		25489AA52A0BB621009619FD /* ObjectMapper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA42A0BB621009619FD /* ObjectMapper.xcframework */; };
-		25489AA72A0BBC44009619FD /* PDFReader.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA62A0BBC44009619FD /* PDFReader.xcframework */; };
 		25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */; };
 		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
@@ -384,7 +383,6 @@
 		D990C7F02B31731300B3ED4D /* AttemptQuestionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */; };
 		D990C7F22B31765E00B3ED4D /* DirectionTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */; };
 		D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AAA2A0BD2A9009619FD /* IGListDiffKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA62A0BBC44009619FD /* PDFReader.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E22A0CF10700A6CB2E /* ObjectMapper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA42A0BB621009619FD /* ObjectMapper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -457,7 +455,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
-				D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */,
 				D9EDF1E22A0CF10700A6CB2E /* ObjectMapper.xcframework in Embed Frameworks */,
 				D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */,
 				038696012BF6355E00E36F8F /* M3U8Parser.xcframework in Embed Frameworks */,
@@ -899,7 +896,6 @@
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
 				259932752A0A4BB800866CA8 /* Lottie.xcframework in Frameworks */,
-				25489AA72A0BBC44009619FD /* PDFReader.xcframework in Frameworks */,
 				259932732A0A4B9A00866CA8 /* Former.xcframework in Frameworks */,
 				036CE8592CA6DE2000183BA8 /* SlideMenuController in Frameworks */,
 				2599326F2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework in Frameworks */,
