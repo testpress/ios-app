@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "dropdown-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/testpress/DropDown-Swift",
+      "state" : {
+        "revision" : "82456ab5f16dfafe0266477a64d26fb239f3de44",
+        "version" : "2.3.14"
+      }
+    },
+    {
       "identity" : "iqkeyboardmanager",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hackiftekhar/IQKeyboardManager",

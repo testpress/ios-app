@@ -1,6 +1,5 @@
 github "airbnb/lottie-ios" "4.4.3"
 github "testpress/iOS-PDF-Reader" "2.5.2"
-github "testpress/DropDown-Swift" "2.3.14"
 github "danielgindi/Charts" "5.1.0"
 github "testpress/SlideMenuControllerSwift" "5.0.1"
 github "facebook/facebook-ios-sdk" "v17.0.1"
