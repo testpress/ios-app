@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "iglistkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Instagram/IGListKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4bad7d52604c695e48c0c161fed631aad8511449"
+      }
+    },
+    {
       "identity" : "iqkeyboardmanager",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hackiftekhar/IQKeyboardManager",

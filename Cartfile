@@ -7,5 +7,4 @@ binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.j
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json" == 6.8.0
 github "getsentry/sentry-cocoa" "8.7.0"
 github "scinfu/SwiftSoup" "2.5.3"
-github "Instagram/IGListKit" "main"
 github "ra1028/Former"
