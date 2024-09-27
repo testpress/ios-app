@@ -127,6 +127,15 @@
       }
     },
     {
+      "identity" : "ttgsnackbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zekunyan/TTGSnackbar",
+      "state" : {
+        "revision" : "2edfc948a75ba2d8eaae3ee6031988cacfefa96e",
+        "version" : "1.11.1"
+      }
+    },
+    {
       "identity" : "xlpagertabstrip",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/xmartlabs/XLPagerTabStrip",
