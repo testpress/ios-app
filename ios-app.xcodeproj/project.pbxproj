@@ -16,9 +16,8 @@
 		036CE8532CA6D6B400183BA8 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8522CA6D6B400183BA8 /* MarqueeLabel */; };
 		036CE8592CA6DE2000183BA8 /* SlideMenuController in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8582CA6DE2000183BA8 /* SlideMenuController */; };
 		036CE85C2CA6E34400183BA8 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE85B2CA6E34400183BA8 /* DGCharts */; };
+		036CE8622CA6EC5A00183BA8 /* M3U8Parser in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8612CA6EC5A00183BA8 /* M3U8Parser */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
-		038696002BF6355E00E36F8F /* M3U8Parser.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */; };
-		038696012BF6355E00E36F8F /* M3U8Parser.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FF2BF6355E00E36F8F /* M3U8Parser.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		038696162BF65D9500E36F8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; };
 		038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0386961C2BF7602600E36F8F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0386961B2BF7602600E36F8F /* Alamofire */; };
@@ -457,7 +456,6 @@
 				D9EDF1DF2A0CF10700A6CB2E /* IGListDiffKit.xcframework in Embed Frameworks */,
 				D9EDF1E22A0CF10700A6CB2E /* ObjectMapper.xcframework in Embed Frameworks */,
 				D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */,
-				038696012BF6355E00E36F8F /* M3U8Parser.xcframework in Embed Frameworks */,
 				D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */,
 				D9EDF1EC2A0CF10800A6CB2E /* Sentry.xcframework in Embed Frameworks */,
 				D9EDF1ED2A0CF10800A6CB2E /* LUExpandableTableView.xcframework in Embed Frameworks */,
@@ -882,8 +880,8 @@
 				0386961C2BF7602600E36F8F /* Alamofire in Frameworks */,
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
 				25489AA52A0BB621009619FD /* ObjectMapper.xcframework in Frameworks */,
+				036CE8622CA6EC5A00183BA8 /* M3U8Parser in Frameworks */,
 				259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */,
-				038696002BF6355E00E36F8F /* M3U8Parser.xcframework in Frameworks */,
 				259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */,
 				259932772A0A4BC300866CA8 /* IGListKit.xcframework in Frameworks */,
 				036CE8502CA6C3BE00183BA8 /* DropDown in Frameworks */,
@@ -1625,6 +1623,7 @@
 				036CE8522CA6D6B400183BA8 /* MarqueeLabel */,
 				036CE8582CA6DE2000183BA8 /* SlideMenuController */,
 				036CE85B2CA6E34400183BA8 /* DGCharts */,
+				036CE8612CA6EC5A00183BA8 /* M3U8Parser */,
 			);
 			productName = "ios-app";
 			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
@@ -1746,6 +1745,7 @@
 				036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 				036CE8572CA6DE2000183BA8 /* XCRemoteSwiftPackageReference "SlideMenuControllerSwift" */,
 				036CE85A2CA6E34300183BA8 /* XCRemoteSwiftPackageReference "Charts" */,
+				036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */,
 			);
 			productRefGroup = 2F26ADE31E8249D70031E6F4 /* Products */;
 			projectDirPath = "";
@@ -2798,6 +2798,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/M3U8Kit/M3U8Parser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 		038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -2852,6 +2860,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE85A2CA6E34300183BA8 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
+		};
+		036CE8612CA6EC5A00183BA8 /* M3U8Parser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */;
+			productName = M3U8Parser;
 		};
 		038696152BF65D9500E36F8F /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

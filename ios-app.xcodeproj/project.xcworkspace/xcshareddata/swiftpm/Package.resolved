@@ -46,6 +46,15 @@
       }
     },
     {
+      "identity" : "m3u8parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/M3U8Kit/M3U8Parser",
+      "state" : {
+        "revision" : "f7965520f3f8b31ee3a9329739623995a91cc789",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "marqueelabel",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/testpress/MarqueeLabel",
