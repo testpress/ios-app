@@ -17,6 +17,8 @@
 		036CE8592CA6DE2000183BA8 /* SlideMenuController in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8582CA6DE2000183BA8 /* SlideMenuController */; };
 		036CE85C2CA6E34400183BA8 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE85B2CA6E34400183BA8 /* DGCharts */; };
 		036CE8622CA6EC5A00183BA8 /* M3U8Parser in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8612CA6EC5A00183BA8 /* M3U8Parser */; };
+		036CE8652CA6EFE000183BA8 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8642CA6EFE000183BA8 /* CropViewController */; };
+		036CE8672CA6EFE000183BA8 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8662CA6EFE000183BA8 /* TOCropViewController */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
 		038696162BF65D9500E36F8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; };
 		038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -101,7 +103,6 @@
 		25985831248A5F14003591FA /* URLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985830248A5F14003591FA /* URLUtils.swift */; };
 		25985835248A77BC003591FA /* EncryptionKeyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985834248A77BC003591FA /* EncryptionKeyRepository.swift */; };
 		25985837248A77F6003591FA /* M3U8Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985836248A77F6003591FA /* M3U8Handler.swift */; };
-		259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932652A0A28C000866CA8 /* TOCropViewController.xcframework */; };
 		259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */; };
 		2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */; };
 		2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; };
@@ -395,7 +396,6 @@
 		D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F42A0CF10800A6CB2E /* FBSDKCoreKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F52A0CF10800A6CB2E /* XLPagerTabStrip.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932682A0A2FB600866CA8 /* XLPagerTabStrip.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9EDF1F62A0CF10800A6CB2E /* TOCropViewController.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932652A0A28C000866CA8 /* TOCropViewController.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -468,7 +468,6 @@
 				D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */,
 				D9EDF1F42A0CF10800A6CB2E /* FBSDKCoreKit.xcframework in Embed Frameworks */,
 				D9EDF1F52A0CF10800A6CB2E /* XLPagerTabStrip.xcframework in Embed Frameworks */,
-				D9EDF1F62A0CF10800A6CB2E /* TOCropViewController.xcframework in Embed Frameworks */,
 				038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -881,7 +880,7 @@
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
 				25489AA52A0BB621009619FD /* ObjectMapper.xcframework in Frameworks */,
 				036CE8622CA6EC5A00183BA8 /* M3U8Parser in Frameworks */,
-				259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */,
+				036CE8652CA6EFE000183BA8 /* CropViewController in Frameworks */,
 				259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */,
 				259932772A0A4BC300866CA8 /* IGListKit.xcframework in Frameworks */,
 				036CE8502CA6C3BE00183BA8 /* DropDown in Frameworks */,
@@ -906,6 +905,7 @@
 				25489A9F2A0B9EEA009619FD /* TTGSnackbar.xcframework in Frameworks */,
 				038696162BF65D9500E36F8F /* RealmSwift in Frameworks */,
 				036CE85C2CA6E34400183BA8 /* DGCharts in Frameworks */,
+				036CE8672CA6EFE000183BA8 /* TOCropViewController in Frameworks */,
 				259932692A0A2FB600866CA8 /* XLPagerTabStrip.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1624,6 +1624,8 @@
 				036CE8582CA6DE2000183BA8 /* SlideMenuController */,
 				036CE85B2CA6E34400183BA8 /* DGCharts */,
 				036CE8612CA6EC5A00183BA8 /* M3U8Parser */,
+				036CE8642CA6EFE000183BA8 /* CropViewController */,
+				036CE8662CA6EFE000183BA8 /* TOCropViewController */,
 			);
 			productName = "ios-app";
 			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
@@ -1746,6 +1748,7 @@
 				036CE8572CA6DE2000183BA8 /* XCRemoteSwiftPackageReference "SlideMenuControllerSwift" */,
 				036CE85A2CA6E34300183BA8 /* XCRemoteSwiftPackageReference "Charts" */,
 				036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */,
+				036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			productRefGroup = 2F26ADE31E8249D70031E6F4 /* Products */;
 			projectDirPath = "";
@@ -2806,6 +2809,14 @@
 				minimumVersion = 1.1.0;
 			};
 		};
+		036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController";
+			requirement = {
+				kind = exactVersion;
+				version = 2.6.1;
+			};
+		};
 		038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -2865,6 +2876,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */;
 			productName = M3U8Parser;
+		};
+		036CE8642CA6EFE000183BA8 /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		036CE8662CA6EFE000183BA8 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
 		};
 		038696152BF65D9500E36F8F /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
