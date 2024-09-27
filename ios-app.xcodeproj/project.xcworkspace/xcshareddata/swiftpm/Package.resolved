@@ -62,6 +62,15 @@
         "revision" : "2000569f03948c281afc83c36c710ab15e5dd33c",
         "version" : "10.50.0"
       }
+    },
+    {
+      "identity" : "slidemenucontrollerswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/testpress/SlideMenuControllerSwift",
+      "state" : {
+        "revision" : "04492844e25adc1396e86ea4a8bc38ff2d18360d",
+        "version" : "5.0.1"
+      }
     }
   ],
   "version" : 2

@@ -24,7 +24,7 @@
 //
 
 import Alamofire
-import SlideMenuControllerSwift
+import SlideMenuController
 import TTGSnackbar
 import UIKit
 

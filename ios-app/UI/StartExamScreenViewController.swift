@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import SlideMenuControllerSwift
+import SlideMenuController
 import UIKit
 import RealmSwift
 

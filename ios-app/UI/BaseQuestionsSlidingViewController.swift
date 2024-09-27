@@ -24,7 +24,7 @@
 //
 
 import UIKit
-import SlideMenuControllerSwift
+import SlideMenuController
 
 protocol SlidingMenuDelegate {
     func dismissViewController()
