@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "fxpagecontrol",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nicklockwood/FXPageControl.git",
+      "state" : {
+        "revision" : "a94633402ba98c52f86c2a70e61ff086dec9de78",
+        "version" : "1.6.0"
+      }
+    },
+    {
       "identity" : "iglistkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Instagram/IGListKit",
@@ -115,6 +124,15 @@
       "state" : {
         "revision" : "d0470491f56e734731bbf77991944c0dfdee3e0e",
         "version" : "2.6.1"
+      }
+    },
+    {
+      "identity" : "xlpagertabstrip",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/xmartlabs/XLPagerTabStrip",
+      "state" : {
+        "revision" : "211ed62aa376722cf93c429802a8b6ff66a8bd52",
+        "version" : "9.1.0"
       }
     }
   ],

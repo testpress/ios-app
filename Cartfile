@@ -1,7 +1,6 @@
 github "airbnb/lottie-ios" "4.4.3"
 github "facebook/facebook-ios-sdk" "v17.0.1"
 github "LaurentiuUngur/LUExpandableTableView"  "3.0.0"
-github "xmartlabs/XLPagerTabStrip" "9.0.0"
 github "zekunyan/TTGSnackbar" "1.11.1"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" == 6.8.0
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json" == 6.8.0
