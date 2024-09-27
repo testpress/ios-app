@@ -13,6 +13,7 @@
 		0332D2452C4104A900345BA9 /* FileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2442C4104A900345BA9 /* FileResponse.swift */; };
 		036654CD2A3D98930005BDDF /* UIInterfaceOrientationMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */; };
 		036CE8502CA6C3BE00183BA8 /* DropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE84F2CA6C3BE00183BA8 /* DropDown */; };
+		036CE8532CA6D6B400183BA8 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8522CA6D6B400183BA8 /* MarqueeLabel */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
 		038695FD2BF6095D00E36F8F /* DGCharts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FC2BF6095D00E36F8F /* DGCharts.xcframework */; };
 		038695FE2BF6095D00E36F8F /* DGCharts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 038695FC2BF6095D00E36F8F /* DGCharts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -62,7 +63,6 @@
 		253DD67E262860B200C6D0A8 /* GapFillResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253DD67D262860B200C6D0A8 /* GapFillResponse.swift */; };
 		25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; };
 		25489A9F2A0B9EEA009619FD /* TTGSnackbar.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */; };
-		25489AA12A0BAD81009619FD /* MarqueeLabel.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */; };
 		25489AA52A0BB621009619FD /* ObjectMapper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA42A0BB621009619FD /* ObjectMapper.xcframework */; };
 		25489AA72A0BBC44009619FD /* PDFReader.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA62A0BBC44009619FD /* PDFReader.xcframework */; };
 		25489AA92A0BC022009619FD /* SlideMenuControllerSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */; };
@@ -388,7 +388,6 @@
 		D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA82A0BC022009619FD /* SlideMenuControllerSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA62A0BBC44009619FD /* PDFReader.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E22A0CF10700A6CB2E /* ObjectMapper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA42A0BB621009619FD /* ObjectMapper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9EDF1E42A0CF10700A6CB2E /* MarqueeLabel.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489AA02A0BAD81009619FD /* MarqueeLabel.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A9E2A0B9EEA009619FD /* TTGSnackbar.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25489A982A0B7F43009619FD /* SwiftSoup.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1EC2A0CF10800A6CB2E /* Sentry.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599327C2A0A4D2C00866CA8 /* Sentry.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -463,7 +462,6 @@
 				D9EDF1E02A0CF10700A6CB2E /* SlideMenuControllerSwift.xcframework in Embed Frameworks */,
 				D9EDF1E12A0CF10700A6CB2E /* PDFReader.xcframework in Embed Frameworks */,
 				D9EDF1E22A0CF10700A6CB2E /* ObjectMapper.xcframework in Embed Frameworks */,
-				D9EDF1E42A0CF10700A6CB2E /* MarqueeLabel.xcframework in Embed Frameworks */,
 				D9EDF1E52A0CF10700A6CB2E /* TTGSnackbar.xcframework in Embed Frameworks */,
 				038696012BF6355E00E36F8F /* M3U8Parser.xcframework in Embed Frameworks */,
 				D9EDF1E82A0CF10800A6CB2E /* SwiftSoup.xcframework in Embed Frameworks */,
@@ -891,7 +889,6 @@
 				0386961C2BF7602600E36F8F /* Alamofire in Frameworks */,
 				25489AAB2A0BD2A9009619FD /* IGListDiffKit.xcframework in Frameworks */,
 				25489AA52A0BB621009619FD /* ObjectMapper.xcframework in Frameworks */,
-				25489AA12A0BAD81009619FD /* MarqueeLabel.xcframework in Frameworks */,
 				259932662A0A28C000866CA8 /* TOCropViewController.xcframework in Frameworks */,
 				038696002BF6355E00E36F8F /* M3U8Parser.xcframework in Frameworks */,
 				259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */,
@@ -901,6 +898,7 @@
 				2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */,
 				2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */,
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
+				036CE8532CA6D6B400183BA8 /* MarqueeLabel in Frameworks */,
 				25489A992A0B7F43009619FD /* SwiftSoup.xcframework in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
@@ -1632,6 +1630,7 @@
 				0386961E2BF762DD00E36F8F /* IQKeyboardManagerSwift */,
 				038696212BF7635C00E36F8F /* Kingfisher */,
 				036CE84F2CA6C3BE00183BA8 /* DropDown */,
+				036CE8522CA6D6B400183BA8 /* MarqueeLabel */,
 			);
 			productName = "ios-app";
 			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
@@ -1750,6 +1749,7 @@
 				0386961D2BF762DD00E36F8F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				038696202BF7635C00E36F8F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				036CE84E2CA6C3BE00183BA8 /* XCRemoteSwiftPackageReference "DropDown-Swift" */,
+				036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 			);
 			productRefGroup = 2F26ADE31E8249D70031E6F4 /* Products */;
 			projectDirPath = "";
@@ -2778,6 +2778,14 @@
 				minimumVersion = 2.3.14;
 			};
 		};
+		036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/testpress/MarqueeLabel";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.3.2;
+			};
+		};
 		038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -2817,6 +2825,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE84E2CA6C3BE00183BA8 /* XCRemoteSwiftPackageReference "DropDown-Swift" */;
 			productName = DropDown;
+		};
+		036CE8522CA6D6B400183BA8 /* MarqueeLabel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
+			productName = MarqueeLabel;
 		};
 		038696152BF65D9500E36F8F /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

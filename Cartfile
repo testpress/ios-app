@@ -12,7 +12,6 @@ binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.j
 github "getsentry/sentry-cocoa" "8.7.0"
 github "M3U8Kit/M3U8Parser" ~> 1.1.0
 github "TimOliver/TOCropViewController" "2.6.1"
-github "testpress/MarqueeLabel" "4.3.2"
 github "scinfu/SwiftSoup" "2.5.3"
 github "Instagram/IGListKit" "main"
 github "ra1028/Former"

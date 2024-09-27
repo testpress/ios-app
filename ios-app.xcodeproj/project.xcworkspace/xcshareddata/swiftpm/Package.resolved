@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "marqueelabel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/testpress/MarqueeLabel",
+      "state" : {
+        "revision" : "ac2d6f26f642ab9ad71b61d2953d3cfa54a6dc4a",
+        "version" : "4.3.2"
+      }
+    },
+    {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
