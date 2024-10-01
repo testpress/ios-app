@@ -18,7 +18,7 @@ public class TestpressCourse {
     }
     
     private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {
-        let storyboard = UIStoryboard(name: "Course", bundle: Bundle(for: TestpressCourse.self))
+        let storyboard = UIStoryboard(name: "Course", bundle: Bundle.module)
         return storyboard.instantiateViewController(withIdentifier: identifier) as? T
     }
 
