@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0303692F2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0303692E2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy */; };
 		031FBACB2C47B23A00AAF71D /* QuestionReviewPage.js in Resources */ = {isa = PBXBuildFile; fileRef = 031FBACA2C47B23A00AAF71D /* QuestionReviewPage.js */; };
 		031FBACD2C47C49F00AAF71D /* FileDownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */; };
 		0332D2432C3FD17100345BA9 /* FileUploadPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */; };
@@ -460,6 +461,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0303692E2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		031FBACA2C47B23A00AAF71D /* QuestionReviewPage.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = QuestionReviewPage.js; sourceTree = "<group>"; };
 		031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloadUtility.swift; sourceTree = "<group>"; };
 		0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadPicker.swift; sourceTree = "<group>"; };
@@ -919,6 +921,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0303692D2CAC188400C6CF2D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				841380332C9DA18E004D5846 /* StoryBoards */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		250629972266FE9700539FB2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1475,9 +1485,10 @@
 		8413802E2C9DA075004D5846 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				841380332C9DA18E004D5846 /* StoryBoards */,
+				0303692D2CAC188400C6CF2D /* Resources */,
 				8413802D2C9DA066004D5846 /* ViewControllers */,
 				8413802B2C9D9F2D004D5846 /* TestpressCourse.swift */,
+				0303692E2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1835,6 +1846,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0303692F2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy in Resources */,
 				841380362C9DA1A8004D5846 /* Course.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

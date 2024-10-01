@@ -18,7 +18,11 @@ let package = Package(
     // Targets can depend on other targets in this package and products from dependencies.
     .target(
       name: "CourseKit",
-      path: "CourseKit/Source"
+      path: "CourseKit/Source",
+      resources: [
+        .process("Resources"),
+        .process("PrivacyInfo.xcprivacy")
+      ]
     )
   ],  
   swiftLanguageVersions: [
