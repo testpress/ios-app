@@ -58,7 +58,7 @@ class Content: DBModel {
     @objc dynamic var liveStream: LiveStream?
     @objc dynamic var liveStreamId: Int = -1
     @objc dynamic var active: Bool = true
-    var bookmarkId = RealmOptional<Int>()
+    var bookmarkId = RealmProperty<Int?>()
     @objc dynamic var isScheduled: Bool = false
     @objc dynamic var start: String = ""
     @objc dynamic var end: String = ""

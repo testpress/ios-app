@@ -31,7 +31,6 @@ import AVFoundation
 import Alamofire
 import Sentry
 import TTGSnackbar
-import RealmSwift
 
 
 class VideoContentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
@@ -180,7 +179,9 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
         if bookmarkContent?.id == content.id {
-            content.bookmarkId = RealmOptional<Int>(bookmarkId)
+            DBManager<Content>().write {
+                content.bookmarkId.value = bookmarkId
+            }
             tableView.reloadData()
             if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
                 if bookmarkId != nil {
@@ -191,7 +192,9 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
             }
         } else {
             if let cellContentId = contents.firstIndex(where: { $0.id == bookmarkContent?.id }) {
-                contents[cellContentId].bookmarkId = RealmOptional<Int>(bookmarkId)
+                DBManager<Content>().write {
+                    contents[cellContentId].bookmarkId.value = bookmarkId
+                }
                 tableView.reloadData()
             }
         }

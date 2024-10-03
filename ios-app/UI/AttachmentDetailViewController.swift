@@ -27,7 +27,6 @@ import Lottie
 import PDFKit
 import UIKit
 import Alamofire
-import RealmSwift
 import MarqueeLabel
 
 
@@ -255,7 +254,9 @@ class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelega
     }
     
     func udpateBookmarkButtonState(bookmarkId: Int?) {
-        content.bookmarkId = RealmOptional<Int>(bookmarkId)
+        DBManager<Content>().write {
+            content.bookmarkId.value = bookmarkId
+        }
         if bookmarkId != nil {
             bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
             bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")

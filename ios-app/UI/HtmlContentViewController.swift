@@ -26,7 +26,6 @@
 import UIKit
 import WebKit
 import  Alamofire
-import RealmSwift
 
 class HtmlContentViewController: BaseWebViewController {
     
@@ -199,7 +198,9 @@ extension HtmlContentViewController: BookmarkDelegate {
     }
     
     func updateBookmark(bookmarkId: Int?) {
-        self.content.bookmarkId = RealmOptional<Int>(bookmarkId)
+        DBManager<Content>().write {
+            self.content.bookmarkId.value = bookmarkId
+        }
         self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
     }
     
