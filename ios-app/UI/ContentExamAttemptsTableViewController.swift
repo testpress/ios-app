@@ -24,7 +24,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class ContentExamAttemptsTableViewController: UITableViewController {
     
@@ -34,7 +33,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     var exam: Exam!
     var attempts: [ContentAttempt] = []
     var pausedAttempts: [ContentAttempt] = []
-    var languages = List<Language>()
+    var languages: [Language] = []
     
     override func viewDidLoad() {
         emptyView = EmptyView.getInstance(parentView: view)
@@ -112,12 +111,12 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                     return
                 }
 
-                self.languages.append(objectsIn: testpressResponse!.results)
+                self.languages.append(contentsOf: testpressResponse!.results)
                 
                 if !(testpressResponse!.next.isEmpty) {
                     self.fetchAvailableLanguages(url: testpressResponse!.next)
                 } else {
-                    self.saveDataInDB(self.languages)
+                    self.exam.updateLanguages(with: self.languages)
                     self.hideLoading()
                 }
         }, type: Language.self)
@@ -137,14 +136,6 @@ class ContentExamAttemptsTableViewController: UITableViewController {
         let (image, title, description) = error.getDisplayInfo()
         self.emptyView.show(image: image, title: title, description: description, retryButtonText: retryButtonText,
                             retryHandler: retryHandler)
-    }
-
-    private func saveDataInDB(_ languages: List<Language>) {
-        DBManager<Exam>().write {
-            self.exam.languages.removeAll()
-            self.exam.languages = languages
-            self.exam.selectedLanguage = languages.first
-        }
     }
 
     private func hideLoading() {

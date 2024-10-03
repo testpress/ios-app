@@ -160,6 +160,14 @@ class Exam: DBModel {
     func IsExamUsingIBPSTemplate() -> Bool{
         return templateType == 2
     }
+    
+    func updateLanguages(with newLanguages: [Language]) {
+        DBManager<Exam>().write {
+            self.languages.removeAll()
+            self.languages.append(objectsIn: newLanguages)
+            self.selectedLanguage = newLanguages.first
+        }
+    }
 }
 
 struct ExamTemplateType {

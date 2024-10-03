@@ -25,7 +25,6 @@
 
 import SlideMenuController
 import UIKit
-import RealmSwift
 
 class StartExamScreenViewController: UIViewController {
     
@@ -51,7 +50,7 @@ class StartExamScreenViewController: UIViewController {
     @IBOutlet weak var selectLanguageLabel: UILabel!
     var activityIndicator: UIActivityIndicatorView!
     
-    var languages = List<Language>()
+    var languages: [Language] = []
     let alertController = UIUtils.initProgressDialog(message: "Please wait\n\n")
     var emptyView: EmptyView!
     var content: Content!
@@ -165,12 +164,13 @@ class StartExamScreenViewController: UIViewController {
                         return
                     }
                     
-                    self.languages.append(objectsIn: testpressResponse!.results)
+                    self.languages.append(contentsOf: testpressResponse!.results)
                     
                     if !(testpressResponse!.next.isEmpty) {
                         self.fetchAvailableLanguages(url: testpressResponse!.next)
                     } else {
-                        self.saveDataInDB(self.languages)
+                        self.exam.updateLanguages(with: self.languages)
+                        self.languageContainer.isHidden = self.languages.count < 2
                         self.hideLoading()
                     }
     
@@ -193,14 +193,6 @@ class StartExamScreenViewController: UIViewController {
         self.emptyView.show(image: image, title: title, description: description,
                             retryButtonText: retryButtonText,
                             retryHandler: retryHandler)
-    }
-    
-    private func saveDataInDB(_ languages: List<Language>) {
-        DBManager<Exam>().write {
-            self.exam.languages.removeAll()
-            self.exam.languages = languages
-        }
-        self.languageContainer.isHidden = languages.count < 2
     }
     
     private func showLoading() {
