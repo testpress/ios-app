@@ -12,6 +12,13 @@
 		031FBACD2C47C49F00AAF71D /* FileDownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */; };
 		0332D2432C3FD17100345BA9 /* FileUploadPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */; };
 		0332D2452C4104A900345BA9 /* FileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2442C4104A900345BA9 /* FileResponse.swift */; };
+		035CC54A2CAE694D0057F4E4 /* ListTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705016246E48BA00E6C688 /* ListTransform.swift */; };
+		035CC54B2CAE694D0057F4E4 /* StringArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */; };
+		035CC54C2CAE694D0057F4E4 /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
+		035CC54D2CAE694D0057F4E4 /* StringTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF75263FADD0003226AD /* StringTransform.swift */; };
+		035CC54F2CAE698D0057F4E4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 035CC54E2CAE698D0057F4E4 /* RealmSwift */; };
+		035CC5502CAE698D0057F4E4 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 035CC54E2CAE698D0057F4E4 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		035CC5532CAE699B0057F4E4 /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = 035CC5522CAE699B0057F4E4 /* ObjectMapper */; };
 		036654CD2A3D98930005BDDF /* UIInterfaceOrientationMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */; };
 		036CE8502CA6C3BE00183BA8 /* DropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE84F2CA6C3BE00183BA8 /* DropDown */; };
 		036CE8532CA6D6B400183BA8 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8522CA6D6B400183BA8 /* MarqueeLabel */; };
@@ -55,7 +62,6 @@
 		2503DF6F263FAC0A003226AD /* ChapterContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF6D263FAC0A003226AD /* ChapterContentViewCell.swift */; };
 		2503DF70263FAC0A003226AD /* ChapterContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2503DF6E263FAC0A003226AD /* ChapterContentViewCell.xib */; };
 		2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF72263FAC4F003226AD /* PillLabel.swift */; };
-		2503DF76263FADD0003226AD /* StringTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF75263FADD0003226AD /* StringTransform.swift */; };
 		2503DF79263FB21F003226AD /* ChapterContentSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF78263FB21F003226AD /* ChapterContentSectionController.swift */; };
 		2503DF7C263FBECD003226AD /* ContentAttemptSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF7B263FBECD003226AD /* ContentAttemptSectionController.swift */; };
 		2506298E2264856E00539FB2 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506298D2264856E00539FB2 /* ApiError.swift */; };
@@ -79,12 +85,10 @@
 		25520BC627547006001A58AB /* DiscussionThreadAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BC527547006001A58AB /* DiscussionThreadAnswer.swift */; };
 		2555A0C42466A59400D56707 /* ContentsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2555A0C32466A59400D56707 /* ContentsListResponse.swift */; };
 		2566A5952745102F00D9E71D /* DRMLicenseKeyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */; };
-		256A909C247D03C100F4E12C /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
 		256A909E247D21F500F4E12C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909D247D21F500F4E12C /* UIButton.swift */; };
 		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
 		256A90A2247D30DA00F4E12C /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A90A1247D30DA00F4E12C /* Collection.swift */; };
 		256DE79E256F8CF200F02995 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256DE79D256F8CF100F02995 /* PaddingLabel.swift */; };
-		25705017246E48BA00E6C688 /* ListTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705016246E48BA00E6C688 /* ListTransform.swift */; };
 		25705019246E71B600E6C688 /* QuizQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705018246E71B600E6C688 /* QuizQuestionViewController.swift */; };
 		2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2570501A246EA32600E6C688 /* LoadingViewController.swift */; };
 		2570A23F21CA0D260097C6FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2570A23E21CA0D260097C6FE /* GoogleService-Info.plist */; };
@@ -122,7 +126,6 @@
 		25B1489A264CFE0500AECC39 /* MathJax-2.7.1 in Resources */ = {isa = PBXBuildFile; fileRef = 25B14899264CFE0500AECC39 /* MathJax-2.7.1 */; };
 		25B4D0BF27B0F8BB0061D100 /* SSOUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */; };
 		25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
-		25DFC1682609B00700E06BA7 /* StringArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */; };
 		25E435BB263AD8CC00243FD3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */; };
 		25E435BE263AD94500243FD3 /* DashboardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435BD263AD94500243FD3 /* DashboardResponse.swift */; };
 		25E435C2263AD9ED00243FD3 /* DashboardSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435C1263AD9ED00243FD3 /* DashboardSection.swift */; };
@@ -430,6 +433,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		035CC5512CAE698D0057F4E4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				035CC5502CAE698D0057F4E4 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		25B0ADCD21D6022900C702B9 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -907,6 +921,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035CC5532CAE699B0057F4E4 /* ObjectMapper in Frameworks */,
+				035CC54F2CAE698D0057F4E4 /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,6 +943,25 @@
 				841380332C9DA18E004D5846 /* StoryBoards */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		035CC5482CAE68D00057F4E4 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				035CC5492CAE690E0057F4E4 /* Transforms */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		035CC5492CAE690E0057F4E4 /* Transforms */ = {
+			isa = PBXGroup;
+			children = (
+				25705016246E48BA00E6C688 /* ListTransform.swift */,
+				256A909B247D03C100F4E12C /* IntArrayTransform.swift */,
+				25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */,
+				2503DF75263FADD0003226AD /* StringTransform.swift */,
+			);
+			path = Transforms;
 			sourceTree = "<group>";
 		};
 		250629972266FE9700539FB2 /* Models */ = {
@@ -1163,12 +1198,8 @@
 				2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 				8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */,
-				25705016246E48BA00E6C688 /* ListTransform.swift */,
-				256A909B247D03C100F4E12C /* IntArrayTransform.swift */,
 				25985830248A5F14003591FA /* URLUtils.swift */,
 				25985836248A77F6003591FA /* M3U8Handler.swift */,
-				25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */,
-				2503DF75263FADD0003226AD /* StringTransform.swift */,
 				25F7522027FEB143000D8137 /* TimeUtils.swift */,
 				0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */,
 				031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */,
@@ -1485,6 +1516,7 @@
 		8413802E2C9DA075004D5846 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				035CC5482CAE68D00057F4E4 /* Database */,
 				0303692D2CAC188400C6CF2D /* Resources */,
 				8413802D2C9DA066004D5846 /* ViewControllers */,
 				8413802B2C9D9F2D004D5846 /* TestpressCourse.swift */,
@@ -1662,12 +1694,17 @@
 				841380092C9D9CCD004D5846 /* Sources */,
 				8413800A2C9D9CCD004D5846 /* Frameworks */,
 				8413800B2C9D9CCD004D5846 /* Resources */,
+				035CC5512CAE698D0057F4E4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = CourseKit;
+			packageProductDependencies = (
+				035CC54E2CAE698D0057F4E4 /* RealmSwift */,
+				035CC5522CAE699B0057F4E4 /* ObjectMapper */,
+			);
 			productName = CourseKit;
 			productReference = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -2012,7 +2049,6 @@
 				2F70F4D71F9F1C3300D30755 /* BaseQuestionsListViewController.swift in Sources */,
 				2FC0F3101F863BA90092BFDC /* TestReportViewController.swift in Sources */,
 				2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */,
-				25705017246E48BA00E6C688 /* ListTransform.swift in Sources */,
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
 				D9533ABE2B99CD2700E73A78 /* PDFViewController.swift in Sources */,
 				258036A52743AA2400397639 /* DRMKeySessionDelegate.swift in Sources */,
@@ -2089,7 +2125,6 @@
 				2F17C1FE20C965B300606D5C /* BookmarkFoldersDropDown.swift in Sources */,
 				2FC0F2E41F863ADC0092BFDC /* TPApiResponse.swift in Sources */,
 				036654CD2A3D98930005BDDF /* UIInterfaceOrientationMask.swift in Sources */,
-				25DFC1682609B00700E06BA7 /* StringArrayTransform.swift in Sources */,
 				8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */,
 				2F48C8111FD28E7A009C686C /* PostPager.swift in Sources */,
 				2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */,
@@ -2137,14 +2172,12 @@
 				2F4A81ED20E4DDFD0062DE8A /* UINavigationControllerExtension.swift in Sources */,
 				2F56B7371FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift in Sources */,
 				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
-				2503DF76263FADD0003226AD /* StringTransform.swift in Sources */,
 				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
 				2F4186A020BD3A33003D2D8A /* BookmarkFolderPager.swift in Sources */,
 				2F25D562201F5C8800C01CCE /* TargetThreatViewController.swift in Sources */,
 				2506298E2264856E00539FB2 /* ApiError.swift in Sources */,
 				2FA9285220B811F400CD3076 /* BookmarksDetailPageViewController.swift in Sources */,
 				2F9778A81FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift in Sources */,
-				256A909C247D03C100F4E12C /* IntArrayTransform.swift in Sources */,
 				2F3DD22020187B5D004EDAF2 /* ApiResponse.swift in Sources */,
 				2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
@@ -2210,7 +2243,11 @@
 				8413802C2C9D9F2D004D5846 /* TestpressCourse.swift in Sources */,
 				841380112C9D9CCD004D5846 /* CourseKit.docc in Sources */,
 				841380302C9DA09D004D5846 /* CourseListViewController.swift in Sources */,
+				035CC54D2CAE694D0057F4E4 /* StringTransform.swift in Sources */,
+				035CC54A2CAE694D0057F4E4 /* ListTransform.swift in Sources */,
+				035CC54C2CAE694D0057F4E4 /* IntArrayTransform.swift in Sources */,
 				841380322C9DA0D0004D5846 /* ContentDetailViewController.swift in Sources */,
+				035CC54B2CAE694D0057F4E4 /* StringArrayTransform.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2919,6 +2956,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		035CC54E2CAE698D0057F4E4 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		035CC5522CAE699B0057F4E4 /* ObjectMapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8682CA6F0E400183BA8 /* XCRemoteSwiftPackageReference "ObjectMapper" */;
+			productName = ObjectMapper;
+		};
 		036CE84F2CA6C3BE00183BA8 /* DropDown */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE84E2CA6C3BE00183BA8 /* XCRemoteSwiftPackageReference "DropDown-Swift" */;
