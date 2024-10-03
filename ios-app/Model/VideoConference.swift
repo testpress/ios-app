@@ -7,7 +7,6 @@
 //
 
 import ObjectMapper
-import RealmSwift
 import Foundation
 
 class VideoConference: DBModel {

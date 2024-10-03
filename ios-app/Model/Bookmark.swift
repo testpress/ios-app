@@ -24,7 +24,6 @@
 //
 
 import ObjectMapper
-import RealmSwift
 import TTGSnackbar
 import UIKit
 import Foundation

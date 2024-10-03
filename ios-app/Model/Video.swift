@@ -24,9 +24,9 @@
 //
 
 import ObjectMapper
-import RealmSwift
 import Foundation
 import CourseKit
+import RealmSwift
 
 
 class Video: DBModel {
