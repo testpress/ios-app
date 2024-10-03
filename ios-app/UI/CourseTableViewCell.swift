@@ -31,6 +31,9 @@ class CourseTableViewCell: UITableViewCell {
     @IBOutlet weak var courseViewCell: UIView!
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var externalLinkLabel: UILabel!
+    @IBOutlet weak var chapterCount: UILabel!
+    @IBOutlet weak var contentCount: UILabel!
+    @IBOutlet weak var validity: UILabel!
     
     var parentViewController: UIViewController! = nil
     var course: Course!
@@ -51,6 +54,9 @@ class CourseTableViewCell: UITableViewCell {
         if !course.external_content_link.isEmpty {
             displayExternalLabel()
         }
+        
+        showChapterAndContentCount()
+        showOrHideCourseValidity()
     }
     
     func displayExternalLabel() {
@@ -64,6 +70,25 @@ class CourseTableViewCell: UITableViewCell {
         externalLinkLabel.layer.cornerRadius = 2
         externalLinkLabel.layer.borderColor = Colors.getRGB(Colors.PRIMARY).cgColor
         externalLinkLabel.textColor = Colors.getRGB(Colors.PRIMARY)
+    }
+    
+    func showChapterAndContentCount() {
+        let chapter = Images.Article.image.resized(to: CGSize(width: 16, height: 12))?.withTintColor(Colors.getRGB("#989898"))
+        let content = Images.ExamAttemptedIcon.image.resized(to: CGSize(width: 16, height: 16))?.withTintColor(Colors.getRGB("#989898"))
+        chapterCount.textColor = Colors.getRGB(Colors.DARK_GRAY)
+        contentCount.textColor = Colors.getRGB(Colors.DARK_GRAY)
+        chapterCount.addLeading(image: chapter!, text: "\(course.chaptersCount) Chapters")
+        contentCount.addLeading(image: content!, text: "\(course.contentsCount) Contents")
+    }
+    
+    func showOrHideCourseValidity() {
+        if (course.getFormattedExpiryDate().isNotEmpty){
+            let validityCalendar = Images.ValidityCalendar.image.resized(to: CGSize(width: 14, height: 14))?.withTintColor(Colors.getRGB("#989898"))
+            validity.textColor = Colors.getRGB(Colors.DARK_GRAY)
+            validity.addLeading(image: validityCalendar!, text: course.getFormattedExpiryDate())
+        } else {
+            validity.text = ""
+        }
     }
     
     override func layoutSubviews() {

@@ -39,6 +39,7 @@ class Colors {
     static let GRAY_MEDIUM_DARK = "#bfbfbf"
     static let TAB_TEXT_COLOR = "#888888"
     static let ORANGE = "#ffa319"
+    static let DARK_GRAY = "#989898"
     static let BLUE = "#1793e6"
     static let BLUE_TEXT = "#3598db"
     static let WHITE = "#FFFFFF"

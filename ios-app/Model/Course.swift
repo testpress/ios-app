@@ -46,6 +46,7 @@ class Course: DBModel {
     @objc dynamic var external_content_link: String = ""
     @objc dynamic var external_link_label: String = ""
     @objc dynamic var allowCustomTestGeneration = false
+    @objc dynamic var expiryDate: String? = ""
     var tags = List<String>()
 
     public override func mapping(map: ObjectMapper.Map) {
@@ -66,10 +67,34 @@ class Course: DBModel {
         external_content_link <- map["external_content_link"]
         external_link_label <- map["external_link_label"]
         allowCustomTestGeneration <- map["allow_custom_test_generation"]
+        expiryDate <- map["expiry_date"]
         tags <- (map["tags"], StringArrayTransform())
     }
     
     override public static func primaryKey() -> String? {
         return "id"
+    }
+    
+    func getFormattedExpiryDate() -> String {
+        do {
+            guard let expiryDate = self.expiryDate, !expiryDate.isEmpty else {
+                return ""
+            }
+                
+            let inputFormatter = DateFormatter()
+            inputFormatter.dateFormat = "yyyy-MM-dd"
+                
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "MMM dd, yyyy"
+                
+            if let date = inputFormatter.date(from: expiryDate) {
+                return "Valid till " + outputFormatter.string(from: date)
+            } else {
+                return ""
+            }
+        } catch {
+            print("Error parsing date: \(error.localizedDescription)")
+            return ""
+        }
     }
 }
