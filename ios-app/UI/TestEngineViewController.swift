@@ -370,7 +370,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                 selectedAnswer: Array(attemptItem.savedAnswers),
                 review: attemptItem.currentReview,
                 shortAnswer: attemptItem.currentShortText,
-                gapFilledResponses: attemptItem.gapFillResponses,
+                gapFilledResponses: Array(attemptItem.gapFillResponses),
                 endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.url),
                 attemptItem: attemptItem,
                 completion: {

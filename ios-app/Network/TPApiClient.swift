@@ -25,7 +25,6 @@
 
 import Alamofire
 import UIKit
-import RealmSwift
 
 enum AuthProvider: String {
     case TESTPRESS
@@ -432,7 +431,7 @@ class TPApiClient {
     static func saveAnswer(selectedAnswer: [Int],
                            review: Bool,
                            shortAnswer: String?,
-                           gapFilledResponses: List<GapFillResponse>?,
+                           gapFilledResponses: [GapFillResponse]?,
                            endpointProvider: TPEndpointProvider,
                            attemptItem: AttemptItem,
                            completion: @escaping (AttemptItem?, TPError?) -> Void) {

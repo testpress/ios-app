@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 class AttemptItemRepository: AttemptRepository {
     func submitAnswer(id: Int) {
@@ -21,7 +20,7 @@ class AttemptItemRepository: AttemptRepository {
             selectedAnswer: Array(attemptItem.savedAnswers),
             review: false,
             shortAnswer: attemptItem.currentShortText,
-            gapFilledResponses: List<GapFillResponse>(),
+            gapFilledResponses: Array<GapFillResponse>(),
             endpointProvider: TPEndpointProvider(.saveAnswer, url: attemptItem.getSaveUrl()), attemptItem: attemptItem,
             completion: {
                 newAttemptItem, error in
