@@ -23,7 +23,6 @@
 //  THE SOFTWARE.
 //
 
-import RealmSwift
 import UIKit
 
 class CoursesTableViewController: BaseDBTableViewController<Course> {
@@ -33,7 +32,6 @@ class CoursesTableViewController: BaseDBTableViewController<Course> {
     var instituteSettings: InstituteSettings?
     
     required init?(coder aDecoder: NSCoder) {
-        debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
         super.init(pager: CoursePager(), coder: aDecoder)
     }
     
