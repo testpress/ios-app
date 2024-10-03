@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class StartQuizExamViewController: UIViewController {
     @IBOutlet weak var examTitle: UILabel!
@@ -95,7 +94,7 @@ class StartQuizExamViewController: UIViewController {
                 return
             }
             
-            try! Realm().write {
+            DBManager<Content>().write {
                 self.content.attemptsCount += 1
             }
             self.showQuestions(contentAttempt: contentAttempt!)

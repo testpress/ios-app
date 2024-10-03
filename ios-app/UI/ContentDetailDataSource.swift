@@ -44,7 +44,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
         }
         
         let content = contents[index]
-        try! Realm().write {
+        DBManager<Content>().write {
             content.index = index
         }
         

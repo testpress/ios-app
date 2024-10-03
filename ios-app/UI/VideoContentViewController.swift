@@ -234,7 +234,7 @@ class VideoContentViewController: UIViewController,UITableViewDelegate, UITableV
     
     func changeVideo(content: Content!) {
         self.content = content
-        try! Realm().write {
+        DBManager<Content>().write {
             self.content.index = contents.firstIndex(where: { $0.id == content.id })!
         }
         viewModel.content = content

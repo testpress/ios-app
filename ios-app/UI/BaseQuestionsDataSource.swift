@@ -47,7 +47,7 @@ class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
         }
         
         let attemptItem = attemptItems[index]
-        try! Realm().write {
+        DBManager<AttemptItem>().write {
             attemptItem.index = index
         }
         let viewController = getQuestionsViewController()

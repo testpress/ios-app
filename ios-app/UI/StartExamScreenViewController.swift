@@ -196,7 +196,7 @@ class StartExamScreenViewController: UIViewController {
     }
     
     private func saveDataInDB(_ languages: List<Language>) {
-        try! Realm().write {
+        DBManager<Exam>().write {
             self.exam.languages.removeAll()
             self.exam.languages = languages
         }
@@ -215,7 +215,7 @@ class StartExamScreenViewController: UIViewController {
     }
     
     private func setSelectedLanguage(_ language: Language) {
-        try! Realm().write {
+        DBManager<Exam>().write {
             self.exam.selectedLanguage = language
         }
     }
@@ -346,7 +346,7 @@ class StartExamScreenViewController: UIViewController {
                 self.alertController.dismiss(animated: true, completion: nil)
                 if let contentAttempt = attempt as? ContentAttempt {
                     self.contentAttempt = contentAttempt
-                    try! Realm().write{
+                    DBManager<Content>().write{
                         self.content.attemptsCount += 1
                     }
                     self.attempt = contentAttempt.assessment

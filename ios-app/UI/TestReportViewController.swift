@@ -282,7 +282,7 @@ class TestReportViewController: UIViewController {
                 let currentIndex = contentDetailPageViewController.getCurrentIndex()
                 let nextContent =
                     contentDetailPageViewController.contents[currentIndex]
-                try! Realm().write {
+                DBManager<Content>().write {
                     nextContent.isLocked = false
                 }
             }

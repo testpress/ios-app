@@ -25,7 +25,6 @@
 
 import DropDown
 import UIKit
-import RealmSwift
 
 class TestEngineViewController: BaseQuestionsPageViewController {
     
@@ -122,7 +121,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     private func setSelectedLanguage(_ language: Language) {
-        try! Realm().write {
+        DBManager<Exam>().write {
             self.exam?.selectedLanguage = language
         }
     }
@@ -394,7 +393,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                         self.hideLoadingProgress(completionHandler: completionHandler)
                         return
                     }
-                    try! Realm().write {
+                    DBManager<AttemptItem>().write {
                         // Saved the answer on user navigate to other question
                         attemptItem.selectedAnswers = newAttemptItem!.selectedAnswers
                         attemptItem.review = newAttemptItem!.review
@@ -757,7 +756,7 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
         for attemptItem in attemptItems {
             let subject = attemptItem.question.subject                    
             if subject.isEmpty {
-                try! Realm().write {
+                DBManager<AttemptItem>().write {
                     attemptItem.question.subject = Constants.UNCATEGORIZED
                 }
             }

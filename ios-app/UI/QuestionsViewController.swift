@@ -25,7 +25,6 @@
 
 import UIKit
 import WebKit
-import RealmSwift
 import SwiftSoup
 
 class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
@@ -77,7 +76,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         selectedOptions = Array(attemptItem.selectedAnswers)
         reviewSwitch.isOn = attemptItem.review
         
-        try! Realm().write {
+        DBManager<AttemptItem>().write {
             attemptItem.savedAnswers.removeAll()
             attemptItem.savedAnswers.append(objectsIn: selectedOptions)
             attemptItem.currentReview = attemptItem.review
@@ -231,7 +230,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             selectedOptions.removeAll { $0 == id }
         }
         
-        try! Realm().write {
+        DBManager<AttemptItem>().write {
             attemptItem?.savedAnswers.removeAll()
             attemptItem?.savedAnswers.append(objectsIn: selectedOptions)
         }
@@ -240,7 +239,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     private func handleShortTextInput(_ dict: [String: AnyObject]) {
         guard let shortText = dict["shortText"] as? String else { return }
         
-        try! Realm().write {
+        DBManager<AttemptItem>().write {
             attemptItem?.currentShortText = shortText.trimmingCharacters(in: .whitespacesAndNewlines)
         }
     }
@@ -248,7 +247,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     private func handleEssayInput(_ dict: [String: AnyObject]) {
         guard let essay = dict["essay"] as? String else { return }
         
-        try! Realm().write {
+        DBManager<AttemptItem>().write {
             attemptItem?.localEssayText = essay
         }
     }
@@ -300,7 +299,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     }
     
     @IBAction func reviewSwitchValueChanged(_ sender: UISwitch) {
-        try! Realm().write {
+        DBManager<AttemptItem>().write {
             attemptItem?.currentReview = sender.isOn
         }
     }

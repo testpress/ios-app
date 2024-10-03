@@ -24,7 +24,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class ReviewSlidingViewController: BaseQuestionsSlidingViewController {
     
@@ -102,7 +101,7 @@ class ReviewSlidingViewController: BaseQuestionsSlidingViewController {
     }
 
     private func setSelectedLanguage(_ language: Language) {
-        try! Realm().write {
+        DBManager<Exam>().write {
             self.exam?.selectedLanguage = language
         }
     }

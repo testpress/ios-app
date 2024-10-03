@@ -94,7 +94,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
                 if !(testpressResponse!.next.isEmpty) {
                     self.loadAttempts(url: testpressResponse!.next)
                 } else {
-                    try! Realm().write {
+                    DBManager<Exam>().write {
                         self.content.attemptsCount = self.attempts.count
                     }
                     self.displayAttemptsList()
@@ -140,7 +140,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     }
 
     private func saveDataInDB(_ languages: List<Language>) {
-        try! Realm().write {
+        DBManager<Exam>().write {
             self.exam.languages.removeAll()
             self.exam.languages = languages
             self.exam.selectedLanguage = languages.first

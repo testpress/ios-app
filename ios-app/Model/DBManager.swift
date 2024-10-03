@@ -125,4 +125,15 @@ class DBManager<T: Object> {
             database.delete(object)
         }
     }
+    
+    
+    func write(_ transaction: () -> Void) {
+        do {
+            try database.write {
+                transaction()
+            }
+        } catch {
+            print("Error during Realm write transaction: \(error)")
+        }
+    }
 }

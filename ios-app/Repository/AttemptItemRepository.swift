@@ -13,7 +13,7 @@ class AttemptItemRepository: AttemptRepository {
     func submitAnswer(id: Int) {
         let attemptItems = DBManager<AttemptItem>().getItemsFromDB(filteredBy: "id=\(id)", byKeyPath: "order")
         let attemptItem = attemptItems[0]
-        try! Realm().write {
+        DBManager<AttemptItem>().write {
             attemptItem.isAttempted = true
         }
         
@@ -43,7 +43,7 @@ class AttemptItemRepository: AttemptRepository {
     func selectAnswer(id: Int, selectedOptions: [Int] = [], shortText: String = "") ->  AttemptItem  {
         let attemptItems = DBManager<AttemptItem>().getItemsFromDB(filteredBy: "id=\(id)", byKeyPath: "order")
         let attemptItem = attemptItems[0]
-        try! Realm().write {
+        DBManager<AttemptItem>().write {
             attemptItem.selectedAnswers.removeAll()
             attemptItem.selectedAnswers.append(objectsIn: selectedOptions)
             attemptItem.savedAnswers.removeAll()

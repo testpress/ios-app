@@ -94,7 +94,7 @@ class AttemptItem: DBModel {
     }
     
     public func setGapFillResponses(_ gapFillOrderAnswerMap: [Int: AnyObject] ) {
-        try! Realm().write {
+        DBManager<AttemptItem>().write {
             let gapFillResponseList = List<GapFillResponse>()
             gapFillOrderAnswerMap.forEach {
                 let response = GapFillResponse.create(order: $0, answer: $1 as! String)
@@ -107,27 +107,15 @@ class AttemptItem: DBModel {
     }
     
     func clearLocalFiles() {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.localFiles.removeAll()
-            }
-        } catch {
-            print("Error updating Realm: \(error)")
-            return
+        DBManager<AttemptItem>().write {
+            self.localFiles.removeAll()
         }
     }
 
     func saveUploadedFilePath(with uploadedPath: String) {
-        do {
-            let realm = try Realm()
-            let userFileResponse = UserFileResponse.create(uploadedPath: uploadedPath)
-            try realm.write {
-                self.localFiles.append(userFileResponse)
-            }
-        } catch {
-            print("Error updating Realm: \(error)")
-            return
+        let userFileResponse = UserFileResponse.create(uploadedPath: uploadedPath)
+        DBManager<AttemptItem>().write {
+            self.localFiles.append(userFileResponse)
         }
     }
 
