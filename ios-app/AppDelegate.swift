@@ -25,7 +25,6 @@
 
 import FBSDKCoreKit
 import IQKeyboardManagerSwift
-import RealmSwift
 import UIKit
 import Sentry
 
@@ -83,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         initializeFacebook(application, launchOptions: launchOptions)
         configureKeyboardManager()
         handleFirstLaunch()
-        configureRealm()
+        DBInstance.configure()
         setupRootViewController()
         
         if let instituteSettings = fetchInstituteSettings() {
@@ -150,11 +149,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
             userDefaults.synchronize()
         }
-    }
-
-    private func configureRealm() {
-        let config = Realm.Configuration(schemaVersion: 43)
-        Realm.Configuration.defaultConfiguration = config
     }
 
     private func setupRootViewController() {

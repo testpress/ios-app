@@ -36,6 +36,11 @@ class DBInstance {
         database = try! Realm()
     }
     
+    public static func configure(){
+        let config = Realm.Configuration(schemaVersion: 43)
+        Realm.Configuration.defaultConfiguration = config
+    }
+    
     func getDB() -> Realm {
         return database
     }
