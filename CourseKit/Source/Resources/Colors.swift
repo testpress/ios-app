@@ -43,6 +43,7 @@ public class Colors {
     public static let BLUE_TEXT = "#3598db"
     public static let WHITE = "#FFFFFF"
     public static let DIM_GRAY = "#666666"
+    public static let DARK_GRAY = "#989898"
     
     public static func getRGB (_ hex:String, alpha: CGFloat = 1) -> UIColor {
         

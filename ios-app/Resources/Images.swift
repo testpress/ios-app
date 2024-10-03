@@ -84,6 +84,7 @@ enum Images: String {
     case AnalyticsIcon = "analytics"
     case OffersIcon = "offers"
     case DoubtsIcon = "doubt"
+    case ValidityCalendar = "validity_calendar"
 
     var image: UIImage {
         return UIImage(asset: self)
@@ -93,5 +94,13 @@ enum Images: String {
 extension UIImage {
     convenience init!(asset: Images) {
         self.init(named: asset.rawValue)
+    }
+    
+    func resized(to newSize: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        draw(in: CGRect(origin: .zero, size: newSize))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return resizedImage
     }
 }
