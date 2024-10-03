@@ -24,7 +24,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     

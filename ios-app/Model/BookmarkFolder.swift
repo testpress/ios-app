@@ -24,7 +24,6 @@
 //
 
 import ObjectMapper
-import RealmSwift
 import Foundation
 
 class BookmarkFolder: DBModel {
