@@ -2,7 +2,6 @@
 //  Object.swift
 //  ios-app
 
-import Realm
 import RealmSwift
 
 protocol DetachableObject: AnyObject {

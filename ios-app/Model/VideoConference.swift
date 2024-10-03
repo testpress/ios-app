@@ -7,7 +7,6 @@
 //
 
 import ObjectMapper
-import Realm
 import RealmSwift
 import Foundation
 
