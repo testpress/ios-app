@@ -26,9 +26,9 @@
 import ObjectMapper
 import RealmSwift
 
-class DBInstance {
+class DBConnection {
     
-    static let sharedInstance = DBInstance()
+    static let sharedConnection = DBConnection()
     
     private var database: Realm
     
@@ -46,8 +46,8 @@ class DBInstance {
     }
     
     static func clearAllTables() {
-        try! sharedInstance.database.write {
-            sharedInstance.database.deleteAll()
+        try! sharedConnection.database.write {
+            sharedConnection.database.deleteAll()
         }
     }
     
@@ -58,9 +58,9 @@ class DBInstance {
          The objective of this method is to not clear InstituteSettings tables
          as it is neccessary for login screen after logout.
         */
-        let course = sharedInstance.database.objects(Course.self)
-        try! sharedInstance.database.write {
-            sharedInstance.database.delete(course)
+        let course = sharedConnection.database.objects(Course.self)
+        try! sharedConnection.database.write {
+            sharedConnection.database.delete(course)
         }
     }
     
@@ -71,7 +71,7 @@ class DBManager<T: Object> {
     private var database: Realm
     
     public init() {
-        database = DBInstance.sharedInstance.getDB()
+        database = DBConnection.sharedConnection.getDB()
     }
     
     func getResultsFromDB() -> Results<T> {

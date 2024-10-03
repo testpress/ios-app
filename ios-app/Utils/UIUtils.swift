@@ -440,7 +440,7 @@ public class UIUtils {
         UIApplication.shared.unregisterForRemoteNotifications()
         
         // Clear only user related tables
-        DBInstance.clearTables()
+        DBConnection.clearTables()
         TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), completion: {_,_ in})
         // Logout on Facebook
         LoginManager().logOut()
