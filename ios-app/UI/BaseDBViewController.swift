@@ -9,10 +9,9 @@
 import Foundation
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 
-class BaseDBViewController<T: Mappable>: UIViewController where T:Object{
+class BaseDBViewController<T: Mappable>: UIViewController where T:DBModel{
     var items = [T]()
     
     override func viewWillAppear(_ animated: Bool) {

@@ -8,7 +8,7 @@ protocol DetachableObject: AnyObject {
     func detached() -> Self
 }
 
-extension Object: DetachableObject {
+extension DBModel: DetachableObject {
     func detached() -> Self {
         let detached = type(of: self).init()
         for property in objectSchema.properties {

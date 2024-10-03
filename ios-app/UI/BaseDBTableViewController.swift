@@ -25,9 +25,8 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
-class BaseDBTableViewController<T: Mappable>: TPBasePagedTableViewController<T> where T:Object {
+class BaseDBTableViewController<T: Mappable>: TPBasePagedTableViewController<T> where T:DBModel {
     
     var firstCallBack: Bool = true // On firstCallBack load modified items if items already exists
     

@@ -8,10 +8,9 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 
-class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePagedTableViewController<T, L> where L:Object {
+class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePagedTableViewController<T, L> where L:DBModel {
     
     var firstCallBack: Bool = true // On firstCallBack load modified items if items already exists
     var networkItems : [L] = []
