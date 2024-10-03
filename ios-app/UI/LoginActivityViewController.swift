@@ -8,6 +8,7 @@
 
 import UIKit
 import TTGSnackbar
+import CourseKit
 
 class LoginActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

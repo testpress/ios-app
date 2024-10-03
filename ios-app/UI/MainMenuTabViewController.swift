@@ -25,6 +25,7 @@
 
 import UIKit
 import Alamofire
+import CourseKit
 
 class MainMenuTabViewController: UITabBarController {
     

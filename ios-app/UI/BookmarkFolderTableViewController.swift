@@ -26,6 +26,7 @@
 import Alamofire
 import TTGSnackbar
 import UIKit
+import CourseKit
 
 class BookmarkFolderTableViewController:
     BasePagedTableViewController<BookmarksListResponse, BookmarkFolder>, UITextFieldDelegate {

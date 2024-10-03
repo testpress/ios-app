@@ -25,6 +25,7 @@
 
 import Alamofire
 import ObjectMapper
+import CourseKit
 
 class ContentPager: BasePager<ContentsListResponse, Content> {
     var url: String!

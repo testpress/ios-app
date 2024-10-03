@@ -26,6 +26,7 @@
 import LUExpandableTableView
 import UIKit
 import WebKit
+import CourseKit
 
 class TimeAnalyticsTableViewController: UIViewController {
     

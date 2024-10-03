@@ -27,6 +27,7 @@ import Alamofire
 import FBSDKLoginKit
 import Kingfisher
 import UIKit
+import CourseKit
 
 class ProfileViewController: UIViewController {
 

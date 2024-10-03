@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class SignUpViewController: BaseTextFieldViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 

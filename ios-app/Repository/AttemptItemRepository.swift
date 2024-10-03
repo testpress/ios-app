@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CourseKit
 
 class AttemptItemRepository: AttemptRepository {
     func submitAnswer(id: Int) {

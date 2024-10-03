@@ -1,5 +1,6 @@
 
 import ObjectMapper
+import CourseKit
 
 class DiscussionThreadAnswer {
     var id: Int!

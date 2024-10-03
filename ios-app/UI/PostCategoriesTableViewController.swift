@@ -25,6 +25,7 @@
 
 import ObjectMapper
 import UIKit
+import CourseKit
 
 protocol PostCategoryDelegate {
     func onLoadedCategories(_ categories: [Category])

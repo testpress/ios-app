@@ -25,6 +25,7 @@
 
 import Alamofire
 import UIKit
+import CourseKit
 
 enum AuthProvider: String {
     case TESTPRESS

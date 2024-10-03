@@ -27,6 +27,7 @@ import TTGSnackbar
 import UIKit
 import ObjectMapper
 import XLPagerTabStrip
+import CourseKit
 
 protocol BaseTableViewDelegate {
     func loadItems()

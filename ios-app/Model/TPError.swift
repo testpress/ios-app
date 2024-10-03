@@ -26,6 +26,7 @@
 import UIKit
 import Alamofire
 import Sentry
+import CourseKit
 
 
 public class TPError: Error {

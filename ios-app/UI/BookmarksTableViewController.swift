@@ -25,6 +25,7 @@
 
 import TTGSnackbar
 import UIKit
+import CourseKit
 
 class BookmarksTableViewController: BasePagedTableViewController<BookmarksListResponse, Bookmark> {
     

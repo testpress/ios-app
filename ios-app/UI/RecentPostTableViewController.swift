@@ -26,6 +26,7 @@
 import DropDown
 import TTGSnackbar
 import UIKit
+import CourseKit
 
 class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,
     UIScrollViewDelegate {

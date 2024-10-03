@@ -35,6 +35,7 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 import AVKit
+import CourseKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {

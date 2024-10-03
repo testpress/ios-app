@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import ObjectMapper
-
+import CourseKit
 
 class BaseDBViewController<T: Mappable>: UIViewController where T:DBModel{
     var items = [T]()

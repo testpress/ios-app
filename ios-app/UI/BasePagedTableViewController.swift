@@ -25,6 +25,7 @@
 
 import UIKit
 import ObjectMapper
+import CourseKit
 
 // Base Paged TableViewController for V4 API's
 class BasePagedTableViewController<T: TestpressModel, L: TestpressModel>

@@ -25,6 +25,7 @@
 
 import UIKit
 import WebKit
+import CourseKit
 
 class TimeAnalyticsQuestionCell: UITableViewCell {
     

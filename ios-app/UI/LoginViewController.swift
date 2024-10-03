@@ -27,6 +27,7 @@ import Alamofire
 import FBSDKCoreKit
 import FBSDKLoginKit
 import UIKit
+import CourseKit
 
 class LoginViewController: BaseTextFieldViewController {
 

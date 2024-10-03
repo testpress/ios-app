@@ -23,6 +23,8 @@
 //  THE SOFTWARE.
 //
 
+import CourseKit
+
 class CommentPager: TPBasePager<Comment> {
     
     let url: String!

@@ -25,6 +25,7 @@
 
 import Alamofire
 import ObjectMapper
+import CourseKit
 
 // Base Pager for V4 API's
 class BasePager<T: TestpressModel, L: TestpressModel> {

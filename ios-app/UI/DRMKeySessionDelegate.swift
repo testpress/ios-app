@@ -1,6 +1,7 @@
 import Foundation
 import AVKit
 import Alamofire
+import CourseKit
 
 
 class DRMKeySessionDelegate: NSObject, AVContentKeySessionDelegate {

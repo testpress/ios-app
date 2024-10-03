@@ -27,6 +27,7 @@
 
 import Alamofire
 import ObjectMapper
+import CourseKit
 
 class LoginActivityPager: BaseDBItemPager<LoginActivity> {
     

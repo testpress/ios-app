@@ -24,6 +24,8 @@
 //
 
 import UIKit
+import CourseKit
+
 
 class BookmarksTableViewCell: BaseTableViewCell {
     

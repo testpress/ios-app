@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CourseKit
 
 class ChapterContentDetailViewModel {
     var content: Content

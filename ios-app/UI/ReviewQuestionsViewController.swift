@@ -27,6 +27,7 @@ import TTGSnackbar
 import UIKit
 import WebKit
 import Alamofire
+import CourseKit
 
 class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler, BookmarkDelegate {
     

@@ -11,6 +11,7 @@ import AVKit
 import Alamofire
 import Sentry
 import TTGSnackbar
+import CourseKit
 
 
 class VideoContentViewModel {

@@ -24,7 +24,7 @@
 //
 
 import UIKit
-import RealmSwift
+import CourseKit
 
 class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
     

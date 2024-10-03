@@ -25,6 +25,7 @@
 
 import UIKit
 import ObjectMapper
+import CourseKit
 
 class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
     BaseTableViewDelegate {

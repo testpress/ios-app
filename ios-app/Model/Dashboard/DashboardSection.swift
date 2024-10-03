@@ -8,6 +8,7 @@
 
 import ObjectMapper
 import IGListKit
+import CourseKit
 
 public class DashboardSection {
     var slug: String?

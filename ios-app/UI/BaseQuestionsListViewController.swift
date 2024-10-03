@@ -25,6 +25,7 @@
 
 import UIKit
 import WebKit
+import CourseKit
 
 protocol QuestionListDelegate {
     func gotoQuestion(index: Int)

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CourseKit
 
 class AttemptRepository {
     func loadContentAttempt(attemptsUrl: String, completion: @escaping(ContentAttempt?, TPError?) -> Void) {
