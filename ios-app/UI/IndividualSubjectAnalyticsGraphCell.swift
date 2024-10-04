@@ -25,6 +25,7 @@
 
 import DGCharts
 import UIKit
+import CourseKit
 
 class IndividualSubjectAnalyticsGraphCell: UITableViewCell {
     

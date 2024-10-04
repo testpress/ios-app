@@ -130,7 +130,7 @@ class ActivityFeedTableViewCell: UITableViewCell {
                 post.url = Constants.BASE_URL + "/api/v2.2/posts/" + post.slug
                 post.commentsUrl = Constants.BASE_URL + "/api/v2.2/posts/\(post.id!)/comments/"
                 self.post = post
-                if let category = activityFeed.target as? Category {
+                if let category = activityFeed.target as? CourseKit.Category {
                     targetName = category.name
                 } else {
                     targetName = ""

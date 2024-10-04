@@ -10,6 +10,7 @@ import Foundation
 import TTGSnackbar
 import UIKit
 import WebKit
+import CourseKit
 
 class WebViewController: BaseWebViewController, WKWebViewDelegate {
     

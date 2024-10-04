@@ -7,6 +7,7 @@
 //
 
 import IGListKit
+import CourseKit
 
 class ChapterContentSectionController: ListSectionController {
     var dashboardData: DashboardResponse?

@@ -39,7 +39,7 @@ class ActivityFeedPager: BasePager<ActivityFeedResponse, ActivityFeed> {
     var attachments = [Int: Attachment]()
     var exams = [Int: Exam]()
     var posts = [Int: Post]()
-    var postCategories = [Int: Category]()
+    var postCategories = [Int: CourseKit.Category]()
     
     override func getItems(_ resultResponse: ActivityFeedResponse) -> [ActivityFeed] {
         let activities: [ActivityFeed] = resultResponse.activities

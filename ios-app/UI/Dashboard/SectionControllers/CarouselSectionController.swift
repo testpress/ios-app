@@ -7,6 +7,7 @@
 //
 
 import IGListKit
+import CourseKit
 
 class CarouselSectionController: BaseSectionController {
     var sections: [DashboardSection] = []

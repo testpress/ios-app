@@ -26,6 +26,7 @@
 import Alamofire
 import TTGSnackbar
 import UIKit
+import CourseKit
 
 class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource,
     UITextViewDelegate {
@@ -39,7 +40,7 @@ class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPick
     @IBOutlet weak var categoryPickerView: UIPickerView!
     @IBOutlet weak var pickTopicLayout: UIStackView!
     
-    var categories = [Category]()
+    var categories = [CourseKit.Category]()
     var postCreated: Bool = false
     var parentTableViewController: TPBasePagedTableViewController<Post>!
     var activityIndicator: UIActivityIndicatorView!
@@ -96,7 +97,7 @@ class PostCreationViewController: UIViewController, UIPickerViewDelegate, UIPick
                 self.categoryPickerView.isHidden = true
             }
             self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        }, type: Category.self)
+        }, type: CourseKit.Category.self)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

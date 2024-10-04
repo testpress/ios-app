@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class LeaderboardItemViewCell: UICollectionViewCell {
     @IBOutlet weak var rank: UILabel!

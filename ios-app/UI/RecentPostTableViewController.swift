@@ -237,7 +237,7 @@ class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITa
 
 extension RecentPostTableViewController: PostCategoryDelegate {
     
-    func onLoadedCategories(_ categories: [Category]) {
+    func onLoadedCategories(_ categories: [CourseKit.Category]) {
         if !categories.isEmpty {
             categoriesDropDown = PostCategoriesDropDown(categories: categories,
                                                         navigationItem: navigationItem)

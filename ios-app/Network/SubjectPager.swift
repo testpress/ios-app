@@ -23,6 +23,8 @@
 //  THE SOFTWARE.
 //
 
+import CourseKit
+
 class SubjectPager: TPBasePager<Subject> {
     
     let url: String

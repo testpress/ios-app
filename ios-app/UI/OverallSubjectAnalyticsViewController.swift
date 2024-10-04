@@ -26,6 +26,7 @@
 import DGCharts
 import UIKit
 import XLPagerTabStrip
+import CourseKit
 
 class OverallSubjectAnalyticsViewController: UIViewController {
     

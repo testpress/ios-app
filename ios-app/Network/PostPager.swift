@@ -22,11 +22,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+import CourseKit
 
 class PostPager: TPBasePager<Post> {
     
     let endpoint: TPEndpoint
-    var category: Category!
+    var category: CourseKit.Category!
     
     init(endpoint: TPEndpoint = .getPosts) {
         self.endpoint = endpoint

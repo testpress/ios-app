@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class PostCategoriesTableViewCell: UITableViewCell {
     
@@ -32,9 +33,9 @@ class PostCategoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var categoryColor: UIView!
     
     var parentViewController: PostCategoriesTableViewController! = nil
-    var category: Category!
+    var category: CourseKit.Category!
     
-    func initCell(_ category: Category, viewController: PostCategoriesTableViewController) {
+    func initCell(_ category: CourseKit.Category, viewController: PostCategoriesTableViewController) {
         self.category = category
         parentViewController = viewController
         categoryName.text = category.name

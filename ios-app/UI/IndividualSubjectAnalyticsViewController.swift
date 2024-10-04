@@ -25,6 +25,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import CourseKit
 
 class IndividualSubjectAnalyticsViewController: UITableViewController {
     

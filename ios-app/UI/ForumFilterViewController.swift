@@ -1,13 +1,14 @@
 import Former
 import Foundation
 import UIKit
+import CourseKit
 
 class ForumFilterViewController: FormViewController {
     var advancedFilters = [CustomCheckRowFormer<FormCheckCell>]()
     var sort = [CustomCheckRowFormer<FormCheckCell>]()
     var delegate: DiscussionFilterDelegate?
     var filters = [String: Any]()
-    var categories = [Category]()
+    var categories = [CourseKit.Category]()
     let categoryPager = CategoryPager()
     let categoryPicker = InlinePickerRowFormer<FormInlinePickerCell, String>() {$0.titleLabel.text = "Choose Category"}
 

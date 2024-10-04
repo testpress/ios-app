@@ -28,17 +28,17 @@ import UIKit
 import CourseKit
 
 protocol PostCategoryDelegate {
-    func onLoadedCategories(_ categories: [Category])
+    func onLoadedCategories(_ categories: [CourseKit.Category])
     func onError(_ error: TPError)
     func onEmptyCategories()
     func showCategories()
 }
 
-class PostCategoriesTableViewController: BaseTableViewController<Category>, BaseTableViewDelegate {
+class PostCategoriesTableViewController: BaseTableViewController<CourseKit.Category>, BaseTableViewDelegate {
     
     var pager: CategoryPager!
     var postCategoryDelegate: PostCategoryDelegate?
-    var categories = [Category]()
+    var categories = [CourseKit.Category]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +76,7 @@ class PostCategoriesTableViewController: BaseTableViewController<Category>, Base
             } else {
                 self.categories = Array(items!.values)
                 self.postCategoryDelegate?.onLoadedCategories(self.categories)
-                var starred = [Category]()
+                var starred = [CourseKit.Category]()
                 for category in self.categories {
                     if category.is_starred {
                         starred.append(category)
