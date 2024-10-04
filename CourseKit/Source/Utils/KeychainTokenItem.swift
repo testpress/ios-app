@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct KeychainTokenItem {
+public struct KeychainTokenItem {
     // MARK: Types
     
     enum KeychainError: Error {
@@ -28,7 +28,7 @@ struct KeychainTokenItem {
 
     // MARK: Intialization
     
-    init(service: String, account: String, accessGroup: String? = nil) {
+    public init(service: String, account: String, accessGroup: String? = nil) {
         self.service = service
         self.account = account
         self.accessGroup = accessGroup
@@ -36,7 +36,7 @@ struct KeychainTokenItem {
     
     // MARK: Keychain access
     
-    func readPassword() throws -> String  {
+    public func readPassword() throws -> String  {
         /*
             Build a query to find the item that matches the service, account and
             access group.
@@ -67,7 +67,7 @@ struct KeychainTokenItem {
         return password
     }
     
-    func savePassword(_ password: String) throws {
+    public func savePassword(_ password: String) throws {
         // Encode the password into an Data object.
         let encodedPassword = password.data(using: String.Encoding.utf8)!
         
@@ -101,7 +101,7 @@ struct KeychainTokenItem {
         }
     }
     
-    mutating func renameAccount(_ newAccountName: String) throws {
+    public mutating func renameAccount(_ newAccountName: String) throws {
         // Try to update an existing item with the new account name.
         var attributesToUpdate = [String : AnyObject]()
         attributesToUpdate[kSecAttrAccount as String] = newAccountName as AnyObject?
@@ -115,7 +115,7 @@ struct KeychainTokenItem {
         self.account = newAccountName
     }
     
-    func deleteItem() throws {
+    public func deleteItem() throws {
         // Delete the existing item from the keychain.
         let query = KeychainTokenItem.keychainQuery(withService: service, account: account, accessGroup: accessGroup)
         let status = SecItemDelete(query as CFDictionary)
@@ -124,7 +124,7 @@ struct KeychainTokenItem {
         guard status == noErr || status == errSecItemNotFound else { throw KeychainError.unhandledError(status: status) }
     }
     
-    static func passwordItems(forService service: String, accessGroup: String? = nil) throws -> [KeychainTokenItem] {
+    public static func passwordItems(forService service: String, accessGroup: String? = nil) throws -> [KeychainTokenItem] {
         // Build a query for all items that match the service and access group.
         var query = KeychainTokenItem.keychainQuery(withService: service, accessGroup: accessGroup)
         query[kSecMatchLimit as String] = kSecMatchLimitAll
@@ -178,7 +178,7 @@ struct KeychainTokenItem {
         return query
     }
     
-    static func passwordItems() -> [KeychainTokenItem] {
+    public static func passwordItems() -> [KeychainTokenItem] {
         var passwordItems = [KeychainTokenItem]()
         do {
             passwordItems =
@@ -189,11 +189,11 @@ struct KeychainTokenItem {
         return passwordItems
     }
     
-    static func isExist() -> Bool {
+    public static func isExist() -> Bool {
         return !passwordItems().isEmpty
     }
     
-    static func getToken() -> String {
+    public static func getToken() -> String {
         do {
             return try passwordItems()[0].readPassword()
         } catch {
@@ -201,11 +201,11 @@ struct KeychainTokenItem {
         }
     }
     
-    static func getAccount() -> String {
+    public static func getAccount() -> String {
         return passwordItems()[0].account
     }
     
-    static func clearKeychainItems() {
+    public static func clearKeychainItems() {
         for passwordItem in passwordItems() {
             do {
                 try passwordItem.deleteItem()

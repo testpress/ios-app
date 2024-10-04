@@ -1,6 +1,7 @@
 import UIKit
 import PDFKit
 import MarqueeLabel
+import CourseKit
 
 
 class PDFViewController: UIViewController {

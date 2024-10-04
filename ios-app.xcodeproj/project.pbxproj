@@ -113,6 +113,8 @@
 		03E4AFCD2CAFD09800ECC34D /* ContentAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AFCC2CAFD09800ECC34D /* ContentAttempt.swift */; };
 		03E4AFD02CAFD15800ECC34D /* TPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AFCF2CAFD15800ECC34D /* TPError.swift */; };
 		03E4AFD22CAFD22100ECC34D /* DashboardSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */; };
+		03E4AFD42CAFE63900ECC34D /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F27E1F861A3E0092BFDC /* KeychainTokenItem.swift */; };
+		03E4AFD62CAFE6A900ECC34D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AFD52CAFE6A900ECC34D /* Constants.swift */; };
 		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
 		18F25D29212FDC5300097425 /* LockableSectionDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */; };
@@ -295,7 +297,6 @@
 		2FC0F2F21F863B190092BFDC /* TPBasePager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2ED1F863B080092BFDC /* TPBasePager.swift */; };
 		2FC0F2F31F863B1B0092BFDC /* TPEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2EE1F863B080092BFDC /* TPEndpoint.swift */; };
 		2FC0F2F41F863B280092BFDC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F27D1F861A3E0092BFDC /* Constants.swift */; };
-		2FC0F2F51F863B2B0092BFDC /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F27E1F861A3E0092BFDC /* KeychainTokenItem.swift */; };
 		2FC0F2F61F863B2F0092BFDC /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F27F1F861A3E0092BFDC /* Strings.swift */; };
 		2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2561F8617690092BFDC /* UIUtils.swift */; };
 		2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28D1F861A860092BFDC /* LoginViewController.swift */; };
@@ -502,6 +503,7 @@
 		03E4AFCC2CAFD09800ECC34D /* ContentAttempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAttempt.swift; sourceTree = "<group>"; };
 		03E4AFCF2CAFD15800ECC34D /* TPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPError.swift; sourceTree = "<group>"; };
 		03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSection.swift; sourceTree = "<group>"; };
+		03E4AFD52CAFE6A900ECC34D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptSection.swift; sourceTree = "<group>"; };
 		1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainDropDown.swift; sourceTree = "<group>"; };
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
@@ -1070,6 +1072,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		03E4AFD32CAFE62200ECC34D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2FC0F27E1F861A3E0092BFDC /* KeychainTokenItem.swift */,
+				03E4AFD52CAFE6A900ECC34D /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		250629972266FE9700539FB2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1344,7 +1355,6 @@
 			isa = PBXGroup;
 			children = (
 				2FC0F27D1F861A3E0092BFDC /* Constants.swift */,
-				2FC0F27E1F861A3E0092BFDC /* KeychainTokenItem.swift */,
 				2FC0F27F1F861A3E0092BFDC /* Strings.swift */,
 			);
 			path = Core;
@@ -1561,6 +1571,7 @@
 		8413802E2C9DA075004D5846 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				03E4AFD32CAFE62200ECC34D /* Utils */,
 				03E4AFA92CAFCE9B00ECC34D /* Network */,
 				03E4AF242CAEDE2600ECC34D /* Extensions */,
 				035CC5482CAE68D00057F4E4 /* Database */,
@@ -2109,7 +2120,6 @@
 				2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */,
 				2FC0F2F61F863B2F0092BFDC /* Strings.swift in Sources */,
 				2FC0F3111F863BA90092BFDC /* TPBasePagedTableViewController.swift in Sources */,
-				2FC0F2F51F863B2B0092BFDC /* KeychainTokenItem.swift in Sources */,
 				2FC0F2DC1F863AB70092BFDC /* Colors.swift in Sources */,
 				2F9F169520724F76009886AB /* PostCategoriesDropDown.swift in Sources */,
 				2FDF9C5120B6D5F40086245F /* BookmarksTableViewCell.swift in Sources */,
@@ -2261,6 +2271,7 @@
 				03E4AF512CAEDF7F00ECC34D /* ExamQuestion.swift in Sources */,
 				03E4AFC12CAFCF6F00ECC34D /* FileDetails.swift in Sources */,
 				03E4AFC32CAFCF7000ECC34D /* TPError.swift in Sources */,
+				03E4AFD42CAFE63900ECC34D /* KeychainTokenItem.swift in Sources */,
 				035CC54D2CAE694D0057F4E4 /* StringTransform.swift in Sources */,
 				03E4AF5D2CAEDF7F00ECC34D /* Course.swift in Sources */,
 				035CC54A2CAE694D0057F4E4 /* ListTransform.swift in Sources */,
@@ -2307,6 +2318,7 @@
 				03E4AFC92CAFCF7000ECC34D /* Banner.swift in Sources */,
 				03E4AF462CAEDF7F00ECC34D /* Video.swift in Sources */,
 				03E4AFC82CAFCF7000ECC34D /* TPApiResponse.swift in Sources */,
+				03E4AFD62CAFE6A900ECC34D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@ import UIKit
 import AVKit
 import M3U8Parser
 import MarqueeLabel
+import CourseKit
 
 
 class VideoPlayerView: UIView {
