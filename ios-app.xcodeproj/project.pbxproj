@@ -954,6 +954,7 @@
 		035CC5482CAE68D00057F4E4 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				2F3F63512004A75F00976053 /* DBManager.swift */,
 				03E4AF232CAEDE1200ECC34D /* Models */,
 				035CC5492CAE690E0057F4E4 /* Transforms */,
 			);
@@ -991,7 +992,6 @@
 				2F763D0E1FBECBBC0033D495 /* Chapter.swift */,
 				2F763CFD1FBD7AE40033D495 /* Course.swift */,
 				2F9699791FC2A22A001B2B18 /* Content.swift */,
-				2F3F63512004A75F00976053 /* DBManager.swift */,
 				2F04052F20D902530074D80E /* Direction.swift */,
 				2FC0F2C71F86385B0092BFDC /* Exam.swift */,
 				2F6F167C1FC3FE0200FB768C /* HtmlContent.swift */,
