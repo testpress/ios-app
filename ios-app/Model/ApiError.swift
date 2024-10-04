@@ -8,6 +8,7 @@
 
 
 import ObjectMapper
+import CourseKit
 
 public class ApiError {
     var error_code: String?

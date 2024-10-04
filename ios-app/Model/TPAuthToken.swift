@@ -24,6 +24,7 @@
 //
 
 import ObjectMapper
+import CourseKit
 
 public class TPAuthToken {
     var token: String?

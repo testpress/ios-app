@@ -25,6 +25,7 @@
 
 import ObjectMapper
 import UIKit
+import CourseKit
 
 class ActivityFeedTableViewCell: UITableViewCell {
     

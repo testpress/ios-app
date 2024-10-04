@@ -25,6 +25,7 @@
 
 import LUExpandableTableView
 import UIKit
+import CourseKit
 
 class TimeAnalyticsHeaderViewCell: LUExpandableTableViewSectionHeader {
     

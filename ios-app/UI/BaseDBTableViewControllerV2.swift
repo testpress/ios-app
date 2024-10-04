@@ -8,7 +8,7 @@
 
 import UIKit
 import ObjectMapper
-
+import CourseKit
 
 class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePagedTableViewController<T, L> where L:DBModel {
     

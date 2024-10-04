@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class StartQuizExamViewController: UIViewController {
     @IBOutlet weak var examTitle: UILabel!

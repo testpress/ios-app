@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class AttemptsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

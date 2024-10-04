@@ -25,6 +25,7 @@
 
 import SlideMenuController
 import UIKit
+import CourseKit
 
 class StartExamScreenViewController: UIViewController {
     

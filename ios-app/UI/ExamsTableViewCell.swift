@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class ExamsTableViewCell: UITableViewCell {
 

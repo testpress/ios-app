@@ -25,6 +25,7 @@
 
 import Alamofire
 import ObjectMapper
+import CourseKit
 
 class CoursePager: BaseDBItemPager<Course> {
     

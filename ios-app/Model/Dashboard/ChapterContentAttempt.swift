@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import CourseKit
 
 public class ChapterContentAttempt {
     

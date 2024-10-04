@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import CourseKit
 
 class QuizQuestionViewController:BaseWebViewController, WKWebViewDelegate, WKScriptMessageHandler {
     var attemptItem: AttemptItem!

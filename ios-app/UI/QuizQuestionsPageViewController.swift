@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class QuizQuestionsPageViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     var currentIndex: Int!

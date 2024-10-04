@@ -28,6 +28,7 @@ import PDFKit
 import UIKit
 import Alamofire
 import MarqueeLabel
+import CourseKit
 
 
 class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelegate {

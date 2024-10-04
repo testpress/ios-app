@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class VideoConferenceViewController: UIViewController {
     var content: Content!

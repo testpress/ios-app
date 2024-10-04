@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import CourseKit
 
 class UserStats {
     var id: Int?

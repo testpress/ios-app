@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import CourseKit
 
 protocol ContentAttemptCreationDelegate {
     func newAttemptCreated()

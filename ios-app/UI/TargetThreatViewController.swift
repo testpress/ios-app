@@ -26,6 +26,7 @@
 import ObjectMapper
 import UIKit
 import XLPagerTabStrip
+import CourseKit
 
 class TargetThreatViewController: BaseTableViewController<Reputation>, BaseTableViewDelegate,
     IndicatorInfoProvider {

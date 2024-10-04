@@ -24,10 +24,11 @@
 //
 
 import UIKit
+import CourseKit
 
 class CoursesTableViewController: BaseDBTableViewController<Course> {
     
-    var tags: [String] = []
+    public var tags: [String] = []
     @IBOutlet weak var customTestIcon: UIBarButtonItem!
     var instituteSettings: InstituteSettings?
     

@@ -25,6 +25,7 @@
 
 import UIKit
 import SlideMenuController
+import CourseKit
 
 protocol SlidingMenuDelegate {
     func dismissViewController()

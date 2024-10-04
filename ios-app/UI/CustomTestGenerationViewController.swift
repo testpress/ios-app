@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import CourseKit
 
 let DEFAULT_EXAM_TIME = "24:00:00"
 let INFINITE_EXAM_TIME = "0:00:00"

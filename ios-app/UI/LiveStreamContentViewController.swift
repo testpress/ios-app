@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CourseKit
 
 class LiveStreamContentViewController: UIViewController {
     var content: Content!

@@ -31,6 +31,7 @@ import AVFoundation
 import Alamofire
 import Sentry
 import TTGSnackbar
+import CourseKit
 
 
 class VideoContentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {

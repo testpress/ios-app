@@ -27,6 +27,7 @@ import Alamofire
 import SlideMenuController
 import TTGSnackbar
 import UIKit
+import CourseKit
 
 class BookmarksSlidingViewController: SlideMenuController {
     

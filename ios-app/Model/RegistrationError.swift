@@ -24,6 +24,7 @@
 //
 
 import ObjectMapper
+import CourseKit
 
 public class RegistrationError {
     var username: [String] = []

@@ -25,6 +25,7 @@
 
 import ObjectMapper
 import Foundation
+import CourseKit
 
 public class Comment {
     

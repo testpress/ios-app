@@ -25,6 +25,7 @@
 
 import UIKit
 import ObjectMapper
+import CourseKit
 
 class BaseDBTableViewController<T: Mappable>: TPBasePagedTableViewController<T> where T:DBModel {
     

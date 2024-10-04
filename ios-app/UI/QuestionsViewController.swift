@@ -26,6 +26,7 @@
 import UIKit
 import WebKit
 import SwiftSoup
+import CourseKit
 
 class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandler {
     

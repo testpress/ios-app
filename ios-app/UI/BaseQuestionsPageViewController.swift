@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import CourseKit
 
 @objc protocol QuestionsPageViewDelegate {
     @objc optional func questionsDidLoad()

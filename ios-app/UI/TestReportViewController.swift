@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class TestReportViewController: UIViewController {
 
