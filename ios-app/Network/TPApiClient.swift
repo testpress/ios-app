@@ -195,6 +195,56 @@ class TPApiClient {
         }
     }
     
+    static func getUserAgent() -> String {
+        // Testpress iOS App/1.17.0.1 iPhone8,4, iOS/12_1_4 CFNetwork
+        let device = UIDevice.current
+        return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) \(device.modelName), iOS/\(device.systemVersion.replacingOccurrences(of: ".", with: "_")) CFNetwork"
+    }
+    
+
+    
+    static func request<T: TestpressModel>(type: T.Type,
+                                           endpointProvider: TPEndpointProvider,
+                                           parameters: Parameters? = nil,
+                                           completion: @escaping(T?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
+            json, error in
+            var dataModel: T? = nil
+            if let json = json {
+                dataModel = TPModelMapper<T>().mapFromJSON(json: json)
+                guard dataModel != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(dataModel, error)
+        })
+    }
+}
+
+extension TPApiClient {
+    static func getListItems<T> (endpointProvider: TPEndpointProvider,
+                                 headers: HTTPHeaders? = nil,
+                                 completion: @escaping (TPApiResponse<T>?, TPError?) -> Void,
+                                 type: T.Type) {
+        
+        apiCall(endpointProvider: endpointProvider, headers: headers, completion: {
+            json, error in
+            
+            var testpressResponse: TPApiResponse<T>? = nil
+            if let json = json {
+                testpressResponse = TPModelMapper<TPApiResponse<T>>().mapFromJSON(json: json)
+                debugPrint(testpressResponse?.results ?? "Error")
+                guard testpressResponse != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(testpressResponse, error)
+        })
+    }
+    
     static func uploadImage(imageData: Data, fileName: String,
                             completion: @escaping (FileDetails?, TPError?) -> Void) {
         
@@ -237,73 +287,6 @@ class TPApiClient {
 
     }
     
-    static func getUserAgent() -> String {
-        // Testpress iOS App/1.17.0.1 iPhone8,4, iOS/12_1_4 CFNetwork
-        let device = UIDevice.current
-        return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) \(device.modelName), iOS/\(device.systemVersion.replacingOccurrences(of: ".", with: "_")) CFNetwork"
-    }
-    
-    static func getListItems<T> (endpointProvider: TPEndpointProvider,
-                                 headers: HTTPHeaders? = nil,
-                                 completion: @escaping (TPApiResponse<T>?, TPError?) -> Void,
-                                 type: T.Type) {
-        
-        apiCall(endpointProvider: endpointProvider, headers: headers, completion: {
-            json, error in
-            
-            var testpressResponse: TPApiResponse<T>? = nil
-            if let json = json {
-                testpressResponse = TPModelMapper<TPApiResponse<T>>().mapFromJSON(json: json)
-                debugPrint(testpressResponse?.results ?? "Error")
-                guard testpressResponse != nil else {
-                    completion(nil, TPError(message: json, kind: .unexpected))
-                    return
-                }
-            }
-            completion(testpressResponse, error)
-        })
-    }
-    
-    static func request<T: TestpressModel>(type: T.Type,
-                                           endpointProvider: TPEndpointProvider,
-                                           parameters: Parameters? = nil,
-                                           completion: @escaping(T?, TPError?) -> Void) {
-        
-        apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
-            json, error in
-            var dataModel: T? = nil
-            if let json = json {
-                dataModel = TPModelMapper<T>().mapFromJSON(json: json)
-                guard dataModel != nil else {
-                    completion(nil, TPError(message: json, kind: .unexpected))
-                    return
-                }
-            }
-            completion(dataModel, error)
-        })
-    }
-    
-    static func getListItems<T> (type: T.Type,
-                                 endpointProvider: TPEndpointProvider,
-                                 headers: HTTPHeaders? = nil,
-                                 completion: @escaping (ApiResponse<T>?, TPError?) -> Void) {
-        
-        apiCall(endpointProvider: endpointProvider, headers: headers, completion: {
-            json, error in
-            
-            var testpressResponse: ApiResponse<T>? = nil
-            if let json = json {
-                testpressResponse = TPModelMapper<ApiResponse<T>>().mapFromJSON(json: json)
-                debugPrint(testpressResponse?.results ?? "Error")
-                guard testpressResponse != nil else {
-                    completion(nil, TPError(message: json, kind: .unexpected))
-                    return
-                }
-            }
-            completion(testpressResponse, error)
-        })
-    }
-    
     static func authenticate(username: String, password: String,
                              provider: AuthProvider = .TESTPRESS,
                              completion: @escaping (TPAuthToken?, TPError?) -> Void) {
@@ -333,24 +316,6 @@ class TPApiClient {
         })
     }
     
-    static func registerNewUser(username: String, email: String, password: String, phone: String, country_code:String, completion: @escaping (TestpressModel?, TPError?) -> Void) {
-        
-        let parameters: Parameters = ["username": username, "email": email, "password": password, "phone": phone, "country_code":country_code]
-        apiCall(endpointProvider: TPEndpointProvider(.registerNewUser), parameters: parameters,
-                completion: { json, error in
-                    
-                    var user: TestpressModel? = nil
-                    if let json = json {
-                        user = TPModelMapper<User>().mapFromJSON(json: json)
-                        guard user != nil else {
-                            completion(nil, TPError(message: json, kind: .unexpected))
-                            return
-                        }
-                    }
-                    completion(user, error)
-        })
-    }
-    
     static func resetPassword(email: String,
                               completion: @escaping (TPError?) -> Void) {
         
@@ -371,6 +336,102 @@ class TPApiClient {
                     completion(error)
         }
         )
+    }
+    
+    static func registerNewUser(username: String, email: String, password: String, phone: String, country_code:String, completion: @escaping (TestpressModel?, TPError?) -> Void) {
+        
+        let parameters: Parameters = ["username": username, "email": email, "password": password, "phone": phone, "country_code":country_code]
+        apiCall(endpointProvider: TPEndpointProvider(.registerNewUser), parameters: parameters,
+                completion: { json, error in
+                    
+                    var user: TestpressModel? = nil
+                    if let json = json {
+                        user = TPModelMapper<User>().mapFromJSON(json: json)
+                        guard user != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(user, error)
+        })
+    }
+    
+    static func getSSOUrl(completion: @escaping(SSOUrl?, TPError?) -> Void) {
+        apiCall(endpointProvider: TPEndpointProvider(.getSSOUrl),
+                completion: {
+                    json, error in
+                    var sso_detail: SSOUrl? = nil
+                    if let json = json {
+                        sso_detail = TPModelMapper<SSOUrl>().mapFromJSON(json: json)
+                        debugPrint(sso_detail?.url ?? "Error")
+                        guard sso_detail != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(sso_detail, error)
+        }
+        )
+    }
+    
+    static func getProfile(endpointProvider: TPEndpointProvider,
+                           completion: @escaping(User?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, completion: {
+            json, error in
+            var user: User? = nil
+            if let json = json {
+                user = TPModelMapper<User>().mapFromJSON(json: json)
+                debugPrint(user?.url ?? "Error")
+                guard user != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(user, error)
+        })
+    }
+    
+    static func postComment(comment: String,
+                            commentsUrl: String,
+                            completion: @escaping (Comment?, TPError?) -> Void) {
+        
+        let parameters: Parameters = ["comment": comment]
+        let endpoint = TPEndpointProvider(.post, url: commentsUrl)
+        apiCall(endpointProvider: endpoint, parameters: parameters,
+                completion: { json, error in
+                    
+                    var comment: Comment? = nil
+                    if let json = json {
+                        comment = TPModelMapper<Comment>().mapFromJSON(json: json)
+                        guard comment != nil else {
+                            completion(nil, TPError(message: json, kind: .unexpected))
+                            return
+                        }
+                    }
+                    completion(comment, error)
+        })
+    }
+    
+    static func getListItems<T> (type: T.Type,
+                                 endpointProvider: TPEndpointProvider,
+                                 headers: HTTPHeaders? = nil,
+                                 completion: @escaping (ApiResponse<T>?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, headers: headers, completion: {
+            json, error in
+            
+            var testpressResponse: ApiResponse<T>? = nil
+            if let json = json {
+                testpressResponse = TPModelMapper<ApiResponse<T>>().mapFromJSON(json: json)
+                debugPrint(testpressResponse?.results ?? "Error")
+                guard testpressResponse != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(testpressResponse, error)
+        })
     }
     
     static func getExams(endpointProvider: TPEndpointProvider,
@@ -488,64 +549,6 @@ class TPApiClient {
             completion(testpressResponse, error)
         })
     }
-    
-    static func getSSOUrl(completion: @escaping(SSOUrl?, TPError?) -> Void) {
-        apiCall(endpointProvider: TPEndpointProvider(.getSSOUrl),
-                completion: {
-                    json, error in
-                    var sso_detail: SSOUrl? = nil
-                    if let json = json {
-                        sso_detail = TPModelMapper<SSOUrl>().mapFromJSON(json: json)
-                        debugPrint(sso_detail?.url ?? "Error")
-                        guard sso_detail != nil else {
-                            completion(nil, TPError(message: json, kind: .unexpected))
-                            return
-                        }
-                    }
-                    completion(sso_detail, error)
-        }
-        )
-    }
-    
-    static func getProfile(endpointProvider: TPEndpointProvider,
-                           completion: @escaping(User?, TPError?) -> Void) {
-        
-        apiCall(endpointProvider: endpointProvider, completion: {
-            json, error in
-            var user: User? = nil
-            if let json = json {
-                user = TPModelMapper<User>().mapFromJSON(json: json)
-                debugPrint(user?.url ?? "Error")
-                guard user != nil else {
-                    completion(nil, TPError(message: json, kind: .unexpected))
-                    return
-                }
-            }
-            completion(user, error)
-        })
-    }
-    
-    static func postComment(comment: String,
-                            commentsUrl: String,
-                            completion: @escaping (Comment?, TPError?) -> Void) {
-        
-        let parameters: Parameters = ["comment": comment]
-        let endpoint = TPEndpointProvider(.post, url: commentsUrl)
-        apiCall(endpointProvider: endpoint, parameters: parameters,
-                completion: { json, error in
-                    
-                    var comment: Comment? = nil
-                    if let json = json {
-                        comment = TPModelMapper<Comment>().mapFromJSON(json: json)
-                        guard comment != nil else {
-                            completion(nil, TPError(message: json, kind: .unexpected))
-                            return
-                        }
-                    }
-                    completion(comment, error)
-        })
-    }
-    
 }
 
 extension Dictionary {
