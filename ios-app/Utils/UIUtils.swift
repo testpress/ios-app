@@ -103,10 +103,6 @@ public class UIUtils {
         tableView.layoutMargins = UIEdgeInsets.zero;
     }
     
-    static func getAppName() -> String {
-        return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? ""
-    }
-    
     static func getActionSheetStyle() -> UIAlertController.Style {
         return (UIDevice.current.userInterfaceIdiom == .phone) ? .actionSheet : .alert
     }

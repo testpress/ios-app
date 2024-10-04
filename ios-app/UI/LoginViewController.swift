@@ -47,7 +47,7 @@ class LoginViewController: BaseTextFieldViewController {
         super.viewDidLoad()
         self.setStatusBarColor()
         
-        navigationbarItem.title = UIUtils.getAppName()
+        navigationbarItem.title = Constants.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
         
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]

@@ -198,7 +198,7 @@ class TPApiClient {
     static func getUserAgent() -> String {
         // Testpress iOS App/1.17.0.1 iPhone8,4, iOS/12_1_4 CFNetwork
         let device = UIDevice.current
-        return "\(UIUtils.getAppName())/\(Constants.getAppVersion()) \(device.modelName), iOS/\(device.systemVersion.replacingOccurrences(of: ".", with: "_")) CFNetwork"
+        return "\(Constants.getAppName())/\(Constants.getAppVersion()) \(device.modelName), iOS/\(device.systemVersion.replacingOccurrences(of: ".", with: "_")) CFNetwork"
     }
     
 

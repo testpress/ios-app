@@ -148,6 +148,9 @@ struct Constants {
         return "\(version).\(build)"
     }
     
+    static func getAppName() -> String {
+        return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? ""
+    }
 }
 
 struct Slug {
