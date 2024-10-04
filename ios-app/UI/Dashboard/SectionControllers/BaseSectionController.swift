@@ -7,6 +7,7 @@
 //
 
 import IGListKit
+import CourseKit
 
 
 class BaseSectionController: ListSectionController, ListSupplementaryViewSource {    

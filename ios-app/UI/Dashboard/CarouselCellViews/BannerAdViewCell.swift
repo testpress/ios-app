@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class BannerAdViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!

@@ -25,8 +25,9 @@
 
 import Alamofire
 import ObjectMapper
+import CourseKit
 
-class CategoryPager: TPBasePager<Category> {
+class CategoryPager: TPBasePager<CourseKit.Category> {
     
     var starred: Bool?
     
@@ -42,11 +43,11 @@ class CategoryPager: TPBasePager<Category> {
         TPApiClient.getListItems(
             endpointProvider: TPEndpointProvider(.getPostCategories, queryParams: queryParams),
             completion: resonseHandler!,
-            type: Category.self
+            type: CourseKit.Category.self
         )
     }
     
-    override func getId(resource: Category) -> Int {
+    override func getId(resource: CourseKit.Category) -> Int {
         return resource.id
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class MainViewController: UIViewController {
 

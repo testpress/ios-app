@@ -25,11 +25,12 @@
 
 import DropDown
 import UIKit
+import CourseKit
 
 class PostTableViewController: TPBasePagedTableViewController<Post> {
     
-    var category: Category!
-    var categories: [Category]!
+    var category: CourseKit.Category!
+    var categories: [CourseKit.Category]!
     var categoriesDropDown: PostCategoriesDropDown!
     
     required init?(coder aDecoder: NSCoder) {

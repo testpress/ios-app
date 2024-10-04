@@ -8,6 +8,7 @@
 
 import UIKit
 import IGListKit
+import CourseKit
 
 class DashboardViewController: UIViewController {
     let repository = DashboardRepository()

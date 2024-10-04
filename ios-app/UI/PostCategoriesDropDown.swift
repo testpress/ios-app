@@ -31,9 +31,9 @@ class PostCategoriesDropDown {
     
     var titleButton: UIButton!
     var dropDown: DropDown!
-    var categories: [Category]
+    var categories: [CourseKit.Category]
     
-    init(category: Category? = nil, categories: [Category], navigationItem: UINavigationItem) {
+    init(category: CourseKit.Category? = nil, categories: [CourseKit.Category], navigationItem: UINavigationItem) {
         self.categories = categories
         titleButton = UIButton(type: .system)
         let image = UIImage(named: "ic_arrow_drop_down")
@@ -69,7 +69,7 @@ class PostCategoriesDropDown {
         }
     }
     
-    func getCategory(withSlug slug: String, from categories: [Category]) -> Category? {
+    func getCategory(withSlug slug: String, from categories: [CourseKit.Category]) -> CourseKit.Category? {
         for category in categories {
             if category.slug == slug {
                 return category

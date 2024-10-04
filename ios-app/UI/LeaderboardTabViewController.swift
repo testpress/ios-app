@@ -25,6 +25,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import CourseKit
 
 class LeaderboardTabViewController: ButtonBarPagerTabStripViewController {
     
