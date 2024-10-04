@@ -11,12 +11,10 @@ public class TestpressCourse {
 
     private init() {}
 
-    // Rename to getMyCoursesViewController
     public func getMyCoursesViewController() -> CourseListViewController? {
         return instantiateViewController(withIdentifier: "CourseListViewController")
     }
 
-    // Rename to getContentDetailViewController
     public func getContentDetailViewController(contentId: Int) -> ContentDetailViewController? {
         let contentDetailVC: ContentDetailViewController? = instantiateViewController(withIdentifier: "ContentDetailViewController")
         contentDetailVC?.contentId = contentId
