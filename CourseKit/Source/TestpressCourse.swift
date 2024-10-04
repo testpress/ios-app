@@ -10,6 +10,10 @@ public class TestpressCourse {
     public static let shared = TestpressCourse()
 
     private init() {}
+    
+    public func initialize() {
+        DBConnection.configure()
+    }
 
     public func getMyCoursesViewController() -> CourseListViewController? {
         return instantiateViewController(withIdentifier: "CourseListViewController")
@@ -25,5 +29,9 @@ public class TestpressCourse {
     private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {
         let storyboard = UIStoryboard(name: "Course", bundle: bundle)
         return storyboard.instantiateViewController(withIdentifier: identifier) as? T
+    }
+    
+    public func clearData() {
+        DBConnection.clearTables()
     }
 }

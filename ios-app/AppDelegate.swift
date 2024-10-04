@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         initializeFacebook(application, launchOptions: launchOptions)
         configureKeyboardManager()
         handleFirstLaunch()
-        DBConnection.configure()
+        TestpressCourse.shared.initialize()
         setupRootViewController()
         
         if let instituteSettings = fetchInstituteSettings() {
