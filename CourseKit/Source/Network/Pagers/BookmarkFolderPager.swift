@@ -1,5 +1,5 @@
 //
-//  ChapterPager.swift
+//  BookmarkFolderPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,37 +25,26 @@
 
 import Alamofire
 import ObjectMapper
-import CourseKit
 
-class ChapterPager: TPBasePager<Chapter> {
+public class BookmarkFolderPager: BasePager<BookmarksListResponse, BookmarkFolder> {
     
-    let url: String
-    let parentId: Int?
+    public var folders = [Int: BookmarkFolder]()
     
-    init(coursesUrl: String, parentId: Int?) {
-        self.url = coursesUrl + TPEndpoint.getChapters.urlPath
-        self.parentId = parentId
-        super.init()
-    }
-    
-    override func getItems(page: Int) {
+    public override func getResponse(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(.getChapters, url: url, queryParams: queryParams),
-            completion: resonseHandler!,
-            type: Chapter.self
+            type: BookmarksListResponse.self,
+            endpointProvider: TPEndpointProvider(.bookmarkFolders, queryParams: queryParams),
+            completion: responseHandler!
         )
     }
     
-    override func getId(resource: Chapter) -> Int {
-        return resource.id
+    public override func getItems(_ resultResponse: BookmarksListResponse) -> [BookmarkFolder] {
+        return resultResponse.folders
     }
     
-    override func register(resource chapter: Chapter) -> Chapter? {
-        if chapter.active {
-            return chapter
-        }
-        return nil
+    public override func getId(resource: BookmarkFolder) -> Int {
+        return resource.id
     }
     
 }

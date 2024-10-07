@@ -30,6 +30,7 @@
 import TOCropViewController
 import TTGSnackbar
 import UIKit
+import CourseKit
 
 protocol ImagePickerDelegate {
     func imagePicker(_ picker: ImagePicker, didFinishPickingImage imageData: Data,

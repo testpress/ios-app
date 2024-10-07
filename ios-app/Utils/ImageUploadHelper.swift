@@ -25,6 +25,7 @@
 
 import TTGSnackbar
 import UIKit
+import CourseKit
 
 protocol ImageUploadHelperDelegate {
     func imageUploadHelper(_ helper: ImageUploadHelper, didFinishUploadImage imageUrl: String)

@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import UIKit
 import MobileCoreServices
+import CourseKit
 
 class FileUploadPicker: NSObject {
     private var filePickerController: UIDocumentPickerViewController?

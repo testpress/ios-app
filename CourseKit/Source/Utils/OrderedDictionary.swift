@@ -25,20 +25,20 @@
 
 import Foundation
 
-struct OrderedDictionary<K: Hashable, V> {
-    var keys: Array<K> = []
-    var dict: Dictionary<K, V> = [:]
+public struct OrderedDictionary<K: Hashable, V> {
+    public var keys: Array<K> = []
+    public var dict: Dictionary<K, V> = [:]
     
-    var count: Int {
+    public var count: Int {
         assert(keys.count == dict.count, "Keys and values array out of sync")
         return self.keys.count;
     }
     
     // Explicitly define an empty initializer to prevent the default memberwise initializer from
     // being generated
-    init() {}
+    public init() {}
     
-    subscript(key: K) -> V? {
+    public subscript(key: K) -> V? {
         get {
             return self.dict[key]
         }
@@ -55,7 +55,7 @@ struct OrderedDictionary<K: Hashable, V> {
         }
     }
     
-    var values: [V] {
+    public var values: [V] {
         var values: Array<V> = []
         for key in keys {
             if let value = dict[key] {
@@ -65,12 +65,12 @@ struct OrderedDictionary<K: Hashable, V> {
         return values
     }
     
-    mutating func removeAll() {
+    public mutating func removeAll() {
         keys.removeAll()
         dict.removeAll()
     }
     
-    var description: String {
+    public var description: String {
         var result = "{\n"
         for i in 0..<count {
             result += "[\(i)]: \(keys[i]) => \(String(describing: self[keys[i]]))\n"

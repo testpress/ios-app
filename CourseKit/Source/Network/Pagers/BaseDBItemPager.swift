@@ -1,5 +1,5 @@
 //
-//  PostPager.swift
+//  BaseDBItemPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -22,37 +22,18 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-import CourseKit
 
-class PostPager: TPBasePager<Post> {
+import Alamofire
+import ObjectMapper
+
+public class BaseDBItemPager<T: DBModel>: TPBasePager<T> {
     
-    let endpoint: TPEndpoint
-    var category: CourseKit.Category!
+    public var latestModifiedDate: String? = nil
+    public var headers = HTTPHeaders()
     
-    init(endpoint: TPEndpoint = .getPosts) {
-        self.endpoint = endpoint
-        super.init()
-    }
-    
-    override func getItems(page: Int) {
-        queryParams.updateValue("-published_date", forKey: Constants.ORDER)
-        queryParams.updateValue(String(page), forKey: Constants.PAGE)
-        if category != nil {
-            queryParams.updateValue(category.slug, forKey: Constants.CATEGORY)
-        }
-        TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(endpoint, queryParams: queryParams),
-            completion: resonseHandler!,
-            type: Post.self
-        )
-    }
-    
-    override func register(resource post: Post) -> Post? {
-        return post.isActive ? post : nil
-    }
-    
-    override func getId(resource: Post) -> Int {
-        return resource.id!
+    public func setLatestModifiedDate(_ latestModifiedDate: String) {
+        self.latestModifiedDate = latestModifiedDate
+        headers = ["If-Modified-Since": latestModifiedDate]
     }
     
 }

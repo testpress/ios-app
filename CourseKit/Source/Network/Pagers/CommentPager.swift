@@ -1,5 +1,5 @@
 //
-//  BookmarkFolderPager.swift
+//  CommentPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,29 +23,26 @@
 //  THE SOFTWARE.
 //
 
-import Alamofire
-import ObjectMapper
-import CourseKit
-
-class BookmarkFolderPager: BasePager<BookmarksListResponse, BookmarkFolder> {
+public class CommentPager: TPBasePager<Comment> {
     
-    var folders = [Int: BookmarkFolder]()
+    public let url: String!
     
-    override func getResponse(page: Int) {
+    public init(_ commentsUrl: String) {
+        url = commentsUrl
+        super.init()
+    }
+    
+    public override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
-            type: BookmarksListResponse.self,
-            endpointProvider: TPEndpointProvider(.bookmarkFolders, queryParams: queryParams),
-            completion: responseHandler!
+            endpointProvider: TPEndpointProvider(.get, url: url, queryParams: queryParams),
+            completion: resonseHandler!,
+            type: Comment.self
         )
     }
     
-    override func getItems(_ resultResponse: BookmarksListResponse) -> [BookmarkFolder] {
-        return resultResponse.folders
-    }
-    
-    override func getId(resource: BookmarkFolder) -> Int {
-        return resource.id
+    public override func getId(resource: Comment) -> Int {
+        return resource.id!
     }
     
 }

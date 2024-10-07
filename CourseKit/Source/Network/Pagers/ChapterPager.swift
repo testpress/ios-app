@@ -1,5 +1,5 @@
 //
-//  CoursePager.swift
+//  ChapterPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,22 +25,36 @@
 
 import Alamofire
 import ObjectMapper
-import CourseKit
 
-class CoursePager: BaseDBItemPager<Course> {
+public class ChapterPager: TPBasePager<Chapter> {
     
-    override func getItems(page: Int) {
+    public let url: String
+    public let parentId: Int?
+    
+    public init(coursesUrl: String, parentId: Int?) {
+        self.url = coursesUrl + TPEndpoint.getChapters.urlPath
+        self.parentId = parentId
+        super.init()
+    }
+    
+    public override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(.getCourses, queryParams: queryParams),
-            headers: headers,
+            endpointProvider: TPEndpointProvider(.getChapters, url: url, queryParams: queryParams),
             completion: resonseHandler!,
-            type: Course.self
+            type: Chapter.self
         )
     }
     
-    override func getId(resource: Course) -> Int {
+    public override func getId(resource: Chapter) -> Int {
         return resource.id
+    }
+    
+    public override func register(resource chapter: Chapter) -> Chapter? {
+        if chapter.active {
+            return chapter
+        }
+        return nil
     }
     
 }

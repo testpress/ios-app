@@ -25,22 +25,21 @@
 
 import Alamofire
 import ObjectMapper
-import CourseKit
 
 // Base Pager for V4 API's
-class BasePager<T: TestpressModel, L: TestpressModel> {
+public class BasePager<T: TestpressModel, L: TestpressModel> {
     
-    var response: ApiResponse<T>?
+    public var response: ApiResponse<T>?
     
     /**
      * Next page to request
      */
-    var page: Int = 1
+    public var page: Int = 1
     
     /**
      * All resources retrieved
      */
-    var resources = OrderedDictionary<Int, L>()
+    public var resources = OrderedDictionary<Int, L>()
     
     /**
      * Query Params to be passed
@@ -50,13 +49,13 @@ class BasePager<T: TestpressModel, L: TestpressModel> {
     /**
      * Are more pages available?
      */
-    var hasMore: Bool = false
+    public var hasMore: Bool = false
     
-    var completion: ((OrderedDictionary<Int, L>?, TPError?) -> Void)? = nil
+    public var completion: ((OrderedDictionary<Int, L>?, TPError?) -> Void)? = nil
     
-    var responseHandler: ((ApiResponse<T>?, TPError?) -> Void)? = nil
+    public var responseHandler: ((ApiResponse<T>?, TPError?) -> Void)? = nil
     
-    init() {
+    public init() {
         responseHandler = { response, error in
             if let error = error {
                 self.hasMore = false;
@@ -68,11 +67,11 @@ class BasePager<T: TestpressModel, L: TestpressModel> {
         }
     }
     
-    func clearValues() {
+    public func clearValues() {
         resources.removeAll()
     }
     
-    func reset() {
+    public func reset() {
         page = 1
         clearValues()
         queryParams.removeAll()
@@ -85,7 +84,7 @@ class BasePager<T: TestpressModel, L: TestpressModel> {
         getResponse(page: page);
     }
     
-    func onSuccess() {
+    public func onSuccess() {
         let resourcePage: [L] = getItems(response!.results)
         #if DEBUG
         print("response?.next:" + (response!.next))
@@ -109,27 +108,27 @@ class BasePager<T: TestpressModel, L: TestpressModel> {
         completion!(self.resources, nil)
     }
     
-    func getResponse(page: Int) {
+    public func getResponse(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
     }
     
-    func getItems(_ resultResponse: T) -> [L] {
+    public func getItems(_ resultResponse: T) -> [L] {
         return []
     }
     
-    func register(resource: L) -> L? {
+    public func register(resource: L) -> L? {
         return resource
     }
     
-    func getId(resource: L) -> Int {
+    public func getId(resource: L) -> Int {
         return -1
     }
     
-    func hasNext() -> Bool {
+    public func hasNext() -> Bool {
         return response == nil || (response != nil && !(response!.next.isEmpty));
     }
     
-    func resetValues(of items: [[Int: Any]]) {
+    public func resetValues(of items: [[Int: Any]]) {
         for item in items {
             var item = item
             item.removeAll()

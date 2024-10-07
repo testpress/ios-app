@@ -25,20 +25,19 @@
 
 import Alamofire
 import ObjectMapper
-import CourseKit
 
-class ContentPager: BasePager<ContentsListResponse, Content> {
-    var url: String!
+public class ContentPager: BasePager<ContentsListResponse, Content> {
+    public var url: String!
     
-    var videos = [Int: Video]()
-    var attachments = [Int: Attachment]()
-    var notes = [Int: HtmlContent]()
-    var streams = [Int: [Stream]]()
-    var exams = [Int: Exam]()
-    var videoConferences = [Int: VideoConference]()
-    var liveStreams = [Int: LiveStream]()
+    public var videos = [Int: Video]()
+    public var attachments = [Int: Attachment]()
+    public var notes = [Int: HtmlContent]()
+    public var streams = [Int: [Stream]]()
+    public var exams = [Int: Exam]()
+    public var videoConferences = [Int: VideoConference]()
+    public var liveStreams = [Int: LiveStream]()
 
-    override func getResponse(page: Int) {
+    public override func getResponse(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
             type: ContentsListResponse.self,
@@ -47,7 +46,7 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
         )
     }
     
-    override func getItems(_ resultResponse: ContentsListResponse) -> [Content] {
+    public override func getItems(_ resultResponse: ContentsListResponse) -> [Content] {
         let contents: [Content] = resultResponse.contents
         
         if (!contents.isEmpty) {
@@ -88,11 +87,11 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
         return contents
     }
     
-    override func getId(resource: Content) -> Int {
+    public override func getId(resource: Content) -> Int {
         return resource.id
     }
     
-    override func register(resource content: Content) -> Content? {
+    public override func register(resource content: Content) -> Content? {
         if content.videoId != -1 {
             content.video = videos[content.videoId]
             content.video?.streams.append(objectsIn: streams[content.videoId] ?? [])
@@ -111,7 +110,7 @@ class ContentPager: BasePager<ContentsListResponse, Content> {
         return content
     }
     
-    override func clearValues() {
+    public override func clearValues() {
         super.clearValues()
         resetValues(of: [videos, attachments, streams, notes, exams, videoConferences, liveStreams])
     }
