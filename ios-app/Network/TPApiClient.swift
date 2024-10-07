@@ -33,6 +33,7 @@ enum AuthProvider: String {
 }
 
 class TPApiClient {
+    public static var authErrorDelegate: AuthErrorHandlingDelegate?
 
     static func apiCall(endpointProvider: TPEndpointProvider,
                         parameters: Parameters? = nil,
@@ -104,7 +105,7 @@ class TPApiClient {
             var error = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
 
             if (statusCode == 401 && ![TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)) {
-                handleUnauthenticatedError(json: json, endpointProvider: endpointProvider)
+                authErrorDelegate?.handleUnauthenticatedError()
             } else if error.kind == .custom {
                 handleCustomError(error: error)
             }
@@ -112,11 +113,6 @@ class TPApiClient {
             error.logErrorToSentry()
             completion(nil, error)
         }
-    }
-
-    private static func handleUnauthenticatedError(json: String, endpointProvider: TPEndpointProvider) {
-        UIUtils.logout()
-        presentLoginViewController()
     }
     
     private static func createError(for statusCode: Int, message: String, httpResponse: HTTPURLResponse, endpointProvider: TPEndpointProvider) -> TPError {
@@ -145,57 +141,13 @@ class TPApiClient {
     }
 
     private static func handleCustomError(error: TPError) {
-        guard let rootViewController = getRootViewController() else { return }
-
         switch error.error_code {
         case Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE:
-            showMultipleLoginRestrictionAlert(error: error, rootViewController: rootViewController)
+            authErrorDelegate?.handleMultipleLoginRestrictionError(error: error)
         case Constants.MAX_LOGIN_LIMIT_EXCEEDED:
-            showMaxLoginLimitAlert(rootViewController: rootViewController)
+            authErrorDelegate?.handleMaxLoginLimitError()
         default:
             break
-        }
-    }
-
-    private static func showMultipleLoginRestrictionAlert(error: TPError, rootViewController: UIViewController) {
-        let alert = UIAlertController(
-            title: Strings.LOADING_FAILED,
-            message: error.error_detail,
-            preferredStyle: UIUtils.getActionSheetStyle()
-        )
-        alert.addAction(UIAlertAction(title: Strings.OK, style: .destructive) { _ in
-            presentLoginViewController(from: rootViewController)
-        })
-        alert.addAction(UIAlertAction(title: Strings.CANCEL, style: .cancel))
-        rootViewController.present(alert, animated: true)
-    }
-
-    private static func showMaxLoginLimitAlert(rootViewController: UIViewController) {
-        let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
-        var message = Strings.MAX_LOGIN_EXCEEDED_ERROR_MESSAGE
-
-        if let coolOffTime = instituteSettings?.cooloffTime, !coolOffTime.isEmpty {
-            message += Strings.ACCOUNT_UNLOCK_INFO + "\(coolOffTime) hours"
-        }
-
-        UIUtils.showSimpleAlert(
-            title: Strings.ACCOUNT_LOCKED,
-            message: message,
-            viewController: rootViewController,
-            cancelable: true
-        )
-    }
-
-    private static func presentLoginViewController(from viewController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) {
-        if var topController = UIApplication.shared.keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-            }
-            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
-            let loginViewController = storyboard.instantiateViewController(withIdentifier:
-                                        Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
-            
-            topController.present(loginViewController, animated: true, completion: nil)
         }
     }
     
@@ -226,18 +178,6 @@ class TPApiClient {
         })
     }
     
-    private static func getRootViewController() -> UIViewController? {
-        guard var rootViewController = UIApplication.shared.keyWindow?.rootViewController else { return nil }
-        
-        if let navigationController = rootViewController as? UINavigationController {
-            rootViewController = navigationController.viewControllers.first!
-        } else if let tabBarController = rootViewController as? UITabBarController {
-            rootViewController = tabBarController.selectedViewController!
-        }
-        
-        return rootViewController
-    }
-    
     private static func debugLog(response: AFDataResponse<String>) {
         print(NSString(data: response.request?.httpBody ?? Data(), encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
         print(response)
@@ -249,5 +189,72 @@ class TPApiClient {
 private extension URLError {
     var isNetworkRelated: Bool {
         return [.notConnectedToInternet, .cannotConnectToHost, .timedOut].contains(self.code)
+    }
+}
+
+
+class AuthErrorHandler: AuthErrorHandlingDelegate {
+    func handleUnauthenticatedError() {
+        UIUtils.logout()
+        presentLoginViewController()
+    }
+
+    func handleMaxLoginLimitError() {
+        let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
+        var message = Strings.MAX_LOGIN_EXCEEDED_ERROR_MESSAGE
+
+        if let coolOffTime = instituteSettings?.cooloffTime, !coolOffTime.isEmpty {
+            message += Strings.ACCOUNT_UNLOCK_INFO + "\(coolOffTime) hours"
+        }
+
+        UIUtils.showSimpleAlert(
+            title: Strings.ACCOUNT_LOCKED,
+            message: message,
+            viewController: getRootViewController()!,
+            cancelable: true
+        )
+    }
+
+    func handleMultipleLoginRestrictionError(error: TPError) {
+        guard let rootViewController = getRootViewController() else { return }
+        
+        let alert = UIAlertController(
+            title: Strings.LOADING_FAILED,
+            message: error.error_detail,
+            preferredStyle: UIUtils.getActionSheetStyle()
+        )
+        
+        alert.addAction(UIAlertAction(title: Strings.OK, style: .destructive) { _ in
+            self.presentLoginViewController(from: rootViewController)
+        })
+        
+        alert.addAction(UIAlertAction(title: Strings.CANCEL, style: .cancel, handler: nil))
+        
+        rootViewController.present(alert, animated: true, completion: nil)
+    }
+    
+    private func presentLoginViewController(from viewController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) {
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+            let loginViewController = storyboard.instantiateViewController(withIdentifier:
+                                        Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+            
+            topController.present(loginViewController, animated: true, completion: nil)
+        }
+    }
+    
+    private func getRootViewController() -> UIViewController? {
+        guard var rootViewController = UIApplication.shared.keyWindow?.rootViewController else { return nil }
+        
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first!
+        } else if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController!
+        }
+        
+        return rootViewController
     }
 }

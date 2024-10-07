@@ -85,6 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         handleFirstLaunch()
         TestpressCourse.shared.initialize()
         setupRootViewController()
+        setupAuthErrorHandlerOnApiClient()
         
         if let instituteSettings = fetchInstituteSettings() {
             setupSentry(instituteSettings: instituteSettings)
@@ -164,6 +165,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
+    }
+    
+    private func setupAuthErrorHandlerOnApiClient(){
+        TPApiClient.authErrorDelegate = AuthErrorHandler()
     }
 
     private func fetchInstituteSettings() -> InstituteSettings? {
