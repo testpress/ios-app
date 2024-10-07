@@ -149,4 +149,21 @@ public class AttemptItem: DBModel {
         
         return answersChanged || reviewStatusChanged || shortTextChanged || filesChanged || essayTextChanged || !gapFillResponses.isEmpty
     }
+    
+    public func getSaveUrl() -> String {
+        return String(format: "%@/api/v2.4/attempts/%d/questions/%d/", Constants.BASE_URL , self.attemptId, self.examQuestionId)
+    }
+    
+    public func clearLocalFiles() {
+        DBManager<AttemptItem>().write {
+            self.localFiles.removeAll()
+        }
+    }
+
+    public func saveUploadedFilePath(with uploadedPath: String) {
+        let userFileResponse = UserFileResponse.create(uploadedPath: uploadedPath)
+        DBManager<AttemptItem>().write {
+            self.localFiles.append(userFileResponse)
+        }
+    }
 }

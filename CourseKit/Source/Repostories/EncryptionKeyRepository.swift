@@ -7,11 +7,12 @@
 //
 
 import Foundation
-import CourseKit
 
 
-class EncryptionKeyRepository {
-    func load(url: URL, onSuccess: @escaping(Data) -> Void) {
+public class EncryptionKeyRepository {
+    public init() {}
+    
+    public func load(url: URL, onSuccess: @escaping(Data) -> Void) {
         let encryptionKeyUrl = URLUtils.convertURLSchemeToHttps(url: url)
         let baseURLComponents = URLComponents(string: Constants.BASE_URL)!
         let baseHost = baseURLComponents.host!
@@ -22,7 +23,7 @@ class EncryptionKeyRepository {
         }
     }
     
-    private func fetchFromNetwork(url: URL, onSuccess: @escaping(Data) -> Void) {
+    public func fetchFromNetwork(url: URL, onSuccess: @escaping(Data) -> Void) {
         var request = URLRequest(url: url)
         request.setValue("JWT " + KeychainTokenItem.getToken(), forHTTPHeaderField: "Authorization")
         let session = URLSession(configuration: URLSessionConfiguration.default)

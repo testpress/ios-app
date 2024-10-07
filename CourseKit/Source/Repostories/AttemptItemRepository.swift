@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import CourseKit
 
-class AttemptItemRepository: AttemptRepository {
-    func submitAnswer(id: Int) {
+public class AttemptItemRepository: AttemptRepository {
+    public func submitAnswer(id: Int) {
         let attemptItems = DBManager<AttemptItem>().getItemsFromDB(filteredBy: "id=\(id)", byKeyPath: "order")
         let attemptItem = attemptItems[0]
         DBManager<AttemptItem>().write {
@@ -40,7 +39,7 @@ class AttemptItemRepository: AttemptRepository {
         )
     }
     
-    func selectAnswer(id: Int, selectedOptions: [Int] = [], shortText: String = "") ->  AttemptItem  {
+    public func selectAnswer(id: Int, selectedOptions: [Int] = [], shortText: String = "") ->  AttemptItem  {
         let attemptItems = DBManager<AttemptItem>().getItemsFromDB(filteredBy: "id=\(id)", byKeyPath: "order")
         let attemptItem = attemptItems[0]
         DBManager<AttemptItem>().write {
@@ -54,11 +53,11 @@ class AttemptItemRepository: AttemptRepository {
         return attemptItem
     }
     
-    func getAttemptItem(id: Int) -> AttemptItem {
+    public func getAttemptItem(id: Int) -> AttemptItem {
         return DBManager<AttemptItem>().getItemsFromDB(filteredBy: "id=\(id)", byKeyPath: "order").first!
     }
     
-    func getIndexOfFirstUnAttemptedItem(attemptId: Int) -> Int {
+    public func getIndexOfFirstUnAttemptedItem(attemptId: Int) -> Int {
         let attemptItems = DBManager<AttemptItem>().getItemsFromDB(filteredBy: "attemptId=\(attemptId)", byKeyPath: "order")
         return attemptItems.firstIndex(where: {$0.isAttempted == false}) ?? 0
     }

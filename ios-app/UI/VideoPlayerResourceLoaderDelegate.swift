@@ -8,6 +8,7 @@
 
 import Foundation
 import AVKit
+import CourseKit
 
 
 class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate {

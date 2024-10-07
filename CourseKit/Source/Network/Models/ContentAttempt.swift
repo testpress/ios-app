@@ -40,6 +40,11 @@ public class ContentAttempt {
     
     public required init?(map: Map) {
     }
+    
+    public func getEndAttemptUrl() -> String {
+        return Constants.BASE_URL + TPEndpoint.contentAttempts.urlPath + "\(id!)/" +
+            TPEndpoint.endExam.urlPath;
+    }
 }
 
 extension ContentAttempt: TestpressModel {

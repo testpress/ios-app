@@ -9,12 +9,14 @@
 import Foundation
 import CourseKit
 
-class AttemptRepository {
-    func loadContentAttempt(attemptsUrl: String, completion: @escaping(ContentAttempt?, TPError?) -> Void) {
+public class AttemptRepository {
+    public init() {}
+    
+    public func loadContentAttempt(attemptsUrl: String, completion: @escaping(ContentAttempt?, TPError?) -> Void) {
         TPApiClient.request(type: ContentAttempt.self, endpointProvider: TPEndpointProvider(.post, url: attemptsUrl), completion: completion)
     }
 
-    func loadQuestions(url: String, examId: Int, attemptId: Int, completion: @escaping([AttemptItem]?, TPError?) -> Void) {
+    public func loadQuestions(url: String, examId: Int, attemptId: Int, completion: @escaping([AttemptItem]?, TPError?) -> Void) {
         let examQuestions = getExamquestionsFromDB(examId: examId, attemptId: attemptId)
         if (!examQuestions.isEmpty) {
             var attemptItems: [AttemptItem]
@@ -31,7 +33,7 @@ class AttemptRepository {
         fetchQuestions(url: url, attemptId: attemptId, examId: examId, completion: completion)
     }
     
-    func fetchQuestions(url: String, attemptId: Int, examId: Int, completion: (([AttemptItem]?, TPError?) -> Void)?) {
+    public func fetchQuestions(url: String, attemptId: Int, examId: Int, completion: (([AttemptItem]?, TPError?) -> Void)?) {
         
         TPApiClient.request(type: ApiResponse<ExamQuestionsResponse>.self, endpointProvider: TPEndpointProvider(.get, url: url), completion:  { response, error in
             self.storeInDB(examQuestions: response?.results.parse() ?? [],examId: examId, attemptId: attemptId)
@@ -45,7 +47,7 @@ class AttemptRepository {
             
         })
     }
-    func getExamquestionsFromDB(examId: Int, attemptId: Int) -> [ExamQuestion] {
+    public func getExamquestionsFromDB(examId: Int, attemptId: Int) -> [ExamQuestion] {
         if examId == -1 {
             return DBManager<ExamQuestion>().getItemsFromDB(filteredBy: "attemptId=\(attemptId)", byKeyPath: "order")
         } else {
@@ -53,7 +55,7 @@ class AttemptRepository {
         }
     }
     
-    func storeInDB(examQuestions: [ExamQuestion], examId: Int, attemptId: Int) {
+    public func storeInDB(examQuestions: [ExamQuestion], examId: Int, attemptId: Int) {
         for question in examQuestions {
                 question.examId = examId
                 question.attemptId = attemptId
@@ -61,11 +63,11 @@ class AttemptRepository {
         DBManager<ExamQuestion>().addData(objects: examQuestions)
     }
     
-    func getAttemtItems(attemptId: Int) -> [AttemptItem] {
+    public func getAttemtItems(attemptId: Int) -> [AttemptItem] {
         return DBManager<AttemptItem>().getItemsFromDB(filteredBy: "attemptId=\(attemptId)", byKeyPath: "order")
     }
     
-    func createAttemptItems(examQuestions: [ExamQuestion], attemptId: Int) -> [AttemptItem] {
+    public func createAttemptItems(examQuestions: [ExamQuestion], attemptId: Int) -> [AttemptItem] {
         var attemptQuestions: [AttemptItem] = []
         let number = Int.random(in: 10000 ..< 999999)
         
@@ -84,7 +86,7 @@ class AttemptRepository {
         return DBManager<AttemptItem>().getItemsFromDB(filteredBy: "attemptId=\(attemptId)", byKeyPath: "order")
     }
     
-    func endExam(url: String, completion: @escaping(ContentAttempt?, TPError?) -> Void) {
+    public func endExam(url: String, completion: @escaping(ContentAttempt?, TPError?) -> Void) {
         TPApiClient.request(
             type: ContentAttempt.self,
             endpointProvider: TPEndpointProvider(.put, url: url),
@@ -95,7 +97,7 @@ class AttemptRepository {
         })
     }
     
-    func endAttempt(url: String, completion: @escaping(Attempt?, TPError?) -> Void) {
+    public func endAttempt(url: String, completion: @escaping(Attempt?, TPError?) -> Void) {
         TPApiClient.request(
             type: Attempt.self,
             endpointProvider: TPEndpointProvider(.put, url: url),

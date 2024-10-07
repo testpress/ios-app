@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import CourseKit
 
-class DashboardRepository {
+public class DashboardRepository {
+    public init() {}
     let DASHBOARD_STORAGE_KEY = "dashboardData"
 
-    func get(completion: @escaping(DashboardResponse?, TPError?) -> Void) {
+    public func get(completion: @escaping(DashboardResponse?, TPError?) -> Void) {
         do {
             let data = try UserDefaults.standard.getObject(forKey: DASHBOARD_STORAGE_KEY, castTo: DashboardResponse.self)
             completion(data, nil)
@@ -23,7 +23,7 @@ class DashboardRepository {
         }
     }
     
-    func fetch(completion: @escaping(DashboardResponse?, TPError?) -> Void) {
+    public func fetch(completion: @escaping(DashboardResponse?, TPError?) -> Void) {
         TPApiClient.request(type: DashboardResponse.self, endpointProvider: TPEndpointProvider(.dashboard), completion: {response, error in
             if response != nil {
                 do {
@@ -35,7 +35,7 @@ class DashboardRepository {
         })
     }
     
-    func refresh(completion: @escaping(DashboardResponse?, TPError?) -> Void) {
+    public func refresh(completion: @escaping(DashboardResponse?, TPError?) -> Void) {
         fetch { response, error in
           completion(response, error)
         }

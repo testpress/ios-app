@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CourseKit
 
 class M3U8Handler {
     func fetch(url: URL, onSuccess: @escaping(Data, URLResponse?) -> Void) {
