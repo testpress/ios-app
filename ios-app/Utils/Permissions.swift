@@ -27,6 +27,7 @@ import AVFoundation
 import Photos
 import TTGSnackbar
 import UIKit
+import CourseKit
 
 func checkCameraAuthorizationStatus(viewController: UIViewController,
                                     completion: @escaping (Bool) -> Void) {

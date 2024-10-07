@@ -1,5 +1,5 @@
 //
-//  BaseDBItemPager.swift
+//  ExamPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -27,14 +27,41 @@ import Alamofire
 import ObjectMapper
 import CourseKit
 
-class BaseDBItemPager<T: DBModel>: TPBasePager<T> {
+public class ExamPager: TPBasePager<Exam> {
     
-    var latestModifiedDate: String? = nil
-    var headers = HTTPHeaders()
+    public var subclass: String!
+    public var accessCode: String!
     
-    func setLatestModifiedDate(_ latestModifiedDate: String) {
-        self.latestModifiedDate = latestModifiedDate
-        headers = ["If-Modified-Since": latestModifiedDate]
+    public init(subclass: String) {
+        self.subclass = subclass
+        super.init()
+    }
+    
+    public override init() {
+        super.init()
+    }
+    
+    public override func getItems(page: Int) {
+        queryParams.updateValue(String(page), forKey: Constants.PAGE)
+        if accessCode != nil {
+            let url = Constants.BASE_URL + TPEndpoint.getAccessCodeExams.urlPath + accessCode
+                + TPEndpoint.examsPath.urlPath
+            
+            let endpointProvider = TPEndpointProvider(.getAccessCodeExams, url: url,
+                                                      queryParams: queryParams)
+            
+            TPApiClient.getExams(endpointProvider: endpointProvider, completion: resonseHandler!)
+            return
+        }
+        queryParams.updateValue(subclass, forKey: Constants.STATE)
+        TPApiClient.getExams(
+            endpointProvider: TPEndpointProvider(.getExams, queryParams: queryParams),
+            completion: resonseHandler!
+        )
+    }
+    
+    public override func getId(resource: Exam) -> Int {
+        return resource.id
     }
     
 }

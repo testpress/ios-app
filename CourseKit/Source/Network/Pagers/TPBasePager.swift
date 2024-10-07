@@ -25,21 +25,20 @@
 
 import Alamofire
 import ObjectMapper
-import CourseKit
 
-class TPBasePager<T: Mappable> {
+public class TPBasePager<T: Mappable> {
     
-    var response: TPApiResponse<T>?
+    public var response: TPApiResponse<T>?
     
     /**
      * Next page to request
      */
-    var page: Int = 1
+    public var page: Int = 1
     
     /**
      * All resources retrieved
      */
-    var resources = OrderedDictionary<Int, T>()
+    public var resources = OrderedDictionary<Int, T>()
     
     /**
      * Query Params to be passed
@@ -49,13 +48,13 @@ class TPBasePager<T: Mappable> {
     /**
      * Are more pages available?
      */
-    var hasMore: Bool = false
+    public var hasMore: Bool = false
     
-    var completion: ((OrderedDictionary<Int, T>?, TPError?) -> Void)? = nil
+    public var completion: ((OrderedDictionary<Int, T>?, TPError?) -> Void)? = nil
     
-    var resonseHandler: ((TPApiResponse<T>?, TPError?) -> Void)? = nil
+    public var resonseHandler: ((TPApiResponse<T>?, TPError?) -> Void)? = nil
     
-    init() {
+    public init() {
         resonseHandler = { response, error in
             if let error = error {
                 self.hasMore = false;
@@ -67,7 +66,7 @@ class TPBasePager<T: Mappable> {
         }
     }
     
-    func reset() {
+    public func reset() {
         page = 1
         resources.removeAll()
         queryParams.removeAll()
@@ -75,7 +74,7 @@ class TPBasePager<T: Mappable> {
         hasMore = true
     }
     
-    func getItems(page: Int) {
+    public func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
     }
     
@@ -84,7 +83,7 @@ class TPBasePager<T: Mappable> {
         getItems(page: page);
     }
     
-    func onSuccess() {
+    public func onSuccess() {
         let resourcePage: [T] = (response?.results)!;
         #if DEBUG
             print("response?.next:" + (response!.next))
@@ -108,15 +107,15 @@ class TPBasePager<T: Mappable> {
         completion!(resources, nil)
     }
     
-    func register(resource: T) -> T? {
+    public func register(resource: T) -> T? {
         return resource;
     }
     
-    func getId(resource: T) -> Int {
+    public func getId(resource: T) -> Int {
         return -1
     }
 
-    func hasNext() -> Bool {
+    public func hasNext() -> Bool {
         return response == nil || (response != nil && !(response!.next.isEmpty));
     }
 }

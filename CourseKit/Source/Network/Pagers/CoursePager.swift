@@ -1,5 +1,5 @@
 //
-//  ExamPager.swift
+//  CoursePager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -27,40 +27,19 @@ import Alamofire
 import ObjectMapper
 import CourseKit
 
-class ExamPager: TPBasePager<Exam> {
+public class CoursePager: BaseDBItemPager<Course> {
     
-    var subclass: String!
-    var accessCode: String!
-    
-    init(subclass: String) {
-        self.subclass = subclass
-        super.init()
-    }
-    
-    override init() {
-        super.init()
-    }
-    
-    override func getItems(page: Int) {
+    public override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
-        if accessCode != nil {
-            let url = Constants.BASE_URL + TPEndpoint.getAccessCodeExams.urlPath + accessCode
-                + TPEndpoint.examsPath.urlPath
-            
-            let endpointProvider = TPEndpointProvider(.getAccessCodeExams, url: url,
-                                                      queryParams: queryParams)
-            
-            TPApiClient.getExams(endpointProvider: endpointProvider, completion: resonseHandler!)
-            return
-        }
-        queryParams.updateValue(subclass, forKey: Constants.STATE)
-        TPApiClient.getExams(
-            endpointProvider: TPEndpointProvider(.getExams, queryParams: queryParams),
-            completion: resonseHandler!
+        TPApiClient.getListItems(
+            endpointProvider: TPEndpointProvider(.getCourses, queryParams: queryParams),
+            headers: headers,
+            completion: resonseHandler!,
+            type: Course.self
         )
     }
     
-    override func getId(resource: Exam) -> Int {
+    public override func getId(resource: Course) -> Int {
         return resource.id
     }
     

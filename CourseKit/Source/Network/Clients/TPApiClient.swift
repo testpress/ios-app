@@ -1,18 +1,211 @@
 //
 //  TPApiClient.swift
-//  CourseKit
+//  ios-app
 //
-//  Created by Testpress on 04/10/24.
-//  Copyright © 2024 Testpress. All rights reserved.
+//  Copyright © 2017 Testpress. All rights reserved.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
-import Foundation
-import CourseKit
 import Alamofire
+import UIKit
 
+public enum AuthProvider: String {
+    case TESTPRESS
+    case FACEBOOK
+}
 
-extension TPApiClient {
-    static func getListItems<T> (endpointProvider: TPEndpointProvider,
+public class TPApiClient {
+    public static var authErrorDelegate: AuthErrorHandlingDelegate?
+
+    public static func apiCall(endpointProvider: TPEndpointProvider,
+                        parameters: Parameters? = nil,
+                        headers: HTTPHeaders? = nil,
+                        completion: @escaping (String?, TPError?) -> Void) -> Void {
+        
+        guard let url = URL(string: endpointProvider.getUrl()) else {
+            completion(nil, TPError(message: "Invalid URL", kind: .unexpected))
+            return
+        }
+        
+        var request = createRequest(url: url, endpointProvider: endpointProvider, headers: headers, parameters: parameters)
+        self.request(dataRequest: request, endpointProvider: endpointProvider, completion: completion)
+    }
+    
+    static private func createRequest(url: URL,
+                                      endpointProvider: TPEndpointProvider,
+                                      headers: HTTPHeaders?,
+                                      parameters: Parameters?) -> DataRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = endpointProvider.endpoint.method.rawValue
+
+        if let customHeaders = headers?.dictionary {
+            request.allHTTPHeaderFields = customHeaders
+        }
+        request.setValue(getUserAgent(), forHTTPHeaderField: "User-Agent")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+       if (KeychainTokenItem.isExist()) {
+           let token: String = KeychainTokenItem.getToken()
+           request.setValue("JWT " + token, forHTTPHeaderField: "Authorization")
+       }
+        
+        if let params = parameters {
+            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        }
+        return Alamofire.AF.request(request)
+    }
+    
+    public static func request(dataRequest: DataRequest,
+                        endpointProvider: TPEndpointProvider,
+                        completion: @escaping (String?, TPError?) -> Void) {
+        
+        dataRequest.responseString(queue: .main, encoding: .utf8) { response in
+            #if DEBUG
+                debugLog(response: response)
+            #endif
+            
+            guard let httpResponse = response.response else {
+                handleError(error: response.error ?? TPError(message: "Unknown error", kind: .unexpected), completion: completion)
+                return
+            }
+            
+            switch response.result {
+            case .success(let json):
+                handleSuccess(json: json, statusCode: httpResponse.statusCode, httpResponse: httpResponse, endpointProvider: endpointProvider, completion: completion)
+                
+            case .failure(let error):
+                handleError(error: error, httpResponse: httpResponse, completion: completion)
+            }
+        }
+    }
+    
+    private static func handleSuccess(json: String, statusCode: Int, httpResponse: HTTPURLResponse, endpointProvider: TPEndpointProvider, completion: @escaping (String?, TPError?) -> Void) {
+        if statusCode >= 200 && statusCode < 300 {
+            completion(json, nil)
+        } else {
+
+            var error = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
+
+            if (statusCode == 401 && ![TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)) {
+                authErrorDelegate?.handleUnauthenticatedError()
+            } else if error.kind == .custom {
+                handleCustomError(error: error)
+            }
+            
+            error.logErrorToSentry()
+            completion(nil, error)
+        }
+    }
+    
+    private static func createError(for statusCode: Int, message: String, httpResponse: HTTPURLResponse, endpointProvider: TPEndpointProvider) -> TPError {
+        switch statusCode {
+        case 403:
+            return TPError(message: message, response: httpResponse, kind: .unauthenticated)
+        case 401 where ![TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint):
+            return TPError(message: message, response: httpResponse, kind: .unauthenticated)
+        default:
+            return TPError(message: message, response: httpResponse, kind: .http)
+        }
+    }
+
+    public static func handleError(error: Error, httpResponse: HTTPURLResponse? = nil, completion: @escaping (String?, TPError?) -> Void) {
+        let errorDescription = error.localizedDescription
+        let kind: TPError.Kind = (error as? URLError)?.isNetworkRelated == true ? .network : .unexpected
+        
+        let tpError = TPError(message: errorDescription, response: httpResponse, kind: kind)
+        
+        if tpError.kind == .custom {
+            handleCustomError(error: tpError)
+        }
+        
+        tpError.logErrorToSentry()
+        completion(nil, tpError)
+    }
+
+    private static func handleCustomError(error: TPError) {
+        switch error.error_code {
+        case Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE:
+            authErrorDelegate?.handleMultipleLoginRestrictionError(error: error)
+        case Constants.MAX_LOGIN_LIMIT_EXCEEDED:
+            authErrorDelegate?.handleMaxLoginLimitError()
+        default:
+            break
+        }
+    }
+    
+    public static func getUserAgent() -> String {
+        // Testpress iOS App/1.17.0.1 iPhone8,4, iOS/12_1_4 CFNetwork
+        let device = UIDevice.current
+        return "\(Constants.getAppName())/\(Constants.getAppVersion()) \(device.modelName), iOS/\(device.systemVersion.replacingOccurrences(of: ".", with: "_")) CFNetwork"
+    }
+    
+
+    
+    public static func request<T: TestpressModel>(type: T.Type,
+                                           endpointProvider: TPEndpointProvider,
+                                           parameters: Parameters? = nil,
+                                           completion: @escaping(T?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, parameters: parameters, completion: {
+            json, error in
+            var dataModel: T? = nil
+            if let json = json {
+                dataModel = TPModelMapper<T>().mapFromJSON(json: json)
+                guard dataModel != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(dataModel, error)
+        })
+    }
+    
+    private static func debugLog(response: AFDataResponse<String>) {
+        print(NSString(data: response.request?.httpBody ?? Data(), encoding: String.Encoding.utf8.rawValue) ?? "Empty Request Body")
+        print(response)
+        print(response.response ?? "No HTTP response")
+        print(response.metrics ?? "No metrics")
+    }
+    
+    public static func getListItems<T> (type: T.Type,
+                                 endpointProvider: TPEndpointProvider,
+                                 headers: HTTPHeaders? = nil,
+                                 completion: @escaping (ApiResponse<T>?, TPError?) -> Void) {
+        
+        apiCall(endpointProvider: endpointProvider, headers: headers, completion: {
+            json, error in
+            
+            var testpressResponse: ApiResponse<T>? = nil
+            if let json = json {
+                testpressResponse = TPModelMapper<ApiResponse<T>>().mapFromJSON(json: json)
+                debugPrint(testpressResponse?.results ?? "Error")
+                guard testpressResponse != nil else {
+                    completion(nil, TPError(message: json, kind: .unexpected))
+                    return
+                }
+            }
+            completion(testpressResponse, error)
+        })
+    }
+    
+    public static func getListItems<T> (endpointProvider: TPEndpointProvider,
                                  headers: HTTPHeaders? = nil,
                                  completion: @escaping (TPApiResponse<T>?, TPError?) -> Void,
                                  type: T.Type) {
@@ -33,7 +226,7 @@ extension TPApiClient {
         })
     }
     
-    static func uploadImage(imageData: Data, fileName: String,
+    public static func uploadImage(imageData: Data, fileName: String,
                             completion: @escaping (FileDetails?, TPError?) -> Void) {
         
         let url =  URL(string: TPEndpointProvider(.uploadImage).getUrl())!
@@ -75,7 +268,7 @@ extension TPApiClient {
 
     }
     
-    static func authenticate(username: String, password: String,
+    public static func authenticate(username: String, password: String,
                              provider: AuthProvider = .TESTPRESS,
                              completion: @escaping (TPAuthToken?, TPError?) -> Void) {
         
@@ -104,7 +297,7 @@ extension TPApiClient {
         })
     }
     
-    static func resetPassword(email: String,
+    public static func resetPassword(email: String,
                               completion: @escaping (TPError?) -> Void) {
         
         let parameters: Parameters = ["email": email]
@@ -116,7 +309,7 @@ extension TPApiClient {
         )
     }
     
-    static func verifyPhoneNumber(username: String, code: String, completion: @escaping (TPError?) -> Void) {
+    public static func verifyPhoneNumber(username: String, code: String, completion: @escaping (TPError?) -> Void) {
         let parameters: Parameters = ["code": code, "username": username]
         apiCall(endpointProvider: TPEndpointProvider(.verifyPhoneNumber),
                 parameters: parameters,
@@ -126,7 +319,7 @@ extension TPApiClient {
         )
     }
     
-    static func registerNewUser(username: String, email: String, password: String, phone: String, country_code:String, completion: @escaping (TestpressModel?, TPError?) -> Void) {
+    public static func registerNewUser(username: String, email: String, password: String, phone: String, country_code:String, completion: @escaping (TestpressModel?, TPError?) -> Void) {
         
         let parameters: Parameters = ["username": username, "email": email, "password": password, "phone": phone, "country_code":country_code]
         apiCall(endpointProvider: TPEndpointProvider(.registerNewUser), parameters: parameters,
@@ -144,7 +337,7 @@ extension TPApiClient {
         })
     }
     
-    static func getSSOUrl(completion: @escaping(SSOUrl?, TPError?) -> Void) {
+    public static func getSSOUrl(completion: @escaping(SSOUrl?, TPError?) -> Void) {
         apiCall(endpointProvider: TPEndpointProvider(.getSSOUrl),
                 completion: {
                     json, error in
@@ -162,7 +355,7 @@ extension TPApiClient {
         )
     }
     
-    static func getProfile(endpointProvider: TPEndpointProvider,
+    public static func getProfile(endpointProvider: TPEndpointProvider,
                            completion: @escaping(User?, TPError?) -> Void) {
         
         apiCall(endpointProvider: endpointProvider, completion: {
@@ -180,7 +373,7 @@ extension TPApiClient {
         })
     }
     
-    static func postComment(comment: String,
+    public static func postComment(comment: String,
                             commentsUrl: String,
                             completion: @escaping (Comment?, TPError?) -> Void) {
         
@@ -201,28 +394,7 @@ extension TPApiClient {
         })
     }
     
-    static func getListItems<T> (type: T.Type,
-                                 endpointProvider: TPEndpointProvider,
-                                 headers: HTTPHeaders? = nil,
-                                 completion: @escaping (ApiResponse<T>?, TPError?) -> Void) {
-        
-        apiCall(endpointProvider: endpointProvider, headers: headers, completion: {
-            json, error in
-            
-            var testpressResponse: ApiResponse<T>? = nil
-            if let json = json {
-                testpressResponse = TPModelMapper<ApiResponse<T>>().mapFromJSON(json: json)
-                debugPrint(testpressResponse?.results ?? "Error")
-                guard testpressResponse != nil else {
-                    completion(nil, TPError(message: json, kind: .unexpected))
-                    return
-                }
-            }
-            completion(testpressResponse, error)
-        })
-    }
-    
-    static func getExams(endpointProvider: TPEndpointProvider,
+    public static func getExams(endpointProvider: TPEndpointProvider,
                          completion: @escaping (TPApiResponse<Exam>?, TPError?) -> Void) {
         
         apiCall(endpointProvider: endpointProvider, completion: {
@@ -241,7 +413,7 @@ extension TPApiClient {
         })
     }
     
-    static func getQuestions(endpointProvider: TPEndpointProvider,
+    public static func getQuestions(endpointProvider: TPEndpointProvider,
                              completion: @escaping(TPApiResponse<AttemptItem>?, TPError?) -> Void) {
         
         apiCall(endpointProvider: endpointProvider, completion: {
@@ -260,7 +432,7 @@ extension TPApiClient {
         })
     }
     
-    static func updateAttemptState(endpointProvider: TPEndpointProvider,
+    public static func updateAttemptState(endpointProvider: TPEndpointProvider,
                                    completion: @escaping (Attempt?, TPError?) -> Void) {
         
         apiCall(endpointProvider: endpointProvider, completion: {
@@ -278,7 +450,7 @@ extension TPApiClient {
         })
     }
     
-    static func saveAnswer(selectedAnswer: [Int],
+    public static func saveAnswer(selectedAnswer: [Int],
                            review: Bool,
                            shortAnswer: String?,
                            gapFilledResponses: [GapFillResponse]?,
@@ -318,7 +490,7 @@ extension TPApiClient {
         })
     }
     
-    static func loadAttempts(endpointProvider: TPEndpointProvider,
+    public static func loadAttempts(endpointProvider: TPEndpointProvider,
                              completion: @escaping(TPApiResponse<Attempt>?, TPError?) -> Void) {
         
         apiCall(endpointProvider: endpointProvider, completion: {
@@ -344,5 +516,11 @@ extension Dictionary {
         for (key,value) in other {
             self.updateValue(value, forKey:key)
         }
+    }
+}
+
+private extension URLError {
+    var isNetworkRelated: Bool {
+        return [.notConnectedToInternet, .cannotConnectToHost, .timedOut].contains(self.code)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CategoryPager.swift
+//  PostPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,32 +23,35 @@
 //  THE SOFTWARE.
 //
 
-import Alamofire
-import ObjectMapper
-import CourseKit
-
-class CategoryPager: TPBasePager<CourseKit.Category> {
+public class PostPager: TPBasePager<Post> {
     
-    var starred: Bool?
+    public let endpoint: TPEndpoint
+    public var category: CourseKit.Category!
     
-    init(starred: Bool? = nil) {
-        self.starred = starred
+    public init(endpoint: TPEndpoint = .getPosts) {
+        self.endpoint = endpoint
+        super.init()
     }
     
-    override func getItems(page: Int) {
+    public override func getItems(page: Int) {
+        queryParams.updateValue("-published_date", forKey: Constants.ORDER)
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
-        if starred != nil {
-            queryParams.updateValue(String(starred!), forKey: Constants.STARRED)
+        if category != nil {
+            queryParams.updateValue(category.slug, forKey: Constants.CATEGORY)
         }
         TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(.getPostCategories, queryParams: queryParams),
+            endpointProvider: TPEndpointProvider(endpoint, queryParams: queryParams),
             completion: resonseHandler!,
-            type: CourseKit.Category.self
+            type: Post.self
         )
     }
     
-    override func getId(resource: CourseKit.Category) -> Int {
-        return resource.id
+    public override func register(resource post: Post) -> Post? {
+        return post.isActive ? post : nil
+    }
+    
+    public override func getId(resource: Post) -> Int {
+        return resource.id!
     }
     
 }

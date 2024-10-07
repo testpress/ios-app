@@ -23,20 +23,19 @@
 //  THE SOFTWARE.
 //
 
-import CourseKit
 
-class SubjectPager: TPBasePager<Subject> {
+public class SubjectPager: TPBasePager<Subject> {
     
-    let url: String
-    let parentSubjectId: String
+    public let url: String
+    public let parentSubjectId: String
     
-    init(_ analyticsUrl: String, parentSubjectId: String) {
+    public init(_ analyticsUrl: String, parentSubjectId: String) {
         url = analyticsUrl
         self.parentSubjectId = parentSubjectId
         super.init()
     }
     
-    override func getItems(page: Int) {
+    public override func getItems(page: Int) {
         queryParams.updateValue(parentSubjectId, forKey: Constants.PARENT)
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
@@ -46,7 +45,7 @@ class SubjectPager: TPBasePager<Subject> {
         )
     }
     
-    override func register(resource subject: Subject) -> Subject? {
+    public override func register(resource subject: Subject) -> Subject? {
         // Discard the Subject if its Total answered count is zero
         if subject.total != 0 {
             subject.percentage = getPercentage(subject.correct, of: subject.total)
@@ -57,11 +56,11 @@ class SubjectPager: TPBasePager<Subject> {
         return nil;
     }
     
-    func getPercentage(_ value: Int, of total: Int) -> Double {
+    public func getPercentage(_ value: Int, of total: Int) -> Double {
         return Double(value) / Double(total) * 100;
     }
     
-    override func getId(resource: Subject) -> Int {
+    public override func getId(resource: Subject) -> Int {
         return resource.id!
     }
     

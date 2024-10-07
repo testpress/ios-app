@@ -27,7 +27,7 @@
 import Foundation
 import Alamofire
 
-enum TPEndpoint {
+public enum TPEndpoint {
     
     case authenticateUser
     case registerNewUser
@@ -80,7 +80,7 @@ enum TPEndpoint {
     case getSSOUrl
     case getS3PreSignedUrl
 
-    var method: Alamofire.HTTPMethod {
+    public var method: Alamofire.HTTPMethod {
         switch self {
         case .authenticateUser:
             return .post
@@ -150,7 +150,7 @@ enum TPEndpoint {
         }
     }
     
-    var urlPath: String {
+    public var urlPath: String {
         switch self {
         case .authenticateUser:
             return "/api/v2.3/auth-token/"
@@ -244,12 +244,12 @@ enum TPEndpoint {
     }
 }
 
-struct TPEndpointProvider {
-    var endpoint: TPEndpoint
-    var url: String
-    var queryParams: [String: String]
+public struct TPEndpointProvider {
+    public var endpoint: TPEndpoint
+    public var url: String
+    public var queryParams: [String: String]
     
-    init(_ endpoint: TPEndpoint,
+    public init(_ endpoint: TPEndpoint,
          url: String = "",
          queryParams: [String: String] = [String: String]()) {
         
@@ -258,7 +258,7 @@ struct TPEndpointProvider {
         self.queryParams = queryParams
     }
     
-    init(_ endpoint: TPEndpoint,
+    public init(_ endpoint: TPEndpoint,
          urlPath: String,
          queryParams: [String: String] = [String: String]()) {
         
@@ -266,7 +266,7 @@ struct TPEndpointProvider {
         self.init(endpoint, url: url, queryParams: queryParams)
     }
     
-    func getUrl() -> String {
+    public func getUrl() -> String {
         // If the given url is empty, use base url with url path
         var url = self.url.isEmpty ? Constants.BASE_URL + endpoint.urlPath : self.url
         if !queryParams.isEmpty {
@@ -287,28 +287,28 @@ struct TPEndpointProvider {
         return url
     }
     
-    static func getBookmarkPath(bookmarkId: Int) -> String {
+    public static func getBookmarkPath(bookmarkId: Int) -> String {
         return TPEndpoint.bookmarks.urlPath + "\(bookmarkId)/"
     }
     
-    static func getBookmarkFolderPath(folderId: Int) -> String {
+    public static func getBookmarkFolderPath(folderId: Int) -> String {
         return TPEndpoint.bookmarkFolders.urlPath + "\(folderId)/"
     }
     
-    static func getCommentsUrl(questionId: Int) -> String {
+    public static func getCommentsUrl(questionId: Int) -> String {
         return Constants.BASE_URL + TPEndpoint.getQuestions.urlPath + "\(questionId)"
             + TPEndpoint.commentsPath.urlPath
     }
     
-    static func getContentAttemptUrl(contentID: Int) -> String {
+    public static func getContentAttemptUrl(contentID: Int) -> String {
         return Constants.BASE_URL + TPEndpoint.getContents.urlPath + "\(contentID)" + TPEndpoint.attemptsPath.urlPath
     }
     
-    static func getVideoAttemptPath(attemptID: Int) -> String {
+    public static func getVideoAttemptPath(attemptID: Int) -> String {
         return Constants.BASE_URL + TPEndpoint.userVideos.urlPath + "\(attemptID)/"
     }
     
-    static func getDRMLicenseURL(contentID: Int) -> String {
+    public static func getDRMLicenseURL(contentID: Int) -> String {
         return Constants.BASE_URL + "/api/v2.5/chapter_contents/\(contentID)/drm_license/"
     }
 }

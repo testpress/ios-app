@@ -25,23 +25,22 @@
 
 import Alamofire
 import ObjectMapper
-import CourseKit
 
-class ActivityFeedPager: BasePager<ActivityFeedResponse, ActivityFeed> {
+public class ActivityFeedPager: BasePager<ActivityFeedResponse, ActivityFeed> {
     
-    var contentTypes = [Int: ContentType]()
-    var users = [Int: User]()
-    var chapters = [Int: Chapter]()
-    var contents = [Int: Content]()
-    var contentAttempts = [Int: ContentAttempt]()
-    var htmlContents = [Int: HtmlContent]()
-    var videos = [Int: Video]()
-    var attachments = [Int: Attachment]()
-    var exams = [Int: Exam]()
-    var posts = [Int: Post]()
-    var postCategories = [Int: CourseKit.Category]()
+    public var contentTypes = [Int: ContentType]()
+    public var users = [Int: User]()
+    public var chapters = [Int: Chapter]()
+    public var contents = [Int: Content]()
+    public var contentAttempts = [Int: ContentAttempt]()
+    public var htmlContents = [Int: HtmlContent]()
+    public var videos = [Int: Video]()
+    public var attachments = [Int: Attachment]()
+    public var exams = [Int: Exam]()
+    public var posts = [Int: Post]()
+    public var postCategories = [Int: CourseKit.Category]()
     
-    override func getItems(_ resultResponse: ActivityFeedResponse) -> [ActivityFeed] {
+    public override func getItems(_ resultResponse: ActivityFeedResponse) -> [ActivityFeed] {
         let activities: [ActivityFeed] = resultResponse.activities
         if !activities.isEmpty {
             // DON'T CHANGE THE BELOW ORDER
@@ -82,7 +81,7 @@ class ActivityFeedPager: BasePager<ActivityFeedResponse, ActivityFeed> {
         return activities
     }
     
-    override func getResponse(page: Int) {
+    public override func getResponse(page: Int) {
         queryParams.updateValue(Constants.ADMIN, forKey: Constants.FILTER)
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         TPApiClient.getListItems(
@@ -92,7 +91,7 @@ class ActivityFeedPager: BasePager<ActivityFeedResponse, ActivityFeed> {
         )
     }
     
-    override func register(resource activity: ActivityFeed) -> ActivityFeed? {
+    public override func register(resource activity: ActivityFeed) -> ActivityFeed? {
         
         activity.actor = users[Int(activity.actorObjectId)!]
         let actionObjectId = Int(activity.actionObjectObjectId)!
@@ -147,7 +146,7 @@ class ActivityFeedPager: BasePager<ActivityFeedResponse, ActivityFeed> {
         return activity
     }
     
-    override func getId(resource: ActivityFeed) -> Int {
+    public override func getId(resource: ActivityFeed) -> Int {
         return resource.id
     }
     

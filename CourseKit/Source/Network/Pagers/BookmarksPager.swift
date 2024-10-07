@@ -25,31 +25,30 @@
 
 import Alamofire
 import ObjectMapper
-import CourseKit
 
-class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
+public class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
     
-    var contentTypes = [Int: ContentType]()
-    var folders = [Int: BookmarkFolder]()
+    public var contentTypes = [Int: ContentType]()
+    public var folders = [Int: BookmarkFolder]()
     
-    var reviewItems = [Int: AttemptItem]()
-    var questions = [Int: AttemptQuestion]()
-    var answers = [Int: AttemptAnswer]()
-    var translations = [Int: AttemptQuestion]()
-    var answerTranslations = [Int: AttemptAnswer]()
+    public var reviewItems = [Int: AttemptItem]()
+    public var questions = [Int: AttemptQuestion]()
+    public var answers = [Int: AttemptAnswer]()
+    public var translations = [Int: AttemptQuestion]()
+    public var answerTranslations = [Int: AttemptAnswer]()
     
-    var directions = [Int: Direction]()
-    var subjects = [Int: Subject]()
+    public var directions = [Int: Direction]()
+    public var subjects = [Int: Subject]()
     
-    var contents = [Int: Content]()
-    var htmlContents = [Int: HtmlContent]()
-    var videos = [Int: Video]()
-    var streams = [Int: [Stream]]()
-    var attachments = [Int: Attachment]()
+    public var contents = [Int: Content]()
+    public var htmlContents = [Int: HtmlContent]()
+    public var videos = [Int: Video]()
+    public var streams = [Int: [Stream]]()
+    public var attachments = [Int: Attachment]()
     
-    var folder: String!
+    public var folder: String!
     
-    override func getResponse(page: Int) {
+    public override func getResponse(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         if folder != nil {
             if folder == BookmarkFolder.UNCATEGORIZED {
@@ -67,7 +66,7 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
         )
     }
     
-    override func getItems(_ resultResponse: BookmarksListResponse) -> [Bookmark] {
+    public override func getItems(_ resultResponse: BookmarksListResponse) -> [Bookmark] {
         let bookmarks: [Bookmark] = resultResponse.bookmarks
         if !bookmarks.isEmpty {
             response!.results.folders.forEach { folder in
@@ -118,7 +117,7 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
         return bookmarks
     }
     
-    func storeStreams() {
+    public func storeStreams() {
         response?.results.streams.forEach { stream in
             if(streams[stream.videoId] == nil) {
                 streams.updateValue([stream], forKey: stream.videoId)
@@ -130,7 +129,7 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
         }
     }
     
-    override func register(resource bookmark: Bookmark) -> Bookmark? {
+    public override func register(resource bookmark: Bookmark) -> Bookmark? {
         
         if bookmark.folderId != 0 {
             bookmark.folder = folders[bookmark.folderId]!.name
@@ -171,11 +170,11 @@ class BookmarksPager: BasePager<BookmarksListResponse, Bookmark> {
         return bookmark
     }
     
-    override func getId(resource: Bookmark) -> Int {
+    public override func getId(resource: Bookmark) -> Int {
         return resource.id
     }
     
-    override func clearValues() {
+    public override func clearValues() {
         super.clearValues()
         resetValues(of: [contentTypes, folders, reviewItems, questions, answers, translations,
                          answerTranslations, contents, htmlContents, videos, attachments,

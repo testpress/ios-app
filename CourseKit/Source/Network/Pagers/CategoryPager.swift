@@ -1,5 +1,5 @@
 //
-//  CommentPager.swift
+//  CategoryPager.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -23,28 +23,31 @@
 //  THE SOFTWARE.
 //
 
-import CourseKit
+import Alamofire
+import ObjectMapper
 
-class CommentPager: TPBasePager<Comment> {
+public class CategoryPager: TPBasePager<CourseKit.Category> {
     
-    let url: String!
+    public var starred: Bool?
     
-    init(_ commentsUrl: String) {
-        url = commentsUrl
-        super.init()
+    public init(starred: Bool? = nil) {
+        self.starred = starred
     }
     
-    override func getItems(page: Int) {
+    public override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
+        if starred != nil {
+            queryParams.updateValue(String(starred!), forKey: Constants.STARRED)
+        }
         TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(.get, url: url, queryParams: queryParams),
+            endpointProvider: TPEndpointProvider(.getPostCategories, queryParams: queryParams),
             completion: resonseHandler!,
-            type: Comment.self
+            type: CourseKit.Category.self
         )
     }
     
-    override func getId(resource: Comment) -> Int {
-        return resource.id!
+    public override func getId(resource: CourseKit.Category) -> Int {
+        return resource.id
     }
     
 }

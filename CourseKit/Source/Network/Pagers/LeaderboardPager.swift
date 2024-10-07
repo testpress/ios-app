@@ -1,8 +1,8 @@
 //
-//  LoginActivityPager.swift
+//  LeaderboardPager.swift
 //  ios-app
 //
-//  Copyright © 2019 Testpress. All rights reserved.
+//  Copyright © 2017 Testpress. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,26 +23,23 @@
 //  THE SOFTWARE.
 //
 
-
-
 import Alamofire
 import ObjectMapper
 import CourseKit
 
-class LoginActivityPager: BaseDBItemPager<LoginActivity> {
+public class LeaderboardPager: TPBasePager<Reputation> {
     
-    override func getItems(page: Int) {
-        queryParams.updateValue("app", forKey: Constants.FILTER)
+    public override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
+        queryParams.updateValue(String(20), forKey: Constants.PAGE_SIZE)
         TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(.loginActivity, queryParams: queryParams),
-            headers: headers,
+            endpointProvider: TPEndpointProvider(.getLeaderboard, queryParams: queryParams),
             completion: resonseHandler!,
-            type: LoginActivity.self
+            type: Reputation.self
         )
     }
     
-    override func getId(resource: LoginActivity) -> Int {
+    public override func getId(resource: Reputation) -> Int {
         return resource.id
     }
     

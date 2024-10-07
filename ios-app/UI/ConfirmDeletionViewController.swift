@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import CourseKit
 
 class ConfirmDeletionViewController: WebViewController, WKScriptMessageHandler {
     override func viewDidLoad() {
