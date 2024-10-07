@@ -82,6 +82,15 @@
       }
     },
     {
+      "identity" : "luexpandabletableview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/LaurentiuUngur/LUExpandableTableView",
+      "state" : {
+        "revision" : "0bd7404416694852e35e313722dcbd6b631dfda4",
+        "version" : "6.0.0"
+      }
+    },
+    {
       "identity" : "m3u8parser",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/M3U8Kit/M3U8Parser",

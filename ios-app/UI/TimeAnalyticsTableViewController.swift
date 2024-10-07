@@ -170,6 +170,10 @@ extension TimeAnalyticsTableViewController: LUExpandableTableViewDataSource {
 }
 
 extension TimeAnalyticsTableViewController: LUExpandableTableViewDelegate {
+    func expandableTableView(_ expandableTableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
     
     func expandableTableView(_ expandableTableView: LUExpandableTableView,
                              heightForRowAt indexPath: IndexPath) -> CGFloat {
