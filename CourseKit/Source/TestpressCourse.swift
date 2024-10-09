@@ -11,7 +11,15 @@ public class TestpressCourse {
 
     private init() {}
     
-    public func initialize() {
+    public func initialize(withToken token: String? = nil){
+        initializeDB()
+        
+        if let token = token {
+            saveTokenToKeychain(token: token)
+        }
+    }
+    
+    public func initializeDB() {
         DBConnection.configure()
     }
 
@@ -33,5 +41,14 @@ public class TestpressCourse {
     
     public func clearData() {
         DBConnection.clearTables()
+    }
+    
+    private func saveTokenToKeychain(token: String) {
+        do {
+            let passwordItem = KeychainTokenItem(service: Constants.KEYCHAIN_SERVICE_NAME, account: "TestpressUser")
+            try passwordItem.savePassword(token)
+        } catch {
+            fatalError("Error updating keychain - \(error)")
+        }
     }
 }
