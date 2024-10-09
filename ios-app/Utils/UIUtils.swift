@@ -127,24 +127,6 @@ public class UIUtils {
         
         viewController.present(profileViewController, animated: true)
     }
-    
-    static func fetchInstituteSettings(
-        completion: @escaping(InstituteSettings?, TPError?) -> Void) {
-        TPApiClient.request(
-            type: InstituteSettings.self,
-            endpointProvider: TPEndpointProvider(.instituteSettings),
-            completion: {
-                instituteSettings, error in
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                } else {
-                    instituteSettings!.baseUrl = Constants.BASE_URL
-                    DBManager<InstituteSettings>().addData(objects: [instituteSettings!])
-                }
-                completion(instituteSettings,error)
-        })
-    }
 
     static func getLoginOrTabViewController() -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

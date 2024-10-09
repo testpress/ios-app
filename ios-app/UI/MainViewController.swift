@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
     func fetchInstitueSettings() {
         activityIndicator.startAnimating()
 
-        UIUtils.fetchInstituteSettings(
+        InstituteRepository.shared.getSettings(
             completion: { instituteSettings, error in
                 if let error = error {
                     debugPrint(error.message ?? "No error")

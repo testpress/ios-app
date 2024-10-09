@@ -74,6 +74,7 @@
 		03A60FA82CB4114A00079A7C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435D4263ADBAA00243FD3 /* UserDefaults.swift */; };
 		03A60FAB2CB4153900079A7C /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 03A60FAA2CB4153900079A7C /* Sentry */; };
 		03A60FAE2CB417CC00079A7C /* LUExpandableTableView in Frameworks */ = {isa = PBXBuildFile; productRef = 03A60FAD2CB417CC00079A7C /* LUExpandableTableView */; };
+		03A60FB02CB5281000079A7C /* InstituteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A60FAF2CB5280F00079A7C /* InstituteRepository.swift */; };
 		03AFFB832C0076AE0015C029 /* ChapterContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */; };
 		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
@@ -490,6 +491,7 @@
 		038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		03A60F6C2CB3EAEE00079A7C /* AuthErrorHandlingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorHandlingDelegate.swift; sourceTree = "<group>"; };
 		03A60FA02CB3FEB000079A7C /* AuthErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorHandler.swift; sourceTree = "<group>"; };
+		03A60FAF2CB5280F00079A7C /* InstituteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstituteRepository.swift; sourceTree = "<group>"; };
 		03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStream.swift; sourceTree = "<group>"; };
 		03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterContentDetailViewModel.swift; sourceTree = "<group>"; };
 		03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
@@ -1031,6 +1033,7 @@
 				2592868B2474316B0035EBA4 /* AttemptItemRepository.swift */,
 				25985834248A77BC003591FA /* EncryptionKeyRepository.swift */,
 				25E435D1263ADB5B00243FD3 /* DashboardRepository.swift */,
+				03A60FAF2CB5280F00079A7C /* InstituteRepository.swift */,
 			);
 			path = Repostories;
 			sourceTree = "<group>";
@@ -2280,6 +2283,7 @@
 				03E4AF472CAEDF7F00ECC34D /* TPModelMapper.swift in Sources */,
 				03A60FA72CB4107100079A7C /* URLUtils.swift in Sources */,
 				03A60FA42CB4060100079A7C /* AttemptItemRepository.swift in Sources */,
+				03A60FB02CB5281000079A7C /* InstituteRepository.swift in Sources */,
 				03E4AF632CAEDF7F00ECC34D /* AttemptAnswer.swift in Sources */,
 				03E4AFC02CAFCF6F00ECC34D /* ContentType.swift in Sources */,
 				03A60F962CB3F35000079A7C /* AuthErrorHandlingDelegate.swift in Sources */,

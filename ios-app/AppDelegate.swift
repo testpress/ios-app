@@ -87,9 +87,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         setupRootViewController()
         setupAuthErrorHandlerOnApiClient()
         
-        if let instituteSettings = fetchInstituteSettings() {
-            setupSentry(instituteSettings: instituteSettings)
-            restrictScreenRecording(instituteSettings: instituteSettings)
+        InstituteRepository.shared.getSettings { instituteSettings, error in
+            if let instituteSettings = instituteSettings {
+                self.setupSentry(instituteSettings: instituteSettings)
+                self.restrictScreenRecording(instituteSettings: instituteSettings)
+            }
         }
 
         return true
@@ -155,10 +157,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private func setupRootViewController() {
         let viewController: UIViewController
-        if !InstituteSettings.isAvailable() {
+        if !InstituteRepository.shared.isSettingsCached() {
             viewController = MainViewController()
         } else {
-            UIUtils.fetchInstituteSettings(completion: { _, _ in })
+            InstituteRepository.shared.getSettings(refresh: true, completion: { _, _ in })
             viewController = UIUtils.getLoginOrTabViewController()
         }
 
@@ -169,11 +171,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     private func setupAuthErrorHandlerOnApiClient(){
         TPApiClient.authErrorDelegate = AuthErrorHandler()
-    }
-
-    private func fetchInstituteSettings() -> InstituteSettings? {
-        guard InstituteSettings.isAvailable() else { return nil }
-        return DBManager<InstituteSettings>().getResultsFromDB().first
     }
 
     private func setupSentry(instituteSettings: InstituteSettings) {
