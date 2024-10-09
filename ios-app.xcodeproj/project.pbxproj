@@ -1334,7 +1334,6 @@
 			isa = PBXGroup;
 			children = (
 				2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */,
-				2FC0F2531F8617690092BFDC /* CALayerBorderColor.swift */,
 				2FC0F2541F8617690092BFDC /* FormatDate.swift */,
 				2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */,
 				2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */,
@@ -1344,11 +1343,7 @@
 				2F515DFD1FF517160005D8A5 /* Permissions.swift */,
 				2F6F167E1FC4164100FB768C /* Reachability.swift */,
 				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
-				2FA9284F20B7DF2200CD3076 /* StringExtension.swift */,
-				2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */,
-				2F4A81EC20E4DDFC0062DE8A /* UINavigationControllerExtension.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
-				2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 				8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */,
 				25985836248A77F6003591FA /* M3U8Handler.swift */,
@@ -1626,6 +1621,11 @@
 				03E4AF642CAEE53E00ECC34D /* Exam.swift */,
 				03E4AFCF2CAFD15800ECC34D /* TPError.swift */,
 				03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */,
+				2FC0F2531F8617690092BFDC /* CALayerBorderColor.swift */,
+				2FA9284F20B7DF2200CD3076 /* StringExtension.swift */,
+				2F42BDDA1FE9167700F0DF14 /* UIImageViewExtension.swift */,
+				2F4A81EC20E4DDFC0062DE8A /* UINavigationControllerExtension.swift */,
+				2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
