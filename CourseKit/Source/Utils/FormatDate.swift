@@ -27,7 +27,7 @@ import Foundation
 
 public class FormatDate {
     
-    static func getDate(from dateString: String,
+    public static func getDate(from dateString: String,
                         givenFormat: String? = nil) -> Date? {
         
         let dateFormatter = DateFormatter()
@@ -48,7 +48,7 @@ public class FormatDate {
         return date
     }
     
-    static func format(date: Date, requiredFormat: String? = nil) -> String {
+    public static func format(date: Date, requiredFormat: String? = nil) -> String {
         
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(identifier: "UTC")
@@ -65,7 +65,7 @@ public class FormatDate {
         return dateFormatter.string(from: date)
     }
     
-    static func format(dateString: String?,
+    public static func format(dateString: String?,
                        givenFormat: String? = nil,
                        requiredFormat: String? = nil) -> String {
         
@@ -78,7 +78,7 @@ public class FormatDate {
         return format(date: date, requiredFormat: requiredFormat)
     }
     
-    static func compareDate(dateString1: String,
+    public static func compareDate(dateString1: String,
                             dateString2: String,
                             givenFormat: String? = nil) -> Bool {
         
@@ -87,14 +87,14 @@ public class FormatDate {
         return date1 > date2
     }
     
-    static func getElapsedTime(dateString: String, givenFormat: String? = nil) -> String {
+    public static func getElapsedTime(dateString: String, givenFormat: String? = nil) -> String {
         guard let date = getDate(from: dateString, givenFormat: givenFormat) else {
             return ""
         }
         return getElapsedTime(date: date)
     }
     
-    static func getElapsedTime(date: Date) -> String {
+    public static func getElapsedTime(date: Date) -> String {
         // https://stackoverflow.com/a/27337951/5134215
         var weeksFromNow: Int {
             return Calendar.current.dateComponents([.weekOfYear], from: date, to: Date())
@@ -127,7 +127,7 @@ public class FormatDate {
         return "Just now"
     }
     
-    static func utcToLocalTime(dateStr: String) -> String? {
+    public static func utcToLocalTime(dateStr: String) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "H:mm:ss"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
