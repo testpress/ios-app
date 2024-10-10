@@ -25,7 +25,7 @@
 
 import UIKit
 
-enum Images: String {
+public enum Images: String {
     case TestpressNoWifi = "testpress_no_wifi"
     case TestpressAlertWarning = "testpress_alert_warning"
     case ExamsFlatIcon = "exams_flat_icon"
@@ -52,7 +52,6 @@ enum Images: String {
     case PlayIcon = "play_icon"
     case PauseIcon = "pause_icon"
     case ReloadIcon = "reload"
-    case Round = "round"
     case RemoveBookmark = "bookmark_filled"
     case AddBookmark = "bookmark_outline"
     case CaretUp = "caret_up"
@@ -65,7 +64,6 @@ enum Images: String {
     case AttachmentIcon = "ic_attachment_icon_small"
     case ExamIcon = "ic_exam_icon"
     case NotesIcon = "ic_notes_icon"
-    case VideoConferenceIcon = "ic_video_conference_icon"
     case AttachmentIconWhite = "attachment_icon_white"
     case NotesIconWhite = "notes_icon_white"
     case ExamIconWhite = "exam_icon_white"
@@ -81,22 +79,22 @@ enum Images: String {
     case CompletedIcon = "completed"
     case AttachmentIconSmall = "notes_small"
     case NotesIconSmall = "attachment_small"
-    case AnalyticsIcon = "analytics"
     case OffersIcon = "offers"
     case DoubtsIcon = "doubt"
     case ValidityCalendar = "validity_calendar"
 
-    var image: UIImage {
+    public var image: UIImage {
         return UIImage(asset: self)
     }
 }
 
 extension UIImage {
-    convenience init!(asset: Images) {
-        self.init(named: asset.rawValue)
+    public convenience init!(asset: Images) {
+        let bundle = Bundle(for: ImageHelper.self)
+        self.init(named: asset.rawValue, in: bundle, compatibleWith: nil)
     }
     
-    func resized(to newSize: CGSize) -> UIImage? {
+    public func resized(to newSize: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
         draw(in: CGRect(origin: .zero, size: newSize))
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -104,3 +102,5 @@ extension UIImage {
         return resizedImage
     }
 }
+
+public class ImageHelper {}
