@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		0303692F2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0303692E2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy */; };
 		031FBACB2C47B23A00AAF71D /* QuestionReviewPage.js in Resources */ = {isa = PBXBuildFile; fileRef = 031FBACA2C47B23A00AAF71D /* QuestionReviewPage.js */; };
-		031FBACD2C47C49F00AAF71D /* FileDownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */; };
-		0332D2432C3FD17100345BA9 /* FileUploadPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */; };
 		035CC54A2CAE694D0057F4E4 /* ListTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705016246E48BA00E6C688 /* ListTransform.swift */; };
 		035CC54B2CAE694D0057F4E4 /* StringArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */; };
 		035CC54C2CAE694D0057F4E4 /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
@@ -98,6 +96,16 @@
 		03CD0C712CB7C5FD00E17218 /* UIInterfaceOrientationMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */; };
 		03CD0C722CB7C5FD00E17218 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F92A1F243306A60084ADC8 /* UIViewController.swift */; };
 		03CD0C732CB7C72E00E17218 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A81EC20E4DDFC0062DE8A /* UINavigationControllerExtension.swift */; };
+		03CD0C742CB7CF4900E17218 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFD1FF517160005D8A5 /* Permissions.swift */; };
+		03CD0C752CB7CF8400E17218 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */; };
+		03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0C762CB7CFC900E17218 /* TTGSnackbar */; };
+		03CD0C792CB7CFD600E17218 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0C782CB7CFD600E17218 /* TOCropViewController */; };
+		03CD0C7A2CB7D01C00E17218 /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */; };
+		03CD0C7B2CB7D25200E17218 /* FileUploadPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */; };
+		03CD0C7C2CB7D25200E17218 /* FileDownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */; };
+		03CD0C7D2CB7D25200E17218 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7522027FEB143000D8137 /* TimeUtils.swift */; };
+		03CD0C7E2CB7D31F00E17218 /* M3U8Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985836248A77F6003591FA /* M3U8Handler.swift */; };
+		03CD0C7F2CB7D31F00E17218 /* VideoPlayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */; };
 		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
 		03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586782628ABB81700E149B5 /* DBModel+Detachable.swift */; };
@@ -211,7 +219,6 @@
 		258036A52743AA2400397639 /* DRMKeySessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */; };
 		2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */; };
 		2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259286892473B1E00035EBA4 /* QuizReviewViewController.swift */; };
-		25985837248A77F6003591FA /* M3U8Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985836248A77F6003591FA /* M3U8Handler.swift */; };
 		2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */; };
 		2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; };
 		2599326F2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; };
@@ -230,7 +237,6 @@
 		25E435EC263ADE7500243FD3 /* DashboardSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435EA263ADE7500243FD3 /* DashboardSectionHeaderCell.swift */; };
 		25E435ED263ADE7500243FD3 /* DashboardSectionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25E435EB263ADE7500243FD3 /* DashboardSectionHeaderCell.xib */; };
 		25EF86ED247E2160005C2B96 /* pseudo_element_selector.js in Resources */ = {isa = PBXBuildFile; fileRef = 25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */; };
-		25F7522127FEB143000D8137 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7522027FEB143000D8137 /* TimeUtils.swift */; };
 		25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
 		2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */; };
@@ -274,9 +280,6 @@
 		2F515DF51FF3B7B10005D8A5 /* RichTextEditor.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F515DF31FF3B7B10005D8A5 /* RichTextEditor.html */; };
 		2F515DF61FF3B7B10005D8A5 /* RichTextEditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F515DF41FF3B7B10005D8A5 /* RichTextEditor.js */; };
 		2F515DF81FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */; };
-		2F515DFA1FF4D12A0005D8A5 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */; };
-		2F515DFE1FF517160005D8A5 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFD1FF517160005D8A5 /* Permissions.swift */; };
-		2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */; };
 		2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */; };
 		2F56B73B1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */; };
 		2F56B73D1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73C1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift */; };
@@ -381,7 +384,6 @@
 		8C2E7B5923979E5A00BA2F41 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */; };
 		8C2E7B5E2397B49000BA2F41 /* VideoPlayerControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */; };
 		8C2E7B602397B56600BA2F41 /* VideoPlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */; };
-		8C2E7B62239A1E4D00BA2F41 /* VideoPlayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */; };
 		8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */; };
 		8C3D6433239D5D8E001C7FE4 /* RelatedContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */; };
 		8CD78EA322BC917D00DD034D /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */; };
@@ -934,7 +936,9 @@
 			files = (
 				035CC5532CAE699B0057F4E4 /* ObjectMapper in Frameworks */,
 				03A60F9F2CB3F83D00079A7C /* Alamofire in Frameworks */,
+				03CD0C792CB7CFD600E17218 /* TOCropViewController in Frameworks */,
 				03CD0C642CB7B5D400E17218 /* DGCharts in Frameworks */,
+				03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */,
 				03E4AFCB2CAFCFD500ECC34D /* IGListKit in Frameworks */,
 				035CC54F2CAE698D0057F4E4 /* RealmSwift in Frameworks */,
 			);
@@ -1153,6 +1157,14 @@
 		03E4AFD32CAFE62200ECC34D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */,
+				25985836248A77F6003591FA /* M3U8Handler.swift */,
+				25F7522027FEB143000D8137 /* TimeUtils.swift */,
+				0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */,
+				031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */,
+				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
+				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
+				2F515DFD1FF517160005D8A5 /* Permissions.swift */,
 				2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
 				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
@@ -1356,16 +1368,8 @@
 			isa = PBXGroup;
 			children = (
 				2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */,
-				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
-				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
 				2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */,
-				2F515DFD1FF517160005D8A5 /* Permissions.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
-				8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */,
-				25985836248A77F6003591FA /* M3U8Handler.swift */,
-				25F7522027FEB143000D8137 /* TimeUtils.swift */,
-				0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */,
-				031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */,
 				03A60FA02CB3FEB000079A7C /* AuthErrorHandler.swift */,
 				03CD0C562CB7A04E00E17218 /* UserHelper.swift */,
 			);
@@ -1769,6 +1773,8 @@
 				03E4AFCA2CAFCFD500ECC34D /* IGListKit */,
 				03A60F9E2CB3F83D00079A7C /* Alamofire */,
 				03CD0C632CB7B5D400E17218 /* DGCharts */,
+				03CD0C762CB7CFC900E17218 /* TTGSnackbar */,
+				03CD0C782CB7CFD600E17218 /* TOCropViewController */,
 			);
 			productName = CourseKit;
 			productReference = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */;
@@ -2096,7 +2102,6 @@
 				2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */,
 				2FC0F3051F863BA90092BFDC /* MoreOptionsViewController.swift in Sources */,
 				2503DF6A263C17DA003226AD /* PostCarouselViewCell.swift in Sources */,
-				2F515DFE1FF517160005D8A5 /* Permissions.swift in Sources */,
 				2F9B5E171FC54AFC00D67100 /* AttachmentDetailViewController.swift in Sources */,
 				2503DF5B263C03B1003226AD /* HorizontalSectionCell.swift in Sources */,
 				2FCBDD4C20CFDB07003A7DC0 /* BookmarkHelper.swift in Sources */,
@@ -2113,7 +2118,6 @@
 				2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */,
 				2FC0F2FC1F863B810092BFDC /* BaseQuestionsPageViewController.swift in Sources */,
 				2FC0F2F91F863B780092BFDC /* AttemptsListViewController.swift in Sources */,
-				25F7522127FEB143000D8137 /* TimeUtils.swift in Sources */,
 				03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */,
 				2503DF50263C01E8003226AD /* CarouselSectionController.swift in Sources */,
 				8C3D6433239D5D8E001C7FE4 /* RelatedContentsCell.swift in Sources */,
@@ -2127,7 +2131,6 @@
 				2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */,
 				03CD0C572CB7A04E00E17218 /* UserHelper.swift in Sources */,
 				2FF024212004CECA00E0047D /* BaseDBTableViewController.swift in Sources */,
-				2F515DFA1FF4D12A0005D8A5 /* ImagePicker.swift in Sources */,
 				256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */,
 				8CDE2649239E1ACD00BA04C6 /* VideoPlayerSlider.swift in Sources */,
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
@@ -2147,7 +2150,6 @@
 				2503DF66263C177A003226AD /* PostSectionController.swift in Sources */,
 				250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */,
 				2F25D564201F5DBB00C01CCE /* BaseTableViewController.swift in Sources */,
-				2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */,
 				2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */,
 				2FC0F2FA1F863B7C0092BFDC /* AttemptsTableViewCell.swift in Sources */,
 				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
@@ -2158,17 +2160,13 @@
 				2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
 				03CD0C732CB7C72E00E17218 /* UINavigationControllerExtension.swift in Sources */,
-				25985837248A77F6003591FA /* M3U8Handler.swift in Sources */,
 				8C2E7B5923979E5A00BA2F41 /* VideoPlayerView.swift in Sources */,
-				0332D2432C3FD17100345BA9 /* FileUploadPicker.swift in Sources */,
 				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
-				031FBACD2C47C49F00AAF71D /* FileDownloadUtility.swift in Sources */,
 				2503DF79263FB21F003226AD /* ChapterContentSectionController.swift in Sources */,
 				250C4CAD2463D24600FD7636 /* BaseDBViewController.swift in Sources */,
 				2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */,
 				03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */,
-				8C2E7B62239A1E4D00BA2F41 /* VideoPlayerUtils.swift in Sources */,
 				2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2209,6 +2207,7 @@
 				03E4AFAF2CAFCF6F00ECC34D /* DRMLicenseKeyResponse.swift in Sources */,
 				03E4AFB42CAFCF6F00ECC34D /* DiscussionThreadAnswer.swift in Sources */,
 				03CD0C512CB79DC700E17218 /* RichTextEditor.swift in Sources */,
+				03CD0C7D2CB7D25200E17218 /* TimeUtils.swift in Sources */,
 				03CD0C6E2CB7C5FD00E17218 /* Stackview+BackgroundColor.swift in Sources */,
 				03CD0C722CB7C5FD00E17218 /* UIViewController.swift in Sources */,
 				03E4AFBB2CAFCF6F00ECC34D /* ContentsListResponse.swift in Sources */,
@@ -2232,6 +2231,7 @@
 				03E4AF622CAEDF7F00ECC34D /* Attempt.swift in Sources */,
 				03E4AF552CAEDF7F00ECC34D /* AttemptSection.swift in Sources */,
 				03E4AFAE2CAFCF6F00ECC34D /* ContentAttempt.swift in Sources */,
+				03CD0C7C2CB7D25200E17218 /* FileDownloadUtility.swift in Sources */,
 				03E4AFB92CAFCF6F00ECC34D /* SectionInfo.swift in Sources */,
 				841380302C9DA09D004D5846 /* CourseListViewController.swift in Sources */,
 				03E4AF512CAEDF7F00ECC34D /* ExamQuestion.swift in Sources */,
@@ -2263,6 +2263,7 @@
 				03CD0C672CB7C4B700E17218 /* AVPlayerExtensions.swift in Sources */,
 				03E4AFB62CAFCF6F00ECC34D /* RegistrationError.swift in Sources */,
 				03CD0C702CB7C5FD00E17218 /* Collection.swift in Sources */,
+				03CD0C7F2CB7D31F00E17218 /* VideoPlayerUtils.swift in Sources */,
 				03E4AF532CAEDF7F00ECC34D /* LoginActivity.swift in Sources */,
 				03A60FA52CB4060100079A7C /* DashboardRepository.swift in Sources */,
 				03E4AFC62CAFCF7000ECC34D /* BookmarksListResponse.swift in Sources */,
@@ -2277,6 +2278,7 @@
 				03A60F852CB3F34600079A7C /* ActivityFeedPager.swift in Sources */,
 				03E4AF4F2CAEDF7F00ECC34D /* LiveStream.swift in Sources */,
 				03E4AF602CAEDF7F00ECC34D /* Content.swift in Sources */,
+				03CD0C7B2CB7D25200E17218 /* FileUploadPicker.swift in Sources */,
 				03E4AFBE2CAFCF6F00ECC34D /* ExamQuestionsResponse.swift in Sources */,
 				03E4AF472CAEDF7F00ECC34D /* TPModelMapper.swift in Sources */,
 				03A60FA72CB4107100079A7C /* URLUtils.swift in Sources */,
@@ -2284,6 +2286,7 @@
 				03A60FB02CB5281000079A7C /* InstituteRepository.swift in Sources */,
 				03E4AF632CAEDF7F00ECC34D /* AttemptAnswer.swift in Sources */,
 				03E4AFC02CAFCF6F00ECC34D /* ContentType.swift in Sources */,
+				03CD0C752CB7CF8400E17218 /* ImagePicker.swift in Sources */,
 				03A60F962CB3F35000079A7C /* AuthErrorHandlingDelegate.swift in Sources */,
 				03E4AFB82CAFCF6F00ECC34D /* ChapterContentAttempt.swift in Sources */,
 				03CD0C522CB79DEB00E17218 /* UIUtils.swift in Sources */,
@@ -2298,8 +2301,10 @@
 				03A60F6F2CB3F22800079A7C /* TPApiClient.swift in Sources */,
 				03E4AFAD2CAFCF6F00ECC34D /* Comment.swift in Sources */,
 				03A60F982CB3F3AD00079A7C /* Strings.swift in Sources */,
+				03CD0C7A2CB7D01C00E17218 /* ImageUploadHelper.swift in Sources */,
 				03A60F842CB3F34600079A7C /* ChapterPager.swift in Sources */,
 				03A60FA82CB4114A00079A7C /* UserDefaults.swift in Sources */,
+				03CD0C7E2CB7D31F00E17218 /* M3U8Handler.swift in Sources */,
 				841380322C9DA0D0004D5846 /* ContentDetailViewController.swift in Sources */,
 				03E4AFB72CAFCF6F00ECC34D /* Subject.swift in Sources */,
 				03E4AFB22CAFCF6F00ECC34D /* ApiError.swift in Sources */,
@@ -2317,6 +2322,7 @@
 				035CC54B2CAE694D0057F4E4 /* StringArrayTransform.swift in Sources */,
 				03CD0C692CB7C5D500E17218 /* UIViewExtension.swift in Sources */,
 				03E4AFB52CAFCF6F00ECC34D /* UserStats.swift in Sources */,
+				03CD0C742CB7CF4900E17218 /* Permissions.swift in Sources */,
 				03E4AFC92CAFCF7000ECC34D /* Banner.swift in Sources */,
 				03E4AF462CAEDF7F00ECC34D /* Video.swift in Sources */,
 				03E4AFC82CAFCF7000ECC34D /* TPApiResponse.swift in Sources */,
@@ -3171,6 +3177,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE85A2CA6E34300183BA8 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
+		};
+		03CD0C762CB7CFC900E17218 /* TTGSnackbar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8732CA6FA1100183BA8 /* XCRemoteSwiftPackageReference "TTGSnackbar" */;
+			productName = TTGSnackbar;
+		};
+		03CD0C782CB7CFD600E17218 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
 		};
 		03E4AFCA2CAFCFD500ECC34D /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;

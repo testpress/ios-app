@@ -2,9 +2,9 @@ import UIKit
 import CourseKit
 
 
-class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownloadDelegate {
+public class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownloadDelegate {
     
-    static let shared = FileDownloadUtility()
+    public static let shared = FileDownloadUtility()
     
     private var session: URLSession!
     private var downloadTask: URLSessionDownloadTask?
@@ -19,7 +19,7 @@ class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownloadDeleg
         alertController = UIUtils.initProgressDialog(message: "Downloading..." + "\n\n")
     }
     
-    func downloadFile(viewController: UIViewController, from url: URL, completion: @escaping (URL?, Error?) -> Void) {
+    public func downloadFile(viewController: UIViewController, from url: URL, completion: @escaping (URL?, Error?) -> Void) {
         presentingViewController = viewController
         presentingViewController?.present(alertController!, animated: true, completion: nil)
         
@@ -34,7 +34,7 @@ class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownloadDeleg
     }
     
     // MARK: - URLSessionDownloadDelegate methods
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         guard let downloadedUrl = downloadTask.originalRequest?.url else {
             handleDownloadCompletion(nil, NSError(domain: "FileDownloadUtility", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to determine destination URL"]), completion: downloadCompletionHandler)
             return
@@ -75,7 +75,7 @@ class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownloadDeleg
         presentingViewController!.present(activityViewController, animated: true, completion: nil)
     }
     
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
             DispatchQueue.main.async {
                 self.dismissProgressDialog() {
@@ -96,7 +96,7 @@ class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownloadDeleg
         }
     }
     
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         guard totalBytesExpectedToWrite > 0 else { return }
         
         let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)

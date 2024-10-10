@@ -27,9 +27,8 @@ import AVFoundation
 import Photos
 import TTGSnackbar
 import UIKit
-import CourseKit
 
-func checkCameraAuthorizationStatus(viewController: UIViewController,
+public func checkCameraAuthorizationStatus(viewController: UIViewController,
                                     completion: @escaping (Bool) -> Void) {
     
     let cameraMediaType = AVMediaType.video
@@ -57,7 +56,7 @@ func checkCameraAuthorizationStatus(viewController: UIViewController,
     }
 }
 
-func checkPhotoLibraryAuthorizationStatus(viewController: UIViewController,
+public func checkPhotoLibraryAuthorizationStatus(viewController: UIViewController,
                                           completion: @escaping (Bool) -> Void) {
     
     let message = Strings.NEEDS_PERMISSION_TO_ACCESS + Strings.PHOTO_LIBRARY
@@ -86,7 +85,7 @@ func checkPhotoLibraryAuthorizationStatus(viewController: UIViewController,
     }
 }
 
-func showGoToSettingsAlert(title: String, viewController: UIViewController) {
+public func showGoToSettingsAlert(title: String, viewController: UIViewController) {
     
     let alertController = UIAlertController (title: title, message: Strings.GO_TO_SETTINGS,
                                              preferredStyle: .alert)

@@ -7,10 +7,11 @@
 //
 
 import Foundation
-import CourseKit
 
-class M3U8Handler {
-    func fetch(url: URL, onSuccess: @escaping(Data, URLResponse?) -> Void) {
+public class M3U8Handler {
+    public init(){}
+    
+    public func fetch(url: URL, onSuccess: @escaping(Data, URLResponse?) -> Void) {
         let request = URLRequest(url: URLUtils.convertURLSchemeToHttps(url: url))
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let task = session.dataTask(with: request) { data, response, _ in

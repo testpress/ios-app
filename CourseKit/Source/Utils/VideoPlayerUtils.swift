@@ -9,7 +9,7 @@
 import Foundation
 
 
-enum PlaybackSpeed:String {
+public enum PlaybackSpeed:String {
     case verySlow = "0.5x"
     case slow = "0.75x"
     case normal = "Normal"
@@ -17,7 +17,7 @@ enum PlaybackSpeed:String {
     case veryFast = "1.5x"
     case double = "2x"
     
-    var value: Float {
+    public var value: Float {
         switch self {
         case .verySlow:
             return 0.5
@@ -34,7 +34,7 @@ enum PlaybackSpeed:String {
         }
     }
     
-    var label: String {
+    public var label: String {
         switch self {
         case .normal:
             return "1x"
@@ -47,7 +47,7 @@ enum PlaybackSpeed:String {
 extension PlaybackSpeed: CaseIterable {}
 
 
-enum PlayerStatus {
+public enum PlayerStatus {
     case readyToPlay
     case playing
     case paused
@@ -55,11 +55,11 @@ enum PlayerStatus {
 }
 
 
-enum VideoDurationType {
+public enum VideoDurationType {
     case remainingTime
     case totalTime
     
-    func getDurationString (seconds : Double) -> String {
+    public func getDurationString (seconds : Double) -> String {
         if seconds.isNaN || seconds.isInfinite {
             return "00:00"
         }
@@ -70,7 +70,7 @@ enum VideoDurationType {
         return time
     }
     
-    func value(seconds:Double, total:Double) -> String {
+    public func value(seconds:Double, total:Double) -> String {
         switch self {
         case .remainingTime:
             return "-\(getDurationString(seconds: total-seconds))"
@@ -80,7 +80,12 @@ enum VideoDurationType {
     }
 }
 
-struct VideoQuality {
-    var resolution: String
-    var bitrate: Int
+public struct VideoQuality {
+    public var resolution: String
+    public var bitrate: Int
+    
+    public init(resolution: String, bitrate: Int) {
+        self.resolution = resolution
+        self.bitrate = bitrate
+    }
 }

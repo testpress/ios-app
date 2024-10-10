@@ -10,23 +10,22 @@ import Foundation
 import Alamofire
 import UIKit
 import MobileCoreServices
-import CourseKit
 
-class FileUploadPicker: NSObject {
+public class FileUploadPicker: NSObject {
     private var filePickerController: UIDocumentPickerViewController?
     private var uploadCompletionCallback: ((String?, Error?) -> Void)?
     private var presentingViewController: UIViewController
     private var fileUploadPath: String
     private var maxFileInMb: Double
     
-    init(presentingViewController: UIViewController, fileUploadPath: String, maxFileInMb: Double) {
+    public init(presentingViewController: UIViewController, fileUploadPath: String, maxFileInMb: Double) {
         self.presentingViewController = presentingViewController
         self.fileUploadPath = fileUploadPath
         self.maxFileInMb = maxFileInMb
         super.init()
     }
 
-    func presentFileSelector(callback: @escaping (String?, Error?) -> Void) {
+    public func presentFileSelector(callback: @escaping (String?, Error?) -> Void) {
         let documentPicker = UIDocumentPickerViewController(documentTypes: [
             "com.microsoft.word.doc",
             "com.microsoft.excel.xls",
@@ -48,7 +47,7 @@ class FileUploadPicker: NSObject {
 }
 
 extension FileUploadPicker: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let fileURL = urls.first else {
             return
         }

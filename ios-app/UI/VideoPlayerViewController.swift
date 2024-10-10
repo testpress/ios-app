@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CourseKit
 
 class VideoPlayerViewController: UIViewController {
     var playerView: VideoPlayerView!

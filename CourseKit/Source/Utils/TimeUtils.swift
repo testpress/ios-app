@@ -6,7 +6,7 @@ import Foundation
 
 
 public class TimeUtils {
-    static func convertDurationStringToSeconds(durationString: String) -> Int {
+    public static func convertDurationStringToSeconds(durationString: String) -> Int {
         var durationList = durationString.split(separator: ":")
         var seconds = 0
         var minutes = 1
@@ -19,7 +19,7 @@ public class TimeUtils {
         return seconds
     }
     
-    static func addTimeStrings(_ timeTaken: String?,_ remainingTime: String?) -> String {
+    public static func addTimeStrings(_ timeTaken: String?,_ remainingTime: String?) -> String {
         // Here, we add one second to totalTime because remainingTime is always one second less than the actual value.
         let totalTime = (timeTaken?.secondsFromString ?? 0) + (remainingTime?.secondsFromString ?? 0) + 1
         let hours = (totalTime / (60 * 60)) % 12
