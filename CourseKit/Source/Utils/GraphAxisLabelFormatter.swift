@@ -24,13 +24,12 @@
 //
 
 import DGCharts
-import CourseKit
 
 public class GraphAxisLabelFormatter: IndexAxisValueFormatter {
     
     var interval: Int!
     
-    init(values: [String], interval: Int) {
+    public init(values: [String], interval: Int) {
         super.init()
         self.values = values;
         self.interval = interval;

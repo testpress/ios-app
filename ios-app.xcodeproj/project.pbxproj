@@ -83,6 +83,8 @@
 		03CD0C522CB79DEB00E17218 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2561F8617690092BFDC /* UIUtils.swift */; };
 		03CD0C532CB79E4600E17218 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DA1F863AAF0092BFDC /* Colors.swift */; };
 		03CD0C572CB7A04E00E17218 /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0C562CB7A04E00E17218 /* UserHelper.swift */; };
+		03CD0C582CB7A60200E17218 /* GraphAxisLabelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */; };
+		03CD0C642CB7B5D400E17218 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0C632CB7B5D400E17218 /* DGCharts */; };
 		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
 		03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586782628ABB81700E149B5 /* DBModel+Detachable.swift */; };
@@ -271,7 +273,6 @@
 		2F515DFA1FF4D12A0005D8A5 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */; };
 		2F515DFE1FF517160005D8A5 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFD1FF517160005D8A5 /* Permissions.swift */; };
 		2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */; };
-		2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */; };
 		2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */; };
 		2F56B73B1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */; };
 		2F56B73D1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73C1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift */; };
@@ -935,6 +936,7 @@
 			files = (
 				035CC5532CAE699B0057F4E4 /* ObjectMapper in Frameworks */,
 				03A60F9F2CB3F83D00079A7C /* Alamofire in Frameworks */,
+				03CD0C642CB7B5D400E17218 /* DGCharts in Frameworks */,
 				03E4AFCB2CAFCFD500ECC34D /* IGListKit in Frameworks */,
 				035CC54F2CAE698D0057F4E4 /* RealmSwift in Frameworks */,
 			);
@@ -1140,6 +1142,7 @@
 		03E4AFD32CAFE62200ECC34D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
 				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
 				2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */,
@@ -1342,7 +1345,6 @@
 			isa = PBXGroup;
 			children = (
 				2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */,
-				2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */,
 				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
 				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
 				2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */,
@@ -1769,6 +1771,7 @@
 				035CC5522CAE699B0057F4E4 /* ObjectMapper */,
 				03E4AFCA2CAFCFD500ECC34D /* IGListKit */,
 				03A60F9E2CB3F83D00079A7C /* Alamofire */,
+				03CD0C632CB7B5D400E17218 /* DGCharts */,
 			);
 			productName = CourseKit;
 			productReference = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */;
@@ -2137,7 +2140,6 @@
 				03CD0C572CB7A04E00E17218 /* UserHelper.swift in Sources */,
 				2FF024212004CECA00E0047D /* BaseDBTableViewController.swift in Sources */,
 				2F515DFA1FF4D12A0005D8A5 /* ImagePicker.swift in Sources */,
-				2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */,
 				256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */,
 				8CDE2649239E1ACD00BA04C6 /* VideoPlayerSlider.swift in Sources */,
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
@@ -2236,6 +2238,7 @@
 				841380112C9D9CCD004D5846 /* CourseKit.docc in Sources */,
 				03E4AFC22CAFCF7000ECC34D /* SSOUrl.swift in Sources */,
 				03A60F8B2CB3F34600079A7C /* CommentPager.swift in Sources */,
+				03CD0C582CB7A60200E17218 /* GraphAxisLabelFormatter.swift in Sources */,
 				03A60F952CB3F34B00079A7C /* TPEndpoint.swift in Sources */,
 				03CD0C4E2CB79BC900E17218 /* FormatDate.swift in Sources */,
 				03E4AF622CAEDF7F00ECC34D /* Attempt.swift in Sources */,
@@ -2721,6 +2724,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2764,6 +2768,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3165,6 +3170,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 03A60FAC2CB417CC00079A7C /* XCRemoteSwiftPackageReference "LUExpandableTableView" */;
 			productName = LUExpandableTableView;
+		};
+		03CD0C632CB7B5D400E17218 /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE85A2CA6E34300183BA8 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
 		};
 		03E4AFCA2CAFCFD500ECC34D /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;
