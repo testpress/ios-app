@@ -1,5 +1,4 @@
 import UIKit
-import CourseKit
 
 
 public class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownloadDelegate {

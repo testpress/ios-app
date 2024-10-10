@@ -24,7 +24,6 @@
 //
 
 import ObjectMapper
-import CourseKit
 
 public class Reputation {
     

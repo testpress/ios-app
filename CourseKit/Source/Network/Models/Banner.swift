@@ -7,7 +7,6 @@
 //
 
 import ObjectMapper
-import CourseKit
 
 public class Banner {
     public var id: Int?

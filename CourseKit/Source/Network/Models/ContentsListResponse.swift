@@ -7,7 +7,6 @@
 //
 
 import ObjectMapper
-import CourseKit
 
 public class ContentsListResponse {
     public var contents: [Content] = []

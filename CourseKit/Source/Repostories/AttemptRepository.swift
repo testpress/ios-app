@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CourseKit
 
 public class AttemptRepository {
     public init() {}

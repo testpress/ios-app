@@ -25,7 +25,6 @@
 
 import Alamofire
 import ObjectMapper
-import CourseKit
 
 class AttemptPager: TPBasePager<Attempt> {
     

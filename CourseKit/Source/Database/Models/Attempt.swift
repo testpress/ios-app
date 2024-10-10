@@ -26,7 +26,6 @@
 import ObjectMapper
 import RealmSwift
 import Foundation
-import CourseKit
 
 public class Attempt: DBModel {
     

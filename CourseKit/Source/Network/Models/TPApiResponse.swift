@@ -24,7 +24,6 @@
 //
 
 import ObjectMapper
-import CourseKit
 
 public class TPApiResponse<T: Mappable> {
     public var count: Int?;

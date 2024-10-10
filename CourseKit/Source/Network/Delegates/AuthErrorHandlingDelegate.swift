@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CourseKit
 
 public protocol AuthErrorHandlingDelegate {
     func handleUnauthenticatedError()

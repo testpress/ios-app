@@ -7,7 +7,6 @@
 //
 
 import ObjectMapper
-import CourseKit
 
 public class ExamQuestionsResponse {
     public var directions: [Direction] = []
