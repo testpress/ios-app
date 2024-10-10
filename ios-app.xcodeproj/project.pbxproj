@@ -1290,7 +1290,6 @@
 				8C9E5BDD238E5D3300D8790F /* ViewModel */,
 				8C5DF60023264D2B00B9F8A0 /* Extensions */,
 				256EF50721CA15A200C743F0 /* ios-app.entitlements */,
-				2FC0F2D91F863AAF0092BFDC /* Resources */,
 				2FC0F2581F8619220092BFDC /* static */,
 				2FC0F2801F861A860092BFDC /* UI */,
 				2FC0F2521F8617690092BFDC /* Utils */,
@@ -1533,13 +1532,6 @@
 				03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		2FC0F2D91F863AAF0092BFDC /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		322BFA670C6561A068806630 /* Generated Mocks */ = {
