@@ -74,7 +74,7 @@ public class Course: DBModel {
         return "id"
     }
     
-    func getFormattedExpiryDate() -> String {
+    public func getFormattedExpiryDate() -> String {
         do {
             guard let expiryDate = self.expiryDate, !expiryDate.isEmpty else {
                 return ""
