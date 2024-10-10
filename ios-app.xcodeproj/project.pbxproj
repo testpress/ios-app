@@ -1435,7 +1435,6 @@
 				2F452C3120BC123D007833A0 /* BookmarkedQuestionViewController.swift */,
 				2F17C1FD20C965B300606D5C /* BookmarkFoldersDropDown.swift */,
 				2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */,
-				2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */,
 				2F4186A320BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift */,
 				2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */,
 				2F452C2F20BBE3E6007833A0 /* BookmarksDetailDataSource.swift */,
@@ -1453,9 +1452,7 @@
 				2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */,
 				2F763CFB1FBD79F60033D495 /* CoursesTableViewController.swift */,
 				2FC0F2871F861A860092BFDC /* EmptyView.swift */,
-				2FC0F2881F861A860092BFDC /* EmptyView.xib */,
 				2FC0F2891F861A860092BFDC /* ExamsTableViewCell.swift */,
-				2FC0F28A1F861A860092BFDC /* ExamsTableViewCell.xib */,
 				2FC0F28B1F861A860092BFDC /* ExamsTableViewController.swift */,
 				2FC0F28C1F861A860092BFDC /* ExamsTabViewController.swift */,
 				2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */,
@@ -1466,11 +1463,9 @@
 				2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */,
 				2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */,
 				2F25D55F201F085A00C01CCE /* LeaderboardTableViewCell.swift */,
-				2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */,
 				2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */,
 				2F25D557201EFB9F00C01CCE /* LeaderboardTabViewController.swift */,
 				18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */,
-				18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */,
 				2FC0F28D1F861A860092BFDC /* LoginViewController.swift */,
 				2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */,
 				2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */,
@@ -1503,7 +1498,6 @@
 				2FC0F2981F861A860092BFDC /* TestEngineViewController.swift */,
 				2FC0F2991F861A860092BFDC /* TestReportViewController.swift */,
 				2F56B73C1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift */,
-				2F3A14301FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib */,
 				2F56B73E1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift */,
 				2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */,
 				2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */,
@@ -1621,7 +1615,13 @@
 		8C2E7B5A2397B25600BA2F41 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				2FC0F2881F861A860092BFDC /* EmptyView.xib */,
+				2FC0F28A1F861A860092BFDC /* ExamsTableViewCell.xib */,
+				2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */,
+				18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */,
+				2F3A14301FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib */,
 				8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */,
+				2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
