@@ -10,7 +10,7 @@ import UIKit
 
 
 extension UIView {
-    func fitSizeOfContent() -> CGSize {
+    public func fitSizeOfContent() -> CGSize {
         let sumHeight = self.subviews.map({$0.frame.size.height}).reduce(0, {x, y in x + y})
         return CGSize(width: self.frame.width, height: sumHeight)
     }
@@ -49,7 +49,7 @@ extension UIView {
         }
     }
     
-    class func fromNib<T: UIView>(_ name: String? = nil) -> T {
+    public class func fromNib<T: UIView>(_ name: String? = nil) -> T {
         let nibName = name ?? String(describing: T.self)
         return Bundle(for: T.self).loadNibNamed(nibName, owner: nil, options: nil)![0] as! T
     }

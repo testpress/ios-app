@@ -1,5 +1,5 @@
 //
-//  StringExtension.swift
+//  UIImageViewExtension.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,36 +25,13 @@
 
 import UIKit
 
-extension String {
-    
-    var htmlToAttributedString: NSAttributedString? {
-        guard let data = data(using: .utf8) else { return NSAttributedString() }
-        do {
-            let htmlType = NSAttributedString.DocumentType.html
-            return try NSAttributedString(
-                data: data,
-                options: [NSAttributedString.DocumentReadingOptionKey.documentType: htmlType],
-                documentAttributes: nil
-            )
-        } catch {
-            return NSAttributedString()
+extension UIImageView {
+    @IBInspectable public var imageColor: UIColor! {
+        set {
+            super.tintColor = newValue
         }
-    }
-    
-    var htmlToString: String {
-        return htmlToAttributedString?.string ?? ""
-    }
-    
-    func trim() -> String {
-        return trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-    
-    static func getValue(_ anyValue: Any) -> String {
-        if let intValue = anyValue as? Int {
-            return String(intValue)
-        } else if let stringValue = anyValue as? String {
-            return stringValue
+        get {
+            return super.tintColor
         }
-        return "NA"
     }
 }

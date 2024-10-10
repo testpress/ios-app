@@ -1,10 +1,8 @@
 //
-//  AVPlayerExtensions.swift
+//  CALayerBorderColor.swift
 //  ios-app
 //
-//
-//
-//  Copyright © 2019 Testpress. All rights reserved.
+//  Copyright © 2017 Testpress. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,26 +23,16 @@
 //  THE SOFTWARE.
 //
 
+import UIKit
 
-import AVKit
-
-extension AVPlayer {
-    var isPlaying: Bool {
-        if #available(iOS 10.0, *) {
-            return timeControlStatus == .playing
+extension CALayer {
+    public var borderUIColor: UIColor {
+        set {
+            borderColor = newValue.cgColor
         }
-        return rate != 0 && error == nil
-    }
-    
-    var currentTimeInSeconds:Float64 {
-        return CMTimeGetSeconds(currentTime())
-    }
-    
-    func availableDuration() -> CMTime
-    {
-        if let range = currentItem?.loadedTimeRanges.first {
-            return CMTimeRangeGetEnd(range.timeRangeValue)
+        
+        get {
+            return UIColor(cgColor: borderColor!)
         }
-        return CMTime.zero
     }
 }

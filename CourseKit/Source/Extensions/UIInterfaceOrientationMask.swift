@@ -11,7 +11,7 @@ import UIKit
 
 
 extension UIInterfaceOrientationMask {
-    var toUIInterfaceOrientation: UIInterfaceOrientation {
+    public var toUIInterfaceOrientation: UIInterfaceOrientation {
         switch self {
         case .portrait:
             return UIInterfaceOrientation.portrait

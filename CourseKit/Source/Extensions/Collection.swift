@@ -9,7 +9,7 @@
 import Foundation
 
 extension Optional where Wrapped: Collection {
-    var isNilOrEmpty: Bool {
+    public var isNilOrEmpty: Bool {
         return self?.isEmpty ?? true
     }    
 }

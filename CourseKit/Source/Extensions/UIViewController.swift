@@ -9,7 +9,7 @@ import UIKit
 import CourseKit
 
 extension UIViewController {
-    func setStatusBarColor() {
+    public func setStatusBarColor() {
         if #available(iOS 13.0, *) {
                 let app = UIApplication.shared
                 let statusBarHeight: CGFloat = app.statusBarFrame.size.height
@@ -31,13 +31,13 @@ extension UIViewController {
         }
     }
 
-    func add(_ child: UIViewController) {
+    public func add(_ child: UIViewController) {
         addChild(child)
         view.addSubview(child.view)
         child.didMove(toParent: self)
     }
 
-    func remove() {
+    public func remove() {
         guard parent != nil else {
             return
         }
@@ -47,7 +47,7 @@ extension UIViewController {
         removeFromParent()
     }
     
-    func getCurrentOrientation() -> UIInterfaceOrientation {
+    public func getCurrentOrientation() -> UIInterfaceOrientation {
         if #available(iOS 16.0, *) {
             if let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation {
                 return orientation

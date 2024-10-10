@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 extension String {
-    static func mediumDateShortTime(date: Date) -> String {
+    public static func mediumDateShortTime(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .current
         dateFormatter.timeStyle = .none
@@ -10,12 +10,12 @@ extension String {
         return dateFormatter.string(from: date)
     }
 
-    func substring(with nsrange: NSRange) -> Substring? {
+    public func substring(with nsrange: NSRange) -> Substring? {
         guard let range = Range(nsrange, in: self) else { return nil }
         return self[range]
     }
     
-    var secondsFromString : Int{
+    public var secondsFromString : Int{
         let components = self.components(separatedBy: ":")
             guard components.count == 3 else { return 0 } // Handle invalid format
 
@@ -31,7 +31,7 @@ extension String {
 
 
 extension StringProtocol {
-    func nsRanges<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [NSRange] {
+    public func nsRanges<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [NSRange] {
         var start = startIndex
         let end = endIndex
         var ranges: [NSRange] = []

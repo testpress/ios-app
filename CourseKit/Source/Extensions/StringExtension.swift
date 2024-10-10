@@ -1,5 +1,5 @@
 //
-//  UIView.swift
+//  StringExtension.swift
 //  ios-app
 //
 //  Copyright © 2017 Testpress. All rights reserved.
@@ -25,33 +25,36 @@
 
 import UIKit
 
-extension UIView {
+extension String {
     
-    @IBInspectable var cornerRadius: CGFloat {
-        get {
-            return layer.cornerRadius
-        }
-        set {
-            layer.cornerRadius = newValue
-            layer.masksToBounds = newValue > 0
+    public var htmlToAttributedString: NSAttributedString? {
+        guard let data = data(using: .utf8) else { return NSAttributedString() }
+        do {
+            let htmlType = NSAttributedString.DocumentType.html
+            return try NSAttributedString(
+                data: data,
+                options: [NSAttributedString.DocumentReadingOptionKey.documentType: htmlType],
+                documentAttributes: nil
+            )
+        } catch {
+            return NSAttributedString()
         }
     }
     
-    @IBInspectable var borderWidth: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
-        }
+    public var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
     }
     
-    @IBInspectable var borderColor: UIColor? {
-        get {
-            return UIColor(cgColor: layer.borderColor!)
+    public func trim() -> String {
+        return trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    public static func getValue(_ anyValue: Any) -> String {
+        if let intValue = anyValue as? Int {
+            return String(intValue)
+        } else if let stringValue = anyValue as? String {
+            return stringValue
         }
-        set {
-            layer.borderColor = newValue?.cgColor
-        }
+        return "NA"
     }
 }

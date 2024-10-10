@@ -9,7 +9,7 @@ import UIKit
 
 extension UIStackView {
     
-    func addBackground(color: UIColor) {
+    public func addBackground(color: UIColor) {
         let subview = UIView(frame: bounds)
         subview.backgroundColor = color
         subview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
