@@ -25,6 +25,7 @@
 
 import DropDown
 import UIKit
+import CourseKit
 
 class LockableSectionDropDownCell: DropDownCell {
     

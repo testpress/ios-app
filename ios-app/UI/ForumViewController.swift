@@ -67,7 +67,7 @@ class ForumViewController: UIViewController, DiscussionFilterDelegate {
     
     
     @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+        UserHelper.showProfileDetails(self)
     }
     
     @IBAction func onFilterButtonClick(_ sender: Any) {

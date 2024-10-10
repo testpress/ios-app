@@ -136,7 +136,7 @@ class ProfileViewController: UIViewController {
             style: UIAlertAction.Style.destructive,
             handler: { action in
                 
-                UIUtils.logout()
+                UserHelper.logout()
                 let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
                     Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
                 

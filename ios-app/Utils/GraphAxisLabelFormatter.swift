@@ -24,6 +24,7 @@
 //
 
 import DGCharts
+import CourseKit
 
 public class GraphAxisLabelFormatter: IndexAxisValueFormatter {
     

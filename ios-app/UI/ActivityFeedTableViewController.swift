@@ -174,7 +174,7 @@ class ActivityFeedTableViewController: UITableViewController {
     }
     
     @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+        UserHelper.showProfileDetails(self)
     }
     
 }

@@ -79,6 +79,10 @@
 		03CD0C4E2CB79BC900E17218 /* FormatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2541F8617690092BFDC /* FormatDate.swift */; };
 		03CD0C4F2CB79C0A00E17218 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167E1FC4164100FB768C /* Reachability.swift */; };
 		03CD0C502CB79C5400E17218 /* GraphAxisPercentValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */; };
+		03CD0C512CB79DC700E17218 /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */; };
+		03CD0C522CB79DEB00E17218 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2561F8617690092BFDC /* UIUtils.swift */; };
+		03CD0C532CB79E4600E17218 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DA1F863AAF0092BFDC /* Colors.swift */; };
+		03CD0C572CB7A04E00E17218 /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0C562CB7A04E00E17218 /* UserHelper.swift */; };
 		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
 		03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586782628ABB81700E149B5 /* DBModel+Detachable.swift */; };
@@ -261,7 +265,6 @@
 		2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */; };
 		2F4A81ED20E4DDFD0062DE8A /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A81EC20E4DDFC0062DE8A /* UINavigationControllerExtension.swift */; };
 		2F4A81EF20E52CB50062DE8A /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A81EE20E52CB50062DE8A /* BaseTableViewCell.swift */; };
-		2F515DF21FF3B0990005D8A5 /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */; };
 		2F515DF51FF3B7B10005D8A5 /* RichTextEditor.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F515DF31FF3B7B10005D8A5 /* RichTextEditor.html */; };
 		2F515DF61FF3B7B10005D8A5 /* RichTextEditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F515DF41FF3B7B10005D8A5 /* RichTextEditor.js */; };
 		2F515DF81FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */; };
@@ -301,9 +304,7 @@
 		2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */; };
 		2FB049BB1FD838860049D5B0 /* post.css in Resources */ = {isa = PBXBuildFile; fileRef = 2FB049BA1FD838860049D5B0 /* post.css */; };
 		2FB049BD1FD839EB0049D5B0 /* ForumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */; };
-		2FC0F2DC1F863AB70092BFDC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DA1F863AAF0092BFDC /* Colors.swift */; };
 		2FC0F2DD1F863ABA0092BFDC /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DB1F863AAF0092BFDC /* Images.swift */; };
-		2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2561F8617690092BFDC /* UIUtils.swift */; };
 		2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28D1F861A860092BFDC /* LoginViewController.swift */; };
 		2FC0F2F91F863B780092BFDC /* AttemptsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2811F861A860092BFDC /* AttemptsListViewController.swift */; };
 		2FC0F2FA1F863B7C0092BFDC /* AttemptsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2821F861A860092BFDC /* AttemptsTableViewCell.swift */; };
@@ -494,6 +495,7 @@
 		03A60FAF2CB5280F00079A7C /* InstituteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstituteRepository.swift; sourceTree = "<group>"; };
 		03A91DEE2BFB7E2500B9E1C6 /* LiveStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStream.swift; sourceTree = "<group>"; };
 		03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterContentDetailViewModel.swift; sourceTree = "<group>"; };
+		03CD0C562CB7A04E00E17218 /* UserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamContentViewController.swift; sourceTree = "<group>"; };
 		03E4AF642CAEE53E00ECC34D /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 		0303692D2CAC188400C6CF2D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2FC0F2DA1F863AAF0092BFDC /* Colors.swift */,
 				841380332C9DA18E004D5846 /* StoryBoards */,
 			);
 			path = Resources;
@@ -1137,6 +1140,8 @@
 		03E4AFD32CAFE62200ECC34D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
+				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
 				2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */,
 				2F6F167E1FC4164100FB768C /* Reachability.swift */,
 				2FC0F2541F8617690092BFDC /* FormatDate.swift */,
@@ -1342,8 +1347,6 @@
 				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
 				2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */,
 				2F515DFD1FF517160005D8A5 /* Permissions.swift */,
-				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
-				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 				8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */,
 				25985836248A77F6003591FA /* M3U8Handler.swift */,
@@ -1351,6 +1354,7 @@
 				0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */,
 				031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */,
 				03A60FA02CB3FEB000079A7C /* AuthErrorHandler.swift */,
+				03CD0C562CB7A04E00E17218 /* UserHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1521,7 +1525,6 @@
 		2FC0F2D91F863AAF0092BFDC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2FC0F2DA1F863AAF0092BFDC /* Colors.swift */,
 				2FC0F2DB1F863AAF0092BFDC /* Images.swift */,
 			);
 			path = Resources;
@@ -2021,7 +2024,6 @@
 				250888DA251C5EC80023DCF6 /* ZoomMeetViewController.swift in Sources */,
 				2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */,
 				25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */,
-				2F515DF21FF3B0990005D8A5 /* RichTextEditor.swift in Sources */,
 				25705019246E71B600E6C688 /* QuizQuestionViewController.swift in Sources */,
 				2FC0F3121F863BBD0092BFDC /* CALayerBorderColor.swift in Sources */,
 				2F452C3220BC123D007833A0 /* BookmarkedQuestionViewController.swift in Sources */,
@@ -2103,7 +2105,6 @@
 				25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */,
 				2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */,
 				2FC0F3111F863BA90092BFDC /* TPBasePagedTableViewController.swift in Sources */,
-				2FC0F2DC1F863AB70092BFDC /* Colors.swift in Sources */,
 				2F9F169520724F76009886AB /* PostCategoriesDropDown.swift in Sources */,
 				2FDF9C5120B6D5F40086245F /* BookmarksTableViewCell.swift in Sources */,
 				2F25D558201EFB9F00C01CCE /* LeaderboardTabViewController.swift in Sources */,
@@ -2133,6 +2134,7 @@
 				8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */,
 				2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */,
 				2F42BDDB1FE9167700F0DF14 /* UIImageViewExtension.swift in Sources */,
+				03CD0C572CB7A04E00E17218 /* UserHelper.swift in Sources */,
 				2FF024212004CECA00E0047D /* BaseDBTableViewController.swift in Sources */,
 				2F515DFA1FF4D12A0005D8A5 /* ImagePicker.swift in Sources */,
 				2F56B7351FDD252E00E2B240 /* GraphAxisLabelFormatter.swift in Sources */,
@@ -2155,7 +2157,6 @@
 				03E4AFD22CAFD22100ECC34D /* DashboardSection.swift in Sources */,
 				2503DF66263C177A003226AD /* PostSectionController.swift in Sources */,
 				250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */,
-				2FC0F2F71F863B6D0092BFDC /* UIUtils.swift in Sources */,
 				2F25D564201F5DBB00C01CCE /* BaseTableViewController.swift in Sources */,
 				2F515E021FF61A550005D8A5 /* ImageUploadHelper.swift in Sources */,
 				2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */,
@@ -2222,6 +2223,7 @@
 				03E4AF5C2CAEDF7F00ECC34D /* AttemptQuestionTranslation.swift in Sources */,
 				03E4AFAF2CAFCF6F00ECC34D /* DRMLicenseKeyResponse.swift in Sources */,
 				03E4AFB42CAFCF6F00ECC34D /* DiscussionThreadAnswer.swift in Sources */,
+				03CD0C512CB79DC700E17218 /* RichTextEditor.swift in Sources */,
 				03E4AFBB2CAFCF6F00ECC34D /* ContentsListResponse.swift in Sources */,
 				03E4AF4D2CAEDF7F00ECC34D /* Chapter.swift in Sources */,
 				03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */,
@@ -2249,6 +2251,7 @@
 				03CD0C502CB79C5400E17218 /* GraphAxisPercentValueFormatter.swift in Sources */,
 				03A60F8C2CB3F34600079A7C /* BaseDBItemPager.swift in Sources */,
 				03A60F9D2CB3F6A900079A7C /* OrderedDictionary.swift in Sources */,
+				03CD0C532CB79E4600E17218 /* Colors.swift in Sources */,
 				035CC54D2CAE694D0057F4E4 /* StringTransform.swift in Sources */,
 				03A60F9C2CB3F45D00079A7C /* UIDevice+ModelName.swift in Sources */,
 				03E4AF5D2CAEDF7F00ECC34D /* Course.swift in Sources */,
@@ -2288,6 +2291,7 @@
 				03E4AFC02CAFCF6F00ECC34D /* ContentType.swift in Sources */,
 				03A60F962CB3F35000079A7C /* AuthErrorHandlingDelegate.swift in Sources */,
 				03E4AFB82CAFCF6F00ECC34D /* ChapterContentAttempt.swift in Sources */,
+				03CD0C522CB79DEB00E17218 /* UIUtils.swift in Sources */,
 				03E4AF4B2CAEDF7F00ECC34D /* GapFillResponse.swift in Sources */,
 				03A60F8A2CB3F34600079A7C /* BookmarksPager.swift in Sources */,
 				03A60F8F2CB3F34600079A7C /* TPBasePager.swift in Sources */,

@@ -12,7 +12,7 @@ import UIKit
 
 class AuthErrorHandler: AuthErrorHandlingDelegate {
     func handleUnauthenticatedError() {
-        UIUtils.logout()
+        UserHelper.logout()
         presentLoginViewController()
     }
 

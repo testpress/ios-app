@@ -26,12 +26,11 @@
 import UIKit
 import Alamofire
 import FBSDKLoginKit
-import CourseKit
 
 public class UIUtils {
 
 
-    static func initActivityIndicator(parentView: UIView) -> UIActivityIndicatorView {
+    public static func initActivityIndicator(parentView: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(frame: parentView.frame)
         activityIndicator.style = .whiteLarge
         activityIndicator.color = Colors.getRGB(Colors.PRIMARY)
@@ -43,7 +42,7 @@ public class UIUtils {
         return activityIndicator
     }
     
-    static func initProgressDialog(message: String) -> UIAlertController {
+    public static func initProgressDialog(message: String) -> UIAlertController {
         let alertController = UIAlertController(title: nil, message: message,
                                                 preferredStyle: .alert)
         
@@ -58,7 +57,7 @@ public class UIUtils {
     }
     
     @discardableResult
-    static func showSimpleAlert(title: String? = nil,
+    public static func showSimpleAlert(title: String? = nil,
                                 message: String? = nil,
                                 viewController: UIViewController,
                                 positiveButtonText: String = Strings.OK,
@@ -84,34 +83,34 @@ public class UIUtils {
         return alert
     }
     
-    static func setButtonDropShadow(_ view: UIView) {
+    public static func setButtonDropShadow(_ view: UIView) {
         view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowOffset = CGSize(width:0, height: 2)
         view.layer.shadowOpacity = 0.9
     }
     
     // Add gradient shadow layer to the shadow container view
-    static func updateBottomShadow(bottomShadowView: UIView, bottomGradient: CAGradientLayer) {
+    public static func updateBottomShadow(bottomShadowView: UIView, bottomGradient: CAGradientLayer) {
         bottomGradient.frame = bottomShadowView.bounds
         bottomGradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
         bottomShadowView.layer.insertSublayer(bottomGradient, at: 0)
     }
     
-    static func setTableViewSeperatorInset(_ tableView: UITableView, size: CGFloat) {
+    public static func setTableViewSeperatorInset(_ tableView: UITableView, size: CGFloat) {
         tableView.preservesSuperviewLayoutMargins = false
         tableView.separatorInset = UIEdgeInsets.init(top: 0, left: size, bottom: 0, right: size);
         tableView.layoutMargins = UIEdgeInsets.zero;
     }
     
-    static func getActionSheetStyle() -> UIAlertController.Style {
+    public static func getActionSheetStyle() -> UIAlertController.Style {
         return (UIDevice.current.userInterfaceIdiom == .phone) ? .actionSheet : .alert
     }
     
-    static func isiPad() -> Bool {
+    public static func isiPad() -> Bool {
         return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
     }
     
-    static func ellipsize(text: String, size: Int) -> String {
+    public static func ellipsize(text: String, size: Int) -> String {
         if (text.count < size) {
             return text
         } else {
@@ -120,29 +119,7 @@ public class UIUtils {
         }
     }
     
-    static func showProfileDetails(_ viewController: UIViewController) {
-        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
-        let profileViewController = storyboard.instantiateViewController(withIdentifier:
-            Constants.PROFILE_VIEW_CONTROLLER) as! ProfileViewController
-        
-        viewController.present(profileViewController, animated: true)
-    }
-
-    static func getLoginOrTabViewController() -> UIViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var viewController: UIViewController
-        if (KeychainTokenItem.isExist()) {
-            viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.TAB_VIEW_CONTROLLER)
-        } else {
-            viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
-        }
-        return viewController
-    }
-    
-    
-    static func getCountryList() -> [String : [String]] {
+    public static func getCountryList() -> [String : [String]] {
         let countryList = [
             "AF": ["Afghanistan","93"],
             "AX": ["Aland Islands","358"],
@@ -396,32 +373,9 @@ public class UIUtils {
         return countryList
     }
     
-       static func getCountryCode(countryRegionCode:String) -> [String] {
+       public static func getCountryCode(countryRegionCode:String) -> [String] {
             let prefix = self.getCountryList()
             let countryDialingCode = prefix[countryRegionCode]
             return countryDialingCode!
         }
-    
-    static func logout() {
-        let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
-        let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
-        
-        if (fcmToken != nil && deviceToken != nil ) {
-            let parameters: Parameters = [
-                "device_id": deviceToken!,
-                "registration_id": fcmToken!,
-                "platform": "ios"
-            ]
-            
-            TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.unRegisterDevice), parameters: parameters,
-                                completion: { _, _ in})
-        }
-        UIApplication.shared.unregisterForRemoteNotifications()
-        
-        TestpressCourse.shared.clearData()
-        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), completion: {_,_ in})
-        // Logout on Facebook
-        LoginManager().logOut()
-        KeychainTokenItem.clearKeychainItems()
-    }
 }

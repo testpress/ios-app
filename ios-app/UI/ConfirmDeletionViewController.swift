@@ -31,7 +31,7 @@ class ConfirmDeletionViewController: WebViewController, WKScriptMessageHandler {
         if (message.name == "onAccountDeletionSuccess") {
             self.emptyView.hide()
             self.activityIndicator?.startAnimating()
-            UIUtils.logout()
+            UserHelper.logout()
             showLoginActivity()
         }
     }

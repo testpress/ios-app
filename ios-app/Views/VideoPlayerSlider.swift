@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class VideoSlider: UIControl {
     var currentPosition : Float = 0.0

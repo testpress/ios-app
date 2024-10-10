@@ -22,7 +22,7 @@ class DashboardViewController: UIViewController {
     }()
     
     @IBAction func onProfileButtonClick(_ sender: Any) {
-        UIUtils.showProfileDetails(self)
+        UserHelper.showProfileDetails(self)
     }
     
     override func viewDidLoad() {

@@ -161,7 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             viewController = MainViewController()
         } else {
             InstituteRepository.shared.getSettings(refresh: true, completion: { _, _ in })
-            viewController = UIUtils.getLoginOrTabViewController()
+            viewController = UserHelper.getLoginOrTabViewController()
         }
 
         window = UIWindow(frame: UIScreen.main.bounds)

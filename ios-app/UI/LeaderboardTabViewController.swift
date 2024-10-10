@@ -122,7 +122,7 @@ class LeaderboardTabViewController: ButtonBarPagerTabStripViewController {
     }
     
     @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+        UserHelper.showProfileDetails(self)
     }
     
 }

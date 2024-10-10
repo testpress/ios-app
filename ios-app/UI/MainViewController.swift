@@ -55,7 +55,7 @@ class MainViewController: UIViewController {
                                         retryButtonText: retryButtonText, retryHandler: retryHandler)
                 } else {
                     self.activityIndicator.stopAnimating()
-                    let viewController = UIUtils.getLoginOrTabViewController()
+                    let viewController = UserHelper.getLoginOrTabViewController()
                     self.present(viewController, animated: false, completion: nil)
                 }
                 

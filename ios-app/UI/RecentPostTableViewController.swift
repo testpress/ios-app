@@ -230,7 +230,7 @@ class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+        UserHelper.showProfileDetails(self)
     }
     
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class ShareToUnlockViewController: UIViewController {
     var shareText: String = ""

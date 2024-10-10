@@ -25,6 +25,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import CourseKit
 
 class ExamsTabViewController: ButtonBarPagerTabStripViewController {
     
@@ -68,7 +69,7 @@ class ExamsTabViewController: ButtonBarPagerTabStripViewController {
     }
     
     @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+        UserHelper.showProfileDetails(self)
     }
     
 }

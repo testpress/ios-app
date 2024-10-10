@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import CourseKit
 
 extension UIViewController {
     func setStatusBarColor() {
