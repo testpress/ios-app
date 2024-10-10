@@ -131,6 +131,42 @@ public class Exam: DBModel {
             self.selectedLanguage = newLanguages.first
         }
     }
+    
+    public func hasStarted() -> Bool {
+        guard let date = FormatDate.getDate(from: startDate) else {
+            assert(false, "no date from string")
+            return true
+        }
+        return date < Date()
+    }
+    
+    public func hasEnded() -> Bool {
+        if endDate == nil || endDate == "" {
+            return false
+        }
+        guard let date = FormatDate.getDate(from: endDate) else {
+            assert(false, "no date from string")
+            return false
+        }
+        return date < Date()
+    }
+    
+    private func getKey() -> String {
+        let id = String(self.id)
+        return "\(id)_SHARE_TO_UNLOCK"
+    }
+    
+    public func getNumberOfTimesShared() -> Int {
+        return UserDefaults.standard.integer(forKey: getKey())
+    }
+    
+    public func incrementNumberOfTimesShared() {
+        UserDefaults.standard.set(getNumberOfTimesShared() + 1, forKey: getKey())
+    }
+    
+    public func getQuestionsURL() -> String {
+        return Constants.BASE_URL + "/api/v2.4/exams/\(id)/questions/"
+    }
 }
 
 public struct ExamTemplateType {

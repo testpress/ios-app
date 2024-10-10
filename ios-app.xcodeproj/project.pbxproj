@@ -118,7 +118,6 @@
 		03E4AF612CAEDF7F00ECC34D /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04052F20D902530074D80E /* Direction.swift */; };
 		03E4AF622CAEDF7F00ECC34D /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2C31F86385B0092BFDC /* Attempt.swift */; };
 		03E4AF632CAEDF7F00ECC34D /* AttemptAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2C41F86385B0092BFDC /* AttemptAnswer.swift */; };
-		03E4AF652CAEE53E00ECC34D /* Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AF642CAEE53E00ECC34D /* Exam.swift */; };
 		03E4AFAB2CAFCF6F00ECC34D /* ContentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8001FCE9963009C686C /* ContentObject.swift */; };
 		03E4AFAC2CAFCF6F00ECC34D /* ActivityFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A14321FE15E97007CEE84 /* ActivityFeed.swift */; };
 		03E4AFAD2CAFCF6F00ECC34D /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C7FE1FCE9750009C686C /* Comment.swift */; };
@@ -499,7 +498,6 @@
 		03CD0C562CB7A04E00E17218 /* UserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamContentViewController.swift; sourceTree = "<group>"; };
-		03E4AF642CAEE53E00ECC34D /* Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exam.swift; sourceTree = "<group>"; };
 		03E4AFCF2CAFD15800ECC34D /* TPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPError.swift; sourceTree = "<group>"; };
 		03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSection.swift; sourceTree = "<group>"; };
 		03E4AFD52CAFE6A900ECC34D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -1623,7 +1621,6 @@
 				259ED9F8274E5B3100A87A71 /* Misc.swift */,
 				25520BBD2751093C001A58AB /* String.swift */,
 				036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */,
-				03E4AF642CAEE53E00ECC34D /* Exam.swift */,
 				03E4AFCF2CAFD15800ECC34D /* TPError.swift */,
 				03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */,
 				2FC0F2531F8617690092BFDC /* CALayerBorderColor.swift */,
@@ -2015,7 +2012,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03E4AF652CAEE53E00ECC34D /* Exam.swift in Sources */,
 				25E435DA263ADCA700243FD3 /* LeaderboardSectionController.swift in Sources */,
 				2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */,
 				2FA9285420B8160A00CD3076 /* BookmarksSlidingViewController.swift in Sources */,
