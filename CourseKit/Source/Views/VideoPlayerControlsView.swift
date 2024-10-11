@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import CourseKit
 
-class VideoPlayerControlsView: UIView {
+public class VideoPlayerControlsView: UIView {
     
     @IBOutlet weak var fullScreen: UIButton!
     @IBOutlet weak var rewindButton: UIButton!
@@ -262,7 +261,7 @@ class VideoPlayerControlsView: UIView {
 }
 
 
-protocol PlayerControlDelegate: class {
+public protocol PlayerControlDelegate: class {
     func isPlaying() -> Bool
     func pause()
     func play()

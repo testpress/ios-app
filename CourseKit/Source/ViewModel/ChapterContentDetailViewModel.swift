@@ -7,18 +7,17 @@
 //
 
 import Foundation
-import CourseKit
 
-class ChapterContentDetailViewModel {
-    var content: Content
-    var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
+public class ChapterContentDetailViewModel {
+    public var content: Content
+    public var contentAttemptCreationDelegate: ContentAttemptCreationDelegate?
     
-    init(_ content: Content, _ contentAttemptCreationDelegate: ContentAttemptCreationDelegate?) {
+    public init(_ content: Content, _ contentAttemptCreationDelegate: ContentAttemptCreationDelegate?) {
         self.content = content
         self.contentAttemptCreationDelegate = contentAttemptCreationDelegate
     }
     
-    func createContentAttempt() {
+    public func createContentAttempt() {
         TPApiClient.request(
             type: ContentAttempt.self,
             endpointProvider: TPEndpointProvider(.post, url: content.getAttemptsUrl())

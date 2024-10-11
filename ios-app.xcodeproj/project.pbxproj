@@ -72,7 +72,6 @@
 		03A60FAB2CB4153900079A7C /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 03A60FAA2CB4153900079A7C /* Sentry */; };
 		03A60FAE2CB417CC00079A7C /* LUExpandableTableView in Frameworks */ = {isa = PBXBuildFile; productRef = 03A60FAD2CB417CC00079A7C /* LUExpandableTableView */; };
 		03A60FB02CB5281000079A7C /* InstituteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A60FAF2CB5280F00079A7C /* InstituteRepository.swift */; };
-		03AFFB832C0076AE0015C029 /* ChapterContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */; };
 		03CD0C4E2CB79BC900E17218 /* FormatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2541F8617690092BFDC /* FormatDate.swift */; };
 		03CD0C4F2CB79C0A00E17218 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167E1FC4164100FB768C /* Reachability.swift */; };
 		03CD0C502CB79C5400E17218 /* GraphAxisPercentValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */; };
@@ -125,6 +124,20 @@
 		03CD0D2E2CB92EC800E17218 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2861F861A860092BFDC /* BaseTextFieldViewController.swift */; };
 		03CD0D312CB935D300E17218 /* BasePagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0D302CB935D300E17218 /* BasePagedTableViewController.swift */; };
 		03CD0D332CB93A6500E17218 /* LearnTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0D322CB93A6500E17218 /* LearnTabController.swift */; };
+		03CD0D352CB947F200E17218 /* VideoContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */; };
+		03CD0D362CB947F200E17218 /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
+		03CD0D372CB947F200E17218 /* ChapterContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */; };
+		03CD0D382CB947F200E17218 /* QuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB692246A9BA000524D2C /* QuizExamViewModel.swift */; };
+		03CD0D392CB947F200E17218 /* CustomTestQuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */; };
+		03CD0D3A2CB947F800E17218 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */; };
+		03CD0D3B2CB9480A00E17218 /* VideoPlayerSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */; };
+		03CD0D3D2CB9485200E17218 /* M3U8Parser in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D3C2CB9485200E17218 /* M3U8Parser */; };
+		03CD0D3F2CB9485E00E17218 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D3E2CB9485E00E17218 /* MarqueeLabel */; };
+		03CD0D412CB94A8C00E17218 /* VideoPlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */; };
+		03CD0D422CB94B1B00E17218 /* VideoPlayerResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */; };
+		03CD0D432CB94B1B00E17218 /* DRMKeySessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */; };
+		03CD0D452CB94D7600E17218 /* ContentAttemptCreationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0D442CB94D7600E17218 /* ContentAttemptCreationDelegate.swift */; };
+		03CD0D462CB94E4600E17218 /* VideoPlayerControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */; };
 		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
 		03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586782628ABB81700E149B5 /* DBModel+Detachable.swift */; };
@@ -214,11 +227,9 @@
 		250888DA251C5EC80023DCF6 /* ZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */; };
 		250DA7BD246A585D00EDB31C /* StartQuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */; };
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
-		2510859B2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */; };
 		25520BC327546AF9001A58AB /* DiscussionThreadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */; };
-		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
 		256DE79E256F8CF200F02995 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256DE79D256F8CF100F02995 /* PaddingLabel.swift */; };
 		25705019246E71B600E6C688 /* QuizQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705018246E71B600E6C688 /* QuizQuestionViewController.swift */; };
 		2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2570501A246EA32600E6C688 /* LoadingViewController.swift */; };
@@ -229,9 +240,7 @@
 		2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24621CA0D770097C6FE /* Firebase.framework */; };
 		2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24821CA0D770097C6FE /* FirebaseMessaging.framework */; };
 		2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A25221CA0DBE0097C6FE /* Protobuf.framework */; };
-		257BB693246A9BA000524D2C /* QuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB692246A9BA000524D2C /* QuizExamViewModel.swift */; };
 		257BB695246AB4C900524D2C /* QuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB694246AB4C900524D2C /* QuizExamViewController.swift */; };
-		258036A52743AA2400397639 /* DRMKeySessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */; };
 		2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */; };
 		2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259286892473B1E00035EBA4 /* QuizReviewViewController.swift */; };
 		2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */; };
@@ -385,22 +394,16 @@
 		8C04229122AA77C90015269B /* TestCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04229022AA77C90015269B /* TestCourseViewController.swift */; };
 		8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205A072323918700596E66 /* LoginActivityCell.swift */; };
 		8C2D130B238507C4005A7F39 /* VideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D130A238507C4005A7F39 /* VideoContentViewController.swift */; };
-		8C2E7B5923979E5A00BA2F41 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */; };
-		8C2E7B5E2397B49000BA2F41 /* VideoPlayerControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */; };
-		8C2E7B602397B56600BA2F41 /* VideoPlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */; };
-		8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */; };
 		8C3D6433239D5D8E001C7FE4 /* RelatedContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */; };
 		8CD78EA322BC917D00DD034D /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */; };
 		8CD78EA522BC9B8F00DD034D /* TestMainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */; };
 		8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA622BC9DA100DD034D /* TestUtils.swift */; };
-		8CDE2649239E1ACD00BA04C6 /* VideoPlayerSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */; };
 		8CDE264B239EAD2700BA04C6 /* TestVideoPlayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264A239EAD2700BA04C6 /* TestVideoPlayerUtils.swift */; };
 		8CDE264E239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */; };
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
 		D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */; };
 		D9533ABE2B99CD2700E73A78 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */; };
-		D98010692B035E780071C397 /* CustomTestQuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */; };
 		D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -506,6 +509,7 @@
 		03CD0D062CB8F92100E17218 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		03CD0D302CB935D300E17218 /* BasePagedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePagedTableViewController.swift; sourceTree = "<group>"; };
 		03CD0D322CB93A6500E17218 /* LearnTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnTabController.swift; sourceTree = "<group>"; };
+		03CD0D442CB94D7600E17218 /* ContentAttemptCreationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAttemptCreationDelegate.swift; sourceTree = "<group>"; };
 		03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamContentViewController.swift; sourceTree = "<group>"; };
 		03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSection.swift; sourceTree = "<group>"; };
@@ -943,7 +947,9 @@
 				035CC5532CAE699B0057F4E4 /* ObjectMapper in Frameworks */,
 				03A60F9F2CB3F83D00079A7C /* Alamofire in Frameworks */,
 				03CD0C792CB7CFD600E17218 /* TOCropViewController in Frameworks */,
+				03CD0D3F2CB9485E00E17218 /* MarqueeLabel in Frameworks */,
 				03CD0C642CB7B5D400E17218 /* DGCharts in Frameworks */,
+				03CD0D3D2CB9485200E17218 /* M3U8Parser in Frameworks */,
 				03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */,
 				03CD0D0A2CB9290200E17218 /* DropDown in Frameworks */,
 				03E4AFCB2CAFCFD500ECC34D /* IGListKit in Frameworks */,
@@ -1060,6 +1066,7 @@
 			isa = PBXGroup;
 			children = (
 				2FC0F2881F861A860092BFDC /* EmptyView.xib */,
+				8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -1078,6 +1085,26 @@
 				2FC0F2871F861A860092BFDC /* EmptyView.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		03CD0D342CB9479C00E17218 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */,
+				8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */,
+				8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		03CD0D402CB949B600E17218 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */,
+				258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */,
+				03CD0D442CB94D7600E17218 /* ContentAttemptCreationDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		03E4AF232CAEDE1200ECC34D /* Models */ = {
@@ -1322,7 +1349,6 @@
 			children = (
 				8C2E7B5A2397B25600BA2F41 /* Xib */,
 				8C2E7B5723979DF800BA2F41 /* Views */,
-				8C9E5BDD238E5D3300D8790F /* ViewModel */,
 				8C5DF60023264D2B00B9F8A0 /* Extensions */,
 				256EF50721CA15A200C743F0 /* ios-app.entitlements */,
 				2FC0F2581F8619220092BFDC /* static */,
@@ -1543,11 +1569,9 @@
 				2570501A246EA32600E6C688 /* LoadingViewController.swift */,
 				25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */,
 				259286892473B1E00035EBA4 /* QuizReviewViewController.swift */,
-				2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */,
 				2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */,
 				250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */,
 				25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */,
-				258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */,
 				25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */,
 				25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */,
 				D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */,
@@ -1599,6 +1623,9 @@
 		8413802E2C9DA075004D5846 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				03CD0D402CB949B600E17218 /* Delegates */,
+				03CD0D342CB9479C00E17218 /* Views */,
+				8C9E5BDD238E5D3300D8790F /* ViewModel */,
 				03A60FA22CB401A900079A7C /* Repostories */,
 				03E4AFD32CAFE62200ECC34D /* Utils */,
 				03E4AFA92CAFCE9B00ECC34D /* Network */,
@@ -1623,9 +1650,6 @@
 		8C2E7B5723979DF800BA2F41 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */,
-				8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */,
-				8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */,
 				256DE79D256F8CF100F02995 /* PaddingLabel.swift */,
 				2503DF72263FAC4F003226AD /* PillLabel.swift */,
 			);
@@ -1639,7 +1663,6 @@
 				2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */,
 				18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */,
 				2F3A14301FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib */,
-				8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */,
 				2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */,
 			);
 			path = Xib;
@@ -1795,6 +1818,8 @@
 				03CD0C782CB7CFD600E17218 /* TOCropViewController */,
 				03CD0D092CB9290200E17218 /* DropDown */,
 				03CD0D292CB92C2400E17218 /* XLPagerTabStrip */,
+				03CD0D3C2CB9485200E17218 /* M3U8Parser */,
+				03CD0D3E2CB9485E00E17218 /* MarqueeLabel */,
 			);
 			productName = CourseKit;
 			productReference = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */;
@@ -1932,7 +1957,6 @@
 				2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */,
 				2FC0F3181F863BCE0092BFDC /* questions_typebase.css in Resources */,
 				2FC0F3171F863BCE0092BFDC /* PT_Serif-Web-Regular.ttf in Resources */,
-				8C2E7B5E2397B49000BA2F41 /* VideoPlayerControls.xib in Resources */,
 				2F6F167B1FC3F08900FB768C /* typebase.css in Resources */,
 				25E435ED263ADE7500243FD3 /* DashboardSectionHeaderCell.xib in Resources */,
 				2FDF9C5B20B6F6C50086245F /* Bookmarks.storyboard in Resources */,
@@ -1976,6 +2000,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CD0D2D2CB92CAE00E17218 /* EmptyView.xib in Resources */,
+				03CD0D462CB94E4600E17218 /* VideoPlayerControls.xib in Resources */,
 				0303692F2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy in Resources */,
 				03CD0C872CB7E2CD00E17218 /* Assets.xcassets in Resources */,
 				841380362C9DA1A8004D5846 /* Course.storyboard in Resources */,
@@ -2043,7 +2068,6 @@
 				2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */,
 				2FA9285420B8160A00CD3076 /* BookmarksSlidingViewController.swift in Sources */,
 				2F4186A420BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift in Sources */,
-				8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */,
 				2FD846601FC30D1900D6F016 /* ContentDetailDataSource.swift in Sources */,
 				25E435E6263ADD9100243FD3 /* LeaderboardItemViewCell.swift in Sources */,
 				25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */,
@@ -2056,7 +2080,6 @@
 				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
 				25520BC327546AF9001A58AB /* DiscussionThreadDetailViewController.swift in Sources */,
 				25E435DD263ADCCF00243FD3 /* BaseSectionController.swift in Sources */,
-				03AFFB832C0076AE0015C029 /* ChapterContentDetailViewModel.swift in Sources */,
 				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,
 				2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */,
 				2FC0F3091F863BA90092BFDC /* ReviewQuestionsDataSource.swift in Sources */,
@@ -2078,7 +2101,6 @@
 				2FC0F3031F863B9B0092BFDC /* ExamsTableViewController.swift in Sources */,
 				2FDD2E4320A5C3FE00A111EC /* AccessCodeExamsViewController.swift in Sources */,
 				2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */,
-				2510859B2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift in Sources */,
 				2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */,
 				2FC0F30E1F863BA90092BFDC /* SuccessViewController.swift in Sources */,
 				18F25D29212FDC5300097425 /* LockableSectionDropDownCell.swift in Sources */,
@@ -2103,7 +2125,6 @@
 				2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */,
 				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
 				D9533ABE2B99CD2700E73A78 /* PDFViewController.swift in Sources */,
-				258036A52743AA2400397639 /* DRMKeySessionDelegate.swift in Sources */,
 				2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */,
 				2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */,
 				D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */,
@@ -2113,7 +2134,6 @@
 				2503DF57263C02C3003226AD /* BannerAdViewCell.swift in Sources */,
 				2FC0F30D1F863BA90092BFDC /* StartExamScreenViewController.swift in Sources */,
 				2F763D081FBDB4D30033D495 /* CourseTableViewCell.swift in Sources */,
-				257BB693246A9BA000524D2C /* QuizExamViewModel.swift in Sources */,
 				2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */,
 				2FC0F3051F863BA90092BFDC /* MoreOptionsViewController.swift in Sources */,
 				2503DF6A263C17DA003226AD /* PostCarouselViewCell.swift in Sources */,
@@ -2126,7 +2146,6 @@
 				2F25D558201EFB9F00C01CCE /* LeaderboardTabViewController.swift in Sources */,
 				2FC0F3001F863B8F0092BFDC /* ExamsTableViewCell.swift in Sources */,
 				259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */,
-				D98010692B035E780071C397 /* CustomTestQuizExamViewModel.swift in Sources */,
 				2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */,
 				2FC0F2FC1F863B810092BFDC /* BaseQuestionsPageViewController.swift in Sources */,
 				2FC0F2F91F863B780092BFDC /* AttemptsListViewController.swift in Sources */,
@@ -2138,13 +2157,10 @@
 				2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */,
 				2F56B73D1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift in Sources */,
 				03CD0D332CB93A6500E17218 /* LearnTabController.swift in Sources */,
-				8C2E7B602397B56600BA2F41 /* VideoPlayerControlsView.swift in Sources */,
 				2F17C1FE20C965B300606D5C /* BookmarkFoldersDropDown.swift in Sources */,
 				8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */,
 				2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */,
 				03CD0C572CB7A04E00E17218 /* UserHelper.swift in Sources */,
-				256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */,
-				8CDE2649239E1ACD00BA04C6 /* VideoPlayerSlider.swift in Sources */,
 				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
 				2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */,
 				2F2A41C01FD6ACE900B92C6D /* ForumViewController.swift in Sources */,
@@ -2171,7 +2187,6 @@
 				2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */,
 				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
 				03CD0C732CB7C72E00E17218 /* UINavigationControllerExtension.swift in Sources */,
-				8C2E7B5923979E5A00BA2F41 /* VideoPlayerView.swift in Sources */,
 				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
 				2503DF79263FB21F003226AD /* ChapterContentSectionController.swift in Sources */,
 				2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */,
@@ -2222,11 +2237,13 @@
 				03E4AFBB2CAFCF6F00ECC34D /* ContentsListResponse.swift in Sources */,
 				03CD0C682CB7C5D500E17218 /* StringExtension.swift in Sources */,
 				03E4AF4D2CAEDF7F00ECC34D /* Chapter.swift in Sources */,
+				03CD0D412CB94A8C00E17218 /* VideoPlayerControlsView.swift in Sources */,
 				03CD0C652CB7C3CE00E17218 /* String.swift in Sources */,
 				03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */,
 				03E4AFB12CAFCF6F00ECC34D /* ApiResponse.swift in Sources */,
 				03E4AFC72CAFCF7000ECC34D /* Category.swift in Sources */,
 				03A60F872CB3F34600079A7C /* CategoryPager.swift in Sources */,
+				03CD0D3B2CB9480A00E17218 /* VideoPlayerSlider.swift in Sources */,
 				03E4AF482CAEDF7F00ECC34D /* AttemptItem.swift in Sources */,
 				03E4AF502CAEDF7F00ECC34D /* Attachment.swift in Sources */,
 				03A60FA32CB4060100079A7C /* AttemptRepository.swift in Sources */,
@@ -2258,6 +2275,9 @@
 				03A60F9D2CB3F6A900079A7C /* OrderedDictionary.swift in Sources */,
 				03CD0C532CB79E4600E17218 /* Colors.swift in Sources */,
 				035CC54D2CAE694D0057F4E4 /* StringTransform.swift in Sources */,
+				03CD0D432CB94B1B00E17218 /* DRMKeySessionDelegate.swift in Sources */,
+				03CD0D3A2CB947F800E17218 /* VideoPlayerView.swift in Sources */,
+				03CD0D352CB947F200E17218 /* VideoContentViewModel.swift in Sources */,
 				03A60F9C2CB3F45D00079A7C /* UIDevice+ModelName.swift in Sources */,
 				03E4AF5D2CAEDF7F00ECC34D /* Course.swift in Sources */,
 				03CD0C4F2CB79C0A00E17218 /* Reachability.swift in Sources */,
@@ -2290,17 +2310,21 @@
 				03E4AF4A2CAEDF7F00ECC34D /* DirectionTranslation.swift in Sources */,
 				035CC54C2CAE694D0057F4E4 /* IntArrayTransform.swift in Sources */,
 				03E4AFC52CAFCF7000ECC34D /* ActivityFeedResponse.swift in Sources */,
+				03CD0D362CB947F200E17218 /* QuizQuestionsViewModel.swift in Sources */,
+				03CD0D382CB947F200E17218 /* QuizExamViewModel.swift in Sources */,
 				03E4AFB32CAFCF6F00ECC34D /* Post.swift in Sources */,
 				03A60FA62CB4060100079A7C /* EncryptionKeyRepository.swift in Sources */,
 				03A60F882CB3F34600079A7C /* CoursePager.swift in Sources */,
 				03A60F852CB3F34600079A7C /* ActivityFeedPager.swift in Sources */,
 				03E4AF4F2CAEDF7F00ECC34D /* LiveStream.swift in Sources */,
 				03E4AF602CAEDF7F00ECC34D /* Content.swift in Sources */,
+				03CD0D392CB947F200E17218 /* CustomTestQuizExamViewModel.swift in Sources */,
 				03CD0C7B2CB7D25200E17218 /* FileUploadPicker.swift in Sources */,
 				03E4AFBE2CAFCF6F00ECC34D /* ExamQuestionsResponse.swift in Sources */,
 				03E4AF472CAEDF7F00ECC34D /* TPModelMapper.swift in Sources */,
 				03A60FA72CB4107100079A7C /* URLUtils.swift in Sources */,
 				03A60FA42CB4060100079A7C /* AttemptItemRepository.swift in Sources */,
+				03CD0D452CB94D7600E17218 /* ContentAttemptCreationDelegate.swift in Sources */,
 				03A60FB02CB5281000079A7C /* InstituteRepository.swift in Sources */,
 				03E4AF632CAEDF7F00ECC34D /* AttemptAnswer.swift in Sources */,
 				03E4AFC02CAFCF6F00ECC34D /* ContentType.swift in Sources */,
@@ -2311,6 +2335,7 @@
 				03CD0C522CB79DEB00E17218 /* UIUtils.swift in Sources */,
 				03E4AF4B2CAEDF7F00ECC34D /* GapFillResponse.swift in Sources */,
 				03CD0C6A2CB7C5D500E17218 /* CALayerBorderColor.swift in Sources */,
+				03CD0D422CB94B1B00E17218 /* VideoPlayerResourceLoaderDelegate.swift in Sources */,
 				03A60F8A2CB3F34600079A7C /* BookmarksPager.swift in Sources */,
 				03A60F8F2CB3F34600079A7C /* TPBasePager.swift in Sources */,
 				03E4AF4E2CAEDF7F00ECC34D /* DBManager.swift in Sources */,
@@ -2321,6 +2346,7 @@
 				03E4AFAD2CAFCF6F00ECC34D /* Comment.swift in Sources */,
 				03A60F982CB3F3AD00079A7C /* Strings.swift in Sources */,
 				03CD0C7A2CB7D01C00E17218 /* ImageUploadHelper.swift in Sources */,
+				03CD0D372CB947F200E17218 /* ChapterContentDetailViewModel.swift in Sources */,
 				03CD0D312CB935D300E17218 /* BasePagedTableViewController.swift in Sources */,
 				03CD0D262CB92C0700E17218 /* BaseTableViewController.swift in Sources */,
 				03CD0D232CB92C0700E17218 /* BaseTableViewCell.swift in Sources */,
@@ -3219,6 +3245,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8702CA6F8D400183BA8 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */;
 			productName = XLPagerTabStrip;
+		};
+		03CD0D3C2CB9485200E17218 /* M3U8Parser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */;
+			productName = M3U8Parser;
+		};
+		03CD0D3E2CB9485E00E17218 /* MarqueeLabel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
+			productName = MarqueeLabel;
 		};
 		03E4AFCA2CAFCFD500ECC34D /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;

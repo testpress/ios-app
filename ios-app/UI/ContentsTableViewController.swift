@@ -26,10 +26,6 @@
 import UIKit
 import CourseKit
 
-protocol ContentAttemptCreationDelegate {
-    func newAttemptCreated()
-}
-
 class ContentsTableViewController: BaseDBTableViewControllerV2<ContentsListResponse, Content>,
     ContentAttemptCreationDelegate {
     

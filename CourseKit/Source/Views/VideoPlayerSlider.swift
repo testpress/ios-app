@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import CourseKit
 
-class VideoSlider: UIControl {
+public class VideoSlider: UIControl {
     var currentPosition : Float = 0.0
     {
         didSet
@@ -48,7 +47,7 @@ class VideoSlider: UIControl {
         initialize()
     }
     
-    override func draw(_ rect: CGRect)
+    public override func draw(_ rect: CGRect)
     {
         updateLayers()
     }
@@ -101,7 +100,7 @@ class VideoSlider: UIControl {
         progressLayer.backgroundColor = UIColor.clear.cgColor
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
           backgroundLayer.path =  UIBezierPath(rect: CGRect(x: 0, y: (self.frame.size.height / 2) - self.frame.size.height / 4, width: self.frame.size.width, height: self.frame.size.height / 2.0)).cgPath
     }
@@ -129,7 +128,7 @@ class VideoSlider: UIControl {
         positionRingLayer.backgroundColor = UIColor.clear.cgColor
     }
     
-    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool
+    public override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool
     {
         super.continueTracking(touch, with: event)
         let point = touch.location(in: self)
@@ -143,7 +142,7 @@ class VideoSlider: UIControl {
     }
     
     
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let bounds = self.bounds.insetBy(dx: -20, dy: -20)
         return bounds.contains(point);
     }

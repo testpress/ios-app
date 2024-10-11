@@ -11,26 +11,25 @@ import AVKit
 import Alamofire
 import Sentry
 import TTGSnackbar
-import CourseKit
 
 
-class VideoContentViewModel {
-    var content: Content!
-    var contentAttemptId: Int?
-    var startTime: String?
-    var videoPlayerView: VideoPlayerView?
-    weak var timer: Timer?
+public class VideoContentViewModel {
+    public var content: Content!
+    public var contentAttemptId: Int?
+    public var startTime: String?
+    public var videoPlayerView: VideoPlayerView?
+    public weak var timer: Timer?
     
     
     public init(_ content: Content){
         self.content = content
     }
     
-    func getTitle() -> String{
+    public func getTitle() -> String{
         return content!.name
     }
     
-    func getDescription()  -> String{
+    public func getDescription()  -> String{
         var description = ""
  
         if !(content?.contentDescription?.isEmpty ?? true) {
@@ -39,7 +38,7 @@ class VideoContentViewModel {
         return description
     }
     
-    func createContentAttempt() {
+    public func createContentAttempt() {
         let url = TPEndpointProvider.getContentAttemptUrl(contentID: content.id)
         TPApiClient.request(
             type: ContentAttempt.self,
@@ -62,7 +61,7 @@ class VideoContentViewModel {
         })
     }
     
-    @objc func updateVideoAttempt() {
+    @objc public func updateVideoAttempt() {
         if ((videoPlayerView?.player?.isPlaying ?? true) && ((contentAttemptId != nil))) {
 
             if ((videoPlayerView?.player?.currentTimeInSeconds)! <= Double(1.0)) {
@@ -87,7 +86,7 @@ class VideoContentViewModel {
     }
     
     
-    func removeBookmark(completion: (() -> Void)?) {
+    public func removeBookmark(completion: (() -> Void)?) {
         let urlPath = TPEndpointProvider.getBookmarkPath(bookmarkId: content!.bookmarkId.value!)
         TPApiClient.apiCall(
             endpointProvider: TPEndpointProvider(.delete, urlPath: urlPath),

@@ -7,17 +7,16 @@
 //
 
 import Foundation
-import CourseKit
 
-class CustomTestQuizExamViewModel: QuizExamViewModelDelegate {
+public class CustomTestQuizExamViewModel: QuizExamViewModelDelegate {
     
     private let repository: AttemptRepository
     
-    init(repository: AttemptRepository = AttemptRepository()) {
+    public init(repository: AttemptRepository = AttemptRepository()) {
         self.repository = repository
     }
     
-    func loadQuestions(attemptId: Int, completion: @escaping ([AttemptItem]?, TPError?) -> Void) {
+    public func loadQuestions(attemptId: Int, completion: @escaping ([AttemptItem]?, TPError?) -> Void) {
         // We don't have exam object for Custom test so we set default examId as -1
         let examId: Int = -1
         let questionUrl = Constants.BASE_URL + "/api/v2.5/attempts/\(attemptId)/questions/"
@@ -27,7 +26,7 @@ class CustomTestQuizExamViewModel: QuizExamViewModelDelegate {
 
 }
 
-protocol QuizExamViewModelDelegate {
+public protocol QuizExamViewModelDelegate {
     
     func loadQuestions(attemptId: Int, completion: @escaping([AttemptItem]?, TPError?) -> Void)
     

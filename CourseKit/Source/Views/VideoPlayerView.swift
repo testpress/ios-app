@@ -10,26 +10,25 @@ import UIKit
 import AVKit
 import M3U8Parser
 import MarqueeLabel
-import CourseKit
 
 
-class VideoPlayerView: UIView {
-    var url: URL!
-    var drmLicenseURL: String?
-    var playerLayer: AVPlayerLayer?
-    var player: AVPlayer? = AVPlayer()
-    var playerDelegate: VideoPlayerDelegate!
-    var controlsContainerView: VideoPlayerControlsView! = .fromNib("VideoPlayerControls")
-    var timeObserver: Any?
-    var videoEndObserver: Any?
-    var startTime: Float = 0.0
-    var currentPlaybackSpeed: Float = 0.0
-    var resolutionInfo:[VideoQuality] = [VideoQuality(resolution:"Auto", bitrate: 0)]
-    var timer: Timer?
-    var watermarkLabel: MarqueeLabel?
-    var contentKeySessionDelegate: DRMKeySessionDelegate!
-    var videoPlayerResourceLoaderDelegate: VideoPlayerResourceLoaderDelegate!
-    var isLive: Bool = false {
+public class VideoPlayerView: UIView {
+    public var url: URL!
+    public var drmLicenseURL: String?
+    public var playerLayer: AVPlayerLayer?
+    public var player: AVPlayer? = AVPlayer()
+    public var playerDelegate: VideoPlayerDelegate!
+    public var controlsContainerView: VideoPlayerControlsView! = .fromNib("VideoPlayerControls")
+    public var timeObserver: Any?
+    public var videoEndObserver: Any?
+    public var startTime: Float = 0.0
+    public var currentPlaybackSpeed: Float = 0.0
+    public var resolutionInfo:[VideoQuality] = [VideoQuality(resolution:"Auto", bitrate: 0)]
+    public var timer: Timer?
+    public var watermarkLabel: MarqueeLabel?
+    public var contentKeySessionDelegate: DRMKeySessionDelegate!
+    public var videoPlayerResourceLoaderDelegate: VideoPlayerResourceLoaderDelegate!
+    public var isLive: Bool = false {
         didSet {
             controlsContainerView.isLive = isLive
         }
@@ -54,7 +53,7 @@ class VideoPlayerView: UIView {
         super.init(coder: aDecoder)
     }
     
-    init(frame: CGRect, url: URL, drmLicenseURL: String?) {
+    public init(frame: CGRect, url: URL, drmLicenseURL: String?) {
         self.url = url
         self.drmLicenseURL = drmLicenseURL
         self.contentKeySessionDelegate = DRMKeySessionDelegate(drmLicenseURL: drmLicenseURL)!
@@ -101,7 +100,7 @@ class VideoPlayerView: UIView {
         watermarkLabel?.frame.origin.y = CGFloat(Int.random(in: 0..<Int(self.frame.height)))
     }
     
-    func playVideo(url: URL) {
+    public func playVideo(url: URL) {
         controlsContainerView.startLoading()
         self.url = url
         let playerItem = AVPlayerItem(asset: createAVAssetWithCustomURLScheme())
@@ -117,7 +116,7 @@ class VideoPlayerView: UIView {
         parseResolutionInfo()
     }
 
-    func createAVAssetWithCustomURLScheme() -> AVURLAsset {
+    public func createAVAssetWithCustomURLScheme() -> AVURLAsset {
         let modifiedURL = URLUtils.convertURLScheme(url: url, scheme: "fakehttps")
         let asset = AVURLAsset(url: modifiedURL)
         asset.resourceLoader.setDelegate(videoPlayerResourceLoaderDelegate, queue: DispatchQueue.main)
@@ -132,7 +131,7 @@ class VideoPlayerView: UIView {
         return asset
     }
     
-    func parseResolutionInfo() {
+    public func parseResolutionInfo() {
         do {
             resolutionInfo.removeAll()
             resolutionInfo = [VideoQuality(resolution:"Auto", bitrate: 0)]
@@ -152,7 +151,7 @@ class VideoPlayerView: UIView {
         } catch {}
     }
     
-    func addObservers() {
+    public func addObservers() {
         initPlayer()
         timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(moveWatermarkPosition), userInfo: nil, repeats: true)
         player?.currentItem?.addObserver(self, forKeyPath: "playbackBufferEmpty", options: .new, context: nil)
@@ -174,7 +173,7 @@ class VideoPlayerView: UIView {
 
     }
     
-    func initPlayer()  {
+    public func initPlayer()  {
         if player != nil {
             player?.play()
             controlsContainerView.playerStatus = .playing
@@ -189,7 +188,7 @@ class VideoPlayerView: UIView {
         controlsContainerView.playerStatus = .finished
     }
     
-    func deallocate() {
+    public func deallocate() {
         player?.pause()
         controlsContainerView.playerStatus = .paused
         player?.removeTimeObserver(timeObserver!)
@@ -201,7 +200,7 @@ class VideoPlayerView: UIView {
         player?.currentItem?.removeObserver(self, forKeyPath: "loadedTimeRanges")
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if object is AVPlayerItem {
             switch keyPath {
                 case "playbackBufferEmpty":
@@ -221,29 +220,29 @@ class VideoPlayerView: UIView {
         }
     }
     
-    func changeBitrate(_ bitrate: Int) {
+    public func changeBitrate(_ bitrate: Int) {
         player?.currentItem?.preferredPeakBitRate = Double(bitrate)
     }
     
-    func getCurrentBitrate() -> Double {
+    public func getCurrentBitrate() -> Double {
         return player?.currentItem?.preferredPeakBitRate ?? 0.0
     }
     
-    func getCurrenPlaybackSpeed() -> Float {
+    public func getCurrenPlaybackSpeed() -> Float {
         return player?.rate ?? 1.0
     }
     
-    func changePlaybackSpeed(speed: PlaybackSpeed) {
+    public func changePlaybackSpeed(speed: PlaybackSpeed) {
         currentPlaybackSpeed = speed.value
         play()
     }
     
-    func pause() {
+    public func pause() {
         player?.pause()
         controlsContainerView.playerStatus = .paused
     }
     
-    func play() {
+    public func play() {
         player?.rate = currentPlaybackSpeed
         controlsContainerView.playerStatus = .playing
     }
@@ -252,11 +251,11 @@ class VideoPlayerView: UIView {
 
 
 extension VideoPlayerView: PlayerControlDelegate {
-    func showOptionsMenu() {
+    public func showOptionsMenu() {
         playerDelegate?.showOptionsMenu()
     }
     
-    func goTo(seconds: Float) {
+    public func goTo(seconds: Float) {
         let seekTime = CMTime(value: Int64(seconds), timescale: 1)
         player?.seek(to: seekTime)
         
@@ -267,7 +266,7 @@ extension VideoPlayerView: PlayerControlDelegate {
         startTime = seconds
     }
     
-    func playOrPause() {
+    public func playOrPause() {
         if (controlsContainerView.playerStatus == .finished) {
             player?.currentItem?.seek(to: CMTime.zero, completionHandler: { _ in
                 self.play()
@@ -281,7 +280,7 @@ extension VideoPlayerView: PlayerControlDelegate {
         }
     }
     
-    func forward() {
+    public func forward() {
         guard let duration  = player?.currentItem?.asset.duration else{
             return
         }
@@ -297,7 +296,7 @@ extension VideoPlayerView: PlayerControlDelegate {
         
     }
     
-    func rewind() {
+    public func rewind() {
         let playerCurrentTime = CMTimeGetSeconds((player?.currentTime())!)
         var newTime = playerCurrentTime - 10
         
@@ -314,16 +313,16 @@ extension VideoPlayerView: PlayerControlDelegate {
         }
     }
     
-    func fullScreen() {
+    public func fullScreen() {
         playerDelegate?.toggleFullScreen()
     }
     
-    func isPlaying() -> Bool {
+    public func isPlaying() -> Bool {
         return player?.isPlaying ?? false
     }
 }
 
-protocol VideoPlayerDelegate: class {
+public protocol VideoPlayerDelegate: class {
     func showOptionsMenu()
     func toggleFullScreen()
 }

@@ -4,16 +4,16 @@ import Alamofire
 import CourseKit
 
 
-class DRMKeySessionDelegate: NSObject, AVContentKeySessionDelegate {
-    let drmLicenseURL: String?
-    let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+public class DRMKeySessionDelegate: NSObject, AVContentKeySessionDelegate {
+    public let drmLicenseURL: String?
+    public let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
     
     public required init?(drmLicenseURL: String?) {
         self.drmLicenseURL = drmLicenseURL
     }
     
     @available(iOS 10.3, *)
-    func contentKeySession(_ session: AVContentKeySession, didProvide keyRequest: AVContentKeyRequest) {
+    public func contentKeySession(_ session: AVContentKeySession, didProvide keyRequest: AVContentKeyRequest) {
         
         if let contentKeyIdentifier = keyRequest.identifier as? NSURL{
             let contentId = contentKeyIdentifier.host!

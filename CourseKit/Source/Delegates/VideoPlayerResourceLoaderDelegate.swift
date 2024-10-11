@@ -8,17 +8,16 @@
 
 import Foundation
 import AVKit
-import CourseKit
 
 
-class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate {
+public class VideoPlayerResourceLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate {
     var contentKeySession: AVContentKeySession?
 
     func setContentKeySession(contentKeySession: AVContentKeySession) {
         self.contentKeySession = contentKeySession
     }
     
-    func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
+    public func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         guard let url = loadingRequest.request.url else { return false }
         if url.scheme == "fakehttps" {
             M3U8Handler().fetch(url: url) { data, response in
