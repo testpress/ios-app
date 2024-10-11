@@ -34,6 +34,7 @@ public enum Images: String {
     case CloseButton = "ic_close"
     case PlaceHolder = "placeholder_icon"
     case LearnFlatIcon = "learn_flat_icon"
+    case LearnNavBarIcon = "learn"
     case NewsFlatIcon = "news_flat_icon"
     case DiscussionFlatIcon = "discussion_flat_icon"
     case SuccessTick = "success_tick"

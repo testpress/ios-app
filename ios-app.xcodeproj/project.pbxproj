@@ -124,6 +124,7 @@
 		03CD0D2D2CB92CAE00E17218 /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2881F861A860092BFDC /* EmptyView.xib */; };
 		03CD0D2E2CB92EC800E17218 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2861F861A860092BFDC /* BaseTextFieldViewController.swift */; };
 		03CD0D312CB935D300E17218 /* BasePagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0D302CB935D300E17218 /* BasePagedTableViewController.swift */; };
+		03CD0D332CB93A6500E17218 /* LearnTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0D322CB93A6500E17218 /* LearnTabController.swift */; };
 		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
 		03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586782628ABB81700E149B5 /* DBModel+Detachable.swift */; };
@@ -504,6 +505,7 @@
 		03CD0C862CB7E2CC00E17218 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03CD0D062CB8F92100E17218 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		03CD0D302CB935D300E17218 /* BasePagedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePagedTableViewController.swift; sourceTree = "<group>"; };
+		03CD0D322CB93A6500E17218 /* LearnTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnTabController.swift; sourceTree = "<group>"; };
 		03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamContentViewController.swift; sourceTree = "<group>"; };
 		03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSection.swift; sourceTree = "<group>"; };
@@ -1552,6 +1554,7 @@
 				03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */,
 				03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */,
 				03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */,
+				03CD0D322CB93A6500E17218 /* LearnTabController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2134,6 +2137,7 @@
 				25E435EC263ADE7500243FD3 /* DashboardSectionHeaderCell.swift in Sources */,
 				2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */,
 				2F56B73D1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift in Sources */,
+				03CD0D332CB93A6500E17218 /* LearnTabController.swift in Sources */,
 				8C2E7B602397B56600BA2F41 /* VideoPlayerControlsView.swift in Sources */,
 				2F17C1FE20C965B300606D5C /* BookmarkFoldersDropDown.swift in Sources */,
 				8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */,
