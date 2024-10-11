@@ -72,7 +72,6 @@
 		03A60FAB2CB4153900079A7C /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 03A60FAA2CB4153900079A7C /* Sentry */; };
 		03A60FAE2CB417CC00079A7C /* LUExpandableTableView in Frameworks */ = {isa = PBXBuildFile; productRef = 03A60FAD2CB417CC00079A7C /* LUExpandableTableView */; };
 		03A60FB02CB5281000079A7C /* InstituteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A60FAF2CB5280F00079A7C /* InstituteRepository.swift */; };
-		03AFFB832C0076AE0015C029 /* ChapterContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */; };
 		03CD0C4E2CB79BC900E17218 /* FormatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2541F8617690092BFDC /* FormatDate.swift */; };
 		03CD0C4F2CB79C0A00E17218 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167E1FC4164100FB768C /* Reachability.swift */; };
 		03CD0C502CB79C5400E17218 /* GraphAxisPercentValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */; };
@@ -95,7 +94,6 @@
 		03CD0C702CB7C5FD00E17218 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A90A1247D30DA00F4E12C /* Collection.swift */; };
 		03CD0C712CB7C5FD00E17218 /* UIInterfaceOrientationMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */; };
 		03CD0C722CB7C5FD00E17218 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F92A1F243306A60084ADC8 /* UIViewController.swift */; };
-		03CD0C732CB7C72E00E17218 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A81EC20E4DDFC0062DE8A /* UINavigationControllerExtension.swift */; };
 		03CD0C742CB7CF4900E17218 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFD1FF517160005D8A5 /* Permissions.swift */; };
 		03CD0C752CB7CF8400E17218 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */; };
 		03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0C762CB7CFC900E17218 /* TTGSnackbar */; };
@@ -108,8 +106,115 @@
 		03CD0C7F2CB7D31F00E17218 /* VideoPlayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */; };
 		03CD0C852CB7E25900E17218 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DB1F863AAF0092BFDC /* Images.swift */; };
 		03CD0C872CB7E2CD00E17218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03CD0C862CB7E2CC00E17218 /* Assets.xcassets */; };
-		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
-		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
+		03CD0C892CB80A8D00E17218 /* LearnTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0C882CB80A8D00E17218 /* LearnTabController.swift */; };
+		03CD0C8A2CB80C4500E17218 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763CFB1FBD79F60033D495 /* CoursesTableViewController.swift */; };
+		03CD0C8B2CB80C8E00E17218 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A81EE20E52CB50062DE8A /* BaseTableViewCell.swift */; };
+		03CD0C8C2CB80C8E00E17218 /* BasePagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF9C5820B6F5240086245F /* BasePagedTableViewController.swift */; };
+		03CD0C8D2CB80C8E00E17218 /* BaseDBTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF024202004CECA00E0047D /* BaseDBTableViewController.swift */; };
+		03CD0C8E2CB80C8E00E17218 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */; };
+		03CD0C8F2CB80D2200E17218 /* TPBasePagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */; };
+		03CD0C902CB80D4A00E17218 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2871F861A860092BFDC /* EmptyView.swift */; };
+		03CD0C912CB80D4A00E17218 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */; };
+		03CD0C922CB80FEA00E17218 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
+		03CD0C932CB8103800E17218 /* CustomTestGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */; };
+		03CD0C942CB8104D00E17218 /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250C4CAC2463D24600FD7636 /* BaseDBViewController.swift */; };
+		03CD0C952CB810E300E17218 /* AttemptsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2811F861A860092BFDC /* AttemptsListViewController.swift */; };
+		03CD0C962CB810E400E17218 /* BaseQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2841F861A860092BFDC /* BaseQuestionsPageViewController.swift */; };
+		03CD0C972CB810E400E17218 /* BaseQuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F4D61F9F1C3300D30755 /* BaseQuestionsListViewController.swift */; };
+		03CD0C982CB810E400E17218 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
+		03CD0C992CB810E400E17218 /* AttachmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */; };
+		03CD0C9A2CB810E400E17218 /* BaseQuestionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2831F861A860092BFDC /* BaseQuestionsDataSource.swift */; };
+		03CD0C9B2CB810E400E17218 /* AttemptsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2821F861A860092BFDC /* AttemptsTableViewCell.swift */; };
+		03CD0C9C2CB810E400E17218 /* BaseQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2851F861A860092BFDC /* BaseQuestionsViewController.swift */; };
+		03CD0C9D2CB8123400E17218 /* QuestionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1474781F8B898F0017151B /* QuestionListViewController.swift */; };
+		03CD0C9E2CB8123400E17218 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
+		03CD0C9F2CB8123400E17218 /* OverallSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */; };
+		03CD0CA02CB8123400E17218 /* RelatedContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */; };
+		03CD0CA12CB8123400E17218 /* ReviewQuestionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2921F861A860092BFDC /* ReviewQuestionsDataSource.swift */; };
+		03CD0CA22CB8123400E17218 /* TestEngineSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1474741F8B7BF30017151B /* TestEngineSlidingViewController.swift */; };
+		03CD0CA32CB8123400E17218 /* StartQuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */; };
+		03CD0CA42CB8123400E17218 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
+		03CD0CA52CB8123400E17218 /* IndividualSubjectAnalyticsCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */; };
+		03CD0CA62CB8123400E17218 /* QuizReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259286892473B1E00035EBA4 /* QuizReviewViewController.swift */; };
+		03CD0CA72CB8123400E17218 /* ZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */; };
+		03CD0CA82CB8123400E17218 /* ContentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */; };
+		03CD0CA92CB8123400E17218 /* ReviewSolutionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2941F861A860092BFDC /* ReviewSolutionsViewController.swift */; };
+		03CD0CAA2CB8123400E17218 /* DRMKeySessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */; };
+		03CD0CAB2CB8123400E17218 /* ReviewQuestionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F4D81F9F1F8200D30755 /* ReviewQuestionListViewController.swift */; };
+		03CD0CAC2CB8123400E17218 /* IndividualSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */; };
+		03CD0CAD2CB8123400E17218 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2911F861A860092BFDC /* QuestionsViewController.swift */; };
+		03CD0CAE2CB8123400E17218 /* StartExamScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2961F861A860092BFDC /* StartExamScreenViewController.swift */; };
+		03CD0CAF2CB8123400E17218 /* ReviewQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2931F861A860092BFDC /* ReviewQuestionsViewController.swift */; };
+		03CD0CB02CB8123400E17218 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
+		03CD0CB12CB8123400E17218 /* TestEngineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2981F861A860092BFDC /* TestEngineViewController.swift */; };
+		03CD0CB22CB8123400E17218 /* VideoPlayerResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */; };
+		03CD0CB32CB8123400E17218 /* ChapterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */; };
+		03CD0CB42CB8123400E17218 /* VideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D130A238507C4005A7F39 /* VideoContentViewController.swift */; };
+		03CD0CB52CB8123400E17218 /* ContentExamAttemptsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */; };
+		03CD0CB62CB8123400E17218 /* SubjectAnalyticsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */; };
+		03CD0CB72CB8123400E17218 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
+		03CD0CB82CB8123400E17218 /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
+		03CD0CB92CB8123400E17218 /* QuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB694246AB4C900524D2C /* QuizExamViewController.swift */; };
+		03CD0CBA2CB8123400E17218 /* VideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */; };
+		03CD0CBB2CB8123400E17218 /* TimeAnalyticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */; };
+		03CD0CBC2CB8123400E17218 /* TimeAnalyticsQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73E1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift */; };
+		03CD0CBD2CB8123400E17218 /* TestReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2991F861A860092BFDC /* TestReportViewController.swift */; };
+		03CD0CBE2CB8123500E17218 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04228E22AA3FD40015269B /* WebViewController.swift */; };
+		03CD0CBF2CB8123500E17218 /* QuizQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705018246E71B600E6C688 /* QuizQuestionViewController.swift */; };
+		03CD0CC02CB8123500E17218 /* ContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */; };
+		03CD0CC12CB8123500E17218 /* TrophiesAchievedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */; };
+		03CD0CC22CB8123500E17218 /* LockableSectionDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */; };
+		03CD0CC32CB8123500E17218 /* ContentDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */; };
+		03CD0CC42CB8123500E17218 /* TimeAnalyticsHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73C1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift */; };
+		03CD0CC52CB8123500E17218 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2570501A246EA32600E6C688 /* LoadingViewController.swift */; };
+		03CD0CC62CB8123500E17218 /* ChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D0C1FBEC91D0033D495 /* ChaptersViewController.swift */; };
+		03CD0CC72CB8123500E17218 /* QuestionsControllerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2901F861A860092BFDC /* QuestionsControllerSource.swift */; };
+		03CD0CC82CB8123500E17218 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */; };
+		03CD0CC92CB8123500E17218 /* ContentDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */; };
+		03CD0CCA2CB8123500E17218 /* HtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */; };
+		03CD0CCC2CB812FF00E17218 /* XLPagerTabStrip in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0CCB2CB812FF00E17218 /* XLPagerTabStrip */; };
+		03CD0CCD2CB8136C00E17218 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */; };
+		03CD0CCE2CB8136C00E17218 /* ChapterContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */; };
+		03CD0CCF2CB8136C00E17218 /* VideoPlayerSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */; };
+		03CD0CD02CB8136C00E17218 /* VideoPlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */; };
+		03CD0CD12CB8136C00E17218 /* CustomTestQuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */; };
+		03CD0CD22CB8136C00E17218 /* QuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB692246A9BA000524D2C /* QuizExamViewModel.swift */; };
+		03CD0CD32CB8136C00E17218 /* VideoContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */; };
+		03CD0CD42CB8136C00E17218 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256DE79D256F8CF100F02995 /* PaddingLabel.swift */; };
+		03CD0CD52CB8136C00E17218 /* PillLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF72263FAC4F003226AD /* PillLabel.swift */; };
+		03CD0CD62CB8136C00E17218 /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
+		03CD0CD82CB8138400E17218 /* M3U8Parser in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0CD72CB8138400E17218 /* M3U8Parser */; };
+		03CD0CDA2CB8138D00E17218 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0CD92CB8138D00E17218 /* Sentry */; };
+		03CD0CDC2CB8139400E17218 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0CDB2CB8139400E17218 /* MarqueeLabel */; };
+		03CD0CE02CB813B500E17218 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0CDF2CB813B500E17218 /* SwiftSoup */; };
+		03CD0CE42CB813B500E17218 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0CE32CB813B500E17218 /* Lottie */; };
+		03CD0CE62CB813B500E17218 /* LUExpandableTableView in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0CE52CB813B500E17218 /* LUExpandableTableView */; };
+		03CD0CE92CB8149C00E17218 /* WebViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2571F8617690092BFDC /* WebViewUtils.swift */; };
+		03CD0CEA2CB817BD00E17218 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
+		03CD0CEC2CB818CB00E17218 /* SlideMenuController in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0CEB2CB818CB00E17218 /* SlideMenuController */; };
+		03CD0CED2CB81A2900E17218 /* BookmarkFoldersDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */; };
+		03CD0CEE2CB81A2900E17218 /* BookmarkFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4186A320BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift */; };
+		03CD0CEF2CB81A2900E17218 /* BookmarksDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA9285120B811F400CD3076 /* BookmarksDetailPageViewController.swift */; };
+		03CD0CF02CB81A2900E17218 /* BookmarkedQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F452C3120BC123D007833A0 /* BookmarkedQuestionViewController.swift */; };
+		03CD0CF12CB81A2900E17218 /* BookmarksDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F452C2F20BBE3E6007833A0 /* BookmarksDetailDataSource.swift */; };
+		03CD0CF22CB81A2900E17218 /* BookmarksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF9C5020B6D5F40086245F /* BookmarksTableViewCell.swift */; };
+		03CD0CF32CB81A2900E17218 /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF9C4A20B6CFBF0086245F /* BookmarksTableViewController.swift */; };
+		03CD0CF42CB81A2900E17218 /* BookmarkFolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */; };
+		03CD0CF52CB81A2900E17218 /* BookmarksSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA9285320B8160A00CD3076 /* BookmarksSlidingViewController.swift */; };
+		03CD0CF62CB81A2A00E17218 /* BookmarkedHtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBDD4D20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift */; };
+		03CD0CF72CB81A2A00E17218 /* BookmarkFoldersDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F17C1FD20C965B300606D5C /* BookmarkFoldersDropDown.swift */; };
+		03CD0CF82CB81A6A00E17218 /* BookmarkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */; };
+		03CD0CF92CB81CD100E17218 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */; };
+		03CD0CFA2CB81E6F00E17218 /* AccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD2E4020A59D2500A111EC /* AccessCodeViewController.swift */; };
+		03CD0CFB2CB81E6F00E17218 /* AccessCodeExamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD2E4220A5C3FE00A111EC /* AccessCodeExamsViewController.swift */; };
+		03CD0CFC2CB81F8D00E17218 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
+		03CD0CFD2CB81FB400E17218 /* ExamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2891F861A860092BFDC /* ExamsTableViewCell.swift */; };
+		03CD0CFE2CB81FC400E17218 /* ExamsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28C1F861A860092BFDC /* ExamsTabViewController.swift */; };
+		03CD0CFF2CB81FC400E17218 /* ExamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28B1F861A860092BFDC /* ExamsTableViewController.swift */; };
+		03CD0D002CB81FDE00E17218 /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2861F861A860092BFDC /* BaseTextFieldViewController.swift */; };
+		03CD0D022CB8226000E17218 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0D012CB8226000E17218 /* UILabel.swift */; };
+		03CD0D042CB822C200E17218 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D032CB822C200E17218 /* Kingfisher */; };
+		03CD0D052CB8253200E17218 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A81EC20E4DDFC0062DE8A /* UINavigationControllerExtension.swift */; };
 		03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586782628ABB81700E149B5 /* DBModel+Detachable.swift */; };
 		03E4AF462CAEDF7F00ECC34D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96997B1FC2A625001B2B18 /* Video.swift */; };
 		03E4AF472CAEDF7F00ECC34D /* TPModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2CC1F86385B0092BFDC /* TPModelMapper.swift */; };
@@ -176,9 +281,7 @@
 		03E4AFD22CAFD22100ECC34D /* DashboardSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */; };
 		03E4AFD42CAFE63900ECC34D /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F27E1F861A3E0092BFDC /* KeychainTokenItem.swift */; };
 		03E4AFD62CAFE6A900ECC34D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AFD52CAFE6A900ECC34D /* Constants.swift */; };
-		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
-		18F25D29212FDC5300097425 /* LockableSectionDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */; };
 		2503DF50263C01E8003226AD /* CarouselSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF4F263C01E8003226AD /* CarouselSectionController.swift */; };
 		2503DF53263C0296003226AD /* BannerSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF52263C0296003226AD /* BannerSectionController.swift */; };
 		2503DF57263C02C3003226AD /* BannerAdViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF55263C02C3003226AD /* BannerAdViewCell.swift */; };
@@ -189,25 +292,15 @@
 		2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2503DF69263C17DA003226AD /* PostCarouselViewCell.xib */; };
 		2503DF6F263FAC0A003226AD /* ChapterContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF6D263FAC0A003226AD /* ChapterContentViewCell.swift */; };
 		2503DF70263FAC0A003226AD /* ChapterContentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2503DF6E263FAC0A003226AD /* ChapterContentViewCell.xib */; };
-		2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF72263FAC4F003226AD /* PillLabel.swift */; };
 		2503DF79263FB21F003226AD /* ChapterContentSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF78263FB21F003226AD /* ChapterContentSectionController.swift */; };
 		2503DF7C263FBECD003226AD /* ContentAttemptSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF7B263FBECD003226AD /* ContentAttemptSectionController.swift */; };
 		250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506298F2265B7D600539FB2 /* LoginActivityViewController.swift */; };
 		250629962266F9C000539FB2 /* LoginActivityViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629952266F9C000539FB2 /* LoginActivityViewControllerTest.swift */; };
 		2506299A2266FEC800539FB2 /* LoginActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629992266FEC800539FB2 /* LoginActivity.swift */; };
-		250888DA251C5EC80023DCF6 /* ZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */; };
-		250C4CAD2463D24600FD7636 /* BaseDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250C4CAC2463D24600FD7636 /* BaseDBViewController.swift */; };
-		250DA7BD246A585D00EDB31C /* StartQuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */; };
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
-		2510859B2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */; };
-		2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
 		25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */; };
 		25520BC327546AF9001A58AB /* DiscussionThreadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */; };
-		256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */; };
-		256DE79E256F8CF200F02995 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256DE79D256F8CF100F02995 /* PaddingLabel.swift */; };
-		25705019246E71B600E6C688 /* QuizQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705018246E71B600E6C688 /* QuizQuestionViewController.swift */; };
-		2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2570501A246EA32600E6C688 /* LoadingViewController.swift */; };
 		2570A23F21CA0D260097C6FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2570A23E21CA0D260097C6FE /* GoogleService-Info.plist */; };
 		2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24021CA0D760097C6FE /* FirebaseInstanceID.framework */; };
 		2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24121CA0D760097C6FE /* FirebaseCore.framework */; };
@@ -215,21 +308,14 @@
 		2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24621CA0D770097C6FE /* Firebase.framework */; };
 		2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24821CA0D770097C6FE /* FirebaseMessaging.framework */; };
 		2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A25221CA0DBE0097C6FE /* Protobuf.framework */; };
-		257BB693246A9BA000524D2C /* QuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB692246A9BA000524D2C /* QuizExamViewModel.swift */; };
-		257BB695246AB4C900524D2C /* QuizExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB694246AB4C900524D2C /* QuizExamViewController.swift */; };
-		258036A52743AA2400397639 /* DRMKeySessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */; };
-		2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */; };
-		2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259286892473B1E00035EBA4 /* QuizReviewViewController.swift */; };
 		2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */; };
 		2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; };
 		2599326F2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; };
 		259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; };
-		259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */; };
 		25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */; };
 		25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */; };
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
 		25B1489A264CFE0500AECC39 /* MathJax-2.7.1 in Resources */ = {isa = PBXBuildFile; fileRef = 25B14899264CFE0500AECC39 /* MathJax-2.7.1 */; };
-		25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
 		25E435BB263AD8CC00243FD3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */; };
 		25E435DA263ADCA700243FD3 /* LeaderboardSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435D9263ADCA700243FD3 /* LeaderboardSectionController.swift */; };
 		25E435DD263ADCCF00243FD3 /* BaseSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435DC263ADCCF00243FD3 /* BaseSectionController.swift */; };
@@ -240,15 +326,10 @@
 		25EF86ED247E2160005C2B96 /* pseudo_element_selector.js in Resources */ = {isa = PBXBuildFile; fileRef = 25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */; };
 		25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
-		2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */; };
-		2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1474741F8B7BF30017151B /* TestEngineSlidingViewController.swift */; };
-		2F1474791F8B898F0017151B /* QuestionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1474781F8B898F0017151B /* QuestionListViewController.swift */; };
-		2F17C1FE20C965B300606D5C /* BookmarkFoldersDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F17C1FD20C965B300606D5C /* BookmarkFoldersDropDown.swift */; };
 		2F25D558201EFB9F00C01CCE /* LeaderboardTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D557201EFB9F00C01CCE /* LeaderboardTabViewController.swift */; };
 		2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */; };
 		2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D55F201F085A00C01CCE /* LeaderboardTableViewCell.swift */; };
 		2F25D562201F5C8800C01CCE /* TargetThreatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D561201F5C8800C01CCE /* TargetThreatViewController.swift */; };
-		2F25D564201F5DBB00C01CCE /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */; };
 		2F25D566201F6D7500C01CCE /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */; };
 		2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */; };
 		2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADE91E8249D70031E6F4 /* Main.storyboard */; };
@@ -256,18 +337,9 @@
 		2F26ADFB1E8249D70031E6F4 /* PushNotificationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* PushNotificationsTest.swift */; };
 		2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */; };
 		2F2A41C01FD6ACE900B92C6D /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A41BF1FD6ACE900B92C6D /* ForumViewController.swift */; };
-		2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
-		2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
 		2F368C0C215DEC77000999FA /* symbol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F368C0B215DEC68000999FA /* symbol.ttf */; };
 		2F3A14311FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F3A14301FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib */; };
-		2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */; };
-		2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */; };
-		2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */; };
-		2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */; };
-		2F4186A420BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4186A320BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift */; };
 		2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F429A0620DD323A00F5555C /* dotted_loader.css */; };
-		2F452C3020BBE3E6007833A0 /* BookmarksDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F452C2F20BBE3E6007833A0 /* BookmarksDetailDataSource.swift */; };
-		2F452C3220BC123D007833A0 /* BookmarkedQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F452C3120BC123D007833A0 /* BookmarkedQuestionViewController.swift */; };
 		2F452C3B20BC3463007833A0 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 2F452C3A20BC3463007833A0 /* images */; };
 		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
 		2F48C7FB1FCDA957009C686C /* comments.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FA1FCDA957009C686C /* comments.js */; };
@@ -277,68 +349,28 @@
 		2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80C1FD28902009C686C /* PostTableViewCell.swift */; };
 		2F48C8161FD3F6BD009C686C /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8141FD3F6BD009C686C /* Post.storyboard */; };
 		2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */; };
-		2F4A81EF20E52CB50062DE8A /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A81EE20E52CB50062DE8A /* BaseTableViewCell.swift */; };
 		2F515DF51FF3B7B10005D8A5 /* RichTextEditor.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F515DF31FF3B7B10005D8A5 /* RichTextEditor.html */; };
 		2F515DF61FF3B7B10005D8A5 /* RichTextEditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F515DF41FF3B7B10005D8A5 /* RichTextEditor.js */; };
 		2F515DF81FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */; };
-		2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */; };
-		2F56B73B1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */; };
-		2F56B73D1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73C1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift */; };
-		2F56B73F1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73E1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift */; };
 		2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BB61FE2444E00236AFE /* ActivityFeedTableViewController.swift */; };
 		2F5E0BB91FE2452D00236AFE /* ActivityFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BB81FE2452D00236AFE /* ActivityFeedTableViewCell.swift */; };
 		2F6F167B1FC3F08900FB768C /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
-		2F70F4D71F9F1C3300D30755 /* BaseQuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F4D61F9F1C3300D30755 /* BaseQuestionsListViewController.swift */; };
-		2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F4D81F9F1F8200D30755 /* ReviewQuestionListViewController.swift */; };
 		2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7179521EC740C6009114C4 /* ExamReview.storyboard */; };
 		2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7179541EC740C6009114C4 /* TestEngine.storyboard */; };
-		2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763CFB1FBD79F60033D495 /* CoursesTableViewController.swift */; };
-		2F763D081FBDB4D30033D495 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */; };
-		2F763D0B1FBEC7260033D495 /* ChapterContent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F763D091FBEC7260033D495 /* ChapterContent.storyboard */; };
-		2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D0C1FBEC91D0033D495 /* ChaptersViewController.swift */; };
-		2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */; };
 		2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8411BB2043D5C500193A66 /* ResetPasswordViewController.swift */; };
 		2F909E6920DBC60700FE9B8D /* material_wave_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F909E6820DBC60700FE9B8D /* material_wave_loading.json */; };
-		2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */; };
-		2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */; };
-		2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */; };
-		2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */; };
-		2F9778A81FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */; };
-		2F9B5E171FC54AFC00D67100 /* AttachmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */; };
 		2F9F169520724F76009886AB /* PostCategoriesDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9F169420724F76009886AB /* PostCategoriesDropDown.swift */; };
-		2FA9285220B811F400CD3076 /* BookmarksDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA9285120B811F400CD3076 /* BookmarksDetailPageViewController.swift */; };
-		2FA9285420B8160A00CD3076 /* BookmarksSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA9285320B8160A00CD3076 /* BookmarksSlidingViewController.swift */; };
 		2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */; };
 		2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */; };
 		2FB049BB1FD838860049D5B0 /* post.css in Resources */ = {isa = PBXBuildFile; fileRef = 2FB049BA1FD838860049D5B0 /* post.css */; };
 		2FB049BD1FD839EB0049D5B0 /* ForumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */; };
 		2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28D1F861A860092BFDC /* LoginViewController.swift */; };
-		2FC0F2F91F863B780092BFDC /* AttemptsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2811F861A860092BFDC /* AttemptsListViewController.swift */; };
-		2FC0F2FA1F863B7C0092BFDC /* AttemptsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2821F861A860092BFDC /* AttemptsTableViewCell.swift */; };
-		2FC0F2FB1F863B7E0092BFDC /* BaseQuestionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2831F861A860092BFDC /* BaseQuestionsDataSource.swift */; };
-		2FC0F2FC1F863B810092BFDC /* BaseQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2841F861A860092BFDC /* BaseQuestionsPageViewController.swift */; };
-		2FC0F2FD1F863B850092BFDC /* BaseQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2851F861A860092BFDC /* BaseQuestionsViewController.swift */; };
-		2FC0F2FE1F863B890092BFDC /* BaseTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2861F861A860092BFDC /* BaseTextFieldViewController.swift */; };
-		2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2871F861A860092BFDC /* EmptyView.swift */; };
-		2FC0F3001F863B8F0092BFDC /* ExamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2891F861A860092BFDC /* ExamsTableViewCell.swift */; };
 		2FC0F3011F863B950092BFDC /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2881F861A860092BFDC /* EmptyView.xib */; };
 		2FC0F3021F863B980092BFDC /* ExamsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F28A1F861A860092BFDC /* ExamsTableViewCell.xib */; };
-		2FC0F3031F863B9B0092BFDC /* ExamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28B1F861A860092BFDC /* ExamsTableViewController.swift */; };
-		2FC0F3041F863B9E0092BFDC /* ExamsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28C1F861A860092BFDC /* ExamsTabViewController.swift */; };
 		2FC0F3051F863BA90092BFDC /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */; };
 		2FC0F3061F863BA90092BFDC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28F1F861A860092BFDC /* ProfileViewController.swift */; };
-		2FC0F3071F863BA90092BFDC /* QuestionsControllerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2901F861A860092BFDC /* QuestionsControllerSource.swift */; };
-		2FC0F3081F863BA90092BFDC /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2911F861A860092BFDC /* QuestionsViewController.swift */; };
-		2FC0F3091F863BA90092BFDC /* ReviewQuestionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2921F861A860092BFDC /* ReviewQuestionsDataSource.swift */; };
-		2FC0F30A1F863BA90092BFDC /* ReviewQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2931F861A860092BFDC /* ReviewQuestionsViewController.swift */; };
-		2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2941F861A860092BFDC /* ReviewSolutionsViewController.swift */; };
 		2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2951F861A860092BFDC /* SignUpViewController.swift */; };
-		2FC0F30D1F863BA90092BFDC /* StartExamScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2961F861A860092BFDC /* StartExamScreenViewController.swift */; };
 		2FC0F30E1F863BA90092BFDC /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2971F861A860092BFDC /* SuccessViewController.swift */; };
-		2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2981F861A860092BFDC /* TestEngineViewController.swift */; };
-		2FC0F3101F863BA90092BFDC /* TestReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2991F861A860092BFDC /* TestReportViewController.swift */; };
-		2FC0F3111F863BA90092BFDC /* TPBasePagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */; };
-		2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2571F8617690092BFDC /* WebViewUtils.swift */; };
 		2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2731F8619220092BFDC /* MathJaxRender.js */; };
 		2FC0F3171F863BCE0092BFDC /* PT_Serif-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2741F8619220092BFDC /* PT_Serif-Web-Regular.ttf */; };
 		2FC0F3181F863BCE0092BFDC /* questions_typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2751F8619220092BFDC /* questions_typebase.css */; };
@@ -347,25 +379,13 @@
 		2FC0F31B1F863BCE0092BFDC /* TestEngine.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2781F8619220092BFDC /* TestEngine.js */; };
 		2FC0F31D1F863D780092BFDC /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F31C1F863D730092BFDC /* katex */; };
 		2FCA8BBE20E65F4C00B8ED87 /* bookmark in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA8BBD20E65F4C00B8ED87 /* bookmark */; };
-		2FCBDD4C20CFDB07003A7DC0 /* BookmarkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */; };
-		2FCBDD4E20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBDD4D20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift */; };
-		2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */; };
-		2FD846601FC30D1900D6F016 /* ContentDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */; };
-		2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */; };
-		2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD2E4020A59D2500A111EC /* AccessCodeViewController.swift */; };
-		2FDD2E4320A5C3FE00A111EC /* AccessCodeExamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD2E4220A5C3FE00A111EC /* AccessCodeExamsViewController.swift */; };
-		2FDF9C4B20B6CFBF0086245F /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF9C4A20B6CFBF0086245F /* BookmarksTableViewController.swift */; };
-		2FDF9C5120B6D5F40086245F /* BookmarksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF9C5020B6D5F40086245F /* BookmarksTableViewCell.swift */; };
-		2FDF9C5920B6F5240086245F /* BasePagedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF9C5820B6F5240086245F /* BasePagedTableViewController.swift */; };
 		2FDF9C5B20B6F6C50086245F /* Bookmarks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF9C5A20B6F6C50086245F /* Bookmarks.storyboard */; };
-		2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */; };
 		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
 		2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
 		2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */; };
 		2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */; };
 		2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */; };
 		2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */; };
-		2FF024212004CECA00E0047D /* BaseDBTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF024202004CECA00E0047D /* BaseDBTableViewController.swift */; };
 		841380112C9D9CCD004D5846 /* CourseKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 841380102C9D9CCD004D5846 /* CourseKit.docc */; };
 		841380172C9D9CCE004D5846 /* CourseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */; };
 		8413801E2C9D9CCE004D5846 /* CourseKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413801D2C9D9CCE004D5846 /* CourseKitTests.swift */; };
@@ -373,30 +393,18 @@
 		841380222C9D9CCE004D5846 /* CourseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */; };
 		841380232C9D9CCE004D5846 /* CourseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8413802C2C9D9F2D004D5846 /* TestpressCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413802B2C9D9F2D004D5846 /* TestpressCourse.swift */; };
-		841380302C9DA09D004D5846 /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413802F2C9DA09D004D5846 /* CourseListViewController.swift */; };
-		841380322C9DA0D0004D5846 /* ContentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841380312C9DA0D0004D5846 /* ContentDetailViewController.swift */; };
 		841380362C9DA1A8004D5846 /* Course.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841380352C9DA1A8004D5846 /* Course.storyboard */; };
 		84F3494925A82C190048487F /* TestAttachmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F3494825A82C190048487F /* TestAttachmentDetailViewController.swift */; };
-		8C04228F22AA3FD40015269B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04228E22AA3FD40015269B /* WebViewController.swift */; };
 		8C04229122AA77C90015269B /* TestCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C04229022AA77C90015269B /* TestCourseViewController.swift */; };
 		8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205A072323918700596E66 /* LoginActivityCell.swift */; };
-		8C2D130B238507C4005A7F39 /* VideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2D130A238507C4005A7F39 /* VideoContentViewController.swift */; };
-		8C2E7B5923979E5A00BA2F41 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */; };
 		8C2E7B5E2397B49000BA2F41 /* VideoPlayerControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */; };
-		8C2E7B602397B56600BA2F41 /* VideoPlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */; };
-		8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6430239D1D8C001C7FE4 /* VideoContentViewModel.swift */; };
-		8C3D6433239D5D8E001C7FE4 /* RelatedContentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */; };
 		8CD78EA322BC917D00DD034D /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */; };
 		8CD78EA522BC9B8F00DD034D /* TestMainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */; };
 		8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA622BC9DA100DD034D /* TestUtils.swift */; };
-		8CDE2649239E1ACD00BA04C6 /* VideoPlayerSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */; };
 		8CDE264B239EAD2700BA04C6 /* TestVideoPlayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264A239EAD2700BA04C6 /* TestVideoPlayerUtils.swift */; };
 		8CDE264E239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */; };
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
-		D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */; };
-		D9533ABE2B99CD2700E73A78 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */; };
-		D98010692B035E780071C397 /* CustomTestQuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */; };
 		D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -499,6 +507,8 @@
 		03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterContentDetailViewModel.swift; sourceTree = "<group>"; };
 		03CD0C562CB7A04E00E17218 /* UserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		03CD0C862CB7E2CC00E17218 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		03CD0C882CB80A8D00E17218 /* LearnTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnTabController.swift; sourceTree = "<group>"; };
+		03CD0D012CB8226000E17218 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamContentViewController.swift; sourceTree = "<group>"; };
 		03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSection.swift; sourceTree = "<group>"; };
@@ -723,7 +733,6 @@
 		2F763CFD1FBD7AE40033D495 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		2F763D051FBDA89C0033D495 /* CoursePager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePager.swift; sourceTree = "<group>"; };
 		2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
-		2F763D0A1FBEC7260033D495 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ChapterContent.storyboard; sourceTree = "<group>"; };
 		2F763D0C1FBEC91D0033D495 /* ChaptersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaptersViewController.swift; sourceTree = "<group>"; };
 		2F763D0E1FBECBBC0033D495 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		2F763D101FBECFD30033D495 /* ChapterPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterPager.swift; sourceTree = "<group>"; };
@@ -838,8 +847,6 @@
 		841380162C9D9CCE004D5846 /* CourseKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CourseKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8413801D2C9D9CCE004D5846 /* CourseKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseKitTests.swift; sourceTree = "<group>"; };
 		8413802B2C9D9F2D004D5846 /* TestpressCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestpressCourse.swift; sourceTree = "<group>"; };
-		8413802F2C9DA09D004D5846 /* CourseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
-		841380312C9DA0D0004D5846 /* ContentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDetailViewController.swift; sourceTree = "<group>"; };
 		841380352C9DA1A8004D5846 /* Course.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Course.storyboard; sourceTree = "<group>"; };
 		84F3494825A82C190048487F /* TestAttachmentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAttachmentDetailViewController.swift; sourceTree = "<group>"; };
 		8C04228E22AA3FD40015269B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -936,9 +943,18 @@
 			files = (
 				035CC5532CAE699B0057F4E4 /* ObjectMapper in Frameworks */,
 				03A60F9F2CB3F83D00079A7C /* Alamofire in Frameworks */,
+				03CD0CEC2CB818CB00E17218 /* SlideMenuController in Frameworks */,
 				03CD0C792CB7CFD600E17218 /* TOCropViewController in Frameworks */,
+				03CD0D042CB822C200E17218 /* Kingfisher in Frameworks */,
+				03CD0CDC2CB8139400E17218 /* MarqueeLabel in Frameworks */,
+				03CD0CE42CB813B500E17218 /* Lottie in Frameworks */,
+				03CD0CD82CB8138400E17218 /* M3U8Parser in Frameworks */,
+				03CD0CCC2CB812FF00E17218 /* XLPagerTabStrip in Frameworks */,
+				03CD0CDA2CB8138D00E17218 /* Sentry in Frameworks */,
 				03CD0C642CB7B5D400E17218 /* DGCharts in Frameworks */,
+				03CD0CE02CB813B500E17218 /* SwiftSoup in Frameworks */,
 				03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */,
+				03CD0CE62CB813B500E17218 /* LUExpandableTableView in Frameworks */,
 				03E4AFCB2CAFCFD500ECC34D /* IGListKit in Frameworks */,
 				035CC54F2CAE698D0057F4E4 /* RealmSwift in Frameworks */,
 			);
@@ -958,6 +974,8 @@
 		0303692D2CAC188400C6CF2D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				03CD0CE82CB8145600E17218 /* Static */,
+				03CD0CE72CB8141F00E17218 /* Xibs */,
 				03CD0C862CB7E2CC00E17218 /* Assets.xcassets */,
 				2FC0F2DA1F863AAF0092BFDC /* Colors.swift */,
 				2FC0F2DB1F863AAF0092BFDC /* Images.swift */,
@@ -1047,6 +1065,52 @@
 			path = Repostories;
 			sourceTree = "<group>";
 		};
+		03CD0CE72CB8141F00E17218 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */,
+				2FC0F2881F861A860092BFDC /* EmptyView.xib */,
+				2FC0F28A1F861A860092BFDC /* ExamsTableViewCell.xib */,
+				18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */,
+				2F3A14301FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib */,
+				8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		03CD0CE82CB8145600E17218 /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				25B14899264CFE0500AECC39 /* MathJax-2.7.1 */,
+				2FCA8BBD20E65F4C00B8ED87 /* bookmark */,
+				2F48C8041FD030A7009C686C /* icomoon */,
+				2F452C3A20BC3463007833A0 /* images */,
+				2FC0F31C1F863D730092BFDC /* katex */,
+				2F48C7FC1FCDABDE009C686C /* comments.css */,
+				2F48C7FA1FCDA957009C686C /* comments.js */,
+				2F429A0620DD323A00F5555C /* dotted_loader.css */,
+				2FE81096201A0AF70031E134 /* Lato-Bold.ttf */,
+				2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */,
+				2F909E6820DBC60700FE9B8D /* material_wave_loading.json */,
+				2FC0F2731F8619220092BFDC /* MathJaxRender.js */,
+				2F48C7F81FCD9F18009C686C /* progress_loader.css */,
+				2FB049BA1FD838860049D5B0 /* post.css */,
+				2FC0F2741F8619220092BFDC /* PT_Serif-Web-Regular.ttf */,
+				2FC0F2751F8619220092BFDC /* questions_typebase.css */,
+				2F515DF31FF3B7B10005D8A5 /* RichTextEditor.html */,
+				2F515DF41FF3B7B10005D8A5 /* RichTextEditor.js */,
+				2FC0F2761F8619220092BFDC /* Rubik-Medium.ttf */,
+				2FC0F2771F8619220092BFDC /* Rubik-Regular.ttf */,
+				2F368C0B215DEC68000999FA /* symbol.ttf */,
+				2FC0F2781F8619220092BFDC /* TestEngine.js */,
+				2F6F167A1FC3F08900FB768C /* typebase.css */,
+				2FE290711F8D07D0004D7574 /* QuestionListHandler.js */,
+				25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */,
+				031FBACA2C47B23A00AAF71D /* QuestionReviewPage.js */,
+			);
+			path = Static;
+			sourceTree = "<group>";
+		};
 		03E4AF232CAEDE1200ECC34D /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1086,6 +1150,7 @@
 		03E4AF242CAEDE2600ECC34D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2F4A81EC20E4DDFC0062DE8A /* UINavigationControllerExtension.swift */,
 				8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */,
 				8CA1E87F239A76AC0001FA5B /* UIView.swift */,
 				25F92A1F243306A60084ADC8 /* UIViewController.swift */,
@@ -1102,6 +1167,7 @@
 				25E435D4263ADBAA00243FD3 /* UserDefaults.swift */,
 				8C5DF60123264D9300B9F8A0 /* UIDevice+ModelName.swift */,
 				2586782628ABB81700E149B5 /* DBModel+Detachable.swift */,
+				03CD0D012CB8226000E17218 /* UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1159,6 +1225,8 @@
 		03E4AFD32CAFE62200ECC34D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */,
+				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 				8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */,
 				25985836248A77F6003591FA /* M3U8Handler.swift */,
 				25F7522027FEB143000D8137 /* TimeUtils.swift */,
@@ -1218,7 +1286,6 @@
 			children = (
 				25E435DF263ADD4800243FD3 /* CarouselCellViews */,
 				25E435D8263ADC9200243FD3 /* SectionControllers */,
-				D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1286,20 +1353,13 @@
 			isa = PBXGroup;
 			children = (
 				8C2E7B5A2397B25600BA2F41 /* Xib */,
-				8C2E7B5723979DF800BA2F41 /* Views */,
-				8C9E5BDD238E5D3300D8790F /* ViewModel */,
 				8C5DF60023264D2B00B9F8A0 /* Extensions */,
 				256EF50721CA15A200C743F0 /* ios-app.entitlements */,
-				2FC0F2581F8619220092BFDC /* static */,
 				2FC0F2801F861A860092BFDC /* UI */,
 				2FC0F2521F8617690092BFDC /* Utils */,
 				2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */,
-				2FDF9C5A20B6F6C50086245F /* Bookmarks.storyboard */,
-				2F763D091FBEC7260033D495 /* ChapterContent.storyboard */,
-				2F7179521EC740C6009114C4 /* ExamReview.storyboard */,
 				2F26ADE91E8249D70031E6F4 /* Main.storyboard */,
 				2F48C8141FD3F6BD009C686C /* Post.storyboard */,
-				2F7179541EC740C6009114C4 /* TestEngine.storyboard */,
 				2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */,
 				2570A23E21CA0D260097C6FE /* GoogleService-Info.plist */,
 				2F26ADF11E8249D70031E6F4 /* Info.plist */,
@@ -1368,110 +1428,28 @@
 		2FC0F2521F8617690092BFDC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */,
 				2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */,
-				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 				03A60FA02CB3FEB000079A7C /* AuthErrorHandler.swift */,
 				03CD0C562CB7A04E00E17218 /* UserHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		2FC0F2581F8619220092BFDC /* static */ = {
-			isa = PBXGroup;
-			children = (
-				25B14899264CFE0500AECC39 /* MathJax-2.7.1 */,
-				2FCA8BBD20E65F4C00B8ED87 /* bookmark */,
-				2F48C8041FD030A7009C686C /* icomoon */,
-				2F452C3A20BC3463007833A0 /* images */,
-				2FC0F31C1F863D730092BFDC /* katex */,
-				2F48C7FC1FCDABDE009C686C /* comments.css */,
-				2F48C7FA1FCDA957009C686C /* comments.js */,
-				2F429A0620DD323A00F5555C /* dotted_loader.css */,
-				2FE81096201A0AF70031E134 /* Lato-Bold.ttf */,
-				2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */,
-				2F909E6820DBC60700FE9B8D /* material_wave_loading.json */,
-				2FC0F2731F8619220092BFDC /* MathJaxRender.js */,
-				2F48C7F81FCD9F18009C686C /* progress_loader.css */,
-				2FB049BA1FD838860049D5B0 /* post.css */,
-				2FC0F2741F8619220092BFDC /* PT_Serif-Web-Regular.ttf */,
-				2FC0F2751F8619220092BFDC /* questions_typebase.css */,
-				2F515DF31FF3B7B10005D8A5 /* RichTextEditor.html */,
-				2F515DF41FF3B7B10005D8A5 /* RichTextEditor.js */,
-				2FC0F2761F8619220092BFDC /* Rubik-Medium.ttf */,
-				2FC0F2771F8619220092BFDC /* Rubik-Regular.ttf */,
-				2F368C0B215DEC68000999FA /* symbol.ttf */,
-				2FC0F2781F8619220092BFDC /* TestEngine.js */,
-				2F6F167A1FC3F08900FB768C /* typebase.css */,
-				2FE290711F8D07D0004D7574 /* QuestionListHandler.js */,
-				25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */,
-				031FBACA2C47B23A00AAF71D /* QuestionReviewPage.js */,
-			);
-			path = static;
-			sourceTree = "<group>";
-		};
 		2FC0F2801F861A860092BFDC /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				25E435D7263ADC8800243FD3 /* Dashboard */,
-				2FDD2E4020A59D2500A111EC /* AccessCodeViewController.swift */,
-				2FDD2E4220A5C3FE00A111EC /* AccessCodeExamsViewController.swift */,
 				2F5E0BB81FE2452D00236AFE /* ActivityFeedTableViewCell.swift */,
 				2F5E0BB61FE2444E00236AFE /* ActivityFeedTableViewController.swift */,
-				2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */,
-				2FC0F2811F861A860092BFDC /* AttemptsListViewController.swift */,
-				2FC0F2821F861A860092BFDC /* AttemptsTableViewCell.swift */,
-				2FF024202004CECA00E0047D /* BaseDBTableViewController.swift */,
-				2FC0F2831F861A860092BFDC /* BaseQuestionsDataSource.swift */,
-				2F70F4D61F9F1C3300D30755 /* BaseQuestionsListViewController.swift */,
-				2FC0F2841F861A860092BFDC /* BaseQuestionsPageViewController.swift */,
-				2FC0F2851F861A860092BFDC /* BaseQuestionsViewController.swift */,
-				2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */,
-				2F4A81EE20E52CB50062DE8A /* BaseTableViewCell.swift */,
-				2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */,
-				2FC0F2861F861A860092BFDC /* BaseTextFieldViewController.swift */,
-				2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */,
-				2FDF9C5820B6F5240086245F /* BasePagedTableViewController.swift */,
-				2FCBDD4D20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift */,
-				2F452C3120BC123D007833A0 /* BookmarkedQuestionViewController.swift */,
-				2F17C1FD20C965B300606D5C /* BookmarkFoldersDropDown.swift */,
-				2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */,
-				2F4186A320BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift */,
-				2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */,
-				2F452C2F20BBE3E6007833A0 /* BookmarksDetailDataSource.swift */,
-				2FA9285120B811F400CD3076 /* BookmarksDetailPageViewController.swift */,
-				2FA9285320B8160A00CD3076 /* BookmarksSlidingViewController.swift */,
-				2FDF9C5020B6D5F40086245F /* BookmarksTableViewCell.swift */,
-				2FDF9C4A20B6CFBF0086245F /* BookmarksTableViewController.swift */,
-				2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */,
-				2F763D0C1FBEC91D0033D495 /* ChaptersViewController.swift */,
-				2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */,
-				2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */,
-				2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */,
-				2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */,
-				2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */,
-				2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */,
-				2F763CFB1FBD79F60033D495 /* CoursesTableViewController.swift */,
-				2FC0F2871F861A860092BFDC /* EmptyView.swift */,
-				2FC0F2891F861A860092BFDC /* ExamsTableViewCell.swift */,
-				2FC0F28B1F861A860092BFDC /* ExamsTableViewController.swift */,
-				2FC0F28C1F861A860092BFDC /* ExamsTabViewController.swift */,
 				2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */,
 				2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */,
 				2F2A41BF1FD6ACE900B92C6D /* ForumViewController.swift */,
-				2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */,
-				2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */,
-				2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */,
-				2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */,
 				2F25D55F201F085A00C01CCE /* LeaderboardTableViewCell.swift */,
 				2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */,
 				2F25D557201EFB9F00C01CCE /* LeaderboardTabViewController.swift */,
-				18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */,
 				2FC0F28D1F861A860092BFDC /* LoginViewController.swift */,
 				2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */,
 				2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */,
-				2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */,
-				1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */,
 				2F9F169420724F76009886AB /* PostCategoriesDropDown.swift */,
 				2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */,
 				2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */,
@@ -1480,56 +1458,20 @@
 				2F48C80C1FD28902009C686C /* PostTableViewCell.swift */,
 				2F48C80A1FD288C6009C686C /* PostTableViewController.swift */,
 				2FC0F28F1F861A860092BFDC /* ProfileViewController.swift */,
-				2FC0F2901F861A860092BFDC /* QuestionsControllerSource.swift */,
-				2F1474781F8B898F0017151B /* QuestionListViewController.swift */,
-				2FC0F2911F861A860092BFDC /* QuestionsViewController.swift */,
 				2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */,
 				2F8411BB2043D5C500193A66 /* ResetPasswordViewController.swift */,
-				2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */,
-				2FC0F2921F861A860092BFDC /* ReviewQuestionsDataSource.swift */,
-				2F70F4D81F9F1F8200D30755 /* ReviewQuestionListViewController.swift */,
-				2FC0F2931F861A860092BFDC /* ReviewQuestionsViewController.swift */,
-				2FC0F2941F861A860092BFDC /* ReviewSolutionsViewController.swift */,
 				2FC0F2951F861A860092BFDC /* SignUpViewController.swift */,
-				2FC0F2961F861A860092BFDC /* StartExamScreenViewController.swift */,
-				2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */,
 				2FC0F2971F861A860092BFDC /* SuccessViewController.swift */,
 				2F25D561201F5C8800C01CCE /* TargetThreatViewController.swift */,
-				2F1474741F8B7BF30017151B /* TestEngineSlidingViewController.swift */,
-				2FC0F2981F861A860092BFDC /* TestEngineViewController.swift */,
-				2FC0F2991F861A860092BFDC /* TestReportViewController.swift */,
-				2F56B73C1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift */,
-				2F56B73E1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift */,
-				2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */,
-				2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */,
-				2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */,
 				250E68F521BA4AA600DA81F1 /* MainViewController.swift */,
 				25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */,
-				8C04228E22AA3FD40015269B /* WebViewController.swift */,
 				2506298F2265B7D600539FB2 /* LoginActivityViewController.swift */,
 				8C205A072323918700596E66 /* LoginActivityCell.swift */,
-				8C2D130A238507C4005A7F39 /* VideoContentViewController.swift */,
-				8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */,
-				259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */,
-				250C4CAC2463D24600FD7636 /* BaseDBViewController.swift */,
-				250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */,
-				257BB694246AB4C900524D2C /* QuizExamViewController.swift */,
-				25705018246E71B600E6C688 /* QuizQuestionViewController.swift */,
-				2570501A246EA32600E6C688 /* LoadingViewController.swift */,
-				25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */,
-				259286892473B1E00035EBA4 /* QuizReviewViewController.swift */,
-				2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */,
-				2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */,
-				2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */,
-				250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */,
 				25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */,
-				258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */,
 				25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */,
 				25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */,
-				D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */,
 				03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */,
-				03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */,
-				03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */,
+				03CD0C882CB80A8D00E17218 /* LearnTabController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1563,8 +1505,91 @@
 		8413802D2C9DA066004D5846 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8413802F2C9DA09D004D5846 /* CourseListViewController.swift */,
-				841380312C9DA0D0004D5846 /* ContentDetailViewController.swift */,
+				2FC0F28B1F861A860092BFDC /* ExamsTableViewController.swift */,
+				2FC0F28C1F861A860092BFDC /* ExamsTabViewController.swift */,
+				2FC0F2891F861A860092BFDC /* ExamsTableViewCell.swift */,
+				259E2FC82428991B0096B6D1 /* ShareToUnlockViewController.swift */,
+				2FDD2E4020A59D2500A111EC /* AccessCodeViewController.swift */,
+				2FDD2E4220A5C3FE00A111EC /* AccessCodeExamsViewController.swift */,
+				2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */,
+				2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */,
+				2F763D0C1FBEC91D0033D495 /* ChaptersViewController.swift */,
+				2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */,
+				2FD8465F1FC30D1900D6F016 /* ContentDetailDataSource.swift */,
+				2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */,
+				2F9699811FC2AC20001B2B18 /* ContentsTableViewCell.swift */,
+				2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */,
+				2FD846611FC30E7700D6F016 /* HtmlContentViewController.swift */,
+				2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */,
+				2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */,
+				2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */,
+				18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */,
+				2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */,
+				1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */,
+				2FC0F2901F861A860092BFDC /* QuestionsControllerSource.swift */,
+				2F1474781F8B898F0017151B /* QuestionListViewController.swift */,
+				2FC0F2911F861A860092BFDC /* QuestionsViewController.swift */,
+				2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */,
+				2FC0F2921F861A860092BFDC /* ReviewQuestionsDataSource.swift */,
+				2F70F4D81F9F1F8200D30755 /* ReviewQuestionListViewController.swift */,
+				2FC0F2931F861A860092BFDC /* ReviewQuestionsViewController.swift */,
+				2FC0F2941F861A860092BFDC /* ReviewSolutionsViewController.swift */,
+				2FC0F2961F861A860092BFDC /* StartExamScreenViewController.swift */,
+				2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */,
+				2F1474741F8B7BF30017151B /* TestEngineSlidingViewController.swift */,
+				2FC0F2981F861A860092BFDC /* TestEngineViewController.swift */,
+				2FC0F2991F861A860092BFDC /* TestReportViewController.swift */,
+				2F56B73C1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift */,
+				2F56B73E1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift */,
+				2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */,
+				2F9778A71FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift */,
+				8C04228E22AA3FD40015269B /* WebViewController.swift */,
+				8C2D130A238507C4005A7F39 /* VideoContentViewController.swift */,
+				8C3D6432239D5D8E001C7FE4 /* RelatedContentsCell.swift */,
+				250DA7BC246A585D00EDB31C /* StartQuizExamViewController.swift */,
+				257BB694246AB4C900524D2C /* QuizExamViewController.swift */,
+				25705018246E71B600E6C688 /* QuizQuestionViewController.swift */,
+				2570501A246EA32600E6C688 /* LoadingViewController.swift */,
+				25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */,
+				259286892473B1E00035EBA4 /* QuizReviewViewController.swift */,
+				2510859A2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift */,
+				2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */,
+				250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */,
+				258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */,
+				03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */,
+				03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */,
+				2F9B5E161FC54AFC00D67100 /* AttachmentDetailViewController.swift */,
+				2FC0F2811F861A860092BFDC /* AttemptsListViewController.swift */,
+				2FC0F2821F861A860092BFDC /* AttemptsTableViewCell.swift */,
+				2FC0F2831F861A860092BFDC /* BaseQuestionsDataSource.swift */,
+				2F70F4D61F9F1C3300D30755 /* BaseQuestionsListViewController.swift */,
+				2FC0F2841F861A860092BFDC /* BaseQuestionsPageViewController.swift */,
+				2FC0F2851F861A860092BFDC /* BaseQuestionsViewController.swift */,
+				2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */,
+				250C4CAC2463D24600FD7636 /* BaseDBViewController.swift */,
+				D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */,
+				2548C4912476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift */,
+				2F763CFB1FBD79F60033D495 /* CoursesTableViewController.swift */,
+				2FF024202004CECA00E0047D /* BaseDBTableViewController.swift */,
+				2F4A81EE20E52CB50062DE8A /* BaseTableViewCell.swift */,
+				2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */,
+				2FDF9C5820B6F5240086245F /* BasePagedTableViewController.swift */,
+				2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */,
+				2F763D071FBDB4D30033D495 /* CourseTableViewCell.swift */,
+				2FC0F2871F861A860092BFDC /* EmptyView.swift */,
+				2FCBDD4D20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift */,
+				2F452C3120BC123D007833A0 /* BookmarkedQuestionViewController.swift */,
+				2F17C1FD20C965B300606D5C /* BookmarkFoldersDropDown.swift */,
+				2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */,
+				2F4186A320BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift */,
+				2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */,
+				2F452C2F20BBE3E6007833A0 /* BookmarksDetailDataSource.swift */,
+				2FA9285120B811F400CD3076 /* BookmarksDetailPageViewController.swift */,
+				2FA9285320B8160A00CD3076 /* BookmarksSlidingViewController.swift */,
+				2FDF9C5020B6D5F40086245F /* BookmarksTableViewCell.swift */,
+				2FDF9C4A20B6CFBF0086245F /* BookmarksTableViewController.swift */,
+				2FC0F2861F861A860092BFDC /* BaseTextFieldViewController.swift */,
+				D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1572,6 +1597,8 @@
 		8413802E2C9DA075004D5846 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				8C2E7B5723979DF800BA2F41 /* Views */,
+				8C9E5BDD238E5D3300D8790F /* ViewModel */,
 				03A60FA22CB401A900079A7C /* Repostories */,
 				03E4AFD32CAFE62200ECC34D /* Utils */,
 				03E4AFA92CAFCE9B00ECC34D /* Network */,
@@ -1588,6 +1615,9 @@
 		841380332C9DA18E004D5846 /* StoryBoards */ = {
 			isa = PBXGroup;
 			children = (
+				2FDF9C5A20B6F6C50086245F /* Bookmarks.storyboard */,
+				2F7179521EC740C6009114C4 /* ExamReview.storyboard */,
+				2F7179541EC740C6009114C4 /* TestEngine.storyboard */,
 				841380352C9DA1A8004D5846 /* Course.storyboard */,
 			);
 			path = StoryBoards;
@@ -1608,13 +1638,7 @@
 		8C2E7B5A2397B25600BA2F41 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
-				2FC0F2881F861A860092BFDC /* EmptyView.xib */,
-				2FC0F28A1F861A860092BFDC /* ExamsTableViewCell.xib */,
 				2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */,
-				18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */,
-				2F3A14301FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib */,
-				8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */,
-				2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -1623,7 +1647,6 @@
 			isa = PBXGroup;
 			children = (
 				03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */,
-				2F4A81EC20E4DDFC0062DE8A /* UINavigationControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1767,6 +1790,15 @@
 				03CD0C632CB7B5D400E17218 /* DGCharts */,
 				03CD0C762CB7CFC900E17218 /* TTGSnackbar */,
 				03CD0C782CB7CFD600E17218 /* TOCropViewController */,
+				03CD0CCB2CB812FF00E17218 /* XLPagerTabStrip */,
+				03CD0CD72CB8138400E17218 /* M3U8Parser */,
+				03CD0CD92CB8138D00E17218 /* Sentry */,
+				03CD0CDB2CB8139400E17218 /* MarqueeLabel */,
+				03CD0CDF2CB813B500E17218 /* SwiftSoup */,
+				03CD0CE32CB813B500E17218 /* Lottie */,
+				03CD0CE52CB813B500E17218 /* LUExpandableTableView */,
+				03CD0CEB2CB818CB00E17218 /* SlideMenuController */,
+				03CD0D032CB822C200E17218 /* Kingfisher */,
 			);
 			productName = CourseKit;
 			productReference = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */;
@@ -1933,7 +1965,6 @@
 				2FC0F3011F863B950092BFDC /* EmptyView.xib in Resources */,
 				2FC0F3191F863BCE0092BFDC /* Rubik-Medium.ttf in Resources */,
 				2F48C8161FD3F6BD009C686C /* Post.storyboard in Resources */,
-				2F763D0B1FBEC7260033D495 /* ChapterContent.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2012,153 +2043,56 @@
 			buildActionMask = 2147483647;
 			files = (
 				25E435DA263ADCA700243FD3 /* LeaderboardSectionController.swift in Sources */,
-				2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */,
-				2FA9285420B8160A00CD3076 /* BookmarksSlidingViewController.swift in Sources */,
-				2F4186A420BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift in Sources */,
-				8C3D6431239D1D8C001C7FE4 /* VideoContentViewModel.swift in Sources */,
-				2FD846601FC30D1900D6F016 /* ContentDetailDataSource.swift in Sources */,
 				25E435E6263ADD9100243FD3 /* LeaderboardItemViewCell.swift in Sources */,
 				25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */,
-				250888DA251C5EC80023DCF6 /* ZoomMeetViewController.swift in Sources */,
 				2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */,
 				25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */,
-				25705019246E71B600E6C688 /* QuizQuestionViewController.swift in Sources */,
-				2F452C3220BC123D007833A0 /* BookmarkedQuestionViewController.swift in Sources */,
-				2FC0F2FB1F863B7E0092BFDC /* BaseQuestionsDataSource.swift in Sources */,
-				2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */,
 				25520BC327546AF9001A58AB /* DiscussionThreadDetailViewController.swift in Sources */,
-				8C04228F22AA3FD40015269B /* WebViewController.swift in Sources */,
 				25E435DD263ADCCF00243FD3 /* BaseSectionController.swift in Sources */,
-				03AFFB832C0076AE0015C029 /* ChapterContentDetailViewModel.swift in Sources */,
 				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,
 				2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */,
-				2FC0F3091F863BA90092BFDC /* ReviewQuestionsDataSource.swift in Sources */,
-				2FC0F2FD1F863B850092BFDC /* BaseQuestionsViewController.swift in Sources */,
-				2FC0F2FE1F863B890092BFDC /* BaseTextFieldViewController.swift in Sources */,
-				03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */,
 				2503DF6F263FAC0A003226AD /* ChapterContentViewCell.swift in Sources */,
 				25E435BB263AD8CC00243FD3 /* DashboardViewController.swift in Sources */,
 				2FC0F3061F863BA90092BFDC /* ProfileViewController.swift in Sources */,
-				2FC0F3081F863BA90092BFDC /* QuestionsViewController.swift in Sources */,
 				2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */,
 				2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */,
-				2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */,
-				2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */,
-				2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */,
-				2F1474791F8B898F0017151B /* QuestionListViewController.swift in Sources */,
-				2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */,
-				1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */,
-				2FDF9C4B20B6CFBF0086245F /* BookmarksTableViewController.swift in Sources */,
-				2F56B73F1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift in Sources */,
-				2FC0F3031F863B9B0092BFDC /* ExamsTableViewController.swift in Sources */,
-				2FDD2E4320A5C3FE00A111EC /* AccessCodeExamsViewController.swift in Sources */,
 				2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */,
-				2510859B2489E1EE00CDC2B5 /* VideoPlayerResourceLoaderDelegate.swift in Sources */,
 				2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */,
 				2FC0F30E1F863BA90092BFDC /* SuccessViewController.swift in Sources */,
-				18F25D29212FDC5300097425 /* LockableSectionDropDownCell.swift in Sources */,
-				2FC0F3041F863B9E0092BFDC /* ExamsTabViewController.swift in Sources */,
 				03A60FA12CB3FEB000079A7C /* AuthErrorHandler.swift in Sources */,
-				2F763CFC1FBD79F60033D495 /* CoursesTableViewController.swift in Sources */,
-				256DE79E256F8CF200F02995 /* PaddingLabel.swift in Sources */,
 				2F5E0BB91FE2452D00236AFE /* ActivityFeedTableViewCell.swift in Sources */,
 				250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */,
 				2503DF53263C0296003226AD /* BannerSectionController.swift in Sources */,
-				2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */,
-				2590B1FC2510C9F2003C0A03 /* VideoConferenceViewController.swift in Sources */,
-				2F452C3020BBE3E6007833A0 /* BookmarksDetailDataSource.swift in Sources */,
-				2F4A81EF20E52CB50062DE8A /* BaseTableViewCell.swift in Sources */,
 				2FB049BD1FD839EB0049D5B0 /* ForumTableViewCell.swift in Sources */,
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
-				2FC0F30A1F863BA90092BFDC /* ReviewQuestionsViewController.swift in Sources */,
-				2FDF9C5920B6F5240086245F /* BasePagedTableViewController.swift in Sources */,
 				2F515DF81FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift in Sources */,
-				257BB695246AB4C900524D2C /* QuizExamViewController.swift in Sources */,
-				2F70F4D71F9F1C3300D30755 /* BaseQuestionsListViewController.swift in Sources */,
-				2FC0F3101F863BA90092BFDC /* TestReportViewController.swift in Sources */,
 				2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */,
-				2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */,
-				D9533ABE2B99CD2700E73A78 /* PDFViewController.swift in Sources */,
-				258036A52743AA2400397639 /* DRMKeySessionDelegate.swift in Sources */,
 				2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */,
 				2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */,
-				D9151E7F2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift in Sources */,
-				2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */,
 				2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */,
-				8C2D130B238507C4005A7F39 /* VideoContentViewController.swift in Sources */,
 				2503DF57263C02C3003226AD /* BannerAdViewCell.swift in Sources */,
-				2FC0F30D1F863BA90092BFDC /* StartExamScreenViewController.swift in Sources */,
-				2F763D081FBDB4D30033D495 /* CourseTableViewCell.swift in Sources */,
-				257BB693246A9BA000524D2C /* QuizExamViewModel.swift in Sources */,
 				2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */,
 				2FC0F3051F863BA90092BFDC /* MoreOptionsViewController.swift in Sources */,
 				2503DF6A263C17DA003226AD /* PostCarouselViewCell.swift in Sources */,
-				2F9B5E171FC54AFC00D67100 /* AttachmentDetailViewController.swift in Sources */,
 				2503DF5B263C03B1003226AD /* HorizontalSectionCell.swift in Sources */,
-				2FCBDD4C20CFDB07003A7DC0 /* BookmarkHelper.swift in Sources */,
-				25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */,
-				2FE290701F8CF8E7004D7574 /* BaseWebViewController.swift in Sources */,
-				2FC0F3111F863BA90092BFDC /* TPBasePagedTableViewController.swift in Sources */,
 				2F9F169520724F76009886AB /* PostCategoriesDropDown.swift in Sources */,
-				2FDF9C5120B6D5F40086245F /* BookmarksTableViewCell.swift in Sources */,
 				2F25D558201EFB9F00C01CCE /* LeaderboardTabViewController.swift in Sources */,
-				2FC0F3001F863B8F0092BFDC /* ExamsTableViewCell.swift in Sources */,
-				259E2FC92428991B0096B6D1 /* ShareToUnlockViewController.swift in Sources */,
-				D98010692B035E780071C397 /* CustomTestQuizExamViewModel.swift in Sources */,
-				2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */,
-				2548C4922476CFAC00F90D09 /* BaseDBTableViewControllerV2.swift in Sources */,
-				2FC0F2FC1F863B810092BFDC /* BaseQuestionsPageViewController.swift in Sources */,
-				2FC0F2F91F863B780092BFDC /* AttemptsListViewController.swift in Sources */,
 				03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */,
 				2503DF50263C01E8003226AD /* CarouselSectionController.swift in Sources */,
-				8C3D6433239D5D8E001C7FE4 /* RelatedContentsCell.swift in Sources */,
-				2FC0F3071F863BA90092BFDC /* QuestionsControllerSource.swift in Sources */,
 				25E435EC263ADE7500243FD3 /* DashboardSectionHeaderCell.swift in Sources */,
-				2592868A2473B1E00035EBA4 /* QuizReviewViewController.swift in Sources */,
-				2F56B73D1FDE92CD00E2B240 /* TimeAnalyticsHeaderViewCell.swift in Sources */,
-				8C2E7B602397B56600BA2F41 /* VideoPlayerControlsView.swift in Sources */,
-				2F17C1FE20C965B300606D5C /* BookmarkFoldersDropDown.swift in Sources */,
 				8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */,
-				2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */,
 				03CD0C572CB7A04E00E17218 /* UserHelper.swift in Sources */,
-				2FF024212004CECA00E0047D /* BaseDBTableViewController.swift in Sources */,
-				256A90A0247D225D00F4E12C /* QuizQuestionsViewModel.swift in Sources */,
-				8CDE2649239E1ACD00BA04C6 /* VideoPlayerSlider.swift in Sources */,
-				2FC0F30B1F863BA90092BFDC /* ReviewSolutionsViewController.swift in Sources */,
-				2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */,
 				2F2A41C01FD6ACE900B92C6D /* ForumViewController.swift in Sources */,
-				2FCBDD4E20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift in Sources */,
 				2503DF7C263FBECD003226AD /* ContentAttemptSectionController.swift in Sources */,
 				2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */,
-				2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */,
-				2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */,
 				2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */,
-				2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */,
-				2F1474751F8B7BF30017151B /* TestEngineSlidingViewController.swift in Sources */,
-				250DA7BD246A585D00EDB31C /* StartQuizExamViewController.swift in Sources */,
-				2F56B73B1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift in Sources */,
 				03E4AFD22CAFD22100ECC34D /* DashboardSection.swift in Sources */,
 				2503DF66263C177A003226AD /* PostSectionController.swift in Sources */,
 				250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */,
-				2F25D564201F5DBB00C01CCE /* BaseTableViewController.swift in Sources */,
-				2FD846621FC30E7700D6F016 /* HtmlContentViewController.swift in Sources */,
-				2FC0F2FA1F863B7C0092BFDC /* AttemptsTableViewCell.swift in Sources */,
 				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
-				2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */,
 				2F25D562201F5C8800C01CCE /* TargetThreatViewController.swift in Sources */,
-				2FA9285220B811F400CD3076 /* BookmarksDetailPageViewController.swift in Sources */,
-				2F9778A81FEB81BA00ADBBE2 /* TrophiesAchievedViewController.swift in Sources */,
-				2570501B246EA32600E6C688 /* LoadingViewController.swift in Sources */,
-				2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */,
-				03CD0C732CB7C72E00E17218 /* UINavigationControllerExtension.swift in Sources */,
-				8C2E7B5923979E5A00BA2F41 /* VideoPlayerView.swift in Sources */,
-				2FC0F2FF1F863B8C0092BFDC /* EmptyView.swift in Sources */,
-				2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
+				03CD0C892CB80A8D00E17218 /* LearnTabController.swift in Sources */,
 				2503DF79263FB21F003226AD /* ChapterContentSectionController.swift in Sources */,
-				250C4CAD2463D24600FD7636 /* BaseDBViewController.swift in Sources */,
-				2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */,
-				03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */,
-				2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2190,6 +2124,8 @@
 			files = (
 				03E4AF5F2CAEDF7F00ECC34D /* FileResponse.swift in Sources */,
 				8413802C2C9D9F2D004D5846 /* TestpressCourse.swift in Sources */,
+				03CD0CA52CB8123400E17218 /* IndividualSubjectAnalyticsCountCell.swift in Sources */,
+				03CD0CEE2CB81A2900E17218 /* BookmarkFolderTableViewCell.swift in Sources */,
 				03E4AF562CAEDF7F00ECC34D /* AttemptQuestion.swift in Sources */,
 				03E4AFBF2CAFCF6F00ECC34D /* TPAuthToken.swift in Sources */,
 				03A60F922CB3F34600079A7C /* SubjectPager.swift in Sources */,
@@ -2198,125 +2134,220 @@
 				03E4AFAF2CAFCF6F00ECC34D /* DRMLicenseKeyResponse.swift in Sources */,
 				03E4AFB42CAFCF6F00ECC34D /* DiscussionThreadAnswer.swift in Sources */,
 				03CD0C512CB79DC700E17218 /* RichTextEditor.swift in Sources */,
+				03CD0CBE2CB8123500E17218 /* WebViewController.swift in Sources */,
+				03CD0CAD2CB8123400E17218 /* QuestionsViewController.swift in Sources */,
+				03CD0CA62CB8123400E17218 /* QuizReviewViewController.swift in Sources */,
 				03CD0C7D2CB7D25200E17218 /* TimeUtils.swift in Sources */,
+				03CD0CFF2CB81FC400E17218 /* ExamsTableViewController.swift in Sources */,
 				03CD0C6E2CB7C5FD00E17218 /* Stackview+BackgroundColor.swift in Sources */,
 				03CD0C722CB7C5FD00E17218 /* UIViewController.swift in Sources */,
 				03E4AFBB2CAFCF6F00ECC34D /* ContentsListResponse.swift in Sources */,
+				03CD0CD22CB8136C00E17218 /* QuizExamViewModel.swift in Sources */,
 				03CD0C682CB7C5D500E17218 /* StringExtension.swift in Sources */,
 				03E4AF4D2CAEDF7F00ECC34D /* Chapter.swift in Sources */,
 				03CD0C652CB7C3CE00E17218 /* String.swift in Sources */,
+				03CD0CA82CB8123400E17218 /* ContentsTableViewController.swift in Sources */,
+				03CD0C9A2CB810E400E17218 /* BaseQuestionsDataSource.swift in Sources */,
+				03CD0CA12CB8123400E17218 /* ReviewQuestionsDataSource.swift in Sources */,
 				03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */,
+				03CD0CB22CB8123400E17218 /* VideoPlayerResourceLoaderDelegate.swift in Sources */,
+				03CD0C952CB810E300E17218 /* AttemptsListViewController.swift in Sources */,
 				03E4AFB12CAFCF6F00ECC34D /* ApiResponse.swift in Sources */,
+				03CD0CF92CB81CD100E17218 /* PDFViewController.swift in Sources */,
+				03CD0CC12CB8123500E17218 /* TrophiesAchievedViewController.swift in Sources */,
 				03E4AFC72CAFCF7000ECC34D /* Category.swift in Sources */,
+				03CD0CB42CB8123400E17218 /* VideoContentViewController.swift in Sources */,
+				03CD0D052CB8253200E17218 /* UINavigationControllerExtension.swift in Sources */,
+				03CD0CD02CB8136C00E17218 /* VideoPlayerControlsView.swift in Sources */,
+				03CD0CBC2CB8123400E17218 /* TimeAnalyticsQuestionCell.swift in Sources */,
 				03A60F872CB3F34600079A7C /* CategoryPager.swift in Sources */,
 				03E4AF482CAEDF7F00ECC34D /* AttemptItem.swift in Sources */,
 				03E4AF502CAEDF7F00ECC34D /* Attachment.swift in Sources */,
+				03CD0C972CB810E400E17218 /* BaseQuestionsListViewController.swift in Sources */,
 				03A60FA32CB4060100079A7C /* AttemptRepository.swift in Sources */,
 				03CD0C712CB7C5FD00E17218 /* UIInterfaceOrientationMask.swift in Sources */,
+				03CD0C9D2CB8123400E17218 /* QuestionListViewController.swift in Sources */,
+				03CD0CCE2CB8136C00E17218 /* ChapterContentDetailViewModel.swift in Sources */,
+				03CD0CC22CB8123500E17218 /* LockableSectionDropDownCell.swift in Sources */,
 				841380112C9D9CCD004D5846 /* CourseKit.docc in Sources */,
 				03E4AFC22CAFCF7000ECC34D /* SSOUrl.swift in Sources */,
+				03CD0C8D2CB80C8E00E17218 /* BaseDBTableViewController.swift in Sources */,
+				03CD0CAF2CB8123400E17218 /* ReviewQuestionsViewController.swift in Sources */,
+				03CD0CC32CB8123500E17218 /* ContentDetailPageViewController.swift in Sources */,
+				03CD0CC42CB8123500E17218 /* TimeAnalyticsHeaderViewCell.swift in Sources */,
+				03CD0CB12CB8123400E17218 /* TestEngineViewController.swift in Sources */,
+				03CD0D002CB81FDE00E17218 /* BaseTextFieldViewController.swift in Sources */,
+				03CD0CF22CB81A2900E17218 /* BookmarksTableViewCell.swift in Sources */,
 				03A60F8B2CB3F34600079A7C /* CommentPager.swift in Sources */,
 				03CD0C582CB7A60200E17218 /* GraphAxisLabelFormatter.swift in Sources */,
 				03A60F952CB3F34B00079A7C /* TPEndpoint.swift in Sources */,
 				03CD0C4E2CB79BC900E17218 /* FormatDate.swift in Sources */,
+				03CD0CBF2CB8123500E17218 /* QuizQuestionViewController.swift in Sources */,
 				03E4AF622CAEDF7F00ECC34D /* Attempt.swift in Sources */,
 				03E4AF552CAEDF7F00ECC34D /* AttemptSection.swift in Sources */,
+				03CD0D022CB8226000E17218 /* UILabel.swift in Sources */,
+				03CD0CF52CB81A2900E17218 /* BookmarksSlidingViewController.swift in Sources */,
 				03E4AFAE2CAFCF6F00ECC34D /* ContentAttempt.swift in Sources */,
+				03CD0CF82CB81A6A00E17218 /* BookmarkHelper.swift in Sources */,
+				03CD0CB02CB8123400E17218 /* VideoPlayerViewController.swift in Sources */,
 				03CD0C7C2CB7D25200E17218 /* FileDownloadUtility.swift in Sources */,
 				03E4AFB92CAFCF6F00ECC34D /* SectionInfo.swift in Sources */,
-				841380302C9DA09D004D5846 /* CourseListViewController.swift in Sources */,
+				03CD0CAA2CB8123400E17218 /* DRMKeySessionDelegate.swift in Sources */,
 				03E4AF512CAEDF7F00ECC34D /* ExamQuestion.swift in Sources */,
 				03E4AFC12CAFCF6F00ECC34D /* FileDetails.swift in Sources */,
 				03A60F8E2CB3F34600079A7C /* BookmarkFolderPager.swift in Sources */,
 				03E4AFC32CAFCF7000ECC34D /* TPError.swift in Sources */,
+				03CD0CBA2CB8123400E17218 /* VideoConferenceViewController.swift in Sources */,
 				03CD0C852CB7E25900E17218 /* Images.swift in Sources */,
 				03E4AFD42CAFE63900ECC34D /* KeychainTokenItem.swift in Sources */,
 				03CD0C502CB79C5400E17218 /* GraphAxisPercentValueFormatter.swift in Sources */,
 				03CD0C6F2CB7C5FD00E17218 /* UIView.swift in Sources */,
+				03CD0CED2CB81A2900E17218 /* BookmarkFoldersDropDownCell.swift in Sources */,
+				03CD0CFA2CB81E6F00E17218 /* AccessCodeViewController.swift in Sources */,
 				03A60F8C2CB3F34600079A7C /* BaseDBItemPager.swift in Sources */,
 				03A60F9D2CB3F6A900079A7C /* OrderedDictionary.swift in Sources */,
 				03CD0C532CB79E4600E17218 /* Colors.swift in Sources */,
+				03CD0C982CB810E400E17218 /* BaseQuestionsSlidingViewController.swift in Sources */,
 				035CC54D2CAE694D0057F4E4 /* StringTransform.swift in Sources */,
+				03CD0CD42CB8136C00E17218 /* PaddingLabel.swift in Sources */,
 				03A60F9C2CB3F45D00079A7C /* UIDevice+ModelName.swift in Sources */,
+				03CD0C8E2CB80C8E00E17218 /* BaseTableViewController.swift in Sources */,
+				03CD0CB92CB8123400E17218 /* QuizExamViewController.swift in Sources */,
+				03CD0CF32CB81A2900E17218 /* BookmarksTableViewController.swift in Sources */,
 				03E4AF5D2CAEDF7F00ECC34D /* Course.swift in Sources */,
+				03CD0CC52CB8123500E17218 /* LoadingViewController.swift in Sources */,
 				03CD0C4F2CB79C0A00E17218 /* Reachability.swift in Sources */,
 				03A60F892CB3F34600079A7C /* PostPager.swift in Sources */,
 				03A60F942CB3F34600079A7C /* ExamPager.swift in Sources */,
+				03CD0CF72CB81A2A00E17218 /* BookmarkFoldersDropDown.swift in Sources */,
+				03CD0C9C2CB810E400E17218 /* BaseQuestionsViewController.swift in Sources */,
 				03A60F8D2CB3F34600079A7C /* LeaderboardPager.swift in Sources */,
 				035CC54A2CAE694D0057F4E4 /* ListTransform.swift in Sources */,
 				03CD0C6C2CB7C5D500E17218 /* UIImageViewExtension.swift in Sources */,
 				03A60F862CB3F34600079A7C /* BasePager.swift in Sources */,
+				03CD0CEF2CB81A2900E17218 /* BookmarksDetailPageViewController.swift in Sources */,
+				03CD0CA72CB8123400E17218 /* ZoomMeetViewController.swift in Sources */,
 				03E4AF522CAEDF7F00ECC34D /* User.swift in Sources */,
 				03E4AF582CAEDF7F00ECC34D /* BookmarkFolder.swift in Sources */,
+				03CD0CCD2CB8136C00E17218 /* VideoPlayerView.swift in Sources */,
 				03E4AF4C2CAEDF7F00ECC34D /* Streams.swift in Sources */,
 				03A60F902CB3F34600079A7C /* LoginActivityPager.swift in Sources */,
 				03E4AFBD2CAFCF6F00ECC34D /* DashboardResponse.swift in Sources */,
+				03CD0CAB2CB8123400E17218 /* ReviewQuestionListViewController.swift in Sources */,
+				03CD0CAE2CB8123400E17218 /* StartExamScreenViewController.swift in Sources */,
+				03CD0C9F2CB8123400E17218 /* OverallSubjectAnalyticsViewController.swift in Sources */,
+				03CD0CF62CB81A2A00E17218 /* BookmarkedHtmlContentViewController.swift in Sources */,
+				03CD0CFB2CB81E6F00E17218 /* AccessCodeExamsViewController.swift in Sources */,
 				03E4AFC42CAFCF7000ECC34D /* VideoAttempt.swift in Sources */,
+				03CD0C942CB8104D00E17218 /* BaseDBViewController.swift in Sources */,
+				03CD0CEA2CB817BD00E17218 /* BaseWebViewController.swift in Sources */,
 				03CD0C672CB7C4B700E17218 /* AVPlayerExtensions.swift in Sources */,
 				03E4AFB62CAFCF6F00ECC34D /* RegistrationError.swift in Sources */,
 				03CD0C702CB7C5FD00E17218 /* Collection.swift in Sources */,
 				03CD0C7F2CB7D31F00E17218 /* VideoPlayerUtils.swift in Sources */,
+				03CD0CC72CB8123500E17218 /* QuestionsControllerSource.swift in Sources */,
 				03E4AF532CAEDF7F00ECC34D /* LoginActivity.swift in Sources */,
+				03CD0CA42CB8123400E17218 /* PlainDropDown.swift in Sources */,
+				03CD0CA22CB8123400E17218 /* TestEngineSlidingViewController.swift in Sources */,
 				03A60FA52CB4060100079A7C /* DashboardRepository.swift in Sources */,
 				03E4AFC62CAFCF7000ECC34D /* BookmarksListResponse.swift in Sources */,
+				03CD0CA92CB8123400E17218 /* ReviewSolutionsViewController.swift in Sources */,
+				03CD0CB52CB8123400E17218 /* ContentExamAttemptsTableViewController.swift in Sources */,
+				03CD0CC62CB8123500E17218 /* ChaptersViewController.swift in Sources */,
+				03CD0CB32CB8123400E17218 /* ChapterCollectionViewCell.swift in Sources */,
+				03CD0C922CB80FEA00E17218 /* BaseDBTableViewControllerV2.swift in Sources */,
 				03E4AFB02CAFCF6F00ECC34D /* LeaderboardItem.swift in Sources */,
+				03CD0CBD2CB8123400E17218 /* TestReportViewController.swift in Sources */,
 				03E4AF5E2CAEDF7F00ECC34D /* HtmlContent.swift in Sources */,
+				03CD0CA02CB8123400E17218 /* RelatedContentsCell.swift in Sources */,
 				03E4AF4A2CAEDF7F00ECC34D /* DirectionTranslation.swift in Sources */,
+				03CD0CD32CB8136C00E17218 /* VideoContentViewModel.swift in Sources */,
 				035CC54C2CAE694D0057F4E4 /* IntArrayTransform.swift in Sources */,
 				03E4AFC52CAFCF7000ECC34D /* ActivityFeedResponse.swift in Sources */,
+				03CD0CAC2CB8123400E17218 /* IndividualSubjectAnalyticsViewController.swift in Sources */,
 				03E4AFB32CAFCF6F00ECC34D /* Post.swift in Sources */,
+				03CD0C8A2CB80C4500E17218 /* CoursesTableViewController.swift in Sources */,
 				03A60FA62CB4060100079A7C /* EncryptionKeyRepository.swift in Sources */,
 				03A60F882CB3F34600079A7C /* CoursePager.swift in Sources */,
 				03A60F852CB3F34600079A7C /* ActivityFeedPager.swift in Sources */,
 				03E4AF4F2CAEDF7F00ECC34D /* LiveStream.swift in Sources */,
+				03CD0CD12CB8136C00E17218 /* CustomTestQuizExamViewModel.swift in Sources */,
 				03E4AF602CAEDF7F00ECC34D /* Content.swift in Sources */,
 				03CD0C7B2CB7D25200E17218 /* FileUploadPicker.swift in Sources */,
+				03CD0CD62CB8136C00E17218 /* QuizQuestionsViewModel.swift in Sources */,
 				03E4AFBE2CAFCF6F00ECC34D /* ExamQuestionsResponse.swift in Sources */,
 				03E4AF472CAEDF7F00ECC34D /* TPModelMapper.swift in Sources */,
 				03A60FA72CB4107100079A7C /* URLUtils.swift in Sources */,
+				03CD0CB82CB8123400E17218 /* LiveStreamContentViewController.swift in Sources */,
 				03A60FA42CB4060100079A7C /* AttemptItemRepository.swift in Sources */,
+				03CD0C962CB810E400E17218 /* BaseQuestionsPageViewController.swift in Sources */,
+				03CD0CA32CB8123400E17218 /* StartQuizExamViewController.swift in Sources */,
+				03CD0CB72CB8123400E17218 /* QuizQuestionsPageViewController.swift in Sources */,
 				03A60FB02CB5281000079A7C /* InstituteRepository.swift in Sources */,
 				03E4AF632CAEDF7F00ECC34D /* AttemptAnswer.swift in Sources */,
 				03E4AFC02CAFCF6F00ECC34D /* ContentType.swift in Sources */,
+				03CD0CFD2CB81FB400E17218 /* ExamsTableViewCell.swift in Sources */,
+				03CD0CF42CB81A2900E17218 /* BookmarkFolderTableViewController.swift in Sources */,
+				03CD0C902CB80D4A00E17218 /* EmptyView.swift in Sources */,
 				03CD0C752CB7CF8400E17218 /* ImagePicker.swift in Sources */,
 				03A60F962CB3F35000079A7C /* AuthErrorHandlingDelegate.swift in Sources */,
 				03E4AFB82CAFCF6F00ECC34D /* ChapterContentAttempt.swift in Sources */,
+				03CD0CF02CB81A2900E17218 /* BookmarkedQuestionViewController.swift in Sources */,
 				03CD0C522CB79DEB00E17218 /* UIUtils.swift in Sources */,
+				03CD0C8B2CB80C8E00E17218 /* BaseTableViewCell.swift in Sources */,
+				03CD0CC92CB8123500E17218 /* ContentDetailDataSource.swift in Sources */,
 				03E4AF4B2CAEDF7F00ECC34D /* GapFillResponse.swift in Sources */,
+				03CD0CFE2CB81FC400E17218 /* ExamsTabViewController.swift in Sources */,
+				03CD0CF12CB81A2900E17218 /* BookmarksDetailDataSource.swift in Sources */,
 				03CD0C6A2CB7C5D500E17218 /* CALayerBorderColor.swift in Sources */,
 				03A60F8A2CB3F34600079A7C /* BookmarksPager.swift in Sources */,
+				03CD0CCA2CB8123500E17218 /* HtmlContentViewController.swift in Sources */,
 				03A60F8F2CB3F34600079A7C /* TPBasePager.swift in Sources */,
+				03CD0CFC2CB81F8D00E17218 /* ShareToUnlockViewController.swift in Sources */,
 				03E4AF4E2CAEDF7F00ECC34D /* DBManager.swift in Sources */,
+				03CD0C8F2CB80D2200E17218 /* TPBasePagedTableViewController.swift in Sources */,
 				03A60F912CB3F34600079A7C /* AttemptPager.swift in Sources */,
 				03E4AF592CAEDF7F00ECC34D /* VideoConference.swift in Sources */,
 				03E4AF572CAEDF7F00ECC34D /* InstituteSettings.swift in Sources */,
 				03A60F6F2CB3F22800079A7C /* TPApiClient.swift in Sources */,
+				03CD0C8C2CB80C8E00E17218 /* BasePagedTableViewController.swift in Sources */,
 				03E4AFAD2CAFCF6F00ECC34D /* Comment.swift in Sources */,
 				03A60F982CB3F3AD00079A7C /* Strings.swift in Sources */,
+				03CD0C9B2CB810E400E17218 /* AttemptsTableViewCell.swift in Sources */,
 				03CD0C7A2CB7D01C00E17218 /* ImageUploadHelper.swift in Sources */,
 				03A60F842CB3F34600079A7C /* ChapterPager.swift in Sources */,
+				03CD0C992CB810E400E17218 /* AttachmentDetailViewController.swift in Sources */,
 				03A60FA82CB4114A00079A7C /* UserDefaults.swift in Sources */,
+				03CD0C912CB80D4A00E17218 /* CourseTableViewCell.swift in Sources */,
 				03CD0C7E2CB7D31F00E17218 /* M3U8Handler.swift in Sources */,
-				841380322C9DA0D0004D5846 /* ContentDetailViewController.swift in Sources */,
+				03CD0CB62CB8123400E17218 /* SubjectAnalyticsTabViewController.swift in Sources */,
+				03CD0CC02CB8123500E17218 /* ContentsTableViewCell.swift in Sources */,
 				03E4AFB72CAFCF6F00ECC34D /* Subject.swift in Sources */,
 				03E4AFB22CAFCF6F00ECC34D /* ApiError.swift in Sources */,
 				03E4AFAB2CAFCF6F00ECC34D /* ContentObject.swift in Sources */,
 				03CD0C6D2CB7C5FD00E17218 /* UIButton.swift in Sources */,
 				03E4AF492CAEDF7F00ECC34D /* AttemptAnswerTranslation.swift in Sources */,
+				03CD0CBB2CB8123400E17218 /* TimeAnalyticsTableViewController.swift in Sources */,
 				03E4AF5A2CAEDF7F00ECC34D /* Exam.swift in Sources */,
+				03CD0C9E2CB8123400E17218 /* ReviewSlidingViewController.swift in Sources */,
 				03E4AFBA2CAFCF6F00ECC34D /* DashboardSection.swift in Sources */,
 				03E4AF5B2CAEDF7F00ECC34D /* Bookmark.swift in Sources */,
+				03CD0C932CB8103800E17218 /* CustomTestGenerationViewController.swift in Sources */,
 				03E4AF542CAEDF7F00ECC34D /* Language.swift in Sources */,
 				03E4AFBC2CAFCF6F00ECC34D /* Reputation.swift in Sources */,
 				03CD0C662CB7C41500E17218 /* Misc.swift in Sources */,
 				03E4AFAC2CAFCF6F00ECC34D /* ActivityFeed.swift in Sources */,
 				03E4AF612CAEDF7F00ECC34D /* Direction.swift in Sources */,
+				03CD0CCF2CB8136C00E17218 /* VideoPlayerSlider.swift in Sources */,
+				03CD0CC82CB8123500E17218 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */,
 				035CC54B2CAE694D0057F4E4 /* StringArrayTransform.swift in Sources */,
 				03CD0C692CB7C5D500E17218 /* UIViewExtension.swift in Sources */,
 				03E4AFB52CAFCF6F00ECC34D /* UserStats.swift in Sources */,
 				03CD0C742CB7CF4900E17218 /* Permissions.swift in Sources */,
 				03E4AFC92CAFCF7000ECC34D /* Banner.swift in Sources */,
+				03CD0CD52CB8136C00E17218 /* PillLabel.swift in Sources */,
 				03E4AF462CAEDF7F00ECC34D /* Video.swift in Sources */,
+				03CD0CE92CB8149C00E17218 /* WebViewUtils.swift in Sources */,
 				03E4AFC82CAFCF7000ECC34D /* TPApiResponse.swift in Sources */,
 				03E4AFD62CAFE6A900ECC34D /* Constants.swift in Sources */,
 			);
@@ -2391,14 +2422,6 @@
 				2F9E39911F851A76001D51B2 /* Base */,
 			);
 			name = TestEngine.storyboard;
-			sourceTree = "<group>";
-		};
-		2F763D091FBEC7260033D495 /* ChapterContent.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2F763D0A1FBEC7260033D495 /* Base */,
-			);
-			name = ChapterContent.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -3179,6 +3202,51 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
 			productName = TOCropViewController;
+		};
+		03CD0CCB2CB812FF00E17218 /* XLPagerTabStrip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8702CA6F8D400183BA8 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */;
+			productName = XLPagerTabStrip;
+		};
+		03CD0CD72CB8138400E17218 /* M3U8Parser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */;
+			productName = M3U8Parser;
+		};
+		03CD0CD92CB8138D00E17218 /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
+		03CD0CDB2CB8139400E17218 /* MarqueeLabel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
+			productName = MarqueeLabel;
+		};
+		03CD0CDF2CB813B500E17218 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8762CA6FB8B00183BA8 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		03CD0CE32CB813B500E17218 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE87C2CA6FF1500183BA8 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		03CD0CE52CB813B500E17218 /* LUExpandableTableView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03A60FAC2CB417CC00079A7C /* XCRemoteSwiftPackageReference "LUExpandableTableView" */;
+			productName = LUExpandableTableView;
+		};
+		03CD0CEB2CB818CB00E17218 /* SlideMenuController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8572CA6DE2000183BA8 /* XCRemoteSwiftPackageReference "SlideMenuControllerSwift" */;
+			productName = SlideMenuController;
+		};
+		03CD0D032CB822C200E17218 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 038696202BF7635C00E36F8F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		03E4AFCA2CAFCFD500ECC34D /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;

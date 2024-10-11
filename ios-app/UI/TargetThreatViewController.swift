@@ -34,7 +34,7 @@ class TargetThreatViewController: BaseTableViewController<Reputation>, BaseTable
     var userReputation: Reputation?
     var startingRank: Int = 1
     
-    override func viewDidLoad() {
+   open override func viewDidLoad() {
         super.viewDidLoad()
         
         tableViewDelegate = self

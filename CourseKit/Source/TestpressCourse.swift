@@ -23,18 +23,19 @@ public class TestpressCourse {
         DBConnection.configure()
     }
 
-    public func getMyCoursesViewController() -> CourseListViewController? {
-        return instantiateViewController(withIdentifier: "CourseListViewController")
+    public func getMyCoursesViewController() -> CoursesTableViewController? {
+        let viewController = instantiateViewController(withIdentifier: "CoursesTableViewController") as? CoursesTableViewController
+        viewController?.title = "Learn"
+        viewController?.tabBarItem.image = Images.LearnNavBarIcon.image
+        viewController?.modalPresentationStyle = .fullScreen
+        return viewController
     }
 
-    public func getContentDetailViewController(contentId: Int) -> ContentDetailViewController? {
-        let contentDetailVC: ContentDetailViewController? = instantiateViewController(withIdentifier: "ContentDetailViewController")
-        contentDetailVC?.contentId = contentId
-        contentDetailVC?.modalPresentationStyle = .fullScreen
-        return contentDetailVC
+    public func getContentDetailViewController(contentId: Int) -> ContentDetailPageViewController? {
+        return nil
     }
 
-    private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {
+    private func instantiateViewController<T: UIViewController>(withIdentifier identifier: String) -> T? {
         let storyboard = UIStoryboard(name: "Course", bundle: bundle)
         return storyboard.instantiateViewController(withIdentifier: identifier) as? T
     }

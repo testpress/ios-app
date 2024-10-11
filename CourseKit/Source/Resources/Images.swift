@@ -33,6 +33,7 @@ public enum Images: String {
     case BackButton = "ic_navigate_before_36pt"
     case CloseButton = "ic_close"
     case PlaceHolder = "placeholder_icon"
+    case LearnNavBarIcon = "learn"
     case LearnFlatIcon = "learn_flat_icon"
     case NewsFlatIcon = "news_flat_icon"
     case DiscussionFlatIcon = "discussion_flat_icon"
