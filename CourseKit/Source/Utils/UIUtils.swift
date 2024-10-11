@@ -25,7 +25,6 @@
 
 import UIKit
 import Alamofire
-import FBSDKLoginKit
 
 public class UIUtils {
 
