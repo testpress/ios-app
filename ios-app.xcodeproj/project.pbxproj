@@ -109,6 +109,8 @@
 		03CD0C852CB7E25900E17218 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DB1F863AAF0092BFDC /* Images.swift */; };
 		03CD0C872CB7E2CD00E17218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03CD0C862CB7E2CC00E17218 /* Assets.xcassets */; };
 		03CD0D072CB8F92100E17218 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0D062CB8F92100E17218 /* UILabel.swift */; };
+		03CD0D082CB928C600E17218 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
+		03CD0D0A2CB9290200E17218 /* DropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D092CB9290200E17218 /* DropDown */; };
 		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
 		03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586782628ABB81700E149B5 /* DBModel+Detachable.swift */; };
@@ -177,7 +179,6 @@
 		03E4AFD22CAFD22100ECC34D /* DashboardSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */; };
 		03E4AFD42CAFE63900ECC34D /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F27E1F861A3E0092BFDC /* KeychainTokenItem.swift */; };
 		03E4AFD62CAFE6A900ECC34D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AFD52CAFE6A900ECC34D /* Constants.swift */; };
-		1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */; };
 		18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */; };
 		18F25D29212FDC5300097425 /* LockableSectionDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F25D28212FDC5300097425 /* LockableSectionDropDownCell.swift */; };
 		2503DF50263C01E8003226AD /* CarouselSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF4F263C01E8003226AD /* CarouselSectionController.swift */; };
@@ -941,6 +942,7 @@
 				03CD0C792CB7CFD600E17218 /* TOCropViewController in Frameworks */,
 				03CD0C642CB7B5D400E17218 /* DGCharts in Frameworks */,
 				03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */,
+				03CD0D0A2CB9290200E17218 /* DropDown in Frameworks */,
 				03E4AFCB2CAFCFD500ECC34D /* IGListKit in Frameworks */,
 				035CC54F2CAE698D0057F4E4 /* RealmSwift in Frameworks */,
 			);
@@ -1162,6 +1164,7 @@
 		03E4AFD32CAFE62200ECC34D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */,
 				8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */,
 				25985836248A77F6003591FA /* M3U8Handler.swift */,
 				25F7522027FEB143000D8137 /* TimeUtils.swift */,
@@ -1474,7 +1477,6 @@
 				2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */,
 				2FC0F28E1F861A860092BFDC /* MoreOptionsViewController.swift */,
 				2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */,
-				1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */,
 				2F9F169420724F76009886AB /* PostCategoriesDropDown.swift */,
 				2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */,
 				2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */,
@@ -1770,6 +1772,7 @@
 				03CD0C632CB7B5D400E17218 /* DGCharts */,
 				03CD0C762CB7CFC900E17218 /* TTGSnackbar */,
 				03CD0C782CB7CFD600E17218 /* TOCropViewController */,
+				03CD0D092CB9290200E17218 /* DropDown */,
 			);
 			productName = CourseKit;
 			productReference = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */;
@@ -2050,7 +2053,6 @@
 				2F9699821FC2AC20001B2B18 /* ContentsTableViewCell.swift in Sources */,
 				2F1474791F8B898F0017151B /* QuestionListViewController.swift in Sources */,
 				2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */,
-				1825F5FF212E920C00AC25E5 /* PlainDropDown.swift in Sources */,
 				2FDF9C4B20B6CFBF0086245F /* BookmarksTableViewController.swift in Sources */,
 				2F56B73F1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift in Sources */,
 				2FC0F3031F863B9B0092BFDC /* ExamsTableViewController.swift in Sources */,
@@ -2243,6 +2245,7 @@
 				03A60F9C2CB3F45D00079A7C /* UIDevice+ModelName.swift in Sources */,
 				03E4AF5D2CAEDF7F00ECC34D /* Course.swift in Sources */,
 				03CD0C4F2CB79C0A00E17218 /* Reachability.swift in Sources */,
+				03CD0D082CB928C600E17218 /* PlainDropDown.swift in Sources */,
 				03A60F892CB3F34600079A7C /* PostPager.swift in Sources */,
 				03A60F942CB3F34600079A7C /* ExamPager.swift in Sources */,
 				03A60F8D2CB3F34600079A7C /* LeaderboardPager.swift in Sources */,
@@ -3183,6 +3186,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
 			productName = TOCropViewController;
+		};
+		03CD0D092CB9290200E17218 /* DropDown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE84E2CA6C3BE00183BA8 /* XCRemoteSwiftPackageReference "DropDown-Swift" */;
+			productName = DropDown;
 		};
 		03E4AFCA2CAFCFD500ECC34D /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;

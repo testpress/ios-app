@@ -25,15 +25,14 @@
 
 import DropDown
 import UIKit
-import CourseKit
 
-class PlainDropDown {
+public class PlainDropDown {
     
-    var titleButton: UIButton!
-    var dropDown: DropDown!
-    var items: [String] = []
+    public var titleButton: UIButton!
+    public var dropDown: DropDown!
+    public var items: [String] = []
     
-    init(containerView: UIView) {
+    public init(containerView: UIView) {
         titleButton = UIButton(type: .system)
         titleButton.setImage(#imageLiteral(resourceName: "ic_arrow_drop_down"), for: .normal)
         titleButton.tintColor = Colors.getRGB(Colors.BLACK_TEXT)
@@ -62,19 +61,19 @@ class PlainDropDown {
         }
     }
     
-    func addItems(items: [String]) {
+    public func addItems(items: [String]) {
         self.items = items
         dropDown.dataSource = self.items
     }
     
-    func setCurrentItem(index: Int) {
+    public func setCurrentItem(index: Int) {
         titleButton.setTitle(items[index], for: .normal)
         dropDown.clearSelection()
         dropDown.reloadAllComponents()
         dropDown.selectRow(at: Index(index))
     }
     
-    @objc func onClickDropDown() {
+    @objc public func onClickDropDown() {
         dropDown.show()
     }
 }
