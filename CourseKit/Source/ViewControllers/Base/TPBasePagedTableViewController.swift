@@ -25,15 +25,14 @@
 
 import UIKit
 import ObjectMapper
-import CourseKit
 
-class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
+open class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
     BaseTableViewDelegate {
     
-    var pager: TPBasePager<T>
-    var loadingItems: Bool = false
+    open var pager: TPBasePager<T>
+    open var loadingItems: Bool = false
     
-    init(pager: TPBasePager<T>, coder aDecoder: NSCoder? = nil) {
+    public init(pager: TPBasePager<T>, coder aDecoder: NSCoder? = nil) {
         self.pager = pager
         // Support table cell view from both xib & storyboard
         if aDecoder != nil {
@@ -43,11 +42,11 @@ class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set table view footer as progress spinner
@@ -60,7 +59,7 @@ class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
         tableViewDelegate = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         if (items.isEmpty) {
             tableView.tableFooterView?.isHidden = true
             pager.reset()
@@ -68,7 +67,7 @@ class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
         }
     }
     
-    func loadItems() {
+    open func loadItems() {
         if loadingItems {
             return
         }
@@ -87,7 +86,7 @@ class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
         })
     }
     
-    override func onLoadFinished(items: [T]) {
+    open override func onLoadFinished(items: [T]) {
         if items.count == 0 {
             setEmptyText()
         }
@@ -96,12 +95,12 @@ class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<T>,
         self.loadingItems = false
     }
     
-    override func handleError(_ error: TPError) {
+    open override func handleError(_ error: TPError) {
         super.handleError(error)
         loadingItems = false
     }
     
-    override func tableView(_ tableView: UITableView,
+    open override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableViewCell(cellForRowAt: indexPath)

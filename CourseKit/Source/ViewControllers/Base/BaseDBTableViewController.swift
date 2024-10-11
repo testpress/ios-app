@@ -25,18 +25,17 @@
 
 import UIKit
 import ObjectMapper
-import CourseKit
 
-class BaseDBTableViewController<T: Mappable>: TPBasePagedTableViewController<T> where T:DBModel {
+open class BaseDBTableViewController<T: Mappable>: TPBasePagedTableViewController<T> where T:DBModel {
     
     var firstCallBack: Bool = true // On firstCallBack load modified items if items already exists
     
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         items = getItemsFromDb()
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         if (items.isEmpty || firstCallBack) {
             firstCallBack = false
             tableView.tableFooterView?.isHidden = true
@@ -45,11 +44,11 @@ class BaseDBTableViewController<T: Mappable>: TPBasePagedTableViewController<T> 
         }
     }
     
-    func getItemsFromDb() -> [T] {
+    open func getItemsFromDb() -> [T] {
         return DBManager<T>().getItemsFromDB()
     }
     
-    override func loadItems() {
+    open override func loadItems() {
         if loadingItems {
             return
         }

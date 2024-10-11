@@ -9,17 +9,16 @@
 import Foundation
 import UIKit
 import ObjectMapper
-import CourseKit
 
-class BaseDBViewController<T: Mappable>: UIViewController where T:DBModel{
-    var items = [T]()
+open class BaseDBViewController<T: Mappable>: UIViewController where T:DBModel{
+    public var items = [T]()
     
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         items = getItemsFromDB()
         super.viewWillAppear(animated)
     }
     
-    func getItemsFromDB() -> [T] {
+    open func getItemsFromDB() -> [T] {
         return DBManager<T>().getItemsFromDB()
     }
     

@@ -25,18 +25,17 @@
 
 import UIKit
 import WebKit
-import CourseKit
 
-class BaseWebViewController: UIViewController {
+open class BaseWebViewController: UIViewController {
 
-    var webView: WKWebView!
-    var parentView: UIView!
-    var activityIndicator: UIActivityIndicatorView!
-    var webViewDelegate: WKWebViewDelegate!
-    var shouldOpenLinksWithinWebview = false
-    var shouldReload = false
+    public var webView: WKWebView!
+    public var parentView: UIView!
+    public var activityIndicator: UIActivityIndicatorView!
+    public var webViewDelegate: WKWebViewDelegate!
+    public var shouldOpenLinksWithinWebview = false
+    public var shouldReload = false
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         parentView = getParentView()
@@ -48,19 +47,19 @@ class BaseWebViewController: UIViewController {
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
     }
     
-    func getParentView() -> UIView {
+    open func getParentView() -> UIView {
         return view
     }
     
-    func initWebView() {
+    open func initWebView() {
         webView = WKWebView(frame: parentView.bounds)
     }
 
-    func getJavascript() -> String {
+    open func getJavascript() -> String {
         return ""
     }
     
-    func evaluateJavaScript(_ javascript: String) {
+    open func evaluateJavaScript(_ javascript: String) {
         webView.evaluateJavaScript(javascript) {
             (result, error) in
             if error != nil {
@@ -73,7 +72,7 @@ class BaseWebViewController: UIViewController {
 
 extension BaseWebViewController: WKNavigationDelegate {
     
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         activityIndicator.startAnimating()
 
         if (self.shouldReload) {
@@ -82,7 +81,7 @@ extension BaseWebViewController: WKNavigationDelegate {
         }
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         activityIndicator.stopAnimating()
         evaluateJavaScript(getJavascript())
         if webViewDelegate != nil {
@@ -90,7 +89,7 @@ extension BaseWebViewController: WKNavigationDelegate {
         }
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if !shouldOpenLinksWithinWebview && navigationAction.navigationType == .linkActivated,
             let url = navigationAction.request.url, UIApplication.shared.canOpenURL(url) {
@@ -111,7 +110,7 @@ extension BaseWebViewController: WKNavigationDelegate {
 
 }
 
-protocol WKWebViewDelegate {
+public protocol WKWebViewDelegate {
     func onFinishLoadingWebView()
 }
 

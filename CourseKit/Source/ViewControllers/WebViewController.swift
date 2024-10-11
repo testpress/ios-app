@@ -10,23 +10,22 @@ import Foundation
 import TTGSnackbar
 import UIKit
 import WebKit
-import CourseKit
 
-class WebViewController: BaseWebViewController, WKWebViewDelegate {
+open class WebViewController: BaseWebViewController, WKWebViewDelegate {
     
-    var emptyView: EmptyView!
-    var url: String = ""
-    var request: URLRequest?
-    var loading: Bool = false
-    var navBar: UINavigationBar?
-    var useSSOLogin: Bool = false
-    var displayNavbar = true
-    var useWebviewNavigation = false
-    var backButton = UIButton(type: .system)
-    var navItem: UINavigationItem?
-    var refreshControl:UIRefreshControl?
+    public var emptyView: EmptyView!
+    public var url: String = ""
+    public var request: URLRequest?
+    public var loading: Bool = false
+    public var navBar: UINavigationBar?
+    public var useSSOLogin: Bool = false
+    public var displayNavbar = true
+    public var useWebviewNavigation = false
+    public var backButton = UIButton(type: .system)
+    public var navItem: UINavigationItem?
+    public var refreshControl:UIRefreshControl?
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.current.orientation.isLandscape {
             navBar?.frame.size.height = getNavBarHeight() + UIApplication.shared.statusBarFrame.size.height
         } else {
@@ -34,7 +33,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
         }
     }
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         webViewDelegate = self
         self.emptyView = EmptyView.getInstance(parentView: view)
@@ -54,15 +53,15 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
     
     }
 
-    func initializeLoadingIndicator() {
+    open func initializeLoadingIndicator() {
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - getNavBarHeight())
     }
 
-    func showLoading() {
+    open func showLoading() {
         activityIndicator?.startAnimating()
     }
     
-    func showNavbar() {
+    open func showNavbar() {
         let screenSize: CGRect = UIScreen.main.bounds
         
         navBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: screenSize.width, height: getNavBarHeight()))
@@ -93,7 +92,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
         view.addConstraint(NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: navBar, attribute: .bottom, multiplier: 1, constant: 0))
     }
     
-    func addPullToRefresh() {
+    public func addPullToRefresh() {
         self.refreshControl = UIRefreshControl.init()
         refreshControl!.addTarget(self, action:#selector(refreshControlClicked), for: UIControl.Event.valueChanged)
         self.webView.scrollView.addSubview(self.refreshControl!)
@@ -104,11 +103,11 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
         refreshControl?.endRefreshing() 
     }
     
-    func getNavBarHeight() -> CGFloat {
+    public func getNavBarHeight() -> CGFloat {
         return UINavigationController().navigationBar.frame.size.height
     }
     
-    @objc func goBack() {
+    @objc open func goBack() {
         if (useWebviewNavigation && webView.canGoBack) {
             webView.goBack()
         } else {
@@ -118,7 +117,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
     }
     
     
-    func loadWebView() {
+    open func loadWebView() {
         showLoading()
         self.emptyView.hide()
         if let request = self.request {
@@ -129,7 +128,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
         }
     }
     
-    func removeCookies(){
+    public func removeCookies(){
          let cookieJar = HTTPCookieStorage.shared
 
          for cookie in cookieJar.cookies! {
@@ -138,7 +137,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
      }
     
     
-    func fetchSSOURLAndLoadPage() {
+    public func fetchSSOURLAndLoadPage() {
             activityIndicator?.startAnimating()
             self.removeCookies()
             TPApiClient.getSSOUrl(
@@ -157,7 +156,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
             )
         }
     
-    func showErrorMessage(error: TPError) {
+    open func showErrorMessage(error: TPError) {
         debugPrint(error.message ?? "No error")
         debugPrint(error.kind)
         var retryButtonText: String?
@@ -178,11 +177,11 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
         }
     }
     
-    override func initWebView() {
+    open override func initWebView() {
         webView = WKWebView( frame: parentView.bounds)
     }
 
-    func cleanAllCookies() {
+    public func cleanAllCookies() {
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
@@ -192,7 +191,7 @@ class WebViewController: BaseWebViewController, WKWebViewDelegate {
         }
     }
 
-    func onFinishLoadingWebView() {
+    open func onFinishLoadingWebView() {
         activityIndicator?.stopAnimating()
     }
 }

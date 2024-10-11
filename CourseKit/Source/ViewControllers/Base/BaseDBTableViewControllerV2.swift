@@ -8,20 +8,19 @@
 
 import UIKit
 import ObjectMapper
-import CourseKit
 
-class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePagedTableViewController<T, L> where L:DBModel {
+open class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePagedTableViewController<T, L> where L:DBModel {
     
-    var firstCallBack: Bool = true // On firstCallBack load modified items if items already exists
-    var networkItems : [L] = []
+    public var firstCallBack: Bool = true // On firstCallBack load modified items if items already exists
+    public var networkItems : [L] = []
 
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         items = getItemsFromDb().detached()
         super.viewWillAppear(animated)
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         if (items.isEmpty || firstCallBack) {
             firstCallBack = false
             tableView.tableFooterView?.isHidden = true
@@ -30,12 +29,12 @@ class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePag
         }
     }
     
-    func getItemsFromDb() -> [L] {
+    open func getItemsFromDb() -> [L] {
         return DBManager<L>().getItemsFromDB()
     }
     
     
-    override func loadItems() {
+    open override func loadItems() {
         if loadingItems {
             return
         }
@@ -61,7 +60,7 @@ class BaseDBTableViewControllerV2<T: TestpressModel, L: TestpressModel>: BasePag
         })
     }
     
-    func deleteExistingItemsFromDB() {
+    open func deleteExistingItemsFromDB() {
         DBManager<L>().deleteFromDb(objects: getItemsFromDb())
     }
 }

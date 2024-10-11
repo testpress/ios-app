@@ -27,21 +27,20 @@ import TTGSnackbar
 import UIKit
 import ObjectMapper
 import XLPagerTabStrip
-import CourseKit
 
-protocol BaseTableViewDelegate {
+public protocol BaseTableViewDelegate {
     func loadItems()
 }
 
-class BaseTableViewController<T: Mappable>: UITableViewController {
+open class BaseTableViewController<T: Mappable>: UITableViewController {
     
-    var activityIndicator: UIActivityIndicatorView! // Progress bar
-    var emptyView: EmptyView!
-    var items = [T]()
-    var tableViewDelegate: BaseTableViewDelegate!
-    var useInterfaceBuilderSeperatorInset = false
+    public var activityIndicator: UIActivityIndicatorView! // Progress bar
+    public var emptyView: EmptyView!
+    public var items = [T]()
+    public var tableViewDelegate: BaseTableViewDelegate!
+    public var useInterfaceBuilderSeperatorInset = false
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
@@ -58,7 +57,7 @@ class BaseTableViewController<T: Mappable>: UITableViewController {
         tableView.tableFooterView = UIView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
         if (items.isEmpty) {
@@ -66,14 +65,14 @@ class BaseTableViewController<T: Mappable>: UITableViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if (items.isEmpty) {
             tableViewDelegate.loadItems()
         }
     }
     
-    func onLoadFinished(items: [T]) {
+    public func onLoadFinished(items: [T]) {
         self.items = items
         self.tableView.reloadData()
         if (self.activityIndicator?.isAnimating)! {
@@ -81,7 +80,7 @@ class BaseTableViewController<T: Mappable>: UITableViewController {
         }
     }
     
-    func handleError(_ error: TPError) {
+    open func handleError(_ error: TPError) {
         var retryHandler: (() -> Void)?
         if error.kind == .network {
             retryHandler = {
@@ -104,11 +103,11 @@ class BaseTableViewController<T: Mappable>: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    open override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if items.count == 0 {
             tableView.backgroundView?.isHidden = false
         } else {
@@ -117,22 +116,22 @@ class BaseTableViewController<T: Mappable>: UITableViewController {
         return items.count
     }
     
-    override func tableView(_ tableView: UITableView,
+    open override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         return tableViewCell(cellForRowAt: indexPath)
     }
     
-    func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableViewCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
     
-    func refreshWithProgress() {
+    open func refreshWithProgress() {
         activityIndicator?.startAnimating()
         tableViewDelegate.loadItems()
     }
     
-    func setEmptyText() {
+    open func setEmptyText() {
         emptyView.setValues(image: Images.LearnFlatIcon.image, description: Strings.NO_ITEMS_EXIST)
     }
     

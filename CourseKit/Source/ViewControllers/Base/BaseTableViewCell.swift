@@ -24,30 +24,29 @@
 //
 
 import UIKit
-import CourseKit
 
-class BaseTableViewCell: UITableViewCell {
+open class BaseTableViewCell: UITableViewCell {
     
-    func setSelectionBackgroundColor(hex: String) {
+    open func setSelectionBackgroundColor(hex: String) {
         selectedBackgroundView = UIView()
         selectedBackgroundView!.backgroundColor = Colors.getRGB(hex, alpha: 0.4)
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    open override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
             updateSubViewsBackgroundColor()
         }
     }
     
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    open override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         if highlighted {
             updateSubViewsBackgroundColor()
         }
     }
     
-    func updateSubViewsBackgroundColor() {
+    open func updateSubViewsBackgroundColor() {
     }
     
 }

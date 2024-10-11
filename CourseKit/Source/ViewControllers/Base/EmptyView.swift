@@ -25,18 +25,18 @@
 
 import UIKit
 
-class EmptyView: UIView {
+public class EmptyView: UIView {
 
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var emptyViewTitle: UILabel!
-    @IBOutlet weak var emptyViewDescription: UILabel!
-    @IBOutlet weak var retryButton: UIButton!
+    @IBOutlet weak public var imageView: UIImageView!
+    @IBOutlet weak public var emptyViewTitle: UILabel!
+    @IBOutlet weak public var emptyViewDescription: UILabel!
+    @IBOutlet weak public var retryButton: UIButton!
     
-    var retryHandler: (() -> Void)?
-    var parentView: UIView!
+    public var retryHandler: (() -> Void)?
+    public var parentView: UIView!
     
-    class func getInstance(parentView: UIView) -> EmptyView {
-        let emptyView = UINib(nibName: "EmptyView", bundle: nil)
+    public class func getInstance(parentView: UIView) -> EmptyView {
+        let emptyView = UINib(nibName: "EmptyView", bundle: bundle)
             .instantiate(withOwner: nil, options: nil)[0] as! EmptyView
         
         parentView.addSubview(emptyView)
@@ -45,14 +45,14 @@ class EmptyView: UIView {
         return emptyView
     }
     
-    class func getInstance() -> EmptyView {
-        let emptyView = UINib(nibName: "EmptyView", bundle: nil)
+    public class func getInstance() -> EmptyView {
+        let emptyView = UINib(nibName: "EmptyView", bundle: bundle)
             .instantiate(withOwner: nil, options: nil)[0] as! EmptyView
         
         return emptyView
     }
     
-    func setValues(image: UIImage? = nil, title: String? = nil, description: String? = nil,
+    public func setValues(image: UIImage? = nil, title: String? = nil, description: String? = nil,
                    retryButtonText: String? = nil, retryHandler: (() -> Void)? = nil) {
         
         if image != nil {
@@ -81,7 +81,7 @@ class EmptyView: UIView {
         }
     }
     
-    func show(image: UIImage? = nil, title: String? = nil, description: String? = nil,
+    public func show(image: UIImage? = nil, title: String? = nil, description: String? = nil,
               retryButtonText: String? = nil, retryHandler: (() -> Void)? = nil) {
         
         setValues(image: image, title: title, description: description,
@@ -92,7 +92,7 @@ class EmptyView: UIView {
         parentView.bringSubviewToFront(self)
     }
     
-    func hide() {
+    public func hide() {
         isHidden = true
         parentView.sendSubviewToBack(self)
     }
@@ -103,7 +103,7 @@ class EmptyView: UIView {
         }
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         // Set frame here to support rotation
         if parentView != nil {

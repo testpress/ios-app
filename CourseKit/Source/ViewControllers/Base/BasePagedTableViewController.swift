@@ -25,16 +25,15 @@
 
 import UIKit
 import ObjectMapper
-import CourseKit
 
 // Base Paged TableViewController for V4 API's
-class BasePagedTableViewController<T: TestpressModel, L: TestpressModel>
+open class BasePagedTableViewController<T: TestpressModel, L: TestpressModel>
     : BaseTableViewController<L>, BaseTableViewDelegate {
     
-    var pager: BasePager<T, L>
-    var loadingItems: Bool = false
+    public var pager: BasePager<T, L>
+    public var loadingItems: Bool = false
     
-    init(pager: BasePager<T, L>, coder aDecoder: NSCoder? = nil) {
+    public init(pager: BasePager<T, L>, coder aDecoder: NSCoder? = nil) {
         self.pager = pager
         // Support table cell view from both xib & storyboard
         if aDecoder != nil {
@@ -44,11 +43,11 @@ class BasePagedTableViewController<T: TestpressModel, L: TestpressModel>
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set table view footer as progress spinner
@@ -61,7 +60,7 @@ class BasePagedTableViewController<T: TestpressModel, L: TestpressModel>
         tableViewDelegate = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         if (items.isEmpty) {
             tableView.tableFooterView?.isHidden = true
             pager.reset()
@@ -69,7 +68,7 @@ class BasePagedTableViewController<T: TestpressModel, L: TestpressModel>
         }
     }
     
-    func loadItems() {
+    open func loadItems() {
         if loadingItems {
             return
         }
@@ -88,7 +87,7 @@ class BasePagedTableViewController<T: TestpressModel, L: TestpressModel>
         })
     }
     
-    override func onLoadFinished(items: [L]) {
+    open override func onLoadFinished(items: [L]) {
         if items.count == 0 {
             setEmptyText()
         }
@@ -97,7 +96,7 @@ class BasePagedTableViewController<T: TestpressModel, L: TestpressModel>
         self.loadingItems = false
     }
     
-    override func tableView(_ tableView: UITableView,
+    open override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableViewCell(cellForRowAt: indexPath)
@@ -113,7 +112,7 @@ class BasePagedTableViewController<T: TestpressModel, L: TestpressModel>
         return cell
     }
     
-    override func refreshWithProgress() {
+    open override func refreshWithProgress() {
         pager.reset()
         super.refreshWithProgress()
     }
