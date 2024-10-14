@@ -26,7 +26,7 @@
 import UIKit
 import CourseKit
 
-class AccessCodeExamsViewController: TPBasePagedTableViewController<Exam> {
+class AccessCodeExamsViewController: TPBasePagedTableViewController<Exam>, TestEngineNavigationDelegate {
     
     let cellIdentifier = "ExamsTableViewCell"
     var accessCode: String!
@@ -66,4 +66,8 @@ class AccessCodeExamsViewController: TPBasePagedTableViewController<Exam> {
         dismiss(animated: true, completion: nil)
     }
     
+    func navigateBack() {
+        items.removeAll()
+        dismiss(animated: false, completion: nil)
+    }
 }

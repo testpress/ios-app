@@ -804,44 +804,21 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
     }
     
     func goBack() {
-        let presentingViewController = self.presentingViewController?.presentingViewController
-        
-        if let nvc =  presentingViewController as? UINavigationController,
-                let accessCodeExamsViewController =
-                    nvc.viewControllers.first as? AccessCodeExamsViewController {
-            
-            accessCodeExamsViewController.items.removeAll()
-            accessCodeExamsViewController.dismiss(animated: false, completion: nil)
-        } else if presentingViewController is UITabBarController {
-            let tabViewController =
-                presentingViewController?.children[0] as! ExamsTabViewController
-            
-            tabViewController.dismiss(animated: false, completion: {
-                if tabViewController.currentIndex != 2 {
-                    // Move to histroy tab
-                    tabViewController.moveToViewController(at: 2, animated: true)
-                }
-                // Refresh the list items
-                tabViewController.reloadPagerTabStripView()
-            })
-        } else if presentingViewController is AttemptsListViewController {
-            let attemptsListViewController = presentingViewController as! AttemptsListViewController
-            attemptsListViewController.dismiss(animated: false, completion: {
-                // Remove exsiting items
-                attemptsListViewController.attempts.removeAll()
-                // Load new attempts list with progress
-                attemptsListViewController.loadAttemptsWithProgress(url: self.exam!.attemptsUrl)
-            })
-        } else if presentingViewController is ContentDetailPageViewController {
-            
-            let contentDetailPageViewController =
-                presentingViewController as! ContentDetailPageViewController
-            
-            contentDetailPageViewController.dismiss(animated: false, completion: {
-                contentDetailPageViewController.updateCurrentExamContent()
-            })
+        var presentingViewController = self.presentingViewController?.presentingViewController
+
+        guard var presentingViewController = self.presentingViewController?.presentingViewController else {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+
+        if presentingViewController is UITabBarController {
+            presentingViewController = presentingViewController.children.first!
+        }
+
+        if let navigatable = presentingViewController as? TestEngineNavigationDelegate {
+            navigatable.navigateBack()
         } else {
-            debugPrint(type(of: presentingViewController!))
+            debugPrint(type(of: presentingViewController))
             dismiss(animated: true, completion: nil)
         }
     }
@@ -854,3 +831,6 @@ extension TestEngineViewController: SlidingMenuDelegate {
     }
 }
 
+protocol TestEngineNavigationDelegate {
+    func navigateBack()
+}
