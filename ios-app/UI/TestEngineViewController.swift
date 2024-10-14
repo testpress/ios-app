@@ -804,8 +804,6 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
     }
     
     func goBack() {
-        var presentingViewController = self.presentingViewController?.presentingViewController
-
         guard var presentingViewController = self.presentingViewController?.presentingViewController else {
             dismiss(animated: true, completion: nil)
             return
