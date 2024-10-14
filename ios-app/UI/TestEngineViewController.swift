@@ -805,15 +805,8 @@ extension TestEngineViewController: QuestionsPageViewDelegate {
     
     func goBack() {
         let presentingViewController = self.presentingViewController?.presentingViewController
-        if self.presentingViewController! is ContentDetailPageViewController {
-            
-            let contentDetailPageViewController  =
-                self.presentingViewController! as! ContentDetailPageViewController
-            
-            contentDetailPageViewController.dismiss(animated: false, completion: {
-                contentDetailPageViewController.updateCurrentExamContent()
-            })
-        } else if let nvc =  presentingViewController as? UINavigationController,
+        
+        if let nvc =  presentingViewController as? UINavigationController,
                 let accessCodeExamsViewController =
                     nvc.viewControllers.first as? AccessCodeExamsViewController {
             
