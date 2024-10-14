@@ -23,15 +23,12 @@ public class TestpressCourse {
         DBConnection.configure()
     }
 
-    public func getMyCoursesViewController() -> CourseListViewController? {
-        return instantiateViewController(withIdentifier: "CourseListViewController")
+    public func getMyCoursesViewController() -> CoursesTableViewController? {
+        return instantiateViewController(withIdentifier: "CoursesTableViewController")
     }
 
-    public func getContentDetailViewController(contentId: Int) -> ContentDetailViewController? {
-        let contentDetailVC: ContentDetailViewController? = instantiateViewController(withIdentifier: "ContentDetailViewController")
-        contentDetailVC?.contentId = contentId
-        contentDetailVC?.modalPresentationStyle = .fullScreen
-        return contentDetailVC
+    public func getContentDetailViewController(contentId: Int) -> ContentDetailPageViewController? {
+        return nil
     }
 
     private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {

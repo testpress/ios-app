@@ -23,8 +23,7 @@ public class LearnTabController: UINavigationController {
     }
 
     private func setupLearnTab() {
-        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "CoursesTableViewController") as? CoursesTableViewController
+        let viewController = TestpressCourse.shared.getMyCoursesViewController()
         viewController?.title = "Learn"
         viewController?.tabBarItem.image = Images.LearnNavBarIcon.image
         

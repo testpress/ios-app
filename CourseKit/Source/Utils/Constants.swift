@@ -44,7 +44,7 @@ public struct Constants {
     public static let TEST_ENGINE_NAVIGATION_CONTROLLER = "TestEngineNavigationController"
     public static let REVIEW_NAVIGATION_VIEW_CONTROLLER = "ReviewNavigationViewController"
     public static let COURSE_LIST_VIEW_CELL = "CourseTableViewCell"
-    public static let CHAPTER_CONTENT_STORYBOARD = "ChapterContent"
+    public static let CHAPTER_CONTENT_STORYBOARD = "Course"
     public static let CHAPTERS_VIEW_CONTROLLER = "ChaptersViewController"
     public static let CHAPTER_COLLECTION_VIEW_CELL = "ChapterCollectionViewCell"
     public static let CONTENTS_LIST_NAVIGATION_CONTROLLER = "ContentsListNavigationController"
