@@ -109,11 +109,7 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if pageViewController.viewControllers?.count == 0 {
-            if self.presentingViewController is MainMenuTabViewController {
-                loadContent()
-            } else {
-                setFirstViewController()
-            }
+            setFirstViewController()
         }
 
         enableBookmarkOption()
@@ -273,38 +269,6 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
                 self.pageViewController.setViewControllers([viewController!] , direction: .forward,
                                                            animated: true, completion: {done in })
                 
-                self.activityIndicator.stopAnimating()
-        })
-    }
-    
-    func loadContent() {
-        activityIndicator.startAnimating()
-        let content = contents[position]
-        TPApiClient.request(
-            type: Content.self,
-            endpointProvider: TPEndpointProvider(.get, url: content.url),
-            completion: {
-                content, error in
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    var retryHandler: (() -> Void)?
-                    if error.kind == .network {
-                        retryHandler = {
-                            self.emptyView.hide()
-                            self.updateContent()
-                        }
-                    }
-                    self.activityIndicator.stopAnimating()
-                    let (image, title, description) = error.getDisplayInfo()
-                    self.emptyView.show(image: image, title: title, description: description,
-                                        retryHandler: retryHandler)
-                    
-                    return
-                }
-                self.contents[self.position] = content!
-                self.contentDetailDataSource.contents = self.contents
-                self.setFirstViewController()
                 self.activityIndicator.stopAnimating()
         })
     }
