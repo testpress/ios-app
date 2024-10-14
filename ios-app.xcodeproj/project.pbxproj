@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0303692F2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0303692E2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy */; };
-		031FBACB2C47B23A00AAF71D /* QuestionReviewPage.js in Resources */ = {isa = PBXBuildFile; fileRef = 031FBACA2C47B23A00AAF71D /* QuestionReviewPage.js */; };
 		035CC54A2CAE694D0057F4E4 /* ListTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705016246E48BA00E6C688 /* ListTransform.swift */; };
 		035CC54B2CAE694D0057F4E4 /* StringArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */; };
 		035CC54C2CAE694D0057F4E4 /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
@@ -138,6 +137,34 @@
 		03CD0D432CB94B1B00E17218 /* DRMKeySessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258036A42743AA2400397639 /* DRMKeySessionDelegate.swift */; };
 		03CD0D452CB94D7600E17218 /* ContentAttemptCreationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0D442CB94D7600E17218 /* ContentAttemptCreationDelegate.swift */; };
 		03CD0D462CB94E4600E17218 /* VideoPlayerControls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */; };
+		03CD0D472CB954F400E17218 /* WebViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2571F8617690092BFDC /* WebViewUtils.swift */; };
+		03CD0D482CB9556D00E17218 /* icomoon in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8041FD030A7009C686C /* icomoon */; };
+		03CD0D492CB9556D00E17218 /* MathJax-2.7.1 in Resources */ = {isa = PBXBuildFile; fileRef = 25B14899264CFE0500AECC39 /* MathJax-2.7.1 */; };
+		03CD0D4A2CB9556D00E17218 /* bookmark in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA8BBD20E65F4C00B8ED87 /* bookmark */; };
+		03CD0D4B2CB9556D00E17218 /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F31C1F863D730092BFDC /* katex */; };
+		03CD0D4C2CB9556D00E17218 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 2F452C3A20BC3463007833A0 /* images */; };
+		03CD0D4D2CB9557700E17218 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2771F8619220092BFDC /* Rubik-Regular.ttf */; };
+		03CD0D4E2CB9557700E17218 /* post.css in Resources */ = {isa = PBXBuildFile; fileRef = 2FB049BA1FD838860049D5B0 /* post.css */; };
+		03CD0D4F2CB9557700E17218 /* comments.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FA1FCDA957009C686C /* comments.js */; };
+		03CD0D502CB9557700E17218 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */; };
+		03CD0D512CB9557700E17218 /* questions_typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2751F8619220092BFDC /* questions_typebase.css */; };
+		03CD0D522CB9557700E17218 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2761F8619220092BFDC /* Rubik-Medium.ttf */; };
+		03CD0D532CB9557700E17218 /* dotted_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F429A0620DD323A00F5555C /* dotted_loader.css */; };
+		03CD0D542CB9557700E17218 /* RichTextEditor.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F515DF31FF3B7B10005D8A5 /* RichTextEditor.html */; };
+		03CD0D552CB9557700E17218 /* QuestionReviewPage.js in Resources */ = {isa = PBXBuildFile; fileRef = 031FBACA2C47B23A00AAF71D /* QuestionReviewPage.js */; };
+		03CD0D562CB9557700E17218 /* MathJaxRender.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2731F8619220092BFDC /* MathJaxRender.js */; };
+		03CD0D572CB9557700E17218 /* pseudo_element_selector.js in Resources */ = {isa = PBXBuildFile; fileRef = 25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */; };
+		03CD0D582CB9557700E17218 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
+		03CD0D592CB9557700E17218 /* material_wave_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F909E6820DBC60700FE9B8D /* material_wave_loading.json */; };
+		03CD0D5A2CB9557700E17218 /* PT_Serif-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2741F8619220092BFDC /* PT_Serif-Web-Regular.ttf */; };
+		03CD0D5B2CB9557700E17218 /* RichTextEditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F515DF41FF3B7B10005D8A5 /* RichTextEditor.js */; };
+		03CD0D5C2CB9557700E17218 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
+		03CD0D5D2CB9557700E17218 /* symbol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F368C0B215DEC68000999FA /* symbol.ttf */; };
+		03CD0D5E2CB9557700E17218 /* comments.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FC1FCDABDE009C686C /* comments.css */; };
+		03CD0D5F2CB9557700E17218 /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
+		03CD0D602CB9557700E17218 /* TestEngine.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2781F8619220092BFDC /* TestEngine.js */; };
+		03CD0D612CB9557700E17218 /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
+		03CD0D632CB95A1700E17218 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D622CB95A1700E17218 /* Sentry */; };
 		03D82DDB2BFCD84100678BBF /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		03D82DDD2BFDFF8000678BBF /* LiveStreamContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */; };
 		03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586782628ABB81700E149B5 /* DBModel+Detachable.swift */; };
@@ -251,7 +278,6 @@
 		25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */; };
 		25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC521D4D48800C702B9 /* VerifyPhoneViewController.swift */; };
 		25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B0ADC721D5A29500C702B9 /* PhoneVerification.swift */; };
-		25B1489A264CFE0500AECC39 /* MathJax-2.7.1 in Resources */ = {isa = PBXBuildFile; fileRef = 25B14899264CFE0500AECC39 /* MathJax-2.7.1 */; };
 		25D891FD24724A2E001B9384 /* QuizQuestionsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D891FC24724A2E001B9384 /* QuizQuestionsPageViewController.swift */; };
 		25E435BB263AD8CC00243FD3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */; };
 		25E435DA263ADCA700243FD3 /* LeaderboardSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435D9263ADCA700243FD3 /* LeaderboardSectionController.swift */; };
@@ -260,7 +286,6 @@
 		25E435E7263ADD9100243FD3 /* LeaderboardItemViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25E435E5263ADD9100243FD3 /* LeaderboardItemViewCell.xib */; };
 		25E435EC263ADE7500243FD3 /* DashboardSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435EA263ADE7500243FD3 /* DashboardSectionHeaderCell.swift */; };
 		25E435ED263ADE7500243FD3 /* DashboardSectionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25E435EB263ADE7500243FD3 /* DashboardSectionHeaderCell.xib */; };
-		25EF86ED247E2160005C2B96 /* pseudo_element_selector.js in Resources */ = {isa = PBXBuildFile; fileRef = 25EF86EC247E2160005C2B96 /* pseudo_element_selector.js */; };
 		25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
 		2F04053420D916FB0074D80E /* BookmarkFoldersDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */; };
@@ -280,27 +305,18 @@
 		2F2A41C01FD6ACE900B92C6D /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A41BF1FD6ACE900B92C6D /* ForumViewController.swift */; };
 		2F3550901F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */; };
 		2F3550921F9E39A9001964D6 /* ReviewSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */; };
-		2F368C0C215DEC77000999FA /* symbol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F368C0B215DEC68000999FA /* symbol.ttf */; };
 		2F3A14311FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F3A14301FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib */; };
 		2F3A52FF1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A52FE1FDA635500C64123 /* IndividualSubjectAnalyticsViewController.swift */; };
 		2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */; };
 		2F3BC8A41FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3BC8A31FC6A009001A84FF /* ContentExamAttemptsTableViewController.swift */; };
 		2F41869E20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F41869D20BD39BA003D2D8A /* BookmarkFolderTableViewController.swift */; };
 		2F4186A420BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4186A320BD3BFF003D2D8A /* BookmarkFolderTableViewCell.swift */; };
-		2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F429A0620DD323A00F5555C /* dotted_loader.css */; };
 		2F452C3020BBE3E6007833A0 /* BookmarksDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F452C2F20BBE3E6007833A0 /* BookmarksDetailDataSource.swift */; };
 		2F452C3220BC123D007833A0 /* BookmarkedQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F452C3120BC123D007833A0 /* BookmarkedQuestionViewController.swift */; };
-		2F452C3B20BC3463007833A0 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 2F452C3A20BC3463007833A0 /* images */; };
-		2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
-		2F48C7FB1FCDA957009C686C /* comments.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FA1FCDA957009C686C /* comments.js */; };
-		2F48C7FD1FCDABDE009C686C /* comments.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7FC1FCDABDE009C686C /* comments.css */; };
-		2F48C8051FD030A7009C686C /* icomoon in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8041FD030A7009C686C /* icomoon */; };
 		2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80A1FD288C6009C686C /* PostTableViewController.swift */; };
 		2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80C1FD28902009C686C /* PostTableViewCell.swift */; };
 		2F48C8161FD3F6BD009C686C /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8141FD3F6BD009C686C /* Post.storyboard */; };
 		2F48C8181FD50E6D009C686C /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C8171FD50E6D009C686C /* PostDetailViewController.swift */; };
-		2F515DF51FF3B7B10005D8A5 /* RichTextEditor.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F515DF31FF3B7B10005D8A5 /* RichTextEditor.html */; };
-		2F515DF61FF3B7B10005D8A5 /* RichTextEditor.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F515DF41FF3B7B10005D8A5 /* RichTextEditor.js */; };
 		2F515DF81FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */; };
 		2F56B7391FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7381FDD6B5700E2B240 /* IndividualSubjectAnalyticsGraphCell.swift */; };
 		2F56B73B1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73A1FDE8B3900E2B240 /* TimeAnalyticsTableViewController.swift */; };
@@ -308,7 +324,6 @@
 		2F56B73F1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73E1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift */; };
 		2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BB61FE2444E00236AFE /* ActivityFeedTableViewController.swift */; };
 		2F5E0BB91FE2452D00236AFE /* ActivityFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E0BB81FE2452D00236AFE /* ActivityFeedTableViewCell.swift */; };
-		2F6F167B1FC3F08900FB768C /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
 		2F70F4D71F9F1C3300D30755 /* BaseQuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F4D61F9F1C3300D30755 /* BaseQuestionsListViewController.swift */; };
 		2F70F4D91F9F1F8200D30755 /* ReviewQuestionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70F4D81F9F1F8200D30755 /* ReviewQuestionListViewController.swift */; };
 		2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7179521EC740C6009114C4 /* ExamReview.storyboard */; };
@@ -319,7 +334,6 @@
 		2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D0C1FBEC91D0033D495 /* ChaptersViewController.swift */; };
 		2F763D131FBEE8080033D495 /* ChapterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F763D121FBEE8080033D495 /* ChapterCollectionViewCell.swift */; };
 		2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8411BB2043D5C500193A66 /* ResetPasswordViewController.swift */; };
-		2F909E6920DBC60700FE9B8D /* material_wave_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F909E6820DBC60700FE9B8D /* material_wave_loading.json */; };
 		2F936E7E1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */; };
 		2F936E801FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */; };
 		2F9699781FC2A202001B2B18 /* ContentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */; };
@@ -331,7 +345,6 @@
 		2FA9285420B8160A00CD3076 /* BookmarksSlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA9285320B8160A00CD3076 /* BookmarksSlidingViewController.swift */; };
 		2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */; };
 		2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */; };
-		2FB049BB1FD838860049D5B0 /* post.css in Resources */ = {isa = PBXBuildFile; fileRef = 2FB049BA1FD838860049D5B0 /* post.css */; };
 		2FB049BD1FD839EB0049D5B0 /* ForumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */; };
 		2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28D1F861A860092BFDC /* LoginViewController.swift */; };
 		2FC0F2F91F863B780092BFDC /* AttemptsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2811F861A860092BFDC /* AttemptsListViewController.swift */; };
@@ -355,15 +368,6 @@
 		2FC0F30E1F863BA90092BFDC /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2971F861A860092BFDC /* SuccessViewController.swift */; };
 		2FC0F30F1F863BA90092BFDC /* TestEngineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2981F861A860092BFDC /* TestEngineViewController.swift */; };
 		2FC0F3101F863BA90092BFDC /* TestReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2991F861A860092BFDC /* TestReportViewController.swift */; };
-		2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2571F8617690092BFDC /* WebViewUtils.swift */; };
-		2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2731F8619220092BFDC /* MathJaxRender.js */; };
-		2FC0F3171F863BCE0092BFDC /* PT_Serif-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2741F8619220092BFDC /* PT_Serif-Web-Regular.ttf */; };
-		2FC0F3181F863BCE0092BFDC /* questions_typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2751F8619220092BFDC /* questions_typebase.css */; };
-		2FC0F3191F863BCE0092BFDC /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2761F8619220092BFDC /* Rubik-Medium.ttf */; };
-		2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2771F8619220092BFDC /* Rubik-Regular.ttf */; };
-		2FC0F31B1F863BCE0092BFDC /* TestEngine.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2781F8619220092BFDC /* TestEngine.js */; };
-		2FC0F31D1F863D780092BFDC /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F31C1F863D730092BFDC /* katex */; };
-		2FCA8BBE20E65F4C00B8ED87 /* bookmark in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA8BBD20E65F4C00B8ED87 /* bookmark */; };
 		2FCBDD4C20CFDB07003A7DC0 /* BookmarkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */; };
 		2FCBDD4E20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBDD4D20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift */; };
 		2FD8465E1FC30B6000D6F016 /* ContentDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8465D1FC30B6000D6F016 /* ContentDetailPageViewController.swift */; };
@@ -374,9 +378,6 @@
 		2FDF9C4B20B6CFBF0086245F /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF9C4A20B6CFBF0086245F /* BookmarksTableViewController.swift */; };
 		2FDF9C5120B6D5F40086245F /* BookmarksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF9C5020B6D5F40086245F /* BookmarksTableViewCell.swift */; };
 		2FDF9C5B20B6F6C50086245F /* Bookmarks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF9C5A20B6F6C50086245F /* Bookmarks.storyboard */; };
-		2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FE290711F8D07D0004D7574 /* QuestionListHandler.js */; };
-		2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81096201A0AF70031E134 /* Lato-Bold.ttf */; };
-		2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FE81097201A0AFA0031E134 /* Lato-Regular.ttf */; };
 		2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */; };
 		2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */; };
 		2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */; };
@@ -955,6 +956,7 @@
 				03E4AFCB2CAFCFD500ECC34D /* IGListKit in Frameworks */,
 				035CC54F2CAE698D0057F4E4 /* RealmSwift in Frameworks */,
 				03CD0D2A2CB92C2400E17218 /* XLPagerTabStrip in Frameworks */,
+				03CD0D632CB95A1700E17218 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,6 +974,7 @@
 		0303692D2CAC188400C6CF2D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2FC0F2581F8619220092BFDC /* static */,
 				03CD0D2C2CB92C8E00E17218 /* Xibs */,
 				03CD0C862CB7E2CC00E17218 /* Assets.xcassets */,
 				2FC0F2DA1F863AAF0092BFDC /* Colors.swift */,
@@ -1220,6 +1223,7 @@
 		03E4AFD32CAFE62200ECC34D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 				1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */,
 				8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */,
 				25985836248A77F6003591FA /* M3U8Handler.swift */,
@@ -1351,7 +1355,6 @@
 				8C2E7B5723979DF800BA2F41 /* Views */,
 				8C5DF60023264D2B00B9F8A0 /* Extensions */,
 				256EF50721CA15A200C743F0 /* ios-app.entitlements */,
-				2FC0F2581F8619220092BFDC /* static */,
 				2FC0F2801F861A860092BFDC /* UI */,
 				2FC0F2521F8617690092BFDC /* Utils */,
 				2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */,
@@ -1431,7 +1434,6 @@
 			children = (
 				2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */,
 				2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */,
-				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 				03A60FA02CB3FEB000079A7C /* AuthErrorHandler.swift */,
 				03CD0C562CB7A04E00E17218 /* UserHelper.swift */,
 			);
@@ -1820,6 +1822,7 @@
 				03CD0D292CB92C2400E17218 /* XLPagerTabStrip */,
 				03CD0D3C2CB9485200E17218 /* M3U8Parser */,
 				03CD0D3E2CB9485E00E17218 /* MarqueeLabel */,
+				03CD0D622CB95A1700E17218 /* Sentry */,
 			);
 			productName = CourseKit;
 			productReference = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */;
@@ -1941,48 +1944,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
-				2F429A0720DD323A00F5555C /* dotted_loader.css in Resources */,
 				2F7179571EC740C6009114C4 /* TestEngine.storyboard in Resources */,
 				2F7179561EC740C6009114C4 /* ExamReview.storyboard in Resources */,
-				2FCA8BBE20E65F4C00B8ED87 /* bookmark in Resources */,
 				2503DF70263FAC0A003226AD /* ChapterContentViewCell.xib in Resources */,
-				2FC0F31B1F863BCE0092BFDC /* TestEngine.js in Resources */,
-				2F48C8051FD030A7009C686C /* icomoon in Resources */,
 				2570A23F21CA0D260097C6FE /* GoogleService-Info.plist in Resources */,
-				2FE81099201A0CD70031E134 /* Lato-Regular.ttf in Resources */,
 				2503DF58263C02C3003226AD /* BannerAdViewCell.xib in Resources */,
 				2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */,
-				2FE290721F8D07D0004D7574 /* QuestionListHandler.js in Resources */,
-				2F452C3B20BC3463007833A0 /* images in Resources */,
-				2FE81098201A0CD40031E134 /* Lato-Bold.ttf in Resources */,
-				2FC0F3181F863BCE0092BFDC /* questions_typebase.css in Resources */,
-				2FC0F3171F863BCE0092BFDC /* PT_Serif-Web-Regular.ttf in Resources */,
-				2F6F167B1FC3F08900FB768C /* typebase.css in Resources */,
 				25E435ED263ADE7500243FD3 /* DashboardSectionHeaderCell.xib in Resources */,
 				2FDF9C5B20B6F6C50086245F /* Bookmarks.storyboard in Resources */,
-				2F515DF51FF3B7B10005D8A5 /* RichTextEditor.html in Resources */,
 				2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */,
-				2FB049BB1FD838860049D5B0 /* post.css in Resources */,
-				25B1489A264CFE0500AECC39 /* MathJax-2.7.1 in Resources */,
-				2F515DF61FF3B7B10005D8A5 /* RichTextEditor.js in Resources */,
 				2F3A14311FE0FF63007CEE84 /* TimeAnalyticsHeaderViewCell.xib in Resources */,
-				031FBACB2C47B23A00AAF71D /* QuestionReviewPage.js in Resources */,
-				2F368C0C215DEC77000999FA /* symbol.ttf in Resources */,
 				25E435E7263ADD9100243FD3 /* LeaderboardItemViewCell.xib in Resources */,
-				2FC0F3161F863BCE0092BFDC /* MathJaxRender.js in Resources */,
 				038696242BF7692900E36F8F /* PrivacyInfo.xcprivacy in Resources */,
 				18F25D27212FDB7000097425 /* LockableSectionDropDownCell.xib in Resources */,
-				2FC0F31A1F863BCE0092BFDC /* Rubik-Regular.ttf in Resources */,
-				2F48C7FB1FCDA957009C686C /* comments.js in Resources */,
 				2F26ADEB1E8249D70031E6F4 /* Main.storyboard in Resources */,
-				2F48C7FD1FCDABDE009C686C /* comments.css in Resources */,
-				25EF86ED247E2160005C2B96 /* pseudo_element_selector.js in Resources */,
-				2F909E6920DBC60700FE9B8D /* material_wave_loading.json in Resources */,
-				2FC0F31D1F863D780092BFDC /* katex in Resources */,
 				2F25D566201F6D7500C01CCE /* LeaderboardTableViewCell.xib in Resources */,
 				2FC0F3021F863B980092BFDC /* ExamsTableViewCell.xib in Resources */,
-				2F48C7F91FCDA1A2009C686C /* progress_loader.css in Resources */,
-				2FC0F3191F863BCE0092BFDC /* Rubik-Medium.ttf in Resources */,
 				2F48C8161FD3F6BD009C686C /* Post.storyboard in Resources */,
 				2F763D0B1FBEC7260033D495 /* ChapterContent.storyboard in Resources */,
 			);
@@ -1999,11 +1976,37 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03CD0D4C2CB9556D00E17218 /* images in Resources */,
 				03CD0D2D2CB92CAE00E17218 /* EmptyView.xib in Resources */,
+				03CD0D602CB9557700E17218 /* TestEngine.js in Resources */,
+				03CD0D5D2CB9557700E17218 /* symbol.ttf in Resources */,
+				03CD0D572CB9557700E17218 /* pseudo_element_selector.js in Resources */,
+				03CD0D5C2CB9557700E17218 /* QuestionListHandler.js in Resources */,
+				03CD0D542CB9557700E17218 /* RichTextEditor.html in Resources */,
 				03CD0D462CB94E4600E17218 /* VideoPlayerControls.xib in Resources */,
 				0303692F2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy in Resources */,
+				03CD0D482CB9556D00E17218 /* icomoon in Resources */,
+				03CD0D4E2CB9557700E17218 /* post.css in Resources */,
 				03CD0C872CB7E2CD00E17218 /* Assets.xcassets in Resources */,
+				03CD0D522CB9557700E17218 /* Rubik-Medium.ttf in Resources */,
+				03CD0D5F2CB9557700E17218 /* progress_loader.css in Resources */,
+				03CD0D5A2CB9557700E17218 /* PT_Serif-Web-Regular.ttf in Resources */,
+				03CD0D5B2CB9557700E17218 /* RichTextEditor.js in Resources */,
+				03CD0D4D2CB9557700E17218 /* Rubik-Regular.ttf in Resources */,
+				03CD0D582CB9557700E17218 /* Lato-Bold.ttf in Resources */,
+				03CD0D4F2CB9557700E17218 /* comments.js in Resources */,
+				03CD0D5E2CB9557700E17218 /* comments.css in Resources */,
 				841380362C9DA1A8004D5846 /* Course.storyboard in Resources */,
+				03CD0D552CB9557700E17218 /* QuestionReviewPage.js in Resources */,
+				03CD0D4B2CB9556D00E17218 /* katex in Resources */,
+				03CD0D592CB9557700E17218 /* material_wave_loading.json in Resources */,
+				03CD0D502CB9557700E17218 /* Lato-Regular.ttf in Resources */,
+				03CD0D612CB9557700E17218 /* typebase.css in Resources */,
+				03CD0D4A2CB9556D00E17218 /* bookmark in Resources */,
+				03CD0D562CB9557700E17218 /* MathJaxRender.js in Resources */,
+				03CD0D492CB9556D00E17218 /* MathJax-2.7.1 in Resources */,
+				03CD0D532CB9557700E17218 /* dotted_loader.css in Resources */,
+				03CD0D512CB9557700E17218 /* questions_typebase.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2167,7 +2170,6 @@
 				2FCBDD4E20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift in Sources */,
 				2503DF7C263FBECD003226AD /* ContentAttemptSectionController.swift in Sources */,
 				2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */,
-				2FC0F3151F863BBD0092BFDC /* WebViewUtils.swift in Sources */,
 				2F763D0D1FBEC91D0033D495 /* ChaptersViewController.swift in Sources */,
 				2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */,
 				2F3A53051FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift in Sources */,
@@ -2308,6 +2310,7 @@
 				03E4AF5E2CAEDF7F00ECC34D /* HtmlContent.swift in Sources */,
 				03CD0D242CB92C0700E17218 /* BaseWebViewController.swift in Sources */,
 				03E4AF4A2CAEDF7F00ECC34D /* DirectionTranslation.swift in Sources */,
+				03CD0D472CB954F400E17218 /* WebViewUtils.swift in Sources */,
 				035CC54C2CAE694D0057F4E4 /* IntArrayTransform.swift in Sources */,
 				03E4AFC52CAFCF7000ECC34D /* ActivityFeedResponse.swift in Sources */,
 				03CD0D362CB947F200E17218 /* QuizQuestionsViewModel.swift in Sources */,
@@ -3255,6 +3258,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
 			productName = MarqueeLabel;
+		};
+		03CD0D622CB95A1700E17218 /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
 		};
 		03E4AFCA2CAFCFD500ECC34D /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;

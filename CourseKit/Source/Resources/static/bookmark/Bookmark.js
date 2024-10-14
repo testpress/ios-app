@@ -3,15 +3,15 @@ function onClickBookmarkButton() {
     webkit.messageHandlers.callbackHandler.postMessage("ClickedBookmarkButton");
 }
 
-function updateBookmarkButtonState(bookmarked) {
+function updateBookmarkButtonState(bookmarked, basePath) {
     var bookmarkImage = getElement("bookmark-image");
     var bookmarkText = getElement("bookmark-text");
     if (bookmarked) {
-        bookmarkImage.src = "images/remove_bookmark.svg"
-        bookmarkText.innerHTML = "Remove Bookmark"
+        bookmarkImage.src = basePath + "/images/remove_bookmark.svg";
+        bookmarkText.innerHTML = "Remove Bookmark";
     } else {
-        bookmarkImage.src = "images/bookmark.svg"
-        bookmarkText.innerHTML = "Bookmark this"
+        bookmarkImage.src = basePath + "/images/bookmark.svg";
+        bookmarkText.innerHTML = "Bookmark this";
     }
     currentBookmarkState = bookmarked;
     displayBookmarkButton()
