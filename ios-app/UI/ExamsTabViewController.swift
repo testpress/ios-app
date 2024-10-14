@@ -27,7 +27,7 @@ import UIKit
 import XLPagerTabStrip
 import CourseKit
 
-class ExamsTabViewController: ButtonBarPagerTabStripViewController {
+class ExamsTabViewController: ButtonBarPagerTabStripViewController, TestEngineNavigationDelegate{
     
     @IBOutlet weak var tempButtonBarView: ButtonBarView!
     @IBOutlet weak var tempContainerView: UIScrollView!
@@ -72,4 +72,10 @@ class ExamsTabViewController: ButtonBarPagerTabStripViewController {
         UserHelper.showProfileDetails(self)
     }
     
+    func navigateBack() {
+        dismiss(animated: false) {
+            self.moveToViewController(at: 2, animated: true)
+            self.reloadPagerTabStripView()
+        }
+    }
 }

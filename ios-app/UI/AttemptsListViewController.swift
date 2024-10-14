@@ -254,3 +254,12 @@ class AttemptsListViewController: UIViewController, UITableViewDelegate, UITable
     }
 
 }
+
+extension AttemptsListViewController: TestEngineNavigationDelegate {
+    func navigateBack() {
+        dismiss(animated: false) {
+            self.attempts.removeAll()
+            self.loadAttemptsWithProgress(url: self.exam!.attemptsUrl)
+        }
+    }
+}

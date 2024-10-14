@@ -26,7 +26,7 @@
 import UIKit
 import CourseKit
 
-class ContentDetailPageViewController: UIViewController, UIPageViewControllerDelegate {
+class ContentDetailPageViewController: UIViewController, UIPageViewControllerDelegate, TestEngineNavigationDelegate {
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var contentsContainerView: UIView!
@@ -295,4 +295,9 @@ class ContentDetailPageViewController: UIViewController, UIPageViewControllerDel
         
     }
     
+    func navigateBack() {
+        dismiss(animated: false) {
+            self.updateCurrentExamContent()
+        }
+    }
 }
