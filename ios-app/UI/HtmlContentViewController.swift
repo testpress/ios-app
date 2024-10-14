@@ -202,7 +202,9 @@ extension HtmlContentViewController: BookmarkDelegate {
         DBManager<Content>().write {
             self.content.bookmarkId.value = bookmarkId
         }
-        self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
+        let basePath = WebViewUtils.getResourcesBasePath() ?? ""
+        
+        self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil), '\(basePath)');")
     }
     
     func displayBookmarkButton() {

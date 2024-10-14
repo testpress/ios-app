@@ -542,7 +542,9 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     
     func updateBookmark(bookmarkId: Int?) {
         self.attemptItem.bookmarkId = bookmarkId
-        self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil));")
+        let basePath = WebViewUtils.getResourcesBasePath() ?? ""
+        
+        self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil), '\(basePath)');")
     }
     
     func displayBookmarkButton() {

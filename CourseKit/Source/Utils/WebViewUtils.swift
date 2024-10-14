@@ -24,55 +24,54 @@
 //
 
 import UIKit
-import CourseKit
 
-class WebViewUtils {
+public class WebViewUtils {
     
-    static func getTestEngineHeader() -> String {
-        return "<script src='TestEngine.js'></script>"
+    public static func getTestEngineHeader() -> String {
+        return "<script src='\(getStaticFileUrl(for: "TestEngine", withExtension: "js")!)'></script>"
     }
     
-    static func getQuestionReviewPageHeader() -> String {
-        return "<script src='QuestionReviewPage.js'></script>"
+    public static func getQuestionReviewPageHeader() -> String {
+        return "<script src='\(getStaticFileUrl(for: "QuestionReviewPage", withExtension: "js")!)'></script>"
     }
     
-    static func getQuestionListHeader() -> String {
-        return "<script src='QuestionListHandler.js'></script>"
+    public static func getQuestionListHeader() -> String {
+        return "<script src='\(getStaticFileUrl(for: "QuestionListHandler", withExtension: "js")!)'></script>"
     }
     
-    static func getRadioButtonInitializer(selectedOption: Int) -> String {
+    public static func getRadioButtonInitializer(selectedOption: Int) -> String {
         return "initRadioGroup(\(selectedOption));"
     }
-    static func getCheckBoxInitializer(selectedOptions: [Int]) -> String {
+    public static func getCheckBoxInitializer(selectedOptions: [Int]) -> String {
         return "initCheckBoxGroup(\(selectedOptions));"
     }
     
     public static func getQuestionHeader() -> String {
         return getHeader()
-            + "<link rel='stylesheet' type='text/css' href='questions_typebase.css' />"
+            + "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "questions_typebase", withExtension: "css")!)' />"
     }
     
     public static func getBookmarkHeader() -> String {
-        return "<link rel='stylesheet' type='text/css' href='bookmark/bookmark.css' />"
-            + "<script src='bookmark/Bookmark.js'></script>"
+        return "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "bookmark/bookmark", withExtension: "css")!)' />"
+            + "<script src='\(getStaticFileUrl(for: "bookmark/Bookmark", withExtension: "js")!)'></script>"
     }
     
     public static func getBookmarkOptionsHeader() -> String {
-        return "<link rel='stylesheet' type='text/css' href='bookmark/bookmark_detail.css' />"
-            + "<script src='bookmark/BookmarkDetail.js'></script>"
+        return "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "bookmark/bookmark_detail", withExtension: "css")!)' />"
+            + "<script src='\(getStaticFileUrl(for: "bookmark/BookmarkDetail", withExtension: "js")!)'></script>"
     }
     
     public static func getHeader() -> String {
         var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, "
             + "initial-scale=1, maximum-scale=1, user-scalable=no' />"
-        header += "<link rel='stylesheet' type='text/css' href='typebase.css' />"
-        header += "<link rel='stylesheet' type='text/css' href='progress_loader.css' />"
-        header += "<link rel='stylesheet' type='text/css' href='dotted_loader.css' />"
-        header += "<link rel='stylesheet' type='text/css' href='comments.css' />"
-        header += "<link rel='stylesheet' type='text/css' href='post.css' />"
-        header += "<link rel='stylesheet' type='text/css' href='icomoon/style.css' />"
-        header += "<script src='comments.js'></script>"
-        header += "<script src='pseudo_element_selector.js'></script>"
+        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "typebase", withExtension: "css")!)' />"
+        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "progress_loader", withExtension: "css")!)' />"
+        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "dotted_loader", withExtension: "css")!)' />"
+        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "comments", withExtension: "css")!)' />"
+        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "post", withExtension: "css")!)' />"
+        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "icomoon/style", withExtension: "css")!)' />"
+        header += "<script src='\(getStaticFileUrl(for: "comments", withExtension: "js")!)'></script>"
+        header += "<script src='\(getStaticFileUrl(for: "pseudo_element_selector", withExtension: "js")!)'></script>"
         header += "<script type='text/x-mathjax-config'>" +
             "    MathJax.Hub.Config({" +
             "      messageStyle: 'none'," +
@@ -83,13 +82,13 @@ class WebViewUtils {
             "      }" +
             "    });" +
             "</script>" +
-            "<script src='MathJax-2.7.1/MathJax.js?noContrib'></script>" +
+            "<script src='\(getStaticFileUrl(for: "MathJax-2.7.1/MathJax", withExtension: "js")!)'></script>" +
             "<script type='text/x-mathjax-config'>" +
-            "    MathJax.Ajax.config.path['MathJax'] = 'MathJax-2.7.1';" +
-            "    MathJax.Ajax.config.path['Contrib'] = 'MathJax-2.7.1/contrib';" +
+        "    MathJax.Ajax.config.path['MathJax'] = \(getStaticFileUrl(for: "MathJax-2.7.1", withExtension: nil)!)';" +
+        "    MathJax.Ajax.config.path['Contrib'] = \(getStaticFileUrl(for: "MathJax-2.7.1/contrib", withExtension: nil)!)';" +
             "</script>" +
-            "<script src='MathJax-2.7.1/config/TeX-MML-AM_CHTML-full.js'></script>" +
-            "<script src='MathJax-2.7.1/extensions/TeX/mhchem3/mhchem.js'></script>"
+            "<script src='\(getStaticFileUrl(for: "MathJax-2.7.1/config/TeX-MML-AM_CHTML-full", withExtension: "js")!)'></script>" +
+            "<script src='\(getStaticFileUrl(for: "MathJax-2.7.1/extensions/TeX/mhchem3/mhchem", withExtension: "js")!)'></script>"
         return header
     }
     
@@ -253,18 +252,19 @@ class WebViewUtils {
     }
     
     public static func getMoveBookmarkTags() -> String {
-        var html = "<div class='bookmark_options_layout' >"
-        html += "<div class='bookmark-button' onclick='onClickMoveBookmarkButton()'" +
-            "       style='width:121px;'>" +
-            "   <img class='bookmark-image' src='images/move_bookmark.svg' />" +
-            "   <div class='move-bookmark-text'>Move bookmark</div>" +
+        var html = "<div class='bookmark_options_layout'>"
+
+        html += "<div class='bookmark-button' onclick='onClickMoveBookmarkButton()' style='width:121px;'>" +
+            "<img class='bookmark-image' src='\(getStaticFileUrl(for: "images/move_bookmark", withExtension: "svg")!)' />" +
+            "<div class='move-bookmark-text'>Move bookmark</div>" +
             getDottedLoader(marginBottom: 3) +
         "</div>"
         html += "<div class='bookmark-button' onclick='onClickRemoveBookmarkButton()'>" +
-            "   <img class='bookmark-image' src='images/remove_bookmark.svg' />" +
-            "   <div class='bookmark-text'>Remove</div>" +
+            "<img class='bookmark-image' src='\(getStaticFileUrl(for: "images/remove_bookmark", withExtension: "svg")!)' />" +
+            "<div class='bookmark-text'>Remove</div>" +
             getDottedLoader(marginBottom: 3) +
         "</div>"
+        
         html += "</div>"
         return html
     }
@@ -273,16 +273,21 @@ class WebViewUtils {
         return "<div style='padding: 5px 5px 0px 5px;'>" + getMoveBookmarkTags() + "</div>"
     }
     
-    public static func getBookmarkButtonWithTags(bookmarked: Bool,
-                                                 alignCenter: Bool = false) -> String {
-        let image = bookmarked ? "images/remove_bookmark.svg" : "images/bookmark.svg";
-        let text = bookmarked ? "Remove Bookmark" : "Bookmark this";
+    public static func getBookmarkButtonWithTags(bookmarked: Bool, alignCenter: Bool = false) -> String {
+        let imagePath = bookmarked ? "images/remove_bookmark" : "images/bookmark"
+        let imageURL = getStaticFileUrl(for: imagePath, withExtension: "svg")
+
+        let text = bookmarked ? "Remove Bookmark" : "Bookmark this"
+
         let buttonClass = alignCenter ? "bookmark-centered-button" : "bookmark-button"
-        return "<div class='" + buttonClass + "' onclick='onClickBookmarkButton()'>" +
-            "   <img class='bookmark-image' src='" + image + "' />" +
-            "   <span class='bookmark-text'>" + text + "</span>" +
-            getDottedLoader() +
-        "</div>";
+
+        var html = "<div class='\(buttonClass)' onclick='onClickBookmarkButton()'>"
+        html += "   <img class='bookmark-image' src='\(imageURL ?? "")' />"
+        html += "   <span class='bookmark-text'>\(text)</span>"
+        html += getDottedLoader()
+        html += "</div>"
+        
+        return html
     }
     
     public static func getDottedLoader(marginBottom: Int = 5) -> String {
@@ -305,5 +310,23 @@ class WebViewUtils {
     
     public static func addWaterMark(imageUrl: String) -> String {
          return "addWatermark('\(imageUrl)');"
+    }
+    
+    public static func getResourcesBasePath() -> String? {
+        return bundle.resourcePath
+    }
+
+    public static func getStaticFileUrl(for filePath: String, withExtension fileExtension: String?) -> String? {
+        guard let resourcePath = getResourcesBasePath() else {
+            return nil
+        }
+
+        var fullPath = (resourcePath as NSString).appendingPathComponent(filePath)
+
+        if let fileExtension = fileExtension {
+            fullPath = (fullPath as NSString).appendingPathExtension(fileExtension) ?? fullPath
+        }
+
+        return URL(fileURLWithPath: fullPath).absoluteString
     }
 }
