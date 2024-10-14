@@ -28,6 +28,7 @@
 //
 
 import WebKit
+import CourseKit
 
 public protocol RichTextEditorDelegate: class {
     func heightDidChange(_ editor: RichTextEditor, heightDidChange height: CGFloat)
