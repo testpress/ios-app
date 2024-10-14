@@ -215,30 +215,21 @@ class TestReportViewController: UIViewController {
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-        let presentingViewController =
-            self.presentingViewController?.presentingViewController?.presentingViewController
+        var presentingViewController = self.presentingViewController?.presentingViewController?.presentingViewController
+
+        guard presentingViewController != nil else {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+
+        if presentingViewController is UITabBarController {
+            presentingViewController = presentingViewController?.children.first
+        }
         
         if let contentDetailPageViewController =
             presentingViewController as? ContentDetailPageViewController {
             
             goToContentDetailPageViewController(contentDetailPageViewController)
-        } else if let nvc =  presentingViewController as? UINavigationController,
-                let accessCodeExamsViewController =
-                    nvc.viewControllers.first as? AccessCodeExamsViewController {
-            
-            goToAccessCodeExamsViewController(accessCodeExamsViewController)
-        } else if presentingViewController is UITabBarController,
-                let tabViewController =
-                    presentingViewController?.children[0] as? ExamsTabViewController {
-            
-            tabViewController.dismiss(animated: false, completion: {
-                if tabViewController.currentIndex != 2 {
-                    // Move to histroy tab
-                    tabViewController.moveToViewController(at: 2, animated: true)
-                }
-                // Refresh the items
-                tabViewController.reloadPagerTabStripView()
-            })
         } else if presentingViewController is AttemptsListViewController {
             let attemptsListViewController = presentingViewController as! AttemptsListViewController
             attemptsListViewController.dismiss(animated: false, completion: {
@@ -251,6 +242,8 @@ class TestReportViewController: UIViewController {
             presentingViewController?.presentingViewController as? ContentDetailPageViewController {
             
             goToContentDetailPageViewController(contentDetailPageViewController)
+        } else if let navigatable = presentingViewController as? TestEngineNavigationDelegate {
+            navigatable.navigateBack()
         } else if isPresentedFromCustomTestViewController() {
             
             goToCourseListView()
@@ -288,11 +281,6 @@ class TestReportViewController: UIViewController {
             }
             contentDetailPageViewController.updateCurrentExamContent()
         })
-    }
-    
-    func goToAccessCodeExamsViewController(_ viewController: AccessCodeExamsViewController) {
-        viewController.items.removeAll()
-        viewController.dismiss(animated: false, completion: nil)
     }
     
     // Set frames of the views in this method to support both portrait & landscape view
