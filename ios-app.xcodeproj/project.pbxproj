@@ -16,20 +16,13 @@
 		035CC5502CAE698D0057F4E4 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 035CC54E2CAE698D0057F4E4 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		035CC5532CAE699B0057F4E4 /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = 035CC5522CAE699B0057F4E4 /* ObjectMapper */; };
 		036CE8502CA6C3BE00183BA8 /* DropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE84F2CA6C3BE00183BA8 /* DropDown */; };
-		036CE8532CA6D6B400183BA8 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8522CA6D6B400183BA8 /* MarqueeLabel */; };
 		036CE8592CA6DE2000183BA8 /* SlideMenuController in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8582CA6DE2000183BA8 /* SlideMenuController */; };
-		036CE85C2CA6E34400183BA8 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE85B2CA6E34400183BA8 /* DGCharts */; };
-		036CE8622CA6EC5A00183BA8 /* M3U8Parser in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8612CA6EC5A00183BA8 /* M3U8Parser */; };
-		036CE8652CA6EFE000183BA8 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8642CA6EFE000183BA8 /* CropViewController */; };
-		036CE8672CA6EFE000183BA8 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8662CA6EFE000183BA8 /* TOCropViewController */; };
 		036CE86A2CA6F0E400183BA8 /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8692CA6F0E400183BA8 /* ObjectMapper */; };
 		036CE86D2CA6F67F00183BA8 /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE86C2CA6F67F00183BA8 /* IGListKit */; };
 		036CE86F2CA6F79600183BA8 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE86E2CA6F79600183BA8 /* IGListDiffKit */; };
 		036CE8722CA6F8D500183BA8 /* XLPagerTabStrip in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8712CA6F8D500183BA8 /* XLPagerTabStrip */; };
 		036CE8752CA6FA1100183BA8 /* TTGSnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8742CA6FA1100183BA8 /* TTGSnackbar */; };
-		036CE8782CA6FB8B00183BA8 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8772CA6FB8B00183BA8 /* SwiftSoup */; };
 		036CE87B2CA6FD5000183BA8 /* Former in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE87A2CA6FD5000183BA8 /* Former */; };
-		036CE87E2CA6FF1500183BA8 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE87D2CA6FF1500183BA8 /* Lottie */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
 		038696162BF65D9500E36F8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; };
 		038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -149,7 +142,6 @@
 		03A60FA72CB4107100079A7C /* URLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985830248A5F14003591FA /* URLUtils.swift */; };
 		03A60FA82CB4114A00079A7C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435D4263ADBAA00243FD3 /* UserDefaults.swift */; };
 		03A60FAB2CB4153900079A7C /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 03A60FAA2CB4153900079A7C /* Sentry */; };
-		03A60FAE2CB417CC00079A7C /* LUExpandableTableView in Frameworks */ = {isa = PBXBuildFile; productRef = 03A60FAD2CB417CC00079A7C /* LUExpandableTableView */; };
 		03A60FB02CB5281000079A7C /* InstituteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A60FAF2CB5280F00079A7C /* InstituteRepository.swift */; };
 		03CD0C4E2CB79BC900E17218 /* FormatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2541F8617690092BFDC /* FormatDate.swift */; };
 		03CD0C4F2CB79C0A00E17218 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167E1FC4164100FB768C /* Reachability.swift */; };
@@ -900,9 +892,6 @@
 			files = (
 				0386961C2BF7602600E36F8F /* Alamofire in Frameworks */,
 				036CE87B2CA6FD5000183BA8 /* Former in Frameworks */,
-				036CE8622CA6EC5A00183BA8 /* M3U8Parser in Frameworks */,
-				036CE8652CA6EFE000183BA8 /* CropViewController in Frameworks */,
-				03A60FAE2CB417CC00079A7C /* LUExpandableTableView in Frameworks */,
 				03A60FAB2CB4153900079A7C /* Sentry in Frameworks */,
 				259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */,
 				036CE8502CA6C3BE00183BA8 /* DropDown in Frameworks */,
@@ -910,12 +899,10 @@
 				2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */,
 				2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */,
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
-				036CE8532CA6D6B400183BA8 /* MarqueeLabel in Frameworks */,
 				036CE86F2CA6F79600183BA8 /* IGListDiffKit in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
 				036CE8752CA6FA1100183BA8 /* TTGSnackbar in Frameworks */,
-				036CE87E2CA6FF1500183BA8 /* Lottie in Frameworks */,
 				036CE8592CA6DE2000183BA8 /* SlideMenuController in Frameworks */,
 				2599326F2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework in Frameworks */,
 				036CE86A2CA6F0E400183BA8 /* ObjectMapper in Frameworks */,
@@ -926,9 +913,6 @@
 				0386961F2BF762DD00E36F8F /* IQKeyboardManagerSwift in Frameworks */,
 				036CE86D2CA6F67F00183BA8 /* IGListKit in Frameworks */,
 				038696162BF65D9500E36F8F /* RealmSwift in Frameworks */,
-				036CE85C2CA6E34400183BA8 /* DGCharts in Frameworks */,
-				036CE8782CA6FB8B00183BA8 /* SwiftSoup in Frameworks */,
-				036CE8672CA6EFE000183BA8 /* TOCropViewController in Frameworks */,
 				036CE8722CA6F8D500183BA8 /* XLPagerTabStrip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1755,22 +1739,14 @@
 				0386961E2BF762DD00E36F8F /* IQKeyboardManagerSwift */,
 				038696212BF7635C00E36F8F /* Kingfisher */,
 				036CE84F2CA6C3BE00183BA8 /* DropDown */,
-				036CE8522CA6D6B400183BA8 /* MarqueeLabel */,
 				036CE8582CA6DE2000183BA8 /* SlideMenuController */,
-				036CE85B2CA6E34400183BA8 /* DGCharts */,
-				036CE8612CA6EC5A00183BA8 /* M3U8Parser */,
-				036CE8642CA6EFE000183BA8 /* CropViewController */,
-				036CE8662CA6EFE000183BA8 /* TOCropViewController */,
 				036CE8692CA6F0E400183BA8 /* ObjectMapper */,
 				036CE86C2CA6F67F00183BA8 /* IGListKit */,
 				036CE86E2CA6F79600183BA8 /* IGListDiffKit */,
 				036CE8712CA6F8D500183BA8 /* XLPagerTabStrip */,
 				036CE8742CA6FA1100183BA8 /* TTGSnackbar */,
-				036CE8772CA6FB8B00183BA8 /* SwiftSoup */,
 				036CE87A2CA6FD5000183BA8 /* Former */,
-				036CE87D2CA6FF1500183BA8 /* Lottie */,
 				03A60FAA2CB4153900079A7C /* Sentry */,
-				03A60FAD2CB417CC00079A7C /* LUExpandableTableView */,
 			);
 			productName = "ios-app";
 			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
@@ -3114,35 +3090,10 @@
 			package = 036CE84E2CA6C3BE00183BA8 /* XCRemoteSwiftPackageReference "DropDown-Swift" */;
 			productName = DropDown;
 		};
-		036CE8522CA6D6B400183BA8 /* MarqueeLabel */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
-			productName = MarqueeLabel;
-		};
 		036CE8582CA6DE2000183BA8 /* SlideMenuController */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8572CA6DE2000183BA8 /* XCRemoteSwiftPackageReference "SlideMenuControllerSwift" */;
 			productName = SlideMenuController;
-		};
-		036CE85B2CA6E34400183BA8 /* DGCharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 036CE85A2CA6E34300183BA8 /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = DGCharts;
-		};
-		036CE8612CA6EC5A00183BA8 /* M3U8Parser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */;
-			productName = M3U8Parser;
-		};
-		036CE8642CA6EFE000183BA8 /* CropViewController */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
-			productName = CropViewController;
-		};
-		036CE8662CA6EFE000183BA8 /* TOCropViewController */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
-			productName = TOCropViewController;
 		};
 		036CE8692CA6F0E400183BA8 /* ObjectMapper */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3169,20 +3120,10 @@
 			package = 036CE8732CA6FA1100183BA8 /* XCRemoteSwiftPackageReference "TTGSnackbar" */;
 			productName = TTGSnackbar;
 		};
-		036CE8772CA6FB8B00183BA8 /* SwiftSoup */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 036CE8762CA6FB8B00183BA8 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
-			productName = SwiftSoup;
-		};
 		036CE87A2CA6FD5000183BA8 /* Former */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8792CA6FD5000183BA8 /* XCRemoteSwiftPackageReference "Former" */;
 			productName = Former;
-		};
-		036CE87D2CA6FF1500183BA8 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 036CE87C2CA6FF1500183BA8 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
 		};
 		038696152BF65D9500E36F8F /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3238,11 +3179,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = Sentry;
-		};
-		03A60FAD2CB417CC00079A7C /* LUExpandableTableView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03A60FAC2CB417CC00079A7C /* XCRemoteSwiftPackageReference "LUExpandableTableView" */;
-			productName = LUExpandableTableView;
 		};
 		03CD0C632CB7B5D400E17218 /* DGCharts */ = {
 			isa = XCSwiftPackageProductDependency;
