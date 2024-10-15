@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0303692F2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0303692E2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy */; };
+		03494F482CBEAD9100C6A44B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */; };
+		03494F492CBEAD9100C6A44B /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */; };
+		03494F4B2CBEAFA700C6A44B /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 03494F4A2CBEAFA700C6A44B /* TOCropViewController */; };
 		035CC54A2CAE694D0057F4E4 /* ListTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25705016246E48BA00E6C688 /* ListTransform.swift */; };
 		035CC54B2CAE694D0057F4E4 /* StringArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */; };
 		035CC54C2CAE694D0057F4E4 /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
@@ -166,10 +169,7 @@
 		03CD0C712CB7C5FD00E17218 /* UIInterfaceOrientationMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036654CC2A3D98930005BDDF /* UIInterfaceOrientationMask.swift */; };
 		03CD0C722CB7C5FD00E17218 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F92A1F243306A60084ADC8 /* UIViewController.swift */; };
 		03CD0C742CB7CF4900E17218 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DFD1FF517160005D8A5 /* Permissions.swift */; };
-		03CD0C752CB7CF8400E17218 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */; };
 		03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0C762CB7CFC900E17218 /* TTGSnackbar */; };
-		03CD0C792CB7CFD600E17218 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0C782CB7CFD600E17218 /* TOCropViewController */; };
-		03CD0C7A2CB7D01C00E17218 /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */; };
 		03CD0C7B2CB7D25200E17218 /* FileUploadPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */; };
 		03CD0C7C2CB7D25200E17218 /* FileDownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */; };
 		03CD0C7D2CB7D25200E17218 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F7522027FEB143000D8137 /* TimeUtils.swift */; };
@@ -901,6 +901,7 @@
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
 				036CE86F2CA6F79600183BA8 /* IGListDiffKit in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
+				03494F4B2CBEAFA700C6A44B /* TOCropViewController in Frameworks */,
 				2570A25121CA0D770097C6FE /* FirebaseMessaging.framework in Frameworks */,
 				036CE8752CA6FA1100183BA8 /* TTGSnackbar in Frameworks */,
 				036CE8592CA6DE2000183BA8 /* SlideMenuController in Frameworks */,
@@ -931,7 +932,6 @@
 				035CC5532CAE699B0057F4E4 /* ObjectMapper in Frameworks */,
 				03A60F9F2CB3F83D00079A7C /* Alamofire in Frameworks */,
 				038CB2BF2CBD2BF600164127 /* SlideMenuController in Frameworks */,
-				03CD0C792CB7CFD600E17218 /* TOCropViewController in Frameworks */,
 				03CD0D3F2CB9485E00E17218 /* MarqueeLabel in Frameworks */,
 				03CD0C642CB7B5D400E17218 /* DGCharts in Frameworks */,
 				038CB2C42CBD331400164127 /* Lottie in Frameworks */,
@@ -1224,8 +1224,6 @@
 				25F7522027FEB143000D8137 /* TimeUtils.swift */,
 				0332D2422C3FD17100345BA9 /* FileUploadPicker.swift */,
 				031FBACC2C47C49F00AAF71D /* FileDownloadUtility.swift */,
-				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
-				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
 				2F515DFD1FF517160005D8A5 /* Permissions.swift */,
 				2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
@@ -1424,6 +1422,8 @@
 				2F515DF71FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift */,
 				03A60FA02CB3FEB000079A7C /* AuthErrorHandler.swift */,
 				03CD0C562CB7A04E00E17218 /* UserHelper.swift */,
+				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
+				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1747,6 +1747,7 @@
 				036CE8742CA6FA1100183BA8 /* TTGSnackbar */,
 				036CE87A2CA6FD5000183BA8 /* Former */,
 				03A60FAA2CB4153900079A7C /* Sentry */,
+				03494F4A2CBEAFA700C6A44B /* TOCropViewController */,
 			);
 			productName = "ios-app";
 			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
@@ -1794,7 +1795,6 @@
 				03A60F9E2CB3F83D00079A7C /* Alamofire */,
 				03CD0C632CB7B5D400E17218 /* DGCharts */,
 				03CD0C762CB7CFC900E17218 /* TTGSnackbar */,
-				03CD0C782CB7CFD600E17218 /* TOCropViewController */,
 				03CD0D092CB9290200E17218 /* DropDown */,
 				03CD0D292CB92C2400E17218 /* XLPagerTabStrip */,
 				03CD0D3C2CB9485200E17218 /* M3U8Parser */,
@@ -2051,6 +2051,7 @@
 				25E435DA263ADCA700243FD3 /* LeaderboardSectionController.swift in Sources */,
 				25E435E6263ADD9100243FD3 /* LeaderboardItemViewCell.swift in Sources */,
 				25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */,
+				03494F482CBEAD9100C6A44B /* ImagePicker.swift in Sources */,
 				2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */,
 				25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */,
 				25520BC327546AF9001A58AB /* DiscussionThreadDetailViewController.swift in Sources */,
@@ -2077,6 +2078,7 @@
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
 				2F515DF81FF3B8050005D8A5 /* KeyboardLayoutConstraint.swift in Sources */,
 				2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */,
+				03494F492CBEAD9100C6A44B /* ImageUploadHelper.swift in Sources */,
 				2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */,
 				2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */,
 				2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */,
@@ -2288,7 +2290,6 @@
 				03E4AFC02CAFCF6F00ECC34D /* ContentType.swift in Sources */,
 				038CB29D2CBD278600164127 /* IndividualSubjectAnalyticsCountCell.swift in Sources */,
 				038CB2B52CBD278600164127 /* ContentDetailPageViewController.swift in Sources */,
-				03CD0C752CB7CF8400E17218 /* ImagePicker.swift in Sources */,
 				03CD0D2B2CB92C8500E17218 /* EmptyView.swift in Sources */,
 				03A60F962CB3F35000079A7C /* AuthErrorHandlingDelegate.swift in Sources */,
 				03E4AFB82CAFCF6F00ECC34D /* ChapterContentAttempt.swift in Sources */,
@@ -2309,7 +2310,6 @@
 				03A60F6F2CB3F22800079A7C /* TPApiClient.swift in Sources */,
 				03E4AFAD2CAFCF6F00ECC34D /* Comment.swift in Sources */,
 				03A60F982CB3F3AD00079A7C /* Strings.swift in Sources */,
-				03CD0C7A2CB7D01C00E17218 /* ImageUploadHelper.swift in Sources */,
 				038CB2BC2CBD2B3200164127 /* ShareToUnlockViewController.swift in Sources */,
 				038CB2A02CBD278600164127 /* TimeAnalyticsQuestionCell.swift in Sources */,
 				03CD0D372CB947F200E17218 /* ChapterContentDetailViewModel.swift in Sources */,
@@ -3075,6 +3075,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		03494F4A2CBEAFA700C6A44B /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
+		};
 		035CC54E2CAE698D0057F4E4 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
@@ -3189,11 +3194,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8732CA6FA1100183BA8 /* XCRemoteSwiftPackageReference "TTGSnackbar" */;
 			productName = TTGSnackbar;
-		};
-		03CD0C782CB7CFD600E17218 /* TOCropViewController */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
-			productName = TOCropViewController;
 		};
 		03CD0D092CB9290200E17218 /* DropDown */ = {
 			isa = XCSwiftPackageProductDependency;

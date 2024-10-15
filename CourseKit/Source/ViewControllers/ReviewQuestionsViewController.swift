@@ -34,7 +34,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     var newCommentsPager: CommentPager!
     var comments = [Comment]()
     var bookmarkHelper: BookmarkHelper!
-    let imageUploadHelper = ImageUploadHelper()
     let loadingDialogController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     
     override func viewDidLoad() {
@@ -45,7 +44,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     }
     
     private func setupHelpers() {
-        imageUploadHelper.delegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
     }
@@ -243,8 +241,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     }
     
     func uploadImage() {
-        imageUploadHelper.showImagePicker(viewController: self,
-                                          loadingDialogController: loadingDialogController)
+        
     }
     
     func getHtml() -> String {
@@ -557,10 +554,4 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     func onClickMoveButton() {}
     func removeBookmark() {}
     func displayRemoveButton() {}
-}
-
-extension ReviewQuestionsViewController: ImageUploadHelperDelegate {
-    func imageUploadHelper(_ helper: ImageUploadHelper, didFinishUploadImage imageUrl: String) {
-        postComment(WebViewUtils.appendImageTag(imageUrl: imageUrl))
-    }
 }
