@@ -1,6 +1,96 @@
 {
   "pins" : [
     {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "ea6a94b7dddffd0ca4d0f29252d95310b84dec84",
+        "version" : "5.10.0"
+      }
+    },
+    {
+      "identity" : "charts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ChartsOrg/Charts",
+      "state" : {
+        "revision" : "dd9c72e3d7e751e769971092a6bd72d39198ae63",
+        "version" : "5.1.0"
+      }
+    },
+    {
+      "identity" : "dropdown-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/testpress/DropDown-Swift",
+      "state" : {
+        "revision" : "82456ab5f16dfafe0266477a64d26fb239f3de44",
+        "version" : "2.3.14"
+      }
+    },
+    {
+      "identity" : "fxpagecontrol",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nicklockwood/FXPageControl.git",
+      "state" : {
+        "revision" : "a94633402ba98c52f86c2a70e61ff086dec9de78",
+        "version" : "1.6.0"
+      }
+    },
+    {
+      "identity" : "iglistkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/instagram/IGListKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "636f6b5a3de48aeb6cfea9ce0612372c2ff3c79e"
+      }
+    },
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher",
+      "state" : {
+        "revision" : "2ef543ee21d63734e1c004ad6c870255e8716c50",
+        "version" : "7.12.0"
+      }
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios",
+      "state" : {
+        "revision" : "fe4c6fe3a0aa66cdeb51d549623c82ca9704b9a5",
+        "version" : "4.5.0"
+      }
+    },
+    {
+      "identity" : "luexpandabletableview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/LaurentiuUngur/LUExpandableTableView",
+      "state" : {
+        "revision" : "0bd7404416694852e35e313722dcbd6b631dfda4",
+        "version" : "6.0.0"
+      }
+    },
+    {
+      "identity" : "m3u8parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/M3U8Kit/M3U8Parser",
+      "state" : {
+        "revision" : "f7965520f3f8b31ee3a9329739623995a91cc789",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "marqueelabel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/testpress/MarqueeLabel",
+      "state" : {
+        "revision" : "ac2d6f26f642ab9ad71b61d2953d3cfa54a6dc4a",
+        "version" : "4.3.2"
+      }
+    },
+    {
       "identity" : "objectmapper",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Hearst-DD/ObjectMapper",
@@ -25,6 +115,51 @@
       "state" : {
         "revision" : "9b9992d59a5148eb557e6c0445fec05009022c8c",
         "version" : "10.53.1"
+      }
+    },
+    {
+      "identity" : "sentry-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/getsentry/sentry-cocoa.git",
+      "state" : {
+        "revision" : "7c1d627aaebbc702210c5062047508e4442ec9bf",
+        "version" : "8.37.0"
+      }
+    },
+    {
+      "identity" : "slidemenucontrollerswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/testpress/SlideMenuControllerSwift",
+      "state" : {
+        "revision" : "04492844e25adc1396e86ea4a8bc38ff2d18360d",
+        "version" : "5.0.1"
+      }
+    },
+    {
+      "identity" : "swiftsoup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scinfu/SwiftSoup",
+      "state" : {
+        "revision" : "3c2c7e1e72b8abd96eafbae80323c5c1e5317437",
+        "version" : "2.7.5"
+      }
+    },
+    {
+      "identity" : "ttgsnackbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zekunyan/TTGSnackbar",
+      "state" : {
+        "revision" : "123e3ef9b91252c0aae20b13625b4e2a160c5f4b",
+        "version" : "1.12.0"
+      }
+    },
+    {
+      "identity" : "xlpagertabstrip",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/xmartlabs/XLPagerTabStrip",
+      "state" : {
+        "revision" : "211ed62aa376722cf93c429802a8b6ff66a8bd52",
+        "version" : "9.1.0"
       }
     }
   ],
