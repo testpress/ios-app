@@ -1,0 +1,10 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new release build to the App Store"
+  lane :release do
+    increment_build_number(xcodeproj: "ios-app.xcodeproj")
+    build_app(scheme: "Testpress.in")
+    upload_to_app_store
+  end
+end
