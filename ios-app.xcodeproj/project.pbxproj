@@ -965,8 +965,6 @@
 				2FC0F2581F8619220092BFDC /* static */,
 				03CD0D2C2CB92C8E00E17218 /* Xibs */,
 				03CD0C862CB7E2CC00E17218 /* Assets.xcassets */,
-				2FC0F2DA1F863AAF0092BFDC /* Colors.swift */,
-				2FC0F2DB1F863AAF0092BFDC /* Images.swift */,
 				841380332C9DA18E004D5846 /* StoryBoards */,
 			);
 			path = Resources;
@@ -1216,6 +1214,8 @@
 		03E4AFD32CAFE62200ECC34D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2FC0F2DA1F863AAF0092BFDC /* Colors.swift */,
+				2FC0F2DB1F863AAF0092BFDC /* Images.swift */,
 				2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 				1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */,
