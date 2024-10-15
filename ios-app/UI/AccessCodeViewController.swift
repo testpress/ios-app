@@ -75,7 +75,8 @@ class AccessCodeViewController: BaseTextFieldViewController {
     }
     
     func showExamsList(exams: [Exam]) {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let bundle = Bundle(for: TestpressCourse.self)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
         let navigationController = storyboard.instantiateViewController(withIdentifier:
             Constants.ACCESS_CODE_EXAMS_NAVIGATION_CONTROLLER) as! UINavigationController
         

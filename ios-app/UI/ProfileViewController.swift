@@ -148,7 +148,8 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func showBookmarks() {
-        let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: nil)
+        let bundle = Bundle(for: TestpressCourse.self)
+        let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: bundle)
         let navigationController = storyboard.instantiateViewController(withIdentifier:
             Constants.BOOKMARKS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
         
