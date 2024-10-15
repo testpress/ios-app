@@ -16,6 +16,7 @@ public class TestpressCourse {
         
         if let token = token {
             saveTokenToKeychain(token: token)
+            InstituteRepository.shared.getSettings(refresh: true, completion: { _, _ in})
         }
     }
     
