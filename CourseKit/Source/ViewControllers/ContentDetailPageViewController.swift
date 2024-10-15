@@ -25,7 +25,7 @@
 
 import UIKit
 
-public class ContentDetailPageViewController: UIViewController, UIPageViewControllerDelegate, TestEngineNavigationDelegate {
+public class ContentDetailPageViewController: UIViewController, UIPageViewControllerDelegate {
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var contentsContainerView: UIView!
@@ -54,41 +54,93 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.setStatusBarColor()
-
         
-        pageViewController = UIPageViewController(
-            transitionStyle: .scroll,
-            navigationOrientation: .horizontal,
-            options: nil
-        )
+        setStatusBarColor()
+        setupPageViewController()
+        setupNavigationButtons()
+        setupActivityIndicator()
+        setupEmptyView()
+        contentDetailDataSource = ContentDetailDataSource(contents, contentAttemptCreationDelegate)
+        setupInitialView()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if pageViewController.viewControllers?.count == 0 {
+            setFirstViewController()
+        }
+
+        enableBookmarkOption()
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        // Add gradient shadow layer to the shadow container view
+        UIUtils.updateBottomShadow(bottomShadowView: bottomShadowView,
+                                   bottomGradient: bottomGradient)
+        emptyView.frame = contentsContainerView.bounds
+        
+    }
+    
+    private func setupPageViewController() {
+        pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.delegate = self
         addChild(pageViewController)
         contentsContainerView.addSubview(pageViewController.view)
         pageViewController.view.frame = contentsContainerView.bounds
         pageViewController.didMove(toParent: self)
-        // Set navigation buttons click listener
-        let previousButtonGesture = UITapGestureRecognizer(target: self, action:
-            #selector(self.onClickPreviousButton(sender:)))
-        previousButtonLayout.addGestureRecognizer(previousButtonGesture)
-        let nextButtonGesture = UITapGestureRecognizer(target: self, action:
-            #selector(self.onClickNextButton(sender:)))
-        nextButtonLayout.addGestureRecognizer(nextButtonGesture)
-        // Set navigation buttons text color
-        prevButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        prevButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
-        nextButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        nextButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
-        
+        disableSwipeGesture()
+    }
+    
+    private func setupNavigationButtons() {
+        addTapGesture(to: previousButtonLayout, action: #selector(onClickPreviousButton))
+        addTapGesture(to: nextButtonLayout, action: #selector(onClickNextButton))
+        setButtonColors(button: prevButton, isEnabled: true)
+        setButtonColors(button: nextButton, isEnabled: true)
+    }
+    
+    private func setupEmptyView(){
         emptyView = EmptyView.getInstance(parentView: pageViewController.view)
+    }
+    
+    private func setupActivityIndicator() {
         activityIndicator = UIUtils.initActivityIndicator(parentView: pageViewController.view)
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 50)
-        contentDetailDataSource = ContentDetailDataSource(contents, contentAttemptCreationDelegate)
+    }
+    
+    private func setupInitialView() {
         navigationBarItem.title = title
         if contents.count < 2 {
             hideBottomNavBar()
         }
-        disableSwipeGesture()
+    }
+
+    private func setButtonColors(button: UIButton, isEnabled: Bool) {
+        let color = isEnabled ? Colors.getRGB(Colors.PRIMARY) : UIColor.lightGray
+        button.setTitleColor(color, for: isEnabled ? .normal : .disabled)
+    }
+    
+    private func addTapGesture(to view: UIView, action: Selector) {
+        let gesture = UITapGestureRecognizer(target: self, action: action)
+        view.addGestureRecognizer(gesture)
+    }
+    
+    private func updateNavigationButtons(index: Int) {
+        previousButtonLayout.isUserInteractionEnabled = (index > 0)
+        prevButton.isEnabled = (index > 0)
+        prevArrow.tintColor = (index > 0) ? Colors.getRGB(Colors.PRIMARY) : UIColor.lightGray
+        
+        let isLastPage = (index + 1 == contentDetailDataSource?.contents.count)
+        nextButton.isEnabled = !isLastPage
+        nextArrow.tintColor = isLastPage ? UIColor.lightGray : Colors.getRGB(Colors.PRIMARY)
+    }
+    
+    // MARK: - Page View Controller Methods
+    private func setFirstViewController() {
+        if let startingViewController = contentDetailDataSource.viewControllerAtIndex(position) {
+            pageViewController.setViewControllers([startingViewController], direction: .forward, animated: false)
+            pageViewController.dataSource = contentDetailDataSource
+            updateNavigationButtons(index: getCurrentIndex())
+        }
     }
     
     func hideNavbarTitle() {
@@ -105,15 +157,6 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
         bottomNavigationBar.isHidden = false
     }
     
-    public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if pageViewController.viewControllers?.count == 0 {
-            setFirstViewController()
-        }
-
-        enableBookmarkOption()
-    }
-    
     func enableBookmarkOption() {
         if !(pageViewController.viewControllers?.isEmpty)! {
             if getCurrentIndex() != -1 && contentDetailDataSource.viewControllerAtIndex(getCurrentIndex())! is VideoContentViewController {
@@ -128,17 +171,6 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
                 bookmarkButton.image = nil
             }
         }
-    }
-    
-    func setFirstViewController() {
-        let startingViewController = contentDetailDataSource.viewControllerAtIndex(position)!
-        pageViewController.setViewControllers(
-            [startingViewController],
-            direction: .forward,
-            animated: false
-        )
-        pageViewController.dataSource = contentDetailDataSource
-        updateNavigationButtons(index: getCurrentIndex())
     }
     
     // MARK: - UIPageViewController delegate methods
@@ -179,27 +211,6 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
         updateNavigationButtons(index: index)
     }
     
-    func updateNavigationButtons(index: Int) {
-        // Update previous button
-        if index == 0 {
-            previousButtonLayout.isUserInteractionEnabled = false
-            prevButton.isEnabled = false
-            prevArrow.tintColor = UIColor.lightGray
-        } else {
-            previousButtonLayout.isUserInteractionEnabled = true
-            prevButton.isEnabled = true
-            prevArrow.tintColor = Colors.getRGB(Colors.PRIMARY)
-        }
-        // Update next button
-        if index + 1 == contentDetailDataSource?.contents.count {
-            nextButton.isEnabled = false
-            nextArrow.tintColor = UIColor.lightGray
-        } else {
-            nextButton.isEnabled = true
-            nextArrow.tintColor = Colors.getRGB(Colors.PRIMARY)
-        }
-    }
-    
     @objc func onClickPreviousButton(sender: UITapGestureRecognizer) {
         setCurrentContent(index: getCurrentIndex() - 1)
     }
@@ -237,39 +248,60 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
     func updateContent() {
         activityIndicator.startAnimating()
         let content = contents[getCurrentIndex()]
+        
         TPApiClient.request(
             type: Content.self,
             endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
-            completion: {
-                content, error in
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    var retryHandler: (() -> Void)?
-                    if error.kind == .network {
-                        retryHandler = {
-                            self.emptyView.hide()
-                            self.updateContent()
-                        }
-                    }
-                    self.activityIndicator.stopAnimating()
-                    let (image, title, description) = error.getDisplayInfo()
-                    self.emptyView.show(image: image, title: title, description: description,
-                                        retryHandler: retryHandler)
-                    
+            completion: {content, error in
+                self.activityIndicator.stopAnimating()
+
+                guard let content = content else {
+                    self.displayContentLoadingError(error)
                     return
                 }
-                
-                self.contents[self.getCurrentIndex()] = content!
-                self.contentDetailDataSource.contents = self.contents
-                let viewController =
-                    self.contentDetailDataSource.viewControllerAtIndex(self.getCurrentIndex())
-                
-                self.pageViewController.setViewControllers([viewController!] , direction: .forward,
-                                                           animated: true, completion: {done in })
-                
-                self.activityIndicator.stopAnimating()
-        })
+
+                self.updateContentData(content)
+            }
+        )
+    }
+
+    private func displayContentLoadingError(_ error: TPError?) {
+        guard let error = error else { return }
+        
+        debugPrint(error.message ?? "No error")
+        debugPrint(error.kind)
+        
+        var retryHandler: (() -> Void)?
+        if error.kind == .network {
+            retryHandler = { [weak self] in
+                self?.emptyView.hide()
+                self?.updateContent()
+            }
+        }
+        
+        let (image, title, description) = error.getDisplayInfo()
+        emptyView.show(
+            image: image,
+            title: title,
+            description: description,
+            retryHandler: retryHandler
+        )
+    }
+
+    private func updateContentData(_ content: Content) {
+        contents[getCurrentIndex()] = content
+        contentDetailDataSource.contents = contents
+        
+        guard let viewController = contentDetailDataSource.viewControllerAtIndex(getCurrentIndex()) else {
+            return
+        }
+        
+        pageViewController.setViewControllers(
+            [viewController],
+            direction: .forward,
+            animated: true,
+            completion: nil
+        )
     }
     
     @IBAction func back() {
@@ -285,15 +317,9 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
             viewController.addOrRemoveBookmark(content: nil)
         }
     }
-    
-    public override func viewDidLayoutSubviews() {
-        // Add gradient shadow layer to the shadow container view
-        UIUtils.updateBottomShadow(bottomShadowView: bottomShadowView,
-                                   bottomGradient: bottomGradient)
-        emptyView.frame = contentsContainerView.bounds
-        
-    }
-    
+}
+
+extension ContentDetailPageViewController: TestEngineNavigationDelegate{
     public func navigateBack() {
         dismiss(animated: false) {
             self.updateCurrentExamContent()
