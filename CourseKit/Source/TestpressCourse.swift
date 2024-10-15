@@ -28,7 +28,12 @@ public class TestpressCourse {
     }
 
     public func getContentDetailViewController(contentId: Int) -> ContentDetailPageViewController? {
-        return nil
+        guard let detailViewController: ContentDetailPageViewController = instantiateViewController(withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) else {
+            return nil
+        }
+        
+        detailViewController.contentId = contentId
+        return detailViewController
     }
 
     private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {

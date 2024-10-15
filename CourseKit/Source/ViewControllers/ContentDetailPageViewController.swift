@@ -51,6 +51,7 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
     var emptyView: EmptyView!
     var activityIndicator: UIActivityIndicatorView!
     var url: String? = nil
+    public var contentId: Int?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,13 +61,15 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
         setupNavigationButtons()
         setupActivityIndicator()
         setupEmptyView()
-        contentDetailDataSource = ContentDetailDataSource(contents, contentAttemptCreationDelegate)
+        setupContentDetailDataSource()
         setupInitialView()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if pageViewController.viewControllers?.count == 0 {
+        if contents.isEmpty && contentId != nil {
+            loadContent()
+        } else if pageViewController.viewControllers?.count == 0 {
             setFirstViewController()
         }
 
@@ -100,6 +103,10 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
     
     private func setupEmptyView(){
         emptyView = EmptyView.getInstance(parentView: pageViewController.view)
+    }
+    
+    private func setupContentDetailDataSource(){
+        contentDetailDataSource = ContentDetailDataSource(contents, contentAttemptCreationDelegate)
     }
     
     private func setupActivityIndicator() {
@@ -244,6 +251,31 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
             }
         }
     }
+    
+    
+    func loadContent() {
+        guard let contentId = contentId else { return }
+        activityIndicator.startAnimating()
+        
+        let url = Constants.BASE_URL + "/api/v2.4/contents/\(contentId)/"
+        TPApiClient.request(
+            type: Content.self,
+            endpointProvider: TPEndpointProvider(.get, url: url),
+            completion: { [weak self] content, error in
+                self?.activityIndicator.stopAnimating()
+                guard let content = content else {
+                    self?.displayContentLoadingError(error)
+                    return
+                }
+                
+                self?.contents = [content]
+                self?.position = 0
+                self?.setupContentDetailDataSource()
+                self?.setFirstViewController()
+            }
+        )
+    }
+    
     
     func updateContent() {
         activityIndicator.startAnimating()
