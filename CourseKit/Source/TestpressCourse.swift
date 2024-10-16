@@ -37,6 +37,17 @@ public class TestpressCourse {
         return detailViewController
     }
     
+    public func getCourseDetailViewController(courseId: Int) -> ChaptersViewController? {
+        guard let detailViewController: ChaptersViewController = instantiateViewController(withIdentifier: Constants.CHAPTERS_VIEW_CONTROLLER) else {
+            return nil
+        }
+        
+        detailViewController.courseId = courseId
+        detailViewController.baseUrl = TPEndpointProvider.getCourseDetailUrl(courseId: courseId)
+        detailViewController.allowCustomTestGeneration = false
+        return detailViewController
+    }
+    
     public func getPaymentPageViewController() -> UIViewController? {
         return instantiateViewController(withIdentifier: "ComingSoonViewController")
     }

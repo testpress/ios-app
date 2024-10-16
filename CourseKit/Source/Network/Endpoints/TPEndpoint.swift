@@ -311,4 +311,8 @@ public struct TPEndpointProvider {
     public static func getDRMLicenseURL(contentID: Int) -> String {
         return Constants.BASE_URL + "/api/v2.5/chapter_contents/\(contentID)/drm_license/"
     }
+    
+    public static func getCourseDetailUrl(courseId: Int) -> String {
+        return Constants.BASE_URL + TPEndpoint.getCourses.urlPath + "\(courseId)/"
+    }
 }
