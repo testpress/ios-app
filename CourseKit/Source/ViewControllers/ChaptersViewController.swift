@@ -35,7 +35,7 @@ BaseDBViewController<Chapter> {
     var emptyView: EmptyView!
     var pager: ChapterPager!
     public var loadingItems: Bool = false
-    public var coursesUrl: String!
+    public var baseUrl: String!
     public var courseId: Int!
     public var parentId: Int? = nil
     public var firstCallback: Bool = true
@@ -46,7 +46,7 @@ BaseDBViewController<Chapter> {
         super.viewDidLoad()
         
         navigationItemBar.title = title
-        pager = ChapterPager(coursesUrl: coursesUrl, parentId: parentId)
+        pager = ChapterPager(coursesUrl: baseUrl, parentId: parentId)
         activityIndicator = UIUtils.initActivityIndicator(parentView: collectionView)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]

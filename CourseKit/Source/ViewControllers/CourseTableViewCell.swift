@@ -114,7 +114,7 @@ class CourseTableViewCell: UITableViewCell {
                 Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
 
             chaptersViewController.courseId = course.id
-            chaptersViewController.coursesUrl = course.url
+            chaptersViewController.baseUrl = course.url
             chaptersViewController.title = course.title
             chaptersViewController.allowCustomTestGeneration = course.allowCustomTestGeneration
             viewController = chaptersViewController
