@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0303692F2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0303692E2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy */; };
+		0324D0462CC0086B00A11AB1 /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */; };
 		03494F482CBEAD9100C6A44B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */; };
 		03494F492CBEAD9100C6A44B /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */; };
 		03494F4B2CBEAFA700C6A44B /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 03494F4A2CBEAFA700C6A44B /* TOCropViewController */; };
@@ -149,7 +150,6 @@
 		03CD0C4E2CB79BC900E17218 /* FormatDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2541F8617690092BFDC /* FormatDate.swift */; };
 		03CD0C4F2CB79C0A00E17218 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6F167E1FC4164100FB768C /* Reachability.swift */; };
 		03CD0C502CB79C5400E17218 /* GraphAxisPercentValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */; };
-		03CD0C512CB79DC700E17218 /* RichTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */; };
 		03CD0C522CB79DEB00E17218 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2561F8617690092BFDC /* UIUtils.swift */; };
 		03CD0C532CB79E4600E17218 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2DA1F863AAF0092BFDC /* Colors.swift */; };
 		03CD0C572CB7A04E00E17218 /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0C562CB7A04E00E17218 /* UserHelper.swift */; };
@@ -1227,7 +1227,6 @@
 				2F515DFD1FF517160005D8A5 /* Permissions.swift */,
 				2F56B7341FDD252E00E2B240 /* GraphAxisLabelFormatter.swift */,
 				2FC0F2561F8617690092BFDC /* UIUtils.swift */,
-				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
 				2F56B7361FDD2F0100E2B240 /* GraphAxisPercentValueFormatter.swift */,
 				2F6F167E1FC4164100FB768C /* Reachability.swift */,
 				2FC0F2541F8617690092BFDC /* FormatDate.swift */,
@@ -1424,6 +1423,7 @@
 				03CD0C562CB7A04E00E17218 /* UserHelper.swift */,
 				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
 				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
+				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2082,6 +2082,7 @@
 				2F25D560201F085A00C01CCE /* LeaderboardTableViewCell.swift in Sources */,
 				2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */,
 				2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */,
+				0324D0462CC0086B00A11AB1 /* RichTextEditor.swift in Sources */,
 				2503DF57263C02C3003226AD /* BannerAdViewCell.swift in Sources */,
 				2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */,
 				2FC0F3051F863BA90092BFDC /* MoreOptionsViewController.swift in Sources */,
@@ -2150,7 +2151,6 @@
 				03E4AFB42CAFCF6F00ECC34D /* DiscussionThreadAnswer.swift in Sources */,
 				038CB2872CBD278600164127 /* TestEngineViewController.swift in Sources */,
 				038CB2AA2CBD278600164127 /* QuestionListViewController.swift in Sources */,
-				03CD0C512CB79DC700E17218 /* RichTextEditor.swift in Sources */,
 				03CD0C7D2CB7D25200E17218 /* TimeUtils.swift in Sources */,
 				03CD0C6E2CB7C5FD00E17218 /* Stackview+BackgroundColor.swift in Sources */,
 				038CB2992CBD278600164127 /* StartQuizExamViewController.swift in Sources */,
