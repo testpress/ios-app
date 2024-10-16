@@ -36,6 +36,14 @@ public class TestpressCourse {
         detailViewController.contentId = contentId
         return detailViewController
     }
+    
+    public func getPaymentPageViewController() -> UIViewController? {
+        return instantiateViewController(withIdentifier: "ComingSoonViewController")
+    }
+    
+    public func getMyDownloadsViewController() -> UIViewController? {
+        return instantiateViewController(withIdentifier: "ComingSoonViewController")
+    }
 
     private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {
         let storyboard = UIStoryboard(name: "Course", bundle: bundle)

@@ -25,7 +25,7 @@
 
 import UIKit
 
-class ChaptersViewController:
+public class ChaptersViewController:
 BaseDBViewController<Chapter> {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -34,15 +34,15 @@ BaseDBViewController<Chapter> {
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var emptyView: EmptyView!
     var pager: ChapterPager!
-    var loadingItems: Bool = false
-    var coursesUrl: String!
-    var courseId: Int!
-    var parentId: Int? = nil
-    var firstCallback: Bool = true
-    var allowCustomTestGeneration: Bool = false
-    var instituteSettings: InstituteSettings?
+    public var loadingItems: Bool = false
+    public var coursesUrl: String!
+    public var courseId: Int!
+    public var parentId: Int? = nil
+    public var firstCallback: Bool = true
+    public var allowCustomTestGeneration: Bool = false
+    public var instituteSettings: InstituteSettings?
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItemBar.title = title
@@ -65,7 +65,7 @@ BaseDBViewController<Chapter> {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         showItemsFromDB()
         
@@ -79,7 +79,7 @@ BaseDBViewController<Chapter> {
         }
     }
     
-    override func getItemsFromDB() -> [Chapter] {
+    public override func getItemsFromDB() -> [Chapter] {
         var filterQuery = String(format: "courseId==%d", courseId)
         
         if (parentId != nil) {
@@ -188,7 +188,7 @@ BaseDBViewController<Chapter> {
 
 extension ChaptersViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView,
+    public func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         
         if items.count == 0 {
@@ -199,7 +199,7 @@ extension ChaptersViewController: UICollectionViewDataSource {
         return items.count
     }
     
-    func collectionView(_ collectionView: UICollectionView,
+    public func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
