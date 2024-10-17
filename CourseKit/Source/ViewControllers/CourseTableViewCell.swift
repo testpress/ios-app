@@ -68,8 +68,8 @@ class CourseTableViewCell: UITableViewCell {
         externalLinkLabel.isHidden = false
         externalLinkLabel.layer.borderWidth = 1.0
         externalLinkLabel.layer.cornerRadius = 2
-        externalLinkLabel.layer.borderColor = Colors.getRGB(Colors.PRIMARY).cgColor
-        externalLinkLabel.textColor = Colors.getRGB(Colors.PRIMARY)
+        externalLinkLabel.layer.borderColor = TestpressCourse.shared.primaryColor.cgColor
+        externalLinkLabel.textColor = TestpressCourse.shared.primaryColor
     }
     
     func showChapterAndContentCount() {

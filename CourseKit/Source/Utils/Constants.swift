@@ -9,7 +9,6 @@
 import Foundation
 
 public struct Constants {
-    public static let BASE_URL = "https://lmsdemo.testpress.in";
     public static let APP_APPLE_ID = "1434052944"
     
     public static let APP_SHARE_MESSAGE = "Good app to prepare for online exams. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID

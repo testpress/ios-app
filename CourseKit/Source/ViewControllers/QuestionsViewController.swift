@@ -177,8 +177,8 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         return """
         <div id="fileUploadSection">
             <div id="fileStatus" style="display: \(fileStatusDisplay);">\(fileStatusText)</div>
-            <button id="uploadFileButton" class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE); display: \(uploadButtonDisplay);"" onclick="onUploadFileButtonClick()">Upload File</button>
-            <button id="clearFileButton" class="rounded-button" style="background-color: \(Colors.PRIMARY); color: \(Colors.WHITE); display: \(clearButtonDisplay);" onclick="clearFile()">Clear File</button>
+            <button id="uploadFileButton" class="rounded-button" style="background-color: \(TestpressCourse.shared.primaryColor); color: \(Colors.WHITE); display: \(uploadButtonDisplay);"" onclick="onUploadFileButtonClick()">Upload File</button>
+            <button id="clearFileButton" class="rounded-button" style="background-color: \(TestpressCourse.shared.primaryColor); color: \(Colors.WHITE); display: \(clearButtonDisplay);" onclick="clearFile()">Clear File</button>
         </div>
         """
     }

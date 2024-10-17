@@ -75,9 +75,9 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         nextButtonLayout.addGestureRecognizer(nextButtonGesture)
         // Set navigation buttons text color
         prevButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        prevButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
+        prevButton.setTitleColor(TestpressCourse.shared.primaryColor, for: .normal)
         nextButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        nextButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
+        nextButton.setTitleColor(TestpressCourse.shared.primaryColor, for: .normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -223,7 +223,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
         } else {
             previousButtonLayout.isUserInteractionEnabled = true
             prevButton.isEnabled = true
-            prevArrow.tintColor = Colors.getRGB(Colors.PRIMARY)
+            prevArrow.tintColor = TestpressCourse.shared.primaryColor
         }
         // Update next button
         if index + 1 == baseQuestionsDataSource?.attemptItems.count {
@@ -231,7 +231,7 @@ class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDel
             nextArrow.tintColor = UIColor.lightGray
         } else {
             nextButton.isEnabled = true
-            nextArrow.tintColor = Colors.getRGB(Colors.PRIMARY)
+            nextArrow.tintColor = TestpressCourse.shared.primaryColor
         }
     }
     

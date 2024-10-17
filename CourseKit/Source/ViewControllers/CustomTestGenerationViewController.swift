@@ -57,7 +57,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
             type: Attempt.self,
             endpointProvider: TPEndpointProvider(
                 .put,
-                url: Constants.BASE_URL+"/api/v2.2/attempts/"+attemptId+"/" + TPEndpoint.resumeAttempt.urlPath
+                url: TestpressCourse.shared.baseURL+"/api/v2.2/attempts/"+attemptId+"/" + TPEndpoint.resumeAttempt.urlPath
             ),
             completion: {
                 attempt, error in
@@ -87,7 +87,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
             type: Attempt.self,
             endpointProvider: TPEndpointProvider(
                 .get,
-                url: Constants.BASE_URL+"/api/v2.2/attempts/"+attemptId+"/"
+                url: TestpressCourse.shared.baseURL+"/api/v2.2/attempts/"+attemptId+"/"
             ),
             completion: {
                 attempt, error in

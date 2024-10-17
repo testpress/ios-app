@@ -42,7 +42,7 @@ public class ContentAttempt {
     }
     
     public func getEndAttemptUrl() -> String {
-        return Constants.BASE_URL + TPEndpoint.contentAttempts.urlPath + "\(id!)/" +
+        return TestpressCourse.shared.baseURL + TPEndpoint.contentAttempts.urlPath + "\(id!)/" +
             TPEndpoint.endExam.urlPath;
     }
 }

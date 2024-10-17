@@ -51,7 +51,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
             loadAttemptsWithProgress(url: content.getAttemptsUrl())
         }
         tableView.reloadData()
-        self.fetchAvailableLanguages(url: Constants.BASE_URL+"/api/v2.3/exams/"+self.exam.slug+"/languages/")
+        self.fetchAvailableLanguages(url: TestpressCourse.shared.baseURL+"/api/v2.3/exams/"+self.exam.slug+"/languages/")
     }
     
     func loadAttemptsWithProgress(url: String) {

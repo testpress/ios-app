@@ -52,7 +52,7 @@ open class TPBasePagedTableViewController<T: Mappable>: BaseTableViewController<
         // Set table view footer as progress spinner
         let pagingSpinner = UIActivityIndicatorView(style: .gray)
         pagingSpinner.startAnimating()
-        pagingSpinner.color = Colors.getRGB(Colors.PRIMARY)
+        pagingSpinner.color = TestpressCourse.shared.primaryColor
         pagingSpinner.hidesWhenStopped = true
         tableView.tableFooterView = pagingSpinner
         

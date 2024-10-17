@@ -72,7 +72,7 @@ public class StartExamScreenViewController: UIViewController {
                 attempt = contentAttempt.assessment
             }
         }
-        fetchAvailableLanguages(url: Constants.BASE_URL+"/api/v2.3/exams/"+exam.slug+"/languages/")
+        fetchAvailableLanguages(url: TestpressCourse.shared.baseURL+"/api/v2.3/exams/"+exam.slug+"/languages/")
         examTitle.text = exam.title
         questionsCount.text = String(exam.numberOfQuestions)
         if attempt?.remainingTime != nil {

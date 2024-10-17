@@ -262,13 +262,13 @@ public struct TPEndpointProvider {
          urlPath: String,
          queryParams: [String: String] = [String: String]()) {
         
-        let url = urlPath.isEmpty ? "" : Constants.BASE_URL + urlPath
+        let url = urlPath.isEmpty ? "" : TestpressCourse.shared.baseURL + urlPath
         self.init(endpoint, url: url, queryParams: queryParams)
     }
     
     public func getUrl() -> String {
         // If the given url is empty, use base url with url path
-        var url = self.url.isEmpty ? Constants.BASE_URL + endpoint.urlPath : self.url
+        var url = self.url.isEmpty ? TestpressCourse.shared.baseURL + endpoint.urlPath : self.url
         if !queryParams.isEmpty {
             url = url + "?"
             for (i, queryParam) in queryParams.enumerated() {
@@ -296,23 +296,23 @@ public struct TPEndpointProvider {
     }
     
     public static func getCommentsUrl(questionId: Int) -> String {
-        return Constants.BASE_URL + TPEndpoint.getQuestions.urlPath + "\(questionId)"
+        return TestpressCourse.shared.baseURL + TPEndpoint.getQuestions.urlPath + "\(questionId)"
             + TPEndpoint.commentsPath.urlPath
     }
     
     public static func getContentAttemptUrl(contentID: Int) -> String {
-        return Constants.BASE_URL + TPEndpoint.getContents.urlPath + "\(contentID)" + TPEndpoint.attemptsPath.urlPath
+        return TestpressCourse.shared.baseURL + TPEndpoint.getContents.urlPath + "\(contentID)" + TPEndpoint.attemptsPath.urlPath
     }
     
     public static func getVideoAttemptPath(attemptID: Int) -> String {
-        return Constants.BASE_URL + TPEndpoint.userVideos.urlPath + "\(attemptID)/"
+        return TestpressCourse.shared.baseURL + TPEndpoint.userVideos.urlPath + "\(attemptID)/"
     }
     
     public static func getDRMLicenseURL(contentID: Int) -> String {
-        return Constants.BASE_URL + "/api/v2.5/chapter_contents/\(contentID)/drm_license/"
+        return TestpressCourse.shared.baseURL + "/api/v2.5/chapter_contents/\(contentID)/drm_license/"
     }
     
     public static func getCourseDetailUrl(courseId: Int) -> String {
-        return Constants.BASE_URL + TPEndpoint.getCourses.urlPath + "\(courseId)/"
+        return TestpressCourse.shared.baseURL + TPEndpoint.getCourses.urlPath + "\(courseId)/"
     }
 }

@@ -151,7 +151,7 @@ public class AttemptItem: DBModel {
     }
     
     public func getSaveUrl() -> String {
-        return String(format: "%@/api/v2.4/attempts/%d/questions/%d/", Constants.BASE_URL , self.attemptId, self.examQuestionId)
+        return String(format: "%@/api/v2.4/attempts/%d/questions/%d/", TestpressCourse.shared.baseURL , self.attemptId, self.examQuestionId)
     }
     
     public func clearLocalFiles() {

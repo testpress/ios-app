@@ -11,7 +11,19 @@ public class TestpressCourse {
 
     private init() {}
     
-    public func initialize(withToken token: String? = nil){
+    public var primaryColor: UIColor!
+    
+    public var subdomain: String!
+    public var baseURL: String! {
+        guard let subdomain = subdomain else { return nil }
+        return "https://\(subdomain).testpress.in"
+    }
+    
+    
+    public func initialize(withToken token: String? = nil, subdomain: String, primaryColor: String) {
+        self.subdomain = subdomain
+        self.primaryColor = Colors.getRGB(primaryColor)
+
         initializeDB()
         
         if let token = token {

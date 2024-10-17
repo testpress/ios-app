@@ -72,9 +72,9 @@ class BookmarksDetailPageViewController: UIViewController, UIPageViewControllerD
         nextButtonLayout.addGestureRecognizer(nextButtonGesture)
         // Set navigation buttons text color
         prevButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        prevButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
+        prevButton.setTitleColor(TestpressCourse.shared.primaryColor, for: .normal)
         nextButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        nextButton.setTitleColor(Colors.getRGB(Colors.PRIMARY), for: .normal)
+        nextButton.setTitleColor(TestpressCourse.shared.primaryColor, for: .normal)
         
         bookmarksTableViewController = parentviewController.tableViewController
     }
@@ -180,7 +180,7 @@ class BookmarksDetailPageViewController: UIViewController, UIPageViewControllerD
         
         button.isEnabled = enable
         buttonLayout.isUserInteractionEnabled = enable
-        navigationArrow.tintColor = enable ? Colors.getRGB(Colors.PRIMARY) : UIColor.lightGray
+        navigationArrow.tintColor = enable ? TestpressCourse.shared.primaryColor : UIColor.lightGray
     }
     
     @objc func onClickPreviousButton(sender: UITapGestureRecognizer) {

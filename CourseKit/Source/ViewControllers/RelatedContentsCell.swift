@@ -55,11 +55,11 @@ class RelatedContentsCell: UITableViewCell {
         
         if (is_current) {
             isAlreadySelected = true
-            contentIcon.setImageColor(color: Colors.getRGB(Colors.PRIMARY))
-            bookmarkIcon.setImageColor(color: Colors.getRGB(Colors.PRIMARY))
-            self.backgroundColor = Colors.getRGB(Colors.PRIMARY, alpha: 0.1)
-            title.textColor = Colors.getRGB(Colors.PRIMARY)
-            desc.textColor = Colors.getRGB(Colors.PRIMARY)
+            contentIcon.setImageColor(color: TestpressCourse.shared.primaryColor)
+            bookmarkIcon.setImageColor(color: TestpressCourse.shared.primaryColor)
+            self.backgroundColor = TestpressCourse.shared.primaryColor.withAlphaComponent(0.1)
+            title.textColor = TestpressCourse.shared.primaryColor
+            desc.textColor = TestpressCourse.shared.primaryColor
             
             if (content?.video != nil) {
                 desc.text = "Now Playing..."

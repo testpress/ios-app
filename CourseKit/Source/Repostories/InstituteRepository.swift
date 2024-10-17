@@ -40,7 +40,7 @@ public class InstituteRepository {
             endpointProvider: TPEndpointProvider(.instituteSettings),
             completion: { instituteSettings, error in
                 if let settings = instituteSettings {
-                    settings.baseUrl = Constants.BASE_URL
+                    settings.baseUrl = TestpressCourse.shared.baseURL
                     self.clearCache()
                     DBManager<InstituteSettings>().addData(objects: [settings])
                 }

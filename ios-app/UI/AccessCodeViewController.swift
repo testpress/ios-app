@@ -47,7 +47,7 @@ class AccessCodeViewController: BaseTextFieldViewController {
         if accessCode.text != nil && !accessCode.text!.isEmpty {
             accessCode.resignFirstResponder()
             present(alertController, animated: false, completion: nil)
-            let url = Constants.BASE_URL + TPEndpoint.getAccessCodeExams.urlPath + accessCode.text!
+            let url = TestpressCourse.shared.baseURL + TPEndpoint.getAccessCodeExams.urlPath + accessCode.text!
                 + TPEndpoint.examsPath.urlPath
             
             TPApiClient.getListItems(

@@ -131,7 +131,7 @@ public class Content: DBModel {
     }
     
     public func getAttemptsUrl() -> String {
-        var url = String(format: "%@%@%d/attempts/", Constants.BASE_URL , TPEndpoint.getContents.urlPath, self.id)
+        var url = String(format: "%@%@%d/attempts/", TestpressCourse.shared.baseURL , TPEndpoint.getContents.urlPath, self.id)
         url = url.replacingOccurrences(of: "v2.3", with: "v2.2.1")
         return url
     }
@@ -141,7 +141,7 @@ public class Content: DBModel {
     }
     
     public func getUrl() -> String {
-        var contentDetailUrl = String(format: "%@/api/v2.4/contents/%d/", Constants.BASE_URL , self.id)
+        var contentDetailUrl = String(format: "%@/api/v2.4/contents/%d/", TestpressCourse.shared.baseURL , self.id)
         return url.isEmpty ? contentDetailUrl : url
     }
 }

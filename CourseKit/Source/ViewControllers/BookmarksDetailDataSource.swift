@@ -50,7 +50,7 @@ class BookmarksDetailDataSource: NSObject, UIPageViewControllerDataSource {
             viewController.position = index
             return viewController
         } else if let content = bookmark.bookmarkedObject as? Content {
-            content.attemptsUrl = Constants.BASE_URL + TPEndpoint.getContents.urlPath
+            content.attemptsUrl = TestpressCourse.shared.baseURL + TPEndpoint.getContents.urlPath
                 + "\(content.id)" + TPEndpoint.attemptsPath.urlPath
             
             if content.attachment != nil {

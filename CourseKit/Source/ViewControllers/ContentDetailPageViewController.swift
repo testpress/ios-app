@@ -122,7 +122,7 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
     }
 
     private func setButtonColors(button: UIButton, isEnabled: Bool) {
-        let color = isEnabled ? Colors.getRGB(Colors.PRIMARY) : UIColor.lightGray
+        let color = isEnabled ? TestpressCourse.shared.primaryColor : UIColor.lightGray
         button.setTitleColor(color, for: isEnabled ? .normal : .disabled)
     }
     
@@ -134,11 +134,11 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
     private func updateNavigationButtons(index: Int) {
         previousButtonLayout.isUserInteractionEnabled = (index > 0)
         prevButton.isEnabled = (index > 0)
-        prevArrow.tintColor = (index > 0) ? Colors.getRGB(Colors.PRIMARY) : UIColor.lightGray
+        prevArrow.tintColor = (index > 0) ? TestpressCourse.shared.primaryColor : UIColor.lightGray
         
         let isLastPage = (index + 1 == contentDetailDataSource?.contents.count)
         nextButton.isEnabled = !isLastPage
-        nextArrow.tintColor = isLastPage ? UIColor.lightGray : Colors.getRGB(Colors.PRIMARY)
+        nextArrow.tintColor = isLastPage ? UIColor.lightGray : TestpressCourse.shared.primaryColor
     }
     
     // MARK: - Page View Controller Methods
@@ -257,7 +257,7 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
         guard let contentId = contentId else { return }
         activityIndicator.startAnimating()
         
-        let url = Constants.BASE_URL + "/api/v2.4/contents/\(contentId)/"
+        let url = TestpressCourse.shared.baseURL + "/api/v2.4/contents/\(contentId)/"
         TPApiClient.request(
             type: Content.self,
             endpointProvider: TPEndpointProvider(.get, url: url),

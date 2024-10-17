@@ -43,7 +43,7 @@ public class ExamPager: TPBasePager<Exam> {
     public override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
         if accessCode != nil {
-            let url = Constants.BASE_URL + TPEndpoint.getAccessCodeExams.urlPath + accessCode
+            let url = TestpressCourse.shared.baseURL + TPEndpoint.getAccessCodeExams.urlPath + accessCode
                 + TPEndpoint.examsPath.urlPath
             
             let endpointProvider = TPEndpointProvider(.getAccessCodeExams, url: url,

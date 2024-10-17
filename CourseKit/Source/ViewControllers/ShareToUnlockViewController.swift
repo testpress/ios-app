@@ -18,7 +18,7 @@ class ShareToUnlockViewController: UIViewController {
     override func viewDidLoad() {
         self.setStatusBarColor()
         shareButton.setTitleColor(Colors.getRGB(Colors.PRIMARY_TEXT), for: .normal)
-        shareButton.backgroundColor = Colors.getRGB(Colors.PRIMARY)
+        shareButton.backgroundColor = TestpressCourse.shared.primaryColor
     }
     
     @IBAction func back(_ sender: Any) {

@@ -41,7 +41,7 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
         self.setStatusBarColor()
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
-        settings.style.selectedBarBackgroundColor = Colors.getRGB(Colors.PRIMARY)
+        settings.style.selectedBarBackgroundColor = TestpressCourse.shared.primaryColor
         settings.style.buttonBarItemFont = UIFont(name: "Helvetica-Bold", size: 12)!
         settings.style.selectedBarHeight = 4.0
         settings.style.buttonBarMinimumLineSpacing = 0
@@ -55,7 +55,7 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
             
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = Colors.getRGB(Colors.TAB_TEXT_COLOR)
-            newCell?.label.textColor = Colors.getRGB(Colors.PRIMARY)
+            newCell?.label.textColor = TestpressCourse.shared.primaryColor
         }
         
         super.viewDidLoad()
@@ -69,7 +69,7 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
         
         if subjects.isEmpty {
             if analyticsUrl == nil {
-                analyticsUrl = Constants.BASE_URL + TPEndpoint.getSubjectAnalytics.urlPath
+                analyticsUrl = TestpressCourse.shared.baseURL + TPEndpoint.getSubjectAnalytics.urlPath
             }
             loadSubjects()
         }

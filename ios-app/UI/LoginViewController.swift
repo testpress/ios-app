@@ -159,7 +159,7 @@ class LoginViewController: BaseTextFieldViewController {
         
         if (instituteSettings.customRegistrationEnabled) {
             let webViewController = WebViewController()
-            webViewController.url = Constants.BASE_URL + "/register/"
+            webViewController.url = TestpressCourse.shared.baseURL + "/register/"
             present(webViewController, animated: true, completion: nil)
         } else {
             let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:

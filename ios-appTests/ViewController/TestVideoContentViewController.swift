@@ -86,10 +86,10 @@ class TestVideoContentViewController: XCTestCase {
         let cell = controller!.tableView.dequeueReusableCell(withIdentifier: "RelatedContentsCell") as! RelatedContentsCell
         cell.initCell(index: 0, contents: (controller!.contents)!, viewController: controller!, is_current: true)
         
-        XCTAssertEqual(cell.title.textColor, Colors.getRGB(Colors.PRIMARY))
-        XCTAssertEqual(cell.desc.textColor, Colors.getRGB(Colors.PRIMARY))
-        XCTAssertEqual(cell.contentIcon.imageColor, Colors.getRGB(Colors.PRIMARY))
-        XCTAssertEqual(cell.bookmarkIcon.imageColor, Colors.getRGB(Colors.PRIMARY))
+        XCTAssertEqual(cell.title.textColor, Colors.getRGB(Colors.DODGERBLUE))
+        XCTAssertEqual(cell.desc.textColor, Colors.getRGB(Colors.DODGERBLUE))
+        XCTAssertEqual(cell.contentIcon.imageColor, Colors.getRGB(Colors.DODGERBLUE))
+        XCTAssertEqual(cell.bookmarkIcon.imageColor, Colors.getRGB(Colors.DODGERBLUE))
         XCTAssertEqual(cell.desc.text, "Now Playing...")
     }
     

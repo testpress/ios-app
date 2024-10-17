@@ -165,7 +165,7 @@ public class Exam: DBModel {
     }
     
     public func getQuestionsURL() -> String {
-        return Constants.BASE_URL + "/api/v2.4/exams/\(id)/questions/"
+        return TestpressCourse.shared.baseURL + "/api/v2.4/exams/\(id)/questions/"
     }
 }
 

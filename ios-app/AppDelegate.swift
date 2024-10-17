@@ -76,6 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        TestpressCourse.shared.initialize(subdomain: "yukthi", primaryColor: Colors.DODGERBLUE)
         registerForNotifications(application)
         configureFirebase()
         customizeAppearance()
@@ -83,7 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         initializeFacebook(application, launchOptions: launchOptions)
         configureKeyboardManager()
         handleFirstLaunch()
-        TestpressCourse.shared.initialize()
         setupRootViewController()
         setupAuthErrorHandlerOnApiClient()
         
@@ -117,8 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private func customizeAppearance() {
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.isTranslucent = false
-        navBarAppearance.backgroundColor = Colors.getRGB(Colors.PRIMARY)
-        navBarAppearance.barTintColor = Colors.getRGB(Colors.PRIMARY)
+        navBarAppearance.backgroundColor = TestpressCourse.shared.primaryColor
+        navBarAppearance.barTintColor = TestpressCourse.shared.primaryColor
         UIBarButtonItem.appearance().tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
         navBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
 
@@ -249,7 +249,7 @@ extension AppDelegate {
                         let viewController = storyboard.instantiateViewController(withIdentifier:
                             Constants.POST_DETAIL_VIEW_CONTROLLER) as! PostDetailViewController
                         
-                        let url = Constants.BASE_URL + "/api/v2.2/posts/\(urlPath.pathComponents[2])/?short_link=true"
+                        let url = TestpressCourse.shared.baseURL + "/api/v2.2/posts/\(urlPath.pathComponents[2])/?short_link=true"
                         viewController.url = url
                         
                         topController.present(viewController, animated: true, completion: nil)
@@ -261,7 +261,7 @@ extension AppDelegate {
                         activityIndicator?.center = CGPoint(x: topController.view.center.x, y: topController.view.center.y - 50)
                         activityIndicator.startAnimating()
                         
-                        let url = Constants.BASE_URL + "/api/v2.2/contents/\(urlPath.pathComponents[3])/"
+                        let url = TestpressCourse.shared.baseURL + "/api/v2.2/contents/\(urlPath.pathComponents[3])/"
                         Content.fetchContent(url: url, completion: { content, error in
                             if let error = error {
                                 debugPrint(error.message ?? "No error")

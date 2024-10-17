@@ -32,7 +32,7 @@ public class UIUtils {
     public static func initActivityIndicator(parentView: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(frame: parentView.frame)
         activityIndicator.style = .whiteLarge
-        activityIndicator.color = Colors.getRGB(Colors.PRIMARY)
+        activityIndicator.color = TestpressCourse.shared.primaryColor
         activityIndicator.backgroundColor = UIColor.white
         activityIndicator.center = parentView.center
         parentView.addSubview(activityIndicator)

@@ -127,7 +127,7 @@ class TestReportViewController: UIViewController {
             solutionButtonLayout.isHidden = true
             shareButton.tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
             shareButton.setTitleColor(Colors.getRGB(Colors.PRIMARY_TEXT), for: .normal)
-            shareButton.backgroundColor = Colors.getRGB(Colors.PRIMARY)
+            shareButton.backgroundColor = TestpressCourse.shared.primaryColor
             shareButton.imageView?.contentMode = .scaleAspectFit
             shareButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         } else {

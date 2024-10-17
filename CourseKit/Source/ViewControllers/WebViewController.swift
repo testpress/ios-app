@@ -149,7 +149,7 @@ open class WebViewController: BaseWebViewController, WKWebViewDelegate {
                         return
                     }
                     
-                    self.url = Constants.BASE_URL + sso_detail!.url + self.url
+                    self.url = TestpressCourse.shared.baseURL + sso_detail!.url + self.url
                     self.loadWebView()
                     return
             }

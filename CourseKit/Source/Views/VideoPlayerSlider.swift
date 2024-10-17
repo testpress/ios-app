@@ -26,9 +26,9 @@ public class VideoSlider: UIControl {
     }
     
     var backgroundLayerColor : UIColor = UIColor.darkGray
-    var progressLayerColor : UIColor = Colors.getRGB(Colors.PRIMARY)
+    var progressLayerColor : UIColor = TestpressCourse.shared.primaryColor
     var bufferLayerColor : UIColor = UIColor.lightGray
-    var positionRingLayerColor : UIColor = Colors.getRGB(Colors.PRIMARY)
+    var positionRingLayerColor : UIColor = TestpressCourse.shared.primaryColor
     
     private var backgroundLayer : CAShapeLayer!
     private var progressLayer : CAShapeLayer!

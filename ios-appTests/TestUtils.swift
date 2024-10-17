@@ -35,7 +35,7 @@ public class TestUtils {
     
     static func getInstituteSettings(allowSignup: Bool? = false, facebookLoginEnabled: Bool? = false, activityFeedEnabled: Bool? = false) -> InstituteSettings {
         let instituteSettings = InstituteSettings()
-        instituteSettings.baseUrl = Constants.BASE_URL
+        instituteSettings.baseUrl = "https://lmsdemo.testpress.in/"
         instituteSettings.allowSignup = allowSignup!
         instituteSettings.facebookLoginEnabled = facebookLoginEnabled!
         instituteSettings.activityFeedEnabled = activityFeedEnabled!
