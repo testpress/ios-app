@@ -941,9 +941,7 @@
 			isa = PBXGroup;
 			children = (
 				2FC0F2581F8619220092BFDC /* static */,
-				03CD0D2C2CB92C8E00E17218 /* Xibs */,
 				03CD0C862CB7E2CC00E17218 /* Assets.xcassets */,
-				841380332C9DA18E004D5846 /* StoryBoards */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -951,6 +949,8 @@
 		035CC5482CAE68D00057F4E4 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				03CD0D2C2CB92C8E00E17218 /* Xibs */,
+				841380332C9DA18E004D5846 /* StoryBoards */,
 				2F3F63512004A75F00976053 /* DBManager.swift */,
 				03E4AF232CAEDE1200ECC34D /* Models */,
 				035CC5492CAE690E0057F4E4 /* Transforms */,
@@ -1354,9 +1354,9 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */,
 				259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */,
 				2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */,
-				2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */,
 				2599326A2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework */,
 				2570A25221CA0DBE0097C6FE /* Protobuf.framework */,
 				2570A24321CA0D770097C6FE /* FIRAnalyticsConnector.framework */,
