@@ -56,7 +56,6 @@ let package = Package(
       ],
       path: "CourseKit/Source",
       resources: [
-        .copy("Resources"),
         .process("PrivacyInfo.xcprivacy")
       ]
     )
