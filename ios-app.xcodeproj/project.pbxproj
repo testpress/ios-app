@@ -949,8 +949,6 @@
 		035CC5482CAE68D00057F4E4 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				03CD0D2C2CB92C8E00E17218 /* Xibs */,
-				841380332C9DA18E004D5846 /* StoryBoards */,
 				2F3F63512004A75F00976053 /* DBManager.swift */,
 				03E4AF232CAEDE1200ECC34D /* Models */,
 				035CC5492CAE690E0057F4E4 /* Transforms */,
@@ -1568,6 +1566,8 @@
 		8413802E2C9DA075004D5846 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				841380332C9DA18E004D5846 /* StoryBoards */,
+				03CD0D2C2CB92C8E00E17218 /* Xibs */,
 				03CD0D402CB949B600E17218 /* Delegates */,
 				03CD0D342CB9479C00E17218 /* Views */,
 				8C9E5BDD238E5D3300D8790F /* ViewModel */,
