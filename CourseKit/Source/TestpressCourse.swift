@@ -2,10 +2,8 @@ import UIKit
 
 #if SWIFT_PACKAGE
 let bundle = Bundle.module
-print("Swift Package called")
 #else
 let bundle = Bundle(for: TestpressCourse.self)
-print("Framework called")
 #endif
 
 public class TestpressCourse {
@@ -24,6 +22,11 @@ public class TestpressCourse {
     
     public func initialize(withToken token: String? = nil, subdomain: String, primaryColor: String) {
         print(bundle, bundle.bundleURL)
+        #if SWIFT_PACKAGE
+        print("Swift package bundle")
+        #else
+        print("Framework package bundle")
+        #endif
         self.subdomain = subdomain
         self.primaryColor = Colors.getRGB(primaryColor)
 
