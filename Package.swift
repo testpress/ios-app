@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
   name: "CourseKit",
+  defaultLocalization: "en",
   platforms: [
     .iOS(.v13),
   ],
