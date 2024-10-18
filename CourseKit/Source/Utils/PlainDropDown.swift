@@ -34,7 +34,7 @@ public class PlainDropDown {
     
     public init(containerView: UIView) {
         titleButton = UIButton(type: .system)
-        titleButton.setImage(#imageLiteral(resourceName: "ic_arrow_drop_down"), for: .normal)
+        titleButton.setImage(UIImage(named: "ic_arrow_drop_down", in: TestpressCourse.bundle, compatibleWith: nil), for: .normal)
         titleButton.tintColor = Colors.getRGB(Colors.BLACK_TEXT)
         titleButton.setTitleColor(Colors.getRGB(Colors.BLACK_TEXT), for: .normal)
         titleButton.addTarget(

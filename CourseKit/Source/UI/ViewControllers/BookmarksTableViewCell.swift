@@ -43,17 +43,17 @@ class BookmarksTableViewCell: BaseTableViewCell {
         
         if let reviewItem = bookmark.bookmarkedObject as? AttemptItem {
             contentName.text = reviewItem.question.questionHtml?.htmlToString
-            thumbnailImage.image = #imageLiteral(resourceName: "question_content_icon")
+            thumbnailImage.image =  UIImage(named: "question_content_icon", in: TestpressCourse.bundle, compatibleWith: nil)
         } else if let content = bookmark.bookmarkedObject as? Content {
             if content.video != nil {
                 contentName.text = content.video!.title
-                thumbnailImage.image = #imageLiteral(resourceName: "video_added_icon")
+                thumbnailImage.image =  UIImage(named: "video_added_icon", in: TestpressCourse.bundle, compatibleWith: nil)
             } else if content.attachment != nil {
                 contentName.text = content.attachment!.title
-                thumbnailImage.image = #imageLiteral(resourceName: "file_download_icon")
+                thumbnailImage.image = UIImage(named: "file_download_icon", in: TestpressCourse.bundle, compatibleWith: nil)
             } else if content.htmlObject != nil {
                 contentName.text = content.htmlObject?.title
-                thumbnailImage.image = #imageLiteral(resourceName: "ebook_content_icon")
+                thumbnailImage.image = UIImage(named: "ebook_content_icon", in: TestpressCourse.bundle, compatibleWith: nil)
             }
         }
         

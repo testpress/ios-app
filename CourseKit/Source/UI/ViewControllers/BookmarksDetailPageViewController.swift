@@ -83,7 +83,7 @@ class BookmarksDetailPageViewController: UIViewController, UIPageViewControllerD
         if bookmarksDataSource.bookmarks.isEmpty {
             navigationButtonLayout.isHidden = true
             emptyView.show(
-                image: #imageLiteral(resourceName: "bookmark_folder_flat_icon"),
+                image:UIImage(named: "bookmark_folder_flat_icon", in: TestpressCourse.bundle, compatibleWith: nil),
                 title: Strings.NO_BOOKMARKS,
                 description: Strings.NO_BOOKMARKS_DESCRIPTION
             )
@@ -201,7 +201,7 @@ class BookmarksDetailPageViewController: UIViewController, UIPageViewControllerD
             if bookmarksTableViewController.tableView.tableFooterView!.isHidden {
                 pageViewController.view.isHidden = true
                 showErrorEmptyView(
-                    image: #imageLiteral(resourceName: "testpress_no_wifi"),
+                    image: UIImage(named: "testpress_no_wifi", in: TestpressCourse.bundle, compatibleWith: nil),
                     title: Strings.NETWORK_ERROR,
                     description: Strings.PLEASE_CHECK_INTERNET_CONNECTION
                 )

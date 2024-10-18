@@ -35,14 +35,14 @@ class LockableSectionDropDownCell: DropDownCell {
         if selectedItem == index {
             optionLabel.textColor = Colors.getRGB(Colors.BLACK_TEXT)
             currentStateImage.tintColor = Colors.getRGB(Colors.MATERIAL_GREEN2)
-            currentStateImage.image = #imageLiteral(resourceName: "check_mark")
+            currentStateImage.image = UIImage(named: "check_mark", in: TestpressCourse.bundle, compatibleWith: nil)
         } else {
             optionLabel.textColor = Colors.getRGB(Colors.GRAY_MEDIUM_DARK)
             currentStateImage.tintColor = Colors.getRGB(Colors.GRAY_MEDIUM_DARK)
             if selectedItem > index {
-                currentStateImage.image = #imageLiteral(resourceName: "ic_lock_with_tick_18pt")
+                currentStateImage.image = UIImage(named: "ic_lock_with_tick_18pt", in: TestpressCourse.bundle, compatibleWith: nil)
             } else {
-                currentStateImage.image = #imageLiteral(resourceName: "ic_lock_outline_18pt")
+                currentStateImage.image = UIImage(named: "ic_lock_outline_18pt", in: TestpressCourse.bundle, compatibleWith: nil)
             }
         }
         separatorInset = UIEdgeInsets.zero

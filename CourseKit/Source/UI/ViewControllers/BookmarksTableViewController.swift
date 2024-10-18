@@ -113,7 +113,7 @@ class BookmarksTableViewController: BasePagedTableViewController<BookmarksListRe
     
     override func setEmptyText() {
         emptyView.setValues(
-            image: #imageLiteral(resourceName: "bookmark_folder_flat_icon"),
+            image:  UIImage(named: "bookmark_folder_flat_icon", in: TestpressCourse.bundle, compatibleWith: nil),
             title: Strings.NO_BOOKMARKS,
             description: Strings.NO_BOOKMARKS_DESCRIPTION
         )

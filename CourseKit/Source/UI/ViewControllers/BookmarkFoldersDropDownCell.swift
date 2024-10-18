@@ -56,7 +56,7 @@ class BookmarkFoldersDropDownCell: DropDownCell {
             editButton.isHidden = false
         }
         if selected {
-            checkMark.image = #imageLiteral(resourceName: "check_mark")
+            checkMark.image = UIImage(named: "check_mark", in: TestpressCourse.bundle, compatibleWith: nil)
         } else {
             checkMark.image = nil
         }

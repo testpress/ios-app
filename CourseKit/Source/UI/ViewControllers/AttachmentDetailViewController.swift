@@ -89,7 +89,7 @@ class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelega
                 bookmarkOptionsLayout.isHidden = true
                 if content.bookmarkId.value != nil {
                     bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
-                    bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")
+                    bookmarkButton.imageView?.image = UIImage(named: "remove_bookmark", in: TestpressCourse.bundle, compatibleWith: nil)
                 }
             } else {
                 moveAnimationView = initAnimationView()
@@ -259,10 +259,10 @@ class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelega
         }
         if bookmarkId != nil {
             bookmarkButton.setTitle(Strings.REMOVE_BOOKMARK, for: .normal)
-            bookmarkButton.imageView?.image = #imageLiteral(resourceName: "remove_bookmark")
+            bookmarkButton.imageView?.image = UIImage(named: "remove_bookmark", in: TestpressCourse.bundle, compatibleWith: nil)
         } else {
             bookmarkButton.setTitle(Strings.BOOKMARK_THIS, for: .normal)
-            bookmarkButton.imageView?.image = #imageLiteral(resourceName: "ic_bookmark")
+            bookmarkButton.imageView?.image = UIImage(named: "ic_bookmark", in: TestpressCourse.bundle, compatibleWith: nil)
         }
         bookmarkAnimationContainer.isHidden = true
         bookmarkButton.isHidden = false
