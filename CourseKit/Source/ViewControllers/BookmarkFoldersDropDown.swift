@@ -37,7 +37,7 @@ class BookmarkFoldersDropDown {
     init(_ viewController: BookmarksSlidingViewController) {
         self.viewController = viewController
         titleButton = UIButton(type: .system)
-        let image = #imageLiteral(resourceName: "ic_arrow_drop_down")
+        let image = UIImage(named: "ic_arrow_drop_down", in: bundle, compatibleWith: nil)
         titleButton.setImage(image, for: .normal)
         titleButton.tintColor = .white
         titleButton.setTitle(Strings.ALL_BOOKMARKS, for: .normal)
