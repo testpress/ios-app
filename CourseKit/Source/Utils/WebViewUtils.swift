@@ -317,9 +317,13 @@ public class WebViewUtils {
     }
 
     public static func getStaticFileUrl(for filePath: String, withExtension fileExtension: String?) -> String? {
-        guard let resourcePath = getResourcesBasePath() else {
+        guard var resourcePath = getResourcesBasePath() else {
             return nil
         }
+        
+        #if SWIFT_PACKAGE
+            resourcePath = (resourcePath as NSString).appendingPathComponent("static")
+        #endif
 
         var fullPath = (resourcePath as NSString).appendingPathComponent(filePath)
 
