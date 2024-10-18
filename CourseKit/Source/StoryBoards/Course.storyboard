@@ -50,7 +50,7 @@
                                     <inset key="sectionInset" minX="35" minY="32" maxX="35" maxY="32"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChapterCollectionViewCell" id="1BE-gu-vbt" customClass="ChapterCollectionViewCell" customModule="CourseKit" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChapterCollectionViewCell" id="1BE-gu-vbt" customClass="ChapterCollectionViewCell" customModule="CourseKit">
                                         <rect key="frame" x="35" y="32" width="108" height="114"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -134,7 +134,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContentsTableViewCell" rowHeight="105" id="y3S-Aq-8yH" customClass="ContentsTableViewCell" customModule="CourseKit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContentsTableViewCell" rowHeight="105" id="y3S-Aq-8yH" customClass="ContentsTableViewCell" customModule="CourseKit">
                                 <rect key="frame" x="0.0" y="50" width="393" height="105"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y3S-Aq-8yH" id="KUY-hM-0oF" userLabel="Content View Cell">
@@ -502,7 +502,7 @@
                                             </constraints>
                                         </view>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RelatedContentsCell" id="Ntd-Nn-SKm" customClass="RelatedContentsCell" customModule="CourseKit" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RelatedContentsCell" id="Ntd-Nn-SKm" customClass="RelatedContentsCell" customModule="CourseKit">
                                                 <rect key="frame" x="0.0" y="109" width="393" height="64"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ntd-Nn-SKm" id="AXj-ni-FoT">
@@ -1565,7 +1565,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="bottom" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttemptsListHeader" rowHeight="55" id="4eg-za-4AJ" customClass="AttemptsListHeader" customModule="CourseKit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="bottom" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttemptsListHeader" rowHeight="55" id="4eg-za-4AJ" customClass="AttemptsListHeader" customModule="CourseKit">
                                 <rect key="frame" x="0.0" y="50" width="393" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4eg-za-4AJ" id="MpK-Bu-0kl">
@@ -1644,7 +1644,7 @@
                                     <outlet property="trophiesLabel" destination="AxD-xv-X75" id="5QN-jt-kjF"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompletedAttemptTableViewCell" rowHeight="65" id="QX0-St-Cxe" customClass="AttemptsTableViewCell" customModule="CourseKit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompletedAttemptTableViewCell" rowHeight="65" id="QX0-St-Cxe" customClass="AttemptsTableViewCell" customModule="CourseKit">
                                 <rect key="frame" x="0.0" y="105" width="393" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QX0-St-Cxe" id="cpc-u0-cvS">
@@ -1722,7 +1722,7 @@
                                     <outlet property="trophiesCount" destination="SM8-xe-XvE" id="wKU-FY-6om"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PausedAttemptTableViewCell" id="ntu-bq-3Nz" customClass="AttemptsTableViewCell" customModule="CourseKit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PausedAttemptTableViewCell" id="ntu-bq-3Nz" customClass="AttemptsTableViewCell" customModule="CourseKit">
                                 <rect key="frame" x="0.0" y="170" width="393" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ntu-bq-3Nz" id="EfB-O0-Wju">
@@ -1806,7 +1806,7 @@
                                     <outlet property="resumeLabel" destination="PSy-Sc-NgH" id="xGd-hp-8E6"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="bottom" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContentAttemptFooterCell" rowHeight="65" id="Pyk-xM-afe" customClass="ContentAttemptFooterCell" customModule="CourseKit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="bottom" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContentAttemptFooterCell" rowHeight="65" id="Pyk-xM-afe" customClass="ContentAttemptFooterCell" customModule="CourseKit">
                                 <rect key="frame" x="0.0" y="235" width="393" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="Pyk-xM-afe" id="oa6-cL-S05">
