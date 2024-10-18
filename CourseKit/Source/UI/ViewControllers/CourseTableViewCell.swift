@@ -102,7 +102,7 @@ class CourseTableViewCell: UITableViewCell {
     }
     
     @objc func onItemClick() {
-        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
         let viewController: UIViewController
         if !course.external_content_link.isEmpty {
             let webViewController = WebViewController()

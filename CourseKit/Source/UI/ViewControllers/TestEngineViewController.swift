@@ -170,7 +170,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
         plainDropDown = PlainDropDown(containerView: dropdownContainer)
         plainDropDown.dropDown.selectionBackgroundColor = UIColor.clear
         plainDropDown.dropDown.cellNib =
-        UINib(nibName: "LockableSectionDropDownCell", bundle: bundle)
+        UINib(nibName: "LockableSectionDropDownCell", bundle: TestpressCourse.bundle)
         
         plainDropDown.dropDown.customCellConfiguration = {
             (index: Index, item: String, cell: DropDownCell) -> Void in
@@ -671,7 +671,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func gotoTestReport() {
-        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
         if contentAttempt != nil {
             let viewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.TROPHIES_ACHIEVED_VIEW_CONTROLLER) as! TrophiesAchievedViewController

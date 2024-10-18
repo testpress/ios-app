@@ -47,7 +47,7 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
             content.index = index
         }
         
-        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
         
         if content.getContentType() == .Quiz {
             return createQuizViewController(for: content, storyboard: storyboard)

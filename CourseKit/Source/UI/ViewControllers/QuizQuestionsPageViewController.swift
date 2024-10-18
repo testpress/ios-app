@@ -101,7 +101,7 @@ class QuizQuestionsPageViewController: UIViewController, UIPageViewControllerDat
     }
     
     func gotoTestReport(contentAttempt: ContentAttempt?, attempt: Attempt?) {
-        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
         if contentAttempt != nil {
             let viewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.TROPHIES_ACHIEVED_VIEW_CONTROLLER) as! TrophiesAchievedViewController

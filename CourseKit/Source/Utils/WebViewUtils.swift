@@ -313,7 +313,7 @@ public class WebViewUtils {
     }
     
     public static func getResourcesBasePath() -> String? {
-        return bundle.resourcePath
+        return TestpressCourse.bundle.resourcePath
     }
 
     public static func getStaticFileUrl(for filePath: String, withExtension fileExtension: String?) -> String? {

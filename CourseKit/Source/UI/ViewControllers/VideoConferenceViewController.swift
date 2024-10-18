@@ -37,7 +37,7 @@ class VideoConferenceViewController: UIViewController {
     }
     
     @IBAction func openZoomMeeting(_ sender: Any?) {
-//        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+//        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
 //        let viewController = storyboard.instantiateViewController(
 //            withIdentifier: Constants.ZOOM_MEET_VIEW_CONTROLLER)
 //            as! ZoomMeetViewController

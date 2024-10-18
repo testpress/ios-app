@@ -157,7 +157,7 @@ class TestReportViewController: UIViewController {
     }
 
     @IBAction func showShareScreen(_ sender: Any) {
-        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.SHARE_TO_UNLOCK_VIEW_CONTROLLER) as! ShareToUnlockViewController
         viewController.shareText = exam!.shareTextForSolutionUnlock

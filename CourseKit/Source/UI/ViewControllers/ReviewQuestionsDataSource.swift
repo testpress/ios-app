@@ -28,7 +28,7 @@ import UIKit
 class ReviewQuestionsDataSource: BaseQuestionsDataSource {
     
     override func getQuestionsViewController() -> BaseQuestionsViewController {
-        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
         
         return storyboard.instantiateViewController(withIdentifier:
             Constants.REVIEW_QUESTIONS_VIEW_CONTROLLER) as! ReviewQuestionsViewController

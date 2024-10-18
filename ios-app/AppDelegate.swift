@@ -281,8 +281,7 @@ extension AppDelegate {
                                                     retryButtonText: retryButtonText, retryHandler: retryHandler)
                             } else {
                                 self.activityIndicator.stopAnimating()
-                                let bundle = Bundle(for: TestpressCourse.self)
-                                let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+                                let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
                                 let viewController = storyboard.instantiateViewController(withIdentifier:
                                     Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) as! ContentDetailPageViewController
                                 

@@ -75,8 +75,7 @@ class ExamsTableViewCell: UITableViewCell {
     }
     
     @objc func showStartExamScreen() {
-        let bundle = Bundle(for: TestpressCourse.self)
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.START_EXAM_SCREEN_VIEW_CONTROLLER) as! StartExamScreenViewController
         viewController.exam = self.exam!
@@ -85,8 +84,7 @@ class ExamsTableViewCell: UITableViewCell {
     }
     
     @objc func showAttemptsList() {
-        let bundle = Bundle(for: TestpressCourse.self)
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.ATTEMPTS_VIEW_CONTROLLER) as! AttemptsListViewController
         viewController.exam = exam!

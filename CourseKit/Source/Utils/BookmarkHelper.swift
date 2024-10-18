@@ -123,7 +123,7 @@ class BookmarkHelper {
     }
     
     func showFoldersList(bookmark: Bookmark? = nil) {
-        let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: TestpressCourse.bundle)
         let navigationController = storyboard.instantiateViewController(withIdentifier:
             Constants.BOOKMARK_FOLDER_NAVIGATION_CONTROLLER) as! UINavigationController
         

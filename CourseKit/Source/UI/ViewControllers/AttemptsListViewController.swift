@@ -219,7 +219,7 @@ public class AttemptsListViewController: UIViewController, UITableViewDelegate, 
     }
     
     func showStartExamScreen(attempt: Attempt? = nil) {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.START_EXAM_SCREEN_VIEW_CONTROLLER) as! StartExamScreenViewController
         viewController.exam = self.exam!
@@ -233,7 +233,7 @@ public class AttemptsListViewController: UIViewController, UITableViewDelegate, 
     }
     
     func showTestReport(attempt: Attempt) {
-        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
         viewController.exam = self.exam!

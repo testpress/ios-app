@@ -1,13 +1,16 @@
 import UIKit
 
-#if SWIFT_PACKAGE
-let bundle = Bundle.module
-#else
-let bundle = Bundle(for: TestpressCourse.self)
-#endif
 
 public class TestpressCourse {
     public static let shared = TestpressCourse()
+    
+    public static let bundle: Bundle = {
+        #if SWIFT_PACKAGE
+        return Bundle.module
+        #else
+        return Bundle(for: TestpressCourse.self)
+        #endif
+    }()
 
     private init() {}
     
@@ -69,7 +72,7 @@ public class TestpressCourse {
     }
 
     private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {
-        let storyboard = UIStoryboard(name: "Course", bundle: bundle)
+        let storyboard = UIStoryboard(name: "Course", bundle: TestpressCourse.bundle)
         return storyboard.instantiateViewController(withIdentifier: identifier) as? T
     }
     

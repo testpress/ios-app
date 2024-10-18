@@ -51,7 +51,7 @@ extension UIView {
     
     public class func fromNib<T: UIView>(_ name: String? = nil) -> T {
         let nibName = name ?? String(describing: T.self)
-        return Bundle(for: T.self).loadNibNamed(nibName, owner: nil, options: nil)![0] as! T
+        return TestpressCourse.bundle.loadNibNamed(nibName, owner: nil, options: nil)![0] as! T
     }
     
 }

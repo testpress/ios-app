@@ -48,7 +48,7 @@ class ChapterCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func onItemClick() {
-        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
         var viewController: UIViewController
         if !chapter.leaf {
             let chapterViewController = storyboard.instantiateViewController(withIdentifier:

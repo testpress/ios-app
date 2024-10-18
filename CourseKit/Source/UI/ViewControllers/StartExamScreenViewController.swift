@@ -355,7 +355,7 @@ public class StartExamScreenViewController: UIViewController {
     }
     
     func gotoTestEngine() {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let slideMenuController = storyboard.instantiateViewController(withIdentifier:
             Constants.TEST_ENGINE_NAVIGATION_CONTROLLER) as! UINavigationController
         
@@ -370,7 +370,7 @@ public class StartExamScreenViewController: UIViewController {
     }
     
     func goToQuizExam() {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
         viewController.contentAttempt = contentAttempt

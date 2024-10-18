@@ -91,8 +91,7 @@ public enum Images: String {
 
 extension UIImage {
     public convenience init!(asset: Images) {
-        let bundle = Bundle(for: ImageHelper.self)
-        self.init(named: asset.rawValue, in: bundle, compatibleWith: nil)
+        self.init(named: asset.rawValue, in: TestpressCourse.bundle, compatibleWith: nil)
     }
     
     public func resized(to newSize: CGSize) -> UIImage? {
@@ -103,5 +102,3 @@ extension UIImage {
         return resizedImage
     }
 }
-
-public class ImageHelper {}

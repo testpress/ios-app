@@ -104,7 +104,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
     }
     
     func gotoTestEngine(_ attempt : Attempt) {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let slideMenuController = storyboard.instantiateViewController(withIdentifier:
             Constants.TEST_ENGINE_NAVIGATION_CONTROLLER) as! UINavigationController
         let viewController =
@@ -114,7 +114,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
     }
     
     func goToQuizExam(_ attempt: Attempt) {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
         viewController.attempt = attempt
@@ -122,7 +122,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
     }
     
     func gotoTestReport(_ attempt: Attempt) {
-        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
         viewController.attempt = attempt

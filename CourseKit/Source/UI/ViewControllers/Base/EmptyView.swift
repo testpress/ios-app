@@ -36,7 +36,7 @@ public class EmptyView: UIView {
     public var parentView: UIView!
     
     public class func getInstance(parentView: UIView) -> EmptyView {
-        let emptyView = UINib(nibName: "EmptyView", bundle: bundle)
+        let emptyView = UINib(nibName: "EmptyView", bundle: TestpressCourse.bundle)
             .instantiate(withOwner: nil, options: nil)[0] as! EmptyView
         
         parentView.addSubview(emptyView)
@@ -46,7 +46,7 @@ public class EmptyView: UIView {
     }
     
     public class func getInstance() -> EmptyView {
-        let emptyView = UINib(nibName: "EmptyView", bundle: bundle)
+        let emptyView = UINib(nibName: "EmptyView", bundle: TestpressCourse.bundle)
             .instantiate(withOwner: nil, options: nil)[0] as! EmptyView
         
         return emptyView

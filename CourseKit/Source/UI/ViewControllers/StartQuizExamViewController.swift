@@ -41,7 +41,7 @@ class StartQuizExamViewController: UIViewController {
     }
     
     func addContentAttemptListViewController() {
-        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(
             withIdentifier: Constants.CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER
             ) as! ContentExamAttemptsTableViewController
@@ -102,7 +102,7 @@ class StartQuizExamViewController: UIViewController {
     }
 
     func showQuestions(contentAttempt: ContentAttempt) {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
         viewController.contentAttempt = contentAttempt

@@ -35,8 +35,7 @@ class ChapterContentSectionController: ListSectionController {
     }
     
     override func didSelectItem(at index: Int) {
-        let bundle = Bundle(for: TestpressCourse.self)
-        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
         let contentDetailViewController = storyboard.instantiateViewController(
             withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
             as! ContentDetailPageViewController

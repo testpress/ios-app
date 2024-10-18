@@ -189,7 +189,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     }
     
     func loadQuestions(contentAttempt: ContentAttempt) {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
               Constants.QUIZ_EXAM_VIEW_CONTROLLER) as! QuizExamViewController
 
@@ -250,7 +250,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     }
     
     func showStartExamScreen(contentAttempt: ContentAttempt? = nil) {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.START_EXAM_SCREEN_VIEW_CONTROLLER) as! StartExamScreenViewController
         
@@ -262,7 +262,7 @@ class ContentExamAttemptsTableViewController: UITableViewController {
     }
     
     func showTestReport(contentAttempt: ContentAttempt) {
-        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier:
             Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
         

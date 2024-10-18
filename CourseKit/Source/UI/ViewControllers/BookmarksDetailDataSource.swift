@@ -41,7 +41,7 @@ class BookmarksDetailDataSource: NSObject, UIPageViewControllerDataSource {
         
         let bookmark = bookmarks[index]
         if let attemptItem = bookmark.bookmarkedObject as? AttemptItem {
-            let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: bundle)
+            let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: TestpressCourse.bundle)
             let viewController = storyboard.instantiateViewController(withIdentifier:
                  Constants.BOOKMARKED_QUESTION_VIEW_CONTROLLER) as! BookmarkedQuestionViewController
             
@@ -55,7 +55,7 @@ class BookmarksDetailDataSource: NSObject, UIPageViewControllerDataSource {
             
             if content.attachment != nil {
                 let storyboard =
-                    UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+                    UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
                 let viewController = storyboard.instantiateViewController(withIdentifier:
                     Constants.ATTACHMENT_DETAIL_VIEW_CONTROLLER) as! AttachmentDetailViewController
                 
@@ -65,7 +65,7 @@ class BookmarksDetailDataSource: NSObject, UIPageViewControllerDataSource {
                 return viewController
             } else if content.video != nil {
                 let storyboard =
-                    UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+                    UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
                 let viewController = storyboard.instantiateViewController(withIdentifier:
                     Constants.VIDEO_CONTENT_VIEW_CONTROLLER) as! VideoContentViewController
                 

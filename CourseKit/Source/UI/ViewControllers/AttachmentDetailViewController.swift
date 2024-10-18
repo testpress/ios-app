@@ -224,7 +224,7 @@ class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelega
         let pdfDocument = PDFDocument(url: url)
         if let pdfDocument = pdfDocument {
             let storyboard =
-            UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: bundle)
+            UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
             let pdfViewController = storyboard.instantiateViewController(withIdentifier:
                                                                             Constants.PDF_VIEW_CONTROLLER) as! PDFViewController
             pdfViewController.pdfDocument = pdfDocument

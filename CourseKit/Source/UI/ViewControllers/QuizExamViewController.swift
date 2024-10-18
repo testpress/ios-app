@@ -35,7 +35,7 @@ class QuizExamViewController: UIViewController {
     }
     
     func initializeQuizQuestionsPageViewController() {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: bundle)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         questionsPageViewController = storyboard.instantiateViewController(withIdentifier:
             Constants.QUIZ_QUESTIONS_PAGE_VIEW_CONTROLLER) as? QuizQuestionsPageViewController
         initializeEmptyView()
