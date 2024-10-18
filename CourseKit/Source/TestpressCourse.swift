@@ -27,6 +27,9 @@ public class TestpressCourse {
         #else
         print("Framework package bundle")
         #endif
+        
+        print(WebViewUtils.getResourcesBasePath(), WebViewUtils.getBookmarkHeader())
+        
         self.subdomain = subdomain
         self.primaryColor = Colors.getRGB(primaryColor)
 
