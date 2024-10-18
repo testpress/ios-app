@@ -27,7 +27,7 @@
                         <color key="separatorColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookmarksTableViewCell" rowHeight="91" id="zak-vL-U6S" customClass="BookmarksTableViewCell" customModule="CourseKit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookmarksTableViewCell" rowHeight="91" id="zak-vL-U6S" customClass="BookmarksTableViewCell" customModule="CourseKit">
                                 <rect key="frame" x="0.0" y="50" width="320" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zak-vL-U6S" id="NoG-Bx-ZSp" userLabel="Content View Cell">
@@ -112,7 +112,7 @@ label</string>
         <!--Bookmarks-->
         <scene sceneID="TC1-oT-adu">
             <objects>
-                <viewController storyboardIdentifier="BookmarksSlidingViewController" modalPresentationStyle="fullScreen" id="wqJ-YU-N5h" customClass="BookmarksSlidingViewController" customModule="CourseKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookmarksSlidingViewController" modalPresentationStyle="fullScreen" id="wqJ-YU-N5h" customClass="BookmarksSlidingViewController" customModule="CourseKit" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sSi-xu-bsf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -339,7 +339,7 @@ label</string>
                         <color key="separatorColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="64" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookmarkFolderTableViewCell" rowHeight="105" id="cV8-AH-NLh" customClass="BookmarkFolderTableViewCell" customModule="CourseKit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookmarkFolderTableViewCell" rowHeight="105" id="cV8-AH-NLh" customClass="BookmarkFolderTableViewCell" customModule="CourseKit">
                                 <rect key="frame" x="0.0" y="50" width="320" height="105"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cV8-AH-NLh" id="kep-20-1Fz" userLabel="Content View Cell">

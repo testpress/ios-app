@@ -12,7 +12,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LockableSectionDropDownCell" customModule="CourseKit" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LockableSectionDropDownCell" customModule="CourseKit"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="h05-Au-v5o" customClass="LockableSectionDropDownCell" customModule="CourseKit">
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

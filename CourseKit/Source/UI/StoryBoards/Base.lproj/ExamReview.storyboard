@@ -1687,7 +1687,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IndividualSubjectAnalyticsCountCell" rowHeight="62" id="IZJ-M8-nYD" customClass="IndividualSubjectAnalyticsCountCell" customModule="CourseKit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IndividualSubjectAnalyticsCountCell" rowHeight="62" id="IZJ-M8-nYD" customClass="IndividualSubjectAnalyticsCountCell" customModule="CourseKit">
                                 <rect key="frame" x="0.0" y="105" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IZJ-M8-nYD" id="THv-ol-98L">
@@ -1759,7 +1759,7 @@
                                     <outlet property="subjectLabel" destination="G2h-fS-PK6" id="cGR-Mo-wpb"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IndividualSubjectAnalyticsGraphCell" rowHeight="271" id="1uY-d0-37L" customClass="IndividualSubjectAnalyticsGraphCell" customModule="CourseKit" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IndividualSubjectAnalyticsGraphCell" rowHeight="271" id="1uY-d0-37L" customClass="IndividualSubjectAnalyticsGraphCell" customModule="CourseKit">
                                 <rect key="frame" x="0.0" y="167" width="320" height="271"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1uY-d0-37L" id="fje-Nc-GXP">
@@ -2154,7 +2154,7 @@
                                         <rect key="frame" x="0.0" y="56" width="320" height="448"/>
                                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimeAnalyticsQuestionCell" rowHeight="62" id="bev-r1-igj" customClass="TimeAnalyticsQuestionCell" customModule="CourseKit" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimeAnalyticsQuestionCell" rowHeight="62" id="bev-r1-igj" customClass="TimeAnalyticsQuestionCell" customModule="CourseKit">
                                                 <rect key="frame" x="0.0" y="55.5" width="320" height="62"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bev-r1-igj" id="SiH-eS-hKI">
@@ -2397,7 +2397,7 @@ You’ve earned</string>
         <!--Share To Unlock View Controller-->
         <scene sceneID="uZl-J0-FaL">
             <objects>
-                <viewController storyboardIdentifier="ShareToUnlockViewController" modalPresentationStyle="fullScreen" id="Sc8-rx-7um" customClass="ShareToUnlockViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShareToUnlockViewController" modalPresentationStyle="fullScreen" id="Sc8-rx-7um" customClass="ShareToUnlockViewController" customModule="ios_app" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sm5-tU-QRd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
