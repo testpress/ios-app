@@ -941,11 +941,22 @@
 			isa = PBXGroup;
 			children = (
 				2FC0F2581F8619220092BFDC /* static */,
-				03CD0D2C2CB92C8E00E17218 /* Xibs */,
 				03CD0C862CB7E2CC00E17218 /* Assets.xcassets */,
-				841380332C9DA18E004D5846 /* StoryBoards */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		0308698D2CC256BE0033403C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				03CD0D402CB949B600E17218 /* Delegates */,
+				03CD0D2C2CB92C8E00E17218 /* Xibs */,
+				841380332C9DA18E004D5846 /* StoryBoards */,
+				03CD0D342CB9479C00E17218 /* Views */,
+				8C9E5BDD238E5D3300D8790F /* ViewModel */,
+				8413802D2C9DA066004D5846 /* ViewControllers */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		035CC5482CAE68D00057F4E4 /* Database */ = {
@@ -1568,16 +1579,13 @@
 		8413802E2C9DA075004D5846 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				03CD0D402CB949B600E17218 /* Delegates */,
-				03CD0D342CB9479C00E17218 /* Views */,
-				8C9E5BDD238E5D3300D8790F /* ViewModel */,
+				0308698D2CC256BE0033403C /* UI */,
 				03A60FA22CB401A900079A7C /* Repostories */,
 				03E4AFD32CAFE62200ECC34D /* Utils */,
 				03E4AFA92CAFCE9B00ECC34D /* Network */,
 				03E4AF242CAEDE2600ECC34D /* Extensions */,
 				035CC5482CAE68D00057F4E4 /* Database */,
 				0303692D2CAC188400C6CF2D /* Resources */,
-				8413802D2C9DA066004D5846 /* ViewControllers */,
 				8413802B2C9D9F2D004D5846 /* TestpressCourse.swift */,
 				0303692E2CAC1C5500C6CF2D /* PrivacyInfo.xcprivacy */,
 			);
