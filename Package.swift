@@ -59,6 +59,7 @@ let package = Package(
       resources: [
         .copy("Resources/static"),
         .process("Resources/Assets.xcassets"),
+        .process("PrivacyInfo.xcprivacy")
       ]
     )
   ],  
