@@ -235,7 +235,6 @@
 		03CD0D5F2CB9557700E17218 /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
 		03CD0D602CB9557700E17218 /* TestEngine.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2781F8619220092BFDC /* TestEngine.js */; };
 		03CD0D612CB9557700E17218 /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
-		03CD0D632CB95A1700E17218 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D622CB95A1700E17218 /* Sentry */; };
 		03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586782628ABB81700E149B5 /* DBModel+Detachable.swift */; };
 		03E4AF462CAEDF7F00ECC34D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96997B1FC2A625001B2B18 /* Video.swift */; };
 		03E4AF472CAEDF7F00ECC34D /* TPModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2CC1F86385B0092BFDC /* TPModelMapper.swift */; };
@@ -922,7 +921,6 @@
 				035CC54F2CAE698D0057F4E4 /* RealmSwift in Frameworks */,
 				038CB2C22CBD32F300164127 /* SwiftSoup in Frameworks */,
 				03CD0D2A2CB92C2400E17218 /* XLPagerTabStrip in Frameworks */,
-				03CD0D632CB95A1700E17218 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1763,7 +1761,6 @@
 				03CD0D292CB92C2400E17218 /* XLPagerTabStrip */,
 				03CD0D3C2CB9485200E17218 /* M3U8Parser */,
 				03CD0D3E2CB9485E00E17218 /* MarqueeLabel */,
-				03CD0D622CB95A1700E17218 /* Sentry */,
 				038CB2B82CBD2AF600164127 /* Kingfisher */,
 				038CB2BA2CBD2B0800164127 /* LUExpandableTableView */,
 				038CB2BE2CBD2BF600164127 /* SlideMenuController */,
@@ -3191,11 +3188,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
 			productName = MarqueeLabel;
-		};
-		03CD0D622CB95A1700E17218 /* Sentry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
-			productName = Sentry;
 		};
 		03E4AFCA2CAFCFD500ECC34D /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;
