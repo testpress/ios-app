@@ -201,7 +201,7 @@ class BookmarksDetailPageViewController: UIViewController, UIPageViewControllerD
             if bookmarksTableViewController.tableView.tableFooterView!.isHidden {
                 pageViewController.view.isHidden = true
                 showErrorEmptyView(
-                    image: UIImage(named: "testpress_no_wifi", in: TestpressCourse.bundle, compatibleWith: nil),
+                    image: UIImage(named: "testpress_no_wifi", in: TestpressCourse.bundle, compatibleWith: nil)!,
                     title: Strings.NETWORK_ERROR,
                     description: Strings.PLEASE_CHECK_INTERNET_CONNECTION
                 )
