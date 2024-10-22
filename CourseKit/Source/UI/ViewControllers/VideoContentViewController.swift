@@ -29,7 +29,6 @@ import UIKit
 import AVKit
 import AVFoundation
 import Alamofire
-import Sentry
 import TTGSnackbar
 
 
