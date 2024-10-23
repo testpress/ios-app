@@ -28,6 +28,7 @@ public class InstituteRepository {
                 fetchFromAPI(completion: completion)
             }
         }
+        print("called")
     }
 
     private func fetchFromDB() -> InstituteSettings? {

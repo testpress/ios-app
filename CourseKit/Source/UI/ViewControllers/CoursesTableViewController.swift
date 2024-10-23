@@ -50,7 +50,7 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
     public override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
         super.viewDidAppear(animated)
-        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
         showOrHideCustomTestIcon()
     }
     
