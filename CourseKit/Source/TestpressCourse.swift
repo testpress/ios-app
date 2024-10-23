@@ -27,7 +27,7 @@ public class TestpressCourse {
         self.subdomain = subdomain
         self.primaryColor = Colors.getRGB(primaryColor)
 
-        // initializeDB()
+        initializeDB()
         
         if let token = token {
             saveTokenToKeychain(token: token)

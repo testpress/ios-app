@@ -37,7 +37,7 @@ public class DBConnection {
     }
     
     public static func configure(){
-        let config = Realm.Configuration(schemaVersion: 44)
+        let config = Realm.Configuration(schemaVersion: 1)
         Realm.Configuration.defaultConfiguration = config
     }
     
