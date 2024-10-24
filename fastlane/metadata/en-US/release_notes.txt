@@ -1,0 +1,1 @@
+- Add live class support. Now users can be able to attend live class within the app.
