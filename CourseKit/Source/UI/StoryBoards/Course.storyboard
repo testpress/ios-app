@@ -2368,6 +2368,23 @@
             </objects>
             <point key="canvasLocation" x="1051.145038167939" y="1918.3098591549297"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9Qp-4b-YCY">
+            <objects>
+                <navigationController id="1Fo-x7-lEi" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="S4S-9V-tKQ"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mFx-Yw-J6w">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ryx-Rq-IYf" kind="relationship" relationship="rootViewController" id="LhY-aq-E0x"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZlH-qY-Odo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3106" y="1127"/>
+        </scene>
         <!--Learn-->
         <scene sceneID="Cy7-b0-6sQ">
             <objects>
@@ -2484,6 +2501,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Learn" id="jzz-en-4id">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_navigate_before_36pt" id="MH8-vV-tbw">
+                            <connections>
+                                <action selector="back:" destination="ryx-Rq-IYf" id="T5T-qZ-3Xe"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="custom_test_icon" id="kkt-bY-G6C">
                             <connections>
                                 <action selector="showCustomTestPage:" destination="ryx-Rq-IYf" id="Isy-Do-EPY"/>
@@ -2497,7 +2519,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="StT-O9-DPy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3073" y="937"/>
+            <point key="canvasLocation" x="4015" y="1127"/>
         </scene>
     </scenes>
     <designables>
@@ -2543,7 +2565,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

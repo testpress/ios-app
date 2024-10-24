@@ -54,6 +54,24 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
         showOrHideCustomTestIcon()
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showOrHideBackButton()
+    }
+
+
+    private func showOrHideBackButton() {
+        let backButton = self.navigationItem.leftBarButtonItem
+        if #available(iOS 16.0, *) {
+            if let navigationController = self.navigationController,
+               navigationController.viewControllers.count > 1 {
+                backButton?.isHidden = false
+            } else {
+                backButton?.isHidden = true
+            }
+        }
+    }
+    
     func showOrHideCustomTestIcon(){
         if ((instituteSettings?.enableCustomTest ?? false)) {
             customTestIcon.isEnabled = true
@@ -128,4 +146,8 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
         return queryParam
     }
     
+    
+    @IBAction func back(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
