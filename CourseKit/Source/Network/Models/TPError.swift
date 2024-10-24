@@ -25,7 +25,9 @@
 
 import UIKit
 import Alamofire
+#if !SWIFT_PACKAGE
 import Sentry
+#endif
 
 
 public class TPError: Error {
@@ -102,6 +104,7 @@ public class TPError: Error {
     }
     
     public func logErrorToSentry() {
+        #if !SWIFT_PACKAGE
         let event = Event(level: .error)
         event.message = SentryMessage(formatted: self.message ?? "Some error occured")
         event.extra = [
@@ -112,6 +115,7 @@ public class TPError: Error {
         ]
         
         SentrySDK.capture(event: event)
+        #endif
     }
     
     public func getDisplayInfo() -> (image: UIImage, title: String, description: String) {

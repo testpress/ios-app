@@ -42,7 +42,6 @@ let package = Package(
         "ObjectMapper",
         "Alamofire",
         "M3U8Parser",
-        .product(name: "Sentry", package: "sentry-cocoa"),
         "Kingfisher",
         "MarqueeLabel",
         .product(name:"SlideMenuController", package: "SlideMenuControllerSwift"), 
