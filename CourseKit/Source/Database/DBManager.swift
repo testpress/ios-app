@@ -37,9 +37,12 @@ public class DBConnection {
     }
     
     public static func configure(){
-        let config = Realm.Configuration(schemaVersion: 44)
-        Realm.Configuration.defaultConfiguration = config
-    }
+         var config = Realm.Configuration(schemaVersion: 1)
+         config.fileURL!.deleteLastPathComponent()
+         config.fileURL!.appendPathComponent("CourseKit")
+         config.fileURL!.appendPathExtension("realm")
+         Realm.Configuration.defaultConfiguration = config
+     }
     
     public func getDB() -> Realm {
         return database
