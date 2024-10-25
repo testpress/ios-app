@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class VideoPlayerViewController: UIViewController {
+class VideoPlayerViewController: BaseUIViewController {
     var playerView: VideoPlayerView!
     var warningLabel: UILabel!
     var warningView: UIView!

@@ -47,6 +47,14 @@ class BaseQuestionsSlidingViewController: SlideMenuController {
     var questionsSlidingMenuDelegate: QuestionsSlidingMenuDelegate!
     var panelOpened: Bool = false
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
+    }
+    
     override func awakeFromNib() {
         let mainViewController = self.mainViewController as! BaseQuestionsPageViewController
         let leftViewController = self.leftViewController as! BaseQuestionsListViewController

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShareToUnlockViewController: UIViewController {
+class ShareToUnlockViewController: BaseUIViewController {
     var shareText: String = ""
     var onShareCompletion: (() -> Void)?
     

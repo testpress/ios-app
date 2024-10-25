@@ -26,7 +26,7 @@
 import UIKit
 import WebKit
 
-open class BaseWebViewController: UIViewController {
+open class BaseWebViewController: BaseUIViewController {
 
     public var webView: WKWebView!
     public var parentView: UIView!

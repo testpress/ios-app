@@ -31,7 +31,7 @@ import UIKit
     func goBack()
 }
 
-class BaseQuestionsPageViewController: UIViewController, UIPageViewControllerDelegate {
+class BaseQuestionsPageViewController: BaseUIViewController, UIPageViewControllerDelegate {
     
     @IBOutlet weak var questionsContainerView: UIView!
     @IBOutlet weak var prevArrow: UIImageView!

@@ -25,7 +25,7 @@
 
 import UIKit
 
-class BookmarksDetailPageViewController: UIViewController, UIPageViewControllerDelegate {
+class BookmarksDetailPageViewController: BaseUIViewController, UIPageViewControllerDelegate {
     
     @IBOutlet weak var questionsContainerView: UIView!
     @IBOutlet weak var prevArrow: UIImageView!

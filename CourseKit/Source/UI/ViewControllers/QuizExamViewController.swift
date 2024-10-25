@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuizExamViewController: UIViewController {
+class QuizExamViewController: BaseUIViewController {
     var contentAttempt: ContentAttempt?
     var exam: Exam?
     var attempt: Attempt?

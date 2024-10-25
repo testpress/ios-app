@@ -25,7 +25,7 @@
 
 import UIKit
 
-public class ContentDetailPageViewController: UIViewController, UIPageViewControllerDelegate {
+public class ContentDetailPageViewController: BaseUIViewController, UIPageViewControllerDelegate {
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var contentsContainerView: UIView!

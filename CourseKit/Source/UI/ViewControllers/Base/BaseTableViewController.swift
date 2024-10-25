@@ -43,6 +43,10 @@ open class BaseTableViewController<T: Mappable>: UITableViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
+        
         activityIndicator = UIUtils.initActivityIndicator(parentView: self.view)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 150)
         

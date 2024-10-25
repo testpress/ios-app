@@ -32,7 +32,7 @@ import Alamofire
 import TTGSnackbar
 
 
-class VideoContentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
+class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     var content: Content!
     var contents: [Content]!
     var playerViewController: VideoPlayerViewController!

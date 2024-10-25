@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LiveStreamContentViewController: UIViewController {
+class LiveStreamContentViewController: BaseUIViewController {
     var content: Content!
     var playerViewController: VideoPlayerViewController!
     var reloadTimer: Timer?
