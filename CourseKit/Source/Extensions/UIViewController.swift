@@ -13,7 +13,7 @@ extension UIViewController {
                 let app = UIApplication.shared
                 let statusBarHeight: CGFloat = app.statusBarFrame.size.height
                 let statusbarView = UIView()
-                statusbarView.backgroundColor = TestpressCourse.shared.primaryColor
+                statusbarView.backgroundColor = TestpressCourse.shared.statusBarColor
                 view.addSubview(statusbarView)
                 statusbarView.translatesAutoresizingMaskIntoConstraints = false
                 statusbarView.heightAnchor
@@ -26,7 +26,7 @@ extension UIViewController {
               let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
                   as? UIView
               
-              statusBar?.backgroundColor = TestpressCourse.shared.primaryColor
+              statusBar?.backgroundColor = TestpressCourse.shared.statusBarColor
         }
     }
 
