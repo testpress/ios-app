@@ -25,7 +25,7 @@
 
 import UIKit
 
-class TrophiesAchievedViewController: UIViewController {
+class TrophiesAchievedViewController: BaseUIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!

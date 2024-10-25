@@ -25,7 +25,7 @@
 
 import UIKit
 
-class TestReportViewController: UIViewController {
+class TestReportViewController: BaseUIViewController {
 
     @IBOutlet weak var rankLayout: UIView!
     @IBOutlet weak var examTitle: UILabel!

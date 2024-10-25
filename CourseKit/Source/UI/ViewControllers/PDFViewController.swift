@@ -3,7 +3,7 @@ import PDFKit
 import MarqueeLabel
 
 
-class PDFViewController: UIViewController {
+class PDFViewController: BaseUIViewController {
     var pdfDocument: PDFDocument?
     @IBOutlet var pdfView: PDFView!
     @IBOutlet weak var navigationBarItem: UINavigationItem!

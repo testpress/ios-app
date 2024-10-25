@@ -26,7 +26,7 @@
 import SlideMenuController
 import UIKit
 
-public class StartExamScreenViewController: UIViewController {
+public class StartExamScreenViewController: BaseUIViewController {
     
     static let REGULAR_ATTEMPT = 0
     static let QUIZ_ATTEMPT = 1

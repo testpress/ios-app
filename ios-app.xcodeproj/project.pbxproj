@@ -302,6 +302,7 @@
 		03E4AFD22CAFD22100ECC34D /* DashboardSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */; };
 		03E4AFD42CAFE63900ECC34D /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F27E1F861A3E0092BFDC /* KeychainTokenItem.swift */; };
 		03E4AFD62CAFE6A900ECC34D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4AFD52CAFE6A900ECC34D /* Constants.swift */; };
+		03FF48292CCB79D9008CED9D /* BaseUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FF48282CCB79D9008CED9D /* BaseUIViewController.swift */; };
 		2503DF50263C01E8003226AD /* CarouselSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF4F263C01E8003226AD /* CarouselSectionController.swift */; };
 		2503DF53263C0296003226AD /* BannerSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF52263C0296003226AD /* BannerSectionController.swift */; };
 		2503DF57263C02C3003226AD /* BannerAdViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF55263C02C3003226AD /* BannerAdViewCell.swift */; };
@@ -507,6 +508,7 @@
 		03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamContentViewController.swift; sourceTree = "<group>"; };
 		03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSection.swift; sourceTree = "<group>"; };
 		03E4AFD52CAFE6A900ECC34D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		03FF48282CCB79D9008CED9D /* BaseUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIViewController.swift; sourceTree = "<group>"; };
 		1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptSection.swift; sourceTree = "<group>"; };
 		1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainDropDown.swift; sourceTree = "<group>"; };
 		18F25D26212FDB7000097425 /* LockableSectionDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockableSectionDropDownCell.xib; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				2FE2906F1F8CF8E7004D7574 /* BaseWebViewController.swift */,
 				2FC0F29A1F861A860092BFDC /* TPBasePagedTableViewController.swift */,
 				2FC0F2871F861A860092BFDC /* EmptyView.swift */,
+				03FF48282CCB79D9008CED9D /* BaseUIViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2127,6 +2130,7 @@
 				038CB2952CBD278600164127 /* ChapterCollectionViewCell.swift in Sources */,
 				03CD0D412CB94A8C00E17218 /* VideoPlayerControlsView.swift in Sources */,
 				03CD0C652CB7C3CE00E17218 /* String.swift in Sources */,
+				03FF48292CCB79D9008CED9D /* BaseUIViewController.swift in Sources */,
 				03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */,
 				03E4AFB12CAFCF6F00ECC34D /* ApiResponse.swift in Sources */,
 				038CB29B2CBD278600164127 /* BookmarksSlidingViewController.swift in Sources */,

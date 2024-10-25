@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import ObjectMapper
 
-open class BaseDBViewController<T: Mappable>: UIViewController where T:DBModel{
+open class BaseDBViewController<T: Mappable>: BaseUIViewController where T:DBModel{
     public var items = [T]()
     
     open override func viewWillAppear(_ animated: Bool) {

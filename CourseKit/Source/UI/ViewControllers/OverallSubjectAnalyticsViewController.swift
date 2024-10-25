@@ -27,7 +27,7 @@ import DGCharts
 import UIKit
 import XLPagerTabStrip
 
-class OverallSubjectAnalyticsViewController: UIViewController {
+class OverallSubjectAnalyticsViewController: BaseUIViewController {
     
     @IBOutlet weak var chartView: HorizontalBarChartView!
     @IBOutlet weak var scrollView: UIScrollView!

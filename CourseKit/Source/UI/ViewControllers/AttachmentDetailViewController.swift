@@ -30,7 +30,7 @@ import Alamofire
 import MarqueeLabel
 
 
-class AttachmentDetailViewController: UIViewController, URLSessionDownloadDelegate {
+class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!

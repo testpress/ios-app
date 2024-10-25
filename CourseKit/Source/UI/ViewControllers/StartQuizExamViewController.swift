@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StartQuizExamViewController: UIViewController {
+class StartQuizExamViewController: BaseUIViewController {
     @IBOutlet weak var examTitle: UILabel!
     @IBOutlet weak var questionsCount: UILabel!
     @IBOutlet weak var startEndDate: UILabel!

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VideoConferenceViewController: UIViewController {
+class VideoConferenceViewController: BaseUIViewController {
     var content: Content!
     @IBOutlet weak var titleView: UILabel!
     @IBOutlet weak var startTime: UILabel!

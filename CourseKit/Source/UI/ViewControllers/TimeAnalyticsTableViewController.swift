@@ -27,7 +27,7 @@ import LUExpandableTableView
 import UIKit
 import WebKit
 
-class TimeAnalyticsTableViewController: UIViewController {
+class TimeAnalyticsTableViewController: BaseUIViewController {
     
     @IBOutlet var tableView: LUExpandableTableView!
     @IBOutlet weak var contentView: UIView!

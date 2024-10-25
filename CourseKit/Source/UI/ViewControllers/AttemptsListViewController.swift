@@ -25,7 +25,7 @@
 
 import UIKit
 
-public class AttemptsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+public class AttemptsListViewController: BaseUIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     @IBOutlet weak var startButtonLayout: UIView!
