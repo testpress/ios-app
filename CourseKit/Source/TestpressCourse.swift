@@ -15,6 +15,7 @@ public class TestpressCourse {
     private init() {}
     
     public var primaryColor: UIColor!
+    public var statusBarColor: UIColor!
     
     public var subdomain: String!
     public var baseURL: String! {
@@ -23,9 +24,10 @@ public class TestpressCourse {
     }
     
     
-    public func initialize(withToken token: String? = nil, subdomain: String, primaryColor: String) {
+    public func initialize(withToken token: String? = nil, subdomain: String, primaryColor: String, statusBarColor: String? = nil) {
         self.subdomain = subdomain
         self.primaryColor = Colors.getRGB(primaryColor)
+        self.statusBarColor = Colors.getRGB(statusBarColor ?? primaryColor)
 
         initializeDB()
         
