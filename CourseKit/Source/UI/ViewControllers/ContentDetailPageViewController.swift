@@ -272,6 +272,7 @@ public class ContentDetailPageViewController: UIViewController, UIPageViewContro
                 self?.position = 0
                 self?.setupContentDetailDataSource()
                 self?.setFirstViewController()
+                self?.navigationBarItem.title = content.name
             }
         )
     }
