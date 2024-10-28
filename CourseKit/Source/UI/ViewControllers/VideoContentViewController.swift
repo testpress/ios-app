@@ -30,12 +30,11 @@ import AVKit
 import AVFoundation
 import Alamofire
 import TTGSnackbar
-
+import TPStreamsSDK
 
 class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     var content: Content!
     var contents: [Content]!
-    var playerViewController: VideoPlayerViewController!
     var viewModel: VideoContentViewModel!
     var customView: UIView!
     var warningLabel: UILabel!
@@ -43,8 +42,10 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     var bookmarkDelegate: BookmarkDelegate?
     var bookmarkContent: Content?
     var position: Int! = 0
+    var player: TPAVPlayer?
+    var playerViewController: TPStreamPlayerViewController?
     
-    @IBOutlet weak var videoPlayer: UIView!
+    @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var desc: UITextView!
     @IBOutlet weak var titleToggleButton: UIButton!
@@ -53,13 +54,10 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleStackView: UIStackView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadPlayer(assetID: content.uuid!)
         viewModel = VideoContentViewModel(content)
-        initalizePlayerViewController()
-        videoPlayer.addSubview(playerViewController.view)
-        viewModel.videoPlayerView = playerViewController.playerView
         showOrHideBottomBar()
         titleLabel.text = viewModel.getTitle()
         initializeDescription()
@@ -73,11 +71,33 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         addGestures()
     }
     
-    func initalizePlayerViewController(){
-        let drmLicenseURL = content.video?.isDRMProtected == true ? TPEndpointProvider.getDRMLicenseURL(contentID: content.id) : nil
-        playerViewController = VideoPlayerViewController(hlsURL: content.video!.getHlsUrl(), drmLicenseURL: drmLicenseURL)
-        playerViewController.view.frame = videoPlayer.bounds
-        addChild(playerViewController)
+    func loadPlayer(assetID: String) {
+        player?.pause()
+        player = nil
+        player = TPAVPlayer(assetID: assetID, accessToken: ""){ error in
+            guard error == nil else {
+                print("Setup error: \(error!.localizedDescription)")
+                return
+            }
+        }
+        playerViewController = TPStreamPlayerViewController()
+        playerViewController?.player = player
+        playerViewController?.delegate = self
+        
+        
+        let config = TPStreamPlayerConfigurationBuilder()
+            .setPreferredForwardDuration(15)
+            .setPreferredRewindDuration(5)
+            .setprogressBarThumbColor(TestpressCourse.shared.primaryColor)
+            .setwatchedProgressTrackColor(TestpressCourse.shared.primaryColor)
+            .build()
+        
+        playerViewController?.config = config
+        
+        addChild(playerViewController!)
+        playerView.addSubview(playerViewController!.view)
+        playerViewController!.view.frame = playerView.bounds
+        player?.play()
     }
     
     func initializeDescription() {
@@ -227,11 +247,24 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
     
     func addObservers() {
+        player?.addObserver(self, forKeyPath: "rate", options: [.new, .old], context: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateVideoAttempt), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "rate" {
+            if player?.rate == 0 {
+                updateVideoAttempt()
+            }
+        }
+    }
+    
+    deinit {
+        player?.removeObserver(self, forKeyPath: "rate")
+    }
+
     @objc func updateVideoAttempt() {
-        viewModel.updateVideoAttempt()
+        viewModel.updateVideoAttempt(currentTime: player?.currentTimeInSeconds)
     }
     
     func changeVideo(content: Content!) {
@@ -242,7 +275,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         viewModel.content = content
         hideDescription()
         viewModel.createContentAttempt()
-        playerViewController.playerView.playVideo(url: URL(string: content.video!.getHlsUrl())!)
+        loadPlayer(assetID: content.uuid!)
         tableView.reloadData()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()
@@ -251,7 +284,8 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.updateVideoAttempt()
+        player?.pause()
+        viewModel.updateVideoAttempt(currentTime: player?.currentTimeInSeconds)
 
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
@@ -277,7 +311,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         let duration = textView.text.substring(with: characterRange)
         if duration != nil {
             let seconds = TimeUtils.convertDurationStringToSeconds(durationString: String(duration!))
-            playerViewController.playerView.goTo(seconds: Float(seconds))
+            goTo(seconds: Float(seconds))
         }
         return true
     }
@@ -318,4 +352,38 @@ extension VideoContentViewController: BookmarkDelegate {
     func updateBookmark(bookmarkId: Int?) {
         self.udpateBookmarkButtonState(bookmarkId: bookmarkId)
     }
+}
+
+extension VideoContentViewController: TPStreamPlayerViewControllerDelegate {
+    func willEnterFullScreenMode() {
+        print("willEnterFullScreenMode")
+    }
+    
+    func didEnterFullScreenMode() {
+        print("didEnterFullScreenMode")
+    }
+    
+    func willExitFullScreenMode() {
+        print("willExitFullScreenMode")
+    }
+    
+    func didExitFullScreenMode() {
+        print("didExitFullScreenMode")
+    }
+}
+
+extension VideoContentViewController: VideoContentViewModelDelegate {
+    func didUpdatePlayerTime(to time: Float) {
+        goTo(seconds: time)
+    }
+    
+    func goTo(seconds: Float) {
+        guard !seconds.isNaN else {
+            print("Invalid seconds value: NaN")
+            return
+        }
+        let seekTime = CMTime(value: Int64(seconds), timescale: 1)
+        player?.seek(to: seekTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+    }
+    
 }

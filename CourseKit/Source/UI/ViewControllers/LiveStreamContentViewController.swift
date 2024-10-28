@@ -8,10 +8,12 @@
 
 import Foundation
 import UIKit
+import TPStreamsSDK
 
 class LiveStreamContentViewController: BaseUIViewController {
     var content: Content!
-    var playerViewController: VideoPlayerViewController!
+    var player: TPAVPlayer?
+    var playerViewController: TPStreamPlayerViewController!
     var reloadTimer: Timer?
     
     var viewModel: ChapterContentDetailViewModel?
@@ -23,8 +25,6 @@ class LiveStreamContentViewController: BaseUIViewController {
         super.viewDidLoad()
         setupPlayerView()
         setupLiveChatView()
-        showNoticeView()
-        pollUntilLiveStreamStart()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -37,16 +37,36 @@ class LiveStreamContentViewController: BaseUIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        stopReloadingContent()
+        player?.pause()
     }
     
     func setupPlayerView(){
-        playerViewController = VideoPlayerViewController(hlsURL: content.liveStream!.streamURL, drmLicenseURL: nil)
+        player?.pause()
+        player = nil
+        player = TPAVPlayer(assetID: content.uuid!, accessToken: ""){ error in
+            guard error == nil else {
+                print("Setup error: \(error!.localizedDescription)")
+                return
+            }
+        }
+        playerViewController = TPStreamPlayerViewController()
+        playerViewController?.player = player
+        playerViewController?.delegate = self
+        
+        
+        let config = TPStreamPlayerConfigurationBuilder()
+            .setPreferredForwardDuration(15)
+            .setPreferredRewindDuration(5)
+            .setprogressBarThumbColor(TestpressCourse.shared.primaryColor)
+            .setwatchedProgressTrackColor(TestpressCourse.shared.primaryColor)
+            .build()
+        
+        playerViewController?.config = config
         
         addChild(playerViewController!)
         playerContainer.addSubview(playerViewController!.view)
         playerViewController!.view.frame = playerContainer.bounds
-        playerViewController.playerView.isLive = true
+        player?.play()
     }
     
     func setupLiveChatView(){
@@ -60,28 +80,6 @@ class LiveStreamContentViewController: BaseUIViewController {
         attachLiveChat(webViewController: webViewController)
     }
     
-    func showNoticeView(){
-        if(content.liveStream!.isEnded){
-            let description = content.liveStream!.showRecordedVideo ? Strings.LIVE_ENDED_WITH_RECORDING_DESC : Strings.LIVE_ENDED_WITHOUT_RECORDING_DESC
-            
-            self.playerViewController.showWarning(text: description)
-        } else if(content.liveStream!.isNotStarted) {
-            self.playerViewController.showWarning(text: Strings.LIVE_NOT_STARTED_DESC)
-        }
-    }
-    
-    func pollUntilLiveStreamStart() {
-        guard content.liveStream!.isNotStarted else { return }
-        
-        reloadContent()
-        reloadTimer = Timer.scheduledTimer(timeInterval: 15.0, target: self, selector: #selector(reloadContent), userInfo: nil, repeats: true)
-    }
-    
-    func stopReloadingContent() {
-        reloadTimer?.invalidate()
-        reloadTimer = nil
-    }
-    
     @objc func reloadContent() {
         fetchContent { [weak self] content, error in
             guard let self = self else { return }
@@ -90,9 +88,7 @@ class LiveStreamContentViewController: BaseUIViewController {
                 self.content = content
                 DBManager<Content>().addData(object: content)
                 if content.liveStream!.isRunning{
-                    self.stopReloadingContent()
-                    self.playerViewController.hideWarning()
-                    self.playerViewController.playerView.play()
+                    setupPlayerView()
                     setupLiveChatView()
                     viewModel?.createContentAttempt()
                 }
@@ -132,5 +128,23 @@ class LiveStreamContentViewController: BaseUIViewController {
         liveChatContainer.addSubview(webViewController.view)
         webViewController.view.frame = liveChatContainer.bounds
         webViewController.didMove(toParent: self)
+    }
+}
+
+extension LiveStreamContentViewController: TPStreamPlayerViewControllerDelegate {
+    func willEnterFullScreenMode() {
+        print("willEnterFullScreenMode")
+    }
+    
+    func didEnterFullScreenMode() {
+        print("didEnterFullScreenMode")
+    }
+    
+    func willExitFullScreenMode() {
+        print("willExitFullScreenMode")
+    }
+    
+    func didExitFullScreenMode() {
+        print("didExitFullScreenMode")
     }
 }

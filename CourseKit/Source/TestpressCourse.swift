@@ -1,4 +1,5 @@
 import UIKit
+import TPStreamsSDK
 
 
 public class TestpressCourse {
@@ -34,6 +35,11 @@ public class TestpressCourse {
         if let token = token {
             saveTokenToKeychain(token: token)
             InstituteRepository.shared.getSettings(refresh: true, completion: { _, _ in})
+        }
+        
+        if (KeychainTokenItem.isExist()) {
+            let token: String = KeychainTokenItem.getToken()
+            TPStreamsSDK.initialize(for : Provider.testpress, withOrgCode: subdomain, usingAuthToken: token)
         }
     }
     

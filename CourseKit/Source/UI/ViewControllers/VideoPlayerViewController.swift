@@ -18,7 +18,7 @@ class VideoPlayerViewController: BaseUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initVideoPlayerView()
+        //initVideoPlayerView()
         view.addSubview(playerView)
         addWarningView()
         
@@ -38,10 +38,10 @@ class VideoPlayerViewController: BaseUIViewController {
         super.init(coder: coder)
     }
     
-    func initVideoPlayerView() {
-        playerView = VideoPlayerView(frame: view.bounds, url: URL(string: self.hlsURL)!, drmLicenseURL: drmLicenseURL)
-        playerView.playerDelegate = self
-    }
+//    func initVideoPlayerView() {
+//        playerView = VideoPlayerView(frame: view.bounds, url: URL(string: self.hlsURL)!, drmLicenseURL: drmLicenseURL)
+//        playerView.playerDelegate = self
+//    }
     
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleExternalDisplay), name: UIScreen.didConnectNotification, object: nil)
@@ -87,11 +87,11 @@ class VideoPlayerViewController: BaseUIViewController {
     }
     
     @objc func willEnterForeground() {
-        playerView.play()
+        //playerView.play()
     }
     
     func showWarning(text: String) {
-        playerView.pause()
+        //playerView.pause()
         playerView.isHidden = true
         warningLabel.text = text
         warningLabel.sizeToFit()
@@ -113,16 +113,16 @@ class VideoPlayerViewController: BaseUIViewController {
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         PlaybackSpeed.allCases.forEach{ playbackSpeed in
-            let action = UIAlertAction(title: playbackSpeed.rawValue, style: .default, handler: { (_) in
-                self.playerView.changePlaybackSpeed(speed: playbackSpeed)
-            })
-            if (playbackSpeed.value == self.playerView.getCurrenPlaybackSpeed()){
-                action.setValue(Images.TickIcon.image, forKey: "image")
-            } else if(self.playerView.getCurrenPlaybackSpeed() == 0.0 && playbackSpeed == .normal) {
-                action.setValue(Images.TickIcon.image, forKey: "image")
-            }
+//            let action = UIAlertAction(title: playbackSpeed.rawValue, style: .default, handler: { (_) in
+//                //self.playerView.changePlaybackSpeed(speed: playbackSpeed)
+//            })
+//            if (playbackSpeed.value == self.playerView.getCurrenPlaybackSpeed()){
+//                action.setValue(Images.TickIcon.image, forKey: "image")
+//            } else if(self.playerView.getCurrenPlaybackSpeed() == 0.0 && playbackSpeed == .normal) {
+//                action.setValue(Images.TickIcon.image, forKey: "image")
+//            }
             
-            alert.addAction(action)
+            //alert.addAction(action)
         }
         alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated: true)
@@ -138,16 +138,16 @@ class VideoPlayerViewController: BaseUIViewController {
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
-        for resolutionInfo in playerView.resolutionInfo {
-            let action = UIAlertAction(title: resolutionInfo.resolution, style: .default, handler: { (_) in
-                self.playerView.changeBitrate(resolutionInfo.bitrate)
-            })
-            
-            if (Double(resolutionInfo.bitrate) == playerView.getCurrentBitrate()) {
-                action.setValue(Images.TickIcon.image, forKey: "image")
-            }
-            alert.addAction(action)
-        }
+//        for resolutionInfo in playerView.resolutionInfo {
+////            let action = UIAlertAction(title: resolutionInfo.resolution, style: .default, handler: { (_) in
+////                self.playerView.changeBitrate(resolutionInfo.bitrate)
+////            })
+////            
+////            if (Double(resolutionInfo.bitrate) == playerView.getCurrentBitrate()) {
+////                action.setValue(Images.TickIcon.image, forKey: "image")
+////            }
+////            alert.addAction(action)
+//        }
         alert.popoverPresentationController?.sourceView = self.view
         self.present(alert, animated: true)
     }
@@ -172,7 +172,7 @@ class VideoPlayerViewController: BaseUIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        playerView.deallocate()
+        //playerView.deallocate()
 
         NotificationCenter.default.removeObserver(self, name: UIScreen.didConnectNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIScreen.didDisconnectNotification, object: nil)
@@ -201,13 +201,13 @@ class VideoPlayerViewController: BaseUIViewController {
         warningLabel.center = warningView.center
         playerView.layoutIfNeeded()
         warningView.layoutIfNeeded()
-        playerView.playerLayer?.frame = playerFrame
+        //playerView.playerLayer?.frame = playerFrame
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers()
-        playerView.addObservers()
+        //playerView.addObservers()
     }
 }
 
