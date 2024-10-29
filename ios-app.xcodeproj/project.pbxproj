@@ -3067,7 +3067,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/testpress/iOSPlayerSDK";
 			requirement = {
-				branch = fix_realm_file_name;
+				branch = main;
 				kind = branch;
 			};
 		};
