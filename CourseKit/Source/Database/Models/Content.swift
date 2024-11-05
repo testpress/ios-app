@@ -67,6 +67,7 @@ public class Content: DBModel {
     @objc dynamic public var coverImageSmall: String!
     @objc dynamic public var coverImageMedium: String!
     @objc dynamic public var hasEnded: Bool = false
+    @objc dynamic public var uuid: String?
 
     
     public override func mapping(map: ObjectMapper.Map) {
@@ -107,6 +108,7 @@ public class Content: DBModel {
         coverImageMedium <- map["cover_image_medium"]
         hasEnded <- map["has_ended"]
         end <- map["end"]
+        uuid <- map["uuid"]
     }
     
     override public static func primaryKey() -> String? {
