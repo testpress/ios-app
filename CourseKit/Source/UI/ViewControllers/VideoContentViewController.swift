@@ -82,7 +82,6 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         }
         playerViewController = TPStreamPlayerViewController()
         playerViewController?.player = player
-        playerViewController?.delegate = self
         
         
         let config = TPStreamPlayerConfigurationBuilder()
@@ -351,24 +350,6 @@ extension VideoContentViewController: BookmarkDelegate {
     
     func updateBookmark(bookmarkId: Int?) {
         self.udpateBookmarkButtonState(bookmarkId: bookmarkId)
-    }
-}
-
-extension VideoContentViewController: TPStreamPlayerViewControllerDelegate {
-    func willEnterFullScreenMode() {
-        print("willEnterFullScreenMode")
-    }
-    
-    func didEnterFullScreenMode() {
-        print("didEnterFullScreenMode")
-    }
-    
-    func willExitFullScreenMode() {
-        print("willExitFullScreenMode")
-    }
-    
-    func didExitFullScreenMode() {
-        print("didExitFullScreenMode")
     }
 }
 
