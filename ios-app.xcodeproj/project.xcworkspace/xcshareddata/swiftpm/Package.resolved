@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/testpress/iOSPlayerSDK",
       "state" : {
-        "branch" : "main",
-        "revision" : "ea2d365ee4f1481cda31f1c1c908dbbefa62b076"
+        "revision" : "2a00c25f10a23f23ebf1040cbeb253ae1fb44ca8",
+        "version" : "1.1.9"
       }
     },
     {
