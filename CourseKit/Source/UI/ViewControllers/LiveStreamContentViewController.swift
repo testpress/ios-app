@@ -51,7 +51,6 @@ class LiveStreamContentViewController: BaseUIViewController {
         }
         playerViewController = TPStreamPlayerViewController()
         playerViewController?.player = player
-        playerViewController?.delegate = self
         
         
         let config = TPStreamPlayerConfigurationBuilder()
@@ -128,23 +127,5 @@ class LiveStreamContentViewController: BaseUIViewController {
         liveChatContainer.addSubview(webViewController.view)
         webViewController.view.frame = liveChatContainer.bounds
         webViewController.didMove(toParent: self)
-    }
-}
-
-extension LiveStreamContentViewController: TPStreamPlayerViewControllerDelegate {
-    func willEnterFullScreenMode() {
-        print("willEnterFullScreenMode")
-    }
-    
-    func didEnterFullScreenMode() {
-        print("didEnterFullScreenMode")
-    }
-    
-    func willExitFullScreenMode() {
-        print("willExitFullScreenMode")
-    }
-    
-    func didExitFullScreenMode() {
-        print("didExitFullScreenMode")
     }
 }
