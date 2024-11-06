@@ -58,7 +58,6 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         super.viewDidLoad()
         loadPlayer(assetID: content.uuid!)
         viewModel = VideoContentViewModel(content)
-        showOrHideBottomBar()
         titleLabel.text = viewModel.getTitle()
         initializeDescription()
         bookmarkContent = content
@@ -214,22 +213,6 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
                     contents[cellContentId].bookmarkId.value = bookmarkId
                 }
                 tableView.reloadData()
-            }
-        }
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        showOrHideBottomBar()
-    }
-    
-    func showOrHideBottomBar() {
-        if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
-            contentDetailPageViewController.disableSwipeGesture()
-            
-            if (UIDevice.current.orientation.isLandscape) {
-                contentDetailPageViewController.hideBottomNavBar()
-            } else {
-                contentDetailPageViewController.showBottomNavbar()
             }
         }
     }
