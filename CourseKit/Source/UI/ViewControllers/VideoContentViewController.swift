@@ -71,30 +71,49 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
     
     func loadPlayer(assetID: String) {
+        initializePlayer(with: assetID)
+        configurePlayerViewController()
+        configurePlayerView()
+        playContent()
+    }
+
+    private func initializePlayer(with assetID: String) {
         player?.pause()
         player = nil
-        player = TPAVPlayer(assetID: assetID, accessToken: ""){ error in
+        player = TPAVPlayer(assetID: assetID, accessToken: "") { error in
             guard error == nil else {
                 print("Setup error: \(error!.localizedDescription)")
                 return
             }
         }
+    }
+
+    private func configurePlayerViewController() {
         playerViewController = TPStreamPlayerViewController()
         playerViewController?.player = player
         
-        
-        let config = TPStreamPlayerConfigurationBuilder()
+        let config = createPlayerConfig()
+        playerViewController?.config = config
+    }
+
+    private func createPlayerConfig() -> TPStreamPlayerConfiguration {
+        return TPStreamPlayerConfigurationBuilder()
             .setPreferredForwardDuration(15)
             .setPreferredRewindDuration(5)
             .setprogressBarThumbColor(TestpressCourse.shared.primaryColor)
             .setwatchedProgressTrackColor(TestpressCourse.shared.primaryColor)
             .build()
+    }
+
+    private func configurePlayerView() {
+        guard let playerViewController = playerViewController else { return }
         
-        playerViewController?.config = config
-        
-        addChild(playerViewController!)
-        playerView.addSubview(playerViewController!.view)
-        playerViewController!.view.frame = playerView.bounds
+        addChild(playerViewController)
+        playerView.addSubview(playerViewController.view)
+        playerViewController.view.frame = playerView.bounds
+    }
+
+    private func playContent() {
         player?.play()
     }
     

@@ -40,31 +40,50 @@ class LiveStreamContentViewController: BaseUIViewController {
         player?.pause()
     }
     
-    func setupPlayerView(){
+    func setupPlayerView() {
+        initializePlayer()
+        configurePlayerViewController()
+        configurePlayerView()
+        playContent()
+    }
+
+    private func initializePlayer() {
         player?.pause()
         player = nil
-        player = TPAVPlayer(assetID: content.uuid!, accessToken: ""){ error in
+        player = TPAVPlayer(assetID: content.uuid!, accessToken: "") { error in
             guard error == nil else {
                 print("Setup error: \(error!.localizedDescription)")
                 return
             }
         }
+    }
+
+    private func configurePlayerViewController() {
         playerViewController = TPStreamPlayerViewController()
         playerViewController?.player = player
         
-        
-        let config = TPStreamPlayerConfigurationBuilder()
+        let config = createPlayerConfig()
+        playerViewController?.config = config
+    }
+
+    private func createPlayerConfig() -> TPStreamPlayerConfiguration {
+        return TPStreamPlayerConfigurationBuilder()
             .setPreferredForwardDuration(15)
             .setPreferredRewindDuration(5)
             .setprogressBarThumbColor(TestpressCourse.shared.primaryColor)
             .setwatchedProgressTrackColor(TestpressCourse.shared.primaryColor)
             .build()
+    }
+
+    private func configurePlayerView() {
+        guard let playerViewController = playerViewController else { return }
         
-        playerViewController?.config = config
-        
-        addChild(playerViewController!)
-        playerContainer.addSubview(playerViewController!.view)
-        playerViewController!.view.frame = playerContainer.bounds
+        addChild(playerViewController)
+        playerContainer.addSubview(playerViewController.view)
+        playerViewController.view.frame = playerContainer.bounds
+    }
+
+    private func playContent() {
         player?.play()
     }
     
