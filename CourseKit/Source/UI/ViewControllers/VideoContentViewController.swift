@@ -74,7 +74,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         initializePlayer(with: assetID)
         configurePlayerViewController()
         configurePlayerView()
-        playContent()
+        player?.play()
     }
 
     private func initializePlayer(with assetID: String) {
@@ -111,10 +111,6 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         addChild(playerViewController)
         playerView.addSubview(playerViewController.view)
         playerViewController.view.frame = playerView.bounds
-    }
-
-    private func playContent() {
-        player?.play()
     }
     
     func initializeDescription() {

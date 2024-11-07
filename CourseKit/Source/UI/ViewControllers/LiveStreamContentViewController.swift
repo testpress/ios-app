@@ -25,6 +25,7 @@ class LiveStreamContentViewController: BaseUIViewController {
         super.viewDidLoad()
         setupPlayerView()
         setupLiveChatView()
+        pollUntilLiveStreamStart()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -37,6 +38,7 @@ class LiveStreamContentViewController: BaseUIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        stopReloadingContent()
         player?.pause()
     }
     
@@ -44,7 +46,7 @@ class LiveStreamContentViewController: BaseUIViewController {
         initializePlayer()
         configurePlayerViewController()
         configurePlayerView()
-        playContent()
+        player?.play()
     }
 
     private func initializePlayer() {
@@ -83,8 +85,16 @@ class LiveStreamContentViewController: BaseUIViewController {
         playerViewController.view.frame = playerContainer.bounds
     }
 
-    private func playContent() {
-        player?.play()
+    func pollUntilLiveStreamStart() {
+        guard content.liveStream!.isNotStarted else { return }
+
+        reloadContent()
+        reloadTimer = Timer.scheduledTimer(timeInterval: 15.0, target: self, selector: #selector(reloadContent), userInfo: nil, repeats: true)
+    }
+
+    func stopReloadingContent() {
+        reloadTimer?.invalidate()
+        reloadTimer = nil
     }
     
     func setupLiveChatView(){
@@ -106,6 +116,7 @@ class LiveStreamContentViewController: BaseUIViewController {
                 self.content = content
                 DBManager<Content>().addData(object: content)
                 if content.liveStream!.isRunning{
+                    stopReloadingContent()
                     setupPlayerView()
                     setupLiveChatView()
                     viewModel?.createContentAttempt()

@@ -396,11 +396,11 @@
 		8CDE264E239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */; };
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
-		D932B2C12CDA1392002B6D30 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932B2C02CDA1392002B6D30 /* AppConstants.swift */; };
 		D932B2B32CCBB357002B6D30 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B22CCBB357002B6D30 /* Realm */; };
 		D932B2B52CCBB357002B6D30 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B42CCBB357002B6D30 /* RealmSwift */; };
 		D932B2B92CCBB3AE002B6D30 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B82CCBB3AE002B6D30 /* Realm */; };
 		D932B2BB2CCBB801002B6D30 /* TPStreamsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */; };
+		D932B2C12CDA1392002B6D30 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932B2C02CDA1392002B6D30 /* AppConstants.swift */; };
 		D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
