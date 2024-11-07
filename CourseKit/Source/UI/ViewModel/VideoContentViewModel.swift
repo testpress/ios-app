@@ -15,9 +15,9 @@ import TTGSnackbar
 public class VideoContentViewModel {
     public var content: Content!
     public var contentAttemptId: Int?
-    public var startTime: String?
-    public var videoPlayerView: VideoPlayerView?
+    public var startTimeString: String?
     public weak var timer: Timer?
+    public weak var delegate: VideoContentViewModelDelegate?
     
     
     public init(_ content: Content){
@@ -49,28 +49,27 @@ public class VideoContentViewModel {
                     debugPrint(error.kind)
                     return
                 }
-                self.startTime = contentAttempt?.video.lastPosition
+                self.startTimeString = contentAttempt?.video.lastPosition
                 self.contentAttemptId = contentAttempt!.objectID
                 let seconds = NSString(string: (contentAttempt?.video.lastPosition)!)
-                self.videoPlayerView?.startTime = Float(seconds.doubleValue)
                 
                 if (seconds.doubleValue > Double(1.0)) {
-                    self.videoPlayerView?.goTo(seconds: Float(seconds.doubleValue))
+                    self.delegate?.didUpdatePlayerTime(to: Float(seconds.doubleValue))
                 }
         })
     }
     
-    @objc public func updateVideoAttempt() {
-        if ((videoPlayerView?.player?.isPlaying ?? true) && ((contentAttemptId != nil))) {
+    public func updateVideoAttempt(currentTime: Float64?) {
+        if currentTime != nil && contentAttemptId != nil {
 
-            if ((videoPlayerView?.player?.currentTimeInSeconds)! <= Double(1.0)) {
+            if (currentTime! <= Double(1.0)) {
                 return
             }
 
-            let currentTime = String(format: "%.4f", (videoPlayerView?.player?.currentTimeInSeconds)!)
+            let currentTime = String(format: "%.4f", currentTime!)
             let parameters: Parameters = [
                 "last_position": currentTime,
-                "time_ranges": [[videoPlayerView!.startTime, currentTime]]
+                "time_ranges": [[startTimeString, currentTime]]
             ]
             let url = TPEndpointProvider.getVideoAttemptPath(attemptID: contentAttemptId!)
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.put, url: url), parameters: parameters,completion: {
@@ -107,4 +106,8 @@ public class VideoContentViewModel {
         })
     }
     
+}
+
+public protocol VideoContentViewModelDelegate: AnyObject {
+    func didUpdatePlayerTime(to time: Float)
 }

@@ -16,8 +16,6 @@
 		035CC54B2CAE694D0057F4E4 /* StringArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DFC1672609B00700E06BA7 /* StringArrayTransform.swift */; };
 		035CC54C2CAE694D0057F4E4 /* IntArrayTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256A909B247D03C100F4E12C /* IntArrayTransform.swift */; };
 		035CC54D2CAE694D0057F4E4 /* StringTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503DF75263FADD0003226AD /* StringTransform.swift */; };
-		035CC54F2CAE698D0057F4E4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 035CC54E2CAE698D0057F4E4 /* RealmSwift */; };
-		035CC5502CAE698D0057F4E4 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 035CC54E2CAE698D0057F4E4 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		035CC5532CAE699B0057F4E4 /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = 035CC5522CAE699B0057F4E4 /* ObjectMapper */; settings = {ATTRIBUTES = (Required, ); }; };
 		036CE8502CA6C3BE00183BA8 /* DropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE84F2CA6C3BE00183BA8 /* DropDown */; };
 		036CE8592CA6DE2000183BA8 /* SlideMenuController in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8582CA6DE2000183BA8 /* SlideMenuController */; };
@@ -29,7 +27,6 @@
 		036CE87B2CA6FD5000183BA8 /* Former in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE87A2CA6FD5000183BA8 /* Former */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
 		038696162BF65D9500E36F8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; };
-		038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0386961C2BF7602600E36F8F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0386961B2BF7602600E36F8F /* Alamofire */; };
 		0386961F2BF762DD00E36F8F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0386961E2BF762DD00E36F8F /* IQKeyboardManagerSwift */; };
 		038696222BF7635C00E36F8F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 038696212BF7635C00E36F8F /* Kingfisher */; };
@@ -78,7 +75,6 @@
 		038CB29C2CBD278600164127 /* SubjectAnalyticsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */; };
 		038CB29D2CBD278600164127 /* IndividualSubjectAnalyticsCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A53041FDA70DE00C64123 /* IndividualSubjectAnalyticsCountCell.swift */; };
 		038CB29E2CBD278600164127 /* AttemptsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2821F861A860092BFDC /* AttemptsTableViewCell.swift */; };
-		038CB29F2CBD278600164127 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */; };
 		038CB2A02CBD278600164127 /* TimeAnalyticsQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B73E1FDEADB000E2B240 /* TimeAnalyticsQuestionCell.swift */; };
 		038CB2A12CBD278600164127 /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF9C4A20B6CFBF0086245F /* BookmarksTableViewController.swift */; };
 		038CB2A22CBD278600164127 /* StartExamScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2961F861A860092BFDC /* StartExamScreenViewController.swift */; };
@@ -400,6 +396,10 @@
 		8CDE264E239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */; };
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
+		D932B2B32CCBB357002B6D30 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B22CCBB357002B6D30 /* Realm */; };
+		D932B2B52CCBB357002B6D30 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B42CCBB357002B6D30 /* RealmSwift */; };
+		D932B2B92CCBB3AE002B6D30 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B82CCBB3AE002B6D30 /* Realm */; };
+		D932B2BB2CCBB801002B6D30 /* TPStreamsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */; };
 		D932B2C12CDA1392002B6D30 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932B2C02CDA1392002B6D30 /* AppConstants.swift */; };
 		D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -452,7 +452,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				035CC5502CAE698D0057F4E4 /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,7 +477,6 @@
 				D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */,
 				D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */,
 				D9EDF1F42A0CF10800A6CB2E /* FBSDKCoreKit.xcframework in Embed Frameworks */,
-				038696172BF65E1800E36F8F /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,7 +503,6 @@
 		03CD0D302CB935D300E17218 /* BasePagedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePagedTableViewController.swift; sourceTree = "<group>"; };
 		03CD0D322CB93A6500E17218 /* LearnTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnTabController.swift; sourceTree = "<group>"; };
 		03CD0D442CB94D7600E17218 /* ContentAttemptCreationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAttemptCreationDelegate.swift; sourceTree = "<group>"; };
-		03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamContentViewController.swift; sourceTree = "<group>"; };
 		03E4AFD12CAFD22100ECC34D /* DashboardSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSection.swift; sourceTree = "<group>"; };
 		03E4AFD52CAFE6A900ECC34D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -896,6 +893,7 @@
 				0386961F2BF762DD00E36F8F /* IQKeyboardManagerSwift in Frameworks */,
 				036CE86D2CA6F67F00183BA8 /* IGListKit in Frameworks */,
 				038696162BF65D9500E36F8F /* RealmSwift in Frameworks */,
+				D932B2B92CCBB3AE002B6D30 /* Realm in Frameworks */,
 				036CE8722CA6F8D500183BA8 /* XLPagerTabStrip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -917,14 +915,16 @@
 				03CD0D3F2CB9485E00E17218 /* MarqueeLabel in Frameworks */,
 				03CD0C642CB7B5D400E17218 /* DGCharts in Frameworks */,
 				038CB2C42CBD331400164127 /* Lottie in Frameworks */,
+				D932B2B32CCBB357002B6D30 /* Realm in Frameworks */,
 				03CD0D3D2CB9485200E17218 /* M3U8Parser in Frameworks */,
 				03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */,
+				D932B2B52CCBB357002B6D30 /* RealmSwift in Frameworks */,
 				03CD0D0A2CB9290200E17218 /* DropDown in Frameworks */,
 				038CB2B92CBD2AF600164127 /* Kingfisher in Frameworks */,
 				038CB2BB2CBD2B0800164127 /* LUExpandableTableView in Frameworks */,
 				03E4AFCB2CAFCFD500ECC34D /* IGListKit in Frameworks */,
-				035CC54F2CAE698D0057F4E4 /* RealmSwift in Frameworks */,
 				038CB2C22CBD32F300164127 /* SwiftSoup in Frameworks */,
+				D932B2BB2CCBB801002B6D30 /* TPStreamsSDK in Frameworks */,
 				03CD0D2A2CB92C2400E17218 /* XLPagerTabStrip in Frameworks */,
 				03CD0D632CB95A1700E17218 /* Sentry in Frameworks */,
 			);
@@ -1574,7 +1574,6 @@
 				2590B1FB2510C9F2003C0A03 /* VideoConferenceViewController.swift */,
 				250888D9251C5EC80023DCF6 /* ZoomMeetViewController.swift */,
 				D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */,
-				03D82DDA2BFCD84100678BBF /* VideoPlayerViewController.swift */,
 				03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */,
 				03CD0D2F2CB9353E00E17218 /* Base */,
 				8C04228E22AA3FD40015269B /* WebViewController.swift */,
@@ -1718,6 +1717,7 @@
 				036CE87A2CA6FD5000183BA8 /* Former */,
 				03A60FAA2CB4153900079A7C /* Sentry */,
 				03494F4A2CBEAFA700C6A44B /* TOCropViewController */,
+				D932B2B82CCBB3AE002B6D30 /* Realm */,
 			);
 			productName = "ios-app";
 			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
@@ -1759,7 +1759,6 @@
 			);
 			name = CourseKit;
 			packageProductDependencies = (
-				035CC54E2CAE698D0057F4E4 /* RealmSwift */,
 				035CC5522CAE699B0057F4E4 /* ObjectMapper */,
 				03E4AFCA2CAFCFD500ECC34D /* IGListKit */,
 				03A60F9E2CB3F83D00079A7C /* Alamofire */,
@@ -1775,6 +1774,9 @@
 				038CB2BE2CBD2BF600164127 /* SlideMenuController */,
 				038CB2C12CBD32F300164127 /* SwiftSoup */,
 				038CB2C32CBD331400164127 /* Lottie */,
+				D932B2B22CCBB357002B6D30 /* Realm */,
+				D932B2B42CCBB357002B6D30 /* RealmSwift */,
+				D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */,
 			);
 			productName = CourseKit;
 			productReference = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */;
@@ -1869,6 +1871,7 @@
 				036CE87C2CA6FF1500183BA8 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				03A60FAC2CB417CC00079A7C /* XCRemoteSwiftPackageReference "LUExpandableTableView" */,
+				D932B2A92CCBAEC4002B6D30 /* XCRemoteSwiftPackageReference "iOSPlayerSDK" */,
 			);
 			productRefGroup = 2F26ADE31E8249D70031E6F4 /* Products */;
 			projectDirPath = "";
@@ -2167,7 +2170,6 @@
 				038CB2972CBD278600164127 /* AttachmentDetailViewController.swift in Sources */,
 				038CB28B2CBD278600164127 /* QuestionsControllerSource.swift in Sources */,
 				038CB2AF2CBD278600164127 /* BookmarkFolderTableViewCell.swift in Sources */,
-				038CB29F2CBD278600164127 /* VideoPlayerViewController.swift in Sources */,
 				038CB2B42CBD278600164127 /* QuizQuestionsPageViewController.swift in Sources */,
 				03E4AF512CAEDF7F00ECC34D /* ExamQuestion.swift in Sources */,
 				03E4AFC12CAFCF6F00ECC34D /* FileDetails.swift in Sources */,
@@ -3013,8 +3015,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.49.3;
+				kind = exactVersion;
+				version = 10.45.0;
 			};
 		};
 		0386961A2BF7602600E36F8F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -3057,6 +3059,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		D932B2A92CCBAEC4002B6D30 /* XCRemoteSwiftPackageReference "iOSPlayerSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/testpress/iOSPlayerSDK";
+			requirement = {
+				kind = exactVersion;
+				version = 1.1.9;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3064,11 +3074,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
 			productName = TOCropViewController;
-		};
-		035CC54E2CAE698D0057F4E4 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		035CC5522CAE699B0057F4E4 /* ObjectMapper */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3209,6 +3214,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE86B2CA6F67F00183BA8 /* XCRemoteSwiftPackageReference "IGListKit" */;
 			productName = IGListKit;
+		};
+		D932B2B22CCBB357002B6D30 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		D932B2B42CCBB357002B6D30 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		D932B2B82CCBB3AE002B6D30 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D932B2A92CCBAEC4002B6D30 /* XCRemoteSwiftPackageReference "iOSPlayerSDK" */;
+			productName = TPStreamsSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
