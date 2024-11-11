@@ -102,6 +102,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
             .setPreferredRewindDuration(5)
             .setprogressBarThumbColor(TestpressCourse.shared.primaryColor)
             .setwatchedProgressTrackColor(TestpressCourse.shared.primaryColor)
+            .showDownloadOption()
             .build()
     }
 

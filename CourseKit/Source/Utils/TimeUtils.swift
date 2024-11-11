@@ -27,5 +27,25 @@ public class TimeUtils {
         let seconds = totalTime % 60
         return String(format: "%d:%02d:%02d", hours, minutes, seconds)
     }
+    
+    public static func formatDuration(seconds: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .abbreviated
+        formatter.maximumUnitCount = 2
+
+        if let formattedString = formatter.string(from: seconds) {
+            return formattedString
+        } else {
+            return "0s"
+        }
+    }
+    
+    public static func formatDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        let formattedString = dateFormatter.string(from: date)
+        return formattedString
+    }
 }
 

@@ -1462,6 +1462,7 @@
                         <segue destination="9va-L7-6A6" kind="relationship" relationship="viewControllers" id="GaN-Gb-zjr"/>
                         <segue destination="LTa-pc-ZhR" kind="relationship" relationship="viewControllers" id="4vL-xg-41d"/>
                         <segue destination="4b6-tm-543" kind="relationship" relationship="viewControllers" id="Nji-EB-1m8"/>
+                        <segue destination="omW-yp-kWD" kind="relationship" relationship="viewControllers" id="MsF-Bm-cID"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tIA-Ht-VGY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1820,7 +1821,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10M-1R-m2U">
-                                <rect key="frame" x="0.0" y="103" width="430" height="746"/>
+                                <rect key="frame" x="0.0" y="103" width="430" height="0.0"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEZ-cL-GBb">
                                         <rect key="frame" x="0.0" y="0.0" width="430" height="275"/>
@@ -2837,20 +2838,22 @@
             </objects>
             <point key="canvasLocation" x="-2295" y="2672.5352112676055"/>
         </scene>
-        <!--View Controller-->
+        <!--OfflineDownloadsTabController-->
         <scene sceneID="6en-eY-ske">
             <objects>
-                <viewController id="omW-yp-kWD" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OfflineDownloadsTabController" title="OfflineDownloadsTabController" id="omW-yp-kWD" customClass="OfflineDownloadsTabController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5zy-o8-S3a">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="BjZ-WZ-FHL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="4b0-h4-53U"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k9U-qf-QOO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1691" y="83"/>
+            <point key="canvasLocation" x="1252" y="73"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="kzu-br-KqF">
