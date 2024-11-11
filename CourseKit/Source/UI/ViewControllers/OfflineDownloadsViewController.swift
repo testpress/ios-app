@@ -15,6 +15,7 @@ public class OfflineDownloadsViewController: BaseUIViewController, ObservableObj
     
     @IBOutlet weak var offlineDownloadstableView: UITableView!
     @IBOutlet weak var emptyContainer: UIView!
+    private var previousAssets: [OfflineAsset] = []
     @Published var offlineAssets: [OfflineAsset] = []
     var cancellables: Set<AnyCancellable> = []
     
@@ -54,11 +55,42 @@ public class OfflineDownloadsViewController: BaseUIViewController, ObservableObj
         $offlineAssets
             .receive(on: DispatchQueue.main)
             .sink { [weak self] assets in
-                self?.offlineDownloadstableView.reloadData()
-                self?.showOrHideListView()
+                self?.handleAssetChange(newAssets: assets)
             }
             .store(in: &cancellables)
         getOfflineAssets()
+    }
+
+    private func handleAssetChange(newAssets: [OfflineAsset]) {
+        guard previousAssets.count != newAssets.count else {
+            reloadChangedAssets(newAssets)
+            return
+        }
+        updateAssets(newAssets)
+    }
+
+    private func updateAssets(_ newAssets: [OfflineAsset]) {
+        previousAssets = newAssets
+        offlineDownloadstableView.reloadData()
+        showOrHideListView()
+    }
+
+    private func reloadChangedAssets(_ newAssets: [OfflineAsset]) {
+        let changedIndices = findChangedIndices(oldAssets: previousAssets, newAssets: newAssets)
+        previousAssets = newAssets
+        let indexPaths = changedIndices.map { IndexPath(row: $0, section: 0) }
+        offlineDownloadstableView.reloadRows(at: indexPaths, with: .automatic)
+        showOrHideListView()
+    }
+    
+    private func findChangedIndices(oldAssets: [OfflineAsset], newAssets: [OfflineAsset]) -> [Int] {
+        var changedIndices = [Int]()
+        for (index, newAsset) in newAssets.enumerated() {
+            if index >= oldAssets.count || oldAssets[index] != newAsset {
+                changedIndices.append(index)
+            }
+        }
+        return changedIndices
     }
     
     func showOrHideListView() {
@@ -71,8 +103,6 @@ public class OfflineDownloadsViewController: BaseUIViewController, ObservableObj
         }
     }
     
-    
-    
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("OfflineAssetsUpdated"), object: nil)
     }
@@ -83,9 +113,15 @@ extension OfflineDownloadsViewController: TPStreamsDownloadDelegate {
     func getOfflineAssets() {
         offlineAssets = TPStreamsDownloadManager.shared.getAllOfflineAssets()
     }
+
+    private func updateOfflineAsset(_ offlineAsset: OfflineAsset) {
+        if let index = offlineAssets.firstIndex(where: { $0.assetId == offlineAsset.assetId }) {
+            offlineAssets[index] = offlineAsset
+        }
+    }
     
     public func onComplete(offlineAsset: OfflineAsset) {
-        getOfflineAssets()
+        updateOfflineAsset(offlineAsset)
     }
     
     public func onStart(offlineAsset: OfflineAsset) {
@@ -93,31 +129,33 @@ extension OfflineDownloadsViewController: TPStreamsDownloadDelegate {
     }
     
     public func onPause(offlineAsset: OfflineAsset) {
-        
+        updateOfflineAsset(offlineAsset)
     }
     
     public func onResume(offlineAsset: OfflineAsset) {
-        
+        updateOfflineAsset(offlineAsset)
     }
     
     public func onCanceled(assetId: String) {
-        getOfflineAssets()
+        if let index = offlineAssets.firstIndex(where: { $0.assetId == assetId }) {
+            offlineAssets.remove(at: index)
+        }
     }
     
     public func onDelete(assetId: String) {
-        getOfflineAssets()
+        if let index = offlineAssets.firstIndex(where: { $0.assetId == assetId }) {
+            offlineAssets.remove(at: index)
+        }
     }
     
     public func onProgressChange(assetId: String, percentage: Double) {
-        getOfflineAssets()
+        if let index = offlineAssets.firstIndex(where: { $0.assetId == assetId }) {
+            offlineAssets[index].percentageCompleted = percentage
+        }
     }
     
     public func onStateChange(status: Status, offlineAsset: OfflineAsset) {
-        func updateOfflineAsset(_ offlineAsset: OfflineAsset) {
-            if let index = offlineAssets.firstIndex(where: { $0.assetId == offlineAsset.assetId }) {
-                offlineAssets[index] = offlineAsset
-            }
-        }
+        updateOfflineAsset(offlineAsset)
     }
 }
 
@@ -136,49 +174,20 @@ extension OfflineDownloadsViewController: UITableViewDelegate, UITableViewDataSo
         cell.configure(with: offlineAsset)
         return cell
     }
-
-}
-
-class OfflineDownloadTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var details: UILabel!
-    @IBOutlet weak var deleteButton: UIImageView!
-    @IBOutlet weak var cancelButton: UIImageView!
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var containerCell: UIView!
-    var offlineAsset : OfflineAsset?
-    
-    func configure(with asset: OfflineAsset) {
-        offlineAsset = asset
-        title.text = asset.title
-        details.text = "\(TimeUtils.formatDate(date: asset.createdAt)) • \(TimeUtils.formatDuration(seconds: asset.duration)) • \(String(format: "%.2f MB", asset.size / 8 / 1024 / 1024))"
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let asset = self.offlineAssets[indexPath.row]
         
-        if asset.status == Status.inProgress.rawValue {
-            let progress = (asset.percentageCompleted / 100)
-            progressView.isHidden = false
-            progressView.progress = Float(progress)
-            cancelButton.isHidden = false
-            deleteButton.isHidden = true
-        } else if asset.status == Status.finished.rawValue {
-            progressView.isHidden = true
-            cancelButton.isHidden = true
-            deleteButton.isHidden = false
-        }
-        
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onItemClick))
-        containerCell.addGestureRecognizer(tapRecognizer)
-        
-        deleteButton.addTapGestureRecognizer {
-            TPStreamsDownloadManager.shared.deleteDownload(asset.assetId)
-        }
-        
-        cancelButton.addTapGestureRecognizer {
-            TPStreamsDownloadManager.shared.cancelDownload(asset.assetId)
+        if asset.status == Status.finished.rawValue {
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+                TPStreamsDownloadManager.shared.deleteDownload(asset.assetId)
+                completionHandler(true)
+            }
+            deleteAction.backgroundColor = .red
+            return UISwipeActionsConfiguration(actions: [deleteAction])
+        } else {
+            return nil
         }
     }
-    
-    @objc func onItemClick() {
-        // Open Player view
-    }
+
 }

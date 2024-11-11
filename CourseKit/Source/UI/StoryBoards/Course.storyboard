@@ -2542,32 +2542,24 @@
                                                             <rect key="frame" x="0.0" y="32" width="361" height="23.666666666666671"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="LJT-sF-mVg">
-                                                                    <rect key="frame" x="0.0" y="1.6666666666666643" width="342" height="20.333333333333332"/>
+                                                                    <rect key="frame" x="0.0" y="1.6666666666666643" width="361" height="20.333333333333332"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="x2q-7A-DJ0">
-                                                                    <rect key="frame" x="342" y="0.99999999999999645" width="19" height="20.666666666666668"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="19" id="eg1-LT-UO2"/>
-                                                                    </constraints>
-                                                                </imageView>
                                                             </subviews>
                                                             <viewLayoutGuide key="safeArea" id="7Dg-g7-sVR"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="x2q-7A-DJ0" secondAttribute="trailing" id="gXr-sZ-eEa"/>
-                                                            </constraints>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="T61-yE-I7J">
                                                             <rect key="frame" x="0.0" y="63.666666666666679" width="361" height="20.333333333333336"/>
                                                             <subviews>
                                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Fbc-Qx-QFt">
-                                                                    <rect key="frame" x="0.0" y="8.3333333333333286" width="333.33333333333331" height="4"/>
+                                                                    <rect key="frame" x="0.0" y="8.3333333333333286" width="326.66666666666669" height="4"/>
                                                                 </progressView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9Ue-7c-eOz">
-                                                                    <rect key="frame" x="341.33333333333331" y="0.99999999999999822" width="19.666666666666686" height="19"/>
+                                                                    <rect key="frame" x="334.66666666666669" y="-3" width="26.333333333333314" height="26.333333333333332"/>
+                                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                                 </imageView>
                                                             </subviews>
                                                             <viewLayoutGuide key="safeArea" id="FYc-3R-Sne"/>
@@ -2597,7 +2589,6 @@
                                         <connections>
                                             <outlet property="cancelButton" destination="9Ue-7c-eOz" id="IkQ-uI-aMf"/>
                                             <outlet property="containerCell" destination="r3g-JX-axL" id="KWL-nd-4IJ"/>
-                                            <outlet property="deleteButton" destination="x2q-7A-DJ0" id="v2Y-ah-sZA"/>
                                             <outlet property="details" destination="LJT-sF-mVg" id="NjB-uq-hpX"/>
                                             <outlet property="progressView" destination="Fbc-Qx-QFt" id="ORh-Xd-ntF"/>
                                             <outlet property="title" destination="sWb-1F-q1p" id="EbG-L3-uKo"/>
@@ -2658,7 +2649,6 @@
         <image name="testpress_questions" width="25" height="25"/>
         <image name="tick_icon" width="42.666667938232422" height="42.666667938232422"/>
         <image name="tp_exam_icon" width="64" height="64"/>
-        <image name="trash.fill" catalog="system" width="117" height="128"/>
         <image name="video_added_icon" width="16" height="12"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="171717">

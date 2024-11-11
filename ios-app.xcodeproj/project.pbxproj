@@ -403,6 +403,7 @@
 		D932B2BB2CCBB801002B6D30 /* TPStreamsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */; };
 		D932B2C12CDA1392002B6D30 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932B2C02CDA1392002B6D30 /* AppConstants.swift */; };
 		D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */; };
+		D9A2F2AC2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */; };
 		D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -859,6 +860,7 @@
 		D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptAnswerTranslation.swift; sourceTree = "<group>"; };
 		D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptQuestionTranslation.swift; sourceTree = "<group>"; };
 		D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionTranslation.swift; sourceTree = "<group>"; };
+		D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineDownloadTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1583,6 +1585,7 @@
 				03CD0D2F2CB9353E00E17218 /* Base */,
 				8C04228E22AA3FD40015269B /* WebViewController.swift */,
 				D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */,
+				D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2168,6 +2171,7 @@
 				03A60F952CB3F34B00079A7C /* TPEndpoint.swift in Sources */,
 				03CD0C4E2CB79BC900E17218 /* FormatDate.swift in Sources */,
 				03E4AF622CAEDF7F00ECC34D /* Attempt.swift in Sources */,
+				D9A2F2AC2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift in Sources */,
 				03CD0D272CB92C0700E17218 /* TPBasePagedTableViewController.swift in Sources */,
 				03E4AF552CAEDF7F00ECC34D /* AttemptSection.swift in Sources */,
 				03E4AFAE2CAFCF6F00ECC34D /* ContentAttempt.swift in Sources */,
