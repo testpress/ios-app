@@ -396,11 +396,14 @@
 		8CDE264E239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */; };
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
+		D90F83672CDCD8220030C38F /* OfflineDownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */; };
 		D932B2B32CCBB357002B6D30 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B22CCBB357002B6D30 /* Realm */; };
 		D932B2B52CCBB357002B6D30 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B42CCBB357002B6D30 /* RealmSwift */; };
 		D932B2B92CCBB3AE002B6D30 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B82CCBB3AE002B6D30 /* Realm */; };
 		D932B2BB2CCBB801002B6D30 /* TPStreamsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */; };
 		D932B2C12CDA1392002B6D30 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932B2C02CDA1392002B6D30 /* AppConstants.swift */; };
+		D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */; };
+		D9A2F2AC2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */; };
 		D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -848,13 +851,16 @@
 		8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stackview+BackgroundColor.swift"; sourceTree = "<group>"; };
 		9B482AA21F7CADEABC2BF009 /* ios_appTests-ios_appMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ios_appTests-ios_appMocks.generated.swift"; path = "MockingbirdMocks/ios_appTests-ios_appMocks.generated.swift"; sourceTree = "<group>"; };
 		D907E7A82B19D11C00BEA874 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Language.swift; path = CourseKit/Source/Database/Models/Language.swift; sourceTree = SOURCE_ROOT; };
+		D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineDownloadsViewController.swift; sourceTree = "<group>"; };
 		D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestGenerationViewController.swift; sourceTree = "<group>"; };
 		D932B2C02CDA1392002B6D30 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		D9533ABD2B99CD2700E73A78 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
+		D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineDownloadsTabController.swift; sourceTree = "<group>"; };
 		D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestQuizExamViewModel.swift; sourceTree = "<group>"; };
 		D990C7ED2B316C6300B3ED4D /* AttemptAnswerTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptAnswerTranslation.swift; sourceTree = "<group>"; };
 		D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptQuestionTranslation.swift; sourceTree = "<group>"; };
 		D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionTranslation.swift; sourceTree = "<group>"; };
+		D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineDownloadTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1477,6 +1483,7 @@
 				25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */,
 				03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */,
 				03CD0D322CB93A6500E17218 /* LearnTabController.swift */,
+				D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1577,6 +1584,8 @@
 				03D82DDC2BFDFF8000678BBF /* LiveStreamContentViewController.swift */,
 				03CD0D2F2CB9353E00E17218 /* Base */,
 				8C04228E22AA3FD40015269B /* WebViewController.swift */,
+				D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */,
+				D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2068,6 +2077,7 @@
 				03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */,
 				2503DF50263C01E8003226AD /* CarouselSectionController.swift in Sources */,
 				25E435EC263ADE7500243FD3 /* DashboardSectionHeaderCell.swift in Sources */,
+				D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */,
 				03CD0D332CB93A6500E17218 /* LearnTabController.swift in Sources */,
 				8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */,
 				2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */,
@@ -2161,6 +2171,7 @@
 				03A60F952CB3F34B00079A7C /* TPEndpoint.swift in Sources */,
 				03CD0C4E2CB79BC900E17218 /* FormatDate.swift in Sources */,
 				03E4AF622CAEDF7F00ECC34D /* Attempt.swift in Sources */,
+				D9A2F2AC2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift in Sources */,
 				03CD0D272CB92C0700E17218 /* TPBasePagedTableViewController.swift in Sources */,
 				03E4AF552CAEDF7F00ECC34D /* AttemptSection.swift in Sources */,
 				03E4AFAE2CAFCF6F00ECC34D /* ContentAttempt.swift in Sources */,
@@ -2196,6 +2207,7 @@
 				03E4AF5D2CAEDF7F00ECC34D /* Course.swift in Sources */,
 				03CD0C4F2CB79C0A00E17218 /* Reachability.swift in Sources */,
 				03CD0D082CB928C600E17218 /* PlainDropDown.swift in Sources */,
+				D90F83672CDCD8220030C38F /* OfflineDownloadsViewController.swift in Sources */,
 				038CB2A32CBD278600164127 /* AttemptsListViewController.swift in Sources */,
 				03A60F892CB3F34600079A7C /* PostPager.swift in Sources */,
 				03A60F942CB3F34600079A7C /* ExamPager.swift in Sources */,
