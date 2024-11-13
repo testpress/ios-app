@@ -18,6 +18,7 @@ public class OfflineDownloadsViewController: BaseUIViewController, ObservableObj
     private var previousAssets: [OfflineAsset] = []
     @Published var offlineAssets: [OfflineAsset] = []
     var cancellables: Set<AnyCancellable> = []
+    var contents: [Content] = []
     
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -35,6 +36,7 @@ public class OfflineDownloadsViewController: BaseUIViewController, ObservableObj
     
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        contents = getItemsFromDb(withUUIDs: offlineAssets.map { $0.assetId })
     }
     
     func setupTPStreamsDownloadManager() {
@@ -103,6 +105,12 @@ public class OfflineDownloadsViewController: BaseUIViewController, ObservableObj
         }
     }
     
+    func getItemsFromDb(withUUIDs uuids: [String]) -> [Content] {
+        return DBManager<Content>().getItemsFromDB().filter { content in
+            uuids.contains(content.uuid ?? "")
+        }
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("OfflineAssetsUpdated"), object: nil)
     }
@@ -159,7 +167,7 @@ extension OfflineDownloadsViewController: TPStreamsDownloadDelegate {
     }
 }
 
-extension OfflineDownloadsViewController: UITableViewDelegate, UITableViewDataSource {
+extension OfflineDownloadsViewController: UITableViewDelegate, UITableViewDataSource, OfflineDownloadTableViewCellDelegate {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return offlineAssets.count
@@ -172,6 +180,7 @@ extension OfflineDownloadsViewController: UITableViewDelegate, UITableViewDataSo
         
         let offlineAsset = offlineAssets[indexPath.row]
         cell.configure(with: offlineAsset)
+        cell.delegate = self
         return cell
     }
     
@@ -189,5 +198,16 @@ extension OfflineDownloadsViewController: UITableViewDelegate, UITableViewDataSo
             return nil
         }
     }
-
+    
+    func didTapItem(for assetId: String) {
+        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
+        let contentDetailViewController = storyboard.instantiateViewController(
+            withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
+            as! ContentDetailPageViewController
+        let content = contents.first(where: { content in content.uuid == assetId })
+        contentDetailViewController.contents = contents
+        contentDetailViewController.title = content?.name
+        contentDetailViewController.position = 0
+        self.present(contentDetailViewController, animated: true, completion: nil)
+    }
 }
