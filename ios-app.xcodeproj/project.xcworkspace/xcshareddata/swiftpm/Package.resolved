@@ -51,7 +51,7 @@
       "location" : "https://github.com/Instagram/IGListKit",
       "state" : {
         "branch" : "main",
-        "revision" : "0ec2d526f35374dc0366024f8bb62aac4db1fd8d"
+        "revision" : "4bad7d52604c695e48c0c161fed631aad8511449"
       }
     },
     {
@@ -158,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/getsentry/sentry-cocoa.git",
       "state" : {
-        "revision" : "0ffc3c6287461962cb2a81e57fc0ee0335d8d56a",
-        "version" : "8.40.1"
+        "revision" : "5575af93efb776414f243e93d6af9f6258dc539a",
+        "version" : "8.36.0"
       }
     },
     {

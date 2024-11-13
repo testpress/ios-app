@@ -50,7 +50,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher",
       "state" : {
-        "revision" : "4bad7d52604c695e48c0c161fed631aad8511449"
+        "revision" : "2ef543ee21d63734e1c004ad6c870255e8716c50"
         "version" : "7.12.0"
       }
     },
@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/getsentry/sentry-cocoa.git",
       "state" : {
-        "revision" : "5575af93efb776414f243e93d6af9f6258dc539a",
-        "version" : "8.36.0"
+        "revision" : "7c1d627aaebbc702210c5062047508e4442ec9bf",
+        "version" : "8.37.0"
       }
     },
     {
