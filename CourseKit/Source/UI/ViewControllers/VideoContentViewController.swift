@@ -97,13 +97,20 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
 
     private func createPlayerConfig() -> TPStreamPlayerConfiguration {
-        return TPStreamPlayerConfigurationBuilder()
+        let builder = TPStreamPlayerConfigurationBuilder()
             .setPreferredForwardDuration(15)
             .setPreferredRewindDuration(5)
             .setprogressBarThumbColor(TestpressCourse.shared.primaryColor)
             .setwatchedProgressTrackColor(TestpressCourse.shared.primaryColor)
-            .showDownloadOption()
-            .build()
+        
+        InstituteRepository.shared.getSettings { instituteSettings, error in
+            guard error == nil else { return }
+            if instituteSettings?.isVideoDownloadEnabled ?? false {
+                builder.showDownloadOption()
+            }
+        }
+        
+        return builder.build()
     }
 
     private func configurePlayerView() {

@@ -36,6 +36,11 @@ class MainMenuTabViewController: UITabBarController {
         self.setStatusBarColor()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         viewControllers?[5].tabBarItem.title = instituteSettings.postsLabel
+        
+        if(!instituteSettings.isVideoDownloadEnabled){
+            viewControllers?.remove(at: 8) // Offline Download List
+        }
+        
         viewControllers?.remove(at: 7) // Access code
         if (!instituteSettings.forumEnabled) {
             viewControllers?.remove(at: 6)
