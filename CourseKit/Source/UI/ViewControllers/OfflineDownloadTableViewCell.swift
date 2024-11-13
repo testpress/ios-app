@@ -18,6 +18,7 @@ class OfflineDownloadTableViewCell: UITableViewCell {
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var containerCell: UIView!
     var offlineAsset : OfflineAsset?
+    weak var delegate: OfflineDownloadTableViewCellDelegate?
     
     func configure(with asset: OfflineAsset) {
         offlineAsset = asset
@@ -55,6 +56,10 @@ class OfflineDownloadTableViewCell: UITableViewCell {
     }
     
     @objc func onItemClick() {
-        // Open Player view
+        delegate?.didTapItem(for: offlineAsset!.assetId)
     }
+}
+
+protocol OfflineDownloadTableViewCellDelegate: AnyObject {
+    func didTapItem(for assetId: String)
 }
