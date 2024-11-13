@@ -44,6 +44,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     var position: Int! = 0
     var player: TPAVPlayer?
     var playerViewController: TPStreamPlayerViewController?
+    public var instituteSettings: InstituteSettings?
     
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -56,6 +57,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         loadPlayer(assetID: content.uuid!)
         viewModel = VideoContentViewModel(content)
         titleLabel.text = viewModel.getTitle()
@@ -97,13 +99,17 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
 
     private func createPlayerConfig() -> TPStreamPlayerConfiguration {
-        return TPStreamPlayerConfigurationBuilder()
+        let builder = TPStreamPlayerConfigurationBuilder()
             .setPreferredForwardDuration(15)
             .setPreferredRewindDuration(5)
             .setprogressBarThumbColor(TestpressCourse.shared.primaryColor)
             .setwatchedProgressTrackColor(TestpressCourse.shared.primaryColor)
-            .showDownloadOption()
-            .build()
+        
+        if instituteSettings?.isVideoDownloadEnabled ?? false {
+            builder.showDownloadOption()
+        }
+        
+        return builder.build()
     }
 
     private func configurePlayerView() {

@@ -65,6 +65,7 @@ public class InstituteSettings: DBModel {
     @objc public dynamic var disableForgotPassword: Bool = false
     @objc public dynamic var enableCustomTest: Bool = false
     @objc public dynamic var AllowScreenShotInApp: Bool = false
+    @objc public dynamic var isVideoDownloadEnabled: Bool = false
 
     public override func mapping(map: ObjectMapper.Map) {
         verificationMethod <- map["verification_method"]
@@ -103,6 +104,7 @@ public class InstituteSettings: DBModel {
         disableForgotPassword <- map["disable_forgot_password"]
         enableCustomTest <- map["enable_custom_test"]
         AllowScreenShotInApp <- map["allow_screenshot_in_app"]
+        isVideoDownloadEnabled <- map["is_video_download_enabled"]
     }
     
     override public static func primaryKey() -> String? {
