@@ -22,7 +22,7 @@ public class OfflineDownloadsTabController: UINavigationController {
     }
 
     private func setupOfflineDownloadsTab() {
-        let viewController = TestpressCourse.shared.getOfflineDownloadsViewController()
+        let viewController = TestpressCourse.shared.getMyDownloadsViewController()
         viewController?.title = "Offline Downloads"
         viewController?.tabBarItem.image = Images.LearnNavBarIcon.image
         
