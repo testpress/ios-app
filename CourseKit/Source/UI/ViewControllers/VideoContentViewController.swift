@@ -80,11 +80,19 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     private func initializePlayer(with assetID: String) {
         player?.pause()
         player = nil
-        player = TPAVPlayer(assetID: assetID, accessToken: "") { error in
-            guard error == nil else {
-                print("Setup error: \(error!.localizedDescription)")
-                return
+        
+        let setupCompletion: (Error?) -> Void = { error in
+            if let error = error {
+                print("Setup error: \(error.localizedDescription)")
+            } else {
+                print("TPAVPlayer setup successfully")
             }
+        }
+        
+        if TPStreamsDownloadManager.shared.isAssetDownloaded(assetID: assetID) {
+            player = TPAVPlayer(offlineAssetId: assetID, completion: setupCompletion)
+        } else {
+            player = TPAVPlayer(assetID: assetID, accessToken: "", completion: setupCompletion)
         }
     }
 
