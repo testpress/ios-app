@@ -50,10 +50,6 @@ public class TestpressCourse {
     public func getMyCoursesViewController() -> CoursesTableViewController? {
         return instantiateViewController(withIdentifier: "CoursesTableViewController")
     }
-    
-    public func getOfflineDownloadsViewController() -> OfflineDownloadsViewController? {
-        return instantiateViewController(withIdentifier: Constants.OFFLINE_DOWNLOADS_VIEW_CONTROLLERS)
-    }
 
     public func getContentDetailViewController(contentId: Int) -> ContentDetailPageViewController? {
         guard let detailViewController: ContentDetailPageViewController = instantiateViewController(withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) else {
@@ -80,7 +76,7 @@ public class TestpressCourse {
     }
     
     public func getMyDownloadsViewController() -> UIViewController? {
-        return instantiateViewController(withIdentifier: "ComingSoonViewController")
+        return instantiateViewController(withIdentifier: Constants.OFFLINE_DOWNLOADS_VIEW_CONTROLLERS)
     }
 
     private func instantiateViewController<T>(withIdentifier identifier: String) -> T? {
