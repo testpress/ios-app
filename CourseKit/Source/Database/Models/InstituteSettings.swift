@@ -66,6 +66,12 @@ public class InstituteSettings: DBModel {
     @objc public dynamic var enableCustomTest: Bool = false
     @objc public dynamic var AllowScreenShotInApp: Bool = false
     @objc public dynamic var isVideoDownloadEnabled: Bool = false
+    @objc public dynamic var salesforceSdkEnabled: Bool = false
+    @objc public dynamic var salesforceMcApplicationId: String? = nil
+    @objc public dynamic var salesforceMcAccessToken: String? = nil
+    @objc public dynamic var salesforceFcmSenderId: String? = nil
+    @objc public dynamic var salesforceMarketingCloudUrl: String? = nil
+    @objc public dynamic var salesforceMid: String? = nil
 
     public override func mapping(map: ObjectMapper.Map) {
         verificationMethod <- map["verification_method"]
@@ -104,7 +110,12 @@ public class InstituteSettings: DBModel {
         disableForgotPassword <- map["disable_forgot_password"]
         enableCustomTest <- map["enable_custom_test"]
         AllowScreenShotInApp <- map["allow_screenshot_in_app"]
-        isVideoDownloadEnabled <- map["is_video_download_enabled"]
+        salesforceSdkEnabled <- map["salesforce_sdk_enabled"]
+        salesforceMcApplicationId <- map["salesforce_mc_application_id"]
+        salesforceMcAccessToken <- map["salesforce_mc_access_token"]
+        salesforceFcmSenderId <- map["salesforce_fcm_sender_id"]
+        salesforceMarketingCloudUrl <- map["salesforce_marketing_cloud_url"]
+        salesforceMid <- map["salesforce_mid"]
     }
     
     override public static func primaryKey() -> String? {
