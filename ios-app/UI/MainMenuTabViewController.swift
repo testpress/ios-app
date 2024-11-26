@@ -26,6 +26,9 @@
 import UIKit
 import Alamofire
 import CourseKit
+import SFMCSDK
+import MarketingCloudSDK
+import Sentry
 
 class MainMenuTabViewController: UITabBarController {
     
@@ -79,6 +82,33 @@ class MainMenuTabViewController: UITabBarController {
             ]
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters,completion: { _, _ in})
         }
+        
+        if instituteSettings.salesforceSdkEnabled {
+            self.configureSalesforceSDK()
+        }
+    }
+    
+    func configureSalesforceSDK() {
+        let mobilePushConfiguration = PushConfigBuilder(appId: instituteSettings.salesforceMcApplicationId ?? "")
+            .setAccessToken(instituteSettings.salesforceMcAccessToken ?? "")
+            .setMarketingCloudServerUrl(URL(string: instituteSettings.salesforceMarketingCloudUrl ?? "")!)
+            .setMid(instituteSettings.salesforceMid ?? "")
+            .setInboxEnabled(false)
+            .setLocationEnabled(false)
+            .setAnalyticsEnabled(true)
+            .build()
+        
+        let completionHandler: (OperationResult) -> () = { result in
+            if result == .error {
+                SentrySDK.capture(message: "Salesforce SDK integration error.")
+            } else if result == .cancelled {
+                SentrySDK.capture(message: "Salesforce SDK integration cancelled.")
+            } else if result == .timeout {
+                SentrySDK.capture(message: "Salesforce SDK integration timeout.")
+            }
+        }
+        
+        SFMCSdk.initializeSdk(ConfigBuilder().setPush(config: mobilePushConfiguration, onCompletion: completionHandler).build())
     }
     
     func getDoubtsWebViewController() -> WebViewController {

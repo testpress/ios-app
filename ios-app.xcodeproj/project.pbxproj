@@ -404,6 +404,7 @@
 		D932B2C12CDA1392002B6D30 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932B2C02CDA1392002B6D30 /* AppConstants.swift */; };
 		D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */; };
 		D9A2F2AC2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */; };
+		D9CCCA5C2CF5DBA700B60B0F /* MarketingCloudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */; };
 		D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -894,6 +895,7 @@
 				036CE86A2CA6F0E400183BA8 /* ObjectMapper in Frameworks */,
 				2599326B2A0A3C2700866CA8 /* FBSDKCoreKit.xcframework in Frameworks */,
 				2599326D2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework in Frameworks */,
+				D9CCCA5C2CF5DBA700B60B0F /* MarketingCloudSDK in Frameworks */,
 				038696222BF7635C00E36F8F /* Kingfisher in Frameworks */,
 				841380222C9D9CCE004D5846 /* CourseKit.framework in Frameworks */,
 				0386961F2BF762DD00E36F8F /* IQKeyboardManagerSwift in Frameworks */,
@@ -1727,6 +1729,7 @@
 				03A60FAA2CB4153900079A7C /* Sentry */,
 				03494F4A2CBEAFA700C6A44B /* TOCropViewController */,
 				D932B2B82CCBB3AE002B6D30 /* Realm */,
+				D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */,
 			);
 			productName = "ios-app";
 			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
@@ -1881,6 +1884,7 @@
 				03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				03A60FAC2CB417CC00079A7C /* XCRemoteSwiftPackageReference "LUExpandableTableView" */,
 				D932B2A92CCBAEC4002B6D30 /* XCRemoteSwiftPackageReference "iOSPlayerSDK" */,
+				D9CCCA5A2CF5DBA700B60B0F /* XCRemoteSwiftPackageReference "MarketingCloudSDK-iOS" */,
 			);
 			productRefGroup = 2F26ADE31E8249D70031E6F4 /* Products */;
 			projectDirPath = "";
@@ -3079,6 +3083,14 @@
 				version = 1.1.9;
 			};
 		};
+		D9CCCA5A2CF5DBA700B60B0F /* XCRemoteSwiftPackageReference "MarketingCloudSDK-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/salesforce-marketingcloud/MarketingCloudSDK-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3246,6 +3258,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D932B2A92CCBAEC4002B6D30 /* XCRemoteSwiftPackageReference "iOSPlayerSDK" */;
 			productName = TPStreamsSDK;
+		};
+		D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D9CCCA5A2CF5DBA700B60B0F /* XCRemoteSwiftPackageReference "MarketingCloudSDK-iOS" */;
+			productName = MarketingCloudSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
