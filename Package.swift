@@ -29,7 +29,7 @@ let package = Package(
     .package(url: "https://github.com/xmartlabs/XLPagerTabStrip", .upToNextMajor(from: "9.1.0")),
     .package(url: "https://github.com/airbnb/lottie-ios", .upToNextMajor(from: "4.4.3")),
     .package(url: "https://github.com/LaurentiuUngur/LUExpandableTableView", .upToNextMajor(from: "6.0.0")),
-    .package(url: "https://github.com/testpress/iOSPlayerSDK", exact: "1.1.9"),
+    .package(url: "https://github.com/testpress/iOSPlayerSDK", branch: "latest_without_sentry"),
   ],
 
 
