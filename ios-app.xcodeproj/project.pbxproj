@@ -3079,8 +3079,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/testpress/iOSPlayerSDK";
 			requirement = {
-				kind = exactVersion;
-				version = 1.1.9;
+				branch = latest_without_sentry;
+				kind = branch;
 			};
 		};
 		D9CCCA5A2CF5DBA700B60B0F /* XCRemoteSwiftPackageReference "MarketingCloudSDK-iOS" */ = {
