@@ -46,6 +46,15 @@
       }
     },
     {
+      "identity" : "iosplayersdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/testpress/iOSPlayerSDK",
+      "state" : {
+        "branch" : "latest_without_sentry",
+        "revision" : "e42137a46ee256b5005b6bb1aac4abb4df0757dd"
+      }
+    },
+    {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher",
@@ -100,30 +109,30 @@
       }
     },
     {
+      "identity" : "reachability.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ashleymills/Reachability.swift",
+      "state" : {
+        "revision" : "21d1dc412cfecbe6e34f1f4c4eb88d3f912654a6",
+        "version" : "5.2.4"
+      }
+    },
+    {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "b36f2436c2746c32b1f93dcc06ea8b859671a767",
-        "version" : "14.12.1"
+        "revision" : "31bcd833c8f67b02f319bede83a05c65868258a9",
+        "version" : "13.24.1"
       }
     },
     {
       "identity" : "realm-swift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-swift/",
+      "location" : "https://github.com/realm/realm-swift",
       "state" : {
-        "revision" : "9b9992d59a5148eb557e6c0445fec05009022c8c",
-        "version" : "10.53.1"
-      }
-    },
-    {
-      "identity" : "sentry-cocoa",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/getsentry/sentry-cocoa.git",
-      "state" : {
-        "revision" : "7c1d627aaebbc702210c5062047508e4442ec9bf",
-        "version" : "8.37.0"
+        "revision" : "2300f05167898acb20a7f7c1199e8a1cf97d6039",
+        "version" : "10.45.0"
       }
     },
     {
