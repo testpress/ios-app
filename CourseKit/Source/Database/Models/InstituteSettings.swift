@@ -110,6 +110,7 @@ public class InstituteSettings: DBModel {
         disableForgotPassword <- map["disable_forgot_password"]
         enableCustomTest <- map["enable_custom_test"]
         AllowScreenShotInApp <- map["allow_screenshot_in_app"]
+        isVideoDownloadEnabled <- map["is_video_download_enabled"]
         salesforceSdkEnabled <- map["salesforce_sdk_enabled"]
         salesforceMcApplicationId <- map["salesforce_mc_application_id"]
         salesforceMcAccessToken <- map["salesforce_mc_access_token"]
