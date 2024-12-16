@@ -44,7 +44,7 @@ public class InstituteRepository {
                     self.clearCache()
                     DBManager<InstituteSettings>().addData(objects: [settings])
                 }
-                print(instituteSettings.is)
+                print(instituteSettings?.isVideoDownloadEnabled)
                 completion(instituteSettings, error)
             }
         )
