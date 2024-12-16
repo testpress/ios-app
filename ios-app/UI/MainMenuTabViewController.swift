@@ -60,7 +60,7 @@ class MainMenuTabViewController: UITabBarController {
         }
         
         if (instituteSettings.isHelpdeskEnabled) {
-            viewControllers?.insert(self.getDoubtsWebViewController(), at: 3)
+            viewControllers?.append(self.getDoubtsWebViewController())
         }
         
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
