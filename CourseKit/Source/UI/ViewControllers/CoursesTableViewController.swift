@@ -28,6 +28,7 @@ import UIKit
 public class CoursesTableViewController: BaseDBTableViewController<Course> {
     
     public var tags: [String] = []
+    public var excludeTags: [String] = []
     @IBOutlet weak var customTestIcon: UIBarButtonItem!
     var instituteSettings: InstituteSettings?
     
@@ -39,11 +40,20 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
         var courses = DBManager<Course>()
             .getItemsFromDB(filteredBy: "active = true", byKeyPath: "order")
         
+        // Filter courses based on the tags if there are any
         if tags.count > 0 {
             courses = courses.filter { (course: Course) in
                 !Set(course.tags).isDisjoint(with: tags)
             }
         }
+        
+        // Exclude courses that contain any of the exclude tags
+        if excludeTags.count > 0 {
+            courses = courses.filter { (course: Course) in
+                Set(course.tags).isDisjoint(with: excludeTags)
+            }
+        }
+
         return courses
     }
     

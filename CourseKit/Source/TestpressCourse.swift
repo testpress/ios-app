@@ -50,6 +50,18 @@ public class TestpressCourse {
     public func getMyCoursesViewController() -> CoursesTableViewController? {
         return instantiateViewController(withIdentifier: "CoursesTableViewController")
     }
+    
+    public func getMyCoursesViewController(tags: [String] = []) -> CoursesTableViewController? {
+        let coursesTableViewController = instantiateViewController(withIdentifier: "CoursesTableViewController") as CoursesTableViewController?
+        coursesTableViewController?.tags = tags
+        return coursesTableViewController
+    }
+    
+    public func getMyCoursesViewController(excludeTags: [String] = []) -> CoursesTableViewController? {
+        let coursesTableViewController = instantiateViewController(withIdentifier: "CoursesTableViewController") as CoursesTableViewController?
+        coursesTableViewController?.excludeTags = excludeTags
+        return coursesTableViewController
+    }
 
     public func getContentDetailViewController(contentId: Int) -> ContentDetailPageViewController? {
         guard let detailViewController: ContentDetailPageViewController = instantiateViewController(withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) else {
