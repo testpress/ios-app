@@ -59,6 +59,12 @@ class MainViewController: UIViewController {
     private func fetchInstituteSettings() {
         activityIndicator.startAnimating()
         
+        if InstituteRepository.shared.isSettingsCached() {
+            InstituteRepository.shared.getSettings(refresh: true) { [weak self] _, _ in }
+            navigateToNextScreen()
+            return
+        }
+        
         InstituteRepository.shared.getSettings { [weak self] instituteSettings, error in
             guard let self = self else { return }
             
@@ -100,7 +106,13 @@ class MainViewController: UIViewController {
     
     private func navigateToNextScreen() {
         let viewController = UserHelper.getLoginOrTabViewController()
-        present(viewController, animated: false)
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+              let window = appDelegate.window else {
+            return
+        }
+        
+        window.rootViewController = viewController
     }
     
     private var navigationBarHeight: CGFloat {

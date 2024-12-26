@@ -156,14 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     private func setupRootViewController() {
-        let viewController: UIViewController
-        if !InstituteRepository.shared.isSettingsCached() {
-            viewController = MainViewController()
-        } else {
-            InstituteRepository.shared.getSettings(refresh: true, completion: { _, _ in })
-            viewController = UserHelper.getLoginOrTabViewController()
-        }
-
+        let viewController = MainViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
