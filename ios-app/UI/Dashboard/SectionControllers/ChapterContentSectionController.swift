@@ -40,11 +40,7 @@ class ChapterContentSectionController: ListSectionController {
             withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
             as! ContentDetailPageViewController
         
-        let content = dashboardData?.getContent(id: contentId!)
-        contentDetailViewController.contents = [content!
-        ]
-        contentDetailViewController.title = content?.name
-        contentDetailViewController.position = 0
+        contentDetailViewController.contentId = contentId!
         viewController?.present(contentDetailViewController, animated: true, completion: nil)
     }
 }
