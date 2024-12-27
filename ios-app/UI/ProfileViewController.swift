@@ -59,6 +59,10 @@ class ProfileViewController: UIViewController {
         UIUtils.setButtonDropShadow(logoutButton)
         UIUtils.setButtonDropShadow(deleteAccountButton)
         bookmarkButtonLayout.isHidden = !Constants.BOOKMARKS_ENABLED
+        
+        deleteAccountButton.isHidden = true
+        showDeleteAccountButtonIfSignupAllowed()
+        
         self.setStatusBarColor()
     }
     
@@ -67,6 +71,15 @@ class ProfileViewController: UIViewController {
         
         if user == nil && !loading {
             getProfile()
+        }
+    }
+
+    func showDeleteAccountButtonIfSignupAllowed() {
+        InstituteRepository.shared.getSettings { [weak self] settings, error in
+            guard let settings = settings else { return }
+            DispatchQueue.main.async {
+                self?.deleteAccountButton.isHidden = !settings.allowSignup
+            }
         }
     }
     
