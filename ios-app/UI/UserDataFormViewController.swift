@@ -35,14 +35,20 @@ class UserDataFormViewController: WebViewController, WKScriptMessageHandler {
         guard message.name == "onSubmit" else { return }
         
         self.emptyView.hide()
-        ToastManager.shared.show(message: "Profile updated successfully")
+        self.cleanAllCookies()
         
         let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(
             withIdentifier: Constants.TAB_VIEW_CONTROLLER
         )
+
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+              let window = appDelegate.window else {
+            return
+        }
         
-        present(viewController, animated: true)
+        window.rootViewController = viewController
+        ToastManager.shared.show(message: "Profile updated successfully")
     }
 
     override func onFinishLoadingWebView() {
