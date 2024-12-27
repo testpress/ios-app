@@ -114,16 +114,7 @@ class MainViewController: UIViewController {
         navigateBasedOnDataCollectionStatus()
     }
     
-    private func isUserLoggedIn() -> Bool {
-        return KeychainTokenItem.isExist()
-    }
-    
-    private func isNetworkReachable() -> Bool {
-        return Alamofire.NetworkReachabilityManager()?.isReachable ?? false
-    }
-    
     private func navigateBasedOnDataCollectionStatus() {
-        print("called navigateBasedOnDataCollectionStatus")
         activityIndicator.startAnimating()
         
         UserService.shared.checkEnforceDataCollectionStatus { [weak self] isDataCollected, error in

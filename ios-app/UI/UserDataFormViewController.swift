@@ -35,7 +35,7 @@ class UserDataFormViewController: WebViewController, WKScriptMessageHandler {
         guard message.name == "onSubmit" else { return }
         
         self.emptyView.hide()
-        UIUtils.showToast(message: "Profile updated successfully")
+        ToastManager.shared.show(message: "Profile updated successfully")
         
         let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
         let viewController = storyboard.instantiateViewController(
