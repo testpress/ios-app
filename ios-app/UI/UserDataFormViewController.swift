@@ -48,7 +48,7 @@ class UserDataFormViewController: WebViewController, WKScriptMessageHandler {
         }
         
         window.rootViewController = viewController
-        ToastManager.shared.show(message: "Profile updated successfully")
+        Toast.shared.show(message: "Profile updated successfully")
     }
 
     override func onFinishLoadingWebView() {

@@ -1,8 +1,8 @@
 import UIKit
 import Foundation
 
-public class ToastManager {
-    public static let shared = ToastManager()
+public class Toast {
+    public static let shared = Toast()
     
     private init() {}
     
