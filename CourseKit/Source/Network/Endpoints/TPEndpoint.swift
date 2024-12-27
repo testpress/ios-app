@@ -79,6 +79,7 @@ public enum TPEndpoint {
     case dashboard
     case getSSOUrl
     case getS3PreSignedUrl
+    case checkEnforceDataCollectionStatus
 
     public var method: Alamofire.HTTPMethod {
         switch self {
@@ -125,7 +126,8 @@ public enum TPEndpoint {
              .getAccessCodeExams,
              .bookmarks,
              .bookmarkFolders,
-             .getActivityFeed:
+             .getActivityFeed,
+             .checkEnforceDataCollectionStatus:
             return .get
         case .get:
             return .get
@@ -238,6 +240,8 @@ public enum TPEndpoint {
             return "/api/v2.3/presigned_sso_url/"
         case .getS3PreSignedUrl:
             return "/api/v2.3/presigned_url/"
+        case .checkEnforceDataCollectionStatus:
+            return "/api/v2.3/me/check_permission/"
         default:
             return ""
         }

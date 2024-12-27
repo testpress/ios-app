@@ -145,14 +145,33 @@ class LoginViewController: BaseTextFieldViewController {
                 } catch {
                     fatalError("Error updating keychain - \(error)")
                 }
-
-                let tabViewController = self.storyboard!.instantiateViewController(
-                    withIdentifier: Constants.TAB_VIEW_CONTROLLER)
                 
-                self.alertController.dismiss(animated: true, completion: nil)
-                self.present(tabViewController, animated: true, completion: nil)
+                UserService.shared.checkEnforceDataCollectionStatus { [weak self] isDataCollected, error in
+                    guard let self = self else { return }
+                    self.alertController.dismiss(animated: true) {
+                        if isDataCollected == true {
+                            self.showTabViewController()
+                        } else {
+                            self.showUserDataForm()
+                        }
+                    }
+                }
             }
         )
+    }
+    
+    private func showTabViewController() {
+        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+        let viewController = storyboard.instantiateViewController(
+            withIdentifier: Constants.TAB_VIEW_CONTROLLER
+        )
+        present(viewController, animated: true)
+    }
+    
+    private func showUserDataForm() {
+        let webViewController = UserDataFormViewController()
+        webViewController.modalPresentationStyle = .fullScreen
+        present(webViewController, animated: true)
     }
     
     @IBAction func showSignUpView() {

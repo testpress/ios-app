@@ -8,6 +8,7 @@
 
 import UIKit
 import CourseKit
+import Alamofire
 
 class MainViewController: UIViewController {
 
@@ -105,6 +106,41 @@ class MainViewController: UIViewController {
     }
     
     private func navigateToNextScreen() {
+        guard isUserLoggedIn() && isNetworkReachable() else {
+            showLoginOrHome()
+            return
+        }
+        
+        navigateBasedOnDataCollectionStatus()
+    }
+    
+    private func navigateBasedOnDataCollectionStatus() {
+        activityIndicator.startAnimating()
+        
+        UserService.shared.checkEnforceDataCollectionStatus { [weak self] isDataCollected, error in
+            guard let self = self else { return }
+            self.activityIndicator.stopAnimating()
+            
+            if let error = error {
+                showLoginOrHome()
+                return
+            }
+            
+            if isDataCollected == true {
+                showLoginOrHome()
+            } else {
+                showUserDataForm()
+            }
+        }
+    }
+    
+    private func showUserDataForm() {
+        let webViewController = UserDataFormViewController()
+        webViewController.modalPresentationStyle = .fullScreen
+        present(webViewController, animated: true)
+    }
+    
+    private func showLoginOrHome() {
         let viewController = UserHelper.getLoginOrTabViewController()
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,

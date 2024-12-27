@@ -57,3 +57,9 @@ class UserHelper {
         return viewController
     }
 }
+
+func isUserLoggedIn() -> Bool {
+    return KeychainTokenItem.isExist()
+}
+
+
