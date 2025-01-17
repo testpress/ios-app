@@ -123,9 +123,8 @@ BaseDBViewController<Chapter> {
                 self.loadItems()
             } else {
                 self.items = Array(items!.values)
-                var chaptersFromDB = [] as [Chapter]
                 let parentIdFilter = self.parentId ?? 0
-                chaptersFromDB = self.getChaptersFromDB(courseId: self.courseId, parentId: parentIdFilter)
+                let chaptersFromDB = self.getChaptersFromDB(courseId: self.courseId, parentId: parentIdFilter)
                 DBManager<Chapter>().deleteFromDb(objects: chaptersFromDB)
                 DBManager<Chapter>().addData(objects: items!.values)
                 if self.items.count == 0 {
