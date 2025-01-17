@@ -124,11 +124,11 @@ BaseDBViewController<Chapter> {
             } else {
                 self.items = Array(items!.values)
                 var chaptersFromDB = [] as [Chapter]
-                if (self.parentId != nil){
-                    chaptersFromDB = DBManager<Chapter>().getItemsFromDB(filteredBy: String(format: "courseId==%d", self.courseId), and: String(format: "parentId==%d", self.parentId!), byKeyPath: "order")
-                } else {
-                    chaptersFromDB = DBManager<Chapter>().getItemsFromDB(filteredBy: String(format: "courseId==%d", self.courseId), and: String(format: "parentId==%d", 0), byKeyPath: "order")
-                }
+                let parentIdFilter = self.parentId ?? 0
+                chaptersFromDB = DBManager<Chapter>().getItemsFromDB(
+                    filteredBy: [String(format: "courseId==%d", self.courseId), String(format: "parentId==%d", parentIdFilter)],
+                    byKeyPath: "order"
+                )
                 DBManager<Chapter>().deleteFromDb(objects: chaptersFromDB)
                 DBManager<Chapter>().addData(objects: items!.values)
                 if self.items.count == 0 {
