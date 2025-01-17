@@ -54,7 +54,6 @@ class ChapterCollectionViewCell: UICollectionViewCell {
             let chapterViewController = storyboard.instantiateViewController(withIdentifier:
                 Constants.CHAPTERS_VIEW_CONTROLLER) as! ChaptersViewController
             chapterViewController.courseId = chapter.courseId
-            chapterViewController.baseUrl = chapter.url
             chapterViewController.parentId = chapter.id
             chapterViewController.title = chapter.name
             viewController = chapterViewController

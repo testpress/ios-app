@@ -95,6 +95,21 @@ public class DBManager<T: Object> {
             .sorted(byKeyPath: byKeyPath, ascending: ascending))
     }
     
+    public func getItemsFromDB(
+        filteredBy filters: [String],
+        byKeyPath: String,
+        ascending: Bool = true
+    ) -> [T] {
+        var results = getResultsFromDB()
+        
+        filters.forEach { filter in
+            results = results.filter(filter)
+        }
+        
+        results = results.sorted(byKeyPath: byKeyPath, ascending: ascending)
+        return Array(results)
+    }
+    
     public func getSortedItemsFromDB(byKeyPath: String, ascending: Bool = true) -> [T] {
         return Array(getResultsFromDB().sorted(byKeyPath: byKeyPath, ascending: ascending))
     }

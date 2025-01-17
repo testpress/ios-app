@@ -78,7 +78,6 @@ public class TestpressCourse {
         }
         
         detailViewController.courseId = courseId
-        detailViewController.baseUrl = TPEndpointProvider.getCourseDetailUrl(courseId: courseId)
         detailViewController.allowCustomTestGeneration = false
         return detailViewController
     }
