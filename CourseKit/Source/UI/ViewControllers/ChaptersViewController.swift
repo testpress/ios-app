@@ -125,10 +125,7 @@ BaseDBViewController<Chapter> {
                 self.items = Array(items!.values)
                 var chaptersFromDB = [] as [Chapter]
                 let parentIdFilter = self.parentId ?? 0
-                chaptersFromDB = DBManager<Chapter>().getItemsFromDB(
-                    filteredBy: [String(format: "courseId==%d", self.courseId), String(format: "parentId==%d", parentIdFilter)],
-                    byKeyPath: "order"
-                )
+                chaptersFromDB = self.getChaptersFromDB(courseId: self.courseId, parentId: parentIdFilter)
                 DBManager<Chapter>().deleteFromDb(objects: chaptersFromDB)
                 DBManager<Chapter>().addData(objects: items!.values)
                 if self.items.count == 0 {
@@ -142,6 +139,16 @@ BaseDBViewController<Chapter> {
                 self.loadingItems = false
             }
         })
+    }
+    
+    func getChaptersFromDB(courseId: Int, parentId: Int) -> [Chapter] {
+        return DBManager<Chapter>().getItemsFromDB(
+            filteredBy: [
+                String(format: "courseId==%d", courseId),
+                String(format: "parentId==%d", parentId)
+            ],
+            byKeyPath: "order"
+        )
     }
     
     func handleError(_ error: TPError) {
