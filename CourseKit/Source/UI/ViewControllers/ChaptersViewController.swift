@@ -35,7 +35,6 @@ BaseDBViewController<Chapter> {
     var emptyView: EmptyView!
     var pager: ChapterPager!
     public var loadingItems: Bool = false
-    public var baseUrl: String!
     public var courseId: Int!
     public var parentId: Int? = nil
     public var firstCallback: Bool = true
@@ -46,7 +45,7 @@ BaseDBViewController<Chapter> {
         super.viewDidLoad()
         
         navigationItemBar.title = title
-        pager = ChapterPager(coursesUrl: baseUrl, parentId: parentId)
+        pager = ChapterPager(courseId: courseId, parentId: parentId)
         activityIndicator = UIUtils.initActivityIndicator(parentView: collectionView)
         activityIndicator?.center = CGPoint(x: view.center.x, y: view.center.y - 50)
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
@@ -124,7 +123,12 @@ BaseDBViewController<Chapter> {
                 self.loadItems()
             } else {
                 self.items = Array(items!.values)
-                let chaptersFromDB = DBManager<Chapter>().getItemsFromDB(filteredBy: String(format: "courseId==%d", self.courseId), byKeyPath: "order")
+                var chaptersFromDB = [] as [Chapter]
+                if (self.parentId != nil){
+                    chaptersFromDB = DBManager<Chapter>().getItemsFromDB(filteredBy: String(format: "courseId==%d", self.courseId), and: String(format: "parentId==%d", self.parentId!), byKeyPath: "order")
+                } else {
+                    chaptersFromDB = DBManager<Chapter>().getItemsFromDB(filteredBy: String(format: "courseId==%d", self.courseId), and: String(format: "parentId==%d", 0), byKeyPath: "order")
+                }
                 DBManager<Chapter>().deleteFromDb(objects: chaptersFromDB)
                 DBManager<Chapter>().addData(objects: items!.values)
                 if self.items.count == 0 {

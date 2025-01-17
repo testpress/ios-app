@@ -31,14 +31,15 @@ public class ChapterPager: TPBasePager<Chapter> {
     public let url: String
     public let parentId: Int?
     
-    public init(coursesUrl: String, parentId: Int?) {
-        self.url = coursesUrl + TPEndpoint.getChapters.urlPath
+    public init(courseId: Int, parentId: Int?) {
+        self.url = TestpressCourse.shared.baseURL + TPEndpoint.getCourses.urlPath + "\(courseId)/" + TPEndpoint.getChapters.urlPath
         self.parentId = parentId
         super.init()
     }
     
     public override func getItems(page: Int) {
         queryParams.updateValue(String(page), forKey: Constants.PAGE)
+        queryParams[Constants.PAGE] = parentId != nil ? String(parentId!) : "null"
         TPApiClient.getListItems(
             endpointProvider: TPEndpointProvider(.getChapters, url: url, queryParams: queryParams),
             completion: resonseHandler!,
