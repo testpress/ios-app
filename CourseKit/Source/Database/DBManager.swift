@@ -96,20 +96,6 @@ public class DBManager<T: Object> {
     }
     
     public func getItemsFromDB(
-        filteredBy firstFilter: String,
-        and secondFilter: String,
-        byKeyPath: String,
-        ascending: Bool = true
-    ) -> [T] {
-        return Array(
-            getResultsFromDB()
-                .filter(firstFilter)
-                .filter(secondFilter)
-                .sorted(byKeyPath: byKeyPath, ascending: ascending)
-        )
-    }
-    
-    public func getItemsFromDB(
         filteredBy filters: [String],
         byKeyPath: String,
         ascending: Bool = true
