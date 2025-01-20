@@ -45,9 +45,6 @@ class MainMenuTabViewController: UITabBarController {
         }
         
         viewControllers?.remove(at: 7) // Access code
-        if (!instituteSettings.forumEnabled) {
-            viewControllers?.remove(at: 6)
-        }
         
         if (!instituteSettings.postsEnabled) {
             viewControllers?.remove(at: 5)
@@ -69,6 +66,7 @@ class MainMenuTabViewController: UITabBarController {
         }
         
         addDoubtsWebViewController()
+        addDiscussionsWebViewController()
         
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
             let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
@@ -119,7 +117,7 @@ class MainMenuTabViewController: UITabBarController {
             viewControllers?.append(doubtsWebViewController)
         }
     }
-    
+
     func getDoubtsWebViewController() -> WebViewController {
         let secondViewController = WebViewController()
         secondViewController.url = "&next=/tickets/mobile"
@@ -129,6 +127,29 @@ class MainMenuTabViewController: UITabBarController {
         secondViewController.title = "Doubts"
         secondViewController.displayNavbar = true
         secondViewController.tabBarItem.image = Images.DoubtsIcon.image
+        return secondViewController
+    }
+
+    private func addDiscussionsWebViewController() {
+        guard instituteSettings.forumEnabled else { return }
+
+        let discussionsWebViewController = self.getDoubtsWebViewController()
+        if (viewControllers?.count ?? 0) > 4 {
+            viewControllers?.insert(getDiscussionsWebViewController(), at: 3)
+        } else {
+            viewControllers?.append(discussionsWebViewController)
+        }
+    }
+
+    func getDiscussionsWebViewController() -> WebViewController {
+        let secondViewController = WebViewController()
+        secondViewController.url = "&next=/discussions/new"
+        secondViewController.useWebviewNavigation = true
+        secondViewController.useSSOLogin = true
+        secondViewController.shouldOpenLinksWithinWebview = true
+        secondViewController.title = "Discussions"
+        secondViewController.displayNavbar = true
+        secondViewController.tabBarItem.image = Images.DiscussionsIcon.image
         return secondViewController
     }
 }

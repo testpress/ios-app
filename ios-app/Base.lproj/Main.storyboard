@@ -1460,7 +1460,6 @@
                         <segue destination="QVc-G1-ctc" kind="relationship" relationship="viewControllers" id="61h-PT-oPA"/>
                         <segue destination="DsX-ph-kej" kind="relationship" relationship="viewControllers" id="VZO-8a-tUC"/>
                         <segue destination="9va-L7-6A6" kind="relationship" relationship="viewControllers" id="GaN-Gb-zjr"/>
-                        <segue destination="LTa-pc-ZhR" kind="relationship" relationship="viewControllers" id="4vL-xg-41d"/>
                         <segue destination="4b6-tm-543" kind="relationship" relationship="viewControllers" id="Nji-EB-1m8"/>
                         <segue destination="omW-yp-kWD" kind="relationship" relationship="viewControllers" id="MsF-Bm-cID"/>
                     </connections>
@@ -2923,7 +2922,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
