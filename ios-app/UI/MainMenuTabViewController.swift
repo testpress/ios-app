@@ -107,7 +107,7 @@ class MainMenuTabViewController: UITabBarController {
         SFMCSdk.initializeSdk(ConfigBuilder().setPush(config: mobilePushConfiguration, onCompletion: completionHandler).build())
     }
     
-    private func addDoubtsWebViewController() {
+    private func addDoubtsWebViewController(to viewControllers: inout [UIViewController]?) {
         guard instituteSettings.isHelpdeskEnabled else { return }
 
         let doubtsWebViewController = self.getDoubtsWebViewController()
@@ -117,7 +117,7 @@ class MainMenuTabViewController: UITabBarController {
             viewControllers?.append(doubtsWebViewController)
         }
     }
-
+    
     func getDoubtsWebViewController() -> WebViewController {
         let secondViewController = WebViewController()
         secondViewController.url = "&next=/tickets/mobile"
@@ -129,8 +129,8 @@ class MainMenuTabViewController: UITabBarController {
         secondViewController.tabBarItem.image = Images.DoubtsIcon.image
         return secondViewController
     }
-
-    private func addDiscussionsWebViewController() {
+    
+    private func addDiscussionsWebViewController(to viewControllers: inout [UIViewController]?) {
         guard instituteSettings.forumEnabled else { return }
 
         let discussionsWebViewController = self.getDoubtsWebViewController()
@@ -140,7 +140,7 @@ class MainMenuTabViewController: UITabBarController {
             viewControllers?.append(discussionsWebViewController)
         }
     }
-
+    
     func getDiscussionsWebViewController() -> WebViewController {
         let secondViewController = WebViewController()
         secondViewController.url = "&next=/discussions/new"
