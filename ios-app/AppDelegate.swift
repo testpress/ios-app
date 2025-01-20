@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        TestpressCourse.shared.initialize(subdomain: AppConstants.SUBDOMAIN, primaryColor: Colors.DODGERBLUE)
+        TestpressCourse.shared.initialize(subdomain: AppConstants.SUBDOMAIN, primaryColor: AppConstants.PRIMARY_COLOR)
         registerForNotifications(application)
         configureFirebase()
         customizeAppearance()
