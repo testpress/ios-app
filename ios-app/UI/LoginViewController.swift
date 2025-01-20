@@ -141,7 +141,7 @@ class LoginViewController: BaseTextFieldViewController {
                     
                     // Save the password for the new item
                     try passwordItem.savePassword(token)
-                    TestpressCourse.shared.initialize(withToken: token, subdomain: AppConstants.SUBDOMAIN, primaryColor: Colors.DODGERBLUE)
+                    TestpressCourse.shared.initialize(withToken: token, subdomain: AppConstants.SUBDOMAIN, primaryColor: AppConstants.PRIMARY_COLOR)
                 } catch {
                     fatalError("Error updating keychain - \(error)")
                 }
