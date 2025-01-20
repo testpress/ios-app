@@ -84,13 +84,7 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     }
     
     func gotoPreviousPage() {
-        if let currentViewController = UIApplication.shared.delegate?.window??.rootViewController?.presentedViewController {
-            currentViewController.dismiss(animated: true, completion: nil)
-        } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: TestpressCourse.bundle)
-            let viewController = storyboard.instantiateViewController(withIdentifier: Constants.TAB_VIEW_CONTROLLER)
-            UIApplication.shared.delegate?.window??.rootViewController = viewController
-        }
+        self.dismiss(animated: true, completion: nil)
     }
 
     func onMobileRTCAuthReturn(_ returnValue: MobileRTCAuthError) {
@@ -116,8 +110,6 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
     func prepareAndJoin() {
         showLoading()
         configureMeeting()
-        // Zoom SDK requires view controller which joins zoom meet to be root view controller
-        presentZoomViewController()
         join()
     }
 
@@ -127,16 +119,6 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         meetingSettings?.meetingInviteHidden = true
         meetingSettings?.meetingShareHidden = true
         meetingSettings?.meetingInviteUrlHidden = true
-    }
-
-    func presentZoomViewController() {
-        guard let currentRootViewController = UIApplication.shared.delegate?.window??.rootViewController else {
-            print("Error: No root view controller found.")
-            return
-        }
-
-        let zoomMeetVC = ZoomMeetViewController()
-        currentRootViewController.present(zoomMeetVC, animated: true, completion: nil)
     }
 
     func join() {
