@@ -82,6 +82,7 @@ public enum Images: String {
     case NotesIconSmall = "attachment_small"
     case OffersIcon = "offers"
     case DoubtsIcon = "doubt"
+    case DiscussionsIcon = "discussion_icon"
     case ValidityCalendar = "validity_calendar"
 
     public var image: UIImage {
