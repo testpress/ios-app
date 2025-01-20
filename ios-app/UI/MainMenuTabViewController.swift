@@ -68,7 +68,7 @@ class MainMenuTabViewController: UITabBarController {
             viewControllers?.remove(at: 1)
         }
         
-        addDoubtsWebViewController(to: &viewControllers)
+        addDoubtsWebViewController()
         
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
             let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
@@ -109,7 +109,7 @@ class MainMenuTabViewController: UITabBarController {
         SFMCSdk.initializeSdk(ConfigBuilder().setPush(config: mobilePushConfiguration, onCompletion: completionHandler).build())
     }
     
-    private func addDoubtsWebViewController(to viewControllers: inout [UIViewController]?) {
+    private func addDoubtsWebViewController() {
         guard instituteSettings.isHelpdeskEnabled else { return }
 
         let doubtsWebViewController = self.getDoubtsWebViewController()
