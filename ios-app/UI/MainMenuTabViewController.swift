@@ -41,10 +41,10 @@ class MainMenuTabViewController: UITabBarController {
         viewControllers?[5].tabBarItem.title = instituteSettings.postsLabel
         
         if(!instituteSettings.isVideoDownloadEnabled){
-            viewControllers?.remove(at: 8) // Offline Download List
+            viewControllers?.remove(at: 7) // Offline Download List
         }
         
-        viewControllers?.remove(at: 7) // Access code
+        viewControllers?.remove(at: 6) // Access code
         
         if (!instituteSettings.postsEnabled) {
             viewControllers?.remove(at: 5)
