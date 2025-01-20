@@ -409,6 +409,9 @@
 		D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */; };
 		D9A2F2AC2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */; };
 		D9CCCA5C2CF5DBA700B60B0F /* MarketingCloudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */; };
+		D9E3D6D52D3E534B0014243F /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3D6D42D3E53460014243F /* MobileRTC.xcframework */; };
+		D9E3D6D72D3E535A0014243F /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9E3D6D62D3E535A0014243F /* MobileRTCResources.bundle */; };
+		D9E3D6D82D3E53640014243F /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3D6D42D3E53460014243F /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -460,6 +463,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D9E3D6D82D3E53640014243F /* MobileRTC.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -870,6 +874,8 @@
 		D990C7EF2B31731300B3ED4D /* AttemptQuestionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptQuestionTranslation.swift; sourceTree = "<group>"; };
 		D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionTranslation.swift; sourceTree = "<group>"; };
 		D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineDownloadTableViewCell.swift; sourceTree = "<group>"; };
+		D9E3D6D42D3E53460014243F /* MobileRTC.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:BJ4HAAB9B3:Zoom Video Communications, Inc."; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
+		D9E3D6D62D3E535A0014243F /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -925,6 +931,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9E3D6D52D3E534B0014243F /* MobileRTC.xcframework in Frameworks */,
 				035CC5532CAE699B0057F4E4 /* ObjectMapper in Frameworks */,
 				03A60F9F2CB3F83D00079A7C /* Alamofire in Frameworks */,
 				038CB2BF2CBD2BF600164127 /* SlideMenuController in Frameworks */,
@@ -1333,6 +1340,7 @@
 		2F26ADD91E8249D70031E6F4 = {
 			isa = PBXGroup;
 			children = (
+				D9E3D6D62D3E535A0014243F /* MobileRTCResources.bundle */,
 				038696232BF7692900E36F8F /* PrivacyInfo.xcprivacy */,
 				2F26ADE41E8249D70031E6F4 /* ios-app */,
 				2F26ADF91E8249D70031E6F4 /* ios-appTests */,
@@ -1396,6 +1404,7 @@
 		2FBEDB781E82BBD0000CF05C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9E3D6D42D3E53460014243F /* MobileRTC.xcframework */,
 				259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */,
 				2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */,
 				2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */,
@@ -1957,6 +1966,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9E3D6D72D3E535A0014243F /* MobileRTCResources.bundle in Resources */,
 				038CB2362CBD24B500164127 /* TestEngine.storyboard in Resources */,
 				03CD0D4C2CB9556D00E17218 /* images in Resources */,
 				03CD0D2D2CB92CAE00E17218 /* EmptyView.xib in Resources */,
