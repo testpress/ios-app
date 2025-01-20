@@ -107,7 +107,7 @@ class MainMenuTabViewController: UITabBarController {
         SFMCSdk.initializeSdk(ConfigBuilder().setPush(config: mobilePushConfiguration, onCompletion: completionHandler).build())
     }
     
-    private func addDoubtsWebViewController(to viewControllers: inout [UIViewController]?) {
+    private func addDoubtsWebViewController() {
         guard instituteSettings.isHelpdeskEnabled else { return }
 
         let doubtsWebViewController = self.getDoubtsWebViewController()
@@ -130,7 +130,7 @@ class MainMenuTabViewController: UITabBarController {
         return secondViewController
     }
     
-    private func addDiscussionsWebViewController(to viewControllers: inout [UIViewController]?) {
+    private func addDiscussionsWebViewController() {
         guard instituteSettings.forumEnabled else { return }
 
         let discussionsWebViewController = self.getDoubtsWebViewController()
