@@ -9,11 +9,6 @@
 import Foundation
 
 public struct Constants {
-    public static let APP_APPLE_ID = "1434052944"
-    
-    public static let APP_SHARE_MESSAGE = "Good app to prepare for online exams. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID
-    
-    public static let APP_STORE_LINK = "itms-apps://itunes.apple.com/app/id" + APP_APPLE_ID
     
     public static let KEYCHAIN_SERVICE_NAME = Bundle.main.bundleIdentifier!
     
