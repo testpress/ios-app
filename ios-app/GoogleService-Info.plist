@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>in.testpress.demo</string>
+	<string>in.testpress.phirelearningsolutions</string>
 	<key>PROJECT_ID</key>
 	<string>testpress--apps-10</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:32674323910:ios:357107b7f9b1750fd626c7</string>
+	<string>1:32674323910:ios:693d8063084199dbd626c7</string>
 </dict>
 </plist>
