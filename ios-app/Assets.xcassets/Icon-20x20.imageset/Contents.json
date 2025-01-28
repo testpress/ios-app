@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "LOgin Screen Wings way (1).png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Icon-20x20@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
