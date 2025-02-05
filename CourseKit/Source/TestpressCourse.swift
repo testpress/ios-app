@@ -37,7 +37,7 @@ public class TestpressCourse {
             InstituteRepository.shared.getSettings(refresh: true, completion: { _, _ in})
         }
         
-        if (KeychainTokenItem.isExist()) {
+        if (KeychainTokenItem.isExist()) {   
             let token: String = KeychainTokenItem.getToken()
             TPStreamsSDK.initialize(for : Provider.testpress, withOrgCode: subdomain, usingAuthToken: token)
         }
