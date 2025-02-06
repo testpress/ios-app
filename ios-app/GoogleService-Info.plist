@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>32674323910-v7h4e43kspucafr9djuq6c3b2vp5hf08.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.32674323910-v7h4e43kspucafr9djuq6c3b2vp5hf08</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDeOJdBUPl1qijkqwYDKNZYVAOt0fhzsmY</string>
 	<key>GCM_SENDER_ID</key>
@@ -9,11 +13,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>in.testpress.demo</string>
+	<string>in.testpress.aceachievers</string>
 	<key>PROJECT_ID</key>
 	<string>testpress--apps-10</string>
 	<key>STORAGE_BUCKET</key>
-	<string>testpress--apps-10.firebasestorage.app</string>
+	<string>testpress--apps-10.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:32674323910:ios:357107b7f9b1750fd626c7</string>
+	<string>1:32674323910:ios:277cb7f3b7b3ffc3d626c7</string>
 </dict>
 </plist>
