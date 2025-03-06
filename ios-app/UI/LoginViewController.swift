@@ -28,6 +28,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import UIKit
 import CourseKit
+import RealmSwift
 
 class LoginViewController: BaseTextFieldViewController {
 
@@ -43,25 +44,18 @@ class LoginViewController: BaseTextFieldViewController {
     
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     var instituteSettings: InstituteSettings!
+    var instituteSettingsToken: NotificationToken?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setStatusBarColor()
-        
+        observeInstituteSettings()
         navigationbarItem.title = Constants.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
-        
-        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-        
-        forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
-        
-        signUpLayout.isHidden = true
-        if(instituteSettings.allowSignup) {
-            signUpLayout.isHidden = false
-        }
 
+        forgotPasswordButton.isHidden = true
+        signUpLayout.isHidden = true
 
         let fbLoginButton = FBLoginButton()
-
         
         fbLoginButton.center.x = facebookButtonLayout.center.x
         fbLoginButton.delegate = self
@@ -76,13 +70,39 @@ class LoginViewController: BaseTextFieldViewController {
             .constraint(equalTo: facebookButtonLayout.trailingAnchor).isActive = true
         
         socialLoginLayout.isHidden = true
-        if(instituteSettings.facebookLoginEnabled) {
-            socialLoginLayout.isHidden = false
-        }
 
         // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
         showKeyboardOnStart = false
+    }
+    
+    func observeInstituteSettings() {
+        var settings : Results<InstituteSettings>? = DBManager<InstituteSettings>().getResultsFromDB()
+        instituteSettingsToken = settings?.observe { [weak self] changes in
+        guard let self = self else { return }
+        switch changes {
+            case .initial(let settings):
+                self.updateUI(settings: settings)
+            case .update(let settings, _, _, _):
+                self.updateUI(settings: settings)
+            case .error(let error):
+                print("Error observing Realm objects: \(error)")
+            }
+        }
+    }
+
+    func updateUI(settings : Results<InstituteSettings>?) {
+        guard let settings = settings else { return }
+        if(settings.isNotEmpty) {
+            self.instituteSettings = settings[0]
+            signUpLayout.isHidden = !instituteSettings.allowSignup
+            socialLoginLayout.isHidden = !instituteSettings.facebookLoginEnabled
+            forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
+        }
+    }
+
+    deinit {
+        instituteSettingsToken?.invalidate()
     }
     
     @IBAction func moveToPasswordField(_ sender: UITextField) {
@@ -175,8 +195,6 @@ class LoginViewController: BaseTextFieldViewController {
     }
     
     @IBAction func showSignUpView() {
-        print("Custom : \(instituteSettings.allowSignup)")
-        
         if (instituteSettings.customRegistrationEnabled) {
             let webViewController = WebViewController()
             webViewController.url = TestpressCourse.shared.baseURL + "/register/"
