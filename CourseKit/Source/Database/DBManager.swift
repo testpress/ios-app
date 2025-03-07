@@ -154,18 +154,4 @@ public class DBManager<T: Object> {
             print("Error during Realm write transaction: \(error)")
         }
     }
-    
-    public func observeAllItems(
-        completion: @escaping (Results<T>) -> Void
-    ) -> NotificationToken? {
-        let results = getResultsFromDB()
-        return results.observe { changes in
-            switch changes {
-            case .initial(let settings), .update(let settings, _, _, _):
-                completion(settings)
-            case .error(let error):
-                print("Error observing Realm objects: \(error)")
-            }
-        }
-    }
 }

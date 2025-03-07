@@ -77,19 +77,18 @@ class LoginViewController: BaseTextFieldViewController {
     }
     
     func observeInstituteSettings() {
-        instituteSettingsToken = DBManager<InstituteSettings>().observeAllItems { [weak self] settings in
-            self?.updateUI(settings: settings)
+        instituteSettingsToken = InstituteRepository.shared.observeSettingsChanges { [weak self] newSettings in
+            guard let self = self else { return }
+            self.updateUI(settings: newSettings)
         }
     }
 
-    func updateUI(settings : Results<InstituteSettings>?) {
+    func updateUI(settings : InstituteSettings?) {
         guard let settings = settings else { return }
-        if(settings.isNotEmpty) {
-            self.instituteSettings = settings[0]
-            signUpLayout.isHidden = !instituteSettings.allowSignup
-            socialLoginLayout.isHidden = !instituteSettings.facebookLoginEnabled
-            forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
-        }
+        self.instituteSettings = settings
+        signUpLayout.isHidden = !instituteSettings.allowSignup
+        socialLoginLayout.isHidden = !instituteSettings.facebookLoginEnabled
+        forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
     }
 
     deinit {
