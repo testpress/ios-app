@@ -77,17 +77,8 @@ class LoginViewController: BaseTextFieldViewController {
     }
     
     func observeInstituteSettings() {
-        var settings : Results<InstituteSettings>? = DBManager<InstituteSettings>().getResultsFromDB()
-        instituteSettingsToken = settings?.observe { [weak self] changes in
-        guard let self = self else { return }
-        switch changes {
-            case .initial(let settings):
-                self.updateUI(settings: settings)
-            case .update(let settings, _, _, _):
-                self.updateUI(settings: settings)
-            case .error(let error):
-                print("Error observing Realm objects: \(error)")
-            }
+        instituteSettingsToken = DBManager<InstituteSettings>().observeAllItems { [weak self] settings in
+            self?.updateUI(settings: settings)
         }
     }
 
