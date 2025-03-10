@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 public class InstituteRepository {
 
@@ -51,5 +52,20 @@ public class InstituteRepository {
 
     private func clearCache() {
         DBManager<InstituteSettings>().deleteAllFromDatabase()
+    }
+    
+    public func observeSettingsChanges(
+        completion: @escaping (InstituteSettings?) -> Void
+    ) -> NotificationToken? {
+        return DBManager<InstituteSettings>().getResultsFromDB().observe { changes in
+            switch changes {
+            case .initial(let settings), .update(let settings, _, _, _):
+                if settings.isNotEmpty {
+                    completion(settings.first)
+                }
+            case .error(let error):
+                print("Error observing Realm objects: \(error)")
+            }
+        }
     }
 }
