@@ -199,10 +199,12 @@ class LoginActivityViewController: UIViewController, UITableViewDelegate, UITabl
 
             if let error = error {
                 self.activityIndicator?.stopAnimating()
-                debugPrint(error.message ?? "No error")
-                debugPrint(error.kind)
-                let (_, _, description) = error.getDisplayInfo()
-                TTGSnackbar(message: description, duration: .middle).show()
+                if (error.statusCode == 200){
+                    TTGSnackbar(message: "Successfully logged out of all other devices.", duration: .middle).show()
+                } else {
+                    let (_, _, description) = error.getDisplayInfo()
+                    TTGSnackbar(message: description, duration: .middle).show()
+                }
                 return
             }
 
