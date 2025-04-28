@@ -26,7 +26,6 @@
 		036CE86F2CA6F79600183BA8 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE86E2CA6F79600183BA8 /* IGListDiffKit */; };
 		036CE8722CA6F8D500183BA8 /* XLPagerTabStrip in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8712CA6F8D500183BA8 /* XLPagerTabStrip */; };
 		036CE8752CA6FA1100183BA8 /* TTGSnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE8742CA6FA1100183BA8 /* TTGSnackbar */; };
-		036CE87B2CA6FD5000183BA8 /* Former in Frameworks */ = {isa = PBXBuildFile; productRef = 036CE87A2CA6FD5000183BA8 /* Former */; };
 		03714E302BDBC767002ED3C2 /* ConfirmDeletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */; };
 		038696162BF65D9500E36F8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; };
 		0386961C2BF7602600E36F8F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0386961B2BF7602600E36F8F /* Alamofire */; };
@@ -881,7 +880,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0386961C2BF7602600E36F8F /* Alamofire in Frameworks */,
-				036CE87B2CA6FD5000183BA8 /* Former in Frameworks */,
 				03A60FAB2CB4153900079A7C /* Sentry in Frameworks */,
 				259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */,
 				036CE8502CA6C3BE00183BA8 /* DropDown in Frameworks */,
@@ -1744,7 +1742,6 @@
 				036CE86E2CA6F79600183BA8 /* IGListDiffKit */,
 				036CE8712CA6F8D500183BA8 /* XLPagerTabStrip */,
 				036CE8742CA6FA1100183BA8 /* TTGSnackbar */,
-				036CE87A2CA6FD5000183BA8 /* Former */,
 				03A60FAA2CB4153900079A7C /* Sentry */,
 				03494F4A2CBEAFA700C6A44B /* TOCropViewController */,
 				D932B2B82CCBB3AE002B6D30 /* Realm */,
@@ -1897,7 +1894,6 @@
 				036CE8702CA6F8D400183BA8 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */,
 				036CE8732CA6FA1100183BA8 /* XCRemoteSwiftPackageReference "TTGSnackbar" */,
 				036CE8762CA6FB8B00183BA8 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
-				036CE8792CA6FD5000183BA8 /* XCRemoteSwiftPackageReference "Former" */,
 				036CE87C2CA6FF1500183BA8 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				03A60FAC2CB417CC00079A7C /* XCRemoteSwiftPackageReference "LUExpandableTableView" */,
@@ -3036,14 +3032,6 @@
 				version = 2.5.3;
 			};
 		};
-		036CE8792CA6FD5000183BA8 /* XCRemoteSwiftPackageReference "Former" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ra1028/Former";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		036CE87C2CA6FF1500183BA8 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -3163,11 +3151,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8732CA6FA1100183BA8 /* XCRemoteSwiftPackageReference "TTGSnackbar" */;
 			productName = TTGSnackbar;
-		};
-		036CE87A2CA6FD5000183BA8 /* Former */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 036CE8792CA6FD5000183BA8 /* XCRemoteSwiftPackageReference "Former" */;
-			productName = Former;
 		};
 		038696152BF65D9500E36F8F /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
