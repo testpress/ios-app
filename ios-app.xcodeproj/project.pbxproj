@@ -320,8 +320,6 @@
 		2506299A2266FEC800539FB2 /* LoginActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250629992266FEC800539FB2 /* LoginActivity.swift */; };
 		250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250E68F521BA4AA600DA81F1 /* MainViewController.swift */; };
 		254E69C421DCF199009A4E61 /* Testpress_iOS_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */; };
-		25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */; };
-		25520BC327546AF9001A58AB /* DiscussionThreadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */; };
 		2570A23F21CA0D260097C6FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2570A23E21CA0D260097C6FE /* GoogleService-Info.plist */; };
 		2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24021CA0D760097C6FE /* FirebaseInstanceID.framework */; };
 		2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2570A24121CA0D760097C6FE /* FirebaseCore.framework */; };
@@ -355,7 +353,6 @@
 		2F26ADED1E8249D70031E6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */; };
 		2F26ADFB1E8249D70031E6F4 /* PushNotificationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26ADFA1E8249D70031E6F4 /* PushNotificationsTest.swift */; };
 		2F2866F81FD6BD5800FC6BAA /* PostCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */; };
-		2F2A41C01FD6ACE900B92C6D /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A41BF1FD6ACE900B92C6D /* ForumViewController.swift */; };
 		2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80A1FD288C6009C686C /* PostTableViewController.swift */; };
 		2F48C80D1FD28902009C686C /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F48C80C1FD28902009C686C /* PostTableViewCell.swift */; };
 		2F48C8161FD3F6BD009C686C /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C8141FD3F6BD009C686C /* Post.storyboard */; };
@@ -366,8 +363,6 @@
 		2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8411BB2043D5C500193A66 /* ResetPasswordViewController.swift */; };
 		2F9F169520724F76009886AB /* PostCategoriesDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9F169420724F76009886AB /* PostCategoriesDropDown.swift */; };
 		2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */; };
-		2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */; };
-		2FB049BD1FD839EB0049D5B0 /* ForumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */; };
 		2FC0F2F81F863B740092BFDC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28D1F861A860092BFDC /* LoginViewController.swift */; };
 		2FC0F3001F863B8F0092BFDC /* ExamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2891F861A860092BFDC /* ExamsTableViewCell.swift */; };
 		2FC0F3031F863B9B0092BFDC /* ExamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F28B1F861A860092BFDC /* ExamsTableViewController.swift */; };
@@ -548,9 +543,7 @@
 		254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Testpress iOS AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testpress_iOS_AppUITests.swift; sourceTree = "<group>"; };
 		254E69C521DCF199009A4E61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumFilterViewController.swift; sourceTree = "<group>"; };
 		25520BBD2751093C001A58AB /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadDetailViewController.swift; sourceTree = "<group>"; };
 		25520BC527547006001A58AB /* DiscussionThreadAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThreadAnswer.swift; sourceTree = "<group>"; };
 		2555A0C32466A59400D56707 /* ContentsListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsListResponse.swift; sourceTree = "<group>"; };
 		2566A5942745102E00D9E71D /* DRMLicenseKeyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRMLicenseKeyResponse.swift; sourceTree = "<group>"; };
@@ -643,7 +636,6 @@
 		2F26ADFC1E8249D70031E6F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F2866F71FD6BD5800FC6BAA /* PostCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreationViewController.swift; sourceTree = "<group>"; };
 		2F2866F91FD6C1D600FC6BAA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-		2F2A41BF1FD6ACE900B92C6D /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
 		2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQuestionsSlidingViewController.swift; sourceTree = "<group>"; };
 		2F3550911F9E39A9001964D6 /* ReviewSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSlidingViewController.swift; sourceTree = "<group>"; };
 		2F368C0B215DEC68000999FA /* symbol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = symbol.ttf; sourceTree = "<group>"; };
@@ -734,9 +726,7 @@
 		2FA9285120B811F400CD3076 /* BookmarksDetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksDetailPageViewController.swift; sourceTree = "<group>"; };
 		2FA9285320B8160A00CD3076 /* BookmarksSlidingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksSlidingViewController.swift; sourceTree = "<group>"; };
 		2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTabViewController.swift; sourceTree = "<group>"; };
-		2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumTableViewController.swift; sourceTree = "<group>"; };
 		2FB049BA1FD838860049D5B0 /* post.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = post.css; sourceTree = "<group>"; };
-		2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumTableViewCell.swift; sourceTree = "<group>"; };
 		2FC0F2531F8617690092BFDC /* CALayerBorderColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerBorderColor.swift; sourceTree = "<group>"; };
 		2FC0F2541F8617690092BFDC /* FormatDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatDate.swift; sourceTree = "<group>"; };
 		2FC0F2561F8617690092BFDC /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
@@ -1470,9 +1460,6 @@
 				2FC0F2891F861A860092BFDC /* ExamsTableViewCell.swift */,
 				2FC0F28B1F861A860092BFDC /* ExamsTableViewController.swift */,
 				2FC0F28C1F861A860092BFDC /* ExamsTabViewController.swift */,
-				2FB049BC1FD839EB0049D5B0 /* ForumTableViewCell.swift */,
-				2FB049B41FD7D5E50049D5B0 /* ForumTableViewController.swift */,
-				2F2A41BF1FD6ACE900B92C6D /* ForumViewController.swift */,
 				2F25D55F201F085A00C01CCE /* LeaderboardTableViewCell.swift */,
 				2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */,
 				2F25D557201EFB9F00C01CCE /* LeaderboardTabViewController.swift */,
@@ -1498,8 +1485,6 @@
 				2506298F2265B7D600539FB2 /* LoginActivityViewController.swift */,
 				8C205A072323918700596E66 /* LoginActivityCell.swift */,
 				25E435BA263AD8CC00243FD3 /* DashboardViewController.swift */,
-				25520BB52750FAC0001A58AB /* ForumFilterViewController.swift */,
-				25520BC227546AF9001A58AB /* DiscussionThreadDetailViewController.swift */,
 				03714E2F2BDBC767002ED3C2 /* ConfirmDeletionViewController.swift */,
 				03CD0D322CB93A6500E17218 /* LearnTabController.swift */,
 				D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */,
@@ -2051,11 +2036,9 @@
 			files = (
 				25E435DA263ADCA700243FD3 /* LeaderboardSectionController.swift in Sources */,
 				25E435E6263ADD9100243FD3 /* LeaderboardItemViewCell.swift in Sources */,
-				25520BB62750FAC0001A58AB /* ForumFilterViewController.swift in Sources */,
 				03494F482CBEAD9100C6A44B /* ImagePicker.swift in Sources */,
 				2F48C80B1FD288C6009C686C /* PostTableViewController.swift in Sources */,
 				25B0ADC621D4D48800C702B9 /* VerifyPhoneViewController.swift in Sources */,
-				25520BC327546AF9001A58AB /* DiscussionThreadDetailViewController.swift in Sources */,
 				25E435DD263ADCCF00243FD3 /* BaseSectionController.swift in Sources */,
 				2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */,
 				2F8411BC2043D5C500193A66 /* ResetPasswordViewController.swift in Sources */,
@@ -2076,7 +2059,6 @@
 				250E68F621BA4AA600DA81F1 /* MainViewController.swift in Sources */,
 				2503DF53263C0296003226AD /* BannerSectionController.swift in Sources */,
 				03CD0D2E2CB92EC800E17218 /* BaseTextFieldViewController.swift in Sources */,
-				2FB049BD1FD839EB0049D5B0 /* ForumTableViewCell.swift in Sources */,
 				03AD89052D1D539B00E426B7 /* UserDataFormViewController.swift in Sources */,
 				03AD89032D1D4E1C00E426B7 /* UserService.swift in Sources */,
 				2F26ADE61E8249D70031E6F4 /* AppDelegate.swift in Sources */,
@@ -2104,14 +2086,12 @@
 				8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */,
 				2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */,
 				03CD0C572CB7A04E00E17218 /* UserHelper.swift in Sources */,
-				2F2A41C01FD6ACE900B92C6D /* ForumViewController.swift in Sources */,
 				2503DF7C263FBECD003226AD /* ContentAttemptSectionController.swift in Sources */,
 				2F5E0BB71FE2444E00236AFE /* ActivityFeedTableViewController.swift in Sources */,
 				2FC0F30C1F863BA90092BFDC /* SignUpViewController.swift in Sources */,
 				03E4AFD22CAFD22100ECC34D /* DashboardSection.swift in Sources */,
 				2503DF66263C177A003226AD /* PostSectionController.swift in Sources */,
 				250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */,
-				2FB049B51FD7D5E50049D5B0 /* ForumTableViewController.swift in Sources */,
 				2F25D562201F5C8800C01CCE /* TargetThreatViewController.swift in Sources */,
 				2503DF79263FB21F003226AD /* ChapterContentSectionController.swift in Sources */,
 				2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */,
