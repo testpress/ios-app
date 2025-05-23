@@ -62,7 +62,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         let contentController = WKUserContentController()
         contentController.add(self, name: "callbackHandler")
         contentController.add(self, name: "previewFile")
-        contentController.add(self, name: "downloadFile")
         
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
@@ -208,10 +207,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             if let fileUrl = message.body as? String {
                 handlePreviewFile(url: fileUrl)
             }
-        } else if message.name == "downloadFile" {
-            if let fileUrl = message.body as? String {
-                handleDownloadFile(url: fileUrl)
-            }
         }
     }
     
@@ -346,7 +341,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 <div class='file-entry'>
                     <label>\(fileLabel)</label>
                     \(file.pdfPreviewUrl != nil ? "<button onclick='previewFile(\"\(file.pdfPreviewUrl!)\")'>Preview</button>" : "")
-                    <button onclick='downloadFile(\"\(file.url)\")'>Download</button>
                 </div>
                 """
             }
@@ -502,21 +496,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         webViewController.title = "PDF Preview"
         webViewController.url = url
         present(webViewController, animated: true, completion: nil)
-    }
-    
-    func handleDownloadFile(url: String) {
-        guard let fileUrl = URL(string: url) else {
-            print("Invalid URL.")
-            return
-        }
-
-        FileDownloadUtility.shared.downloadFile(viewController: self, from: fileUrl) { (destinationURL, error) in
-            if let destinationURL = destinationURL {
-                debugPrint(destinationURL)
-            } else if let error = error {
-                self.presentErrorDialog(error: error)
-            }
-        }
     }
     
     private func presentErrorDialog(error: Error) {
