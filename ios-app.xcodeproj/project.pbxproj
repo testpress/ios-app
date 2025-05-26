@@ -403,9 +403,6 @@
 		D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */; };
 		D9A2F2AC2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */; };
 		D9CCCA5C2CF5DBA700B60B0F /* MarketingCloudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */; };
-		D9D3721C2D3FB087002E9FE2 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D3721B2D3FB086002E9FE2 /* MobileRTC.xcframework */; };
-		D9D3721D2D3FB087002E9FE2 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9D3721B2D3FB086002E9FE2 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9D3721F2D3FB0A2002E9FE2 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9D3721E2D3FB0A1002E9FE2 /* MobileRTCResources.bundle */; };
 		D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 259932702A0A3F6800866CA8 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326E2A0A3F4600866CA8 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2599326C2A0A3C2A00866CA8 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -470,7 +467,6 @@
 				841380232C9D9CCE004D5846 /* CourseKit.framework in Embed Frameworks */,
 				D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */,
 				D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */,
-				D9D3721D2D3FB087002E9FE2 /* MobileRTC.xcframework in Embed Frameworks */,
 				D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */,
 				D9EDF1F42A0CF10800A6CB2E /* FBSDKCoreKit.xcframework in Embed Frameworks */,
 			);
@@ -877,7 +873,6 @@
 				2570A24921CA0D770097C6FE /* FirebaseInstanceID.framework in Frameworks */,
 				2570A24A21CA0D770097C6FE /* FirebaseCore.framework in Frameworks */,
 				2570A24B21CA0D770097C6FE /* GoogleUtilities.framework in Frameworks */,
-				D9D3721C2D3FB087002E9FE2 /* MobileRTC.xcframework in Frameworks */,
 				036CE86F2CA6F79600183BA8 /* IGListDiffKit in Frameworks */,
 				2570A24F21CA0D770097C6FE /* Firebase.framework in Frameworks */,
 				03494F4B2CBEAFA700C6A44B /* TOCropViewController in Frameworks */,
@@ -1910,7 +1905,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9D3721F2D3FB0A2002E9FE2 /* MobileRTCResources.bundle in Resources */,
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
 				2503DF70263FAC0A003226AD /* ChapterContentViewCell.xib in Resources */,
 				2570A23F21CA0D260097C6FE /* GoogleService-Info.plist in Resources */,
@@ -2017,7 +2011,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "/opt/homebrew/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2604,7 +2598,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Testpress LMS";
+				INFOPLIST_KEY_CFBundleDisplayName = "Mithavai Commerce";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2616,7 +2610,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.mithavai;
 				PRODUCT_NAME = "ios-app";
 				SWIFT_VERSION = 4.2;
 			};
@@ -2638,7 +2632,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Testpress LMS";
+				INFOPLIST_KEY_CFBundleDisplayName = "Mithavai Commerce";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2650,7 +2644,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.mithavai;
 				PRODUCT_NAME = "ios-app";
 				SWIFT_VERSION = 4.2;
 			};
