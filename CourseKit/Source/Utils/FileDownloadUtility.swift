@@ -10,6 +10,7 @@ public class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownlo
     private var downloadCompletionHandler: ((URL?, Error?) -> Void)?
     private var alertController: UIAlertController?
     private weak var presentingViewController: UIViewController?
+    private var fileName: String?
     
     private override init() {
         super.init()
@@ -18,17 +19,33 @@ public class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownlo
         alertController = UIUtils.initProgressDialog(message: "Downloading..." + "\n\n")
     }
     
-    public func downloadFile(viewController: UIViewController, from url: URL, completion: @escaping (URL?, Error?) -> Void) {
+    public func downloadFile(
+        viewController: UIViewController,
+        from url: URL,
+        fileName: String? = nil,
+        completion: @escaping (URL?, Error?) -> Void
+    ) {
+        let request = URLRequest(url: url)
+        downloadFile(viewController: viewController, from: request, fileName: fileName, completion: completion)
+    }
+
+    public func downloadFile(
+        viewController: UIViewController,
+        from urlRequest: URLRequest,
+        fileName: String? = nil,
+        completion: @escaping (URL?, Error?) -> Void
+    ) {
+        self.fileName = fileName
         presentingViewController = viewController
         presentingViewController?.present(alertController!, animated: true, completion: nil)
         
         downloadTask?.cancel()
-        startDownloadTask(from: url, completion: completion)
+        startDownloadTask(from: urlRequest, completion: completion)
     }
         
-    private func startDownloadTask(from url: URL, completion: @escaping (URL?, Error?) -> Void) {
+    private func startDownloadTask(from urlRequest: URLRequest, completion: @escaping (URL?, Error?) -> Void) {
         self.downloadCompletionHandler = completion
-        downloadTask = session.downloadTask(with: url)
+        downloadTask = session.downloadTask(with: urlRequest)
         downloadTask?.resume()
     }
     
@@ -50,7 +67,7 @@ public class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownlo
     }
     
     func generateUniqueDestinationPath(downloadedUrl: URL) -> URL {
-        let filename = downloadedUrl.lastPathComponent
+        let filename = fileName ?? downloadedUrl.lastPathComponent
         let downloadsPath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         var uniqueFilename = filename
         var filePath = downloadsPath.appendingPathComponent(uniqueFilename)
@@ -69,8 +86,13 @@ public class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownlo
     
     func presentActivityViewController(with fileURL: URL) {
         let activityViewController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = presentingViewController!.view
-        
+        activityViewController.popoverPresentationController?.sourceView = presentingViewController?.view
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(
+            x: presentingViewController!.view.bounds.maxX,
+            y: presentingViewController!.view.bounds.minY,
+            width: 0, height: 0)
+        activityViewController.popoverPresentationController?.permittedArrowDirections = [.up, .right]
+
         presentingViewController!.present(activityViewController, animated: true, completion: nil)
     }
     
@@ -111,6 +133,7 @@ public class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownlo
     private func handleDownloadCompletion(_ url: URL?, _ error: Error?, completion: ((URL?, Error?) -> Void)?) {
         DispatchQueue.main.async {
             self.dismissProgressDialog(){
+                self.fileName = nil    
                 if let url = url {
                     self.presentActivityViewController(with: url)
                 }

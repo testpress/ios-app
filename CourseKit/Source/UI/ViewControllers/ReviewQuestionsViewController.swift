@@ -492,9 +492,10 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     }
     
     func handlePreviewFile(url: String) {
-        let webViewController = WebViewController()
+        let webViewController = PreviewPDFViewController()
         webViewController.title = "PDF Preview"
         webViewController.url = url
+        webViewController.modalPresentationStyle = .fullScreen
         present(webViewController, animated: true, completion: nil)
     }
     
