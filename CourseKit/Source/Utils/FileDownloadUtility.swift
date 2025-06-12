@@ -133,6 +133,7 @@ public class FileDownloadUtility: NSObject, URLSessionDelegate, URLSessionDownlo
     private func handleDownloadCompletion(_ url: URL?, _ error: Error?, completion: ((URL?, Error?) -> Void)?) {
         DispatchQueue.main.async {
             self.dismissProgressDialog(){
+                self.fileName = nil    
                 if let url = url {
                     self.presentActivityViewController(with: url)
                 }
