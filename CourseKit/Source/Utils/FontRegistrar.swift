@@ -14,7 +14,7 @@ public class FontRegistrar {
     public static func registerFont(
         withName fontName: String,
         fileExtension: String = "ttf",
-        bundle: Bundle = Bundle.main
+        bundle: Bundle = Bundle(for: FontRegistrar.self)
     ) -> Bool {
         guard let fontURL = bundle.url(forResource: fontName, withExtension: fileExtension) else {
             print("FontRegistrar: Font file \(fontName).\(fileExtension) not found in bundle.")
