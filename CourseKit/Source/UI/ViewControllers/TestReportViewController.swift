@@ -50,10 +50,7 @@ class TestReportViewController: BaseUIViewController {
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var solutionsButton: UIButton!
     @IBOutlet weak var analyticsButton: UIButton!
-    @IBOutlet weak var timeAnalyticsButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var solutionButtonLayout: UIStackView!
-    @IBOutlet weak var analyticsButtonLayout: UIStackView!
     @IBOutlet weak var shareButtonLayout: UIStackView!
     
     var attempt: Attempt!
@@ -69,7 +66,6 @@ class TestReportViewController: BaseUIViewController {
         setExamDetails()
         UIUtils.setButtonDropShadow(solutionsButton)
         UIUtils.setButtonDropShadow(analyticsButton)
-        UIUtils.setButtonDropShadow(timeAnalyticsButton)
         showOrHideRank()
         showOrHideScore()
         showOrHidePercentile()
@@ -123,8 +119,8 @@ class TestReportViewController: BaseUIViewController {
     func showOrHideLockIconInSolutionButton() {
         if (exam != nil && (exam!.isGrowthHackEnabled) && (exam!.getNumberOfTimesShared() < 2)) {
             shareButtonLayout.isHidden = false
-            analyticsButtonLayout.isHidden = true
-            solutionButtonLayout.isHidden = true
+            analyticsButton.isHidden = true
+            solutionsButton.isHidden = true
             shareButton.tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
             shareButton.setTitleColor(Colors.getRGB(Colors.PRIMARY_TEXT), for: .normal)
             shareButton.backgroundColor = TestpressCourse.shared.primaryColor
@@ -140,9 +136,9 @@ class TestReportViewController: BaseUIViewController {
 
     private func showOrHideSolutions() {
         if (exam != nil && !exam!.showAnswers) {
-            solutionButtonLayout.isHidden = true
+            solutionsButton.isHidden = true
         } else {
-            solutionButtonLayout.isHidden = false
+            solutionsButton.isHidden = false
         }
     }
     
@@ -174,9 +170,9 @@ class TestReportViewController: BaseUIViewController {
     
     private func showOrHideAnalytics() {
         if (exam != nil && !exam!.showAnalytics) {
-            analyticsButtonLayout.isHidden = true
+            analyticsButton.isHidden = true
         } else {
-            analyticsButtonLayout.isHidden = false
+            analyticsButton.isHidden = false
         }
     }
     
@@ -202,14 +198,6 @@ class TestReportViewController: BaseUIViewController {
             Constants.SUBJECT_ANALYTICS_TAB_VIEW_CONTROLLER) as! SubjectAnalyticsTabViewController
         
         viewController.analyticsUrl = attempt!.url + TPEndpoint.getAttemptSubjectAnalytics.urlPath
-        present(viewController, animated: true, completion: nil)
-    }
-    
-    @IBAction func showTimeAnalytics(_ sender: UIButton) {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier:
-            Constants.TIME_ANALYTICS_TABLE_VIEW_CONTROLLER) as! TimeAnalyticsTableViewController
-        
-        viewController.attempt = attempt
         present(viewController, animated: true, completion: nil)
     }
     

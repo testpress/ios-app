@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +41,7 @@
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxf-PL-fVq">
-                                <rect key="frame" x="0.0" y="64" width="320" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="643"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDB-Vf-fVH">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
@@ -1023,7 +1023,7 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D74-Wv-07Z">
-                                <rect key="frame" x="0.0" y="659" width="320" height="141"/>
+                                <rect key="frame" x="0.0" y="699" width="320" height="101"/>
                                 <subviews>
                                     <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cw2-cS-8Rg">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="8"/>
@@ -1033,52 +1033,12 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rEr-EX-qb1">
-                                        <rect key="frame" x="15" y="18" width="290" height="113"/>
+                                        <rect key="frame" x="15" y="18" width="290" height="73"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="7XX-ai-BYG">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="7XX-ai-BYG" userLabel="Button Layout">
                                                 <rect key="frame" x="0.0" y="0.0" width="290" height="30"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCg-y8-gbZ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="137.5" height="30"/>
-                                                        <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                                        <state key="normal" title="ANALYTICS">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="15"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="showSubjectAnalytics:" destination="3z8-h4-idf" eventType="touchUpInside" id="ggL-mn-f06"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uox-a4-XPT">
-                                                        <rect key="frame" x="152.5" y="0.0" width="137.5" height="30"/>
-                                                        <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
-                                                        <state key="normal" title="TIME ANALYTICS">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                <integer key="value" value="15"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="showTimeAnalytics:" destination="3z8-h4-idf" eventType="touchUpInside" id="D2f-cS-fVu"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="eKV-NR-ww8"/>
-                                                </constraints>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="oHa-OG-knM">
-                                                <rect key="frame" x="0.0" y="40" width="290" height="30"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y79-Ub-iWU">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCg-y8-gbZ" userLabel="Solutions">
                                                         <rect key="frame" x="0.0" y="0.0" width="137.5" height="30"/>
                                                         <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
@@ -1091,20 +1051,32 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="showSolutions:" destination="3z8-h4-idf" eventType="touchUpInside" id="oZd-gC-Pm1"/>
+                                                            <action selector="showSolutions:" destination="3z8-h4-idf" eventType="touchUpInside" id="4nc-hr-bRf"/>
                                                         </connections>
                                                     </button>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54i-Ba-yow">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uox-a4-XPT" userLabel="Analytics Button">
                                                         <rect key="frame" x="152.5" y="0.0" width="137.5" height="30"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </view>
+                                                        <color key="backgroundColor" red="0.0" green="0.80000000000000004" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
+                                                        <state key="normal" title="ANALYTICS">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="15"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="showSubjectAnalytics:" destination="3z8-h4-idf" eventType="touchUpInside" id="EPK-d0-w81"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="NKz-Vw-kgb"/>
+                                                    <constraint firstAttribute="height" constant="30" id="eKV-NR-ww8"/>
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fp-Iv-UDG">
-                                                <rect key="frame" x="0.0" y="80" width="290" height="33"/>
+                                                <rect key="frame" x="0.0" y="40" width="290" height="33"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zMy-ns-bte">
                                                         <rect key="frame" x="0.0" y="0.0" width="290" height="33"/>
@@ -1159,8 +1131,7 @@
                     <size key="freeformSize" width="320" height="800"/>
                     <connections>
                         <outlet property="accuracy" destination="BK1-03-BbW" id="TJw-XC-hru"/>
-                        <outlet property="analyticsButton" destination="KCg-y8-gbZ" id="6nG-Ja-bOt"/>
-                        <outlet property="analyticsButtonLayout" destination="7XX-ai-BYG" id="Dc0-wG-qC9"/>
+                        <outlet property="analyticsButton" destination="Uox-a4-XPT" id="ocL-Zz-cV9"/>
                         <outlet property="bottomShadowView" destination="Cw2-cS-8Rg" id="z9W-sx-4so"/>
                         <outlet property="contentView" destination="FY5-iF-FPQ" id="5Nf-9r-MMQ"/>
                         <outlet property="correct" destination="v6C-Ot-5g8" id="ck5-iU-lDn"/>
@@ -1179,9 +1150,7 @@
                         <outlet property="scrollView" destination="Vxf-PL-fVq" id="uUV-3y-Thy"/>
                         <outlet property="shareButton" destination="zMy-ns-bte" id="KJZ-yg-cEs"/>
                         <outlet property="shareButtonLayout" destination="7fp-Iv-UDG" id="AYC-8c-nOz"/>
-                        <outlet property="solutionButtonLayout" destination="oHa-OG-knM" id="U4a-Y7-ieK"/>
-                        <outlet property="solutionsButton" destination="Y79-Ub-iWU" id="kGM-oR-M8t"/>
-                        <outlet property="timeAnalyticsButton" destination="Uox-a4-XPT" id="mt4-0p-whr"/>
+                        <outlet property="solutionsButton" destination="KCg-y8-gbZ" id="NoD-by-mTy"/>
                         <outlet property="timeTaken" destination="qpT-WA-WvI" id="3SG-tR-mOo"/>
                         <outlet property="totalMarks" destination="LSF-n4-Bgt" id="YOL-1f-Yl1"/>
                         <outlet property="totalQuestions" destination="Js0-Dd-R6I" id="fwD-U4-Y7X"/>
