@@ -77,7 +77,7 @@ public class AttemptItem: DBModel {
         question <- map["question"]
         questionId <- map["question_id"]
         review <- map["review"]
-        index <- map["index"]
+        index <- map["question_index"]
         currentReview <- map["current_review"]
         selectedAnswers <- (map["selected_answers"], IntArrayTransform())
         savedAnswers <- (map["saved_answers"], IntArrayTransform())

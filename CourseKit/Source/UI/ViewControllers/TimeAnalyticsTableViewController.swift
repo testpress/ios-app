@@ -53,7 +53,7 @@ class TimeAnalyticsTableViewController: BaseUIViewController {
         tableView.sectionFooterHeight = 2.0;
         UIUtils.setTableViewSeperatorInset(tableView, size: 0)
         tableView.register(
-            UINib(nibName: Constants.TIME_ANALYTICS_HEADER_VIEW_CELL, bundle: Bundle.main),
+            UINib(nibName: Constants.TIME_ANALYTICS_HEADER_VIEW_CELL, bundle: TestpressCourse.bundle),
             forHeaderFooterViewReuseIdentifier: Constants.TIME_ANALYTICS_HEADER_VIEW_CELL
         )
     }
@@ -104,6 +104,7 @@ class TimeAnalyticsTableViewController: BaseUIViewController {
                         })
                         return
                     }
+                    print((repeating: 0, count: self.attemptItems.count), "---------------------")
                     self.webViewHeight = [CGFloat](repeating: 0, count: self.attemptItems.count)
                     self.loadingDialogController.dismiss(animated: false, completion: nil)
                     self.tableView.reloadData()
