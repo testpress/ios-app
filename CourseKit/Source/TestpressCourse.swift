@@ -41,6 +41,7 @@ public class TestpressCourse {
             let token: String = KeychainTokenItem.getToken()
             TPStreamsSDK.initialize(for : Provider.testpress, withOrgCode: subdomain, usingAuthToken: token)
         }
+        FontRegistrar.registerRubikFonts()
     }
     
     public func initializeDB() {
