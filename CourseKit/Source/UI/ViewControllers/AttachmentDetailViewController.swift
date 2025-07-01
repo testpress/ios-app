@@ -237,7 +237,7 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
     
     @IBAction func downloadAttachment(_ sender: UIButton) {
         var attachmentUrl = URL(string: content.attachment!.attachmentUrl)!
-        UIApplication.shared.openURL(attachmentUrl)
+        UIApplication.shared.open(attachmentUrl)
         viewModel?.createContentAttempt()
     }
     
