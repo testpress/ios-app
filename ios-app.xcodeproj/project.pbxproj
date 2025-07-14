@@ -399,10 +399,8 @@
 		A4A1E4FC2DF1658700C72932 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A4A1E4FB2DF1658700C72932 /* MobileRTCResources.bundle */; };
 		A4B6EE6A2DFC221E006D6FD1 /* FontRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6EE692DFC221C006D6FD1 /* FontRegistrar.swift */; };
 		A4B98DBA2DF85A9300471BA7 /* PreviewPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B98DB92DF85A8C00471BA7 /* PreviewPDFViewController.swift */; };
-		A4FC173D2E211A7100249B5D /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B42CCBB357002B6D30 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		A4FC173F2E211A7A00249B5D /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D90F83672CDCD8220030C38F /* OfflineDownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */; };
-		D932B2B52CCBB357002B6D30 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B42CCBB357002B6D30 /* RealmSwift */; };
 		D932B2BB2CCBB801002B6D30 /* TPStreamsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */; };
 		D932B2C12CDA1392002B6D30 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932B2C02CDA1392002B6D30 /* AppConstants.swift */; };
 		D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */; };
@@ -486,7 +484,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A4FC173D2E211A7100249B5D /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -932,7 +929,6 @@
 				038CB2C42CBD331400164127 /* Lottie in Frameworks */,
 				03CD0D3D2CB9485200E17218 /* M3U8Parser in Frameworks */,
 				03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */,
-				D932B2B52CCBB357002B6D30 /* RealmSwift in Frameworks */,
 				03CD0D0A2CB9290200E17218 /* DropDown in Frameworks */,
 				038CB2B92CBD2AF600164127 /* Kingfisher in Frameworks */,
 				038CB2BB2CBD2B0800164127 /* LUExpandableTableView in Frameworks */,
@@ -1800,7 +1796,6 @@
 				038CB2BE2CBD2BF600164127 /* SlideMenuController */,
 				038CB2C12CBD32F300164127 /* SwiftSoup */,
 				038CB2C32CBD331400164127 /* Lottie */,
-				D932B2B42CCBB357002B6D30 /* RealmSwift */,
 				D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */,
 			);
 			productName = CourseKit;
@@ -3241,11 +3236,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE86B2CA6F67F00183BA8 /* XCRemoteSwiftPackageReference "IGListKit" */;
 			productName = IGListKit;
-		};
-		D932B2B42CCBB357002B6D30 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */ = {
 			isa = XCSwiftPackageProductDependency;
