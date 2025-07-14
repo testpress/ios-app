@@ -399,10 +399,10 @@
 		A4A1E4FC2DF1658700C72932 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A4A1E4FB2DF1658700C72932 /* MobileRTCResources.bundle */; };
 		A4B6EE6A2DFC221E006D6FD1 /* FontRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6EE692DFC221C006D6FD1 /* FontRegistrar.swift */; };
 		A4B98DBA2DF85A9300471BA7 /* PreviewPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B98DB92DF85A8C00471BA7 /* PreviewPDFViewController.swift */; };
+		A4FC173D2E211A7100249B5D /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B42CCBB357002B6D30 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		A4FC173F2E211A7A00249B5D /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D90F83672CDCD8220030C38F /* OfflineDownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */; };
-		D932B2B32CCBB357002B6D30 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B22CCBB357002B6D30 /* Realm */; };
 		D932B2B52CCBB357002B6D30 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B42CCBB357002B6D30 /* RealmSwift */; };
-		D932B2B92CCBB3AE002B6D30 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2B82CCBB3AE002B6D30 /* Realm */; };
 		D932B2BB2CCBB801002B6D30 /* TPStreamsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */; };
 		D932B2C12CDA1392002B6D30 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932B2C02CDA1392002B6D30 /* AppConstants.swift */; };
 		D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */; };
@@ -471,10 +471,22 @@
 			files = (
 				A4A1E4FA2DF164C400C72932 /* MobileRTC.xcframework in Embed Frameworks */,
 				841380232C9D9CCE004D5846 /* CourseKit.framework in Embed Frameworks */,
+				A4FC173F2E211A7A00249B5D /* RealmSwift in Embed Frameworks */,
 				D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */,
 				D9EDF1F22A0CF10800A6CB2E /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */,
 				D9EDF1F32A0CF10800A6CB2E /* FBSDKLoginKit.xcframework in Embed Frameworks */,
 				D9EDF1F42A0CF10800A6CB2E /* FBSDKCoreKit.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4FC173E2E211A7100249B5D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A4FC173D2E211A7100249B5D /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -846,7 +858,6 @@
 		A4A1E4FB2DF1658700C72932 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 		A4B6EE692DFC221C006D6FD1 /* FontRegistrar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontRegistrar.swift; sourceTree = "<group>"; };
 		A4B98DB92DF85A8C00471BA7 /* PreviewPDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPDFViewController.swift; sourceTree = "<group>"; };
-		A4EFEE242DF9B11D00CC0413 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D907E7A82B19D11C00BEA874 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Language.swift; path = CourseKit/Source/Database/Models/Language.swift; sourceTree = SOURCE_ROOT; };
 		D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineDownloadsViewController.swift; sourceTree = "<group>"; };
 		D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestGenerationViewController.swift; sourceTree = "<group>"; };
@@ -898,7 +909,6 @@
 				0386961F2BF762DD00E36F8F /* IQKeyboardManagerSwift in Frameworks */,
 				036CE86D2CA6F67F00183BA8 /* IGListKit in Frameworks */,
 				038696162BF65D9500E36F8F /* RealmSwift in Frameworks */,
-				D932B2B92CCBB3AE002B6D30 /* Realm in Frameworks */,
 				036CE8722CA6F8D500183BA8 /* XLPagerTabStrip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -920,7 +930,6 @@
 				03CD0D3F2CB9485E00E17218 /* MarqueeLabel in Frameworks */,
 				03CD0C642CB7B5D400E17218 /* DGCharts in Frameworks */,
 				038CB2C42CBD331400164127 /* Lottie in Frameworks */,
-				D932B2B32CCBB357002B6D30 /* Realm in Frameworks */,
 				03CD0D3D2CB9485200E17218 /* M3U8Parser in Frameworks */,
 				03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */,
 				D932B2B52CCBB357002B6D30 /* RealmSwift in Frameworks */,
@@ -1274,7 +1283,6 @@
 			isa = PBXGroup;
 			children = (
 				254E69C321DCF199009A4E61 /* Testpress_iOS_AppUITests.swift */,
-				254E69C521DCF199009A4E61 /* Info.plist */,
 			);
 			path = "Testpress iOS AppUITests";
 			sourceTree = "<group>";
@@ -1735,7 +1743,6 @@
 				036CE8742CA6FA1100183BA8 /* TTGSnackbar */,
 				03A60FAA2CB4153900079A7C /* Sentry */,
 				03494F4A2CBEAFA700C6A44B /* TOCropViewController */,
-				D932B2B82CCBB3AE002B6D30 /* Realm */,
 				D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */,
 			);
 			productName = "ios-app";
@@ -1770,6 +1777,7 @@
 				841380092C9D9CCD004D5846 /* Sources */,
 				8413800A2C9D9CCD004D5846 /* Frameworks */,
 				8413800B2C9D9CCD004D5846 /* Resources */,
+				A4FC173E2E211A7100249B5D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1792,7 +1800,6 @@
 				038CB2BE2CBD2BF600164127 /* SlideMenuController */,
 				038CB2C12CBD32F300164127 /* SwiftSoup */,
 				038CB2C32CBD331400164127 /* Lottie */,
-				D932B2B22CCBB357002B6D30 /* Realm */,
 				D932B2B42CCBB357002B6D30 /* RealmSwift */,
 				D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */,
 			);
@@ -3033,7 +3040,7 @@
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
 				kind = exactVersion;
-				version = 10.45.0;
+				version = 10.54.2;
 			};
 		};
 		0386961A2BF7602600E36F8F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -3081,7 +3088,7 @@
 			repositoryURL = "https://github.com/testpress/iOSPlayerSDK";
 			requirement = {
 				kind = exactVersion;
-				version = 1.1.9;
+				version = 1.2.6;
 			};
 		};
 		D9CCCA5A2CF5DBA700B60B0F /* XCRemoteSwiftPackageReference "MarketingCloudSDK-iOS" */ = {
@@ -3235,20 +3242,10 @@
 			package = 036CE86B2CA6F67F00183BA8 /* XCRemoteSwiftPackageReference "IGListKit" */;
 			productName = IGListKit;
 		};
-		D932B2B22CCBB357002B6D30 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
 		D932B2B42CCBB357002B6D30 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
-		};
-		D932B2B82CCBB3AE002B6D30 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 038696142BF65D9400E36F8F /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
 		};
 		D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */ = {
 			isa = XCSwiftPackageProductDependency;
