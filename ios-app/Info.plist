@@ -56,7 +56,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>This app requires access to your calendar to schedule and manage meetings.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>To take image &amp; upload in comments/forum</string>
+	<string>Allow camera access to take photos when asking doubts, posting in discussions, and updating your profile picture. Access will be requested the first time you use any of these features.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>This app requires access to your contacts to allow you to invite others to meetings.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
