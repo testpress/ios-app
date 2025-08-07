@@ -1,4 +1,5 @@
 {
+  "originHash" : "6ae5a9636eb71403d143f3ef478f37e405f016e920c9550af8fd349ccd008255",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -28,15 +29,6 @@
       }
     },
     {
-      "identity" : "former",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ra1028/Former",
-      "state" : {
-        "branch" : "master",
-        "revision" : "6e9d10c0c34105990507b65916281dae4cf6b899"
-      }
-    },
-    {
       "identity" : "fxpagecontrol",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nicklockwood/FXPageControl.git",
@@ -59,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/testpress/iOSPlayerSDK",
       "state" : {
-        "revision" : "a0b79670f186b536aa23fd7237e3c83be6d6201f",
-        "version" : "1.1.9"
+        "revision" : "240db2495e7f25c7025fe631952844128655edf0",
+        "version" : "1.2.6"
       }
     },
     {
@@ -149,8 +141,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "31bcd833c8f67b02f319bede83a05c65868258a9",
-        "version" : "13.24.1"
+        "revision" : "85eeca41654cc9070ad81a21a4b1d153ad467c33",
+        "version" : "14.13.1"
       }
     },
     {
@@ -158,8 +150,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-swift.git",
       "state" : {
-        "revision" : "2300f05167898acb20a7f7c1199e8a1cf97d6039",
-        "version" : "10.45.0"
+        "revision" : "a3abcdf95a3176f5ad990239920aad4ef86e00de",
+        "version" : "10.54.2"
       }
     },
     {
@@ -226,5 +218,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

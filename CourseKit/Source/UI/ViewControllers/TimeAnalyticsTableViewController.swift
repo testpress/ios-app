@@ -53,7 +53,7 @@ class TimeAnalyticsTableViewController: BaseUIViewController {
         tableView.sectionFooterHeight = 2.0;
         UIUtils.setTableViewSeperatorInset(tableView, size: 0)
         tableView.register(
-            UINib(nibName: Constants.TIME_ANALYTICS_HEADER_VIEW_CELL, bundle: Bundle.main),
+            UINib(nibName: Constants.TIME_ANALYTICS_HEADER_VIEW_CELL, bundle: TestpressCourse.bundle),
             forHeaderFooterViewReuseIdentifier: Constants.TIME_ANALYTICS_HEADER_VIEW_CELL
         )
     }
