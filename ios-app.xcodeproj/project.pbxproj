@@ -2614,7 +2614,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Testpress LMS";
+				INFOPLIST_KEY_CFBundleDisplayName = "TNPSC Mind Academy";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2626,7 +2626,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.tnpscmindacademy;
 				PRODUCT_NAME = "ios-app";
 				SWIFT_VERSION = 4.2;
 			};
@@ -2648,7 +2648,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Testpress LMS";
+				INFOPLIST_KEY_CFBundleDisplayName = "TNPSC Mind Academy";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2660,7 +2660,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.tnpscmindacademy;
 				PRODUCT_NAME = "ios-app";
 				SWIFT_VERSION = 4.2;
 			};
