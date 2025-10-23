@@ -73,7 +73,7 @@ fastlane update_app_identity \
   bundle_identifier:"$APP_BUNDLE_IDENTIFIER" \
   display_name:"$DISPLAY_NAME"
 EXECUTED_TASKS+=("App Identity (bundle ID + display name) updated")
- 
+
 
 EXECUTED_TASKS+=("Updated Bundle Display name")
 # -----------------------------
