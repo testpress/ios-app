@@ -1,0 +1,12 @@
+{
+  "subdomain": "manjoorans",
+  "apple_id": "6753752664",
+  "primary_color": "#251C75",
+  "google_plist_path": "fastlane/GoogleService-Info.plist",
+  "display_name": "Manjoorans Connect",
+    "bundle_identifier": "com.testpress.manjoorans",
+  "features": {
+    "zoom_enabled": false
+  }
+}
+
