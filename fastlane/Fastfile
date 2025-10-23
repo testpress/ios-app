@@ -1,0 +1,325 @@
+# ==========================
+# Fastlane Fastfile
+# ==========================
+
+require 'fileutils'
+require 'mini_magick'
+
+
+# --------------------------
+# Lane 1: Generate App Icons
+# --------------------------
+lane :generate_app_icons do
+  require 'fileutils'
+  require 'mini_magick'
+  require 'json'
+
+  # --- Paths ---
+  appiconset_folder = "ios-app/Assets.xcassets/AppIcon.appiconset"
+  contents_path = "../#{appiconset_folder}/Contents.json"
+  source_image = "fastlane/AppIcon.png"
+
+  # --- Load Contents.json ---
+  contents = JSON.parse(File.read(contents_path))
+
+  # --- Generate each icon according to Contents.json ---
+  contents["images"].each do |img|
+    next unless img["filename"] # skip if filename missing
+
+    filename = img["filename"]
+    size = img["size"].split("x").first.to_f   # ← parse as float, not int
+    scale = img["scale"].to_i
+    pixels = (size * scale).round              # ← round to nearest pixel
+
+    dest_image = "../#{appiconset_folder}/#{filename}"
+    FileUtils.mkdir_p(File.dirname(dest_image))
+
+    image = MiniMagick::Image.open(source_image)
+    image.combine_options do |c|
+      c.resize "#{pixels}x#{pixels}"
+      c.gravity "center"
+      c.background "transparent"
+      c.extent "#{pixels}x#{pixels}"
+    end
+    image.write(dest_image)
+    puts "✅ Generated #{filename} (#{pixels}x#{pixels}px)"
+  end
+
+  puts "🎉 All AppIcon images generated successfully and match Contents.json"
+end
+
+
+# --------------------------
+# Lane: Generate Login Screen Images (JSON untouched)
+# --------------------------
+# --------------------------
+# Lane: Generate Login Screen Image (1x only, JSON untouched)
+# --------------------------
+lane :generate_login_image do
+  require 'fileutils'
+  require 'mini_magick'
+
+  login_folder = "../ios-app/Assets.xcassets/login_screen_image.imageset"
+  source_image = "fastlane/AppIcon.png"
+  FileUtils.mkdir_p(login_folder)
+
+  # 1x image size
+  width = 646
+  height = 218
+  filename = "login_screen_image.png"
+  dest_path = File.join(login_folder, filename)
+
+  puts "🚀 Generating login screen image from #{source_image}..."
+
+  image = MiniMagick::Image.open(source_image)
+  image.combine_options do |c|
+    c.resize "#{width}x#{height}"  # maintain aspect ratio
+    c.background "white"           # white background
+    c.gravity "center"             # center the image
+    c.extent "#{width}x#{height}"  # pad to exact size
+  end
+
+  image.write(dest_path)
+  puts "✅ #{filename} (#{width}x#{height}) generated"
+  puts "🎉 Login screen image generated successfully (Contents.json untouched)"
+end
+
+# --------------------------
+# Lane: Generate Launch Images (JSON untouched)
+# --------------------------
+lane :generate_launch_images do
+  require 'fileutils'
+  require 'mini_magick'
+
+  source_image = "fastlane/AppIcon.png"
+  output_folder = "../ios-app/Assets.xcassets/LaunchImage.launchimage"
+  FileUtils.mkdir_p(output_folder)
+
+  # All images exactly as per Contents.json
+  images = [
+    { filename: "LaunchImage-1242@3x~iphoneXsMax-portrait_1242x2688.png", width: 1242, height: 2688 },
+    { filename: "LaunchImage-2688@3x~iphoneXsMax-landscape_2688x1242.png", width: 2688, height: 1242 },
+    { filename: "LaunchImage-828@2x~iphoneXr-portrait_828x1792.png", width: 828, height: 1792 },
+    { filename: "LaunchImage-1792@2x~iphoneXr-landscape_1792x828.png", width: 1792, height: 828 },
+    { filename: "LaunchImage-1125@3x~iphoneX-portrait_1125x2436.png", width: 1125, height: 2436 },
+    { filename: "LaunchImage-2436@3x~iphoneX-landscape_2436x1125.png", width: 2436, height: 1125 },
+    { filename: "splash_screen_1242x2208.png", width: 1242, height: 2208 },
+    { filename: "LaunchImage-1242@3x~iphone6s-landscape_2208x1242.png", width: 2208, height: 1242 },
+    { filename: "splash_screen_1.png", width: 750, height: 1334 },
+    { filename: "splash_screen_640x960.png", width: 640, height: 960 },
+    { filename: "splash_screen_640x1136_2.png", width: 640, height: 1136 },
+    { filename: "splash_screen_768x1024.png", width: 768, height: 1024 },
+    { filename: "splash_screen_1024x768.png", width: 1024, height: 768 },
+    { filename: "splash_screen_4.png", width: 1536, height: 2048 },
+    { filename: "splash_screen_2.png", width: 2048, height: 1536 }
+  ]
+
+  puts "🚀 Generating launch images from #{source_image}..."
+  images.each do |img|
+    dest_path = File.join(output_folder, img[:filename])
+
+    image = MiniMagick::Image.open(source_image)
+    image.combine_options do |c|
+      c.resize "#{img[:width]}x#{img[:height]}"   # Keep aspect ratio
+      c.background "white"                        # White background (no transparency)
+      c.gravity "center"                          # Center the image
+      c.extent "#{img[:width]}x#{img[:height]}"   # Pad to exact size
+    end
+
+    image.write(dest_path)
+    puts "✅ #{img[:filename]} (#{img[:width]}x#{img[:height]}) generated successfully"
+  end
+
+  puts "🎉 All launch images generated successfully — Contents.json left untouched!"
+end
+
+
+lane :update_app_constants do |options|
+  file_path = "../ios-app/Utils/AppConstants.swift"
+
+  # Read file
+  content = File.read(file_path)
+
+  # Replace constants if provided
+  if options[:subdomain]
+    content.gsub!(/public static let SUBDOMAIN = ".*?"/, "public static let SUBDOMAIN = \"#{options[:subdomain]}\"")
+  end
+
+  if options[:app_apple_id]
+    content.gsub!(/public static let APP_APPLE_ID = ".*?"/, "public static let APP_APPLE_ID = \"#{options[:app_apple_id]}\"")
+  end
+
+  if options[:primary_color]
+    content.gsub!(/public static let PRIMARY_COLOR = ".*?"/, "public static let PRIMARY_COLOR = \"#{options[:primary_color]}\"")
+  end
+
+  # Write back
+  File.write(file_path, content)
+
+  puts "✅ AppConstants.swift updated successfully!"
+end
+
+
+lane :update_google_service_plist do
+  require 'fileutils'
+  require 'fastlane_core/ui/ui'
+
+  # --- Paths ---
+  target_path = "../ios-app/GoogleService-Info.plist"
+  new_file =  "fastlane/GoogleService-Info.plist"
+
+  # --- Check new file exists ---
+  unless File.exist?(new_file)
+    UI.user_error!("❌ New GoogleService-Info.plist not found at #{new_file}")
+  end
+
+  # --- Remove old plist if it exists ---
+  if File.exist?(target_path)
+    FileUtils.rm(target_path)
+    puts "✅ Old GoogleService-Info.plist removed"
+  end
+
+  # --- Copy new plist ---
+  FileUtils.cp(new_file, target_path)
+  puts "🎉 New GoogleService-Info.plist copied successfully to ios-app/ios-app"
+end
+
+
+lane :disable_zoom do
+  require 'fileutils'
+
+  # --- 1️⃣ Comment entire ZoomMeetViewController.swift ---
+  zoom_meet_file = "../CourseKit/Source/UI/ViewControllers/ZoomMeetViewController.swift"
+  if File.exist?(zoom_meet_file)
+    content = File.read(zoom_meet_file)
+    File.write(zoom_meet_file, "/*\n#{content}\n*/")
+    puts "✅ ZoomMeetViewController.swift commented out"
+  else
+    puts "⚠️ ZoomMeetViewController.swift not found"
+  end
+
+  # --- 2️⃣ Comment only the body of openZoomMeeting in VideoConferenceViewController.swift ---
+  video_conf_file = "../CourseKit/Source/UI/ViewControllers/VideoConferenceViewController.swift"
+  unless File.exist?(video_conf_file)
+    puts "⚠️ VideoConferenceViewController.swift not found at #{video_conf_file}"
+    next
+  end
+
+  lines = File.readlines(video_conf_file)
+  new_lines = []
+  in_function = false
+  brace_count = 0
+
+  lines.each do |line|
+    if !in_function && line =~ /func\s+openZoomMeeting\s*\(.*\)\s*{/
+      in_function = true
+      brace_count = 1
+      new_lines << line  # keep function signature
+      next
+    end
+
+    if in_function
+      # Count braces first
+      brace_count += line.count("{")
+      brace_count -= line.count("}")
+
+      # Comment the line only if brace_count > 0 (inside the body)
+      if brace_count > 0
+        new_lines << "// #{line}"
+      else
+        # This is the last closing brace, keep it uncommented
+        new_lines << line
+        in_function = false
+      end
+    else
+      new_lines << line
+    end
+  end
+
+  File.write(video_conf_file, new_lines.join)
+  puts "✅ openZoomMeeting function body commented in VideoConferenceViewController.swift"
+end
+
+
+# ==========================
+# Lane: Remove frameworks / bundles from Xcode project
+# ==========================
+lane :remove_zoom_module do
+  require 'xcodeproj'
+
+  project_path = "../ios-app.xcodeproj"
+  project = Xcodeproj::Project.open(project_path)
+
+  # --- 1️⃣ Detect main app target automatically ---
+  app_target = project.targets.find { |t| t.is_a?(Xcodeproj::Project::Object::PBXNativeTarget) && t.product_type == "com.apple.product-type.application" }
+  
+  unless app_target
+    UI.user_error!("❌ No application target found in the project!")
+  end
+
+  UI.message("✅ Found app target: #{app_target.name}")
+
+  frameworks_to_remove = ["MobileRTC.xcframework"]
+  resources_to_remove  = ["MobileRTCResources.bundle"]
+
+  # --- 2️⃣ Remove from Link Binary With Libraries ---
+  frameworks_to_remove.each do |fw|
+    ref = app_target.frameworks_build_phase.files.find { |f| f.display_name.include?(fw) }
+    if ref
+      app_target.frameworks_build_phase.remove_file_reference(ref.file_ref)
+      UI.message("✅ Removed #{fw} from Link Binary With Libraries")
+    else
+      UI.message("ℹ️ #{fw} not found in Link Binary With Libraries")
+    end
+  end
+
+  # --- 3️⃣ Remove from Embed Frameworks (Copy Files build phase) ---
+  app_target.copy_files_build_phases.each do |phase|
+    next unless phase.name&.downcase&.include?("embed")
+
+    frameworks_to_remove.each do |fw|
+      ref = phase.files.find { |f| f.display_name.include?(fw) }
+      if ref
+        phase.remove_file_reference(ref.file_ref)
+        UI.message("✅ Removed #{fw} from Embed Frameworks")
+      else
+        UI.message("ℹ️ #{fw} not found in Embed Frameworks")
+      end
+    end
+  end
+
+  # --- 4️⃣ Remove from Copy Bundle Resources ---
+  resources_to_remove.each do |res|
+    ref = app_target.resources_build_phase.files.find { |f| f.display_name.include?(res) }
+    if ref
+      app_target.resources_build_phase.remove_file_reference(ref.file_ref)
+      UI.message("✅ Removed #{res} from Copy Bundle Resources")
+    else
+      UI.message("ℹ️ #{res} not found in Copy Bundle Resources")
+    end
+  end
+
+  # --- 5️⃣ Save the project ---
+  project.save
+  UI.success("🎉 Zoom module removed successfully from #{app_target.name}!")
+end
+
+
+lane :update_bundle_display_name do |options|
+  require 'fastlane_core/ui/ui'
+
+  # Ensure a display name is provided
+  unless options[:display_name] && !options[:display_name].empty?
+    UI.user_error!("❌ Please provide a display_name, e.g., display_name: 'Qaaf Academy'")
+  end
+
+  plist_path = "../ios-app/Info.plist"
+  unless File.exist?(plist_path)
+    UI.user_error!("❌ Info.plist not found at #{plist_path}")
+  end
+
+  # Use /usr/libexec/PlistBuddy to safely update the value
+  sh("/usr/libexec/PlistBuddy -c \"Set :CFBundleDisplayName '#{options[:display_name]}'\" '#{plist_path}'")
+  UI.success("✅ CFBundleDisplayName updated to '#{options[:display_name]}' in Info.plist")
+end
+

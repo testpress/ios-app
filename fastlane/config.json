@@ -1,0 +1,11 @@
+{
+  "subdomain": "qaaflearning",
+  "apple_id": "6752639414",
+  "primary_color": "#2196F3",
+  "google_plist_path": "fastlane/GoogleService-Info.plist",
+  "display_name": "fastlane",
+  "features": {
+    "zoom_enabled": false
+  }
+}
+
