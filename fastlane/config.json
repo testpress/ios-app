@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "subdomain": "staging",
   "apple_id": "6753752664",
   "primary_color": "#101010",
@@ -9,5 +10,16 @@
     "zoom_enabled": true
   },
   "image_background" : "#111111"
+=======
+  "subdomain": "manjoorans",
+  "apple_id": "6753752664",
+  "primary_color": "#251C75",
+  "google_plist_path": "fastlane/GoogleService-Info.plist",
+  "display_name": "Manjoorans Connect",
+    "bundle_identifier": "com.testpress.manjoorans",
+  "features": {
+    "zoom_enabled": false
+  }
+>>>>>>> 847aab74 (automate the deployment update)
 }
 

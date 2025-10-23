@@ -19,7 +19,11 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane generate_app_icons
 ```
 
+<<<<<<< HEAD
 Generate all AppIcon sizes from Icon-1024.png
+=======
+
+>>>>>>> 847aab74 (automate the deployment update)
 
 ### generate_login_image
 
@@ -27,7 +31,11 @@ Generate all AppIcon sizes from Icon-1024.png
 [bundle exec] fastlane generate_login_image
 ```
 
+<<<<<<< HEAD
 Generate login_screen_image.png (646×218)
+=======
+
+>>>>>>> 847aab74 (automate the deployment update)
 
 ### generate_launch_images
 
@@ -35,6 +43,7 @@ Generate login_screen_image.png (646×218)
 [bundle exec] fastlane generate_launch_images
 ```
 
+<<<<<<< HEAD
 Generate every launch image from LaunchImage.png
 
 ### disable_zoom_code
@@ -44,6 +53,33 @@ Generate every launch image from LaunchImage.png
 ```
 
 Comment out Zoom-related Swift files
+=======
+
+
+### update_app_constants
+
+```sh
+[bundle exec] fastlane update_app_constants
+```
+
+
+
+### update_google_service_plist
+
+```sh
+[bundle exec] fastlane update_google_service_plist
+```
+
+
+
+### disable_zoom
+
+```sh
+[bundle exec] fastlane disable_zoom
+```
+
+
+>>>>>>> 847aab74 (automate the deployment update)
 
 ### remove_zoom_module
 
@@ -51,6 +87,7 @@ Comment out Zoom-related Swift files
 [bundle exec] fastlane remove_zoom_module
 ```
 
+<<<<<<< HEAD
 Remove Zoom xcframework & bundle from the Xcode project
 
 ### deploy
@@ -60,6 +97,25 @@ Remove Zoom xcframework & bundle from the Xcode project
 ```
 
 Full iOS re-brand / asset generation pipeline
+=======
+
+
+### update_bundle_display_name
+
+```sh
+[bundle exec] fastlane update_bundle_display_name
+```
+
+
+
+### update_app_identity
+
+```sh
+[bundle exec] fastlane update_app_identity
+```
+
+
+>>>>>>> 847aab74 (automate the deployment update)
 
 ----
 
