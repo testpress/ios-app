@@ -342,6 +342,8 @@
 		25E435EC263ADE7500243FD3 /* DashboardSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435EA263ADE7500243FD3 /* DashboardSectionHeaderCell.swift */; };
 		25E435ED263ADE7500243FD3 /* DashboardSectionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25E435EB263ADE7500243FD3 /* DashboardSectionHeaderCell.xib */; };
 		25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */; };
+		2D7AB61E2EAF75930092B460 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A4A1E4FB2DF1658700C72932 /* MobileRTCResources.bundle */; };
+		2D7AB61F2EAF75970092B460 /* MobileRTCResources.bundle in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1E4FB2DF1658700C72932 /* MobileRTCResources.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
 		2F25D558201EFB9F00C01CCE /* LeaderboardTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D557201EFB9F00C01CCE /* LeaderboardTabViewController.swift */; };
 		2F25D55E201F076300C01CCE /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */; };
@@ -394,9 +396,6 @@
 		8CDE264E239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */; };
 		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
-		A4A1E4F72DF1648600C72932 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D3721B2D3FB086002E9FE2 /* MobileRTC.xcframework */; };
-		A4A1E4FA2DF164C400C72932 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9D3721B2D3FB086002E9FE2 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A4A1E4FC2DF1658700C72932 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A4A1E4FB2DF1658700C72932 /* MobileRTCResources.bundle */; };
 		A4B6EE6A2DFC221E006D6FD1 /* FontRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6EE692DFC221C006D6FD1 /* FontRegistrar.swift */; };
 		A4B98DBA2DF85A9300471BA7 /* PreviewPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B98DB92DF85A8C00471BA7 /* PreviewPDFViewController.swift */; };
 		A4FC173F2E211A7A00249B5D /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -467,7 +466,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A4A1E4FA2DF164C400C72932 /* MobileRTC.xcframework in Embed Frameworks */,
+				2D7AB61F2EAF75970092B460 /* MobileRTCResources.bundle in Embed Frameworks */,
 				841380232C9D9CCE004D5846 /* CourseKit.framework in Embed Frameworks */,
 				A4FC173F2E211A7A00249B5D /* RealmSwift in Embed Frameworks */,
 				D9EDF1F12A0CF10800A6CB2E /* FBAEMKit.xcframework in Embed Frameworks */,
@@ -881,7 +880,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4A1E4F72DF1648600C72932 /* MobileRTC.xcframework in Frameworks */,
 				0386961C2BF7602600E36F8F /* Alamofire in Frameworks */,
 				03A60FAB2CB4153900079A7C /* Sentry in Frameworks */,
 				259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */,
@@ -1918,7 +1916,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4A1E4FC2DF1658700C72932 /* MobileRTCResources.bundle in Resources */,
+				2D7AB61E2EAF75930092B460 /* MobileRTCResources.bundle in Resources */,
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
 				2503DF70263FAC0A003226AD /* ChapterContentViewCell.xib in Resources */,
 				2570A23F21CA0D260097C6FE /* GoogleService-Info.plist in Resources */,
@@ -2626,8 +2624,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
-				PRODUCT_NAME = "ios-app";
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.lmsdemo;
+				PRODUCT_NAME = "Testpress LMS";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -2660,8 +2658,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
-				PRODUCT_NAME = "ios-app";
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.lmsdemo;
+				PRODUCT_NAME = "Testpress LMS";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

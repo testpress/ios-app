@@ -1,0 +1,333 @@
+# Fastfile (cleaned & deduplicated)
+# ==========================
+# Minimal, focused lanes for app asset generation and identity updates
+# ==========================
+
+require 'fileutils'
+require 'mini_magick'
+require 'json'
+require 'xcodeproj'
+require 'fastlane_core/ui/ui'
+
+default_platform(:ios)
+
+# --------------------------
+# Helpers
+# --------------------------
+def plist_set_or_add(plist_path, key_path, value)
+  # Try Set first; if it fails, Add as string
+  begin
+    sh("/usr/libexec/PlistBuddy -c \"Set :#{key_path} #{escape_plist_value(value)}\" '#{plist_path}'")
+  rescue => e
+    UI.message("ℹ️ Plist key not found. Adding :#{key_path} to #{plist_path}")
+    begin
+      sh("/usr/libexec/PlistBuddy -c \"Add :#{key_path} string #{escape_plist_value(value)}\" '#{plist_path}'")
+    rescue => e2
+      UI.user_error!("❌ Failed to set or add #{key_path} in #{plist_path}: #{e2.message}")
+    end
+  end
+end
+
+def escape_plist_value(v)
+  # Basic escaping for single quotes in PlistBuddy string context
+  # We'll wrap value in single quotes at invocation, so escape internal single quotes
+  v.to_s.gsub("'", "\\\\'")
+end
+
+# --------------------------
+# Lane 1: Generate App Icons
+# --------------------------
+lane :generate_app_icons do
+  appiconset_folder = "../ios-app/Assets.xcassets/AppIcon.appiconset"
+  contents_path = File.join(appiconset_folder, "Contents.json")
+  source_image = "fastlane/AppIcon.png"
+
+  UI.user_error!("❌ Source app icon missing: #{source_image}") unless File.exist?(source_image)
+  UI.user_error!("❌ Contents.json missing: #{contents_path}") unless File.exist?(contents_path)
+
+  contents = JSON.parse(File.read(contents_path))
+
+  contents["images"].each do |img|
+    next unless img["filename"]
+    filename = img["filename"]
+    # Support size value like "20x20" or "20"
+    size_value = img["size"].to_s.split("x").first.to_f
+    scale = img["scale"].to_s.gsub(/[^\d]/, '').to_i
+    scale = 1 if scale == 0
+    pixels = (size_value * scale).round
+
+    dest_image = File.join("../ios-app", "Assets.xcassets", "AppIcon.appiconset", filename)
+    FileUtils.mkdir_p(File.dirname(dest_image))
+
+    image = MiniMagick::Image.open(source_image)
+    image.combine_options do |c|
+      c.resize "#{pixels}x#{pixels}"
+      c.gravity "center"
+      c.background "transparent"
+      c.extent "#{pixels}x#{pixels}"
+    end
+    image.write(dest_image)
+    UI.message("✅ Generated #{filename} (#{pixels}x#{pixels}px)")
+  end
+
+  UI.success("🎉 All AppIcon images generated successfully")
+end
+
+# --------------------------
+# Lane: Generate Login Screen Image (1x only)
+# --------------------------
+lane :generate_login_image do
+  login_folder = "../ios-app/Assets.xcassets/login_screen_image.imageset"
+  source_image = "fastlane/AppIcon.png"
+  FileUtils.mkdir_p(login_folder)
+
+  width = 646
+  height = 218
+  filename = "login_screen_image.png"
+  dest_path = File.join(login_folder, filename)
+
+  UI.user_error!("❌ Source image missing: #{source_image}") unless File.exist?(source_image)
+
+  image = MiniMagick::Image.open(source_image)
+  image.combine_options do |c|
+    c.resize "#{width}x#{height}"
+    c.background "white"
+    c.gravity "center"
+    c.extent "#{width}x#{height}"
+  end
+
+  image.write(dest_path)
+  UI.message("✅ #{filename} (#{width}x#{height}) generated")
+  UI.success("🎉 Login screen image generated successfully")
+end
+
+# --------------------------
+# Lane: Generate Launch Images
+# --------------------------
+lane :generate_launch_images do
+  source_image = "fastlane/AppIcon.png"
+  output_folder = "../ios-app/Assets.xcassets/LaunchImage.launchimage"
+  FileUtils.mkdir_p(output_folder)
+
+  UI.user_error!("❌ Source image missing: #{source_image}") unless File.exist?(source_image)
+
+  images = [
+    { filename: "LaunchImage-1242@3x~iphoneXsMax-portrait_1242x2688.png", width: 1242, height: 2688 },
+    { filename: "LaunchImage-2688@3x~iphoneXsMax-landscape_2688x1242.png", width: 2688, height: 1242 },
+    { filename: "LaunchImage-828@2x~iphoneXr-portrait_828x1792.png", width: 828, height: 1792 },
+    { filename: "LaunchImage-1792@2x~iphoneXr-landscape_1792x828.png", width: 1792, height: 828 },
+    { filename: "LaunchImage-1125@3x~iphoneX-portrait_1125x2436.png", width: 1125, height: 2436 },
+    { filename: "LaunchImage-2436@3x~iphoneX-landscape_2436x1125.png", width: 2436, height: 1125 },
+    { filename: "splash_screen_1242x2208.png", width: 1242, height: 2208 },
+    { filename: "LaunchImage-1242@3x~iphone6s-landscape_2208x1242.png", width: 2208, height: 1242 },
+    { filename: "splash_screen_1.png", width: 750, height: 1334 },
+    { filename: "splash_screen_640x960.png", width: 640, height: 960 },
+    { filename: "splash_screen_640x1136_2.png", width: 640, height: 1136 },
+    { filename: "splash_screen_768x1024.png", width: 768, height: 1024 },
+    { filename: "splash_screen_1024x768.png", width: 1024, height: 768 },
+    { filename: "splash_screen_4.png", width: 1536, height: 2048 },
+    { filename: "splash_screen_2.png", width: 2048, height: 1536 }
+  ]
+
+  images.each do |img|
+    dest_path = File.join(output_folder, img[:filename])
+    image = MiniMagick::Image.open(source_image)
+    image.combine_options do |c|
+      c.resize "#{img[:width]}x#{img[:height]}"
+      c.background "white"
+      c.gravity "center"
+      c.extent "#{img[:width]}x#{img[:height]}"
+    end
+    image.write(dest_path)
+    UI.message("✅ #{img[:filename]} (#{img[:width]}x#{img[:height]}) generated")
+  end
+
+  UI.success("🎉 All launch images generated successfully")
+end
+
+# --------------------------
+# Lane: Update App Constants.swift
+# --------------------------
+lane :update_app_constants do |options|
+  file_path = "../ios-app/Utils/AppConstants.swift"
+  UI.user_error!("❌ AppConstants.swift not found at #{file_path}") unless File.exist?(file_path)
+
+  content = File.read(file_path)
+
+  if options[:subdomain]
+    content.gsub!(/public static let SUBDOMAIN = ".*?"/, "public static let SUBDOMAIN = \"#{options[:subdomain]}\"")
+  end
+
+  if options[:app_apple_id]
+    content.gsub!(/public static let APP_APPLE_ID = ".*?"/, "public static let APP_APPLE_ID = \"#{options[:app_apple_id]}\"")
+  end
+
+  if options[:primary_color]
+    content.gsub!(/public static let PRIMARY_COLOR = ".*?"/, "public static let PRIMARY_COLOR = \"#{options[:primary_color]}\"")
+  end
+
+  File.write(file_path, content)
+  UI.success("✅ AppConstants.swift updated successfully")
+end
+
+# --------------------------
+# Lane: Update GoogleService-Info.plist
+# Accepts optional 'source' param; defaults to fastlane/GoogleService-Info.plist
+# --------------------------
+lane :update_google_service_plist do |options|
+  source = options[:source] || "fastlane/GoogleService-Info.plist"
+  target = "../ios-app/GoogleService-Info.plist"
+
+  UI.user_error!("❌ Source GoogleService-Info.plist not found at #{source}") unless File.exist?(source)
+
+  if File.exist?(target)
+    FileUtils.rm(target)
+    UI.message("✅ Removed old GoogleService-Info.plist at #{target}")
+  end
+
+  FileUtils.cp(source, target)
+  UI.success("🎉 New GoogleService-Info.plist copied to #{target}")
+end
+
+# --------------------------
+# Lane: Disable Zoom (comment code) + remove module
+# --------------------------
+lane :disable_zoom do
+  # Comment out the ZoomMeetViewController entire file if it exists
+  zoom_meet_file = "CourseKit/Source/UI/ViewControllers/ZoomMeetViewController.swift"
+  if File.exist?(zoom_meet_file)
+    content = File.read(zoom_meet_file)
+    File.write(zoom_meet_file, "/*\n#{content}\n*/")
+    UI.message("✅ ZoomMeetViewController.swift commented out")
+  else
+    UI.message("⚠️ ZoomMeetViewController.swift not found at #{zoom_meet_file}")
+  end
+
+  # Comment body of openZoomMeeting function (if present)
+  video_conf_file = "CourseKit/Source/UI/ViewControllers/VideoConferenceViewController.swift"
+  unless File.exist?(video_conf_file)
+    UI.message("⚠️ VideoConferenceViewController.swift not found")
+    next
+  end
+
+  lines = File.readlines(video_conf_file)
+  new_lines = []
+  in_function = false
+  brace_count = 0
+
+  lines.each do |line|
+    if !in_function && line =~ /func\s+openZoomMeeting\s*\(.*\)\s*{/
+      in_function = true
+      brace_count = 1
+      new_lines << line
+      next
+    end
+
+    if in_function
+      brace_count += line.count("{")
+      brace_count -= line.count("}")
+      if brace_count > 0
+        new_lines << "// #{line}"
+      else
+        new_lines << line
+        in_function = false
+      end
+    else
+      new_lines << line
+    end
+  end
+
+  File.write(video_conf_file, new_lines.join)
+  UI.message("✅ openZoomMeeting function body commented (if it existed)")
+end
+
+lane :remove_zoom_module do
+  project_path = "../ios-app.xcodeproj"
+  UI.user_error!("❌ Xcode project not found at #{project_path}") unless File.exist?(project_path)
+
+  project = Xcodeproj::Project.open(project_path)
+  app_target = project.targets.find { |t| t.is_a?(Xcodeproj::Project::Object::PBXNativeTarget) && t.product_type == "com.apple.product-type.application" }
+  UI.user_error!("❌ No application target found") unless app_target
+
+  frameworks_to_remove = ["MobileRTC.xcframework"]
+  resources_to_remove  = ["MobileRTCResources.bundle"]
+
+  frameworks_to_remove.each do |fw|
+    ref = app_target.frameworks_build_phase.files.find { |f| f.display_name.include?(fw) } rescue nil
+    if ref
+      app_target.frameworks_build_phase.remove_file_reference(ref.file_ref)
+      UI.message("✅ Removed #{fw} from Link Binary With Libraries")
+    else
+      UI.message("ℹ️ #{fw} not found in Link Binary With Libraries")
+    end
+  end
+
+  app_target.copy_files_build_phases.each do |phase|
+    next unless phase.name&.downcase&.include?("embed")
+    frameworks_to_remove.each do |fw|
+      ref = phase.files.find { |f| f.display_name.include?(fw) } rescue nil
+      if ref
+        phase.remove_file_reference(ref.file_ref)
+        UI.message("✅ Removed #{fw} from Embed Frameworks")
+      else
+        UI.message("ℹ️ #{fw} not found in Embed Frameworks")
+      end
+    end
+  end
+
+  resources_to_remove.each do |res|
+    ref = app_target.resources_build_phase.files.find { |f| f.display_name.include?(res) } rescue nil
+    if ref
+      app_target.resources_build_phase.remove_file_reference(ref.file_ref)
+      UI.message("✅ Removed #{res} from Copy Bundle Resources")
+    else
+      UI.message("ℹ️ #{res} not found in Copy Bundle Resources")
+    end
+  end
+
+  project.save
+  UI.success("🎉 Zoom module removed successfully")
+end
+
+# --------------------------
+# Lane: Update App Identity (bundle id + display name + product name)
+# --------------------------
+lane :update_app_identity do |options|
+  bundle_id = options[:bundle_identifier]
+  display_name = options[:display_name]
+
+  if bundle_id.nil? || display_name.nil?
+    UI.user_error!("❌ Missing parameters: bundle_identifier or display_name")
+  end
+
+  UI.message("🚀 Updating app identity...")
+  UI.message("   • Bundle Identifier → #{bundle_id}")
+  UI.message("   • Display Name → #{display_name}")
+
+  project_path = "../ios-app.xcodeproj"
+  UI.user_error!("❌ Xcode project not found at #{project_path}") unless File.exist?(project_path)
+
+  project = Xcodeproj::Project.open(project_path)
+  app_target = project.targets.find { |t| t.product_type == "com.apple.product-type.application" }
+  UI.user_error!("❌ No application target found in project!") unless app_target
+
+  app_target.build_configurations.each do |config|
+    old_id = config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"]
+    config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = bundle_id
+    config.build_settings["PRODUCT_NAME"] = display_name
+    config.build_settings["INFOPLIST_KEY_CFBundleDisplayName"] = display_name
+
+    UI.message("✅ Updated #{config.name} bundle ID: #{old_id} → #{bundle_id}")
+  end
+
+  project.save
+  UI.success("🎯 Bundle Identifier and Product Name updated in project")
+
+  plist_path = "../ios-app/Info.plist"
+  UI.user_error!("❌ Info.plist not found at #{plist_path}") unless File.exist?(plist_path)
+  plist_set_or_add(plist_path, "CFBundleDisplayName", display_name)
+  UI.success("🎯 CFBundleDisplayName updated in Info.plist")
+
+  UI.success("🎉 App identity updated successfully!")
+end
+
