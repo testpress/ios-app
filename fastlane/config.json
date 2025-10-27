@@ -1,12 +1,12 @@
 {
-  "subdomain": "lmsdemo",
-  "apple_id": "6753752664",
-  "primary_color": "#000000",
+  "subdomain": "bankersgrade",
+  "apple_id": "6753742316",
+  "primary_color": "#861B23",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
-  "display_name": "Testpress LMS",
-  "bundle_identifier": "in.testpress.lmsdemo",
+  "display_name": "Bankers Grade",
+  "bundle_identifier": "in.testpress.bankersgrade",
   "features": {
-    "zoom_enabled": true
+    "zoom_enabled": false
   }
 }
 
