@@ -1,10 +1,10 @@
 {
-  "subdomain": "manjoorans",
-  "apple_id": "6753752664",
+  "subdomain": "delta360",
+  "apple_id": "6752555027",
   "primary_color": "#251C75",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
-  "display_name": "Manjoorans Connect",
-    "bundle_identifier": "com.testpress.manjoorans",
+  "display_name": "Delta360 App",
+    "bundle_identifier": "in.testpress.delta360",
   "features": {
     "zoom_enabled": false
   }
