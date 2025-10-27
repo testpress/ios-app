@@ -10,9 +10,9 @@ import Foundation
 
 public struct AppConstants {
     
-    public static let SUBDOMAIN = "https://learn.qaaflearning.com"
-    public static let APP_APPLE_ID = "6752639414"
+    public static let SUBDOMAIN = "manjoorans"
+    public static let APP_APPLE_ID = "6753752664"
     public static let APP_SHARE_MESSAGE = "Good app to prepare for online exams. Get it at http://itunes.apple.com/app/id" + APP_APPLE_ID
     public static let APP_STORE_LINK = "itms-apps://itunes.apple.com/app/id" + APP_APPLE_ID
-    public static let PRIMARY_COLOR = "#2196F3"
+    public static let PRIMARY_COLOR = "#251C75"
 }

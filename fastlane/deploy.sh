@@ -62,10 +62,10 @@ else
   EXECUTED_TASKS+=("Zoom disabled and removed")
 fi
 
-echo "🔹 Updating Bundle Display Name..."
-fastlane update_bundle_display_name display_name:"$DISPLAY_NAME"
-# 7️⃣ Update App Identity (Bundle Identifier + Display Name)
-echo "🔹 Updating app identity (bundle ID and display name)..."
+# echo "🔹 Updating Bundle Display Name..."
+# fastlane update_bundle_display_name display_name:"$DISPLAY_NAME"
+# # 7️⃣ Update App Identity (Bundle Identifier + Display Name)
+# echo "🔹 Updating app identity (bundle ID and display name)..."
 
 APP_BUNDLE_IDENTIFIER=$(jq -r '.bundle_identifier' "$CONFIG_FILE")
 echo "This is updating the bundle id"

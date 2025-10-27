@@ -4,11 +4,11 @@
   "primary_color": "#251C75",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
   "display_name": "Manjoorans Connect",
-    "bundle_identifier": "com.testpress.manjoorans",
+  "bundle_identifier": "in.testpress.manjoorans",
   "features": {
     "zoom_enabled": false
   },
-    "image_background" : "#111111"
+    "image_background" : "white"
 
 }
 
