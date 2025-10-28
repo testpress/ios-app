@@ -7,7 +7,11 @@
   "bundle_identifier": "in.testpress.staging",
   "features": {
     "zoom_enabled": true
+<<<<<<< HEAD
   },
   "image_background" : "#111111"
+=======
+  }
+>>>>>>> 906c5c9f (Fastlane local automation)
 }
 

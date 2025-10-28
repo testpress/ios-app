@@ -37,6 +37,7 @@ Generate login_screen_image.png (646×218)
 
 Generate every launch image from LaunchImage.png
 
+<<<<<<< HEAD
 ### disable_zoom_code
 
 ```sh
@@ -53,6 +54,8 @@ Comment out Zoom-related Swift files
 
 Remove Zoom xcframework & bundle from the Xcode project
 
+=======
+>>>>>>> 906c5c9f (Fastlane local automation)
 ### deploy
 
 ```sh

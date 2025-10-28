@@ -153,8 +153,7 @@ private_lane :update_app_constants do |options|
   {
     subdomain:      "SUBDOMAIN",
     app_apple_id:   "APP_APPLE_ID",
-    primary_color:  "PRIMARY_COLOR",
-
+    primary_color:  "PRIMARY_COLOR"
   }.each do |opt_key, const|
     next unless (value = options[opt_key])
     regex = /public static let #{const} = ".*?"/
@@ -193,7 +192,6 @@ lane  :disable_zoom_code do
     File.write(zoom_file, "/*\n#{File.read(zoom_file)}\n*/")
     UI.message("Commented ZoomMeetViewController.swift")
   else
-    UI.message(zoom_file)
     UI.message("ZoomMeetViewController.swift not present")
   end
 
@@ -250,7 +248,6 @@ lane :remove_zoom_module do
   # Embed Frameworks phase
   target.copy_files_build_phases.each do |phase|
     next unless phase.name&.downcase&.include?("embed")
-
     %w[MobileRTC.xcframework].each do |fw|
       ref = phase.files.find { |f| f.display_name.include?(fw) }
       if ref
