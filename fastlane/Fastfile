@@ -154,7 +154,6 @@ private_lane :update_app_constants do |options|
     subdomain:      "SUBDOMAIN",
     app_apple_id:   "APP_APPLE_ID",
     primary_color:  "PRIMARY_COLOR",
-
   }.each do |opt_key, const|
     next unless (value = options[opt_key])
     regex = /public static let #{const} = ".*?"/
