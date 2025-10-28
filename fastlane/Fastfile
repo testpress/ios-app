@@ -9,7 +9,10 @@ require 'json'
 require 'xcodeproj'
 require 'fastlane_core/ui/ui'
 
+<<<<<<< HEAD
 $config = {}
+=======
+>>>>>>> 8fef8243 (Fastlane local automation)
 default_platform(:ios)
 
 # -----------------------------------------------------------------
@@ -153,8 +156,12 @@ private_lane :update_app_constants do |options|
   {
     subdomain:      "SUBDOMAIN",
     app_apple_id:   "APP_APPLE_ID",
+<<<<<<< HEAD
     primary_color:  "PRIMARY_COLOR",
 
+=======
+    primary_color:  "PRIMARY_COLOR"
+>>>>>>> 8fef8243 (Fastlane local automation)
   }.each do |opt_key, const|
     next unless (value = options[opt_key])
     regex = /public static let #{const} = ".*?"/
@@ -316,8 +323,11 @@ lane :deploy do |options|
   # 1. Load & validate config.json
   # -----------------------------------------------------------------
   config_path = options[:config] || "config.json"
+<<<<<<< HEAD
   $config = JSON.parse(File.read(config_path))
 
+=======
+>>>>>>> 8fef8243 (Fastlane local automation)
   UI.user_error!("config.json not found: #{config_path}") unless File.exist?(config_path)
 
   config = JSON.parse(File.read(config_path))
