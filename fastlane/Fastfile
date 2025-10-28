@@ -193,7 +193,6 @@ lane  :disable_zoom_code do
     File.write(zoom_file, "/*\n#{File.read(zoom_file)}\n*/")
     UI.message("Commented ZoomMeetViewController.swift")
   else
-    UI.message(zoom_file)
     UI.message("ZoomMeetViewController.swift not present")
   end
 
