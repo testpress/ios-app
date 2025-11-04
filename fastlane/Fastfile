@@ -92,7 +92,7 @@ lane :generate_app_icons do
       width: pixels,
       height: pixels,
       resize_mode: "",          # square – no caret
-      background: "transparent"
+      background: "#1A2148"
     )
   end
   UI.success("All App Icons generated")
