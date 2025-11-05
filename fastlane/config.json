@@ -1,17 +1,13 @@
 {
-  "subdomain": "staging",
-  "apple_id": "6753752664",
-  "primary_color": "#101010",
+  "subdomain": "nasheeriasacademy",
+  "apple_id": "6754904211",
+  "primary_color": "#122E43",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
-  "display_name": "Staging LMS",
-  "bundle_identifier": "in.testpress.staging",
+  "display_name": "Nasheer IAS Academy",
+  "bundle_identifier": "in.testpress.nasheeriasacademy",
   "features": {
-    "zoom_enabled": true
-<<<<<<< HEAD
+    "zoom_enabled": false
   },
-  "image_background" : "#111111"
-=======
-  }
->>>>>>> 906c5c9f (Fastlane local automation)
+  "image_background" : "white"
 }
 
