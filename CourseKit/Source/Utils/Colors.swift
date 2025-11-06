@@ -27,24 +27,6 @@ import UIKit
 
 public class Colors {
     
-<<<<<<< HEAD:ios-app/Resources/Colors.swift
-    static let PRIMARY = "#251c75"
-    static let PRIMARY_TEXT = "#ffffff"
-    static let MATERIAL_GREEN = "#00ccaa"
-    static let MATERIAL_GREEN2 = "#00bb9c"
-    static let MATERIAL_RED = "#e65c6c"
-    static let BLACK_TEXT = "#333333"
-    static let GRAY_LIGHT = "#e6e6e6"
-    static let GRAY_LIGHT_DARK = "#cccccc"
-    static let GRAY_MEDIUM = "#999999"
-    static let GRAY_MEDIUM_DARK = "#bfbfbf"
-    static let TAB_TEXT_COLOR = "#888888"
-    static let ORANGE = "#ffa319"
-    static let BLUE = "#1793e6"
-    static let BLUE_TEXT = "#3598db"
-    static let WHITE = "#FFFFFF"
-    static let DIM_GRAY = "#666666"
-=======
     public static let DODGERBLUE = "#2196F3"
     public static let PRIMARY_TEXT = "#ffffff"
     public static let MATERIAL_GREEN = "#00ccaa"
@@ -62,7 +44,6 @@ public class Colors {
     public static let WHITE = "#FFFFFF"
     public static let DIM_GRAY = "#666666"
     public static let DARK_GRAY = "#989898"
->>>>>>> master:CourseKit/Source/Utils/Colors.swift
     
     public static func getRGB (_ hex:String, alpha: CGFloat = 1) -> UIColor {
         
