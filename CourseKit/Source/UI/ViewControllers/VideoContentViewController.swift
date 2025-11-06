@@ -220,9 +220,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
         
     func addOrRemoveBookmark(content: Content?) {
-        guard let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first,
-              instituteSettings.bookmarksEnabled else { return }
-
+        guard instituteSettings.bookmarksEnabled else { return }
         bookmarkContent = content ?? self.content
         bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId.value)
     }

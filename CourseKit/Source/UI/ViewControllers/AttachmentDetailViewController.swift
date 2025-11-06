@@ -87,7 +87,6 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         bookmarkAnimationContainer.isHidden = true
-        if instituteSettings.bookmarksEnabled {
             if bookmark == nil {
                 animationView = initAnimationView()
                 bookmarkAnimationContainer.addSubview(animationView)
@@ -109,10 +108,6 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
                 removeAnimationView.center.y = removeAnimationView.center.y + 5
                 bookmarkButton.isHidden = true
             }
-        } else {
-            bookmarkOptionsLayout.isHidden = true
-            bookmarkButton.isHidden = true
-        }
     }
     
     func showTitleAndDescription() {
