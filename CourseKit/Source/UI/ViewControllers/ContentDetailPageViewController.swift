@@ -40,6 +40,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     @IBOutlet weak var bottomNavigationBar: UIStackView!
     @IBOutlet weak var bottomNavigationBarConstraint: NSLayoutConstraint!
     @IBOutlet weak var bookmarkButton: UIBarButtonItem!
+    var instituteSettings: InstituteSettings!
     
     let bottomGradient = CAGradientLayer()
     var pageViewController: UIPageViewController!
@@ -55,6 +56,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         
         setStatusBarColor()
         setupPageViewController()
@@ -165,21 +167,31 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     }
     
     func enableBookmarkOption() {
-        if !(pageViewController.viewControllers?.isEmpty)! {
-            if getCurrentIndex() != -1 && contentDetailDataSource.viewControllerAtIndex(getCurrentIndex())! is VideoContentViewController {
-                navigationBarItem.rightBarButtonItems = [bookmarkButton]
-                bookmarkButton.isEnabled = true
-                bookmarkButton.image = Images.AddBookmark.image
-                if contents[getCurrentIndex()].bookmarkId.value != nil {
-                    bookmarkButton.image = Images.RemoveBookmark.image
-                }
-            } else {
-                bookmarkButton.isEnabled = false
-                bookmarkButton.image = nil
+        if !instituteSettings.bookmarksEnabled {
+            navigationBarItem.rightBarButtonItems = nil
+            return
+        }
+
+        guard let viewControllers = pageViewController.viewControllers,
+              !viewControllers.isEmpty else { return }
+
+        let currentIndex = getCurrentIndex()
+        guard currentIndex != -1 else { return }
+
+        if let currentVC = contentDetailDataSource.viewControllerAtIndex(currentIndex),
+           currentVC is VideoContentViewController {
+            navigationBarItem.rightBarButtonItems = [bookmarkButton]
+            bookmarkButton.isEnabled = true
+            bookmarkButton.image = Images.AddBookmark.image
+            if contents[currentIndex].bookmarkId.value != nil {
+                bookmarkButton.image = Images.RemoveBookmark.image
             }
+        } else {
+            bookmarkButton.isEnabled = false
+            bookmarkButton.image = nil
         }
     }
-    
+
     // MARK: - UIPageViewController delegate methods
     
     public func pageViewController(_ pageViewController: UIPageViewController,

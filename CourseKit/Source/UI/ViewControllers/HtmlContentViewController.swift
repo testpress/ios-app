@@ -34,9 +34,12 @@ class HtmlContentViewController: BaseWebViewController {
     var loading: Bool = false
     var viewModel: ChapterContentDetailViewModel?
     var bookmarkHelper: BookmarkHelper!
+    var instituteSettings: InstituteSettings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+
         emptyView = EmptyView.getInstance(parentView: webView)
         webViewDelegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
@@ -133,13 +136,13 @@ class HtmlContentViewController: BaseWebViewController {
     
     func getFormattedContent(_ contentHtml: String) -> String {
         var html = WebViewUtils.getHeader()
-        if Constants.BOOKMARKS_ENABLED {
+        if instituteSettings.bookmarksEnabled {
             html += WebViewUtils.getBookmarkHeader()
         }
         let bookmarked = content.bookmarkId.value != nil
         html += WebViewUtils.getFormattedTitle(
             title: title!,
-            withBookmarkButton: Constants.BOOKMARKS_ENABLED,
+            withBookmarkButton: instituteSettings.bookmarksEnabled,
             withBookmarkedState: bookmarked
         )
         return html + WebViewUtils.getHtmlContentWithMargin(contentHtml)
