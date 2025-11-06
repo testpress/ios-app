@@ -61,6 +61,7 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
     let cacheDirectoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     var session: URLSession!
     var pdfFilePath: URL!
+    var instituteSettings: InstituteSettings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,10 +78,15 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
     }
     
     func initializeBookmarkHelper() {
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
+        guard let settings = instituteSettings, settings.bookmarksEnabled else {
+              bookmarkOptionsLayout.isHidden = true
+              bookmarkButton.isHidden = true
+              return
+          }
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         bookmarkAnimationContainer.isHidden = true
-        if Constants.BOOKMARKS_ENABLED {
             if bookmark == nil {
                 animationView = initAnimationView()
                 bookmarkAnimationContainer.addSubview(animationView)
@@ -102,10 +108,6 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
                 removeAnimationView.center.y = removeAnimationView.center.y + 5
                 bookmarkButton.isHidden = true
             }
-        } else {
-            bookmarkOptionsLayout.isHidden = true
-            bookmarkButton.isHidden = true
-        }
     }
     
     func showTitleAndDescription() {

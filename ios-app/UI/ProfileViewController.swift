@@ -31,6 +31,8 @@ import CourseKit
 
 class ProfileViewController: UIViewController {
 
+    var instituteSettings: InstituteSettings!
+
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
@@ -54,11 +56,12 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
         emptyView = EmptyView.getInstance(parentView: contentStackView)
         emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
         UIUtils.setButtonDropShadow(deleteAccountButton)
-        bookmarkButtonLayout.isHidden = !Constants.BOOKMARKS_ENABLED
+        bookmarkButtonLayout.isHidden = !(instituteSettings?.bookmarksEnabled ?? false)
         
         deleteAccountButton.isHidden = true
         showDeleteAccountButtonIfSignupAllowed()

@@ -53,18 +53,25 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleStackView: UIStackView!
-    
+    var instituteSettings : InstituteSettings!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
         loadPlayer(assetID: content.uuid!)
         viewModel = VideoContentViewModel(content)
         titleLabel.text = viewModel.getTitle()
         initializeDescription()
         bookmarkContent = content
         viewModel.createContentAttempt()
-        udpateBookmarkButtonState(bookmarkId: content!.bookmarkId.value)
-        bookmarkHelper = BookmarkHelper(viewController: self)
-        bookmarkHelper.delegate = self
+        if instituteSettings.bookmarksEnabled {
+            bookmarkHelper = BookmarkHelper(viewController: self)
+            bookmarkHelper.delegate = self
+            udpateBookmarkButtonState(bookmarkId: content?.bookmarkId.value)
+        } else {
+            bookmarkHelper = nil
+        }
         tableView.dataSource = self
         tableView.delegate = self
         addGestures()
@@ -212,6 +219,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
         
     func addOrRemoveBookmark(content: Content?) {
+        guard instituteSettings.bookmarksEnabled else { return }
         bookmarkContent = content ?? self.content
         bookmarkHelper?.onClickBookmarkButton(bookmarkId: bookmarkContent?.bookmarkId.value)
     }
@@ -247,7 +255,12 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
             contentDetailPageViewController.hideNavbarTitle()
-            contentDetailPageViewController.enableBookmarkOption()
+            
+            if instituteSettings.bookmarksEnabled {
+                contentDetailPageViewController.enableBookmarkOption()
+            } else {
+                contentDetailPageViewController.navigationBarItem.rightBarButtonItem = nil
+            }
         }
     }
     

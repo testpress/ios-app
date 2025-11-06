@@ -35,10 +35,13 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     var comments = [Comment]()
     var bookmarkHelper: BookmarkHelper!
     let loadingDialogController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
+    var instituteSettings:InstituteSettings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
+
         setupHelpers()
         loadWebViewContent()
     }
@@ -55,7 +58,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     }
     
     func getAdditionalHeaders() -> String {
-        return Constants.BOOKMARKS_ENABLED ? WebViewUtils.getBookmarkHeader() : ""
+        return instituteSettings?.bookmarksEnabled ?? false ? WebViewUtils.getBookmarkHeader() : ""
     }
     
     override func initWebView() {
@@ -270,7 +273,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     func getHtmlAboveQuestion() -> String {
         // Add index
         var html = "<div class='review-question-index'>\((attemptItem!.index) + 1)</div>"
-        if (Constants.BOOKMARKS_ENABLED) {
+        if instituteSettings.bookmarksEnabled {
             let attemptItemBookmarked = attemptItem!.bookmarkId != nil
             html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: attemptItemBookmarked)
         }
