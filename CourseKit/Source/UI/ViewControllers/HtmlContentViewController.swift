@@ -136,13 +136,13 @@ class HtmlContentViewController: BaseWebViewController {
     
     func getFormattedContent(_ contentHtml: String) -> String {
         var html = WebViewUtils.getHeader()
-        if instituteSettings.bookmarksEnabled {
+        if instituteSettings?.bookmarksEnabled ?? false {
             html += WebViewUtils.getBookmarkHeader()
         }
         let bookmarked = content.bookmarkId.value != nil
         html += WebViewUtils.getFormattedTitle(
             title: title!,
-            withBookmarkButton: instituteSettings.bookmarksEnabled,
+            withBookmarkButton: instituteSettings?.bookmarksEnabled ?? false,
             withBookmarkedState: bookmarked
         )
         return html + WebViewUtils.getHtmlContentWithMargin(contentHtml)

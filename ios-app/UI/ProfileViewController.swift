@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController {
         emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
         UIUtils.setButtonDropShadow(deleteAccountButton)
-        bookmarkButtonLayout.isHidden = !instituteSettings.bookmarksEnabled
+        bookmarkButtonLayout.isHidden = !(instituteSettings?.bookmarksEnabled ?? false)
         
         deleteAccountButton.isHidden = true
         showDeleteAccountButtonIfSignupAllowed()

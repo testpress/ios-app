@@ -58,8 +58,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     }
     
     func getAdditionalHeaders() -> String {
-        return instituteSettings.bookmarksEnabled ? WebViewUtils
-            .getBookmarkHeader() : ""
+        return instituteSettings?.bookmarksEnabled ?? false ? WebViewUtils.getBookmarkHeader() : ""
     }
     
     override func initWebView() {
