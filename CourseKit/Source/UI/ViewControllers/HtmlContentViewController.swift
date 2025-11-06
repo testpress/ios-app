@@ -38,7 +38,7 @@ class HtmlContentViewController: BaseWebViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
 
         emptyView = EmptyView.getInstance(parentView: webView)
         webViewDelegate = self

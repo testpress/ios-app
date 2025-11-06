@@ -40,7 +40,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
 
         setupHelpers()
         loadWebViewContent()
@@ -274,7 +274,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     func getHtmlAboveQuestion() -> String {
         // Add index
         var html = "<div class='review-question-index'>\((attemptItem!.index) + 1)</div>"
-        if (instituteSettings.bookmarksEnabled) {
+        if instituteSettings.bookmarksEnabled {
             let attemptItemBookmarked = attemptItem!.bookmarkId != nil
             html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: attemptItemBookmarked)
         }

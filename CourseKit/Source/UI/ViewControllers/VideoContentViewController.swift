@@ -58,15 +58,14 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
         loadPlayer(assetID: content.uuid!)
         viewModel = VideoContentViewModel(content)
         titleLabel.text = viewModel.getTitle()
         initializeDescription()
         bookmarkContent = content
         viewModel.createContentAttempt()
-        udpateBookmarkButtonState(bookmarkId: content!.bookmarkId.value)
-        if instituteSettings.bookmarksEnabled == true {
+        if instituteSettings.bookmarksEnabled {
             bookmarkHelper = BookmarkHelper(viewController: self)
             bookmarkHelper.delegate = self
             udpateBookmarkButtonState(bookmarkId: content?.bookmarkId.value)
@@ -257,7 +256,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
             contentDetailPageViewController.disableSwipeGesture()
             contentDetailPageViewController.hideNavbarTitle()
             
-            if instituteSettings.bookmarksEnabled == true {
+            if instituteSettings.bookmarksEnabled {
                 contentDetailPageViewController.enableBookmarkOption()
             } else {
                 contentDetailPageViewController.navigationBarItem.rightBarButtonItem = nil

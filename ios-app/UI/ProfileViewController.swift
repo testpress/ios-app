@@ -55,9 +55,8 @@ class ProfileViewController: UIViewController {
     var loading: Bool = false
     
     override func viewDidLoad() {
-        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-
         super.viewDidLoad()
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
         emptyView = EmptyView.getInstance(parentView: contentStackView)
         emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)

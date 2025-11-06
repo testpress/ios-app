@@ -56,7 +56,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
         
         setStatusBarColor()
         setupPageViewController()

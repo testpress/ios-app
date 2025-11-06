@@ -78,7 +78,7 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
     }
     
     func initializeBookmarkHelper() {
-        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
         guard instituteSettings.bookmarksEnabled else {
               bookmarkOptionsLayout.isHidden = true
               bookmarkButton.isHidden = true
