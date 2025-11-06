@@ -3,6 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
+<<<<<<< HEAD
 	<string>AIzaSyB0XDjrz7WB0FBLUtiJ8GhghPPyv_PMobw</string>
 	<key>GCM_SENDER_ID</key>
 	<string>159590057286</string>
@@ -14,6 +15,19 @@
 	<string>testpress-app-12</string>
 	<key>STORAGE_BUCKET</key>
 	<string>testpress-app-12.appspot.com</string>
+=======
+	<string>AIzaSyDeOJdBUPl1qijkqwYDKNZYVAOt0fhzsmY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>32674323910</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>in.testpress.demo</string>
+	<key>PROJECT_ID</key>
+	<string>testpress--apps-10</string>
+	<key>STORAGE_BUCKET</key>
+	<string>testpress--apps-10.firebasestorage.app</string>
+>>>>>>> master
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +39,10 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
+<<<<<<< HEAD
 	<string>1:159590057286:ios:1f2414fc22ef8504919147</string>
+=======
+	<string>1:32674323910:ios:357107b7f9b1750fd626c7</string>
+>>>>>>> master
 </dict>
 </plist>

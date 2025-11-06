@@ -25,8 +25,9 @@
 
 import UIKit
 import XLPagerTabStrip
+import CourseKit
 
-class ExamsTabViewController: ButtonBarPagerTabStripViewController {
+class ExamsTabViewController: ButtonBarPagerTabStripViewController, TestEngineNavigationDelegate{
     
     @IBOutlet weak var tempButtonBarView: ButtonBarView!
     @IBOutlet weak var tempContainerView: UIScrollView!
@@ -38,7 +39,7 @@ class ExamsTabViewController: ButtonBarPagerTabStripViewController {
         
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
-        settings.style.selectedBarBackgroundColor = Colors.getRGB(Colors.PRIMARY)
+        settings.style.selectedBarBackgroundColor = TestpressCourse.shared.primaryColor
         settings.style.buttonBarItemFont = UIFont(name: "Helvetica-Bold", size: 12)!
         settings.style.selectedBarHeight = 4.0
         settings.style.buttonBarMinimumLineSpacing = 0
@@ -52,7 +53,7 @@ class ExamsTabViewController: ButtonBarPagerTabStripViewController {
             
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = Colors.getRGB(Colors.TAB_TEXT_COLOR)
-            newCell?.label.textColor = Colors.getRGB(Colors.PRIMARY)
+            newCell?.label.textColor = TestpressCourse.shared.primaryColor
         }
         
         super.viewDidLoad()
@@ -68,7 +69,13 @@ class ExamsTabViewController: ButtonBarPagerTabStripViewController {
     }
     
     @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+        UserHelper.showProfileDetails(self)
     }
     
+    func navigateBack() {
+        dismiss(animated: false) {
+            self.moveToViewController(at: 2, animated: true)
+            self.reloadPagerTabStripView()
+        }
+    }
 }

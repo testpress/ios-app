@@ -7,62 +7,151 @@
 //
 
 import UIKit
+import CourseKit
+import Alamofire
 
 class MainViewController: UIViewController {
 
     
-    var activityIndicator: UIActivityIndicatorView!
-    var emptyView: EmptyView!
-    
+    private var activityIndicator: UIActivityIndicatorView!
+    private var emptyView: EmptyView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        fetchInstituteSettings()
+    }
+    
+    private func setupUI() {
         view.backgroundColor = .white
-
+        setupEmptyView()
+        setupActivityIndicator()
+        setupNavigationBar()
+    }
+    
+    private func setupEmptyView() {
         emptyView = EmptyView.getInstance(parentView: view)
+    }
+    
+    private func setupActivityIndicator() {
         activityIndicator = UIUtils.initActivityIndicator(parentView: view)
-        let screenSize: CGRect = UIScreen.main.bounds
-        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - getNavBarHeight())
-        let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: screenSize.width, height: getNavBarHeight()))
-        let navItem = UINavigationItem(title: Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String);
-        navBar.setItems([navItem], animated: false);
-
-        self.view.addSubview(navBar);
-        self.fetchInstitueSettings()
+        activityIndicator.center = CGPoint(
+            x: view.center.x,
+            y: view.center.y - navigationBarHeight
+        )
     }
     
-    func fetchInstitueSettings() {
+    private func setupNavigationBar() {
+        let screenSize = UIScreen.main.bounds
+        let navigationBar = UINavigationBar(frame: CGRect(
+            x: 0,
+            y: UIApplication.shared.statusBarFrame.height,
+            width: screenSize.width,
+            height: navigationBarHeight
+        ))
+        
+        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+        let navigationItem = UINavigationItem(title: appName)
+        navigationBar.setItems([navigationItem], animated: false)
+        
+        view.addSubview(navigationBar)
+    }
+    
+    private func fetchInstituteSettings() {
         activityIndicator.startAnimating()
-
-        UIUtils.fetchInstituteSettings(
-            completion: { instituteSettings, error in
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    var retryButtonText: String?
-                    var retryHandler: (() -> Void)?
-                    if error.kind == .network {
-                        retryButtonText = Strings.TRY_AGAIN
-                        retryHandler = {
-                            self.emptyView.hide()
-                            self.fetchInstitueSettings()
-                        }
-                    }
-                    self.activityIndicator.stopAnimating()
-                    let (image, title, description) = error.getDisplayInfo()
-                    
-                    self.emptyView.show(image: image, title: title, description: description,
-                                        retryButtonText: retryButtonText, retryHandler: retryHandler)
-                } else {
-                    self.activityIndicator.stopAnimating()
-                    let viewController = UIUtils.getLoginOrTabViewController()
-                    self.present(viewController, animated: false, completion: nil)
-                }
-                
-        })
+        
+        if InstituteRepository.shared.isSettingsCached() {
+            InstituteRepository.shared.getSettings(refresh: true) { [weak self] _, _ in }
+            navigateToNextScreen()
+            return
+        }
+        
+        InstituteRepository.shared.getSettings { [weak self] instituteSettings, error in
+            guard let self = self else { return }
+            
+            self.activityIndicator.stopAnimating()
+            
+            if let error = error {
+                self.handleError(error)
+            } else {
+                self.navigateToNextScreen()
+            }
+        }
     }
     
+    private func handleError(_ error: Error) {
+        let tpError = error as! TPError
+        debugPrint(tpError.message ?? "No error")
+        debugPrint(tpError.kind)
+        
+        var retryButtonText: String?
+        var retryHandler: (() -> Void)?
+        
+        if tpError.kind == .network {
+            retryButtonText = Strings.TRY_AGAIN
+            retryHandler = { [weak self] in
+                self?.emptyView.hide()
+                self?.fetchInstituteSettings()
+            }
+        }
+        
+        let (image, title, description) = tpError.getDisplayInfo()
+        emptyView.show(
+            image: image,
+            title: title,
+            description: description,
+            retryButtonText: retryButtonText,
+            retryHandler: retryHandler
+        )
+    }
     
-    func getNavBarHeight() -> CGFloat {
-        return UINavigationController().navigationBar.frame.size.height
+    private func navigateToNextScreen() {
+        guard isUserLoggedIn() && isNetworkReachable() else {
+            showLoginOrHome()
+            return
+        }
+        
+        navigateBasedOnDataCollectionStatus()
+    }
+    
+    private func navigateBasedOnDataCollectionStatus() {
+        activityIndicator.startAnimating()
+        
+        UserService.shared.checkEnforceDataCollectionStatus { [weak self] isDataCollected, error in
+            guard let self = self else { return }
+            self.activityIndicator.stopAnimating()
+            
+            if let error = error {
+                showLoginOrHome()
+                return
+            }
+            
+            if isDataCollected == true {
+                showLoginOrHome()
+            } else {
+                showUserDataForm()
+            }
+        }
+    }
+    
+    private func showUserDataForm() {
+        let webViewController = UserDataFormViewController()
+        webViewController.modalPresentationStyle = .fullScreen
+        present(webViewController, animated: true)
+    }
+    
+    private func showLoginOrHome() {
+        let viewController = UserHelper.getLoginOrTabViewController()
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+              let window = appDelegate.window else {
+            return
+        }
+        
+        window.rootViewController = viewController
+    }
+    
+    private var navigationBarHeight: CGFloat {
+        UINavigationController().navigationBar.frame.size.height
     }
 }

@@ -25,6 +25,10 @@
 
 import UIKit
 import Alamofire
+import CourseKit
+import SFMCSDK
+import MarketingCloudSDK
+import Sentry
 
 class MainMenuTabViewController: UITabBarController {
     
@@ -35,10 +39,12 @@ class MainMenuTabViewController: UITabBarController {
         self.setStatusBarColor()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         viewControllers?[5].tabBarItem.title = instituteSettings.postsLabel
-        viewControllers?.remove(at: 7) // Access code
-        if (!instituteSettings.forumEnabled) {
-            viewControllers?.remove(at: 6)
+        
+        if(!instituteSettings.isVideoDownloadEnabled){
+            viewControllers?.remove(at: 7) // Offline Download List
         }
+        
+        viewControllers?.remove(at: 6) // Access code
         
         if (!instituteSettings.postsEnabled) {
             viewControllers?.remove(at: 5)
@@ -59,9 +65,8 @@ class MainMenuTabViewController: UITabBarController {
             viewControllers?.remove(at: 1)
         }
         
-        if (instituteSettings.isHelpdeskEnabled) {
-            viewControllers?.insert(self.getDoubtsWebViewController(), at: 3)
-        }
+        addDoubtsWebViewController()
+        addDiscussionsWebViewController()
         
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
             let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
@@ -72,6 +77,44 @@ class MainMenuTabViewController: UITabBarController {
                 "platform": "ios"
             ]
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters,completion: { _, _ in})
+        }
+        
+        if instituteSettings.salesforceSdkEnabled {
+            self.configureSalesforceSDK()
+        }
+    }
+    
+    func configureSalesforceSDK() {
+        let mobilePushConfiguration = PushConfigBuilder(appId: instituteSettings.salesforceMcApplicationId ?? "")
+            .setAccessToken(instituteSettings.salesforceMcAccessToken ?? "")
+            .setMarketingCloudServerUrl(URL(string: instituteSettings.salesforceMarketingCloudUrl ?? "")!)
+            .setMid(instituteSettings.salesforceMid ?? "")
+            .setInboxEnabled(false)
+            .setLocationEnabled(false)
+            .setAnalyticsEnabled(true)
+            .build()
+        
+        let completionHandler: (OperationResult) -> () = { result in
+            if result == .error {
+                SentrySDK.capture(message: "Salesforce SDK integration error.")
+            } else if result == .cancelled {
+                SentrySDK.capture(message: "Salesforce SDK integration cancelled.")
+            } else if result == .timeout {
+                SentrySDK.capture(message: "Salesforce SDK integration timeout.")
+            }
+        }
+        
+        SFMCSdk.initializeSdk(ConfigBuilder().setPush(config: mobilePushConfiguration, onCompletion: completionHandler).build())
+    }
+    
+    private func addDoubtsWebViewController() {
+        guard instituteSettings.isHelpdeskEnabled else { return }
+
+        let doubtsWebViewController = self.getDoubtsWebViewController()
+        if (viewControllers?.count ?? 0) > 3 {
+            viewControllers?.insert(doubtsWebViewController, at: 2)
+        } else {
+            viewControllers?.append(doubtsWebViewController)
         }
     }
     
@@ -84,6 +127,29 @@ class MainMenuTabViewController: UITabBarController {
         secondViewController.title = "Doubts"
         secondViewController.displayNavbar = true
         secondViewController.tabBarItem.image = Images.DoubtsIcon.image
+        return secondViewController
+    }
+    
+    private func addDiscussionsWebViewController() {
+        guard instituteSettings.forumEnabled else { return }
+
+        let discussionsWebViewController = self.getDoubtsWebViewController()
+        if (viewControllers?.count ?? 0) > 4 {
+            viewControllers?.insert(getDiscussionsWebViewController(), at: 3)
+        } else {
+            viewControllers?.append(discussionsWebViewController)
+        }
+    }
+    
+    func getDiscussionsWebViewController() -> WebViewController {
+        let secondViewController = WebViewController()
+        secondViewController.url = "&next=/discussions/new"
+        secondViewController.useWebviewNavigation = true
+        secondViewController.useSSOLogin = true
+        secondViewController.shouldOpenLinksWithinWebview = true
+        secondViewController.title = "Discussions"
+        secondViewController.displayNavbar = true
+        secondViewController.tabBarItem.image = Images.DiscussionsIcon.image
         return secondViewController
     }
 }

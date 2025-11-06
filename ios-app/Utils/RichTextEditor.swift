@@ -28,6 +28,7 @@
 //
 
 import WebKit
+import CourseKit
 
 public protocol RichTextEditorDelegate: class {
     func heightDidChange(_ editor: RichTextEditor, heightDidChange height: CGFloat)
@@ -99,12 +100,13 @@ public class RichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDelegat
         placeholderLabel.textColor = UIColor.lightGray.withAlphaComponent(0.65)
         placeholderLabel.font = placeholderLabel.font.withSize(15)
         
-        guard let scriptPath = Bundle.main.path(forResource: "RichTextEditor", ofType: "js"),
-            let scriptContent =
-                try? String(contentsOfFile: scriptPath, encoding: String.Encoding.utf8),
-            let htmlPath = Bundle.main.path(forResource: "RichTextEditor", ofType: "html"),
-            let html = try? String(contentsOfFile: htmlPath, encoding: String.Encoding.utf8)
-            else { fatalError("Unable to find javscript/html for text editor") }
+        guard let scriptPath = WebViewUtils.getStaticFileUrl(for: "RichTextEditor", withExtension: "js"),
+              let scriptContent = try? String(contentsOf: URL(string: scriptPath)!, encoding: .utf8),
+              let htmlPath = WebViewUtils.getStaticFileUrl(for: "RichTextEditor", withExtension: "html"),
+              let html = try? String(contentsOf: URL(string: htmlPath)!, encoding: .utf8)
+        else {
+            fatalError("Unable to find JavaScript/HTML for text editor")
+        }
         
         let configuration = WKWebViewConfiguration()
         configuration.userContentController.addUserScript(

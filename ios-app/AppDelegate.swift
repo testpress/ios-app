@@ -25,7 +25,6 @@
 
 import FBSDKCoreKit
 import IQKeyboardManagerSwift
-import RealmSwift
 import UIKit
 import Sentry
 
@@ -36,6 +35,7 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 import AVKit
+import CourseKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -76,6 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        TestpressCourse.shared.initialize(subdomain: AppConstants.SUBDOMAIN, primaryColor: AppConstants.PRIMARY_COLOR)
         registerForNotifications(application)
         configureFirebase()
         customizeAppearance()
@@ -83,12 +84,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         initializeFacebook(application, launchOptions: launchOptions)
         configureKeyboardManager()
         handleFirstLaunch()
-        configureRealm()
         setupRootViewController()
+        setupAuthErrorHandlerOnApiClient()
         
-        if let instituteSettings = fetchInstituteSettings() {
-            setupSentry(instituteSettings: instituteSettings)
-            restrictScreenRecording(instituteSettings: instituteSettings)
+        InstituteRepository.shared.getSettings { instituteSettings, error in
+            if let instituteSettings = instituteSettings {
+                self.setupSentry(instituteSettings: instituteSettings)
+                self.restrictScreenRecording(instituteSettings: instituteSettings)
+            }
         }
 
         return true
@@ -114,8 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private func customizeAppearance() {
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.isTranslucent = false
-        navBarAppearance.backgroundColor = Colors.getRGB(Colors.PRIMARY)
-        navBarAppearance.barTintColor = Colors.getRGB(Colors.PRIMARY)
+        navBarAppearance.backgroundColor = TestpressCourse.shared.primaryColor
+        navBarAppearance.barTintColor = TestpressCourse.shared.primaryColor
         UIBarButtonItem.appearance().tintColor = Colors.getRGB(Colors.PRIMARY_TEXT)
         navBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Colors.getRGB(Colors.PRIMARY_TEXT)]
 
@@ -152,34 +155,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
-    private func configureRealm() {
-        let config = Realm.Configuration(schemaVersion: 43)
-        Realm.Configuration.defaultConfiguration = config
-    }
-
     private func setupRootViewController() {
-        let viewController: UIViewController
-        if !InstituteSettings.isAvailable() {
-            viewController = MainViewController()
-        } else {
-            UIUtils.fetchInstituteSettings(completion: { _, _ in })
-            viewController = UIUtils.getLoginOrTabViewController()
-        }
-
+        let viewController = MainViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
     }
-
-    private func fetchInstituteSettings() -> InstituteSettings? {
-        guard InstituteSettings.isAvailable() else { return nil }
-        return DBManager<InstituteSettings>().getResultsFromDB().first
+    
+    private func setupAuthErrorHandlerOnApiClient(){
+        TPApiClient.authErrorDelegate = AuthErrorHandler()
     }
 
     private func setupSentry(instituteSettings: InstituteSettings) {
         SentrySDK.start { options in
             options.dsn = instituteSettings.sentryDSN
             options.debug = false
+            options.enableCrashHandler = true
+            options.enableAutoSessionTracking = true
+            #if DEBUG
+                options.tracesSampleRate = 1.0
+            #else
+                options.tracesSampleRate = 0.2
+            #endif
         }
 
         if let buildID = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String {
@@ -252,7 +249,7 @@ extension AppDelegate {
                         let viewController = storyboard.instantiateViewController(withIdentifier:
                             Constants.POST_DETAIL_VIEW_CONTROLLER) as! PostDetailViewController
                         
-                        let url = Constants.BASE_URL + "/api/v2.2/posts/\(urlPath.pathComponents[2])/?short_link=true"
+                        let url = TestpressCourse.shared.baseURL + "/api/v2.2/posts/\(urlPath.pathComponents[2])/?short_link=true"
                         viewController.url = url
                         
                         topController.present(viewController, animated: true, completion: nil)
@@ -264,7 +261,7 @@ extension AppDelegate {
                         activityIndicator?.center = CGPoint(x: topController.view.center.x, y: topController.view.center.y - 50)
                         activityIndicator.startAnimating()
                         
-                        let url = Constants.BASE_URL + "/api/v2.2/contents/\(urlPath.pathComponents[3])/"
+                        let url = TestpressCourse.shared.baseURL + "/api/v2.2/contents/\(urlPath.pathComponents[3])/"
                         Content.fetchContent(url: url, completion: { content, error in
                             if let error = error {
                                 debugPrint(error.message ?? "No error")
@@ -284,7 +281,7 @@ extension AppDelegate {
                                                     retryButtonText: retryButtonText, retryHandler: retryHandler)
                             } else {
                                 self.activityIndicator.stopAnimating()
-                                let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
+                                let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
                                 let viewController = storyboard.instantiateViewController(withIdentifier:
                                     Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) as! ContentDetailPageViewController
                                 

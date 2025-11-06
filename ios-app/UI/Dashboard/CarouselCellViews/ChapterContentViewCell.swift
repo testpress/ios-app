@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CourseKit
 
 class ChapterContentViewCell: UICollectionViewCell {
     @IBOutlet weak var contentTitle: UILabel!

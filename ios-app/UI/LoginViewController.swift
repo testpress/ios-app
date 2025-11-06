@@ -27,6 +27,8 @@ import Alamofire
 import FBSDKCoreKit
 import FBSDKLoginKit
 import UIKit
+import CourseKit
+import RealmSwift
 
 class LoginViewController: BaseTextFieldViewController {
 
@@ -42,25 +44,18 @@ class LoginViewController: BaseTextFieldViewController {
     
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     var instituteSettings: InstituteSettings!
+    var instituteSettingsToken: NotificationToken?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setStatusBarColor()
-        
-        navigationbarItem.title = UIUtils.getAppName()
+        observeInstituteSettings()
+        navigationbarItem.title = Constants.getAppName()
         UIUtils.setButtonDropShadow(loginButton)
-        
-        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
-        
-        forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
-        
-        signUpLayout.isHidden = true
-        if(instituteSettings.allowSignup) {
-            signUpLayout.isHidden = false
-        }
 
+        forgotPasswordButton.isHidden = true
+        signUpLayout.isHidden = true
 
         let fbLoginButton = FBLoginButton()
-
         
         fbLoginButton.center.x = facebookButtonLayout.center.x
         fbLoginButton.delegate = self
@@ -75,13 +70,29 @@ class LoginViewController: BaseTextFieldViewController {
             .constraint(equalTo: facebookButtonLayout.trailingAnchor).isActive = true
         
         socialLoginLayout.isHidden = true
-        if(instituteSettings.facebookLoginEnabled) {
-            socialLoginLayout.isHidden = false
-        }
 
         // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
         showKeyboardOnStart = false
+    }
+    
+    func observeInstituteSettings() {
+        instituteSettingsToken = InstituteRepository.shared.observeSettingsChanges { [weak self] newSettings in
+            guard let self = self else { return }
+            self.updateUI(settings: newSettings)
+        }
+    }
+
+    func updateUI(settings : InstituteSettings?) {
+        guard let settings = settings else { return }
+        self.instituteSettings = settings
+        signUpLayout.isHidden = !instituteSettings.allowSignup
+        socialLoginLayout.isHidden = !instituteSettings.facebookLoginEnabled
+        forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
+    }
+
+    deinit {
+        instituteSettingsToken?.invalidate()
     }
     
     @IBAction func moveToPasswordField(_ sender: UITextField) {
@@ -140,25 +151,43 @@ class LoginViewController: BaseTextFieldViewController {
                     
                     // Save the password for the new item
                     try passwordItem.savePassword(token)
+                    TestpressCourse.shared.initialize(withToken: token, subdomain: AppConstants.SUBDOMAIN, primaryColor: AppConstants.PRIMARY_COLOR)
                 } catch {
                     fatalError("Error updating keychain - \(error)")
                 }
-
-                let tabViewController = self.storyboard!.instantiateViewController(
-                    withIdentifier: Constants.TAB_VIEW_CONTROLLER)
                 
-                self.alertController.dismiss(animated: true, completion: nil)
-                self.present(tabViewController, animated: true, completion: nil)
+                UserService.shared.checkEnforceDataCollectionStatus { [weak self] isDataCollected, error in
+                    guard let self = self else { return }
+                    self.alertController.dismiss(animated: true) {
+                        if isDataCollected == true {
+                            self.showTabViewController()
+                        } else {
+                            self.showUserDataForm()
+                        }
+                    }
+                }
             }
         )
     }
     
+    private func showTabViewController() {
+        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+        let viewController = storyboard.instantiateViewController(
+            withIdentifier: Constants.TAB_VIEW_CONTROLLER
+        )
+        present(viewController, animated: true)
+    }
+    
+    private func showUserDataForm() {
+        let webViewController = UserDataFormViewController()
+        webViewController.modalPresentationStyle = .fullScreen
+        present(webViewController, animated: true)
+    }
+    
     @IBAction func showSignUpView() {
-        print("Custom : \(instituteSettings.allowSignup)")
-        
         if (instituteSettings.customRegistrationEnabled) {
             let webViewController = WebViewController()
-            webViewController.url = Constants.BASE_URL + "/register/"
+            webViewController.url = TestpressCourse.shared.baseURL + "/register/"
             present(webViewController, animated: true, completion: nil)
         } else {
             let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:

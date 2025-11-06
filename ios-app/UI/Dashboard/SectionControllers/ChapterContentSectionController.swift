@@ -7,6 +7,7 @@
 //
 
 import IGListKit
+import CourseKit
 
 class ChapterContentSectionController: ListSectionController {
     var dashboardData: DashboardResponse?
@@ -34,16 +35,12 @@ class ChapterContentSectionController: ListSectionController {
     }
     
     override func didSelectItem(at index: Int) {
-        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
+        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
         let contentDetailViewController = storyboard.instantiateViewController(
             withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
             as! ContentDetailPageViewController
         
-        let content = dashboardData?.getContent(id: contentId!)
-        contentDetailViewController.contents = [content!
-        ]
-        contentDetailViewController.title = content?.name
-        contentDetailViewController.position = 0
+        contentDetailViewController.contentId = contentId!
         viewController?.present(contentDetailViewController, animated: true, completion: nil)
     }
 }

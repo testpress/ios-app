@@ -26,6 +26,7 @@
 import DropDown
 import TTGSnackbar
 import UIKit
+import CourseKit
 
 class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,
     UIScrollViewDelegate {
@@ -74,7 +75,7 @@ class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITa
         // Set table view footer as progress spinner
         let pagingSpinner = UIActivityIndicatorView(style: .gray)
         pagingSpinner.startAnimating()
-        pagingSpinner.color = Colors.getRGB(Colors.PRIMARY)
+        pagingSpinner.color = TestpressCourse.shared.primaryColor
         pagingSpinner.hidesWhenStopped = true
         tableView.tableFooterView = pagingSpinner
         
@@ -229,14 +230,14 @@ class RecentPostTableViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+        UserHelper.showProfileDetails(self)
     }
     
 }
 
 extension RecentPostTableViewController: PostCategoryDelegate {
     
-    func onLoadedCategories(_ categories: [Category]) {
+    func onLoadedCategories(_ categories: [CourseKit.Category]) {
         if !categories.isEmpty {
             categoriesDropDown = PostCategoriesDropDown(categories: categories,
                                                         navigationItem: navigationItem)

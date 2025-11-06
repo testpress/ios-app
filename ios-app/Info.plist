@@ -5,7 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
+<<<<<<< HEAD
 	<string>UPSCprep.com</string>
+=======
+	<string>Testpress LMS</string>
+>>>>>>> master
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -56,9 +60,15 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>This app requires access to your calendar to schedule and manage meetings.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>To take image &amp; upload in comments/forum</string>
+	<string>Allow camera access to take photos when asking doubts, posting in discussions, and updating your profile picture. Access will be requested the first time you use any of these features.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>This app requires access to your contacts to allow you to invite others to meetings.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location information will for notifications</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location information will for notifications</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location information will for notifications</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>For people to hear you during meetings, we need access to your microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

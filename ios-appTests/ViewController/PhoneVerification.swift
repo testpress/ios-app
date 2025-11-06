@@ -38,7 +38,7 @@ class PhoneVerification: XCTestCase {
         /*
             This tests the verify code button action and whether login view controller
          */
-        let url = URL(string: Constants.BASE_URL+"/api/v2.2/verify/")!
+        let url = URL(string: "https://lmsdemo.testpress.in/api/v2.2/verify/")!
         var stub = StubRequest(method: .POST, url: url)
         var response = StubResponse()
         let body = "success".data(using: .utf8)!
@@ -62,7 +62,7 @@ class PhoneVerification: XCTestCase {
         /*
          This tests for authentication failure
          */
-        let url = URL(string: Constants.BASE_URL+"/api/v2.2/auth-token/")!
+        let url = URL(string: "https://lmsdemo.testpress.in/api/v2.2/auth-token/")!
         var stub = StubRequest(method: .POST, url: url)
         var response = StubResponse()
         response = StubResponse(statusCode: 400)

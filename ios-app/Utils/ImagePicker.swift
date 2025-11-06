@@ -30,19 +30,20 @@
 import TOCropViewController
 import TTGSnackbar
 import UIKit
+import CourseKit
 
-protocol ImagePickerDelegate {
+public protocol ImagePickerDelegate {
     func imagePicker(_ picker: ImagePicker, didFinishPickingImage imageData: Data,
                      imagePath: String)
 }
 
-class ImagePicker: NSObject {
+public class ImagePicker: NSObject {
     
     private var viewController: UIViewController!
     
-    var delegate: ImagePickerDelegate?
+    public var delegate: ImagePickerDelegate?
     
-    func pickImage(sourceType: UIImagePickerController.SourceType) {
+    public func pickImage(sourceType: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(sourceType){
             let pickerController = UIImagePickerController()
             pickerController.delegate = self
@@ -53,7 +54,7 @@ class ImagePicker: NSObject {
         }
     }
     
-    func showImagePicker(viewController: UIViewController) {
+    public func showImagePicker(viewController: UIViewController) {
         self.viewController = viewController
         let actionSheet = UIAlertController(
             title: nil,
@@ -93,11 +94,11 @@ class ImagePicker: NSObject {
 
 extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    @objc public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
     
-    @objc func imagePickerController(_ picker: UIImagePickerController,
+    @objc public func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 // Local variable inserted by Swift 4.2 migrator.
 let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
@@ -116,7 +117,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 }
 
 extension ImagePicker: TOCropViewControllerDelegate {
-    func cropViewController(_ cropViewController: TOCropViewController, didCropTo image: UIImage, with cropRect: CGRect, angle: Int)
+    public func cropViewController(_ cropViewController: TOCropViewController, didCropTo image: UIImage, with cropRect: CGRect, angle: Int)
     {
         cropViewController.dismiss(animated: true)
         
@@ -138,7 +139,7 @@ extension ImagePicker: TOCropViewControllerDelegate {
     }
     
     
-    func cropViewController(_ cropViewController: TOCropViewController, didFinishCancelled cancelled: Bool)
+    public func cropViewController(_ cropViewController: TOCropViewController, didFinishCancelled cancelled: Bool)
     {
         cropViewController.dismiss(animated: true) { () -> Void in  }
     }

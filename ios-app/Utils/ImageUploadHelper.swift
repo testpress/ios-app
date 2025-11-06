@@ -25,20 +25,21 @@
 
 import TTGSnackbar
 import UIKit
+import CourseKit
 
-protocol ImageUploadHelperDelegate {
+public protocol ImageUploadHelperDelegate {
     func imageUploadHelper(_ helper: ImageUploadHelper, didFinishUploadImage imageUrl: String)
 }
 
-class ImageUploadHelper: NSObject {
+public class ImageUploadHelper: NSObject {
     
     private var viewController: UIViewController!
     private var loadingDialogController: UIAlertController!
     private let imagePicker = ImagePicker()
     
-    var delegate: ImageUploadHelperDelegate?
+    public var delegate: ImageUploadHelperDelegate?
     
-    func showImagePicker(viewController: UIViewController,
+    public func showImagePicker(viewController: UIViewController,
                          loadingDialogController: UIAlertController) {
         
         self.viewController = viewController
@@ -50,7 +51,7 @@ class ImageUploadHelper: NSObject {
 
 extension ImageUploadHelper: ImagePickerDelegate {
     
-    func imagePicker(_ picker: ImagePicker, didFinishPickingImage imageData: Data,
+    public func imagePicker(_ picker: ImagePicker, didFinishPickingImage imageData: Data,
                      imagePath: String) {
         
         viewController.present(loadingDialogController, animated: false, completion: {
@@ -61,7 +62,7 @@ extension ImageUploadHelper: ImagePickerDelegate {
                     debugPrint(error.message ?? "No error")
                     debugPrint(error.kind)
                     self.loadingDialogController.dismiss(animated: false)
-                    let (_, title, _) = error.getDisplayInfo()
+                    let title = "Something went wrong, Please try again."
                     TTGSnackbar(message: title, duration: .middle).show()
                     return
                 }

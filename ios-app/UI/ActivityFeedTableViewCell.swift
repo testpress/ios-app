@@ -25,6 +25,7 @@
 
 import ObjectMapper
 import UIKit
+import CourseKit
 
 class ActivityFeedTableViewCell: UITableViewCell {
     
@@ -57,7 +58,7 @@ class ActivityFeedTableViewCell: UITableViewCell {
             if let contentAttempt = activityFeed.actionObject as? ContentAttempt {
                 if let content = pager.contents[contentAttempt.chapterContentId] {
                     content.order = 0
-                    content.url = Constants.BASE_URL + "/api/v2.2/contents/\(content.id)/"
+                    content.url = TestpressCourse.shared.baseURL + "/api/v2.2/contents/\(content.id)/"
                     content.attemptsUrl = content.url + "attempts/"
                     self.content = content
                     if contentAttempt.assessment != nil {
@@ -85,7 +86,7 @@ class ActivityFeedTableViewCell: UITableViewCell {
             if let content = activityFeed.actionObject as? Content {
                 action = " added "
                 content.order = 0
-                content.url = Constants.BASE_URL + "/api/v2.2/contents/\(content.id)/"
+                content.url = TestpressCourse.shared.baseURL + "/api/v2.2/contents/\(content.id)/"
                 content.attemptsUrl = content.url + "attempts/"
                 if content.examId != -1 {
                     action += "an exam "
@@ -126,10 +127,10 @@ class ActivityFeedTableViewCell: UITableViewCell {
                 action = " added an article "
                 actionObjectName = post.title
                 thumbnailImage.image = Images.PostAdded.image
-                post.url = Constants.BASE_URL + "/api/v2.2/posts/" + post.slug
-                post.commentsUrl = Constants.BASE_URL + "/api/v2.2/posts/\(post.id!)/comments/"
+                post.url = TestpressCourse.shared.baseURL + "/api/v2.2/posts/" + post.slug
+                post.commentsUrl = TestpressCourse.shared.baseURL + "/api/v2.2/posts/\(post.id!)/comments/"
                 self.post = post
-                if let category = activityFeed.target as? Category {
+                if let category = activityFeed.target as? CourseKit.Category {
                     targetName = category.name
                 } else {
                     targetName = ""
@@ -176,7 +177,7 @@ class ActivityFeedTableViewCell: UITableViewCell {
     
     @objc func onItemClick() {
         if content != nil {
-            let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: nil)
+            let storyboard = UIStoryboard(name:Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
             let viewController = storyboard.instantiateViewController(
                 withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
                 as! ContentDetailPageViewController

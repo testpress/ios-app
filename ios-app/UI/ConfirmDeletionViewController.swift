@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import CourseKit
 
 class ConfirmDeletionViewController: WebViewController, WKScriptMessageHandler {
     override func viewDidLoad() {
@@ -30,7 +31,7 @@ class ConfirmDeletionViewController: WebViewController, WKScriptMessageHandler {
         if (message.name == "onAccountDeletionSuccess") {
             self.emptyView.hide()
             self.activityIndicator?.startAnimating()
-            UIUtils.logout()
+            UserHelper.logout()
             showLoginActivity()
         }
     }

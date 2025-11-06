@@ -27,8 +27,11 @@ import Alamofire
 import FBSDKLoginKit
 import Kingfisher
 import UIKit
+import CourseKit
 
 class ProfileViewController: UIViewController {
+
+    var instituteSettings: InstituteSettings!
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -53,11 +56,16 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
         emptyView = EmptyView.getInstance(parentView: contentStackView)
         emptyView.parentView = view
         UIUtils.setButtonDropShadow(logoutButton)
         UIUtils.setButtonDropShadow(deleteAccountButton)
-        bookmarkButtonLayout.isHidden = !Constants.BOOKMARKS_ENABLED
+        bookmarkButtonLayout.isHidden = !(instituteSettings?.bookmarksEnabled ?? false)
+        
+        deleteAccountButton.isHidden = true
+        showDeleteAccountButtonIfSignupAllowed()
+        
         self.setStatusBarColor()
     }
     
@@ -66,6 +74,15 @@ class ProfileViewController: UIViewController {
         
         if user == nil && !loading {
             getProfile()
+        }
+    }
+
+    func showDeleteAccountButtonIfSignupAllowed() {
+        InstituteRepository.shared.getSettings { [weak self] settings, error in
+            guard let settings = settings else { return }
+            DispatchQueue.main.async {
+                self?.deleteAccountButton.isHidden = !settings.allowSignup
+            }
         }
     }
     
@@ -135,7 +152,7 @@ class ProfileViewController: UIViewController {
             style: UIAlertAction.Style.destructive,
             handler: { action in
                 
-                UIUtils.logout()
+                UserHelper.logout()
                 let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
                     Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
                 
@@ -147,7 +164,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func showBookmarks() {
-        let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: nil)
+        let storyboard = UIStoryboard(name: Constants.BOOKMARKS_STORYBOARD, bundle: TestpressCourse.bundle)
         let navigationController = storyboard.instantiateViewController(withIdentifier:
             Constants.BOOKMARKS_LIST_NAVIGATION_CONTROLLER) as! UINavigationController
         
@@ -162,7 +179,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func rateUs() {
-        if let url = URL(string: Constants.APP_STORE_LINK),
+        if let url = URL(string: AppConstants.APP_STORE_LINK),
             UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url, options: [:])
@@ -173,7 +190,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func shareApp() {
-        let textToShare = [ Constants.APP_SHARE_MESSAGE ]
+        let textToShare = [ AppConstants.APP_SHARE_MESSAGE ]
         let activityViewController =
             UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         

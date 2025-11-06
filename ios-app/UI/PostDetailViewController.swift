@@ -26,6 +26,7 @@
 import TTGSnackbar
 import UIKit
 import WebKit
+import CourseKit
 
 class PostDetailViewController: BaseWebViewController, WKWebViewDelegate, WKScriptMessageHandler {
     

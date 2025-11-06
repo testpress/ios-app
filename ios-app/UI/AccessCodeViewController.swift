@@ -25,6 +25,7 @@
 
 import TTGSnackbar
 import UIKit
+import CourseKit
 
 class AccessCodeViewController: BaseTextFieldViewController {
     
@@ -46,7 +47,7 @@ class AccessCodeViewController: BaseTextFieldViewController {
         if accessCode.text != nil && !accessCode.text!.isEmpty {
             accessCode.resignFirstResponder()
             present(alertController, animated: false, completion: nil)
-            let url = Constants.BASE_URL + TPEndpoint.getAccessCodeExams.urlPath + accessCode.text!
+            let url = TestpressCourse.shared.baseURL + TPEndpoint.getAccessCodeExams.urlPath + accessCode.text!
                 + TPEndpoint.examsPath.urlPath
             
             TPApiClient.getListItems(
@@ -74,7 +75,7 @@ class AccessCodeViewController: BaseTextFieldViewController {
     }
     
     func showExamsList(exams: [Exam]) {
-        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: nil)
+        let storyboard = UIStoryboard(name: Constants.TEST_ENGINE, bundle: TestpressCourse.bundle)
         let navigationController = storyboard.instantiateViewController(withIdentifier:
             Constants.ACCESS_CODE_EXAMS_NAVIGATION_CONTROLLER) as! UINavigationController
         
@@ -86,7 +87,7 @@ class AccessCodeViewController: BaseTextFieldViewController {
     }
     
     @IBAction func showProfileDetails(_ sender: UIBarButtonItem) {
-        UIUtils.showProfileDetails(self)
+        UserHelper.showProfileDetails(self)
     }
     
 }
