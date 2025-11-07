@@ -1,13 +1,13 @@
 {
-  "subdomain": "staging",
-  "apple_id": "6753752664",
-  "primary_color": "#101010",
+  "subdomain": "eyementor",
+  "apple_id": "6753798531",
+  "primary_color": "#251C75",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
-  "display_name": "Staging LMS",
-  "bundle_identifier": "in.testpress.staging",
+  "display_name": "EyeMentor Dr.Rajarathna",
+  "bundle_identifier": "in.testpress.eyementor",
   "features": {
-    "zoom_enabled": true
+    "zoom_enabled": false
   },
-  "image_background" : "#111111"
+  "image_background" : "white"
 }
 
