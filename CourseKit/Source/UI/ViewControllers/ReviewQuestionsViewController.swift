@@ -194,9 +194,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 case "LoadNewComments":
                     loadNewComments()
                     break
-                case "InsertImage":
-                    uploadImage()
-                    break
                 default:
                     bookmarkJavascriptListener(message: message)
                     break
@@ -245,9 +242,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             })
     }
     
-    func uploadImage() {
-        
-    }
     
     func getHtml() -> String {
         guard let attemptItem = attemptItem, let attemptQuestion = attemptItem.question else {
@@ -433,7 +427,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     private func getCommentBoxHtml() -> String {
         var html = WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS)
         html += "<div class='comment_box_layout'>" +
-                "<div><span class='icon-add-a-photo' onclick='insertImage()'></span></div>" +
                 "<div contentEditable='true' class='comment_box' " +
                 "data-placeholder='Write a comment...'></div>" +
                 "<div><span class='icon-paper-plane' onclick='sendComment()'></span></div>" +
