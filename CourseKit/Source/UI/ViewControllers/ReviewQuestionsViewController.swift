@@ -203,9 +203,9 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 present(loadingDialogController, animated: true)
                 postComment(comment)
             }
-            } else if message.name == "previewFile" {
-                if let fileUrl = message.body as? String {
-                    handlePreviewFile(url: fileUrl)
+        } else if message.name == "previewFile" {
+            if let fileUrl = message.body as? String {
+                handlePreviewFile(url: fileUrl)
             }
         }
     }
