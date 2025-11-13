@@ -202,7 +202,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                     break
                 }
             } else if let dict = body as? Dictionary<String, AnyObject> {
-                let rawComment = dict["comment"] as! String
+                guard let rawComment = dict["comment"] as? String else { return }
                 let comment = rawComment.trimmingCharacters(in: .whitespacesAndNewlines)
                 
                 if comment.isEmpty {
