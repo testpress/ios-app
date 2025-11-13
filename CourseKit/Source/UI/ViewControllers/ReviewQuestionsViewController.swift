@@ -202,7 +202,14 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                     break
                 }
             } else if let dict = body as? Dictionary<String, AnyObject> {
-                let comment = dict["comment"] as! String
+                let rawComment = dict["comment"] as! String
+                let comment = rawComment.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if comment.isEmpty {
+                    TTGSnackbar(message: "Comment cannot be empty.", duration: .middle).show()
+                    return
+                }
+                
                 present(loadingDialogController, animated: true)
                 postComment(comment)
             }
