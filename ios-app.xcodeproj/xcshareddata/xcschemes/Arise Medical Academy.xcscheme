@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2F26ADE11E8249D70031E6F4"
-               BuildableName = "ios-app.app"
+               BuildableName = "Wezva Technologies.app"
                BlueprintName = "ios-app"
                ReferencedContainer = "container:ios-app.xcodeproj">
             </BuildableReference>
@@ -31,7 +31,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2F26ADE11E8249D70031E6F4"
-            BuildableName = "ios-app.app"
+            BuildableName = "Wezva Technologies.app"
             BlueprintName = "ios-app"
             ReferencedContainer = "container:ios-app.xcodeproj">
          </BuildableReference>
@@ -54,7 +54,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2F26ADE11E8249D70031E6F4"
-            BuildableName = "ios-app.app"
+            BuildableName = "Wezva Technologies.app"
             BlueprintName = "ios-app"
             ReferencedContainer = "container:ios-app.xcodeproj">
          </BuildableReference>
@@ -71,7 +71,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2F26ADE11E8249D70031E6F4"
-            BuildableName = "ios-app.app"
+            BuildableName = "Wezva Technologies.app"
             BlueprintName = "ios-app"
             ReferencedContainer = "container:ios-app.xcodeproj">
          </BuildableReference>

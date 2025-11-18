@@ -40,7 +40,7 @@ end
 # -----------------------------------------------------------------
 #  Helper: Resize + write (centralised)
 # -----------------------------------------------------------------
-def resize_and_save(source, dest, width:, height:, resize_mode: "", background: "white")
+def resize_and_save(source, dest, width:, height:, resize_mode: "", background: "#FD4E39")
   UI.user_error!("Source missing: #{source}") unless File.exist?(source)
 
   FileUtils.mkdir_p(File.dirname(dest))
@@ -104,7 +104,7 @@ desc "Generate login_screen_image.png (646×218)"
 lane :generate_login_image do
   imageset = File.join(ASSETS_DIR, "login_screen_image.imageset")
   dest = File.join(imageset, "login_screen_image.png")
-  resize_and_save(LAUNCH_SOURCE, dest, width: 646, height: 218, background: "white")
+  resize_and_save(LAUNCH_SOURCE, dest, width: 646, height: 218, background: "#FD4E39")
   UI.success("Login image generated")
 end
 

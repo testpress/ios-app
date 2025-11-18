@@ -636,7 +636,7 @@
 		2F25D561201F5C8800C01CCE /* TargetThreatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetThreatViewController.swift; sourceTree = "<group>"; };
 		2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
-		2F26ADE21E8249D70031E6F4 /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F26ADE21E8249D70031E6F4 /* Wezva Technologies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wezva Technologies.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F26ADEA1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1343,7 +1343,7 @@
 		2F26ADE31E8249D70031E6F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2F26ADE21E8249D70031E6F4 /* ios-app.app */,
+				2F26ADE21E8249D70031E6F4 /* Wezva Technologies.app */,
 				2F26ADF61E8249D70031E6F4 /* ios-appTests.xctest */,
 				254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */,
 				8413800D2C9D9CCD004D5846 /* CourseKit.framework */,
@@ -1742,7 +1742,7 @@
 				D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */,
 			);
 			productName = "ios-app";
-			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
+			productReference = 2F26ADE21E8249D70031E6F4 /* Wezva Technologies.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2F26ADF51E8249D70031E6F4 /* ios-appTests */ = {
@@ -2608,13 +2608,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BHAB7LC35Y;
 				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Testpress LMS";
+				INFOPLIST_KEY_CFBundleDisplayName = "Wezva Technologies";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2626,8 +2627,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
-				PRODUCT_NAME = "ios-app";
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.wezvatechnologies;
+				PRODUCT_NAME = "Wezva Technologies";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -2648,7 +2649,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Testpress LMS";
+				INFOPLIST_KEY_CFBundleDisplayName = "Wezva Technologies";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2660,8 +2661,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
-				PRODUCT_NAME = "ios-app";
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.wezvatechnologies;
+				PRODUCT_NAME = "Wezva Technologies";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
