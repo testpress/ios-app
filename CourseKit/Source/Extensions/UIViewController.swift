@@ -10,23 +10,28 @@ import UIKit
 extension UIViewController {
     public func setStatusBarColor() {
         if #available(iOS 13.0, *) {
-            view.subviews.filter { $0.tag == 999999 }.forEach { $0.removeFromSuperview() }
-            let statusbarView = UIView()
-            statusbarView.backgroundColor = TestpressCourse.shared.statusBarColor
-            statusbarView.tag = 999999
-            view.addSubview(statusbarView)
-            statusbarView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
+            let statusBarViewTag = 999999
+            if let existingView = view.viewWithTag(statusBarViewTag) {
+                existingView.backgroundColor = TestpressCourse.shared.statusBarColor
+                view.bringSubviewToFront(existingView)
+            } else {
+                let statusbarView = UIView()
+                statusbarView.backgroundColor = TestpressCourse.shared.statusBarColor
+                statusbarView.tag = statusBarViewTag
+                view.addSubview(statusbarView)
+                statusbarView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
                     statusbarView.topAnchor.constraint(equalTo: view.topAnchor),
                     statusbarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                     statusbarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                     statusbarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
                 ])
-          } else {
-              let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
-                  as? UIView
-              
-              statusBar?.backgroundColor = TestpressCourse.shared.statusBarColor
+            }
+        } else {
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
+                as? UIView
+            
+            statusBar?.backgroundColor = TestpressCourse.shared.statusBarColor
         }
     }
 
