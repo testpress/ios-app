@@ -10,23 +10,28 @@ import UIKit
 extension UIViewController {
     public func setStatusBarColor() {
         if #available(iOS 13.0, *) {
-                let app = UIApplication.shared
-                let statusBarHeight: CGFloat = app.statusBarFrame.size.height
+            let statusBarViewTag = 999999
+            if let existingView = view.viewWithTag(statusBarViewTag) {
+                existingView.backgroundColor = TestpressCourse.shared.statusBarColor
+                view.bringSubviewToFront(existingView)
+            } else {
                 let statusbarView = UIView()
                 statusbarView.backgroundColor = TestpressCourse.shared.statusBarColor
+                statusbarView.tag = statusBarViewTag
                 view.addSubview(statusbarView)
                 statusbarView.translatesAutoresizingMaskIntoConstraints = false
-                statusbarView.heightAnchor
-            .constraint(equalToConstant: statusBarHeight).isActive = true
-                statusbarView.widthAnchor
-            .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
-                statusbarView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-                statusbarView.centerXAnchor.constraint(equalTo:   view.centerXAnchor).isActive = true
-          } else {
-              let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
-                  as? UIView
-              
-              statusBar?.backgroundColor = TestpressCourse.shared.statusBarColor
+                NSLayoutConstraint.activate([
+                    statusbarView.topAnchor.constraint(equalTo: view.topAnchor),
+                    statusbarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                    statusbarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                    statusbarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+                ])
+            }
+        } else {
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar")
+                as? UIView
+            
+            statusBar?.backgroundColor = TestpressCourse.shared.statusBarColor
         }
     }
 
