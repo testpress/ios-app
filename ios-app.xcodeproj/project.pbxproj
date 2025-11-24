@@ -2621,7 +2621,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.manjoorans;
-				PRODUCT_NAME = "ios-app";
+				PRODUCT_NAME = "Manjoorans Connect";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -2655,7 +2655,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.manjoorans;
-				PRODUCT_NAME = "ios-app";
+				PRODUCT_NAME = "Manjoorans Connect";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

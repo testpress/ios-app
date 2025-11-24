@@ -281,7 +281,6 @@ private_lane :update_app_identity do |options|
   bundle_id    = options[:bundle_identifier] || UI.user_error!("bundle_identifier required")
   display_name = options[:display_name]     || UI.user_error!("display_name required")
 
-<<<<<<< HEAD
   UI.message("Updating identity → #{bundle_id} / #{display_name}")
 
   # ✅ Open project once
@@ -297,73 +296,6 @@ private_lane :update_app_identity do |options|
     cfg.build_settings["PRODUCT_NAME"] = display_name
     cfg.build_settings["INFOPLIST_KEY_CFBundleDisplayName"] = display_name
     UI.message("#{cfg.name}: #{old_id} → #{bundle_id}")
-=======
-lane :update_bundle_display_name do |options|
-  require 'fastlane_core/ui/ui'
-
-  # Ensure a display name is provided
-  unless options[:display_name] && !options[:display_name].empty?
-    UI.user_error!("❌ Please provide a display_name, e.g., display_name: 'Qaaf Academy'")
-  end
-
-  plist_path = "../ios-app/Info.plist"
-  unless File.exist?(plist_path)
-    UI.user_error!("❌ Info.plist not found at #{plist_path}")
-  end
-
-  display_name = options[:display_name]
-
-  # Check if CFBundleDisplayName exists
-  begin
-    existing_value = sh("/usr/libexec/PlistBuddy -c \"Print :CFBundleDisplayName\" '#{plist_path}'", error_callback: ->(_) { nil })
-  rescue
-    existing_value = nil
-  end
-
-  if existing_value.nil? || existing_value.empty?
-    UI.message("ℹ️ CFBundleDisplayName not found — adding new key.")
-    sh("/usr/libexec/PlistBuddy -c \"Add :CFBundleDisplayName string '#{display_name}'\" '#{plist_path}'")
-  else
-    UI.message("🔹 Updating existing CFBundleDisplayName (#{existing_value.strip} → #{display_name})")
-    sh("/usr/libexec/PlistBuddy -c \"Set :CFBundleDisplayName '#{display_name}'\" '#{plist_path}'")
-  end
-
-  UI.success("✅ CFBundleDisplayName updated to '#{display_name}' in Info.plist")
-end
-
-lane :update_app_identity do |options|
-  require 'xcodeproj'
-  require 'fastlane_core/ui/ui'
-
-  bundle_id = options[:bundle_identifier]
-  display_name = options[:display_name]
-
-  if bundle_id.nil? || display_name.nil?
-    UI.user_error!("❌ Missing parameters: bundle_identifier or display_name")
-  end
-
-  UI.message("🚀 Updating app identity...")
-  UI.message("   • Bundle Identifier → #{bundle_id}")
-  UI.message("   • Display Name → #{display_name}")
-
-  # --- Update Bundle Identifier ---
-  project_path = "../ios-app.xcodeproj"
-  unless File.exist?(project_path)
-    UI.user_error!("❌ Xcode project not found at #{project_path}")
-  end
-
-  project = Xcodeproj::Project.open(project_path)
-  app_target = project.targets.find { |t| t.product_type == "com.apple.product-type.application" }
-
-  unless app_target
-    UI.user_error!("❌ No application target found in project!")
-  end
-
-  app_target.build_configurations.each do |config|
-    old_id = config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"]
-    config.build_settings["PRODUCT_BUNDLE_IDENTIFIER"] = bundle_id
-    UI.message("✅ Updated #{config.name} bundle ID: #{old_id} → #{bundle_id}")
->>>>>>> 4e296765 (Manjoorans first release)
   end
 
   # ✅ Save the same project instance
@@ -450,3 +382,4 @@ lane :deploy do |options|
   UI.message("Display name: #{config['display_name']}")
   UI.message("Zoom: #{zoom_enabled ? 'ENABLED' : 'DISABLED'}")
 end
+
