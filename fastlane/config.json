@@ -1,13 +1,13 @@
 {
-  "subdomain": "staging",
-  "apple_id": "6753752664",
-  "primary_color": "#101010",
+  "subdomain": "jtcindia",
+  "apple_id": "6752597426",
+  "primary_color": "#251C75",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
-  "display_name": "Staging LMS",
-  "bundle_identifier": "in.testpress.staging",
+  "display_name": "JTC Inida",
+  "bundle_identifier": "in.testpress.jtcindia",
   "features": {
-    "zoom_enabled": true
+    "zoom_enabled": false
   },
-  "image_background" : "#111111"
+  "image_background" : "white"
 }
 
