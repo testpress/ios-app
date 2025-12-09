@@ -1,13 +1,13 @@
 {
-  "subdomain": "staging",
-  "apple_id": "6753752664",
-  "primary_color": "#101010",
+  "subdomain": "indianeconomybysreejith",
+  "apple_id": "6756178975",
+  "primary_color": "#003456",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
-  "display_name": "Staging LMS",
-  "bundle_identifier": "in.testpress.staging",
+  "display_name": "Indian Economy by Sreejith RS",
+  "bundle_identifier": "in.testpress.indianeconomybysreejith",
   "features": {
-    "zoom_enabled": true
+    "zoom_enabled": false
   },
-  "image_background" : "#111111"
+  "image_background" : "white"
 }
 
