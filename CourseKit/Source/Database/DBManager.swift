@@ -37,7 +37,11 @@ public class DBConnection {
     }
     
     public static func configure(){
-         var config = Realm.Configuration(schemaVersion: 1)
+         var config = Realm.Configuration(
+            schemaVersion: 2,
+            migrationBlock: { migration, oldSchemaVersion in
+            }
+         )
          config.fileURL!.deleteLastPathComponent()
          config.fileURL!.appendPathComponent("CourseKit")
          config.fileURL!.appendPathExtension("realm")
