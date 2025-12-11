@@ -48,6 +48,7 @@ class BaseTextFieldViewController: UIViewController, UIGestureRecognizerDelegate
         super.viewWillAppear(animated)
         
         // Add tap gesture to hide keyboard on outside click
+        guard let scrollView = scrollView else { return }
         let tapGesture = UITapGestureRecognizer(target: self, action:
             #selector(hideKeyboard(gesture:)))
         
@@ -65,6 +66,7 @@ class BaseTextFieldViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     @objc func keyboardWillShow(notification:NSNotification){
+        guard let scrollView = scrollView else { return }
         // Give room at the bottom of the scroll view, so keyboard doesn't cover up anything
         // the user needs to tap
         var userInfo = notification.userInfo!
@@ -78,6 +80,7 @@ class BaseTextFieldViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     @objc func keyboardWillHide(notification:NSNotification){
+        guard let scrollView = scrollView else { return }
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
     }
