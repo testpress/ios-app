@@ -382,20 +382,10 @@ public class TPApiClient {
             parameters["email"] = email
         }
         
-        apiCall(endpointProvider: TPEndpointProvider(.otpLogin),
+        request(type: TPAuthToken.self,
+                endpointProvider: TPEndpointProvider(.otpLogin),
                 parameters: parameters,
-                completion: { json, error in
-                    
-                    var authToken: TPAuthToken? = nil
-                    if let json = json {
-                        authToken = TPModelMapper<TPAuthToken>().mapFromJSON(json: json)
-                        guard authToken != nil else {
-                            completion(nil, TPError(message: json, kind: .unexpected))
-                            return
-                        }
-                    }
-                    completion(authToken, error)
-        })
+                completion: completion)
     }
 
     
