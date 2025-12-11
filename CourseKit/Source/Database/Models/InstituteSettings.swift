@@ -25,6 +25,7 @@
 
 import ObjectMapper
 import Foundation
+import RealmSwift
 
 public class InstituteSettings: DBModel {
     
@@ -73,6 +74,20 @@ public class InstituteSettings: DBModel {
     @objc public dynamic var salesforceMarketingCloudUrl: String? = nil
     @objc public dynamic var salesforceMid: String? = nil
 
+    public var allowedLoginMethods = List<Int>()
+    
+    public enum LoginMethod: Int {
+        case usernamePassword = 1
+        case otp = 3
+    }
+    
+    public func isOtpLoginMethodAllowed() -> Bool {
+        return allowedLoginMethods.contains(LoginMethod.otp.rawValue)
+    }
+
+    public func isUsernameLoginMethodAllowed() -> Bool {
+        return allowedLoginMethods.contains(LoginMethod.usernamePassword.rawValue)
+    }
     public override func mapping(map: ObjectMapper.Map) {
         verificationMethod <- map["verification_method"]
         allowSignup <- map["allow_signup"]
@@ -117,6 +132,11 @@ public class InstituteSettings: DBModel {
         salesforceFcmSenderId <- map["salesforce_fcm_sender_id"]
         salesforceMarketingCloudUrl <- map["salesforce_marketing_cloud_url"]
         salesforceMid <- map["salesforce_mid"]
+        var tempAllowed: [Int] = []
+        tempAllowed <- map["allowed_login_methods"]
+
+        allowedLoginMethods.removeAll()
+        allowedLoginMethods.append(objectsIn: tempAllowed)
     }
     
     override public static func primaryKey() -> String? {
