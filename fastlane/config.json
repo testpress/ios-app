@@ -1,13 +1,13 @@
 {
-  "subdomain": "staging",
-  "apple_id": "6753752664",
-  "primary_color": "#101010",
+  "subdomain": "nextofficersacademy",
+  "apple_id": "6756355084",
+  "primary_color": "#a80582",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
-  "display_name": "Staging LMS",
-  "bundle_identifier": "in.testpress.staging",
+  "display_name": "NEXT OFFICERS ACADEMY",
+  "bundle_identifier": "in.testpress.nextofficersacademy",
   "features": {
-    "zoom_enabled": true
+    "zoom_enabled": false
   },
-  "image_background" : "#111111"
+  "image_background" : "white"
 }
 
