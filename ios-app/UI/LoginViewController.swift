@@ -41,6 +41,7 @@ class LoginViewController: BaseTextFieldViewController {
     @IBOutlet weak var socialLoginLayout: UIStackView!
     @IBOutlet weak var facebookButtonLayout: UIView!
     @IBOutlet weak var forgotPasswordButton: UIButton!
+    @IBOutlet weak var phoneNumberLoginButton: UIButton!
     
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     var instituteSettings: InstituteSettings!
@@ -112,6 +113,13 @@ class LoginViewController: BaseTextFieldViewController {
         
         hideKeyboard()
         authenticate(username: username, password: password, provider: .TESTPRESS)
+    }
+    
+    @IBAction func onOTPLoginButtonClick(_ sender: UIView) {
+        let otpLoginVC = storyboard?.instantiateViewController(
+            withIdentifier: Constants.OTP_LOGIN_VIEW_CONTROLLER
+        ) as! OTPLoginViewController
+        present(otpLoginVC, animated: true)
     }
     
     func authenticate(username: String, password: String, provider: AuthProvider) {
