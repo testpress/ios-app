@@ -80,6 +80,8 @@ public enum TPEndpoint {
     case getSSOUrl
     case getS3PreSignedUrl
     case checkEnforceDataCollectionStatus
+    case generateOtp
+    case otpLogin
 
     public var method: Alamofire.HTTPMethod {
         switch self {
@@ -141,7 +143,9 @@ public enum TPEndpoint {
              .logoutDevices,
              .logout,
              .getSSOUrl,
-             .getS3PreSignedUrl:
+             .getS3PreSignedUrl,
+             .generateOtp,
+             .otpLogin:
             return .post
         case .put:
             return .put
@@ -242,6 +246,10 @@ public enum TPEndpoint {
             return "/api/v2.3/presigned_url/"
         case .checkEnforceDataCollectionStatus:
             return "/api/v2.3/me/check_permission/"
+        case .generateOtp:
+            return "/api/v2.5/auth/generate-otp/"
+        case .otpLogin:
+            return "/api/v2.5/auth/otp-login/"
         default:
             return ""
         }
