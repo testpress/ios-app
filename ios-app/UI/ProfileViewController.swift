@@ -153,10 +153,14 @@ class ProfileViewController: UIViewController {
             handler: { action in
                 
                 UserHelper.logout()
-                let loginViewController = self.storyboard?.instantiateViewController(withIdentifier:
-                    Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+                let viewController = UserHelper.getLoginOrTabViewController()
                 
-                self.present(loginViewController, animated: true, completion: nil)
+                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+                      let window = appDelegate.window else {
+                    return
+                }
+                
+                window.rootViewController = viewController
             }
         ))
         alert.addAction(UIAlertAction(title: Strings.CANCEL, style: UIAlertAction.Style.cancel))

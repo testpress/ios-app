@@ -55,6 +55,7 @@ public struct Constants {
     public static let QUIZ_QUESTION_VIEW_CONTROLLER = "QuizQuestionViewController"
     public static let QUIZ_QUESTIONS_PAGE_VIEW_CONTROLLER = "QuizQuestionsPageViewController"
     public static let LIVE_STREAM_VIEW_CONTROLLER = "LiveStreamContentViewController"
+    public static let OTP_LOGIN_VIEW_CONTROLLER = "OTPLoginViewController"
     
     public static let CONTENT_EXAM_ATTEMPS_TABLE_VIEW_CONTROLLER = "ContentExamAttemptsTableViewController"
     public static let POST_TABLE_VIEW_CELL = "PostTableViewCell"
