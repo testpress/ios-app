@@ -351,9 +351,7 @@ public class TPApiClient {
         var parameters: Parameters = [:]
         
         if let phone = phoneNumber, let code = countryCode {
-            if let phoneInt = Int(phone) {
-                parameters["phone_number"] = phoneInt
-            }
+            parameters["phone_number"] = phone
             parameters["country_code"] = code
         }
         
@@ -377,9 +375,7 @@ public class TPApiClient {
         parameters["otp"] = otp
         
         if let phone = phoneNumber {
-            if let phoneInt = Int(phone) {
-                parameters["phone_number"] = phoneInt
-            }
+            parameters["phone_number"] = phone
         }
         
         if let email = email {

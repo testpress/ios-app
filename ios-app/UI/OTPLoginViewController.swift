@@ -32,6 +32,8 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
     private let countryList = UIUtils.getCountryList()
     private var countryCodes: [String]?
     private var countryCode = "IN"
+    private let defaultCountryCode = "91"
+    private let disabledButtonAlpha: CGFloat = 0.8
     
     var instituteSettings: InstituteSettings!
     var instituteSettingsToken: NotificationToken?
@@ -67,7 +69,7 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
         pickerView.dataSource = self
         countryCodeField.inputView = pickerView
         countryCodes = Array(countryList.keys).sorted()
-        countryCodeField.text = "91"
+        countryCodeField.text = defaultCountryCode
     }
     
     private func configureTextFields() {
@@ -145,16 +147,21 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
     }
     
     @IBAction private func useUsernameLogin(_: Any) {
-        let loginVC = storyboard?.instantiateViewController(
+        guard let loginVC = storyboard?.instantiateViewController(
             withIdentifier: Constants.LOGIN_VIEW_CONTROLLER
-        ) as! LoginViewController
-        present(loginVC, animated: true)
+        ) as? LoginViewController else { return }
+        
+        dismiss(animated: false) {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+                  let window = appDelegate.window else { return }
+            window.rootViewController = loginVC
+        }
     }
     
     private func sendOtp() {
         TPApiClient.generateOtp(
             phoneNumber: phoneNumber,
-            countryCode: countryList[countryCode]?[1] ?? "91"
+            countryCode: countryList[countryCode]?[1] ?? defaultCountryCode
         ) { [weak self] error in
             guard let self = self else { return }
             self.loadingDialog.dismiss(animated: true)
@@ -219,7 +226,7 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
     private func startResendCooldown() {
         resendOtpButton.isEnabled = false
         remainingSeconds = cooldownSeconds
-        resendOtpButton.alpha = 0.8
+        resendOtpButton.alpha = disabledButtonAlpha
         updateResendButtonTitle()
         
         countdownTimer?.invalidate()

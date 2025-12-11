@@ -116,10 +116,15 @@ class LoginViewController: BaseTextFieldViewController {
     }
     
     @IBAction func onOTPLoginButtonClick(_ sender: UIView) {
-        let otpLoginVC = storyboard?.instantiateViewController(
+        guard let otpLoginVC = storyboard?.instantiateViewController(
             withIdentifier: Constants.OTP_LOGIN_VIEW_CONTROLLER
-        ) as! OTPLoginViewController
-        present(otpLoginVC, animated: true)
+        ) as? OTPLoginViewController else { return }
+        
+        dismiss(animated: false) {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+                  let window = appDelegate.window else { return }
+            window.rootViewController = otpLoginVC
+        }
     }
     
     func authenticate(username: String, password: String, provider: AuthProvider) {
