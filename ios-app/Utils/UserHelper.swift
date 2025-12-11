@@ -51,8 +51,14 @@ class UserHelper {
             viewController = storyboard.instantiateViewController(withIdentifier:
                                                                     Constants.TAB_VIEW_CONTROLLER)
         } else {
-            viewController = storyboard.instantiateViewController(withIdentifier:
-                                                                    Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+            let settings = DBManager<InstituteSettings>().getResultsFromDB().first
+            if settings?.isOtpLoginMethodAllowed() == true {
+                viewController = storyboard.instantiateViewController(withIdentifier:
+                                                                        Constants.OTP_LOGIN_VIEW_CONTROLLER)
+            } else {
+                viewController = storyboard.instantiateViewController(withIdentifier:
+                                                                        Constants.LOGIN_VIEW_CONTROLLER)
+            }
         }
         return viewController
     }
