@@ -55,6 +55,7 @@ class LoginViewController: BaseTextFieldViewController {
 
         forgotPasswordButton.isHidden = true
         signUpLayout.isHidden = true
+        phoneNumberLoginButton.isHidden = true
 
         let fbLoginButton = FBLoginButton()
         
