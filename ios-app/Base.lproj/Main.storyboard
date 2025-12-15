@@ -27,7 +27,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="LoginViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -236,7 +236,6 @@
                         <outlet property="loginButton" destination="SKF-zT-5yA" id="Owh-dc-0FD"/>
                         <outlet property="navigationbarItem" destination="y21-8k-c3o" id="23P-l9-DYy"/>
                         <outlet property="passwordField" destination="omV-An-VdO" id="YK7-XR-RQV"/>
-                        <outlet property="phoneNumberLoginButton" destination="yWJ-Wz-U9b" id="rnU-jv-uGX"/>
                         <outlet property="scrollView" destination="IC7-mf-Rhd" id="rh9-gq-s8e"/>
                         <outlet property="signUpLayout" destination="YcW-vj-b3g" id="aXQ-4G-UCA"/>
                         <outlet property="socialLoginLayout" destination="htc-yl-NIs" id="4z2-Wv-n0X"/>
@@ -250,7 +249,7 @@
         <!--Reset Password View Controller-->
         <scene sceneID="ZXr-yO-wOB">
             <objects>
-                <viewController storyboardIdentifier="ResetPasswordViewController" modalPresentationStyle="fullScreen" id="SQh-2n-q3Z" customClass="ResetPasswordViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResetPasswordViewController" modalPresentationStyle="fullScreen" id="SQh-2n-q3Z" customClass="ResetPasswordViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aCt-to-abR">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -380,7 +379,7 @@
         <!--Success View Controller-->
         <scene sceneID="273-vF-ac4">
             <objects>
-                <viewController storyboardIdentifier="SuccessViewController" modalPresentationStyle="fullScreen" id="YWy-U8-Ccy" customClass="SuccessViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SuccessViewController" modalPresentationStyle="fullScreen" id="YWy-U8-Ccy" customClass="SuccessViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lVG-zB-7f6">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -465,7 +464,7 @@
         <!--Verify Phone View Controller-->
         <scene sceneID="Jjd-66-BkY">
             <objects>
-                <viewController storyboardIdentifier="VerifyPhoneViewController" modalPresentationStyle="fullScreen" id="KQk-tq-POh" customClass="VerifyPhoneViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VerifyPhoneViewController" modalPresentationStyle="fullScreen" id="KQk-tq-POh" customClass="VerifyPhoneViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ett-2w-keh">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -583,7 +582,7 @@
         <!--Login Actitvity View Controller-->
         <scene sceneID="rKW-Yj-rxu">
             <objects>
-                <viewController storyboardIdentifier="LoginActivityViewController" title="Login Actitvity View Controller" modalPresentationStyle="fullScreen" id="JnQ-3U-IYq" customClass="LoginActivityViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginActivityViewController" title="Login Actitvity View Controller" modalPresentationStyle="fullScreen" id="JnQ-3U-IYq" customClass="LoginActivityViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4h3-OD-ueW">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -637,7 +636,7 @@
                                 <rect key="frame" x="0.0" y="184" width="390" height="542"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoginActivityTableCell" id="MAC-zB-wTC" customClass="LoginActivityCell" customModule="Vet_Edge" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoginActivityTableCell" id="MAC-zB-wTC" customClass="LoginActivityCell" customModule="ios_app" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="390" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MAC-zB-wTC" id="OmI-nI-XlO">
@@ -717,7 +716,7 @@
         <!--Profile View Controller-->
         <scene sceneID="GfJ-zy-Q5X">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="htN-nI-XSU" customClass="ProfileViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="htN-nI-XSU" customClass="ProfileViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="txK-3L-7uh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="909"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1485,7 +1484,7 @@
         <!--Main Menu Tab View Controller-->
         <scene sceneID="Mdy-Sk-uTh">
             <objects>
-                <tabBarController storyboardIdentifier="TabViewController" modalPresentationStyle="fullScreen" id="Rpt-VZ-9Dz" customClass="MainMenuTabViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabViewController" modalPresentationStyle="fullScreen" id="Rpt-VZ-9Dz" customClass="MainMenuTabViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="fill" id="2Dr-wo-Tqc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1509,7 +1508,7 @@
         <!--Learn-->
         <scene sceneID="wTU-md-1zb">
             <objects>
-                <navigationController modalPresentationStyle="fullScreen" id="cio-FJ-YrM" customClass="LearnTabController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="fullScreen" id="cio-FJ-YrM" customClass="LearnTabController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Learn" image="learn" id="Yfg-Wo-Hor"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eh5-Xc-JeH">
@@ -1524,7 +1523,7 @@
         <!--Exams-->
         <scene sceneID="DTl-fJ-hg6">
             <objects>
-                <viewController storyboardIdentifier="ExamsTabViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="QVc-G1-ctc" customClass="ExamsTabViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExamsTabViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="QVc-G1-ctc" customClass="ExamsTabViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XgZ-C5-jdQ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1623,7 +1622,7 @@
         <!--Discussion-->
         <scene sceneID="Pgp-Jd-ASa">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Qu3-Qm-bXH" customClass="ForumViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="Qu3-Qm-bXH" customClass="ForumViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AIU-fy-eSi">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1707,7 +1706,7 @@
         <!--Forum Table View Controller-->
         <scene sceneID="WLe-87-Ixo">
             <objects>
-                <tableViewController storyboardIdentifier="ForumTableViewController" id="qlb-mJ-cnn" customClass="ForumTableViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ForumTableViewController" id="qlb-mJ-cnn" customClass="ForumTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2j8-UH-VMJ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="515"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1717,7 +1716,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </stackView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ForumTableViewCell" rowHeight="115" id="q5o-xK-Hod" customClass="ForumTableViewCell" customModule="Vet_Edge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ForumTableViewCell" rowHeight="115" id="q5o-xK-Hod" customClass="ForumTableViewCell" customModule="ios_app" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="390" height="115"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q5o-xK-Hod" id="8vp-cn-iIK">
@@ -1852,7 +1851,7 @@
         <!--Articles-->
         <scene sceneID="Kme-qm-gBh">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="iks-hl-Go7" customClass="RecentPostTableViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="iks-hl-Go7" customClass="RecentPostTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" ambiguous="YES" id="eMh-vw-ZB2">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1933,7 +1932,7 @@
                                             <constraint firstAttribute="height" constant="180" id="5T9-dh-OgZ"/>
                                         </constraints>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostTableViewCell" rowHeight="105" id="QXa-bK-ADq" customClass="PostTableViewCell" customModule="Vet_Edge" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostTableViewCell" rowHeight="105" id="QXa-bK-ADq" customClass="PostTableViewCell" customModule="ios_app" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="50" width="390" height="105"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QXa-bK-ADq" id="usV-91-eu6">
@@ -2068,13 +2067,13 @@
         <!--Post Categories Table View Controller-->
         <scene sceneID="wk1-XD-7PZ">
             <objects>
-                <tableViewController storyboardIdentifier="PostCategoriesTableViewController" id="S5l-QU-hU8" customClass="PostCategoriesTableViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PostCategoriesTableViewController" id="S5l-QU-hU8" customClass="PostCategoriesTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GQg-VN-vGk">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="156.33333333333334"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCategoriesTableViewCell" id="yaa-J2-zl3" customClass="PostCategoriesTableViewCell" customModule="Vet_Edge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCategoriesTableViewCell" id="yaa-J2-zl3" customClass="PostCategoriesTableViewCell" customModule="ios_app" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="390" height="53.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yaa-J2-zl3" id="7d7-Cw-HUw">
@@ -2151,14 +2150,14 @@
         <!--Recent Activities-->
         <scene sceneID="a92-ph-Hje">
             <objects>
-                <tableViewController storyboardIdentifier="ActivityFeedTableViewController" modalPresentationStyle="fullScreen" id="49r-oQ-YhN" customClass="ActivityFeedTableViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ActivityFeedTableViewController" modalPresentationStyle="fullScreen" id="49r-oQ-YhN" customClass="ActivityFeedTableViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rht-iO-6Mx">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ActivityFeedTableViewCell" rowHeight="229" id="f01-zy-3Wz" customClass="ActivityFeedTableViewCell" customModule="Vet_Edge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ActivityFeedTableViewCell" rowHeight="229" id="f01-zy-3Wz" customClass="ActivityFeedTableViewCell" customModule="ios_app" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="390" height="229"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f01-zy-3Wz" id="ElK-nE-eug">
@@ -2446,7 +2445,7 @@
         <!--Leaderboard-->
         <scene sceneID="OJp-2o-HqP">
             <objects>
-                <viewController storyboardIdentifier="LeaderboardTabViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="DsX-ph-kej" customClass="LeaderboardTabViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeaderboardTabViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="DsX-ph-kej" customClass="LeaderboardTabViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5VG-Y5-khw">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2523,7 +2522,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="Dpd-yi-YRG">
             <objects>
-                <viewController storyboardIdentifier="SignUpViewController" modalPresentationStyle="fullScreen" id="coG-x9-smr" customClass="SignUpViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" modalPresentationStyle="fullScreen" id="coG-x9-smr" customClass="SignUpViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qh5-vu-CfA">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2728,7 +2727,7 @@
         <!--Access Code-->
         <scene sceneID="8Pd-qL-cMy">
             <objects>
-                <viewController storyboardIdentifier="AccessCodeViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="4b6-tm-543" customClass="AccessCodeViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccessCodeViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="4b6-tm-543" customClass="AccessCodeViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="59d-et-BR9">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2837,7 +2836,7 @@
         <!--Dashboard-->
         <scene sceneID="kDp-0n-DqY">
             <objects>
-                <viewController id="fBp-XL-OQD" customClass="DashboardViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fBp-XL-OQD" customClass="DashboardViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MSe-Zk-Eh9">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2878,7 +2877,7 @@
         <!--OfflineDownloadsTabController-->
         <scene sceneID="6en-eY-ske">
             <objects>
-                <viewController storyboardIdentifier="OfflineDownloadsTabController" title="OfflineDownloadsTabController" id="omW-yp-kWD" customClass="OfflineDownloadsTabController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OfflineDownloadsTabController" title="OfflineDownloadsTabController" id="omW-yp-kWD" customClass="OfflineDownloadsTabController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5zy-o8-S3a">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2895,7 +2894,7 @@
         <!--OTP Login View Controller-->
         <scene sceneID="uYh-Y2-Wut">
             <objects>
-                <viewController storyboardIdentifier="OTPLoginViewController" title="OTP Login View Controller" modalPresentationStyle="fullScreen" id="k5r-rd-T60" customClass="OTPLoginViewController" customModule="Vet_Edge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTPLoginViewController" title="OTP Login View Controller" modalPresentationStyle="fullScreen" id="k5r-rd-T60" customClass="OTPLoginViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Her-HH-DlL">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
