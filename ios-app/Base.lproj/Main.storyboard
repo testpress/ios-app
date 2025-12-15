@@ -236,6 +236,7 @@
                         <outlet property="loginButton" destination="SKF-zT-5yA" id="Owh-dc-0FD"/>
                         <outlet property="navigationbarItem" destination="y21-8k-c3o" id="23P-l9-DYy"/>
                         <outlet property="passwordField" destination="omV-An-VdO" id="YK7-XR-RQV"/>
+                        <outlet property="phoneNumberLoginButton" destination="yWJ-Wz-U9b" id="hZd-LE-MyC"/>
                         <outlet property="scrollView" destination="IC7-mf-Rhd" id="rh9-gq-s8e"/>
                         <outlet property="signUpLayout" destination="YcW-vj-b3g" id="aXQ-4G-UCA"/>
                         <outlet property="socialLoginLayout" destination="htc-yl-NIs" id="4z2-Wv-n0X"/>
