@@ -55,7 +55,6 @@ class LoginViewController: BaseTextFieldViewController {
 
         forgotPasswordButton.isHidden = true
         signUpLayout.isHidden = true
-        phoneNumberLoginButton.isHidden = true
 
         let fbLoginButton = FBLoginButton()
         
@@ -91,7 +90,6 @@ class LoginViewController: BaseTextFieldViewController {
         signUpLayout.isHidden = !instituteSettings.allowSignup
         socialLoginLayout.isHidden = !instituteSettings.facebookLoginEnabled
         forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
-        phoneNumberLoginButton.isHidden = !instituteSettings.isOtpLoginMethodAllowed()
     }
 
     deinit {
