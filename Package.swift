@@ -16,7 +16,6 @@ let package = Package(
     .package(url: "https://github.com/realm/realm-swift/", .upToNextMajor(from: "10.54.2")),
     .package(url: "https://github.com/Hearst-DD/ObjectMapper", .upToNextMajor(from: "4.2.0")),
     .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.9.1")),
-    .package(url: "https://github.com/getsentry/sentry-cocoa.git", .upToNextMajor(from: "8.36.0")),
     .package(url: "https://github.com/M3U8Kit/M3U8Parser", .upToNextMajor(from: "1.1.0")),
     .package(url: "https://github.com/onevcat/Kingfisher", .upToNextMajor(from: "7.11.0")),
     .package(url: "https://github.com/testpress/MarqueeLabel", .upToNextMajor(from: "4.3.2")),
@@ -29,6 +28,7 @@ let package = Package(
     .package(url: "https://github.com/xmartlabs/XLPagerTabStrip", .upToNextMajor(from: "9.1.0")),
     .package(url: "https://github.com/airbnb/lottie-ios", .upToNextMajor(from: "4.4.3")),
     .package(url: "https://github.com/LaurentiuUngur/LUExpandableTableView", .upToNextMajor(from: "6.0.0")),
+    .package(url: "https://github.com/testpress/iOSPlayerSDK", branch: "latest_without_sentry1")
   ],
 
 

@@ -118,15 +118,6 @@
       }
     },
     {
-      "identity" : "sentry-cocoa",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/getsentry/sentry-cocoa.git",
-      "state" : {
-        "revision" : "7c1d627aaebbc702210c5062047508e4442ec9bf",
-        "version" : "8.37.0"
-      }
-    },
-    {
       "identity" : "slidemenucontrollerswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/testpress/SlideMenuControllerSwift",
