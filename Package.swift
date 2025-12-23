@@ -53,7 +53,6 @@ let package = Package(
         "IGListKit",
         "XLPagerTabStrip",
         .product(name: "Lottie", package: "lottie-ios"),
-        .product(name: "TPStreamsSDK", package: "iOSPlayerSDK")
       ],
       path: "CourseKit/Source",
       resources: [
