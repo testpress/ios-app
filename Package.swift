@@ -28,6 +28,7 @@ let package = Package(
     .package(url: "https://github.com/xmartlabs/XLPagerTabStrip.git", .upToNextMajor(from: "9.1.0")),
     .package(url: "https://github.com/airbnb/lottie-ios.git", .upToNextMajor(from: "4.4.3")),
     .package(url: "https://github.com/LaurentiuUngur/LUExpandableTableView.git", .upToNextMajor(from: "6.0.0")),
+    .package(url: "https://github.com/testpress/iOSPlayerSDK.git", branch: "yukthi-sample")
   ],
 
 
@@ -51,6 +52,7 @@ let package = Package(
         "IGListKit",
         "XLPagerTabStrip",
         .product(name: "Lottie", package: "lottie-ios"),
+        .product(name: "TPStreamsSDK", package: "iOSPlayerSDK")
       ],
       path: "CourseKit/Source",
       resources: [
