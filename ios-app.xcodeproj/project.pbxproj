@@ -198,7 +198,6 @@
 		03CD0D372CB947F200E17218 /* ChapterContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */; };
 		03CD0D382CB947F200E17218 /* QuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB692246A9BA000524D2C /* QuizExamViewModel.swift */; };
 		03CD0D392CB947F200E17218 /* CustomTestQuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */; };
-		03CD0D3A2CB947F800E17218 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */; };
 		03CD0D3B2CB9480A00E17218 /* VideoPlayerSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */; };
 		03CD0D3D2CB9485200E17218 /* M3U8Parser in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D3C2CB9485200E17218 /* M3U8Parser */; };
 		03CD0D3F2CB9485E00E17218 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D3E2CB9485E00E17218 /* MarqueeLabel */; };
@@ -392,8 +391,6 @@
 		8CD78EA522BC9B8F00DD034D /* TestMainMenuTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */; };
 		8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD78EA622BC9DA100DD034D /* TestUtils.swift */; };
 		8CDE264B239EAD2700BA04C6 /* TestVideoPlayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264A239EAD2700BA04C6 /* TestVideoPlayerUtils.swift */; };
-		8CDE264E239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */; };
-		8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */; };
 		8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */; };
 		A4A1E4F72DF1648600C72932 /* MobileRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D3721B2D3FB086002E9FE2 /* MobileRTC.xcframework */; };
 		A4A1E4FA2DF164C400C72932 /* MobileRTC.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9D3721B2D3FB086002E9FE2 /* MobileRTC.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -833,7 +830,6 @@
 		8C04229022AA77C90015269B /* TestCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCourseViewController.swift; sourceTree = "<group>"; };
 		8C205A072323918700596E66 /* LoginActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginActivityCell.swift; sourceTree = "<group>"; };
 		8C2D130A238507C4005A7F39 /* VideoContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentViewController.swift; sourceTree = "<group>"; };
-		8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		8C2E7B5D2397B49000BA2F41 /* VideoPlayerControls.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerControls.xib; sourceTree = "<group>"; };
 		8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerControlsView.swift; sourceTree = "<group>"; };
 		8C2E7B61239A1E4A00BA2F41 /* VideoPlayerUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerUtils.swift; sourceTree = "<group>"; };
@@ -849,8 +845,6 @@
 		8CD78EA622BC9DA100DD034D /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSlider.swift; sourceTree = "<group>"; };
 		8CDE264A239EAD2700BA04C6 /* TestVideoPlayerUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoPlayerUtils.swift; sourceTree = "<group>"; };
-		8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerControlsViewTest.swift; sourceTree = "<group>"; };
-		8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewTest.swift; sourceTree = "<group>"; };
 		8CDE2651239F26B700BA04C6 /* TestVideoContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoContentViewController.swift; sourceTree = "<group>"; };
 		8CF6972C232652A80040A986 /* Stackview+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Stackview+BackgroundColor.swift"; sourceTree = "<group>"; };
 		9B482AA21F7CADEABC2BF009 /* ios_appTests-ios_appMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ios_appTests-ios_appMocks.generated.swift"; path = "MockingbirdMocks/ios_appTests-ios_appMocks.generated.swift"; sourceTree = "<group>"; };
@@ -1097,7 +1091,6 @@
 			isa = PBXGroup;
 			children = (
 				256DE79D256F8CF100F02995 /* PaddingLabel.swift */,
-				8C2E7B5823979E5A00BA2F41 /* VideoPlayerView.swift */,
 				8C2E7B5F2397B56600BA2F41 /* VideoPlayerControlsView.swift */,
 				8CDE2648239E1ACD00BA04C6 /* VideoPlayerSlider.swift */,
 			);
@@ -1674,8 +1667,6 @@
 		8CDE264C239EB03000BA04C6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8CDE264D239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift */,
-				8CDE264F239EB61D00BA04C6 /* VideoPlayerViewTest.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2119,11 +2110,9 @@
 				25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */,
 				8CD78EA722BC9DA100DD034D /* TestUtils.swift in Sources */,
 				8CD78EA322BC917D00DD034D /* TestLoginViewController.swift in Sources */,
-				8CDE264E239EB04900BA04C6 /* VideoPlayerControlsViewTest.swift in Sources */,
 				25AA1B2E252B2274008AAA9D /* TestVideoConferenceViewController.swift in Sources */,
 				8C04229122AA77C90015269B /* TestCourseViewController.swift in Sources */,
 				2506299A2266FEC800539FB2 /* LoginActivity.swift in Sources */,
-				8CDE2650239EB61D00BA04C6 /* VideoPlayerViewTest.swift in Sources */,
 				8CDE2652239F26B700BA04C6 /* TestVideoContentViewController.swift in Sources */,
 				84F3494925A82C190048487F /* TestAttachmentDetailViewController.swift in Sources */,
 				250629962266F9C000539FB2 /* LoginActivityViewControllerTest.swift in Sources */,
@@ -2215,7 +2204,6 @@
 				038CB2B72CBD280E00164127 /* BookmarkHelper.swift in Sources */,
 				035CC54D2CAE694D0057F4E4 /* StringTransform.swift in Sources */,
 				03CD0D432CB94B1B00E17218 /* DRMKeySessionDelegate.swift in Sources */,
-				03CD0D3A2CB947F800E17218 /* VideoPlayerView.swift in Sources */,
 				038CB2912CBD278600164127 /* TrophiesAchievedViewController.swift in Sources */,
 				03CD0D352CB947F200E17218 /* VideoContentViewModel.swift in Sources */,
 				03A60F9C2CB3F45D00079A7C /* UIDevice+ModelName.swift in Sources */,
