@@ -196,7 +196,6 @@
 		03CD0D372CB947F200E17218 /* ChapterContentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AFFB822C0076AE0015C029 /* ChapterContentDetailViewModel.swift */; };
 		03CD0D382CB947F200E17218 /* QuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BB692246A9BA000524D2C /* QuizExamViewModel.swift */; };
 		03CD0D392CB947F200E17218 /* CustomTestQuizExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98010682B035E780071C397 /* CustomTestQuizExamViewModel.swift */; };
-		03CD0D3D2CB9485200E17218 /* M3U8Parser in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D3C2CB9485200E17218 /* M3U8Parser */; };
 		03CD0D3F2CB9485E00E17218 /* MarqueeLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D3E2CB9485E00E17218 /* MarqueeLabel */; };
 		03CD0D452CB94D7600E17218 /* ContentAttemptCreationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CD0D442CB94D7600E17218 /* ContentAttemptCreationDelegate.swift */; };
 		03CD0D472CB954F400E17218 /* WebViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2571F8617690092BFDC /* WebViewUtils.swift */; };
@@ -907,7 +906,6 @@
 				03CD0D3F2CB9485E00E17218 /* MarqueeLabel in Frameworks */,
 				03CD0C642CB7B5D400E17218 /* DGCharts in Frameworks */,
 				038CB2C42CBD331400164127 /* Lottie in Frameworks */,
-				03CD0D3D2CB9485200E17218 /* M3U8Parser in Frameworks */,
 				03CD0C772CB7CFC900E17218 /* TTGSnackbar in Frameworks */,
 				03CD0D0A2CB9290200E17218 /* DropDown in Frameworks */,
 				038CB2B92CBD2AF600164127 /* Kingfisher in Frameworks */,
@@ -1758,7 +1756,6 @@
 				03CD0C762CB7CFC900E17218 /* TTGSnackbar */,
 				03CD0D092CB9290200E17218 /* DropDown */,
 				03CD0D292CB92C2400E17218 /* XLPagerTabStrip */,
-				03CD0D3C2CB9485200E17218 /* M3U8Parser */,
 				03CD0D3E2CB9485E00E17218 /* MarqueeLabel */,
 				03CD0D622CB95A1700E17218 /* Sentry */,
 				038CB2B82CBD2AF600164127 /* Kingfisher */,
@@ -1850,7 +1847,6 @@
 				036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */,
 				036CE8572CA6DE2000183BA8 /* XCRemoteSwiftPackageReference "SlideMenuControllerSwift" */,
 				036CE85A2CA6E34300183BA8 /* XCRemoteSwiftPackageReference "Charts" */,
-				036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */,
 				036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				036CE8682CA6F0E400183BA8 /* XCRemoteSwiftPackageReference "ObjectMapper" */,
 				036CE86B2CA6F67F00183BA8 /* XCRemoteSwiftPackageReference "IGListKit" */,
@@ -2926,14 +2922,6 @@
 				minimumVersion = 5.1.0;
 			};
 		};
-		036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/M3U8Kit/M3U8Parser";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
-			};
-		};
 		036CE8632CA6EFE000183BA8 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TimOliver/TOCropViewController";
@@ -3176,11 +3164,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8702CA6F8D400183BA8 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */;
 			productName = XLPagerTabStrip;
-		};
-		03CD0D3C2CB9485200E17218 /* M3U8Parser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 036CE8602CA6EC5A00183BA8 /* XCRemoteSwiftPackageReference "M3U8Parser" */;
-			productName = M3U8Parser;
 		};
 		03CD0D3E2CB9485E00E17218 /* MarqueeLabel */ = {
 			isa = XCSwiftPackageProductDependency;
