@@ -16,7 +16,6 @@ let package = Package(
     .package(url: "https://github.com/realm/realm-swift.git", .upToNextMajor(from: "10.54.2")),
     .package(url: "https://github.com/Hearst-DD/ObjectMapper.git", .upToNextMajor(from: "4.2.0")),
     .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.9.1")),
-    .package(url: "https://github.com/getsentry/sentry-cocoa.git", .upToNextMajor(from: "8.36.0")),
     .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "7.11.0")),
     .package(url: "https://github.com/testpress/MarqueeLabel.git", .upToNextMajor(from: "4.3.2")),
     .package(url: "https://github.com/testpress/SlideMenuControllerSwift.git", .upToNextMajor(from: "5.0.1")),
