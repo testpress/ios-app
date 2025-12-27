@@ -115,7 +115,6 @@ public class TPApiClient {
                 handleCustomError(error: error)
             }
             
-            error.logErrorToSentry()
             completion(nil, error)
         }
     }
@@ -141,7 +140,6 @@ public class TPApiClient {
             handleCustomError(error: tpError)
         }
         
-        tpError.logErrorToSentry()
         completion(nil, tpError)
     }
 

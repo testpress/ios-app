@@ -26,7 +26,6 @@
 import FBSDKCoreKit
 import IQKeyboardManagerSwift
 import UIKit
-import Sentry
 
 
 import Alamofire
@@ -89,7 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         InstituteRepository.shared.getSettings { instituteSettings, error in
             if let instituteSettings = instituteSettings {
-                self.setupSentry(instituteSettings: instituteSettings)
                 self.restrictScreenRecording(instituteSettings: instituteSettings)
             }
         }
@@ -166,31 +164,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         TPApiClient.authErrorDelegate = AuthErrorHandler()
     }
 
-    private func setupSentry(instituteSettings: InstituteSettings) {
-        SentrySDK.start { options in
-            options.dsn = instituteSettings.sentryDSN
-            options.debug = false
-            options.enableCrashHandler = true
-            options.enableAutoSessionTracking = true
-            #if DEBUG
-                options.tracesSampleRate = 1.0
-            #else
-                options.tracesSampleRate = 0.2
-            #endif
-        }
-
-        if let buildID = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String {
-            SentrySDK.configureScope { scope in
-                scope.setTag(value: buildID, key: "build.id")
-            }
-        }
-
-        if KeychainTokenItem.isExist() {
-            let user = Sentry.User()
-            user.username = KeychainTokenItem.getAccount()
-            SentrySDK.setUser(user)
-        }
-    }
 
     private func restrictScreenRecording(instituteSettings: InstituteSettings) {
         if !instituteSettings.AllowScreenShotInApp {

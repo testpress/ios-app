@@ -28,7 +28,6 @@ import Alamofire
 import CourseKit
 import SFMCSDK
 import MarketingCloudSDK
-import Sentry
 
 class MainMenuTabViewController: UITabBarController {
     
@@ -96,11 +95,8 @@ class MainMenuTabViewController: UITabBarController {
         
         let completionHandler: (OperationResult) -> () = { result in
             if result == .error {
-                SentrySDK.capture(message: "Salesforce SDK integration error.")
             } else if result == .cancelled {
-                SentrySDK.capture(message: "Salesforce SDK integration cancelled.")
             } else if result == .timeout {
-                SentrySDK.capture(message: "Salesforce SDK integration timeout.")
             }
         }
         
