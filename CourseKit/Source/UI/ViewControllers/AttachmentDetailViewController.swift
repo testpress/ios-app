@@ -298,43 +298,43 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
 }
 
 extension AttachmentDetailViewController: BookmarkDelegate {
-    func getBookMarkParams() -> Parameters? {
-        var parameters: Parameters = Parameters()
+    public func getBookMarkParams() -> [String: Any]? {
+        var parameters: [String: Any] = [:]
         parameters["object_id"] = content.id
         parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
         return parameters
     }
     
-    func updateBookmark(bookmarkId: Int?) {
+    public func updateBookmark(bookmarkId: Int?) {
         self.udpateBookmarkButtonState(bookmarkId: bookmarkId)
     }
     
-    func onClickMoveButton() {
+    public func onClickMoveButton() {
         self.moveButton.isHidden = true
         self.moveAnimationView.isHidden = false
     }
     
-    func displayRemoveButton() {
+    public func displayRemoveButton() {
         self.removeAnimationView.isHidden = true
         self.removeButton.isHidden = false
     }
     
-    func onClickBookmarkButton() {
+    public func onClickBookmarkButton() {
         self.bookmarkButton.isHidden = true
         self.bookmarkAnimationContainer.isHidden = false
     }
     
-    func removeBookmark() {
+    public func removeBookmark() {
         self.removeButton.isHidden = true
         self.removeAnimationView.isHidden = false
     }
     
-    func displayBookmarkButton() {
+    public func displayBookmarkButton() {
         self.bookmarkAnimationContainer.isHidden = true
         self.bookmarkButton.isHidden = false
     }
     
-    func displayMoveButton() {
+    public func displayMoveButton() {
         self.moveAnimationView.isHidden = true
         self.moveButton.isHidden = false
     }

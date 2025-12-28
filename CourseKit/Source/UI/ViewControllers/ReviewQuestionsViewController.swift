@@ -508,33 +508,34 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
         self.present(errorAlert, animated: true, completion: nil)
     }
     
-    func onClickBookmarkButton() {
+    public func onClickBookmarkButton() {
         self.evaluateJavaScript("hideBookmarkButton();")
     }
     
-    func getBookMarkParams() -> Parameters? {
-        var parameters: Parameters = Parameters()
-        parameters["object_id"] = self.attemptItem.id
-        parameters["content_type"] = ["model": "userselectedanswer", "app_label": "exams"]
+   public func getBookMarkParams() -> [String: Sendable]? {
+        var parameters: [String: Any] = [:]
+        parameters["object_id"] = self.attemptItem.id as Int
+        parameters["content_type"] = ["model": "userselectedanswer", "app_label": "exams"] as [String: String]
         return parameters
     }
     
-    func updateBookmark(bookmarkId: Int?) {
+    public func updateBookmark(bookmarkId: Int?) {
         self.attemptItem.bookmarkId = bookmarkId
         let basePath = WebViewUtils.getResourcesBasePath() ?? ""
         
         self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil), '\(basePath)');")
     }
     
-    func displayBookmarkButton() {
+    public func displayBookmarkButton() {
         self.evaluateJavaScript("displayBookmarkButton();")
     }
     
-    func displayMoveButton() {
+    public func displayMoveButton() {
         self.evaluateJavaScript("displayMoveButton();")
     }
     
-    func onClickMoveButton() {}
-    func removeBookmark() {}
-    func displayRemoveButton() {}
+    public func onClickMoveButton() {}
+    public func removeBookmark() {}
+    public func displayRemoveButton() {}
 }
+

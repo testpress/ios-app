@@ -337,37 +337,37 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
 
 
 extension VideoContentViewController: BookmarkDelegate {
-    func displayMoveButton() {
+    public func displayMoveButton() {
 
     }
     
-    func displayBookmarkButton() {
+    public func displayBookmarkButton() {
     }
     
-    func onClickMoveButton() {
-    
-    }
-    
-    func removeBookmark() {
+    public func onClickMoveButton() {
     
     }
     
-    func displayRemoveButton() {
+    public func removeBookmark() {
+    
+    }
+    
+    public func displayRemoveButton() {
         
     }
     
-    func onClickBookmarkButton() {
+    public func onClickBookmarkButton() {
     
     }
     
-    func getBookMarkParams() -> Parameters? {
-        var parameters: Parameters = Parameters()
+    public func getBookMarkParams() -> [String: Any]? {
+        var parameters: [String: Any] = [:]
         parameters["object_id"] = bookmarkContent?.id
         parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
         return parameters
     }
     
-    func updateBookmark(bookmarkId: Int?) {
+    public func updateBookmark(bookmarkId: Int?) {
         self.udpateBookmarkButtonState(bookmarkId: bookmarkId)
     }
 }

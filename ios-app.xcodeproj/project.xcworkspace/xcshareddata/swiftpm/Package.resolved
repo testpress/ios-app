@@ -1,13 +1,13 @@
 {
-  "originHash" : "6ae5a9636eb71403d143f3ef478f37e405f016e920c9550af8fd349ccd008255",
+  "originHash" : "6dc67d7aabc8634446e56575fe16b5b687750f2477b79915aec914508c2e7acd",
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire",
       "state" : {
-        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
-        "version" : "5.9.1"
+        "revision" : "7be73f6c2b5cd90e40798b06ebd5da8f9f79cf88",
+        "version" : "5.11.0"
       }
     },
     {
@@ -43,7 +43,7 @@
       "location" : "https://github.com/Instagram/IGListKit",
       "state" : {
         "branch" : "main",
-        "revision" : "4bad7d52604c695e48c0c161fed631aad8511449"
+        "revision" : "5784f6db5118566c4ce17f13d64c4490e5a4492c"
       }
     },
     {
@@ -51,8 +51,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/testpress/iOSPlayerSDK",
       "state" : {
-        "revision" : "c95dc04be6e293c0f2aec63c68fed001dbb8cdac",
-        "version" : "1.2.10"
+        "branch" : "yukthi-sample",
+        "revision" : "d13da3f710a203d0d074f1f2b1d6b1de3b6689f5"
+      }
+    },
+    {
+      "identity" : "iqkeyboardcore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hackiftekhar/IQKeyboardCore.git",
+      "state" : {
+        "revision" : "6501e93b03161ce1c9355d2d689bad91c534104e",
+        "version" : "1.0.8"
       }
     },
     {
@@ -60,8 +69,26 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hackiftekhar/IQKeyboardManager",
       "state" : {
-        "revision" : "19e111f9246b3407fe0c334dc78fa890c40d8c67",
-        "version" : "7.0.3"
+        "revision" : "3989683f60dfc33df6063f9a8d0fabb50a910e9d",
+        "version" : "7.2.0"
+      }
+    },
+    {
+      "identity" : "iqkeyboardnotification",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hackiftekhar/IQKeyboardNotification.git",
+      "state" : {
+        "revision" : "08bdc90e7db64ac88f51da5dc9e82f4c247e7057",
+        "version" : "1.0.6"
+      }
+    },
+    {
+      "identity" : "iqtextinputviewnotification",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hackiftekhar/IQTextInputViewNotification.git",
+      "state" : {
+        "revision" : "723784a2197121bb76a940cc6d79fd2fa6c23f43",
+        "version" : "1.0.9"
       }
     },
     {
@@ -69,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher",
       "state" : {
-        "revision" : "5b92f029fab2cce44386d28588098b5be0824ef5",
-        "version" : "7.11.0"
+        "revision" : "2ef543ee21d63734e1c004ad6c870255e8716c50",
+        "version" : "7.12.0"
       }
     },
     {
@@ -96,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/M3U8Kit/M3U8Parser",
       "state" : {
-        "revision" : "f7965520f3f8b31ee3a9329739623995a91cc789",
-        "version" : "1.1.0"
+        "revision" : "d38c45964506c0d41a2beb5b4d8d59263459638f",
+        "version" : "1.2.0"
       }
     },
     {
@@ -105,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/salesforce-marketingcloud/MarketingCloudSDK-iOS.git",
       "state" : {
-        "revision" : "a5b000903071ef50c8295586ada41e85122b4383",
-        "version" : "8.1.3"
+        "revision" : "1e5ac292240b21081a85e5389a654174f0a20ad9",
+        "version" : "8.1.4"
       }
     },
     {
@@ -155,21 +182,12 @@
       }
     },
     {
-      "identity" : "sentry-cocoa",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/getsentry/sentry-cocoa.git",
-      "state" : {
-        "revision" : "5575af93efb776414f243e93d6af9f6258dc539a",
-        "version" : "8.36.0"
-      }
-    },
-    {
       "identity" : "sfmc-sdk-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/salesforce-marketingcloud/sfmc-sdk-ios",
       "state" : {
-        "revision" : "526530898db36eb3974fe191f100392e7afaa242",
-        "version" : "1.1.3"
+        "revision" : "54dd60fe0986739f89af49641693347a82f50123",
+        "version" : "1.1.4"
       }
     },
     {
@@ -188,6 +206,15 @@
       "state" : {
         "revision" : "f707b8680cddb96dc1855632340a572ef37bbb98",
         "version" : "2.5.3"
+      }
+    },
+    {
+      "identity" : "toast-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scalessec/Toast-Swift.git",
+      "state" : {
+        "revision" : "ddccd20d6fb718448d9b179c454c561653fda7d5",
+        "version" : "5.1.1"
       }
     },
     {

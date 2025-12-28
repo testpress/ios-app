@@ -142,7 +142,6 @@
 		03A60FA62CB4060100079A7C /* EncryptionKeyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985834248A77BC003591FA /* EncryptionKeyRepository.swift */; };
 		03A60FA72CB4107100079A7C /* URLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25985830248A5F14003591FA /* URLUtils.swift */; };
 		03A60FA82CB4114A00079A7C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435D4263ADBAA00243FD3 /* UserDefaults.swift */; };
-		03A60FAB2CB4153900079A7C /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 03A60FAA2CB4153900079A7C /* Sentry */; };
 		03A60FB02CB5281000079A7C /* InstituteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A60FAF2CB5280F00079A7C /* InstituteRepository.swift */; };
 		03AD89032D1D4E1C00E426B7 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AD89022D1D4E1C00E426B7 /* UserService.swift */; };
 		03AD89052D1D539B00E426B7 /* UserDataFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AD89042D1D539B00E426B7 /* UserDataFormViewController.swift */; };
@@ -225,7 +224,6 @@
 		03CD0D5F2CB9557700E17218 /* progress_loader.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C7F81FCD9F18009C686C /* progress_loader.css */; };
 		03CD0D602CB9557700E17218 /* TestEngine.js in Resources */ = {isa = PBXBuildFile; fileRef = 2FC0F2781F8619220092BFDC /* TestEngine.js */; };
 		03CD0D612CB9557700E17218 /* typebase.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F6F167A1FC3F08900FB768C /* typebase.css */; };
-		03CD0D632CB95A1700E17218 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 03CD0D622CB95A1700E17218 /* Sentry */; };
 		03E4AF252CAEDE3D00ECC34D /* DBModel+Detachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586782628ABB81700E149B5 /* DBModel+Detachable.swift */; };
 		03E4AF462CAEDF7F00ECC34D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96997B1FC2A625001B2B18 /* Video.swift */; };
 		03E4AF472CAEDF7F00ECC34D /* TPModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2CC1F86385B0092BFDC /* TPModelMapper.swift */; };
@@ -860,7 +858,6 @@
 			files = (
 				A4A1E4F72DF1648600C72932 /* MobileRTC.xcframework in Frameworks */,
 				0386961C2BF7602600E36F8F /* Alamofire in Frameworks */,
-				03A60FAB2CB4153900079A7C /* Sentry in Frameworks */,
 				259932712A0A3F6800866CA8 /* FBAEMKit.xcframework in Frameworks */,
 				036CE8502CA6C3BE00183BA8 /* DropDown in Frameworks */,
 				2570A25321CA0DBE0097C6FE /* Protobuf.framework in Frameworks */,
@@ -912,7 +909,6 @@
 				038CB2C22CBD32F300164127 /* SwiftSoup in Frameworks */,
 				D932B2BB2CCBB801002B6D30 /* TPStreamsSDK in Frameworks */,
 				03CD0D2A2CB92C2400E17218 /* XLPagerTabStrip in Frameworks */,
-				03CD0D632CB95A1700E17218 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1702,7 +1698,6 @@
 				036CE86E2CA6F79600183BA8 /* IGListDiffKit */,
 				036CE8712CA6F8D500183BA8 /* XLPagerTabStrip */,
 				036CE8742CA6FA1100183BA8 /* TTGSnackbar */,
-				03A60FAA2CB4153900079A7C /* Sentry */,
 				03494F4A2CBEAFA700C6A44B /* TOCropViewController */,
 				D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */,
 			);
@@ -1754,7 +1749,6 @@
 				03CD0D092CB9290200E17218 /* DropDown */,
 				03CD0D292CB92C2400E17218 /* XLPagerTabStrip */,
 				03CD0D3E2CB9485E00E17218 /* MarqueeLabel */,
-				03CD0D622CB95A1700E17218 /* Sentry */,
 				038CB2B82CBD2AF600164127 /* Kingfisher */,
 				038CB2BA2CBD2B0800164127 /* LUExpandableTableView */,
 				038CB2BE2CBD2BF600164127 /* SlideMenuController */,
@@ -1851,7 +1845,6 @@
 				036CE8732CA6FA1100183BA8 /* XCRemoteSwiftPackageReference "TTGSnackbar" */,
 				036CE8762CA6FB8B00183BA8 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				036CE87C2CA6FF1500183BA8 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				03A60FAC2CB417CC00079A7C /* XCRemoteSwiftPackageReference "LUExpandableTableView" */,
 				D932B2A92CCBAEC4002B6D30 /* XCRemoteSwiftPackageReference "iOSPlayerSDK" */,
 				D9CCCA5A2CF5DBA700B60B0F /* XCRemoteSwiftPackageReference "MarketingCloudSDK-iOS" */,
@@ -3006,14 +2999,6 @@
 				minimumVersion = 7.11.0;
 			};
 		};
-		03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/getsentry/sentry-cocoa.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.7.0;
-			};
-		};
 		03A60FAC2CB417CC00079A7C /* XCRemoteSwiftPackageReference "LUExpandableTableView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/LaurentiuUngur/LUExpandableTableView";
@@ -3026,8 +3011,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/testpress/iOSPlayerSDK";
 			requirement = {
-				kind = exactVersion;
-				version = 1.2.16;
+				branch = "yukthi-sample";
+				kind = branch;
 			};
 		};
 		D9CCCA5A2CF5DBA700B60B0F /* XCRemoteSwiftPackageReference "MarketingCloudSDK-iOS" */ = {
@@ -3136,11 +3121,6 @@
 			package = 0386961A2BF7602600E36F8F /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		03A60FAA2CB4153900079A7C /* Sentry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
-			productName = Sentry;
-		};
 		03CD0C632CB7B5D400E17218 /* DGCharts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE85A2CA6E34300183BA8 /* XCRemoteSwiftPackageReference "Charts" */;
@@ -3165,11 +3145,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 036CE8512CA6D6B400183BA8 /* XCRemoteSwiftPackageReference "MarqueeLabel" */;
 			productName = MarqueeLabel;
-		};
-		03CD0D622CB95A1700E17218 /* Sentry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03A60FA92CB4153900079A7C /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
-			productName = Sentry;
 		};
 		03E4AFCA2CAFCFD500ECC34D /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;

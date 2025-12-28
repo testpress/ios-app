@@ -172,7 +172,7 @@ class BookmarkHelper {
         if folderName == BookmarkFolder.UNCATEGORIZED {
             folderName = ""
         }
-        var parameters: Parameters = delegate?.getBookMarkParams() ?? Parameters()
+        var parameters: [String: Any] = delegate?.getBookMarkParams() ?? [:]
         parameters["folder"] = folderName
         
         TPApiClient.request(
@@ -255,7 +255,7 @@ class BookmarkHelper {
 }
 
 
-protocol BookmarkDelegate: AnyObject {
+public protocol BookmarkDelegate: AnyObject {
     func onClickMoveButton()
     
     func removeBookmark()
@@ -264,7 +264,7 @@ protocol BookmarkDelegate: AnyObject {
     
     func onClickBookmarkButton()
     
-    func getBookMarkParams() -> Parameters?
+    func getBookMarkParams() -> [String: Any]?
     
     func updateBookmark(bookmarkId: Int?)
     

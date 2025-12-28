@@ -176,31 +176,31 @@ extension HtmlContentViewController: WKScriptMessageHandler {
 
 
 extension HtmlContentViewController: BookmarkDelegate {
-    func getBookMarkParams() -> Parameters? {
-        var parameters: Parameters = Parameters()
+    public func getBookMarkParams() -> [String: Any]? {
+        var parameters: [String: Any] = [:]
         parameters["object_id"] = content.id
         parameters["content_type"] = ["model": "chaptercontent", "app_label": "courses"]
         print("Parameters : \(parameters)")
         return parameters
     }
     
-    func onClickMoveButton() {
+    public func onClickMoveButton() {
         self.evaluateJavaScript("hideMoveButton();")
     }
     
-    func removeBookmark() {
+    public func removeBookmark() {
         self.evaluateJavaScript("hideRemoveButton();")
     }
     
-    func displayRemoveButton() {
+    public func displayRemoveButton() {
         self.evaluateJavaScript("displayRemoveButton();")
     }
     
-    func onClickBookmarkButton() {
+    public func onClickBookmarkButton() {
         self.evaluateJavaScript("hideBookmarkButton();")
     }
     
-    func updateBookmark(bookmarkId: Int?) {
+    public func updateBookmark(bookmarkId: Int?) {
         DBManager<Content>().write {
             self.content.bookmarkId.value = bookmarkId
         }
@@ -209,11 +209,11 @@ extension HtmlContentViewController: BookmarkDelegate {
         self.evaluateJavaScript("updateBookmarkButtonState(\(bookmarkId != nil), '\(basePath)');")
     }
     
-    func displayBookmarkButton() {
+    public func displayBookmarkButton() {
         self.evaluateJavaScript("displayBookmarkButton();")
     }
     
-    func displayMoveButton() {
+    public func displayMoveButton() {
         self.evaluateJavaScript("displayMoveButton();")
     }
 }
