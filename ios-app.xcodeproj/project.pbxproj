@@ -632,7 +632,7 @@
 		2F25D561201F5C8800C01CCE /* TargetThreatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetThreatViewController.swift; sourceTree = "<group>"; };
 		2F25D563201F5DBB00C01CCE /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
-		2F26ADE21E8249D70031E6F4 /* ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F26ADE21E8249D70031E6F4 /* iGet IAS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iGet IAS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F26ADE51E8249D70031E6F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F26ADEA1E8249D70031E6F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F26ADEC1E8249D70031E6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1338,7 +1338,7 @@
 		2F26ADE31E8249D70031E6F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2F26ADE21E8249D70031E6F4 /* ios-app.app */,
+				2F26ADE21E8249D70031E6F4 /* iGet IAS.app */,
 				2F26ADF61E8249D70031E6F4 /* ios-appTests.xctest */,
 				254E69C121DCF199009A4E61 /* Testpress iOS AppUITests.xctest */,
 				8413800D2C9D9CCD004D5846 /* CourseKit.framework */,
@@ -1737,7 +1737,7 @@
 				D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */,
 			);
 			productName = "ios-app";
-			productReference = 2F26ADE21E8249D70031E6F4 /* ios-app.app */;
+			productReference = 2F26ADE21E8249D70031E6F4 /* iGet IAS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2F26ADF51E8249D70031E6F4 /* ios-appTests */ = {
@@ -2615,7 +2615,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.2;
+				MARKETING_VERSION = 3.1.3;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
@@ -2649,7 +2649,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.2;
+				MARKETING_VERSION = 3.1.3;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
