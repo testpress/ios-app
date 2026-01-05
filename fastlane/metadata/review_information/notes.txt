@@ -1,0 +1,1 @@
+Existing user can login using username & password. New users can sign up using their email id. Users can take the practice tests & check their reports & stats.
