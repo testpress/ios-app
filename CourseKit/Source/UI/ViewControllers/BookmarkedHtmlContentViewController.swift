@@ -33,10 +33,10 @@ class BookmarkedHtmlContentViewController: HtmlContentViewController {
     var position: Int!
     
     override func getFormattedContent(_ contentHtml: String) -> String {
-        return WebViewUtils.getHeader() +
+        return WebViewUtils.getHeader(injectCSS: true) +
             WebViewUtils.getBookmarkOptionsHeader() +
             WebViewUtils.getMoveBookmarkTagsWithPadding() +
-            WebViewUtils.getFormattedTitle(title: title!) +
+            WebViewUtils.getFormattedTitle(title: title!, useDataURI: true) +
             WebViewUtils.getHtmlContentWithMargin(contentHtml)
     }
     

@@ -51,7 +51,17 @@ public class WebViewUtils {
             + "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "questions_typebase", withExtension: "css")!)' />"
     }
     
-    public static func getBookmarkHeader() -> String {
+    public static func getBookmarkHeader(inject: Bool = false) -> String {
+        if inject {
+            var html = ""
+            if let css = getStaticFileContent(for: "bookmark/bookmark", withExtension: "css") {
+                html += "<style>\(css)</style>"
+            }
+            if let js = getStaticFileContent(for: "bookmark/Bookmark", withExtension: "js") {
+                html += "<script>\(js)</script>"
+            }
+            return html
+        }
         return "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "bookmark/bookmark", withExtension: "css")!)' />"
             + "<script src='\(getStaticFileUrl(for: "bookmark/Bookmark", withExtension: "js")!)'></script>"
     }
@@ -61,15 +71,24 @@ public class WebViewUtils {
             + "<script src='\(getStaticFileUrl(for: "bookmark/BookmarkDetail", withExtension: "js")!)'></script>"
     }
     
-    public static func getHeader() -> String {
+    public static func getHeader(injectCSS: Bool = false) -> String {
         var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, "
             + "initial-scale=1, maximum-scale=1, user-scalable=no' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "typebase", withExtension: "css")!)' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "progress_loader", withExtension: "css")!)' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "dotted_loader", withExtension: "css")!)' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "comments", withExtension: "css")!)' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "post", withExtension: "css")!)' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "icomoon/style", withExtension: "css")!)' />"
+
+        let cssFiles = ["typebase", "progress_loader", "dotted_loader", "comments", "post", "icomoon/style"]
+        
+        if injectCSS {
+            for file in cssFiles {
+                if let cssContent = getStaticFileContent(for: file, withExtension: "css") {
+                    header += "<style>\(cssContent)</style>"
+                }
+            }
+        } else {
+            for file in cssFiles {
+                header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: file, withExtension: "css")!)' />"
+            }
+        }
+        
         header += "<script src='\(getStaticFileUrl(for: "comments", withExtension: "js")!)'></script>"
         header += "<script src='\(getStaticFileUrl(for: "pseudo_element_selector", withExtension: "js")!)'></script>"
         header += "<script type='text/x-mathjax-config'>" +
@@ -163,13 +182,15 @@ public class WebViewUtils {
     
     public static func getFormattedTitle(title: String,
                                          withBookmarkButton: Bool = false,
-                                         withBookmarkedState: Bool = false) -> String {
+                                         withBookmarkedState: Bool = false,
+                                         useDataURI: Bool = false) -> String {
         
-        var html = "<div class='title'>" + title + "</div>"
+        var html = "<div class='title'><b>" + title + "</b></div>"
         if withBookmarkButton {
             html += "<div class='bookmark-button-container'>"
             html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: withBookmarkedState,
-                                                           alignCenter: true)
+                                                           alignCenter: true,
+                                                           useDataURI: useDataURI)
             html += "</div>"
         }
         return html + "<hr class='title_separator'>"
@@ -273,16 +294,23 @@ public class WebViewUtils {
         return "<div style='padding: 5px 5px 0px 5px;'>" + getMoveBookmarkTags() + "</div>"
     }
     
-    public static func getBookmarkButtonWithTags(bookmarked: Bool, alignCenter: Bool = false) -> String {
+    public static func getBookmarkButtonWithTags(bookmarked: Bool, alignCenter: Bool = false, useDataURI: Bool = false) -> String {
         let imagePath = bookmarked ? "images/remove_bookmark" : "images/bookmark"
-        let imageURL = getStaticFileUrl(for: imagePath, withExtension: "svg")
+        var imageSrc = ""
+        
+        if useDataURI {
+            if let base64 = getStaticFileBase64(for: imagePath, withExtension: "svg") {
+                imageSrc = "data:image/svg+xml;base64,\(base64)"
+            }
+        } else {
+            imageSrc = getStaticFileUrl(for: imagePath, withExtension: "svg") ?? ""
+        }
 
         let text = bookmarked ? "Remove Bookmark" : "Bookmark this"
-
         let buttonClass = alignCenter ? "bookmark-centered-button" : "bookmark-button"
 
         var html = "<div class='\(buttonClass)' onclick='onClickBookmarkButton()'>"
-        html += "   <img class='bookmark-image' src='\(imageURL ?? "")' />"
+        html += "   <img class='bookmark-image' src='\(imageSrc)' />"
         html += "   <span class='bookmark-text'>\(text)</span>"
         html += getDottedLoader()
         html += "</div>"
@@ -317,6 +345,28 @@ public class WebViewUtils {
     }
 
     public static func getStaticFileUrl(for filePath: String, withExtension fileExtension: String?) -> String? {
+        guard let path = getStaticFilePath(for: filePath, withExtension: fileExtension) else {
+            return nil
+        }
+        return URL(fileURLWithPath: path).absoluteString
+    }
+
+    public static func getStaticFileContent(for filePath: String, withExtension fileExtension: String?) -> String? {
+        guard let path = getStaticFilePath(for: filePath, withExtension: fileExtension) else {
+            return nil
+        }
+        return try? String(contentsOfFile: path, encoding: .utf8)
+    }
+
+    public static func getStaticFileBase64(for filePath: String, withExtension fileExtension: String?) -> String? {
+        guard let path = getStaticFilePath(for: filePath, withExtension: fileExtension) else {
+            return nil
+        }
+        let data = try? Data(contentsOf: URL(fileURLWithPath: path))
+        return data?.base64EncodedString()
+    }
+
+    private static func getStaticFilePath(for filePath: String, withExtension fileExtension: String?) -> String? {
         guard var resourcePath = getResourcesBasePath() else {
             return nil
         }
@@ -331,6 +381,6 @@ public class WebViewUtils {
             fullPath = (fullPath as NSString).appendingPathExtension(fileExtension) ?? fullPath
         }
 
-        return URL(fileURLWithPath: fullPath).absoluteString
+        return fullPath
     }
 }

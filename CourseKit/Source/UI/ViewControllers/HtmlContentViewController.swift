@@ -54,6 +54,10 @@ class HtmlContentViewController: BaseWebViewController {
         config.userContentController = contentController
         config.preferences.javaScriptEnabled = true
         
+        // Required for YouTube and other video embeds to play inline
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = []
+        
         webView = WKWebView( frame: parentView.bounds, configuration: config)
     }
     
@@ -118,7 +122,7 @@ class HtmlContentViewController: BaseWebViewController {
         if !Reachability.isConnectedToNetwork() {
             let retryHandler = {
                 self.emptyView.hide()
-                self.viewDidLoad()
+                self.displayVideoContent()
             }
             emptyView.show(image: Images.TestpressNoWifi.image,
                            title: Strings.NETWORK_ERROR,
@@ -127,23 +131,79 @@ class HtmlContentViewController: BaseWebViewController {
             
             return
         }
-        let videoContentHtml = "<div class='videoWrapper'>" + content.video!.embedCode + "</div>"
-        webView.loadHTMLString(
-            getFormattedContent(videoContentHtml),
-            baseURL: Bundle.main.bundleURL
+        
+        if loading {
+            return
+        }
+        
+        activityIndicator.startAnimating()
+        loading = true
+        
+        let videoUrl = "\(TestpressCourse.shared.baseURL!)/api/v2.4/contents/\(content.id)/video/"
+        TPApiClient.request(
+            type: Video.self,
+            endpointProvider: TPEndpointProvider(.get, url: videoUrl),
+            completion: { video, error in
+                self.loading = false
+                
+                if let error = error {
+                    debugPrint(error.message ?? "No error")
+                    debugPrint(error.kind)
+                    
+                    if (self.activityIndicator?.isAnimating)! {
+                        self.activityIndicator?.stopAnimating()
+                    }
+                    
+                    var retryHandler: (() -> Void)?
+                    if error.kind == .network {
+                        retryHandler = {
+                            self.emptyView.hide()
+                            self.displayVideoContent()
+                        }
+                    }
+                    
+                    let (image, title, description) = error.getDisplayInfo()
+                    self.emptyView.show(image: image, title: title, description: description,
+                                        retryHandler: retryHandler)
+                    return
+                }
+                
+                guard let video = video, !video.embedCode.isEmpty else {
+                    if (self.activityIndicator?.isAnimating)! {
+                        self.activityIndicator?.stopAnimating()
+                    }
+                    self.emptyView.show(
+                        description: "Video embed code not available",
+                        retryHandler: {
+                            self.emptyView.hide()
+                            self.displayVideoContent()
+                        }
+                    )
+                    return
+                }
+                
+                let videoContentHtml = "<div class='videoWrapper'>" + video.embedCode + "</div>"
+                
+                let baseURL = URL(string: TestpressCourse.shared.baseURL)
+                self.webView.loadHTMLString(
+                    self.getFormattedContent(videoContentHtml),
+                    baseURL: baseURL
+                )
+            }
         )
     }
     
     func getFormattedContent(_ contentHtml: String) -> String {
-        var html = WebViewUtils.getHeader()
+        var html = WebViewUtils.getHeader(injectCSS: true)
         if instituteSettings?.bookmarksEnabled ?? false {
-            html += WebViewUtils.getBookmarkHeader()
+            html += WebViewUtils.getBookmarkHeader(inject: true)
         }
         let bookmarked = content.bookmarkId.value != nil
         html += WebViewUtils.getFormattedTitle(
             title: title!,
             withBookmarkButton: instituteSettings?.bookmarksEnabled ?? false,
-            withBookmarkedState: bookmarked
+            withBookmarkedState: bookmarked,
+            useDataURI: true
         )
         return html + WebViewUtils.getHtmlContentWithMargin(contentHtml)
     }
