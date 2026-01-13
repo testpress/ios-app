@@ -52,8 +52,8 @@ public class WebViewUtils {
     }
     
     public static func getBookmarkHeader() -> String {
-        let css = getStaticFileContent(for: "bookmark/bookmark", withExtension: "css")!
-        let js = getStaticFileContent(for: "bookmark/Bookmark", withExtension: "js")!
+        let css = getStaticFileContent(for: "bookmark/bookmark", withExtension: "css") ?? ""
+        let js = getStaticFileContent(for: "bookmark/Bookmark", withExtension: "js") ?? ""
         return "<style>\(css)</style><script>\(js)</script>"
     }
     
@@ -66,12 +66,12 @@ public class WebViewUtils {
         var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, "
             + "initial-scale=1, maximum-scale=1, user-scalable=no' />"
 
-        header += "<style>\(getStaticFileContent(for: "typebase", withExtension: "css")!)</style>"
-        header += "<style>\(getStaticFileContent(for: "progress_loader", withExtension: "css")!)</style>"
-        header += "<style>\(getStaticFileContent(for: "dotted_loader", withExtension: "css")!)</style>"
-        header += "<style>\(getStaticFileContent(for: "comments", withExtension: "css")!)</style>"
-        header += "<style>\(getStaticFileContent(for: "post", withExtension: "css")!)</style>"
-        header += "<style>\(getStaticFileContent(for: "icomoon/style", withExtension: "css")!)</style>"
+        header += "<style>\(getStaticFileContent(for: "typebase", withExtension: "css") ?? "")</style>"
+        header += "<style>\(getStaticFileContent(for: "progress_loader", withExtension: "css") ?? "")</style>"
+        header += "<style>\(getStaticFileContent(for: "dotted_loader", withExtension: "css") ?? "")</style>"
+        header += "<style>\(getStaticFileContent(for: "comments", withExtension: "css") ?? "")</style>"
+        header += "<style>\(getStaticFileContent(for: "post", withExtension: "css") ?? "")</style>"
+        header += "<style>\(getStaticFileContent(for: "icomoon/style", withExtension: "css") ?? "")</style>"
         header += "<script src='\(getStaticFileUrl(for: "comments", withExtension: "js")!)'></script>"
         header += "<script src='\(getStaticFileUrl(for: "pseudo_element_selector", withExtension: "js")!)'></script>"
         header += "<script type='text/x-mathjax-config'>" +
@@ -276,12 +276,12 @@ public class WebViewUtils {
     
     public static func getBookmarkButtonWithTags(bookmarked: Bool, alignCenter: Bool = false) -> String {
         let imagePath = bookmarked ? "images/remove_bookmark" : "images/bookmark"
-        let base64 = getStaticFileBase64(for: imagePath, withExtension: "svg")
+        let base64 = getStaticFileBase64(for: imagePath, withExtension: "svg") ?? ""
         let text = bookmarked ? "Remove Bookmark" : "Bookmark this"
         let buttonClass = alignCenter ? "bookmark-centered-button" : "bookmark-button"
 
         var html = "<div class='\(buttonClass)' onclick='onClickBookmarkButton()'>"
-        html += "   <img class='bookmark-image' src='data:image/svg+xml;base64,\(getStaticFileBase64(for: imagePath, withExtension: "svg")!)' />"
+        html += "   <img class='bookmark-image' src='data:image/svg+xml;base64,\(base64)' />"
         html += "   <span class='bookmark-text'>\(text)</span>"
         html += getDottedLoader()
         html += "</div>"

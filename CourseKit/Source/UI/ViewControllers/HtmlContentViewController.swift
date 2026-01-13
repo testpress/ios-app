@@ -55,7 +55,6 @@ class HtmlContentViewController: BaseWebViewController {
         config.preferences.javaScriptEnabled = true
         config.allowsInlineMediaPlayback = true
         config.mediaTypesRequiringUserActionForPlayback = []        
-
         
         webView = WKWebView( frame: parentView.bounds, configuration: config)
     }
@@ -131,7 +130,7 @@ class HtmlContentViewController: BaseWebViewController {
             return
         }
         let videoContentHtml = "<div class='videoWrapper'>" + content.video!.embedCode + "</div>"
-        let baseURL = URL(string: TestpressCourse.shared.baseURL!)
+        let baseURL = TestpressCourse.shared.baseURL.flatMap { URL(string: $0) }
         webView.loadHTMLString(
             getFormattedContent(videoContentHtml),
             baseURL: baseURL
