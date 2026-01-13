@@ -158,8 +158,7 @@ public class WebViewUtils {
             "<tr>" +
             "   <td class='short_answer_option_item table-without-border'>" +
                 shortAnswerText + "</td>" +
-                "   <td class='short_answer_option_item table-without-border'>" +
-                marksAllocated + "%</td>" +
+            "   <td class='short_answer_option_item table-without-border'>" +                marksAllocated + "%</td>" +
             "</tr>";
     }
     

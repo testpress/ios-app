@@ -54,9 +54,7 @@ class HtmlContentViewController: BaseWebViewController {
         config.userContentController = contentController
         config.preferences.javaScriptEnabled = true
         config.allowsInlineMediaPlayback = true
-        config.mediaTypesRequiringUserActionForPlayback = []
-        
-        // Required for YouTube and other video embeds to play inline
+        config.mediaTypesRequiringUserActionForPlayback = []        
         config.allowsInlineMediaPlayback = true
         config.mediaTypesRequiringUserActionForPlayback = []
         
@@ -124,7 +122,7 @@ class HtmlContentViewController: BaseWebViewController {
         if !Reachability.isConnectedToNetwork() {
             let retryHandler = {
                 self.emptyView.hide()
-                self.displayVideoContent()
+                self.viewDidLoad()
             }
             emptyView.show(image: Images.TestpressNoWifi.image,
                            title: Strings.NETWORK_ERROR,
@@ -133,7 +131,6 @@ class HtmlContentViewController: BaseWebViewController {
             
             return
         }
-
         let videoContentHtml = "<div class='videoWrapper'>" + content.video!.embedCode + "</div>"
         let baseURL = URL(string: TestpressCourse.shared.baseURL!)
         webView.loadHTMLString(
