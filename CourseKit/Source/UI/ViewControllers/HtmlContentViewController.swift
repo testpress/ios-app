@@ -55,8 +55,7 @@ class HtmlContentViewController: BaseWebViewController {
         config.preferences.javaScriptEnabled = true
         config.allowsInlineMediaPlayback = true
         config.mediaTypesRequiringUserActionForPlayback = []        
-        config.allowsInlineMediaPlayback = true
-        config.mediaTypesRequiringUserActionForPlayback = []
+
         
         webView = WKWebView( frame: parentView.bounds, configuration: config)
     }
