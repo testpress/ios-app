@@ -53,6 +53,8 @@ class HtmlContentViewController: BaseWebViewController {
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
         config.preferences.javaScriptEnabled = true
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = []
         
         // Required for YouTube and other video embeds to play inline
         config.allowsInlineMediaPlayback = true
@@ -131,65 +133,12 @@ class HtmlContentViewController: BaseWebViewController {
             
             return
         }
-        
-        if loading {
-            return
-        }
-        
-        activityIndicator.startAnimating()
-        loading = true
-        
-        let videoUrl = "\(TestpressCourse.shared.baseURL!)/api/v2.4/contents/\(content.id)/video/"
-        TPApiClient.request(
-            type: Video.self,
-            endpointProvider: TPEndpointProvider(.get, url: videoUrl),
-            completion: { video, error in
-                self.loading = false
-                
-                if let error = error {
-                    debugPrint(error.message ?? "No error")
-                    debugPrint(error.kind)
-                    
-                    if (self.activityIndicator?.isAnimating)! {
-                        self.activityIndicator?.stopAnimating()
-                    }
-                    
-                    var retryHandler: (() -> Void)?
-                    if error.kind == .network {
-                        retryHandler = {
-                            self.emptyView.hide()
-                            self.displayVideoContent()
-                        }
-                    }
-                    
-                    let (image, title, description) = error.getDisplayInfo()
-                    self.emptyView.show(image: image, title: title, description: description,
-                                        retryHandler: retryHandler)
-                    return
-                }
-                
-                guard let video = video, !video.embedCode.isEmpty else {
-                    if (self.activityIndicator?.isAnimating)! {
-                        self.activityIndicator?.stopAnimating()
-                    }
-                    self.emptyView.show(
-                        description: "Video embed code not available",
-                        retryHandler: {
-                            self.emptyView.hide()
-                            self.displayVideoContent()
-                        }
-                    )
-                    return
-                }
-                
-                let videoContentHtml = "<div class='videoWrapper'>" + video.embedCode + "</div>"
-                
-                let baseURL = URL(string: TestpressCourse.shared.baseURL)
-                self.webView.loadHTMLString(
-                    self.getFormattedContent(videoContentHtml),
-                    baseURL: baseURL
-                )
-            }
+
+        let videoContentHtml = "<div class='videoWrapper'>" + content.video!.embedCode + "</div>"
+        let baseURL = URL(string: TestpressCourse.shared.baseURL!)
+        webView.loadHTMLString(
+            getFormattedContent(videoContentHtml),
+            baseURL: baseURL
         )
     }
     

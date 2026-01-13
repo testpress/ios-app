@@ -51,19 +51,10 @@ public class WebViewUtils {
             + "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "questions_typebase", withExtension: "css")!)' />"
     }
     
-    public static func getBookmarkHeader(inject: Bool = false) -> String {
-        if inject {
-            var html = ""
-            if let css = getStaticFileContent(for: "bookmark/bookmark", withExtension: "css") {
-                html += "<style>\(css)</style>"
-            }
-            if let js = getStaticFileContent(for: "bookmark/Bookmark", withExtension: "js") {
-                html += "<script>\(js)</script>"
-            }
-            return html
-        }
-        return "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "bookmark/bookmark", withExtension: "css")!)' />"
-            + "<script src='\(getStaticFileUrl(for: "bookmark/Bookmark", withExtension: "js")!)'></script>"
+    public static func getBookmarkHeader() -> String {
+        let css = getStaticFileContent(for: "bookmark/bookmark", withExtension: "css")!
+        let js = getStaticFileContent(for: "bookmark/Bookmark", withExtension: "js")!
+        return "<style>\(css)</style><script>\(js)</script>"
     }
     
     public static func getBookmarkOptionsHeader() -> String {
@@ -75,20 +66,12 @@ public class WebViewUtils {
         var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, "
             + "initial-scale=1, maximum-scale=1, user-scalable=no' />"
 
-        let cssFiles = ["typebase", "progress_loader", "dotted_loader", "comments", "post", "icomoon/style"]
-        
-        if injectCSS {
-            for file in cssFiles {
-                if let cssContent = getStaticFileContent(for: file, withExtension: "css") {
-                    header += "<style>\(cssContent)</style>"
-                }
-            }
-        } else {
-            for file in cssFiles {
-                header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: file, withExtension: "css")!)' />"
-            }
-        }
-        
+        header += "<style>\(getStaticFileContent(for: "typebase", withExtension: "css")!)</style>"
+        header += "<style>\(getStaticFileContent(for: "progress_loader", withExtension: "css")!)</style>"
+        header += "<style>\(getStaticFileContent(for: "dotted_loader", withExtension: "css")!)</style>"
+        header += "<style>\(getStaticFileContent(for: "comments", withExtension: "css")!)</style>"
+        header += "<style>\(getStaticFileContent(for: "post", withExtension: "css")!)</style>"
+        header += "<style>\(getStaticFileContent(for: "icomoon/style", withExtension: "css")!)</style>"
         header += "<script src='\(getStaticFileUrl(for: "comments", withExtension: "js")!)'></script>"
         header += "<script src='\(getStaticFileUrl(for: "pseudo_element_selector", withExtension: "js")!)'></script>"
         header += "<script type='text/x-mathjax-config'>" +
@@ -175,7 +158,7 @@ public class WebViewUtils {
             "<tr>" +
             "   <td class='short_answer_option_item table-without-border'>" +
                 shortAnswerText + "</td>" +
-            "   <td class='short_answer_option_item table-without-border'>" +
+                "   <td class='short_answer_option_item table-without-border'>" +
                 marksAllocated + "%</td>" +
             "</tr>";
     }
@@ -296,21 +279,12 @@ public class WebViewUtils {
     
     public static func getBookmarkButtonWithTags(bookmarked: Bool, alignCenter: Bool = false, useDataURI: Bool = false) -> String {
         let imagePath = bookmarked ? "images/remove_bookmark" : "images/bookmark"
-        var imageSrc = ""
-        
-        if useDataURI {
-            if let base64 = getStaticFileBase64(for: imagePath, withExtension: "svg") {
-                imageSrc = "data:image/svg+xml;base64,\(base64)"
-            }
-        } else {
-            imageSrc = getStaticFileUrl(for: imagePath, withExtension: "svg") ?? ""
-        }
-
+        let base64 = getStaticFileBase64(for: imagePath, withExtension: "svg")
         let text = bookmarked ? "Remove Bookmark" : "Bookmark this"
         let buttonClass = alignCenter ? "bookmark-centered-button" : "bookmark-button"
 
         var html = "<div class='\(buttonClass)' onclick='onClickBookmarkButton()'>"
-        html += "   <img class='bookmark-image' src='\(imageSrc)' />"
+        html += "   <img class='bookmark-image' src='data:image/svg+xml;base64,\(getStaticFileBase64(for: imagePath, withExtension: "svg")!)' />"
         html += "   <span class='bookmark-text'>\(text)</span>"
         html += getDottedLoader()
         html += "</div>"
@@ -376,7 +350,6 @@ public class WebViewUtils {
         #endif
 
         var fullPath = (resourcePath as NSString).appendingPathComponent(filePath)
-
         if let fileExtension = fileExtension {
             fullPath = (fullPath as NSString).appendingPathExtension(fileExtension) ?? fullPath
         }
