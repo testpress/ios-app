@@ -72,8 +72,8 @@ public class WebViewUtils {
         header += "<style>\(getStaticFileContent(for: "comments", withExtension: "css") ?? "")</style>"
         header += "<style>\(getStaticFileContent(for: "post", withExtension: "css") ?? "")</style>"
         header += "<style>\(getStaticFileContent(for: "icomoon/style", withExtension: "css") ?? "")</style>"
-        header += "<script src='\(getStaticFileUrl(for: "comments", withExtension: "js")!)'></script>"
-        header += "<script src='\(getStaticFileUrl(for: "pseudo_element_selector", withExtension: "js")!)'></script>"
+        header += "<script>\(getStaticFileContent(for: "comments", withExtension: "js") ?? "")</script>"
+        header += "<script>\(getStaticFileContent(for: "pseudo_element_selector", withExtension: "js") ?? "")</script>"
         header += "<script type='text/x-mathjax-config'>" +
             "    MathJax.Hub.Config({" +
             "      messageStyle: 'none'," +
@@ -86,8 +86,8 @@ public class WebViewUtils {
             "</script>" +
             "<script src='\(getStaticFileUrl(for: "MathJax-2.7.1/MathJax", withExtension: "js")!)'></script>" +
             "<script type='text/x-mathjax-config'>" +
-        "    MathJax.Ajax.config.path['MathJax'] = \(getStaticFileUrl(for: "MathJax-2.7.1", withExtension: nil)!)';" +
-        "    MathJax.Ajax.config.path['Contrib'] = \(getStaticFileUrl(for: "MathJax-2.7.1/contrib", withExtension: nil)!)';" +
+        "    MathJax.Ajax.config.path['MathJax'] = '\(getStaticFileUrl(for: "MathJax-2.7.1", withExtension: nil)!)';" +
+        "    MathJax.Ajax.config.path['Contrib'] = '\(getStaticFileUrl(for: "MathJax-2.7.1/contrib", withExtension: nil)!)';" +
             "</script>" +
             "<script src='\(getStaticFileUrl(for: "MathJax-2.7.1/config/TeX-MML-AM_CHTML-full", withExtension: "js")!)'></script>" +
             "<script src='\(getStaticFileUrl(for: "MathJax-2.7.1/extensions/TeX/mhchem3/mhchem", withExtension: "js")!)'></script>"
