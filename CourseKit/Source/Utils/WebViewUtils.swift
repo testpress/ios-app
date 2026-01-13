@@ -315,26 +315,30 @@ public class WebViewUtils {
         return TestpressCourse.bundle.resourcePath
     }
 
-    public static func getStaticFileUrl(for filePath: String, withExtension fileExtension: String?) -> String? {
+    private static func withStaticFilePath<T>(for filePath: String, withExtension fileExtension: String?, do action: (String) -> T?) -> T? {
         guard let path = getStaticFilePath(for: filePath, withExtension: fileExtension) else {
             return nil
         }
-        return URL(fileURLWithPath: path).absoluteString
+        return action(path)
+    }
+
+    public static func getStaticFileUrl(for filePath: String, withExtension fileExtension: String?) -> String? {
+        return withStaticFilePath(for: filePath, withExtension: fileExtension) { path in
+            URL(fileURLWithPath: path).absoluteString
+        }
     }
 
     public static func getStaticFileContent(for filePath: String, withExtension fileExtension: String?) -> String? {
-        guard let path = getStaticFilePath(for: filePath, withExtension: fileExtension) else {
-            return nil
+        return withStaticFilePath(for: filePath, withExtension: fileExtension) { path in
+            try? String(contentsOfFile: path, encoding: .utf8)
         }
-        return try? String(contentsOfFile: path, encoding: .utf8)
     }
 
     public static func getStaticFileBase64(for filePath: String, withExtension fileExtension: String?) -> String? {
-        guard let path = getStaticFilePath(for: filePath, withExtension: fileExtension) else {
-            return nil
+        return withStaticFilePath(for: filePath, withExtension: fileExtension) { path in
+            let data = try? Data(contentsOf: URL(fileURLWithPath: path))
+            return data?.base64EncodedString()
         }
-        let data = try? Data(contentsOf: URL(fileURLWithPath: path))
-        return data?.base64EncodedString()
     }
 
     private static func getStaticFilePath(for filePath: String, withExtension fileExtension: String?) -> String? {
