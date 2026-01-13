@@ -53,6 +53,8 @@ class HtmlContentViewController: BaseWebViewController {
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
         config.preferences.javaScriptEnabled = true
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = []        
         
         webView = WKWebView( frame: parentView.bounds, configuration: config)
     }
@@ -114,7 +116,12 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func displayVideoContent() {
-        title = content.video!.title
+        guard let video = content.video, !video.embedCode.isEmpty else {
+            emptyView.show(description: "Video embed code not available")
+            return
+        }
+        
+        title = video.title
         if !Reachability.isConnectedToNetwork() {
             let retryHandler = {
                 self.emptyView.hide()
@@ -127,10 +134,12 @@ class HtmlContentViewController: BaseWebViewController {
             
             return
         }
-        let videoContentHtml = "<div class='videoWrapper'>" + content.video!.embedCode + "</div>"
+
+        let videoContentHtml = "<div class='videoWrapper'>" + video.embedCode + "</div>"
+        let baseURL = TestpressCourse.shared.baseURL.flatMap { URL(string: $0) }
         webView.loadHTMLString(
             getFormattedContent(videoContentHtml),
-            baseURL: Bundle.main.bundleURL
+            baseURL: baseURL
         )
     }
     

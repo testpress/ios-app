@@ -52,8 +52,9 @@ public class WebViewUtils {
     }
     
     public static func getBookmarkHeader() -> String {
-        return "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "bookmark/bookmark", withExtension: "css")!)' />"
-            + "<script src='\(getStaticFileUrl(for: "bookmark/Bookmark", withExtension: "js")!)'></script>"
+        let css = getStaticFileContent(for: "bookmark/bookmark", withExtension: "css") ?? ""
+        let js = getStaticFileContent(for: "bookmark/Bookmark", withExtension: "js") ?? ""
+        return "<style>\(css)</style><script>\(js)</script>"
     }
     
     public static func getBookmarkOptionsHeader() -> String {
@@ -64,14 +65,15 @@ public class WebViewUtils {
     public static func getHeader() -> String {
         var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, "
             + "initial-scale=1, maximum-scale=1, user-scalable=no' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "typebase", withExtension: "css")!)' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "progress_loader", withExtension: "css")!)' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "dotted_loader", withExtension: "css")!)' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "comments", withExtension: "css")!)' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "post", withExtension: "css")!)' />"
-        header += "<link rel='stylesheet' type='text/css' href='\(getStaticFileUrl(for: "icomoon/style", withExtension: "css")!)' />"
-        header += "<script src='\(getStaticFileUrl(for: "comments", withExtension: "js")!)'></script>"
-        header += "<script src='\(getStaticFileUrl(for: "pseudo_element_selector", withExtension: "js")!)'></script>"
+
+        header += "<style>\(getStaticFileContent(for: "typebase", withExtension: "css") ?? "")</style>"
+        header += "<style>\(getStaticFileContent(for: "progress_loader", withExtension: "css") ?? "")</style>"
+        header += "<style>\(getStaticFileContent(for: "dotted_loader", withExtension: "css") ?? "")</style>"
+        header += "<style>\(getStaticFileContent(for: "comments", withExtension: "css") ?? "")</style>"
+        header += "<style>\(getStaticFileContent(for: "post", withExtension: "css") ?? "")</style>"
+        header += "<style>\(getStaticFileContent(for: "icomoon/style", withExtension: "css") ?? "")</style>"
+        header += "<script>\(getStaticFileContent(for: "comments", withExtension: "js") ?? "")</script>"
+        header += "<script>\(getStaticFileContent(for: "pseudo_element_selector", withExtension: "js") ?? "")</script>"
         header += "<script type='text/x-mathjax-config'>" +
             "    MathJax.Hub.Config({" +
             "      messageStyle: 'none'," +
@@ -84,8 +86,8 @@ public class WebViewUtils {
             "</script>" +
             "<script src='\(getStaticFileUrl(for: "MathJax-2.7.1/MathJax", withExtension: "js")!)'></script>" +
             "<script type='text/x-mathjax-config'>" +
-        "    MathJax.Ajax.config.path['MathJax'] = \(getStaticFileUrl(for: "MathJax-2.7.1", withExtension: nil)!)';" +
-        "    MathJax.Ajax.config.path['Contrib'] = \(getStaticFileUrl(for: "MathJax-2.7.1/contrib", withExtension: nil)!)';" +
+        "    MathJax.Ajax.config.path['MathJax'] = '\(getStaticFileUrl(for: "MathJax-2.7.1", withExtension: nil)!)';" +
+        "    MathJax.Ajax.config.path['Contrib'] = '\(getStaticFileUrl(for: "MathJax-2.7.1/contrib", withExtension: nil)!)';" +
             "</script>" +
             "<script src='\(getStaticFileUrl(for: "MathJax-2.7.1/config/TeX-MML-AM_CHTML-full", withExtension: "js")!)'></script>" +
             "<script src='\(getStaticFileUrl(for: "MathJax-2.7.1/extensions/TeX/mhchem3/mhchem", withExtension: "js")!)'></script>"
@@ -156,8 +158,7 @@ public class WebViewUtils {
             "<tr>" +
             "   <td class='short_answer_option_item table-without-border'>" +
                 shortAnswerText + "</td>" +
-            "   <td class='short_answer_option_item table-without-border'>" +
-                marksAllocated + "%</td>" +
+            "   <td class='short_answer_option_item table-without-border'>" +                marksAllocated + "%</td>" +
             "</tr>";
     }
     
@@ -165,7 +166,7 @@ public class WebViewUtils {
                                          withBookmarkButton: Bool = false,
                                          withBookmarkedState: Bool = false) -> String {
         
-        var html = "<div class='title'>" + title + "</div>"
+        var html = "<div class='title'><b>" + title + "</b></div>"
         if withBookmarkButton {
             html += "<div class='bookmark-button-container'>"
             html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: withBookmarkedState,
@@ -275,14 +276,12 @@ public class WebViewUtils {
     
     public static func getBookmarkButtonWithTags(bookmarked: Bool, alignCenter: Bool = false) -> String {
         let imagePath = bookmarked ? "images/remove_bookmark" : "images/bookmark"
-        let imageURL = getStaticFileUrl(for: imagePath, withExtension: "svg")
-
+        let base64 = getStaticFileBase64(for: imagePath, withExtension: "svg") ?? ""
         let text = bookmarked ? "Remove Bookmark" : "Bookmark this"
-
         let buttonClass = alignCenter ? "bookmark-centered-button" : "bookmark-button"
 
         var html = "<div class='\(buttonClass)' onclick='onClickBookmarkButton()'>"
-        html += "   <img class='bookmark-image' src='\(imageURL ?? "")' />"
+        html += "   <img class='bookmark-image' src='data:image/svg+xml;base64,\(base64)' />"
         html += "   <span class='bookmark-text'>\(text)</span>"
         html += getDottedLoader()
         html += "</div>"
@@ -316,7 +315,33 @@ public class WebViewUtils {
         return TestpressCourse.bundle.resourcePath
     }
 
+    private static func withStaticFilePath<T>(for filePath: String, withExtension fileExtension: String?, do action: (String) -> T?) -> T? {
+        guard let path = getStaticFilePath(for: filePath, withExtension: fileExtension) else {
+            return nil
+        }
+        return action(path)
+    }
+
     public static func getStaticFileUrl(for filePath: String, withExtension fileExtension: String?) -> String? {
+        return withStaticFilePath(for: filePath, withExtension: fileExtension) { path in
+            URL(fileURLWithPath: path).absoluteString
+        }
+    }
+
+    public static func getStaticFileContent(for filePath: String, withExtension fileExtension: String?) -> String? {
+        return withStaticFilePath(for: filePath, withExtension: fileExtension) { path in
+            try? String(contentsOfFile: path, encoding: .utf8)
+        }
+    }
+
+    public static func getStaticFileBase64(for filePath: String, withExtension fileExtension: String?) -> String? {
+        return withStaticFilePath(for: filePath, withExtension: fileExtension) { path in
+            let data = try? Data(contentsOf: URL(fileURLWithPath: path))
+            return data?.base64EncodedString()
+        }
+    }
+
+    private static func getStaticFilePath(for filePath: String, withExtension fileExtension: String?) -> String? {
         guard var resourcePath = getResourcesBasePath() else {
             return nil
         }
@@ -326,11 +351,10 @@ public class WebViewUtils {
         #endif
 
         var fullPath = (resourcePath as NSString).appendingPathComponent(filePath)
-
         if let fileExtension = fileExtension {
             fullPath = (fullPath as NSString).appendingPathExtension(fileExtension) ?? fullPath
         }
 
-        return URL(fileURLWithPath: fullPath).absoluteString
+        return fullPath
     }
 }
