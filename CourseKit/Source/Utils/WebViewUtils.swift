@@ -62,7 +62,7 @@ public class WebViewUtils {
             + "<script src='\(getStaticFileUrl(for: "bookmark/BookmarkDetail", withExtension: "js")!)'></script>"
     }
     
-    public static func getHeader(injectCSS: Bool = false) -> String {
+    public static func getHeader() -> String {
         var header = "<!DOCTYPE html><meta name='viewport' content='width=device-width, "
             + "initial-scale=1, maximum-scale=1, user-scalable=no' />"
 
@@ -165,15 +165,13 @@ public class WebViewUtils {
     
     public static func getFormattedTitle(title: String,
                                          withBookmarkButton: Bool = false,
-                                         withBookmarkedState: Bool = false,
-                                         useDataURI: Bool = false) -> String {
+                                         withBookmarkedState: Bool = false) -> String {
         
         var html = "<div class='title'><b>" + title + "</b></div>"
         if withBookmarkButton {
             html += "<div class='bookmark-button-container'>"
             html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: withBookmarkedState,
-                                                           alignCenter: true,
-                                                           useDataURI: useDataURI)
+                                                           alignCenter: true)
             html += "</div>"
         }
         return html + "<hr class='title_separator'>"
@@ -277,7 +275,7 @@ public class WebViewUtils {
         return "<div style='padding: 5px 5px 0px 5px;'>" + getMoveBookmarkTags() + "</div>"
     }
     
-    public static func getBookmarkButtonWithTags(bookmarked: Bool, alignCenter: Bool = false, useDataURI: Bool = false) -> String {
+    public static func getBookmarkButtonWithTags(bookmarked: Bool, alignCenter: Bool = false) -> String {
         let imagePath = bookmarked ? "images/remove_bookmark" : "images/bookmark"
         let base64 = getStaticFileBase64(for: imagePath, withExtension: "svg")
         let text = bookmarked ? "Remove Bookmark" : "Bookmark this"
