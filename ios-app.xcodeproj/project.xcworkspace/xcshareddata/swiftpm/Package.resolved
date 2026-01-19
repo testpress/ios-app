@@ -1,5 +1,5 @@
 {
-  "originHash" : "6ae5a9636eb71403d143f3ef478f37e405f016e920c9550af8fd349ccd008255",
+  "originHash" : "5a42a9d1dd70e972e1ebc16abc33f4b8d64e6d562351618089b7d25dbe860daa",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/testpress/iOSPlayerSDK",
       "state" : {
-        "revision" : "c95dc04be6e293c0f2aec63c68fed001dbb8cdac",
-        "version" : "1.2.10"
+        "revision" : "43c21e8b3475489ca9618bb0d02b66c7ca8781d0",
+        "version" : "1.2.18"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/M3U8Kit/M3U8Parser",
       "state" : {
-        "revision" : "f7965520f3f8b31ee3a9329739623995a91cc789",
-        "version" : "1.1.0"
+        "revision" : "d38c45964506c0d41a2beb5b4d8d59263459638f",
+        "version" : "1.2.0"
       }
     },
     {
@@ -188,6 +188,15 @@
       "state" : {
         "revision" : "f707b8680cddb96dc1855632340a572ef37bbb98",
         "version" : "2.5.3"
+      }
+    },
+    {
+      "identity" : "toast-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scalessec/Toast-Swift.git",
+      "state" : {
+        "revision" : "ddccd20d6fb718448d9b179c454c561653fda7d5",
+        "version" : "5.1.1"
       }
     },
     {
