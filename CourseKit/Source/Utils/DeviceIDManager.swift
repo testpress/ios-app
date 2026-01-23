@@ -23,7 +23,11 @@ public class DeviceIDManager {
             return try keychainItem.readPassword()
         } catch {
             let newID = UUID().uuidString
-            try? keychainItem.savePassword(newID)
+            do {
+                try keychainItem.savePassword(newID)
+            } catch {
+                debugPrint("Error saving new device ID to Keychain: \(error.localizedDescription)")
+            }
             return newID
         }
     }
