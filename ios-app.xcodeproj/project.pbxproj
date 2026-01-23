@@ -333,6 +333,7 @@
 		25E435EC263ADE7500243FD3 /* DashboardSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435EA263ADE7500243FD3 /* DashboardSectionHeaderCell.swift */; };
 		25E435ED263ADE7500243FD3 /* DashboardSectionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25E435EB263ADE7500243FD3 /* DashboardSectionHeaderCell.xib */; };
 		25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */; };
+		2D7CDBCC2F237CCD0076B42F /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */; };
 		2D7CDBCE2F237D150076B42F /* DeviceIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */; };
 		2D9597432EDEF06800E9AC7C /* OTPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9597422EDEF06800E9AC7C /* OTPLoginViewController.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
@@ -609,6 +610,7 @@
 		25F7522027FEB143000D8137 /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		25F92A1F243306A60084ADC8 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestZoomMeetViewController.swift; sourceTree = "<group>"; };
+		2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIDManager.swift; sourceTree = "<group>"; };
 		2D9597422EDEF06800E9AC7C /* OTPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPLoginViewController.swift; sourceTree = "<group>"; };
 		2F04052F20D902530074D80E /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
@@ -1205,6 +1207,7 @@
 				2FC0F2DA1F863AAF0092BFDC /* Colors.swift */,
 				2FC0F2DB1F863AAF0092BFDC /* Images.swift */,
 				2FCBDD4B20CFDB07003A7DC0 /* BookmarkHelper.swift */,
+				2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */,
 				2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */,
 				2FC0F2571F8617690092BFDC /* WebViewUtils.swift */,
 				1825F5FE212E920C00AC25E5 /* PlainDropDown.swift */,
@@ -2272,6 +2275,7 @@
 				03A60F982CB3F3AD00079A7C /* Strings.swift in Sources */,
 				038CB2BC2CBD2B3200164127 /* ShareToUnlockViewController.swift in Sources */,
 				038CB2A02CBD278600164127 /* TimeAnalyticsQuestionCell.swift in Sources */,
+				2D7CDBCC2F237CCD0076B42F /* URLRequest+Extension.swift in Sources */,
 				03CD0D372CB947F200E17218 /* ChapterContentDetailViewModel.swift in Sources */,
 				038CB2962CBD278600164127 /* ContentExamAttemptsTableViewController.swift in Sources */,
 				038CB2BD2CBD2B9C00164127 /* LoadingViewController.swift in Sources */,

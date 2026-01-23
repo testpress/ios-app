@@ -120,7 +120,8 @@ open class WebViewController: BaseWebViewController, WKWebViewDelegate {
     open func loadWebView() {
         showLoading()
         self.emptyView.hide()
-        if let request = self.request {
+        if var request = self.request {
+            request.addDeviceHeaders()
             webView.load(request)
         } else {
             let url = URL(string: self.url)!

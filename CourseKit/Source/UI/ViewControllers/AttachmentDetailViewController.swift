@@ -162,7 +162,8 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
     }
     
     func downloadAndShowPdf(_ attachmentUrl: URL) {
-        let downloadTask = session.downloadTask(with: attachmentUrl)
+        let request = URLRequest(url: attachmentUrl)
+        let downloadTask = session.downloadTask(with: request)
         downloadTask.resume()
     }
     

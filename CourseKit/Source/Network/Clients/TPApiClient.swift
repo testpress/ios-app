@@ -56,7 +56,9 @@ public class TPApiClient {
         request.httpMethod = endpointProvider.endpoint.method.rawValue
 
         if let customHeaders = headers?.dictionary {
-            request.allHTTPHeaderFields = customHeaders
+            for (key, value) in customHeaders {
+                request.setValue(value, forHTTPHeaderField: key)
+            }
         }
         request.setValue(getUserAgent(), forHTTPHeaderField: "User-Agent")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
