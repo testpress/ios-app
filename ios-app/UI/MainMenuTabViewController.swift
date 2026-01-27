@@ -65,6 +65,15 @@ class MainMenuTabViewController: UITabBarController {
             viewControllers?.remove(at: 1)
         }
         
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .systemBackground
+            tabBar.standardAppearance = appearance
+            tabBar.scrollEdgeAppearance = appearance
+        }
+        tabBar.tintColor = TestpressCourse.shared.primaryColor
+        
         addDoubtsWebViewController()
         addDiscussionsWebViewController()
         
