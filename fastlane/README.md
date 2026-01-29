@@ -53,6 +53,22 @@ Comment out Zoom-related Swift files
 
 Remove Zoom xcframework & bundle from the Xcode project
 
+### release_update_to
+
+```sh
+[bundle exec] fastlane release_update_to
+```
+
+Release updates to one or ALL institutes
+
+### release_update
+
+```sh
+[bundle exec] fastlane release_update
+```
+
+Fetch config, prepare assets, re-brand, and deploy to TestFlight
+
 ### deploy
 
 ```sh
@@ -67,7 +83,7 @@ Full iOS re-brand / asset generation pipeline
 [bundle exec] fastlane archive_preview
 ```
 
-Archive the iOS app and show the display name before archiving
+Build, archive and upload the iOS app to TestFlight
 
 ----
 

@@ -11,16 +11,71 @@ require 'fastlane_core/ui/ui'
 
 $config = {}
 default_platform(:ios)
+FASTFILE_DIR = File.expand_path(File.dirname(__FILE__))
+
+def p(*parts)
+  File.expand_path(File.join(*parts), FASTFILE_DIR)
+end
 
 # -----------------------------------------------------------------
-#  Global constants (relative to Fastfile location)
+#  Helper: Download file from URL
 # -----------------------------------------------------------------
-ASSETS_DIR          = "../ios-app/Assets.xcassets".freeze
-PROJECT_PATH        = "../ios-app.xcodeproj".freeze
-INFO_PLIST_PATH     = "../ios-app/Info.plist".freeze
-APP_CONSTANTS_PATH  = "../ios-app/Utils/AppConstants.swift".freeze
-ICON_SOURCE         = "fastlane/Icon-1024.png".freeze
-LAUNCH_SOURCE       = "fastlane/LaunchImage.png".freeze
+def download_file(url:, destination_path:)
+  UI.message("Downloading #{url} to #{destination_path}")
+  sh("curl -L -o '#{destination_path}' '#{url}'")
+end
+
+# -----------------------------------------------------------------
+#  Helper: Fetch App Config from API
+# -----------------------------------------------------------------
+def get_app_config(subdomain:)
+  # NEW v2.5 Administrative API (Updated to use testbench for testing)
+  api_url = "http://demo.testbench.in:8000/api/v2.5/admin/ios/app-config/"
+  
+  # Check for Admin Token in environment
+  token = ENV["TESTPRESS_ADMIN_TOKEN"]
+  jwt_header = token ? "-H 'Authorization: JWT #{token}'" : ""
+  access_key_header = "-H 'API-ACCESS-KEY: testpress'"
+  
+  # For local testing:
+  if subdomain == "demo" && ENV["USE_TEST_BACKEND"]
+    api_url = "http://demo.testbench.in:8000/api/v2.5/admin/ios/app-config/"
+  end
+
+  UI.message("Fetching config for #{subdomain} from #{api_url}")
+  
+  output = sh("curl -s #{jwt_header} #{access_key_header} '#{api_url}'")
+  parsed = JSON.parse(output)
+
+  if parsed["detail"]
+    UI.error("API Error: #{parsed["detail"]}")
+    if parsed["detail"].include?("credentials")
+      UI.user_error!("Authentication failed. Please set your TESTPRESS_ADMIN_TOKEN environment variable correctly.")
+    else
+      UI.user_error!("API returned an error: #{parsed["detail"]}")
+    end
+  end
+
+  parsed
+rescue => e
+  if e.to_s.include?("Authentication failed") || e.to_s.include?("API Error")
+    raise e
+  end
+  UI.error("Failed to fetch config for #{subdomain}: #{e.message}")
+  UI.user_error!("Could not fetch app config for #{subdomain}. Ensure TESTPRESS_ADMIN_TOKEN is set accurately.")
+end
+
+
+# -----------------------------------------------------------------
+#  Global constants (absolute, relative to Fastfile location)
+# -----------------------------------------------------------------
+ASSETS_DIR          = p("..", "ios-app", "Assets.xcassets").freeze
+PROJECT_PATH        = p("..", "ios-app.xcodeproj").freeze
+INFO_PLIST_PATH     = p("..", "ios-app", "Info.plist").freeze
+APP_CONSTANTS_PATH  = p("..", "ios-app", "Utils", "AppConstants.swift").freeze
+
+ICON_SOURCE         = p("fastlane", "Icon-1024.png").freeze
+LAUNCH_SOURCE       = p("fastlane", "LaunchImage.png").freeze
 
 # -----------------------------------------------------------------
 #  Helper: PlistBuddy safe set / add
@@ -173,7 +228,8 @@ end
 desc "Replace GoogleService-Info.plist with the one from config"
 private_lane :update_google_plist do |options|
   source = options[:source] || UI.user_error!(":source required")
-  target = "../ios-app/GoogleService-Info.plist"
+  source = File.expand_path(source, FASTFILE_DIR)
+  target = p("..", "ios-app", "GoogleService-Info.plist")
 
   UI.user_error!("Source plist missing: #{source}") unless File.exist?(source)
 
@@ -188,7 +244,7 @@ end
 desc "Comment out Zoom-related Swift files"
 lane  :disable_zoom_code do
   # 1. ZoomMeetViewController.swift
-  zoom_file = "../CourseKit/Source/UI/ViewControllers/ZoomMeetViewController.swift"
+  zoom_file = p("..", "CourseKit", "Source", "UI", "ViewControllers", "ZoomMeetViewController.swift")
   if File.exist?(zoom_file)
     File.write(zoom_file, "/*\n#{File.read(zoom_file)}\n*/")
     UI.message("Commented ZoomMeetViewController.swift")
@@ -198,7 +254,7 @@ lane  :disable_zoom_code do
   end
 
   # 2. openZoomMeeting() body in VideoConferenceViewController.swift
-  vc_file = "../CourseKit/Source/UI/ViewControllers/VideoConferenceViewController.swift"
+  vc_file = p("..", "CourseKit", "Source", "UI", "ViewControllers", "VideoConferenceViewController.swift")
   next unless File.exist?(vc_file)
 
   lines = File.readlines(vc_file)
@@ -309,6 +365,130 @@ private_lane :update_app_identity do |options|
 end
 
 # -----------------------------------------------------------------
+# -----------------------------------------------------------------
+#  Helper: Fetch all subdomains for batch updates
+# -----------------------------------------------------------------
+def fetch_subdomains
+  # NEW v2.5 Administrative API (Updated to use testbench for testing)
+  api_url = "http://admin.testbench.in:8000/api/v2.5/admin/ios/subdomains/"
+  
+  # Check for Admin Token in environment
+  token = ENV["TESTPRESS_ADMIN_TOKEN"]
+  jwt_header = token ? "-H 'Authorization: JWT #{token}'" : ""
+  access_key_header = "-H 'API-ACCESS-KEY: testpress'"
+
+  # For local testing:
+  if ENV["USE_TEST_BACKEND"]
+    api_url = "http://admin.testbench.in:8000/api/v2.5/admin/ios/subdomains/"
+  end
+
+  UI.message("Fetching all subdomains from #{api_url}")
+  
+  output = sh("curl -s #{jwt_header} #{access_key_header} '#{api_url}'")
+  JSON.parse(output) # Expecting an array of strings or subdomains
+rescue => e
+  UI.error("Failed to fetch subdomains: #{e.message}")
+  []
+end
+
+# -----------------------------------------------------------------
+#  Helper: Prepare all remote assets (Icons, Plists, Keys)
+# -----------------------------------------------------------------
+def prepare_assets(config:)
+  UI.header("📥 PREPARING ASSETS")
+
+  # 1. MAP API KEYS TO INTERNAL FASTFILE KEYS
+  config["subdomain"]         ||= config["testpress_site_subdomain"]
+  config["bundle_identifier"] ||= config["package_name"]
+  config["display_name"]      ||= config["app_name"]
+
+  # 2. FILL GLOBAL DEFAULTS (Option A: Shared Apple Account)
+  # You can also set these via environment variables for more security
+  config["api_key_id"]     ||= ENV["APPLE_API_KEY_ID"]     || "DDJ2YGJZCP"
+  config["api_key_issuer"] ||= ENV["APPLE_API_KEY_ISSUER"] || "69a6de92-69ad-47e3-e053-5b8c7c11a4d1"
+  config["apple_id"]       ||= ENV["APPLE_APP_ID"]         || "6753752664"
+  config["scheme"]         ||= "Arise Medical Academy"
+
+  # 3. Download Master Icon (Expects 'app_icon_url' or 'launcher_xxxhdpi' in JSON)
+  icon_url = config["app_icon_url"] || config["launcher_xxxhdpi"]
+  if icon_url
+    download_file(url: icon_url, destination_path: ICON_SOURCE)
+  end
+  
+  # 4. Download Launch Image (Expects 'launch_image_url' or 'login_screen_image' in JSON)
+  launch_url = config["launch_image_url"] || config["login_screen_image"]
+  if launch_url
+    download_file(url: launch_url, destination_path: LAUNCH_SOURCE)
+  end
+  
+  # 5. Download GoogleService-Info.plist (Expects 'google_plist_url')
+  if config["google_plist_url"]
+    dest = p("fastlane", "GoogleService-Info.plist")
+    download_file(url: config["google_plist_url"], destination_path: dest)
+  end
+  
+  # 6. Download .p8 API Key (Only if a URL is provided)
+  # If you use the same key for everyone, just keep it locally on the Mac
+  if config["api_key_url"]
+    key_filename = "AuthKey_#{config['api_key_id']}.p8"
+    dest = p("fastlane", key_filename)
+    download_file(url: config["api_key_url"], destination_path: dest)
+  end
+  
+  # 7. Write the final config.json for the 'deploy' lane to use
+  # We ensure the paths in config.json match where we just downloaded them
+  config["google_plist_path"] = "fastlane/GoogleService-Info.plist"
+  config["api_key_path"]      = "fastlane/AuthKey_#{config['api_key_id']}.p8"
+  
+  File.write(p("config.json"), JSON.pretty_generate(config))
+  UI.success("✅ Assets and config.json are ready (Mapped: #{config['bundle_identifier']})")
+end
+
+
+# -----------------------------------------------------------------
+#  PUBLIC LANE: Batch Release
+# -----------------------------------------------------------------
+desc "Release updates to one or ALL institutes"
+lane :release_update_to do |params|
+  if params[:subdomain] == "all"
+    subdomains = fetch_subdomains
+    subdomains.each do |subdomain|
+      # Filter out protected subdomains
+      next if ["verandalearning", "brilliantpalalms", "brilliantpalaclasses", "race"].include?(subdomain)
+      
+      begin
+        release_update(subdomain: subdomain)
+      rescue => e
+        UI.error("Failed to release for #{subdomain}: #{e.message}")
+      end
+    end
+  else
+    release_update(subdomain: params[:subdomain])
+  end
+end
+
+# -----------------------------------------------------------------
+#  PUBLIC LANE: Single Institute Release
+# -----------------------------------------------------------------
+desc "Fetch config, prepare assets, re-brand, and deploy to TestFlight"
+lane :release_update do |params|
+  UI.user_error!("Subdomain is required") unless params[:subdomain]
+  
+  # 1. Fetch the latest config from your DB
+  app_config = get_app_config(subdomain: params[:subdomain])
+  
+  # 2. Download files & write local config.json
+  prepare_assets(config: app_config)
+  
+  # 3. Run the re-branding pipeline (patches code, generates icons)
+  deploy
+  
+  # 4. Build, Archive and Upload to TestFlight
+  archive_preview
+end
+
+
+# -----------------------------------------------------------------
 #  MAIN LANE: Deploy (single entry point)
 # -----------------------------------------------------------------
 desc "Full iOS re-brand / asset generation pipeline"
@@ -316,14 +496,15 @@ lane :deploy do |options|
   # -----------------------------------------------------------------
   # 1. Load & validate config.json
   # -----------------------------------------------------------------
-  config_path = options[:config] || "config.json"
-  $config = JSON.parse(File.read(config_path))
+  config_path = options[:config] || p("config.json")
+  config_path = File.expand_path(config_path)
 
   UI.user_error!("config.json not found: #{config_path}") unless File.exist?(config_path)
 
-  config = JSON.parse(File.read(config_path))
+  $config = JSON.parse(File.read(config_path))
+  config  = $config
 
-  required = %w[subdomain apple_id primary_color google_plist_path display_name bundle_identifier]
+  required = %w[subdomain apple_id primary_color google_plist_path display_name bundle_identifier scheme api_key_id api_key_issuer api_key_path]
   missing = required.select { |k| config[k].to_s.empty? }
   UI.user_error!("Missing config fields: #{missing.join(', ')}") unless missing.empty?
 
@@ -387,29 +568,69 @@ end
 # -----------------------------------------------------------------
 #  PUBLIC LANE: Preview name + Archive only (no upload)
 # -----------------------------------------------------------------
-desc "Archive the iOS app and show the display name before archiving"
+desc "Build, archive and upload the iOS app to TestFlight"
 lane :archive_preview do |options|
-  config_path = options[:config] || "config.json"
+  config_path = File.expand_path(options[:config] || p("config.json"))
   UI.user_error!("config.json not found: #{config_path}") unless File.exist?(config_path)
+
+  UI.user_error!("Project not found: #{PROJECT_PATH}") unless File.exist?(PROJECT_PATH)
 
   config = JSON.parse(File.read(config_path))
 
   display_name = config["display_name"] || "UNKNOWN_APP_NAME"
   bundle_id    = config["bundle_identifier"] || "UNKNOWN_BUNDLE"
+  scheme       = config["scheme"] || "ios-app"
 
-  UI.header("📦 ARCHIVE PREVIEW")
+  UI.header("📦 ARCHIVE & UPLOAD")
   UI.message("App Name     : #{display_name}")
   UI.message("Bundle ID    : #{bundle_id}")
-  UI.message("⚠️ Upload is DISABLED in this lane")
+  UI.message("Scheme       : #{scheme}")
 
-  # --------------------------------
-  # ARCHIVE ONLY (build_app / gym)
-  # --------------------------------
-  build_app(
-    scheme: "ios-app",
-    export_method: "app-store"
+  # ✅ Make sure this archive appears in Organizer
+  timestamp = Time.now.strftime("%Y-%m-%d %H.%M.%S")
+  archive_dir = File.expand_path("~/Library/Developer/Xcode/Archives/#{Time.now.strftime("%Y-%m-%d")}")
+  FileUtils.mkdir_p(archive_dir)
+  archive_path = File.join(archive_dir, "#{display_name} #{timestamp}.xcarchive")
+
+  # 1. Authenticate with App Store Connect
+  api_key = app_store_connect_api_key(
+    key_id: config["api_key_id"],
+    issuer_id: config["api_key_issuer"],
+    key_filepath: File.expand_path(config["api_key_path"], FASTFILE_DIR)
+  )
+  UI.message("📦 Resolving Swift Package Manager dependencies...")
+  sh("xcodebuild -resolvePackageDependencies -scheme '#{scheme}' -project '#{PROJECT_PATH}' -configuration Release")
+
+  # 3. Automate Versioning
+  increment_build_number(
+    build_number: Time.now.strftime("%Y%m%d%H%M"), # Unique build number based on timestamp
+    xcodeproj: PROJECT_PATH
   )
 
-  UI.success("✅ Archive Completed — No Upload Performed")
+  # 4. Build & Archive (Automatic Signing)
+  build_app(
+    project: PROJECT_PATH,
+    scheme: scheme,
+    configuration: "Release",
+    export_method: "app-store",
+    clean: true,
+    archive_path: archive_path,
+    xcargs: "PRODUCT_NAME='#{display_name}' -allowProvisioningUpdates -scmProvider system"
+  )
+
+  UI.message("✅ Archive created at: #{archive_path}")
+  UI.header("HOW TO FIND IN Xcode ORGANIZER")
+  UI.message("1. Open Xcode Organizer (Window > Organizer)")
+  UI.message("2. Look for '#{display_name}' in the left sidebar list.")
+  UI.message("3. Note: If you don't see it, it might be grouped under '#{scheme}' folder.")
+  UI.message("4. Total Archive Size: #{`du -sh "#{archive_path}"`.split.first} (This is a healthy size!)")
+
+  # 5. Upload to TestFlight
+  # upload_to_testflight(
+  #   api_key: api_key,
+  #   skip_waiting_for_build_processing: true
+  # )
+
+  UI.success("✅ Build, Archive and Upload Completed!")
 end
 

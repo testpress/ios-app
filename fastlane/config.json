@@ -1,13 +1,20 @@
 {
-  "subdomain": "staging",
+  "version": "1.0.0",
+  "version_code": "5",
+  "testpress_site_subdomain": "demo",
+  "package_name": "in.testbench.staging",
+  "app_name": "staging",
+  "primary_color": "#251c75",
+  "image_background": "#ffffff",
+  "white_labeled_host_url": "demo.testbench.in",
+  "zoom_enabled": true,
+  "subdomain": "demo",
+  "bundle_identifier": "in.testbench.staging",
+  "display_name": "staging",
+  "api_key_id": "DDJ2YGJZCP",
+  "api_key_issuer": "69a6de92-69ad-47e3-e053-5b8c7c11a4d1",
   "apple_id": "6753752664",
-  "primary_color": "#101010",
+  "scheme": "Arise Medical Academy",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
-  "display_name": "Staging LMS",
-  "bundle_identifier": "in.testpress.staging",
-  "features": {
-    "zoom_enabled": true
-  },
-  "image_background" : "#111111"
+  "api_key_path": "fastlane/AuthKey_DDJ2YGJZCP.p8"
 }
-

@@ -1,0 +1,41 @@
+name: iOS Deploy (Self-Hosted)
+
+on:
+  workflow_dispatch:
+    inputs:
+      subdomain:
+        description: 'Institute subdomain to build (use "all" for batch)'
+        required: true
+        default: 'demo'
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: Build & Release
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Unlock Keychain
+        run: |
+          security unlock-keychain -p "${{ secrets.MAC_PASSWORD }}" ~/Library/Keychains/ios-build.keychain-db
+          security set-keychain-settings -lut 21600 ~/Library/Keychains/ios-build.keychain-db
+
+      - name: Install Ruby Dependencies
+        run: bundle install
+
+      - name: Fastlane Release
+        env:
+          TESTPRESS_ADMIN_TOKEN: ${{ secrets.TESTPRESS_ADMIN_TOKEN }}
+          MAC_PASSWORD: ${{ secrets.MAC_PASSWORD }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_API_KEY_ISSUER: ${{ secrets.APPLE_API_KEY_ISSUER }}
+          APPLE_APP_ID: ${{ secrets.APPLE_APP_ID }}
+        run: |
+          SUBDOMAIN="${{ github.event.inputs.subdomain }}"
+          # Fallback to 'demo' if triggered by push
+          SUBDOMAIN=${SUBDOMAIN:-demo}
+          bundle exec fastlane release_update subdomain:"$SUBDOMAIN"
