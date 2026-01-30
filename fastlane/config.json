@@ -3,7 +3,7 @@
   "apple_id": "6752597426",
   "primary_color": "#251C75",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
-  "display_name": "JTC Inida",
+  "display_name": "JTC India",
   "bundle_identifier": "in.testpress.jtcindia",
   "features": {
     "zoom_enabled": false
