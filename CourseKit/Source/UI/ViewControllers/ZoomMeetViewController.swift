@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+#if ZOOM_ENABLED
 import MobileRTC
 import MobileCoreServices
 
@@ -179,3 +181,4 @@ class ZoomMeetViewController: UIViewController, MobileRTCAuthDelegate, MobileRTC
         meetingService?.delegate = nil
     }
 }
+#endif
