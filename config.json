@@ -1,0 +1,24 @@
+{
+  "app_name": "Testpress",
+  "package_name": "in.testpress.demo",
+  "subdomain": "demo",
+  "app_store_app_id": "6753752664",
+  "primary_color": "#2b25ab",
+  "image_background": "#ffffff",
+  "app_icon_url": "http://localhost:9000/testpress/institute/demo/ios-images/6fa9153ddce5471d91caf1a3122e7285.png",
+  "launch_image_url": "http://localhost:9000/testpress/institute/demo/ios-images/458fba5433a4400bb3f3a488e77799b2.png",
+  "google_plist_url": "http://localhost:9000/testpress/institute/demo/ios-config-files/f9a1ac27365b4649b709f4533277ef85.plist?Expires=1770355964&Signature=q0kmkn3HY4L0I-R9ipn0xhspATkv9cC4pTADbaolTPQmMLTpIrvih9TVWw4C0zWSRw1hWEr~UYM9NPKKX3p8sCFD8layH5rLZ~fA0kL~xTNZ5yhPl7HrrId0-54Vbg7IwIfXcbLt6qw66kKyuAAYdMGK6ElAetwaI6FZTivRs8uU2cGyifOiEWsl3bTJY6FXlJ2V1Tbkjyh-SgWFF8-E0uBQa5mJsS1LeYjUPyw2Yei8PDPIaHL5liPYFlGmrHxDOMxJUIQjndJZDRi1qHjO6mfspFXKNP684GSHAzhitcCq56QOV3XMpRLgLLZ65W7RBGBv-Wckr57BH3S13QOuog__&Key-Pair-Id=K2XWKDWM065EGO",
+  "version": "1.0.1",
+  "version_code": 2,
+  "features": {
+    "zoom_enabled": false
+  },
+  "bundle_identifier": "in.testpress.demo",
+  "display_name": "Testpress",
+  "api_key_id": "DDJ2YGJZCP",
+  "api_key_issuer": "69a6de92-69ad-47e3-e053-5b8c7c11a4d1",
+  "apple_id": "6753752664",
+  "scheme": "Arise Medical Academy",
+  "google_plist_path": "fastlane/GoogleService-Info.plist",
+  "api_key_path": "fastlane/AuthKey_DDJ2YGJZCP.p8"
+}

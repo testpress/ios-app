@@ -1,13 +1,13 @@
 {
   "subdomain": "staging",
-  "apple_id": "6753752664",
-  "primary_color": "#101010",
+  "apple_id": "6740989040",
+  "primary_color": "#2196F3",
   "google_plist_path": "fastlane/GoogleService-Info.plist",
-  "display_name": "Staging LMS",
+  "display_name": "Testpress Staging",
   "bundle_identifier": "in.testpress.staging",
   "features": {
-    "zoom_enabled": true
+    "zoom_enabled": false
   },
-  "image_background" : "#111111"
+  "image_background" : "white"
 }
 
