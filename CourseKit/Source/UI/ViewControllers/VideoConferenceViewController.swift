@@ -37,6 +37,7 @@ class VideoConferenceViewController: BaseUIViewController {
     }
     
     @IBAction func openZoomMeeting(_ sender: Any?) {
+        #if ZOOM_ENABLED
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
         let viewController = storyboard.instantiateViewController(
             withIdentifier: Constants.ZOOM_MEET_VIEW_CONTROLLER)
@@ -49,6 +50,7 @@ class VideoConferenceViewController: BaseUIViewController {
             self.fetchAccessToken(completion: completion)
         }
         self.present(viewController, animated: true, completion: nil)
+        #endif
     }
     
     

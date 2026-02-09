@@ -56,7 +56,9 @@ public class TPApiClient {
         request.httpMethod = endpointProvider.endpoint.method.rawValue
 
         if let customHeaders = headers?.dictionary {
-            request.allHTTPHeaderFields = customHeaders
+            for (key, value) in customHeaders {
+                request.setValue(value, forHTTPHeaderField: key)
+            }
         }
         request.setValue(getUserAgent(), forHTTPHeaderField: "User-Agent")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -83,6 +85,12 @@ public class TPApiClient {
             
             guard let httpResponse = response.response else {
                 handleError(error: response.error ?? TPError(message: "Unknown error", kind: .unexpected), completion: completion)
+                return
+            }
+            
+            if httpResponse.statusCode >= 200 && httpResponse.statusCode < 300 {
+                let json = (try? response.result.get()) ?? ""
+                handleSuccess(json: json, statusCode: httpResponse.statusCode, httpResponse: httpResponse, endpointProvider: endpointProvider, completion: completion)
                 return
             }
             
@@ -336,6 +344,52 @@ public class TPApiClient {
                     completion(user, error)
         })
     }
+    
+    public static func generateOtp(phoneNumber: String? = nil,
+                                   countryCode: String? = nil,
+                                   email: String? = nil,
+                                   completion: @escaping (TPError?) -> Void) {
+        
+        var parameters: Parameters = [:]
+        
+        if let phone = phoneNumber, let code = countryCode {
+            parameters["phone_number"] = phone
+            parameters["country_code"] = code
+        }
+        
+        if let email = email {
+            parameters["email"] = email
+        }
+        
+        apiCall(endpointProvider: TPEndpointProvider(.generateOtp),
+                parameters: parameters,
+                completion: { _, error in
+                    completion(error)
+                })
+    }
+    
+    public static func otpLogin(otp: String,
+                               phoneNumber: String? = nil,
+                               email: String? = nil,
+                               completion: @escaping (TPAuthToken?, TPError?) -> Void) {
+        
+        var parameters: Parameters = [:]
+        parameters["otp"] = otp
+        
+        if let phone = phoneNumber {
+            parameters["phone_number"] = phone
+        }
+        
+        if let email = email {
+            parameters["email"] = email
+        }
+        
+        request(type: TPAuthToken.self,
+                endpointProvider: TPEndpointProvider(.otpLogin),
+                parameters: parameters,
+                completion: completion)
+    }
+
     
     public static func getSSOUrl(completion: @escaping(SSOUrl?, TPError?) -> Void) {
         apiCall(endpointProvider: TPEndpointProvider(.getSSOUrl),
