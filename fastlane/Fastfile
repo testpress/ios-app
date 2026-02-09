@@ -19,8 +19,28 @@ ASSETS_DIR          = "../ios-app/Assets.xcassets".freeze
 PROJECT_PATH        = "../ios-app.xcodeproj".freeze
 INFO_PLIST_PATH     = "../ios-app/Info.plist".freeze
 APP_CONSTANTS_PATH  = "../ios-app/Utils/AppConstants.swift".freeze
-ICON_SOURCE         = "fastlane/Icon-1024.png".freeze
-LAUNCH_SOURCE       = "fastlane/LaunchImage.png".freeze
+GOOGLE_PLIST_SOURCE = "GoogleService-Info.plist".freeze
+ICON_SOURCE         = "Icon-1024.png".freeze
+LAUNCH_SOURCE       = "LaunchImage.png".freeze
+
+def fetch_config_from_api(subdomain, base_url)
+  url = "#{base_url}/api/v2.5/admin/ios/app-config/?subdomain=#{subdomain}"
+  headers = ["-H 'API-ACCESS-KEY: testpress'"]
+  token = ENV["TESTPRESS_ADMIN_TOKEN"]
+  headers << "-H 'Authorization: JWT #{token}'" if token
+  response = sh("curl -s #{headers.join(' ')} '#{url}'")
+  parsed = JSON.parse(response)
+  UI.user_error!("API Failure: #{parsed['detail']}") if parsed["detail"]
+  parsed["subdomain"] ||= subdomain
+  parsed
+rescue => e
+  UI.user_error!("Failed to fetch API config for #{subdomain}: #{e.message}")
+end
+
+def download_to_fastlane(url, dest)
+  return if url.to_s.empty?
+  sh("curl -L --fail -o '#{dest}' '#{url}'")
+end
 
 # -----------------------------------------------------------------
 #  Helper: PlistBuddy safe set / add
@@ -316,16 +336,33 @@ lane :deploy do |options|
   # -----------------------------------------------------------------
   # 1. Load & validate config.json
   # -----------------------------------------------------------------
-  config_path = options[:config] || "config.json"
-  $config = JSON.parse(File.read(config_path))
+  config =
+    if options[:subdomain]
+      base_url = options[:base_url] || ENV["TESTPRESS_BASE_URL"] || "http://demo.testbench.in:8000"
+      fetch_config_from_api(options[:subdomain], base_url)
+    else
+      config_path = options[:config] || "config.json"
+      UI.user_error!("config.json not found: #{config_path}") unless File.exist?(config_path)
+      JSON.parse(File.read(config_path))
+    end
 
-  UI.user_error!("config.json not found: #{config_path}") unless File.exist?(config_path)
+  # Normalize API keys to this lane's expected config format
+  config["apple_id"] ||= config["app_store_app_id"]
+  config["bundle_identifier"] ||= config["bundle_id"] || config["package_name"]
+  config["display_name"] ||= config["app_name"]
 
-  config = JSON.parse(File.read(config_path))
+  # Download API assets to fastlane root (avoid fastlane/fastlane/* nesting)
+  download_to_fastlane(config["app_icon_url"] || config["app_icon"], ICON_SOURCE)
+  download_to_fastlane(config["launch_image_url"] || config["launch_image"] || config["login_screen_image"], LAUNCH_SOURCE)
+  download_to_fastlane(config["google_plist_url"] || config["google_plist"], GOOGLE_PLIST_SOURCE)
+
+  config["google_plist_path"] ||= GOOGLE_PLIST_SOURCE
 
   required = %w[subdomain apple_id primary_color google_plist_path display_name bundle_identifier]
   missing = required.select { |k| config[k].to_s.empty? }
   UI.user_error!("Missing config fields: #{missing.join(', ')}") unless missing.empty?
+
+  $config = config
 
   zoom_enabled = config.dig("features", "zoom_enabled") == true
 
@@ -412,4 +449,3 @@ lane :archive_preview do |options|
 
   UI.success("✅ Archive Completed — No Upload Performed")
 end
-
