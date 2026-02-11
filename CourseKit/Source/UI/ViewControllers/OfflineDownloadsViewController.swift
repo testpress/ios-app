@@ -64,6 +64,13 @@ public class OfflineDownloadsViewController: BaseUIViewController, ObservableObj
     }
 
     private func handleAssetChange(newAssets: [OfflineAsset]) {
+        let newIds = newAssets.map { $0.assetId }
+        let oldIds = previousAssets.map { $0.assetId }
+        
+        if newIds != oldIds {
+            contents = getItemsFromDb(withUUIDs: newIds)
+        }
+
         guard previousAssets.count != newAssets.count else {
             reloadChangedAssets(newAssets)
             return
@@ -204,10 +211,18 @@ extension OfflineDownloadsViewController: UITableViewDelegate, UITableViewDataSo
         let contentDetailViewController = storyboard.instantiateViewController(
             withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER)
             as! ContentDetailPageViewController
-        let content = contents.first(where: { content in content.uuid == assetId })
+        
+        if contents.isEmpty && !offlineAssets.isEmpty {
+            contents = getItemsFromDb(withUUIDs: offlineAssets.map { $0.assetId })
+        }
+
+        guard let content = contents.first(where: { content in content.uuid == assetId }) else {
+            return
+        }
+
         contentDetailViewController.contents = contents
-        contentDetailViewController.title = content?.name
-        contentDetailViewController.position = 0
+        contentDetailViewController.title = content.name
+        contentDetailViewController.position = contents.firstIndex(where: { $0.uuid == assetId }) ?? 0
         self.present(contentDetailViewController, animated: true, completion: nil)
     }
 }
