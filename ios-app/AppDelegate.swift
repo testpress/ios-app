@@ -170,6 +170,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         SentrySDK.start { options in
             options.dsn = instituteSettings.sentryDSN
             options.debug = false
+            options.enableCrashHandler = true
+            options.enableAutoSessionTracking = true
+            #if DEBUG
+                options.tracesSampleRate = 1.0
+            #else
+                options.tracesSampleRate = 0.2
+            #endif
         }
 
         if let buildID = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String {

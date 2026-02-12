@@ -35,10 +35,13 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     var comments = [Comment]()
     var bookmarkHelper: BookmarkHelper!
     let loadingDialogController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
+    var instituteSettings:InstituteSettings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
+
         setupHelpers()
         loadWebViewContent()
     }
@@ -55,7 +58,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     }
     
     func getAdditionalHeaders() -> String {
-        return Constants.BOOKMARKS_ENABLED ? WebViewUtils.getBookmarkHeader() : ""
+        return instituteSettings?.bookmarksEnabled ?? false ? WebViewUtils.getBookmarkHeader() : ""
     }
     
     override func initWebView() {
@@ -191,15 +194,19 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
                 case "LoadNewComments":
                     loadNewComments()
                     break
-                case "InsertImage":
-                    uploadImage()
-                    break
                 default:
                     bookmarkJavascriptListener(message: message)
                     break
                 }
             } else if let dict = body as? Dictionary<String, AnyObject> {
-                let comment = dict["comment"] as! String
+                guard let rawComment = dict["comment"] as? String else { return }
+                let comment = rawComment.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if comment.isEmpty {
+                    TTGSnackbar(message: "Comment cannot be empty.", duration: .middle).show()
+                    return
+                }
+                
                 present(loadingDialogController, animated: true)
                 postComment(comment)
             }
@@ -235,9 +242,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
             })
     }
     
-    func uploadImage() {
-        
-    }
     
     func getHtml() -> String {
         guard let attemptItem = attemptItem, let attemptQuestion = attemptItem.question else {
@@ -270,7 +274,7 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     func getHtmlAboveQuestion() -> String {
         // Add index
         var html = "<div class='review-question-index'>\((attemptItem!.index) + 1)</div>"
-        if (Constants.BOOKMARKS_ENABLED) {
+        if instituteSettings.bookmarksEnabled {
             let attemptItemBookmarked = attemptItem!.bookmarkId != nil
             html += WebViewUtils.getBookmarkButtonWithTags(bookmarked: attemptItemBookmarked)
         }
@@ -423,7 +427,6 @@ class ReviewQuestionsViewController: BaseQuestionsViewController, WKScriptMessag
     private func getCommentBoxHtml() -> String {
         var html = WebViewUtils.getCommentHeadingTags(headingText: Strings.COMMENTS)
         html += "<div class='comment_box_layout'>" +
-                "<div><span class='icon-add-a-photo' onclick='insertImage()'></span></div>" +
                 "<div contentEditable='true' class='comment_box' " +
                 "data-placeholder='Write a comment...'></div>" +
                 "<div><span class='icon-paper-plane' onclick='sendComment()'></span></div>" +

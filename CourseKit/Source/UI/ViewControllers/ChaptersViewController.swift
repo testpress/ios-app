@@ -56,6 +56,7 @@ BaseDBViewController<Chapter> {
         emptyView.frame = collectionView.frame
         showOrHideCustomTestIcon()
         self.setStatusBarColor()
+        self.extendedLayoutIncludesOpaqueBars = true
     }
     
     func showOrHideCustomTestIcon(){

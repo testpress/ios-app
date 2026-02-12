@@ -34,9 +34,12 @@ class HtmlContentViewController: BaseWebViewController {
     var loading: Bool = false
     var viewModel: ChapterContentDetailViewModel?
     var bookmarkHelper: BookmarkHelper!
+    var instituteSettings: InstituteSettings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
+
         emptyView = EmptyView.getInstance(parentView: webView)
         webViewDelegate = self
         bookmarkHelper = BookmarkHelper(viewController: self)
@@ -50,6 +53,8 @@ class HtmlContentViewController: BaseWebViewController {
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
         config.preferences.javaScriptEnabled = true
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = []        
         
         webView = WKWebView( frame: parentView.bounds, configuration: config)
     }
@@ -111,7 +116,12 @@ class HtmlContentViewController: BaseWebViewController {
     }
     
     func displayVideoContent() {
-        title = content.video!.title
+        guard let video = content.video, !video.embedCode.isEmpty else {
+            emptyView.show(description: "Video embed code not available")
+            return
+        }
+        
+        title = video.title
         if !Reachability.isConnectedToNetwork() {
             let retryHandler = {
                 self.emptyView.hide()
@@ -124,22 +134,24 @@ class HtmlContentViewController: BaseWebViewController {
             
             return
         }
-        let videoContentHtml = "<div class='videoWrapper'>" + content.video!.embedCode + "</div>"
+
+        let videoContentHtml = "<div class='videoWrapper'>" + video.embedCode + "</div>"
+        let baseURL = TestpressCourse.shared.baseURL.flatMap { URL(string: $0) }
         webView.loadHTMLString(
             getFormattedContent(videoContentHtml),
-            baseURL: Bundle.main.bundleURL
+            baseURL: baseURL
         )
     }
     
     func getFormattedContent(_ contentHtml: String) -> String {
         var html = WebViewUtils.getHeader()
-        if Constants.BOOKMARKS_ENABLED {
+        if instituteSettings?.bookmarksEnabled ?? false {
             html += WebViewUtils.getBookmarkHeader()
         }
         let bookmarked = content.bookmarkId.value != nil
         html += WebViewUtils.getFormattedTitle(
             title: title!,
-            withBookmarkButton: Constants.BOOKMARKS_ENABLED,
+            withBookmarkButton: instituteSettings?.bookmarksEnabled ?? false,
             withBookmarkedState: bookmarked
         )
         return html + WebViewUtils.getHtmlContentWithMargin(contentHtml)
