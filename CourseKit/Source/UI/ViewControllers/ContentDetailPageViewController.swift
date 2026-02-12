@@ -281,7 +281,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
                 }
                 
                 self?.contents = [content]
-                DBManager<Content>().addData(object: content)
+                DBManager<Content>().addDataIfPossible(object: content)
                 self?.position = 0
                 self?.setupContentDetailDataSource()
                 self?.setFirstViewController()
@@ -335,7 +335,8 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     }
 
     private func updateContentData(_ content: Content) {
-        DBManager<Content>().addData(object: content)
+        DBManager<Content>().addDataIfPossible(object: content)
+
         contents[getCurrentIndex()] = content
         contentDetailDataSource.contents = contents
         

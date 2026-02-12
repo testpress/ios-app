@@ -124,6 +124,18 @@ public class DBManager<T: Object> {
         }
     }
     
+    public func addDataIfPossible(object: T) -> Bool {
+        do {
+            try database.write {
+                database.add(object, update: .modified)
+            }
+            return true
+        } catch {
+            print("DBManager addDataIfPossible(object:) failed: \(error)")
+            return false
+        }
+    }
+
     public func addData(objects: [T]) {
         try! database.write {
             database.add(objects, update: .modified)
