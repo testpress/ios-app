@@ -81,16 +81,23 @@ class MainViewController: UIViewController {
     
     private func handleError(_ error: Error) {
         let tpError = error as! TPError
+        
+        if tpError.isGloballyHandled() {
+            return
+        }
+        
         debugPrint(tpError.message ?? "No error")
         debugPrint(tpError.kind)
         
         var retryButtonText: String?
         var retryHandler: (() -> Void)?
         
-        retryButtonText = Strings.TRY_AGAIN
-        retryHandler = { [weak self] in
-            self?.emptyView.hide()
-            self?.fetchInstituteSettings()
+        if tpError.kind == .network {
+            retryButtonText = Strings.TRY_AGAIN
+            retryHandler = { [weak self] in
+                self?.emptyView.hide()
+                self?.fetchInstituteSettings()
+            }
         }
         
         let (image, title, description) = tpError.getDisplayInfo()

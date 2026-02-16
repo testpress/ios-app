@@ -104,6 +104,12 @@ public class TPError: Error {
         return errorCode == Constants.UNAUTHORIZED_DEVICE_ERROR_CODE
     }
     
+    public func isGloballyHandled() -> Bool {
+        return isDeviceRestrictionError() || 
+               error_code == "parallel_login_restriction" || 
+               error_code == "max_login_exceeded"
+    }
+    
     public func getErrorBodyAs<T: TestpressModel>(type: T.Type) -> T? {
         return TPModelMapper<T>().mapFromJSON(json: message!)
     }

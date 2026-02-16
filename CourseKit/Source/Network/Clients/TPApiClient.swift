@@ -107,30 +107,24 @@ public class TPApiClient {
     private static func handleSuccess(json: String, statusCode: Int, httpResponse: HTTPURLResponse, endpointProvider: TPEndpointProvider, completion: @escaping (String?, TPError?) -> Void) {
         if statusCode >= 200 && statusCode < 300 {
             completion(json, nil)
-        } else {
-            let tpError = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
-            let shouldSkipAuthDelegation = [TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)
-            
-            if !shouldSkipAuthDelegation {
-                if tpError.kind == .custom {
-                    handleCustomError(error: tpError)
-                    
-                    if tpError.isDeviceRestrictionError() {
-                        tpError.logErrorToSentry()
-                        completion(nil, tpError)
-                        return
-                    }
-                } else if statusCode == 401 {
-                    authErrorDelegate?.handleUnauthenticatedError()
-                    tpError.logErrorToSentry()
-                    completion(nil, tpError)
-                    return
-                }
+            return
+        }
+
+        let tpError = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
+        let isLogoutOrUnregister = [TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)
+        
+        if !isLogoutOrUnregister {
+            if tpError.kind == .custom {
+                handleCustomError(error: tpError)
             }
             
-            tpError.logErrorToSentry()
-            completion(nil, tpError)
+            if (statusCode == 401 || statusCode == 403) && !tpError.isDeviceRestrictionError() {
+                authErrorDelegate?.handleUnauthenticatedError()
+            }
         }
+        
+        tpError.logErrorToSentry()
+        completion(nil, tpError)
     }
     
     private static func createError(for statusCode: Int, message: String, httpResponse: HTTPURLResponse, endpointProvider: TPEndpointProvider) -> TPError {
