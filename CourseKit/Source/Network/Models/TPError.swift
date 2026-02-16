@@ -100,14 +100,7 @@ public class TPError: Error {
     }
 
     public func isDeviceRestrictionError() -> Bool {
-        guard let errorCode = error_code else { return false }
-        return errorCode == Constants.UNAUTHORIZED_DEVICE_ERROR_CODE
-    }
-    
-    public func isGloballyHandled() -> Bool {
-        return isDeviceRestrictionError() || 
-               error_code == "parallel_login_restriction" || 
-               error_code == "max_login_exceeded"
+        return error_code == Constants.UNAUTHORIZED_DEVICE_ERROR_CODE
     }
     
     public func getErrorBodyAs<T: TestpressModel>(type: T.Type) -> T? {

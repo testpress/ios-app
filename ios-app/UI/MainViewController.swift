@@ -82,7 +82,7 @@ class MainViewController: UIViewController {
     private func handleError(_ error: Error) {
         let tpError = error as! TPError
         
-        if tpError.isGloballyHandled() {
+        if tpError.isDeviceRestrictionError() {
             return
         }
         

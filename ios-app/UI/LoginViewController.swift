@@ -138,7 +138,7 @@ class LoginViewController: BaseTextFieldViewController {
             completion: {
                 testpressAuthToken, error in
                 if let error = error {
-                    if error.isGloballyHandled() {
+                    if error.isDeviceRestrictionError() {
                         return
                     }
                     debugPrint(error.message ?? "No error message found")
