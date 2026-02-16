@@ -21,8 +21,7 @@ public class TestpressCourse {
     public var subdomain: String!
     public var baseURL: String! {
         guard let subdomain = subdomain else { return nil }
-        // return "https://\(subdomain).testpress.in"
-        return "https://maxim-flakier-marcelo.ngrok-free.dev"
+        return "https://\(subdomain).testpress.in"
     }
     
     
