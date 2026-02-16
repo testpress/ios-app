@@ -59,38 +59,38 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
             self.showUnauthorizedDeviceView(error: error)
         }
     }
-    
+
     private func showUnauthorizedDeviceView(error: TPError) {
         isUnauthorizedViewPresented = true
-        
+
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.windowLevel = .alert + 1
         window.backgroundColor = .clear
-        
+
         let unauthorizedVC = UnauthorizedDeviceViewController(nibName: "UnauthorizedDeviceViewController", bundle: nil)
         unauthorizedVC.errorMessage = error.error_detail
         unauthorizedVC.actionHandler = { [weak self] in
             self?.unauthorizedLogoutTapped()
         }
-        
+
         window.rootViewController = unauthorizedVC
-        
+
         self.unauthorizedWindow = window
         window.makeKeyAndVisible()
     }
-    
+
     private func unauthorizedLogoutTapped() {
         isUnauthorizedViewPresented = false
-        
+
         let appWindow = (UIApplication.shared.delegate as? AppDelegate)?.window
-        
+
         unauthorizedWindow?.isHidden = true
         unauthorizedWindow = nil
-        
+
         UserHelper.logout()
-        
+
         guard let window = appWindow else { return }
-        
+
         let loginVC = UserHelper.getLoginOrTabViewController()
         window.rootViewController = loginVC
         window.makeKeyAndVisible()
