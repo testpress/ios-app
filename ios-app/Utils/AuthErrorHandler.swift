@@ -11,6 +11,9 @@ import CourseKit
 import UIKit
 
 class AuthErrorHandler: AuthErrorHandlingDelegate {
+    private var isUnauthorizedViewPresented = false
+    private var unauthorizedWindow: UIWindow?
+
     func handleUnauthenticatedError() {
         UserHelper.logout()
         presentLoginViewController()
@@ -48,6 +51,69 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
         alert.addAction(UIAlertAction(title: Strings.CANCEL, style: .cancel, handler: nil))
         
         rootViewController.present(alert, animated: true, completion: nil)
+    }
+    
+    func handleUnauthorizedDeviceError(error: TPError) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, !self.isUnauthorizedViewPresented else { return }
+            self.showUnauthorizedDeviceView(error: error)
+        }
+    }
+    
+    private func showUnauthorizedDeviceView(error: TPError) {
+        isUnauthorizedViewPresented = true
+        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.windowLevel = .alert + 1
+        window.backgroundColor = .clear
+        
+        let containerVC = UIViewController()
+        containerVC.view.backgroundColor = .white
+        window.rootViewController = containerVC
+        
+        let emptyView = EmptyView.getInstance()
+        emptyView.translatesAutoresizingMaskIntoConstraints = false
+        
+        emptyView.setValues(
+            image: Images.TestpressAlertWarning.image,
+            title: Strings.DEVICE_NOT_ALLOWED,
+            description: error.error_detail,
+            retryButtonText: "Logout",
+            retryHandler: { [weak self] in
+                self?.unauthorizedLogoutTapped()
+            }
+        )
+        
+        containerVC.view.addSubview(emptyView)
+        NSLayoutConstraint.activate([
+            emptyView.topAnchor.constraint(equalTo: containerVC.view.topAnchor),
+            emptyView.bottomAnchor.constraint(equalTo: containerVC.view.bottomAnchor),
+            emptyView.leadingAnchor.constraint(equalTo: containerVC.view.leadingAnchor),
+            emptyView.trailingAnchor.constraint(equalTo: containerVC.view.trailingAnchor)
+        ])
+        
+        emptyView.isHidden = false
+        emptyView.retryButton.isHidden = false
+        
+        self.unauthorizedWindow = window
+        window.makeKeyAndVisible()
+    }
+    
+    private func unauthorizedLogoutTapped() {
+        isUnauthorizedViewPresented = false
+        
+        let appWindow = (UIApplication.shared.delegate as? AppDelegate)?.window
+        
+        unauthorizedWindow?.isHidden = true
+        unauthorizedWindow = nil
+        
+        UserHelper.logout()
+        
+        guard let window = appWindow else { return }
+        
+        let loginVC = UserHelper.getLoginOrTabViewController()
+        window.rootViewController = loginVC
+        window.makeKeyAndVisible()
     }
     
     private func presentLoginViewController(from viewController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) {

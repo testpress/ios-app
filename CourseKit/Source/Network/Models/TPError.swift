@@ -98,6 +98,11 @@ public class TPError: Error {
     public func isServerError() -> Bool {
         return statusCode >= 500 && statusCode < 600;
     }
+
+    public func isDeviceRestrictionError() -> Bool {
+        guard let errorCode = error_code else { return false }
+        return errorCode == Constants.UNAUTHORIZED_DEVICE_ERROR_CODE
+    }
     
     public func getErrorBodyAs<T: TestpressModel>(type: T.Type) -> T? {
         return TPModelMapper<T>().mapFromJSON(json: message!)
@@ -130,8 +135,12 @@ public class TPError: Error {
                     Strings.AUTHENTICATION_FAILED,
                     Strings.PLEASE_LOGIN)
         case .custom:
+            var title = Strings.LOADING_FAILED
+            if isDeviceRestrictionError() {
+                title = Strings.DEVICE_NOT_ALLOWED
+            }
             return (Images.TestpressAlertWarning.image,
-                    Strings.LOADING_FAILED,
+                    title,
                     self.error_detail!)
         default:
             return (Images.TestpressAlertWarning.image,
@@ -140,5 +149,4 @@ public class TPError: Error {
         }
     }
 }
-
 

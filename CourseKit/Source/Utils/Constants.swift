@@ -118,6 +118,7 @@ public struct Constants {
     //    ERROR_CODES
     public static let MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE = "parallel_login_restriction"
     public static let MAX_LOGIN_LIMIT_EXCEEDED = "max_login_exceeded"
+    public static let UNAUTHORIZED_DEVICE_ERROR_CODE = "device_not_allowed"
 
     
     public static func getAppVersion() -> String {
@@ -139,4 +140,3 @@ public struct Slug {
     public static let HISTORY = "history"
     
 }
-

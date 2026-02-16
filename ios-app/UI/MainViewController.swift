@@ -87,12 +87,10 @@ class MainViewController: UIViewController {
         var retryButtonText: String?
         var retryHandler: (() -> Void)?
         
-        if tpError.kind == .network {
-            retryButtonText = Strings.TRY_AGAIN
-            retryHandler = { [weak self] in
-                self?.emptyView.hide()
-                self?.fetchInstituteSettings()
-            }
+        retryButtonText = Strings.TRY_AGAIN
+        retryHandler = { [weak self] in
+            self?.emptyView.hide()
+            self?.fetchInstituteSettings()
         }
         
         let (image, title, description) = tpError.getDisplayInfo()

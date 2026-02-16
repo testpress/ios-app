@@ -108,17 +108,28 @@ public class TPApiClient {
         if statusCode >= 200 && statusCode < 300 {
             completion(json, nil)
         } else {
-
-            var error = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
-
-            if (statusCode == 401 && ![TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)) {
-                authErrorDelegate?.handleUnauthenticatedError()
-            } else if error.kind == .custom {
-                handleCustomError(error: error)
+            let tpError = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
+            let shouldSkipAuthDelegation = [TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)
+            
+            if !shouldSkipAuthDelegation {
+                if tpError.kind == .custom {
+                    handleCustomError(error: tpError)
+                    
+                    if tpError.isDeviceRestrictionError() {
+                        tpError.logErrorToSentry()
+                        completion(nil, tpError)
+                        return
+                    }
+                } else if statusCode == 401 {
+                    authErrorDelegate?.handleUnauthenticatedError()
+                    tpError.logErrorToSentry()
+                    completion(nil, tpError)
+                    return
+                }
             }
             
-            error.logErrorToSentry()
-            completion(nil, error)
+            tpError.logErrorToSentry()
+            completion(nil, tpError)
         }
     }
     
@@ -148,6 +159,11 @@ public class TPApiClient {
     }
 
     private static func handleCustomError(error: TPError) {
+        if error.isDeviceRestrictionError() {
+            authErrorDelegate?.handleUnauthorizedDeviceError(error: error)
+            return
+        }
+        
         switch error.error_code {
         case Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE:
             authErrorDelegate?.handleMultipleLoginRestrictionError(error: error)
