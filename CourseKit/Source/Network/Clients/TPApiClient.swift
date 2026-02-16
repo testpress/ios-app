@@ -107,24 +107,19 @@ public class TPApiClient {
     private static func handleSuccess(json: String, statusCode: Int, httpResponse: HTTPURLResponse, endpointProvider: TPEndpointProvider, completion: @escaping (String?, TPError?) -> Void) {
         if statusCode >= 200 && statusCode < 300 {
             completion(json, nil)
-            return
-        }
+        } else {
 
-        let tpError = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
-        let isLogoutOrUnregister = [TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)
-        
-        if !isLogoutOrUnregister {
-            if tpError.kind == .custom {
-                handleCustomError(error: tpError)
+            var error = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
+
+            if (statusCode == 401 && ![TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)) {
+                authErrorDelegate?.handleUnauthenticatedError()
+            } else if error.kind == .custom {
+                handleCustomError(error: error)
             }
             
-            if (statusCode == 401 || statusCode == 403) && !tpError.isDeviceRestrictionError() {
-                authErrorDelegate?.handleUnauthenticatedError()
-            }
+            error.logErrorToSentry()
+            completion(nil, error)
         }
-        
-        tpError.logErrorToSentry()
-        completion(nil, tpError)
     }
     
     private static func createError(for statusCode: Int, message: String, httpResponse: HTTPURLResponse, endpointProvider: TPEndpointProvider) -> TPError {
