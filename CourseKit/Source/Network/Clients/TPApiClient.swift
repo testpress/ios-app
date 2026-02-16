@@ -111,9 +111,11 @@ public class TPApiClient {
 
             var error = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
 
-            if (statusCode == 401 && ![TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)) {
+            let isLogoutOrUnregister = [TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)
+            
+            if (statusCode == 401 && !isLogoutOrUnregister) {
                 authErrorDelegate?.handleUnauthenticatedError()
-            } else if error.kind == .custom {
+            } else if error.kind == .custom && !isLogoutOrUnregister {
                 handleCustomError(error: error)
             }
             
