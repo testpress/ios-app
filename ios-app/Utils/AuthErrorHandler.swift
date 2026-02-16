@@ -78,7 +78,7 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
             image: Images.TestpressAlertWarning.image,
             title: Strings.DEVICE_NOT_ALLOWED,
             description: error.error_detail,
-            retryButtonText: "Logout",
+            retryButtonText: Strings.LOGIN_WITH_DIFFERENT_ACCOUNT,
             retryHandler: { [weak self] in
                 self?.unauthorizedLogoutTapped()
             }
