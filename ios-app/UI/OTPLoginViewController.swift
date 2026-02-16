@@ -184,9 +184,6 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
             self.loadingDialog.dismiss(animated: true)
             
             if let error = error {
-                if error.isDeviceRestrictionError() {
-                    return
-                }
                 self.showAlert(message: self.parseErrorMessage(from: error))
                 return
             }

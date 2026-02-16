@@ -67,33 +67,13 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
         window.windowLevel = .alert + 1
         window.backgroundColor = .clear
         
-        let containerVC = UIViewController()
-        containerVC.view.backgroundColor = .white
-        window.rootViewController = containerVC
+        let unauthorizedVC = UnauthorizedDeviceViewController(nibName: "UnauthorizedDeviceViewController", bundle: nil)
+        unauthorizedVC.errorMessage = error.error_detail
+        unauthorizedVC.actionHandler = { [weak self] in
+            self?.unauthorizedLogoutTapped()
+        }
         
-        let emptyView = EmptyView.getInstance()
-        emptyView.translatesAutoresizingMaskIntoConstraints = false
-        
-        emptyView.setValues(
-            image: Images.TestpressAlertWarning.image,
-            title: Strings.DEVICE_NOT_ALLOWED,
-            description: error.error_detail,
-            retryButtonText: Strings.LOGIN_WITH_DIFFERENT_ACCOUNT,
-            retryHandler: { [weak self] in
-                self?.unauthorizedLogoutTapped()
-            }
-        )
-        
-        containerVC.view.addSubview(emptyView)
-        NSLayoutConstraint.activate([
-            emptyView.topAnchor.constraint(equalTo: containerVC.view.topAnchor),
-            emptyView.bottomAnchor.constraint(equalTo: containerVC.view.bottomAnchor),
-            emptyView.leadingAnchor.constraint(equalTo: containerVC.view.leadingAnchor),
-            emptyView.trailingAnchor.constraint(equalTo: containerVC.view.trailingAnchor)
-        ])
-        
-        emptyView.isHidden = false
-        emptyView.retryButton.isHidden = false
+        window.rootViewController = unauthorizedVC
         
         self.unauthorizedWindow = window
         window.makeKeyAndVisible()
