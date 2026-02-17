@@ -134,12 +134,8 @@ public class TPError: Error {
                     Strings.AUTHENTICATION_FAILED,
                     Strings.PLEASE_LOGIN)
         case .custom:
-            var title = Strings.LOADING_FAILED
-            if isDeviceRestrictionError() {
-                title = Strings.DEVICE_NOT_ALLOWED
-            }
             return (Images.TestpressAlertWarning.image,
-                    title,
+                    Strings.LOADING_FAILED,
                     self.error_detail!)
         default:
             return (Images.TestpressAlertWarning.image,

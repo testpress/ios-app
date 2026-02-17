@@ -11,7 +11,7 @@ import CourseKit
 import UIKit
 
 class AuthErrorHandler: AuthErrorHandlingDelegate {
-    private let unauthorizedDevicePresenter = UnauthorizedDevicePresenter()
+    private var overlayWindow: UIWindow?
 
     func handleUnauthenticatedError() {
         UserHelper.logout()
@@ -53,24 +53,31 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
     }
     
     func handleUnauthorizedDeviceError(error: TPError) {
-        unauthorizedDevicePresenter.present(message: error.error_detail) { [weak self] in
-            self?.unauthorizedLogoutTapped()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self, self.overlayWindow == nil else { return }
+
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            window.windowLevel = .alert + 1
+            window.backgroundColor = .clear
+
+            let unauthorizedVC = UnauthorizedDeviceViewController(nibName: "UnauthorizedDeviceViewController", bundle: nil)
+            unauthorizedVC.errorMessage = error.error_detail
+            unauthorizedVC.actionHandler = { [weak self] in
+                self?.overlayWindow?.isHidden = true
+                self?.overlayWindow = nil
+                UserHelper.logout()
+                if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
+                    window.rootViewController = UserHelper.getLoginOrTabViewController()
+                    window.makeKeyAndVisible()
+                }
+            }
+
+            window.rootViewController = unauthorizedVC
+            self.overlayWindow = window
+            window.makeKeyAndVisible()
         }
     }
 
-    private func unauthorizedLogoutTapped() {
-        let appWindow = (UIApplication.shared.delegate as? AppDelegate)?.window
-        unauthorizedDevicePresenter.dismiss()
-
-        UserHelper.logout()
-
-        guard let window = appWindow else { return }
-
-        let loginVC = UserHelper.getLoginOrTabViewController()
-        window.rootViewController = loginVC
-        window.makeKeyAndVisible()
-    }
-    
     private func presentLoginViewController(from viewController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
@@ -78,7 +85,7 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
             }
             let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
             let loginActivityViewController = storyboard.instantiateViewController(withIdentifier:
-                                        Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER) as! LoginActivityViewController
+                                         Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER) as! LoginActivityViewController
             
             topController.present(loginActivityViewController, animated: true, completion: nil)
         }
@@ -94,43 +101,5 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
         }
         
         return rootViewController
-    }
-}
-
-private final class UnauthorizedDevicePresenter {
-    private var isPresented = false
-    private var overlayWindow: UIWindow?
-
-    func present(message: String?, onAction: @escaping () -> Void) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self, !self.isPresented else { return }
-
-            self.isPresented = true
-
-            let window = UIWindow(frame: UIScreen.main.bounds)
-            window.windowLevel = .alert + 1
-            window.backgroundColor = .clear
-
-            let unauthorizedVC = UnauthorizedDeviceViewController(
-                nibName: "UnauthorizedDeviceViewController",
-                bundle: nil
-            )
-            unauthorizedVC.errorMessage = message
-            unauthorizedVC.actionHandler = onAction
-
-            window.rootViewController = unauthorizedVC
-            self.overlayWindow = window
-            window.makeKeyAndVisible()
-        }
-    }
-
-    func dismiss() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-
-            self.overlayWindow?.isHidden = true
-            self.overlayWindow = nil
-            self.isPresented = false
-        }
     }
 }

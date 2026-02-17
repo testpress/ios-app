@@ -81,8 +81,6 @@ class MainViewController: UIViewController {
     
     private func handleError(_ error: Error) {
         let tpError = error as! TPError
-        debugPrint(tpError.message ?? "No error")
-        debugPrint(tpError.kind)
         
         var retryButtonText: String?
         var retryHandler: (() -> Void)?
