@@ -148,7 +148,6 @@ class LoginViewController: BaseTextFieldViewController {
                         (_, title, description) = error.getDisplayInfo()
                     }
                     self.alertController.dismiss(animated: true, completion: nil)
-
                     UIUtils.showSimpleAlert(
                         title: title,
                         message: description,
