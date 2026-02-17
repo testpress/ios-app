@@ -114,7 +114,6 @@ public class TPApiClient {
             
             if error.isDeviceRestrictionError() && !isLogoutOrUnregister {
                 handleCustomError(error: error)
-                return
             } else if (statusCode == 401 && !isLogoutOrUnregister) {
                 authErrorDelegate?.handleUnauthenticatedError()
             } else if error.kind == .custom && !isLogoutOrUnregister {

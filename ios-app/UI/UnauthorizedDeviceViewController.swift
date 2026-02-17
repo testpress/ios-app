@@ -17,7 +17,9 @@ class UnauthorizedDeviceViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        descriptionLabel.text = errorMessage
+        if let errorMessage = errorMessage {
+            descriptionLabel.text = errorMessage
+        }
     }
     
     @IBAction func onActionTapped(_ sender: UIButton) {
