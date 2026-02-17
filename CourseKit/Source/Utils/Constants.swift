@@ -140,3 +140,4 @@ public struct Slug {
     public static let HISTORY = "history"
     
 }
+
