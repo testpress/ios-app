@@ -108,7 +108,7 @@ public class TPApiClient {
         if statusCode >= 200 && statusCode < 300 {
             completion(json, nil)
         } else {
-            
+
             var error = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
             let isLogoutOrUnregister = [TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)
             
