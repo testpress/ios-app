@@ -108,8 +108,7 @@ public class TPApiClient {
         if statusCode >= 200 && statusCode < 300 {
             completion(json, nil)
         } else {
-
-            var error = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
+            let error = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
             let isLogoutOrUnregister = [TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)
             
             if error.isDeviceRestrictionError() && !isLogoutOrUnregister {
@@ -142,6 +141,10 @@ public class TPApiClient {
         let kind: TPError.Kind = (error as? URLError)?.isNetworkRelated == true ? .network : .unexpected
         
         let tpError = TPError(message: errorDescription, response: httpResponse, kind: kind)
+        
+        if tpError.kind == .custom {
+            handleCustomError(error: tpError)
+        }
         
         tpError.logErrorToSentry()
         completion(nil, tpError)
