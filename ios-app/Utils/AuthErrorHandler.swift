@@ -60,7 +60,9 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
             window.windowLevel = .alert + 1
             window.backgroundColor = .clear
 
-            let unauthorizedVC = UnauthorizedDeviceViewController(nibName: "UnauthorizedDeviceViewController", bundle: nil)
+            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+            let unauthorizedVC = storyboard.instantiateViewController(withIdentifier:
+                                        Constants.UNAUTHORIZED_DEVICE_VIEW_CONTROLLER) as! UnauthorizedDeviceViewController
             unauthorizedVC.errorMessage = error.error_detail
             unauthorizedVC.actionHandler = { [weak self] in
                 self?.overlayWindow?.isHidden = true

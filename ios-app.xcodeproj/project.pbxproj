@@ -336,7 +336,6 @@
 		2D7CDBCC2F237CCD0076B42F /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */; };
 		2D7CDBCE2F237D150076B42F /* DeviceIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */; };
 		2D84D0662F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D84D0652F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift */; };
-		2D84D0682F433D09000EF4DC /* UnauthorizedDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D84D0672F433D09000EF4DC /* UnauthorizedDeviceViewController.xib */; };
 		2D9597432EDEF06800E9AC7C /* OTPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9597422EDEF06800E9AC7C /* OTPLoginViewController.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
 		2F25D558201EFB9F00C01CCE /* LeaderboardTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F25D557201EFB9F00C01CCE /* LeaderboardTabViewController.swift */; };
@@ -615,7 +614,6 @@
 		2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIDManager.swift; sourceTree = "<group>"; };
 		2D84D0652F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedDeviceViewController.swift; sourceTree = "<group>"; };
-		2D84D0672F433D09000EF4DC /* UnauthorizedDeviceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnauthorizedDeviceViewController.xib; sourceTree = "<group>"; };
 		2D9597422EDEF06800E9AC7C /* OTPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPLoginViewController.swift; sourceTree = "<group>"; };
 		2F04052F20D902530074D80E /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkFoldersDropDownCell.xib; sourceTree = "<group>"; };
@@ -1623,7 +1621,6 @@
 		8C2E7B5A2397B25600BA2F41 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
-				2D84D0672F433D09000EF4DC /* UnauthorizedDeviceViewController.xib */,
 				2F25D565201F6D7400C01CCE /* LeaderboardTableViewCell.xib */,
 				2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */,
 			);
@@ -1898,7 +1895,6 @@
 			files = (
 				A4A1E4FC2DF1658700C72932 /* MobileRTCResources.bundle in Resources */,
 				2503DF6B263C17DA003226AD /* PostCarouselViewCell.xib in Resources */,
-				2D84D0682F433D09000EF4DC /* UnauthorizedDeviceViewController.xib in Resources */,
 				2503DF70263FAC0A003226AD /* ChapterContentViewCell.xib in Resources */,
 				2570A23F21CA0D260097C6FE /* GoogleService-Info.plist in Resources */,
 				2503DF58263C02C3003226AD /* BannerAdViewCell.xib in Resources */,

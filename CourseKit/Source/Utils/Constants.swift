@@ -95,6 +95,7 @@ public struct Constants {
     public static let LOGIN_ACTIVITY_VIEW_CONTROLLER = "LoginActivityViewController"
     public static let PDF_VIEW_CONTROLLER = "PDFViewController"
     public static let OFFLINE_DOWNLOADS_VIEW_CONTROLLERS = "OfflineDownloadsViewController"
+    public static let UNAUTHORIZED_DEVICE_VIEW_CONTROLLER = "UnauthorizedDeviceViewController"
 
     
     public static let PAGE = "page"
