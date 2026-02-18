@@ -11,7 +11,6 @@ import CourseKit
 import UIKit
 
 class AuthErrorHandler: AuthErrorHandlingDelegate {
-    private var overlayWindow: UIWindow?
 
     func handleUnauthenticatedError() {
         UserHelper.logout()
@@ -53,30 +52,8 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
     }
     
     func handleUnauthorizedDeviceError(error: TPError) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self, self.overlayWindow == nil else { return }
-
-            let window = UIWindow(frame: UIScreen.main.bounds)
-            window.windowLevel = .alert + 1
-            window.backgroundColor = .clear
-
-            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
-            let unauthorizedVC = storyboard.instantiateViewController(withIdentifier:
-                                        Constants.UNAUTHORIZED_DEVICE_VIEW_CONTROLLER) as! UnauthorizedDeviceViewController
-            unauthorizedVC.errorMessage = error.error_detail
-            unauthorizedVC.actionHandler = { [weak self] in
-                self?.overlayWindow?.isHidden = true
-                self?.overlayWindow = nil
-                UserHelper.logout()
-                if let window = (UIApplication.shared.delegate as? AppDelegate)?.window {
-                    window.rootViewController = UserHelper.getLoginOrTabViewController()
-                    window.makeKeyAndVisible()
-                }
-            }
-
-            window.rootViewController = unauthorizedVC
-            self.overlayWindow = window
-            window.makeKeyAndVisible()
+        DispatchQueue.main.async {
+            UnauthorizedDeviceViewController.show(errorMessage: error.error_detail)
         }
     }
 
