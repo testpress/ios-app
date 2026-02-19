@@ -110,10 +110,13 @@ public class TPApiClient {
         } else {
 
             var error = createError(for: statusCode, message: json, httpResponse: httpResponse, endpointProvider: endpointProvider)
-
-            if (statusCode == 401 && ![TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)) {
+            let isLogoutOrUnregister = [TPEndpoint.logout, TPEndpoint.unRegisterDevice].contains(endpointProvider.endpoint)
+            
+            if error.isDeviceRestrictionError() && !isLogoutOrUnregister {
+                handleCustomError(error: error)
+            } else if (statusCode == 401 && !isLogoutOrUnregister) {
                 authErrorDelegate?.handleUnauthenticatedError()
-            } else if error.kind == .custom {
+            } else if error.kind == .custom && !isLogoutOrUnregister {
                 handleCustomError(error: error)
             }
             
@@ -148,6 +151,11 @@ public class TPApiClient {
     }
 
     private static func handleCustomError(error: TPError) {
+        if error.isDeviceRestrictionError() {
+            authErrorDelegate?.handleUnauthorizedDeviceError(error: error)
+            return
+        }
+        
         switch error.error_code {
         case Constants.MULTIPLE_LOGIN_RESTRICTION_ERROR_CODE:
             authErrorDelegate?.handleMultipleLoginRestrictionError(error: error)
