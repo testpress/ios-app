@@ -98,6 +98,10 @@ public class TPError: Error {
     public func isServerError() -> Bool {
         return statusCode >= 500 && statusCode < 600;
     }
+
+    public func isDeviceRestrictionError() -> Bool {
+        return error_code == Constants.UNAUTHORIZED_DEVICE_ERROR_CODE
+    }
     
     public func getErrorBodyAs<T: TestpressModel>(type: T.Type) -> T? {
         return TPModelMapper<T>().mapFromJSON(json: message!)

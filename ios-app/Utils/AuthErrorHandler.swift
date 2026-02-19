@@ -11,6 +11,7 @@ import CourseKit
 import UIKit
 
 class AuthErrorHandler: AuthErrorHandlingDelegate {
+
     func handleUnauthenticatedError() {
         UserHelper.logout()
         presentLoginViewController()
@@ -50,6 +51,12 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
         rootViewController.present(alert, animated: true, completion: nil)
     }
     
+    func handleUnauthorizedDeviceError(error: TPError) {
+        DispatchQueue.main.async {
+            UnauthorizedDeviceViewController.show(errorMessage: error.error_detail)
+        }
+    }
+
     private func presentLoginViewController(from viewController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {

@@ -10,6 +10,7 @@ import Foundation
 
 public protocol AuthErrorHandlingDelegate {
     func handleUnauthenticatedError()
+    func handleUnauthorizedDeviceError(error: TPError)
     func handleMaxLoginLimitError()
     func handleMultipleLoginRestrictionError(error: TPError)
 }
