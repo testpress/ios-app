@@ -52,8 +52,12 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
     }
     
     func handleUnauthorizedDeviceError(error: TPError) {
+        var errorTitle = Strings.UNAUTHORIZED_DEVICE
+        if error.error_code == Constants.DEVICE_ALREADY_BOUND_ERROR_CODE {
+            errorTitle = Strings.DEVICE_ALREADY_BOUND
+        }
         DispatchQueue.main.async {
-            UnauthorizedDeviceViewController.show(errorMessage: error.error_detail)
+            UnauthorizedDeviceViewController.show(errorTitle: errorTitle , errorMessage: error.error_detail)
         }
     }
 

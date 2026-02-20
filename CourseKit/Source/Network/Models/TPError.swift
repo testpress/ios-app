@@ -100,7 +100,7 @@ public class TPError: Error {
     }
 
     public func isDeviceRestrictionError() -> Bool {
-        return error_code == Constants.UNAUTHORIZED_DEVICE_ERROR_CODE
+        return error_code == Constants.UNAUTHORIZED_DEVICE_ERROR_CODE || error_code == Constants.DEVICE_ALREADY_BOUND_ERROR_CODE
     }
     
     public func getErrorBodyAs<T: TestpressModel>(type: T.Type) -> T? {
