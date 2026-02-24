@@ -3098,6 +3098,64 @@
             </objects>
             <point key="canvasLocation" x="-2296" y="-271"/>
         </scene>
+        <!--Unauthorized Device View Controller-->
+        <scene sceneID="w3x-la-fT4">
+            <objects>
+                <viewController storyboardIdentifier="UnauthorizedDeviceViewController" id="caQ-BI-NQy" customClass="UnauthorizedDeviceViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aW2-KL-AzM" userLabel="Unauthorized device View">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="eLt-B9-A2e">
+                                <rect key="frame" x="20" y="296.33333333333331" width="350" height="251.33333333333331"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testpress_alert_warning" translatesAutoresizingMaskIntoConstraints="NO" id="66H-U8-yQr">
+                                        <rect key="frame" x="111" y="0.0" width="128" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="128" id="vSI-eR-KSq"/>
+                                            <constraint firstAttribute="height" constant="128" id="zEn-Az-AGR"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Not Allowed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymx-Kx-FLm">
+                                        <rect key="frame" x="64.000000000000014" y="144" width="222.33333333333337" height="28.666666666666657"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="24"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your device is not authorized to access this app." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7b-O1-7JA">
+                                        <rect key="frame" x="18.666666666666657" y="188.66666666666669" width="312.66666666666674" height="16.666666666666657"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uow-Dd-u0t">
+                                        <rect key="frame" x="71.666666666666686" y="221.33333333333331" width="207" height="30"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
+                                        <state key="normal" title="Login with different account"/>
+                                        <connections>
+                                            <action selector="onActionTapped:" destination="caQ-BI-NQy" eventType="touchUpInside" id="aMH-Ku-0cg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wVG-3r-O1O"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eLt-B9-A2e" firstAttribute="leading" secondItem="aW2-KL-AzM" secondAttribute="leading" constant="20" id="0SB-dX-BRG"/>
+                            <constraint firstAttribute="trailing" secondItem="eLt-B9-A2e" secondAttribute="trailing" constant="20" id="GS0-uV-YW2"/>
+                            <constraint firstItem="eLt-B9-A2e" firstAttribute="centerY" secondItem="aW2-KL-AzM" secondAttribute="centerY" id="RYR-XQ-cse"/>
+                            <constraint firstItem="eLt-B9-A2e" firstAttribute="centerX" secondItem="aW2-KL-AzM" secondAttribute="centerX" id="oZV-KE-PTY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="a7b-O1-7JA" id="gFA-yb-ZLh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dkm-ci-oue" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3455" y="-1097"/>
+        </scene>
     </scenes>
     <resources>
         <image name="access_key" width="24" height="24"/>
@@ -3126,6 +3184,7 @@
         <image name="schollership_flat_icon" width="60" height="54"/>
         <image name="share_rocket" width="48" height="48"/>
         <image name="success_tick" width="128" height="128"/>
+        <image name="testpress_alert_warning" width="128" height="128"/>
         <image name="tests_taken_flat_icon" width="64" height="64"/>
         <image name="time_icon" width="16" height="16"/>
         <image name="views_icon" width="16" height="11"/>
