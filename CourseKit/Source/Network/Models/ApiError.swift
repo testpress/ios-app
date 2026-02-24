@@ -11,6 +11,7 @@ import ObjectMapper
 
 public class ApiError {
     public var error_code: String?
+    public var title: String?
     public var detail: String?
     
     public required init?(map: Map) {
@@ -20,6 +21,7 @@ public class ApiError {
 extension ApiError: TestpressModel {
     public func mapping(map: Map) {
         error_code <- map["error_code"]
+        title <- map["title"]
         detail <- map["detail"]
     }
 }
@@ -40,6 +42,7 @@ public class TestpressAPIError: TestpressModel {
 public class ErrorDetail: TestpressModel {
     public var error_code: String?
     public var message: String?
+    public var title: String?
     
     public required init?(map: Map) {
     }
@@ -47,5 +50,6 @@ public class ErrorDetail: TestpressModel {
     public func mapping(map: Map) {
         error_code <- map["error_code"]
         message <- map["message"]
+        title <- map["title"]
     }
 }

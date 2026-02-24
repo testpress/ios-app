@@ -38,8 +38,6 @@ public struct Strings {
     public static let AUTHENTICATION_FAILED = "Authentication failed"
     public static let PLEASE_LOGIN = "Please login to see this"
     public static let LOADING_FAILED = "Loading Failed"
-    public static let UNAUTHORIZED_DEVICE = "Unauthorized Device"
-    public static let DEVICE_ALREADY_BOUND = "Device Already Bound"
     public static let LOGIN_WITH_DIFFERENT_ACCOUNT = "Login with different account"
     public static let SOMETHIGN_WENT_WRONG = "Some thing went wrong, please try again later."
     

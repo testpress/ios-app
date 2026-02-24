@@ -56,6 +56,7 @@ public class TPError: Error {
     
     public var error_detail: String?
     public var error_code: String?
+    public var error_title: String?
     
     /// Identifies the event kind which triggered this error
     public var kind: Kind
@@ -69,9 +70,9 @@ public class TPError: Error {
 
         if isCustomError() {
             let error = self.getErrorBodyAs(type: TestpressAPIError.self)?.detail
-            self.populateErrorData(code: error?.error_code, detail: error?.message)
-        } else if let error_detail = self.getErrorBodyAs(type: ApiError.self) {
-            self.populateErrorData(code: error_detail.error_code, detail: error_detail.detail)
+            self.populateErrorData(code: error?.error_code, title: error?.title, detail: error?.message)
+        } else if let apiError = self.getErrorBodyAs(type: ApiError.self) {
+            self.populateErrorData(code: apiError.error_code, title: apiError.title, detail: apiError.detail)
         }
         
     }
@@ -81,10 +82,11 @@ public class TPError: Error {
         return error != nil && error?.detail?.message != nil
     }
     
-    func populateErrorData(code: String?, detail: String?) {
+    func populateErrorData(code: String?, title: String?, detail: String?) {
         self.kind = Kind.custom
         self.error_detail = detail
         self.error_code = code
+        self.error_title = title
     }
     
     public func isNetworkError() -> Bool {
