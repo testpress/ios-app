@@ -53,7 +53,10 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
     
     func handleUnauthorizedDeviceError(error: TPError) {
         DispatchQueue.main.async {
-            UnauthorizedDeviceViewController.show(errorMessage: error.error_detail)
+            UnauthorizedDeviceViewController.show(
+                errorTitle: error.error_title,
+                errorMessage: error.error_detail
+            )
         }
     }
 

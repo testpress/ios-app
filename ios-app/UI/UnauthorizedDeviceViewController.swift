@@ -11,12 +11,14 @@ import CourseKit
 
 class UnauthorizedDeviceViewController: UIViewController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
     static var overlayWindow: UIWindow?
+    var errorTitle: String?
     var errorMessage: String?
     
-    static func show(errorMessage: String?) {
+    static func show(errorTitle:String?, errorMessage: String?) {
         guard overlayWindow == nil else { return }
 
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -27,6 +29,7 @@ class UnauthorizedDeviceViewController: UIViewController {
         let unauthorizedVC = storyboard.instantiateViewController(withIdentifier:
                                     Constants.UNAUTHORIZED_DEVICE_VIEW_CONTROLLER) as! UnauthorizedDeviceViewController
         unauthorizedVC.errorMessage = errorMessage
+        unauthorizedVC.errorTitle = errorTitle
 
         window.rootViewController = unauthorizedVC
         overlayWindow = window
@@ -35,6 +38,9 @@ class UnauthorizedDeviceViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let errorTitle = errorTitle {
+            titleLabel.text = errorTitle
+        }
         if let errorMessage = errorMessage {
             descriptionLabel.text = errorMessage
         }
