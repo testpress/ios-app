@@ -2582,7 +2582,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Testpress LMS";
+				INFOPLIST_KEY_CFBundleDisplayName = "CS and AI";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2594,8 +2594,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
-				PRODUCT_NAME = "ios-app";
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.csandai;
+				PRODUCT_NAME = "CS and AI";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -2616,7 +2616,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-app/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Testpress LMS";
+				INFOPLIST_KEY_CFBundleDisplayName = "CS and AI";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2628,8 +2628,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.demo;
-				PRODUCT_NAME = "ios-app";
+				PRODUCT_BUNDLE_IDENTIFIER = in.testpress.csandai;
+				PRODUCT_NAME = "CS and AI";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
