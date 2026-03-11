@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/testpress/iOSPlayerSDK",
       "state" : {
-        "revision" : "225a09390080448ce8b8c0f9a11ddd35b7266026",
-        "version" : "1.2.21"
+        "revision" : "034802f6f50181f71441ca48762c576716c66aab",
+        "version" : "1.2.24"
       }
     },
     {
@@ -188,15 +188,6 @@
       "state" : {
         "revision" : "f707b8680cddb96dc1855632340a572ef37bbb98",
         "version" : "2.5.3"
-      }
-    },
-    {
-      "identity" : "toast-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/scalessec/Toast-Swift.git",
-      "state" : {
-        "revision" : "ddccd20d6fb718448d9b179c454c561653fda7d5",
-        "version" : "5.1.1"
       }
     },
     {

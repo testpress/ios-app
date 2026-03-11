@@ -3150,6 +3150,7 @@
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="a7b-O1-7JA" id="gFA-yb-ZLh"/>
+                        <outlet property="titleLabel" destination="ymx-Kx-FLm" id="ftO-m0-6Vz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dkm-ci-oue" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
