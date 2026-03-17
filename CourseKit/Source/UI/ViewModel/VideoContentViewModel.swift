@@ -49,12 +49,13 @@ public class VideoContentViewModel {
                     debugPrint(error.kind)
                     return
                 }
-                self.startTimeString = contentAttempt?.video.lastPosition
-                self.contentAttemptId = contentAttempt!.objectID
-                let seconds = NSString(string: (contentAttempt?.video.lastPosition)!)
-                
-                if (seconds.doubleValue > Double(1.0)) {
-                    self.delegate?.didUpdatePlayerTime(to: Float(seconds.doubleValue))
+                self.startTimeString = contentAttempt?.video?.lastPosition
+                self.contentAttemptId = contentAttempt?.objectID
+                if let lastPosition = contentAttempt?.video?.lastPosition {
+                    let seconds = NSString(string: lastPosition)
+                    if seconds.doubleValue > 1.0 {
+                        self.delegate?.didUpdatePlayerTime(to: Float(seconds.doubleValue))
+                    }
                 }
         })
     }
@@ -69,7 +70,7 @@ public class VideoContentViewModel {
             let currentTime = String(format: "%.4f", currentTime!)
             let parameters: Parameters = [
                 "last_position": currentTime,
-                "time_ranges": [[startTimeString, currentTime]]
+                "time_ranges": [[startTimeString ?? "0", currentTime]]
             ]
             let url = TPEndpointProvider.getVideoAttemptPath(attemptID: contentAttemptId!)
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.put, url: url), parameters: parameters,completion: {
