@@ -51,11 +51,10 @@ public class VideoContentViewModel {
                 }
                 self.startTimeString = contentAttempt?.video?.lastPosition
                 self.contentAttemptId = contentAttempt?.objectID
-                if let lastPosition = contentAttempt?.video?.lastPosition {
-                    let seconds = NSString(string: lastPosition)
-                    if seconds.doubleValue > 1.0 {
-                        self.delegate?.didUpdatePlayerTime(to: Float(seconds.doubleValue))
-                    }
+                if let lastPosition = contentAttempt?.video?.lastPosition,
+                   let seconds = Double(lastPosition),
+                   seconds > 1.0 {
+                    self.delegate?.didUpdatePlayerTime(to: Float(seconds))
                 }
         })
     }
