@@ -32,11 +32,11 @@ public class ContentAttempt {
     public var trophies: Any!
     public var objectUrl: String!
     public var assessment: Attempt!
-    public var video: VideoAttempt!
+    public var video: VideoAttempt?
     public var content: HtmlContent!
     public var attachment: Attachment!
     public var chapterContentId: Int!
-    public var objectID: Int!
+    public var objectID: Int?
     
     public required init?(map: Map) {
     }

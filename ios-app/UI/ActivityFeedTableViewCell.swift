@@ -69,9 +69,9 @@ class ActivityFeedTableViewCell: UITableViewCell {
                         action = "read the article "
                         actionObjectName = contentAttempt.content.title
                         thumbnailImage.image = Images.PostAdded.image
-                    } else if contentAttempt.video != nil {
+                    } else if let videoAttempt = contentAttempt.video, let videoContent = videoAttempt.videoContent {
                         action = "watched the video "
-                        actionObjectName = contentAttempt.video.videoContent.title
+                        actionObjectName = videoContent.title
                         thumbnailImage.image = Images.VideoAddedIcon.image
                     } else if contentAttempt.attachment != nil {
                         action = "viewed the file "
@@ -106,9 +106,8 @@ class ActivityFeedTableViewCell: UITableViewCell {
                     actionObjectName = htmlContent.title
                     thumbnailImage.image = Images.PostAdded.image
                     content.htmlContentUrl = content.url + "html/"
-                } else if content.videoId != -1 {
+                } else if content.videoId != -1, let video = pager.videos[content.videoId] {
                     action += "a video "
-                    let video = pager.videos[content.videoId]!
                     content.video = video
                     actionObjectName = video.title
                     thumbnailImage.image = Images.VideoAddedIcon.image

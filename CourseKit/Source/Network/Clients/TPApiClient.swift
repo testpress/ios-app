@@ -189,7 +189,12 @@ public class TPApiClient {
                     return
                 }
             }
-            completion(dataModel, error)
+            
+            if dataModel == nil && error == nil {
+                completion(nil, TPError(message: "Response was empty", kind: .unexpected))
+            } else {
+                completion(dataModel, error)
+            }
         })
     }
     

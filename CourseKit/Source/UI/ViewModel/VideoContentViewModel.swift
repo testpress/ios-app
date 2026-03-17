@@ -49,13 +49,13 @@ public class VideoContentViewModel {
                     debugPrint(error.kind)
                     return
                 }
-                self.startTimeString = contentAttempt?.video.lastPosition
-                self.contentAttemptId = contentAttempt!.objectID
-                let seconds = NSString(string: (contentAttempt?.video.lastPosition)!)
-                
-                if (seconds.doubleValue > Double(1.0)) {
-                    self.delegate?.didUpdatePlayerTime(to: Float(seconds.doubleValue))
+                if let video = contentAttempt?.video {
+                    self.startTimeString = video.lastPosition
+                    if let lastPosition = video.lastPosition, let seconds = Double(lastPosition), seconds > 1.0 {
+                        self.delegate?.didUpdatePlayerTime(to: Float(seconds))
+                    }
                 }
+                self.contentAttemptId = contentAttempt?.objectID
         })
     }
     
@@ -69,7 +69,7 @@ public class VideoContentViewModel {
             let currentTime = String(format: "%.4f", currentTime!)
             let parameters: Parameters = [
                 "last_position": currentTime,
-                "time_ranges": [[startTimeString, currentTime]]
+                "time_ranges": [[startTimeString ?? "0", currentTime]]
             ]
             let url = TPEndpointProvider.getVideoAttemptPath(attemptID: contentAttemptId!)
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.put, url: url), parameters: parameters,completion: {
@@ -97,6 +97,7 @@ public class VideoContentViewModel {
                     TTGSnackbar(message: description, duration: .middle).show()
                     return
                 }
+                
                 TTGSnackbar(
                     message: Strings.BOOKMARK_DELETED_SUCCESSFULLY,
                     duration: .middle
