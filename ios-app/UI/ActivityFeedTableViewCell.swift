@@ -61,26 +61,26 @@ class ActivityFeedTableViewCell: UITableViewCell {
                     content.url = TestpressCourse.shared.baseURL + "/api/v2.2/contents/\(content.id)/"
                     content.attemptsUrl = content.url + "attempts/"
                     self.content = content
-                    if contentAttempt.assessment != nil {
-                        action = "attempted exam "
-                        actionObjectName = exams[contentAttempt.assessment.exam]!.title
-                        thumbnailImage.image = Images.ExamAttemptedIcon.image
-                    } else if contentAttempt.content != nil {
-                        action = "read the article "
-                        actionObjectName = contentAttempt.content.title
-                        thumbnailImage.image = Images.PostAdded.image
-                    } else if let videoAttempt = contentAttempt.video, let videoContent = videoAttempt.videoContent {
-                        action = "watched the video "
-                        actionObjectName = videoContent.title
-                        thumbnailImage.image = Images.VideoAddedIcon.image
-                    } else if contentAttempt.attachment != nil {
-                        action = "viewed the file "
-                        actionObjectName = contentAttempt.attachment.title
-                        thumbnailImage.image = Images.FileDownloadIcon.image
-                    }
+            if contentAttempt.assessment != nil, let examId = contentAttempt.assessment?.exam, let exam = exams[examId] {
+                action = "attempted exam "
+                actionObjectName = exam.title
+                thumbnailImage.image = Images.ExamAttemptedIcon.image
+            } else if let htmlContent = contentAttempt.content {
+                action = "read the article "
+                actionObjectName = htmlContent.title
+                thumbnailImage.image = Images.PostAdded.image
+            } else if let videoAttempt = contentAttempt.video, let videoContent = videoAttempt.videoContent {
+                action = "watched the video "
+                actionObjectName = videoContent.title
+                thumbnailImage.image = Images.VideoAddedIcon.image
+            } else if let attachment = contentAttempt.attachment {
+                action = "viewed the file "
+                actionObjectName = attachment.title
+                thumbnailImage.image = Images.FileDownloadIcon.image
+            }
                 }
-                let chapter = activityFeed.target as! Chapter
-                targetName = chapter.name
+                let chapter = activityFeed.target as? Chapter
+                targetName = chapter?.name ?? ""
             }
         } else {
             if let content = activityFeed.actionObject as? Content {
@@ -119,8 +119,8 @@ class ActivityFeedTableViewCell: UITableViewCell {
                     thumbnailImage.image = Images.FileDownloadIcon.image
                 }
                 self.content = content
-                let chapter = activityFeed.target as! Chapter
-                targetName = chapter.name
+                let chapter = activityFeed.target as? Chapter
+                targetName = chapter?.name ?? ""
             } else if let post = activityFeed.actionObject as? Post {
                 content = nil
                 action = " added an article "
