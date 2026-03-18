@@ -1450,6 +1450,7 @@
                         <outlet property="deleteAccountButton" destination="c2W-NX-cSR" id="WC0-qr-bX3"/>
                         <outlet property="imageView" destination="g63-qh-6PY" id="gtD-2N-Zut"/>
                         <outlet property="logoutButton" destination="JP9-qk-duN" id="XuD-I4-pkA"/>
+                        <outlet property="navigationBarItem" destination="tE3-EF-0ef" id="p8q-Jm-SHf"/>
                         <outlet property="score" destination="vOW-e0-vcm" id="hQQ-zO-s8k"/>
                         <outlet property="scrollView" destination="1Kk-gz-6pT" id="m6Q-xw-ona"/>
                         <outlet property="shareButtonView" destination="Bo3-CJ-FOp" id="NlG-9f-BCK"/>

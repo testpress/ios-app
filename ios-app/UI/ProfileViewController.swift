@@ -48,6 +48,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var accuracy: UILabel!
     @IBOutlet weak var bookmarkButtonLayout: UIStackView!
     
+    @IBOutlet weak var navigationBarItem: UINavigationItem!
     @IBOutlet weak var shareButtonView: UIView!
     var activityIndicator: UIActivityIndicatorView? // Progress bar
     var emptyView: EmptyView!
@@ -62,7 +63,9 @@ class ProfileViewController: UIViewController {
         UIUtils.setButtonDropShadow(logoutButton)
         UIUtils.setButtonDropShadow(deleteAccountButton)
         bookmarkButtonLayout.isHidden = !(instituteSettings?.bookmarksEnabled ?? false)
-        
+        if instituteSettings?.allowProfileEdit == false {
+            navigationBarItem.rightBarButtonItem = nil
+        }
         deleteAccountButton.isHidden = true
         showDeleteAccountButtonIfSignupAllowed()
         
