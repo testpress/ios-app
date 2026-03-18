@@ -1,0 +1,21 @@
+# Environment files (may contain secrets)
+.env
+.env.local
+
+# Downloaded credentials
+GoogleService-Info.plist
+AuthKey_*.p8
+
+# Generated assets
+Icon-1024.png
+LaunchImage.png
+
+# Build artifacts
+DerivedData_*
+report.xml
+
+# macOS
+.DS_Store
+
+# Generated config
+../config.json
