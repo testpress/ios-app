@@ -73,6 +73,7 @@ public class InstituteSettings: DBModel {
     @objc public dynamic var salesforceFcmSenderId: String? = nil
     @objc public dynamic var salesforceMarketingCloudUrl: String? = nil
     @objc public dynamic var salesforceMid: String? = nil
+    @objc public dynamic var allowProfileEdit: Bool = true
 
     public var allowedLoginMethods = List<Int>()
     
@@ -132,6 +133,7 @@ public class InstituteSettings: DBModel {
         salesforceFcmSenderId <- map["salesforce_fcm_sender_id"]
         salesforceMarketingCloudUrl <- map["salesforce_marketing_cloud_url"]
         salesforceMid <- map["salesforce_mid"]
+        allowProfileEdit <- map["allow_profile_edit"]
         var tempAllowed: [Int] = []
         tempAllowed <- map["allowed_login_methods"]
 
