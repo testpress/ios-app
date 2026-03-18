@@ -1,0 +1,227 @@
+# ios-app/fastlane/Fastfile
+# --------------------------------------------------------------
+#  ONE-LANE DEPLOYMENT for iOS – Action-Only Architecture
+# --------------------------------------------------------------
+
+require 'json'
+
+default_platform(:ios)
+FASTFILE_DIR = File.expand_path(File.dirname(__FILE__))
+ROOT_DIR     = File.expand_path("..", FASTFILE_DIR)
+
+begin
+  require 'dotenv'
+  Dotenv.load(File.join(ROOT_DIR, ".env"), File.join(FASTFILE_DIR, ".env"))
+rescue LoadError
+  # Optional: ENV can still be provided by the calling shell.
+end
+
+# Global paths
+ASSETS_DIR          = File.join(ROOT_DIR, "ios-app", "Assets.xcassets")
+PROJECT_PATH        = File.join(ROOT_DIR, "ios-app.xcodeproj")
+INFO_PLIST_PATH     = File.join(ROOT_DIR, "ios-app", "Info.plist")
+APP_CONSTANTS_PATH  = File.join(ROOT_DIR, "ios-app", "Utils", "AppConstants.swift")
+ICON_SOURCE         = File.join(FASTFILE_DIR, "Icon-1024.png")
+LAUNCH_SOURCE       = File.join(FASTFILE_DIR, "LaunchImage.png")
+
+# -----------------------------------------------------------------
+#  TRANSFORMATION LANES
+# -----------------------------------------------------------------
+lane :apply_rebranding do |options|
+  config = options[:config]
+  zoom_enabled = config.dig("features", "zoom_enabled") == true
+
+  # 1. Swift Constants
+  testpress_patch(
+    action: "constants",
+    file: APP_CONSTANTS_PATH,
+    constants: {
+      "SUBDOMAIN"    => config["subdomain"],
+      "APP_APPLE_ID" => config["apple_id"],
+      "PRIMARY_COLOR" => config["primary_color"]
+    }
+  )
+
+  # 2. Google Plist
+  sh("cp '#{File.expand_path(config['google_plist_path'], ROOT_DIR)}' '#{File.join(ROOT_DIR, 'ios-app', 'GoogleService-Info.plist')}'")
+
+  # 3. Zoom Features
+  testpress_patch(action: "flags", project: PROJECT_PATH, target: "CourseKit", flag: "ZOOM_ENABLED", enabled: zoom_enabled)
+  unless zoom_enabled
+    testpress_patch(action: "remove_module", project: PROJECT_PATH, target: "ios-app", frameworks: ["MobileRTC.xcframework"], resources: ["MobileRTCResources.bundle"])
+    testpress_patch(action: "remove_module", project: PROJECT_PATH, target: "CourseKit", frameworks: ["MobileRTC.xcframework"], resources: ["MobileRTCResources.bundle"])
+  end
+
+  # 4. Identity & Versioning
+  testpress_patch(
+    action: "identity",
+    project: PROJECT_PATH,
+    bundle_id: config["bundle_identifier"],
+    display_name: config["display_name"],
+    version: config["version"],
+    version_code: config["version_code"].to_s,
+    info_plist: INFO_PLIST_PATH
+  )
+end
+
+# -----------------------------------------------------------------
+#  PUBLIC LANES
+# -----------------------------------------------------------------
+lane :release_update_to do |params|
+  skip_backend = params[:skip_backend] || false
+  (params[:subdomain] == "all" ? testpress_api(action: "fetch_subdomains") : [params[:subdomain]]).each do |sub|
+    next if %w[verandalearning brilliantpalalms brilliantpalaclasses race].include?(sub)
+    release_update(subdomain: sub, skip_backend: skip_backend) rescue UI.error("Failed for #{sub}")
+  end
+end
+
+lane :release_update do |params|
+  skip_backend = params[:skip_backend] || false
+
+  # Trigger backend update and get fresh config (includes new version), unless skipped
+  if skip_backend
+    config = testpress_api(
+      action: "get_config",
+      subdomain: params[:subdomain]
+    )
+  else
+    config = testpress_api(
+      action: "update_version",
+      subdomain: params[:subdomain],
+      version: params[:version],
+      version_code: params[:version_code]
+    )
+  end
+  config = prepare_project_config(config: config, fastlane_dir: FASTFILE_DIR)
+  
+  # 1. Assets
+  testpress_assets(action: "icons", assets_dir: ASSETS_DIR, source: ICON_SOURCE)
+  testpress_assets(action: "launch_images", assets_dir: ASSETS_DIR, source: LAUNCH_SOURCE, background_color: config["image_background"])
+  
+  # 2. Branding & Archive
+  apply_rebranding(config: config)
+  archive_preview(config: config)
+end
+
+lane :prepare_local do |params|
+  UI.message("🛠 Preparing local environment for #{params[:subdomain]}...")
+  
+  # Fetch config without updating version
+  config = testpress_api(action: "get_config", subdomain: params[:subdomain])
+  config = prepare_project_config(config: config, fastlane_dir: FASTFILE_DIR)
+
+  # 1. Assets
+  testpress_assets(action: "icons", assets_dir: ASSETS_DIR, source: ICON_SOURCE)
+  testpress_assets(action: "launch_images", assets_dir: ASSETS_DIR, source: LAUNCH_SOURCE, background_color: config["image_background"])
+  
+  # 2. Branding
+  apply_rebranding(config: config)
+  
+  UI.success("✅ Local environment prepared. You can now run the app from Xcode.")
+end
+
+# -----------------------------------------------------------------
+#  ARCHIVE LANE
+# -----------------------------------------------------------------
+lane :archive_preview do |params|
+  config = params[:config]
+  scheme = config["scheme"] || "ios-app"
+  archive_path = File.join(File.expand_path("~/Library/Developer/Xcode/Archives/#{Time.now.strftime('%Y-%m-%d')}"), "#{scheme} #{Time.now.strftime('%d-%m-%y, %-I.%M %p')}.xcarchive")
+
+  api_key = app_store_connect_api_key(
+    key_id: config["api_key_id"],
+    issuer_id: config["api_key_issuer"],
+    key_filepath: File.expand_path(config["api_key_path"], ROOT_DIR)
+  )
+
+  # Clean all DerivedData folders and caches
+  FileUtils.rm_rf("./DerivedData")
+  FileUtils.rm_rf("./ModuleCache")
+  FileUtils.rm_rf("./SourcePackages")
+  Dir.glob("./DerivedData_*").each { |f| FileUtils.rm_rf(f) }
+  Dir.glob("./fastlane/DerivedData_*").each { |f| FileUtils.rm_rf(f) }
+
+  derived_data_path = "./DerivedData_#{scheme.gsub(' ', '_')}"
+  FileUtils.rm_rf(derived_data_path)
+  
+  sh("xcodebuild -resolvePackageDependencies -scheme '#{scheme}' -project '#{PROJECT_PATH}' -configuration Release -derivedDataPath #{derived_data_path}")
+  
+  build_app(
+    project: PROJECT_PATH,
+    scheme: scheme,
+    configuration: "Release",
+    export_method: "app-store",
+    clean: true,
+    derived_data_path: derived_data_path,
+    archive_path: archive_path,
+    xcargs: "-allowProvisioningUpdates -scmProvider system -GCC_CACHECODE=NO"
+  )
+  UI.success("📦 Archive created: #{archive_path}")
+
+  ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+  UI.user_error!("IPA not found after build. Cannot upload to TestFlight.") unless ipa_path && File.exist?(ipa_path)
+
+  upload_to_testflight(
+    api_key: api_key,
+    ipa: ipa_path,
+    skip_waiting_for_build_processing: false,
+    distribute_external: false,
+    notify_external_testers: false
+  )
+  UI.success("🚀 Uploaded to TestFlight: #{ipa_path}")
+
+  FileUtils.rm_rf(derived_data_path)
+  UI.message("🧹 Cleaned up DerivedData")
+end
+
+# -----------------------------------------------------------------
+#  UPLOAD STATUS LANE
+# -----------------------------------------------------------------
+lane :check_last_upload do |params|
+  subdomain = params[:subdomain]
+  config = subdomain ? testpress_api(action: "get_config", subdomain: subdomain) : {}
+
+  key_id = ENV["APPLE_API_KEY_ID"] || config["apple_key_id"]
+  issuer_id = ENV["APPLE_API_KEY_ISSUER"] || config["apple_issuer_id"]
+  key_path = ENV["APPLE_API_KEY_PATH"] || config["api_key_path"]
+  key_content = ENV["APPLE_API_KEY_CONTENT"]
+  bundle_id = params[:bundle_id] || config["bundle_id"] || config["package_name"]
+
+  UI.user_error!("Missing bundle_id. Pass bundle_id:... or subdomain:...") if bundle_id.to_s.strip.empty?
+  UI.user_error!("Missing APPLE_API_KEY_ID/apple_key_id") if key_id.to_s.strip.empty?
+  UI.user_error!("Missing APPLE_API_KEY_ISSUER/apple_issuer_id") if issuer_id.to_s.strip.empty?
+
+  if key_content.to_s.strip.empty? && key_path.to_s.strip.empty?
+    UI.user_error!("Missing Apple API key material. Set APPLE_API_KEY_CONTENT or APPLE_API_KEY_PATH.")
+  end
+
+  api_key_options = {
+    key_id: key_id,
+    issuer_id: issuer_id
+  }
+  api_key_options[:key_content] = key_content unless key_content.to_s.strip.empty?
+  api_key_options[:key_filepath] = File.expand_path(key_path, ROOT_DIR) unless key_path.to_s.strip.empty?
+  app_store_connect_api_key(api_key_options)
+
+  app = Spaceship::ConnectAPI::App.find(bundle_id)
+  UI.user_error!("App not found in App Store Connect for bundle_id: #{bundle_id}") unless app
+
+  latest_build = app.get_builds(sort: "-uploadedDate", limit: 1).first
+  UI.user_error!("No builds found for #{bundle_id}") unless latest_build
+
+  processing_state = latest_build.processing_state.to_s
+  version = latest_build.version
+  build_number = latest_build.build_number
+
+  UI.message("Latest build: #{version} (#{build_number})")
+  UI.message("Processing state: #{processing_state}")
+
+  case processing_state
+  when "PROCESSED"
+    UI.success("✅ Last upload succeeded and is processed by App Store Connect.")
+  when "FAILED", "INVALID"
+    UI.user_error!("❌ Last upload failed in App Store Connect.")
+  else
+    UI.important("⏳ Last upload is not finished yet (state: #{processing_state}).")
+  end
+end
