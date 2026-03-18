@@ -53,6 +53,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return ApplicationDelegate.shared.application(application, open: url, options: options)
     }
     
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+           let url = userActivity.webpageURL {
+            DeepLinkRouter.shared.route(url: url)
+            return true
+        }
+        return false
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -236,74 +246,7 @@ extension AppDelegate {
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        let userInfo = response.notification.request.content.userInfo
-        
-        if let url: String = userInfo["gcm.notification.short_url"] as? String  {
-            let urlPath = URL(fileURLWithPath: url)
-            let contentType = urlPath.pathComponents[1]
-            if let topController = UIApplication.topViewController() {
-                if (KeychainTokenItem.isExist()) {
-                    switch(contentType) {
-                    case "p":
-                        let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
-                        let viewController = storyboard.instantiateViewController(withIdentifier:
-                            Constants.POST_DETAIL_VIEW_CONTROLLER) as! PostDetailViewController
-                        
-                        let url = TestpressCourse.shared.baseURL + "/api/v2.2/posts/\(urlPath.pathComponents[2])/?short_link=true"
-                        viewController.url = url
-                        
-                        topController.present(viewController, animated: true, completion: nil)
-                        break;
-                    case "chapters":
-                        emptyView = EmptyView.getInstance(parentView: topController.view)
-                        emptyView.backgroundColor = .white
-                        activityIndicator = UIUtils.initActivityIndicator(parentView: topController.view)
-                        activityIndicator?.center = CGPoint(x: topController.view.center.x, y: topController.view.center.y - 50)
-                        activityIndicator.startAnimating()
-                        
-                        let url = TestpressCourse.shared.baseURL + "/api/v2.2/contents/\(urlPath.pathComponents[3])/"
-                        Content.fetchContent(url: url, completion: { content, error in
-                            if let error = error {
-                                debugPrint(error.message ?? "No error")
-                                debugPrint(error.kind)
-                                var retryButtonText: String?
-                                var retryHandler: (() -> Void)?
-                                if error.kind == .network {
-                                    retryButtonText = Strings.TRY_AGAIN
-                                    retryHandler = {
-                                        self.emptyView.hide()
-                                    }
-                                }
-                                self.activityIndicator.stopAnimating()
-                                let (image, title, description) = error.getDisplayInfo()
-                                
-                                self.emptyView.show(image: image, title: title, description: description,
-                                                    retryButtonText: retryButtonText, retryHandler: retryHandler)
-                            } else {
-                                self.activityIndicator.stopAnimating()
-                                let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
-                                let viewController = storyboard.instantiateViewController(withIdentifier:
-                                    Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) as! ContentDetailPageViewController
-                                
-                                viewController.position = 0
-                                viewController.contents = [content] as! [Content]
-                                
-                                topController.present(viewController, animated: true, completion: nil)
-                            }
-                        })
-                        break;
-                    default:
-                        break;
-                    }
-                } else {
-                    let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
-                    let viewController = storyboard.instantiateViewController(withIdentifier:
-                        Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
-                    topController.present(viewController, animated: true, completion: nil)
-                    
-                }
-            }
-        }
+        DeepLinkRouter.shared.routeFromNotification(userInfo: response.notification.request.content.userInfo)
         completionHandler()
     }
     
