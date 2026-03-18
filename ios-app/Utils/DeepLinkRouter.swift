@@ -19,7 +19,7 @@ public class DeepLinkRouter {
         isAppReady = true
         if let url = pendingURL {
             pendingURL = nil
-            navigateToURL(url)
+            routeIfAuthenticated(url)
         }
     }
 
@@ -28,37 +28,37 @@ public class DeepLinkRouter {
             pendingURL = url
             return
         }
-        navigateToURL(url)
+        routeIfAuthenticated(url)
     }
 
     public func routeFromNotification(userInfo: [AnyHashable: Any]) {
         guard let urlString = userInfo["short_url"] as? String,
-              let url = resolvedURL(from: urlString)
+              let url = buildURL(from: urlString)
         else { return }
 
         guard isAppReady else {
             pendingURL = url
             return
         }
-        navigateToURL(url)
+        routeIfAuthenticated(url)
     }
 
-    private func navigateToURL(_ url: URL) {
+    private func routeIfAuthenticated(_ url: URL) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             let presenter = UIApplication.topViewController() ?? UIApplication.shared.keyWindow?.rootViewController
             guard let presenter else { return }
 
             if KeychainTokenItem.isExist() {
-                self.decideAndNavigate(for: url, from: presenter)
+                self.handleRoute(url, from: presenter)
             } else {
                 self.navigateToLogin(from: presenter)
             }
         }
     }
 
-    private func decideAndNavigate(for url: URL, from presenter: UIViewController) {
-        switch resolvedRoute(from: url) {
+    private func handleRoute(_ url: URL, from presenter: UIViewController) {
+        switch parseDeepLinkRoute(from: url) {
         case .post(let id):
             navigateToPost(postID: id, from: presenter)
         case .content(let id):
@@ -68,7 +68,7 @@ public class DeepLinkRouter {
         }
     }
 
-    private func resolvedRoute(from url: URL) -> DeepLinkRoute {
+    private func parseDeepLinkRoute(from url: URL) -> DeepLinkRoute {
         let parts = url.pathComponents
         if let id = extractID(after: "p", in: parts) { return .post(id: id) }
 
@@ -139,7 +139,7 @@ public class DeepLinkRouter {
         return candidate.isEmpty || candidate == keyword ? nil : candidate
     }
 
-    private func resolvedURL(from urlString: String) -> URL? {
+    private func buildURL(from urlString: String) -> URL? {
         if urlString.hasPrefix("http") || urlString.hasPrefix("https") { return URL(string: urlString) }
         if urlString.contains("://") { return URL(string: urlString) }
         guard let baseURLString = TestpressCourse.shared.baseURL,

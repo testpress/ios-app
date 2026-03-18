@@ -69,7 +69,7 @@ class AuthErrorHandler: AuthErrorHandlingDelegate {
             let loginActivityViewController = storyboard.instantiateViewController(withIdentifier:
                                         Constants.LOGIN_ACTIVITY_VIEW_CONTROLLER) as! LoginActivityViewController
             
-            topController.present(loginActivityViewController, animated: true)
+            topController.present(loginActivityViewController, animated: true, completion: nil)
         }
     }
     
