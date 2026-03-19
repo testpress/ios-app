@@ -245,6 +245,75 @@ extension AppDelegate {
     //Called when a notification is interacted with for a background app.
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+         let userInfo = response.notification.request.content.userInfo
+         
+         if let url: String = userInfo["gcm.notification.short_url"] as? String  {
+             let urlPath = URL(fileURLWithPath: url)
+             let contentType = urlPath.pathComponents[1]
+             if let topController = UIApplication.topViewController() {
+                 if (KeychainTokenItem.isExist()) {
+                     switch(contentType) {
+                     case "p":
+                         let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
+                         let viewController = storyboard.instantiateViewController(withIdentifier:
+                             Constants.POST_DETAIL_VIEW_CONTROLLER) as! PostDetailViewController
+                         
+                         let url = TestpressCourse.shared.baseURL + "/api/v2.2/posts/\(urlPath.pathComponents[2])/?short_link=true"
+                         viewController.url = url
+                         
+                         topController.present(viewController, animated: true, completion: nil)
+                         break;
+                     case "chapters":
+                         emptyView = EmptyView.getInstance(parentView: topController.view)
+                         emptyView.backgroundColor = .white
+                         activityIndicator = UIUtils.initActivityIndicator(parentView: topController.view)
+                         activityIndicator?.center = CGPoint(x: topController.view.center.x, y: topController.view.center.y - 50)
+                         activityIndicator.startAnimating()
+                         
+                         let url = TestpressCourse.shared.baseURL + "/api/v2.2/contents/\(urlPath.pathComponents[3])/"
+                         Content.fetchContent(url: url, completion: { content, error in
+                             if let error = error {
+                                 debugPrint(error.message ?? "No error")
+                                 debugPrint(error.kind)
+                                 var retryButtonText: String?
+                                 var retryHandler: (() -> Void)?
+                                 if error.kind == .network {
+                                     retryButtonText = Strings.TRY_AGAIN
+                                     retryHandler = {
+                                         self.emptyView.hide()
+                                     }
+                                 }
+                                 self.activityIndicator.stopAnimating()
+                                 let (image, title, description) = error.getDisplayInfo()
+                                 
+                                 self.emptyView.show(image: image, title: title, description: description,
+                                                     retryButtonText: retryButtonText, retryHandler: retryHandler)
+                             } else {
+                                 self.activityIndicator.stopAnimating()
+                                 let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
+                                 let viewController = storyboard.instantiateViewController(withIdentifier:
+                                     Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) as! ContentDetailPageViewController
+                                 
+                                 viewController.position = 0
+                                 viewController.contents = [content] as! [Content]
+                                 
+                                 topController.present(viewController, animated: true, completion: nil)
+                             }
+                         })
+                         break;
+                     default:
+                         break;
+                     }
+                 } else {
+                     let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+                     let viewController = storyboard.instantiateViewController(withIdentifier:
+                         Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
+                     topController.present(viewController, animated: true, completion: nil)
+                     
+                 }
+             }
+         } 
         completionHandler()
     }
     
