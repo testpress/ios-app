@@ -31,11 +31,22 @@ public class DeepLinkRouter {
 
     private func routeIfAuthenticated(_ url: URL) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            guard let presenter = self.currentRootViewController else { return }
-            self.dismissAllPresented(from: presenter) {
-                NavigationService.shared.navigateIfAuthenticated(url: url, from: presenter)
+            guard let self,
+                  let rootVC = self.currentRootViewController else { return }
+            self.dismissAllPresented(from: rootVC) {
+                self.resetNavigationStacks(from: rootVC)
+                NavigationService.shared.navigateIfAuthenticated(url: url, from: rootVC)
             }
+        }
+    }
+
+    private func resetNavigationStacks(from rootVC: UIViewController) {
+        if let tabBar = rootVC as? UITabBarController {
+            tabBar.viewControllers?
+                .compactMap { $0 as? UINavigationController }
+                .forEach { $0.popToRootViewController(animated: false) }
+        } else if let nav = rootVC as? UINavigationController {
+            nav.popToRootViewController(animated: false)
         }
     }
 
