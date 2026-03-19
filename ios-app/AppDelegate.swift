@@ -245,8 +245,6 @@ extension AppDelegate {
     //Called when a notification is interacted with for a background app.
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        DeepLinkRouter.shared.routeFromNotification(userInfo: response.notification.request.content.userInfo)
         completionHandler()
     }
     
