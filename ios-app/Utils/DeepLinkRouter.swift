@@ -1,42 +1,51 @@
 import UIKit
 
+// Single pendingURL slot: deep links are rare; the latest one overwrites any stale one.
+// Intentional tradeoff: simplicity over queueing multiple links.
 public class DeepLinkRouter {
 
     public static let shared = DeepLinkRouter()
     private init() {}
 
     private var pendingURL: URL?
-    private var isAppReady = false
 
     public func route(url: URL) {
-        guard isAppReady else {
-            pendingURL = url
-            return
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if self.appDelegate.isAppReady {
+                self.dispatch(url: url)
+            } else {
+                self.pendingURL = url
+            }
         }
-        routeIfAuthenticated(url)
     }
 
-    public func appDidBecomeReady() {
-        isAppReady = true
+    private var appDelegate: AppDelegate {
+        UIApplication.shared.delegate as! AppDelegate
+    }
+
+    public func markAppReady() {
+        guard !appDelegate.isAppReady else { return }
+        appDelegate.isAppReady = true
         processPending()
     }
 
-    private func processPending() {
-        guard isAppReady else { return }
-        guard let url = pendingURL else { return }
-        guard currentRootViewController != nil else { return }
-        pendingURL = nil
-        routeIfAuthenticated(url)
+    public func processPending() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            guard self.appDelegate.isAppReady else { return }
+            guard let url = self.pendingURL else { return }
+            guard self.currentRootViewController != nil else { return }
+            self.pendingURL = nil
+            self.dispatch(url: url)
+        }
     }
 
-    private func routeIfAuthenticated(_ url: URL) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self,
-                  let rootVC = self.currentRootViewController else { return }
-            self.dismissAllPresented(from: rootVC) {
-                self.resetNavigationStacks(from: rootVC)
-                NavigationService.shared.navigateIfAuthenticated(url: url, from: rootVC)
-            }
+    private func dispatch(url: URL) {
+        guard let rootVC = currentRootViewController else { return }
+        dismissAllPresented(from: rootVC) { [weak self] in
+            self?.resetNavigationStacks(from: rootVC)
+            NavigationService.shared.open(url: url, from: rootVC)
         }
     }
 

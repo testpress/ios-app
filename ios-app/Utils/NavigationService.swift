@@ -13,7 +13,7 @@ public class NavigationService {
     public static let shared = NavigationService()
     private init() {}
 
-    public func buildURL(from urlString: String) -> URL? {
+    internal func buildURL(from urlString: String) -> URL? {
         if let url = URL(string: urlString),
            let scheme = url.scheme?.lowercased(),
            ["http", "https"].contains(scheme) {
@@ -35,7 +35,7 @@ public class NavigationService {
         return .unknown
     }
 
-    public func navigateIfAuthenticated(url: URL, from presenter: UIViewController) {
+    public func open(url: URL, from presenter: UIViewController) {
         let route = parseURL(url)
         if case .unknown = route { return }
         if KeychainTokenItem.isExist() {
@@ -48,11 +48,11 @@ public class NavigationService {
     public func navigate(to route: NavigationRoute, from presenter: UIViewController) {
         switch route {
         case .post(let id):
-            presentPostDetail(postID: id, from: presenter)
+            showPost(id: id, from: presenter)
         case .content(let id):
-            presentContentDetail(contentID: id, from: presenter)
+            showContent(id: id, from: presenter)
         case .login:
-            presentLogin(from: presenter)
+            showLogin(from: presenter)
         case .unknown:
             break
         }
@@ -62,7 +62,8 @@ public class NavigationService {
         guard let index = parts.firstIndex(of: keyword),
               index + 1 < parts.count else { return nil }
         let candidate = parts[index + 1]
-        return candidate.isEmpty || candidate == keyword ? nil : candidate
+        // Skip empty component (e.g., /chapters/)
+        return candidate.isEmpty ? nil : candidate
     }
 
     private func extractContentID(from parts: [String]) -> String? {
@@ -70,22 +71,22 @@ public class NavigationService {
             ?? extractID(after: "contents", from: parts)
     }
 
-    private func presentPostDetail(postID: String, from presenter: UIViewController) {
+    private func showPost(id: String, from presenter: UIViewController) {
         guard let baseURL = TestpressCourse.shared.baseURL,
               let vc = instantiateViewController(Constants.POST_STORYBOARD,
                                                Constants.POST_DETAIL_VIEW_CONTROLLER) as? PostDetailViewController
         else { return }
 
-        vc.url = "\(baseURL)/api/v2.2/posts/\(postID)/?short_link=true"
+        vc.url = "\(baseURL)/api/v2.2/posts/\(id)/?short_link=true"
         presenter.present(vc, animated: true)
     }
 
-    private func presentContentDetail(contentID: String, from presenter: UIViewController) {
+    private func showContent(id: String, from presenter: UIViewController) {
         guard let baseURL = TestpressCourse.shared.baseURL else { return }
         let loadingView = LoadingView(parentView: presenter.view)
         loadingView.show()
 
-        Content.fetchContent(url: "\(baseURL)/api/v2.4/contents/\(contentID)/") { [weak self, weak presenter] content, error in
+        Content.fetchContent(url: "\(baseURL)/api/v2.4/contents/\(id)/") { [weak self, weak presenter] content, error in
             DispatchQueue.main.async { [weak self, weak presenter] in
                 loadingView.hide()
                 guard let self = self, let presenter = presenter else { return }
@@ -110,7 +111,7 @@ public class NavigationService {
         presenter.present(vc, animated: true)
     }
 
-    private func presentLogin(from presenter: UIViewController) {
+    private func showLogin(from presenter: UIViewController) {
         guard let vc = instantiateViewController(Constants.MAIN_STORYBOARD,
                                                  Constants.LOGIN_VIEW_CONTROLLER) as? LoginViewController
         else { return }
@@ -121,9 +122,19 @@ public class NavigationService {
     private func showError(error: Error, from presenter: UIViewController) {
         let tpError = error as? TPError ?? TPError(message: nil, response: nil, kind: .unexpected)
         let (image, title, description) = tpError.getDisplayInfo()
+
         let emptyView = EmptyView.getInstance(parentView: presenter.view)
+
+        var retryButtonText: String?
+        var retryHandler: (() -> Void)?
+
+        if tpError.kind == .network {
+            retryButtonText = Strings.TRY_AGAIN
+            retryHandler = { emptyView.hide() }
+        }
+
         emptyView.show(image: image, title: title, description: description,
-                       retryButtonText: nil, retryHandler: nil)
+                       retryButtonText: retryButtonText, retryHandler: retryHandler)
     }
 
     private func instantiateViewController(_ storyboard: String, _ identifier: String, bundle: Bundle? = nil) -> UIViewController? {
