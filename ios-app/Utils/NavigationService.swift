@@ -131,23 +131,27 @@ public class NavigationService {
     }
 
     private class LoadingView {
-        private let emptyView: EmptyView
+        private let parentView: UIView
+        private let overlay = UIView()
         private let spinner: UIActivityIndicatorView
 
         init(parentView: UIView) {
-            emptyView = EmptyView.getInstance(parentView: parentView)
-            emptyView.backgroundColor = .white
-            spinner = UIUtils.initActivityIndicator(parentView: parentView)
+            self.parentView = parentView
+            overlay.frame = parentView.bounds
+            overlay.backgroundColor = .white
+            overlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            spinner = UIUtils.initActivityIndicator(parentView: overlay)
             spinner.center = CGPoint(x: parentView.center.x, y: parentView.center.y - 50)
         }
 
         func show() {
+            parentView.addSubview(overlay)
             spinner.startAnimating()
         }
 
         func hide() {
             spinner.stopAnimating()
-            emptyView.hide()
+            overlay.removeFromSuperview()
         }
     }
 }
