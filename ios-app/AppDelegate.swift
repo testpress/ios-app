@@ -41,6 +41,7 @@ import CourseKit
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     var window: UIWindow?
+    var isAppReady = false
     
     var activityIndicator: UIActivityIndicatorView!
     var emptyView: EmptyView!
@@ -50,7 +51,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         
+        DeepLinkRouter.shared.route(url: url)
         return ApplicationDelegate.shared.application(application, open: url, options: options)
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+           let url = userActivity.webpageURL {
+            DeepLinkRouter.shared.route(url: url)
+            return true
+        }
+        return false
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -86,7 +98,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         handleFirstLaunch()
         setupRootViewController()
         setupAuthErrorHandlerOnApiClient()
-        
+
+        handleColdStartDeepLink(launchOptions)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.isAppReady = true
+            DeepLinkRouter.shared.processPending()
+        }
+
         InstituteRepository.shared.getSettings { instituteSettings, error in
             if let instituteSettings = instituteSettings {
                 self.setupSentry(instituteSettings: instituteSettings)
@@ -95,6 +114,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
 
         return true
+    }
+
+    private func handleColdStartDeepLink(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        guard let userActivityDict = launchOptions?[.userActivityDictionary] as? [String: Any],
+              let nsUserActivity = userActivityDict["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity,
+              let url = nsUserActivity.webpageURL else { return }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DeepLinkRouter.shared.dispatch(url: url)
+        }
     }
 
     private func registerForNotifications(_ application: UIApplication) {
