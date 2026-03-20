@@ -48,7 +48,6 @@ class UserDataFormViewController: WebViewController, WKScriptMessageHandler {
         }
         
         window.rootViewController = viewController
-        DeepLinkRouter.shared.markAppReady()
         Toast.shared.show(message: "Profile updated successfully")
     }
 

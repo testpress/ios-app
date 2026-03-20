@@ -98,7 +98,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         handleFirstLaunch()
         setupRootViewController()
         setupAuthErrorHandlerOnApiClient()
-        
+
+        handleColdStartDeepLink(launchOptions)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.isAppReady = true
+            DeepLinkRouter.shared.processPending()
+        }
+
         InstituteRepository.shared.getSettings { instituteSettings, error in
             if let instituteSettings = instituteSettings {
                 self.setupSentry(instituteSettings: instituteSettings)
@@ -107,6 +114,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
 
         return true
+    }
+
+    private func handleColdStartDeepLink(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        guard let userActivityDict = launchOptions?[.userActivityDictionary] as? [String: Any],
+              let nsUserActivity = userActivityDict["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity,
+              let url = nsUserActivity.webpageURL else { return }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DeepLinkRouter.shared.dispatch(url: url)
+        }
     }
 
     private func registerForNotifications(_ application: UIApplication) {

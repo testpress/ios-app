@@ -12,7 +12,7 @@ public class DeepLinkRouter {
     public func route(url: URL) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            if self.appDelegate.isAppReady {
+            if self.isAppReady {
                 self.dispatch(url: url)
             } else {
                 self.pendingURL = url
@@ -20,28 +20,23 @@ public class DeepLinkRouter {
         }
     }
 
-    private var appDelegate: AppDelegate {
-        UIApplication.shared.delegate as! AppDelegate
-    }
-
-    public func markAppReady() {
-        guard !appDelegate.isAppReady else { return }
-        appDelegate.isAppReady = true
-        processPending()
+    private var isAppReady: Bool {
+        (UIApplication.shared.delegate as? AppDelegate)?.isAppReady ?? false
     }
 
     public func processPending() {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            guard self.appDelegate.isAppReady else { return }
-            guard let url = self.pendingURL else { return }
-            guard self.currentRootViewController != nil else { return }
+            guard let self = self,
+                  self.isAppReady,
+                  let url = self.pendingURL,
+                  let rootVC = self.currentRootViewController else { return }
+
             self.pendingURL = nil
             self.dispatch(url: url)
         }
     }
 
-    private func dispatch(url: URL) {
+    public func dispatch(url: URL) {
         guard let rootVC = currentRootViewController else { return }
         dismissAllPresented(from: rootVC) { [weak self] in
             self?.resetNavigationStacks(from: rootVC)

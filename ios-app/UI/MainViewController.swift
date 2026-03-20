@@ -149,7 +149,6 @@ class MainViewController: UIViewController {
         }
         
         window.rootViewController = viewController
-        DeepLinkRouter.shared.markAppReady()
     }
     
     private var navigationBarHeight: CGFloat {
