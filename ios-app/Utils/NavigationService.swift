@@ -18,15 +18,10 @@ public class NavigationService {
     }
 
     private func extractContentID(from parts: [String]) -> String? {
-        if let index = parts.firstIndex(of: "chapters"), index + 1 < parts.count {
-            let id = parts[index + 1]
-            return id.isEmpty ? nil : id
-        }
-        if let index = parts.firstIndex(of: "contents"), index + 1 < parts.count {
-            let id = parts[index + 1]
-            return id.isEmpty ? nil : id
-        }
-        return nil
+        guard let index = parts.firstIndex(of: "contents"),
+              index + 1 < parts.count else { return nil }
+        let id = parts[index + 1]
+        return id.isEmpty ? nil : id
     }
 
     private func showContentDetail(id: String, from presenter: UIViewController) {
