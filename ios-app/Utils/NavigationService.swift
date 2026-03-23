@@ -13,17 +13,6 @@ public class NavigationService {
     public static let shared = NavigationService()
     private init() {}
 
-    internal func buildURL(from urlString: String) -> URL? {
-        if let url = URL(string: urlString),
-           let scheme = url.scheme?.lowercased(),
-           ["http", "https"].contains(scheme) {
-            return url
-        }
-        guard let base = TestpressCourse.shared.baseURL,
-              let baseURL = URL(string: base) else { return nil }
-        return URL(string: urlString, relativeTo: baseURL)
-    }
-
     public func parseURL(_ url: URL) -> NavigationRoute {
         let parts = url.pathComponents
         if let id = extractID(after: "p", from: parts) {
@@ -131,6 +120,12 @@ public class NavigationService {
         if tpError.kind == .network {
             retryButtonText = Strings.TRY_AGAIN
             retryHandler = { emptyView.hide() }
+        } else {
+            retryButtonText = "Go Back"
+            retryHandler = { [weak presenter] in
+                emptyView.hide()
+                presenter?.dismiss(animated: true)
+            }
         }
 
         emptyView.show(image: image, title: title, description: description,

@@ -51,7 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         
-        DeepLinkRouter.shared.route(url: url)
+        if let baseURL = TestpressCourse.shared.baseURL,
+           let host = url.host,
+           URL(string: baseURL)?.host == host {
+            DeepLinkRouter.shared.route(url: url)
+        }
         return ApplicationDelegate.shared.application(application, open: url, options: options)
     }
     
@@ -87,6 +91,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    private var coldStartURL: URL?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         TestpressCourse.shared.initialize(subdomain: AppConstants.SUBDOMAIN, primaryColor: AppConstants.PRIMARY_COLOR)
         registerForNotifications(application)
@@ -96,33 +102,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         initializeFacebook(application, launchOptions: launchOptions)
         configureKeyboardManager()
         handleFirstLaunch()
-        setupRootViewController()
         setupAuthErrorHandlerOnApiClient()
 
-        handleColdStartDeepLink(launchOptions)
+        coldStartURL = extractColdStartURL(launchOptions)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            self?.isAppReady = true
-            DeepLinkRouter.shared.processPending()
-        }
-
-        InstituteRepository.shared.getSettings { instituteSettings, error in
-            if let instituteSettings = instituteSettings {
-                self.setupSentry(instituteSettings: instituteSettings)
-                self.restrictScreenRecording(instituteSettings: instituteSettings)
-            }
+        if let url = coldStartURL {
+            setupRootViewControllerWithDeepLink(url: url)
+        } else {
+            setupRootViewController()
+            fetchSettings()
         }
 
         return true
     }
 
-    private func handleColdStartDeepLink(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+    private func extractColdStartURL(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> URL? {
         guard let userActivityDict = launchOptions?[.userActivityDictionary] as? [String: Any],
-              let nsUserActivity = userActivityDict["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity,
-              let url = nsUserActivity.webpageURL else { return }
+              let userActivity = userActivityDict["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity
+        else { return nil }
+        return userActivity.webpageURL
+    }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            DeepLinkRouter.shared.dispatch(url: url)
+    private func setupRootViewControllerWithDeepLink(url: URL) {
+        let viewController = UserHelper.getLoginOrTabViewController()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
+
+        DeepLinkRouter.shared.setPendingURL(url)
+        fetchSettings()
+    }
+
+    private func setupRootViewController() {
+        let viewController = MainViewController()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
+    }
+
+    private func fetchSettings() {
+        InstituteRepository.shared.getSettings { [weak self] instituteSettings, error in
+            guard let self = self else { return }
+            if let instituteSettings = instituteSettings {
+                self.setupSentry(instituteSettings: instituteSettings)
+                self.restrictScreenRecording(instituteSettings: instituteSettings)
+            }
+            self.isAppReady = true
+            DeepLinkRouter.shared.processPending()
         }
     }
 
@@ -182,13 +208,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
             userDefaults.synchronize()
         }
-    }
-
-    private func setupRootViewController() {
-        let viewController = MainViewController()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = viewController
-        window?.makeKeyAndVisible()
     }
     
     private func setupAuthErrorHandlerOnApiClient(){

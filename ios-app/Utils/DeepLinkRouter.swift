@@ -20,6 +20,10 @@ public class DeepLinkRouter {
         }
     }
 
+    func setPendingURL(_ url: URL) {
+        pendingURL = url
+    }
+
     private var isAppReady: Bool {
         (UIApplication.shared.delegate as? AppDelegate)?.isAppReady ?? false
     }
@@ -29,14 +33,14 @@ public class DeepLinkRouter {
             guard let self = self,
                   self.isAppReady,
                   let url = self.pendingURL,
-                  let rootVC = self.currentRootViewController else { return }
+                  self.currentRootViewController != nil else { return }
 
             self.pendingURL = nil
             self.dispatch(url: url)
         }
     }
 
-    public func dispatch(url: URL) {
+    private func dispatch(url: URL) {
         guard let rootVC = currentRootViewController else { return }
         dismissAllPresented(from: rootVC) { [weak self] in
             self?.resetNavigationStacks(from: rootVC)
@@ -65,10 +69,6 @@ public class DeepLinkRouter {
     }
 
     private var currentRootViewController: UIViewController? {
-        UIApplication.shared.connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .flatMap { $0.windows }
-            .first { $0.isKeyWindow }?
-            .rootViewController
+        return (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController
     }
 }
