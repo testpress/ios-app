@@ -1,7 +1,6 @@
 import UIKit
 
 // Single pendingURL slot: deep links are rare; the latest one overwrites any stale one.
-// Intentional tradeoff: simplicity over queueing multiple links.
 public class DeepLinkRouter {
 
     public static let shared = DeepLinkRouter()
@@ -9,26 +8,36 @@ public class DeepLinkRouter {
 
     private var pendingURL: URL?
 
-    public func route(url: URL) {
+    @discardableResult
+    public func handleIncomingURL(_ url: URL) -> Bool {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if self.isAppReady {
-                self.dispatch(url: url)
+                self.navigateToDeepLink(url: url)
             } else {
                 self.pendingURL = url
             }
         }
+        return true
     }
 
-    func setPendingURL(_ url: URL) {
+    public func setPendingURL(_ url: URL) {
         pendingURL = url
+    }
+
+    // Extract URL from cold start launch options
+    public static func extractURLFromLaunchOptions(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> URL? {
+        guard let userActivityDict = launchOptions?[.userActivityDictionary] as? [String: Any],
+              let userActivity = userActivityDict["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity
+        else { return nil }
+        return userActivity.webpageURL
     }
 
     private var isAppReady: Bool {
         (UIApplication.shared.delegate as? AppDelegate)?.isAppReady ?? false
     }
 
-    public func processPending() {
+    public func flushPendingDeepLink() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self,
                   self.isAppReady,
@@ -36,19 +45,19 @@ public class DeepLinkRouter {
                   self.currentRootViewController != nil else { return }
 
             self.pendingURL = nil
-            self.dispatch(url: url)
+            self.navigateToDeepLink(url: url)
         }
     }
 
-    private func dispatch(url: URL) {
+    private func navigateToDeepLink(url: URL) {
         guard let rootVC = currentRootViewController else { return }
-        dismissAllPresented(from: rootVC) { [weak self] in
-            self?.resetNavigationStacks(from: rootVC)
-            NavigationService.shared.open(url: url, from: rootVC)
+        dismissPresentedViewControllers(from: rootVC) { [weak self] in
+            self?.resetNavigationToRoot(from: rootVC)
+            NavigationService.shared.navigateToDeepLink(url: url, from: rootVC)
         }
     }
 
-    private func resetNavigationStacks(from rootVC: UIViewController) {
+    private func resetNavigationToRoot(from rootVC: UIViewController) {
         if let tabBar = rootVC as? UITabBarController {
             tabBar.viewControllers?
                 .compactMap { $0 as? UINavigationController }
@@ -58,10 +67,10 @@ public class DeepLinkRouter {
         }
     }
 
-    private func dismissAllPresented(from viewController: UIViewController, completion: @escaping () -> Void) {
+    private func dismissPresentedViewControllers(from viewController: UIViewController, completion: @escaping () -> Void) {
         if let presented = viewController.presentedViewController {
             presented.dismiss(animated: false) { [weak self] in
-                self?.dismissAllPresented(from: viewController, completion: completion)
+                self?.dismissPresentedViewControllers(from: viewController, completion: completion)
             }
         } else {
             completion()
@@ -69,6 +78,6 @@ public class DeepLinkRouter {
     }
 
     private var currentRootViewController: UIViewController? {
-        return (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController
+        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController
     }
 }

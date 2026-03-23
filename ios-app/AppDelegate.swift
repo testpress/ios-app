@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let baseURL = TestpressCourse.shared.baseURL,
            let host = url.host,
            URL(string: baseURL)?.host == host {
-            DeepLinkRouter.shared.route(url: url)
+             DeepLinkRouter.shared.handleIncomingURL(url)
         }
         return ApplicationDelegate.shared.application(application, open: url, options: options)
     }
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
            let url = userActivity.webpageURL {
-            DeepLinkRouter.shared.route(url: url)
+             DeepLinkRouter.shared.handleIncomingURL(url)
             return true
         }
         return false
@@ -91,8 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    private var coldStartURL: URL?
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         TestpressCourse.shared.initialize(subdomain: AppConstants.SUBDOMAIN, primaryColor: AppConstants.PRIMARY_COLOR)
         registerForNotifications(application)
@@ -104,23 +102,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         handleFirstLaunch()
         setupAuthErrorHandlerOnApiClient()
 
-        coldStartURL = extractColdStartURL(launchOptions)
-
-        if let url = coldStartURL {
-            setupRootViewControllerWithDeepLink(url: url)
+        if let coldStartURL = DeepLinkRouter.extractURLFromLaunchOptions(launchOptions) {
+            setupRootViewControllerWithDeepLink(url: coldStartURL)
         } else {
             setupRootViewController()
             fetchSettings()
         }
 
         return true
-    }
-
-    private func extractColdStartURL(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> URL? {
-        guard let userActivityDict = launchOptions?[.userActivityDictionary] as? [String: Any],
-              let userActivity = userActivityDict["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity
-        else { return nil }
-        return userActivity.webpageURL
     }
 
     private func setupRootViewControllerWithDeepLink(url: URL) {
@@ -133,12 +122,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         fetchSettings()
     }
 
-    private func setupRootViewController() {
-        let viewController = MainViewController()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = viewController
-        window?.makeKeyAndVisible()
-    }
 
     private func fetchSettings() {
         InstituteRepository.shared.getSettings { [weak self] instituteSettings, error in
@@ -148,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.restrictScreenRecording(instituteSettings: instituteSettings)
             }
             self.isAppReady = true
-            DeepLinkRouter.shared.processPending()
+            DeepLinkRouter.shared.flushPendingDeepLink()
         }
     }
 
@@ -208,6 +191,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             userDefaults.set(true, forKey: Constants.LAUNCHED_APP_BEFORE)
             userDefaults.synchronize()
         }
+    }
+
+    private func setupRootViewController() {
+        let viewController = MainViewController()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
     }
     
     private func setupAuthErrorHandlerOnApiClient(){
