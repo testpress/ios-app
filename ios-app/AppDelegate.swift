@@ -130,8 +130,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.setupSentry(instituteSettings: instituteSettings)
                 self.restrictScreenRecording(instituteSettings: instituteSettings)
             }
-            self.isAppReady = true
-            DeepLinkRouter.shared.flushPendingDeepLink()
+            DispatchQueue.main.async {
+                self.isAppReady = true
+                DeepLinkRouter.shared.flushPendingDeepLink()
+            }
         }
     }
 

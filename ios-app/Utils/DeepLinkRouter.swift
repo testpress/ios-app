@@ -1,6 +1,6 @@
 import UIKit
+import CourseKit
 
-// Single pendingURL slot: deep links are rare; the latest one overwrites any stale one.
 public class DeepLinkRouter {
 
     public static let shared = DeepLinkRouter()
@@ -8,8 +8,7 @@ public class DeepLinkRouter {
 
     private var pendingURL: URL?
 
-    @discardableResult
-    public func handleIncomingURL(_ url: URL) -> Bool {
+    public func handleIncomingURL(_ url: URL) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if self.isAppReady {
@@ -18,14 +17,12 @@ public class DeepLinkRouter {
                 self.pendingURL = url
             }
         }
-        return true
     }
 
-    public func setPendingURL(_ url: URL) {
+    func setPendingURL(_ url: URL) {
         pendingURL = url
     }
 
-    // Extract URL from cold start launch options
     public static func extractURLFromLaunchOptions(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> URL? {
         guard let userActivityDict = launchOptions?[.userActivityDictionary] as? [String: Any],
               let userActivity = userActivityDict["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity
@@ -53,6 +50,7 @@ public class DeepLinkRouter {
         guard let rootVC = currentRootViewController else { return }
         dismissPresentedViewControllers(from: rootVC) { [weak self] in
             self?.resetNavigationToRoot(from: rootVC)
+            rootVC.view.subviews.filter { $0 is EmptyView }.forEach { $0.removeFromSuperview() }
             NavigationService.shared.navigateToDeepLink(url: url, from: rootVC)
         }
     }

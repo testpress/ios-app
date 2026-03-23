@@ -1,70 +1,32 @@
 import UIKit
 import CourseKit
 
-public enum DeepLinkDestination {
-    case post(id: String)
-    case content(id: String)
-    case login
-    case unknown
-}
-
 public class NavigationService {
 
     public static let shared = NavigationService()
     private init() {}
 
-    public func parseDeepLink(_ url: URL) -> DeepLinkDestination {
-        let pathParts = url.pathComponents
-        if let postID = extractID(after: "p", from: pathParts) {
-            return .post(id: postID)
-        }
-        if let contentID = extractContentID(from: pathParts) {
-            return .content(id: contentID)
-        }
-        return .unknown
-    }
-
     public func navigateToDeepLink(url: URL, from presenter: UIViewController) {
-        let destination = parseDeepLink(url)
-        if case .unknown = destination { return }
+        guard let contentID = extractContentID(from: url.pathComponents) else { return }
 
         if !KeychainTokenItem.isExist() {
             showLoginScreen(from: presenter)
             return
         }
 
-        switch destination {
-        case .post(let id):
-            showPostDetail(id: id, from: presenter)
-        case .content(let id):
-            showContentDetail(id: id, from: presenter)
-        case .login, .unknown:
-            break
-        }
-    }
-
-    private func extractID(after keyword: String, from parts: [String]) -> String? {
-        guard let index = parts.firstIndex(of: keyword),
-              index + 1 < parts.count else { return nil }
-        let candidate = parts[index + 1]
-        return candidate.isEmpty ? nil : candidate
+        showContentDetail(id: contentID, from: presenter)
     }
 
     private func extractContentID(from parts: [String]) -> String? {
-        return extractID(after: "chapters", from: parts)
-            ?? extractID(after: "contents", from: parts)
-    }
-
-    private func showPostDetail(id: String, from presenter: UIViewController) {
-        guard let baseURL = TestpressCourse.shared.baseURL else {
-            debugPrint("[NavigationService] Cannot show post - baseURL not configured")
-            return
+        if let index = parts.firstIndex(of: "chapters"), index + 1 < parts.count {
+            let id = parts[index + 1]
+            return id.isEmpty ? nil : id
         }
-        guard let vc = instantiateVC(Constants.POST_STORYBOARD, Constants.POST_DETAIL_VIEW_CONTROLLER) as? PostDetailViewController
-        else { return }
-
-        vc.url = "\(baseURL)/api/v2.2/posts/\(id)/?short_link=true"
-        presenter.present(vc, animated: true)
+        if let index = parts.firstIndex(of: "contents"), index + 1 < parts.count {
+            let id = parts[index + 1]
+            return id.isEmpty ? nil : id
+        }
+        return nil
     }
 
     private func showContentDetail(id: String, from presenter: UIViewController) {
@@ -90,9 +52,8 @@ public class NavigationService {
     }
 
     private func displayContentDetail(_ content: Content, from presenter: UIViewController) {
-        guard let vc = instantiateVC(Constants.CHAPTER_CONTENT_STORYBOARD,
-                                     Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER,
-                                     bundle: TestpressCourse.bundle) as? ContentDetailPageViewController
+        guard let vc = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
+            .instantiateViewController(withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) as? ContentDetailPageViewController
         else { return }
 
         vc.position = 0
@@ -101,7 +62,8 @@ public class NavigationService {
     }
 
     private func showLoginScreen(from presenter: UIViewController) {
-        guard let vc = instantiateVC(Constants.MAIN_STORYBOARD, Constants.LOGIN_VIEW_CONTROLLER) as? LoginViewController
+        guard let vc = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+            .instantiateViewController(withIdentifier: Constants.LOGIN_VIEW_CONTROLLER) as? LoginViewController
         else { return }
 
         presenter.present(vc, animated: true)
@@ -124,10 +86,6 @@ public class NavigationService {
                 presenter?.dismiss(animated: true)
             }
         }
-    }
-
-    private func instantiateVC(_ storyboard: String, _ identifier: String, bundle: Bundle? = nil) -> UIViewController? {
-        UIStoryboard(name: storyboard, bundle: bundle).instantiateViewController(withIdentifier: identifier)
     }
 
     private class LoadingOverlay {
