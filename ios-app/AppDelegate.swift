@@ -41,7 +41,6 @@ import CourseKit
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     var window: UIWindow?
-    var isAppReady = false
     
     var activityIndicator: UIActivityIndicatorView!
     var emptyView: EmptyView!
@@ -131,7 +130,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.restrictScreenRecording(instituteSettings: instituteSettings)
             }
             DispatchQueue.main.async {
-                self.isAppReady = true
                 DeepLinkRouter.shared.flushPendingDeepLink()
             }
         }

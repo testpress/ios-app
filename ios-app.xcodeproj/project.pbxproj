@@ -336,7 +336,6 @@
 		2D6B7F9C2F6A6D5A00A0C362 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7F9B2F6A6D5A00A0C362 /* DeepLinkRouter.swift */; };
 		2D7CDBCC2F237CCD0076B42F /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */; };
 		2D7CDBCE2F237D150076B42F /* DeviceIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */; };
-		2D819AD42F6C3E47008C2096 /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D819AD32F6C3E47008C2096 /* NavigationService.swift */; };
 		2D84D0662F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D84D0652F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift */; };
 		2D9597432EDEF06800E9AC7C /* OTPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9597422EDEF06800E9AC7C /* OTPLoginViewController.swift */; };
 		2F04053220D915D90074D80E /* BookmarkFoldersDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F04053120D915D90074D80E /* BookmarkFoldersDropDownCell.xib */; };
@@ -616,7 +615,6 @@
 		2D6B7F9B2F6A6D5A00A0C362 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRouter.swift; sourceTree = "<group>"; };
 		2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIDManager.swift; sourceTree = "<group>"; };
-		2D819AD32F6C3E47008C2096 /* NavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		2D84D0652F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedDeviceViewController.swift; sourceTree = "<group>"; };
 		2D9597422EDEF06800E9AC7C /* OTPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPLoginViewController.swift; sourceTree = "<group>"; };
 		2F04052F20D902530074D80E /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
@@ -1397,7 +1395,6 @@
 				03A60FA02CB3FEB000079A7C /* AuthErrorHandler.swift */,
 				03CD0C562CB7A04E00E17218 /* UserHelper.swift */,
 				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
-				2D819AD32F6C3E47008C2096 /* NavigationService.swift */,
 				2D6B7F9B2F6A6D5A00A0C362 /* DeepLinkRouter.swift */,
 				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
 				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
@@ -2072,7 +2069,6 @@
 				2503DF50263C01E8003226AD /* CarouselSectionController.swift in Sources */,
 				25E435EC263ADE7500243FD3 /* DashboardSectionHeaderCell.swift in Sources */,
 				D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */,
-				2D819AD42F6C3E47008C2096 /* NavigationService.swift in Sources */,
 				03CD0D332CB93A6500E17218 /* LearnTabController.swift in Sources */,
 				8C205A082323918700596E66 /* LoginActivityCell.swift in Sources */,
 				2503DF73263FAC4F003226AD /* PillLabel.swift in Sources */,
