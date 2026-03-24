@@ -6,30 +6,23 @@ public class DeepLinkRouter {
     public static let shared = DeepLinkRouter()
     private init() {}
 
-    public func route(url: URL) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            guard let topVC = UIApplication.topViewController() else { return }
-            
-            guard let vc = self.getViewController(for: url) as? ContentDetailPageViewController else { return }
+    public func route(url: URL, animated: Bool = true, on viewController: UIViewController? = nil) {
+        guard let contentID = extractContentID(from: url), let id = Int(contentID) else { return }
+        
+        let targetVC = viewController ?? UIApplication.topViewController()
+        guard let topVC = targetVC else { return }
 
-            if let contentVC = topVC as? ContentDetailPageViewController, contentVC.contentId == vc.contentId {
-                return
-            }
-
-            topVC.present(vc, animated: true)
+        if let current = topVC as? ContentDetailPageViewController, current.contentId == id {
+            return
         }
-    }
 
-    public func getViewController(for url: URL) -> UIViewController? {
-        guard let contentID = extractContentID(from: url), let id = Int(contentID) else { return nil }
-        
-        guard let vc = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
-            .instantiateViewController(withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) as? ContentDetailPageViewController
-        else { return nil }
-        
+        let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) as? ContentDetailPageViewController else {
+            return
+        }
+
         vc.contentId = id
-        return vc
+        topVC.present(vc, animated: animated)
     }
 
     private func extractContentID(from url: URL) -> String? {

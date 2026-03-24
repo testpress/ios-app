@@ -53,7 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let baseURL = TestpressCourse.shared.baseURL,
            let host = url.host,
            URL(string: baseURL)?.host == host {
-             handleDeepLink(url: url)
+            if KeychainTokenItem.isExist() {
+                DeepLinkRouter.shared.route(url: url)
+            }
         }
         return ApplicationDelegate.shared.application(application, open: url, options: options)
     }
@@ -62,7 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
            let url = userActivity.webpageURL {
-             handleDeepLink(url: url)
+            if KeychainTokenItem.isExist() {
+                DeepLinkRouter.shared.route(url: url)
+            }
             return true
         }
         return false
@@ -100,18 +104,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         configureKeyboardManager()
         handleFirstLaunch()
         setupAuthErrorHandlerOnApiClient()
-
-        if let coldStartURL = Self.extractURLFromLaunchOptions(launchOptions) {
-            setupRootViewControllerWithDeepLink(url: coldStartURL)
-        } else {
-            setupRootViewController()
-        }
+        setupRootViewController(launchOptions: launchOptions)
 
         InstituteRepository.shared.getSettings { [weak self] instituteSettings, error in
-            guard let self = self else { return }
             if let instituteSettings = instituteSettings {
-                self.setupSentry(instituteSettings: instituteSettings)
-                self.restrictScreenRecording(instituteSettings: instituteSettings)
+                self?.setupSentry(instituteSettings: instituteSettings)
+                self?.restrictScreenRecording(instituteSettings: instituteSettings)
             }
         }
 
@@ -119,33 +117,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
 
-    private func setupRootViewControllerWithDeepLink(url: URL) {
-        let viewController = UserHelper.getLoginOrTabViewController()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = viewController
-        
-        if KeychainTokenItem.isExist(), let deepLinkVC = DeepLinkRouter.shared.getViewController(for: url) {
-            deepLinkVC.modalPresentationStyle = .fullScreen
-            viewController.present(deepLinkVC, animated: false)
+    private static func extractURLFromLaunchOptions(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> URL? {
+        if let url = launchOptions?[.url] as? URL {
+            return url
         }
         
-        window?.makeKeyAndVisible()
-    }
-
-    private static func extractURLFromLaunchOptions(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> URL? {
         guard let userActivityDict = launchOptions?[.userActivityDictionary] as? [String: Any],
               let userActivity = userActivityDict["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity
         else { return nil }
+        
         return userActivity.webpageURL
     }
 
-    private func handleDeepLink(url: URL) {
-        guard let topController = UIApplication.topViewController() else { return }
 
-        if KeychainTokenItem.isExist() {
-            DeepLinkRouter.shared.route(url: url)
-        }
-    }
 
     private func registerForNotifications(_ application: UIApplication) {
         if #available(iOS 10.0, *) {
@@ -205,11 +189,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
-    private func setupRootViewController() {
-        let viewController = MainViewController()
+    private func setupRootViewController(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = viewController
-        window?.makeKeyAndVisible()
+        
+        if let coldStartURL = Self.extractURLFromLaunchOptions(launchOptions) {
+            let rootVC = UserHelper.getLoginOrTabViewController()
+            window?.rootViewController = rootVC
+            window?.makeKeyAndVisible()
+            
+            if KeychainTokenItem.isExist() {
+                DeepLinkRouter.shared.route(url: coldStartURL, animated: false, on: rootVC)
+            }
+        } else {
+            window?.rootViewController = MainViewController()
+            window?.makeKeyAndVisible()
+        }
     }
     
     private func setupAuthErrorHandlerOnApiClient(){
@@ -405,15 +399,6 @@ extension AppDelegate {
     func removeBlurView() {
         blurEffectView?.removeFromSuperview()
         blurEffectView = nil
-    }
-
-    func showLoginScreen(from presenter: UIViewController) {
-        if presenter is LoginViewController { return }
-        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier:
-            Constants.LOGIN_VIEW_CONTROLLER) as? LoginViewController {
-            presenter.present(viewController, animated: true, completion: nil)
-        }
     }
 }
 
