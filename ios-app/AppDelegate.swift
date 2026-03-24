@@ -106,13 +106,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         setupAuthErrorHandlerOnApiClient()
         setupRootViewController(launchOptions: launchOptions)
 
-        InstituteRepository.shared.getSettings { [weak self] instituteSettings, error in
+        InstituteRepository.shared.getSettings { instituteSettings, error in
             if let instituteSettings = instituteSettings {
-                self?.setupSentry(instituteSettings: instituteSettings)
-                self?.restrictScreenRecording(instituteSettings: instituteSettings)
+                self.setupSentry(instituteSettings: instituteSettings)
+                self.restrictScreenRecording(instituteSettings: instituteSettings)
             }
         }
-
 
         return true
     }
@@ -128,8 +127,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         return userActivity.webpageURL
     }
-
-
 
     private func registerForNotifications(_ application: UIApplication) {
         if #available(iOS 10.0, *) {
