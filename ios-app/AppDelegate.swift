@@ -107,6 +107,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             setupRootViewController()
         }
 
+        InstituteRepository.shared.getSettings { [weak self] instituteSettings, error in
+            guard let self = self else { return }
+            if let instituteSettings = instituteSettings {
+                self.setupSentry(instituteSettings: instituteSettings)
+                self.restrictScreenRecording(instituteSettings: instituteSettings)
+            }
+            DispatchQueue.main.async {
+                self.executePendingDeepLink()
+            }
+        }
+
+
         return true
     }
 
@@ -114,9 +126,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let viewController = UserHelper.getLoginOrTabViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
+        
+        if KeychainTokenItem.isExist(), let deepLinkVC = DeepLinkRouter.shared.getViewController(for: url) {
+            deepLinkVC.modalPresentationStyle = .fullScreen
+            viewController.present(deepLinkVC, animated: false)
+        }
+        
         window?.makeKeyAndVisible()
-
-        configureAppUsingInstituteSettings()
     }
 
     private static func extractURLFromLaunchOptions(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> URL? {
@@ -134,20 +150,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 DeepLinkRouter.shared.pendingURL = url
             } else {
                 DeepLinkRouter.shared.route(url: url)
-            }
-        }
-    }
-
-
-    private func configureAppUsingInstituteSettings() {
-        InstituteRepository.shared.getSettings { [weak self] instituteSettings, error in
-            guard let self = self else { return }
-            if let instituteSettings = instituteSettings {
-                self.setupSentry(instituteSettings: instituteSettings)
-                self.restrictScreenRecording(instituteSettings: instituteSettings)
-            }
-            DispatchQueue.main.async {
-                self.executePendingDeepLink()
             }
         }
     }
@@ -222,7 +224,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
-        configureAppUsingInstituteSettings()
     }
     
     private func setupAuthErrorHandlerOnApiClient(){
