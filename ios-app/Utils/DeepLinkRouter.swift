@@ -6,8 +6,6 @@ public class DeepLinkRouter {
     public static let shared = DeepLinkRouter()
     private init() {}
 
-    public var pendingURL: URL?
-
     public func getViewController(for url: URL) -> UIViewController? {
         guard let contentID = extractContentID(from: url), let id = Int(contentID) else { return nil }
         

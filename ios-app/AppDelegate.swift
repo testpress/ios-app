@@ -113,9 +113,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.setupSentry(instituteSettings: instituteSettings)
                 self.restrictScreenRecording(instituteSettings: instituteSettings)
             }
-            DispatchQueue.main.async {
-                self.executePendingDeepLink()
-            }
         }
 
 
@@ -146,18 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         guard let topController = UIApplication.topViewController() else { return }
 
         if KeychainTokenItem.isExist() {
-            if topController is MainViewController {
-                DeepLinkRouter.shared.pendingURL = url
-            } else {
-                DeepLinkRouter.shared.route(url: url)
-            }
-        }
-    }
-
-    private func executePendingDeepLink() {
-        if let url = DeepLinkRouter.shared.pendingURL {
-            DeepLinkRouter.shared.pendingURL = nil
-            handleDeepLink(url: url)
+            DeepLinkRouter.shared.route(url: url)
         }
     }
 
