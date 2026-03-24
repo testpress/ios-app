@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let baseURL = TestpressCourse.shared.baseURL,
            let host = url.host,
            URL(string: baseURL)?.host == host {
-             DeepLinkRouter.shared.handleIncomingURL(url)
+             handleDeepLink(url: url)
         }
         return ApplicationDelegate.shared.application(application, open: url, options: options)
     }
@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
            let url = userActivity.webpageURL {
-             DeepLinkRouter.shared.handleIncomingURL(url)
+             handleDeepLink(url: url)
             return true
         }
         return false
@@ -101,11 +101,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         handleFirstLaunch()
         setupAuthErrorHandlerOnApiClient()
 
-        if let coldStartURL = DeepLinkRouter.extractURLFromLaunchOptions(launchOptions) {
+        if let coldStartURL = Self.extractURLFromLaunchOptions(launchOptions) {
             setupRootViewControllerWithDeepLink(url: coldStartURL)
         } else {
             setupRootViewController()
-            fetchSettings()
         }
 
         return true
@@ -117,12 +116,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
 
-        DeepLinkRouter.shared.setPendingURL(url)
-        fetchSettings()
+        configureAppUsingInstituteSettings()
+    }
+
+    private static func extractURLFromLaunchOptions(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> URL? {
+        guard let userActivityDict = launchOptions?[.userActivityDictionary] as? [String: Any],
+              let userActivity = userActivityDict["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity
+        else { return nil }
+        return userActivity.webpageURL
+    }
+
+    private func handleDeepLink(url: URL) {
+        guard let topController = UIApplication.topViewController() else { return }
+
+        if KeychainTokenItem.isExist() {
+            if topController is MainViewController {
+                DeepLinkRouter.shared.pendingURL = url
+            } else {
+                DeepLinkRouter.shared.route(url: url)
+            }
+        }
     }
 
 
-    private func fetchSettings() {
+    private func configureAppUsingInstituteSettings() {
         InstituteRepository.shared.getSettings { [weak self] instituteSettings, error in
             guard let self = self else { return }
             if let instituteSettings = instituteSettings {
@@ -130,8 +147,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.restrictScreenRecording(instituteSettings: instituteSettings)
             }
             DispatchQueue.main.async {
-                DeepLinkRouter.shared.flushPendingDeepLink()
+                self.executePendingDeepLink()
             }
+        }
+    }
+
+    private func executePendingDeepLink() {
+        if let url = DeepLinkRouter.shared.pendingURL {
+            DeepLinkRouter.shared.pendingURL = nil
+            handleDeepLink(url: url)
         }
     }
 
@@ -198,6 +222,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
+        configureAppUsingInstituteSettings()
     }
     
     private func setupAuthErrorHandlerOnApiClient(){
@@ -393,6 +418,15 @@ extension AppDelegate {
     func removeBlurView() {
         blurEffectView?.removeFromSuperview()
         blurEffectView = nil
+    }
+
+    func showLoginScreen(from presenter: UIViewController) {
+        if presenter is LoginViewController { return }
+        let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier:
+            Constants.LOGIN_VIEW_CONTROLLER) as? LoginViewController {
+            presenter.present(viewController, animated: true, completion: nil)
+        }
     }
 }
 
