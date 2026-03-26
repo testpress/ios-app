@@ -1,4 +1,7 @@
 require 'xcodeproj'
+require 'net/http'
+require 'uri'
+require 'json'
 
 module Fastlane
   module Actions
@@ -14,6 +17,8 @@ module Fastlane
           manage_swift_flags(params)
         when "remove_module"
           remove_ios_module(params)
+        when "entitlements"
+          patch_entitlements(params)
         else
           UI.user_error!("Unknown action: #{action}")
         end
@@ -33,12 +38,60 @@ module Fastlane
         end
         project.save
 
-        # Update Info.plist
         plist = params[:info_plist]
         set_plist_buddy_value("CFBundleIdentifier", params[:bundle_id], plist)
         set_plist_buddy_value("CFBundleDisplayName", params[:display_name], plist)
         set_plist_buddy_value("CFBundleShortVersionString", params[:version], plist) if params[:version]
         set_plist_buddy_value("CFBundleVersion", params[:version_code], plist) if params[:version_code]
+      end
+
+      def self.patch_entitlements(params)
+        subdomain = params[:subdomain]
+        UI.user_error!("subdomain is required for entitlements action") unless subdomain
+
+        api_access_key = ENV["API_ACCESS_KEY"]
+        UI.user_error!("Missing API_ACCESS_KEY") unless api_access_key
+
+        settings_url = "https://#{subdomain}.testpress.in/api/v2.3/settings/"
+
+        uri = URI(settings_url)
+        request = Net::HTTP::Get.new(uri)
+        request["API-access-key"] = api_access_key
+
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        response = http.request(request)
+
+        unless response.is_a?(Net::HTTPSuccess)
+          UI.error("Settings API failed: HTTP #{response.code} - #{response.body}")
+          UI.user_error!("Could not fetch settings from #{settings_url}")
+        end
+
+        settings = JSON.parse(response.body)
+        domain_url = settings["domain_url"]
+
+        unless domain_url
+          UI.error("Response missing domain_url: #{response.body}")
+          UI.user_error!("domain_url not found in settings response")
+        end
+
+        project = Xcodeproj::Project.open(params[:project])
+        target = project.targets.find { |t| t.product_type == "com.apple.product-type.application" }
+        UI.user_error!("No app target found") unless target
+
+        domain_clean = domain_url.gsub(/^https?:\/\//, '')
+        entitlements = JSON.parse('{
+          "aps-environment": "development",
+          "com.apple.developer.associated-domains": ["applinks:' + domain_clean + '"]
+        }')
+
+        entitlements_path = params[:entitlements_path]
+        File.write(entitlements_path, entitlements.to_plist)
+
+        target.build_configurations.each do |cfg|
+          cfg.build_settings["CODE_SIGN_ENTITLEMENTS"] = entitlements_path
+        end
+        project.save
       end
 
       def self.set_plist_buddy_value(key, value, plist)
@@ -57,7 +110,6 @@ module Fastlane
         end
 
         File.write(file_path, content)
-        UI.success("Patched constants in #{File.basename(file_path)}")
       end
 
       def self.manage_swift_flags(params)
@@ -123,7 +175,7 @@ module Fastlane
 
       def self.available_options
         [
-          FastlaneCore::ConfigItem.new(key: :action, description: "Action to perform (identity, constants, flags, remove_module)"),
+          FastlaneCore::ConfigItem.new(key: :action, description: "Action to perform (identity, constants, flags, remove_module, entitlements)"),
           FastlaneCore::ConfigItem.new(key: :project, description: "Path to .xcodeproj", optional: true),
           FastlaneCore::ConfigItem.new(key: :target, description: "Target name", optional: true),
           FastlaneCore::ConfigItem.new(key: :bundle_id, description: "Bundle identifier", optional: true),
@@ -136,7 +188,10 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :flag, description: "Swift flag", optional: true),
           FastlaneCore::ConfigItem.new(key: :enabled, description: "Enable flag", is_string: false, optional: true),
           FastlaneCore::ConfigItem.new(key: :frameworks, description: "Frameworks to remove", is_string: false, optional: true),
-          FastlaneCore::ConfigItem.new(key: :resources, description: "Resources to remove", is_string: false, optional: true)
+          FastlaneCore::ConfigItem.new(key: :resources, description: "Resources to remove", is_string: false, optional: true),
+          FastlaneCore::ConfigItem.new(key: :subdomain, description: "Subdomain for entitlements", optional: true),
+          FastlaneCore::ConfigItem.new(key: :domain_url, description: "Domain URL for entitlements", optional: true),
+          FastlaneCore::ConfigItem.new(key: :entitlements_path, description: "Path to entitlements file", optional: true)
         ]
       end
 

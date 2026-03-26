@@ -88,7 +88,6 @@ module Fastlane
         end
 
         parsed = JSON.parse(response.body)
-        UI.success("Backend version updated: #{parsed['version']}")
         parsed
       rescue => e
         UI.user_error!("Backend update error: #{e.message}")

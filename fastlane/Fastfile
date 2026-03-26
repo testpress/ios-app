@@ -1,7 +1,4 @@
 # ios-app/fastlane/Fastfile
-# --------------------------------------------------------------
-#  ONE-LANE DEPLOYMENT for iOS – Action-Only Architecture
-# --------------------------------------------------------------
 
 require 'json'
 
@@ -13,25 +10,20 @@ begin
   require 'dotenv'
   Dotenv.load(File.join(ROOT_DIR, ".env"), File.join(FASTFILE_DIR, ".env"))
 rescue LoadError
-  # Optional: ENV can still be provided by the calling shell.
 end
 
-# Global paths
 ASSETS_DIR          = File.join(ROOT_DIR, "ios-app", "Assets.xcassets")
 PROJECT_PATH        = File.join(ROOT_DIR, "ios-app.xcodeproj")
 INFO_PLIST_PATH     = File.join(ROOT_DIR, "ios-app", "Info.plist")
 APP_CONSTANTS_PATH  = File.join(ROOT_DIR, "ios-app", "Utils", "AppConstants.swift")
 ICON_SOURCE         = File.join(FASTFILE_DIR, "Icon-1024.png")
 LAUNCH_SOURCE       = File.join(FASTFILE_DIR, "LaunchImage.png")
+ENTITLEMENTS_PATH   = File.join(ROOT_DIR, "ios-app", "ios-app.entitlements")
 
-# -----------------------------------------------------------------
-#  TRANSFORMATION LANES
-# -----------------------------------------------------------------
 lane :apply_rebranding do |options|
   config = options[:config]
   zoom_enabled = config.dig("features", "zoom_enabled") == true
 
-  # 1. Swift Constants
   testpress_patch(
     action: "constants",
     file: APP_CONSTANTS_PATH,
@@ -42,17 +34,14 @@ lane :apply_rebranding do |options|
     }
   )
 
-  # 2. Google Plist
   sh("cp '#{File.expand_path(config['google_plist_path'], ROOT_DIR)}' '#{File.join(ROOT_DIR, 'ios-app', 'GoogleService-Info.plist')}'")
 
-  # 3. Zoom Features
   testpress_patch(action: "flags", project: PROJECT_PATH, target: "CourseKit", flag: "ZOOM_ENABLED", enabled: zoom_enabled)
   unless zoom_enabled
     testpress_patch(action: "remove_module", project: PROJECT_PATH, target: "ios-app", frameworks: ["MobileRTC.xcframework"], resources: ["MobileRTCResources.bundle"])
     testpress_patch(action: "remove_module", project: PROJECT_PATH, target: "CourseKit", frameworks: ["MobileRTC.xcframework"], resources: ["MobileRTCResources.bundle"])
   end
 
-  # 4. Identity & Versioning
   testpress_patch(
     action: "identity",
     project: PROJECT_PATH,
@@ -62,11 +51,15 @@ lane :apply_rebranding do |options|
     version_code: config["version_code"].to_s,
     info_plist: INFO_PLIST_PATH
   )
+
+  testpress_patch(
+    action: "entitlements",
+    project: PROJECT_PATH,
+    subdomain: config["subdomain"],
+    entitlements_path: ENTITLEMENTS_PATH
+  )
 end
 
-# -----------------------------------------------------------------
-#  PUBLIC LANES
-# -----------------------------------------------------------------
 lane :release_update_to do |params|
   skip_backend = params[:skip_backend] || false
   excluded = ENV["EXCLUDED_SUBDOMAINS"]&.split(",") || []
@@ -79,7 +72,6 @@ end
 lane :release_update do |params|
   skip_backend = params[:skip_backend] || false
 
-  # Trigger backend update and get fresh config (includes new version), unless skipped
   if skip_backend
     config = testpress_api(
       action: "get_config",
@@ -95,11 +87,9 @@ lane :release_update do |params|
   end
   config = prepare_project_config(config: config, fastlane_dir: FASTFILE_DIR)
   
-  # 1. Assets
   testpress_assets(action: "icons", assets_dir: ASSETS_DIR, source: ICON_SOURCE)
   testpress_assets(action: "launch_images", assets_dir: ASSETS_DIR, source: LAUNCH_SOURCE, background_color: config["image_background"])
   
-  # 2. Branding & Archive
   apply_rebranding(config: config)
   archive_preview(config: config)
 end
@@ -111,9 +101,7 @@ lane :release_update_list do |params|
   UI.user_error!("Missing subdomains. Pass subdomains:\"sub1,sub2,sub3\"") if subdomains.to_s.strip.empty?
 
   subdomains.split(",").map(&:strip).each do |sub|
-    UI.message("Processing: #{sub}")
     release_update(subdomain: sub, skip_backend: skip_backend) rescue UI.error("Failed for #{sub}")
-    UI.message("Completed: #{sub}")
   end
 end
 
@@ -124,9 +112,7 @@ lane :release_update_all do |params|
   testpress_api(action: "fetch_subdomains").each do |sub|
     next if excluded.include?(sub)
 
-    UI.message("Processing: #{sub}")
     release_update(subdomain: sub, skip_backend: skip_backend) rescue UI.error("Failed for #{sub}")
-    UI.message("Completed: #{sub}")
   end
 end
 
@@ -139,9 +125,6 @@ lane :prepare_local do |params|
   apply_rebranding(config: config)
 end
 
-# -----------------------------------------------------------------
-#  ARCHIVE LANE
-# -----------------------------------------------------------------
 lane :archive_preview do |params|
   config = params[:config]
   scheme = config["scheme"] || "Arise Medical Academy"
@@ -153,7 +136,6 @@ lane :archive_preview do |params|
     key_filepath: File.expand_path(config["api_key_path"], ROOT_DIR)
   )
 
-  # Clean all DerivedData folders and caches
   FileUtils.rm_rf("./DerivedData")
   FileUtils.rm_rf("./ModuleCache")
   FileUtils.rm_rf("./SourcePackages")
@@ -192,9 +174,6 @@ lane :archive_preview do |params|
   FileUtils.rm_rf(derived_data_path)
 end
 
-# -----------------------------------------------------------------
-#  UPLOAD STATUS LANE
-# -----------------------------------------------------------------
 lane :check_last_upload do |params|
   subdomain = params[:subdomain]
   config = subdomain ? testpress_api(action: "get_config", subdomain: subdomain) : {}
@@ -230,9 +209,6 @@ lane :check_last_upload do |params|
   processing_state = latest_build.processing_state.to_s
   version = latest_build.version
   build_number = latest_build.build_number
-
-  UI.message("Latest build: #{version} (#{build_number})")
-  UI.message("Processing state: #{processing_state}")
 
   case processing_state
   when "PROCESSED"

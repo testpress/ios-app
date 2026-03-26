@@ -7,7 +7,6 @@ module Fastlane
         config = params[:config]
         fastlane_dir = params[:fastlane_dir]
         
-        # 1. Normalize keys
         config["subdomain"]         ||= config["testpress_site_subdomain"]
         config["bundle_identifier"] ||= config["package_name"]
         config["bundle_identifier"] ||= config["bundle_id"]
@@ -19,14 +18,13 @@ module Fastlane
         config["api_key_issuer"]    ||= config["apple_issuer_id"]
         config["api_key_url"]       ||= config["apple_api_key"]
         config["apple_id"]          ||= config["app_store_app_id"]
+        config["domain_url"]        ||= config["domain"]
 
-        # 2. Env Overrides (no hardcoded fallbacks - must be provided via env or config)
         config["api_key_id"]     = ENV["APPLE_API_KEY_ID"]     || config["api_key_id"]
         config["api_key_issuer"] = ENV["APPLE_API_KEY_ISSUER"] || config["api_key_issuer"]
         config["apple_id"]       = ENV["APPLE_APP_ID"]         || config["apple_id"]
         config["scheme"]         = ENV["SCHEME_NAME"]         || config["scheme"]
 
-        # 3. Downloads
         icon_path = File.join(fastlane_dir, "Icon-1024.png")
         launch_path = File.join(fastlane_dir, "LaunchImage.png")
         google_plist = File.join(fastlane_dir, "GoogleService-Info.plist")
@@ -35,7 +33,6 @@ module Fastlane
         other_action.download_asset(url: config["launch_image_url"], path: launch_path) if config["launch_image_url"]
         other_action.download_asset(url: config["google_plist_url"], path: google_plist) if config["google_plist_url"]
 
-        # 4. API Key
         key_file = "AuthKey_#{config['api_key_id']}.p8"
         dest = File.join(fastlane_dir, key_file)
         if ENV["APPLE_API_KEY_CONTENT"]
@@ -44,14 +41,12 @@ module Fastlane
           other_action.download_asset(url: config["api_key_url"], path: dest)
         end
 
-        # 5. Save back
         config["google_plist_path"] = "fastlane/GoogleService-Info.plist"
         config["api_key_path"]      = "fastlane/#{key_file}"
         
         config_out = File.join(File.dirname(fastlane_dir), "config.json")
         File.write(config_out, JSON.pretty_generate(config))
         
-        UI.success("Project config and assets prepared")
         config
       end
 

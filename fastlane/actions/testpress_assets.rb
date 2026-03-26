@@ -40,7 +40,6 @@ module Fastlane
 
           resize_image(source: icon_source, dest: dest, width: pixels, height: pixels, background: "transparent")
         end
-        UI.success("App Icons generated")
       end
 
       def self.generate_launch_images(params)
@@ -48,11 +47,9 @@ module Fastlane
         launch_source = params[:source]
         bg_color = params[:background_color] || "#FFFFFF"
 
-        # 1. Login Image
         login_dest = File.join(assets_dir, "login_screen_image.imageset", "login_screen_image.png")
         resize_image(source: launch_source, dest: login_dest, width: 646, height: 218, background: bg_color)
         
-        # 2. Launch Images
         output_dir = File.join(assets_dir, "LaunchImage.launchimage")
         FileUtils.mkdir_p(output_dir)
 
@@ -75,7 +72,6 @@ module Fastlane
         ].each do |filename, w, h|
           resize_image(source: launch_source, dest: File.join(output_dir, filename), width: w, height: h, background: bg_color)
         end
-        UI.success("Launch and login images generated")
       end
 
       def self.resize_image(params)
