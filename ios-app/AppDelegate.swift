@@ -53,8 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let baseURL = TestpressCourse.shared.baseURL,
            let host = url.host,
            URL(string: baseURL)?.host == host {
-            if KeychainTokenItem.isExist() {
-                DeepLinkRouter.shared.route(url: url)
+            if isUserLoggedIn() {
+                DispatchQueue.main.async {
+                    DeepLinkRouter.shared.route(url: url)
+                }
             }
         }
         return ApplicationDelegate.shared.application(application, open: url, options: options)
@@ -64,8 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
            let url = userActivity.webpageURL {
-            if KeychainTokenItem.isExist() {
-                DeepLinkRouter.shared.route(url: url)
+            if isUserLoggedIn() {
+                DispatchQueue.main.async {
+                    DeepLinkRouter.shared.route(url: url)
+                }
             }
             return true
         }
@@ -188,19 +192,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private func setupRootViewController(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         window = UIWindow(frame: UIScreen.main.bounds)
+        let rootVC = MainViewController()
         
         if let coldStartURL = Self.extractURLFromLaunchOptions(launchOptions) {
-            let rootVC = UserHelper.getLoginOrTabViewController()
-            window?.rootViewController = rootVC
-            window?.makeKeyAndVisible()
-            
-            if KeychainTokenItem.isExist() {
-                DeepLinkRouter.shared.route(url: coldStartURL, animated: false, on: rootVC)
-            }
-        } else {
-            window?.rootViewController = MainViewController()
-            window?.makeKeyAndVisible()
+            rootVC.launchDeepLinkURL = coldStartURL
         }
+        
+        window?.rootViewController = rootVC
+        window?.makeKeyAndVisible()
     }
     
     private func setupAuthErrorHandlerOnApiClient(){

@@ -12,7 +12,7 @@ import Alamofire
 
 class MainViewController: UIViewController {
 
-    
+    var launchDeepLinkURL: URL?
     private var activityIndicator: UIActivityIndicatorView!
     private var emptyView: EmptyView!
 
@@ -141,14 +141,27 @@ class MainViewController: UIViewController {
     }
     
     private func showLoginOrHome() {
-        let viewController = UserHelper.getLoginOrTabViewController()
-        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
               let window = appDelegate.window else {
             return
         }
-        
-        window.rootViewController = viewController
+
+        let nextVC = UserHelper.getLoginOrTabViewController()
+        if let deepLinkURL = launchDeepLinkURL, isUserLoggedIn() {
+            guard let splashView = self.view else {
+                 window.rootViewController = nextVC
+                 return
+            }
+            
+            window.rootViewController = nextVC
+            window.addSubview(splashView)
+            
+            DeepLinkRouter.shared.route(url: deepLinkURL, animated: false, on: nextVC) {
+                splashView.removeFromSuperview()
+            }
+        } else {
+            window.rootViewController = nextVC
+        }
     }
     
     private var navigationBarHeight: CGFloat {
