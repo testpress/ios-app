@@ -109,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         handleFirstLaunch()
         setupRootViewController(launchOptions: launchOptions)
         setupAuthErrorHandlerOnApiClient()
-
+        
         InstituteRepository.shared.getSettings { instituteSettings, error in
             if let instituteSettings = instituteSettings {
                 self.setupSentry(instituteSettings: instituteSettings)

@@ -22,6 +22,10 @@ class MainViewController: UIViewController {
         fetchInstituteSettings()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.showLoginOrHome()
+    }
     private func setupUI() {
         view.backgroundColor = .white
         setupEmptyView()
@@ -147,25 +151,12 @@ class MainViewController: UIViewController {
               let window = appDelegate.window else {
             return
         }
-
-        if let deepLinkURL = launchDeepLinkURL, isUserLoggedIn() {
-           guard let splashView = self.view else {
-                 window.rootViewController = viewController
-                 return
-            }
-            
-            window.rootViewController = viewController
-            window.addSubview(splashView)
-            
-            DeepLinkRouter.shared.route(url: deepLinkURL, animated: false, on: viewController) {
-                splashView.removeFromSuperview()
-            }
-        } else {
-            if let deepLinkURL = launchDeepLinkURL {
-                DeepLinkRouter.shared.setPendingURL(deepLinkURL)
-            }
-            window.rootViewController = viewController
-        }
+        
+        if let deepLinkURL = launchDeepLinkURL {
+            DeepLinkRouter.shared.setPendingURL(deepLinkURL)
+        } 
+        
+        window.rootViewController = viewController
     }
     
     private var navigationBarHeight: CGFloat {
