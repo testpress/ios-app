@@ -7,15 +7,6 @@ public class DeepLinkRouter {
     public private(set) var pendingURL: URL?
     private init() {}
     
-    public func setPendingURL(_ url: URL) {
-        pendingURL = url
-    }
-    
-    public func routePending(on vc: UIViewController) {
-        guard let url = pendingURL else { return }
-        pendingURL = nil
-        route(url: url, animated: true, on: vc)
-    }
 
     public func route( url: URL, animated: Bool = true, on viewController: UIViewController? = nil, completion: (() -> Void)? = nil ) {
         guard let topVC = viewController ?? UIApplication.topViewController() else {
@@ -49,6 +40,15 @@ public class DeepLinkRouter {
         completion?()
     }
 
+    public func routePendingURL(on vc: UIViewController) {
+        guard let url = pendingURL else { return }
+        pendingURL = nil
+        route(url: url, animated: true, on: vc)
+    }
+    
+    public func setPendingURL(_ url: URL) {
+        pendingURL = url
+    }
     private func extractContentID(from url: URL) -> String? {
         return url.path.range(of: "(?<=/contents/)[0-9]+", options: .regularExpression).map { String(url.path[$0]) }
     }

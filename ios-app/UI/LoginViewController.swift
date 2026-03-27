@@ -192,7 +192,7 @@ class LoginViewController: BaseTextFieldViewController {
         )
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true) {
-            DeepLinkRouter.shared.routePending(on: viewController)
+            DeepLinkRouter.shared.routePendingURL(on: viewController)
         }
     }
     

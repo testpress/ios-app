@@ -304,6 +304,6 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
             .instantiateViewController(withIdentifier: Constants.TAB_VIEW_CONTROLLER)
         window.rootViewController = vc
         
-        DeepLinkRouter.shared.routePending(on: vc)
+        DeepLinkRouter.shared.routePendingURL(on: vc)
     }
 }
