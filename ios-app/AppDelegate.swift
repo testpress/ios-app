@@ -107,8 +107,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         initializeFacebook(application, launchOptions: launchOptions)
         configureKeyboardManager()
         handleFirstLaunch()
-        setupAuthErrorHandlerOnApiClient()
         setupRootViewController(launchOptions: launchOptions)
+        setupAuthErrorHandlerOnApiClient()
 
         InstituteRepository.shared.getSettings { instituteSettings, error in
             if let instituteSettings = instituteSettings {
@@ -191,14 +191,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     private func setupRootViewController(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        let viewController = MainViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
-        let rootVC = MainViewController()
         
         if let coldStartURL = Self.extractURLFromLaunchOptions(launchOptions) {
-            rootVC.launchDeepLinkURL = coldStartURL
+            viewController.launchDeepLinkURL = coldStartURL
         }
         
-        window?.rootViewController = rootVC
+        window?.rootViewController = viewController
         window?.makeKeyAndVisible()
     }
     
