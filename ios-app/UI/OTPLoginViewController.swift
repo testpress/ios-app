@@ -37,6 +37,7 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
     
     var instituteSettings: InstituteSettings!
     var instituteSettingsToken: NotificationToken?
+    var deepLinkURL: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,6 +152,7 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
             withIdentifier: Constants.LOGIN_VIEW_CONTROLLER
         ) as? LoginViewController else { return }
         
+        loginVC.deepLinkURL = deepLinkURL
         dismiss(animated: false) {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
                   let window = appDelegate.window else { return }
@@ -304,6 +306,10 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
             .instantiateViewController(withIdentifier: Constants.TAB_VIEW_CONTROLLER)
         window.rootViewController = vc
         
-        DeepLinkRouter.shared.routePendingURL(on: vc)
+        if let url = deepLinkURL {
+            DispatchQueue.main.async {
+                DeepLinkRouter.shared.route(url: url, on: vc)
+            }
+        }
     }
 }

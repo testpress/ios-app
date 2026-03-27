@@ -12,7 +12,7 @@ import Alamofire
 
 class MainViewController: UIViewController {
 
-    var launchDeepLinkURL: URL?
+    var deepLinkURL: URL?
     private var activityIndicator: UIActivityIndicatorView!
     private var emptyView: EmptyView!
 
@@ -145,16 +145,12 @@ class MainViewController: UIViewController {
     }
     
     private func showLoginOrHome() {
-        let viewController = UserHelper.getLoginOrTabViewController()
+        let viewController = UserHelper.getLoginOrTabViewController(deepLinkURL: deepLinkURL)
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
               let window = appDelegate.window else {
             return
         }
-        
-        if let deepLinkURL = launchDeepLinkURL {
-            DeepLinkRouter.shared.setPendingURL(deepLinkURL)
-        } 
         
         window.rootViewController = viewController
     }

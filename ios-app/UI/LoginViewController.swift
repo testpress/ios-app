@@ -46,6 +46,7 @@ class LoginViewController: BaseTextFieldViewController {
     let alertController = UIUtils.initProgressDialog(message: Strings.PLEASE_WAIT + "\n\n")
     var instituteSettings: InstituteSettings!
     var instituteSettingsToken: NotificationToken?
+    var deepLinkURL: URL?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setStatusBarColor()
@@ -122,6 +123,7 @@ class LoginViewController: BaseTextFieldViewController {
             withIdentifier: Constants.OTP_LOGIN_VIEW_CONTROLLER
         ) as? OTPLoginViewController else { return }
         
+        otpLoginVC.deepLinkURL = deepLinkURL
         dismiss(animated: false) {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
                   let window = appDelegate.window else { return }
@@ -192,7 +194,11 @@ class LoginViewController: BaseTextFieldViewController {
         )
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true) {
-            DeepLinkRouter.shared.routePendingURL(on: viewController)
+            if let url = self.deepLinkURL {
+                DispatchQueue.main.async {
+                    DeepLinkRouter.shared.route(url: url, on: viewController)
+                }
+            }
         }
     }
     

@@ -194,8 +194,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let viewController = MainViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        if let coldStartURL = Self.extractURLFromLaunchOptions(launchOptions) {
-            viewController.launchDeepLinkURL = coldStartURL
+        if let deepLinkURL = Self.extractURLFromLaunchOptions(launchOptions) {
+            viewController.deepLinkURL = deepLinkURL
         }
         
         window?.rootViewController = viewController
