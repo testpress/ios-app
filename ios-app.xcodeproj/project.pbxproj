@@ -333,6 +333,7 @@
 		25E435EC263ADE7500243FD3 /* DashboardSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E435EA263ADE7500243FD3 /* DashboardSectionHeaderCell.swift */; };
 		25E435ED263ADE7500243FD3 /* DashboardSectionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25E435EB263ADE7500243FD3 /* DashboardSectionHeaderCell.xib */; };
 		25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */; };
+		2D6B7F9C2F6A6D5A00A0C362 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7F9B2F6A6D5A00A0C362 /* DeepLinkRouter.swift */; };
 		2D7CDBCC2F237CCD0076B42F /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */; };
 		2D7CDBCE2F237D150076B42F /* DeviceIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */; };
 		2D84D0662F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D84D0652F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift */; };
@@ -611,6 +612,7 @@
 		25F7522027FEB143000D8137 /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		25F92A1F243306A60084ADC8 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestZoomMeetViewController.swift; sourceTree = "<group>"; };
+		2D6B7F9B2F6A6D5A00A0C362 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRouter.swift; sourceTree = "<group>"; };
 		2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIDManager.swift; sourceTree = "<group>"; };
 		2D84D0652F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedDeviceViewController.swift; sourceTree = "<group>"; };
@@ -1393,6 +1395,7 @@
 				03A60FA02CB3FEB000079A7C /* AuthErrorHandler.swift */,
 				03CD0C562CB7A04E00E17218 /* UserHelper.swift */,
 				2F515E011FF61A550005D8A5 /* ImageUploadHelper.swift */,
+				2D6B7F9B2F6A6D5A00A0C362 /* DeepLinkRouter.swift */,
 				2F515DF91FF4D12A0005D8A5 /* ImagePicker.swift */,
 				2F515DF11FF3B0980005D8A5 /* RichTextEditor.swift */,
 				D932B2C02CDA1392002B6D30 /* AppConstants.swift */,
@@ -2076,6 +2079,7 @@
 				03E4AFD22CAFD22100ECC34D /* DashboardSection.swift in Sources */,
 				2503DF66263C177A003226AD /* PostSectionController.swift in Sources */,
 				250629902265B7D600539FB2 /* LoginActivityViewController.swift in Sources */,
+				2D6B7F9C2F6A6D5A00A0C362 /* DeepLinkRouter.swift in Sources */,
 				2F25D562201F5C8800C01CCE /* TargetThreatViewController.swift in Sources */,
 				2503DF79263FB21F003226AD /* ChapterContentSectionController.swift in Sources */,
 				2FDD2E4120A59D2600A111EC /* AccessCodeViewController.swift in Sources */,

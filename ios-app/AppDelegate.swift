@@ -50,7 +50,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         
+        if let baseURL = TestpressCourse.shared.baseURL,
+           let host = url.host,
+           URL(string: baseURL)?.host == host {
+            if isUserLoggedIn() {
+                DispatchQueue.main.async {
+                    DeepLinkRouter.shared.route(url: url)
+                }
+            }
+        }
         return ApplicationDelegate.shared.application(application, open: url, options: options)
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+           let url = userActivity.webpageURL {
+            if isUserLoggedIn() {
+                DispatchQueue.main.async {
+                    DeepLinkRouter.shared.route(url: url)
+                }
+            }
+            return true
+        }
+        return false
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -84,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         initializeFacebook(application, launchOptions: launchOptions)
         configureKeyboardManager()
         handleFirstLaunch()
-        setupRootViewController()
+        setupRootViewController(launchOptions: launchOptions)
         setupAuthErrorHandlerOnApiClient()
         
         InstituteRepository.shared.getSettings { instituteSettings, error in
@@ -95,6 +118,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
 
         return true
+    }
+
+    private static func extractURLFromLaunchOptions(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> URL? {
+        if let url = launchOptions?[.url] as? URL {
+            return url
+        }
+        
+        guard let userActivityDict = launchOptions?[.userActivityDictionary] as? [String: Any],
+              let userActivity = userActivityDict["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity
+        else { return nil }
+        
+        return userActivity.webpageURL
     }
 
     private func registerForNotifications(_ application: UIApplication) {
@@ -155,9 +190,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
-    private func setupRootViewController() {
+    private func setupRootViewController(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         let viewController = MainViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
+        
+        if let deepLinkURL = Self.extractURLFromLaunchOptions(launchOptions) {
+            viewController.deepLinkURL = deepLinkURL
+        }
+        
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
     }

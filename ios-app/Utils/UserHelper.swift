@@ -44,7 +44,7 @@ class UserHelper {
         viewController.present(profileViewController, animated: true)
     }
     
-    static func getLoginOrTabViewController() -> UIViewController {
+    static func getLoginOrTabViewController(deepLinkURL: URL? = nil) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var viewController: UIViewController
         if (KeychainTokenItem.isExist()) {
@@ -59,6 +59,7 @@ class UserHelper {
                 viewController = storyboard.instantiateViewController(withIdentifier:
                                                                         Constants.LOGIN_VIEW_CONTROLLER)
             }
+            (viewController as? DeepLinkBaseProtocol)?.deepLinkURL = deepLinkURL
         }
         return viewController
     }

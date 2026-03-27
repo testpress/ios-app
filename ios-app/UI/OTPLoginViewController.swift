@@ -10,7 +10,7 @@ import CourseKit
 import UIKit
 import RealmSwift
 
-final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDataSource, UIPickerViewDelegate, DeepLinkBaseProtocol {
     
     @IBOutlet private var phoneField: UITextField!
     @IBOutlet private var otpField: UITextField!
@@ -37,6 +37,7 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
     
     var instituteSettings: InstituteSettings!
     var instituteSettingsToken: NotificationToken?
+    var deepLinkURL: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,10 +152,11 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
             withIdentifier: Constants.LOGIN_VIEW_CONTROLLER
         ) as? LoginViewController else { return }
         
+        loginVC.deepLinkURL = deepLinkURL
         dismiss(animated: false) {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
                   let window = appDelegate.window else { return }
-            window.rootViewController = loginVC
+            window.rootViewController = loginVC as? UIViewController
         }
     }
     
@@ -303,5 +305,11 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
         let vc = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: Constants.TAB_VIEW_CONTROLLER)
         window.rootViewController = vc
+        
+        if let url = deepLinkURL {
+            DispatchQueue.main.async {
+                DeepLinkRouter.shared.route(url: url, on: vc)
+            }
+        }
     }
 }
