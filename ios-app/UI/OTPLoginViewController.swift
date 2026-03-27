@@ -303,5 +303,7 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
         let vc = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: Constants.TAB_VIEW_CONTROLLER)
         window.rootViewController = vc
+        
+        DeepLinkRouter.shared.routePending(on: vc)
     }
 }

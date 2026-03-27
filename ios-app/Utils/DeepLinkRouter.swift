@@ -4,15 +4,25 @@ import CourseKit
 public class DeepLinkRouter {
 
     public static let shared = DeepLinkRouter()
+    public private(set) var pendingURL: URL?
     private init() {}
+    
+    public func setPendingURL(_ url: URL) {
+        pendingURL = url
+    }
+    
+    public func routePending(on vc: UIViewController) {
+        guard let url = pendingURL else { return }
+        pendingURL = nil
+        route(url: url, animated: true, on: vc)
+    }
 
-    public func route(url: URL, animated: Bool = true, on viewController: UIViewController? = nil, completion: (() -> Void)? = nil) {
-        if let contentID = extractContentID(from: url),
-           let id = Int(contentID) {
+    public func route( url: URL, animated: Bool = true, on viewController: UIViewController? = nil, completion: (() -> Void)? = nil ) {
+        guard let topVC = viewController ?? UIApplication.topViewController() else {
+            return
+        }
     
-            let targetVC = viewController ?? UIApplication.topViewController()
-            guard let topVC = targetVC else { return }
-    
+        if let contentID = extractContentID(from: url), let id = Int(contentID) {
             if let current = topVC as? ContentDetailPageViewController,
                current.contentId == id {
                 return
@@ -32,9 +42,11 @@ public class DeepLinkRouter {
             vc.contentId = id
             vc.modalPresentationStyle = .overFullScreen
             topVC.present(vc, animated: animated, completion: completion)
-        } else {
-            completion?()
+    
+            return
         }
+    
+        completion?()
     }
 
     private func extractContentID(from url: URL) -> String? {

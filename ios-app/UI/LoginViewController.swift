@@ -190,7 +190,10 @@ class LoginViewController: BaseTextFieldViewController {
         let viewController = storyboard.instantiateViewController(
             withIdentifier: Constants.TAB_VIEW_CONTROLLER
         )
-        present(viewController, animated: true)
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true) {
+            DeepLinkRouter.shared.routePending(on: viewController)
+        }
     }
     
     private func showUserDataForm() {

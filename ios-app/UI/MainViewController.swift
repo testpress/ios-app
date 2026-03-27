@@ -146,21 +146,24 @@ class MainViewController: UIViewController {
             return
         }
 
-        let nextVC = UserHelper.getLoginOrTabViewController()
+        let dashboardVC = UserHelper.getLoginOrTabViewController()
         if let deepLinkURL = launchDeepLinkURL, isUserLoggedIn() {
-            guard let splashView = self.view else {
-                 window.rootViewController = nextVC
+           guard let splashView = self.view else {
+                 window.rootViewController = dashboardVC
                  return
             }
             
-            window.rootViewController = nextVC
+            window.rootViewController = dashboardVC
             window.addSubview(splashView)
             
-            DeepLinkRouter.shared.route(url: deepLinkURL, animated: false, on: nextVC) {
+            DeepLinkRouter.shared.route(url: deepLinkURL, animated: false, on: dashboardVC) {
                 splashView.removeFromSuperview()
             }
         } else {
-            window.rootViewController = nextVC
+            if let deepLinkURL = launchDeepLinkURL {
+                DeepLinkRouter.shared.setPendingURL(deepLinkURL)
+            }
+            window.rootViewController = dashboardVC
         }
     }
     
