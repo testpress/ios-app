@@ -53,16 +53,13 @@ class UserHelper {
         } else {
             let settings = DBManager<InstituteSettings>().getResultsFromDB().first
             if settings?.isOtpLoginMethodAllowed() == true {
-                let otpLoginVC = storyboard.instantiateViewController(withIdentifier:
-                                                                        Constants.OTP_LOGIN_VIEW_CONTROLLER) as! OTPLoginViewController
-                otpLoginVC.deepLinkURL = deepLinkURL
-                viewController = otpLoginVC
+                viewController = storyboard.instantiateViewController(withIdentifier:
+                                                                        Constants.OTP_LOGIN_VIEW_CONTROLLER)
             } else {
-                let loginVC = storyboard.instantiateViewController(withIdentifier:
-                                                                        Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
-                loginVC.deepLinkURL = deepLinkURL
-                viewController = loginVC
+                viewController = storyboard.instantiateViewController(withIdentifier:
+                                                                        Constants.LOGIN_VIEW_CONTROLLER)
             }
+            (viewController as? DeepLinkBaseProtocol)?.deepLinkURL = deepLinkURL
         }
         return viewController
     }

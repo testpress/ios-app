@@ -30,7 +30,7 @@ import UIKit
 import CourseKit
 import RealmSwift
 
-class LoginViewController: BaseTextFieldViewController {
+class LoginViewController: BaseTextFieldViewController, DeepLinkBaseProtocol {
 
     // MARK: Properties
     @IBOutlet weak var usernameField: UITextField!
@@ -127,7 +127,7 @@ class LoginViewController: BaseTextFieldViewController {
         dismiss(animated: false) {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
                   let window = appDelegate.window else { return }
-            window.rootViewController = otpLoginVC
+            window.rootViewController = otpLoginVC as? UIViewController
         }
     }
     

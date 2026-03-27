@@ -10,7 +10,7 @@ import CourseKit
 import UIKit
 import RealmSwift
 
-final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDataSource, UIPickerViewDelegate, DeepLinkBaseProtocol {
     
     @IBOutlet private var phoneField: UITextField!
     @IBOutlet private var otpField: UITextField!
@@ -156,7 +156,7 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
         dismiss(animated: false) {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
                   let window = appDelegate.window else { return }
-            window.rootViewController = loginVC
+            window.rootViewController = loginVC as? UIViewController
         }
     }
     

@@ -24,7 +24,10 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.showLoginOrHome()
+        if deepLinkURL != nil {
+            deepLinkURL = nil
+            showLoginOrHome()
+        }
     }
     private func setupUI() {
         view.backgroundColor = .white

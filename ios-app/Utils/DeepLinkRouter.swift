@@ -1,6 +1,10 @@
 import UIKit
 import CourseKit
 
+public protocol DeepLinkBaseProtocol: AnyObject {
+    var deepLinkURL: URL? { get set }
+}
+
 public class DeepLinkRouter {
 
     public static let shared = DeepLinkRouter()
