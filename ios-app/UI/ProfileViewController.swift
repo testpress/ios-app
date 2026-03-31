@@ -68,6 +68,7 @@ class ProfileViewController: UIViewController {
         }
         deleteAccountButton.isHidden = true
         showDeleteAccountButtonIfSignupAllowed()
+        showOrHideBookmark()
         
         self.setStatusBarColor()
     }
@@ -85,6 +86,15 @@ class ProfileViewController: UIViewController {
             guard let settings = settings else { return }
             DispatchQueue.main.async {
                 self?.deleteAccountButton.isHidden = !settings.allowSignup
+            }
+        }
+    }
+    
+    func showOrHideBookmark() {
+        InstituteRepository.shared.getSettings { [weak self] settings, error in
+            guard let settings = settings else { return }
+            DispatchQueue.main.async {
+                self?.bookmarkButtonLayout.isHidden = !settings.bookmarksEnabled
             }
         }
     }
