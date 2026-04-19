@@ -94,7 +94,13 @@ module Fastlane
       def self.patch_constants(file_path, constants)
         content = File.read(file_path)
         constants.each do |name, value|
-          content.gsub!(/public static let #{name} = ".*?"/, "public static let #{name} = \"#{value}\"")
+          pattern = /(\bstatic\s+let\s+#{Regexp.escape(name)}\s*=\s*")([^"]*)(")/
+          replacements = 0
+          content.gsub!(pattern) do
+            replacements += 1
+            "#{Regexp.last_match(1)}#{value}#{Regexp.last_match(3)}"
+          end
+          UI.user_error!("Failed to patch AppConstants.swift: constant #{name} not found") if replacements.zero?
         end
         File.write(file_path, content)
       end
@@ -114,12 +120,14 @@ module Fastlane
 
         unless enabled
           project.targets.each do |target|
-            [target.frameworks_build_phase, *target.copy_files_build_phases.select { |p| p.name&.downcase&.include?("embed") }].each do |phase|
+            [target.frameworks_build_phase, *target.copy_files_build_phases.select { |p| p.name&.downcase&.include?("embed") }].compact.each do |phase|
               ref = phase.files.find { |f| f.display_name.include?("MobileRTC.xcframework") }
               phase.remove_file_reference(ref.file_ref) if ref
             end
-            ref = target.resources_build_phase.files.find { |f| f.display_name.include?("MobileRTCResources.bundle") }
-            target.resources_build_phase.remove_file_reference(ref.file_ref) if ref
+            if target.resources_build_phase
+              ref = target.resources_build_phase.files.find { |f| f.display_name.include?("MobileRTCResources.bundle") }
+              target.resources_build_phase.remove_file_reference(ref.file_ref) if ref
+            end
           end
         end
 
@@ -134,19 +142,20 @@ module Fastlane
         request["API-access-key"] = ENV["API_ACCESS_KEY"]
 
         response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) { |http| http.request(request) }
-        return unless response.is_a?(Net::HTTPSuccess)
+        UI.user_error!("Failed to fetch settings for entitlements: HTTP #{response.code}") unless response.is_a?(Net::HTTPSuccess)
 
         domain_url = JSON.parse(response.body)["domain_url"]
-        return unless domain_url
+        UI.user_error!("Failed to configure entitlements: domain_url missing in settings response") unless domain_url
 
         domain = domain_url.gsub(/^https?:\/\//, "")
-        File.write(entitlements_path, {
+        Xcodeproj::Plist.write_to_path({
           "aps-environment"                        => "production",
           "com.apple.developer.associated-domains" => ["applinks:#{domain}"]
-        }.to_plist)
+        }, entitlements_path)
 
         project    = Xcodeproj::Project.open(project_path)
         app_target = project.targets.find { |t| t.product_type == "com.apple.product-type.application" }
+        UI.user_error!("Failed to configure entitlements: application target not found") unless app_target
         app_target.build_configurations.each { |cfg| cfg.build_settings["CODE_SIGN_ENTITLEMENTS"] = entitlements_path }
         project.save
       end
