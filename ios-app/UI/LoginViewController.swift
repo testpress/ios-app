@@ -24,8 +24,6 @@
 //
 
 import Alamofire
-import FBSDKCoreKit
-import FBSDKLoginKit
 import UIKit
 import CourseKit
 import RealmSwift
@@ -38,8 +36,6 @@ class LoginViewController: BaseTextFieldViewController, DeepLinkBaseProtocol {
     @IBOutlet weak var navigationbarItem: UINavigationItem!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpLayout: UIStackView!
-    @IBOutlet weak var socialLoginLayout: UIStackView!
-    @IBOutlet weak var facebookButtonLayout: UIView!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     @IBOutlet weak var phoneNumberLoginButton: UIButton!
     
@@ -58,22 +54,6 @@ class LoginViewController: BaseTextFieldViewController, DeepLinkBaseProtocol {
         signUpLayout.isHidden = true
         phoneNumberLoginButton.isHidden = true
 
-        let fbLoginButton = FBLoginButton()
-        
-        fbLoginButton.center.x = facebookButtonLayout.center.x
-        fbLoginButton.delegate = self
-        fbLoginButton.translatesAutoresizingMaskIntoConstraints = false
-        facebookButtonLayout.addSubview(fbLoginButton)
-        fbLoginButton.topAnchor.constraint(equalTo: facebookButtonLayout.topAnchor).isActive = true
-        fbLoginButton.bottomAnchor
-            .constraint(equalTo: facebookButtonLayout.bottomAnchor).isActive = true
-        fbLoginButton.leadingAnchor
-            .constraint(equalTo: facebookButtonLayout.leadingAnchor).isActive = true
-        fbLoginButton.trailingAnchor
-            .constraint(equalTo: facebookButtonLayout.trailingAnchor).isActive = true
-        
-        socialLoginLayout.isHidden = true
-
         // Set firstTextField in super class to hide keyboard on outer side click
         firstTextField = usernameField
         showKeyboardOnStart = false
@@ -90,7 +70,6 @@ class LoginViewController: BaseTextFieldViewController, DeepLinkBaseProtocol {
         guard let settings = settings else { return }
         self.instituteSettings = settings
         signUpLayout.isHidden = !instituteSettings.allowSignup
-        socialLoginLayout.isHidden = !instituteSettings.facebookLoginEnabled
         forgotPasswordButton.isHidden = instituteSettings.disableForgotPassword
         phoneNumberLoginButton.isHidden = !instituteSettings.isOtpLoginMethodAllowed()
     }
@@ -234,19 +213,4 @@ class LoginViewController: BaseTextFieldViewController, DeepLinkBaseProtocol {
 
 }
 
-extension LoginViewController: LoginButtonDelegate {
-    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-    }
-    
-    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-        if (error != nil) {
-            print(error)
-            return
-        }
-        
-        let token = result?.token
-        authenticate(username: (token?.userID)!, password: (token?.tokenString)!, provider: .FACEBOOK)
-    }
-    
-}
 

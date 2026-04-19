@@ -24,7 +24,6 @@
 //
 
 import Alamofire
-import FBSDKLoginKit
 import Kingfisher
 import UIKit
 import CourseKit

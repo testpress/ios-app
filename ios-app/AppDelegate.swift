@@ -23,7 +23,6 @@
 //  THE SOFTWARE.
 //
 
-import FBSDKCoreKit
 import IQKeyboardManagerSwift
 import UIKit
 import Sentry
@@ -59,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             }
         }
-        return ApplicationDelegate.shared.application(application, open: url, options: options)
+        return true
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity,
@@ -104,7 +103,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         configureFirebase()
         customizeAppearance()
         configureAudioSession()
-        initializeFacebook(application, launchOptions: launchOptions)
         configureKeyboardManager()
         handleFirstLaunch()
         setupRootViewController(launchOptions: launchOptions)
@@ -173,9 +171,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 
-    private func initializeFacebook(_ application: UIApplication, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-    }
 
     private func configureKeyboardManager() {
         IQKeyboardManager.shared.enable = true

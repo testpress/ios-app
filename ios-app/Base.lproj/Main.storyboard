@@ -178,23 +178,6 @@
                                                                     </stackView>
                                                                 </subviews>
                                                             </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="htc-yl-NIs">
-                                                                <rect key="frame" x="0.0" y="280" width="350" height="69.666666666666686"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSj-uM-Kwg">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="16.666666666666668"/>
-                                                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
-                                                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozZ-X7-GX9">
-                                                                        <rect key="frame" x="0.0" y="41.666666666666629" width="350" height="28"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="28" id="qVn-SG-3yx"/>
-                                                                        </constraints>
-                                                                    </view>
-                                                                </subviews>
-                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -231,7 +214,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="facebookButtonLayout" destination="ozZ-X7-GX9" id="EBw-bO-voE"/>
                         <outlet property="forgotPasswordButton" destination="9fg-Is-jIf" id="XNU-zK-ReL"/>
                         <outlet property="loginButton" destination="SKF-zT-5yA" id="Owh-dc-0FD"/>
                         <outlet property="navigationbarItem" destination="y21-8k-c3o" id="23P-l9-DYy"/>
@@ -239,7 +221,6 @@
                         <outlet property="phoneNumberLoginButton" destination="yWJ-Wz-U9b" id="hZd-LE-MyC"/>
                         <outlet property="scrollView" destination="IC7-mf-Rhd" id="rh9-gq-s8e"/>
                         <outlet property="signUpLayout" destination="YcW-vj-b3g" id="aXQ-4G-UCA"/>
-                        <outlet property="socialLoginLayout" destination="htc-yl-NIs" id="4z2-Wv-n0X"/>
                         <outlet property="usernameField" destination="qaT-yY-Sc7" id="kSr-nI-LNK"/>
                     </connections>
                 </viewController>

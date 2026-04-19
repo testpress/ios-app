@@ -60,16 +60,5 @@ class TestLoginViewController: XCTestCase {
         XCTAssertFalse(controller.signUpLayout.isHidden)
     }
     
-    func testVisibiltyOfFacebookLogin() {
-        /*
-         Facebook login's visibility should depend on institute settings
-         */
-        XCTAssertTrue(controller.socialLoginLayout.isHidden)
-        
-        TestUtils.saveInstituteSettings(TestUtils.getInstituteSettings(facebookLoginEnabled: true))
-        controller.loadView()
-        
-        XCTAssertFalse(controller.socialLoginLayout.isHidden)
-    }
 
 }
