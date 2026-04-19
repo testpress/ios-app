@@ -10,7 +10,6 @@ import Foundation
 import CourseKit
 import Alamofire
 import UIKit
-import FBSDKLoginKit
 
 class UserHelper {
     static func logout() {
@@ -31,8 +30,6 @@ class UserHelper {
         
         TestpressCourse.shared.clearData()
         TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), completion: {_,_ in})
-        // Logout on Facebook
-        LoginManager().logOut()
         KeychainTokenItem.clearKeychainItems()
     }
     
