@@ -7,14 +7,13 @@ on:
         description: "Institute subdomain (e.g. lmsdemo, myinstitute)"
         required: true
         default: lmsdemo
-  pull_request:
 
 jobs:
   release:
     runs-on: macos-latest
 
     env:
-      SUBDOMAIN: ${{ github.event_name == 'pull_request' && 'lmsdemo' || inputs.subdomain }}
+      SUBDOMAIN: ${{ inputs.subdomain }}
       API_ACCESS_KEY: ${{ secrets.API_ACCESS_KEY }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
