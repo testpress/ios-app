@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       subdomain:
-        description: "Institute subdomain (e.g. staging, myinstitute)"
+        description: "Institute subdomain (e.g. demo, myinstitute)"
         required: true
         default: demo
   pull_request:
@@ -14,7 +14,7 @@ jobs:
     runs-on: macos-latest
 
     env:
-      SUBDOMAIN: ${{ github.event_name == 'pull_request' && 'staging' || inputs.subdomain }}
+      SUBDOMAIN: ${{ github.event_name == 'pull_request' && 'demo' || inputs.subdomain }}
       API_ACCESS_KEY: ${{ secrets.API_ACCESS_KEY }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
