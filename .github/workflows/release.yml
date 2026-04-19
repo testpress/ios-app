@@ -6,7 +6,7 @@ on:
       subdomain:
         description: "Institute subdomain (e.g. staging, myinstitute)"
         required: true
-        default: staging
+        default: lmsdemo
   pull_request:
 
 jobs:

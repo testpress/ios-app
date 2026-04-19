@@ -27,6 +27,7 @@ module Fastlane
         config["api_key_issuer"]    ||= config["apple_issuer_id"]
         config["api_key_url"]       ||= config["apple_api_key"]
         config["apple_id"]          ||= config["app_store_app_id"]
+        config["team_id"]           ||= config["apple_team_id"]
         config["xcode_scheme"]        = "Testpress.in"
         config
       end

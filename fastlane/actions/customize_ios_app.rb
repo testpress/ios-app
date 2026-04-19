@@ -56,10 +56,13 @@ module Fastlane
 
       def self.patch_identity(project_path, plist_path, config, provisioning_profile = nil)
         project = Xcodeproj::Project.open(project_path)
+        team_id = config["team_id"]
+        UI.user_error!("Missing team_id or apple_team_id in API config. Fix it in the dashboard.") if team_id.to_s.empty?
+
         project.targets.each do |target|
           target.build_configurations.each do |cfg|
             cfg.build_settings["CODE_SIGN_STYLE"] = "Manual"
-            cfg.build_settings["DEVELOPMENT_TEAM"] = "BHAB7LC35Y"
+            cfg.build_settings["DEVELOPMENT_TEAM"] = team_id
             cfg.build_settings["CODE_SIGN_IDENTITY"] = "Apple Distribution"
 
             if target.product_type != "com.apple.product-type.application"
