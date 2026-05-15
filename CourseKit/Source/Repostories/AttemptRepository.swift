@@ -106,4 +106,46 @@ public class AttemptRepository {
                 completion(attempt, error)
         })
     }
+
+    private func fetchRunningAttempt(attemptsUrl: String, completion: @escaping (Attempt?, TPError?) -> Void) {
+        TPApiClient.loadAttempts(endpointProvider: TPEndpointProvider(.loadAttempts, url: attemptsUrl)) { response, error in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            let runningAttempt = response?.results.first(where: { $0.state == Constants.STATE_RUNNING })
+            completion(runningAttempt, nil)
+        }
+    }
+
+    private func fetchContentRunningAttempt(attemptsUrl: String, completion: @escaping (ContentAttempt?, TPError?) -> Void) {
+        TPApiClient.getListItems(endpointProvider: TPEndpointProvider(.loadAttempts, url: attemptsUrl), completion: { (response: TPApiResponse<ContentAttempt>?, error: TPError?) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            let runningContentAttempt = response?.results.first(where: { $0.assessment?.state == Constants.STATE_RUNNING })
+            completion(runningContentAttempt, nil)
+        }, type: ContentAttempt.self)
+    }
+
+    public func fetchLatestRunningAttempt(exam: Exam, content: Content?, completion: @escaping (ContentAttempt?, Attempt?, TPError?) -> Void) {
+        let url = content?.getAttemptsUrl() ?? exam.attemptsUrl
+        guard !url.isEmpty else {
+            completion(nil, nil, nil)
+            return
+        }
+
+        if content != nil {
+            fetchContentRunningAttempt(attemptsUrl: url) { ca, error in
+                completion(ca, ca?.assessment, error)
+            }
+        } else {
+            fetchRunningAttempt(attemptsUrl: url) { a, error in
+                completion(nil, a, error)
+            }
+        }
+    }
+
+
 }

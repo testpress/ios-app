@@ -58,6 +58,7 @@ public class StartExamScreenViewController: BaseUIViewController {
     public var exam: Exam!
     public var attempt: Attempt?
     public var accessCode: String!
+    private let attemptRepository = AttemptRepository()
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,9 +109,12 @@ public class StartExamScreenViewController: BaseUIViewController {
         } else {
             webOnlyExamLabel.isHidden = true
             UIUtils.setButtonDropShadow(startButton)
-            if attempt?.state! == Constants.STATE_RUNNING {
-                startButton.setTitle("RESUME", for: .normal)
-                navigationBarItem?.title = Strings.RESUME_EXAM
+            updateResumeUI()
+            attemptRepository.fetchLatestRunningAttempt(exam: exam, content: content) { [weak self] ca, a, _ in
+                guard let self = self else { return }
+                self.contentAttempt = ca
+                self.attempt = ca?.assessment ?? a
+                self.updateResumeUI()
             }
         }
         initializeLanguageSelection()
@@ -376,6 +380,13 @@ public class StartExamScreenViewController: BaseUIViewController {
         viewController.contentAttempt = contentAttempt
         viewController.exam = content.exam
         present(viewController, animated: true, completion: nil)
+    }
+
+    private func updateResumeUI() {
+        if attempt?.state == Constants.STATE_RUNNING {
+            startButton.setTitle("RESUME", for: .normal)
+            navigationBarItem?.title = Strings.RESUME_EXAM
+        }
     }
     
     // Set frames of the views in this method to support both portrait & landscape view
