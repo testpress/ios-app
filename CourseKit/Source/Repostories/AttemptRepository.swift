@@ -142,21 +142,4 @@ public class AttemptRepository {
         }
     }
 
-    public func endRunningAttempt(exam: Exam, content: Content?, currentAttempt: Attempt?, currentContentAttempt: ContentAttempt?, completion: @escaping (ContentAttempt?, Attempt?, TPError?) -> Void) {
-        if let ca = currentContentAttempt {
-            endExam(url: ca.getEndAttemptUrl()) { r, e in completion(r, r?.assessment, e) }
-        } else if let a = currentAttempt {
-            endAttempt(url: a.getEndAttemptUrl()) { r, e in completion(nil, r, e) }
-        } else {
-            fetchLatestRunningAttempt(exam: exam, content: content) { ca, a, error in
-                if let ca = ca {
-                    self.endExam(url: ca.getEndAttemptUrl()) { r, e in completion(r, r?.assessment, e) }
-                } else if let a = a {
-                    self.endAttempt(url: a.getEndAttemptUrl()) { r, e in completion(nil, r, e) }
-                } else {
-                    completion(nil, nil, error)
-                }
-            }
-        }
-    }
 }

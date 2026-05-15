@@ -232,17 +232,28 @@ public class StartExamScreenViewController: BaseUIViewController {
                 present(alertController, animated: false, completion: nil)
                 startButton.isHidden = true
                 alertController.message = Strings.ENDING_EXAM
-                attemptRepository.endRunningAttempt(exam: exam, content: content, currentAttempt: attempt, currentContentAttempt: contentAttempt) { [weak self] ca, a, error in
+                
+                let completion: (ContentAttempt?, Attempt?, TPError?) -> Void = { [weak self] contentAttempt, attempt, error in
                     guard let self = self else { return }
                     self.alertController.dismiss(animated: true, completion: nil)
                     if error != nil {
                         self.startButton.isHidden = false
                         return
                     }
-                    self.contentAttempt = ca
-                    self.attempt = ca?.assessment ?? a
+                    self.contentAttempt = contentAttempt
+                    self.attempt = contentAttempt?.assessment ?? attempt
                     if self.attempt != nil || self.contentAttempt != nil {
                         self.navigateToExamResult(exam: self.exam, contentAttempt: self.contentAttempt, attempt: self.attempt)
+                    }
+                }
+
+                if let contentAttempt = contentAttempt {
+                    attemptRepository.endExam(url: contentAttempt.getEndAttemptUrl()) { ca, error in
+                        completion(ca, ca?.assessment, error)
+                    }
+                } else if let attempt = attempt {
+                    attemptRepository.endAttempt(url: attempt.getEndAttemptUrl()) { a, error in
+                        completion(nil, a, error)
                     }
                 }
                 return
