@@ -116,13 +116,24 @@ public class TPError: Error {
     }
 
     public func getDisplayMessage() -> String {
-        return error_detail ?? getMessageFromErrorBody() ?? message ?? Strings.SOMETHIGN_WENT_WRONG
+        return error_detail ?? message ?? Strings.SOMETHIGN_WENT_WRONG
     }
 
     private func getMessageFromErrorBody() -> String? {
-        let data = message?.data(using: .utf8)
-        let json = (try? JSONSerialization.jsonObject(with: data ?? Data())) as? [String: Any]
-        return json?["message"] as? String
+        guard let data = message?.data(using: .utf8),
+              let json = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any] else {
+            return nil
+        }
+
+        if let message = json["message"] as? String {
+            return message
+        }
+
+        if let nonFieldErrors = json["non_field_errors"] as? [String] {
+            return nonFieldErrors.first
+        }
+
+        return nil
     }
     
     public func logErrorToSentry() {
