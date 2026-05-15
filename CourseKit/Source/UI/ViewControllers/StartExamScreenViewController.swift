@@ -226,23 +226,32 @@ public class StartExamScreenViewController: BaseUIViewController {
             showLanguages()
             return
         }
-        if exam.disableAttemptResume {
-            if attempt?.state == Constants.STATE_RUNNING || contentAttempt?.assessment?.state == Constants.STATE_RUNNING {
+        let isRunning = attempt?.state == Constants.STATE_RUNNING || contentAttempt?.assessment?.state == Constants.STATE_RUNNING
+        if isRunning {
+            if exam.disableAttemptResume {
                 present(alertController, animated: false, completion: nil)
                 startButton.isHidden = true
                 alertController.message = Strings.ENDING_EXAM
-                attemptRepository.endRunningAttempt(exam: exam, content: content, currentAttempt: attempt, currentContentAttempt: contentAttempt) { [weak self] ca, a, _ in
+                attemptRepository.endRunningAttempt(exam: exam, content: content, currentAttempt: attempt, currentContentAttempt: contentAttempt) { [weak self] ca, a, error in
                     guard let self = self else { return }
+                    self.alertController.dismiss(animated: true, completion: nil)
+                    if error != nil {
+                        self.startButton.isHidden = false
+                        return
+                    }
                     self.contentAttempt = ca
                     self.attempt = ca?.assessment ?? a
-                    self.alertController.dismiss(animated: true, completion: nil)
                     if self.attempt != nil || self.contentAttempt != nil {
                         self.navigateToExamResult(exam: self.exam, contentAttempt: self.contentAttempt, attempt: self.attempt)
                     }
                 }
                 return
+            } else {
+                startExam(attempt?.attemptType ?? contentAttempt?.assessment?.attemptType ?? StartExamScreenViewController.REGULAR_ATTEMPT)
+                return
             }
         }
+        
         if(exam.enableQuizMode) {
             showExamModePopUp(sender)
         } else {
