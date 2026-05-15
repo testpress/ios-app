@@ -75,6 +75,9 @@ public class TPError: Error {
             self.populateErrorData(code: apiError.error_code, title: apiError.title, detail: apiError.detail)
         }
         
+        if error_detail == nil, let parsedMessage = getMessageFromErrorBody() {
+            self.populateErrorData(code: error_code, title: error_title, detail: parsedMessage)
+        }
     }
     
     func isCustomError() -> Bool {
@@ -106,7 +109,31 @@ public class TPError: Error {
     }
     
     public func getErrorBodyAs<T: TestpressModel>(type: T.Type) -> T? {
-        return TPModelMapper<T>().mapFromJSON(json: message!)
+        guard let message = message else {
+            return nil
+        }
+        return TPModelMapper<T>().mapFromJSON(json: message)
+    }
+
+    public func getDisplayMessage() -> String {
+        return error_detail ?? message ?? Strings.SOMETHIGN_WENT_WRONG
+    }
+
+    private func getMessageFromErrorBody() -> String? {
+        guard let data = message?.data(using: .utf8),
+              let json = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any] else {
+            return nil
+        }
+
+        if let message = json["message"] as? String {
+            return message
+        }
+
+        if let nonFieldErrors = json["non_field_errors"] as? [String] {
+            return nonFieldErrors.first
+        }
+
+        return nil
     }
     
     public func logErrorToSentry() {
