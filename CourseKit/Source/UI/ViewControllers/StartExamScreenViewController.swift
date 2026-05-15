@@ -226,10 +226,22 @@ public class StartExamScreenViewController: BaseUIViewController {
             showLanguages()
             return
         }
-        
-        if (contentAttempt?.assessment?.state == "Running"){
-            startExam(contentAttempt?.assessment?.attemptType ?? StartExamScreenViewController.REGULAR_ATTEMPT)
-            return
+        if exam.disableAttemptResume {
+            if attempt?.state == Constants.STATE_RUNNING || contentAttempt?.assessment?.state == Constants.STATE_RUNNING {
+                present(alertController, animated: false, completion: nil)
+                startButton.isHidden = true
+                alertController.message = Strings.ENDING_EXAM
+                attemptRepository.endRunningAttempt(exam: exam, content: content, currentAttempt: attempt, currentContentAttempt: contentAttempt) { [weak self] ca, a, _ in
+                    guard let self = self else { return }
+                    self.contentAttempt = ca
+                    self.attempt = ca?.assessment ?? a
+                    self.alertController.dismiss(animated: true, completion: nil)
+                    if self.attempt != nil || self.contentAttempt != nil {
+                        self.navigateToExamResult(exam: self.exam, contentAttempt: self.contentAttempt, attempt: self.attempt)
+                    }
+                }
+                return
+            }
         }
         if(exam.enableQuizMode) {
             showExamModePopUp(sender)
@@ -382,6 +394,23 @@ public class StartExamScreenViewController: BaseUIViewController {
         present(viewController, animated: true, completion: nil)
     }
 
+    private func navigateToExamResult(exam: Exam?, contentAttempt: ContentAttempt?, attempt: Attempt?) {
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
+        if let contentAttempt = contentAttempt {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TROPHIES_ACHIEVED_VIEW_CONTROLLER) as! TrophiesAchievedViewController
+            viewController.exam = exam
+            viewController.contentAttempt = contentAttempt
+            present(viewController, animated: true, completion: nil)
+        } else {
+            let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
+            viewController.exam = exam
+            viewController.attempt = attempt
+            present(viewController, animated: true, completion: nil)
+        }
+    }
+    
     private func updateResumeUI() {
         if attempt?.state == Constants.STATE_RUNNING {
             startButton.setTitle("RESUME", for: .normal)
