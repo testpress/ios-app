@@ -137,12 +137,12 @@ public class AttemptRepository {
         }
 
         if content != nil {
-            fetchContentRunningAttempt(attemptsUrl: url) { ca, error in
-                completion(ca, ca?.assessment, error)
+            fetchContentRunningAttempt(attemptsUrl: url) { contentAttempt, error in
+                completion(contentAttempt, contentAttempt?.assessment, error)
             }
         } else {
-            fetchRunningAttempt(attemptsUrl: url) { a, error in
-                completion(nil, a, error)
+            fetchRunningAttempt(attemptsUrl: url) { attempt, error in
+                completion(nil, attempt, error)
             }
         }
     }
