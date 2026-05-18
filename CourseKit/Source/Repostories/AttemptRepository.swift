@@ -107,16 +107,16 @@ public class AttemptRepository {
         })
     }
 
-    private func fetchAttempt<T: TestpressModel>(attemptsUrl: String, type: T.Type, queryParams: [String: String] = [:], completion: @escaping (T?, TPError?) -> Void) {
-        TPApiClient.getListItems(endpointProvider: TPEndpointProvider(.loadAttempts, url: attemptsUrl, queryParams: queryParams), completion: { (response: TPApiResponse<T>?, error: TPError?) in
-            if let error = error {
-                completion(nil, error)
-                return
-            }
-
-            let attempt = response?.results.first
-            completion(attempt, nil)
-        }, type: T.self)
+    private func fetchAttempts<T: TestpressModel>(attemptsUrl: String,type: T.Type,queryParams: [String: String] = [:],completion: @escaping ([T]?, TPError?) -> Void) {
+        TPApiClient.getListItems(endpointProvider: TPEndpointProvider(.loadAttempts,url: attemptsUrl,queryParams: queryParams),completion: { (response: TPApiResponse<T>?, error: TPError?) in
+                if let error = error {
+                    completion(nil, error)
+                    return
+                }
+                completion(response?.results, nil)
+            },
+            type: T.self
+        )
     }
 
     public func fetchRunningAttempt(exam: Exam, content: Content?, completion: @escaping (ContentAttempt?, Attempt?, TPError?) -> Void) {
@@ -127,12 +127,13 @@ public class AttemptRepository {
         }
 
         if content != nil {
-            fetchAttempt(attemptsUrl: url, type: ContentAttempt.self, queryParams: [Constants.STATE: "paused"]) { contentAttempt, error in
+            fetchAttempts(attemptsUrl: url, type: ContentAttempt.self, queryParams: [Constants.STATE: "paused"]) { attempts, error in
+                let contentAttempt = attempts?.first
                 completion(contentAttempt, contentAttempt?.assessment, error)
             }
         } else {
-            fetchAttempt(attemptsUrl: url, type: Attempt.self, queryParams: [Constants.STATE: "paused"]) { attempt, error in
-                completion(nil, attempt, error)
+            fetchAttempts(attemptsUrl: url, type: Attempt.self, queryParams: [Constants.STATE: "paused"]) { attempts, error in
+                completion(nil, attempts?.first, error)
             }
         }
     }
