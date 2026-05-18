@@ -65,6 +65,7 @@ public class Exam: DBModel {
     @objc public dynamic var showAnalytics: Bool = false
     @objc public dynamic var enableQuizMode: Bool = false;
     @objc public dynamic var selectedLanguage: Language?
+    @objc public dynamic var disableAttemptResume: Bool = false
     public var languages = List<Language>()
     @objc public dynamic var examStartUrl: String?
     
@@ -112,6 +113,7 @@ public class Exam: DBModel {
         showAnalytics <- map["show_analytics"]
         enableQuizMode <- map["enable_quiz_mode"]
         selectedLanguage <- map["selected_language"]
+        disableAttemptResume <- map["disable_attempt_resume"]
         languages <- (map["languages"], ListTransform<Language>())
         examStartUrl <- map["exam_start_url"]
     }
