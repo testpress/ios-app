@@ -107,14 +107,14 @@ public class AttemptRepository {
         })
     }
 
-    private func fetchAttempt<T: TestpressModel>(attemptsUrl: String, type: T.Type, filter: @escaping (T) -> Bool, completion: @escaping (T?, TPError?) -> Void) {
-        TPApiClient.getListItems(endpointProvider: TPEndpointProvider(.loadAttempts, url: attemptsUrl), completion: { (response: TPApiResponse<T>?, error: TPError?) in
+    private func fetchAttempt<T: TestpressModel>(attemptsUrl: String, type: T.Type, queryParams: [String: String] = [:], completion: @escaping (T?, TPError?) -> Void) {
+        TPApiClient.getListItems(endpointProvider: TPEndpointProvider(.loadAttempts, url: attemptsUrl, queryParams: queryParams), completion: { (response: TPApiResponse<T>?, error: TPError?) in
             if let error = error {
                 completion(nil, error)
                 return
             }
 
-            let attempt = response?.results.first(where: filter)
+            let attempt = response?.results.first
             completion(attempt, nil)
         }, type: T.self)
     }
@@ -127,11 +127,11 @@ public class AttemptRepository {
         }
 
         if content != nil {
-            fetchAttempt(attemptsUrl: url, type: ContentAttempt.self, filter: { $0.assessment?.state == Constants.STATE_RUNNING }) { contentAttempt, error in
+            fetchAttempt(attemptsUrl: url, type: ContentAttempt.self, queryParams: [Constants.STATE: "paused"]) { contentAttempt, error in
                 completion(contentAttempt, contentAttempt?.assessment, error)
             }
         } else {
-            fetchAttempt(attemptsUrl: url, type: Attempt.self, filter: { $0.state == Constants.STATE_RUNNING }) { attempt, error in
+            fetchAttempt(attemptsUrl: url, type: Attempt.self, queryParams: [Constants.STATE: "paused"]) { attempt, error in
                 completion(nil, attempt, error)
             }
         }
