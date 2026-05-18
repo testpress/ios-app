@@ -107,18 +107,19 @@ public class AttemptRepository {
         })
     }
 
-    private func fetchLatestAttempt<T: TestpressModel>(attemptsUrl: String, type: T.Type, filter: @escaping (T) -> Bool, completion: @escaping (T?, TPError?) -> Void) {
+    private func fetchAttempt<T: TestpressModel>(attemptsUrl: String, type: T.Type, filter: @escaping (T) -> Bool, completion: @escaping (T?, TPError?) -> Void) {
         TPApiClient.getListItems(endpointProvider: TPEndpointProvider(.loadAttempts, url: attemptsUrl), completion: { (response: TPApiResponse<T>?, error: TPError?) in
             if let error = error {
                 completion(nil, error)
                 return
             }
-            let latestAttempt = response?.results.first(where: filter)
-            completion(latestAttempt, nil)
+
+            let attempt = response?.results.first(where: filter)
+            completion(attempt, nil)
         }, type: T.self)
     }
 
-    public func fetchLatestRunningAttempt(exam: Exam, content: Content?, completion: @escaping (ContentAttempt?, Attempt?, TPError?) -> Void) {
+    public func fetchRunningAttempt(exam: Exam, content: Content?, completion: @escaping (ContentAttempt?, Attempt?, TPError?) -> Void) {
         let url = content?.getAttemptsUrl() ?? exam.attemptsUrl
         guard !url.isEmpty else {
             completion(nil, nil, nil)
@@ -126,15 +127,13 @@ public class AttemptRepository {
         }
 
         if content != nil {
-            fetchLatestAttempt(attemptsUrl: url, type: ContentAttempt.self, filter: { $0.assessment?.state == Constants.STATE_RUNNING }) { contentAttempt, error in
+            fetchAttempt(attemptsUrl: url, type: ContentAttempt.self, filter: { $0.assessment?.state == Constants.STATE_RUNNING }) { contentAttempt, error in
                 completion(contentAttempt, contentAttempt?.assessment, error)
             }
         } else {
-            fetchLatestAttempt(attemptsUrl: url, type: Attempt.self, filter: { $0.state == Constants.STATE_RUNNING }) { attempt, error in
+            fetchAttempt(attemptsUrl: url, type: Attempt.self, filter: { $0.state == Constants.STATE_RUNNING }) { attempt, error in
                 completion(nil, attempt, error)
             }
         }
     }
-
-
 }
