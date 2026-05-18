@@ -6,7 +6,7 @@
 //  Copyright © 2023 Testpress. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import WebKit
 
 let DEFAULT_EXAM_TIME = "24:00:00"
@@ -122,7 +122,11 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
     }
     
     func gotoTestReport(_ attempt: Attempt) {
-        ExamReviewRouter.showExamReview(from: self, exam: nil, contentAttempt: nil, attempt: attempt)
+        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
+        let viewController = storyboard.instantiateViewController(withIdentifier:
+                Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
+        viewController.attempt = attempt
+        present(viewController, animated: true, completion: nil)
     }
     
     override func onFinishLoadingWebView() {
