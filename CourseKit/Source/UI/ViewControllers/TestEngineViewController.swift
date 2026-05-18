@@ -671,22 +671,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     func gotoTestReport() {
-        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
-        if contentAttempt != nil {
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.TROPHIES_ACHIEVED_VIEW_CONTROLLER) as! TrophiesAchievedViewController
-            
-            viewController.exam = exam
-            viewController.contentAttempt = contentAttempt
-            present(viewController, animated: true, completion: nil)
-        } else {
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
-            
-            viewController.exam = exam
-            viewController.attempt = attempt
-            present(viewController, animated: true, completion: nil)
-        }
+        ExamReviewRouter.showExamReview(from: self,exam: exam,contentAttempt: contentAttempt,attempt: attempt)
     }
     
     func getSecondsFromInputString(_ inputString: String?) -> Int {
