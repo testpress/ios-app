@@ -169,6 +169,10 @@ public class Exam: DBModel {
     public func getQuestionsURL() -> String {
         return TestpressCourse.shared.baseURL + "/api/v2.4/exams/\(id)/questions/"
     }
+
+    public func shouldEndRunningAttemptOnResume(attempt: Attempt?, contentAttempt: ContentAttempt?) -> Bool {
+        return disableAttemptResume && Attempt.hasRunningAttempt(attempt: attempt, contentAttempt: contentAttempt)
+    }
 }
 
 public struct ExamTemplateType {

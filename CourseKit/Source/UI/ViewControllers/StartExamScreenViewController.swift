@@ -226,9 +226,21 @@ public class StartExamScreenViewController: BaseUIViewController {
             showLanguages()
             return
         }
+
+        if exam.shouldEndRunningAttemptOnResume(attempt: attempt, contentAttempt: contentAttempt) {
+            alertController.message = Strings.ENDING_EXAM
+            present(alertController, animated: false, completion: nil)
+            startButton.isHidden = true
+            endRunningAttemptAndShowReview()
+            return
+        }
         
-        if (contentAttempt?.assessment?.state == "Running"){
-            startExam(contentAttempt?.assessment?.attemptType ?? StartExamScreenViewController.REGULAR_ATTEMPT)
+        if Attempt.hasRunningAttempt(attempt: attempt, contentAttempt: contentAttempt) {
+            startExam(
+                attempt?.attemptType
+                    ?? contentAttempt?.assessment?.attemptType
+                    ?? StartExamScreenViewController.REGULAR_ATTEMPT
+            )
             return
         }
         if(exam.enableQuizMode) {
@@ -321,6 +333,7 @@ public class StartExamScreenViewController: BaseUIViewController {
                 if let error = error {
                     debugPrint(error.message ?? "No error")
                     debugPrint(error.kind)
+                    
                     var retryButtonText: String?
                     var retryHandler: (() -> Void)?
                     if error.kind == .network {
@@ -356,6 +369,43 @@ public class StartExamScreenViewController: BaseUIViewController {
                 }
                 
         })
+    }
+
+    private func endRunningAttemptAndShowReview() {
+        let onEnded: (ContentAttempt?, Attempt?, TPError?) -> Void = { [weak self] contentAttempt, attempt, error in
+            guard let self = self else { return }
+            self.alertController.dismiss(animated: true, completion: nil)
+            self.startButton.isHidden = false
+            if let error = error {
+                let (image, title, description) = error.getDisplayInfo()
+                self.emptyView.show(image: image, title: title, description: description,
+                                    retryButtonText: error.kind == .network ? Strings.TRY_AGAIN : nil,
+                                    retryHandler: error.kind == .network ? {
+                                        self.present(self.alertController, animated: false, completion: nil)
+                                        self.endRunningAttemptAndShowReview()
+                                    } : nil)
+                return
+            }
+            guard contentAttempt != nil || attempt != nil else { return }
+            self.contentAttempt = contentAttempt
+            self.attempt = attempt
+            ExamReviewRouter.showExamReview(
+                from: self,
+                exam: self.exam,
+                contentAttempt: contentAttempt,
+                attempt: attempt
+            )
+        }
+
+        if let contentAttempt = contentAttempt {
+            attemptRepository.endRunningContentAttempt(contentAttempt) { contentAttempt, error in
+                onEnded(contentAttempt, contentAttempt?.assessment, error)
+            }
+        } else if let attempt = attempt {
+            attemptRepository.endRunningStandaloneAttempt(attempt) { attempt, error in
+                onEnded(nil, attempt, error)
+            }
+        }
     }
     
     func gotoTestEngine() {
