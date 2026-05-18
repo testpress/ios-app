@@ -97,7 +97,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
                     return
                 }
                 if attempt != nil {
-                    self.gotoTestReport(attempt!)
+                    TestReportRouter.routeToTestReport(from: self, exam: nil, contentAttempt: nil, attempt: attempt!)
                 }
                 
             })
@@ -121,13 +121,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
         present(viewController, animated: true, completion: nil)
     }
     
-    func gotoTestReport(_ attempt: Attempt) {
-        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
-        let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
-        viewController.attempt = attempt
-        present(viewController, animated: true, completion: nil)
-    }
+
     
     override func onFinishLoadingWebView() {
         activityIndicator?.stopAnimating()

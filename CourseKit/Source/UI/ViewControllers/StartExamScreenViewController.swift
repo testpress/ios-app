@@ -243,7 +243,7 @@ public class StartExamScreenViewController: BaseUIViewController {
                     self.contentAttempt = contentAttempt
                     self.attempt = contentAttempt?.assessment ?? attempt
                     if self.attempt != nil || self.contentAttempt != nil {
-                        self.navigateToExamResult(exam: self.exam, contentAttempt: self.contentAttempt, attempt: self.attempt)
+                        TestReportRouter.routeToTestReport(from: self, exam: self.exam, contentAttempt: self.contentAttempt, attempt: self.attempt)
                     }
                 }
 
@@ -414,22 +414,7 @@ public class StartExamScreenViewController: BaseUIViewController {
         present(viewController, animated: true, completion: nil)
     }
 
-    private func navigateToExamResult(exam: Exam?, contentAttempt: ContentAttempt?, attempt: Attempt?) {
-        let storyboard = UIStoryboard(name: Constants.EXAM_REVIEW_STORYBOARD, bundle: TestpressCourse.bundle)
-        if let contentAttempt = contentAttempt {
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.TROPHIES_ACHIEVED_VIEW_CONTROLLER) as! TrophiesAchievedViewController
-            viewController.exam = exam
-            viewController.contentAttempt = contentAttempt
-            present(viewController, animated: true, completion: nil)
-        } else {
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.TEST_REPORT_VIEW_CONTROLLER) as! TestReportViewController
-            viewController.exam = exam
-            viewController.attempt = attempt
-            present(viewController, animated: true, completion: nil)
-        }
-    }
+    
     
     private func updateResumeUI() {
         if attempt?.state == Constants.STATE_RUNNING {

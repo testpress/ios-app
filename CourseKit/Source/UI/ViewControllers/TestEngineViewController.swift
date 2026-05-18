@@ -560,7 +560,7 @@ class TestEngineViewController: BaseQuestionsPageViewController {
                     self.attempt = attempt as? Attempt
                 }
                 self.hideLoadingProgress(completionHandler: {
-                    self.gotoTestReport()
+                    TestReportRouter.routeToTestReport(from: self, exam: self.exam, contentAttempt: self.contentAttempt, attempt: self.attempt)
                 })
         }
         )

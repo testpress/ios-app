@@ -90,12 +90,12 @@ class QuizQuestionsPageViewController: UIViewController, UIPageViewControllerDat
         if exam != nil {
             viewModel.endExam { contentAttempt, error in
                 self.loadingDialogController.dismiss(animated: false, completion: nil)
-                self.gotoTestReport(contentAttempt: contentAttempt!, attempt: nil)
+                TestReportRouter.routeToTestReport(from: self, exam: self.exam, contentAttempt: contentAttempt!, attempt: nil)
             }
         } else {
             viewModel.endAttempt { attempt, error in
                 self.loadingDialogController.dismiss(animated: false, completion: nil)
-                self.gotoTestReport(contentAttempt: nil, attempt: attempt!)
+                TestReportRouter.routeToTestReport(from: self, exam: self.exam, contentAttempt: nil, attempt: attempt!)
             }
         }
     }

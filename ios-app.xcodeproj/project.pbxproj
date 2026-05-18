@@ -1189,6 +1189,7 @@
 			isa = PBXGroup;
 			children = (
 				A4B6EE692DFC221C006D6FD1 /* FontRegistrar.swift */,
+				2D0B60422FBADB8E00B931A2 /* TestReportRouter.swift */,
 				0311ABC72D1EA32F00F7AA30 /* Toast.swift */,
 				2FC0F2DA1F863AAF0092BFDC /* Colors.swift */,
 				2FC0F2DB1F863AAF0092BFDC /* Images.swift */,
@@ -2214,6 +2215,7 @@
 				03CD0D382CB947F200E17218 /* QuizExamViewModel.swift in Sources */,
 				03E4AFB32CAFCF6F00ECC34D /* Post.swift in Sources */,
 				03A60FA62CB4060100079A7C /* EncryptionKeyRepository.swift in Sources */,
+				2D0B60432FBADB8E00B931A2 /* TestReportRouter.swift in Sources */,
 				038CB2B62CBD278600164127 /* TimeAnalyticsTableViewController.swift in Sources */,
 				038CB2982CBD278600164127 /* OverallSubjectAnalyticsViewController.swift in Sources */,
 				038CB2B32CBD278600164127 /* BookmarkedQuestionViewController.swift in Sources */,
