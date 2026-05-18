@@ -226,43 +226,23 @@ public class StartExamScreenViewController: BaseUIViewController {
             showLanguages()
             return
         }
-        let isRunning = attempt?.state == Constants.STATE_RUNNING || contentAttempt?.assessment?.state == Constants.STATE_RUNNING
-        if isRunning {
-            if exam.disableAttemptResume {
-                present(alertController, animated: false, completion: nil)
-                startButton.isHidden = true
-                alertController.message = Strings.ENDING_EXAM
-                
-                let completion: (ContentAttempt?, Attempt?, TPError?) -> Void = { [weak self] contentAttempt, attempt, error in
-                    guard let self = self else { return }
-                    self.alertController.dismiss(animated: true, completion: nil)
-                    if error != nil {
-                        self.startButton.isHidden = false
-                        return
-                    }
-                    self.contentAttempt = contentAttempt
-                    self.attempt = contentAttempt?.assessment ?? attempt
-                    if self.attempt != nil || self.contentAttempt != nil {
-                        TestReportRouter.routeToTestReport(from: self, exam: self.exam, contentAttempt: self.contentAttempt, attempt: self.attempt)
-                    }
-                }
 
-                if let contentAttempt = contentAttempt {
-                    attemptRepository.endExam(url: contentAttempt.getEndAttemptUrl()) { ca, error in
-                        completion(ca, ca?.assessment, error)
-                    }
-                } else if let attempt = attempt {
-                    attemptRepository.endAttempt(url: attempt.getEndAttemptUrl()) { a, error in
-                        completion(nil, a, error)
-                    }
-                }
-                return
-            } else {
-                startExam(attempt?.attemptType ?? contentAttempt?.assessment?.attemptType ?? StartExamScreenViewController.REGULAR_ATTEMPT)
-                return
-            }
+        if exam.shouldEndRunningAttemptOnResume(attempt: attempt, contentAttempt: contentAttempt) {
+            alertController.message = Strings.ENDING_EXAM
+            present(alertController, animated: false, completion: nil)
+            startButton.isHidden = true
+            endRunningAttemptAndShowReview()
+            return
         }
         
+        if Attempt.hasRunningAttempt(attempt: attempt, contentAttempt: contentAttempt) {
+            startExam(
+                attempt?.attemptType
+                    ?? contentAttempt?.assessment?.attemptType
+                    ?? StartExamScreenViewController.REGULAR_ATTEMPT
+            )
+            return
+        }
         if(exam.enableQuizMode) {
             showExamModePopUp(sender)
         } else {
@@ -353,21 +333,17 @@ public class StartExamScreenViewController: BaseUIViewController {
                 if let error = error {
                     debugPrint(error.message ?? "No error")
                     debugPrint(error.kind)
-                    var retryButtonText: String?
-                    var retryHandler: (() -> Void)?
-                    if error.kind == .network {
-                        retryButtonText = Strings.TRY_AGAIN
-                        retryHandler = {
-                            self.present(self.alertController, animated: false, completion: nil)
-                            self.startAttempt(examMode)
-                        }
-                    }
-                    let (image, title, description) = error.getDisplayInfo()
-                    self.emptyView.show(image: image, title: title, description: description,
-                                        retryButtonText: retryButtonText,
-                                        retryHandler: retryHandler)
                     
                     self.alertController.dismiss(animated: true, completion: nil)
+                    self.startButton.isHidden = false
+                    
+                    let (image, title, description) = error.getDisplayInfo()
+                    self.emptyView.show(image: image, title: title, description: description,
+                                        retryButtonText: error.kind == .network ? Strings.TRY_AGAIN : nil,
+                                        retryHandler: error.kind == .network ? {
+                                            self.present(self.alertController, animated: false, completion: nil)
+                                            self.startAttempt(examMode)
+                                        } : nil)
                     return
                 }
                 
@@ -388,6 +364,53 @@ public class StartExamScreenViewController: BaseUIViewController {
                 }
                 
         })
+    }
+
+    private func endRunningAttemptAndShowReview() {
+        let onEnded: (ContentAttempt?, Attempt?, TPError?) -> Void = { [weak self] contentAttempt, attempt, error in
+            guard let self = self else { return }
+            self.alertController.dismiss(animated: true, completion: nil)
+            self.startButton.isHidden = false
+            if let error = error {
+                self.showEndRunningAttemptError(error)
+                return
+            }
+            guard contentAttempt != nil || attempt != nil else { return }
+            self.contentAttempt = contentAttempt
+            self.attempt = attempt
+            ExamReviewRouter.showExamReview(
+                from: self,
+                exam: self.exam,
+                contentAttempt: contentAttempt,
+                attempt: attempt
+            )
+        }
+
+        if let contentAttempt = contentAttempt,
+           contentAttempt.assessment?.isRunning == true {
+            attemptRepository.endRunningContentAttempt(contentAttempt) { contentAttempt, error in
+                onEnded(contentAttempt, contentAttempt?.assessment, error)
+            }
+        } else if let attempt = attempt, attempt.isRunning {
+            attemptRepository.endRunningStandaloneAttempt(attempt) { attempt, error in
+                onEnded(nil, attempt, error)
+            }
+        } else {
+            assertionFailure("Unreachable state: endRunningAttemptAndShowReview called without a running attempt.")
+            onEnded(nil, nil, nil)
+        }
+    }
+
+    private func showEndRunningAttemptError(_ error: TPError) {
+        let info = error.getDisplayInfo()
+        let message = (info.description != Strings.SOMETHIGN_WENT_WRONG ? info.description : nil)
+            ?? error.getDisplayMessage()
+        let alert = UIAlertController(title: info.title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Strings.TRY_AGAIN, style: .default) { [weak self] _ in
+            self?.endRunningAttemptAndShowReview()
+        })
+        alert.addAction(UIAlertAction(title: Strings.CANCEL, style: .cancel))
+        present(alert, animated: true, completion: nil)
     }
     
     func gotoTestEngine() {
@@ -414,10 +437,8 @@ public class StartExamScreenViewController: BaseUIViewController {
         present(viewController, animated: true, completion: nil)
     }
 
-    
-    
     private func updateResumeUI() {
-        if attempt?.state == Constants.STATE_RUNNING {
+        if attempt?.isRunning == true {
             startButton.setTitle("RESUME", for: .normal)
             navigationBarItem?.title = Strings.RESUME_EXAM
         } else {

@@ -85,11 +85,19 @@ public class Attempt: DBModel {
         sections <- (map["sections"], ListTransform<AttemptSection>())
     }
 
+    public var isRunning: Bool {
+        return state == Attempt.RUNNING
+    }
+
     public func hasScore() -> Bool {
         return self.score != nil && self.score != "NA"
     }
     
     public func getEndAttemptUrl() -> String {
         return url + "end/";
+    }
+
+    public static func hasRunningAttempt(attempt: Attempt?, contentAttempt: ContentAttempt?) -> Bool {
+        return attempt?.isRunning == true || contentAttempt?.assessment?.isRunning == true
     }
 }

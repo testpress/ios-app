@@ -111,6 +111,20 @@ public class AttemptRepository {
         })
     }
 
+    public func endRunningContentAttempt(
+        _ contentAttempt: ContentAttempt,
+        completion: @escaping (ContentAttempt?, TPError?) -> Void
+    ) {
+        endExam(url: contentAttempt.getEndAttemptUrl(), completion: completion)
+    }
+
+    public func endRunningStandaloneAttempt(
+        _ attempt: Attempt,
+        completion: @escaping (Attempt?, TPError?) -> Void
+    ) {
+        endAttempt(url: attempt.getEndAttemptUrl(), completion: completion)
+    }
+
     private func fetchAttempts<T: TestpressModel>(attemptsUrl: String,type: T.Type,queryParams: [String: String] = [:],completion: @escaping ([T]?, TPError?) -> Void) {
         TPApiClient.getListItems(endpointProvider: TPEndpointProvider(.loadAttempts,url: attemptsUrl,queryParams: queryParams),completion: { (response: TPApiResponse<T>?, error: TPError?) in
                 if let error = error {

@@ -64,6 +64,7 @@ public class Exam: DBModel {
     @objc public dynamic var shareTextForSolutionUnlock: String = "";
     @objc public dynamic var showAnalytics: Bool = false
     @objc public dynamic var enableQuizMode: Bool = false;
+    /// When true, a running attempt must be ended (not resumed); maps to API `disable_attempt_resume`.
     @objc public dynamic var disableAttemptResume: Bool = false
     @objc public dynamic var selectedLanguage: Language?
     @objc public dynamic var disableAttemptResume: Bool = false
@@ -170,6 +171,10 @@ public class Exam: DBModel {
     
     public func getQuestionsURL() -> String {
         return TestpressCourse.shared.baseURL + "/api/v2.4/exams/\(id)/questions/"
+    }
+
+    public func shouldEndRunningAttemptOnResume(attempt: Attempt?, contentAttempt: ContentAttempt?) -> Bool {
+        return disableAttemptResume && Attempt.hasRunningAttempt(attempt: attempt, contentAttempt: contentAttempt)
     }
 }
 

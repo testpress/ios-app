@@ -6,7 +6,7 @@
 //  Copyright © 2023 Testpress. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import WebKit
 
 let DEFAULT_EXAM_TIME = "24:00:00"
@@ -97,7 +97,7 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
                     return
                 }
                 if attempt != nil {
-                    TestReportRouter.routeToTestReport(from: self, exam: nil, contentAttempt: nil, attempt: attempt!)
+                    self.gotoTestReport(attempt!)
                 }
                 
             })
@@ -121,7 +121,9 @@ class CustomTestGenerationViewController: WebViewController, WKScriptMessageHand
         present(viewController, animated: true, completion: nil)
     }
     
-
+    func gotoTestReport(_ attempt: Attempt) {
+        ExamReviewRouter.showExamReview(from: self, exam: nil, contentAttempt: nil, attempt: attempt)
+    }
     
     override func onFinishLoadingWebView() {
         activityIndicator?.stopAnimating()
