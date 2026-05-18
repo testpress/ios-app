@@ -91,7 +91,9 @@ public class AttemptRepository {
             endpointProvider: TPEndpointProvider(.put, url: url),
             completion: {
                 contentAttempt, error in
-                DBManager<Attempt>().addData(object: contentAttempt!.assessment)
+                if let assessment = contentAttempt?.assessment {
+                    DBManager<Attempt>().addData(object: assessment)
+                }
                 completion(contentAttempt, error)
         })
     }
@@ -102,7 +104,9 @@ public class AttemptRepository {
             endpointProvider: TPEndpointProvider(.put, url: url),
             completion: {
                 attempt, error in
-                DBManager<Attempt>().addData(object: attempt!)
+                if let attempt = attempt {
+                    DBManager<Attempt>().addData(object: attempt)
+                }
                 completion(attempt, error)
         })
     }
