@@ -26,7 +26,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
+public class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var contentView: UIView!
     
@@ -37,7 +37,7 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
     var subjects: [Subject] = []
     var pager: SubjectPager!
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         self.setStatusBarColor()
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
@@ -64,7 +64,7 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
         activityIndicator = UIUtils.initActivityIndicator(parentView: contentView)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if subjects.isEmpty {
@@ -133,7 +133,7 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
     
     // MARK: - PagerTabStripDataSource
     
-    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) ->
+    public override func viewControllers(for pagerTabStripController: PagerTabStripViewController) ->
         [UIViewController] {
             
         let overallAnalyticsViewController = storyboard?.instantiateViewController(
@@ -155,7 +155,7 @@ class SubjectAnalyticsTabViewController: ButtonBarPagerTabStripViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    override func viewDidLayoutSubviews() {
+    public override func viewDidLayoutSubviews() {
         // Set frames of the view here to support both portrait & landscape view
         activityIndicator?.frame = contentView.frame
     }
