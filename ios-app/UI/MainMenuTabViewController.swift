@@ -77,6 +77,10 @@ class MainMenuTabViewController: UITabBarController {
         addDoubtsWebViewController()
         addDiscussionsWebViewController()
         
+        if !instituteSettings.disableStudentAnalytics {
+            addAnalyticsTab()
+        }
+        
         if (UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "true") {
             let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
             let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
@@ -160,5 +164,19 @@ class MainMenuTabViewController: UITabBarController {
         secondViewController.displayNavbar = true
         secondViewController.tabBarItem.image = Images.DiscussionsIcon.image
         return secondViewController
+    }
+    
+    private func addAnalyticsTab() {
+        let bundle = Bundle(for: SubjectAnalyticsTabViewController.self)
+        let storyboard = UIStoryboard(name: "ExamReview", bundle: bundle)
+        guard let analyticsVC = storyboard.instantiateViewController(
+            withIdentifier: Constants.SUBJECT_ANALYTICS_TAB_VIEW_CONTROLLER
+        ) as? SubjectAnalyticsTabViewController else { return }
+        analyticsVC.tabBarItem = UITabBarItem(
+            title: "Analytics",
+            image: UIImage(systemName: "chart.pie.fill"),
+            tag: 0
+        )
+        viewControllers?.append(analyticsVC)
     }
 }
