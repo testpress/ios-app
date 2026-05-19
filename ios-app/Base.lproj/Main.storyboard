@@ -1482,6 +1482,7 @@
                         <segue destination="9va-L7-6A6" kind="relationship" relationship="viewControllers" id="GaN-Gb-zjr"/>
                         <segue destination="4b6-tm-543" kind="relationship" relationship="viewControllers" id="Nji-EB-1m8"/>
                         <segue destination="omW-yp-kWD" kind="relationship" relationship="viewControllers" id="MsF-Bm-cID"/>
+                        <segue destination="p4p-GQ-rVe" kind="relationship" relationship="viewControllers" id="vPZ-rC-ANL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tIA-Ht-VGY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3139,12 +3140,96 @@
             </objects>
             <point key="canvasLocation" x="-3455" y="-1097"/>
         </scene>
+        <!--AnalyticsTab-->
+        <scene sceneID="MEr-fl-Ci0">
+            <objects>
+                <viewController storyboardIdentifier="AnalyticsTabViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="p4p-GQ-rVe" customClass="AnalyticsTabViewController" customModule="ios_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p4p-GQ-rVe-view">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ab-50b-6e2">
+                                <rect key="frame" x="0.0" y="94" width="390" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7cc-f93-c23"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Analytics" id="48b-68e-afc"/>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3c7-407-4ef">
+                                <rect key="frame" x="0.0" y="138" width="390" height="589"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d9f-f03-5de" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="54" id="fa0-b43-112"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1e4-a72-825">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8c-711-a08">
+                                        <rect key="frame" x="0.0" y="54" width="390" height="1"/>
+                                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="3e6-26e-b01"/>
+                                        </constraints>
+                                    </view>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bf4-97d-932" userLabel="Container View">
+                                        <rect key="frame" x="0.0" y="55" width="390" height="534"/>
+                                    </scrollView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="d9f-f03-5de" firstAttribute="top" secondItem="3c7-407-4ef" secondAttribute="top" id="09b-4bc-c09"/>
+                                    <constraint firstItem="bf4-97d-932" firstAttribute="leading" secondItem="3c7-407-4ef" secondAttribute="leading" id="38a-b8c-74d"/>
+                                    <constraint firstAttribute="trailing" secondItem="bf4-97d-932" secondAttribute="trailing" id="3af-207-3ff"/>
+                                    <constraint firstAttribute="bottom" secondItem="bf4-97d-932" secondAttribute="bottom" id="cd4-007-b00"/>
+                                    <constraint firstAttribute="trailing" secondItem="d9f-f03-5de" secondAttribute="trailing" id="f0a-2a3-478"/>
+                                    <constraint firstItem="d9f-f03-5de" firstAttribute="leading" secondItem="3c7-407-4ef" secondAttribute="leading" id="b32-ba4-311"/>
+                                    <constraint firstItem="a8c-711-a08" firstAttribute="top" secondItem="d9f-f03-5de" secondAttribute="bottom" id="a7c-19d-a90"/>
+                                    <constraint firstItem="a8c-711-a08" firstAttribute="leading" secondItem="3c7-407-4ef" secondAttribute="leading" id="e38-88b-c5f"/>
+                                    <constraint firstItem="bf4-97d-932" firstAttribute="top" secondItem="a8c-711-a08" secondAttribute="bottom" constant="1" id="87e-973-aa6"/>
+                                    <constraint firstAttribute="trailing" secondItem="a8c-711-a08" secondAttribute="trailing" id="efc-0a1-494"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1a5-cc1-c6f"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1ab-50b-6e2" firstAttribute="top" secondItem="1a5-cc1-c6f" secondAttribute="top" id="47a-8f9-e9f"/>
+                            <constraint firstItem="3c7-407-4ef" firstAttribute="top" secondItem="1ab-50b-6e2" secondAttribute="bottom" id="aae-4be-7e4"/>
+                            <constraint firstItem="3c7-407-4ef" firstAttribute="leading" secondItem="1a5-cc1-c6f" secondAttribute="leading" id="2c3-322-7f7"/>
+                            <constraint firstItem="1ab-50b-6e2" firstAttribute="leading" secondItem="1a5-cc1-c6f" secondAttribute="leading" id="1a4-172-253"/>
+                            <constraint firstItem="3c7-407-4ef" firstAttribute="trailing" secondItem="1a5-cc1-c6f" secondAttribute="trailing" id="4aa-6dd-d60"/>
+                            <constraint firstItem="1a5-cc1-c6f" firstAttribute="trailing" secondItem="1ab-50b-6e2" secondAttribute="trailing" id="733-8de-bfb"/>
+                            <constraint firstItem="1a5-cc1-c6f" firstAttribute="bottom" secondItem="3c7-407-4ef" secondAttribute="bottom" id="0e4-8dd-071"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Analytics" image="chart.pie.fill" catalog="system" id="Bd3-Um-2D5" userLabel="Analytics"/>
+                    <navigationItem key="navigationItem" id="f14-5f2-f65"/>
+                    <connections>
+                        <outlet property="buttonBarView" destination="d9f-f03-5de" id="681-134-565"/>
+                        <outlet property="containerView" destination="bf4-97d-932" id="c59-72e-d83"/>
+                        <outlet property="contentView" destination="3c7-407-4ef" id="b59-3a6-7a2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SrN-Uu-hN2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="943" y="893"/>
+        </scene>
     </scenes>
     <resources>
         <image name="access_key" width="24" height="24"/>
         <image name="accurate_flat_icon" width="33" height="36"/>
         <image name="bookmarks_flat_icon" width="128" height="128"/>
         <image name="category_icon" width="16" height="16"/>
+        <image name="chart.pie.fill" catalog="system" width="128" height="123"/>
         <image name="clock_flat_icon" width="33" height="36"/>
         <image name="dashboard" width="24" height="24"/>
         <image name="discussion_icon" width="32" height="32"/>
