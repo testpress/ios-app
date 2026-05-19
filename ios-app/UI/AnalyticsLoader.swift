@@ -1,5 +1,5 @@
 //
-//  SubjectAnalyticsLoader.swift
+//  AnalyticsLoader.swift
 //  ios-app
 //
 //  Copyright © 2024 Testpress. All rights reserved.
@@ -8,7 +8,7 @@
 import Foundation
 import CourseKit
 
-class SubjectAnalyticsLoader {
+class AnalyticsLoader {
 
     private var pager: SubjectPager?
     private var isLoading = false
