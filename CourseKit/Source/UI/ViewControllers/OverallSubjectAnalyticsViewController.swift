@@ -27,7 +27,7 @@ import DGCharts
 import UIKit
 import XLPagerTabStrip
 
-class OverallSubjectAnalyticsViewController: BaseUIViewController {
+public class OverallSubjectAnalyticsViewController: BaseUIViewController {
     
     @IBOutlet weak var chartView: HorizontalBarChartView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -35,16 +35,16 @@ class OverallSubjectAnalyticsViewController: BaseUIViewController {
     @IBOutlet weak var contentStackView: UIStackView!
     @IBOutlet weak var chartViewHeightConstraint: NSLayoutConstraint!
     
-    var subjects = [Subject]()
+    public var subjects = [Subject]()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         if !subjects.isEmpty {
             populateChart(chart: chartView, sets: getDataForAllAnswers(), allSubjects: true)
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
@@ -131,7 +131,7 @@ class OverallSubjectAnalyticsViewController: BaseUIViewController {
     }
     
     // Set frames of the views in this method to support both portrait & landscape view
-    override func viewDidLayoutSubviews() {
+    public override func viewDidLayoutSubviews() {
         // Set scroll view content height to support the scroll
         scrollView.contentSize.height = contentStackView.frame.size.height
     }
@@ -140,7 +140,7 @@ class OverallSubjectAnalyticsViewController: BaseUIViewController {
 
 extension OverallSubjectAnalyticsViewController: IndicatorInfoProvider {
     
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    public func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: Strings.OVERALL_SUBJECTS_ANALYTICS)
     }
 }

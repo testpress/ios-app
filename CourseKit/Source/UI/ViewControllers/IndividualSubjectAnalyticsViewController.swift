@@ -26,15 +26,15 @@
 import UIKit
 import XLPagerTabStrip
 
-class IndividualSubjectAnalyticsViewController: UITableViewController {
+public class IndividualSubjectAnalyticsViewController: UITableViewController {
     
     let HEADER_VIEW_HEIGHT: CGFloat = 55
     let GRAPH_CELL_HEIGHT: CGFloat = 316
     
-    var analyticsUrl: String!
-    var subjects = [Subject]()
+    public var analyticsUrl: String!
+    public var subjects = [Subject]()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.reloadData()
         UIUtils.setTableViewSeperatorInset(tableView, size: 0)
@@ -42,15 +42,15 @@ class IndividualSubjectAnalyticsViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    public override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return subjects.count
     }
     
-    override func tableView(_ tableView: UITableView,
+    public override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
         if subjects.count <= indexPath.row {
@@ -74,14 +74,14 @@ class IndividualSubjectAnalyticsViewController: UITableViewController {
         return graphCell
     }
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) ->
+    public override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) ->
         IndexPath? {
             
         let subject = subjects[indexPath.row]
         return subject.leaf || indexPath.section == 1 ? nil : indexPath
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let subject = subjects[indexPath.row]
         if !subject.leaf {
             let viewController = storyboard?.instantiateViewController(
@@ -94,7 +94,7 @@ class IndividualSubjectAnalyticsViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView,
+    public override func tableView(_ tableView: UITableView,
                             viewForHeaderInSection section: Int) -> UIView? {
         
         if subjects.isEmpty || section == 1 {
@@ -104,7 +104,7 @@ class IndividualSubjectAnalyticsViewController: UITableViewController {
         return cell.contentView
     }
     
-    override func tableView(_ tableView: UITableView,
+    public override func tableView(_ tableView: UITableView,
                             heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return HEADER_VIEW_HEIGHT
@@ -116,7 +116,7 @@ class IndividualSubjectAnalyticsViewController: UITableViewController {
 
 extension IndividualSubjectAnalyticsViewController: IndicatorInfoProvider {
     
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    public func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: Strings.INDIVIDUAL_SUBJECTS_ANALYTICS)
     }
 }
