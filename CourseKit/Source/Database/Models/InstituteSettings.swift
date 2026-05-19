@@ -54,6 +54,7 @@ public class InstituteSettings: DBModel {
     @objc public dynamic var forumEnabled: Bool = false
     @objc public dynamic var twilioEnabled: Bool = false
     @objc public dynamic var activityFeedEnabled: Bool = false
+    @objc public dynamic var disableStudentAnalytics: Bool = false
     @objc public dynamic var enableParallelLoginRestriction: Bool = false
     @objc public dynamic var maxParallelLogins: Int = 0
     @objc public dynamic var lockoutLimit: String = ""
@@ -114,6 +115,7 @@ public class InstituteSettings: DBModel {
         forumEnabled <- map["forum_enabled"]
         twilioEnabled <- map["twilio_enabled"]
         activityFeedEnabled <- map["activity_feed_enabled"]
+        disableStudentAnalytics <- map["disable_student_analytics"]
         enableParallelLoginRestriction <- map["enable_parallel_login_restriction"]
         maxParallelLogins <- map["max_parallel_logins"]
         lockoutLimit <- map["lockout_limit"]
