@@ -396,9 +396,6 @@
 		D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */; };
 		D9A2F2AC2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */; };
 		D9CCCA5C2CF5DBA700B60B0F /* MarketingCloudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */; };
-
-		1EB00A74EAFF40C2BF07DA13 /* AnalyticsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C05629E8DBE44B6BD9FF4D3 /* AnalyticsTabViewController.swift */; };
-		B74ACABC73994F898D0DDA73 /* AnalyticsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD077B2BF0784C1CAB7F8E86 /* AnalyticsLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -705,8 +702,6 @@
 		2F8411BB2043D5C500193A66 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		2F909E6820DBC60700FE9B8D /* material_wave_loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = material_wave_loading.json; sourceTree = "<group>"; };
 		2F936E7D1FDAC128008C353A /* SubjectAnalyticsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectAnalyticsTabViewController.swift; sourceTree = "<group>"; };
-		2C05629E8DBE44B6BD9FF4D3 /* AnalyticsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsTabViewController.swift; sourceTree = "<group>"; };
-		FD077B2BF0784C1CAB7F8E86 /* AnalyticsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsLoader.swift; sourceTree = "<group>"; };
 		2F936E7F1FDAD2B0008C353A /* OverallSubjectAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallSubjectAnalyticsViewController.swift; sourceTree = "<group>"; };
 		2F9699771FC2A202001B2B18 /* ContentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTableViewController.swift; sourceTree = "<group>"; };
 		2F9699791FC2A22A001B2B18 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
@@ -1437,8 +1432,6 @@
 				2D84D0652F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift */,
 				2F25D55D201F076300C01CCE /* LeaderboardTableViewController.swift */,
 				2F25D557201EFB9F00C01CCE /* LeaderboardTabViewController.swift */,
-				2C05629E8DBE44B6BD9FF4D3 /* AnalyticsTabViewController.swift */,
-				FD077B2BF0784C1CAB7F8E86 /* AnalyticsLoader.swift */,
 				2FC0F28D1F861A860092BFDC /* LoginViewController.swift */,
 				2D9597422EDEF06800E9AC7C /* OTPLoginViewController.swift */,
 				2FB049B21FD7D3EB0049D5B0 /* MainMenuTabViewController.swift */,
@@ -2019,8 +2012,6 @@
 				25E435BB263AD8CC00243FD3 /* DashboardViewController.swift in Sources */,
 				2FC0F3061F863BA90092BFDC /* ProfileViewController.swift in Sources */,
 				2FB049B31FD7D3EB0049D5B0 /* MainMenuTabViewController.swift in Sources */,
-				1EB00A74EAFF40C2BF07DA13 /* AnalyticsTabViewController.swift in Sources */,
-				B74ACABC73994F898D0DDA73 /* AnalyticsLoader.swift in Sources */,
 				2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */,
 				2FC0F3031F863B9B0092BFDC /* ExamsTableViewController.swift in Sources */,
 				2FDD2E4320A5C3FE00A111EC /* AccessCodeExamsViewController.swift in Sources */,
