@@ -172,6 +172,9 @@ class MainMenuTabViewController: UITabBarController {
         guard let analyticsVC = storyboard.instantiateViewController(
             withIdentifier: Constants.SUBJECT_ANALYTICS_TAB_VIEW_CONTROLLER
         ) as? SubjectAnalyticsTabViewController else { return }
+        if let navBar = analyticsVC.view.subviews.first(where: { $0 is UINavigationBar }) as? UINavigationBar {
+            navBar.topItem?.leftBarButtonItem = nil
+        }
         analyticsVC.tabBarItem = UITabBarItem(
             title: "Analytics",
             image: UIImage(systemName: "chart.pie.fill"),
