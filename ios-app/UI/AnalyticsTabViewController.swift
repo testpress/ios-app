@@ -18,14 +18,14 @@ class AnalyticsTabViewController: ButtonBarPagerTabStripViewController {
     private var analyticsUrl: String!
     var subjects: [Subject] = []
     var hasLoaded = false
-    let loader = SubjectAnalyticsLoader()
+    let loader = AnalyticsLoader()
 
     override func viewDidLoad() {
         self.setStatusBarColor()
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = TestpressCourse.shared.primaryColor
-        settings.style.buttonBarItemFont = UIFont(name: "Helvetica-Bold", size: 12)!
+        settings.style.buttonBarItemFont = UIFont(name: "Helvetica-Bold", size: 12) ?? UIFont.boldSystemFont(ofSize: 12)
         settings.style.selectedBarHeight = 4.0
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = Colors.getRGB(Colors.TAB_TEXT_COLOR)
@@ -98,7 +98,7 @@ class AnalyticsTabViewController: ButtonBarPagerTabStripViewController {
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) ->
         [UIViewController] {
 
-        let bundle = Bundle(identifier: "com.testpress.CourseKit")
+        let bundle = Bundle(for: OverallSubjectAnalyticsViewController.self)
         let storyboard = UIStoryboard(name: "ExamReview", bundle: bundle)
 
         guard let overallAnalyticsViewController = storyboard.instantiateViewController(
