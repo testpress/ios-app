@@ -40,6 +40,10 @@ class MainMenuTabViewController: UITabBarController {
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB()[0]
         viewControllers?[5].tabBarItem.title = instituteSettings.postsLabel
         
+        if (instituteSettings.disableStudentAnalytics) {
+            viewControllers?.remove(at: 8) // Analytics
+        }
+        
         if(!instituteSettings.isVideoDownloadEnabled){
             viewControllers?.remove(at: 7) // Offline Download List
         }
