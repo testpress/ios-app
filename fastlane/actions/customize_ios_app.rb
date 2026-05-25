@@ -47,7 +47,7 @@ module Fastlane
           "PRIMARY_COLOR" => config["primary_color"]
         }) if File.exist?(constants_path)
 
-        configure_zoom(project_path, config.dig("features", "zoom_enabled") == true)
+        configure_zoom(project_path, config["zoom_enabled"] == true)
         patch_entitlements(project_path, entitlements_path, config["subdomain"])
 
         generate_icons(assets_dir, icon_source)                                          if File.exist?(icon_source)
@@ -110,23 +110,12 @@ module Fastlane
         coursekit = project.targets.find { |t| t.name == "CourseKit" } || project.targets.first
 
         coursekit.build_configurations.each do |cfg|
-          ["OTHER_SWIFT_FLAGS", "SWIFT_ACTIVE_COMPILATION_CONDITIONS", "SWIFT_ACTIVE_COMPILATION_CONDITIONS[sdk=iphone*]"].each do |key|
-            flags = Array(cfg.build_settings[key] || "$(inherited)").flat_map(&:split)
-            flag  = key == "OTHER_SWIFT_FLAGS" ? "-DZOOM_ENABLED" : "ZOOM_ENABLED"
-            enabled ? (flags << flag unless flags.include?(flag)) : flags.delete(flag)
-            cfg.build_settings[key] = flags.empty? ? nil : flags.join(" ")
-          end
-        end
-
-        unless enabled
-          project.targets.each do |target|
-            [target.frameworks_build_phase, *target.copy_files_build_phases.select { |p| p.name&.downcase&.include?("embed") }].compact.each do |phase|
-              ref = phase.files.find { |f| f.display_name.include?("MobileRTC.xcframework") }
-              phase.remove_file_reference(ref.file_ref) if ref
-            end
-            if target.resources_build_phase
-              ref = target.resources_build_phase.files.find { |f| f.display_name.include?("MobileRTCResources.bundle") }
-              target.resources_build_phase.remove_file_reference(ref.file_ref) if ref
+          ["OTHER_SWIFT_FLAGS", "SWIFT_ACTIVE_COMPILATION_CONDITIONS"].each do |key|
+            if cfg.build_settings.key?(key)
+              flags = Array(cfg.build_settings[key] || "$(inherited)").flat_map(&:split)
+              flag  = key == "OTHER_SWIFT_FLAGS" ? "-DZOOM_ENABLED" : "ZOOM_ENABLED"
+              enabled ? (flags << flag unless flags.include?(flag)) : flags.delete(flag)
+              cfg.build_settings[key] = (flags.empty? || flags == ["$(inherited)"]) ? nil : flags.join(" ")
             end
           end
         end
