@@ -68,10 +68,12 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
         initializeBookmarkHelper()
         showTitleAndDescription()
         addShadowToButtons()
+        guard let attachment = content.attachment else { return }
 
-        if (content.attachment?.isRenderable == true) {
+        if attachment.isRenderable {
             showViewButton()
-        } else {
+        }
+        if attachment.allowDownload {
             showDownloadButton()
         }
         session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
