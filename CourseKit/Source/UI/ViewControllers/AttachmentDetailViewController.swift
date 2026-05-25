@@ -65,10 +65,10 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let attachment = content.attachment else { return }
         initializeBookmarkHelper()
         showTitleAndDescription()
         addShadowToButtons()
-        guard let attachment = content.attachment else { return }
 
         if attachment.isRenderable {
             showViewButton()
