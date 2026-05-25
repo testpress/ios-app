@@ -47,7 +47,7 @@ module Fastlane
           "PRIMARY_COLOR" => config["primary_color"]
         }) if File.exist?(constants_path)
 
-        configure_zoom(project_path, config.dig("features", "zoom_enabled") == true)
+        configure_zoom(project_path, config["zoom_enabled"] == true)
         patch_entitlements(project_path, entitlements_path, config["subdomain"])
 
         generate_icons(assets_dir, icon_source)                                          if File.exist?(icon_source)
@@ -114,7 +114,7 @@ module Fastlane
             flags = Array(cfg.build_settings[key] || "$(inherited)").flat_map(&:split)
             flag  = key == "OTHER_SWIFT_FLAGS" ? "-DZOOM_ENABLED" : "ZOOM_ENABLED"
             enabled ? (flags << flag unless flags.include?(flag)) : flags.delete(flag)
-            cfg.build_settings[key] = flags.empty? ? nil : flags.join(" ")
+            cfg.build_settings[key] = (flags.empty? || flags == ["$(inherited)"]) ? nil : flags.join(" ")
           end
         end
 
