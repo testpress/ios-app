@@ -137,14 +137,14 @@ public class AttemptRepository {
         )
     }
 
-    public func fetchRunningAttempt(exam: Exam, content: Content?, completion: @escaping (ContentAttempt?, Attempt?, TPError?) -> Void) {
+    public func fetchRunningAttempt(exam: Exam, completion: @escaping (Attempt?, TPError?) -> Void) {
         guard !exam.attemptsUrl.isEmpty else {
-            completion(nil, nil, nil)
+            completion(nil, nil)
             return
         }
 
         fetchAttempts(attemptsUrl: exam.attemptsUrl, type: Attempt.self, queryParams: [Constants.STATE: "paused"]) { attempts, error in
-            completion(nil, attempts?.first, error)
+            completion(attempts?.first, error)
         }
     }
 

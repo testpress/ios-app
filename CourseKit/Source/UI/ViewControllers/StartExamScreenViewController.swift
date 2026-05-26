@@ -110,10 +110,10 @@ public class StartExamScreenViewController: BaseUIViewController {
             webOnlyExamLabel.isHidden = true
             UIUtils.setButtonDropShadow(startButton)
             updateResumeUI()
-            attemptRepository.fetchRunningAttempt(exam: exam, content: content) { [weak self] contentAttempt, attempt, error in
+            attemptRepository.fetchRunningAttempt(exam: exam) { [weak self] attempt, error in
                 guard let self = self, error == nil else { return }
-                self.contentAttempt = contentAttempt
-                self.attempt = contentAttempt?.assessment ?? attempt
+                self.contentAttempt = nil
+                self.attempt = attempt
                 self.updateResumeUI()
             }
         }
