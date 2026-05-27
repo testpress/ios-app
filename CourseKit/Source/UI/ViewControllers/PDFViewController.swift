@@ -24,8 +24,8 @@ class PDFViewController: BaseUIViewController {
         pdfView.displayDirection = .vertical
         pdfView.minScaleFactor = 0.5
         pdfView.maxScaleFactor = 5.0
-        pdfView.autoScales = true
         pdfView.document = pdfDocument
+        pdfView.autoScales = true
         
         navigationBarItem.title = contentTitle
     }
