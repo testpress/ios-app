@@ -7,7 +7,6 @@ class PDFViewController: BaseUIViewController {
     var pdfDocument: PDFDocument?
     @IBOutlet var pdfView: PDFView!
     @IBOutlet weak var navigationBarItem: UINavigationItem!
-    private var currentPageIndex = 0
     var watermarkLabel: MarqueeLabel?
     var timer: Timer?
     var contentTitle: String!
@@ -16,26 +15,19 @@ class PDFViewController: BaseUIViewController {
         super.viewDidLoad()
         self.setStatusBarColor()
         setupPDFView()
-        addPanGesture()
         addWaterMark()
     }
     
     func setupPDFView() {
         pdfView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        pdfView.displayMode = .singlePage
-        pdfView.displayDirection = .horizontal
+        pdfView.displayMode = .singlePageContinuous
+        pdfView.displayDirection = .vertical
         pdfView.minScaleFactor = 0.5
         pdfView.maxScaleFactor = 5.0
-        pdfView.autoScales = true
         pdfView.document = pdfDocument
-        pdfView.documentView?.isUserInteractionEnabled = false
+        pdfView.autoScales = true
         
         navigationBarItem.title = contentTitle
-    }
-    
-    func addPanGesture() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
-        pdfView.addGestureRecognizer(panGesture)
     }
     
     func addWaterMark() {
@@ -61,34 +53,6 @@ class PDFViewController: BaseUIViewController {
     
     @IBAction func back(_ sender: Any) {
         self.dismiss(animated: true)
-    }
-    
-    @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
-        guard let pdfDocument = pdfDocument else {
-            return
-        }
-        
-        guard recognizer.state == .ended else { return }
-        
-        let translation = recognizer.translation(in: pdfView)
-        let velocity = recognizer.velocity(in: pdfView)
-        let isSwipeLeft = translation.x < -50 && velocity.x < -500
-        let isSwipeRight = translation.x > 50 && velocity.x > 500
-        let canNavigateForward = currentPageIndex < pdfDocument.pageCount
-        let canNavigateBackward = currentPageIndex > 0
-
-        if isSwipeLeft && canNavigateForward {
-            currentPageIndex += 1
-            if let nextPage = pdfDocument.page(at: currentPageIndex) {
-                pdfView.go(to: nextPage)
-            }
-        } else if isSwipeRight && canNavigateBackward {
-            currentPageIndex -= 1
-            if let prevPage = pdfDocument.page(at: currentPageIndex) {
-                pdfView.go(to: prevPage)
-            }
-        }
-        pdfView.autoScales = true
     }
     
     deinit {
