@@ -116,6 +116,30 @@ public class StartExamScreenViewController: BaseUIViewController {
                 self.attempt = attempt
                 self.updateResumeUI()
             }
+            if let examId = content?.id {
+                startButtonLayout.isHidden = true
+                attemptRepository.checkContentPermission(contentId: examId) { [weak self] permission, error in
+                    guard let self = self else { return }
+                    self.hideLoading()
+
+                    guard let permission = permission, error == nil else {
+                        self.startButtonLayout.isHidden = false
+                        return
+                    }
+
+                    if !permission.hasPermission {
+                        self.webOnlyExamLabel.isHidden = false
+                        self.webOnlyExamLabel.text = Strings.EXAM_NO_PERMISSION
+                    } else if let time = permission.nextRetakeTime,
+                              time != "0",
+                              let timeDiff = FormatDate.getTimeDifference(iso8601String: time) {
+                        self.webOnlyExamLabel.isHidden = false
+                        self.webOnlyExamLabel.text = String(format: Strings.CAN_RETAKE_IN, timeDiff.lowercased())
+                    } else {
+                        self.startButtonLayout.isHidden = false
+                    }
+                }
+            }
         }
         initializeLanguageSelection()
     }
@@ -175,7 +199,14 @@ public class StartExamScreenViewController: BaseUIViewController {
                     } else {
                         self.exam.updateLanguages(with: self.languages)
                         self.languageContainer.isHidden = self.languages.count < 2
-                        self.hideLoading()
+                        let isPermissionCheckPending = self.content?.id != nil &&
+                            self.exam?.deviceAccessControl != "web" &&
+                            !(self.content?.isLocked ?? false) &&
+                            self.exam.hasStarted() &&
+                            !self.exam.hasEnded()
+                        if !isPermissionCheckPending {
+                            self.hideLoading()
+                        }
                     }
     
             }, type: Language.self)

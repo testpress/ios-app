@@ -140,4 +140,16 @@ public class FormatDate {
         }
         return nil
     }
+
+    public static func getTimeDifference(iso8601String: String) -> String? {
+        guard let date = getDate(from: iso8601String), date > Date() else { return nil }
+
+        if date.timeIntervalSinceNow < 60 { return "less than a minute" }
+
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.weekOfYear, .day, .hour, .minute]
+        formatter.unitsStyle = .full
+        formatter.maximumUnitCount = 1
+        return formatter.string(from: Date(), to: date)
+    }
 }
