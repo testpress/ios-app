@@ -76,6 +76,7 @@ jobs:
           curl -L -s -o zoom-sdk.zip "${{ env.ZOOM_SDK_URL }}"
           unzip -q zoom-sdk.zip -d zoom_temp
           cp -R zoom_temp/*.xcframework Carthage/Build/ || true
+          cp -R zoom_temp/*.bundle Carthage/Build/ || true
           rm -rf zoom_temp zoom-sdk.zip
         timeout-minutes: 40
 
