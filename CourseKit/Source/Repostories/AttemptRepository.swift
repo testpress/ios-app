@@ -148,4 +148,10 @@ public class AttemptRepository {
         }
     }
 
+    public func checkContentPermission(contentId: Int, completion: @escaping (ContentPermission?, TPError?) -> Void) {
+        let url = TestpressCourse.shared.baseURL + "/api/v2.2/contents/\(contentId)/permissions/"
+        TPApiClient.request(type: ContentPermission.self, endpointProvider: TPEndpointProvider(.get, url: url)) { permission, error in
+            completion(permission, error)
+        }
+    }
 }

@@ -331,6 +331,7 @@
 		25FF2A9D2525E566005A31C5 /* TestZoomMeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */; };
 		2D0658F12FBB524E00FCB43B /* ExamReviewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0658F02FBB524E00FCB43B /* ExamReviewRouter.swift */; };
 		2D6B7F9C2F6A6D5A00A0C362 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6B7F9B2F6A6D5A00A0C362 /* DeepLinkRouter.swift */; };
+		2D78B7BF2FC71046002EEE84 /* ContentPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D78B7BE2FC71046002EEE84 /* ContentPermission.swift */; };
 		2D7CDBCC2F237CCD0076B42F /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */; };
 		2D7CDBCE2F237D150076B42F /* DeviceIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */; };
 		2D84D0662F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D84D0652F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift */; };
@@ -599,6 +600,7 @@
 		25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestZoomMeetViewController.swift; sourceTree = "<group>"; };
 		2D0658F02FBB524E00FCB43B /* ExamReviewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamReviewRouter.swift; sourceTree = "<group>"; };
 		2D6B7F9B2F6A6D5A00A0C362 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRouter.swift; sourceTree = "<group>"; };
+		2D78B7BE2FC71046002EEE84 /* ContentPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentPermission.swift; sourceTree = "<group>"; };
 		2D7CDBCB2F237CCD0076B42F /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		2D7CDBCD2F237D150076B42F /* DeviceIDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIDManager.swift; sourceTree = "<group>"; };
 		2D84D0652F433CE1000EF4DC /* UnauthorizedDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedDeviceViewController.swift; sourceTree = "<group>"; };
@@ -1080,6 +1082,7 @@
 				D907E7A82B19D11C00BEA874 /* Language.swift */,
 				2F96997D1FC2A761001B2B18 /* Attachment.swift */,
 				2FC0F2C31F86385B0092BFDC /* Attempt.swift */,
+				2D78B7BE2FC71046002EEE84 /* ContentPermission.swift */,
 				2FC0F2C41F86385B0092BFDC /* AttemptAnswer.swift */,
 				2FC0F2C51F86385B0092BFDC /* AttemptItem.swift */,
 				1825F5FC212E8BF900AC25E5 /* AttemptSection.swift */,
@@ -2158,6 +2161,7 @@
 				03CD0D282CB92C0700E17218 /* BaseDBTableViewController.swift in Sources */,
 				03CD0C502CB79C5400E17218 /* GraphAxisPercentValueFormatter.swift in Sources */,
 				03CD0C6F2CB7C5FD00E17218 /* UIView.swift in Sources */,
+				2D78B7BF2FC71046002EEE84 /* ContentPermission.swift in Sources */,
 				03A60F8C2CB3F34600079A7C /* BaseDBItemPager.swift in Sources */,
 				03A60F9D2CB3F6A900079A7C /* OrderedDictionary.swift in Sources */,
 				038CB2B22CBD278600164127 /* HtmlContentViewController.swift in Sources */,

@@ -133,8 +133,10 @@ public struct Strings {
     public static let TARGETS_AND_THREATS = "TARGETS / THREATS"
     
     public static let EXAM_ENDED = "This exam has ended"
+    public static let EXAM_NO_PERMISSION = "You do not have permission to perform this action."
     public static let CAN_START_EXAM_ONLY_AFTER = "You can attempt this exam only after \n"
     public static let SCORE_GOOD_IN_PREVIOUS = "You need to get good score in your previous test to attempt this."
+    public static let CAN_RETAKE_IN = "You can retake this exam in %@. Meanwhile review your previous attempt."
     
     public static let RESET_PASSWORD_MAIL_SENT = "We have sent you an email with a link to reset your password.  Please check your email and click the link to continue."
     
