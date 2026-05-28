@@ -122,7 +122,10 @@ public class StartExamScreenViewController: BaseUIViewController {
                     guard let self = self else { return }
                     self.hideLoading()
 
-                    guard let permission = permission, error == nil else { return }
+                    guard let permission = permission, error == nil else {
+                        self.startButtonLayout.isHidden = false
+                        return
+                    }
 
                     if !permission.hasPermission {
                         self.webOnlyExamLabel.isHidden = false
@@ -196,7 +199,12 @@ public class StartExamScreenViewController: BaseUIViewController {
                     } else {
                         self.exam.updateLanguages(with: self.languages)
                         self.languageContainer.isHidden = self.languages.count < 2
-                        if self.content?.id == nil {
+                        let isPermissionCheckPending = self.content?.id != nil &&
+                            self.exam?.deviceAccessControl != "web" &&
+                            !(self.content?.isLocked ?? false) &&
+                            self.exam.hasStarted() &&
+                            !self.exam.hasEnded()
+                        if !isPermissionCheckPending {
                             self.hideLoading()
                         }
                     }
