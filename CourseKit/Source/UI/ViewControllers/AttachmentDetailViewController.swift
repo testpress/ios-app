@@ -72,8 +72,13 @@ class AttachmentDetailViewController: BaseUIViewController, URLSessionDownloadDe
 
         if attachment.isRenderable {
             showViewButton()
-        }
-        if attachment.allowDownload {
+            if attachment.allowDownload {
+                showDownloadButton()
+            }
+        } else {
+            // For non-renderable content (regular attachments, not PDFs), always
+            // show the download button. The allow_download field is only
+            // meaningful for PDFs (renderable content), matching Web and Android.
             showDownloadButton()
         }
         session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
