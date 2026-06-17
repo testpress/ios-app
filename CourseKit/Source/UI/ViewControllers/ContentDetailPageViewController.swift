@@ -336,10 +336,15 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
 
     private func updateContentData(_ content: Content) {
         DBManager<Content>().addData(object: content)
-        contents[getCurrentIndex()] = content
+        let currentIndex = getCurrentIndex()
+        guard currentIndex >= 0, currentIndex < contents.count else {
+            return
+        }
+
+        contents[currentIndex] = content
         contentDetailDataSource.contents = contents
         
-        guard let viewController = contentDetailDataSource.viewControllerAtIndex(getCurrentIndex()) else {
+        guard let viewController = contentDetailDataSource.viewControllerAtIndex(currentIndex) else {
             return
         }
         
