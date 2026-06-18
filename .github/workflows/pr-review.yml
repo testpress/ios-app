@@ -1,0 +1,94 @@
+name: PR Review with Progress Tracking
+
+on:
+  pull_request:
+    types: [opened]
+  issue_comment:
+    types: [created]
+
+jobs:
+  review-with-tracking:
+    if: |
+      github.actor != 'claude[bot]' &&
+      github.actor != 'github-actions[bot]' &&
+      (
+        (github.event_name == 'pull_request' && github.event.pull_request.draft == false) ||
+        (github.event_name == 'issue_comment' &&
+         github.event.issue.pull_request != null &&
+         contains(github.event.comment.body, '@claude review'))
+      )
+
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: pr-review-${{ github.event.pull_request.number || github.event.issue.number }}
+      cancel-in-progress: true
+
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+      actions: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: PR Review with Progress Tracking
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          track_progress: true
+
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
+
+            Review this iOS pull request for an LMS application built with UIKit and Storyboards.
+
+            Focus on:
+
+            1. Code Quality
+               - Readability and maintainability
+               - UIKit best practices
+               - Proper use of MVC/MVVM architecture
+               - Avoid duplicated code
+
+            2. UI & Navigation
+               - Storyboard and Auto Layout issues
+               - Navigation flow correctness
+               - UI consistency across screens
+               - Device size and orientation considerations
+
+            3. Stability
+               - Potential crashes or force unwraps
+               - Memory management issues
+               - Retain cycles and leaks
+               - Threading and main-thread UI updates
+
+            4. Performance
+               - View controller lifecycle usage
+               - TableView/CollectionView performance
+               - Image loading and caching
+               - Unnecessary network calls
+
+            5. LMS Functionality
+               - Course, exam, video, and progress-related logic
+               - Edge cases during navigation and content loading
+               - Error handling and offline scenarios
+
+            6. Testing
+               - Missing test cases
+               - Important edge cases not covered
+
+            Keep feedback concise and actionable.
+            Only report real issues or improvements.
+            Avoid speculative comments.
+            Provide inline comments for specific issues.
+            Use top-level comments for general observations.
+
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
+
