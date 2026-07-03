@@ -44,6 +44,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     var position: Int! = 0
     var player: TPAVPlayer?
     var playerViewController: TPStreamPlayerViewController?
+    var processingEmptyView: EmptyView?
     
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -59,7 +60,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         super.viewDidLoad()
         
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
-        loadPlayer(assetID: content.uuid!)
+        checkTranscodingStatusAndLoadPlayer()
         viewModel = VideoContentViewModel(content)
         titleLabel.text = viewModel.getTitle()
         initializeDescription()
@@ -77,6 +78,31 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         addGestures()
     }
     
+    private func checkTranscodingStatusAndLoadPlayer() {
+        let status = content.video?.transcodingStatus?.lowercased()
+
+        if status == TranscodingStatus.completed.rawValue
+            || status == TranscodingStatus.notTranscoded.rawValue {
+            guard let uuid = content.uuid else { return }
+            loadPlayer(assetID: uuid)
+        } else if status == nil {
+            guard let uuid = content.uuid else { return }
+            
+            let isDownloaded = TPStreamsDownloadManager.shared.isAssetDownloaded(assetID: uuid)
+            let hasStreams = !(content.video?.streams.isEmpty ?? true)
+            let hasValidUrl = !(content.video?.url.isEmpty ?? true)
+            
+            if isDownloaded || hasStreams || hasValidUrl {
+                loadPlayer(assetID: uuid)
+            } else {
+                showProcessingOverlay()
+                performTranscodingCheck()
+            }
+        } else {
+            showProcessingOverlay()
+        }
+    }
+
     func loadPlayer(assetID: String) {
         initializePlayer(with: assetID)
         configurePlayerViewController()
@@ -126,6 +152,116 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         addChild(playerViewController)
         playerView.addSubview(playerViewController.view)
         playerViewController.view.frame = playerView.bounds
+    }
+    
+    func showProcessingOverlay() {
+        removeExistingOverlay()
+        processingEmptyView = EmptyView.getInstance(parentView: playerView)
+        processingEmptyView?.setProcessingStyle()
+        processingEmptyView?.show(
+            description: "The video is being processed and will be available shortly.",
+            retryButtonText: "Retry",
+            retryHandler: { [weak self] in
+                self?.retryProcessingCheck()
+            }
+        )
+    }
+    
+    func retryProcessingCheck() {
+        let indicator = showRetryLoadingIndicator()
+        performTranscodingCheck {
+            self.hideRetryLoadingIndicator(indicator)
+        }
+    }
+    
+    func performTranscodingCheck(completion: (() -> Void)? = nil) {
+        let requestedContentId = content.id
+        
+        TPApiClient.request(
+            type: Content.self,
+            endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
+            completion: { [weak self] content, error in
+                guard let self = self else { return }
+                completion?()
+                self.handleTranscodingCheckResult(requestedContentId: requestedContentId, content: content, error: error)
+            }
+        )
+    }
+    
+    private func showRetryLoadingIndicator() -> UIActivityIndicatorView {
+        processingEmptyView?.retryButton.isEnabled = false
+        
+        let indicator = UIActivityIndicatorView(style: .white)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.startAnimating()
+        if let emptyView = processingEmptyView {
+            emptyView.addSubview(indicator)
+            NSLayoutConstraint.activate([
+                indicator.centerXAnchor.constraint(equalTo: emptyView.retryButton.centerXAnchor),
+                indicator.centerYAnchor.constraint(equalTo: emptyView.retryButton.centerYAnchor)
+            ])
+            emptyView.retryButton.setTitleColor(.clear, for: .normal)
+        }
+        return indicator
+    }
+    
+    private func hideRetryLoadingIndicator(_ indicator: UIActivityIndicatorView) {
+        indicator.removeFromSuperview()
+        processingEmptyView?.retryButton.isEnabled = true
+        processingEmptyView?.retryButton.setTitleColor(.white, for: .normal)
+    }
+    
+    private func handleTranscodingCheckResult(requestedContentId: Int, content: Content?, error: TPError?) {
+        guard requestedContentId == self.content.id else { return }
+        
+        if let error = error {
+            debugPrint(error.message ?? "No error")
+            debugPrint(error.kind)
+            showErrorSnackbar(message: "Could not check video status. Please try again.")
+            return
+        }
+        
+        guard let updatedContent = content else { return }
+        
+        debugPrint("=== Retry API response - transcodingStatus: \(updatedContent.video?.transcodingStatus ?? "nil")")
+        
+        DBManager<Content>().addData(object: updatedContent)
+        applyTranscodingContent(updatedContent)
+        
+        let isComplete = updatedContent.video?.isTranscodingComplete ?? true
+        if !isComplete {
+            // Started playing assuming complete, but API says still processing — show overlay instead
+            player?.pause()
+            player = nil
+            playerViewController?.willMove(toParent: nil)
+            playerViewController?.view.removeFromSuperview()
+            playerViewController?.removeFromParent()
+            playerViewController = nil
+            showProcessingOverlay()
+            return
+        }
+        
+        // Only load player if overlay was showing (retry path). Auto-check path already playing.
+        guard processingEmptyView != nil else { return }
+        processingEmptyView?.hide()
+        guard let uuid = updatedContent.uuid else { return }
+        loadPlayer(assetID: uuid)
+    }
+    
+    private func applyTranscodingContent(_ newContent: Content) {
+        self.content = DBManager<Content>().getResultsFromDB().filter("id == %d", newContent.id).first
+        viewModel.content = self.content
+        bookmarkContent = self.content
+    }
+    
+    private func showErrorSnackbar(message: String) {
+        let snackbar = TTGSnackbar(message: message, duration: .middle)
+        snackbar.show()
+    }
+    
+    private func removeExistingOverlay() {
+        processingEmptyView?.removeFromSuperview()
+        processingEmptyView = nil
     }
     
     func initializeDescription() {
@@ -293,7 +429,8 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         viewModel.content = content
         hideDescription()
         viewModel.createContentAttempt()
-        loadPlayer(assetID: content.uuid!)
+        removeExistingOverlay()
+        checkTranscodingStatusAndLoadPlayer()
         tableView.reloadData()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()
@@ -383,7 +520,7 @@ extension VideoContentViewController: VideoContentViewModelDelegate {
             return
         }
         let seekTime = CMTime(value: Int64(seconds), timescale: 1)
+
         player?.seek(to: seekTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
     }
-    
 }

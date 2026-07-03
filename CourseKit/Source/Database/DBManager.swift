@@ -38,7 +38,7 @@ public class DBConnection {
     
     public static func configure(){
          var config = Realm.Configuration(
-            schemaVersion:6,
+            schemaVersion:7,
             migrationBlock: { migration, oldSchemaVersion in
             }
          )
