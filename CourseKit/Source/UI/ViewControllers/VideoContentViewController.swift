@@ -80,18 +80,17 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     
     private func handleTranscodingStatus() {
         let status = content.video?.transcodingStatus?.lowercased()
-        debugPrint("=== Transcoding status: \(content.video?.transcodingStatus ?? "nil"), video: \(content.video != nil)")
 
         if status == TranscodingStatus.completed.rawValue
             || status == TranscodingStatus.notTranscoded.rawValue {
             guard let uuid = content.uuid else { return }
             loadPlayer(assetID: uuid)
         } else if status == nil {
-            // Status unknown — list endpoint doesn't include it. Show overlay + auto-check.
-            showProcessingOverlay()
+            // Unknown — play immediately, verify in background
+            guard let uuid = content.uuid else { return }
+            loadPlayer(assetID: uuid)
             performTranscodingCheck()
         } else {
-            // Explicitly processing — show overlay, user taps retry
             showProcessingOverlay()
         }
     }
@@ -223,9 +222,19 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         
         let isComplete = updatedContent.video?.isTranscodingComplete ?? true
         if !isComplete {
+            // Started playing assuming complete, but API says still processing — show overlay instead
+            player?.pause()
+            player = nil
+            playerViewController?.willMove(toParent: nil)
+            playerViewController?.view.removeFromSuperview()
+            playerViewController?.removeFromParent()
+            playerViewController = nil
+            showProcessingOverlay()
             return
         }
         
+        // Only load player if overlay was showing (retry path). Auto-check path already playing.
+        guard processingEmptyView != nil else { return }
         processingEmptyView?.hide()
         guard let uuid = updatedContent.uuid else { return }
         loadPlayer(assetID: uuid)
