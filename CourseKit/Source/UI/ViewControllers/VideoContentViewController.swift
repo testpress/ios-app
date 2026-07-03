@@ -60,7 +60,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         super.viewDidLoad()
         
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
-        handleTranscodingStatus()
+        checkTranscodingStatusAndLoadPlayer()
         viewModel = VideoContentViewModel(content)
         titleLabel.text = viewModel.getTitle()
         initializeDescription()
@@ -78,7 +78,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         addGestures()
     }
     
-    private func handleTranscodingStatus() {
+    private func checkTranscodingStatusAndLoadPlayer() {
         let status = content.video?.transcodingStatus?.lowercased()
 
         if status == TranscodingStatus.completed.rawValue
@@ -421,7 +421,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         hideDescription()
         viewModel.createContentAttempt()
         removeExistingOverlay()
-        handleTranscodingStatus()
+        checkTranscodingStatusAndLoadPlayer()
         tableView.reloadData()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()
