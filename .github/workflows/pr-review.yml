@@ -79,15 +79,18 @@ jobs:
                - Edge cases during navigation and content loading
                - Error handling and offline scenarios
 
-            6. Testing
-               - Missing test cases
-               - Important edge cases not covered
 
             Keep feedback concise and actionable.
             Only report real issues or improvements.
             Avoid speculative comments.
             Provide inline comments for specific issues.
             Use top-level comments for general observations.
+
+             ## Final Verdict
+            After completing the review, provide an overall verdict:
+
+            - **APPROVED**: The PR is ready to merge. Minor suggestions may be included, but they are non-blocking.
+            - **NEEDS CHANGES**: The PR contains one or more blocking issues that should be addressed before merging.
 
           claude_args: |
             --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
