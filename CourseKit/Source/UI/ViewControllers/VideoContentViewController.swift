@@ -86,9 +86,8 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
             guard let uuid = content.uuid else { return }
             loadPlayer(assetID: uuid)
         } else if status == nil {
-            // Unknown — play immediately, verify in background
-            guard let uuid = content.uuid else { return }
-            loadPlayer(assetID: uuid)
+            // Unknown (list endpoint doesn't include transcoding_status) — show overlay, verify via API
+            showProcessingOverlay()
             performTranscodingCheck()
         } else {
             showProcessingOverlay()
