@@ -96,6 +96,13 @@ public class EmptyView: UIView {
         isHidden = true
         parentView.sendSubviewToBack(self)
     }
+    
+    public func setProcessingStyle() {
+        imageView.isHidden = true
+        backgroundColor = UIColor.black
+        emptyViewDescription.textColor = .white
+        retryButton.setTitleColor(.white, for: .normal)
+    }
 
     @IBAction func onRetry(_ sender: UIButton) {
         if retryHandler != nil {

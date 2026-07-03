@@ -150,6 +150,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     func showProcessingOverlay() {
         removeExistingOverlay()
         processingEmptyView = EmptyView.getInstance(parentView: playerView)
+        processingEmptyView?.setProcessingStyle()
         processingEmptyView?.show(
             description: "The video is being processed and will be available shortly.",
             retryButtonText: "Retry",
@@ -157,10 +158,6 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
                 self?.retryProcessingCheck()
             }
         )
-        processingEmptyView?.imageView.isHidden = true
-        processingEmptyView?.backgroundColor = UIColor.black
-        processingEmptyView?.emptyViewDescription.textColor = .white
-        processingEmptyView?.retryButton.setTitleColor(.white, for: .normal)
     }
     
     func retryProcessingCheck() {
@@ -222,7 +219,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         debugPrint("=== Retry API response - transcodingStatus: \(updatedContent.video?.transcodingStatus ?? "nil")")
         
         DBManager<Content>().addData(object: updatedContent)
-        self.content = DBManager<Content>().getResultsFromDB().filter("id == %d", updatedContent.id).first
+        applyTranscodingContent(updatedContent)
         
         let isComplete = updatedContent.video?.isTranscodingComplete ?? true
         if !isComplete {
@@ -232,6 +229,12 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         processingEmptyView?.hide()
         guard let uuid = updatedContent.uuid else { return }
         loadPlayer(assetID: uuid)
+    }
+    
+    private func applyTranscodingContent(_ newContent: Content) {
+        self.content = DBManager<Content>().getResultsFromDB().filter("id == %d", newContent.id).first
+        viewModel.content = self.content
+        bookmarkContent = self.content
     }
     
     private func showErrorSnackbar(message: String) {
