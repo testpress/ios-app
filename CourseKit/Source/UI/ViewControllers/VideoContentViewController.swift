@@ -44,6 +44,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     var position: Int! = 0
     var player: TPAVPlayer?
     var playerViewController: TPStreamPlayerViewController?
+    var processingEmptyView: EmptyView?
     
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -59,7 +60,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         super.viewDidLoad()
         
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
-        loadPlayer(assetID: content.uuid!)
+        handleTranscodingStatus()
         viewModel = VideoContentViewModel(content)
         titleLabel.text = viewModel.getTitle()
         initializeDescription()
@@ -77,6 +78,16 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         addGestures()
     }
     
+    private func handleTranscodingStatus() {
+        let isComplete = content.video?.isTranscodingComplete ?? true
+        if isComplete {
+            guard let uuid = content.uuid else { return }
+            loadPlayer(assetID: uuid)
+        } else {
+            showProcessingOverlay()
+        }
+    }
+
     func loadPlayer(assetID: String) {
         initializePlayer(with: assetID)
         configurePlayerViewController()
@@ -126,6 +137,92 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         addChild(playerViewController)
         playerView.addSubview(playerViewController.view)
         playerViewController.view.frame = playerView.bounds
+    }
+    
+    func showProcessingOverlay() {
+        removeExistingOverlay()
+        processingEmptyView = EmptyView.getInstance(parentView: playerView)
+        processingEmptyView?.show(
+            description: "The video is being processed and will be available shortly.",
+            retryButtonText: "Retry",
+            retryHandler: { [weak self] in
+                self?.retryProcessingCheck()
+            }
+        )
+        processingEmptyView?.imageView.isHidden = true
+        processingEmptyView?.backgroundColor = UIColor.black
+        processingEmptyView?.emptyViewDescription.textColor = .white
+        processingEmptyView?.retryButton.setTitleColor(.white, for: .normal)
+    }
+    
+    func retryProcessingCheck() {
+        let indicator = showRetryLoadingIndicator()
+        
+        TPApiClient.request(
+            type: Content.self,
+            endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
+            completion: { [weak self] content, error in
+                guard let self = self else { return }
+                self.hideRetryLoadingIndicator(indicator)
+                self.handleTranscodingCheckResult(content: content, error: error)
+            }
+        )
+    }
+    
+    private func showRetryLoadingIndicator() -> UIActivityIndicatorView {
+        processingEmptyView?.retryButton.isEnabled = false
+        
+        let indicator = UIActivityIndicatorView(style: .white)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.startAnimating()
+        if let emptyView = processingEmptyView {
+            emptyView.addSubview(indicator)
+            NSLayoutConstraint.activate([
+                indicator.centerXAnchor.constraint(equalTo: emptyView.retryButton.centerXAnchor),
+                indicator.centerYAnchor.constraint(equalTo: emptyView.retryButton.centerYAnchor)
+            ])
+            emptyView.retryButton.setTitleColor(.clear, for: .normal)
+        }
+        return indicator
+    }
+    
+    private func hideRetryLoadingIndicator(_ indicator: UIActivityIndicatorView) {
+        indicator.removeFromSuperview()
+        processingEmptyView?.retryButton.isEnabled = true
+        processingEmptyView?.retryButton.setTitleColor(.white, for: .normal)
+    }
+    
+    private func handleTranscodingCheckResult(content: Content?, error: TPError?) {
+        if let error = error {
+            debugPrint(error.message ?? "No error")
+            debugPrint(error.kind)
+            showErrorSnackbar(message: "Could not check video status. Please try again.")
+            return
+        }
+        
+        guard let updatedContent = content else { return }
+        
+        DBManager<Content>().addData(object: updatedContent)
+        self.content = updatedContent
+        
+        let isComplete = updatedContent.video?.isTranscodingComplete ?? true
+        if !isComplete {
+            return
+        }
+        
+        processingEmptyView?.hide()
+        guard let uuid = updatedContent.uuid else { return }
+        loadPlayer(assetID: uuid)
+    }
+    
+    private func showErrorSnackbar(message: String) {
+        let snackbar = TTGSnackbar(message: message, duration: .middle)
+        snackbar.show()
+    }
+    
+    private func removeExistingOverlay() {
+        processingEmptyView?.removeFromSuperview()
+        processingEmptyView = nil
     }
     
     func initializeDescription() {
@@ -279,6 +376,8 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     
     deinit {
         player?.removeObserver(self, forKeyPath: "rate")
+        processingEmptyView?.removeFromSuperview()
+        processingEmptyView = nil
     }
 
     @objc func updateVideoAttempt() {
@@ -293,7 +392,8 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         viewModel.content = content
         hideDescription()
         viewModel.createContentAttempt()
-        loadPlayer(assetID: content.uuid!)
+        removeExistingOverlay()
+        handleTranscodingStatus()
         tableView.reloadData()
         titleLabel.text = viewModel.getTitle()
         desc.text = viewModel.getDescription()
@@ -383,7 +483,7 @@ extension VideoContentViewController: VideoContentViewModelDelegate {
             return
         }
         let seekTime = CMTime(value: Int64(seconds), timescale: 1)
+
         player?.seek(to: seekTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
     }
-    
 }

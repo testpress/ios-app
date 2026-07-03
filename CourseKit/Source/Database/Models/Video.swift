@@ -27,12 +27,17 @@ import ObjectMapper
 import Foundation
 import RealmSwift
 
+public enum TranscodingStatus: String {
+    case completed = "completed"
+    case notTranscoded = "not transcoded video"
+}
 
 public class Video: DBModel {
     @objc dynamic public var url: String = ""
     @objc dynamic public var title: String = ""
     @objc dynamic public var embedCode: String = ""
     @objc dynamic public var duration: String = ""
+    @objc dynamic public var transcodingStatus: String?
 
     public var streams = List<Stream>()
     
@@ -52,6 +57,14 @@ public class Video: DBModel {
         }
     }
     
+    public var isTranscodingComplete: Bool {
+        guard let status = transcodingStatus?.lowercased() else {
+            return true
+        }
+        return status == TranscodingStatus.completed.rawValue
+            || status == TranscodingStatus.notTranscoded.rawValue
+    }
+    
     override public static func primaryKey() -> String? {
         return "id"
     }
@@ -64,5 +77,6 @@ public class Video: DBModel {
         embedCode <- map["embed_code"]
         streams <- (map["streams"], ListTransform<Stream>())
         duration <- (map["duration"], StringTransform())
+        transcodingStatus <- map["transcoding_status"]
     }
 }
