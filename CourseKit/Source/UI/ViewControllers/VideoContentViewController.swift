@@ -96,8 +96,8 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
                 loadPlayer(assetID: uuid)
             } else {
                 showProcessingOverlay()
+                performTranscodingCheck()
             }
-            performTranscodingCheck()
         } else {
             showProcessingOverlay()
         }
