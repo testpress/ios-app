@@ -79,11 +79,19 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
     
     private func handleTranscodingStatus() {
-        let isComplete = content.video?.isTranscodingComplete ?? true
-        if isComplete {
+        let status = content.video?.transcodingStatus?.lowercased()
+        debugPrint("=== Transcoding status: \(content.video?.transcodingStatus ?? "nil"), video: \(content.video != nil)")
+
+        if status == TranscodingStatus.completed.rawValue
+            || status == TranscodingStatus.notTranscoded.rawValue {
             guard let uuid = content.uuid else { return }
             loadPlayer(assetID: uuid)
+        } else if status == nil {
+            // Status unknown — list endpoint doesn't include it. Show overlay + auto-check.
+            showProcessingOverlay()
+            performTranscodingCheck()
         } else {
+            // Explicitly processing — show overlay, user taps retry
             showProcessingOverlay()
         }
     }
@@ -157,14 +165,21 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     
     func retryProcessingCheck() {
         let indicator = showRetryLoadingIndicator()
+        performTranscodingCheck {
+            self.hideRetryLoadingIndicator(indicator)
+        }
+    }
+    
+    func performTranscodingCheck(completion: (() -> Void)? = nil) {
+        let requestedContentId = content.id
         
         TPApiClient.request(
             type: Content.self,
             endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
             completion: { [weak self] content, error in
                 guard let self = self else { return }
-                self.hideRetryLoadingIndicator(indicator)
-                self.handleTranscodingCheckResult(content: content, error: error)
+                completion?()
+                self.handleTranscodingCheckResult(requestedContentId: requestedContentId, content: content, error: error)
             }
         )
     }
@@ -192,7 +207,9 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         processingEmptyView?.retryButton.setTitleColor(.white, for: .normal)
     }
     
-    private func handleTranscodingCheckResult(content: Content?, error: TPError?) {
+    private func handleTranscodingCheckResult(requestedContentId: Int, content: Content?, error: TPError?) {
+        guard requestedContentId == self.content.id else { return }
+        
         if let error = error {
             debugPrint(error.message ?? "No error")
             debugPrint(error.kind)
@@ -202,8 +219,10 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         
         guard let updatedContent = content else { return }
         
+        debugPrint("=== Retry API response - transcodingStatus: \(updatedContent.video?.transcodingStatus ?? "nil")")
+        
         DBManager<Content>().addData(object: updatedContent)
-        self.content = updatedContent
+        self.content = DBManager<Content>().getResultsFromDB().filter("id == %d", updatedContent.id).first
         
         let isComplete = updatedContent.video?.isTranscodingComplete ?? true
         if !isComplete {
@@ -376,8 +395,6 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     
     deinit {
         player?.removeObserver(self, forKeyPath: "rate")
-        processingEmptyView?.removeFromSuperview()
-        processingEmptyView = nil
     }
 
     @objc func updateVideoAttempt() {
