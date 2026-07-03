@@ -75,6 +75,7 @@ public class InstituteSettings: DBModel {
     @objc public dynamic var salesforceMarketingCloudUrl: String? = nil
     @objc public dynamic var salesforceMid: String? = nil
     @objc public dynamic var allowProfileEdit: Bool = true
+    @objc public dynamic var customForgotPasswordUrl: String? = nil
 
     public var allowedLoginMethods = List<Int>()
     
@@ -136,6 +137,7 @@ public class InstituteSettings: DBModel {
         salesforceMarketingCloudUrl <- map["salesforce_marketing_cloud_url"]
         salesforceMid <- map["salesforce_mid"]
         allowProfileEdit <- map["allow_profile_edit"]
+        customForgotPasswordUrl <- map["custom_forgot_password_url"]
         var tempAllowed: [Int] = []
         tempAllowed <- map["allowed_login_methods"]
 
