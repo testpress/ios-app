@@ -86,8 +86,17 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
             guard let uuid = content.uuid else { return }
             loadPlayer(assetID: uuid)
         } else if status == nil {
-            // Unknown (list endpoint doesn't include transcoding_status) — show overlay, verify via API
-            showProcessingOverlay()
+            guard let uuid = content.uuid else { return }
+            
+            let isDownloaded = TPStreamsDownloadManager.shared.isAssetDownloaded(assetID: uuid)
+            let hasStreams = !(content.video?.streams.isEmpty ?? true)
+            let hasValidUrl = !(content.video?.url.isEmpty ?? true)
+            
+            if isDownloaded || hasStreams || hasValidUrl {
+                loadPlayer(assetID: uuid)
+            } else {
+                showProcessingOverlay()
+            }
             performTranscodingCheck()
         } else {
             showProcessingOverlay()
