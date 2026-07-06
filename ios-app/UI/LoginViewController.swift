@@ -201,16 +201,26 @@ class LoginViewController: BaseTextFieldViewController, DeepLinkBaseProtocol {
     }
     
     @IBAction func showResetPasswordView() {
-        if let customUrlString = instituteSettings.customForgotPasswordUrl,
+        if let customUrlString = instituteSettings?.customForgotPasswordUrl,
+           !customUrlString.isEmpty,
            let customUrl = URL(string: customUrlString),
+           (customUrl.scheme == "http" || customUrl.scheme == "https"),
            UIApplication.shared.canOpenURL(customUrl) {
-            UIApplication.shared.open(customUrl, options: [:], completionHandler: nil)
+            UIApplication.shared.open(customUrl, options: [:]) { success in
+                if !success {
+                    self.showNativeResetPassword()
+                }
+            }
         } else {
-            let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
-                Constants.RESET_PASSWORD_VIEW_CONTROLLER) as! ResetPasswordViewController
-            
-            present(tabViewController, animated: true, completion: nil)
+            showNativeResetPassword()
         }
+    }
+    
+    private func showNativeResetPassword() {
+        let tabViewController = self.storyboard?.instantiateViewController(withIdentifier:
+            Constants.RESET_PASSWORD_VIEW_CONTROLLER) as! ResetPasswordViewController
+        
+        present(tabViewController, animated: true, completion: nil)
     }
     
     @objc func closeAlert(gesture: UITapGestureRecognizer) {
