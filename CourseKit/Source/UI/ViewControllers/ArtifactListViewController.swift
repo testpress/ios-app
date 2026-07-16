@@ -233,16 +233,17 @@ private class ArtifactCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
             fileIconView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            fileIconView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            fileIconView.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             fileIconView.widthAnchor.constraint(equalToConstant: 24),
             fileIconView.heightAnchor.constraint(equalToConstant: 24),
 
             titleLabel.leadingAnchor.constraint(equalTo: fileIconView.trailingAnchor, constant: 12),
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             titleLabel.trailingAnchor.constraint(equalTo: rightIconView.leadingAnchor, constant: -8),
 
             rightIconView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            rightIconView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            rightIconView.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             rightIconView.widthAnchor.constraint(equalToConstant: 24),
             rightIconView.heightAnchor.constraint(equalToConstant: 24)
         ])
