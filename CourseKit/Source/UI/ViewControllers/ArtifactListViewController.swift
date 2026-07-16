@@ -93,7 +93,7 @@ extension ArtifactListViewController: UITableViewDataSource, UITableViewDelegate
 
 // MARK: - ArtifactCell
 
-private class ArtifactCell: UITableViewCell {
+class ArtifactCell: UITableViewCell {
     @IBOutlet weak var fileIconView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var rightIconView: UIImageView!
