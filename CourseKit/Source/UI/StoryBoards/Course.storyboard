@@ -2662,6 +2662,55 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="art-tv">
                                 <rect key="frame" x="0.0" y="203" width="393" height="649"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ArtifactCell" rowHeight="-1" estimatedRowHeight="-1" id="art-cell" customClass="ArtifactCell" customModule="CourseKit">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="art-cell" id="art-cv">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="art-fiv">
+                                                    <rect key="frame" x="16" y="10" width="24" height="24"/>
+                                                    <color key="tintColor" systemColor="systemGrayColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="c-fiv-w"/>
+                                                        <constraint firstAttribute="height" constant="24" id="c-fiv-h"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="art-tl">
+                                                    <rect key="frame" x="52" y="12" width="281" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="art-riv">
+                                                    <rect key="frame" x="353" y="10" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="c-riv-w"/>
+                                                        <constraint firstAttribute="height" constant="24" id="c-riv-h"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="art-fiv" firstAttribute="leading" secondItem="art-cv" secondAttribute="leading" constant="16" id="c-fiv-l"/>
+                                                <constraint firstItem="art-fiv" firstAttribute="centerY" secondItem="art-tl" secondAttribute="centerY" id="c-fiv-y"/>
+                                                <constraint firstItem="art-tl" firstAttribute="leading" secondItem="art-fiv" secondAttribute="trailing" constant="12" id="c-tl-l"/>
+                                                <constraint firstItem="art-tl" firstAttribute="top" secondItem="art-cv" secondAttribute="top" constant="12" id="c-tl-t"/>
+                                                <constraint firstItem="art-tl" firstAttribute="bottom" secondItem="art-cv" secondAttribute="bottom" constant="-12" id="c-tl-b"/>
+                                                <constraint firstItem="art-tl" firstAttribute="trailing" secondItem="art-riv" secondAttribute="leading" constant="-8" id="c-tl-r"/>
+                                                <constraint firstItem="art-riv" firstAttribute="trailing" secondItem="art-cv" secondAttribute="trailing" constant="-16" id="c-riv-r"/>
+                                                <constraint firstItem="art-riv" firstAttribute="centerY" secondItem="art-tl" secondAttribute="centerY" id="c-riv-y"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="fileIconView" destination="art-fiv" id="con-fiv"/>
+                                            <outlet property="titleLabel" destination="art-tl" id="con-tl"/>
+                                            <outlet property="rightIconView" destination="art-riv" id="con-riv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No resources available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="art-el">
                                 <rect key="frame" x="114.66666666666667" y="441.33333333333331" width="163.66666666666663" height="19.333333333333314"/>

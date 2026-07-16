@@ -18,10 +18,6 @@ class ArtifactListViewController: BaseUIViewController {
 
     var artifacts: [Artifact] = []
 
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -32,7 +28,6 @@ class ArtifactListViewController: BaseUIViewController {
     }
 
     private func setupTableView() {
-        tableView.register(ArtifactCell.self, forCellReuseIdentifier: "ArtifactCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
@@ -43,19 +38,13 @@ class ArtifactListViewController: BaseUIViewController {
 
     private func downloadArtifact(_ artifact: Artifact) {
         guard let downloadUrl = URL(string: artifact.url) else {
-            showError("Invalid file URL")
+            showAlert(title: "Download Failed", message: "Invalid file URL")
             return
         }
 
-        let fileExtension = downloadUrl.pathExtension
-        let fileName: String
-        if artifact.name.isEmpty {
-            fileName = downloadUrl.lastPathComponent
-        } else if !fileExtension.isEmpty {
-            fileName = "\(artifact.name).\(fileExtension)"
-        } else {
-            fileName = artifact.name
-        }
+        let baseName = artifact.name.isEmpty ? downloadUrl.lastPathComponent : artifact.name
+        let ext = downloadUrl.pathExtension
+        let fileName = ext.isEmpty ? baseName : "\(baseName).\(ext)"
 
         FileDownloadUtility.shared.downloadFile(
             viewController: self,
@@ -63,28 +52,14 @@ class ArtifactListViewController: BaseUIViewController {
             fileName: fileName,
             completion: { [weak self] fileUrl, error in
                 if let error = error {
-                    self?.showError(error.localizedDescription)
+                    self?.showAlert(title: "Download Failed", message: error.localizedDescription)
                 }
             }
         )
     }
 
-    private func showLockedAlert() {
-        let alert = UIAlertController(
-            title: "Resource Locked",
-            message: "This resource is locked",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-
-    private func showError(_ message: String) {
-        let alert = UIAlertController(
-            title: "Download Failed",
-            message: message,
-            preferredStyle: .alert
-        )
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
@@ -111,7 +86,7 @@ extension ArtifactListViewController: UITableViewDataSource, UITableViewDelegate
         if artifact.accessibleWithoutAttempt {
             downloadArtifact(artifact)
         } else {
-            showLockedAlert()
+            showAlert(title: "Resource Locked", message: "This resource is locked")
         }
     }
 }
@@ -119,56 +94,9 @@ extension ArtifactListViewController: UITableViewDataSource, UITableViewDelegate
 // MARK: - ArtifactCell
 
 private class ArtifactCell: UITableViewCell {
-
-    private let fileIconView = UIImageView()
-    private let titleLabel = UILabel()
-    private let rightIconView = UIImageView()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupViews() {
-        backgroundColor = .white
-        contentView.backgroundColor = .white
-        selectionStyle = .none
-
-        fileIconView.translatesAutoresizingMaskIntoConstraints = false
-        fileIconView.tintColor = .systemGray
-        fileIconView.contentMode = .scaleAspectFit
-        contentView.addSubview(fileIconView)
-
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
-        titleLabel.numberOfLines = 2
-        contentView.addSubview(titleLabel)
-
-        rightIconView.translatesAutoresizingMaskIntoConstraints = false
-        rightIconView.contentMode = .scaleAspectFit
-        contentView.addSubview(rightIconView)
-
-        NSLayoutConstraint.activate([
-            fileIconView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            fileIconView.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            fileIconView.widthAnchor.constraint(equalToConstant: 24),
-            fileIconView.heightAnchor.constraint(equalToConstant: 24),
-
-            titleLabel.leadingAnchor.constraint(equalTo: fileIconView.trailingAnchor, constant: 12),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            titleLabel.trailingAnchor.constraint(equalTo: rightIconView.leadingAnchor, constant: -8),
-
-            rightIconView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            rightIconView.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            rightIconView.widthAnchor.constraint(equalToConstant: 24),
-            rightIconView.heightAnchor.constraint(equalToConstant: 24)
-        ])
-    }
+    @IBOutlet weak var fileIconView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var rightIconView: UIImageView!
 
     func configure(with artifact: Artifact) {
         titleLabel.text = artifact.name.isEmpty ? artifact.url : artifact.name
