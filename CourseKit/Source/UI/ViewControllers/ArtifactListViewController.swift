@@ -9,115 +9,36 @@ import UIKit
 
 class ArtifactListViewController: BaseUIViewController {
 
-    private let tableView = UITableView()
-    private let emptyLabel = UILabel()
+    @IBOutlet weak var dragHandleView: UIView!
+    @IBOutlet weak var headerTitleLabel: UILabel!
+    @IBOutlet weak var headerSubtitleLabel: UILabel!
+    @IBOutlet weak var dividerView: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyLabel: UILabel!
 
-    // Bottom sheet header views
-    private let dragHandleView = UIView()
-    private let headerTitleLabel = UILabel()
-    private let headerSubtitleLabel = UILabel()
-    private let dividerView = UIView()
-
-    private var artifacts: [Artifact]
-
-    init(artifacts: [Artifact]) {
-        self.artifacts = artifacts
-        super.init(nibName: nil, bundle: nil)
-    }
+    var artifacts: [Artifact] = []
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         tableView.backgroundColor = .white
-        setupHeader()
         setupTableView()
-        setupEmptyLabel()
-    }
-
-    private func setupHeader() {
-        // Drag handle
-        dragHandleView.translatesAutoresizingMaskIntoConstraints = false
-        dragHandleView.backgroundColor = .systemGray4
-        dragHandleView.layer.cornerRadius = 2.5
-        dragHandleView.clipsToBounds = true
-        view.addSubview(dragHandleView)
-
-        // Title
-        headerTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        headerTitleLabel.text = "Resources"
-        headerTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        headerTitleLabel.textColor = .black
-        view.addSubview(headerTitleLabel)
-
-        // Subtitle
-        headerSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        headerSubtitleLabel.text = "Access your study materials"
-        headerSubtitleLabel.font = UIFont.systemFont(ofSize: 14)
-        headerSubtitleLabel.textColor = .systemGray
-        view.addSubview(headerSubtitleLabel)
-
-        // Divider
-        dividerView.translatesAutoresizingMaskIntoConstraints = false
-        dividerView.backgroundColor = .systemGray5
-        view.addSubview(dividerView)
-
-        NSLayoutConstraint.activate([
-            dragHandleView.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
-            dragHandleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dragHandleView.widthAnchor.constraint(equalToConstant: 40),
-            dragHandleView.heightAnchor.constraint(equalToConstant: 5),
-
-            headerTitleLabel.topAnchor.constraint(equalTo: dragHandleView.bottomAnchor, constant: 16),
-            headerTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            headerTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-
-            headerSubtitleLabel.topAnchor.constraint(equalTo: headerTitleLabel.bottomAnchor, constant: 4),
-            headerSubtitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            headerSubtitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-
-            dividerView.topAnchor.constraint(equalTo: headerSubtitleLabel.bottomAnchor, constant: 12),
-            dividerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            dividerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dividerView.heightAnchor.constraint(equalToConstant: 1)
-        ])
+        emptyLabel.isHidden = !artifacts.isEmpty
+        tableView.isHidden = artifacts.isEmpty
     }
 
     private func setupTableView() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(ArtifactCell.self, forCellReuseIdentifier: "ArtifactCell")
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(ArtifactCell.self, forCellReuseIdentifier: "ArtifactCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 56
         tableView.tableFooterView = UIView()
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 52, bottom: 0, right: 16)
-        view.addSubview(tableView)
-
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
-
-    private func setupEmptyLabel() {
-        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
-        emptyLabel.text = "No resources available"
-        emptyLabel.textAlignment = .center
-        emptyLabel.textColor = .systemGray
-        emptyLabel.font = UIFont.systemFont(ofSize: 16)
-        emptyLabel.isHidden = !artifacts.isEmpty
-        view.addSubview(emptyLabel)
-
-        NSLayoutConstraint.activate([
-            emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
     }
 
     private func downloadArtifact(_ artifact: Artifact) {

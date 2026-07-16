@@ -392,7 +392,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
 
         let url = TPEndpointProvider.getContentArtifactsUrl(contentId: contentId)
         TPApiClient.getListItems(
-            endpointProvider: TPEndpointProvider(.contentArtifacts, url: url),
+            endpointProvider: TPEndpointProvider(.get, url: url),
             headers: nil,
             completion: { [weak self] (response: TPApiResponse<Artifact>?, error: TPError?) in
                 alert.dismiss(animated: true) {
@@ -419,7 +419,9 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     }
 
     private func presentArtifactList(_ artifacts: [Artifact]) {
-        let vc = ArtifactListViewController(artifacts: artifacts)
+        let storyboard = UIStoryboard(name: "Course", bundle: TestpressCourse.bundle)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ArtifactListViewController") as! ArtifactListViewController
+        vc.artifacts = artifacts
         vc.modalPresentationStyle = .pageSheet
 
         if #available(iOS 15.0, *) {

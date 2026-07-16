@@ -82,7 +82,6 @@ public enum TPEndpoint {
     case checkEnforceDataCollectionStatus
     case generateOtp
     case otpLogin
-    case contentArtifacts
 
     public var method: Alamofire.HTTPMethod {
         switch self {
@@ -130,8 +129,7 @@ public enum TPEndpoint {
              .bookmarks,
              .bookmarkFolders,
              .getActivityFeed,
-             .checkEnforceDataCollectionStatus,
-             .contentArtifacts:
+             .checkEnforceDataCollectionStatus:
             return .get
         case .get:
             return .get
@@ -252,8 +250,6 @@ public enum TPEndpoint {
             return "/api/v2.5/auth/generate-otp/"
         case .otpLogin:
             return "/api/v2.5/auth/otp-login/"
-        case .contentArtifacts:
-            return ""
         default:
             return ""
         }
