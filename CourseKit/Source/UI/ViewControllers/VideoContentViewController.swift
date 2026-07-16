@@ -176,11 +176,23 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     
     func performTranscodingCheck(completion: (() -> Void)? = nil) {
         let requestedContentId = content.id
+        let url = content.getUrl()
+        
+        debugPrint("=== Transcoding Check Initiated ===")
+        debugPrint("Content ID: \(requestedContentId)")
+        debugPrint("API Endpoint URL: \(url)")
         
         TPApiClient.request(
             type: Content.self,
-            endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
+            endpointProvider: TPEndpointProvider(.get, url: url),
             completion: { [weak self] content, error in
+                debugPrint("=== Transcoding Check Completed ===")
+                debugPrint("Requested URL: \(url)")
+                if let error = error {
+                    debugPrint("Error occurred: \(error)")
+                    debugPrint("Error Message: \(error.message ?? "None")")
+                    debugPrint("Error Kind: \(error.kind)")
+                }
                 guard let self = self else { return }
                 completion?()
                 self.handleTranscodingCheckResult(requestedContentId: requestedContentId, content: content, error: error)
@@ -368,11 +380,9 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
             }
             tableView.reloadData()
             if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
-                if bookmarkId != nil {
-                    contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.RemoveBookmark.image
-                } else {
-                    contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
-                }
+                contentDetailPageViewController.bookmarkButton.image = bookmarkId != nil
+                    ? Images.RemoveBookmark.image
+                    : Images.AddBookmark.image
             }
         } else {
             if let cellContentId = contents.firstIndex(where: { $0.id == bookmarkContent?.id }) {
@@ -391,12 +401,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
             contentDetailPageViewController.hideNavbarTitle()
-            
-            if instituteSettings.bookmarksEnabled {
-                contentDetailPageViewController.enableBookmarkOption()
-            } else {
-                contentDetailPageViewController.navigationBarItem.rightBarButtonItem = nil
-            }
+            contentDetailPageViewController.enableBookmarkOption()
         }
     }
     

@@ -397,6 +397,8 @@
 		D953EB6F2CDDE90B00B62759 /* OfflineDownloadsTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D953EB6E2CDDE90B00B62759 /* OfflineDownloadsTabController.swift */; };
 		D9A2F2AC2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */; };
 		D9CCCA5C2CF5DBA700B60B0F /* MarketingCloudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D9CCCA5B2CF5DBA700B60B0F /* MarketingCloudSDK */; };
+		2D7CDBD42F3F705F00A3B927 /* Artifact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBD32F3F705F00A3B927 /* Artifact.swift */; };
+		2D7CDBD62F3F706000A3B927 /* ArtifactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7CDBD52F3F706000A3B927 /* ArtifactListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -842,6 +844,8 @@
 		D990C7F12B31765E00B3ED4D /* DirectionTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionTranslation.swift; sourceTree = "<group>"; };
 		D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineDownloadTableViewCell.swift; sourceTree = "<group>"; };
 		D9D3721B2D3FB086002E9FE2 /* MobileRTC.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:BJ4HAAB9B3:Zoom Video Communications, Inc."; lastKnownFileType = wrapper.xcframework; name = MobileRTC.xcframework; path = Carthage/Build/MobileRTC.xcframework; sourceTree = "<group>"; };
+		2D7CDBD32F3F705F00A3B927 /* Artifact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artifact.swift; sourceTree = "<group>"; };
+		2D7CDBD52F3F706000A3B927 /* ArtifactListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtifactListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1184,6 +1188,7 @@
 				25520BC527547006001A58AB /* DiscussionThreadAnswer.swift */,
 				25B4D0BE27B0F8BB0061D100 /* SSOUrl.swift */,
 				2F48C80E1FD2899E009C686C /* Post.swift */,
+				2D7CDBD32F3F705F00A3B927 /* Artifact.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1564,6 +1569,7 @@
 				8C04228E22AA3FD40015269B /* WebViewController.swift */,
 				D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */,
 				D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */,
+				2D7CDBD52F3F706000A3B927 /* ArtifactListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2312,6 +2318,8 @@
 				03E4AFC82CAFCF7000ECC34D /* TPApiResponse.swift in Sources */,
 				03E4AFD62CAFE6A900ECC34D /* Constants.swift in Sources */,
 				038CB2942CBD278600164127 /* BaseQuestionsListViewController.swift in Sources */,
+				2D7CDBD42F3F705F00A3B927 /* Artifact.swift in Sources */,
+				2D7CDBD62F3F706000A3B927 /* ArtifactListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

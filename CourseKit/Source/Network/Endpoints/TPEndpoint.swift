@@ -82,6 +82,7 @@ public enum TPEndpoint {
     case checkEnforceDataCollectionStatus
     case generateOtp
     case otpLogin
+    case contentArtifacts
 
     public var method: Alamofire.HTTPMethod {
         switch self {
@@ -129,7 +130,8 @@ public enum TPEndpoint {
              .bookmarks,
              .bookmarkFolders,
              .getActivityFeed,
-             .checkEnforceDataCollectionStatus:
+             .checkEnforceDataCollectionStatus,
+             .contentArtifacts:
             return .get
         case .get:
             return .get
@@ -250,6 +252,8 @@ public enum TPEndpoint {
             return "/api/v2.5/auth/generate-otp/"
         case .otpLogin:
             return "/api/v2.5/auth/otp-login/"
+        case .contentArtifacts:
+            return ""
         default:
             return ""
         }
@@ -326,5 +330,9 @@ public struct TPEndpointProvider {
     
     public static func getCourseDetailUrl(courseId: Int) -> String {
         return TestpressCourse.shared.baseURL + TPEndpoint.getCourses.urlPath + "\(courseId)/"
+    }
+
+    public static func getContentArtifactsUrl(contentId: Int) -> String {
+        return TestpressCourse.shared.baseURL + "/api/v3/contents/\(contentId)/artifacts/"
     }
 }

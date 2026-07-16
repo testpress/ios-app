@@ -40,6 +40,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     @IBOutlet weak var bottomNavigationBar: UIStackView!
     @IBOutlet weak var bottomNavigationBarConstraint: NSLayoutConstraint!
     @IBOutlet weak var bookmarkButton: UIBarButtonItem!
+    var artifactButton: UIBarButtonItem!
     var instituteSettings: InstituteSettings!
     
     let bottomGradient = CAGradientLayer()
@@ -65,6 +66,13 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         setupEmptyView()
         setupContentDetailDataSource()
         setupInitialView()
+        setupArtifactButton()
+    }
+
+    private func setupArtifactButton() {
+        let image = UIImage(systemName: "paperclip")
+        artifactButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(showArtifacts))
+        artifactButton.tintColor = TestpressCourse.shared.primaryColor
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -167,29 +175,32 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     }
     
     func enableBookmarkOption() {
-        if !instituteSettings.bookmarksEnabled {
-            navigationBarItem.rightBarButtonItems = nil
-            return
-        }
-
         guard let viewControllers = pageViewController.viewControllers,
               !viewControllers.isEmpty else { return }
 
         let currentIndex = getCurrentIndex()
-        guard currentIndex != -1 else { return }
+        guard currentIndex >= 0, currentIndex < contents.count else { return }
 
-        if let currentVC = contentDetailDataSource.viewControllerAtIndex(currentIndex),
-           currentVC is VideoContentViewController {
-            navigationBarItem.rightBarButtonItems = [bookmarkButton]
-            bookmarkButton.isEnabled = true
-            bookmarkButton.image = Images.AddBookmark.image
-            if contents[currentIndex].bookmarkId.value != nil {
-                bookmarkButton.image = Images.RemoveBookmark.image
-            }
-        } else {
-            bookmarkButton.isEnabled = false
-            bookmarkButton.image = nil
+        let content = contents[currentIndex]
+        var rightItems: [UIBarButtonItem] = []
+
+        // Artifact button
+        if content.hasArtifacts {
+            rightItems.append(artifactButton)
         }
+
+        // Bookmark button
+        if instituteSettings.bookmarksEnabled,
+           let currentVC = contentDetailDataSource.viewControllerAtIndex(currentIndex),
+           currentVC is VideoContentViewController {
+            bookmarkButton.isEnabled = true
+            bookmarkButton.image = content.bookmarkId.value != nil
+                ? Images.RemoveBookmark.image
+                : Images.AddBookmark.image
+            rightItems.append(bookmarkButton)
+        }
+
+        navigationBarItem.rightBarButtonItems = rightItems.isEmpty ? nil : rightItems
     }
 
     // MARK: - UIPageViewController delegate methods
@@ -203,6 +214,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         if completed {
             let currentIndex = getCurrentIndex()
             updateNavigationButtons(index: currentIndex)
+            enableBookmarkOption()
         }
     }
     
@@ -368,6 +380,57 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         if let viewController = self.getCurretViewController() as? VideoContentViewController {
             viewController.addOrRemoveBookmark(content: nil)
         }
+    }
+
+    @objc func showArtifacts() {
+        let currentIndex = getCurrentIndex()
+        guard currentIndex >= 0, currentIndex < contents.count else { return }
+        let contentId = contents[currentIndex].id
+
+        let alert = UIUtils.initProgressDialog(message: "Loading...")
+        present(alert, animated: true)
+
+        let url = TPEndpointProvider.getContentArtifactsUrl(contentId: contentId)
+        TPApiClient.getListItems(
+            endpointProvider: TPEndpointProvider(.contentArtifacts, url: url),
+            headers: nil,
+            completion: { [weak self] (response: TPApiResponse<Artifact>?, error: TPError?) in
+                alert.dismiss(animated: true) {
+                    guard let self = self else { return }
+
+                    if let error = error {
+                        self.showArtifactError(error)
+                        return
+                    }
+
+                    let artifacts = response?.results ?? []
+                    self.presentArtifactList(artifacts)
+                }
+            },
+            type: Artifact.self
+        )
+    }
+
+    private func showArtifactError(_ error: TPError) {
+        let message = error.message ?? "Failed to load artifacts. Please try again."
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
+    private func presentArtifactList(_ artifacts: [Artifact]) {
+        let vc = ArtifactListViewController(artifacts: artifacts)
+        vc.modalPresentationStyle = .pageSheet
+
+        if #available(iOS 15.0, *) {
+            if let sheet = vc.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.prefersGrabberVisible = true
+                sheet.preferredCornerRadius = 16
+            }
+        }
+
+        present(vc, animated: true)
     }
 }
 
