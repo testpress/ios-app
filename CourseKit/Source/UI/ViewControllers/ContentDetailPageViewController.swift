@@ -420,7 +420,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
 
     private func presentArtifactList(_ artifacts: [Artifact]) {
         let storyboard = UIStoryboard(name: "Course", bundle: TestpressCourse.bundle)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ArtifactListViewController") as! ArtifactListViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: Constants.ARTIFACT_LIST_VIEW_CONTROLLER) as! ArtifactListViewController
         vc.artifacts = artifacts
         vc.modalPresentationStyle = .pageSheet
 
