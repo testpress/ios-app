@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ArtifactListViewController: UIViewController {
+class ArtifactListViewController: BaseUIViewController {
 
     private let tableView = UITableView()
     private let emptyLabel = UILabel()
@@ -32,6 +32,7 @@ class ArtifactListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        tableView.backgroundColor = .white
         setupHeader()
         setupTableView()
         setupEmptyLabel()
@@ -90,6 +91,8 @@ class ArtifactListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ArtifactCell.self, forCellReuseIdentifier: "ArtifactCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 56
         tableView.tableFooterView = UIView()
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 52, bottom: 0, right: 16)
         view.addSubview(tableView)
@@ -123,7 +126,15 @@ class ArtifactListViewController: UIViewController {
             return
         }
 
-        let fileName = artifact.name.isEmpty ? downloadUrl.lastPathComponent : "\(artifact.name).pdf"
+        let fileExtension = downloadUrl.pathExtension
+        let fileName: String
+        if artifact.name.isEmpty {
+            fileName = downloadUrl.lastPathComponent
+        } else if !fileExtension.isEmpty {
+            fileName = "\(artifact.name).\(fileExtension)"
+        } else {
+            fileName = artifact.name
+        }
 
         FileDownloadUtility.shared.downloadFile(
             viewController: self,

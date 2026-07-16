@@ -176,23 +176,11 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     
     func performTranscodingCheck(completion: (() -> Void)? = nil) {
         let requestedContentId = content.id
-        let url = content.getUrl()
-        
-        debugPrint("=== Transcoding Check Initiated ===")
-        debugPrint("Content ID: \(requestedContentId)")
-        debugPrint("API Endpoint URL: \(url)")
         
         TPApiClient.request(
             type: Content.self,
-            endpointProvider: TPEndpointProvider(.get, url: url),
+            endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
             completion: { [weak self] content, error in
-                debugPrint("=== Transcoding Check Completed ===")
-                debugPrint("Requested URL: \(url)")
-                if let error = error {
-                    debugPrint("Error occurred: \(error)")
-                    debugPrint("Error Message: \(error.message ?? "None")")
-                    debugPrint("Error Kind: \(error.kind)")
-                }
                 guard let self = self else { return }
                 completion?()
                 self.handleTranscodingCheckResult(requestedContentId: requestedContentId, content: content, error: error)
