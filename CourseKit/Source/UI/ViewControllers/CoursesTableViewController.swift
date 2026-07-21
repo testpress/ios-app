@@ -35,6 +35,11 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
     required init?(coder aDecoder: NSCoder) {
         super.init(pager: CoursePager(), coder: aDecoder)
     }
+
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.rightBarButtonItems = []
+    }
     
     public override func getItemsFromDb() -> [Course] {
         var courses = DBManager<Course>()
@@ -65,12 +70,10 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
     }
     
     func showOrHideCustomTestIcon(){
-        if ((instituteSettings?.enableCustomTest ?? false)) {
-            customTestIcon.isEnabled = true
-            customTestIcon.tintColor = nil
+        if (instituteSettings?.enableCustomTest ?? false) {
+            navigationItem.rightBarButtonItems = [customTestIcon]
         } else {
-            customTestIcon.isEnabled = false
-            customTestIcon.tintColor = UIColor.clear
+            navigationItem.rightBarButtonItems = nil
         }
     }
     
