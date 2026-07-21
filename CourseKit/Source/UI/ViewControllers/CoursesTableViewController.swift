@@ -30,10 +30,17 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
     public var tags: [String] = []
     public var excludeTags: [String] = []
     @IBOutlet weak var customTestIcon: UIBarButtonItem!
+    private var strongCustomTestIcon: UIBarButtonItem?
     var instituteSettings: InstituteSettings?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(pager: CoursePager(), coder: aDecoder)
+    }
+
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        strongCustomTestIcon = customTestIcon
+        navigationItem.rightBarButtonItems = []
     }
     
     public override func getItemsFromDb() -> [Course] {
@@ -65,12 +72,12 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
     }
     
     func showOrHideCustomTestIcon(){
-        if ((instituteSettings?.enableCustomTest ?? false)) {
-            customTestIcon.isEnabled = true
-            customTestIcon.tintColor = nil
+        if (instituteSettings?.enableCustomTest ?? false) {
+            if let icon = strongCustomTestIcon ?? customTestIcon {
+                navigationItem.rightBarButtonItems = [icon]
+            }
         } else {
-            customTestIcon.isEnabled = false
-            customTestIcon.tintColor = UIColor.clear
+            navigationItem.rightBarButtonItems = nil
         }
     }
     
