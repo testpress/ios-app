@@ -30,6 +30,7 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
     public var tags: [String] = []
     public var excludeTags: [String] = []
     @IBOutlet weak var customTestIcon: UIBarButtonItem!
+    private var strongCustomTestIcon: UIBarButtonItem?
     var instituteSettings: InstituteSettings?
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,6 +39,7 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+        strongCustomTestIcon = customTestIcon
         navigationItem.rightBarButtonItems = []
     }
     
@@ -71,7 +73,9 @@ public class CoursesTableViewController: BaseDBTableViewController<Course> {
     
     func showOrHideCustomTestIcon(){
         if (instituteSettings?.enableCustomTest ?? false) {
-            navigationItem.rightBarButtonItems = [customTestIcon]
+            if let icon = strongCustomTestIcon ?? customTestIcon {
+                navigationItem.rightBarButtonItems = [icon]
+            }
         } else {
             navigationItem.rightBarButtonItems = nil
         }
