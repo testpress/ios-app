@@ -177,7 +177,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     func enableBookmarkOption() {
         if !instituteSettings.bookmarksEnabled {
             navigationBarItem.rightBarButtonItems = nil
-            updateArtifactButton()
+            appendArtifactButton()
             return
         }
 
@@ -199,19 +199,22 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
             bookmarkButton.isEnabled = false
             bookmarkButton.image = nil
         }
-        updateArtifactButton()
+        appendArtifactButton()
     }
 
-    private func updateArtifactButton() {
+    private func appendArtifactButton() {
         let currentIndex = getCurrentIndex()
         guard currentIndex >= 0, currentIndex < contents.count else { return }
-        let content = contents[currentIndex]
-        guard content.hasArtifacts else { return }
 
         var items = navigationBarItem.rightBarButtonItems ?? []
-        if !items.contains(artifactButton) {
+        let hasArtifact = items.contains(where: { $0 === artifactButton })
+
+        if contents[currentIndex].hasArtifacts && !hasArtifact {
             items.insert(artifactButton, at: 0)
             navigationBarItem.rightBarButtonItems = items
+        } else if !contents[currentIndex].hasArtifacts && hasArtifact {
+            items.removeAll(where: { $0 === artifactButton })
+            navigationBarItem.rightBarButtonItems = items.isEmpty ? nil : items
         }
     }
 
@@ -226,7 +229,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         if completed {
             let currentIndex = getCurrentIndex()
             updateNavigationButtons(index: currentIndex)
-            updateArtifactButton()
+            appendArtifactButton()
         }
     }
     
