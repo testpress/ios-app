@@ -393,7 +393,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
             contentDetailPageViewController.hideNavbarTitle()
             
             if instituteSettings.bookmarksEnabled {
-                contentDetailPageViewController.updateRightNavigationItems()
+                contentDetailPageViewController.enableBookmarkOption()
             } else {
                 contentDetailPageViewController.navigationBarItem.rightBarButtonItem = nil
             }

@@ -83,7 +83,10 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
             setFirstViewController()
         }
 
-        updateRightNavigationItems()
+        enableBookmarkOption()
+        DispatchQueue.main.async { [weak self] in
+            self?.appendArtifactButton()
+        }
     }
     
     public override func viewDidLayoutSubviews() {
@@ -174,10 +177,9 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         bottomNavigationBar.isHidden = false
     }
     
-    func updateRightNavigationItems() {
+    func enableBookmarkOption() {
         if !instituteSettings.bookmarksEnabled {
             navigationBarItem.rightBarButtonItems = nil
-            appendArtifactButton()
             return
         }
 
@@ -199,7 +201,6 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
             bookmarkButton.isEnabled = false
             bookmarkButton.image = nil
         }
-        appendArtifactButton()
     }
 
     private func appendArtifactButton() {
@@ -316,7 +317,8 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
                 self?.setupContentDetailDataSource()
                 self?.setFirstViewController()
                 self?.navigationBarItem.title = content.name
-                self?.updateRightNavigationItems()
+                self?.enableBookmarkOption()
+                self?.appendArtifactButton()
             }
         )
     }
