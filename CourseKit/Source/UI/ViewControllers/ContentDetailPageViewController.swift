@@ -175,32 +175,44 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     }
     
     func enableBookmarkOption() {
+        if !instituteSettings.bookmarksEnabled {
+            navigationBarItem.rightBarButtonItems = nil
+            updateArtifactButton()
+            return
+        }
+
         guard let viewControllers = pageViewController.viewControllers,
               !viewControllers.isEmpty else { return }
 
         let currentIndex = getCurrentIndex()
-        guard currentIndex >= 0, currentIndex < contents.count else { return }
+        guard currentIndex != -1 else { return }
 
-        let content = contents[currentIndex]
-        var rightItems: [UIBarButtonItem] = []
-
-        // Artifact button
-        if content.hasArtifacts {
-            rightItems.append(artifactButton)
-        }
-
-        // Bookmark button
-        if instituteSettings.bookmarksEnabled,
-           let currentVC = contentDetailDataSource.viewControllerAtIndex(currentIndex),
+        if let currentVC = contentDetailDataSource.viewControllerAtIndex(currentIndex),
            currentVC is VideoContentViewController {
+            navigationBarItem.rightBarButtonItems = [bookmarkButton]
             bookmarkButton.isEnabled = true
-            bookmarkButton.image = content.bookmarkId.value != nil
-                ? Images.RemoveBookmark.image
-                : Images.AddBookmark.image
-            rightItems.append(bookmarkButton)
+            bookmarkButton.image = Images.AddBookmark.image
+            if contents[currentIndex].bookmarkId.value != nil {
+                bookmarkButton.image = Images.RemoveBookmark.image
+            }
+        } else {
+            bookmarkButton.isEnabled = false
+            bookmarkButton.image = nil
         }
+        updateArtifactButton()
+    }
 
-        navigationBarItem.rightBarButtonItems = rightItems.isEmpty ? nil : rightItems
+    private func updateArtifactButton() {
+        let currentIndex = getCurrentIndex()
+        guard currentIndex >= 0, currentIndex < contents.count else { return }
+        let content = contents[currentIndex]
+        guard content.hasArtifacts else { return }
+
+        var items = navigationBarItem.rightBarButtonItems ?? []
+        if !items.contains(artifactButton) {
+            items.insert(artifactButton, at: 0)
+            navigationBarItem.rightBarButtonItems = items
+        }
     }
 
     // MARK: - UIPageViewController delegate methods
@@ -214,7 +226,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         if completed {
             let currentIndex = getCurrentIndex()
             updateNavigationButtons(index: currentIndex)
-            enableBookmarkOption()
+            updateArtifactButton()
         }
     }
     
@@ -298,6 +310,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
                 self?.setupContentDetailDataSource()
                 self?.setFirstViewController()
                 self?.navigationBarItem.title = content.name
+                self?.enableBookmarkOption()
             }
         )
     }
@@ -390,22 +403,25 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         let alert = UIUtils.initProgressDialog(message: "Loading...")
         present(alert, animated: true)
 
+        fetchArtifacts(contentId: contentId) { [weak self] artifacts, error in
+            alert.dismiss(animated: true) {
+                guard let self = self else { return }
+                if let error = error {
+                    self.showArtifactError(error)
+                    return
+                }
+                self.presentArtifactList(artifacts ?? [])
+            }
+        }
+    }
+
+    private func fetchArtifacts(contentId: Int, completion: @escaping ([Artifact]?, TPError?) -> Void) {
         let url = TPEndpointProvider.getContentArtifactsUrl(contentId: contentId)
         TPApiClient.getListItems(
             endpointProvider: TPEndpointProvider(.get, url: url),
             headers: nil,
-            completion: { [weak self] (response: TPApiResponse<Artifact>?, error: TPError?) in
-                alert.dismiss(animated: true) {
-                    guard let self = self else { return }
-
-                    if let error = error {
-                        self.showArtifactError(error)
-                        return
-                    }
-
-                    let artifacts = response?.results ?? []
-                    self.presentArtifactList(artifacts)
-                }
+            completion: { (response: TPApiResponse<Artifact>?, error: TPError?) in
+                completion(response?.results, error)
             },
             type: Artifact.self
         )

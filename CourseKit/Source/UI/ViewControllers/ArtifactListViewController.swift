@@ -21,13 +21,13 @@ class ArtifactListViewController: BaseUIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        tableView.backgroundColor = .white
         setupTableView()
         emptyLabel.isHidden = !artifacts.isEmpty
         tableView.isHidden = artifacts.isEmpty
     }
 
     private func setupTableView() {
+        tableView.backgroundColor = .white
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension

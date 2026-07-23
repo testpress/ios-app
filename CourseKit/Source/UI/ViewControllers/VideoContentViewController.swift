@@ -368,9 +368,11 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
             }
             tableView.reloadData()
             if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
-                contentDetailPageViewController.bookmarkButton.image = bookmarkId != nil
-                    ? Images.RemoveBookmark.image
-                    : Images.AddBookmark.image
+                if bookmarkId != nil {
+                    contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.RemoveBookmark.image
+                } else {
+                    contentDetailPageViewController.navigationBarItem.rightBarButtonItem?.image = Images.AddBookmark.image
+                }
             }
         } else {
             if let cellContentId = contents.firstIndex(where: { $0.id == bookmarkContent?.id }) {
@@ -389,7 +391,12 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
             contentDetailPageViewController.hideNavbarTitle()
-            contentDetailPageViewController.enableBookmarkOption()
+            
+            if instituteSettings.bookmarksEnabled {
+                contentDetailPageViewController.enableBookmarkOption()
+            } else {
+                contentDetailPageViewController.navigationBarItem.rightBarButtonItem = nil
+            }
         }
     }
     
