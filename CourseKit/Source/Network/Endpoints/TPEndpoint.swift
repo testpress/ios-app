@@ -327,4 +327,8 @@ public struct TPEndpointProvider {
     public static func getCourseDetailUrl(courseId: Int) -> String {
         return TestpressCourse.shared.baseURL + TPEndpoint.getCourses.urlPath + "\(courseId)/"
     }
+
+    public static func getContentArtifactsUrl(contentId: Int) -> String {
+        return TestpressCourse.shared.baseURL + "/api/v3/contents/\(contentId)/artifacts/"
+    }
 }

@@ -46,6 +46,7 @@ public struct Constants {
     public static let CONTENT_DETAIL_PAGE_VIEW_CONTROLLER = "ContentDetailPageViewController"
     public static let HTML_CONTENT_VIEW_CONTROLLER = "HtmlContentViewController"
     public static let ATTACHMENT_DETAIL_VIEW_CONTROLLER = "AttachmentDetailViewController"
+    public static let ARTIFACT_LIST_VIEW_CONTROLLER = "ArtifactListViewController"
     public static let VIDEO_CONTENT_VIEW_CONTROLLER = "VideoContentViewController"
     public static let VIDEO_CONFERENCE_VIEW_CONTROLLER = "VideoConferenceViewController"
     public static let ZOOM_MEET_VIEW_CONTROLLER = "ZoomMeetViewController"

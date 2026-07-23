@@ -40,6 +40,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     @IBOutlet weak var bottomNavigationBar: UIStackView!
     @IBOutlet weak var bottomNavigationBarConstraint: NSLayoutConstraint!
     @IBOutlet weak var bookmarkButton: UIBarButtonItem!
+    var artifactButton: UIBarButtonItem!
     var instituteSettings: InstituteSettings!
     
     let bottomGradient = CAGradientLayer()
@@ -65,6 +66,13 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         setupEmptyView()
         setupContentDetailDataSource()
         setupInitialView()
+        setupArtifactButton()
+    }
+
+    private func setupArtifactButton() {
+        let image = UIImage(systemName: "paperclip")
+        artifactButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(showArtifacts))
+        artifactButton.tintColor = TestpressCourse.shared.primaryColor
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +84,9 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         }
 
         enableBookmarkOption()
+        DispatchQueue.main.async { [weak self] in
+            self?.appendArtifactButton()
+        }
     }
     
     public override func viewDidLayoutSubviews() {
@@ -192,6 +203,25 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         }
     }
 
+    private func appendArtifactButton() {
+        guard let viewControllers = pageViewController.viewControllers,
+              !viewControllers.isEmpty else { return }
+
+        let currentIndex = getCurrentIndex()
+        guard currentIndex >= 0, currentIndex < contents.count else { return }
+
+        var items = navigationBarItem.rightBarButtonItems ?? []
+        let hasArtifact = items.contains(where: { $0 === artifactButton })
+
+        if contents[currentIndex].hasArtifacts && !hasArtifact {
+            items.insert(artifactButton, at: 0)
+            navigationBarItem.rightBarButtonItems = items
+        } else if !contents[currentIndex].hasArtifacts && hasArtifact {
+            items.removeAll(where: { $0 === artifactButton })
+            navigationBarItem.rightBarButtonItems = items.isEmpty ? nil : items
+        }
+    }
+
     // MARK: - UIPageViewController delegate methods
     
     public func pageViewController(_ pageViewController: UIPageViewController,
@@ -203,6 +233,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         if completed {
             let currentIndex = getCurrentIndex()
             updateNavigationButtons(index: currentIndex)
+            appendArtifactButton()
         }
     }
     
@@ -286,6 +317,8 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
                 self?.setupContentDetailDataSource()
                 self?.setFirstViewController()
                 self?.navigationBarItem.title = content.name
+                self?.enableBookmarkOption()
+                self?.appendArtifactButton()
             }
         )
     }
@@ -368,6 +401,62 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         if let viewController = self.getCurretViewController() as? VideoContentViewController {
             viewController.addOrRemoveBookmark(content: nil)
         }
+    }
+
+    @objc func showArtifacts() {
+        let currentIndex = getCurrentIndex()
+        guard currentIndex >= 0, currentIndex < contents.count else { return }
+        let contentId = contents[currentIndex].id
+
+        let alert = UIUtils.initProgressDialog(message: "Loading...")
+        present(alert, animated: true)
+
+        fetchArtifacts(contentId: contentId) { [weak self] artifacts, error in
+            alert.dismiss(animated: true) {
+                guard let self = self else { return }
+                if let error = error {
+                    self.showArtifactError(error)
+                    return
+                }
+                self.presentArtifactList(artifacts ?? [])
+            }
+        }
+    }
+
+    private func fetchArtifacts(contentId: Int, completion: @escaping ([Artifact]?, TPError?) -> Void) {
+        let url = TPEndpointProvider.getContentArtifactsUrl(contentId: contentId)
+        TPApiClient.getListItems(
+            endpointProvider: TPEndpointProvider(.get, url: url),
+            headers: nil,
+            completion: { (response: TPApiResponse<Artifact>?, error: TPError?) in
+                completion(response?.results, error)
+            },
+            type: Artifact.self
+        )
+    }
+
+    private func showArtifactError(_ error: TPError) {
+        let message = error.message ?? "Failed to load artifacts. Please try again."
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
+    private func presentArtifactList(_ artifacts: [Artifact]) {
+        let storyboard = UIStoryboard(name: "Course", bundle: TestpressCourse.bundle)
+        let vc = storyboard.instantiateViewController(withIdentifier: Constants.ARTIFACT_LIST_VIEW_CONTROLLER) as! ArtifactListViewController
+        vc.artifacts = artifacts
+        vc.modalPresentationStyle = .pageSheet
+
+        if #available(iOS 15.0, *) {
+            if let sheet = vc.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.prefersGrabberVisible = true
+                sheet.preferredCornerRadius = 16
+            }
+        }
+
+        present(vc, animated: true)
     }
 }
 

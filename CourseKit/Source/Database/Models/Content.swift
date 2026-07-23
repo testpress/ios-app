@@ -67,6 +67,7 @@ public class Content: DBModel {
     @objc dynamic public var coverImageSmall: String!
     @objc dynamic public var coverImageMedium: String!
     @objc dynamic public var hasEnded: Bool = false
+    @objc dynamic public var hasArtifacts: Bool = false
     @objc dynamic public var uuid: String?
 
     
@@ -107,6 +108,7 @@ public class Content: DBModel {
         coverImageSmall <- map["cover_image_small"]
         coverImageMedium <- map["cover_image_medium"]
         hasEnded <- map["has_ended"]
+        hasArtifacts <- map["has_artifacts"]
         end <- map["end"]
         uuid <- map["uuid"]
     }
