@@ -45,6 +45,8 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     var player: TPAVPlayer?
     var playerViewController: TPStreamPlayerViewController?
     var processingEmptyView: EmptyView?
+    var avPlayer: AVPlayer?
+    var avPlayerViewController: AVPlayerViewController?
     
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -79,6 +81,10 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
     
     private func checkTranscodingStatusAndLoadPlayer() {
+        if isFermionVideoProvider() {
+            loadFermionPlayer()
+            return
+        }
         let status = content.video?.transcodingStatus?.lowercased()
 
         if status == TranscodingStatus.completed.rawValue
@@ -104,6 +110,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
 
     func loadPlayer(assetID: String) {
+        cleanupPlayer()
         initializePlayer(with: assetID)
         configurePlayerViewController()
         configurePlayerView()
@@ -152,6 +159,49 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         addChild(playerViewController)
         playerView.addSubview(playerViewController.view)
         playerViewController.view.frame = playerView.bounds
+    }
+    
+    private func cleanupPlayer() {
+        player?.pause()
+        player = nil
+        playerViewController?.willMove(toParent: nil)
+        playerViewController?.view.removeFromSuperview()
+        playerViewController?.removeFromParent()
+        playerViewController = nil
+        
+        avPlayer?.pause()
+        avPlayer = nil
+        avPlayerViewController?.willMove(toParent: nil)
+        avPlayerViewController?.view.removeFromSuperview()
+        avPlayerViewController?.removeFromParent()
+        avPlayerViewController = nil
+    }
+    
+    private func isFermionVideoProvider() -> Bool {
+        return content.video?.provider.lowercased() == "fermion"
+    }
+    
+    private func loadFermionPlayer() {
+        guard let urlString = content.video?.getHlsUrl().isEmpty == false ? content.video?.getHlsUrl() : content.video?.url,
+              let url = URL(string: urlString) else {
+            showProcessingOverlay()
+            return
+        }
+        cleanupPlayer()
+        avPlayer = AVPlayer(url: url)
+        avPlayerViewController = AVPlayerViewController()
+        avPlayerViewController?.player = avPlayer
+        avPlayerViewController?.entersFullScreenWhenPlaybackBegins = false
+        avPlayerViewController?.showsPlaybackControls = true
+        avPlayerViewController?.videoGravity = .resizeAspect
+        if let vc = avPlayerViewController {
+            addChild(vc)
+            playerView.addSubview(vc.view)
+            vc.view.frame = playerView.bounds
+            vc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            vc.didMove(toParent: self)
+            avPlayer?.play()
+        }
     }
     
     func showProcessingOverlay() {
@@ -440,7 +490,10 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         player?.pause()
-        viewModel.updateVideoAttempt(currentTime: player?.currentTimeInSeconds)
+        avPlayer?.pause()
+        let avCurrentTime = avPlayer.map { CMTimeGetSeconds($0.currentTime()) }
+        let currentTime: Float64? = player?.currentTimeInSeconds ?? avCurrentTime
+        viewModel.updateVideoAttempt(currentTime: currentTime)
 
         if let contentDetailPageViewController = self.parent?.parent as? ContentDetailPageViewController {
             contentDetailPageViewController.disableSwipeGesture()
@@ -524,3 +577,4 @@ extension VideoContentViewController: VideoContentViewModelDelegate {
         player?.seek(to: seekTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
     }
 }
+

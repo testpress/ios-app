@@ -9,12 +9,14 @@
 import Foundation
 import UIKit
 import TPStreamsSDK
+import WebKit
 
 class LiveStreamContentViewController: BaseUIViewController {
     var content: Content!
     var player: TPAVPlayer?
     var playerViewController: TPStreamPlayerViewController!
     var reloadTimer: Timer?
+    var fermionWebView: WKWebView?
     
     var viewModel: ChapterContentDetailViewModel?
     
@@ -43,10 +45,15 @@ class LiveStreamContentViewController: BaseUIViewController {
     }
     
     func setupPlayerView() {
-        initializePlayer()
-        configurePlayerViewController()
-        configurePlayerView()
-        player?.play()
+        cleanupPlayer()
+        if isFermionProvider() {
+            setupFermionWebView()
+        } else {
+            initializePlayer()
+            configurePlayerViewController()
+            configurePlayerView()
+            player?.play()
+        }
     }
 
     private func initializePlayer() {
@@ -83,6 +90,33 @@ class LiveStreamContentViewController: BaseUIViewController {
         addChild(playerViewController)
         playerContainer.addSubview(playerViewController.view)
         playerViewController.view.frame = playerContainer.bounds
+    }
+    
+    private func cleanupPlayer() {
+        player?.pause()
+        player = nil
+        playerViewController?.willMove(toParent: nil)
+        playerViewController?.view.removeFromSuperview()
+        playerViewController?.removeFromParent()
+        playerViewController = nil
+        
+        fermionWebView?.removeFromSuperview()
+        fermionWebView = nil
+    }
+    
+    private func isFermionProvider() -> Bool {
+        return content.liveStream?.provider.lowercased() == "fermion"
+    }
+    
+    private func setupFermionWebView() {
+        guard let streamURLString = content.liveStream?.streamURL,
+              let streamURL = URL(string: streamURLString) else { return }
+        
+        let webView = WKWebView(frame: playerContainer.bounds)
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        playerContainer.addSubview(webView)
+        fermionWebView = webView
+        webView.load(URLRequest(url: streamURL))
     }
 
     func pollUntilLiveStreamStart() {

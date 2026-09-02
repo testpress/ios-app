@@ -38,6 +38,7 @@ public class Video: DBModel {
     @objc dynamic public var embedCode: String = ""
     @objc dynamic public var duration: String = ""
     @objc dynamic public var transcodingStatus: String?
+    @objc dynamic public var provider: String = ""
 
     public var streams = List<Stream>()
     
@@ -78,5 +79,6 @@ public class Video: DBModel {
         streams <- (map["streams"], ListTransform<Stream>())
         duration <- (map["duration"], StringTransform())
         transcodingStatus <- map["transcoding_status"]
+        provider <- map["provider"]
     }
 }

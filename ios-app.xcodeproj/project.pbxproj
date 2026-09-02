@@ -2992,7 +2992,7 @@
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
 				kind = exactVersion;
-				version = 10.54.2;
+				version = 20.0.4;
 			};
 		};
 		0386961A2BF7602600E36F8F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -3040,7 +3040,7 @@
 			repositoryURL = "https://github.com/testpress/iOSPlayerSDK";
 			requirement = {
 				kind = exactVersion;
-				version = 1.2.31;
+				version = 1.2.39;
 			};
 		};
 		D9CCCA5A2CF5DBA700B60B0F /* XCRemoteSwiftPackageReference "MarketingCloudSDK-iOS" */ = {
