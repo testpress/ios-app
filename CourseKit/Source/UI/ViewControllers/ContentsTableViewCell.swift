@@ -111,7 +111,9 @@ class ContentsTableViewCell: UITableViewCell {
     }
     
     func getThumbnailIcon(content: Content) -> UIImage {
-        if (content.video != nil) {
+        if content.hasFermionURL {
+            return Images.LiveClassIcon.image
+        } else if (content.video != nil) {
             return Images.VideoIconWhite.image
         } else if (content.videoConference != nil) {
             return Images.LiveClassIcon.image
