@@ -36,6 +36,38 @@ class FermionContentViewController: BaseWebViewController {
         webView.customUserAgent = "TestpressiOSApp/WebView"
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if webView == nil {
+            recreateWebView()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tearDownWebView()
+    }
+
+    private func tearDownWebView() {
+        webView?.stopLoading()
+        webView?.removeFromSuperview()
+        emptyView.removeFromSuperview()
+        emptyView.parentView = nil
+        webView = nil
+    }
+
+    private func recreateWebView() {
+        initWebView()
+        webView.navigationDelegate = self
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        parentView.addSubview(webView)
+        if activityIndicator.superview != nil {
+            parentView.bringSubviewToFront(activityIndicator)
+        }
+        emptyView = EmptyView.getInstance(parentView: webView)
+        loadFermionStream()
+    }
+
     func loadFermionStream() {
         if let request = buildAuthenticatedRequest() {
             emptyView.hide()
@@ -47,9 +79,10 @@ class FermionContentViewController: BaseWebViewController {
     }
 
     func buildAuthenticatedRequest() -> URLRequest? {
-        guard let urlString = content.fermionURL?.trimmingCharacters(in: .whitespacesAndNewlines),
-              !urlString.isEmpty,
-              let url = URL(string: urlString) else {
+        let embedURL = content.liveStream?.streamURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        let urlString = (embedURL.flatMap { $0.isEmpty ? nil : $0 })
+            ?? content.fermionURL?.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let urlString = urlString, !urlString.isEmpty, let url = URL(string: urlString) else {
             return nil
         }
         var request = URLRequest(url: url)
@@ -65,6 +98,7 @@ class FermionContentViewController: BaseWebViewController {
         Content.fetchContent(url: content.getUrl()) { [weak self] content, error in
             guard let self = self else { return }
             self.isFetchingContent = false
+            guard webView != nil else { return }
             self.activityIndicator.stopAnimating()
             if let content = content {
                 DBManager<Content>().addData(object: content)

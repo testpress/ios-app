@@ -112,7 +112,10 @@ public class Content: DBModel {
         hasArtifacts <- map["has_artifacts"]
         end <- map["end"]
         uuid <- map["uuid"]
-        fermionURL <- map["fermion_url"]
+        fermionURL <- map["live_stream.fermion_url"]
+        if fermionURL == nil || fermionURL?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
+            fermionURL <- map["fermion_url"]
+        }
     }
     
     override public static func primaryKey() -> String? {
@@ -152,8 +155,9 @@ public class Content: DBModel {
     }
 
     public var hasFermionURL: Bool {
-        guard let fermionURL = fermionURL?.trimmingCharacters(in: .whitespacesAndNewlines),
-              !fermionURL.isEmpty else {
+        let urlString = fermionURL?.trimmingCharacters(in: .whitespacesAndNewlines)
+            ?? liveStream?.fermionURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let urlString = urlString, !urlString.isEmpty else {
             return false
         }
         return true

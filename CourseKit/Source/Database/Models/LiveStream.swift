@@ -16,6 +16,8 @@ public class LiveStream: DBModel {
     @objc dynamic public var showRecordedVideo: Bool = false
     @objc dynamic public var status: String = ""
     @objc dynamic public var chatEmbedURL: String = ""
+    @objc dynamic public var provider: String = ""
+    @objc dynamic public var fermionURL: String = ""
 
     override static public func primaryKey() -> String? {
         return "id"
@@ -29,6 +31,8 @@ public class LiveStream: DBModel {
         showRecordedVideo <- map["show_recorded_video"]
         status <- map["status"]
         chatEmbedURL <- map["chat_embed_url"]
+        provider <- map["provider"]
+        fermionURL <- map["fermion_url"]
     }
     
     public var isEnded: Bool {
