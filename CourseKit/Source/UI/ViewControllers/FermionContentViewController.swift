@@ -111,7 +111,7 @@ class FermionContentViewController: BaseWebViewController {
         Content.fetchContent(url: content.getUrl()) { [weak self] content, error in
             guard let self = self else { return }
             self.isFetchingContent = false
-            guard webView != nil else { return }
+            guard self.webView != nil else { return }
             self.activityIndicator.stopAnimating()
             if let content = content {
                 DBManager<Content>().addData(object: content)
