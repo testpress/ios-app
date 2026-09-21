@@ -43,9 +43,16 @@ class FermionContentViewController: BaseWebViewController {
         }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        tearDownWebView()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if view.window == nil {
+            tearDownWebView()
+        }
+    }
+
+    deinit {
+        emptyView?.parentView = nil
+        emptyView?.removeFromSuperview()
     }
 
     private func tearDownWebView() {
@@ -79,8 +86,14 @@ class FermionContentViewController: BaseWebViewController {
     }
 
     func buildAuthenticatedRequest() -> URLRequest? {
-        let embedURL = content.liveStream?.streamURL.trimmingCharacters(in: .whitespacesAndNewlines)
-        let urlString = (embedURL.flatMap { $0.isEmpty ? nil : $0 })
+        let isFermion = content.liveStream?.provider.caseInsensitiveCompare("Fermion") == .orderedSame
+        let candidate: String?
+        if isFermion {
+            candidate = content.liveStream?.streamURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        } else {
+            candidate = content.fermionURL?.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        let urlString = (candidate.flatMap { $0.isEmpty ? nil : $0 })
             ?? content.fermionURL?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let urlString = urlString, !urlString.isEmpty, let url = URL(string: urlString) else {
             return nil
