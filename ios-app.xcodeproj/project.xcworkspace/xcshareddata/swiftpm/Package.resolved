@@ -29,6 +29,15 @@
       }
     },
     {
+      "identity" : "dsfregex",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/DSFRegex",
+      "state" : {
+        "revision" : "e0e64805519b23b08dcca9c83ca2d4a2b3de4c33",
+        "version" : "3.4.0"
+      }
+    },
+    {
       "identity" : "fxpagecontrol",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nicklockwood/FXPageControl.git",
@@ -51,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/testpress/iOSPlayerSDK",
       "state" : {
-        "revision" : "6525b28a01b9580054fc8559a76d695722429f59",
-        "version" : "1.2.31"
+        "revision" : "38986c1e5e5dd48d2e0b82f930410530291c6df7",
+        "version" : "1.2.35"
       }
     },
     {
@@ -188,6 +197,24 @@
       "state" : {
         "revision" : "f707b8680cddb96dc1855632340a572ef37bbb98",
         "version" : "2.5.3"
+      }
+    },
+    {
+      "identity" : "swiftsubtitles",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/SwiftSubtitles.git",
+      "state" : {
+        "revision" : "42cae8baacbad363ee621107207829107ef3e6b2",
+        "version" : "1.8.1"
+      }
+    },
+    {
+      "identity" : "tinycsv",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/TinyCSV",
+      "state" : {
+        "revision" : "05d691ee7bab64f5ff075b97f47ef41d36a81f6f",
+        "version" : "1.0.1"
       }
     },
     {
