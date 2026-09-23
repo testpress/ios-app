@@ -393,6 +393,7 @@
 		A4B6EE6A2DFC221E006D6FD1 /* FontRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6EE692DFC221C006D6FD1 /* FontRegistrar.swift */; };
 		A4B98DBA2DF85A9300471BA7 /* PreviewPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B98DB92DF85A8C00471BA7 /* PreviewPDFViewController.swift */; };
 		A4FC173F2E211A7A00249B5D /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 038696152BF65D9500E36F8F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B82260B4305BD91800D795A5 /* FermionContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82260B3305BD91800D795A5 /* FermionContentViewController.swift */; };
 		D90F83672CDCD8220030C38F /* OfflineDownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */; };
 		D932B2BB2CCBB801002B6D30 /* TPStreamsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D932B2BA2CCBB801002B6D30 /* TPStreamsSDK */; };
 		D932B2C12CDA1392002B6D30 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932B2C02CDA1392002B6D30 /* AppConstants.swift */; };
@@ -834,6 +835,7 @@
 		A4A1E4FB2DF1658700C72932 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MobileRTCResources.bundle; path = Carthage/Build/MobileRTCResources.bundle; sourceTree = "<group>"; };
 		A4B6EE692DFC221C006D6FD1 /* FontRegistrar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontRegistrar.swift; sourceTree = "<group>"; };
 		A4B98DB92DF85A8C00471BA7 /* PreviewPDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPDFViewController.swift; sourceTree = "<group>"; };
+		B82260B3305BD91800D795A5 /* FermionContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermionContentViewController.swift; sourceTree = "<group>"; };
 		D907E7A82B19D11C00BEA874 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Language.swift; path = CourseKit/Source/Database/Models/Language.swift; sourceTree = SOURCE_ROOT; };
 		D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineDownloadsViewController.swift; sourceTree = "<group>"; };
 		D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTestGenerationViewController.swift; sourceTree = "<group>"; };
@@ -1513,6 +1515,7 @@
 				2FC0F2851F861A860092BFDC /* BaseQuestionsViewController.swift */,
 				2F35508F1F9E12D2001964D6 /* BaseQuestionsSlidingViewController.swift */,
 				2FCBDD4D20CFDDB2003A7DC0 /* BookmarkedHtmlContentViewController.swift */,
+				B82260B3305BD91800D795A5 /* FermionContentViewController.swift */,
 				2F452C3120BC123D007833A0 /* BookmarkedQuestionViewController.swift */,
 				2F17C1FD20C965B300606D5C /* BookmarkFoldersDropDown.swift */,
 				2F04053320D916FB0074D80E /* BookmarkFoldersDropDownCell.swift */,
@@ -2292,6 +2295,7 @@
 				038CB27A2CBD278600164127 /* CustomTestGenerationViewController.swift in Sources */,
 				03E4AFB72CAFCF6F00ECC34D /* Subject.swift in Sources */,
 				03E4AFB22CAFCF6F00ECC34D /* ApiError.swift in Sources */,
+				B82260B4305BD91800D795A5 /* FermionContentViewController.swift in Sources */,
 				038CB2A92CBD278600164127 /* TimeAnalyticsHeaderViewCell.swift in Sources */,
 				03E4AFAB2CAFCF6F00ECC34D /* ContentObject.swift in Sources */,
 				03CD0C6D2CB7C5FD00E17218 /* UIButton.swift in Sources */,

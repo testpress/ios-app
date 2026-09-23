@@ -49,7 +49,9 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
         
         let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
         
-        if content.getContentType() == .Quiz {
+        if content.hasFermionURL {
+            return createFermionContentViewController(for: content)
+        } else if content.getContentType() == .Quiz {
             return createQuizViewController(for: content, storyboard: storyboard)
         } else if content.getContentType() == .Exam {
             return createExamViewController(for: content, storyboard: storyboard)
@@ -67,7 +69,9 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
     }
     
     func indexOfViewController(_ viewController: UIViewController) -> Int {
-        if viewController is ContentExamAttemptsTableViewController {
+        if viewController is FermionContentViewController {
+            return (viewController as! FermionContentViewController).content.index
+        } else if viewController is ContentExamAttemptsTableViewController {
             return (viewController as! ContentExamAttemptsTableViewController).content.index
         } else if viewController is StartExamScreenViewController {
             return (viewController as! StartExamScreenViewController).content.index
@@ -131,6 +135,13 @@ class ContentDetailDataSource: NSObject, UIPageViewControllerDataSource {
         return viewController
     }
     
+    private func createFermionContentViewController(for content: Content) -> UIViewController {
+        let viewController = FermionContentViewController()
+        viewController.content = content
+        viewController.viewModel = ChapterContentDetailViewModel(content, contentAttemptCreationDelegate)
+        return viewController
+    }
+
     private func createLiveStreamContentViewController(for content: Content, storyboard: UIStoryboard) -> UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: Constants.LIVE_STREAM_VIEW_CONTROLLER) as! LiveStreamContentViewController
         viewController.content = content

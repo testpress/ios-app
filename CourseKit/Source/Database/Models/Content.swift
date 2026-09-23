@@ -69,6 +69,7 @@ public class Content: DBModel {
     @objc dynamic public var hasEnded: Bool = false
     @objc dynamic public var hasArtifacts: Bool = false
     @objc dynamic public var uuid: String?
+    @objc dynamic public var fermionURL: String?
 
     
     public override func mapping(map: ObjectMapper.Map) {
@@ -111,6 +112,10 @@ public class Content: DBModel {
         hasArtifacts <- map["has_artifacts"]
         end <- map["end"]
         uuid <- map["uuid"]
+        fermionURL <- map["live_stream.fermion_url"]
+        if fermionURL == nil || fermionURL?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
+            fermionURL <- map["fermion_url"]
+        }
     }
     
     override public static func primaryKey() -> String? {
@@ -147,6 +152,15 @@ public class Content: DBModel {
     public func getUrl() -> String {
         var contentDetailUrl = String(format: "%@/api/v2.4/contents/%d/", TestpressCourse.shared.baseURL , self.id)
         return url.isEmpty ? contentDetailUrl : url
+    }
+
+    public var hasFermionURL: Bool {
+        let urlString = fermionURL?.trimmingCharacters(in: .whitespacesAndNewlines)
+            ?? liveStream?.fermionURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let urlString = urlString, !urlString.isEmpty else {
+            return false
+        }
+        return true
     }
 }
 

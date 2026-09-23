@@ -29,6 +29,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var contentsContainerView: UIView!
+    @IBOutlet weak var contentsContainerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var prevArrow: UIImageView!
     @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -103,6 +104,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         addChild(pageViewController)
         contentsContainerView.addSubview(pageViewController.view)
         pageViewController.view.frame = contentsContainerView.bounds
+        pageViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         pageViewController.didMove(toParent: self)
         disableSwipeGesture()
     }
@@ -153,6 +155,31 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         nextButton.isEnabled = !isLastPage
         nextArrow.tintColor = isLastPage ? UIColor.lightGray : TestpressCourse.shared.primaryColor
     }
+
+    // Live Fermion streams take the full screen: hide the prev/next bar
+    // and extend the content container down to the bottom edge.
+    private var containerBottomToSafeAreaConstraint: NSLayoutConstraint!
+
+    private func updateLiveStreamLayout() {
+        let isLiveFermion = (getCurretViewController() as? FermionContentViewController)?.isLive == true
+
+        if isLiveFermion {
+            if containerBottomToSafeAreaConstraint == nil {
+                containerBottomToSafeAreaConstraint = contentsContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            }
+            contentsContainerBottomConstraint.isActive = false
+            containerBottomToSafeAreaConstraint.isActive = true
+            hideBottomNavBar()
+        } else {
+            containerBottomToSafeAreaConstraint?.isActive = false
+            contentsContainerBottomConstraint.isActive = true
+            if contents.count >= 2 {
+                showBottomNavbar()
+            }
+        }
+        view.layoutIfNeeded()
+        pageViewController.view.frame = contentsContainerView.bounds
+    }
     
     // MARK: - Page View Controller Methods
     private func setFirstViewController() {
@@ -160,6 +187,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
             pageViewController.setViewControllers([startingViewController], direction: .forward, animated: false)
             pageViewController.dataSource = contentDetailDataSource
             updateNavigationButtons(index: getCurrentIndex())
+            updateLiveStreamLayout()
         }
     }
     
@@ -233,6 +261,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         if completed {
             let currentIndex = getCurrentIndex()
             updateNavigationButtons(index: currentIndex)
+            updateLiveStreamLayout()
             appendArtifactButton()
         }
     }
@@ -259,6 +288,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
                                               animated: true, completion: {done in })
         
         updateNavigationButtons(index: index)
+        updateLiveStreamLayout()
     }
     
     @objc func onClickPreviousButton(sender: UITapGestureRecognizer) {
@@ -387,6 +417,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
             animated: true,
             completion: nil
         )
+        updateLiveStreamLayout()
     }
     
     @IBAction func back() {
