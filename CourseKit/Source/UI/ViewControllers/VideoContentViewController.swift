@@ -180,12 +180,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     func showNoRecordedVideoEmptyView() {
         let contentTypeName = content.getContentType() == .VideoConference ? "Video conference" : "Live stream"
         
-        player?.pause()
-        player = nil
-        playerViewController?.willMove(toParent: nil)
-        playerViewController?.view.removeFromSuperview()
-        playerViewController?.removeFromParent()
-        playerViewController = nil
+        cleanupVideoPlayer()
         
         removeExistingOverlay()
         processingEmptyView = EmptyView.getInstance(parentView: playerView)
@@ -194,6 +189,15 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
             title: "\(contentTypeName) ended",
             description: "Live session has ended. See you in the next one!"
         )
+    }
+    
+    private func cleanupVideoPlayer() {
+        player?.pause()
+        player = nil
+        playerViewController?.willMove(toParent: nil)
+        playerViewController?.view.removeFromSuperview()
+        playerViewController?.removeFromParent()
+        playerViewController = nil
     }
     
     func retryProcessingCheck() {
