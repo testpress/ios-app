@@ -121,8 +121,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
 
     private func initializePlayer(with assetID: String) {
-        player?.pause()
-        player = nil
+        cleanupVideoPlayer()
         
         if TPStreamsDownloadManager.shared.isAssetDownloaded(assetID: assetID) {
             player = TPAVPlayer(offlineAssetId: assetID)
@@ -264,12 +263,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         let isComplete = updatedContent.video?.isTranscodingComplete ?? true
         if !isComplete {
             // Started playing assuming complete, but API says still processing — show overlay instead
-            player?.pause()
-            player = nil
-            playerViewController?.willMove(toParent: nil)
-            playerViewController?.view.removeFromSuperview()
-            playerViewController?.removeFromParent()
-            playerViewController = nil
+            cleanupVideoPlayer()
             showProcessingOverlay()
             return
         }
