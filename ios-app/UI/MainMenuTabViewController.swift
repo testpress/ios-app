@@ -33,6 +33,41 @@ import Sentry
 class MainMenuTabViewController: UITabBarController {
     
     var instituteSettings: InstituteSettings!
+    var messagingViewController: WebViewController?
+    private var unreadBadgeValue: String?
+    private var unreadCountTimer: Timer?
+    
+    private func startUnreadCountTimer() {
+        guard unreadCountTimer == nil else { return }
+        unreadCountTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
+            self?.fetchUnreadMessagesCount()
+        }
+    }
+    
+    private func stopUnreadCountTimer() {
+        unreadCountTimer?.invalidate()
+        unreadCountTimer = nil
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if selectedViewController !== messagingViewController {
+            fetchUnreadMessagesCount()
+            startUnreadCountTimer()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopUnreadCountTimer()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // iOS resets the More tab badge on each layout pass, so we re-apply the stored value.
+        messagingViewController?.tabBarItem.badgeValue = unreadBadgeValue
+        moreNavigationController.tabBarItem.badgeValue = unreadBadgeValue
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +111,7 @@ class MainMenuTabViewController: UITabBarController {
         
         addDoubtsWebViewController()
         addDiscussionsWebViewController()
+        addMessagingWebViewController()
         
         if !instituteSettings.disableStudentAnalytics {
             addAnalyticsTab()
@@ -95,6 +131,8 @@ class MainMenuTabViewController: UITabBarController {
         if instituteSettings.salesforceSdkEnabled {
             self.configureSalesforceSDK()
         }
+        
+        self.delegate = self
     }
     
     func configureSalesforceSDK() {
@@ -166,6 +204,66 @@ class MainMenuTabViewController: UITabBarController {
         return secondViewController
     }
     
+    private func addMessagingWebViewController() {
+        let messagingWebViewController = self.getMessagingWebViewController()
+        self.messagingViewController = messagingWebViewController
+        if (viewControllers?.count ?? 0) > 4 {
+            viewControllers?.insert(messagingWebViewController, at: 4)
+        } else {
+            viewControllers?.append(messagingWebViewController)
+        }
+    }
+    
+    // MARK: - Unread Messages Badge
+    
+    private func fetchUnreadMessagesCount() {
+        let endpoint = TPEndpointProvider(.getUnreadMessagesCount)
+        TPApiClient.apiCall(endpointProvider: endpoint, completion: { [weak self] response, error in
+            guard let self = self else { return }
+            
+            if error != nil {
+                return
+            }
+            
+            guard let response = response,
+                  let data = response.data(using: .utf8),
+                  let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
+                  let count = json["unread_count"] as? Int else {
+                TPError(message: "Invalid response format", kind: .unexpected).logErrorToSentry()
+                return
+            }
+            
+            self.applyUnreadBadge(count > 0 ? "\(count)" : nil)
+        })
+    }
+    
+    private func applyUnreadBadge(_ value: String?) {
+        unreadBadgeValue = value
+        messagingViewController?.tabBarItem.badgeValue = value
+        moreNavigationController.tabBarItem.badgeValue = value
+    }
+    
+    func getMessagingWebViewController() -> WebViewController {
+        let messagingViewController = WebViewController()
+        messagingViewController.url = "&next=/messages/?testpress_app=1"
+        messagingViewController.useWebviewNavigation = true
+        messagingViewController.useSSOLogin = true
+        messagingViewController.shouldOpenLinksWithinWebview = true
+        messagingViewController.title = "Messages"
+        messagingViewController.displayNavbar = false
+        messagingViewController.edgesForExtendedLayout = [.top]
+        if #available(iOS 13.0, *) {
+            messagingViewController.tabBarItem = UITabBarItem(
+                title: "Messages",
+                image: UIImage(systemName: "message.fill"),
+                tag: 0
+            )
+        } else {
+            messagingViewController.tabBarItem.title = "Messages"
+        }
+        return messagingViewController
+    }
+    
     private func addAnalyticsTab() {
         let bundle = Bundle(for: SubjectAnalyticsTabViewController.self)
         let storyboard = UIStoryboard(name: "ExamReview", bundle: bundle)
@@ -181,5 +279,22 @@ class MainMenuTabViewController: UITabBarController {
             tag: 0
         )
         viewControllers?.append(analyticsVC)
+    }
+}
+
+// MARK: - UITabBarControllerDelegate
+
+extension MainMenuTabViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController === messagingViewController {
+            // User opened Messages — they are reading it now, so clear the badge and stop polling.
+            applyUnreadBadge(nil)
+            stopUnreadCountTimer()
+        } else {
+            if unreadCountTimer == nil {
+                fetchUnreadMessagesCount()
+                startUnreadCountTimer()
+            }
+        }
     }
 }
