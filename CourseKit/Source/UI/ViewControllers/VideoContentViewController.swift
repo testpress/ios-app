@@ -79,6 +79,16 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
     
     private func checkTranscodingStatusAndLoadPlayer() {
+        if content.getContentType() == .LiveStream, let liveStream = content.liveStream, liveStream.isEnded && !liveStream.showRecordedVideo {
+            showNoRecordedVideoEmptyView()
+            return
+        }
+        
+        if content.getContentType() == .VideoConference, let videoConference = content.videoConference, videoConference.isEnded && !videoConference.showRecordedVideo {
+            showNoRecordedVideoEmptyView()
+            return
+        }
+
         let status = content.video?.transcodingStatus?.lowercased()
 
         if status == TranscodingStatus.completed.rawValue
@@ -111,8 +121,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
 
     private func initializePlayer(with assetID: String) {
-        player?.pause()
-        player = nil
+        cleanupVideoPlayer()
         
         if TPStreamsDownloadManager.shared.isAssetDownloaded(assetID: assetID) {
             player = TPAVPlayer(offlineAssetId: assetID)
@@ -165,6 +174,29 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
                 self?.retryProcessingCheck()
             }
         )
+    }
+    
+    func showNoRecordedVideoEmptyView() {
+        let contentTypeName = content.getContentType() == .VideoConference ? "Video conference" : "Live stream"
+        
+        cleanupVideoPlayer()
+        
+        removeExistingOverlay()
+        processingEmptyView = EmptyView.getInstance(parentView: playerView)
+        processingEmptyView?.show(
+            image: Images.TestpressAlertWarning.image,
+            title: "\(contentTypeName) ended",
+            description: "Live session has ended. See you in the next one!"
+        )
+    }
+    
+    private func cleanupVideoPlayer() {
+        player?.pause()
+        player = nil
+        playerViewController?.willMove(toParent: nil)
+        playerViewController?.view.removeFromSuperview()
+        playerViewController?.removeFromParent()
+        playerViewController = nil
     }
     
     func retryProcessingCheck() {
@@ -231,12 +263,7 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         let isComplete = updatedContent.video?.isTranscodingComplete ?? true
         if !isComplete {
             // Started playing assuming complete, but API says still processing — show overlay instead
-            player?.pause()
-            player = nil
-            playerViewController?.willMove(toParent: nil)
-            playerViewController?.view.removeFromSuperview()
-            playerViewController?.removeFromParent()
-            playerViewController = nil
+            cleanupVideoPlayer()
             showProcessingOverlay()
             return
         }
