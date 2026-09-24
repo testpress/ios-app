@@ -37,20 +37,29 @@ class MainMenuTabViewController: UITabBarController {
     private var unreadBadgeValue: String?
     private var unreadCountTimer: Timer?
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchUnreadMessagesCount()
-        // Poll every 30 seconds so the badge reflects new messages while the app is open.
+    private func startUnreadCountTimer() {
         guard unreadCountTimer == nil else { return }
         unreadCountTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
             self?.fetchUnreadMessagesCount()
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    private func stopUnreadCountTimer() {
         unreadCountTimer?.invalidate()
         unreadCountTimer = nil
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if selectedViewController !== messagingViewController {
+            fetchUnreadMessagesCount()
+            startUnreadCountTimer()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopUnreadCountTimer()
     }
     
     override func viewDidLayoutSubviews() {
@@ -210,11 +219,19 @@ class MainMenuTabViewController: UITabBarController {
     private func fetchUnreadMessagesCount() {
         let endpoint = TPEndpointProvider(.getUnreadMessagesCount)
         TPApiClient.apiCall(endpointProvider: endpoint, completion: { [weak self] response, error in
-            guard let self = self,
-                  let response = response,
+            guard let self = self else { return }
+            
+            if error != nil {
+                return
+            }
+            
+            guard let response = response,
                   let data = response.data(using: .utf8),
                   let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
-                  let count = json["unread_count"] as? Int else { return }
+                  let count = json["unread_count"] as? Int else {
+                TPError(message: "Invalid response format", kind: .unexpected).logErrorToSentry()
+                return
+            }
             
             self.applyUnreadBadge(count > 0 ? "\(count)" : nil)
         })
@@ -270,8 +287,14 @@ class MainMenuTabViewController: UITabBarController {
 extension MainMenuTabViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if viewController === messagingViewController {
-            // User opened Messages — they are reading it now, so clear the badge.
+            // User opened Messages — they are reading it now, so clear the badge and stop polling.
             applyUnreadBadge(nil)
+            stopUnreadCountTimer()
+        } else {
+            if unreadCountTimer == nil {
+                fetchUnreadMessagesCount()
+                startUnreadCountTimer()
+            }
         }
     }
 }
