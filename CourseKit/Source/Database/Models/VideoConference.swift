@@ -18,6 +18,8 @@ public class VideoConference: DBModel {
     @objc dynamic public var provider: String = ""
     @objc dynamic public var start: String = ""
     @objc dynamic public var title: String = ""
+    @objc dynamic public var showRecordedVideo: Bool = false
+    @objc dynamic public var state: String = ""
     
     public override func mapping(map: ObjectMapper.Map) {
         joinUrl <- map["join_url"]
@@ -29,6 +31,12 @@ public class VideoConference: DBModel {
         provider <- map["provider"]
         start <- map["start"]
         title <- map["title"]
+        showRecordedVideo <- map["show_recorded_video"]
+        state <- map["state"]
+    }
+    
+    public var isEnded: Bool {
+        return state == "Ended"
     }
     
     override public static func primaryKey() -> String? {

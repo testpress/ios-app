@@ -79,6 +79,16 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
     
     private func checkTranscodingStatusAndLoadPlayer() {
+        if content.getContentType() == .LiveStream, let liveStream = content.liveStream, liveStream.isEnded && !liveStream.showRecordedVideo {
+            showNoRecordedVideoEmptyView()
+            return
+        }
+        
+        if content.getContentType() == .VideoConference, let videoConference = content.videoConference, videoConference.isEnded && !videoConference.showRecordedVideo {
+            showNoRecordedVideoEmptyView()
+            return
+        }
+
         let status = content.video?.transcodingStatus?.lowercased()
 
         if status == TranscodingStatus.completed.rawValue
@@ -164,6 +174,25 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
             retryHandler: { [weak self] in
                 self?.retryProcessingCheck()
             }
+        )
+    }
+    
+    func showNoRecordedVideoEmptyView() {
+        let contentTypeName = content.getContentType() == .VideoConference ? "Video conference" : "Live stream"
+        
+        player?.pause()
+        player = nil
+        playerViewController?.willMove(toParent: nil)
+        playerViewController?.view.removeFromSuperview()
+        playerViewController?.removeFromParent()
+        playerViewController = nil
+        
+        removeExistingOverlay()
+        processingEmptyView = EmptyView.getInstance(parentView: playerView)
+        processingEmptyView?.show(
+            image: Images.TestpressAlertWarning.image,
+            title: "\(contentTypeName) ended",
+            description: "Live session has ended. See you in the next one!"
         )
     }
     
