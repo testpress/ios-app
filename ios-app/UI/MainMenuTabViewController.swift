@@ -56,9 +56,8 @@ class MainMenuTabViewController: UITabBarController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // iOS resets the More tab badge on each layout pass, so we re-apply the stored value.
+        messagingViewController?.tabBarItem.badgeValue = unreadBadgeValue
         moreNavigationController.tabBarItem.badgeValue = unreadBadgeValue
-        // Re-apply the custom cell badge in case the More list table view reloaded.
-        updateMoreListBadge(unreadBadgeValue)
     }
     
     override func viewDidLoad() {
@@ -223,48 +222,8 @@ class MainMenuTabViewController: UITabBarController {
     
     private func applyUnreadBadge(_ value: String?) {
         unreadBadgeValue = value
-        // More icon badge (red circle on the tab bar)
+        messagingViewController?.tabBarItem.badgeValue = value
         moreNavigationController.tabBarItem.badgeValue = value
-        // More list row badge — iOS renders tabBarItem.badgeValue as plain grey text inside
-        // the More list, so we stamp a custom red label onto the cell instead.
-        updateMoreListBadge(value)
-    }
-    
-    /// Finds the Messages row in the More list and stamps a red badge label onto it.
-    /// Safe to call at any time — does nothing if the More list is not currently visible.
-    private func updateMoreListBadge(_ value: String?) {
-        // Avoid casting to UITableViewController (private iOS class, unreliable across versions).
-        // Instead find the UITableView directly from topViewController's view hierarchy.
-        guard let topView = moreNavigationController.topViewController?.view,
-              let tableView = topView.subviews.compactMap({ $0 as? UITableView }).first
-                           ?? topView.subviews.flatMap({ $0.subviews }).compactMap({ $0 as? UITableView }).first
-        else { return }
-        
-        let messagingTitle = messagingViewController?.tabBarItem.title
-        for cell in tableView.visibleCells {
-            guard cell.textLabel?.text == messagingTitle else { continue }
-            // Remove any previously stamped badge
-            cell.contentView.subviews.filter { $0.tag == 9001 }.forEach { $0.removeFromSuperview() }
-            guard let text = value else { break }
-            let badge = UILabel()
-            badge.tag = 9001
-            badge.text = text
-            badge.font = .systemFont(ofSize: 12, weight: .semibold)
-            badge.textColor = .white
-            badge.backgroundColor = .systemRed
-            badge.textAlignment = .center
-            badge.layer.cornerRadius = 10
-            badge.clipsToBounds = true
-            badge.translatesAutoresizingMaskIntoConstraints = false
-            cell.contentView.addSubview(badge)
-            NSLayoutConstraint.activate([
-                badge.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -8),
-                badge.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
-                badge.heightAnchor.constraint(equalToConstant: 20),
-                badge.widthAnchor.constraint(greaterThanOrEqualToConstant: 20)
-            ])
-            break
-        }
     }
     
     func getMessagingWebViewController() -> WebViewController {
@@ -313,12 +272,6 @@ extension MainMenuTabViewController: UITabBarControllerDelegate {
         if viewController === messagingViewController {
             // User opened Messages — they are reading it now, so clear the badge.
             applyUnreadBadge(nil)
-        } else if viewController === moreNavigationController {
-            // The More list table view renders its cells after this callback fires.
-            // Deferring by one run loop tick ensures visibleCells is populated.
-            DispatchQueue.main.async {
-                self.updateMoreListBadge(self.unreadBadgeValue)
-            }
         }
     }
 }
