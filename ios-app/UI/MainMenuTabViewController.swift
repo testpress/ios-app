@@ -33,6 +33,33 @@ import Sentry
 class MainMenuTabViewController: UITabBarController {
     
     var instituteSettings: InstituteSettings!
+    var messagingViewController: WebViewController?
+    private var unreadBadgeValue: String?
+    private var unreadCountTimer: Timer?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchUnreadMessagesCount()
+        // Poll every 30 seconds so the badge reflects new messages while the app is open.
+        guard unreadCountTimer == nil else { return }
+        unreadCountTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
+            self?.fetchUnreadMessagesCount()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unreadCountTimer?.invalidate()
+        unreadCountTimer = nil
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // iOS resets the More tab badge on each layout pass, so we re-apply the stored value.
+        moreNavigationController.tabBarItem.badgeValue = unreadBadgeValue
+        // Re-apply the custom cell badge in case the More list table view reloaded.
+        updateMoreListBadge(unreadBadgeValue)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +103,7 @@ class MainMenuTabViewController: UITabBarController {
         
         addDoubtsWebViewController()
         addDiscussionsWebViewController()
+        addMessagingWebViewController()
         
         if !instituteSettings.disableStudentAnalytics {
             addAnalyticsTab()
@@ -95,6 +123,8 @@ class MainMenuTabViewController: UITabBarController {
         if instituteSettings.salesforceSdkEnabled {
             self.configureSalesforceSDK()
         }
+        
+        self.delegate = self
     }
     
     func configureSalesforceSDK() {
@@ -166,6 +196,98 @@ class MainMenuTabViewController: UITabBarController {
         return secondViewController
     }
     
+    private func addMessagingWebViewController() {
+        let messagingWebViewController = self.getMessagingWebViewController()
+        self.messagingViewController = messagingWebViewController
+        if (viewControllers?.count ?? 0) > 4 {
+            viewControllers?.insert(messagingWebViewController, at: 4)
+        } else {
+            viewControllers?.append(messagingWebViewController)
+        }
+    }
+    
+    // MARK: - Unread Messages Badge
+    
+    private func fetchUnreadMessagesCount() {
+        let endpoint = TPEndpointProvider(.getUnreadMessagesCount)
+        TPApiClient.apiCall(endpointProvider: endpoint, completion: { [weak self] response, error in
+            guard let self = self,
+                  let response = response,
+                  let data = response.data(using: .utf8),
+                  let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
+                  let count = json["unread_count"] as? Int else { return }
+            
+            self.applyUnreadBadge(count > 0 ? "\(count)" : nil)
+        })
+    }
+    
+    private func applyUnreadBadge(_ value: String?) {
+        unreadBadgeValue = value
+        // More icon badge (red circle on the tab bar)
+        moreNavigationController.tabBarItem.badgeValue = value
+        // More list row badge — iOS renders tabBarItem.badgeValue as plain grey text inside
+        // the More list, so we stamp a custom red label onto the cell instead.
+        updateMoreListBadge(value)
+    }
+    
+    /// Finds the Messages row in the More list and stamps a red badge label onto it.
+    /// Safe to call at any time — does nothing if the More list is not currently visible.
+    private func updateMoreListBadge(_ value: String?) {
+        // Avoid casting to UITableViewController (private iOS class, unreliable across versions).
+        // Instead find the UITableView directly from topViewController's view hierarchy.
+        guard let topView = moreNavigationController.topViewController?.view,
+              let tableView = topView.subviews.compactMap({ $0 as? UITableView }).first
+                           ?? topView.subviews.flatMap({ $0.subviews }).compactMap({ $0 as? UITableView }).first
+        else { return }
+        
+        let messagingTitle = messagingViewController?.tabBarItem.title
+        for cell in tableView.visibleCells {
+            guard cell.textLabel?.text == messagingTitle else { continue }
+            // Remove any previously stamped badge
+            cell.contentView.subviews.filter { $0.tag == 9001 }.forEach { $0.removeFromSuperview() }
+            guard let text = value else { break }
+            let badge = UILabel()
+            badge.tag = 9001
+            badge.text = text
+            badge.font = .systemFont(ofSize: 12, weight: .semibold)
+            badge.textColor = .white
+            badge.backgroundColor = .systemRed
+            badge.textAlignment = .center
+            badge.layer.cornerRadius = 10
+            badge.clipsToBounds = true
+            badge.translatesAutoresizingMaskIntoConstraints = false
+            cell.contentView.addSubview(badge)
+            NSLayoutConstraint.activate([
+                badge.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -8),
+                badge.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
+                badge.heightAnchor.constraint(equalToConstant: 20),
+                badge.widthAnchor.constraint(greaterThanOrEqualToConstant: 20)
+            ])
+            break
+        }
+    }
+    
+    func getMessagingWebViewController() -> WebViewController {
+        let messagingViewController = WebViewController()
+        messagingViewController.url = "&next=/messages/?testpress_app=1"
+        messagingViewController.useWebviewNavigation = true
+        messagingViewController.useSSOLogin = true
+        messagingViewController.shouldOpenLinksWithinWebview = true
+        messagingViewController.title = "Messages"
+        messagingViewController.displayNavbar = false
+        messagingViewController.edgesForExtendedLayout = [.top]
+        if #available(iOS 13.0, *) {
+            messagingViewController.tabBarItem = UITabBarItem(
+                title: "Messages",
+                image: UIImage(systemName: "message.fill"),
+                tag: 0
+            )
+        } else {
+            messagingViewController.tabBarItem.title = "Messages"
+        }
+        return messagingViewController
+    }
+    
     private func addAnalyticsTab() {
         let bundle = Bundle(for: SubjectAnalyticsTabViewController.self)
         let storyboard = UIStoryboard(name: "ExamReview", bundle: bundle)
@@ -181,5 +303,22 @@ class MainMenuTabViewController: UITabBarController {
             tag: 0
         )
         viewControllers?.append(analyticsVC)
+    }
+}
+
+// MARK: - UITabBarControllerDelegate
+
+extension MainMenuTabViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController === messagingViewController {
+            // User opened Messages — they are reading it now, so clear the badge.
+            applyUnreadBadge(nil)
+        } else if viewController === moreNavigationController {
+            // The More list table view renders its cells after this callback fires.
+            // Deferring by one run loop tick ensures visibleCells is populated.
+            DispatchQueue.main.async {
+                self.updateMoreListBadge(self.unreadBadgeValue)
+            }
+        }
     }
 }
