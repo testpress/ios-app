@@ -27,9 +27,10 @@ import UIKit
 
 public class ContentDetailPageViewController: BaseUIViewController, UIPageViewControllerDelegate {
     
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var contentsContainerView: UIView!
-    @IBOutlet weak var contentsContainerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var navigationBar: UINavigationBar!
+    @IBOutlet var contentsContainerView: UIView!
+    @IBOutlet var contentsContainerTopConstraint: NSLayoutConstraint!
+    @IBOutlet var contentsContainerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var prevArrow: UIImageView!
     @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -91,20 +92,36 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     }
     
     public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         // Add gradient shadow layer to the shadow container view
         UIUtils.updateBottomShadow(bottomShadowView: bottomShadowView,
                                    bottomGradient: bottomGradient)
-        emptyView.frame = contentsContainerView.bounds
-        
+        emptyView?.frame = contentsContainerView.bounds
+    }
+
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        let isLandscape = size.width > size.height
+        updateLiveStreamLayout(isLandscape: isLandscape)
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            self?.view.layoutIfNeeded()
+        }, completion: { [weak self] _ in
+            self?.updateLiveStreamLayout()
+        })
     }
     
     private func setupPageViewController() {
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.delegate = self
         addChild(pageViewController)
+        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
         contentsContainerView.addSubview(pageViewController.view)
-        pageViewController.view.frame = contentsContainerView.bounds
-        pageViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        NSLayoutConstraint.activate([
+            pageViewController.view.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor),
+            pageViewController.view.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor),
+            pageViewController.view.topAnchor.constraint(equalTo: contentsContainerView.topAnchor),
+            pageViewController.view.bottomAnchor.constraint(equalTo: contentsContainerView.bottomAnchor)
+        ])
         pageViewController.didMove(toParent: self)
         disableSwipeGesture()
     }
@@ -156,29 +173,63 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         nextArrow.tintColor = isLastPage ? UIColor.lightGray : TestpressCourse.shared.primaryColor
     }
 
-    // Live Fermion streams take the full screen: hide the prev/next bar
-    // and extend the content container down to the bottom edge.
-    private var containerBottomToSafeAreaConstraint: NSLayoutConstraint!
+    // Live Fermion streams layout handling:
+    // In portrait: hide bottom prev/next bar, show standard top navigation bar, extend container to safe area bottom.
+    // In landscape: hide top navigation bar and bottom bar, extend container edge-to-edge for full screen.
+    private var containerBottomToSafeAreaConstraint: NSLayoutConstraint?
+    private var containerTopToViewConstraint: NSLayoutConstraint?
+    private var containerBottomToViewConstraint: NSLayoutConstraint?
 
-    private func updateLiveStreamLayout() {
+    private func updateLiveStreamLayout(isLandscape: Bool? = nil) {
+        guard isViewLoaded, let containerView = contentsContainerView else { return }
         let isLiveFermion = (getCurretViewController() as? FermionContentViewController)?.isLive == true
+        let landscape = isLandscape ?? (view.bounds.width > view.bounds.height)
 
         if isLiveFermion {
-            if containerBottomToSafeAreaConstraint == nil {
-                containerBottomToSafeAreaConstraint = contentsContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-            }
-            contentsContainerBottomConstraint.isActive = false
-            containerBottomToSafeAreaConstraint.isActive = true
             hideBottomNavBar()
+
+            if landscape {
+                navigationBar?.isHidden = true
+                contentsContainerTopConstraint?.isActive = false
+                containerBottomToSafeAreaConstraint?.isActive = false
+                contentsContainerBottomConstraint?.isActive = false
+
+                if containerTopToViewConstraint == nil {
+                    containerTopToViewConstraint = containerView.topAnchor.constraint(equalTo: view.topAnchor)
+                }
+                if containerBottomToViewConstraint == nil {
+                    containerBottomToViewConstraint = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                }
+                containerTopToViewConstraint?.isActive = true
+                containerBottomToViewConstraint?.isActive = true
+            } else {
+                navigationBar?.isHidden = false
+                containerTopToViewConstraint?.isActive = false
+                containerBottomToViewConstraint?.isActive = false
+                contentsContainerBottomConstraint?.isActive = false
+
+                if containerBottomToSafeAreaConstraint == nil {
+                    containerBottomToSafeAreaConstraint = containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+                }
+                contentsContainerTopConstraint?.isActive = true
+                containerBottomToSafeAreaConstraint?.isActive = true
+            }
         } else {
+            navigationBar?.isHidden = false
+            containerTopToViewConstraint?.isActive = false
+            containerBottomToViewConstraint?.isActive = false
             containerBottomToSafeAreaConstraint?.isActive = false
-            contentsContainerBottomConstraint.isActive = true
+
+            contentsContainerTopConstraint?.isActive = true
+            contentsContainerBottomConstraint?.isActive = true
+
             if contents.count >= 2 {
                 showBottomNavbar()
+            } else {
+                hideBottomNavBar()
             }
         }
         view.layoutIfNeeded()
-        pageViewController.view.frame = contentsContainerView.bounds
     }
     
     // MARK: - Page View Controller Methods
@@ -196,13 +247,13 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     }
     
     func hideBottomNavBar() {
-        bottomShadowView.isHidden = true
-        bottomNavigationBar.isHidden = true
+        bottomShadowView?.isHidden = true
+        bottomNavigationBar?.isHidden = true
     }
     
     func showBottomNavbar() {
-        bottomShadowView.isHidden = false
-        bottomNavigationBar.isHidden = false
+        bottomShadowView?.isHidden = false
+        bottomNavigationBar?.isHidden = false
     }
     
     func enableBookmarkOption() {
@@ -266,12 +317,21 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
         }
     }
     
-    func getCurretViewController() -> UIViewController {
-        return pageViewController.viewControllers![0]
+    func getCurretViewController() -> UIViewController? {
+        guard let pageVC = pageViewController,
+              let viewControllers = pageVC.viewControllers,
+              !viewControllers.isEmpty else {
+            return nil
+        }
+        return viewControllers[0]
     }
     
     func getCurrentIndex() -> Int {
-        return contentDetailDataSource.indexOfViewController(getCurretViewController())
+        guard let currentVC = getCurretViewController(),
+              let dataSource = contentDetailDataSource else {
+            return -1
+        }
+        return dataSource.indexOfViewController(currentVC)
     }
     
     func setCurrentContent(index: Int) {
