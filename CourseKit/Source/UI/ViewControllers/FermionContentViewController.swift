@@ -126,16 +126,12 @@ class FermionContentViewController: BaseWebViewController {
     }
 
     func buildAuthenticatedRequest() -> URLRequest? {
-        let urlString = content.liveStream?.provider.caseInsensitiveCompare("Fermion") == .orderedSame
-            ? content.liveStream?.streamURL : content.fermionURL
-        guard let validUrl = urlString?.trimmingCharacters(in: .whitespacesAndNewlines),
-              !validUrl.isEmpty, let url = URL(string: validUrl) else {
+        guard let streamUrl = content.liveStream?.streamURL.trimmingCharacters(in: .whitespacesAndNewlines),
+              !streamUrl.isEmpty,
+              let url = URL(string: streamUrl) else {
             return nil
         }
-        var request = URLRequest(url: url)
-        request.setValue("JWT \(KeychainTokenItem.getToken())", forHTTPHeaderField: "Authorization")
-        request.addDeviceHeaders()
-        return request
+        return URLRequest(url: url)
     }
 
     private func refreshContentAndLoad() {
