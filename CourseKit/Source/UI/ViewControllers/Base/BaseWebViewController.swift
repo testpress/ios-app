@@ -31,7 +31,7 @@ open class BaseWebViewController: BaseUIViewController {
     public var webView: WKWebView!
     public var parentView: UIView!
     public var activityIndicator: UIActivityIndicatorView!
-    public var webViewDelegate: WKWebViewDelegate!
+    public weak var webViewDelegate: WKWebViewDelegate?
     public var shouldOpenLinksWithinWebview = false
     public var shouldReload = false
     
@@ -84,9 +84,7 @@ extension BaseWebViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         activityIndicator.stopAnimating()
         evaluateJavaScript(getJavascript())
-        if webViewDelegate != nil {
-            webViewDelegate.onFinishLoadingWebView()
-        }
+        webViewDelegate?.onFinishLoadingWebView()
     }
     
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
@@ -110,7 +108,7 @@ extension BaseWebViewController: WKNavigationDelegate {
 
 }
 
-public protocol WKWebViewDelegate {
+public protocol WKWebViewDelegate: AnyObject {
     func onFinishLoadingWebView()
 }
 
