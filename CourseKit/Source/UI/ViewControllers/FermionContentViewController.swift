@@ -116,7 +116,7 @@ class FermionContentViewController: BaseWebViewController {
     }
 
     func loadFermionStream() {
-        if let request = buildAuthenticatedRequest() {
+        if let request = buildStreamRequest() {
             emptyView.hide()
             activityIndicator.startAnimating()
             webView.load(request)
@@ -125,7 +125,7 @@ class FermionContentViewController: BaseWebViewController {
         }
     }
 
-    func buildAuthenticatedRequest() -> URLRequest? {
+    func buildStreamRequest() -> URLRequest? {
         guard let streamUrl = content.liveStream?.streamURL.trimmingCharacters(in: .whitespacesAndNewlines),
               !streamUrl.isEmpty,
               let url = URL(string: streamUrl) else {
@@ -147,7 +147,7 @@ class FermionContentViewController: BaseWebViewController {
                 self.content = content
                 self.applyContainerHeightConstraint()
             }
-            if let request = self.buildAuthenticatedRequest() {
+            if let request = self.buildStreamRequest() {
                 self.emptyView.hide()
                 self.activityIndicator.startAnimating()
                 self.webView.load(request)
