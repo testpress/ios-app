@@ -187,12 +187,6 @@ class FermionContentViewController: BaseWebViewController {
     }
 
     private func findParentContentDetailPageViewController() -> ContentDetailPageViewController? {
-        if let parent = self.parent as? ContentDetailPageViewController {
-            return parent
-        }
-        if let grandParent = self.parent?.parent as? ContentDetailPageViewController {
-            return grandParent
-        }
         var responder: UIResponder? = self
         while let next = responder?.next {
             if let vc = next as? ContentDetailPageViewController {
@@ -349,7 +343,7 @@ class FermionContentViewController: BaseWebViewController {
             window.addEventListener('message', function(event) {
                 if (event && event.data) {
                     var msg = typeof event.data === 'string' ? event.data : (event.data.type || event.data.action || event.data.event || '');
-                    if (/end|leave|exit|close|finish|complete/i.test(msg)) {
+                    if (/\\b(end|ended|leave|left|exit|exited|close|closed|finish|complete)\\b/i.test(msg)) {
                         notifyEnd();
                     }
                 }
@@ -378,6 +372,9 @@ private class WeakScriptMessageHandler: NSObject, WKScriptMessageHandler {
 
 extension FermionContentViewController: WKWebViewDelegate {
     func onFinishLoadingWebView() {
+        if let loadedUrl = webView?.url {
+            initialStreamUrl = loadedUrl
+        }
         initialLoadComplete = true
         viewModel?.createContentAttempt()
     }
@@ -411,8 +408,18 @@ extension FermionContentViewController: WKUIDelegate {
         let lowerMessage = message.lowercased()
         if lowerMessage.contains("leave") || lowerMessage.contains("end") || lowerMessage.contains("exit") || lowerMessage.contains("close") {
             returnToApp()
+            completionHandler(true)
+            return
         }
-        completionHandler(true)
+
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Strings.CANCEL, style: .cancel) { _ in
+            completionHandler(false)
+        })
+        alert.addAction(UIAlertAction(title: Strings.OK, style: .default) { _ in
+            completionHandler(true)
+        })
+        present(alert, animated: true)
     }
 
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
@@ -441,7 +448,8 @@ extension FermionContentViewController {
 
     override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                           decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let requestUrl = navigationAction.request.url {
+        if navigationAction.targetFrame?.isMainFrame == true,
+           let requestUrl = navigationAction.request.url {
             if handleNavigation(url: requestUrl) {
                 decisionHandler(.cancel)
                 return
@@ -457,7 +465,8 @@ extension FermionContentViewController {
 
     public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse,
                         decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        if let responseUrl = navigationResponse.response.url {
+        if navigationResponse.isForMainFrame,
+           let responseUrl = navigationResponse.response.url {
             if handleNavigation(url: responseUrl) {
                 decisionHandler(.cancel)
                 return
