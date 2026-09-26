@@ -732,6 +732,7 @@
                         <outlet property="bottomShadowView" destination="mKx-8f-odD" id="Mgv-Rv-OO4"/>
                         <outlet property="contentsContainerView" destination="2Eq-Dj-xz4" id="Zce-EN-nem"/>
                         <outlet property="contentsContainerBottomConstraint" destination="Ic0-3n-Deo" id="wQ4-7k-pR8"/>
+                        <outlet property="contentsContainerTopConstraint" destination="o6n-wr-HKV" id="Z3c-tp-cst"/>
                         <outlet property="navigationBar" destination="bC9-Gf-lRW" id="W3x-Zs-MxG"/>
                         <outlet property="navigationBarItem" destination="E4C-2g-tsL" id="pj8-Yf-U9Q"/>
                         <outlet property="nextArrow" destination="ZnT-TH-fX5" id="bYi-3a-ufT"/>
