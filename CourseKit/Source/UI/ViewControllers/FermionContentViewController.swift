@@ -19,7 +19,7 @@ class FermionContentViewController: BaseWebViewController {
     private var playerContainer: UIView!
 
     var isLive: Bool {
-        return true
+        return content?.liveStream?.isRunning == true || content?.liveStream?.isNotStarted == true
     }
 
     override func getParentView() -> UIView {
@@ -58,11 +58,13 @@ class FermionContentViewController: BaseWebViewController {
             ])
         }
 
-        AVCaptureDevice.requestAccess(for: .video) { _ in }
-        AVCaptureDevice.requestAccess(for: .audio) { _ in }
-        let session = AVAudioSession.sharedInstance()
-        try? session.setCategory(.playAndRecord, mode: .videoChat, options: [.defaultToSpeaker, .allowBluetooth])
-        try? session.setActive(true)
+        if isLive {
+            AVCaptureDevice.requestAccess(for: .video) { _ in }
+            AVCaptureDevice.requestAccess(for: .audio) { _ in }
+            let session = AVAudioSession.sharedInstance()
+            try? session.setCategory(.playAndRecord, mode: .videoChat, options: [.defaultToSpeaker, .allowBluetooth])
+            try? session.setActive(true)
+        }
         loadFermionStream()
     }
 
@@ -161,6 +163,9 @@ class FermionContentViewController: BaseWebViewController {
 
     private static let VIEWPORT_FIT_SCRIPT = """
         (function() {
+            if (window.__fermionViewportFitInjected) return;
+            window.__fermionViewportFitInjected = true;
+
             var meta = document.querySelector('meta[name="viewport"]');
             if (!meta) {
                 meta = document.createElement('meta');
@@ -205,7 +210,6 @@ class FermionContentViewController: BaseWebViewController {
 
 extension FermionContentViewController: WKWebViewDelegate {
     func onFinishLoadingWebView() {
-        evaluateJavaScript(FermionContentViewController.VIEWPORT_FIT_SCRIPT)
         viewModel?.createContentAttempt()
     }
 }
