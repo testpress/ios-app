@@ -340,6 +340,8 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
             return
         }
         
+        (getCurretViewController() as? FermionContentViewController)?.cleanUp()
+        
         let viewController = contentDetailDataSource.viewControllerAtIndex(index)!
         let direction: UIPageViewController.NavigationDirection =
             index > currentIndex ? .forward : .reverse
@@ -481,6 +483,7 @@ public class ContentDetailPageViewController: BaseUIViewController, UIPageViewCo
     }
     
     @IBAction func back() {
+        (getCurretViewController() as? FermionContentViewController)?.cleanUp()
         if let navigationViewController = self.view.window?.rootViewController?.presentedViewController?.presentedViewController as? UINavigationController {
             navigationViewController.dismiss(animated: true)
         } else {
