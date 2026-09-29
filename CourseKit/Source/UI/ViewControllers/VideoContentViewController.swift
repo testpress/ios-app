@@ -78,10 +78,14 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         addGestures()
     }
     
-    private func checkTranscodingStatusAndLoadPlayer() {
+    private func checkTranscodingStatusAndLoadPlayer(isRecheck: Bool = false) {
         if content.getContentType() == .LiveStream {
             guard let liveStream = content.liveStream else {
-                fetchContentDetailAndRecheck()
+                if isRecheck {
+                    showContentDetailFetchError()
+                } else {
+                    fetchContentDetailAndRecheck()
+                }
                 return
             }
             if liveStream.isEnded && !liveStream.showRecordedVideo {
@@ -92,7 +96,11 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         
         if content.getContentType() == .VideoConference {
             guard let videoConference = content.videoConference else {
-                fetchContentDetailAndRecheck()
+                if isRecheck {
+                    showContentDetailFetchError()
+                } else {
+                    fetchContentDetailAndRecheck()
+                }
                 return
             }
             if videoConference.isEnded && !videoConference.showRecordedVideo {
@@ -126,6 +134,8 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
     
     private func fetchContentDetailAndRecheck() {
+        removeExistingOverlay()
+        
         let indicator = UIActivityIndicatorView(style: .white)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.startAnimating()
@@ -141,11 +151,37 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
             endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
             completion: { [weak self] content, error in
                 indicator.removeFromSuperview()
-                guard let self = self, let updatedContent = content, self.content.id == requestedContentId else { return }
+                guard let self = self else { return }
+                
+                if let error = error {
+                    self.showContentDetailFetchError(error)
+                    return
+                }
+                
+                guard let updatedContent = content, self.content.id == requestedContentId else {
+                    self.showContentDetailFetchError()
+                    return
+                }
                 
                 DBManager<Content>().addData(object: updatedContent)
                 self.applyTranscodingContent(updatedContent)
-                self.checkTranscodingStatusAndLoadPlayer()
+                self.checkTranscodingStatusAndLoadPlayer(isRecheck: true)
+            }
+        )
+    }
+    
+    private func showContentDetailFetchError(_ error: TPError? = nil) {
+        removeExistingOverlay()
+        processingEmptyView = EmptyView.getInstance(parentView: playerView)
+        
+        let (image, title, description) = error?.getDisplayInfo() ?? (nil, "Error", "Could not load video details")
+        processingEmptyView?.show(
+            image: image,
+            title: title,
+            description: description,
+            retryButtonText: "Retry",
+            retryHandler: { [weak self] in
+                self?.fetchContentDetailAndRecheck()
             }
         )
     }
