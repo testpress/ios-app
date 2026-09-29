@@ -79,14 +79,26 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
     }
     
     private func checkTranscodingStatusAndLoadPlayer() {
-        if content.getContentType() == .LiveStream, let liveStream = content.liveStream, liveStream.isEnded && !liveStream.showRecordedVideo {
-            showNoRecordedVideoEmptyView()
-            return
+        if content.getContentType() == .LiveStream {
+            guard let liveStream = content.liveStream else {
+                fetchContentDetailAndRecheck()
+                return
+            }
+            if liveStream.isEnded && !liveStream.showRecordedVideo {
+                showNoRecordedVideoEmptyView()
+                return
+            }
         }
         
-        if content.getContentType() == .VideoConference, let videoConference = content.videoConference, videoConference.isEnded && !videoConference.showRecordedVideo {
-            showNoRecordedVideoEmptyView()
-            return
+        if content.getContentType() == .VideoConference {
+            guard let videoConference = content.videoConference else {
+                fetchContentDetailAndRecheck()
+                return
+            }
+            if videoConference.isEnded && !videoConference.showRecordedVideo {
+                showNoRecordedVideoEmptyView()
+                return
+            }
         }
 
         let status = content.video?.transcodingStatus?.lowercased()
@@ -111,6 +123,31 @@ class VideoContentViewController: BaseUIViewController,UITableViewDelegate, UITa
         } else {
             showProcessingOverlay()
         }
+    }
+    
+    private func fetchContentDetailAndRecheck() {
+        let indicator = UIActivityIndicatorView(style: .white)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.startAnimating()
+        playerView.addSubview(indicator)
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: playerView.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: playerView.centerYAnchor)
+        ])
+        
+        let requestedContentId = content.id
+        TPApiClient.request(
+            type: Content.self,
+            endpointProvider: TPEndpointProvider(.get, url: content.getUrl()),
+            completion: { [weak self] content, error in
+                indicator.removeFromSuperview()
+                guard let self = self, let updatedContent = content, self.content.id == requestedContentId else { return }
+                
+                DBManager<Content>().addData(object: updatedContent)
+                self.applyTranscodingContent(updatedContent)
+                self.checkTranscodingStatusAndLoadPlayer()
+            }
+        )
     }
 
     func loadPlayer(assetID: String) {
