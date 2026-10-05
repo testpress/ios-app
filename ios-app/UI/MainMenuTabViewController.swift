@@ -51,7 +51,7 @@ class MainMenuTabViewController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if selectedViewController !== messagingViewController {
+        if instituteSettings.messagesEnabled && selectedViewController !== messagingViewController {
             fetchUnreadMessagesCount()
             startUnreadCountTimer()
         }
@@ -205,6 +205,8 @@ class MainMenuTabViewController: UITabBarController {
     }
     
     private func addMessagingWebViewController() {
+        guard instituteSettings.messagesEnabled else { return }
+        
         let messagingWebViewController = self.getMessagingWebViewController()
         self.messagingViewController = messagingWebViewController
         if (viewControllers?.count ?? 0) > 4 {
@@ -290,7 +292,7 @@ extension MainMenuTabViewController: UITabBarControllerDelegate {
             // User opened Messages — they are reading it now, so clear the badge and stop polling.
             applyUnreadBadge(nil)
             stopUnreadCountTimer()
-        } else {
+        } else if instituteSettings.messagesEnabled {
             if unreadCountTimer == nil {
                 fetchUnreadMessagesCount()
                 startUnreadCountTimer()
