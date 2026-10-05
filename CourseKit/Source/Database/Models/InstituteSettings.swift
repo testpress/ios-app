@@ -40,6 +40,7 @@ public class InstituteSettings: DBModel {
     @objc public dynamic var coursesEnableGamification: Bool = false
     @objc public dynamic var coursesLabel: Bool = false
     @objc public dynamic var postsEnabled: Bool = false
+    @objc public dynamic var messagesEnabled: Bool = false
     @objc public dynamic var postsLabel: String = ""
     @objc public dynamic var storeEnabled: Bool = false
     @objc public dynamic var documentsEnabled: Bool = false
@@ -102,6 +103,7 @@ public class InstituteSettings: DBModel {
         coursesEnableGamification <- map["courses_enable_gamification"]
         coursesLabel <- map["courses_label"]
         postsEnabled <- map["posts_enabled"]
+        messagesEnabled <- map["messages_enabled"]
         postsLabel <- map["posts_label"]
         storeEnabled <- map["store_enabled"]
         storeLabel <- map["store_label"]
