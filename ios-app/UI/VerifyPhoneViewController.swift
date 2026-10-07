@@ -31,26 +31,35 @@ class VerifyPhoneViewController: UIViewController {
     
     @IBAction func verifyCode(_ sender: Any) {
         if validate() {
-            self.present(alertController, animated: false, completion: nil)
-            TPApiClient.verifyPhoneNumber(
-                username: username!,
-                code: otpField.text!,
-                completion: { error in
-                    if let error = error {
-                        debugPrint(error.message ?? "No error message found")
-                        debugPrint(error.kind)
-                        self.alertController.dismiss(animated: true, completion: nil)
-                        if error.isClientError() {
-                            let registrationError = error.getErrorBodyAs(type: RegistrationError.self)
-                            if !(registrationError?.non_field_errors.isEmpty)! {
-                                self.setFieldError(textField: self.otpField,
-                                                   errorMessage: (registrationError?.non_field_errors[0])!)
+            let instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
+            UIUtils.showDeviceBindingConfirmationIfNeeded(
+                instituteSettings: instituteSettings,
+                viewController: self,
+                message: Strings.DEVICE_BINDING_SIGNUP_CONFIRM_MESSAGE,
+                onConfirm: { [weak self] in
+                    guard let self = self else { return }
+                    self.present(self.alertController, animated: false, completion: nil)
+                    TPApiClient.verifyPhoneNumber(
+                        username: self.username!,
+                        code: self.otpField.text!,
+                        completion: { error in
+                            if let error = error {
+                                debugPrint(error.message ?? "No error message found")
+                                debugPrint(error.kind)
+                                self.alertController.dismiss(animated: true, completion: nil)
+                                if error.isClientError() {
+                                    let registrationError = error.getErrorBodyAs(type: RegistrationError.self)
+                                    if !(registrationError?.non_field_errors.isEmpty)! {
+                                        self.setFieldError(textField: self.otpField,
+                                                           errorMessage: (registrationError?.non_field_errors[0])!)
+                                    }
+                                }
+                                return
                             }
-                        }
-                        return
+                            self.authenticate(username: self.username!, password: self.password!, provider: .TESTPRESS)
                     }
-                    self.authenticate(username: self.username!, password: self.password!, provider: .TESTPRESS)
-            }
+                    )
+                }
             )
         }
     }

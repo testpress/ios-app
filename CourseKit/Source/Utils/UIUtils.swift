@@ -118,15 +118,16 @@ public class UIUtils {
         }
     }
     
-    public static func showDeviceBindingLoginConfirmationIfNeeded(
+    public static func showDeviceBindingConfirmationIfNeeded(
         instituteSettings: InstituteSettings?,
         viewController: UIViewController,
+        message: String,
         onConfirm: @escaping () -> Void
     ) {
         if instituteSettings?.isDeviceBindingEnabled == true {
             let alert = UIAlertController(
                 title: "Device Binding",
-                message: Strings.DEVICE_BINDING_LOGIN_CONFIRM_MESSAGE,
+                message: message,
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(title: Strings.CANCEL, style: .cancel, handler: nil))

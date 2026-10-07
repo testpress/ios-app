@@ -117,9 +117,10 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
         phoneNumber = phone
         hideKeyboard()
         
-        UIUtils.showDeviceBindingLoginConfirmationIfNeeded(
+        UIUtils.showDeviceBindingConfirmationIfNeeded(
             instituteSettings: self.instituteSettings,
             viewController: self,
+            message: Strings.DEVICE_BINDING_LOGIN_CONFIRM_MESSAGE,
             onConfirm: { [weak self] in
                 guard let self = self else { return }
                 self.present(self.loadingDialog, animated: false)
