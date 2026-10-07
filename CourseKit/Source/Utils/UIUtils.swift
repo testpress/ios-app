@@ -126,12 +126,12 @@ public class UIUtils {
     ) {
         if instituteSettings?.isDeviceBindingEnabled == true {
             let alert = UIAlertController(
-                title: "Device Binding",
+                title: Strings.DEVICE_BINDING,
                 message: message,
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(title: Strings.CANCEL, style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: Strings.CONTINUE, style: .default, handler: { _ in
                 onConfirm()
             }))
             viewController.present(alert, animated: true)

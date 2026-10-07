@@ -96,6 +96,8 @@ public struct Strings {
     public static let PAUSE = "Pause"
     public static let END = "End"
     public static let CANCEL = "Cancel"
+    public static let CONTINUE = "Continue"
+    public static let DEVICE_BINDING = "Device Binding"
     
     public static let ENTER_VALID_EMAIL = "Please enter a valid email address"
     public static let ENTER_VALID_USERNAME = "Use only alphabets or numbers"
