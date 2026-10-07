@@ -116,8 +116,15 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
         
         phoneNumber = phone
         hideKeyboard()
-        present(loadingDialog, animated: false)
-        sendOtp()
+        
+        UIUtils.showDeviceBindingLoginConfirmationIfNeeded(
+            instituteSettings: self.instituteSettings,
+            viewController: self,
+            onConfirm: {
+                self.present(self.loadingDialog, animated: false)
+                self.sendOtp()
+            }
+        )
     }
     
     @IBAction private func onVerifyOtp(_: Any) {

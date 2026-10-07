@@ -118,6 +118,27 @@ public class UIUtils {
         }
     }
     
+    public static func showDeviceBindingLoginConfirmationIfNeeded(
+        instituteSettings: InstituteSettings?,
+        viewController: UIViewController,
+        onConfirm: @escaping () -> Void
+    ) {
+        if let bindingMode = instituteSettings?.deviceBindingMode, !bindingMode.isEmpty {
+            let alert = UIAlertController(
+                title: nil,
+                message: Strings.DEVICE_BINDING_LOGIN_CONFIRM_MESSAGE,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: Strings.CANCEL, style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: Strings.OK, style: .default, handler: { _ in
+                onConfirm()
+            }))
+            viewController.present(alert, animated: true)
+        } else {
+            onConfirm()
+        }
+    }
+    
     public static func getCountryList() -> [String : [String]] {
         let countryList = [
             "AF": ["Afghanistan","93"],

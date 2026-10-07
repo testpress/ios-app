@@ -145,8 +145,11 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func logout(_ sender: UIButton) {
+        let isDeviceBindingEnabled = instituteSettings != nil && instituteSettings.deviceBindingMode != nil && !instituteSettings.deviceBindingMode!.isEmpty
+        let message = isDeviceBindingEnabled ? Strings.DEVICE_BINDING_LOGOUT_CONFIRM_MESSAGE : Strings.LOGOUT_CONFIRM_MESSAGE
+        
         let alert = UIAlertController(title: nil,
-                                      message: Strings.LOGOUT_CONFIRM_MESSAGE,
+                                      message: message,
                                       preferredStyle: UIUtils.getActionSheetStyle())
         
         alert.addAction(UIAlertAction(

@@ -77,6 +77,7 @@ public class InstituteSettings: DBModel {
     @objc public dynamic var salesforceMid: String? = nil
     @objc public dynamic var allowProfileEdit: Bool = true
     @objc public dynamic var customForgotPasswordUrl: String? = nil
+    @objc public dynamic var deviceBindingMode: String? = nil
 
     public var allowedLoginMethods = List<Int>()
     
@@ -140,6 +141,7 @@ public class InstituteSettings: DBModel {
         salesforceMid <- map["salesforce_mid"]
         allowProfileEdit <- map["allow_profile_edit"]
         customForgotPasswordUrl <- map["custom_forgot_password_url"]
+        deviceBindingMode <- map["device_binding_mode"]
         var tempAllowed: [Int] = []
         tempAllowed <- map["allowed_login_methods"]
 

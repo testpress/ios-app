@@ -94,7 +94,14 @@ class LoginViewController: BaseTextFieldViewController, DeepLinkBaseProtocol {
         }
         
         hideKeyboard()
-        authenticate(username: username, password: password, provider: .TESTPRESS)
+        
+        UIUtils.showDeviceBindingLoginConfirmationIfNeeded(
+            instituteSettings: self.instituteSettings,
+            viewController: self,
+            onConfirm: {
+                self.authenticate(username: username, password: password, provider: .TESTPRESS)
+            }
+        )
     }
     
     @IBAction func onOTPLoginButtonClick(_ sender: UIView) {
