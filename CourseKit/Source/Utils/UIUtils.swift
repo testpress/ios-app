@@ -123,14 +123,14 @@ public class UIUtils {
         viewController: UIViewController,
         onConfirm: @escaping () -> Void
     ) {
-        if let bindingMode = instituteSettings?.deviceBindingMode, !bindingMode.isEmpty {
+        if instituteSettings?.isDeviceBindingEnabled == true {
             let alert = UIAlertController(
-                title: nil,
+                title: "Device Binding",
                 message: Strings.DEVICE_BINDING_LOGIN_CONFIRM_MESSAGE,
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(title: Strings.CANCEL, style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: Strings.OK, style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { _ in
                 onConfirm()
             }))
             viewController.present(alert, animated: true)

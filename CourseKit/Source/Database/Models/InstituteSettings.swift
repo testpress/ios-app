@@ -78,6 +78,10 @@ public class InstituteSettings: DBModel {
     @objc public dynamic var allowProfileEdit: Bool = true
     @objc public dynamic var customForgotPasswordUrl: String? = nil
     @objc public dynamic var deviceBindingMode: String? = nil
+    
+    public var isDeviceBindingEnabled: Bool {
+        return !(deviceBindingMode ?? "").isEmpty
+    }
 
     public var allowedLoginMethods = List<Int>()
     

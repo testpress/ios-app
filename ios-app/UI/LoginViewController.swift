@@ -98,7 +98,8 @@ class LoginViewController: BaseTextFieldViewController, DeepLinkBaseProtocol {
         UIUtils.showDeviceBindingLoginConfirmationIfNeeded(
             instituteSettings: self.instituteSettings,
             viewController: self,
-            onConfirm: {
+            onConfirm: { [weak self] in
+                guard let self = self else { return }
                 self.authenticate(username: username, password: password, provider: .TESTPRESS)
             }
         )

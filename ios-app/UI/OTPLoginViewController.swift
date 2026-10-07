@@ -120,7 +120,8 @@ final class OTPLoginViewController: BaseTextFieldViewController, UIPickerViewDat
         UIUtils.showDeviceBindingLoginConfirmationIfNeeded(
             instituteSettings: self.instituteSettings,
             viewController: self,
-            onConfirm: {
+            onConfirm: { [weak self] in
+                guard let self = self else { return }
                 self.present(self.loadingDialog, animated: false)
                 self.sendOtp()
             }
