@@ -48,10 +48,6 @@ class ContentsTableViewCell: UITableViewCell {
         parentViewController = viewController
         self.position = position
         
-        // Guard against index out of range when items are cleared (e.g., by newAttemptCreated())
-        // while the table view is still prefetching cells
-        guard position < parentViewController.items.count else { return }
-        
         let content = parentViewController.items[position]
         contentName.text = content.name
         thumbnailImage.addRoundedCorners(radius: 3.0)
