@@ -47,7 +47,7 @@ class ContentsTableViewCell: UITableViewCell {
     func initCell(position: Int, viewController: ContentsTableViewController) {
         parentViewController = viewController
         self.position = position
-        
+        guard position < parentViewController.items.count else { return }
         let content = parentViewController.items[position]
         contentName.text = content.name
         thumbnailImage.addRoundedCorners(radius: 3.0)
@@ -154,6 +154,7 @@ class ContentsTableViewCell: UITableViewCell {
     }
     
     @objc func onItemClick() {
+        guard position < parentViewController.items.count else { return }
         let content = parentViewController.items[position]
         
         if (content.isScheduled || content.isLocked || content.hasEnded) {
