@@ -96,6 +96,8 @@ public struct Strings {
     public static let PAUSE = "Pause"
     public static let END = "End"
     public static let CANCEL = "Cancel"
+    public static let CONTINUE = "Continue"
+    public static let DEVICE_BINDING = "Device Binding"
     
     public static let ENTER_VALID_EMAIL = "Please enter a valid email address"
     public static let ENTER_VALID_USERNAME = "Use only alphabets or numbers"
@@ -116,6 +118,9 @@ public struct Strings {
     
     public static let LOGOUT = "Log Out"
     public static let LOGOUT_CONFIRM_MESSAGE = "Are you sure want to log out?"
+    public static let DEVICE_BINDING_LOGIN_CONFIRM_MESSAGE = "This device will be bound to your account. You cannot use another device unless an administrator resets the binding."
+    public static let DEVICE_BINDING_SIGNUP_CONFIRM_MESSAGE = "Completing signup will bind this device to your account. You cannot use another device unless an administrator resets the binding."
+    public static let DEVICE_BINDING_LOGOUT_CONFIRM_MESSAGE = "Logging out will not remove the device binding. This device will remain bound to your account. Are you sure want to log out?"
     
     public static let LOAD_MORE_COMMENTS = "Load previous comments"
     public static let LOAD_COMMENTS = "Load comments"
