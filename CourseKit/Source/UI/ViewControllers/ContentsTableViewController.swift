@@ -63,6 +63,7 @@ class ContentsTableViewController: BaseDBTableViewControllerV2<ContentsListRespo
     
     func newAttemptCreated() {
         items.removeAll()
+        tableView.reloadData()
     }
     
     override func setEmptyText() {
