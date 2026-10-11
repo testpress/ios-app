@@ -316,11 +316,12 @@ public class StartExamScreenViewController: BaseUIViewController {
     }
     
     func startExam(_ examMode: Int) {
-        print("Mindset reflections enabled:", exam.enableMindsetReflections)
-        print("Pre-exam reflection form:", String(describing: exam.preExamReflectionForm))
-        if exam.enableMindsetReflections, let form = exam.preExamReflectionForm {
+        // Only show reflection form for fresh attempts (not resuming)
+        let isResumingAttempt = Attempt.hasRunningAttempt(attempt: attempt, contentAttempt: contentAttempt)
+        
+        if exam.enableMindsetReflections, let form = exam.preExamReflectionForm, !isResumingAttempt {
             let webViewController = MindsetReflectionViewController()
-            webViewController.url = "/exam-mindset/\(exam.id)/reflection/\(form.id)/"
+            webViewController.url = "&next=/exam-mindset/\(exam.id)/reflection/\(form.id)/"
             webViewController.submissionMandatory = form.submissionMandatory
             webViewController.onReflectionSubmitted = { [weak self] in
                 self?.startAttemptWithLoading(examMode)
