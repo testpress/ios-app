@@ -121,12 +121,12 @@ public class StartExamScreenViewController: BaseUIViewController {
                 attemptRepository.checkContentPermission(contentId: examId) { [weak self] permission, error in
                     guard let self = self else { return }
                     self.hideLoading()
-
+                    
                     guard let permission = permission, error == nil else {
                         self.startButtonLayout.isHidden = false
                         return
                     }
-
+                    
                     if !permission.hasPermission {
                         self.webOnlyExamLabel.isHidden = false
                         self.webOnlyExamLabel.text = Strings.EXAM_NO_PERMISSION
@@ -208,7 +208,7 @@ public class StartExamScreenViewController: BaseUIViewController {
                             self.hideLoading()
                         }
                     }
-    
+           
             }, type: Language.self)
         }
     
@@ -316,6 +316,27 @@ public class StartExamScreenViewController: BaseUIViewController {
     }
     
     func startExam(_ examMode: Int) {
+        print("Mindset reflections enabled:", exam.enableMindsetReflections)
+        print("Pre-exam reflection form:", String(describing: exam.preExamReflectionForm))
+        if exam.enableMindsetReflections, let form = exam.preExamReflectionForm {
+            let webViewController = MindsetReflectionViewController()
+            webViewController.url = "/exam-mindset/\(exam.id)/reflection/\(form.id)/"
+            webViewController.submissionMandatory = form.submissionMandatory
+            webViewController.onReflectionSubmitted = { [weak self] in
+                self?.startAttemptWithLoading(examMode)
+            }
+            webViewController.onReflectionSkipped = { [weak self] in
+                self?.startAttemptWithLoading(examMode)
+            }
+            webViewController.modalPresentationStyle = .fullScreen
+            present(webViewController, animated: true, completion: nil)
+            return
+        }
+        
+        startAttemptWithLoading(examMode)
+    }
+    
+    private func startAttemptWithLoading(_ examMode: Int) {
         present(alertController, animated: false, completion: nil)
         startButton.isHidden = true
         startAttempt(examMode)
