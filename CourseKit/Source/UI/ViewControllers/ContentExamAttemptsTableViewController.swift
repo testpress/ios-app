@@ -255,7 +255,6 @@ class ContentExamAttemptsTableViewController: UITableViewController {
             Constants.START_EXAM_SCREEN_VIEW_CONTROLLER) as! StartExamScreenViewController
         
         viewController.content = content
-        viewController.content.index = content.index
         if contentAttempt != nil {
             viewController.contentAttempt = contentAttempt
         }
