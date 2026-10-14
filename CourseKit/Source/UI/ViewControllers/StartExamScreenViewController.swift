@@ -224,7 +224,7 @@ public class StartExamScreenViewController: BaseUIViewController {
     func fetchExamDetail(completion: ((Exam?, TPError?) -> Void)? = nil) {
         // Prevent multiple simultaneous fetches
         guard !examDetailFetchInProgress else {
-            completion?(nil, TPError(message: "Fetch already in progress", kind: .unknown))
+            completion?(nil, TPError(message: "Fetch already in progress", kind: .unexpected))
             return
         }
         examDetailFetchInProgress = true
