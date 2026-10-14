@@ -59,6 +59,7 @@ public class StartExamScreenViewController: BaseUIViewController {
     public var attempt: Attempt?
     public var accessCode: String!
     private let attemptRepository = AttemptRepository()
+    private var isExamDetailFetched = false
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +74,15 @@ public class StartExamScreenViewController: BaseUIViewController {
                 attempt = contentAttempt.assessment
             }
         }
+
+        // Load full exam detail if not already populated with mindset reflection fields.
+        // The exam detail endpoint (/api/v2.2/exams/{slug}/) returns the exam with
+        // enable_mindset_reflections and pre_exam_reflection_form fields.
+        // This is needed when starting from the Exams tab where content is not set.
+        if content == nil && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil) {
+            fetchExamDetail()
+        }
+
         fetchAvailableLanguages(url: TestpressCourse.shared.baseURL+"/api/v2.3/exams/"+exam.slug+"/languages/")
         examTitle.text = exam.title
         questionsCount.text = String(exam.numberOfQuestions)
@@ -212,6 +222,21 @@ public class StartExamScreenViewController: BaseUIViewController {
             }, type: Language.self)
         }
     
+    func fetchExamDetail(completion: ((Exam?, TPError?) -> Void)? = nil) {
+        let examUrl = TestpressCourse.shared.baseURL + "/api/v2.2/exams/" + exam.slug + "/"
+        TPApiClient.request(
+            type: Exam.self,
+            endpointProvider: TPEndpointProvider(.get, url: examUrl),
+            completion: { [weak self] exam, error in
+                if let exam = exam {
+                    self?.exam = exam
+                }
+                self?.isExamDetailFetched = true
+                completion?(exam, error)
+            }
+        )
+    }
+
     private func showErrorView(_ error: TPError, url: String) {
         var retryButtonText: String?
         var retryHandler: (() -> Void)?
@@ -317,7 +342,22 @@ public class StartExamScreenViewController: BaseUIViewController {
     
     func startExam(_ examMode: Int) {
         // Only show reflection form for fresh attempts (not resuming)
+        
+        
+        // If reflection fields are missing, fetch full exam detail first
+        if !isExamDetailFetched && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil) {
+            fetchExamDetail { [weak self] exam, error in
+                guard let self = self, exam != nil, error == nil else {
+                    self?.startAttemptWithLoading(examMode)
+                    return
+                }
+                self.startExam(examMode) // Retry with updated exam
+            }
+            return
+        }
+        
         let isResumingAttempt = Attempt.hasRunningAttempt(attempt: attempt, contentAttempt: contentAttempt)
+        
         
         if exam.enableMindsetReflections, let form = exam.preExamReflectionForm, !isResumingAttempt {
             let webViewController = MindsetReflectionViewController()
