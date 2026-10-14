@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>aps-environment</key>
-	<string>development</string>
+	<string>production</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:lmsdemo.testpress.in</string>
+		<string>applinks:www.rrmnext.in</string>
 	</array>
 </dict>
 </plist>
