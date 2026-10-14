@@ -103,7 +103,7 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
 
     private func showFailureCloseButton() {
         let closeButton = UIBarButtonItem(title: Strings.CANCEL, style: .plain, target: self, action: #selector(closeOnFailure))
-        closeButton.tintColor = .white
+        closeButton.tintColor = self.navigationController?.navigationBar.tintColor ?? .white
         navItem?.leftBarButtonItem = closeButton
     }
 
