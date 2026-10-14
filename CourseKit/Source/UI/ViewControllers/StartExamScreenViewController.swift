@@ -219,15 +219,29 @@ public class StartExamScreenViewController: BaseUIViewController {
             }, type: Language.self)
         }
     
+    private var examDetailFetchInProgress = false
+
     func fetchExamDetail(completion: ((Exam?, TPError?) -> Void)? = nil) {
+        // Prevent multiple simultaneous fetches
+        guard !examDetailFetchInProgress else {
+            completion?(nil, TPError(message: "Fetch already in progress", kind: .unknown))
+            return
+        }
+        examDetailFetchInProgress = true
+
         let examUrl = TestpressCourse.shared.baseURL + "/api/v2.2/exams/" + exam.slug + "/"
         TPApiClient.request(
             type: Exam.self,
             endpointProvider: TPEndpointProvider(.get, url: examUrl),
             completion: { [weak self] exam, error in
-                if let exam = exam {
-                    self?.updateExamReflectionFields(from: exam)
-                    self?.isExamDetailFetched = true
+                guard let self = self else {
+                    completion?(nil, error)
+                    return
+                }
+                self.examDetailFetchInProgress = false
+                if let exam = exam, error == nil {
+                    self.updateExamReflectionFields(from: exam)
+                    self.isExamDetailFetched = true
                 }
                 completion?(exam, error)
             }
@@ -235,6 +249,17 @@ public class StartExamScreenViewController: BaseUIViewController {
     }
 
     private func updateExamReflectionFields(from fetchedExam: Exam) {
+        // Ensure Realm writes happen on main thread
+        if Thread.isMainThread {
+            performUpdate(fetchedExam)
+        } else {
+            DispatchQueue.main.async {
+                self.performUpdate(fetchedExam)
+            }
+        }
+    }
+
+    private func performUpdate(_ fetchedExam: Exam) {
         if self.exam.realm != nil {
             DBManager<Exam>().write {
                 self.exam.enableMindsetReflections = fetchedExam.enableMindsetReflections
@@ -353,9 +378,14 @@ public class StartExamScreenViewController: BaseUIViewController {
         if !isExamDetailFetched && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil) {
             startButton.isEnabled = false
             present(alertController, animated: false, completion: nil)
-            fetchExamDetail { [weak self] exam, error in
+            fetchExamDetail { [weak self] _, error in
                 guard let self = self else { return }
-                guard let exam = exam, error == nil else {
+                if error == nil {
+                    self.alertController.dismiss(animated: false) {
+                        self.startButton.isEnabled = true
+                        self.startExam(examMode)
+                    }
+                } else {
                     self.alertController.dismiss(animated: true) {
                         self.startButton.isEnabled = true
                         UIUtils.showSimpleAlert(
@@ -364,11 +394,6 @@ public class StartExamScreenViewController: BaseUIViewController {
                             viewController: self
                         )
                     }
-                    return
-                }
-                self.alertController.dismiss(animated: false) {
-                    self.startButton.isEnabled = true
-                    self.startExam(examMode)
                 }
             }
             return
