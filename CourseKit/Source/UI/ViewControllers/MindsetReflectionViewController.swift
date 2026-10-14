@@ -81,7 +81,7 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
 
     private func handleLoadFailure(error: Error) {
         activityIndicator?.stopAnimating()
-        let tpError = TPError(kind: .network, message: error.localizedDescription)
+        let tpError = TPError(message: error.localizedDescription, kind: .network)
         let (image, title, description) = tpError.getDisplayInfo()
         self.emptyView.show(
             image: image,
