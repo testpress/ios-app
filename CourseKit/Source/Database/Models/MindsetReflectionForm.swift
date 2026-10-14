@@ -1,5 +1,5 @@
 //
-//  PreExamReflectionForm.swift
+//  MindsetReflectionForm.swift
 //  CourseKit
 //
 

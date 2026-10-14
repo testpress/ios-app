@@ -200,4 +200,5 @@ public struct Strings {
     public static let LIVE_ENDED_WITH_RECORDING_DESC = "The live stream has come to an end. Stay tuned, we\'ll have the recording ready for you shortly."
     public static let LIVE_ENDED_WITHOUT_RECORDING_DESC = "The live stream has ended. See you at the next one!"
     public static let LIVE_NOT_STARTED_DESC = "Hang tight! The live stream will kick off in a few moments."
+    public static let MINDSET_REFLECTION = "Mindset Reflection"
 }

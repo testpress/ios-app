@@ -75,10 +75,7 @@ public class StartExamScreenViewController: BaseUIViewController {
             }
         }
 
-        // Load full exam detail if not already populated with mindset reflection fields.
-        // The exam detail endpoint (/api/v2.2/exams/{slug}/) returns the exam with
-        // enable_mindset_reflections and pre_exam_reflection_form fields.
-        // This is needed when starting from the Exams tab where content is not set.
+        // When starting from the Exams tab (content is nil), pre-fetch exam detail to obtain mindset reflection config.
         if content == nil && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil) {
             fetchExamDetail()
         }
@@ -131,12 +128,12 @@ public class StartExamScreenViewController: BaseUIViewController {
                 attemptRepository.checkContentPermission(contentId: examId) { [weak self] permission, error in
                     guard let self = self else { return }
                     self.hideLoading()
-                    
+
                     guard let permission = permission, error == nil else {
                         self.startButtonLayout.isHidden = false
                         return
                     }
-                    
+
                     if !permission.hasPermission {
                         self.webOnlyExamLabel.isHidden = false
                         self.webOnlyExamLabel.text = Strings.EXAM_NO_PERMISSION
@@ -218,7 +215,7 @@ public class StartExamScreenViewController: BaseUIViewController {
                             self.hideLoading()
                         }
                     }
-           
+    
             }, type: Language.self)
         }
     
@@ -229,12 +226,24 @@ public class StartExamScreenViewController: BaseUIViewController {
             endpointProvider: TPEndpointProvider(.get, url: examUrl),
             completion: { [weak self] exam, error in
                 if let exam = exam {
-                    self?.exam = exam
+                    self?.updateExamReflectionFields(from: exam)
+                    self?.isExamDetailFetched = true
                 }
-                self?.isExamDetailFetched = true
                 completion?(exam, error)
             }
         )
+    }
+
+    private func updateExamReflectionFields(from fetchedExam: Exam) {
+        if self.exam.realm != nil {
+            DBManager<Exam>().write {
+                self.exam.enableMindsetReflections = fetchedExam.enableMindsetReflections
+                self.exam.preExamReflectionForm = fetchedExam.preExamReflectionForm
+            }
+        } else {
+            self.exam.enableMindsetReflections = fetchedExam.enableMindsetReflections
+            self.exam.preExamReflectionForm = fetchedExam.preExamReflectionForm
+        }
     }
 
     private func showErrorView(_ error: TPError, url: String) {
@@ -341,26 +350,38 @@ public class StartExamScreenViewController: BaseUIViewController {
     }
     
     func startExam(_ examMode: Int) {
-        // Only show reflection form for fresh attempts (not resuming)
-        
-        
-        // If reflection fields are missing, fetch full exam detail first
         if !isExamDetailFetched && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil) {
+            startButton.isEnabled = false
+            present(alertController, animated: false, completion: nil)
             fetchExamDetail { [weak self] exam, error in
-                guard let self = self, exam != nil, error == nil else {
-                    self?.startAttemptWithLoading(examMode)
+                guard let self = self else { return }
+                guard let exam = exam, error == nil else {
+                    self.alertController.dismiss(animated: true) {
+                        self.startButton.isEnabled = true
+                        UIUtils.showSimpleAlert(
+                            title: Strings.NETWORK_ERROR,
+                            message: error?.message ?? Strings.SOMETHIGN_WENT_WRONG,
+                            viewController: self
+                        )
+                    }
                     return
                 }
-                self.startExam(examMode) // Retry with updated exam
+                self.alertController.dismiss(animated: false) {
+                    self.startButton.isEnabled = true
+                    self.startExam(examMode)
+                }
             }
             return
         }
-        
+
+        // Only show reflection form for fresh attempts (not resuming)
         let isResumingAttempt = Attempt.hasRunningAttempt(attempt: attempt, contentAttempt: contentAttempt)
-        
-        
+
         if exam.enableMindsetReflections, let form = exam.preExamReflectionForm, !isResumingAttempt {
             let webViewController = MindsetReflectionViewController()
+            // The SSO endpoint (/api/v2.5/sso/) returns a redirect URL (e.g. '/api/v2.5/sso/?token=<token>').
+            // WebViewController appends 'self.url' directly to that SSO redirect URL when useSSOLogin is true.
+            // Prefixing with '&next=' passes the reflection form path as the next parameter for SSO redirection.
             webViewController.url = "&next=/exam-mindset/\(exam.id)/reflection/\(form.id)/"
             webViewController.submissionMandatory = form.submissionMandatory
             webViewController.onReflectionSubmitted = { [weak self] in
@@ -373,7 +394,7 @@ public class StartExamScreenViewController: BaseUIViewController {
             present(webViewController, animated: true, completion: nil)
             return
         }
-        
+
         startAttemptWithLoading(examMode)
     }
     
