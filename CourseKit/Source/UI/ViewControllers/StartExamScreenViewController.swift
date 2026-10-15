@@ -220,11 +220,14 @@ public class StartExamScreenViewController: BaseUIViewController {
         }
     
     private var examDetailFetchInProgress = false
+    private var pendingExamDetailCompletions: [((Exam?, TPError?) -> Void)] = []
 
     func fetchExamDetail(completion: ((Exam?, TPError?) -> Void)? = nil) {
-        // Prevent multiple simultaneous fetches
-        guard !examDetailFetchInProgress else {
-            completion?(nil, TPError(message: "Fetch already in progress", kind: .unexpected))
+        // If a fetch is already in progress, queue this completion to be called when the fetch finishes
+        if examDetailFetchInProgress {
+            if let completion = completion {
+                pendingExamDetailCompletions.append(completion)
+            }
             return
         }
         examDetailFetchInProgress = true
@@ -240,21 +243,31 @@ public class StartExamScreenViewController: BaseUIViewController {
                 }
                 self.examDetailFetchInProgress = false
                 if let exam = exam, error == nil {
-                    self.updateExamReflectionFields(from: exam)
-                    self.isExamDetailFetched = true
+                    self.updateExamReflectionFields(from: exam) {
+                        self.isExamDetailFetched = true
+                        // Call all pending completions after flag is set
+                        self.pendingExamDetailCompletions.forEach { $0(exam, nil) }
+                        self.pendingExamDetailCompletions.removeAll()
+                    }
+                } else {
+                    // On error, also call pending completions with error
+                    self.pendingExamDetailCompletions.forEach { $0(nil, error) }
+                    self.pendingExamDetailCompletions.removeAll()
                 }
                 completion?(exam, error)
             }
         )
     }
 
-    private func updateExamReflectionFields(from fetchedExam: Exam) {
+    private func updateExamReflectionFields(from fetchedExam: Exam, completion: (() -> Void)? = nil) {
         // Ensure Realm writes happen on main thread
         if Thread.isMainThread {
             performUpdate(fetchedExam)
+            completion?()
         } else {
             DispatchQueue.main.async {
                 self.performUpdate(fetchedExam)
+                completion?()
             }
         }
     }
