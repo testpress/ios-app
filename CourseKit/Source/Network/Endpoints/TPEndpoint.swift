@@ -217,7 +217,7 @@ public enum TPEndpoint {
         case .bookmarkFolders:
             return "/api/v2.4/folders/"
         case .getContents:
-            return "/api/v2.3/contents/"
+            return "/api/v2.4/contents/"
         case .attemptsPath:
             return "/attempts/"
         case .getQuestions:

@@ -372,6 +372,8 @@
 		2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */; };
 		2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */; };
 		2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */; };
+		734EB464307BBEE300DB1CE2 /* MindsetReflectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734EB463307BBEE300DB1CE2 /* MindsetReflectionViewController.swift */; };
+		734EB466307BBF0200DB1CE2 /* MindsetReflectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734EB465307BBF0200DB1CE2 /* MindsetReflectionForm.swift */; };
 		841380112C9D9CCD004D5846 /* CourseKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 841380102C9D9CCD004D5846 /* CourseKit.docc */; };
 		841380172C9D9CCE004D5846 /* CourseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */; };
 		8413801E2C9D9CCE004D5846 /* CourseKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413801D2C9D9CCE004D5846 /* CourseKitTests.swift */; };
@@ -807,6 +809,8 @@
 		2FEDFF59206CE7560002CF04 /* CategoryPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPager.swift; sourceTree = "<group>"; };
 		2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostTableViewController.swift; sourceTree = "<group>"; };
 		2FF024202004CECA00E0047D /* BaseDBTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBTableViewController.swift; sourceTree = "<group>"; };
+		734EB463307BBEE300DB1CE2 /* MindsetReflectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindsetReflectionViewController.swift; sourceTree = "<group>"; };
+		734EB465307BBF0200DB1CE2 /* MindsetReflectionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindsetReflectionForm.swift; sourceTree = "<group>"; };
 		8413800D2C9D9CCD004D5846 /* CourseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CourseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8413800F2C9D9CCD004D5846 /* CourseKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseKit.h; sourceTree = "<group>"; };
 		841380102C9D9CCD004D5846 /* CourseKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CourseKit.docc; sourceTree = "<group>"; };
@@ -1115,6 +1119,7 @@
 				253DD67D262860B200C6D0A8 /* GapFillResponse.swift */,
 				2FC0F2CC1F86385B0092BFDC /* TPModelMapper.swift */,
 				250629912265E74D00539FB2 /* LoginActivity.swift */,
+				734EB465307BBF0200DB1CE2 /* MindsetReflectionForm.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1573,6 +1578,7 @@
 				D90F83662CDCD8220030C38F /* OfflineDownloadsViewController.swift */,
 				D9A2F2AB2CE1DFBF0052802D /* OfflineDownloadTableViewCell.swift */,
 				2D7CDBD52F3F706000A3B927 /* ArtifactListViewController.swift */,
+				734EB463307BBEE300DB1CE2 /* MindsetReflectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2133,6 +2139,7 @@
 				038CB2862CBD278600164127 /* ReviewSlidingViewController.swift in Sources */,
 				03E4AF482CAEDF7F00ECC34D /* AttemptItem.swift in Sources */,
 				03E4AF502CAEDF7F00ECC34D /* Attachment.swift in Sources */,
+				734EB466307BBF0200DB1CE2 /* MindsetReflectionForm.swift in Sources */,
 				038CB2822CBD278600164127 /* BaseQuestionsViewController.swift in Sources */,
 				03A60FA32CB4060100079A7C /* AttemptRepository.swift in Sources */,
 				03CD0C712CB7C5FD00E17218 /* UIInterfaceOrientationMask.swift in Sources */,
@@ -2314,6 +2321,7 @@
 				03CD0C692CB7C5D500E17218 /* UIViewExtension.swift in Sources */,
 				03E4AFB52CAFCF6F00ECC34D /* UserStats.swift in Sources */,
 				03CD0C742CB7CF4900E17218 /* Permissions.swift in Sources */,
+				734EB464307BBEE300DB1CE2 /* MindsetReflectionViewController.swift in Sources */,
 				03E4AFC92CAFCF7000ECC34D /* Banner.swift in Sources */,
 				038CB2A42CBD278600164127 /* LockableSectionDropDownCell.swift in Sources */,
 				038CB2812CBD278600164127 /* ReviewQuestionsDataSource.swift in Sources */,

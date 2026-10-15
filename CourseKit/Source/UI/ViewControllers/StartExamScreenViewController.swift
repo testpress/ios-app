@@ -59,6 +59,7 @@ public class StartExamScreenViewController: BaseUIViewController {
     public var attempt: Attempt?
     public var accessCode: String!
     private let attemptRepository = AttemptRepository()
+    private var isExamDetailFetched = false
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +74,12 @@ public class StartExamScreenViewController: BaseUIViewController {
                 attempt = contentAttempt.assessment
             }
         }
+
+        // When starting from the Exams tab (content is nil), pre-fetch exam detail to obtain mindset reflection config.
+        if content == nil && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil) {
+            fetchExamDetail()
+        }
+
         fetchAvailableLanguages(url: TestpressCourse.shared.baseURL+"/api/v2.3/exams/"+exam.slug+"/languages/")
         examTitle.text = exam.title
         questionsCount.text = String(exam.numberOfQuestions)
@@ -212,6 +219,71 @@ public class StartExamScreenViewController: BaseUIViewController {
             }, type: Language.self)
         }
     
+    private var examDetailFetchInProgress = false
+    private var pendingExamDetailCompletions: [((Exam?, TPError?) -> Void)] = []
+
+    func fetchExamDetail(completion: ((Exam?, TPError?) -> Void)? = nil) {
+        // If a fetch is already in progress, queue this completion to be called when the fetch finishes
+        if examDetailFetchInProgress {
+            if let completion = completion {
+                pendingExamDetailCompletions.append(completion)
+            }
+            return
+        }
+        examDetailFetchInProgress = true
+
+        let examUrl = TestpressCourse.shared.baseURL + "/api/v2.2/exams/" + exam.slug + "/"
+        TPApiClient.request(
+            type: Exam.self,
+            endpointProvider: TPEndpointProvider(.get, url: examUrl),
+            completion: { [weak self] exam, error in
+                guard let self = self else {
+                    completion?(nil, error)
+                    return
+                }
+                self.examDetailFetchInProgress = false
+                if let exam = exam, error == nil {
+                    self.updateExamReflectionFields(from: exam) {
+                        self.isExamDetailFetched = true
+                        // Call all pending completions after flag is set
+                        self.pendingExamDetailCompletions.forEach { $0(exam, nil) }
+                        self.pendingExamDetailCompletions.removeAll()
+                    }
+                } else {
+                    // On error, also call pending completions with error
+                    self.pendingExamDetailCompletions.forEach { $0(nil, error) }
+                    self.pendingExamDetailCompletions.removeAll()
+                }
+                completion?(exam, error)
+            }
+        )
+    }
+
+    private func updateExamReflectionFields(from fetchedExam: Exam, completion: (() -> Void)? = nil) {
+        // Ensure Realm writes happen on main thread
+        if Thread.isMainThread {
+            performUpdate(fetchedExam)
+            completion?()
+        } else {
+            DispatchQueue.main.async {
+                self.performUpdate(fetchedExam)
+                completion?()
+            }
+        }
+    }
+
+    private func performUpdate(_ fetchedExam: Exam) {
+        if self.exam.realm != nil {
+            DBManager<Exam>().write {
+                self.exam.enableMindsetReflections = fetchedExam.enableMindsetReflections
+                self.exam.preExamReflectionForm = fetchedExam.preExamReflectionForm
+            }
+        } else {
+            self.exam.enableMindsetReflections = fetchedExam.enableMindsetReflections
+            self.exam.preExamReflectionForm = fetchedExam.preExamReflectionForm
+        }
+    }
+
     private func showErrorView(_ error: TPError, url: String) {
         var retryButtonText: String?
         var retryHandler: (() -> Void)?
@@ -316,6 +388,55 @@ public class StartExamScreenViewController: BaseUIViewController {
     }
     
     func startExam(_ examMode: Int) {
+        if !isExamDetailFetched && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil) {
+            startButton.isEnabled = false
+            present(alertController, animated: false, completion: nil)
+            fetchExamDetail { [weak self] _, error in
+                guard let self = self else { return }
+                if error == nil {
+                    self.alertController.dismiss(animated: false) {
+                        self.startButton.isEnabled = true
+                        self.startExam(examMode)
+                    }
+                } else {
+                    self.alertController.dismiss(animated: true) {
+                        self.startButton.isEnabled = true
+                        UIUtils.showSimpleAlert(
+                            title: Strings.NETWORK_ERROR,
+                            message: error?.message ?? Strings.SOMETHIGN_WENT_WRONG,
+                            viewController: self
+                        )
+                    }
+                }
+            }
+            return
+        }
+
+        // Only show reflection form for fresh attempts (not resuming)
+        let isResumingAttempt = Attempt.hasRunningAttempt(attempt: attempt, contentAttempt: contentAttempt)
+
+        if exam.enableMindsetReflections, let form = exam.preExamReflectionForm, !isResumingAttempt {
+            let webViewController = MindsetReflectionViewController()
+            // The SSO endpoint (/api/v2.5/sso/) returns a redirect URL (e.g. '/api/v2.5/sso/?token=<token>').
+            // WebViewController appends 'self.url' directly to that SSO redirect URL when useSSOLogin is true.
+            // Prefixing with '&next=' passes the reflection form path as the next parameter for SSO redirection.
+            webViewController.url = "&next=/exam-mindset/\(exam.id)/reflection/\(form.id)/"
+            webViewController.submissionMandatory = form.submissionMandatory
+            webViewController.onReflectionSubmitted = { [weak self] in
+                self?.startAttemptWithLoading(examMode)
+            }
+            webViewController.onReflectionSkipped = { [weak self] in
+                self?.startAttemptWithLoading(examMode)
+            }
+            webViewController.modalPresentationStyle = .fullScreen
+            present(webViewController, animated: true, completion: nil)
+            return
+        }
+
+        startAttemptWithLoading(examMode)
+    }
+    
+    private func startAttemptWithLoading(_ examMode: Int) {
         present(alertController, animated: false, completion: nil)
         startButton.isHidden = true
         startAttempt(examMode)
