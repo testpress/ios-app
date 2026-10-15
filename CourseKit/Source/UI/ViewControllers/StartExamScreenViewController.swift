@@ -241,34 +241,35 @@ public class StartExamScreenViewController: BaseUIViewController {
                     completion?(nil, error)
                     return
                 }
-                self.examDetailFetchInProgress = false
-                if let exam = exam, error == nil {
-                    self.updateExamReflectionFields(from: exam) {
-                        self.isExamDetailFetched = true
-                        // Call all pending completions after flag is set
-                        self.pendingExamDetailCompletions.forEach { $0(exam, nil) }
+                DispatchQueue.main.async {
+                    self.examDetailFetchInProgress = false
+                    if let exam = exam, error == nil {
+                        self.updateExamReflectionFields(from: exam) {
+                            self.isExamDetailFetched = true
+                            completion?(exam, nil)
+                            self.pendingExamDetailCompletions.forEach { $0(exam, nil) }
+                            self.pendingExamDetailCompletions.removeAll()
+                        }
+                    } else {
+                        self.pendingExamDetailCompletions.forEach { $0(nil, error) }
                         self.pendingExamDetailCompletions.removeAll()
+                        completion?(nil, error)
                     }
-                } else {
-                    // On error, also call pending completions with error
-                    self.pendingExamDetailCompletions.forEach { $0(nil, error) }
-                    self.pendingExamDetailCompletions.removeAll()
                 }
-                completion?(exam, error)
             }
         )
     }
 
     private func updateExamReflectionFields(from fetchedExam: Exam, completion: (() -> Void)? = nil) {
         // Ensure Realm writes happen on main thread
-        if Thread.isMainThread {
-            performUpdate(fetchedExam)
+        let updateAction = {
+            self.performUpdate(fetchedExam)
             completion?()
+        }
+        if Thread.isMainThread {
+            updateAction()
         } else {
-            DispatchQueue.main.async {
-                self.performUpdate(fetchedExam)
-                completion?()
-            }
+            DispatchQueue.main.async(execute: updateAction)
         }
     }
 
@@ -419,15 +420,14 @@ public class StartExamScreenViewController: BaseUIViewController {
             let webViewController = MindsetReflectionViewController()
             // The SSO endpoint (/api/v2.5/sso/) returns a redirect URL (e.g. '/api/v2.5/sso/?token=<token>').
             // WebViewController appends 'self.url' directly to that SSO redirect URL when useSSOLogin is true.
-            // Prefixing with '&next=' passes the reflection form path as the next parameter for SSO redirection.
-            webViewController.url = "&next=/exam-mindset/\(exam.id)/reflection/\(form.id)/"
+            // form.getSSOUrl prefixes with '&next=' to pass the reflection form path for SSO redirection.
+            webViewController.url = form.getSSOUrl(examId: exam.id)
             webViewController.submissionMandatory = form.submissionMandatory
-            webViewController.onReflectionSubmitted = { [weak self] in
+            let startAttemptClosure: () -> Void = { [weak self] in
                 self?.startAttemptWithLoading(examMode)
             }
-            webViewController.onReflectionSkipped = { [weak self] in
-                self?.startAttemptWithLoading(examMode)
-            }
+            webViewController.onReflectionSubmitted = startAttemptClosure
+            webViewController.onReflectionSkipped = startAttemptClosure
             webViewController.modalPresentationStyle = .fullScreen
             present(webViewController, animated: true, completion: nil)
             return

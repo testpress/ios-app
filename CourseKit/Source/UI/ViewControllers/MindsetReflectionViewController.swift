@@ -72,33 +72,11 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
     }
 
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        handleLoadFailure(error: error)
+        showErrorMessage(error: TPError(message: error.localizedDescription, kind: .network))
     }
 
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        handleLoadFailure(error: error)
-    }
-
-    private func handleLoadFailure(error: Error) {
-        activityIndicator?.stopAnimating()
-        let tpError = TPError(message: error.localizedDescription, kind: .network)
-        let (image, title, description) = tpError.getDisplayInfo()
-        self.emptyView.show(
-            image: image,
-            title: title,
-            description: description,
-            retryButtonText: Strings.TRY_AGAIN,
-            retryHandler: { [weak self] in
-                self?.emptyView.hide()
-                if self?.submissionMandatory == true {
-                    self?.navItem?.leftBarButtonItem = nil
-                }
-                self?.fetchSSOURLAndLoadPage()
-            }
-        )
-        if submissionMandatory {
-            showFailureCloseButton()
-        }
+        showErrorMessage(error: TPError(message: error.localizedDescription, kind: .network))
     }
 
     private func showFailureCloseButton() {

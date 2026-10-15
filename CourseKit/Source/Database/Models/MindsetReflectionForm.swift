@@ -18,4 +18,8 @@ public class MindsetReflectionForm: DBModel {
     override public static func primaryKey() -> String? {
         return "id"
     }
+
+    public func getSSOUrl(examId: Int) -> String {
+        return "&next=/exam-mindset/\(examId)/reflection/\(id)/"
+    }
 }
