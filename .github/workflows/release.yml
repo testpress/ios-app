@@ -36,7 +36,7 @@ jobs:
           bundler-cache: true
 
       - name: Install dependencies
-        run: brew install --quiet imagemagick
+        run: brew install --quiet libpng jpeg imagemagick
 
       - name: Install signing certificate
         env:
