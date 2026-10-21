@@ -187,14 +187,14 @@ module Fastlane
 
       def self.resize_image(source, dest, w, h, bg = "transparent")
         FileUtils.mkdir_p(File.dirname(dest))
-        image = MiniMagick::Image.open(source)
-        image.combine_options do |c|
-          c.resize     "#{w}x#{h}"
-          c.gravity    "center"
-          c.background bg
-          c.extent     "#{w}x#{h}"
+        MiniMagick::Tool::Convert.new do |convert|
+          convert << source
+          convert.resize "#{w}x#{h}"
+          convert.gravity "center"
+          convert.background bg
+          convert.extent "#{w}x#{h}"
+          convert << "png:#{dest}"
         end
-        image.write(dest)
       end
 
       def self.description
