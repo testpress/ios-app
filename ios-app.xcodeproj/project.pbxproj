@@ -37,10 +37,6 @@
 		038CB2362CBD24B500164127 /* TestEngine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7179541EC740C6009114C4 /* TestEngine.storyboard */; };
 		038CB2372CBD25E100164127 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A81EC20E4DDFC0062DE8A /* UINavigationControllerExtension.swift */; };
 		038CB2382CBD263700164127 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256DE79D256F8CF100F02995 /* PaddingLabel.swift */; };
-		E4A100022CBD263700000002 /* SecureContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A100012CBD263700000001 /* SecureContainerView.swift */; };
-		E4A100042CBD263700000004 /* TestSecureContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A100032CBD263700000003 /* TestSecureContainerView.swift */; };
-		E4A100062CBD263700000006 /* TestPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A100052CBD263700000005 /* TestPDFViewController.swift */; };
-		E4A100082CBD263700000008 /* TestHtmlContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A100072CBD263700000007 /* TestHtmlContentViewController.swift */; };
 		038CB2782CBD278600164127 /* TestReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC0F2991F861A860092BFDC /* TestReportViewController.swift */; };
 		038CB2792CBD278600164127 /* BookmarksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF9C5020B6D5F40086245F /* BookmarksTableViewCell.swift */; };
 		038CB27A2CBD278600164127 /* CustomTestGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9151E7E2A7B8A9C00EAE2DF /* CustomTestGenerationViewController.swift */; };
@@ -376,6 +372,7 @@
 		2FEDFF54206CB4870002CF04 /* PostCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF53206CB4870002CF04 /* PostCategoriesTableViewController.swift */; };
 		2FEDFF56206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF55206CE1DF0002CF04 /* PostCategoriesTableViewCell.swift */; };
 		2FEDFF5C206CF3340002CF04 /* RecentPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */; };
+		7349FB37308A186E00F00638 /* SecureContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7349FB36308A186E00F00638 /* SecureContainerView.swift */; };
 		841380112C9D9CCD004D5846 /* CourseKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 841380102C9D9CCD004D5846 /* CourseKit.docc */; };
 		841380172C9D9CCE004D5846 /* CourseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8413800D2C9D9CCD004D5846 /* CourseKit.framework */; };
 		8413801E2C9D9CCE004D5846 /* CourseKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413801D2C9D9CCE004D5846 /* CourseKitTests.swift */; };
@@ -551,10 +548,6 @@
 		256A909F247D225D00F4E12C /* QuizQuestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionsViewModel.swift; sourceTree = "<group>"; };
 		256A90A1247D30DA00F4E12C /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		256DE79D256F8CF100F02995 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
-		E4A100012CBD263700000001 /* SecureContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureContainerView.swift; sourceTree = "<group>"; };
-		E4A100032CBD263700000003 /* TestSecureContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSecureContainerView.swift; sourceTree = "<group>"; };
-		E4A100052CBD263700000005 /* TestPDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPDFViewController.swift; sourceTree = "<group>"; };
-		E4A100072CBD263700000007 /* TestHtmlContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHtmlContentViewController.swift; sourceTree = "<group>"; };
 		256EF50721CA15A200C743F0 /* ios-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-app.entitlements"; sourceTree = "<group>"; };
 		25705016246E48BA00E6C688 /* ListTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransform.swift; sourceTree = "<group>"; };
 		25705018246E71B600E6C688 /* QuizQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionViewController.swift; sourceTree = "<group>"; };
@@ -815,6 +808,7 @@
 		2FEDFF59206CE7560002CF04 /* CategoryPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPager.swift; sourceTree = "<group>"; };
 		2FEDFF5B206CF3340002CF04 /* RecentPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPostTableViewController.swift; sourceTree = "<group>"; };
 		2FF024202004CECA00E0047D /* BaseDBTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDBTableViewController.swift; sourceTree = "<group>"; };
+		7349FB36308A186E00F00638 /* SecureContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureContainerView.swift; sourceTree = "<group>"; };
 		8413800D2C9D9CCD004D5846 /* CourseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CourseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8413800F2C9D9CCD004D5846 /* CourseKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseKit.h; sourceTree = "<group>"; };
 		841380102C9D9CCD004D5846 /* CourseKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = CourseKit.docc; sourceTree = "<group>"; };
@@ -1078,7 +1072,7 @@
 			isa = PBXGroup;
 			children = (
 				256DE79D256F8CF100F02995 /* PaddingLabel.swift */,
-				E4A100012CBD263700000001 /* SecureContainerView.swift */,
+				7349FB36308A186E00F00638 /* SecureContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1253,8 +1247,6 @@
 				25FF2A9C2525E566005A31C5 /* TestZoomMeetViewController.swift */,
 				25AA1B2D252B2274008AAA9D /* TestVideoConferenceViewController.swift */,
 				84F3494825A82C190048487F /* TestAttachmentDetailViewController.swift */,
-				E4A100052CBD263700000005 /* TestPDFViewController.swift */,
-				E4A100072CBD263700000007 /* TestHtmlContentViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1367,7 +1359,6 @@
 				8CD78EA222BC917D00DD034D /* TestLoginViewController.swift */,
 				8CD78EA422BC9B8F00DD034D /* TestMainMenuTabViewController.swift */,
 				8CD78EA622BC9DA100DD034D /* TestUtils.swift */,
-				E4A100032CBD263700000003 /* TestSecureContainerView.swift */,
 			);
 			path = "ios-appTests";
 			sourceTree = "<group>";
@@ -2105,9 +2096,6 @@
 				250629962266F9C000539FB2 /* LoginActivityViewControllerTest.swift in Sources */,
 				2F26ADFB1E8249D70031E6F4 /* PushNotificationsTest.swift in Sources */,
 				25B0ADC821D5A29600C702B9 /* PhoneVerification.swift in Sources */,
-				E4A100042CBD263700000004 /* TestSecureContainerView.swift in Sources */,
-				E4A100062CBD263700000006 /* TestPDFViewController.swift in Sources */,
-				E4A100082CBD263700000008 /* TestHtmlContentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2152,7 +2140,6 @@
 				03A60FA32CB4060100079A7C /* AttemptRepository.swift in Sources */,
 				03CD0C712CB7C5FD00E17218 /* UIInterfaceOrientationMask.swift in Sources */,
 				038CB2382CBD263700164127 /* PaddingLabel.swift in Sources */,
-				E4A100022CBD263700000002 /* SecureContainerView.swift in Sources */,
 				038CB2B12CBD278600164127 /* BaseQuestionsDataSource.swift in Sources */,
 				841380112C9D9CCD004D5846 /* CourseKit.docc in Sources */,
 				03E4AFC22CAFCF7000ECC34D /* SSOUrl.swift in Sources */,
@@ -2337,6 +2324,7 @@
 				03E4AF462CAEDF7F00ECC34D /* Video.swift in Sources */,
 				03E4AFC82CAFCF7000ECC34D /* TPApiResponse.swift in Sources */,
 				03E4AFD62CAFE6A900ECC34D /* Constants.swift in Sources */,
+				7349FB37308A186E00F00638 /* SecureContainerView.swift in Sources */,
 				038CB2942CBD278600164127 /* BaseQuestionsListViewController.swift in Sources */,
 				2D7CDBD42F3F705F00A3B927 /* Artifact.swift in Sources */,
 				2D7CDBD62F3F706000A3B927 /* ArtifactListViewController.swift in Sources */,
