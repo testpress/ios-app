@@ -35,9 +35,11 @@ class HtmlContentViewController: BaseWebViewController {
     var viewModel: ChapterContentDetailViewModel?
     var bookmarkHelper: BookmarkHelper!
     var instituteSettings: InstituteSettings!
+    var secureContainerView: SecureContainerView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSecureWebView()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
 
         emptyView = EmptyView.getInstance(parentView: webView)
@@ -45,6 +47,66 @@ class HtmlContentViewController: BaseWebViewController {
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         checkContentType()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerScreenCaptureObserver()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unregisterScreenCaptureObserver()
+    }
+    
+    func setupSecureWebView() {
+        guard let webView = webView, secureContainerView == nil else { return }
+        webView.removeFromSuperview()
+        let container = SecureContainerView(contentView: webView)
+        container.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(container)
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+        container.setNeedsLayout()
+        container.layoutIfNeeded()
+        self.secureContainerView = container
+    }
+    
+    func registerScreenCaptureObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(screenCaptureDidChange),
+            name: UIScreen.capturedDidChangeNotification,
+            object: nil
+        )
+        handleScreenCapture(isCaptured: UIScreen.main.isCaptured)
+    }
+    
+    func unregisterScreenCaptureObserver() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIScreen.capturedDidChangeNotification,
+            object: nil
+        )
+    }
+    
+    @objc func screenCaptureDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.handleScreenCapture(isCaptured: UIScreen.main.isCaptured)
+        }
+    }
+    
+    func handleScreenCapture(isCaptured: Bool) {
+        secureContainerView?.handleScreenCapture(isCaptured: isCaptured)
+    }
+    
+    deinit {
+        unregisterScreenCaptureObserver()
     }
     
     override func initWebView() {
