@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import os.log
+
+private let secureLog = OSLog(subsystem: "CourseKit", category: "SecureContainerView")
 
 open class SecureContainerView: UIView {
     
@@ -14,6 +17,8 @@ open class SecureContainerView: UIView {
     public var recordingOverlayMessage: String = "Screen recording is not allowed."
     public private(set) var overlayView: UIView?
     private var hasEmbeddedContentView = false
+    private var embeddingRetryCount = 0
+    private let maxEmbeddingRetries = 10
     
     public var isSecure: Bool {
         get { return textField.isSecureTextEntry }
@@ -35,6 +40,14 @@ open class SecureContainerView: UIView {
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    open override func didMoveToWindow() {
+        super.didMoveToWindow()
+        if window != nil {
+            // View is now in window hierarchy - trigger layout to embed content
+            setNeedsLayout()
+        }
     }
     
     public func setupSecureContainer(with contentView: UIView) {
@@ -63,9 +76,20 @@ open class SecureContainerView: UIView {
     private func embedContentViewIfNeeded() {
         guard !hasEmbeddedContentView, let contentView = contentView else { return }
         
-        // FAIL-CLOSED: Secure canvas must exist
+        // Try to get the secure canvas
         guard let canvas = textField.subviews.first else {
-            // Canvas not ready yet - will retry on next layoutSubviews
+            embeddingRetryCount += 1
+            os_log("Secure canvas not ready (attempt %d/%d). Will retry on next layout pass.", log: secureLog, type: .info, embeddingRetryCount, maxEmbeddingRetries)
+            
+            if embeddingRetryCount >= maxEmbeddingRetries {
+                // FAIL-CLOSED: After max retries, log error and hide content
+                os_log("FAIL-CLOSED: Secure canvas unavailable after %d retries. Content hidden for security.", log: secureLog, type: .error, maxEmbeddingRetries)
+                assertionFailure("Secure canvas unavailable - UITextField secure canvas not found after \(maxEmbeddingRetries) retries. Content hidden for security.")
+                contentView.isHidden = true
+                contentView.alpha = 0
+                hasEmbeddedContentView = true // Prevent further retries
+            }
+            // Will retry on next layoutSubviews call
             return
         }
         
@@ -75,6 +99,8 @@ open class SecureContainerView: UIView {
         contentView.translatesAutoresizingMaskIntoConstraints = true
         contentView.frame = canvas.bounds
         hasEmbeddedContentView = true
+        
+        os_log("Secure container: contentView embedded successfully in secure canvas.", log: secureLog, type: .info)
     }
     
     open override func layoutSubviews() {

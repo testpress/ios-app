@@ -65,6 +65,9 @@ class HtmlContentViewController: BaseWebViewController {
         // Preserve the parent view where webView currently resides
         guard let parent = webView.superview ?? view else { return }
         
+        // Get webView's index to insert container at same position (below activityIndicator)
+        let webViewIndex = parent.subviews.firstIndex(of: webView) ?? parent.subviews.count
+        
         // Remove webView from superview to deactivate old layout constraints
         webView.removeFromSuperview()
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +75,7 @@ class HtmlContentViewController: BaseWebViewController {
         // Wrap webView in SecureContainerView
         let container = SecureContainerView(contentView: webView)
         container.translatesAutoresizingMaskIntoConstraints = false
-        parent.addSubview(container)
+        parent.insertSubview(container, at: webViewIndex)
         
         // Constrain container to fill parent (matching webView's original layout)
         NSLayoutConstraint.activate([
