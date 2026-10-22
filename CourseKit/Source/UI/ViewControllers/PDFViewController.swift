@@ -7,7 +7,7 @@ class PDFViewController: BaseUIViewController {
     var pdfDocument: PDFDocument?
     @IBOutlet var pdfView: PDFView!
     @IBOutlet weak var navigationBarItem: UINavigationItem!
-    @IBOutlet weak var navigationBar: UINavigationBar!  // Connect in storyboard to the navigation bar
+    @IBOutlet weak var navigationBar: UINavigationBar!
     var watermarkLabel: MarqueeLabel?
     var timer: Timer?
     var contentTitle: String!
@@ -24,12 +24,8 @@ class PDFViewController: BaseUIViewController {
     func setupSecurePDFView() {
         guard let pdfView = pdfView, secureContainerView == nil else { return }
         
-        // Use IBOutlet navBar (connected in Course.storyboard); fall back safely to subview lookup
         let navBar = self.navigationBar ?? view.subviews.first(where: { $0 is UINavigationBar }) as? UINavigationBar
         
-        // CRITICAL: navBar's leading/trailing constraints in storyboard reference pdfView.
-        // Before removing pdfView, deactivate any existing top/leading/trailing/left/right constraints from view.constraints
-        // that anchor navBar, then pin navBar to safeArea so it stays positioned correctly without duplicate constraint warnings.
         if let navBar = navBar {
             let constraintsToRemove = view.constraints.filter { constraint in
                 let involvesNavBar = (constraint.firstItem as? UIView === navBar) || (constraint.secondItem as? UIView === navBar)
@@ -47,15 +43,12 @@ class PDFViewController: BaseUIViewController {
             ])
         }
         
-        // Now safe to remove pdfView (deactivates its old constraints including those referencing navBar)
         pdfView.removeFromSuperview()
         pdfView.translatesAutoresizingMaskIntoConstraints = false
         
-        // Wrap pdfView in SecureContainerView
         let container = SecureContainerView(contentView: pdfView)
         container.translatesAutoresizingMaskIntoConstraints = false
         
-        // Insert below navBar to ensure navBar (and its Back button) is always above container in z-order
         if let navBar = navBar {
             view.insertSubview(container, belowSubview: navBar)
             view.bringSubviewToFront(navBar)
@@ -63,10 +56,7 @@ class PDFViewController: BaseUIViewController {
             view.addSubview(container)
         }
         
-        // Compute top anchor based on navBar presence
         let topAnchor = navBar?.bottomAnchor ?? view.safeAreaLayoutGuide.topAnchor
-        
-        // Single merged path: constrain container below navBar (or safeArea top), filling remaining safeArea
         NSLayoutConstraint.activate([
             container.topAnchor.constraint(equalTo: topAnchor),
             container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),

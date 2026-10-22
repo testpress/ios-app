@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import os.log
-
-private let secureLog = OSLog(subsystem: "CourseKit", category: "SecureContainerView")
 
 open class SecureContainerView: UIView {
     
@@ -47,7 +44,6 @@ open class SecureContainerView: UIView {
     open override func didMoveToWindow() {
         super.didMoveToWindow()
         if window != nil {
-            // If fallback overlay was shown while offscreen or prior to window attachment, reset to allow embed
             if fallbackOverlayView != nil {
                 fallbackOverlayView?.removeFromSuperview()
                 fallbackOverlayView = nil
@@ -58,7 +54,6 @@ open class SecureContainerView: UIView {
             }
             registerScreenCaptureObserver()
             checkScreenCaptureStatus()
-            // View is now in window hierarchy - trigger layout to embed content
             setNeedsLayout()
         } else {
             unregisterScreenCaptureObserver()
@@ -74,12 +69,9 @@ open class SecureContainerView: UIView {
         isUserInteractionEnabled = true
         contentView.isUserInteractionEnabled = true
         
-        // 1. Ensure textField is initialized with isSecureTextEntry = true BEFORE querying its subviews
         textField.isSecureTextEntry = true
-        textField.isUserInteractionEnabled = false // Pass touch/scroll events to child content
+        textField.isUserInteractionEnabled = false
         textField.translatesAutoresizingMaskIntoConstraints = false
-        
-        // 2. textField MUST be added as a subview of SecureContainerView first
         addSubview(textField)
         
         NSLayoutConstraint.activate([
@@ -89,31 +81,25 @@ open class SecureContainerView: UIView {
             textField.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         
-        // 3. Attempt embedding directly into textField.subviews.first
         embedContentViewIfNeeded()
     }
     
     private func embedContentViewIfNeeded() {
         guard !hasEmbeddedContentView, let contentView = contentView else { return }
         
-        // Force layout pass on textField to ensure secure canvas subview is materialized
         textField.layoutIfNeeded()
         
-        // Try to get the secure canvas (the private _UITextFieldCanvasView)
         guard let canvas = textField.subviews.first else {
             embeddingRetryCount += 1
-            os_log("Secure canvas not ready (attempt %d/%d). Will retry on next layout pass.", log: secureLog, type: .info, embeddingRetryCount, maxEmbeddingRetries)
+            debugPrint("SecureContainerView: Secure canvas not ready (attempt \(embeddingRetryCount)/\(maxEmbeddingRetries)). Will retry on next layout pass.")
             
             if embeddingRetryCount >= maxEmbeddingRetries {
-                // FAIL-CLOSED: After max retries, log error, hide content, and display user-facing fallback UI
-                // Never fall back to adding contentView to self
-                os_log("FAIL-CLOSED: Secure canvas unavailable after %d retries. Content hidden for security.", log: secureLog, type: .error, maxEmbeddingRetries)
+                debugPrint("SecureContainerView: FAIL-CLOSED: Secure canvas unavailable after \(maxEmbeddingRetries) retries. Content hidden for security.")
                 contentView.isHidden = true
                 contentView.alpha = 0
-                hasEmbeddedContentView = true // Prevent further retries
+                hasEmbeddedContentView = true
                 showFallbackErrorOverlay()
             } else {
-                // Schedule next layout pass on the main thread to continue retry loop
                 DispatchQueue.main.async { [weak self] in
                     self?.setNeedsLayout()
                 }
@@ -121,8 +107,6 @@ open class SecureContainerView: UIView {
             return
         }
         
-        // contentView (PDFView / WKWebView) MUST be added directly as a subview of
-        // textField.subviews.first, NOT directly to textField and NOT to SecureContainerView (self)
         canvas.isUserInteractionEnabled = true
         canvas.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = true
@@ -130,21 +114,16 @@ open class SecureContainerView: UIView {
         contentView.frame = canvas.bounds
         hasEmbeddedContentView = true
         
-        os_log("Secure container: contentView embedded successfully in secure canvas.", log: secureLog, type: .info)
+        debugPrint("SecureContainerView: contentView embedded successfully in secure canvas.")
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
         
-        // textField is sized via AutoLayout constraints (top/bottom/leading/trailing = 0)
-        // Secure canvas (textField.subviews.first) is sized by UIKit to match textField
-        
-        // Lazy embed: secure canvas only exists after textField renders in window
         if !hasEmbeddedContentView {
             embedContentViewIfNeeded()
         }
         
-        // Frame sync is the source of truth for the content because the secure canvas is a private UIKit view.
         if let canvas = textField.subviews.first,
            let contentView = contentView,
            contentView.superview === canvas {
