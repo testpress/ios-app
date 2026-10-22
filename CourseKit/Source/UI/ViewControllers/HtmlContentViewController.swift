@@ -61,16 +61,27 @@ class HtmlContentViewController: BaseWebViewController {
     
     func setupSecureWebView() {
         guard let webView = webView, secureContainerView == nil else { return }
+        
+        // Preserve the parent view where webView currently resides
+        guard let parent = webView.superview ?? view else { return }
+        
+        // Remove webView from superview to deactivate old layout constraints
         webView.removeFromSuperview()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Wrap webView in SecureContainerView
         let container = SecureContainerView(contentView: webView)
         container.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(container)
+        parent.addSubview(container)
+        
+        // Constrain container to fill parent (matching webView's original layout)
         NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            container.topAnchor.constraint(equalTo: parent.topAnchor),
+            container.bottomAnchor.constraint(equalTo: parent.bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: parent.trailingAnchor)
         ])
+        
         container.setNeedsLayout()
         container.layoutIfNeeded()
         self.secureContainerView = container

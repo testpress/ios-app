@@ -13,6 +13,7 @@ open class SecureContainerView: UIView {
     public private(set) var contentView: UIView?
     public var recordingOverlayMessage: String = "Screen recording is not allowed."
     public private(set) var overlayView: UIView?
+    private var hasEmbeddedContentView = false
     
     public var isSecure: Bool {
         get { return textField.isSecureTextEntry }
@@ -54,36 +55,44 @@ open class SecureContainerView: UIView {
             textField.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         
-        textField.setNeedsLayout()
-        textField.layoutIfNeeded()
+        // NOTE: Do NOT embed contentView here. The secure canvas (textField.subviews.first)
+        // is created LAZILY by UIKit when the textField is actually rendered in a window.
+        // We'll embed contentView in layoutSubviews once canvas exists.
+    }
+    
+    private func embedContentViewIfNeeded() {
+        guard !hasEmbeddedContentView, let contentView = contentView else { return }
         
-        // 2. Embed the child view into the secure canvas container (textField.subviews.first)
-        let canvas = textField.subviews.first ?? self
+        // FAIL-CLOSED: Secure canvas must exist
+        guard let canvas = textField.subviews.first else {
+            // Canvas not ready yet - will retry on next layoutSubviews
+            return
+        }
+        
         canvas.isUserInteractionEnabled = true
         canvas.addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // 3. Constrain child content view to secure container edges (Top, Bottom, Leading, Trailing) with 0 constant
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: canvas.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: canvas.bottomAnchor),
-            contentView.leadingAnchor.constraint(equalTo: canvas.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: canvas.trailingAnchor)
-        ])
-        
-        // 4. Immediately ensure non-zero frame dimensions
-        setNeedsLayout()
-        layoutIfNeeded()
+        // Use manual frame layout (canvas is private UIKit view, not AutoLayout-friendly)
+        contentView.translatesAutoresizingMaskIntoConstraints = true
+        contentView.frame = canvas.bounds
+        hasEmbeddedContentView = true
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        textField.frame = bounds
-        if let canvas = textField.subviews.first {
-            canvas.frame = textField.bounds
-            if let contentView = contentView, contentView.superview === canvas {
-                contentView.frame = canvas.bounds
-            }
+        
+        // textField is sized via AutoLayout constraints (top/bottom/leading/trailing = 0)
+        // Secure canvas (textField.subviews.first) is sized by UIKit to match textField
+        
+        // Lazy embed: secure canvas only exists after textField renders in window
+        if !hasEmbeddedContentView {
+            embedContentViewIfNeeded()
+        }
+        
+        // Sync contentView frame to canvas bounds (canvas resizes with textField)
+        if let canvas = textField.subviews.first,
+           let contentView = contentView,
+           contentView.superview === canvas {
+            contentView.frame = canvas.bounds
         }
     }
     

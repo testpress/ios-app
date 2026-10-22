@@ -32,31 +32,59 @@ class PDFViewController: BaseUIViewController {
     
     func setupSecurePDFView() {
         guard let pdfView = pdfView, secureContainerView == nil else { return }
+        
+        // Find navBar from storyboard
+        guard let navBar = view.subviews.first(where: { $0 is UINavigationBar }) as? UINavigationBar else {
+            // No navBar - constrain to safeArea directly
+            setupContainerWithoutNavBar(pdfView: pdfView)
+            return
+        }
+        
+        // CRITICAL: navBar's leading/trailing constraints in storyboard reference pdfView.
+        // Before removing pdfView, pin navBar to safeArea so it stays positioned correctly.
+        navBar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            navBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+        
+        // Now safe to remove pdfView (deactivates its old constraints including those referencing navBar)
         pdfView.removeFromSuperview()
+        pdfView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Wrap pdfView in SecureContainerView
         let container = SecureContainerView(contentView: pdfView)
         container.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(container)
         
-        let navBar = view.subviews.first(where: { $0 is UINavigationBar })
-        if let navBar = navBar {
-            navBar.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                navBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                navBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                container.topAnchor.constraint(equalTo: navBar.bottomAnchor),
-                container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-                container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-            ])
-        }
+        // Constrain container below navBar, filling remaining safeArea
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: navBar.bottomAnchor),
+            container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+        
+        container.setNeedsLayout()
+        container.layoutIfNeeded()
+        self.secureContainerView = container
+    }
+    
+    private func setupContainerWithoutNavBar(pdfView: PDFView) {
+        pdfView.removeFromSuperview()
+        pdfView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let container = SecureContainerView(contentView: pdfView)
+        container.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(container)
+        
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
         
         container.setNeedsLayout()
         container.layoutIfNeeded()
