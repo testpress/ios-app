@@ -2285,6 +2285,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navigationBar" destination="mfv-Zs-Xo0" id="dNu-7m-0K5"/>
                         <outlet property="navigationBarItem" destination="ph8-2L-TDJ" id="NaX-AN-udc"/>
                         <outlet property="pdfView" destination="aYd-GV-zb1" id="O7l-Sn-ZNx"/>
                     </connections>

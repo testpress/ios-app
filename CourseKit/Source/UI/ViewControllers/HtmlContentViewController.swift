@@ -35,9 +35,11 @@ class HtmlContentViewController: BaseWebViewController {
     var viewModel: ChapterContentDetailViewModel?
     var bookmarkHelper: BookmarkHelper!
     var instituteSettings: InstituteSettings!
+    var secureContainerView: SecureContainerView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSecureWebView()
         instituteSettings = DBManager<InstituteSettings>().getResultsFromDB().first
 
         emptyView = EmptyView.getInstance(parentView: webView)
@@ -45,6 +47,38 @@ class HtmlContentViewController: BaseWebViewController {
         bookmarkHelper = BookmarkHelper(viewController: self)
         bookmarkHelper.delegate = self
         checkContentType()
+    }
+    
+    func setupSecureWebView() {
+        guard let webView = webView, secureContainerView == nil else { return }
+        
+        // Preserve the parent view where webView currently resides
+        guard let parent = webView.superview ?? view else { return }
+        
+        // Get webView's index to insert container at same position (below activityIndicator)
+        let webViewIndex = parent.subviews.firstIndex(of: webView) ?? parent.subviews.count
+        
+        // Remove webView from superview to deactivate old layout constraints
+        webView.removeFromSuperview()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Wrap webView in SecureContainerView
+        let container = SecureContainerView(contentView: webView)
+        container.translatesAutoresizingMaskIntoConstraints = false
+        parent.insertSubview(container, at: webViewIndex)
+        
+        // Constrain container strictly to parent's safe area layout guide to prevent content from
+        // sliding under the navigation bar at the top or home indicator at the bottom (including landscape mode)
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.topAnchor),
+            container.bottomAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.trailingAnchor)
+        ])
+        
+        container.setNeedsLayout()
+        container.layoutIfNeeded()
+        self.secureContainerView = container
     }
     
     override func initWebView() {
