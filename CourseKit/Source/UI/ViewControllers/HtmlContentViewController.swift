@@ -77,12 +77,13 @@ class HtmlContentViewController: BaseWebViewController {
         container.translatesAutoresizingMaskIntoConstraints = false
         parent.insertSubview(container, at: webViewIndex)
         
-        // Constrain container to fill parent (matching webView's original layout)
+        // Constrain container strictly to safe area layout guides to prevent content from
+        // sliding under the navigation bar at the top or home indicator at the bottom (including landscape mode)
         NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: parent.topAnchor),
-            container.bottomAnchor.constraint(equalTo: parent.bottomAnchor),
-            container.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
-            container.trailingAnchor.constraint(equalTo: parent.trailingAnchor)
+            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         container.setNeedsLayout()

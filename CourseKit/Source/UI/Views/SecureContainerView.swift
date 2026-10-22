@@ -16,6 +16,8 @@ open class SecureContainerView: UIView {
     public private(set) var contentView: UIView?
     public var recordingOverlayMessage: String = "Screen recording is not allowed."
     public private(set) var overlayView: UIView?
+    public var fallbackErrorMessage: String = "Unable to load protected content. Please reload the page."
+    public private(set) var fallbackOverlayView: UIView?
     private var hasEmbeddedContentView = false
     private var embeddingRetryCount = 0
     private let maxEmbeddingRetries = 10
@@ -82,14 +84,18 @@ open class SecureContainerView: UIView {
             os_log("Secure canvas not ready (attempt %d/%d). Will retry on next layout pass.", log: secureLog, type: .info, embeddingRetryCount, maxEmbeddingRetries)
             
             if embeddingRetryCount >= maxEmbeddingRetries {
-                // FAIL-CLOSED: After max retries, log error and hide content
+                // FAIL-CLOSED: After max retries, log error, hide content, and display user-facing fallback UI
                 os_log("FAIL-CLOSED: Secure canvas unavailable after %d retries. Content hidden for security.", log: secureLog, type: .error, maxEmbeddingRetries)
-                assertionFailure("Secure canvas unavailable - UITextField secure canvas not found after \(maxEmbeddingRetries) retries. Content hidden for security.")
                 contentView.isHidden = true
                 contentView.alpha = 0
                 hasEmbeddedContentView = true // Prevent further retries
+                showFallbackErrorOverlay()
+            } else {
+                // Schedule next layout pass on the main thread to continue retry loop
+                DispatchQueue.main.async { [weak self] in
+                    self?.setNeedsLayout()
+                }
             }
-            // Will retry on next layoutSubviews call
             return
         }
         
@@ -124,6 +130,14 @@ open class SecureContainerView: UIView {
     
     open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard isUserInteractionEnabled, !isHidden, alpha > 0.01 else { return nil }
+        
+        if let fallbackOverlayView = fallbackOverlayView {
+            let convertedPoint = convert(point, to: fallbackOverlayView)
+            if let hit = fallbackOverlayView.hitTest(convertedPoint, with: event) {
+                return hit
+            }
+            return fallbackOverlayView
+        }
         
         if let overlayView = overlayView {
             let convertedPoint = convert(point, to: overlayView)
@@ -187,5 +201,49 @@ open class SecureContainerView: UIView {
     open func hideRecordingOverlay() {
         overlayView?.removeFromSuperview()
         overlayView = nil
+    }
+    
+    // MARK: - Fail-Closed Fallback UI
+    
+    public func showFallbackErrorOverlay() {
+        guard fallbackOverlayView == nil else { return }
+        
+        let container = UIView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 13.0, *) {
+            container.backgroundColor = .systemBackground
+        } else {
+            container.backgroundColor = .white
+        }
+        
+        let label = UILabel()
+        label.text = fallbackErrorMessage
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .darkGray
+        }
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        container.addSubview(label)
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            label.leadingAnchor.constraint(greaterThanOrEqualTo: container.leadingAnchor, constant: 24),
+            label.trailingAnchor.constraint(lessThanOrEqualTo: container.trailingAnchor, constant: -24)
+        ])
+        
+        addSubview(container)
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: topAnchor),
+            container.bottomAnchor.constraint(equalTo: bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
+        fallbackOverlayView = container
     }
 }

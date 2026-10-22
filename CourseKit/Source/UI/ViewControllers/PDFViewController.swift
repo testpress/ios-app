@@ -34,14 +34,21 @@ class PDFViewController: BaseUIViewController {
     func setupSecurePDFView() {
         guard let pdfView = pdfView, secureContainerView == nil else { return }
         
-        // Use IBOutlet navBar if connected, otherwise fall back to runtime lookup
-        let navBar = self.navigationBar ?? view.subviews.first(where: { $0 is UINavigationBar }) as? UINavigationBar
+        // Use IBOutlet navBar if connected; if nil, layout safely falls back to view.safeAreaLayoutGuide
+        let navBar = self.navigationBar
         
         // CRITICAL: navBar's leading/trailing constraints in storyboard reference pdfView.
-        // Before removing pdfView, pin navBar to safeArea so it stays positioned correctly.
-        // Only add constraints if they don't already exist (avoid conflicts on notched/iPad/landscape)
-        if let navBar = navBar,
-           navBar.constraints.filter({ $0.firstAttribute == .top && $0.secondItem === view.safeAreaLayoutGuide }).isEmpty {
+        // Before removing pdfView, deactivate any existing top/leading/trailing/left/right constraints from view.constraints
+        // that anchor navBar, then pin navBar to safeArea so it stays positioned correctly without duplicate constraint warnings.
+        if let navBar = navBar {
+            let constraintsToRemove = view.constraints.filter { constraint in
+                let involvesNavBar = (constraint.firstItem as? UIView === navBar) || (constraint.secondItem as? UIView === navBar)
+                guard involvesNavBar else { return false }
+                let attr = (constraint.firstItem as? UIView === navBar) ? constraint.firstAttribute : constraint.secondAttribute
+                return attr == .top || attr == .leading || attr == .trailing || attr == .left || attr == .right
+            }
+            NSLayoutConstraint.deactivate(constraintsToRemove)
+            
             navBar.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
