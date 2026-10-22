@@ -21,21 +21,11 @@ class PDFViewController: BaseUIViewController {
         addWaterMark()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        registerScreenCaptureObserver()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        unregisterScreenCaptureObserver()
-    }
-    
     func setupSecurePDFView() {
         guard let pdfView = pdfView, secureContainerView == nil else { return }
         
-        // Use IBOutlet navBar if connected; if nil, layout safely falls back to view.safeAreaLayoutGuide
-        let navBar = self.navigationBar
+        // Use IBOutlet navBar (connected in Course.storyboard); fall back safely to subview lookup
+        let navBar = self.navigationBar ?? view.subviews.first(where: { $0 is UINavigationBar }) as? UINavigationBar
         
         // CRITICAL: navBar's leading/trailing constraints in storyboard reference pdfView.
         // Before removing pdfView, deactivate any existing top/leading/trailing/left/right constraints from view.constraints
@@ -64,7 +54,14 @@ class PDFViewController: BaseUIViewController {
         // Wrap pdfView in SecureContainerView
         let container = SecureContainerView(contentView: pdfView)
         container.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(container)
+        
+        // Insert below navBar to ensure navBar (and its Back button) is always above container in z-order
+        if let navBar = navBar {
+            view.insertSubview(container, belowSubview: navBar)
+            view.bringSubviewToFront(navBar)
+        } else {
+            view.addSubview(container)
+        }
         
         // Compute top anchor based on navBar presence
         let topAnchor = navBar?.bottomAnchor ?? view.safeAreaLayoutGuide.topAnchor
@@ -94,35 +91,6 @@ class PDFViewController: BaseUIViewController {
         navigationBarItem.title = contentTitle
     }
     
-    func registerScreenCaptureObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(screenCaptureDidChange),
-            name: UIScreen.capturedDidChangeNotification,
-            object: nil
-        )
-        handleScreenCapture(isCaptured: UIScreen.main.isCaptured)
-    }
-    
-    func unregisterScreenCaptureObserver() {
-        NotificationCenter.default.removeObserver(
-            self,
-            name: UIScreen.capturedDidChangeNotification,
-            object: nil
-        )
-    }
-    
-    @objc func screenCaptureDidChange() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.handleScreenCapture(isCaptured: UIScreen.main.isCaptured)
-        }
-    }
-    
-    func handleScreenCapture(isCaptured: Bool) {
-        secureContainerView?.handleScreenCapture(isCaptured: isCaptured)
-    }
-    
     func addWaterMark() {
         watermarkLabel = initializeWatermark(view: view)
         view.addSubview(watermarkLabel!)
@@ -150,7 +118,6 @@ class PDFViewController: BaseUIViewController {
     
     deinit {
         self.timer?.invalidate()
-        unregisterScreenCaptureObserver()
     }
     
 }

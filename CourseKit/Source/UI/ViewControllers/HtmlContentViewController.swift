@@ -49,16 +49,6 @@ class HtmlContentViewController: BaseWebViewController {
         checkContentType()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        registerScreenCaptureObserver()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        unregisterScreenCaptureObserver()
-    }
-    
     func setupSecureWebView() {
         guard let webView = webView, secureContainerView == nil else { return }
         
@@ -77,51 +67,18 @@ class HtmlContentViewController: BaseWebViewController {
         container.translatesAutoresizingMaskIntoConstraints = false
         parent.insertSubview(container, at: webViewIndex)
         
-        // Constrain container strictly to safe area layout guides to prevent content from
+        // Constrain container strictly to parent's safe area layout guide to prevent content from
         // sliding under the navigation bar at the top or home indicator at the bottom (including landscape mode)
         NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            container.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            container.topAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.topAnchor),
+            container.bottomAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         container.setNeedsLayout()
         container.layoutIfNeeded()
         self.secureContainerView = container
-    }
-    
-    func registerScreenCaptureObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(screenCaptureDidChange),
-            name: UIScreen.capturedDidChangeNotification,
-            object: nil
-        )
-        handleScreenCapture(isCaptured: UIScreen.main.isCaptured)
-    }
-    
-    func unregisterScreenCaptureObserver() {
-        NotificationCenter.default.removeObserver(
-            self,
-            name: UIScreen.capturedDidChangeNotification,
-            object: nil
-        )
-    }
-    
-    @objc func screenCaptureDidChange() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.handleScreenCapture(isCaptured: UIScreen.main.isCaptured)
-        }
-    }
-    
-    func handleScreenCapture(isCaptured: Bool) {
-        secureContainerView?.handleScreenCapture(isCaptured: isCaptured)
-    }
-    
-    deinit {
-        unregisterScreenCaptureObserver()
     }
     
     override func initWebView() {
