@@ -324,7 +324,7 @@ public class WebViewUtils {
 
     public static func getStaticFileUrl(for filePath: String, withExtension fileExtension: String?) -> String? {
         return withStaticFilePath(for: filePath, withExtension: fileExtension) { path in
-            URL(fileURLWithPath: path).absoluteString
+            URL(fileURLWithPath: path).absoluteString.replacingOccurrences(of: "'", with: "%27")
         }
     }
 
