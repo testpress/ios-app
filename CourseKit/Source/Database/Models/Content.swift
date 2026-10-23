@@ -136,7 +136,7 @@ public class Content: DBModel {
     
     public func getAttemptsUrl() -> String {
         var url = String(format: "%@%@%d/attempts/", TestpressCourse.shared.baseURL , TPEndpoint.getContents.urlPath, self.id)
-        url = url.replacingOccurrences(of: "v2.3", with: "v2.2.1")
+        url = url.replacingOccurrences(of: "v2.4", with: "v2.2.1")
         return url
     }
     
