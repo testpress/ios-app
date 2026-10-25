@@ -68,6 +68,7 @@ public class Exam: DBModel {
     @objc public dynamic var disableAttemptResume: Bool = false
     @objc public dynamic var enableMindsetReflections: Bool = false
     @objc public dynamic var preExamReflectionForm: MindsetReflectionForm?
+    @objc public dynamic var postExamReflectionForm: MindsetReflectionForm?
     public var languages = List<Language>()
     @objc public dynamic var examStartUrl: String?
     
@@ -118,6 +119,7 @@ public class Exam: DBModel {
         disableAttemptResume <- map["disable_attempt_resume"]
         enableMindsetReflections <- map["enable_mindset_reflections"]
         preExamReflectionForm <- map["pre_exam_reflection_form"]
+        postExamReflectionForm <- map["post_exam_reflection_form"]
         languages <- (map["languages"], ListTransform<Language>())
         examStartUrl <- map["exam_start_url"]
     }

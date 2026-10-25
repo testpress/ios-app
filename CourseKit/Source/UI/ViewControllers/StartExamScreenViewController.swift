@@ -76,7 +76,7 @@ public class StartExamScreenViewController: BaseUIViewController {
         }
 
         // When starting from the Exams tab (content is nil), pre-fetch exam detail to obtain mindset reflection config.
-        if content == nil && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil) {
+        if content == nil && (!exam.enableMindsetReflections || (exam.preExamReflectionForm == nil && exam.postExamReflectionForm == nil)) {
             fetchExamDetail()
         }
 
@@ -274,14 +274,24 @@ public class StartExamScreenViewController: BaseUIViewController {
     }
 
     private func performUpdate(_ fetchedExam: Exam) {
-        if self.exam.realm != nil {
+        if let realm = self.exam.realm {
             DBManager<Exam>().write {
                 self.exam.enableMindsetReflections = fetchedExam.enableMindsetReflections
-                self.exam.preExamReflectionForm = fetchedExam.preExamReflectionForm
+                if let preForm = fetchedExam.preExamReflectionForm {
+                    self.exam.preExamReflectionForm = realm.create(MindsetReflectionForm.self, value: preForm, update: .modified)
+                } else {
+                    self.exam.preExamReflectionForm = nil
+                }
+                if let postForm = fetchedExam.postExamReflectionForm {
+                    self.exam.postExamReflectionForm = realm.create(MindsetReflectionForm.self, value: postForm, update: .modified)
+                } else {
+                    self.exam.postExamReflectionForm = nil
+                }
             }
         } else {
             self.exam.enableMindsetReflections = fetchedExam.enableMindsetReflections
             self.exam.preExamReflectionForm = fetchedExam.preExamReflectionForm
+            self.exam.postExamReflectionForm = fetchedExam.postExamReflectionForm
         }
     }
 
@@ -389,7 +399,7 @@ public class StartExamScreenViewController: BaseUIViewController {
     }
     
     func startExam(_ examMode: Int) {
-        if !isExamDetailFetched && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil) {
+        if !isExamDetailFetched && (!exam.enableMindsetReflections || (exam.preExamReflectionForm == nil && exam.postExamReflectionForm == nil)) {
             startButton.isEnabled = false
             present(alertController, animated: false, completion: nil)
             fetchExamDetail { [weak self] _, error in

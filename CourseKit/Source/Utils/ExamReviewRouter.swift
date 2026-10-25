@@ -9,7 +9,42 @@ import UIKit
 
 public enum ExamReviewRouter {
 
-    public static func showExamReview(from viewController: UIViewController,exam: Exam?,contentAttempt: ContentAttempt?,attempt: Attempt?) {
+    public static func showExamReview(from viewController: UIViewController, exam: Exam?, contentAttempt: ContentAttempt?, attempt: Attempt?) {
+        var resolvedExam = exam
+        let userExamId = contentAttempt?.assessment?.id ?? attempt?.id
+        let examId = contentAttempt?.assessment?.exam ?? attempt?.exam ?? 0
+
+        if (resolvedExam == nil || resolvedExam?.isInvalidated == true) && examId > 0 {
+            resolvedExam = DBManager<Exam>().getItemsFromDB(filteredBy: "id == \(examId)", byKeyPath: "id").first
+        }
+
+        let isQuiz = (contentAttempt?.assessment?.attemptType ?? attempt?.attemptType) == StartExamScreenViewController.QUIZ_ATTEMPT
+
+        if let currentExam = resolvedExam,
+           currentExam.enableMindsetReflections,
+           let postForm = currentExam.postExamReflectionForm,
+           let attemptId = userExamId,
+           attemptId > 0,
+           !isQuiz {
+            let webViewController = MindsetReflectionViewController()
+            webViewController.url = postForm.getPostExamSSOUrl(examId: currentExam.id, attemptId: attemptId)
+            webViewController.submissionMandatory = postForm.submissionMandatory
+            webViewController.modalPresentationStyle = .fullScreen
+
+            let navigateToReview: () -> Void = {
+                presentNativeExamReview(from: viewController, exam: currentExam, contentAttempt: contentAttempt, attempt: attempt)
+            }
+            webViewController.onReflectionSubmitted = navigateToReview
+            webViewController.onReflectionSkipped = navigateToReview
+            webViewController.onBackButtonPressed = navigateToReview
+
+            viewController.present(webViewController, animated: true, completion: nil)
+        } else {
+            presentNativeExamReview(from: viewController, exam: resolvedExam, contentAttempt: contentAttempt, attempt: attempt)
+        }
+    }
+
+    private static func presentNativeExamReview(from viewController: UIViewController, exam: Exam?, contentAttempt: ContentAttempt?, attempt: Attempt?) {
         let storyboard = getStoryboard()
 
         if let contentAttempt = contentAttempt {

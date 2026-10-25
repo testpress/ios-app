@@ -22,4 +22,8 @@ public class MindsetReflectionForm: DBModel {
     public func getSSOUrl(examId: Int) -> String {
         return "&next=/exam-mindset/\(examId)/reflection/\(id)/"
     }
+
+    public func getPostExamSSOUrl(examId: Int, attemptId: Int) -> String {
+        return "&next=/exam-mindset/\(examId)/reflection/\(id)/userexam/\(attemptId)/"
+    }
 }

@@ -10,6 +10,7 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
 
     var onReflectionSubmitted: (() -> Void)?
     var onReflectionSkipped: (() -> Void)?
+    var onBackButtonPressed: (() -> Void)?
     var submissionMandatory: Bool = false
     
     override func viewDidLoad() {
@@ -30,6 +31,22 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
         contentController.add(WeakScriptMessageHandler(delegate: self), name: "onReflectionSubmitted")
         contentController.add(WeakScriptMessageHandler(delegate: self), name: "onReflectionSkipped")
         
+        let skipScript = """
+        document.addEventListener('click', function(e) {
+            var target = e.target.closest('button');
+            if (target) {
+                var text = (target.innerText || target.textContent || '').toLowerCase();
+                if (text.includes('skip') || text.includes("i'll do later") || target.getAttribute('aria-label') === 'Close') {
+                    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.onReflectionSkipped) {
+                        window.webkit.messageHandlers.onReflectionSkipped.postMessage('');
+                    }
+                }
+            }
+        }, true);
+        """
+        let userScript = WKUserScript(source: skipScript, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        contentController.addUserScript(userScript)
+
         let config = WKWebViewConfiguration()
         config.userContentController = contentController
         if #available(iOS 14.0, *) {
@@ -40,6 +57,32 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
         
         webView = WKWebView(frame: parentView.bounds, configuration: config)
         webView.customUserAgent = "TestpressiOSApp/WebView"
+    }
+
+    open override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url {
+            let path = url.path
+            if path.contains("/exams/review/") || path.contains("/attempt_answers") || path.contains("/mindset_insights/") {
+                decisionHandler(.cancel)
+                self.cleanAllCookies()
+                self.dismiss(animated: true) {
+                    self.onReflectionSubmitted?()
+                }
+                return
+            }
+        }
+        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+    }
+
+    @objc open override func goBack() {
+        if (useWebviewNavigation && webView.canGoBack) {
+            webView.goBack()
+        } else {
+            self.cleanAllCookies()
+            self.dismiss(animated: true) {
+                self.onBackButtonPressed?()
+            }
+        }
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
