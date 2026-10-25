@@ -20,7 +20,8 @@ public enum ExamReviewRouter {
 
         let isQuiz = (contentAttempt?.assessment?.attemptType ?? attempt?.attemptType) == StartExamScreenViewController.QUIZ_ATTEMPT
 
-        if let currentExam = resolvedExam,
+        if Reachability.isConnectedToNetwork(),
+           let currentExam = resolvedExam,
            currentExam.enableMindsetReflections,
            let postForm = currentExam.postExamReflectionForm,
            let attemptId = userExamId,
@@ -31,8 +32,10 @@ public enum ExamReviewRouter {
             webViewController.submissionMandatory = postForm.submissionMandatory
             webViewController.modalPresentationStyle = .fullScreen
 
+            let targetExamId = currentExam.id
             let navigateToReview: () -> Void = {
-                presentNativeExamReview(from: viewController, exam: currentExam, contentAttempt: contentAttempt, attempt: attempt)
+                let latestExam = Exam.find(by: targetExamId)
+                presentNativeExamReview(from: viewController, exam: latestExam, contentAttempt: contentAttempt, attempt: attempt)
             }
             webViewController.onReflectionSubmitted = navigateToReview
             webViewController.onReflectionSkipped = navigateToReview

@@ -13,6 +13,8 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
     var onBackButtonPressed: (() -> Void)?
     var submissionMandatory: Bool = false
     
+    private var isFinished = false
+
     override func viewDidLoad() {
         self.useSSOLogin = true
         self.displayNavbar = true
@@ -31,12 +33,8 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
         
         let skipScript = """
         document.addEventListener('click', function(e) {
-            var button = e.target.closest('button');
-            if (!button) return;
-            var clickAttr = button.getAttribute('@click') || '';
-            var xShowAttr = button.getAttribute('x-show') || '';
-            var actionAttr = button.getAttribute('data-action') || '';
-            if (clickAttr.indexOf('handleCloseOrSkip') !== -1 || xShowAttr.indexOf('postExamReflectionMandatory') !== -1 || actionAttr === 'skip') {
+            var button = e.target.closest('button[data-action="skip"]');
+            if (button) {
                 if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.onReflectionSkipped) {
                     window.webkit.messageHandlers.onReflectionSkipped.postMessage('');
                 }
@@ -94,9 +92,38 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
 
     override func showErrorMessage(error: TPError) {
         super.showErrorMessage(error: error)
+
+        // Ensure retry handler is always available on emptyView regardless of error kind
+        let (image, title, description) = error.getDisplayInfo()
+        emptyView.show(
+            image: image,
+            title: title,
+            description: description,
+            retryButtonText: Strings.TRY_AGAIN,
+            retryHandler: { [weak self] in
+                if self?.submissionMandatory == true {
+                    self?.applyMandatoryNavbarState()
+                }
+                self?.emptyView.hide()
+                self?.fetchSSOURLAndLoadPage()
+            }
+        )
+
         if submissionMandatory {
-            applyMandatoryNavbarState()
+            if error.kind != .network {
+                // For non-network failures (e.g. 4xx/5xx server or SSO errors), allow user to dismiss and proceed to review
+                let proceedButton = UIBarButtonItem(title: Strings.CANCEL, style: .plain, target: self, action: #selector(proceedToReviewOnFailure))
+                proceedButton.tintColor = self.navigationController?.navigationBar.tintColor ?? .white
+                navItem?.leftBarButtonItem = proceedButton
+                navItem?.hidesBackButton = true
+            } else {
+                applyMandatoryNavbarState()
+            }
         }
+    }
+
+    @objc private func proceedToReviewOnFailure() {
+        finish(onReflectionSubmitted)
     }
 
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
@@ -114,6 +141,8 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
     }
 
     private func finish(_ callback: (() -> Void)? = nil) {
+        guard !isFinished else { return }
+        isFinished = true
         cleanAllCookies()
         dismiss(animated: true) {
             callback?()
