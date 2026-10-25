@@ -76,7 +76,7 @@ public class StartExamScreenViewController: BaseUIViewController {
         }
 
         // When starting from the Exams tab (content is nil), pre-fetch exam detail to obtain mindset reflection config.
-        if content == nil && !isExamDetailFetched && (!exam.enableMindsetReflections || (exam.preExamReflectionForm == nil && exam.postExamReflectionForm == nil)) {
+        if content == nil && !isExamDetailFetched && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil || exam.postExamReflectionForm == nil) {
             fetchExamDetail()
         }
 
@@ -400,7 +400,7 @@ public class StartExamScreenViewController: BaseUIViewController {
     }
     
     func startExam(_ examMode: Int) {
-        if !isExamDetailFetched && (!exam.enableMindsetReflections || (exam.preExamReflectionForm == nil && exam.postExamReflectionForm == nil)) {
+        if !isExamDetailFetched && (!exam.enableMindsetReflections || exam.preExamReflectionForm == nil || exam.postExamReflectionForm == nil) {
             startButton.isEnabled = false
             present(alertController, animated: false, completion: nil)
             fetchExamDetail { [weak self] _, error in

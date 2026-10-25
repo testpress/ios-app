@@ -14,6 +14,7 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
     var submissionMandatory: Bool = false
     
     private var isFinished = false
+    private var retryCount = 0
 
     override func viewDidLoad() {
         self.useSSOLogin = true
@@ -63,7 +64,7 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
         }
 
         let path = url.path
-        if path.hasPrefix("/exams/review/") || path.hasPrefix("/exams/review_attempt_answers") || path.hasPrefix("/review_attempt_answers") {
+        if path.hasPrefix("/exams/review/") || path.hasPrefix("/exams/review_attempt_answers") {
             decisionHandler(.cancel)
             finish(onReflectionSubmitted)
             return
@@ -97,15 +98,21 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
         emptyView.retryButton.setTitle(Strings.TRY_AGAIN, for: .normal)
         emptyView.retryButton.isHidden = false
         emptyView.retryHandler = { [weak self] in
-            if self?.submissionMandatory == true {
-                self?.applyMandatoryNavbarState()
+            guard let self = self else { return }
+            self.retryCount += 1
+            // Note: applyMandatoryNavbarState() temporarily hides navbar exits while a retry is in-flight.
+            // If the retry fails, super.showErrorMessage re-initializes the navbar and the logic below
+            // restores the Cancel button (since error is non-network or retryCount >= 1), preventing a permanent trap.
+            if self.submissionMandatory {
+                self.applyMandatoryNavbarState()
             }
-            self?.fetchSSOURLAndLoadPage()
+            self.fetchSSOURLAndLoadPage()
         }
 
         if submissionMandatory {
-            if error.kind != .network {
-                // For non-network failures (e.g. 4xx/5xx server or SSO errors), allow user to dismiss and proceed to review
+            // For non-network failures (e.g. 4xx/5xx server or SSO errors) or when connection drops mid-load
+            // and fails after a retry, provide a Cancel button so the user is not trapped from viewing review.
+            if error.kind != .network || retryCount >= 1 {
                 let proceedButton = UIBarButtonItem(title: Strings.CANCEL, style: .plain, target: self, action: #selector(proceedToReviewOnFailure))
                 proceedButton.tintColor = self.navigationController?.navigationBar.tintColor ?? .white
                 navItem?.leftBarButtonItem = proceedButton

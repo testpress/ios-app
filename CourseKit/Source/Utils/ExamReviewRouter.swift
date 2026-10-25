@@ -34,7 +34,7 @@ public enum ExamReviewRouter {
 
             let targetExamId = currentExam.id
             let navigateToReview: () -> Void = {
-                let latestExam = Exam.find(by: targetExamId)
+                let latestExam = Exam.find(by: targetExamId) ?? (currentExam.isInvalidated ? nil : currentExam)
                 presentNativeExamReview(from: viewController, exam: latestExam, contentAttempt: contentAttempt, attempt: attempt)
             }
             webViewController.onReflectionSubmitted = navigateToReview
