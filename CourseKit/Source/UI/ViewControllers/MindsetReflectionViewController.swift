@@ -93,21 +93,15 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
     override func showErrorMessage(error: TPError) {
         super.showErrorMessage(error: error)
 
-        // Ensure retry handler is always available on emptyView regardless of error kind
-        let (image, title, description) = error.getDisplayInfo()
-        emptyView.show(
-            image: image,
-            title: title,
-            description: description,
-            retryButtonText: Strings.TRY_AGAIN,
-            retryHandler: { [weak self] in
-                if self?.submissionMandatory == true {
-                    self?.applyMandatoryNavbarState()
-                }
-                self?.emptyView.hide()
-                self?.fetchSSOURLAndLoadPage()
+        // Ensure retry button and handler are always set on emptyView regardless of error kind
+        emptyView.retryButton.setTitle(Strings.TRY_AGAIN, for: .normal)
+        emptyView.retryButton.isHidden = false
+        emptyView.retryHandler = { [weak self] in
+            if self?.submissionMandatory == true {
+                self?.applyMandatoryNavbarState()
             }
-        )
+            self?.fetchSSOURLAndLoadPage()
+        }
 
         if submissionMandatory {
             if error.kind != .network {
@@ -123,7 +117,7 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
     }
 
     @objc private func proceedToReviewOnFailure() {
-        finish(onReflectionSubmitted)
+        finish(onBackButtonPressed)
     }
 
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
