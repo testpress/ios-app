@@ -152,7 +152,7 @@ class TestReportViewController: BaseUIViewController {
 
     private func loadExamIfAvailable() {
         if (exam == nil || exam?.isInvalidated == true), let attempt = attempt, attempt.exam > 0 {
-            exam = DBManager<Exam>().getItemsFromDB(filteredBy: "id == \(attempt.exam)", byKeyPath: "id").first
+            exam = Exam.find(by: attempt.exam)
         }
     }
 

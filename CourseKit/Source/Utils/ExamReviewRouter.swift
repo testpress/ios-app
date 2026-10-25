@@ -14,8 +14,8 @@ public enum ExamReviewRouter {
         let userExamId = contentAttempt?.assessment?.id ?? attempt?.id
         let examId = contentAttempt?.assessment?.exam ?? attempt?.exam ?? 0
 
-        if (resolvedExam == nil || resolvedExam?.isInvalidated == true) && examId > 0 {
-            resolvedExam = DBManager<Exam>().getItemsFromDB(filteredBy: "id == \(examId)", byKeyPath: "id").first
+        if (resolvedExam == nil || resolvedExam?.isInvalidated == true), examId > 0 {
+            resolvedExam = Exam.find(by: examId)
         }
 
         let isQuiz = (contentAttempt?.assessment?.attemptType ?? attempt?.attemptType) == StartExamScreenViewController.QUIZ_ATTEMPT

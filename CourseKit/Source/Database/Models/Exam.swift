@@ -179,6 +179,11 @@ public class Exam: DBModel {
     public func shouldEndRunningAttemptOnResume(attempt: Attempt?, contentAttempt: ContentAttempt?) -> Bool {
         return disableAttemptResume && Attempt.hasRunningAttempt(attempt: attempt, contentAttempt: contentAttempt)
     }
+
+    public static func find(by id: Int) -> Exam? {
+        guard id > 0 else { return nil }
+        return DBManager<Exam>().getItemsFromDB(filteredBy: "id == \(id)", byKeyPath: "id").first
+    }
 }
 
 public struct ExamTemplateType {

@@ -20,9 +20,7 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
         super.viewDidLoad()
         
         if submissionMandatory {
-            self.backButton.isHidden = true
-            self.navItem?.leftBarButtonItem = nil
-            self.navItem?.hidesBackButton = true
+            applyMandatoryNavbarState()
         }
     }
     
@@ -33,18 +31,19 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
         
         let skipScript = """
         document.addEventListener('click', function(e) {
-            var target = e.target.closest('button');
-            if (target) {
-                var text = (target.innerText || target.textContent || '').toLowerCase();
-                if (text.includes('skip') || text.includes("i'll do later") || target.getAttribute('aria-label') === 'Close') {
-                    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.onReflectionSkipped) {
-                        window.webkit.messageHandlers.onReflectionSkipped.postMessage('');
-                    }
+            var button = e.target.closest('button');
+            if (!button) return;
+            var clickAttr = button.getAttribute('@click') || '';
+            var xShowAttr = button.getAttribute('x-show') || '';
+            var actionAttr = button.getAttribute('data-action') || '';
+            if (clickAttr.indexOf('handleCloseOrSkip') !== -1 || xShowAttr.indexOf('postExamReflectionMandatory') !== -1 || actionAttr === 'skip') {
+                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.onReflectionSkipped) {
+                    window.webkit.messageHandlers.onReflectionSkipped.postMessage('');
                 }
             }
         }, true);
         """
-        let userScript = WKUserScript(source: skipScript, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        let userScript = WKUserScript(source: skipScript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         contentController.addUserScript(userScript)
 
         let config = WKWebViewConfiguration()
@@ -60,57 +59,43 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
     }
 
     open override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url {
-            let path = url.path
-            if path.contains("/exams/review/") || path.contains("/attempt_answers") || path.contains("/mindset_insights/") {
-                decisionHandler(.cancel)
-                self.cleanAllCookies()
-                self.dismiss(animated: true) {
-                    self.onReflectionSubmitted?()
-                }
-                return
-            }
+        guard navigationAction.targetFrame?.isMainFrame == true, let url = navigationAction.request.url else {
+            super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+            return
         }
+
+        let path = url.path
+        if path.hasPrefix("/exams/review/") || path.hasPrefix("/exams/review_attempt_answers") || path.hasPrefix("/review_attempt_answers") {
+            decisionHandler(.cancel)
+            finish(onReflectionSubmitted)
+            return
+        }
+
         super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
     }
 
     @objc open override func goBack() {
-        if (useWebviewNavigation && webView.canGoBack) {
+        if useWebviewNavigation && webView.canGoBack {
             webView.goBack()
-        } else {
-            self.cleanAllCookies()
-            self.dismiss(animated: true) {
-                self.onBackButtonPressed?()
-            }
+            return
         }
+        guard !submissionMandatory else { return }
+        finish(onBackButtonPressed)
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "onReflectionSubmitted" {
-            self.cleanAllCookies()
-            self.dismiss(animated: true) {
-                self.onReflectionSubmitted?()
-            }
+            finish(onReflectionSubmitted)
         } else if message.name == "onReflectionSkipped" {
             guard !submissionMandatory else { return }
-            self.cleanAllCookies()
-            self.dismiss(animated: true) {
-                self.onReflectionSkipped?()
-            }
+            finish(onReflectionSkipped)
         }
     }
 
     override func showErrorMessage(error: TPError) {
         super.showErrorMessage(error: error)
         if submissionMandatory {
-            showFailureCloseButton()
-            let previousRetryHandler = emptyView.retryHandler
-            emptyView.retryHandler = { [weak self] in
-                if self?.submissionMandatory == true {
-                    self?.navItem?.leftBarButtonItem = nil
-                }
-                previousRetryHandler?()
-            }
+            applyMandatoryNavbarState()
         }
     }
 
@@ -122,15 +107,17 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
         showErrorMessage(error: TPError(message: error.localizedDescription, kind: .network))
     }
 
-    private func showFailureCloseButton() {
-        let closeButton = UIBarButtonItem(title: Strings.CANCEL, style: .plain, target: self, action: #selector(closeOnFailure))
-        closeButton.tintColor = self.navigationController?.navigationBar.tintColor ?? .white
-        navItem?.leftBarButtonItem = closeButton
+    private func applyMandatoryNavbarState() {
+        backButton.isHidden = true
+        navItem?.leftBarButtonItem = nil
+        navItem?.hidesBackButton = true
     }
 
-    @objc private func closeOnFailure() {
+    private func finish(_ callback: (() -> Void)? = nil) {
         cleanAllCookies()
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            callback?()
+        }
     }
 
     deinit {
