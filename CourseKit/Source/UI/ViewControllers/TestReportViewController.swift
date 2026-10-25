@@ -80,6 +80,7 @@ class TestReportViewController: BaseUIViewController {
         mindsetButton.titleLabel?.minimumScaleFactor = 0.5
         mindsetButton.titleLabel?.lineBreakMode = .byTruncatingTail
         mindsetButton.setTitle(Strings.EXAM_MINDSET_INSIGHTS.uppercased(), for: .normal)
+        mindsetButton.accessibilityLabel = Strings.EXAM_MINDSET_INSIGHTS
         showOrHideRank()
         showOrHideScore()
         showOrHidePercentile()
@@ -150,7 +151,7 @@ class TestReportViewController: BaseUIViewController {
     }
 
     private func loadExamIfAvailable() {
-        if exam == nil, let attempt = attempt, attempt.exam > 0 {
+        if (exam == nil || exam?.isInvalidated == true), let attempt = attempt, attempt.exam > 0 {
             exam = DBManager<Exam>().getItemsFromDB(filteredBy: "id == \(attempt.exam)", byKeyPath: "id").first
         }
     }

@@ -274,26 +274,10 @@ public class StartExamScreenViewController: BaseUIViewController {
     }
 
     private func performUpdate(_ fetchedExam: Exam) {
-        if let realm = self.exam.realm {
-            let updateBlock = {
+        if self.exam.realm != nil {
+            DBManager<Exam>().write {
                 self.exam.enableMindsetReflections = fetchedExam.enableMindsetReflections
-                if let preForm = fetchedExam.preExamReflectionForm {
-                    self.exam.preExamReflectionForm = realm.create(MindsetReflectionForm.self, value: preForm, update: .modified)
-                } else {
-                    self.exam.preExamReflectionForm = nil
-                }
-            }
-
-            if realm.isInWriteTransaction {
-                updateBlock()
-            } else {
-                do {
-                    try realm.write {
-                        updateBlock()
-                    }
-                } catch {
-                    print("Error during Realm write transaction: \(error)")
-                }
+                self.exam.preExamReflectionForm = fetchedExam.preExamReflectionForm
             }
         } else {
             self.exam.enableMindsetReflections = fetchedExam.enableMindsetReflections
