@@ -34,8 +34,11 @@ class MindsetReflectionViewController: WebViewController, WKScriptMessageHandler
         
         let skipScript = """
         document.addEventListener('click', function(e) {
-            var button = e.target.closest('button[data-action="skip"]');
-            if (button) {
+            var button = e.target.closest('button');
+            if (!button) return;
+            var isSkip = button.matches('button[data-action="skip"]') ||
+                         ((button.getAttribute('@click') || '').indexOf('handleCloseOrSkip') !== -1);
+            if (isSkip) {
                 if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.onReflectionSkipped) {
                     window.webkit.messageHandlers.onReflectionSkipped.postMessage('');
                 }
