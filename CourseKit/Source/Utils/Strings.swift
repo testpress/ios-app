@@ -202,4 +202,5 @@ public struct Strings {
     public static let LIVE_NOT_STARTED_DESC = "Hang tight! The live stream will kick off in a few moments."
     public static let SCREEN_RECORDING_NOT_ALLOWED = "Screen recording is not allowed."
     public static let UNABLE_TO_LOAD_PROTECTED_CONTENT = "Unable to load protected content. Please reload the page."
+    public static let MINDSET_REFLECTION = "Mindset Reflection"
 }
