@@ -203,4 +203,5 @@ public struct Strings {
     public static let SCREEN_RECORDING_NOT_ALLOWED = "Screen recording is not allowed."
     public static let UNABLE_TO_LOAD_PROTECTED_CONTENT = "Unable to load protected content. Please reload the page."
     public static let MINDSET_REFLECTION = "Mindset Reflection"
+    public static let EXAM_MINDSET_INSIGHTS = "Exam Mindset Insights"
 }

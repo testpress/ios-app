@@ -49,6 +49,8 @@ class TestReportViewController: BaseUIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomShadowView: UIView!
     @IBOutlet weak var solutionsButton: UIButton!
+    @IBOutlet weak var mindsetButton: UIButton!
+    @IBOutlet weak var solutionButtonPlaceholder: UIView!
     @IBOutlet weak var analyticsButton: UIButton!
     @IBOutlet weak var timeAnalyticsButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
@@ -63,13 +65,22 @@ class TestReportViewController: BaseUIViewController {
         super.viewDidLoad()
         self.setStatusBarColor()
 
+        loadExamIfAvailable()
+
         date.text = FormatDate.format(dateString: attempt!.date!,
                                       givenFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
 
         setExamDetails()
         UIUtils.setButtonDropShadow(solutionsButton)
+        UIUtils.setButtonDropShadow(mindsetButton)
         UIUtils.setButtonDropShadow(analyticsButton)
         UIUtils.setButtonDropShadow(timeAnalyticsButton)
+        mindsetButton.titleLabel?.numberOfLines = 1
+        mindsetButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        mindsetButton.titleLabel?.minimumScaleFactor = 0.5
+        mindsetButton.titleLabel?.lineBreakMode = .byTruncatingTail
+        mindsetButton.setTitle(Strings.EXAM_MINDSET_INSIGHTS.uppercased(), for: .normal)
+        mindsetButton.accessibilityLabel = Strings.EXAM_MINDSET_INSIGHTS
         showOrHideRank()
         showOrHideScore()
         showOrHidePercentile()
@@ -134,16 +145,33 @@ class TestReportViewController: BaseUIViewController {
             shareButtonLayout.isHidden = true
             showOrHideAnalytics()
             showOrHideSolutions()
+            showOrHideMindsetButton()
             solutionsButton.setImage(nil, for: .normal)
         }
     }
 
-    private func showOrHideSolutions() {
-        if (exam != nil && !exam!.showAnswers) {
-            solutionButtonLayout.isHidden = true
-        } else {
-            solutionButtonLayout.isHidden = false
+    private func loadExamIfAvailable() {
+        if (exam == nil || exam?.isInvalidated == true), let attempt = attempt, attempt.exam > 0 {
+            exam = DBManager<Exam>().getItemsFromDB(filteredBy: "id == \(attempt.exam)", byKeyPath: "id").first
         }
+    }
+
+    private func showOrHideSolutions() {
+        solutionsButton.isHidden = (exam != nil && !exam!.showAnswers)
+        updateSolutionButtonLayoutVisibility()
+    }
+
+    private func showOrHideMindsetButton() {
+        let isQuiz = (attempt?.attemptType == StartExamScreenViewController.QUIZ_ATTEMPT)
+        let canViewMindsetInsights = (exam?.enableMindsetReflections ?? false) && !isQuiz
+
+        mindsetButton.isHidden = !canViewMindsetInsights
+        solutionButtonPlaceholder.isHidden = canViewMindsetInsights
+        updateSolutionButtonLayoutVisibility()
+    }
+
+    private func updateSolutionButtonLayoutVisibility() {
+        solutionButtonLayout.isHidden = solutionsButton.isHidden && mindsetButton.isHidden
     }
     
     private func getTotalTime() -> String {
@@ -182,6 +210,19 @@ class TestReportViewController: BaseUIViewController {
     
     @IBAction func showSolutions(_ sender: UIButton) {
         showSolutionsScreen()
+    }
+
+    @IBAction func showMindsetReflection(_ sender: UIButton) {
+        guard let attemptId = attempt?.id, attemptId > 0 else { return }
+        let webViewController = WebViewController()
+        webViewController.url = "&next=/exams/review/\(attemptId)/mindset_insights/"
+        webViewController.title = Strings.EXAM_MINDSET_INSIGHTS
+        webViewController.useSSOLogin = true
+        webViewController.useWebviewNavigation = true
+        webViewController.shouldOpenLinksWithinWebview = true
+        webViewController.displayNavbar = true
+        webViewController.modalPresentationStyle = .fullScreen
+        present(webViewController, animated: true, completion: nil)
     }
 
     
