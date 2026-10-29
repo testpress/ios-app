@@ -79,6 +79,8 @@ public class AttemptRepository {
             attemptItem.question = examQuestion.question
             attemptItem.questionId = examQuestion.questionId
             attemptItem.examQuestionId = examQuestion.id
+            attemptItem.marks = examQuestion.marks
+            attemptItem.negativeMarks = examQuestion.negativeMarks
             attemptQuestions.append(attemptItem)
         }
         DBManager<AttemptItem>().addData(objects: attemptQuestions)

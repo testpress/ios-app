@@ -29,6 +29,7 @@ class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
     
     var attemptItems = [AttemptItem]()
     var language: Language?
+    var exam: Exam?
     
     init(_ attemptItems: [AttemptItem] = [AttemptItem](),_ language: Language? = nil) {
         super.init()
@@ -52,6 +53,7 @@ class BaseQuestionsDataSource: NSObject, UIPageViewControllerDataSource {
         let viewController = getQuestionsViewController()
         viewController.attemptItem = attemptItem
         viewController.language = self.language
+        viewController.exam = self.exam
         return viewController
     }
     

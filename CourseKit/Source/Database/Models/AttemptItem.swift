@@ -52,6 +52,7 @@ public class AttemptItem: DBModel {
     @objc public dynamic var shortText: String?
     @objc public dynamic var currentShortText: String!
     @objc public dynamic var marks: String?
+    @objc public dynamic var negativeMarks: String?
     @objc public dynamic var result: String!
     @objc public dynamic var attemptId: Int = -1
     @objc public dynamic var examQuestionId: Int = -1
@@ -90,6 +91,8 @@ public class AttemptItem: DBModel {
         attemptSection <- map["attempt_section"]
         shortText <- map["short_text"]
         marks <- map["marks"]
+        negativeMarks <- map["negative_marks"]
+        examQuestionId <- map["exam_question_id"]
         result <- map["result"]
         attemptId <- map["attempt_id"]
         gapFillResponses <- (map["gap_fill_responses"], ListTransform<GapFillResponse>())

@@ -41,6 +41,8 @@ public class AttemptQuestion: DBModel {
     public var translationIds = List<Int>()
     public var translations = List<AttemptQuestionTranslation>()
     @objc dynamic public var isCaseSensitive: Bool = false
+    @objc dynamic public var marks: String? = nil
+    @objc dynamic public var negativeMarks: String? = nil
     public var questionType: QuestionType {
         get {
             return QuestionType(rawValue: type ?? "Unknown") ?? .UNKNOWN
@@ -81,6 +83,8 @@ public class AttemptQuestion: DBModel {
         newAttemptItem.translationIds = translationIds
         newAttemptItem.isCaseSensitive = isCaseSensitive
         newAttemptItem.translations = translations
+        newAttemptItem.marks = marks
+        newAttemptItem.negativeMarks = negativeMarks
         return newAttemptItem
     }
     
@@ -104,6 +108,8 @@ public class AttemptQuestion: DBModel {
         translationIds <- map["translation_ids"]
         isCaseSensitive <- map["is_case_sensitive"]
         translations <- (map["translations"], ListTransform<AttemptQuestionTranslation>())
+        marks <- map["marks"]
+        negativeMarks <- map["negative_marks"]
     }
     
     let transform = TransformOf<Int, Int>(fromJSON: { (value: Int?) -> Int? in

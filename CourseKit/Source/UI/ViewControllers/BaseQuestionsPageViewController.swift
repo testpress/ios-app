@@ -95,7 +95,9 @@ class BaseQuestionsPageViewController: BaseUIViewController, UIPageViewControlle
     }
     
     func getQuestionsDataSource() -> BaseQuestionsDataSource {
-        return BaseQuestionsDataSource(attemptItems)
+        let source = BaseQuestionsDataSource(attemptItems)
+        source.exam = self.exam
+        return source
     }
     
     func loadQuestions(url: String) {
@@ -137,6 +139,7 @@ class BaseQuestionsPageViewController: BaseUIViewController, UIPageViewControlle
                         self.questionsPageViewDelegate?.questionsDidLoad!()
                     }
                     self.baseQuestionsDataSource = self.getQuestionsDataSource()
+                    self.baseQuestionsDataSource.exam = self.exam
                     // TODO: Handle empty questions
                     let startingViewController: BaseQuestionsViewController =
                         self.baseQuestionsDataSource.viewControllerAtIndex(0)!

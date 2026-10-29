@@ -34,6 +34,7 @@ class BaseQuestionsViewController: BaseWebViewController, WKWebViewDelegate {
     
     var attemptItem: AttemptItem!
     var language: Language?
+    var exam: Exam?
     let topGradient = CAGradientLayer()
     let bottomGradient = CAGradientLayer()
     
