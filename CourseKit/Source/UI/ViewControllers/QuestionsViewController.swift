@@ -31,7 +31,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     
     @IBOutlet weak var indexView: UILabel!
     @IBOutlet weak var reviewSwitch: UISwitch!
-    @IBOutlet weak var marksStackView: UIStackView!
+    @IBOutlet weak var marksStackView: UIStackView?
     @IBOutlet weak var marksLabel: UILabel!
     @IBOutlet weak var negativeMarksLabel: UILabel!
     @IBOutlet weak var positiveMarksBlock: UIStackView?
@@ -196,6 +196,14 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         }
     }
     
+    private static let marksFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+    
     private func formatMarksValue(_ val: String?, isNegative: Bool) -> String? {
         guard let raw = val?.trimmingCharacters(in: .whitespacesAndNewlines), !raw.isEmpty else { return nil }
         var cleaned = raw
@@ -204,11 +212,7 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
             if absVal == 0 {
                 return nil
             }
-            if absVal.truncatingRemainder(dividingBy: 1) == 0 {
-                cleaned = String(format: "%.0f", absVal)
-            } else {
-                cleaned = String(format: "%g", absVal)
-            }
+            cleaned = QuestionsViewController.marksFormatter.string(from: NSNumber(value: absVal)) ?? "\(absVal)"
         } else {
             if isNegative && cleaned.hasPrefix("-") {
                 cleaned = String(cleaned.dropFirst()).trimmingCharacters(in: .whitespaces)
