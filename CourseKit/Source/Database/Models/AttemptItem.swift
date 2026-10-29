@@ -92,7 +92,6 @@ public class AttemptItem: DBModel {
         shortText <- map["short_text"]
         marks <- map["marks"]
         negativeMarks <- map["negative_marks"]
-        examQuestionId <- map["exam_question_id"]
         result <- map["result"]
         attemptId <- map["attempt_id"]
         gapFillResponses <- (map["gap_fill_responses"], ListTransform<GapFillResponse>())

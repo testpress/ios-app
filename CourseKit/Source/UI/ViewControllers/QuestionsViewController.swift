@@ -37,10 +37,6 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     @IBOutlet weak var positiveMarksBlock: UIStackView?
     @IBOutlet weak var negativeMarksBlock: UIStackView?
     
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {
-        // Safely ignore undefined keys to prevent NSUnknownKeyException
-    }
-    
     private var selectedOptions: [Int] = []
     private var gapFilledResponse: [Int: AnyObject] = [:]
     private var fileUploadHelper: FileUploadPicker?
@@ -97,7 +93,6 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         }
         
         indexView.text = String(attemptItem.index + 1)
-        displayMarks()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,29 +107,14 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         if let attempt = attemptItem, attempt.attemptId != -1,
            let attemptObj = DBManager<Attempt>().getItemsFromDB(filteredBy: "id=\(attempt.attemptId)", byKeyPath: "id").first,
            attemptObj.exam != -1 {
-            if let exam = DBManager<Exam>().getItemsFromDB(filteredBy: "id=\(attemptObj.exam)", byKeyPath: "id").first {
-                return exam
-            }
+            return DBManager<Exam>().getItemsFromDB(filteredBy: "id=\(attemptObj.exam)", byKeyPath: "id").first
         }
-        return DBManager<Exam>().getItemsFromDB().first
+        return nil
     }
     
-    private func getExamQuestion() -> ExamQuestion? {
-        guard let attempt = attemptItem else { return nil }
+    private func getExamQuestion(for attempt: AttemptItem) -> ExamQuestion? {
         if attempt.examQuestionId != -1 {
-            if let eq = DBManager<ExamQuestion>().getItemsFromDB(filteredBy: "id=\(attempt.examQuestionId)", byKeyPath: "id").first {
-                return eq
-            }
-        }
-        if attempt.questionId != -1 {
-            if let eq = DBManager<ExamQuestion>().getItemsFromDB(filteredBy: "questionId=\(attempt.questionId)", byKeyPath: "id").first {
-                return eq
-            }
-        }
-        if let qId = attempt.question?.id, qId != -1 {
-            if let eq = DBManager<ExamQuestion>().getItemsFromDB(filteredBy: "questionId=\(qId)", byKeyPath: "id").first {
-                return eq
-            }
+            return DBManager<ExamQuestion>().getItemsFromDB(filteredBy: "id=\(attempt.examQuestionId)", byKeyPath: "id").first
         }
         return nil
     }
@@ -149,44 +129,23 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         return true
     }
 
-    private func resolveMarks() -> String? {
-        let currentExam = resolveExam()
-        let isVariable = currentExam?.variableMarkPerQuestion ?? false
-        let eq = getExamQuestion()
-        
+    private func resolveMarkValue(
+        examValue: String?,
+        attemptValue: String?,
+        questionValue: String?,
+        examQuestionValue: String?,
+        isVariable: Bool
+    ) -> String? {
         if isVariable {
-            // Variable marks per question: attemptItem -> question -> examQuestion -> fallback to exam
-            if isValidMark(attemptItem?.marks) { return attemptItem?.marks }
-            if isValidMark(attemptItem?.question?.marks) { return attemptItem?.question?.marks }
-            if isValidMark(eq?.marks) { return eq?.marks }
-            if isValidMark(currentExam?.markPerQuestion) { return currentExam?.markPerQuestion }
+            if isValidMark(attemptValue) { return attemptValue }
+            if isValidMark(questionValue) { return questionValue }
+            if isValidMark(examQuestionValue) { return examQuestionValue }
+            if isValidMark(examValue) { return examValue }
         } else {
-            // Fixed marks for exam: exam markPerQuestion takes precedence (as in Android)
-            if isValidMark(currentExam?.markPerQuestion) { return currentExam?.markPerQuestion }
-            if isValidMark(attemptItem?.marks) { return attemptItem?.marks }
-            if isValidMark(attemptItem?.question?.marks) { return attemptItem?.question?.marks }
-            if isValidMark(eq?.marks) { return eq?.marks }
-        }
-        return nil
-    }
-
-    private func resolveNegativeMarks() -> String? {
-        let currentExam = resolveExam()
-        let isVariable = currentExam?.variableMarkPerQuestion ?? false
-        let eq = getExamQuestion()
-        
-        if isVariable {
-            // Variable marks per question: attemptItem -> question -> examQuestion -> fallback to exam
-            if isValidMark(attemptItem?.negativeMarks) { return attemptItem?.negativeMarks }
-            if isValidMark(attemptItem?.question?.negativeMarks) { return attemptItem?.question?.negativeMarks }
-            if isValidMark(eq?.negativeMarks) { return eq?.negativeMarks }
-            if isValidMark(currentExam?.negativeMarks) { return currentExam?.negativeMarks }
-        } else {
-            // Fixed marks for exam: exam negativeMarks takes precedence (as in Android)
-            if isValidMark(currentExam?.negativeMarks) { return currentExam?.negativeMarks }
-            if isValidMark(attemptItem?.negativeMarks) { return attemptItem?.negativeMarks }
-            if isValidMark(attemptItem?.question?.negativeMarks) { return attemptItem?.question?.negativeMarks }
-            if isValidMark(eq?.negativeMarks) { return eq?.negativeMarks }
+            if isValidMark(examValue) { return examValue }
+            if isValidMark(attemptValue) { return attemptValue }
+            if isValidMark(questionValue) { return questionValue }
+            if isValidMark(examQuestionValue) { return examQuestionValue }
         }
         return nil
     }
@@ -194,52 +153,46 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
     private func displayMarks() {
         guard let attempt = attemptItem else { return }
         
-        let marks = resolveMarks()
-        let negativeMarks = resolveNegativeMarks()
+        let currentExam = resolveExam()
+        let isVariable = currentExam?.variableMarkPerQuestion ?? false
+        
+        var examQuestion: ExamQuestion? = nil
+        if attempt.marks == nil || attempt.negativeMarks == nil {
+            examQuestion = getExamQuestion(for: attempt)
+        }
+        
+        let marks = resolveMarkValue(
+            examValue: currentExam?.markPerQuestion,
+            attemptValue: attempt.marks,
+            questionValue: attempt.question?.marks,
+            examQuestionValue: examQuestion?.marks,
+            isVariable: isVariable
+        )
+        
+        let negativeMarks = resolveMarkValue(
+            examValue: currentExam?.negativeMarks,
+            attemptValue: attempt.negativeMarks,
+            questionValue: attempt.question?.negativeMarks,
+            examQuestionValue: examQuestion?.negativeMarks,
+            isVariable: isVariable
+        )
         
         let formattedMarks = formatMarksValue(marks, isNegative: false)
         let formattedNegativeMarks = formatMarksValue(negativeMarks, isNegative: true)
         
-        // Update positive marks block
-        if let m = formattedMarks {
-            marksLabel?.text = m
-            marksLabel?.isHidden = false
-            positiveMarksBlock?.isHidden = false
-            (marksLabel?.superview as? UIStackView)?.isHidden = false
-        } else {
-            marksLabel?.isHidden = true
-            positiveMarksBlock?.isHidden = true
-            (marksLabel?.superview as? UIStackView)?.isHidden = true
-        }
+        updateMarksBlock(block: positiveMarksBlock, label: marksLabel, value: formattedMarks)
+        updateMarksBlock(block: negativeMarksBlock, label: negativeMarksLabel, value: formattedNegativeMarks)
         
-        // Update negative marks block
-        if let n = formattedNegativeMarks {
-            negativeMarksLabel?.text = n
-            negativeMarksLabel?.isHidden = false
-            negativeMarksBlock?.isHidden = false
-            (negativeMarksLabel?.superview as? UIStackView)?.isHidden = false
+        marksStackView?.isHidden = (formattedMarks == nil && formattedNegativeMarks == nil)
+        indexView?.text = "\(attempt.index + 1)"
+    }
+    
+    private func updateMarksBlock(block: UIStackView?, label: UILabel?, value: String?) {
+        if let value = value {
+            label?.text = value
+            block?.isHidden = false
         } else {
-            negativeMarksLabel?.isHidden = true
-            negativeMarksBlock?.isHidden = true
-            (negativeMarksLabel?.superview as? UIStackView)?.isHidden = true
-        }
-        
-        let hasMarks = (formattedMarks != nil)
-        let hasNegativeMarks = (formattedNegativeMarks != nil)
-        marksStackView?.isHidden = !hasMarks && !hasNegativeMarks
-        
-        // Restore compact question number format; if marksStackView is absent, append marks to indexView as fallback
-        if marksStackView == nil {
-            var indexParts: [String] = ["\(attempt.index + 1)"]
-            if let m = formattedMarks {
-                indexParts.append("+\(m)")
-            }
-            if let n = formattedNegativeMarks {
-                indexParts.append(n)
-            }
-            indexView.text = indexParts.joined(separator: " | ")
-        } else {
-            indexView.text = "\(attempt.index + 1)"
+            block?.isHidden = true
         }
     }
     
