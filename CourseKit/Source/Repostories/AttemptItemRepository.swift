@@ -32,12 +32,11 @@ public class AttemptItemRepository: AttemptRepository {
                     newAttemptItem?.order = attemptItem.order
                     newAttemptItem?.questionId = attemptItem.questionId
                     newAttemptItem?.isAttempted = true
-                    if newAttemptItem?.marks == nil || newAttemptItem?.marks?.isEmpty == true {
-                        newAttemptItem?.marks = attemptItem.marks
+                    let preserveIfEmpty = { (current: String?, previous: String?) -> String? in
+                        return (current?.isEmpty == false) ? current : previous
                     }
-                    if newAttemptItem?.negativeMarks == nil || newAttemptItem?.negativeMarks?.isEmpty == true {
-                        newAttemptItem?.negativeMarks = attemptItem.negativeMarks
-                    }
+                    newAttemptItem?.marks = preserveIfEmpty(newAttemptItem?.marks, attemptItem.marks)
+                    newAttemptItem?.negativeMarks = preserveIfEmpty(newAttemptItem?.negativeMarks, attemptItem.negativeMarks)
                     DBManager<AttemptItem>().addData(object: newAttemptItem!)
                     DBManager<AttemptItem>().deleteFromDb(object: attemptItem)
                 }
