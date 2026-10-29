@@ -103,43 +103,6 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         displayMarks()
     }
     
-    private func resolveExam() -> Exam? {
-        if let exam = self.exam {
-            return exam
-        }
-        if let attempt = attemptItem, attempt.attemptId != -1,
-           let attemptObj = DBManager<Attempt>().getItemsFromDB(filteredBy: "id=\(attempt.attemptId)", byKeyPath: "id").first,
-           attemptObj.exam != -1 {
-            return DBManager<Exam>().getItemsFromDB(filteredBy: "id=\(attemptObj.exam)", byKeyPath: "id").first
-        }
-        return nil
-    }
-    
-    private func isValidMark(_ val: String?) -> Bool {
-        guard let trimmed = val?.trimmingCharacters(in: .whitespacesAndNewlines), !trimmed.isEmpty else {
-            return false
-        }
-        if let doubleVal = Double(trimmed) {
-            return abs(doubleVal) > 0.0001
-        }
-        return true
-    }
-
-    private func resolveAndFormatMark(
-        examValue: String?,
-        attemptValue: String?,
-        questionValue: String?,
-        examQuestionValue: String?,
-        isVariable: Bool,
-        isNegative: Bool
-    ) -> String? {
-        let sources = isVariable
-            ? [attemptValue, questionValue, examQuestionValue, examValue]
-            : [examValue, attemptValue, questionValue, examQuestionValue]
-        let raw = sources.first { isValidMark($0) } ?? nil
-        return formatMarksValue(raw, isNegative: isNegative)
-    }
-
     private func displayMarks() {
         guard let attempt = attemptItem else { return }
         
@@ -176,6 +139,43 @@ class QuestionsViewController: BaseQuestionsViewController, WKScriptMessageHandl
         updateMarksBlock(block: negativeMarksBlock, label: negativeMarksLabel, value: cachedFormattedNegativeMarks)
         
         marksStackView?.isHidden = (cachedFormattedMarks == nil && cachedFormattedNegativeMarks == nil)
+    }
+
+    private func resolveExam() -> Exam? {
+        if let exam = self.exam {
+            return exam
+        }
+        if let attempt = attemptItem, attempt.attemptId != -1,
+           let attemptObj = DBManager<Attempt>().getItemsFromDB(filteredBy: "id=\(attempt.attemptId)", byKeyPath: "id").first,
+           attemptObj.exam != -1 {
+            return DBManager<Exam>().getItemsFromDB(filteredBy: "id=\(attemptObj.exam)", byKeyPath: "id").first
+        }
+        return nil
+    }
+    
+    private func resolveAndFormatMark(
+        examValue: String?,
+        attemptValue: String?,
+        questionValue: String?,
+        examQuestionValue: String?,
+        isVariable: Bool,
+        isNegative: Bool
+    ) -> String? {
+        let sources = isVariable
+            ? [attemptValue, questionValue, examQuestionValue, examValue]
+            : [examValue, attemptValue, questionValue, examQuestionValue]
+        let raw = sources.first { isValidMark($0) } ?? nil
+        return formatMarksValue(raw, isNegative: isNegative)
+    }
+
+    private func isValidMark(_ val: String?) -> Bool {
+        guard let trimmed = val?.trimmingCharacters(in: .whitespacesAndNewlines), !trimmed.isEmpty else {
+            return false
+        }
+        if let doubleVal = Double(trimmed) {
+            return abs(doubleVal) > 0.0001
+        }
+        return true
     }
     
     private func updateMarksBlock(block: UIStackView?, label: UILabel?, value: String?) {
