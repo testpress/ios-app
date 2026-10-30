@@ -263,7 +263,9 @@ class TestEngineViewController: BaseQuestionsPageViewController {
     }
     
     override func getQuestionsDataSource() -> BaseQuestionsDataSource {
-        return QuestionsControllerSource(attemptItems, exam?.selectedLanguage)
+        let source = QuestionsControllerSource(attemptItems, exam?.selectedLanguage)
+        source.exam = self.exam
+        return source
     }
     
     override func getQuestionsUrl() -> String {

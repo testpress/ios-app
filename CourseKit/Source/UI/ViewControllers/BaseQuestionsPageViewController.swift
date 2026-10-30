@@ -95,7 +95,9 @@ class BaseQuestionsPageViewController: BaseUIViewController, UIPageViewControlle
     }
     
     func getQuestionsDataSource() -> BaseQuestionsDataSource {
-        return BaseQuestionsDataSource(attemptItems)
+        let source = BaseQuestionsDataSource(attemptItems)
+        source.exam = self.exam
+        return source
     }
     
     func loadQuestions(url: String) {

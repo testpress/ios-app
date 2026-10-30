@@ -32,6 +32,11 @@ public class AttemptItemRepository: AttemptRepository {
                     newAttemptItem?.order = attemptItem.order
                     newAttemptItem?.questionId = attemptItem.questionId
                     newAttemptItem?.isAttempted = true
+                    let preserveIfEmpty = { (current: String?, previous: String?) -> String? in
+                        return (current?.isEmpty == false) ? current : previous
+                    }
+                    newAttemptItem?.marks = preserveIfEmpty(newAttemptItem?.marks, attemptItem.marks)
+                    newAttemptItem?.negativeMarks = preserveIfEmpty(newAttemptItem?.negativeMarks, attemptItem.negativeMarks)
                     DBManager<AttemptItem>().addData(object: newAttemptItem!)
                     DBManager<AttemptItem>().deleteFromDb(object: attemptItem)
                 }
