@@ -13,6 +13,12 @@ import UIKit
 
 class UserHelper {
     static func logout() {
+        var headers: HTTPHeaders? = nil
+        if (KeychainTokenItem.isExist()) {
+            let token: String = KeychainTokenItem.getToken()
+            headers = ["Authorization": "JWT " + token]
+        }
+        
         let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN)
         let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN)
         
@@ -24,13 +30,13 @@ class UserHelper {
             ]
             
             TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.unRegisterDevice), parameters: parameters,
-                                completion: { _, _ in})
+                                headers: headers, completion: { _, _ in})
         }
         UIApplication.shared.unregisterForRemoteNotifications()
         
         TestpressCourse.shared.clearData()
-        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), completion: {_,_ in})
         KeychainTokenItem.clearKeychainItems()
+        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), headers: headers, completion: { _, _ in })
     }
     
     static func showProfileDetails(_ viewController: UIViewController) {
