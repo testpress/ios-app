@@ -63,10 +63,10 @@ public class TPApiClient {
         request.setValue(getUserAgent(), forHTTPHeaderField: "User-Agent")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-       if (KeychainTokenItem.isExist()) {
-           let token: String = KeychainTokenItem.getToken()
-           request.setValue("JWT " + token, forHTTPHeaderField: "Authorization")
-       }
+        if (request.value(forHTTPHeaderField: "Authorization") == nil && KeychainTokenItem.isExist()) {
+            let token: String = KeychainTokenItem.getToken()
+            request.setValue("JWT " + token, forHTTPHeaderField: "Authorization")
+        }
         
         if let params = parameters {
             request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
