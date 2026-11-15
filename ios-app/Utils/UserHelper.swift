@@ -29,8 +29,9 @@ class UserHelper {
         UIApplication.shared.unregisterForRemoteNotifications()
         
         TestpressCourse.shared.clearData()
-        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), completion: {_,_ in})
-        KeychainTokenItem.clearKeychainItems()
+        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), completion: { _, _ in
+            KeychainTokenItem.clearKeychainItems()
+        })
     }
     
     static func showProfileDetails(_ viewController: UIViewController) {
