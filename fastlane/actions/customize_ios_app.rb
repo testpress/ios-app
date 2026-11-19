@@ -65,12 +65,6 @@ module Fastlane
             cfg.build_settings["DEVELOPMENT_TEAM"] = team_id
             cfg.build_settings["CODE_SIGN_IDENTITY"] = "Apple Distribution"
 
-            if target.product_type != "com.apple.product-type.application"
-              cfg.build_settings["CODE_SIGNING_REQUIRED"] = "NO"
-              cfg.build_settings["CODE_SIGNING_ALLOWED"] = "NO"
-              cfg.build_settings["PROVISIONING_PROFILE_SPECIFIER"] = ""
-            end
-
             # Apply bundle ID and names to all targets if they match common prefix or are the main target
             if target.product_type == "com.apple.product-type.application"
               cfg.build_settings["PRODUCT_BUNDLE_IDENTIFIER"]        = config["bundle_identifier"]
@@ -79,8 +73,19 @@ module Fastlane
               cfg.build_settings["MARKETING_VERSION"]                = config["version"]           if config["version"]
               cfg.build_settings["CURRENT_PROJECT_VERSION"]          = config["version_code"].to_s if config["version_code"]
               cfg.build_settings["PROVISIONING_PROFILE_SPECIFIER"]  = provisioning_profile if provisioning_profile
+            elsif target.product_type == "com.apple.product-type.app-extension"
+              cfg.build_settings["PRODUCT_BUNDLE_IDENTIFIER"]        = "#{config["bundle_identifier"]}.NotificationServiceExtension"
+              cfg.build_settings["MARKETING_VERSION"]                = config["version"]           if config["version"]
+              cfg.build_settings["CURRENT_PROJECT_VERSION"]          = config["version_code"].to_s if config["version_code"]
+            else
+              cfg.build_settings["CODE_SIGNING_REQUIRED"] = "NO"
+              cfg.build_settings["CODE_SIGNING_ALLOWED"] = "NO"
+              cfg.build_settings["PROVISIONING_PROFILE_SPECIFIER"] = ""
             end
           end
+        end
+        project.build_configurations.each do |cfg|
+          cfg.build_settings["APP_BUNDLE_IDENTIFIER"] = config["bundle_identifier"]
         end
         project.save
 

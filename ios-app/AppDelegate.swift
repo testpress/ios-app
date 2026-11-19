@@ -237,22 +237,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate {
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        if UserDefaults.standard.string(forKey: Constants.FCM_TOKEN) != fcmToken {
+            UserDefaults.standard.set("true", forKey: Constants.REGISTER_DEVICE_TOKEN)
+        }
         UserDefaults.standard.set(fcmToken, forKey: Constants.FCM_TOKEN)
+        registerDeviceTokenWithBackend()
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
         // Convert token to string
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        if ((UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN) != deviceTokenString)) {
+        if (UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN) != deviceTokenString) {
             UserDefaults.standard.set(deviceTokenString, forKey: Constants.DEVICE_TOKEN)
             UserDefaults.standard.set("true", forKey: Constants.REGISTER_DEVICE_TOKEN)
-            
         }
+        registerDeviceTokenWithBackend()
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugPrint("Unable to register for remote notifications: \(error.localizedDescription)")
         UserDefaults.standard.set("false", forKey: Constants.REGISTER_DEVICE_TOKEN)
+    }
+
+    func registerDeviceTokenWithBackend(force: Bool = false) {
+        guard isUserLoggedIn() else { return }
+        if !force && UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "false" {
+            return
+        }
+        guard let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN),
+              let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN),
+              !deviceToken.isEmpty, !fcmToken.isEmpty else {
+            return
+        }
+
+        let parameters: Parameters = [
+            "device_id": deviceToken,
+            "registration_id": fcmToken,
+            "platform": "ios"
+        ]
+
+        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters) { _, error in
+            if error == nil {
+                UserDefaults.standard.set("false", forKey: Constants.REGISTER_DEVICE_TOKEN)
+            }
+        }
     }
     
     
@@ -261,7 +290,11 @@ extension AppDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.badge,.alert,.sound])
+        if #available(iOS 14.0, *) {
+            completionHandler([.banner, .badge, .sound, .list])
+        } else {
+            completionHandler([.alert, .badge, .sound])
+        }
     }
     
     // [END ios_10_message_handling]

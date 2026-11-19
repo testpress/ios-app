@@ -30,6 +30,7 @@ class UserHelper {
         
         TestpressCourse.shared.clearData()
         TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.logout), completion: {_,_ in})
+        UserDefaults.standard.set("true", forKey: Constants.REGISTER_DEVICE_TOKEN)
         KeychainTokenItem.clearKeychainItems()
     }
     
