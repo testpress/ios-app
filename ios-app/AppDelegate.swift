@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var activityIndicator: UIActivityIndicatorView!
     var emptyView: EmptyView!
     var blurEffectView: UIVisualEffectView?
+    private var isRegisteringDeviceToken = false
     
     
     func application(_ application: UIApplication, open url: URL,
@@ -237,22 +238,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate {
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        if UserDefaults.standard.string(forKey: Constants.FCM_TOKEN) != fcmToken {
+            UserDefaults.standard.set("true", forKey: Constants.REGISTER_DEVICE_TOKEN)
+        }
         UserDefaults.standard.set(fcmToken, forKey: Constants.FCM_TOKEN)
+        registerDeviceTokenWithBackend()
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
         // Convert token to string
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        if ((UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN) != deviceTokenString)) {
+        if (UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN) != deviceTokenString) {
             UserDefaults.standard.set(deviceTokenString, forKey: Constants.DEVICE_TOKEN)
             UserDefaults.standard.set("true", forKey: Constants.REGISTER_DEVICE_TOKEN)
-            
         }
+        registerDeviceTokenWithBackend()
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugPrint("Unable to register for remote notifications: \(error.localizedDescription)")
         UserDefaults.standard.set("false", forKey: Constants.REGISTER_DEVICE_TOKEN)
+    }
+
+    func registerDeviceTokenWithBackend(force: Bool = false) {
+        guard isUserLoggedIn() else { return }
+        guard !isRegisteringDeviceToken else { return }
+        if !force && UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "false" {
+            return
+        }
+        guard let deviceToken = UserDefaults.standard.string(forKey: Constants.DEVICE_TOKEN),
+              let fcmToken = UserDefaults.standard.string(forKey: Constants.FCM_TOKEN),
+              !deviceToken.isEmpty, !fcmToken.isEmpty else {
+            return
+        }
+
+        isRegisteringDeviceToken = true
+        let parameters: Parameters = [
+            "device_id": deviceToken,
+            "registration_id": fcmToken,
+            "platform": "ios"
+        ]
+
+        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters) { [weak self] _, error in
+            self?.isRegisteringDeviceToken = false
+            if error == nil {
+                UserDefaults.standard.set("false", forKey: Constants.REGISTER_DEVICE_TOKEN)
+            }
+        }
     }
     
     
@@ -261,7 +294,11 @@ extension AppDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.badge,.alert,.sound])
+        if #available(iOS 14.0, *) {
+            completionHandler([.banner, .badge, .sound, .list])
+        } else {
+            completionHandler([.alert, .badge, .sound])
+        }
     }
     
     // [END ios_10_message_handling]
@@ -272,74 +309,42 @@ extension AppDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         let userInfo = response.notification.request.content.userInfo
-        
-        if let url: String = userInfo["gcm.notification.short_url"] as? String  {
-            let urlPath = URL(fileURLWithPath: url)
-            let contentType = urlPath.pathComponents[1]
+        let destination = (userInfo["destination_url"] as? String)
+            ?? (userInfo["gcm.notification.destination_url"] as? String)
+            ?? (userInfo["short_url"] as? String)
+            ?? (userInfo["gcm.notification.short_url"] as? String)
+            ?? ""
+
+        if isUserLoggedIn() {
+            routeDestinationSafely(destination)
+        } else {
+            DeepLinkRouter.shared.pendingDestination = destination
             if let topController = UIApplication.topViewController() {
-                if (KeychainTokenItem.isExist()) {
-                    switch(contentType) {
-                    case "p":
-                        let storyboard = UIStoryboard(name: Constants.POST_STORYBOARD, bundle: nil)
-                        let viewController = storyboard.instantiateViewController(withIdentifier:
-                            Constants.POST_DETAIL_VIEW_CONTROLLER) as! PostDetailViewController
-                        
-                        let url = TestpressCourse.shared.baseURL + "/api/v2.2/posts/\(urlPath.pathComponents[2])/?short_link=true"
-                        viewController.url = url
-                        
-                        topController.present(viewController, animated: true, completion: nil)
-                        break;
-                    case "chapters":
-                        emptyView = EmptyView.getInstance(parentView: topController.view)
-                        emptyView.backgroundColor = .white
-                        activityIndicator = UIUtils.initActivityIndicator(parentView: topController.view)
-                        activityIndicator?.center = CGPoint(x: topController.view.center.x, y: topController.view.center.y - 50)
-                        activityIndicator.startAnimating()
-                        
-                        let url = TestpressCourse.shared.baseURL + "/api/v2.2/contents/\(urlPath.pathComponents[3])/"
-                        Content.fetchContent(url: url, completion: { content, error in
-                            if let error = error {
-                                debugPrint(error.message ?? "No error")
-                                debugPrint(error.kind)
-                                var retryButtonText: String?
-                                var retryHandler: (() -> Void)?
-                                if error.kind == .network {
-                                    retryButtonText = Strings.TRY_AGAIN
-                                    retryHandler = {
-                                        self.emptyView.hide()
-                                    }
-                                }
-                                self.activityIndicator.stopAnimating()
-                                let (image, title, description) = error.getDisplayInfo()
-                                
-                                self.emptyView.show(image: image, title: title, description: description,
-                                                    retryButtonText: retryButtonText, retryHandler: retryHandler)
-                            } else {
-                                self.activityIndicator.stopAnimating()
-                                let storyboard = UIStoryboard(name: Constants.CHAPTER_CONTENT_STORYBOARD, bundle: TestpressCourse.bundle)
-                                let viewController = storyboard.instantiateViewController(withIdentifier:
-                                    Constants.CONTENT_DETAIL_PAGE_VIEW_CONTROLLER) as! ContentDetailPageViewController
-                                
-                                viewController.position = 0
-                                viewController.contents = [content] as! [Content]
-                                
-                                topController.present(viewController, animated: true, completion: nil)
-                            }
-                        })
-                        break;
-                    default:
-                        break;
-                    }
-                } else {
-                    let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
-                    let viewController = storyboard.instantiateViewController(withIdentifier:
-                        Constants.LOGIN_VIEW_CONTROLLER) as! LoginViewController
-                    topController.present(viewController, animated: true, completion: nil)
-                    
+                let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.LOGIN_VIEW_CONTROLLER)
+                if let base = TestpressCourse.shared.baseURL, !destination.isEmpty {
+                    let path = destination.hasPrefix("/") ? destination : "/\(destination)"
+                    (viewController as? DeepLinkBaseProtocol)?.deepLinkURL = URL(string: "\(base)\(path)")
+                } else if let url = URL(string: destination) {
+                    (viewController as? DeepLinkBaseProtocol)?.deepLinkURL = url
                 }
+                topController.present(viewController, animated: true, completion: nil)
             }
         }
         completionHandler()
+    }
+
+    private func routeDestinationSafely(_ destination: String, retryCount: Int = 0) {
+        guard !destination.isEmpty else { return }
+        if let topVC = UIApplication.topViewController(), !(topVC is MainViewController) {
+            DeepLinkRouter.shared.route(destination: destination, on: topVC)
+        } else if retryCount < 10 {
+            DeepLinkRouter.shared.pendingDestination = destination
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                self?.routeDestinationSafely(destination, retryCount: retryCount + 1)
+            }
+        }
     }
     
     @objc func screenRecordingChanged() {

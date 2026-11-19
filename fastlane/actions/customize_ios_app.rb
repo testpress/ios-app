@@ -39,7 +39,7 @@ module Fastlane
         icon_source       = File.join(fastlane_dir, "Icon-1024.png")
         launch_source     = File.join(fastlane_dir, "LaunchImage.png")
 
-        patch_identity(project_path, info_plist_path, config, params[:provisioning_profile])
+        patch_identity(project_path, info_plist_path, config, params[:provisioning_profile], params[:extension_provisioning_profile])
 
         patch_constants(constants_path, {
           "SUBDOMAIN"     => config["subdomain"],
@@ -54,7 +54,7 @@ module Fastlane
         generate_launch_images(assets_dir, launch_source, config["image_background"]) if File.exist?(launch_source)
       end
 
-      def self.patch_identity(project_path, plist_path, config, provisioning_profile = nil)
+      def self.patch_identity(project_path, plist_path, config, provisioning_profile = nil, extension_provisioning_profile = nil)
         project = Xcodeproj::Project.open(project_path)
         team_id = config["team_id"]
         UI.user_error!("Missing team_id or apple_team_id in API config. Fix it in the dashboard.") if team_id.to_s.empty?
@@ -65,12 +65,6 @@ module Fastlane
             cfg.build_settings["DEVELOPMENT_TEAM"] = team_id
             cfg.build_settings["CODE_SIGN_IDENTITY"] = "Apple Distribution"
 
-            if target.product_type != "com.apple.product-type.application"
-              cfg.build_settings["CODE_SIGNING_REQUIRED"] = "NO"
-              cfg.build_settings["CODE_SIGNING_ALLOWED"] = "NO"
-              cfg.build_settings["PROVISIONING_PROFILE_SPECIFIER"] = ""
-            end
-
             # Apply bundle ID and names to all targets if they match common prefix or are the main target
             if target.product_type == "com.apple.product-type.application"
               cfg.build_settings["PRODUCT_BUNDLE_IDENTIFIER"]        = config["bundle_identifier"]
@@ -79,8 +73,26 @@ module Fastlane
               cfg.build_settings["MARKETING_VERSION"]                = config["version"]           if config["version"]
               cfg.build_settings["CURRENT_PROJECT_VERSION"]          = config["version_code"].to_s if config["version_code"]
               cfg.build_settings["PROVISIONING_PROFILE_SPECIFIER"]  = provisioning_profile if provisioning_profile
+            elsif target.product_type == "com.apple.product-type.app-extension"
+              cfg.build_settings["PRODUCT_BUNDLE_IDENTIFIER"]        = "#{config["bundle_identifier"]}.NotificationServiceExtension"
+              cfg.build_settings["MARKETING_VERSION"]                = config["version"]           if config["version"]
+              cfg.build_settings["CURRENT_PROJECT_VERSION"]          = config["version_code"].to_s if config["version_code"]
+              if extension_provisioning_profile
+                cfg.build_settings["PROVISIONING_PROFILE_SPECIFIER"] = extension_provisioning_profile
+              else
+                cfg.build_settings["CODE_SIGNING_REQUIRED"]          = "NO"
+                cfg.build_settings["CODE_SIGNING_ALLOWED"]           = "NO"
+                cfg.build_settings["PROVISIONING_PROFILE_SPECIFIER"] = ""
+              end
+            else
+              cfg.build_settings["CODE_SIGNING_REQUIRED"] = "NO"
+              cfg.build_settings["CODE_SIGNING_ALLOWED"] = "NO"
+              cfg.build_settings["PROVISIONING_PROFILE_SPECIFIER"] = ""
             end
           end
+        end
+        project.build_configurations.each do |cfg|
+          cfg.build_settings["APP_BUNDLE_IDENTIFIER"] = config["bundle_identifier"]
         end
         project.save
 
@@ -203,9 +215,10 @@ module Fastlane
 
       def self.available_options
         [
-          FastlaneCore::ConfigItem.new(key: :config,               description: "Normalized configuration hash", is_string: false),
-          FastlaneCore::ConfigItem.new(key: :fastlane_dir,         description: "Absolute path to the fastlane directory"),
-          FastlaneCore::ConfigItem.new(key: :provisioning_profile, description: "Provisioning profile UDID to apply", optional: true)
+          FastlaneCore::ConfigItem.new(key: :config,                         description: "Normalized configuration hash", is_string: false),
+          FastlaneCore::ConfigItem.new(key: :fastlane_dir,                   description: "Absolute path to the fastlane directory"),
+          FastlaneCore::ConfigItem.new(key: :provisioning_profile,           description: "Provisioning profile UDID to apply", optional: true),
+          FastlaneCore::ConfigItem.new(key: :extension_provisioning_profile, description: "Extension provisioning profile UDID to apply", optional: true)
         ]
       end
 
