@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var activityIndicator: UIActivityIndicatorView!
     var emptyView: EmptyView!
     var blurEffectView: UIVisualEffectView?
+    private var isRegisteringDeviceToken = false
     
     
     func application(_ application: UIApplication, open url: URL,
@@ -262,6 +263,7 @@ extension AppDelegate {
 
     func registerDeviceTokenWithBackend(force: Bool = false) {
         guard isUserLoggedIn() else { return }
+        guard !isRegisteringDeviceToken else { return }
         if !force && UserDefaults.standard.string(forKey: Constants.REGISTER_DEVICE_TOKEN) == "false" {
             return
         }
@@ -271,13 +273,15 @@ extension AppDelegate {
             return
         }
 
+        isRegisteringDeviceToken = true
         let parameters: Parameters = [
             "device_id": deviceToken,
             "registration_id": fcmToken,
             "platform": "ios"
         ]
 
-        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters) { _, error in
+        TPApiClient.apiCall(endpointProvider: TPEndpointProvider(.registerDevice), parameters: parameters) { [weak self] _, error in
+            self?.isRegisteringDeviceToken = false
             if error == nil {
                 UserDefaults.standard.set("false", forKey: Constants.REGISTER_DEVICE_TOKEN)
             }
@@ -312,14 +316,35 @@ extension AppDelegate {
             ?? ""
 
         if isUserLoggedIn() {
-            DeepLinkRouter.shared.route(destination: destination)
-        } else if let topController = UIApplication.topViewController() {
-            let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier:
-                Constants.LOGIN_VIEW_CONTROLLER)
-            topController.present(viewController, animated: true, completion: nil)
+            routeDestinationSafely(destination)
+        } else {
+            DeepLinkRouter.shared.pendingDestination = destination
+            if let topController = UIApplication.topViewController() {
+                let storyboard = UIStoryboard(name: Constants.MAIN_STORYBOARD, bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier:
+                    Constants.LOGIN_VIEW_CONTROLLER)
+                if let base = TestpressCourse.shared.baseURL, !destination.isEmpty {
+                    let path = destination.hasPrefix("/") ? destination : "/\(destination)"
+                    (viewController as? DeepLinkBaseProtocol)?.deepLinkURL = URL(string: "\(base)\(path)")
+                } else if let url = URL(string: destination) {
+                    (viewController as? DeepLinkBaseProtocol)?.deepLinkURL = url
+                }
+                topController.present(viewController, animated: true, completion: nil)
+            }
         }
         completionHandler()
+    }
+
+    private func routeDestinationSafely(_ destination: String, retryCount: Int = 0) {
+        guard !destination.isEmpty else { return }
+        if let topVC = UIApplication.topViewController(), !(topVC is MainViewController) {
+            DeepLinkRouter.shared.route(destination: destination, on: topVC)
+        } else if retryCount < 10 {
+            DeepLinkRouter.shared.pendingDestination = destination
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                self?.routeDestinationSafely(destination, retryCount: retryCount + 1)
+            }
+        }
     }
     
     @objc func screenRecordingChanged() {

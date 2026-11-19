@@ -11,6 +11,14 @@ public class DeepLinkRouter {
     public static let shared = DeepLinkRouter()
     private init() {}
 
+    public var pendingDestination: String?
+
+    public func routePendingDestination(on viewController: UIViewController? = nil) {
+        guard let dest = pendingDestination, !dest.isEmpty else { return }
+        pendingDestination = nil
+        route(destination: dest, on: viewController)
+    }
+
     public func route(destination: String, animated: Bool = true, on viewController: UIViewController? = nil) {
         let trimmed = destination.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.isEmpty {
@@ -27,7 +35,9 @@ public class DeepLinkRouter {
             return
         }
 
-        let base = TestpressCourse.shared.baseURL ?? "https://testpress.in"
+        guard let base = TestpressCourse.shared.baseURL, !base.isEmpty else {
+            return
+        }
         let path = trimmed.hasPrefix("/") ? trimmed : "/\(trimmed)"
         if let url = URL(string: "\(base)\(path)") {
             route(url: url, animated: animated, on: viewController)
@@ -79,7 +89,7 @@ public class DeepLinkRouter {
         }
 
         // 6. Content detail check: "/contents/<id>"
-        if let contentID = extractContentID(from: url), let id = Int(contentID) {
+        if let id = extractContentID(from: segments) {
             openContent(id: id, animated: animated, on: topVC)
             return
         }
@@ -114,8 +124,22 @@ public class DeepLinkRouter {
         topVC.present(safariVC, animated: animated, completion: nil)
     }
 
+    private func getKeyWindow() -> UIWindow? {
+        if #available(iOS 13.0, *) {
+            for scene in UIApplication.shared.connectedScenes {
+                if let windowScene = scene as? UIWindowScene,
+                   windowScene.activationState == .foregroundActive || windowScene.activationState == .foregroundInactive {
+                    if let keyWin = windowScene.windows.first(where: { $0.isKeyWindow }) ?? windowScene.windows.first {
+                        return keyWin
+                    }
+                }
+            }
+        }
+        return UIApplication.shared.windows.first(where: { $0.isKeyWindow }) ?? UIApplication.shared.keyWindow
+    }
+
     private func navigateToHomepage(animated: Bool, on topVC: UIViewController) {
-        let rootVC = UIApplication.shared.keyWindow?.rootViewController
+        let rootVC = getKeyWindow()?.rootViewController
         let tabController = (rootVC as? UITabBarController) ?? (topVC as? UITabBarController) ?? topVC.tabBarController
 
         if let tabController = tabController {
@@ -129,23 +153,37 @@ public class DeepLinkRouter {
         }
     }
 
+    private func isAlreadyPresenting(url: String, from topVC: UIViewController) -> Bool {
+        if let current = topVC as? WebViewController, current.url == url {
+            return true
+        }
+        if let presented = topVC.presentedViewController as? WebViewController, presented.url == url {
+            return true
+        }
+        if let nav = topVC.navigationController {
+            return nav.viewControllers.contains { ($0 as? WebViewController)?.url == url }
+        }
+        return false
+    }
+
     private func openStore(animated: Bool, on topVC: UIViewController) {
-        if let current = topVC as? WebViewController, current.url == "&next=/products/" {
+        let storeURL = "&next=/products/"
+        if isAlreadyPresenting(url: storeURL, from: topVC) {
             return
         }
         let webViewController = WebViewController()
-        webViewController.url = "&next=/products/"
+        webViewController.url = storeURL
         webViewController.useSSOLogin = true
         webViewController.displayNavbar = true
         webViewController.useWebviewNavigation = true
-        webViewController.title = "Store"
+        webViewController.title = NSLocalizedString("Store", comment: "Store")
         webViewController.modalPresentationStyle = .fullScreen
         topVC.present(webViewController, animated: animated, completion: nil)
     }
 
     private func openProduct(slug: String, animated: Bool, on topVC: UIViewController) {
         let nextURL = "&next=/products/\(slug)/"
-        if let current = topVC as? WebViewController, current.url == nextURL {
+        if isAlreadyPresenting(url: nextURL, from: topVC) {
             return
         }
         let webViewController = WebViewController()
@@ -153,7 +191,7 @@ public class DeepLinkRouter {
         webViewController.useSSOLogin = true
         webViewController.displayNavbar = true
         webViewController.useWebviewNavigation = true
-        webViewController.title = "Product"
+        webViewController.title = NSLocalizedString("Product", comment: "Product")
         webViewController.modalPresentationStyle = .fullScreen
         topVC.present(webViewController, animated: animated, completion: nil)
     }
@@ -188,8 +226,10 @@ public class DeepLinkRouter {
         }
     }
 
-    private func extractContentID(from url: URL) -> String? {
-        let string = url.absoluteString
-        return string.range(of: "(?<=contents/)[0-9]+", options: .regularExpression).map { String(string[$0]) }
+    private func extractContentID(from segments: [String]) -> Int? {
+        guard let index = segments.firstIndex(of: "contents"), index + 1 < segments.count else {
+            return nil
+        }
+        return Int(segments[index + 1])
     }
 }

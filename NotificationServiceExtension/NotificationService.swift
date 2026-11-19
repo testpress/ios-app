@@ -12,13 +12,16 @@ class NotificationService: UNNotificationServiceExtension {
 
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
+    private var downloadTask: URLSessionDownloadTask?
+    private var hasDeliveredContent = false
+    private let deliveryLock = NSLock()
 
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
         guard let bestAttemptContent = bestAttemptContent else {
-            contentHandler(request.content)
+            deliver(request.content)
             return
         }
 
@@ -27,23 +30,35 @@ class NotificationService: UNNotificationServiceExtension {
 
         guard let validImageUrlString = imageUrlString?.trimmingCharacters(in: .whitespacesAndNewlines),
               !validImageUrlString.isEmpty,
-              let imageUrl = URL(string: validImageUrlString) else {
-            contentHandler(bestAttemptContent)
+              let imageUrl = URL(string: validImageUrlString),
+              imageUrl.scheme?.lowercased() == "https" else {
+            deliver(bestAttemptContent)
             return
         }
 
         downloadAttachment(from: imageUrl) { [weak self] attachment in
+            guard let self = self else { return }
             if let attachment = attachment {
                 bestAttemptContent.attachments = [attachment]
             }
-            self?.contentHandler?(bestAttemptContent)
+            self.deliver(bestAttemptContent)
         }
     }
 
     override func serviceExtensionTimeWillExpire() {
-        if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
-            contentHandler(bestAttemptContent)
+        downloadTask?.cancel()
+        downloadTask = nil
+        if let bestAttemptContent = bestAttemptContent {
+            deliver(bestAttemptContent)
         }
+    }
+
+    private func deliver(_ content: UNNotificationContent) {
+        deliveryLock.lock()
+        defer { deliveryLock.unlock() }
+        guard !hasDeliveredContent else { return }
+        hasDeliveredContent = true
+        contentHandler?(content)
     }
 
     func downloadAttachment(from url: URL, completion: @escaping (UNNotificationAttachment?) -> Void) {
@@ -87,6 +102,7 @@ class NotificationService: UNNotificationServiceExtension {
                 completion(nil)
             }
         }
+        self.downloadTask = task
         task.resume()
     }
 }

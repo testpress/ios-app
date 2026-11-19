@@ -57,21 +57,41 @@ private_lane :archive_and_upload do |params|
     key_filepath: File.expand_path(config["api_key_path"], ROOT_DIR)
   )
 
+  extension_bundle_id = "#{config["bundle_identifier"]}.NotificationServiceExtension"
+  extension_profile_udid = nil
+  begin
+    get_provisioning_profile(
+      app_identifier: extension_bundle_id,
+      api_key:        api_key,
+      force:          true
+    )
+    extension_profile_udid = lane_context[SharedValues::SIGH_UDID]
+  rescue => e
+    UI.important("Extension provisioning profile could not be fetched for #{extension_bundle_id}: #{e.message}")
+  end
+
   get_provisioning_profile(
     app_identifier: config["bundle_identifier"],
     api_key:        api_key,
     force:          true
   )
+  app_profile_udid = lane_context[SharedValues::SIGH_UDID]
 
   # Target-specific patch right before build
   customize_ios_app(
-    config:               config,
-    fastlane_dir:         FASTFILE_DIR,
-    provisioning_profile: lane_context[SharedValues::SIGH_UDID]
+    config:                         config,
+    fastlane_dir:                   FASTFILE_DIR,
+    provisioning_profile:           app_profile_udid,
+    extension_provisioning_profile: extension_profile_udid
   )
 
   derived_data_path = "./DerivedData_#{scheme.gsub(' ', '_')}"
   clear_derived_data(derived_data_path: derived_data_path)
+
+  provisioning_profiles = {
+    config["bundle_identifier"] => app_profile_udid
+  }
+  provisioning_profiles[extension_bundle_id] = extension_profile_udid if extension_profile_udid
 
   build_app(
     project:           PROJECT_PATH,
@@ -81,9 +101,7 @@ private_lane :archive_and_upload do |params|
     export_method:     "app-store",
     export_options: {
       signingStyle: "manual",
-      provisioningProfiles: {
-        config["bundle_identifier"] => lane_context[SharedValues::SIGH_UDID]
-      }
+      provisioningProfiles: provisioning_profiles
     },
     clean:             true,
     derived_data_path: derived_data_path,

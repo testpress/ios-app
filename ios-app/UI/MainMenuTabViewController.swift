@@ -117,7 +117,8 @@ class MainMenuTabViewController: UITabBarController {
             addAnalyticsTab()
         }
         
-        (UIApplication.shared.delegate as? AppDelegate)?.registerDeviceTokenWithBackend(force: true)
+        (UIApplication.shared.delegate as? AppDelegate)?.registerDeviceTokenWithBackend()
+        DeepLinkRouter.shared.routePendingDestination(on: self)
         
         if instituteSettings.salesforceSdkEnabled {
             self.configureSalesforceSDK()
